@@ -1,0 +1,76 @@
+ @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+.Login {
+
+}
+
+.Login-header {
+  margin: 0 0 0 0;
+  padding: 0 0 0 13%;
+  color:  #7B7B7B;
+  background: #EEEEEE;
+  height: 100vh;
+}
+.Login-login {
+    text-align:center;
+    margin: -7% auto;
+ }
+
+.Login-Choose {
+    text-align:center;
+    margin: 5% auto;
+ }
+
+h1 {
+  font-family: 'Noto Sans CJK TC';
+  font-weight:  lighter;
+  font-size: 27px;
+  margin: 0 0 0 0;
+}
+
+#eng-title {
+  height: 40%;
+}
+
+#ch-title {
+  height: 35vh;
+}
+
+
+#AjustToggleButtom {
+  height: 35vh;
+  background: #EEEEEE;
+}
+
+h2 {
+  font-family: 'Noto Sans CJK TC';
+  font-weight:  400;
+  font-size: 55px;
+  margin: 0 0 0 0;
+}
+
+#rectangle {
+    margin: 11px 35px 0 0;
+    width: 17px;
+    height: 108px;
+    background: #00AEAE;
+    float: left;
+}
+
+@media (max-width: 480px) {
+    .Login-header {
+      padding: 35vh 0 0 0;
+      height: 100vh;
+      text-align: center;
+    }
+
+    #rectangle {
+      display: none;
+    }
+    h1 {
+      font-size: 18px;
+    }
+    h2 {
+      font-size: 30px;
+    }
+}
