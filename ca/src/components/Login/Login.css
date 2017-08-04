@@ -9,7 +9,7 @@
   padding: 0 0 0 13%;
   color:  #7B7B7B;
   background: #EEEEEE;
-  height: 100vh;
+  height: 60vh;
 }
 .Login-login {
     text-align:center;
@@ -60,13 +60,18 @@ h2 {
 @media (max-width: 480px) {
     .Login-header {
       padding: 35vh 0 0 0;
-      height: 100vh;
+      height: 60vh;
       text-align: center;
     }
 
     #rectangle {
       display: none;
     }
+
+    #AjustToggleButtom {
+    height: 0vh;
+    background: #EEEEEE;
+  }
     h1 {
       font-size: 18px;
     }
