@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './Head.css';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import index from './index+.png';
 import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
@@ -17,9 +15,7 @@ const nearbyIcon = <IconLocationOn />;
 
 
 
-
 class Head extends Component {
-
   	state = {
     	selectedIndex: 0,
     	style: {

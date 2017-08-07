@@ -2,7 +2,11 @@
   "name": "ca",
   "version": "0.1.0",
   "private": true,
+  "author": "Danny",
   "dependencies": {
+    "@types/react": "^16.0.0",
+    "axios": "^0.16.2",
+    "express": "^4.15.3",
     "material-ui": "^0.18.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -17,5 +21,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
   }
 }

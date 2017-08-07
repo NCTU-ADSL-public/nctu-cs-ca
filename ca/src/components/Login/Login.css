@@ -1,6 +1,7 @@
  @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 
 .Login {
+    background: #EEEEEE;
 
 }
 
@@ -8,12 +9,12 @@
   margin: 0 0 0 0;
   padding: 0 0 0 13%;
   color:  #7B7B7B;
-  background: #EEEEEE;
-  height: 60vh;
+  /*background: #EEEEEE;*/
+  height: 65vh;
 }
 .Login-login {
     text-align:center;
-    margin: -7% auto;
+    margin: -7% 0 0 -13%;
  }
 
 .Login-Choose {
@@ -39,7 +40,7 @@ h1 {
 
 #AjustToggleButtom {
   height: 35vh;
-  background: #EEEEEE;
+  /*background: #EEEEEE;*/
 }
 
 h2 {
