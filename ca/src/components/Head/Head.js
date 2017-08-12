@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import './Head.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import index from './index+.png';
-import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
 import Home from 'material-ui/svg-icons/content/flag';
 import Map from 'material-ui/svg-icons/maps/map';
 import Graduation from 'material-ui/svg-icons/social/school';
 import Check from 'material-ui/svg-icons/av/featured-play-list';
+
+import HomeItem from './Home.js';
+import MapItem from './Map.js';
+import GraduationItem from './Graduation.js';
+import CreditItem from './Credit.js';
 
 import FadeIn from 'react-fade-in';
 
@@ -23,24 +26,93 @@ const checkIcon = <Check />;
 class Head extends Component {
   	state = {
     	selectedIndex: 0,
-    	style: {
+    	styleButton: {
   			fontFamily: 'Noto Sans CJK TC',
-  			background: '#FCFCFC',
+  			background: '#EEEEEE',
     	},
-    	displayindex0 : 'none',
-    	displayindex1 : 'none',
-    	displayindex2 : 'none',
-    	displayindex3 : 'none',
-    	displayindex4 : 'none',
+		styleindex0: {
+            display : 'inline',
+			margin :"60px 0 0 0",
+		},
+        styleindex1: {
+            display : 'none',
+            margin :"60px 0 0 0",
+        },
+        styleindex2: {
+            display : 'none',
+            top : '60px',
+        },
+        styleindex3: {
+            display : 'none',
+            top : '60px',
+        },
+
 
   	};
-
   	
 
-  	select(index){  	
-  		// if(index==1){
-  		// alert('11');
-  		// }
+  	select(index){
+  		if(index==0){
+            this.setState({ styleindex0: {
+                display : 'inline',
+            	},
+                styleindex1: {
+                    display : 'none',
+                },
+                styleindex2: {
+                    display : 'none',
+                },
+                styleindex3: {
+                    display : 'none',
+                },
+			});
+		}
+        else if(index==1){
+            this.setState({ styleindex0: {
+                display : 'none',
+            },
+                styleindex1: {
+                    display : 'inline',
+                },
+                styleindex2: {
+                    display : 'none',
+                },
+                styleindex3: {
+                    display : 'none',
+                },
+            });
+        }
+        else if(index==2){
+            this.setState({ styleindex0: {
+                display : 'none',
+            },
+                styleindex1: {
+                    display : 'none',
+                },
+                styleindex2: {
+                    display : 'inline',
+                },
+                styleindex3: {
+                    display : 'none',
+                },
+            });
+        }
+        else if(index==3){
+            this.setState({ styleindex0: {
+                display : 'none',
+            },
+                styleindex1: {
+                    display : 'none',
+                },
+                styleindex2: {
+                    display : 'none',
+                },
+                styleindex3: {
+                    display : 'inline',
+                },
+            });
+        }
+
   		console.log(index);
   		this.setState({selectedIndex: index});
   	} 
@@ -66,35 +138,48 @@ class Head extends Component {
 						  <BottomNavigationItem
 							label="首頁"
 							icon={homeIcon}
-							style={this.state.style}
+							style={this.state.styleButton}
 							onTouchTap={() => this.select(0)}
 						  />
 						  <BottomNavigationItem
 							label="課程地圖"
 							icon={mapIcon}
-							style={this.state.style}
+							style={this.state.styleButton}
 							onTouchTap={() => this.select(1)}
 						  />
 						  <BottomNavigationItem
 							label="畢業預審"
 							icon={graduationIcon}
-							style={this.state.style}
+							style={this.state.styleButton}
 							onTouchTap={() => this.select(2)}
 						  />
 						  <BottomNavigationItem
 							label="抵免"
 							icon={checkIcon}
-							style={this.state.style}
+							style={this.state.styleButton}
 							onTouchTap={() => this.select(3)}
 						  />
 						</BottomNavigation>
 					</MuiThemeProvider>
 					</div>
 				</div>
+				<div id="topRec">
+
+				</div>
             <FadeIn>
-            	<div >
-	    			<img src={index} width="100%" display={this.state.displayindex0}/>
-            	</div>
+				<div style = {this.state.styleindex0}>
+					<HomeItem />
+				</div>
+
+				<div style = {this.state.styleindex1}>
+					<MapItem />
+				</div>
+				<div style = {this.state.styleindex2}>
+					<GraduationItem />
+				</div>
+				<div style = {this.state.styleindex3}>
+					<CreditItem />
+				</div>
             </FadeIn>
 
 	  		</div>

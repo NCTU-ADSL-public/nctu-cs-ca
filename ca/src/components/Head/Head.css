@@ -29,7 +29,13 @@
      left: 0;
      width: 100%;
      z-index: 10000;
-     background: #FFFFFF;
+     background: #EEEEEE;
+     height: 60px;
+ }
+
+ #topRec{
+     height: 60px;
+     width: 100%;
  }
 
 #h1 {
