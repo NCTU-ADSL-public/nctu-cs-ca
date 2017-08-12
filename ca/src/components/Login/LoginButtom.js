@@ -10,7 +10,7 @@ class LoginButtom extends React.Component{
 			<RaisedButton label="Login"
 						  backgroundColor = "#00AEAE"
 						  labelColor = {grey50}
-						  href="/auth/Nctu"
+						  href="/Head"
 						  style={{
                               width: '13%',
                               fontFamily: 'Noto Sans CJK TC',

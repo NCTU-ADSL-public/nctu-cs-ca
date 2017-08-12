@@ -4,19 +4,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import index from './index+.png';
 import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-
-import Home from 'material-ui/svg-icons/content/flag';
-import Map from 'material-ui/svg-icons/maps/map';
-import Graduation from 'material-ui/svg-icons/social/school';
-import Check from 'material-ui/svg-icons/av/featured-play-list';
-
+import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import FadeIn from 'react-fade-in';
 
 
-const homeIcon = <Home />;
-const mapIcon = <Map />;
-const graduationIcon = <Graduation />;
-const checkIcon = <Check />;
+
+const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
+const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
+const nearbyIcon = <IconLocationOn />;
 
 
 
@@ -64,27 +59,33 @@ class Head extends Component {
 			        <BottomNavigation selectedIndex={this.state.selectedIndex}>
 			          <BottomNavigationItem
 			            label="首頁"
-			            icon={homeIcon}
+			            icon={nearbyIcon} 
 			            style={this.state.style}
 			            onTouchTap={() => this.select(0)}
 			          />
 			          <BottomNavigationItem
 			            label="課程地圖"
-			            icon={mapIcon}
+			            icon={nearbyIcon}
 			            style={this.state.style}
 			            onTouchTap={() => this.select(1)}
 			          />
 			          <BottomNavigationItem
-			            label="畢業預審"
-			            icon={graduationIcon}
+			            label="必選修"
+			            icon={nearbyIcon}
 			            style={this.state.style}
 			            onTouchTap={() => this.select(2)}
 			          />
 			          <BottomNavigationItem
-			            label="抵免"
-			            icon={checkIcon}
+			            label="畢業預審"
+			            icon={nearbyIcon}
 			            style={this.state.style}
 			            onTouchTap={() => this.select(3)}
+			          />
+			          <BottomNavigationItem
+			            label="抵免"
+			            icon={nearbyIcon}
+			            style={this.state.style}
+			            onTouchTap={() => this.select(4)}
 			          />
 			        </BottomNavigation>
                 </MuiThemeProvider>
