@@ -9,12 +9,11 @@
   margin: 0 0 0 0;
   padding: 0 0 0 13%;
   color:  #7B7B7B;
-  /*background: #EEEEEE;*/
   height: 65vh;
 }
 .Login-login {
     text-align:center;
-    margin: -7% 0 0 -13%;
+    margin: -7% 0 0 -15%;
  }
 
 .Login-Choose {
@@ -40,7 +39,6 @@ h1 {
 
 #AjustToggleButtom {
   height: 35vh;
-  /*background: #EEEEEE;*/
 }
 
 h2 {
@@ -53,7 +51,7 @@ h2 {
 #rectangle {
     margin: 11px 35px 0 0;
     width: 17px;
-    height: 108px;
+    height: 100px;
     background: #00AEAE;
     float: left;
 }
@@ -73,6 +71,10 @@ h2 {
     height: 0vh;
     background: #EEEEEE;
   }
+    .Login-login {
+        text-align:center;
+        margin: -7% 0 0 0%;
+    }
     h1 {
       font-size: 18px;
     }

@@ -54,41 +54,43 @@ class Head extends Component {
 	render() {
 	    return (
 		    <div id="Head">
-            	<div className="Head-header" >    
-			    	<div id="rectangle1"></div>
-		            <div id="h1">交大資工線上助理</div> 
-		            <div id="h2">NCTU Curriculum Assistant</div>
-            	</div>
-            	<div id="adjust">
-                <MuiThemeProvider zDepth={1}>
-			        <BottomNavigation selectedIndex={this.state.selectedIndex}>
-			          <BottomNavigationItem
-			            label="首頁"
-			            icon={homeIcon}
-			            style={this.state.style}
-			            onTouchTap={() => this.select(0)}
-			          />
-			          <BottomNavigationItem
-			            label="課程地圖"
-			            icon={mapIcon}
-			            style={this.state.style}
-			            onTouchTap={() => this.select(1)}
-			          />
-			          <BottomNavigationItem
-			            label="畢業預審"
-			            icon={graduationIcon}
-			            style={this.state.style}
-			            onTouchTap={() => this.select(2)}
-			          />
-			          <BottomNavigationItem
-			            label="抵免"
-			            icon={checkIcon}
-			            style={this.state.style}
-			            onTouchTap={() => this.select(3)}
-			          />
-			        </BottomNavigation>
-                </MuiThemeProvider>
-            	</div>
+				<div id="ontopDiv">
+					<div className="Head-header" >
+						<div id="rectangle1"></div>
+						<div id="h1">交大資工線上助理</div>
+						<div id="h2">NCTU Curriculum Assistant</div>
+					</div>
+					<div id="adjust">
+					<MuiThemeProvider zDepth={1}>
+						<BottomNavigation selectedIndex={this.state.selectedIndex}>
+						  <BottomNavigationItem
+							label="首頁"
+							icon={homeIcon}
+							style={this.state.style}
+							onTouchTap={() => this.select(0)}
+						  />
+						  <BottomNavigationItem
+							label="課程地圖"
+							icon={mapIcon}
+							style={this.state.style}
+							onTouchTap={() => this.select(1)}
+						  />
+						  <BottomNavigationItem
+							label="畢業預審"
+							icon={graduationIcon}
+							style={this.state.style}
+							onTouchTap={() => this.select(2)}
+						  />
+						  <BottomNavigationItem
+							label="抵免"
+							icon={checkIcon}
+							style={this.state.style}
+							onTouchTap={() => this.select(3)}
+						  />
+						</BottomNavigation>
+					</MuiThemeProvider>
+					</div>
+				</div>
             <FadeIn>
             	<div >
 	    			<img src={index} width="100%" display={this.state.displayindex0}/>
