@@ -11,8 +11,8 @@ import Check from 'material-ui/svg-icons/av/featured-play-list';
 
 import HomeItem from './Home.js';
 import MapItem from './Map/Map.js';
-import GraduationItem from './Graduation.js';
-import CreditItem from './Credit.js';
+import GraduationItem from './Graduation/Graduation.js';
+import CreditItem from './Credit/Credit.js';
 
 import FadeIn from 'react-fade-in';
 

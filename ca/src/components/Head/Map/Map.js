@@ -1,6 +1,7 @@
 import React from 'react';
 import './Map.css';
 import Radiobuttom from './Radiobuttom';
+import RaiseButtom from './RaiseButtom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Map extends React.Component{
@@ -10,7 +11,7 @@ class Map extends React.Component{
     }
     render() {
         return (
-            <div >
+            <div id="font_adjust">
                 <div className="Map-title-text">
                     <div id="lessons-title">課程地圖 - 資工組</div>
                 </div>
@@ -60,7 +61,7 @@ class Map extends React.Component{
 
                     <div className="mods">
                         <MuiThemeProvider>
-                            <Radiobuttom/>
+                            <RaiseButtom/>
                         </MuiThemeProvider>
                     </div>
                 </div>
