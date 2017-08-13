@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Head.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import ReactDOM from 'react-dom';
 
 import Home from 'material-ui/svg-icons/content/flag';
 import Map from 'material-ui/svg-icons/maps/map';
@@ -23,105 +24,62 @@ const checkIcon = <Check />;
 
 
 
+
 class Head extends Component {
-  	state = {
-    	selectedIndex: 0,
-    	styleButton: {
-  			fontFamily: 'Noto Sans CJK TC',
-  			background: '#EEEEEE',
-    	},
-		styleindex0: {
-            display : 'inline',
-			margin :"60px 0 0 0",
-		},
-        styleindex1: {
-            display : 'none',
-            margin :"60px 0 0 0",
-        },
-        styleindex2: {
-            display : 'none',
-            top : '60px',
-        },
-        styleindex3: {
-            display : 'none',
-            top : '60px',
-        },
 
-
-  	};
-  	
-
-  	select(index){
-  		if(index==0){
-            this.setState({ styleindex0: {
+        state = {
+            selectedIndex: 0,
+            styleButton: {
+                fontFamily: 'Noto Sans CJK TC',
+                background: '#EEEEEE',
+            },
+            styleindex: {
                 display : 'inline',
-            	},
-                styleindex1: {
-                    display : 'none',
-                },
-                styleindex2: {
-                    display : 'none',
-                },
-                styleindex3: {
-                    display : 'none',
-                },
-			});
+            },
+
+
+        };
+        
+  	select(index){
+  		this.setState({styleindex:
+			{display : 'none',
+			}
+        });
+  		if(index===0){
+        	ReactDOM.render(
+				<FadeIn>
+					<HomeItem />
+				</FadeIn>,
+            document.getElementById('page'));
 		}
-        else if(index==1){
-            this.setState({ styleindex0: {
-                display : 'none',
-            },
-                styleindex1: {
-                    display : 'inline',
-                },
-                styleindex2: {
-                    display : 'none',
-                },
-                styleindex3: {
-                    display : 'none',
-                },
-            });
+        else if(index===1){
+            ReactDOM.render(
+				<div>
+					<FadeIn>
+						<MapItem />
+					</FadeIn>
+				</div>,
+				document.getElementById('page'));
         }
-        else if(index==2){
-            this.setState({ styleindex0: {
-                display : 'none',
-            },
-                styleindex1: {
-                    display : 'none',
-                },
-                styleindex2: {
-                    display : 'inline',
-                },
-                styleindex3: {
-                    display : 'none',
-                },
-            });
+        else if(index===2){
+            ReactDOM.render(
+					<FadeIn>
+						<GraduationItem />
+					</FadeIn>,
+                document.getElementById('page'));
         }
-        else if(index==3){
-            this.setState({ styleindex0: {
-                display : 'none',
-            },
-                styleindex1: {
-                    display : 'none',
-                },
-                styleindex2: {
-                    display : 'none',
-                },
-                styleindex3: {
-                    display : 'inline',
-                },
-            });
+        else if(index===3){
+            ReactDOM.render(
+				<div>
+				<FadeIn>
+					<CreditItem />
+				</FadeIn>
+                </div>,
+                document.getElementById('page'));
         }
 
-  		console.log(index);
   		this.setState({selectedIndex: index});
-  	} 
-
-  	getInitialState (){
-      return {
-      }
-
-    }
+  	}
     
 	render() {
 	    return (
@@ -166,22 +124,13 @@ class Head extends Component {
 				<div id="topRec">
 
 				</div>
-            <FadeIn>
-				<div style = {this.state.styleindex0}>
-					<HomeItem />
-				</div>
 
-				<div style = {this.state.styleindex1}>
-					<MapItem />
+				<div id="page"></div>
+				<div style={this.state.styleindex}>
+					<FadeIn>
+						<HomeItem/>
+					</FadeIn>
 				</div>
-				<div style = {this.state.styleindex2}>
-					<GraduationItem />
-				</div>
-				<div style = {this.state.styleindex3}>
-					<CreditItem />
-				</div>
-            </FadeIn>
-
 	  		</div>
 	    );
 	  }
