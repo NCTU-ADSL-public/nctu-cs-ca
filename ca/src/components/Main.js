@@ -8,6 +8,9 @@ import Head from './Head/Head';
 // and /schedule routes will match any pathname that starts
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
+
+
+
 const Main = () => (
   <main>
     <Switch>
@@ -16,5 +19,6 @@ const Main = () => (
     </Switch>
   </main>
 );
+
 
 export default Main;

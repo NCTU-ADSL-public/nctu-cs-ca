@@ -1,0 +1,96 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+
+#lessons-title{
+    font-size: 2.3em;
+    font-weight: 500;
+    margin: 0;
+}
+
+h3{
+    font-size: 1.5em;
+    font-weight: 450;
+    margin: 0;
+}
+
+.Map-title-text{
+    margin: 70px 5% 0 5%;
+    padding: 10px 10px 10px 45px;
+    color: #7B7B7B;
+    font-size: 1.5em;
+
+}
+
+.Row{
+    margin: 0 5% 0 5%;
+}
+
+.grades{
+    float: left;
+    margin: 5px 5px 0 5px;
+
+    border: 0.5px solid #e3e3e3;
+    height: 800px;
+    width: 80%;
+}
+
+.mods{
+    float: left;
+    margin: 5px 5px 0 5px;
+
+    height: 800px;
+    width: 15%;
+}
+
+.grade{
+    float: left;
+    background: #AFEEEE;
+    height: 100%;
+    width: 25%;
+}
+
+#grade-2, #grade-4{
+    background: #F0FFFF;
+}
+
+
+.grade-num{
+    padding: 3px 3px 3px 10px;
+
+    background: #FFF;
+    opacity: 0.5;
+    color: #222;
+}
+
+.course{
+    padding: 8px 8px 4px 8px;
+}
+
+.course-btn{
+    padding: 3px;
+
+    border-radius: 3px;
+    text-align: center;
+    color: #EEE;
+    font-size: 1em;
+    background: #808080;
+}
+
+.btn-default{
+    background: #222;
+}
+.btn-green{
+    background: #b6ffe7;
+    color: #222;
+}
+.btn-orange{
+    background: #ffff61;
+    color: #222;
+}
+.btn-red{
+    background: #f56161;
+}
+
+.mods{
+    margin: 2% 0 0 1%;
+}

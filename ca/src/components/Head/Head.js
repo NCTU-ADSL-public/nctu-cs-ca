@@ -10,7 +10,7 @@ import Graduation from 'material-ui/svg-icons/social/school';
 import Check from 'material-ui/svg-icons/av/featured-play-list';
 
 import HomeItem from './Home.js';
-import MapItem from './Map.js';
+import MapItem from './Map/Map.js';
 import GraduationItem from './Graduation.js';
 import CreditItem from './Credit.js';
 
@@ -23,7 +23,12 @@ const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
 
+var data = [{
+    name : "陳景熙",
+    grad : "資電",
 
+},
+];
 
 class Head extends Component {
 
@@ -39,7 +44,7 @@ class Head extends Component {
 
 
         };
-        
+
   	select(index){
   		this.setState({styleindex:
 			{display : 'none',
@@ -56,25 +61,28 @@ class Head extends Component {
             ReactDOM.render(
 				<div>
 					<FadeIn>
-						<MapItem />
+						<MapItem
+							data = {data}/>
 					</FadeIn>
 				</div>,
 				document.getElementById('page'));
         }
         else if(index===2){
             ReactDOM.render(
+            	<p>
 					<FadeIn>
 						<GraduationItem />
-					</FadeIn>,
+					</FadeIn>
+				</p>,
                 document.getElementById('page'));
         }
         else if(index===3){
             ReactDOM.render(
-				<div>
+				<a>
 				<FadeIn>
 					<CreditItem />
 				</FadeIn>
-                </div>,
+                </a>,
                 document.getElementById('page'));
         }
 
@@ -122,7 +130,6 @@ class Head extends Component {
 					</div>
 				</div>
 				<div id="topRec">
-
 				</div>
 
 				<div id="page"></div>
