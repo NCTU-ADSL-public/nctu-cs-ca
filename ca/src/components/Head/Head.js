@@ -15,6 +15,7 @@ import GraduationItem from './Graduation/Graduation.js';
 import CreditItem from './Credit/Credit.js';
 
 import FadeIn from 'react-fade-in';
+import gimshi from './gimshi.jpg';
 
 
 const homeIcon = <Home />;
@@ -22,13 +23,29 @@ const mapIcon = <Map />;
 const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
+var data = {
+    'name': "陳景熙",
+	'group': "資電08",
+};
 
-var data = [{
-    name : "陳景熙",
-    grad : "資電",
+var users = {
+    'Active User': {
+        'config': {
+            'status': 'active',
+        }
+    },
+    'Paused User': {
+        'config': {
+            'status': 'paused',
+        }
+    }
+};
 
-},
-];
+var usersWithName = Object.keys(users).map(function(key) {
+    var user = users[key];
+    user.name = key;
+    return user;
+});
 
 class Head extends Component {
 
@@ -127,6 +144,18 @@ class Head extends Component {
 						  />
 						</BottomNavigation>
 					</MuiThemeProvider>
+					</div>
+					<div>
+						<div id="idcard">
+
+							<div id="idcard-top">
+                            {data.name}
+
+							</div>
+							<div id="idcard-button">
+                            {data.group}
+                            </div>
+						</div>
 					</div>
 				</div>
 				<div id="topRec">

@@ -15,7 +15,7 @@
     width: 6.5px;
     height: 35px;
     background: #00AEAE;
-	  float:left;
+	float:left;
 }
 
 #adjust{
@@ -31,6 +31,26 @@
      z-index: 10000;
      background: #EEEEEE;
      height: 60px;
+ }
+
+ #idcard{
+     margin: 0.2% -5% 0 0;
+     font-size: 17px;
+     font-family: Noto Sans CJK TC;
+     color:#7B7B7B;
+     text-align: left;
+ }
+
+ #idcard-top{
+     text-align: center;
+ }
+
+ #idcard-photo{
+     margin: -2.5% 0 0 0%;
+ }
+
+ #idcard-button{
+     text-align: center;
  }
 
  #topRec{

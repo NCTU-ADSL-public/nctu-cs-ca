@@ -6,7 +6,7 @@ class Graduation extends React.Component{
 
     render() {
         return (
-            <div >
+            <div>
                 Nice
             </div>
         );

@@ -1,13 +1,13 @@
 import React from 'react';
 import './Map.css';
-import Radiobuttom from './Radiobuttom';
 import RaiseButtom from './RaiseButtom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Map extends React.Component{
     constructor(props) {
         super(props);
-        console.log(props.data.name);
+        var name = props.data;
+        console.log(name);
     }
     render() {
         return (
