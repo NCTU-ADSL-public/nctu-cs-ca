@@ -15,7 +15,6 @@ import GraduationItem from './Graduation/Graduation.js';
 import CreditItem from './Credit/Credit.js';
 
 import FadeIn from 'react-fade-in';
-import gimshi from './gimshi.jpg';
 
 
 const homeIcon = <Home />;
@@ -23,29 +22,13 @@ const mapIcon = <Map />;
 const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
-var data = {
-    'name': "陳景熙",
-	'group': "資電大三",
-};
 
-var users = {
-    'Active User': {
-        'config': {
-            'status': 'active',
-        }
-    },
-    'Paused User': {
-        'config': {
-            'status': 'paused',
-        }
-    }
-};
+var data = [{
+    name : "陳景熙",
+    grad : "資電",
 
-var usersWithName = Object.keys(users).map(function(key) {
-    var user = users[key];
-    user.name = key;
-    return user;
-});
+},
+];
 
 class Head extends Component {
 
@@ -114,54 +97,37 @@ class Head extends Component {
 						<div id="rectangle1"></div>
 						<div id="h1">交大資工線上助理</div>
 						<div id="h2">NCTU Curriculum Assistant</div>
-						<div id="adjust">
-							<MuiThemeProvider zDepth={1}>
-								<BottomNavigation selectedIndex={this.state.selectedIndex}>
-									<BottomNavigationItem
-										label="首頁"
-										icon={homeIcon}
-										style={this.state.styleButton}
-										onTouchTap={() => this.select(0)}
-									/>
-									<BottomNavigationItem
-										label="課程地圖"
-										icon={mapIcon}
-										style={this.state.styleButton}
-										onTouchTap={() => this.select(1)}
-									/>
-									<BottomNavigationItem
-										label="畢業預審"
-										icon={graduationIcon}
-										style={this.state.styleButton}
-										onTouchTap={() => this.select(2)}
-									/>
-									<BottomNavigationItem
-										label="抵免"
-										icon={checkIcon}
-										style={this.state.styleButton}
-										onTouchTap={() => this.select(3)}
-									/>
-								</BottomNavigation>
-							</MuiThemeProvider>
-						</div>
-						<div>
-
-						</div>
 					</div>
-					<div id="idcard">
-						<div id="idcard-data">
-							<div id="idcard-top">
-                                {data.name}
-							</div>
-							<div id="idcard-button">
-                                {data.group}
-							</div>
-						</div>
-						<div id="idcard-photo">
-							<img src={gimshi} width="3%" />
-						</div>
+					<div id="adjust">
+					<MuiThemeProvider zDepth={1}>
+						<BottomNavigation selectedIndex={this.state.selectedIndex}>
+						  <BottomNavigationItem
+							label="首頁"
+							icon={homeIcon}
+							style={this.state.styleButton}
+							onTouchTap={() => this.select(0)}
+						  />
+						  <BottomNavigationItem
+							label="課程地圖"
+							icon={mapIcon}
+							style={this.state.styleButton}
+							onTouchTap={() => this.select(1)}
+						  />
+						  <BottomNavigationItem
+							label="畢業預審"
+							icon={graduationIcon}
+							style={this.state.styleButton}
+							onTouchTap={() => this.select(2)}
+						  />
+						  <BottomNavigationItem
+							label="抵免"
+							icon={checkIcon}
+							style={this.state.styleButton}
+							onTouchTap={() => this.select(3)}
+						  />
+						</BottomNavigation>
+					</MuiThemeProvider>
 					</div>
-
 				</div>
 				<div id="topRec">
 				</div>
