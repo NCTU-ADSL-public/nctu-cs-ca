@@ -9,7 +9,7 @@ import Map from 'material-ui/svg-icons/maps/map';
 import Graduation from 'material-ui/svg-icons/social/school';
 import Check from 'material-ui/svg-icons/av/featured-play-list';
 
-import HomeItem from './Home.js';
+import HomeItem from './Home/Home.js';
 import MapItem from './Map/Map.js';
 import GraduationItem from './Graduation/Graduation.js';
 import CreditItem from './Credit/Credit.js';
@@ -138,6 +138,7 @@ class Head extends Component {
 						<HomeItem/>
 					</FadeIn>
 				</div>
+				<footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
 	  		</div>
 	    );
 	  }

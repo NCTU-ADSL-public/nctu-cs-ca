@@ -13,10 +13,10 @@ class Map extends React.Component{
         return (
             <div id="font_adjust">
                 <div className="Map-title-text">
-                    <div id="lessons-title">課程地圖 - 資工組</div>
+                    <div id="lessons-title">課程地圖</div><div id="lessons-little-title"> - 資工組</div>
                 </div>
 
-                <div className="Row">
+                <div className="Map-Row">
                     <div className="grades">
                         <div className="grade" id="grade-1">
                             <div className="grade-num"><h3>大一(104)</h3></div>

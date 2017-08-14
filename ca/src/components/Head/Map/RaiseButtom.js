@@ -1,26 +1,24 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
     fontFamily: 'Noto Sans CJK TC',
     fontWeight: 'bold',
-    color: '#778899',
-    background: '#D3D3D3',
 };
 
-const FlatButtonExampleSimple = () => (
+const RaisedButtonEx = () => (
     <div>
-        <FlatButton label="全覽" style={style} fullWidth={true}  />
+        <RaisedButton label="全覽" backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}  />
         <br />
         <br />
-        <FlatButton label="必修" style={style} fullWidth={true}  />
+        <RaisedButton label="必修" backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}  />
         <br />
         <br />
-        <FlatButton label="必選修" style={style} fullWidth={true}  />
+        <RaisedButton label="必選修" backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}  />
         <br />
         <br />
-        <FlatButton label="建議修課" style={style} fullWidth={true}  />
+        <RaisedButton label="建議修課" backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}  />
     </div>
 );
 
-export default FlatButtonExampleSimple;
+export default RaisedButtonEx;
