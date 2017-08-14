@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/components/Head/Head.js" line="128" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="eb6c96c9-ad6a-4920-85d2-a73d4e25c710" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/Head/gimshi.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Head/Graduation/Graduation.js" afterPath="$PROJECT_DIR$/src/components/Head/Graduation/Graduation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Head/Head.css" afterPath="$PROJECT_DIR$/src/components/Head/Head.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Head/Head.js" afterPath="$PROJECT_DIR$/src/components/Head/Head.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Head/Map/Map.js" afterPath="$PROJECT_DIR$/src/components/Head/Map/Map.js" />
     </list>
     <ignored path="ca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,8 +28,8 @@
           <file leaf-file-name="Head.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/Head/Head.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="288">
-                  <caret line="155" column="40" lean-forward="true" selection-start-line="155" selection-start-column="40" selection-end-line="155" selection-end-column="40" />
+                <state relative-caret-position="234">
+                  <caret line="27" column="18" lean-forward="false" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
                   <folding>
                     <element signature="e#0#41#0" expanded="true" />
                   </folding>
@@ -56,8 +50,8 @@
           <file leaf-file-name="Home.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Head/Home/Home.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="234">
-                  <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="48" />
+                <state relative-caret-position="208">
+                  <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="9" selection-end-column="48" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -79,8 +73,8 @@
           <file leaf-file-name="Head.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/Head/Head.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="78">
-                  <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+                <state relative-caret-position="390">
+                  <caret line="48" column="16" lean-forward="false" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
                   <folding />
                 </state>
               </provider>
@@ -125,8 +119,8 @@
         <option value="$PROJECT_DIR$/src/components/Head/Map/Map.css" />
         <option value="$PROJECT_DIR$/src/components/Head/Map/Map.js" />
         <option value="$PROJECT_DIR$/src/components/Head/Graduation/Graduation.js" />
-        <option value="$PROJECT_DIR$/src/components/Head/Head.js" />
         <option value="$PROJECT_DIR$/src/components/Head/Head.css" />
+        <option value="$PROJECT_DIR$/src/components/Head/Head.js" />
       </list>
     </option>
   </component>
@@ -372,12 +366,12 @@
       <workItem from="1502099500332" duration="8035000" />
       <workItem from="1502547115377" duration="11935000" />
       <workItem from="1502593155116" duration="3208000" />
-      <workItem from="1502612899144" duration="24619000" />
+      <workItem from="1502612899144" duration="26949000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58753000" />
+    <option name="totallyTimeSpent" value="61083000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -756,33 +750,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Head/gimshi.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Head/Home/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="48" />
+        <state relative-caret-position="208">
+          <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="9" selection-end-column="48" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Head/gimshi.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Head/Head.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+        <state relative-caret-position="390">
+          <caret line="48" column="16" lean-forward="false" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Head/Head.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="155" column="40" lean-forward="true" selection-start-line="155" selection-start-column="40" selection-end-line="155" selection-end-column="40" />
+        <state relative-caret-position="234">
+          <caret line="27" column="18" lean-forward="false" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
