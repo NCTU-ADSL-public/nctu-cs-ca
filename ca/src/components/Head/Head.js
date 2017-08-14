@@ -145,22 +145,22 @@ class Head extends Component {
 							</MuiThemeProvider>
 						</div>
 						<div>
-							<div className="idcard">
-								<div id="idcard-data">
-									<div id="idcard-top">
-                                        {data.name}
-									</div>
-									<div id="idcard-button">
-                                        {data.group}
-									</div>
-								</div>
-								<div id="idcard-photo">
-								<img src={gimshi} width="3%" />
-								</div>
-							</div>
+
 						</div>
 					</div>
-
+					<div id="idcard">
+						<div id="idcard-data">
+							<div id="idcard-top">
+                                {data.name}
+							</div>
+							<div id="idcard-button">
+                                {data.group}
+							</div>
+						</div>
+						<div id="idcard-photo">
+							<img src={gimshi} width="3%" />
+						</div>
+					</div>
 
 				</div>
 				<div id="topRec">

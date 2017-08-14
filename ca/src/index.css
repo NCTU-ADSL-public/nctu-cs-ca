@@ -6,14 +6,14 @@ body {
 footer {
   	height: 20px;
   	padding: 8px 0px 8px 0px;
-	  font-size: 8px;
-	  color: #FCFCFC;
+	font-size: 8px;
+	color: #FCFCFC;
     background-color:#6C6C6C;
     text-align:center;
     font-family: 'Noto Sans CJK TC';
   	font-weight:  400;
     position: fixed;
-    bottom: 0%;
+    bottom: 0;
 
     width: 100%;
 }
