@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb6c96c9-ad6a-4920-85d2-a73d4e25c710" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Login/LoginButtom.js" afterPath="$PROJECT_DIR$/src/components/Login/LoginButtom.js" />
-    </list>
+    <list default="true" id="eb6c96c9-ad6a-4920-85d2-a73d4e25c710" name="Default" comment="" />
     <ignored path="ca.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +44,8 @@
           <file leaf-file-name="Login.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/Login/Login.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="390">
-                  <caret line="34" column="21" lean-forward="true" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+                <state relative-caret-position="236">
+                  <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -142,8 +139,8 @@
           <file leaf-file-name="LoginButtom.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/Login/LoginButtom.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="208">
-                  <caret line="22" column="10" lean-forward="true" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+                <state relative-caret-position="260">
+                  <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
                   <folding />
                 </state>
               </provider>
@@ -437,12 +434,12 @@
       <workItem from="1502547115377" duration="11935000" />
       <workItem from="1502593155116" duration="3208000" />
       <workItem from="1502612899144" duration="30706000" />
-      <workItem from="1502720548010" duration="254000" />
+      <workItem from="1502720548010" duration="529000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65094000" />
+    <option name="totallyTimeSpent" value="65369000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -806,16 +803,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Login/Login.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="34" column="21" lean-forward="true" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+        <state relative-caret-position="236">
+          <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Login/LoginButtom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="22" column="10" lean-forward="true" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+        <state relative-caret-position="260">
+          <caret line="12" column="41" lean-forward="true" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
           <folding />
         </state>
       </provider>
