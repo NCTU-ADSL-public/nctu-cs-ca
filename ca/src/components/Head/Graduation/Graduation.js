@@ -1,5 +1,4 @@
 import React from 'react';
-import coursemap from '../Map/coursemap_v2.png';
 
 class Graduation extends React.Component{
 
