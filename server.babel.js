@@ -1,3 +1,4 @@
+var query = require('./msql.js');
 var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -15,6 +16,7 @@ app.use(session({
   activeDuration: 5 * 60 * 1000,
   httpOnly: true,
 }));
+app.set('view engine', 'ejs'); 
 app.use('/Head', express.static('./build'));
 app.use('/Login', express.static('./build'));
 app.use('/', express.static('./build'));
@@ -36,7 +38,24 @@ app.get('/auth/Nctu', function(req, res) {
 });
 
 app.get('/students/info', function(req, res) {
-    res.send(req.session.profile);
+    var tempString = req.session.profile.toString();
+    var tempIndex = tempString.lastIndexOf('username')
+    tempString = tempString.substring(tempIndex + 12);
+    tempIndex = tempString.indexOf('"');
+    tempString = tempString.substring(0, tempIndex);
+    var studentId = tempString;
+    
+    query.findStudent(studentId,function(err,result){
+	if(err)
+		throw err;
+	console.log(result);
+	result = JSON.parse(result);
+	var reqJSON = JSON.parse(req.session.profile);   
+	reqJSON.studentInfo = result;
+	req.session.profile = reqJSON;
+        res.send(req.session.profile);
+    });
+
 });
 function getCode(req, res, next){
 	oAuthNctu.code = req.query.code;
