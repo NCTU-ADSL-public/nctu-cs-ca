@@ -9,6 +9,7 @@ import Home from 'material-ui/svg-icons/content/flag';
 import Map from 'material-ui/svg-icons/maps/map';
 import Graduation from 'material-ui/svg-icons/social/school';
 import Check from 'material-ui/svg-icons/av/featured-play-list';
+import gimshi from './gimshi.jpg';
 
 import HomeItem from './Home/Home.js';
 import MapItem from './Map/Map.js';
@@ -36,7 +37,7 @@ axios.get('/students/info').then(res => {
 
 var data = [{
     name : "陳景熙",
-    grad : "資電",
+    grad : "資電大三",
 
 },
 ];
@@ -136,6 +137,21 @@ class Head extends Component {
 						  />
 						</BottomNavigation>
 					</MuiThemeProvider>
+					</div>
+					<div>
+						<div className="idcard">
+							<div id="idcard-data">
+								<div id="idcard-top">
+									{data.name}陳景熙
+								</div>
+								<div id="idcard-button">
+                                    {data.grad}資工大三
+								</div>
+							</div>
+							<div id="idcard-photo">
+								<img src={gimshi} width="15%" />
+							</div>
+						</div>
 					</div>
 				</div>
 				<div id="topRec">
