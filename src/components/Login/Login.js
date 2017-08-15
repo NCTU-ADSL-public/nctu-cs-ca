@@ -1,14 +1,55 @@
 import React, { Component } from 'react';
 import LoginButtom from './LoginButtom.js';
+// import ToggleButtom from './ToggleButtom.js';
 import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FadeIn from 'react-fade-in';
+import axios from 'axios';
 
+axios.get('https://www.dcard.tw/_api/posts').then(res => {
+    res.status // HTTP response code (e.g., 200, 401)
+    res.data // object parsed from HTTP response body
+    res.headers // HTTP presonse headers
+    console.log(res.data);
 
+}).catch(err => {
+    console.log(err);
+});
+
+const styles = {
+  toggle: {
+    width: '10%',
+    marginBottom: 16,
+  },
+};
 
 
 class Login extends Component {
+  state = {
+    block:{
+      display:'none',
+    },
 
+  };
+
+  getInitialState (){
+      return {
+      }
+
+  }
+
+  handler(){
+    // alert('1');
+    // var tipe = this.className.Login-header;
+    // alert(tipe.style.background);
+    // if(tipe.style.background === "#EEEEEE"){
+    //   tipe.style.background=grey800;
+    // }
+    // else{
+    //   tipe.style.background=grey200;
+    // }
+
+  };
 
   render() {
     return (
@@ -20,8 +61,8 @@ class Login extends Component {
 
             <FadeIn>
                 <div id="rectangle"></div>
-                <div id="eng-title"><div id="h11">NCTU Curriculum Assistant</div></div>
-                <div id="ch-title"><div id="h22">交大資工線上助理</div></div>
+                <div id="eng-title"><h1>NCTU Curriculum Assistant</h1></div>
+                <div id="ch-title"><h2>交大資工線上助理</h2></div>
 
                 <div className = "Login-login">
                   <MuiThemeProvider>

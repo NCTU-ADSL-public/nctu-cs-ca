@@ -46,54 +46,56 @@ function getCode(req, res, next){
 		return;
 	}
 	console.log(oAuthNctu.code);
-
-	var formData = {
-		grant_type : oAuthNctu.grant_type,
-		code: 'hihihihihih',
-		//code : oAuthNctu.code,
-		client_id : oAuthNctu.client_id,
-		client_secret : oAuthNctu.client_secret,
-		redirect_uri : oAuthNctu.redirect_uri
-	};
-	// Todo: if wrong code
-	request({
-		uri: 'https://id.nctu.edu.tw/o/token/',
-		method: "POST",
-		headers: {
-			'Content-Type': 'multipart/form-data'
-		},	
-		formData: formData
-	}, function(err, res, body){
-		console.log(body);	
-		var bodyObj = JSON.parse(body);
-		var access_token = bodyObj.access_token;
-		console.log(access_token);
-		oAuthNctu.token = access_token;
-		//if(!access_token){
-		//	res.redirect('/');
-		//	return;
-		//}
-		//else
-		
-		//res.locals.access_token = access_token;
-		//I think we should pass token like above but I can't
 		next();
-	});
+	//});
 }
-
+function getToken(req, res, next){
+      var formData = {
+              grant_type : oAuthNctu.grant_type,
+              //code: 'hihihihihih',
+              code : oAuthNctu.code,
+              client_id : oAuthNctu.client_id,
+              client_secret : oAuthNctu.client_secret,
+              redirect_uri : oAuthNctu.redirect_uri
+       };
+        // Todo: if wrong code
+        request({
+              uri: 'https://id.nctu.edu.tw/o/token/',
+              method: "POST",
+              headers: {
+                    'Content-Type': 'multipart/form-data'
+              },
+              formData: formData
+        }, function(err, res, body){
+              console.log(body);
+              if(body == '{"error": "invalid_grant"}'){
+                  console.log("invalid code!");
+                  return;
+              }
+              //console.log(body);
+              var bodyObj = JSON.parse(body);
+              var access_token = bodyObj.access_token;
+              console.log(access_token);
+              oAuthNctu.token = access_token;
+              next();
+           });
+}
 function getProfile(req, res, next){
     request({
     	uri: 'https://id.nctu.edu.tw/api/profile/',
     	method: "GET",
     	headers: {
-      	'Authorization' : 'Bearer ' + oAuthNctu.token,
+      	  'Authorization' : 'Bearer ' + oAuthNctu.token,
     },
   	}, function(err, res, body){              				       
-        console.log('Profile: ' +  body);
-	//req.session = body;
-        //console.log('getProfile checkpoint: ' + req.session.profile);   
-	req.session.profile = body; 
-	next();
+        
+              if(body == '<h1>Server Error (500)</h1>'){
+                  console.log("invalid token!!");
+                  return;
+              }
+              console.log('Profile: ' +  body);
+	      req.session.profile = body; 
+	      next();
    });
 }
 
@@ -101,5 +103,6 @@ function redirectAfterAuth(req, res){
 	res.redirect('/Head');
 }
 
-app.get('/auth/Nctu/callback', getCode, getProfile, redirectAfterAuth);
+app.get('/auth/Nctu/callback', getCode, getToken, getProfile,  redirectAfterAuth);
+
 
