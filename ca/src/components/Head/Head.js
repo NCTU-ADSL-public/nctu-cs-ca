@@ -3,6 +3,7 @@ import './Head.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 import Home from 'material-ui/svg-icons/content/flag';
 import Map from 'material-ui/svg-icons/maps/map';
@@ -21,6 +22,16 @@ const homeIcon = <Home />;
 const mapIcon = <Map />;
 const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
+
+axios.get('/students/info').then(res => {
+    res.status // HTTP response code (e.g., 200, 401)
+    res.data // object parsed from HTTP response body
+    res.headers // HTTP presonse headers
+    console.log(res.data);
+
+}).catch(err => {
+    console.log(err);
+});
 
 
 var data = [{
@@ -41,8 +52,6 @@ class Head extends Component {
             styleindex: {
                 display : 'inline',
             },
-
-
         };
 
   	select(index){

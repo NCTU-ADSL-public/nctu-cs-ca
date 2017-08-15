@@ -3,17 +3,7 @@ import LoginButtom from './LoginButtom.js';
 import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FadeIn from 'react-fade-in';
-import axios from 'axios';
 
-axios.get('https://www.dcard.tw/_api/posts').then(res => {
-    res.status // HTTP response code (e.g., 200, 401)
-    res.data // object parsed from HTTP response body
-    res.headers // HTTP presonse headers
-    console.log(res.data);
-
-}).catch(err => {
-    console.log(err);
-});
 
 
 
