@@ -61,7 +61,7 @@ class Head extends Component {
 
     getdata(){
     	var _this = this;
-        return axios.get('https://www.dcard.tw/_api/posts').then(studentData => {
+        return axios.get('/students/info').then(studentData => {
             studentData.status // HTTP response code (e.g., 200, 401)
             studentData.data // object parsed from HTTP response body
             studentData.headers // HTTP presonse headers
