@@ -69,8 +69,8 @@ class Head extends Component {
 			console.log(studentData.data);
             _this.setState({
 				studentIdcard: {
-                    name: studentData.data.studentInfo.sname,
-                    grad: studentData.data.studentInfo.program,
+                    name: studentData.data.sname,
+                    grad: studentData.data.program,
 				}
 			})
         }).catch(err => {
@@ -165,10 +165,10 @@ class Head extends Component {
 						<div className="idcard">
 							<div id="idcard-data">
 								<div id="idcard-top">
-									{this.state.studentIdcard.name}陳景熙
+									{this.state.studentIdcard.name}
 								</div>
 								<div id="idcard-button">
-                                    {this.state.studentIdcard.grad}資工
+                                    {this.state.studentIdcard.grad}
 								</div>
 							</div>
 							<div id="idcard-photo">
