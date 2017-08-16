@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import Home from 'material-ui/svg-icons/content/flag';
 import Map from 'material-ui/svg-icons/maps/map';
@@ -164,14 +165,22 @@ class Head extends Component {
 						<div className="idcard">
 							<div id="idcard-data">
 								<div id="idcard-top">
-									{this.state.studentIdcard.name}
+									{this.state.studentIdcard.name}陳景熙
 								</div>
 								<div id="idcard-button">
-                                    {this.state.studentIdcard.grad}
+                                    {this.state.studentIdcard.grad}資工
 								</div>
 							</div>
 							<div id="idcard-photo">
 								<img src={gimshi} width="15%" />
+							</div>
+							<div id="logout-button">
+								<MuiThemeProvider>
+									<RaisedButton style={{
+                                        width: '13%',
+                                        fontFamily: 'Noto Sans CJK TC',
+                                    }}  backgroundColor = "#DDDDDD" label="Logout" href="/logout"/>
+								</MuiThemeProvider>
 							</div>
 						</div>
 					</div>
