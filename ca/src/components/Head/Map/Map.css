@@ -3,6 +3,14 @@
     background: #F5F5F5;
 }
 
+.Map-title-text{
+    margin: 0 5% 6% 5%;
+    padding: 35px 10px 3px 65px;
+    color: #7B7B7B;
+    font-size: 1.5em;
+
+}
+
 #lessons-title{
     font-size: 2.3em;
     font-weight: 500;
@@ -21,13 +29,6 @@ h3{
     margin: 0;
 }
 
-.Map-title-text{
-    margin: 0 5% 6% 5%;
-    padding: 35px 10px 3px 65px;
-    color: #7B7B7B;
-    font-size: 1.5em;
-
-}
 
 .Map-Row{
     padding: 0 7% 0 7%;
@@ -59,6 +60,14 @@ h3{
     width: 25%;
 }
 
+.grade-cur .grade-num{
+    color: #fcfffa;
+    background-color: #e8a840;
+    opacity: 1;
+}
+.grade-cur .session{
+    opacity: 1;
+}
 
 #grade-2, #grade-4{
     background: #F0FFFF;
@@ -77,6 +86,7 @@ h3{
 .session{
     height: 464px;
     width: 100%;
+    opacity: 1;
 }
 
 .up-session{
@@ -93,11 +103,21 @@ h3{
 }
 
 #grade-2 .session .down-session, #grade-4 .session .down-session{
-   #background: #bee4e4;
+    #background: #bee4e4;
 }
 
 .course-group{
     height: 30%;
+}
+
+.course-group-1{
+    height: 22%;
+}
+.course-group-2{
+    height: 42%;
+}
+.course-group-3{
+    height: 20%;
 }
 
 .course{
@@ -120,6 +140,17 @@ h3{
     background: #338d68;
 }
 
+.session-cur{
+    background: #fbe099;
+}
+.session-cur .course-group .course .course-btn{
+    background: #e8a840;
+    color: #f2fff8;
+    font-weight: 300;
+}
+
+
+
 .btn-default{
     background: #222;
 }
@@ -133,4 +164,76 @@ h3{
 }
 .btn-red{
     background: #f56161;
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    .Map-title-text{
+        margin: 0 5% 6% 5%;
+        padding: 60px 10px 3px 25px;
+        color: #7B7B7B;
+        font-size: 1.5em;
+
+    }
+
+    #lessons-title{
+        font-size: 1.7em;
+        font-weight: 500;
+        margin: 0;
+        float: left;
+    }
+
+    #lessons-little-title{
+        margin: 4% 0 0 20px;
+        font-size: 1.1em;
+        float: left;
+    }
+
+
+    .Map-Row{
+        height: 1000px;
+    }
+
+    .grades{
+        margin-bottom: 10px;
+        width: 100%;
+        height: 750px;
+    }
+
+    .grade-num{
+        padding: 3px 0px 3px 0px;
+        height: 7.5%;
+        text-align: center;
+    }
+
+    .session {
+        height: 92%;
+    }
+
+    .course-group-1{
+        height: 22%;
+    }
+    .course-group-2{
+        height: 42%;
+    }
+    .course-group-3{
+        height: 20%;
+    }
+
+    .course{
+        padding: 5px;
+        height: 54px;
+    }
+
+    .course-btn{
+        height: 100%;
+        overflow: hidden;
+    }
+
+
+    .mods{
+        width: 100%;
+    }
+
 }

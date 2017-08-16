@@ -148,15 +148,15 @@ class Head extends Component {
 						</div>
 						<div className="idcard">
 							<div id="idcard-data">
+								<div id="idcard-photo">
+									<img src={gimshi} width="50px" />
+								</div>
 								<div id="idcard-top">
                                     {this.state.studentIdcard.name}
 								</div>
 								<div id="idcard-buttom">
                                     {this.state.studentIdcard.grad}
 								</div>
-							</div>
-							<div id="idcard-photo">
-								<img src={gimshi} width="25%" />
 							</div>
 						</div>
 						<div id="logout-button">
