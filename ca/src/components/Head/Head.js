@@ -167,7 +167,7 @@ class Head extends Component {
 									{this.state.studentIdcard.name}
 								</div>
 								<div id="idcard-button">
-                                    {data.grad}
+                                    {this.state.studentIdcard.grad}
 								</div>
 							</div>
 							<div id="idcard-photo">
