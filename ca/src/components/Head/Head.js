@@ -165,10 +165,10 @@ class Head extends Component {
 						<div className="idcard">
 							<div id="idcard-data">
 								<div id="idcard-top">
-									{this.state.studentIdcard.name}陳景熙
+									{this.state.studentIdcard.name}
 								</div>
 								<div id="idcard-button">
-                                    {this.state.studentIdcard.grad}資工
+                                    {this.state.studentIdcard.grad}
 								</div>
 							</div>
 							<div id="idcard-photo">
