@@ -24,15 +24,9 @@ const mapIcon = <Map />;
 const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
-axios.get('/students/info').then(res => {
-    res.status // HTTP response code (e.g., 200, 401)
-    res.data // object parsed from HTTP response body
-    res.headers // HTTP presonse headers
-    console.log(res.data);
+var studentData;
+// /students/info
 
-}).catch(err => {
-    console.log(err);
-});
 
 
 var data = [{
@@ -44,16 +38,44 @@ var data = [{
 
 class Head extends Component {
 
-        state = {
-            selectedIndex: 0,
-            styleButton: {
-                fontFamily: 'Noto Sans CJK TC',
-                background: '#EEEEEE',
-            },
-            styleindex: {
-                display : 'inline',
-            },
-        };
+
+    constructor(props) {
+        super(props);
+        this.getdata();
+    }
+
+    state = {
+       selectedIndex: 0,
+       styleButton: {
+       fontFamily: 'Noto Sans CJK TC',
+       background: '#EEEEEE',
+       },
+       styleindex: {
+            display : 'inline',
+       },
+		studentIdcard:{
+       		name:'',
+			grad:'',
+		}
+    };
+
+    getdata(){
+    	var _this = this;
+        return axios.get('https://www.dcard.tw/_api/posts').then(studentData => {
+            studentData.status // HTTP response code (e.g., 200, 401)
+            studentData.data // object parsed from HTTP response body
+            studentData.headers // HTTP presonse headers
+			console.log(studentData.data);
+            _this.setState({
+				studentIdcard: {
+                    name: studentData.data.studentInfo.sname,
+                    grad: studentData.data.studentInfo.program,
+				}
+			})
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 
   	select(index){
   		this.setState({styleindex:
@@ -142,10 +164,10 @@ class Head extends Component {
 						<div className="idcard">
 							<div id="idcard-data">
 								<div id="idcard-top">
-									{data.name}陳景熙
+									{this.state.studentIdcard.name}
 								</div>
 								<div id="idcard-button">
-                                    {data.grad}資工大三
+                                    {data.grad}
 								</div>
 							</div>
 							<div id="idcard-photo">
