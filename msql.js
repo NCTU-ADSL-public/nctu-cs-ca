@@ -8,7 +8,7 @@ var c = new Client({
     charset: 'utf8'
 });
 
-var sql_findStudent = c.prepare('select sname,program from student where student_id=:id');
+var sql_findStudent = c.prepare('select sname,program,grade from student where student_id=:id');
 var sql_addEmail = c.prepare('update student set email=:email where student_id=:id');
 
 module.exports = {
