@@ -89,7 +89,7 @@
 #logout-button{
     height: 60px;
     width: 70px;
-    padding:10px 0 0 80px;
+    padding:10px 0 0 0px;
     float: left;
     position: static;
 }

@@ -53,7 +53,6 @@ class Head extends Component {
             studentData.status // HTTP response code (e.g., 200, 401)
             studentData.data // object parsed from HTTP response body
             studentData.headers // HTTP presonse headers
-			console.log(studentData.data);
             _this.setState({
 				studentIdcard: {
                     name: studentData.data.studentInfo[0].sname,
