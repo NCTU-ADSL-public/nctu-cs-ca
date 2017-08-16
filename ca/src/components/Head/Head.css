@@ -8,65 +8,17 @@
     margin: 0 0 0 0;
     padding: 0 0 0 3.5%;
     color:  #7B7B7B;
-}
-
-#rectangle1 {
-    margin: 11px 13px 0 0;
-    width: 6.5px;
-    height: 35px;
-    background: #00AEAE;
-    float:left;
-}
-
-#adjust{
-    margin: 0 8% 0 1%;
-    float:left;
-}
-
-#ontopDiv {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000;
-    background: #EEEEEE;
+    width: 1900px;
     height: 60px;
-}
-
-.idcard{
-    margin: -3% 0% 0 50%;
-    font-size: 15px;
-    font-family: Noto Sans CJK TC;
-    color:#7B7B7B;
-    float: right;
-}
-
-#idcard-top{
-    margin: 0.4% 2% 0 50%;
-    text-align: left;
-}
-
-#idcard-button{
-    margin: 0% 2% 0 50%;
-    text-align: left;
-}
-
-#dcard-data{
     float: left;
 }
 
-#idcard-photo{
-    margin: -8% 0 0 36%;
-}
-
-#logout-button{
-    margin: -8% 0 0 0;
-    padding:0 0 0 70%;
-}
-
-#topRec{
-    height: 60px;
-    width: 100%;
+#rectangle1 {
+    margin: 15px 13px 0 0;
+    width: 6.5px;
+    height: 31px;
+    background: #00AEAE;
+    float:left;
 }
 
 
@@ -84,6 +36,65 @@
     font-size: 18px;
     margin: 1.1% 0 0 0;
     float: left;
+}
+
+#adjust{
+    padding: 0.15% 3% 0 8%;
+    float:left;
+    width: 500px;
+    height: 60px;
+    float:left;
+}
+
+#ontopDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    background: #EEEEEE;
+    height: 60px;
+}
+
+.idcard{
+    padding: 0 0 0 20px;
+    font-size: 15px;
+    font-family: Noto Sans CJK TC;
+    color:#7B7B7B;
+    float: left;
+    height: 60px;
+    width: 200px;
+}
+
+#idcard-top{
+    margin: 10px 2% 0 60px;
+    text-align: left;
+}
+
+#idcard-buttom{
+    margin: 0% 2% 0 60px;
+    text-align: left;
+}
+
+#dcard-data{
+    float: left;
+}
+
+#idcard-photo{
+    margin: -42px 5px 20px 0;
+}
+
+#logout-button{
+    height: 60px;
+    width: 70px;
+    padding:10px 0 0 80px;
+    float: left;
+    position: static;
+}
+
+#topRec{
+    height: 60px;
+    width: 100%;
 }
 
 @media (max-width: 480px) {

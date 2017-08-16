@@ -19,23 +19,10 @@ import CreditItem from './Credit/Credit.js';
 
 import FadeIn from 'react-fade-in';
 
-
 const homeIcon = <Home />;
 const mapIcon = <Map />;
 const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
-
-var studentData;
-// /students/info
-
-
-
-var data = [{
-    name : "陳景熙",
-    grad : "資電大三",
-
-},
-];
 
 class Head extends Component {
 
@@ -94,8 +81,7 @@ class Head extends Component {
             ReactDOM.render(
 				<div>
 					<FadeIn>
-						<MapItem
-							data = {data}/>
+						<MapItem />
 					</FadeIn>
 				</div>,
 				document.getElementById('page'));
@@ -127,61 +113,59 @@ class Head extends Component {
 		    <div id="Head">
 				<div id="ontopDiv">
 					<div className="Head-header" >
-						<div id="rectangle1"></div>
-						<div id="h1">交大資工線上助理</div>
-						<div id="h2">NCTU Curriculum Assistant</div>
-					</div>
-					<div id="adjust">
-					<MuiThemeProvider zDepth={1}>
-						<BottomNavigation selectedIndex={this.state.selectedIndex}>
-						  <BottomNavigationItem
-							label="首頁"
-							icon={homeIcon}
-							style={this.state.styleButton}
-							onTouchTap={() => this.select(0)}
-						  />
-						  <BottomNavigationItem
-							label="課程地圖"
-							icon={mapIcon}
-							style={this.state.styleButton}
-							onTouchTap={() => this.select(1)}
-						  />
-						  <BottomNavigationItem
-							label="畢業預審"
-							icon={graduationIcon}
-							style={this.state.styleButton}
-							onTouchTap={() => this.select(2)}
-						  />
-						  <BottomNavigationItem
-							label="抵免"
-							icon={checkIcon}
-							style={this.state.styleButton}
-							onTouchTap={() => this.select(3)}
-						  />
-						</BottomNavigation>
-					</MuiThemeProvider>
-					</div>
-					<div>
+							<div id="rectangle1"></div>
+							<div id="h1">交大資工線上助理</div>
+							<div id="h2">NCTU Curriculum Assistant</div>
+						<div id="adjust">
+						<MuiThemeProvider zDepth={1}>
+							<BottomNavigation selectedIndex={this.state.selectedIndex}>
+							  <BottomNavigationItem
+								label="首頁"
+								icon={homeIcon}
+								style={this.state.styleButton}
+								onTouchTap={() => this.select(0)}
+							  />
+							  <BottomNavigationItem
+								label="課程地圖"
+								icon={mapIcon}
+								style={this.state.styleButton}
+								onTouchTap={() => this.select(1)}
+							  />
+							  <BottomNavigationItem
+								label="畢業預審"
+								icon={graduationIcon}
+								style={this.state.styleButton}
+								onTouchTap={() => this.select(2)}
+							  />
+							  <BottomNavigationItem
+								label="抵免"
+								icon={checkIcon}
+								style={this.state.styleButton}
+								onTouchTap={() => this.select(3)}
+							  />
+							</BottomNavigation>
+						</MuiThemeProvider>
+						</div>
 						<div className="idcard">
 							<div id="idcard-data">
 								<div id="idcard-top">
-									{this.state.studentIdcard.name}
+                                    {this.state.studentIdcard.name}王冠升
 								</div>
-								<div id="idcard-button">
-                                    {this.state.studentIdcard.grad}
+								<div id="idcard-buttom">
+                                    {this.state.studentIdcard.grad}資工
 								</div>
 							</div>
 							<div id="idcard-photo">
-								<img src={gimshi} width="15%" />
+								<img src={gimshi} width="25%" />
 							</div>
-							<div id="logout-button">
-								<MuiThemeProvider>
-									<RaisedButton style={{
-                                        width: '13%',
-                                        fontFamily: 'Noto Sans CJK TC',
-                                    }}  backgroundColor = "#DDDDDD" label="Logout" href="/logout"/>
-								</MuiThemeProvider>
-							</div>
+						</div>
+						<div id="logout-button">
+							<MuiThemeProvider>
+								<RaisedButton style={{
+                                    width: '13%',
+                                    fontFamily: 'Noto Sans CJK TC',
+                                }}  backgroundColor = "#DDDDDD" label="Logout" href="/logout"/>
+							</MuiThemeProvider>
 						</div>
 					</div>
 				</div>
