@@ -64,10 +64,10 @@ class Login extends Component {
 
     state = {
         LoginMessage_state1:{
-            display:'inline',
+            display:'none',
         },
         LoginMessage_state2:{
-            display:'inline',
+            display:'none',
         }
     };
 
@@ -75,9 +75,9 @@ class Login extends Component {
         return (
           <div className="Login" >
 
-              <div style = {this.state.LoginMessage_state1}>Oops you are not cs student !</div>
+              <div style = {this.state.LoginMessage_state1}>Oops you are not cs student !(status 1)</div>
               <br/>
-              <div style = {this.state.LoginMessage_state2}>Please login first</div>
+              <div style = {this.state.LoginMessage_state2}>Please login first(status 2)</div>
                 <div id="AjustToggleButtom"></div>
                 <div className="Login-header"   ref="tip">
 
