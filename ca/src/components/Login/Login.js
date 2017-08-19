@@ -29,7 +29,7 @@ class Login extends Component {
     }
 
     loginStatusHandler(index){
-        if(index === '0'){
+        if(index === "0"){
             this.setState({
                 LoginMessage_state1: {
                     display:'none',
@@ -40,7 +40,7 @@ class Login extends Component {
             })
         }
 
-        else if(index === '1'){
+        else if(index === "1"){
             this.setState({
                 LoginMessage_state1: {
                     display:'inline',
@@ -50,7 +50,7 @@ class Login extends Component {
                 }
             })
         }
-        else if(index === '1'){
+        else if(index === "2"){
             this.setState({
                 LoginMessage_state1: {
                     display:'none',
