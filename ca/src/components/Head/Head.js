@@ -13,7 +13,7 @@ import Check from 'material-ui/svg-icons/av/featured-play-list';
 import gimshi from './gimshi.jpg';
 
 import HomeItem from './Home/Home.js';
-import MapItem from './Map/Map.js';
+import MapItem from './Map/MapComponents/Map.js';
 import GraduationItem from './Graduation/Graduation.js';
 import CreditItem from './Credit/Credit.js';
 
@@ -30,6 +30,7 @@ class Head extends Component {
     constructor(props) {
         super(props);
         this.getdata();
+        this.getStudentMap();
     }
 
     state = {
@@ -63,6 +64,18 @@ class Head extends Component {
             console.log(err);
         });
     }
+
+    getStudentMap(){
+        var _this = this;
+        return axios.get('/students/info').then(studentMapData => {
+            studentMapData.status // HTTP response code (e.g., 200, 401)
+            studentMapData.data // object parsed from HTTP response body
+            studentMapData.headers // HTTP presonse headers
+            console.log(studentMapData);
+        }).catch(err => {
+            console.log(err);
+        });
+	}
 
   	select(index){
   		this.setState({styleindex:
