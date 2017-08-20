@@ -1,11 +1,10 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
+import './Map.css';
 
 const CourseMapItem = ({ onClick, cos_cname, grade, semester, suggest, pre}) => (
-    <div
-        onClick={onClick}
-    >
-        {cos_cname}
-    </div>
+
+    <div onClick={onClick} className="course"><div className="course-btn">{cos_cname}</div></div>
+
 )
 
 CourseMapItem.propTypes = {

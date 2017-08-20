@@ -1,10 +1,13 @@
-const todo = (state = {}, action) => {
+const courseMapItem = (state = {}, action) => {
     switch (action.type) {
-        case 'ADD_TODO':
+        case 'ADD_COURSE':
             return {
                 id: action.id,
-                text: action.text,
-                completed: false
+                cos_cname:action.cname,
+                grade:action.grade,
+                semester:action.semester,
+                suggest:action.suggest,
+                pre:action.pre
             }
         case 'TOGGLE_TODO':
             if (state.id !== action.id) {
@@ -20,20 +23,20 @@ const todo = (state = {}, action) => {
     }
 }
 
-const todos = (state = [], action) => {
+const courseMapItems = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_TODO':
+        case 'ADD_COURSE':
             return [
                 ...state,
-                todo(undefined, action)
+                courseMapItem(undefined, action)
             ]
         case 'TOGGLE_TODO':
             return state.map(t =>
-                todo(t, action)
+                courseMapItem(t, action)
             )
         default:
             return state
     }
 }
 
-export default todos
+export default courseMapItems

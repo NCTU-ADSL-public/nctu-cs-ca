@@ -5,6 +5,9 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import todoApp from './Map/reducers';
 
 import Home from 'material-ui/svg-icons/content/flag';
 import Map from 'material-ui/svg-icons/maps/map';
@@ -24,6 +27,7 @@ const mapIcon = <Map />;
 const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
+let store = createStore(todoApp);
 class Head extends Component {
 
     constructor(props) {
@@ -92,11 +96,11 @@ class Head extends Component {
 		}
         else if(index===1){
             ReactDOM.render(
-				<div>
+				<Provider store={store}>
 					<FadeIn>
 						<MapItem />
 					</FadeIn>
-				</div>,
+				</Provider>,
 				document.getElementById('page'));
         }
         else if(index===2){

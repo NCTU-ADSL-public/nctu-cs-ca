@@ -1,21 +1,19 @@
 import { connect } from 'react-redux'
 import { toggleTodo } from '../actions'
-import TodoList from '../MapComponents/TodoList'
+import CourseMapItemList from '../MapComponents/CourseMapItemList'
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {
         case 'SHOW_ALL':
-            return todos
-        case 'SHOW_COMPLETED':
-            return todos.filter(t => t.completed)
-        case 'SHOW_ACTIVE':
-            return todos.filter(t => !t.completed)
+            return CourseMapItemList;
+        default:
+            return CourseMapItemList;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        todos: getVisibleTodos(state.todos, state.visibilityFilter)
+        courseMapItems: getVisibleTodos(state.CourseMapItemList, state.visibilityFilter)
     }
 }
 
@@ -30,6 +28,6 @@ const mapDispatchToProps = (dispatch) => {
 const VisibleTodoList = connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoList)
+)(CourseMapItemList)
 
 export default VisibleTodoList

@@ -3,7 +3,11 @@ export const addCourse = (text) => {
     return {
         type: 'ADD_COURSE',
         id: nextCourseId++,
-        text
+        cos_cname,
+        grade,
+        semester,
+        suggest,
+        pre
     }
 }
 
