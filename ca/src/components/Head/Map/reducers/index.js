@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
+import todos from './courseMapItem'
 import visibilityFilter from './visibilityFilter'
 
 const todoApp = combineReducers({

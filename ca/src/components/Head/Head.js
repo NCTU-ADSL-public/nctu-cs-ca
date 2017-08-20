@@ -26,7 +26,6 @@ const checkIcon = <Check />;
 
 class Head extends Component {
 
-
     constructor(props) {
         super(props);
         this.getdata();
@@ -45,7 +44,8 @@ class Head extends Component {
 		studentIdcard:{
        		name:'',
 			grad:'',
-		}
+		},
+
     };
 
     getdata(){
@@ -57,7 +57,8 @@ class Head extends Component {
             _this.setState({
 				studentIdcard: {
                     name: studentData.data.studentInfo[0].sname,
-                    grad: studentData.data.studentInfo[0].program,
+                    grad: studentData.data.studentInfo[0].program + "大"
+					+ studentData.data.studentInfo[0].grade,
 				}
 			})
         }).catch(err => {

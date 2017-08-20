@@ -1,8 +1,8 @@
 let nextTodoId = 0
-export const addTodo = (text) => {
+export const addCourse = (text) => {
     return {
-        type: 'ADD_TODO',
-        id: nextTodoId++,
+        type: 'ADD_COURSE',
+        id: nextCourseId++,
         text
     }
 }
