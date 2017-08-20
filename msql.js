@@ -9,10 +9,12 @@ var c = new Client({
 });
 
 var sql_findStudent = c.prepare('\
-    select sname,program,grade from student where student_id=:id');
+    select sname,program,grade from student \
+    where student_id=:id');
 
 var sql_addEmail = c.prepare('\
-    update student set email=:email where student_id=:id');
+    update student set email=:email \
+    where student_id=:id');
 
 var sql_showCowMap=c.prepare('\
     select a.cos_cname, a.grade, a.semester, b.pre_cos_cname as suggest, c.pre_cos_cname as pre \
@@ -47,7 +49,8 @@ var sql_PassCos=c.prepare('\
     select sc.cos_code,cos_cname \
     from student_cos_relation as sc \
     left outer join cos_name as c \
-    on sc.student_id=:id and sc.cos_code=c.cos_code;');
+    on sc.cos_code=c.cos_code \
+    where sc.student_id=:id;');
 
 module.exports = {
 
