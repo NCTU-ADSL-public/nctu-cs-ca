@@ -58,11 +58,18 @@ class Head extends Component {
             studentData.status // HTTP response code (e.g., 200, 401)
             studentData.data // object parsed from HTTP response body
             studentData.headers // HTTP presonse headers
+
+            var usersWithName = Object.keys(studentData.data.studentCos[0]).map(function(key) {
+                var user = studentData.data.studentCos[0][key];
+                user.cos_cname = key;
+                return user;
+            });
+
             _this.setState({
 				studentIdcard: {
                     name: studentData.data.studentInfo[0].sname,
-                    grad: studentData.data.studentInfo[0].program ,
-                    MapCourseData:studentData.data.studentCos[0].cos_cname,
+                    grad: studentData.data.studentInfo[0].program + "大" + studentData.data.studentInfo[0].grade,
+                    MapCourseData:usersWithName,
 				}
 			})
 			console.log(_this.MapCourseData);
