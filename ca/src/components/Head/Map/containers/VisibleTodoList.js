@@ -6,8 +6,6 @@ const getVisibleTodos = (CourseMapItems, filter) => {
     switch (filter) {
         case 'SHOW_ALL':
             return CourseMapItems;
-        default:
-            return CourseMapItems;
     }
 }
 

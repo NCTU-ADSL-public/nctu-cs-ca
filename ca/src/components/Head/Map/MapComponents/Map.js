@@ -5,28 +5,23 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { addCourse } from '../actions';
 import { createStore } from 'redux';
 import todoApp from '../reducers';
+import VisibleTodoList from '../containers/VisibleTodoList';
+
+
 let store = createStore(todoApp);
 
 class Map extends React.Component{
     constructor(props) {
         super(props);
+        this.SavingCourseData();
+    }
+
+    SavingCourseData(){
         for(var i=0;i<this.props.data.length;i++){
             console.log(this.props.data[i]);
             store.dispatch(addCourse(this.props.data[i]));
         }
     }
-
-    // SavingCourseData(){
-    //     var _this = this;
-    //     return axios.get('/students/info').then(studentMapData => {
-    //         studentMapData.status // HTTP response code (e.g., 200, 401)
-    //         studentMapData.data // object parsed from HTTP response body
-    //         studentMapData.headers // HTTP presonse headers
-    //         console.log(studentMapData);
-    //     }).catch(err => {
-    //         console.log(err);
-    //     });
-    // }
 
     render() {
         return (
@@ -40,20 +35,7 @@ class Map extends React.Component{
                         <div className="grade" id="grade-1">
                             <div className="grade-num"><h3>大一(104)</h3></div>
                             <div className="session">
-                                <div className="up-session">
-                                    <div className="course-group course-group-1">
-                                        <div className="course"><div className="course-btn">微積分(一)</div></div>
-                                        <div className="course"><div className="course-btn">線性代數</div></div>
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                        <div className="course"><div className="course-btn">計算機概論與程式設計</div></div>
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                        <div className="course"><div className="course-btn">物理(一)</div></div>
-                                        <div className="course"><div className="course-btn">化學(一)</div></div>
-                                        <div className="course"><div className="course-btn">普通生物(一)</div></div>
-                                    </div>
-                                </div>
+                                <VisibleTodoList/>
                                 <div className="down-session">
                                     <div className="course-group course-group-1">
                                         <div className="course"><div className="course-btn">微積分(二)</div></div>

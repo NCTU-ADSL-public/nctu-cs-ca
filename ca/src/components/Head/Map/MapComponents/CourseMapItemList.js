@@ -5,7 +5,7 @@ import './Map.css';
 const CourseMapItemList = ({ courseMapItems, onTodoClick }) => (
     <div className="up-session">
         <div className="course-group course-group-1">
-            {todos.map(courseMapItem =>
+            {courseMapItems.map(courseMapItem =>
                 <CourseMapItem
                     key={courseMapItem.id}
                     {...courseMapItem}
