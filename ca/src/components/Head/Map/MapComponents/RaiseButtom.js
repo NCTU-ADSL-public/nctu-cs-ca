@@ -19,6 +19,7 @@ class RaisedButtonEx extends Component {
     };
 
     handleclick (index) {
+        // onTodoClick();
         if(index===0){
             this.setState({disabled0:true});
             this.setState({disabled1:false});

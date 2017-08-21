@@ -1,13 +1,19 @@
 let nextTodoId = 0
-export const addCourse = (text) => {
+export const addCourse = (
+    cos_cname,
+    grade,
+    id,
+    pre,
+    semester,
+    suggest) => {
     return {
         type: 'ADD_COURSE',
-        id: nextCourseId++,
         cos_cname,
         grade,
+        id,
+        pre,
         semester,
         suggest,
-        pre
     }
 }
 

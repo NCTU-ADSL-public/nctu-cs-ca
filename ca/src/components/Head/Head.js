@@ -27,7 +27,7 @@ const mapIcon = <Map />;
 const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
-let usersWithName;
+let MapCourseData;
 let store = createStore(todoApp);
 class Head extends Component {
 
@@ -49,8 +49,6 @@ class Head extends Component {
        		name:'',
 			grad:'',
 		},
-		MapCourseData:{},
-
     };
 
     getdata(){
@@ -60,21 +58,19 @@ class Head extends Component {
             studentData.data // object parsed from HTTP response body
             studentData.headers // HTTP presonse headers
 
-             usersWithName = Object.keys(studentData.data.studentCos).map(function(key) {
+            MapCourseData = Object.keys(studentData.data.studentCos).map(function(key) {
                 var user = studentData.data.studentCos[key];
                 user.id = key;
                 return user;
             });
-            console.log(usersWithName);
+            console.log(MapCourseData);
 
             _this.setState({
 				studentIdcard: {
                     name: studentData.data.studentInfo[0].sname,
                     grad: studentData.data.studentInfo[0].program + "大" + studentData.data.studentInfo[0].grade,
-                    MapCourseData:usersWithName,
 				}
 			})
-			console.log(_this.MapCourseData);
         }).catch(err => {
             console.log(err);
         });
@@ -96,7 +92,7 @@ class Head extends Component {
             ReactDOM.render(
 				<Provider store={store}>
 					<FadeIn>
-						<MapItem data={usersWithName}/>
+						<MapItem data={MapCourseData}/>
 					</FadeIn>
 				</Provider>,
 				document.getElementById('page'));

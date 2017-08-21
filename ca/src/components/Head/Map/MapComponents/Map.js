@@ -2,12 +2,18 @@ import React from 'react';
 import './Map.css';
 import RaiseButtom from './RaiseButtom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { addCourse } from '../actions';
+import { createStore } from 'redux';
+import todoApp from '../reducers';
+let store = createStore(todoApp);
 
 class Map extends React.Component{
     constructor(props) {
         super(props);
-        console.log(this.props.data);
-        // SavingCourseData();
+        for(var i=0;i<this.props.data.length;i++){
+            console.log(this.props.data[i]);
+            store.dispatch(addCourse(this.props.data[i]));
+        }
     }
 
     // SavingCourseData(){

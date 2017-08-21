@@ -2,12 +2,12 @@ import { connect } from 'react-redux'
 import { toggleTodo } from '../actions'
 import CourseMapItemList from '../MapComponents/CourseMapItemList'
 
-const getVisibleTodos = (todos, filter) => {
+const getVisibleTodos = (CourseMapItems, filter) => {
     switch (filter) {
         case 'SHOW_ALL':
-            return CourseMapItemList;
+            return CourseMapItems;
         default:
-            return CourseMapItemList;
+            return CourseMapItems;
     }
 }
 
