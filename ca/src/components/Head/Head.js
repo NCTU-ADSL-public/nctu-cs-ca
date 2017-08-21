@@ -62,7 +62,7 @@ class Head extends Component {
 				studentIdcard: {
                     name: studentData.data.studentInfo[0].sname,
                     grad: studentData.data.studentInfo[0].program ,
-                    MapCourseData:studentData.data.studentCos[0],
+                    MapCourseData:studentData.data.studentCos[0].cos_cname,
 				}
 			})
 			console.log(_this.MapCourseData);
