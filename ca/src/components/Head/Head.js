@@ -64,6 +64,7 @@ class Head extends Component {
                 user.cos_cname = key;
                 return user;
             });
+            console.log(usersWithName);
 
             _this.setState({
 				studentIdcard: {
