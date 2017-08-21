@@ -65,6 +65,7 @@ class Head extends Component {
                     MapCourseData:studentData.data.studentCos[0],
 				}
 			})
+			console.log(MapCourseData);
         }).catch(err => {
             console.log(err);
         });
