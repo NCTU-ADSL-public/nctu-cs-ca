@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class Map extends React.Component{
     constructor(props) {
         super(props);
+        console.log(this.props.data);
         SavingCourseData();
     }
 
