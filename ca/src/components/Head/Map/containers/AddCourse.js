@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addCourse } from '../actions'
 
-let AddTodo = ({ dispatch }) => {
+let AddCourse = ({ dispatch }) => {
     let input
 
     return (
@@ -25,6 +25,6 @@ let AddTodo = ({ dispatch }) => {
         </div>
     )
 }
-AddTodo = connect()(AddTodo)
+AddCourse = connect()(AddCourse);
 
-export default AddTodo
+export default AddCourse;

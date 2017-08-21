@@ -49,6 +49,7 @@ class Head extends Component {
        		name:'',
 			grad:'',
 		},
+		MapCourseData:{},
 
     };
 
@@ -76,6 +77,9 @@ class Head extends Component {
             studentMapData.status // HTTP response code (e.g., 200, 401)
             studentMapData.data // object parsed from HTTP response body
             studentMapData.headers // HTTP presonse headers
+			_this.setState({
+                MapCourseData:studentMapData.data.studentCos[0],
+			})
             console.log(studentMapData);
         }).catch(err => {
             console.log(err);
@@ -98,7 +102,7 @@ class Head extends Component {
             ReactDOM.render(
 				<Provider store={store}>
 					<FadeIn>
-						<MapItem />
+						<MapItem data={this.state.MapCourseData}/>
 					</FadeIn>
 				</Provider>,
 				document.getElementById('page'));
