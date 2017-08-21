@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { toggleTodo } from '../actions'
 import CourseMapItemList from '../MapComponents/CourseMapItemList'
 
-const getVisibleTodos = (CourseMapItems, filter) => {
+const getVisibleTodos = (courseMapItems, filter) => {
     switch (filter) {
         case 'SHOW_ALL':
             return CourseMapItems;
@@ -11,14 +11,14 @@ const getVisibleTodos = (CourseMapItems, filter) => {
 
 const mapStateToProps = (state) => {
     return {
-        courseMapItems: getVisibleTodos(state.CourseMapItemList, state.visibilityFilter)
+        courseMapItems: getVisibleTodos(state.courseMapItems, state.visibilityFilter)
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onTodoClick: (id) => {
-            dispatch(toggleTodo(id))
+            // dispatch(toggleTodo(id))
         }
     }
 }
