@@ -7,20 +7,20 @@ class Map extends React.Component{
     constructor(props) {
         super(props);
         console.log(this.props.data);
-        SavingCourseData();
+        // SavingCourseData();
     }
 
-    SavingCourseData(){
-        var _this = this;
-        return axios.get('/students/info').then(studentMapData => {
-            studentMapData.status // HTTP response code (e.g., 200, 401)
-            studentMapData.data // object parsed from HTTP response body
-            studentMapData.headers // HTTP presonse headers
-            console.log(studentMapData);
-        }).catch(err => {
-            console.log(err);
-        });
-    }
+    // SavingCourseData(){
+    //     var _this = this;
+    //     return axios.get('/students/info').then(studentMapData => {
+    //         studentMapData.status // HTTP response code (e.g., 200, 401)
+    //         studentMapData.data // object parsed from HTTP response body
+    //         studentMapData.headers // HTTP presonse headers
+    //         console.log(studentMapData);
+    //     }).catch(err => {
+    //         console.log(err);
+    //     });
+    // }
 
     render() {
         return (

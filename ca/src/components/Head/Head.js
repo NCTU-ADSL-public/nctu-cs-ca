@@ -33,7 +33,6 @@ class Head extends Component {
     constructor(props) {
         super(props);
         this.getdata();
-        this.getStudentMap();
     }
 
     state = {
@@ -62,29 +61,14 @@ class Head extends Component {
             _this.setState({
 				studentIdcard: {
                     name: studentData.data.studentInfo[0].sname,
-                    grad: studentData.data.studentInfo[0].program + "大"
-					+ studentData.data.studentInfo[0].grade,
+                    grad: studentData.data.studentInfo[0].program ,
+                    MapCourseData:studentData.data.studentCos[0],
 				}
 			})
         }).catch(err => {
             console.log(err);
         });
     }
-
-    getStudentMap(){
-        var _this = this;
-        return axios.get('/students/info').then(studentMapData => {
-            studentMapData.status // HTTP response code (e.g., 200, 401)
-            studentMapData.data // object parsed from HTTP response body
-            studentMapData.headers // HTTP presonse headers
-			_this.setState({
-                MapCourseData:studentMapData.data.studentCos[0],
-			})
-            console.log(studentMapData);
-        }).catch(err => {
-            console.log(err);
-        });
-	}
 
   	select(index){
   		this.setState({styleindex:
