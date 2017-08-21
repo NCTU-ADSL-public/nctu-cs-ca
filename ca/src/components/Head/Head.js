@@ -61,7 +61,7 @@ class Head extends Component {
 
             var usersWithName = Object.keys(studentData.data.studentCos).map(function(key) {
                 var user = studentData.data.studentCos[key];
-                user.cos_cname = key;
+                user.id = key;
                 return user;
             });
             console.log(usersWithName);
