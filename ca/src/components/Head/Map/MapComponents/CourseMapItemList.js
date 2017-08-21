@@ -3,17 +3,15 @@ import CourseMapItem from './CourseMapItem';
 import './Map.css';
 
 const CourseMapItemList = ({ coursemapitems, onTodoClick }) => (
-    <div className="up-session">
-        <div className="course-group course-group-1">
-            {coursemapitems.map(courseMapItem =>
+    <ul>
+            {coursemapitems.map(coursemapitem =>
                 <CourseMapItem
                     key={coursemapitem.id}
                     {...coursemapitem}
                     onClick={() => onTodoClick(coursemapitem.id)}
                 />
             )}
-        </div>
-    </div>
+    </ul>
 )
 
 CourseMapItemList.propTypes = {
