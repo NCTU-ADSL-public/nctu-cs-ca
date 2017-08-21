@@ -4,6 +4,8 @@ import './Map.css';
 
 const CourseMapItemList = ({ coursemapitems, onTodoClick }) => (
     <ul>
+    <div className="up-session">
+        <div className="course-group course-group-1">
             {coursemapitems.map(coursemapitem =>
                 <CourseMapItem
                     key={coursemapitem.id}
@@ -11,6 +13,8 @@ const CourseMapItemList = ({ coursemapitems, onTodoClick }) => (
                     onClick={() => onTodoClick(coursemapitem.id)}
                 />
             )}
+        </div>
+    </div>
     </ul>
 )
 
