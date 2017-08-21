@@ -1,4 +1,4 @@
-let nextTodoId = 0
+
 export const addCourse = (
     cos_cname,
     grade,

@@ -3,11 +3,11 @@ const courseMapItem = (state = {}, action) => {
         case 'ADD_COURSE':
             return {
                 id: action.id,
-                cos_cname:action.cname,
+                cos_cname:action.cos_cname,
                 grade:action.grade,
+                pre:action.pre,
                 semester:action.semester,
                 suggest:action.suggest,
-                pre:action.pre
             }
         case 'TOGGLE_TODO':
             if (state.id !== action.id) {

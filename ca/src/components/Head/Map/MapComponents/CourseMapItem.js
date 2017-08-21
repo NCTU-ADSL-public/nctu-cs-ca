@@ -13,7 +13,6 @@ CourseMapItem.propTypes = {
     grade: PropTypes.string.isRequired,
     semester: PropTypes.string.isRequired,
     suggest: PropTypes.string.isRequired,
-    pre: PropTypes.string.isRequired,
 }
 
 export default CourseMapItem

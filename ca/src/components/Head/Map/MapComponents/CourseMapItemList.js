@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react';
 import CourseMapItem from './CourseMapItem';
 import './Map.css';
 
-const CourseMapItemList = ({ courseMapItems, onTodoClick }) => (
+const CourseMapItemList = ({ coursemapitems, onTodoClick }) => (
     <div className="up-session">
         <div className="course-group course-group-1">
-            {courseMapItems.map(courseMapItem =>
+            {coursemapitems.map(courseMapItem =>
                 <CourseMapItem
-                    key={courseMapItem.id}
-                    {...courseMapItem}
-                    onClick={() => onTodoClick(courseMapItem.id)}
+                    key={coursemapitem.id}
+                    {...coursemapitem}
+                    onClick={() => onTodoClick(coursemapitem.id)}
                 />
             )}
         </div>
@@ -17,7 +17,7 @@ const CourseMapItemList = ({ courseMapItems, onTodoClick }) => (
 )
 
 CourseMapItemList.propTypes = {
-    todos: PropTypes.arrayOf(PropTypes.shape({
+    coursemapitems: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         onClick: PropTypes.func.isRequired,
         cos_cname: PropTypes.string.isRequired,
