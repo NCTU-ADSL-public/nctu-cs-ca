@@ -3,7 +3,7 @@ import Todo from './Todo'
 import './Map.css';
 
 const TodoList = ({ todos, onTodoClick }) => (
-    <div className="up-session">
+    <div>
         {todos.map(todo =>
             <Todo
                 key={todo.id}

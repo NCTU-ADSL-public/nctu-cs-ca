@@ -11,7 +11,14 @@ import VisibleTodoList from '../containers/VisibleTodoList';
 import App from './App';
 
 
-let store = createStore(todoApp);
+let storeOneUp = createStore(todoApp);
+let storeOneDo = createStore(todoApp);
+let storeTwoUp = createStore(todoApp);
+let storeTwodo = createStore(todoApp);
+let storeThrUp = createStore(todoApp);
+let storeThrDo = createStore(todoApp);
+let storeFouUp = createStore(todoApp);
+let storeFouDo = createStore(todoApp);
 
 class Map extends React.Component{
     constructor(props) {
@@ -23,7 +30,21 @@ class Map extends React.Component{
         for(var i=0;i<this.props.data.length;i++){
             console.log(this.props.data[i]);
             if(this.props.data[i].grade==="1" && this.props.data[i].semester==="1")
-            store.dispatch(addTodo(this.props.data[i].cos_cname));
+                storeOneUp.dispatch(addTodo(this.props.data[i].cos_cname));
+            else if(this.props.data[i].grade==="1" && this.props.data[i].semester==="2")
+                storeOneDo.dispatch(addTodo(this.props.data[i].cos_cname));
+            else if(this.props.data[i].grade==="2" && this.props.data[i].semester==="1")
+                storeTwoUp.dispatch(addTodo(this.props.data[i].cos_cname));
+            else if(this.props.data[i].grade==="2" && this.props.data[i].semester==="2")
+                storeTwodo.dispatch(addTodo(this.props.data[i].cos_cname));
+            else if(this.props.data[i].grade==="3" && this.props.data[i].semester==="1")
+                storeThrUp.dispatch(addTodo(this.props.data[i].cos_cname));
+            else if(this.props.data[i].grade==="3" && this.props.data[i].semester==="2")
+                storeThrDo.dispatch(addTodo(this.props.data[i].cos_cname));
+            else if(this.props.data[i].grade==="4" && this.props.data[i].semester==="1")
+                storeFouUp.dispatch(addTodo(this.props.data[i].cos_cname));
+            else if(this.props.data[i].grade==="4" && this.props.data[i].semester==="2")
+                storeFouDo.dispatch(addTodo(this.props.data[i].cos_cname));
         }
     }
 
@@ -39,24 +60,15 @@ class Map extends React.Component{
                         <div className="grade" id="grade-1">
                             <div className="grade-num"><h3>大一(104)</h3></div>
                             <div className="session">
-                                    <Provider store={store}>
-                                        <App data={this.props.data}/>
+                                <div  className="up-session">
+                                    <Provider store={storeOneUp}>
+                                        <App />
                                     </Provider>
-
+                                </div>
                                 <div className="down-session">
-                                    <div className="course-group course-group-1">
-                                        <div className="course"><div className="course-btn">微積分(二)</div></div>
-                                        <div className="course"><div className="course-btn">離散數學</div></div>
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                        <div className="course"><div className="course-btn">物件導向程式設計</div></div>
-                                        <div className="course"><div className="course-btn">數位電路設計</div></div>
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                        <div className="course"><div className="course-btn">物理(二)</div></div>
-                                        <div className="course"><div className="course-btn">化學(二)</div></div>
-                                        <div className="course"><div className="course-btn">普通生物(二)</div></div>
-                                    </div>
+                                    <Provider store={storeOneDo}>
+                                        <App />
+                                    </Provider>
                                 </div>
                             </div>
                         </div>
@@ -66,29 +78,15 @@ class Map extends React.Component{
                             <div className="grade-num"><h3>大二(105)</h3></div>
                             <div className="session">
                                 <div className="up-session">
-                                    <div className="course-group course-group-1">
-                                        <div className="course"><div className="course-btn">機率</div></div>
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                        <div className="course"><div className="course-btn">資料結構</div></div>
-                                        <div className="course"><div className="course-btn">數位電路實驗</div></div>
-                                        <div className="course"><div className="course-btn">計算機網路概論</div></div>
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                    </div>
+                                    <Provider store={storeTwoUp}>
+                                        <App />
+                                    </Provider>
 
                                 </div>
                                 <div className="down-session">
-                                    <div className="course-group course-group-1">
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                        <div className="course"><div className="course-btn">正規語言概論</div></div>
-                                        <div className="course"><div className="course-btn">演算法概論</div></div>
-                                        <div className="course"><div className="course-btn">基礎程式設計</div></div>
-                                        <div className="course"><div className="course-btn">計算機組織</div></div>
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                    </div>
+                                    <Provider store={storeTwodo}>
+                                        <App />
+                                    </Provider>
 
                                 </div>
                             </div>
@@ -99,25 +97,14 @@ class Map extends React.Component{
                             <div className="grade-num"><h3>大三(106)</h3></div>
                             <div className="session">
                                 <div className="up-session session-cur">
-                                    <div className="course-group course-group-1">
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                        <div className="course"><div className="course-btn">編譯器設計概論</div></div>
-                                        <div className="course"><div className="course-btn">軟體工程概論</div></div>
-                                        <div className="course"><div className="course-btn">作業系統概論</div></div>
-                                        <div className="course"><div className="course-btn">微處理機系統實驗</div></div>
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                    </div>
+                                    <Provider store={storeThrUp}>
+                                        <App />
+                                    </Provider>
                                 </div>
                                 <div className="down-session">
-                                    <div className="course-group course-group-1">
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                        <div className="course"><div className="course-btn">資訊工程專題(一)</div></div>
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                    </div>
+                                    <Provider store={storeThrDo}>
+                                        <App />
+                                    </Provider>
                                 </div>
                             </div>
                         </div>
@@ -127,21 +114,14 @@ class Map extends React.Component{
                             <div className="grade-num"><h3>大四(107)</h3></div>
                             <div className="session">
                                 <div className="up-session">
-                                    <div className="course-group course-group-1">
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                        <div className="course"><div className="course-btn">資訊工程專題(二)</div></div>
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                    </div>
+                                    <Provider store={storeFouUp}>
+                                        <App />
+                                    </Provider>
                                 </div>
                                 <div className="down-session">
-                                    <div className="course-group course-group-1">
-                                    </div>
-                                    <div className="course-group course-group-2">
-                                    </div>
-                                    <div className="course-group course-group-3">
-                                    </div>
+                                    <Provider store={storeFouDo}>
+                                        <App />
+                                    </Provider>
                                 </div>
                             </div>
                         </div>
