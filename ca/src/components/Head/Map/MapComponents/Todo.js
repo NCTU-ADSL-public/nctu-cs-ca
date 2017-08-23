@@ -11,8 +11,6 @@ const Todo = ({ onClick, completed, text }) => (
             {text}
         </div>
     </div>
-
-
 )
 
 Todo.propTypes = {
