@@ -1,19 +1,9 @@
-
-export const addCourse = (
-    cos_cname,
-    grade,
-    id,
-    pre,
-    semester,
-    suggest) => {
+let nextTodoId = 0
+export const addTodo = (text) => {
     return {
-        type: 'ADD_COURSE',
-        cos_cname,
-        grade,
-        id,
-        pre,
-        semester,
-        suggest,
+        type: 'ADD_TODO',
+        id: nextTodoId++,
+        text
     }
 }
 

@@ -94,11 +94,9 @@ class Head extends Component {
 		}
         else if(index===1){
             ReactDOM.render(
-				<Provider store={store}>
 					<FadeIn>
 						<MapItem data={MapCourseData}/>
-					</FadeIn>
-				</Provider>,
+					</FadeIn>,
 				document.getElementById('page'));
         }
         else if(index===2){

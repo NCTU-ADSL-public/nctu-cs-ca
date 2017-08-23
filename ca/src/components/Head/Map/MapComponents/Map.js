@@ -2,9 +2,10 @@ import React from 'react';
 import './Map.css';
 import RaiseButtom from './RaiseButtom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { addCourse } from '../actions';
+// import { addCourse } from '../actions';
 import { createStore } from 'redux';
 import todoApp from '../reducers';
+import {addTodo} from "../actions/index";
 import VisibleTodoList from '../containers/VisibleTodoList';
 
 
@@ -19,7 +20,7 @@ class Map extends React.Component{
     SavingCourseData(){
         for(var i=0;i<this.props.data.length;i++){
             console.log(this.props.data[i]);
-            store.dispatch(addCourse(this.props.data[i]));
+            store.dispatch(addTodo(this.props.data[i]));
         }
     }
 
@@ -35,7 +36,9 @@ class Map extends React.Component{
                         <div className="grade" id="grade-1">
                             <div className="grade-num"><h3>大一(104)</h3></div>
                             <div className="session">
+                                <div className="up-session">
                                 <VisibleTodoList/>
+                                </div>
                                 <div className="down-session">
                                     <div className="course-group course-group-1">
                                         <div className="course"><div className="course-btn">微積分(二)</div></div>

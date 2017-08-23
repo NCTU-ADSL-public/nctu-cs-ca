@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import courseMapItems from './courseMapItems'
+import todos from './todos'
 import visibilityFilter from './visibilityFilter'
 
 const todoApp = combineReducers({
-    courseMapItems,
+    todos,
     visibilityFilter
 })
 
-export default todoApp;
+export default todoApp
