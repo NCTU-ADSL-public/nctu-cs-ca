@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import './Map.css';
 
 const Todo = ({ onClick, completed, text }) => (
     <div className="course-group course-group-1"
