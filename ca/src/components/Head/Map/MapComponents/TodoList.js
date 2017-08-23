@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 import Todo from './Todo'
+import './Map.css';
 
 const TodoList = ({ todos, onTodoClick }) => (
-    <ul>
+    <div className="up-session">
         {todos.map(todo =>
             <Todo
                 key={todo.id}
@@ -10,7 +11,7 @@ const TodoList = ({ todos, onTodoClick }) => (
                 onClick={() => onTodoClick(todo.id)}
             />
         )}
-    </ul>
+    </div>
 )
 
 TodoList.propTypes = {

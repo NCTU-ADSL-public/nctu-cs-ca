@@ -38,12 +38,10 @@ class Map extends React.Component{
                         <div className="grade" id="grade-1">
                             <div className="grade-num"><h3>大一(104)</h3></div>
                             <div className="session">
-                                <div className="up-session">
                                     <Provider store={store}>
                                         <App data={this.props.data}/>
                                     </Provider>
 
-                                </div>
                                 <div className="down-session">
                                     <div className="course-group course-group-1">
                                         <div className="course"><div className="course-btn">微積分(二)</div></div>
