@@ -22,7 +22,7 @@ class Map extends React.Component{
     SavingCourseData(){
         for(var i=0;i<this.props.data.length;i++){
             console.log(this.props.data[i]);
-            if(this.props.data[i].grad==="1" && this.props.data[i].semester==="1")
+            if(this.props.data[i].grade==="1" && this.props.data[i].semester==="1")
             store.dispatch(addTodo(this.props.data[i].cos_cname));
         }
     }
