@@ -2,11 +2,13 @@ import React, { PropTypes } from 'react'
 import './Map.css';
 
 const Todo = ({ onClick, completed, text }) => (
-    <div className="course-group course-group-1"
-        onClick={onClick}
-    >
-        {text}
+    <div className="course">
+        <div className="course-btn" onClick={onClick}>
+            {text}
+        </div>
     </div>
+
+
 )
 
 Todo.propTypes = {
