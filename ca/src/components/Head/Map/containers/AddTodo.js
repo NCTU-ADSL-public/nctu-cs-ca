@@ -7,12 +7,6 @@ import todoApp from '../reducers';
 
 
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    for(var i=0;i<ownProps.data.length;i++){
-        console.log(ownProps.data[i]);
-        dispatch(addTodo(ownProps.data[i]));
-    }
-}
 
 let AddTodo = ({ dispatch }) => {
 
@@ -23,6 +17,6 @@ let AddTodo = ({ dispatch }) => {
         )
 
 }
-AddTodo = connect(mapDispatchToProps)(AddTodo)
+AddTodo = connect()(AddTodo)
 
 export default AddTodo
