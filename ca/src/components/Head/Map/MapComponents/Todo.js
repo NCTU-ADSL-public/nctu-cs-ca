@@ -3,7 +3,11 @@ import './Map.css';
 
 const Todo = ({ onClick, completed, text }) => (
     <div className="course">
-        <div className="course-btn" onClick={onClick}>
+        <div className="course-btn"
+             style={{
+                 textDecoration: completed ? 'line-through' : 'none'
+             }}
+             onClick={onClick}>
             {text}
         </div>
     </div>
