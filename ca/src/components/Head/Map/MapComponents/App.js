@@ -3,13 +3,7 @@ import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
 
-class App extends React.Component{
-    constructor(props) {
-        super(props);
-        console.log(this.props.data);
-    }
-
-    render(){
+const App = () => {
         return(
             <div>
                 <AddTodo data={this.props.data}/>
@@ -17,7 +11,6 @@ class App extends React.Component{
                 <Footer />
             </div>
         )
-    };
 }
 
 export default App
