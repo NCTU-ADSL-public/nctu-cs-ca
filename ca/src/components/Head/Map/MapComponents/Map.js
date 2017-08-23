@@ -37,7 +37,10 @@ class Map extends React.Component{
                             <div className="grade-num"><h3>大一(104)</h3></div>
                             <div className="session">
                                 <div className="up-session">
-                                <VisibleTodoList/>
+                                    <Provider store={store}>
+                                        <VisibleTodoList/>
+                                    </Provider>
+
                                 </div>
                                 <div className="down-session">
                                     <div className="course-group course-group-1">
