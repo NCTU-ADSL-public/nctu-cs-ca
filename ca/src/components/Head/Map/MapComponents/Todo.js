@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
 
 const Todo = ({ onClick, completed, text }) => (
-    <li
+    <div className="course-group course-group-1"
         onClick={onClick}
         style={{
             textDecoration: completed ? 'line-through' : 'none'
         }}
     >
         {text}
-    </li>
+    </div>
 )
 
 Todo.propTypes = {
