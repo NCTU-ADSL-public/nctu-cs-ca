@@ -8,6 +8,7 @@ import { createStore } from 'redux';
 import todoApp from '../reducers';
 import {addTodo} from "../actions/index";
 import VisibleTodoList from '../containers/VisibleTodoList';
+import App from './App';
 
 
 let store = createStore(todoApp);
@@ -15,15 +16,15 @@ let store = createStore(todoApp);
 class Map extends React.Component{
     constructor(props) {
         super(props);
-        this.SavingCourseData();
+        // this.SavingCourseData();
     }
 
-    SavingCourseData(){
-        for(var i=0;i<this.props.data.length;i++){
-            console.log(this.props.data[i]);
-            store.dispatch(addTodo(this.props.data[i]));
-        }
-    }
+    // SavingCourseData(){
+    //     for(var i=0;i<this.props.data.length;i++){
+    //         console.log(this.props.data[i]);
+    //         store.dispatch(addTodo(this.props.data[i]));
+    //     }
+    // }
 
     render() {
         return (
@@ -39,7 +40,7 @@ class Map extends React.Component{
                             <div className="session">
                                 <div className="up-session">
                                     <Provider store={store}>
-                                        <VisibleTodoList/>
+                                        <App data={this.props.data}/>
                                     </Provider>
 
                                 </div>

@@ -12,7 +12,7 @@ class App extends React.Component{
     render(){
         return(
             <div>
-                <AddTodo />
+                <AddTodo data={this.props.data}/>
                 <VisibleTodoList />
                 <Footer />
             </div>
