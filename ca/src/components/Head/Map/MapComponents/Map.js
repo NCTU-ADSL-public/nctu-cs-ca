@@ -16,15 +16,15 @@ let store = createStore(todoApp);
 class Map extends React.Component{
     constructor(props) {
         super(props);
-        // this.SavingCourseData();
+        this.SavingCourseData();
     }
 
-    // SavingCourseData(){
-    //     for(var i=0;i<this.props.data.length;i++){
-    //         console.log(this.props.data[i]);
-    //         store.dispatch(addTodo(this.props.data[i]));
-    //     }
-    // }
+    SavingCourseData(){
+        for(var i=0;i<this.props.data.length;i++){
+            console.log(this.props.data[i]);
+            store.dispatch(addTodo(this.props.data[i].cos_cname));
+        }
+    }
 
     render() {
         return (
