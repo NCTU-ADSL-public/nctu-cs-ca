@@ -3,6 +3,7 @@ import './Map.css';
 import RaiseButtom from './RaiseButtom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import { addCourse } from '../actions';
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import todoApp from '../reducers';
 import {addTodo} from "../actions/index";

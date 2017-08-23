@@ -5,7 +5,6 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import todoApp from './Map/reducers';
 
