@@ -20,17 +20,11 @@ const Link = ({ active, children, onClick }) => {
 
     return (
         <MuiThemeProvider>
-            <RaisedButton href="#" label={children}
-                          backgroundColor = "#D3D3D3"
-                          labelColor = '#778899'
-                          labelStyle={style} fullWidth={true}
+            <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
                           onTouchTap={e => {
-                   e.preventDefault()
-                   onClick()
-               }}
-            >
-                {children}
-            </RaisedButton>
+                              e.preventDefault()
+                              onClick()
+                          }}/>
         </MuiThemeProvider>
     )
 }
