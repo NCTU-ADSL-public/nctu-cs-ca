@@ -2,21 +2,17 @@ import React from 'react'
 import FilterLink from '../containers/FilterLink'
 
 const Footer = () => (
-    <p>
-        Show:
-        {" "}
+    <div>
         <FilterLink filter="SHOW_ALL">
-            All
+            全覽
         </FilterLink>
-        {", "}
         <FilterLink filter="SHOW_ACTIVE">
-            Active
+            必修
         </FilterLink>
-        {", "}
         <FilterLink filter="SHOW_COMPLETED">
-            Completed
+            必選修
         </FilterLink>
-    </p>
+    </div>
 )
 
 export default Footer

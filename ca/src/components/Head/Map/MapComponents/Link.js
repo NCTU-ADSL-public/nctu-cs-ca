@@ -10,7 +10,7 @@ const Link = ({ active, children, onClick }) => {
     if (active) {
         return (
             <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
-                             disabled=true>
+                             disabled={true}>
             </RaisedButton>
             )
     }

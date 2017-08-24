@@ -2,7 +2,8 @@ import React from 'react';
 import './Map.css';
 import RaiseButtom from './RaiseButtom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import { addCourse } from '../actions';
+import Footer from './Footer';
+
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import todoApp from '../reducers';
@@ -133,9 +134,9 @@ class Map extends React.Component{
                     </div>
 
                     <div className="mods">
-                        <MuiThemeProvider>
-                            <RaiseButtom ref="raiseBtn"/>
-                        </MuiThemeProvider>
+                        <Provider store={storeFouDo}>
+                            <Footer/>
+                        </Provider>
                     </div>
                 </div>
             </div>
