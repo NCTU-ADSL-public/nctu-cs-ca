@@ -4,7 +4,9 @@ const todo = (state = {}, action) => {
             return {
                 id: action.id,
                 cosCame: action.cosCame,
-                completed: false
+                completed: false,
+                grade: action.grade,
+                semester:action.semester
             }
         case 'TOGGLE_TODO':
             if (state.id !== action.id) {
