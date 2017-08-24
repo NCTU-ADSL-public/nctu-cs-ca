@@ -33,21 +33,21 @@ class Map extends React.Component{
             for(var i=0;i<this.props.data.length;i++){
                 console.log(this.props.data[i]);
                 if(this.props.data[i].grade==="1" && this.props.data[i].semester==="1")
-                    storeOneUp.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeOneUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="1" && this.props.data[i].semester==="2")
-                    storeOneDo.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeOneDo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="2" && this.props.data[i].semester==="1")
-                    storeTwoUp.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeTwoUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="2" && this.props.data[i].semester==="2")
-                    storeTwodo.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeTwodo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="3" && this.props.data[i].semester==="1")
-                    storeThrUp.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeThrUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="3" && this.props.data[i].semester==="2")
-                    storeThrDo.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeThrDo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="4" && this.props.data[i].semester==="1")
-                    storeFouUp.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeFouUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="4" && this.props.data[i].semester==="2")
-                    storeFouDo.dispatch(addTodo(this.props.data[i].cos_cname));
+                    storeFouDo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
             }
         }
     }
