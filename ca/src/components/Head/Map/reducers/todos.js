@@ -3,7 +3,7 @@ const todo = (state = {}, action) => {
         case 'ADD_TODO':
             return {
                 id: action.id,
-                text: action.text,
+                cosCame: action.cosCame,
                 completed: false
             }
         case 'TOGGLE_TODO':

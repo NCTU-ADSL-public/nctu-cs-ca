@@ -1,9 +1,9 @@
 let nextTodoId = 0
-export const addTodo = (cos_cname,grade,semester,suggest,pre) => {
+export const addTodo = (cosCame,grade,semester,suggest,pre) => {
     return {
         type: 'ADD_TODO',
         id: nextTodoId++,
-        cos_cname,grade,semester,suggest,pre
+        cosCame,grade,semester,suggest,pre
     }
 }
 

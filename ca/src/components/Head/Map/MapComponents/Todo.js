@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
 import './Map.css';
 
-const Todo = ({ onClick, completed, cos_cname }) => (
+const Todo = ({ onClick, completed, cosCame }) => (
     <div className="course">
         <div className="course-btn"
              style={{
                  textDecoration: completed ? 'line-through' : 'none'
              }}
              onClick={onClick}>
-            {cos_cname}
+            {cosCame}
         </div>
     </div>
 )
