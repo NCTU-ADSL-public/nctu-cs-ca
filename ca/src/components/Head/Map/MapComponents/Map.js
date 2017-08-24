@@ -10,6 +10,7 @@ import VisibleTodoList from '../containers/VisibleTodoList';
 import App from './App';
 
 
+let store = createStore(todoApp);
 let storeOneUp = createStore(todoApp);
 let storeOneDo = createStore(todoApp);
 let storeTwoUp = createStore(todoApp);
@@ -31,6 +32,8 @@ class Map extends React.Component{
             flag = 0;
             for(var i=0;i<this.props.data.length;i++){
                 console.log(this.props.data[i]);
+                store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
+
                 if(this.props.data[i].grade==="1" && this.props.data[i].semester==="1")
                     storeOneUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 else if(this.props.data[i].grade==="1" && this.props.data[i].semester==="2")
@@ -59,19 +62,16 @@ class Map extends React.Component{
                 </div>
 
                 <div className="Map-Row">
+                    <Provider store={storeOneUp}>
                     <div className="grades">
                         <div className="grade" id="grade-1">
                             <div className="grade-num"><h3>大一(104)</h3></div>
                             <div className="session">
                                 <div  className="up-session">
-                                    <Provider store={storeOneUp}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="1" sem="1"/>
                                 </div>
                                 <div className="down-session">
-                                    <Provider store={storeOneDo}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="1" sem="2"/>
                                 </div>
                             </div>
                         </div>
@@ -81,15 +81,11 @@ class Map extends React.Component{
                             <div className="grade-num"><h3>大二(105)</h3></div>
                             <div className="session">
                                 <div className="up-session">
-                                    <Provider store={storeTwoUp}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="2" sem="1"/>
 
                                 </div>
                                 <div className="down-session">
-                                    <Provider store={storeTwodo}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="2" sem="2"/>
 
                                 </div>
                             </div>
@@ -100,14 +96,10 @@ class Map extends React.Component{
                             <div className="grade-num"><h3>大三(106)</h3></div>
                             <div className="session">
                                 <div className="up-session session-cur">
-                                    <Provider store={storeThrUp}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="3" sem="1"/>
                                 </div>
                                 <div className="down-session">
-                                    <Provider store={storeThrDo}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="3" sem="2"/>
                                 </div>
                             </div>
                         </div>
@@ -117,14 +109,10 @@ class Map extends React.Component{
                             <div className="grade-num"><h3>大四(107)</h3></div>
                             <div className="session">
                                 <div className="up-session">
-                                    <Provider store={storeFouUp}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="4" sem="1"/>
                                 </div>
                                 <div className="down-session">
-                                    <Provider store={storeFouDo}>
-                                        <App />
-                                    </Provider>
+                                        <App grad="4" sem="2"/>
                                 </div>
                             </div>
                         </div>
@@ -133,6 +121,7 @@ class Map extends React.Component{
 
                     <div className="mods">
                     </div>
+                    </Provider>
                 </div>
             </div>
         );
