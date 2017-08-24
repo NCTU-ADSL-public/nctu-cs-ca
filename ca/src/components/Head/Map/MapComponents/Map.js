@@ -1,24 +1,14 @@
 import React from 'react';
 import './Map.css';
-import Footer from './Footer';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import todoApp from '../reducers';
 import {addTodo} from "../actions/index";
-import VisibleTodoList from '../containers/VisibleTodoList';
 import App from './App';
 
 
 let store = createStore(todoApp);
-let storeOneUp = createStore(todoApp);
-let storeOneDo = createStore(todoApp);
-let storeTwoUp = createStore(todoApp);
-let storeTwodo = createStore(todoApp);
-let storeThrUp = createStore(todoApp);
-let storeThrDo = createStore(todoApp);
-let storeFouUp = createStore(todoApp);
-let storeFouDo = createStore(todoApp);
 
 let flag = 1;
 class Map extends React.Component{
@@ -32,23 +22,6 @@ class Map extends React.Component{
             flag = 0;
             for(var i=0;i<this.props.data.length;i++){
                 store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-
-                if(this.props.data[i].grade==="1" && this.props.data[i].semester==="1")
-                    storeOneUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-                else if(this.props.data[i].grade==="1" && this.props.data[i].semester==="2")
-                    storeOneDo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-                else if(this.props.data[i].grade==="2" && this.props.data[i].semester==="1")
-                    storeTwoUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-                else if(this.props.data[i].grade==="2" && this.props.data[i].semester==="2")
-                    storeTwodo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-                else if(this.props.data[i].grade==="3" && this.props.data[i].semester==="1")
-                    storeThrUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-                else if(this.props.data[i].grade==="3" && this.props.data[i].semester==="2")
-                    storeThrDo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-                else if(this.props.data[i].grade==="4" && this.props.data[i].semester==="1")
-                    storeFouUp.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-                else if(this.props.data[i].grade==="4" && this.props.data[i].semester==="2")
-                    storeFouDo.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
             }
         }
     }

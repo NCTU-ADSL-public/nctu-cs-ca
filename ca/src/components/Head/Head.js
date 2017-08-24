@@ -5,14 +5,12 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
-import { createStore } from 'redux';
-import todoApp from './Map/reducers';
 
 import Home from 'material-ui/svg-icons/content/flag';
 import Map from 'material-ui/svg-icons/maps/map';
 import Graduation from 'material-ui/svg-icons/social/school';
 import Check from 'material-ui/svg-icons/av/featured-play-list';
-import gimshi from './gimshi.jpg';
+import defalt from './defalt.jpg';
 
 import HomeItem from './Home/Home.js';
 import MapItem from './Map/MapComponents/Map.js';
@@ -27,7 +25,6 @@ const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
 let MapCourseData;
-let store = createStore(todoApp);
 class Head extends Component {
 
     constructor(props) {
@@ -63,7 +60,6 @@ class Head extends Component {
                 user.id = key;
                 return user;
             });
-            console.log(MapCourseData);
 
             _this.setState({
 				studentIdcard: {
@@ -161,7 +157,7 @@ class Head extends Component {
 						<div className="idcard">
 							<div id="idcard-data">
 								<div id="idcard-photo">
-									<img src={gimshi} width="50px" />
+									<img src={defalt} width="44px" />
 								</div>
 								<div id="idcard-top">
                                     {this.state.studentIdcard.name}

@@ -1,6 +1,6 @@
 import React from 'react'
 import VisibleTodoList from '../containers/VisibleTodoList'
-import Footer from './Footer'
+import Button from './Button'
 class App extends React.Component{
 
     constructor(props) {
@@ -66,7 +66,7 @@ class App extends React.Component{
 
                 </div>
 
-                <div className="mods"><Footer/></div>
+                <div className="mods"><Button/></div>
             </div>
         )
     }
