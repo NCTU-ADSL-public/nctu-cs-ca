@@ -31,7 +31,6 @@ class Map extends React.Component{
         if(flag === 1){
             flag = 0;
             for(var i=0;i<this.props.data.length;i++){
-                console.log(this.props.data[i]);
                 store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
 
                 if(this.props.data[i].grade==="1" && this.props.data[i].semester==="1")
