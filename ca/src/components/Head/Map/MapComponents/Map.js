@@ -124,7 +124,6 @@ class Map extends React.Component{
                                 <div className="down-session">
                                     <Provider store={storeFouDo}>
                                         <App />
-                                        <Footer/>
                                     </Provider>
                                 </div>
                             </div>
@@ -133,8 +132,6 @@ class Map extends React.Component{
                     </div>
 
                     <div className="mods">
-                        <Provider store={storeFouDo}>
-                        </Provider>
                     </div>
                 </div>
             </div>
