@@ -1,19 +1,29 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style =[{
+    fontFamily: 'Noto Sans CJK TC',
+    fontWeight: 'bold',
+}] ;
 
 const Link = ({ active, children, onClick }) => {
     if (active) {
-        return <span>{children}</span>
+        return (
+            <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
+                             disabled=true>
+            </RaisedButton>
+            )
     }
 
     return (
-        <a href="#"
-           onClick={e => {
+        <RaisedButton href="#"
+               onTouchTap={e => {
                e.preventDefault()
                onClick()
            }}
         >
             {children}
-        </a>
+        </RaisedButton>
     )
 }
 

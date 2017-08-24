@@ -46,6 +46,7 @@ class Head extends Component {
        },
 		studentIdcard:{
        		name:'',
+			prog:'',
 			grad:'',
 		},
     };
@@ -67,7 +68,8 @@ class Head extends Component {
             _this.setState({
 				studentIdcard: {
                     name: studentData.data.studentInfo[0].sname,
-                    grad: studentData.data.studentInfo[0].program + "大" + studentData.data.studentInfo[0].grade,
+					prog: studentData.data.studentInfo[0].program ,
+                	grad: "大" + studentData.data.studentInfo[0].grade,
 				}
 			})
         }).catch(err => {
@@ -89,9 +91,11 @@ class Head extends Component {
 		}
         else if(index===1){
             ReactDOM.render(
+            	<div>
 					<FadeIn>
-						<MapItem data={MapCourseData}/>
-					</FadeIn>,
+						<MapItem data={MapCourseData} studentId={this.state.studentIdcard.prog}/>
+					</FadeIn>
+				</div>,
 				document.getElementById('page'));
         }
         else if(index===2){
@@ -163,7 +167,7 @@ class Head extends Component {
                                     {this.state.studentIdcard.name}
 								</div>
 								<div id="idcard-buttom">
-                                    {this.state.studentIdcard.grad}
+                                    {this.state.studentIdcard.prog}{this.state.studentIdcard.grad}
 								</div>
 							</div>
 						</div>
