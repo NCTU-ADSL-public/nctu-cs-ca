@@ -6,9 +6,13 @@ const Footer = () => (
         <FilterLink filter="SHOW_ALL">
             全覽
         </FilterLink>
+        <br />
+        <br />
         <FilterLink filter="SHOW_ACTIVE">
             必修
         </FilterLink>
+        <br />
+        <br />
         <FilterLink filter="SHOW_COMPLETED">
             必選修
         </FilterLink>
