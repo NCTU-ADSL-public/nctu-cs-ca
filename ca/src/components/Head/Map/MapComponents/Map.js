@@ -1,7 +1,5 @@
 import React from 'react';
 import './Map.css';
-import RaiseButtom from './RaiseButtom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Footer from './Footer';
 
 import { Provider } from 'react-redux';
@@ -126,6 +124,7 @@ class Map extends React.Component{
                                 <div className="down-session">
                                     <Provider store={storeFouDo}>
                                         <App />
+                                        <Footer/>
                                     </Provider>
                                 </div>
                             </div>
@@ -135,7 +134,6 @@ class Map extends React.Component{
 
                     <div className="mods">
                         <Provider store={storeFouDo}>
-                            <Footer/>
                         </Provider>
                     </div>
                 </div>
