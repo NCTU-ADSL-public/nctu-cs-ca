@@ -5,7 +5,7 @@ import TodoList from '../MapComponents/TodoList'
 const getVisibleTodos = (todos, filter, grad, sem) => {
     switch (filter) {
         case 'SHOW_ALL':
-            return todos.filter(t => (t.grade===grad && t.semester===sem))
+            return todos.filter(t => t.grade===grad )
         case 'SHOW_COMPLETED':
             return todos.filter(t => t.completed)
         case 'SHOW_ACTIVE':
