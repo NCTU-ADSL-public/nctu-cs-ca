@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const style =[{
     fontFamily: 'Noto Sans CJK TC',
@@ -9,21 +10,25 @@ const style =[{
 const Link = ({ active, children, onClick }) => {
     if (active) {
         return (
-            <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
-                             disabled={true}>
-            </RaisedButton>
+            <MuiThemeProvider>
+                <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
+                                 disabled={true}>
+                </RaisedButton>
+            </MuiThemeProvider>
             )
     }
 
     return (
-        <RaisedButton href="#"
-               onTouchTap={e => {
-               e.preventDefault()
-               onClick()
-           }}
-        >
-            {children}
-        </RaisedButton>
+        <MuiThemeProvider>
+            <RaisedButton href="#"
+                   onTouchTap={e => {
+                   e.preventDefault()
+                   onClick()
+               }}
+            >
+                {children}
+            </RaisedButton>
+        </MuiThemeProvider>
     )
 }
 
