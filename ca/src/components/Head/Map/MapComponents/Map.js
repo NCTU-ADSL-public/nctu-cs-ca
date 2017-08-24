@@ -62,7 +62,7 @@ class Map extends React.Component{
                 </div>
 
                 <div className="Map-Row">
-                    <Provider store={storeOneUp}>
+                    <Provider store={store}>
                     <div className="grades">
                         <div className="grade" id="grade-1">
                             <div className="grade-num"><h3>大一(104)</h3></div>
