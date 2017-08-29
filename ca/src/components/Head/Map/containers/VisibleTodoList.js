@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleTodo } from '../actions'
+import { setPascos } from '../actions'
 import TodoList from '../MapComponents/TodoList'
 
 const getVisibleTodos = (todos, filter, grad, sem) => {
@@ -22,8 +22,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onTodoClick: (id) => {
-            dispatch(toggleTodo(id))
+        onTodoClick: (cosCame) => {
+            dispatch(setPascos(cosCame))
         }
     }
 }

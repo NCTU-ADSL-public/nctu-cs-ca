@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import todoApp from '../reducers';
 import {addTodo} from "../actions/index";
+import {setPascos} from "../actions/index";
 import App from './App';
 
 
@@ -20,8 +21,13 @@ class Map extends React.Component{
     SavingCourseData(){
         if(flag === 1){
             flag = 0;
+
             for(var i=0;i<this.props.data.length;i++){
                 store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
+            }
+
+            for(var i=0;i<this.props.studentPasdata.length;i++){
+                store.dispatch(setPascos(this.props.studentPasdata[i].cos_cname));
             }
         }
     }
@@ -30,7 +36,7 @@ class Map extends React.Component{
         return (
             <div id="font_adjust">
                 <div className="Map-title-text">
-                    <div id="lessons-title">課程地圖</div><div id="lessons-little-title">{this.props.studentId}</div>
+                    <div id="lessons-title">課程地圖</div><div id="lessons-little-title">-{this.props.studentId}</div>
                 </div>
 
                 <div className="Map-Row">

@@ -9,7 +9,7 @@ const todo = (state = {}, action) => {
                 semester:action.semester
             }
         case 'TOGGLE_TODO':
-            if (state.id !== action.id) {
+            if (state.cosCame !== action.cosCame) {
                 return state
             }
 
@@ -29,7 +29,7 @@ const todos = (state = [], action) => {
                 ...state,
                 todo(undefined, action)
             ]
-        case 'TOGGLE_TODO':
+        case 'SET_PASCOS':
             return state.map(t =>
                 todo(t, action)
             )

@@ -14,9 +14,9 @@ export const setVisibilityFilter = (filter) => {
     }
 }
 
-export const toggleTodo = (id) => {
+export const setPascos = (cosCame) => {
     return {
-        type: 'TOGGLE_TODO',
-        id
+        type: 'SET_PASCOS',
+        cosCame
     }
 }

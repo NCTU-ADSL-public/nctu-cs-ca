@@ -25,6 +25,7 @@ const graduationIcon = <Graduation />;
 const checkIcon = <Check />;
 
 let MapCourseData;
+let StudentCosPas;
 class Head extends Component {
 
     constructor(props) {
@@ -54,6 +55,13 @@ class Head extends Component {
             studentData.status // HTTP response code (e.g., 200, 401)
             studentData.data // object parsed from HTTP response body
             studentData.headers // HTTP presonse headers
+
+
+            StudentCosPas = Object.keys(studentData.data.studentCos).map(function(key) {
+                var user = studentData.data.studentPass[key];
+                user.id = key;
+                return user;
+            });
 
             MapCourseData = Object.keys(studentData.data.studentCos).map(function(key) {
                 var user = studentData.data.studentCos[key];
@@ -89,7 +97,7 @@ class Head extends Component {
             ReactDOM.render(
             	<div>
 					<FadeIn>
-						<MapItem data={MapCourseData} studentId={this.state.studentIdcard.prog}/>
+						<MapItem studentPasdata={StudentCosPas} data={MapCourseData} studentId={this.state.studentIdcard.prog}/>
 					</FadeIn>
 				</div>,
 				document.getElementById('page'));
