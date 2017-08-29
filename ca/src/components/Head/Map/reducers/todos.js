@@ -8,7 +8,7 @@ const todo = (state = {}, action) => {
                 grade: action.grade,
                 semester:action.semester
             }
-        case 'TOGGLE_TODO':
+        case 'SET_PASCOS':
             if (state.cosCame !== action.cosCame) {
                 return state
             }
