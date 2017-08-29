@@ -57,7 +57,7 @@ class Head extends Component {
             studentData.headers // HTTP presonse headers
 
 
-            StudentCosPas = Object.keys(studentData.data.studentCos).map(function(key) {
+            StudentCosPas = Object.keys(studentData.data.studentPass).map(function(key) {
                 var user = studentData.data.studentPass[key];
                 user.id = key;
                 return user;
