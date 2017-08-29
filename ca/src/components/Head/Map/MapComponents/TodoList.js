@@ -8,7 +8,7 @@ const TodoList = ({ todos, onTodoClick }) => (
             <Todo
                 key={todo.id}
                 {...todo}
-                onClick={() => onTodoClick(todo.id)}
+                onClick={() => onTodoClick(todo.cosCame)}
             />
         )}
     </div>

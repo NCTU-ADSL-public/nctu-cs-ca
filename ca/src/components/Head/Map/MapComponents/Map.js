@@ -27,8 +27,8 @@ class Map extends React.Component{
                 store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
             }
 
-            for(var i=0;i<this.props.studentPasdata.length;i++){
-                store.dispatch(setPascos(this.props.studentPasdata[i].cos_cname));
+            for(var j=0;j<this.props.studentPasdata.length;j++){
+                store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname));
             }
         }
     }
