@@ -8,13 +8,13 @@ const Footer = () => (
         </FilterLink>
         <br />
         <br />
-        <FilterLink filter="SHOW_ACTIVE">
-            必修
+        <FilterLink filter="SHOW_COMPLETED">
+            已修
         </FilterLink>
         <br />
         <br />
-        <FilterLink filter="SHOW_COMPLETED">
-            必選修
+        <FilterLink filter="SHOW_ACTIVE">
+            未修
         </FilterLink>
     </div>
 )
