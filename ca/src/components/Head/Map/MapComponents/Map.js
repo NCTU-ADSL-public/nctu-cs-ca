@@ -24,17 +24,17 @@ class Map extends React.Component{
             flag = 0;
 
             for(var i=0;i<this.props.data.length;i++){
-                store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
-            }
-            for(var j=0;j<this.props.studentPasdata.length;j++){
-                if(j!==0){
-                    if(this.props.studentPasdata[j-1].cos_cname !==this.props.studentPasdata[j].cos_cname){
-                        store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname));
+                if(i!==0){
+                    if(this.props.data[j-1].cos_cname !== this.props.data[j].cos_cname){
+                        store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                     }
                 }
                 else{
-                    store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname));
+                    store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 }
+            }
+            for(var j=0;j<this.props.studentPasdata.length;j++){
+                store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname));
             }
         }
     }
