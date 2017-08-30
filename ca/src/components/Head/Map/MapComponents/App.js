@@ -78,7 +78,7 @@ class App extends React.Component{
                     <ReactHover
                         options={optionsCursorTrueWithMargin}>
                         <ReactHover.Trigger>
-HEllo
+                            <div>HEllo</div>
                         </ReactHover.Trigger>
                         <ReactHover.Hover>
                             <h1> I am hover HTML </h1>
