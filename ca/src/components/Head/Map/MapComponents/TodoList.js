@@ -8,11 +8,11 @@ const TodoList = ({ todos, onTodoClick }) => (
             <Todo
                 key={todo.id}
                 {...todo}
-                onHoverChanged={() => onTodoClick(todo.pre)}
+                onClick={() => onTodoClick(todo.pre)}
             />
         )}
     </div>
-);
+)
 
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.shape({

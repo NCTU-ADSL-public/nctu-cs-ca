@@ -4,14 +4,14 @@ import './Map.css';
 import ReactHoverObserver from 'react-hover-observer';
 
 
-const Todo = ({ onHoverChanged, pre_flag, cosCame }) => (
+const Todo = ({ onClick, pre_flag, cosCame }) => (
     <div className="course">
         <ReactHoverObserver {...{
             className:"course-btn",
             style:{
                 background: pre_flag ? '#61070d' : '#616161'
             },
-            onHoverChanged:onHoverChanged,
+            onClick:onClick,
         }}>
             {cosCame}
         </ReactHoverObserver>
