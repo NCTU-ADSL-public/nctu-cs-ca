@@ -25,7 +25,7 @@ class Map extends React.Component{
 
             for(var i=0;i<this.props.data.length;i++){
                 if(i!==0){
-                    if(this.props.data[j-1].cos_cname !== this.props.data[j].cos_cname){
+                    if(this.props.data[i-1].cos_cname !== this.props.data[i].cos_cname){
                         store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                     }
                 }
