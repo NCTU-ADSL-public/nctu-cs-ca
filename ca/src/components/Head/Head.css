@@ -8,7 +8,7 @@
     margin: 0 0 0 0;
     padding: 0 0 0 3.5%;
     color:  #7B7B7B;
-    width: 1900px;
+    width: 1300px;
     height: 60px;
     float: left;
 }
@@ -90,7 +90,7 @@
     height: 60px;
     width: 70px;
     padding:10px 0 0 0px;
-    float: left;
+    float: right;
     position: static;
 }
 
