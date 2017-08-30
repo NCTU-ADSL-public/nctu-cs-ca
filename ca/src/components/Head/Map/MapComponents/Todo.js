@@ -10,7 +10,7 @@ const Todo = ({ onClick, pre_flag, cosCame }) => (
                              style={{
                                  background: pre_flag ? '#61070d' : '#616161'
                              }}
-                             onHoverChanged={onClick}>
+                             onClick={onClick}>
                             {cosCame}
                         </div>
                     </ReactHoverObserver>
