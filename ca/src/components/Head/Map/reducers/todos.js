@@ -21,14 +21,14 @@ const todo = (state = {}, action) => {
                 completed: !state.completed
             });
         case 'HANDLE_DATA':
-            if (state.cosCame !== action.suggest) {
+            if (state.cosCame !== action.pre) {
                 return Object.assign({}, state, {
-                    suggest_flag: false
+                    pre_flag: false
                 });
             }
 
             return Object.assign({}, state, {
-                suggest_flag: true
+                pre_flag: true
             });
 
         default:

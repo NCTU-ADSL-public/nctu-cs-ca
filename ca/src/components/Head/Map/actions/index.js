@@ -23,9 +23,9 @@ export const setPascos = (cosCame) => {
     }
 };
 
-export const handleCoursedata = (suggest) => {
+export const handleCoursedata = (pre) => {
     return {
         type: 'HANDLE_DATA',
-        suggest
+        pre
     }
 };
