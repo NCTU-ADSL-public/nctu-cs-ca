@@ -8,13 +8,34 @@ const optionsCursorTrueWithMargin = {
     shiftX: 20,
     shiftY: 0
 }
-
+//
+// const Example = () =>(
+//     <div className="example">
+//         <ReactHoverObserver {...{
+//             className: 'example__observer',
+//             onMouseOver: ({ e, setIsHovering, unsetIsHovering }) => {
+//                 if (e.target.className === 'example__child') {
+//                     unsetIsHovering();
+//                 } else {
+//                     setIsHovering();
+//                 }
+//             }
+//         }}>
+//             <div className="example__child">
+//                 passive
+//             </div>
+//             <Label />
+//         </ReactHoverObserver>
+//     </div>
+// );
+//
+// const Label = ({ isHovering = false }) => (
+//     <div className="example__label">
+//         Is Hovering: { isHovering ? 'true' : 'false' }
+//     </div>
+// );
 
 const Todo = ({ onClick, pre_flag, cosCame }) => (
-    <div>
-        <ReactHover
-            options={optionsCursorTrueWithMargin}>
-            <ReactHover.Trigger>
                 <div className="course">
                     <div className="course-btn"
                          style={{
@@ -24,12 +45,6 @@ const Todo = ({ onClick, pre_flag, cosCame }) => (
                         {cosCame}
                     </div>
                 </div>
-            </ReactHover.Trigger>
-            <ReactHover.Hover>
-                <h1> I am hover HTML </h1>
-            </ReactHover.Hover>
-        </ReactHover>
-    </div>
 )
 
 Todo.propTypes = {
