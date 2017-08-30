@@ -3,7 +3,6 @@ import { handleCoursedata } from '../actions'
 import TodoList from '../MapComponents/TodoList'
 
 const getVisibleTodos = (todos, filter, grad, sem) => {
-    console.log(grad);
     switch (filter) {
         case 'SHOW_ALL':
             return todos.filter(t => (t.grade===grad && t.semester===sem));
