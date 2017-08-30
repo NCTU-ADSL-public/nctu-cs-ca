@@ -6,8 +6,12 @@ const todo = (state = {}, action) => {
                 cosCame: action.cosCame,
                 completed: false,
                 grade: action.grade,
-                semester:action.semester
-            }
+                semester:action.semester,
+                suggest:action.suggest,
+                pre:action.pre,
+                suggest_flag:false,
+                pre_flag:false
+            };
         case 'SET_PASCOS':
             if (state.cosCame !== action.cosCame) {
                 return state
@@ -15,7 +19,17 @@ const todo = (state = {}, action) => {
 
             return Object.assign({}, state, {
                 completed: !state.completed
-            })
+            });
+        case 'HANDLE_DATA':
+            if (state.cosCame !== action.suggest) {
+                return Object.assign({}, state, {
+                    suggest_flag: false
+                });
+            }
+
+            return Object.assign({}, state, {
+                suggest_flag: true
+            });
 
         default:
             return state
@@ -28,11 +42,16 @@ const todos = (state = [], action) => {
             return [
                 ...state,
                 todo(undefined, action)
-            ]
+            ];
         case 'SET_PASCOS':
             return state.map(t =>
                 todo(t, action)
-            )
+            );
+        case 'HANDLE_DATA':
+            return state.map(t =>
+                todo(t, action)
+            );
+
         default:
             return state
     }

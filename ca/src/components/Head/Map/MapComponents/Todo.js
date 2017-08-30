@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react'
 import './Map.css';
 
 
-const Todo = ({ onClick, completed, cosCame }) => (
+const Todo = ({ onClick, suggest_flag, cosCame }) => (
     <div className="course">
         <div className="course-btn"
              style={{
-                 textDecoration: completed ? 'line-through' : 'none'
+                 background: suggest_flag ? '#61070d' : '#616161'
              }}
              onClick={onClick}>
             {cosCame}
