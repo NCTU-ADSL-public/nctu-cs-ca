@@ -8,10 +8,10 @@ const optionsCursorTrueWithMargin = {
     shiftX: 20,
     shiftY: 0
 };
-{/*<div className="course">*/}
-    {/*<ReactHover*/}
-        {/*options={optionsCursorTrueWithMargin}>*/}
-        {/*<ReactHover.Trigger>*/}
+{/*<ReactHover*/}
+    {/*options={optionsCursorTrueWithMargin}>*/}
+    {/*<ReactHover.Trigger>*/}
+        {/*<div className="course">*/}
             {/*<div className="course-btn"*/}
                  {/*style={{*/}
                      {/*background: pre_flag ? '#61070d' : '#616161'*/}
@@ -19,23 +19,23 @@ const optionsCursorTrueWithMargin = {
                  {/*onClick={onClick}>*/}
                 {/*{cosCame}*/}
             {/*</div>*/}
-        {/*</ReactHover.Trigger>*/}
-        {/*<ReactHover.Hover>*/}
-            {/*<h1> I am hover HTML </h1>*/}
-        {/*</ReactHover.Hover>*/}
-    {/*</ReactHover>*/}
-{/*</div>*/}
+        {/*</div>*/}
+    {/*</ReactHover.Trigger>*/}
+    {/*<ReactHover.Hover>*/}
+        {/*<h1> I am hover HTML </h1>*/}
+    {/*</ReactHover.Hover>*/}
+{/*</ReactHover>*/}
 
 const Todo = ({ onClick, pre_flag, cosCame }) => (
-    <ReactHover
-        options={optionsCursorTrueWithMargin}>
-        <ReactHover.Trigger>
-            <h1 style={{background: '#abbcf1', width: '200px'}}> Hover on me </h1>
-        </ReactHover.Trigger>
-        <ReactHover.Hover>
-            <h1> I am hover HTML </h1>
-        </ReactHover.Hover>
-    </ReactHover>
+    <div className="course">
+<div className="course-btn"
+style={{
+background: pre_flag ? '#61070d' : '#616161'
+}}
+onClick={onClick}>
+{cosCame}
+</div>
+</div>
 );
 
 Todo.propTypes = {
