@@ -18,6 +18,15 @@ class App extends React.Component{
     render(){
             return(
                 <div>
+                    <ReactHover
+                        options={optionsCursorTrueWithMargin}>
+                        <ReactHover.Trigger>
+                            <h1 style={{background: '#abbcf1', width: '200px'}}> Hover on me </h1>
+                        </ReactHover.Trigger>
+                        <ReactHover.Hover>
+                            <h1> I am hover HTML </h1>
+                        </ReactHover.Hover>
+                    </ReactHover>
                 <div className="grades">
                     <div className="grade" id="grade-1">
                         <div className="grade-num"><h3>大一(104)</h3></div>
@@ -74,16 +83,7 @@ class App extends React.Component{
 
                 </div>
 
-                <div className="mods"><Button/>
-                    <ReactHover
-                        options={optionsCursorTrueWithMargin}>
-                        <ReactHover.Trigger>
-                            <h1>HEllo</h1>
-                        </ReactHover.Trigger>
-                        <ReactHover.Hover>
-                            <h1> I am hover HTML </h1>
-                        </ReactHover.Hover>
-                    </ReactHover></div>
+                <div className="mods"><Button/></div>
             </div>
         )
     }
