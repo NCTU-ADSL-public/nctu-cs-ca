@@ -2,6 +2,13 @@ import React from 'react'
 import VisibleTodoList from '../containers/VisibleTodoList'
 import Button from './Button'
 
+import ReactHover from 'react-hover';
+
+const optionsCursorTrueWithMargin = {
+    followCursor: true,
+    shiftX: 20,
+    shiftY: 0
+};
 
 class App extends React.Component{
 
@@ -67,7 +74,16 @@ class App extends React.Component{
 
                 </div>
 
-                <div className="mods"><Button/></div>
+                <div className="mods"><Button/>
+                    <ReactHover
+                        options={optionsCursorTrueWithMargin}>
+                        <ReactHover.Trigger>
+HEllo
+                        </ReactHover.Trigger>
+                        <ReactHover.Hover>
+                            <h1> I am hover HTML </h1>
+                        </ReactHover.Hover>
+                    </ReactHover></div>
             </div>
         )
     }
