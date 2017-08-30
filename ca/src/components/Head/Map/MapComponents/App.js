@@ -2,13 +2,7 @@ import React from 'react'
 import VisibleTodoList from '../containers/VisibleTodoList'
 import Button from './Button'
 
-import ReactHover from 'react-hover';
 
-const optionsCursorTrueWithMargin = {
-    followCursor: true,
-    shiftX: 20,
-    shiftY: 0
-};
 
 class App extends React.Component{
 
@@ -18,15 +12,6 @@ class App extends React.Component{
     render(){
             return(
                 <div>
-                    <ReactHover
-                        options={optionsCursorTrueWithMargin}>
-                        <ReactHover.Trigger>
-                            <h1 style={{background: '#abbcf1', width: '200px'}}> Hover on me </h1>
-                        </ReactHover.Trigger>
-                        <ReactHover.Hover>
-                            <h1> I am hover HTML </h1>
-                        </ReactHover.Hover>
-                    </ReactHover>
                 <div className="grades">
                     <div className="grade" id="grade-1">
                         <div className="grade-num"><h3>大一(104)</h3></div>
