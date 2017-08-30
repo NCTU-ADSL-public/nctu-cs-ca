@@ -11,11 +11,10 @@ const optionsCursorTrueWithMargin = {
 
 
 const Todo = ({ onClick, pre_flag, cosCame }) => (
-    <div>
+    <div className="course">
         <ReactHover
             options={optionsCursorTrueWithMargin}>
             <ReactHover.Trigger>
-                <div className="course">
                     <div className="course-btn"
                          style={{
                              background: pre_flag ? '#61070d' : '#616161'
@@ -23,7 +22,6 @@ const Todo = ({ onClick, pre_flag, cosCame }) => (
                          onClick={onClick}>
                         {cosCame}
                     </div>
-                </div>
             </ReactHover.Trigger>
             <ReactHover.Hover>
                 <h1> I am hover HTML </h1>
