@@ -3,7 +3,7 @@ import './Map.css';
 
 import ReactHoverObserver from 'react-hover-observer';
 
-const Todo = ({ onClick, pre_flag, cosCame }) => (
+const Todo = ({ onClick, completed , pre_flag, cosCame }) => (
                 <div className="course">
                     <ReactHoverObserver {...{
                         onMouseOver: ({ e, setIsHovering, unsetIsHovering }) =>

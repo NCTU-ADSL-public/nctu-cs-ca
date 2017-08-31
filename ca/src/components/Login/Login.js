@@ -4,13 +4,6 @@ import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FadeIn from 'react-fade-in';
 import axios from 'axios';
-import ReactHoverObserver from 'react-hover-observer';
-
-const Label = ({ isHovering = false }) => (
-    <div className="example__label">
-        Is Hovering: { isHovering ? 'true' : 'false' }
-    </div>
-);
 
 class Login extends Component {
 
@@ -78,25 +71,6 @@ class Login extends Component {
       render() {
         return (
           <div className="Login" >
-
-              <div className="example">
-                  <ReactHoverObserver {...{
-                      className: 'example__observer',
-                      onMouseOver: ({ e, setIsHovering, unsetIsHovering }) => {
-                          if (e.target.className === 'example__child') {
-                              unsetIsHovering();
-                          } else {
-                              setIsHovering();
-                          }
-                      }
-                  }}>
-                      <div className="example__child">
-                          passive
-                      </div>
-                      <Label/>
-                  </ReactHoverObserver>
-              </div>
-
 
               <div style = {this.state.LoginMessage_state1}>Oops you are not cs student !(status 1)</div>
               <br/>

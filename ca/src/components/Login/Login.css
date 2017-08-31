@@ -57,62 +57,6 @@
     float: left;
 }
 
-/**/
- .example {
-     width: 500px;
-     display: flex;
-     margin: 0 auto;
-     font-family: Arial;
- }
-
- .example__guide {
-     flex: 1;
-     margin: auto;
-     padding-right: 20px;
-     line-height: 1.3;
- }
-
- .example__observer {
-     width: 200px;
-     height: 200px;
-     margin: 0 auto;
-     display: flex;
-     position: relative;
-     border: solid 1px #C5CAE9;
-     border-radius: 4px;
-     transition: border .2s ease-in-out;
- }
-
- .example__observer:hover {
-     border-color: #3F51B5;
- }
-
- .example__label {
-     width: 125px;
-     margin: auto;
-     white-space: nowrap;
- }
-
- .example__child {
-     width: 100px;
-     height: 50px;
-     padding-top: 15px;
-     box-sizing: border-box;
-     position: absolute;
-     top: 25px;
-     left: 50px;
-     background-color: #C5CAE9;
-     transition: background .2s ease-in-out;
-     border-radius: 4px;
-     text-align: center
- }
-
- .example__child:hover {
-     background-color: #3F51B5;
-     color: white;
- }
-
- /**/
 
 
 @media (max-width: 480px) {
