@@ -6,13 +6,13 @@ import ReactHoverObserver from 'react-hover-observer';
 const Todo = ({ onClick, pre_flag, cosCame }) => (
                 <div className="course">
                     <ReactHoverObserver {...{
-                        onMouseOver: ({ e, setIsHovering, unsetIsHovering }) => 
-                            {onClick}
+                        onMouseOver: ({ e, setIsHovering, unsetIsHovering }) =>
+                            onClick
 
                     }}>
                         <div className="course-btn"
                              style={{
-                                 borderColor: pre_flag ? '#611505' : '#616161'
+                                 border: pre_flag ? 'solid 3px #611505':'',
                              }}
                              onClick={onClick}>
                             {cosCame}
