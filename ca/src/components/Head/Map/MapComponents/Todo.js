@@ -6,13 +6,9 @@ import ReactHoverObserver from 'react-hover-observer';
 const Todo = ({ onClick, pre_flag, cosCame }) => (
                 <div className="course">
                     <ReactHoverObserver {...{
-                        onMouseOver: ({ e, setIsHovering, unsetIsHovering }) => {
-                            if (e.target.className === 'course-btn') {
-                                unsetIsHovering();
-                            } else {
-                                setIsHovering();
-                            }
-                        }
+                        onMouseOver: ({ e, setIsHovering, unsetIsHovering }) => 
+                            {onClick}
+
                     }}>
                         <div className="course-btn"
                              style={{
