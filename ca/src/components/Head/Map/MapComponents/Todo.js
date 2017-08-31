@@ -16,7 +16,7 @@ const Todo = ({ onClick, pre_flag, cosCame }) => (
                     }}>
                         <div className="course-btn"
                              style={{
-                                 borderColor: pre_flag ? '#61070d' : '#616161'
+                                 borderColor: pre_flag ? '#611505' : '#616161'
                              }}
                              onClick={onClick}>
                             {cosCame}
