@@ -133,11 +133,12 @@ h3{
     font-size: 1em;
     font-weight: 100;
     letter-spacing: 1px;
-    background: #616161;
+    transition: background .2s ease-in-out;
+    background-color: #616161;
 }
 
 .course-btn:hover{
-    background: #338d68;
+    background-color: #338d68;
 }
 
 .session-cur{
