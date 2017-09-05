@@ -16,6 +16,7 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) => (
                             <FlatButton className="course-btn"
                                  backgroundColor="#616161"
                                  fullWidth="true"
+                                 labelStyle="course-btn"
                                  style={{
                                      border: pre_flag ? 'solid 2px #611505':'',
                                  }}
