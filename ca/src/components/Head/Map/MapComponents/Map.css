@@ -125,7 +125,7 @@ h3{
 }
 
 .course-btn{
-
+    overflow: visible;
     border-radius: 2px;
     transition: background .2s ease-in-out;
     background-color: #616161;
