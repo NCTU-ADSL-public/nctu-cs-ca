@@ -13,14 +13,14 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) => (
 
                     }}>
                         <MuiThemeProvider>
-                            <div className="course-btn"
+                            <FlatButton className="course-btn"
                                  style={{
                                      border: pre_flag ? 'solid 2px #611505':'',
                                  }}
+                                 label={cosCame}
                                  onClick={onClick}>
-                                {cosCame}
 
-                            </div>
+                            </FlatButton>
                         </MuiThemeProvider>
                     </ReactHoverObserver>
                 </div>

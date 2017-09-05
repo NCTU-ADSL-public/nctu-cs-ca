@@ -23,7 +23,7 @@ const todo = (state = {}, action) => {
         case 'HANDLE_DATA':
             if (state.cosCame !== action.pre) {
                 return Object.assign({}, state, {
-                    pre_flag: !state.pre_flag
+                    pre_flag: false
                 });
             }
 
