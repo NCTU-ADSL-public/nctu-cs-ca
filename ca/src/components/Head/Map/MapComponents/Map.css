@@ -127,7 +127,6 @@ h3{
 .course-btn{
 
     border-radius: 2px;
-    text-align: center;
     transition: background .2s ease-in-out;
     background-color: #616161;
 }
