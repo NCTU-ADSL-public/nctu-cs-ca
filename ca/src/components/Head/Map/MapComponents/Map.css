@@ -125,14 +125,9 @@ h3{
 }
 
 .course-btn{
-    padding: 3px 5px 3px 5px;
 
-    border-radius: 3px;
+    border-radius: 2px;
     text-align: center;
-    color: #fcfcfc;
-    font-size: 1em;
-    font-weight: 100;
-    letter-spacing: 1px;
     transition: background .2s ease-in-out;
     background-color: #616161;
 }

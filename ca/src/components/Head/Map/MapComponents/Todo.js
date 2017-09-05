@@ -17,14 +17,13 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) => (
                                  backgroundColor="#616161"
                                  fullWidth="true"
                                  labelStyle={{
-
                                      color: '#fcfcfc',
                                      fontSize: '1em',
                                      fontWeight: '100',
                                      letterSpacing: '1px'
                                  }}
                                  style={{
-                                     border: pre_flag ? 'solid 2px #611505':'',
+                                     border: pre_flag ? 'solid 2px #611505':'#616161',
                                  }}
                                  label={cosCame}
                                  onClick={onClick}>
