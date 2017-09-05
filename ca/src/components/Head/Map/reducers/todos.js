@@ -28,7 +28,7 @@ const todo = (state = {}, action) => {
             }
 
             return Object.assign({}, state, {
-                pre_flag: true
+                pre_flag: !state.pre_flag
             });
 
         default:
