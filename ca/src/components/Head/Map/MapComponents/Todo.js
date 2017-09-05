@@ -17,8 +17,8 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) => (
                                  style={{
                                      border: pre_flag ? 'solid 2px #611505':'',
                                  }}
-                                 onClick={onClick}
-                                        label={cosCame}>
+                                 onClick={onClick}>
+                                {cosCame}
 
                             </div>
                         </MuiThemeProvider>
