@@ -58,21 +58,23 @@
 
 .idcard{
     padding: 0 0 0 20px;
-    font-size: 15px;
+    font-size: 14px;
     font-family: Noto Sans CJK TC;
     color:#7B7B7B;
-    float: left;
+    float: right;
     height: 60px;
     width: 200px;
+    position: absolute;
+    right: 60px;
 }
 
 #idcard-top{
-    margin: 10px 2% 0 68px;
+    margin: 10px 2% 0 58px;
     text-align: left;
 }
 
 #idcard-buttom{
-    margin: 0 2% 0 68px;
+    margin: 0 2% 0 58px;
     text-align: left;
 }
 
@@ -91,7 +93,8 @@
     width: 70px;
     padding:10px 0 0 0px;
     float: right;
-    position: static;
+    position: absolute;
+    right: 50px;
 }
 
 #topRec{
@@ -121,5 +124,14 @@
     #h2 {
         font-size: 12px;
         margin: -0.2% 0 0 0;
+    }
+
+
+    .idcard{
+        right: 20px;
+    }
+
+    #logout-button {
+        right: 25px;
     }
 }
