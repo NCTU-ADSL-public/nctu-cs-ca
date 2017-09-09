@@ -23,6 +23,7 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) => (
                                      letterSpacing: '1px'
                                  }}
                                  style={{
+                                     display:completed? "hidden": "inline",
                                      border: pre_flag ? 'solid 2px #611505':'#616161',
                                  }}
                                  label={cosCame}
