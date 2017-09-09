@@ -31,7 +31,7 @@ class Todo extends React.Component{
             <ReactHover
                 options={optionsCursorTrueWithMargin}>
                 <ReactHover.Trigger>
-                    <div className="course" onMouseOver={this.handleHover()} onMouseDown={this.handleHover()}>
+                    <div className="course" onMouseOver={() =>this.handleHover()} onMouseDown={() =>this.handleHover()}>
                         <MuiThemeProvider>
                             <FlatButton className="course-btn"
                                         backgroundColor="#616161"
@@ -63,7 +63,7 @@ class Todo extends React.Component{
 }
 
 
-Todo.propTypes = {
+Todo.PropTypes = {
     onClick: PropTypes.func.isRequired,
     completed: PropTypes.bool.isRequired,
     cos_cname: PropTypes.string.isRequired

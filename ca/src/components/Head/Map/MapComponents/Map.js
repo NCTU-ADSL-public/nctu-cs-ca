@@ -8,7 +8,6 @@ import {addTodo} from "../actions/index";
 import {setPascos} from "../actions/index";
 import App from './App';
 
-
 let store = createStore(todoApp);
 
 let flag = 1;
