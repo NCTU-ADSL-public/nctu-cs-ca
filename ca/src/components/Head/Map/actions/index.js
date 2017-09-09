@@ -5,14 +5,14 @@ export const addTodo = (cosCame,grade,semester,suggest,pre) => {
         id: nextTodoId++,
         cosCame,grade,semester,suggest,pre,
         suggest_flag:0,
-        pre_flag:0
+        pre_flag:0,
     }
 };
 
 export const setVisibilityFilter = (filter) => {
     return {
         type: 'SET_VISIBILITY_FILTER',
-        filter
+        filter,
     }
 };
 

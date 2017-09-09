@@ -3,17 +3,17 @@ import FilterLink from '../containers/FilterLink'
 
 const Footer = () => (
     <div>
-        <FilterLink filter="SHOW_ALL">
+        <FilterLink filter="SHOW_ALL" >
             全覽
         </FilterLink>
         <br />
         <br />
-        <FilterLink filter="SHOW_COMPLETED">
+        <FilterLink filter="SHOW_COMPLETED" >
             已修
         </FilterLink>
         <br />
         <br />
-        <FilterLink filter="SHOW_ACTIVE">
+        <FilterLink filter="SHOW_ACTIVE" >
             未修
         </FilterLink>
     </div>

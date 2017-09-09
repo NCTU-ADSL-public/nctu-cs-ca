@@ -4,7 +4,6 @@ import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FadeIn from 'react-fade-in';
 import axios from 'axios';
-
 class Login extends Component {
 
     constructor(props) {
@@ -71,7 +70,6 @@ class Login extends Component {
       render() {
         return (
           <div className="Login" >
-
               <div style = {this.state.LoginMessage_state1}>Oops you are not cs student !(status 1)</div>
               <br/>
               <div style = {this.state.LoginMessage_state2}>Please login first(status 2)</div>

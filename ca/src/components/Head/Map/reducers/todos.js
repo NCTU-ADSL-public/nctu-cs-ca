@@ -10,7 +10,8 @@ const todo = (state = {}, action) => {
                 suggest:action.suggest,
                 pre:action.pre,
                 suggest_flag:false,
-                pre_flag:false
+                pre_flag:false,
+
             };
         case 'SET_PASCOS':
             if (state.cosCame !== action.cosCame) {
