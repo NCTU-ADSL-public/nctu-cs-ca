@@ -26,6 +26,7 @@ const checkIcon = <Check />;
 
 let MapCourseData;
 let StudentCosPas;
+
 class Head extends Component {
 
     constructor(props) {
@@ -104,11 +105,9 @@ class Head extends Component {
         }
         else if(index===2){
             ReactDOM.render(
-            	<p>
 					<FadeIn>
 						<GraduationItem />
-					</FadeIn>
-				</p>,
+					</FadeIn>,
                 document.getElementById('page'));
         }
         else if(index===3){

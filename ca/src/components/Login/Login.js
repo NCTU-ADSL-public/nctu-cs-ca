@@ -42,7 +42,8 @@ class Login extends Component {
             else if(this.state.LoginMessage_state === "2")
                 ToastStore.error("Please login first(status 2)")
     }
-      render() {
+
+    render() {
         return (
           <div className="Login"  >
 
