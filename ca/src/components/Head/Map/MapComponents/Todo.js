@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import './Map.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactHover from 'react-hover';
 
 const optionsCursorTrueWithMargin = {

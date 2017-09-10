@@ -6,7 +6,6 @@ import FadeIn from 'react-fade-in';
 import axios from 'axios';
 import {ToastContainer, ToastStore} from 'react-toasts';
 
-let statusFlag = 1;
 class Login extends Component {
 
     constructor(props) {
@@ -29,7 +28,7 @@ class Login extends Component {
 
     loginStatusHandler(index){
         this.setState({
-           LoginMessage_state:index
+             LoginMessage_state:index,
         })
     }
 
@@ -37,15 +36,11 @@ class Login extends Component {
         LoginMessage_state:"0",
     };
 
-    componentDidMount(){
-        if(statusFlag){
-            statusFlag=0
-            if(this.state.LoginMessage_state==="1")
+    componentDidMount() {
+            if (this.state.LoginMessage_state === "1")
                 ToastStore.error("Oops you are not cs student !(status 1)")
-
-            else if(this.state.LoginMessage_state==="2")
+            else if(this.state.LoginMessage_state === "2")
                 ToastStore.error("Please login first(status 2)")
-        }
     }
       render() {
         return (
@@ -53,10 +48,10 @@ class Login extends Component {
 
               <ToastContainer store={ToastStore}/>
                 <div id="AjustToggleButtom"></div>
-                <div className="Login-header"   ref="tip"  >
+                <div className="Login-header"   ref="tip">
 
                 <FadeIn>
-                    <div id="rectangle" ></div>
+                    <div id="rectangle"></div>
                     <div id="eng-title"><div id="h11">NCTU Curriculum Assistant</div></div>
                     <div id="ch-title"><div id="h22">交大資工線上助理</div></div>
 
