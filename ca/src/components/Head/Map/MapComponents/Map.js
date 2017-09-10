@@ -21,7 +21,7 @@ class Map extends React.Component{
         if(flag === 1){
             flag = 0;
 
-            for(var i=0;i<this.props.data.length;i++){
+            for(let i=0;i<this.props.data.length;i++){
                 if(i!==0){
                     if(this.props.data[i-1].cos_cname !== this.props.data[i].cos_cname){
                         store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
@@ -31,7 +31,7 @@ class Map extends React.Component{
                     store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 }
             }
-            for(var j=0;j<this.props.studentPasdata.length;j++){
+            for(let j=0;j<this.props.studentPasdata.length;j++){
                 store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname));
             }
         }

@@ -4,6 +4,7 @@ import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FadeIn from 'react-fade-in';
 import axios from 'axios';
+import {ToastContainer, ToastStore} from 'react-toasts';
 
 let statusFlag = 1;
 class Login extends Component {
@@ -55,6 +56,7 @@ class Login extends Component {
         return (
           <div className="Login"  >
 
+              <ToastContainer store={ToastStore}/>
                 <div id="AjustToggleButtom"></div>
                 <div className="Login-header"   ref="tip"  >
 
