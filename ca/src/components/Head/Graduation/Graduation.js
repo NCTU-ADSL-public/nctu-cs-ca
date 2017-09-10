@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ReactUploadFile from 'react-upload-file';
 import ChooseButton from './ChooseButton';
 import UploadButton from './UploadButton';
 import FileUpload from 'react-fileupload';
