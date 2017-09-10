@@ -18,6 +18,7 @@
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10",
     "react-tap-event-plugin": "^2.0.1",
+    "react-toasts": "^1.0.6",
     "redux": "^3.7.2"
   },
   "scripts": {

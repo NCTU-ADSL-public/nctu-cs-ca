@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import './Map.css';
-import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import FlatButton from 'material-ui/FlatButton';
 import ReactHover from 'react-hover';
 
 const optionsCursorTrueWithMargin = {
@@ -31,7 +31,7 @@ class Todo extends React.Component{
             <ReactHover
                 options={optionsCursorTrueWithMargin}>
                 <ReactHover.Trigger>
-                    <div className="course" onMouseOver={() =>this.handleHover()} onMouseDown={() =>this.handleHover()}>
+                    <div className="course" onMouseOver={() =>this.handleHover()} onMouseOut={() =>this.handleHover()}>
                         <MuiThemeProvider>
                             <FlatButton className="course-btn"
                                         backgroundColor="#616161"
