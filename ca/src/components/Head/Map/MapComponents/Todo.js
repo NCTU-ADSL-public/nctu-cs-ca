@@ -2,47 +2,77 @@ import React, { PropTypes } from 'react'
 import './Map.css';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import ReactHover from 'react-hover';
+import ReactHoverObserver from 'react-hover-observer';
 
 const optionsCursorTrueWithMargin = {
     followCursor: true,
     shiftX: 20,
     shiftY: 0
 }
-const Todo = ({ onClick, completed , pre_flag, cosCame }) =>(
+// const Todo = ({ onClick, completed , pre_flag, cosCame }) =>(
+//
+//             <ReactHover
+//                 options={optionsCursorTrueWithMargin}>
+//                 <ReactHover.Trigger>
+//                     <div className="course" >
+//                         <MuiThemeProvider>
+//                             <FlatButton className="course-btn"
+//                                         backgroundColor="#616161"
+//                                         fullWidth="true"
+//                                         labelStyle={{
+//                                             color: "#fcfcfc",
+//                                             fontSize: "1em",
+//                                             fontWeight: "100",
+//                                             letterSpacing: "1px"
+//                                         }}
+//                                         style={{
+//                                             visibility:completed?"hidden":"visible" ,
+//                                             border: pre_flag ? "solid 2px #611505":"#616161",
+//                                             padding: 0,
+//                                         }}
+//                                         label={cosCame}
+//                                         onClick={onClick}>
+//
+//                             </FlatButton>
+//                         </MuiThemeProvider>
+//                     </div>
+//                 </ReactHover.Trigger>
+//                 <ReactHover.Hover>
+//                     <h1>{cosCame}</h1>
+//                 </ReactHover.Hover>
+//             </ReactHover>
+// )
 
-            <ReactHover
-                options={optionsCursorTrueWithMargin}>
-                <ReactHover.Trigger>
-                    <div className="course" >
+
+const Todo = ({ onClick, completed , pre_flag, cosCame }) => (
+                <div className="course">
+                    <ReactHoverObserver {...{
+                        onMouseOver: ({ e, setIsHovering, unsetIsHovering }) =>
+                            onClick
+
+                    }}>
                         <MuiThemeProvider>
                             <FlatButton className="course-btn"
-                                        backgroundColor="#616161"
-                                        fullWidth="true"
-                                        labelStyle={{
-                                            color: "#fcfcfc",
-                                            fontSize: "1em",
-                                            fontWeight: "100",
-                                            letterSpacing: "1px"
-                                        }}
-                                        style={{
-                                            visibility:completed?"hidden":"visible" ,
-                                            border: pre_flag ? "solid 2px #611505":"#616161",
-                                            padding: 0,
-                                        }}
-                                        label={cosCame}
-                                        onClick={onClick}>
+                                 backgroundColor="#616161"
+                                 fullWidth="true"
+                                 labelStyle={{
+                                     color: '#fcfcfc',
+                                     fontSize: '1em',
+                                     fontWeight: '100',
+                                     letterSpacing: '1px'
+                                 }}
+                                 style={{
+                                     display:completed? "hidden": "inline",
+                                     border: pre_flag ? 'solid 2px #611505':'#616161',
+                                 }}
+                                 label={cosCame}
+                                 onClick={onClick}>
 
                             </FlatButton>
                         </MuiThemeProvider>
-                    </div>
-                </ReactHover.Trigger>
-                <ReactHover.Hover>
-                    <h1>{cosCame}</h1>
-                </ReactHover.Hover>
-            </ReactHover>
+                    </ReactHoverObserver>
+                </div>
 )
-
 
 Todo.PropTypes = {
     onClick: PropTypes.func.isRequired,
