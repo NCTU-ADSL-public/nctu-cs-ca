@@ -46,6 +46,7 @@ class Todo extends React.Component{
                                             overflow:this.state.isMouseover?"visible":"hidden",
                                             visibility:this.props.completed?"hidden":"visible" ,
                                             border: this.props.pre_flag ? "solid 2px #611505":"#616161",
+                                            padding: 0,
                                         }}
                                         label={this.props.cosCame}
                                         onClick={this.props.onClick}>
@@ -55,7 +56,7 @@ class Todo extends React.Component{
                     </div>
                 </ReactHover.Trigger>
                 <ReactHover.Hover>
-                    <h1> I am hover HTML </h1>
+                    <h1>{this.props.cosCame}</h1>
                 </ReactHover.Hover>
             </ReactHover>
         );
