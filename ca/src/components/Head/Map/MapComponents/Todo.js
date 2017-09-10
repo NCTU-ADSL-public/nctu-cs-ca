@@ -12,8 +12,8 @@ const optionsCursorTrueWithMargin = {
 class Todo extends React.Component{
 
 
-    constructor({ onClick, completed , pre_flag, cosCame ,show_status}){
-        super({ onClick, completed , pre_flag, cosCame, show_status});
+    constructor({ onClick, completed , pre_flag, cosCame }){
+        super({ onClick, completed , pre_flag, cosCame});
     }
 
     state = {

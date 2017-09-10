@@ -34,14 +34,9 @@ class Login extends Component {
     }
 
     state = {
-        LoginMessage_state:"1",
-        isMouseover:false,
+        LoginMessage_state:"0",
     };
-    handleHover(){
-        this.setState({
-            isMouseover:!this.state.isMouseover,
-        })
-    }
+
     componentDidMount(){
         if(statusFlag){
             statusFlag=0
