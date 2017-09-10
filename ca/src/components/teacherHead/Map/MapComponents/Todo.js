@@ -28,6 +28,7 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) =>(
                                             letterSpacing: "1px"
                                         }}
                                         style={{
+                                            visibility:completed?"hidden":"visible" ,
                                             border: pre_flag ? "solid 2px #611505":"#616161",
                                             padding: 0,
                                         }}
