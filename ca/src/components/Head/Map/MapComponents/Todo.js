@@ -38,7 +38,7 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) =>(
                     </div>
                 </ReactHover.Trigger>
                 <ReactHover.Hover>
-                    <h1>{this.props.cosCame}</h1>
+                    <h1>{cosCame}</h1>
                 </ReactHover.Hover>
             </ReactHover>
 )
