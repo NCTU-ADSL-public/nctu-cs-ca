@@ -13,19 +13,11 @@ const optionsCursorTrueWithMargin = {
 
 class Todo extends React.Component {
 
-    state={
-        index:this.props.completed,
-    }
-
-    componentWillMount(){
-        console.log(this.state.index)
-    }
-
     render(){
         return(
             <div className="course"
                  style={{
-                     opacity: !this.props.completed ? "100%" : "10%",
+                     opacity: !this.props.completed ? "1" : "0.1",
                  }}>
                 <ReactHover
                     options={optionsCursorTrueWithMargin}>
