@@ -69,7 +69,7 @@ class App extends React.Component{
 
                 </div>
 
-                <div className="mods"><Button/></div>
+                <div className="mods"><Button studentPasdata={this.props.studentPasdata}/></div>
             </div>
         )
     }

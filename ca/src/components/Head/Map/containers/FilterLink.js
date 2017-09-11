@@ -14,13 +14,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(setVisibilityFilter(ownProps.filter))
             if(ownProps.filter === "SHOW_COMPLETED"){
                 console.log(ownProps.filter);
-                for(let j=0;j<this.props.studentPasdata.length;j++){
+                for(let j=0;j<ownProps.studentPasdata.length;j++){
                     dispatch(setPascos(ownProps.studentPasdata[j].cos_cname,0));
                 }
             }
             else if(ownProps.filter === "SHOW_ACTIVE"){
                 console.log(ownProps.filter);
-                for(let j=0;j<this.props.studentPasdata.length;j++){
+                for(let j=0;j<ownProps.studentPasdata.length;j++){
                     dispatch(setPascos(ownProps.studentPasdata[j].cos_cname,1));
                 }
             }
