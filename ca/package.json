@@ -12,6 +12,7 @@
     "react-dom": "^15.6.1",
     "react-fade-in": "^0.1.4",
     "react-fileupload": "^2.4.0",
+    "react-fileupload-progress": "^0.4.0",
     "react-hover": "^1.2.0",
     "react-hover-observer": "^2.0.1",
     "react-hoverbox": "^1.0.531",

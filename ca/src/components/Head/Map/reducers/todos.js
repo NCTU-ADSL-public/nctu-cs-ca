@@ -17,9 +17,16 @@ const todo = (state = {}, action) => {
                 return state
             }
 
-            return Object.assign({}, state, {
-                completed: !state.completed
-            });
+            if(action.index===0){
+                return Object.assign({}, state, {
+                    completed: true
+                });
+            }
+            if(action.index===1){
+                return Object.assign({}, state, {
+                    completed: false
+                });
+            }
         case 'HANDLE_DATA':
             if (state.cosCame !== action.pre) {
                 return Object.assign({}, state, {

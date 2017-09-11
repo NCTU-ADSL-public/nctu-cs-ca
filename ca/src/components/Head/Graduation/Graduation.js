@@ -1,23 +1,20 @@
 import React from 'react';
 
-import ChooseButton from './ChooseButton';
-import UploadButton from './UploadButton';
-import FileUpload from 'react-fileupload';
+import FileUploadProgress  from 'react-fileupload-progress';
 
 class Graduation extends React.Component{
 
     render() {
-        /* set properties */
-        const options = {
-            baseUrl: '/students/score',
-        }
-        /* Use ReactUploadFile with options */
-        /* Custom your buttons */
         return (
-            <FileUpload options={options}>
-                <ChooseButton ref="chooseBtn"></ChooseButton>
-                <UploadButton ref="uploadBtn"></UploadButton>
-            </FileUpload>
+            <div>
+                <h3>Default style</h3>
+                <FileUploadProgress key='ex1' url='/students/score'
+                                    onProgress={(e, request, progress) => {console.log('progress', e, request, progress);}}
+                                    onLoad={ (e, request) => {console.log('load', e, request);}}
+                                    onError={ (e, request) => {console.log('error', e, request);}}
+                                    onAbort={ (e, request) => {console.log('abort', e, request);}}
+                />
+            </div>
         );
     }
 
