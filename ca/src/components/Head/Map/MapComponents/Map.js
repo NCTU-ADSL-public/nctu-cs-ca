@@ -37,6 +37,7 @@ class Map extends React.Component{
         }
     }
 
+
     render() {
         return (
             <div id="font_adjust">
@@ -46,7 +47,7 @@ class Map extends React.Component{
 
                 <div className="Map-Row">
                     <Provider store={store}>
-                        <App/>
+                        <App studentPasdata={this.props.studentPasdata}/>
                     </Provider>
                 </div>
             </div>

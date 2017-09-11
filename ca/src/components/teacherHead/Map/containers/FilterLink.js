@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setVisibilityFilter } from '../actions'
+import { setVisibilityFilter ,setPascos} from '../actions'
 import Link from '../MapComponents/Link'
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(setVisibilityFilter(ownProps.filter))
             if(ownProps.filter === "SHOW_COMPLETED" || ownProps.filter === "SHOW_ACTIVE"){
                 for(let j=0;j<this.props.studentPasdata.length;j++){
-                    store.dispatch(setPascos(ownProps.studentPasdata[j].cos_cname));
+                    dispatch(setPascos(ownProps.studentPasdata[j].cos_cname));
                 }
             }
         }

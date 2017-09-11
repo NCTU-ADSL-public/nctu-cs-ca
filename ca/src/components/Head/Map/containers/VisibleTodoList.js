@@ -7,7 +7,7 @@ const getVisibleTodos = (todos, filter, grad, sem) => {
         case 'SHOW_ALL':
             return todos.filter(t => (t.grade===grad && t.semester===sem));
         case 'SHOW_COMPLETED':
-            return todos.filter(t => (t.grade===grad && t.semester===sem && t.completed));
+            return todos.filter(t => (t.grade===grad && t.semester===sem && !t.completed));
         case 'SHOW_ACTIVE':
             return todos.filter(t => (t.grade===grad && t.semester===sem && !t.completed));
     }
