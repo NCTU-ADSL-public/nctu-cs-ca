@@ -23,7 +23,10 @@ class Todo extends React.Component {
 
     render(){
         return(
-            <div className="course" >
+            <div className="course"
+                 style={{
+                     opacity: !this.props.completed ? "100%" : "10%",
+                 }}>
                 <ReactHover
                     options={optionsCursorTrueWithMargin}>
                     <ReactHover.Trigger>
@@ -38,7 +41,6 @@ class Todo extends React.Component {
                                             letterSpacing: "1px"
                                         }}
                                         style={{
-                                            opacity: "10%",
                                             border: this.props.pre_flag ? "solid 2px #611505":"#616161",
                                             paddingRight: 0,
                                         }}
