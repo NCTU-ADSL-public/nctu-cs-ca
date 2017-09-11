@@ -12,6 +12,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
             dispatch(setVisibilityFilter(ownProps.filter))
+            if(ownProps.filter === "SHOW_COMPLETED" || ownProps.filter === "SHOW_ACTIVE"){
+                for(let j=0;j<this.props.studentPasdata.length;j++){
+                    store.dispatch(setPascos(ownProps.studentPasdata[j].cos_cname));
+                }
+            }
         }
     }
 }
