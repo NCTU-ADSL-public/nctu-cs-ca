@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import './Map.css';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import ReactHoverObserver from 'react-hover-observer';
 import ReactHover from 'react-hover';
 
 
