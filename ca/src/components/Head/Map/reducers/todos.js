@@ -4,7 +4,7 @@ const todo = (state = {}, action) => {
             return {
                 id: action.id,
                 cosCame: action.cosCame,
-                completed: false,
+                completed: 0,
                 grade: action.grade,
                 semester:action.semester,
                 suggest:action.suggest,
@@ -19,12 +19,12 @@ const todo = (state = {}, action) => {
 
             if(action.index===0){
                 return Object.assign({}, state, {
-                    completed: true
+                    completed: 1
                 });
             }
             if(action.index===1){
                 return Object.assign({}, state, {
-                    completed: false
+                    completed: 2
                 });
             }
         case 'HANDLE_DATA':

@@ -11,12 +11,21 @@ const optionsCursorTrueWithMargin = {
     shiftY: 0
 }
 
-const Todo = ({ onClick, completed , pre_flag, cosCame }) =>(
+class Todo extends React.Component {
 
-    <div className="course" >
-            <ReactHover
-                options={optionsCursorTrueWithMargin}>
-                <ReactHover.Trigger>
+    state={
+        index:this.props.completed,
+    }
+
+    componentWillMount(){
+        console.log(this.state.index)
+    }
+    render(){
+        return(
+            <div className="course" >
+                <ReactHover
+                    options={optionsCursorTrueWithMargin}>
+                    <ReactHover.Trigger>
                         <MuiThemeProvider>
                             <FlatButton className="course-btn"
                                         backgroundColor="#616161"
@@ -28,26 +37,30 @@ const Todo = ({ onClick, completed , pre_flag, cosCame }) =>(
                                             letterSpacing: "1px"
                                         }}
                                         style={{
-                                            border: pre_flag ? "solid 2px #611505":"#616161",
+                                            border: this.props.pre_flag ? "solid 2px #611505":"#616161",
                                             padding: 0,
                                         }}
-                                        label={cosCame}
-                                        onClick={onClick}>
+                                        label={this.props.cosCame}
+                                        onClick={this.props.onClick}>
 
                             </FlatButton>
                         </MuiThemeProvider>
-                </ReactHover.Trigger>
-                <ReactHover.Hover>
-                    <h1>{cosCame}</h1>
-                </ReactHover.Hover>
-            </ReactHover>
-    </div>
-)
+                    </ReactHover.Trigger>
+                    <ReactHover.Hover>
+                        <h1>{this.props.cosCame}</h1>
+                    </ReactHover.Hover>
+                </ReactHover>
+            </div>
+
+        )
+    }
+}
+
 
 Todo.PropTypes = {
     onClick: PropTypes.func.isRequired,
     pre_flag: PropTypes.bool.isRequired,
-    completed: PropTypes.bool.isRequired,
+    completed: PropTypes.number.isRequired,
     cos_cname: PropTypes.string.isRequired
 }
 
