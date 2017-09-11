@@ -11,7 +11,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
-            console.log(ownProps.studentPasdata)
             dispatch(setVisibilityFilter(ownProps.filter))
             if(ownProps.filter === "SHOW_ALL"){
                 for(let j=0;j<ownProps.studentPasdata.length;j++){

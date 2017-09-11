@@ -24,10 +24,13 @@ const todo = (state = {}, action) => {
                         completed: true
                     });
                 }
+                else{
+                    console.log("1")
+                    return Object.assign({}, state, {
+                        completed: false
+                    });
 
-                return Object.assign({}, state, {
-                    completed: false
-                });
+                }
             }
             else if(action.index===2){
                 if (state.cosCame !== action.cosCame) {
