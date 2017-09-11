@@ -32,7 +32,7 @@ class Map extends React.Component{
                 }
             }
             for(let j=0;j<this.props.studentPasdata.length;j++){
-                store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname));
+                store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname,0));
             }
         }
     }

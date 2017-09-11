@@ -20,6 +20,7 @@ class Todo extends React.Component {
     componentWillMount(){
         console.log(this.state.index)
     }
+
     render(){
         return(
             <div className="course" >
@@ -37,8 +38,9 @@ class Todo extends React.Component {
                                             letterSpacing: "1px"
                                         }}
                                         style={{
+                                            opacity: !this.props.completed ? "100%" : "10%",
                                             border: this.props.pre_flag ? "solid 2px #611505":"#616161",
-                                            padding: 0,
+                                            paddingRight: 0,
                                         }}
                                         label={this.props.cosCame}
                                         onClick={this.props.onClick}>

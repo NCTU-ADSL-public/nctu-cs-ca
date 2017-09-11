@@ -4,7 +4,7 @@ const todo = (state = {}, action) => {
             return {
                 id: action.id,
                 cosCame: action.cosCame,
-                completed: 0,
+                completed: false,
                 grade: action.grade,
                 semester:action.semester,
                 suggest:action.suggest,
@@ -13,18 +13,31 @@ const todo = (state = {}, action) => {
                 pre_flag:false,
             };
         case 'SET_PASCOS':
-            if (state.cosCame !== action.cosCame) {
-                return state
-            }
-
             if(action.index===0){
                 return Object.assign({}, state, {
-                    completed: 1
+                    completed: false
                 });
             }
-            if(action.index===1){
+            else if(action.index===1){
+                if (state.cosCame !== action.cosCame) {
+                    return Object.assign({}, state, {
+                        completed: true
+                    });
+                }
+
                 return Object.assign({}, state, {
-                    completed: 2
+                    completed: false
+                });
+            }
+            else if(action.index===2){
+                if (state.cosCame !== action.cosCame) {
+                    return Object.assign({}, state, {
+                        completed: false
+                    });
+                }
+
+                return Object.assign({}, state, {
+                    completed: true
                 });
             }
         case 'HANDLE_DATA':

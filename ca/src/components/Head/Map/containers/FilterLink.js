@@ -12,16 +12,22 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
             dispatch(setVisibilityFilter(ownProps.filter))
-            if(ownProps.filter === "SHOW_COMPLETED"){
+            if(ownProps.filter === "SHOW_ALL"){
                 console.log(ownProps.filter);
                 for(let j=0;j<ownProps.studentPasdata.length;j++){
                     dispatch(setPascos(ownProps.studentPasdata[j].cos_cname,0));
                 }
             }
-            else if(ownProps.filter === "SHOW_ACTIVE"){
+            else if(ownProps.filter === "SHOW_COMPLETED"){
                 console.log(ownProps.filter);
                 for(let j=0;j<ownProps.studentPasdata.length;j++){
                     dispatch(setPascos(ownProps.studentPasdata[j].cos_cname,1));
+                }
+            }
+            else if(ownProps.filter === "SHOW_ACTIVE"){
+                console.log(ownProps.filter);
+                for(let j=0;j<ownProps.studentPasdata.length;j++){
+                    dispatch(setPascos(ownProps.studentPasdata[j].cos_cname,2));
                 }
             }
         }
