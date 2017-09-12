@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './Login/Login';
 import Head from './Head/Head';
-import teacherHead from './teacherHead/teacherHead';
+import Graduation from './Head/Graduation/Graduation';
 
 
 // The Main component renders one of the three provided
@@ -18,7 +18,7 @@ const Main = () => (
     <Switch>
       <Route exact path='/' component={Login}/>
       <Route exact path='/Head' component={Head}/>
-      <Route exact path='/teacherHead' component={teacherHead}/>
+      <Route exact path='/students/score' component={Graduation}/>
     </Switch>
   </main>
 );

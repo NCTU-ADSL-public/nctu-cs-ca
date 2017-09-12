@@ -5,6 +5,7 @@ import axios from 'axios';
 class FileUpload extends React.Component {
 
 
+// <input type="file" onChange={()=>this.changeFile}/>
 
     changeFile(e){
         const data = new FormData();
@@ -18,7 +19,10 @@ class FileUpload extends React.Component {
     render(){
         return (
             <div>
-                <input type="file" onChange={()=>this.changeFile}/>
+                <form id="uploadForm" enctype="multipart/form-data" method="post">
+                    <input type="file" name="userFile" />
+                    <input type="submit" value="Upload File" name="submit"/>
+                </form>
             </div>
         );
     }
