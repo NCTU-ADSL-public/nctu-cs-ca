@@ -1,28 +1,32 @@
 import React from 'react'
 import axios from 'axios';
+import FormData from 'form-data'
 
 
 class FileUpload extends React.Component {
 
 
-// <input type="file" onChange={()=>this.changeFile}/>
 
     changeFile(e){
-        const data = new FormData();
+        let data = new FormData();
         data.append('file', e.target.files[0]);
-        axios({
-            method: 'post',
-            url: '/students/score',
-            data: data
-        });
+        console.log(e.target.files[0])
+
+        axios.post('/students/score', e.target.files[0] , {
+            headers: {
+                    'Content-Type': 'multipart/form-data; boundary=${data._boundary}',
+            }
+        }).then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     render(){
         return (
             <div>
-                <form id="uploadForm" enctype="multipart/form-data" method="post">
-                    <input type="file" name="userFile" />
-                    <input type="submit" value="Upload File" name="submit"/>
-                </form>
+                <input type="file" onChange={this.changeFile}/>
             </div>
         );
     }
