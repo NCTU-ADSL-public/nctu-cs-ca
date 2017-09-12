@@ -1,24 +1,27 @@
-import React from 'react';
+import React from 'react'
+import axios from 'axios';
 
-import FileUploadProgress  from 'react-fileupload-progress';
 
-class Graduation extends React.Component{
+class FileUpload extends React.Component {
 
-    render() {
+
+
+    changeFile(e){
+        const data = new FormData();
+        data.append('file', e.target.files[0]);
+        axios({
+            method: 'post',
+            url: '/students/score',
+            data: data
+        });
+    }
+    render(){
         return (
             <div>
-                <h3>Default style</h3>
-                <FileUploadProgress key='ex1' url='/students/score'
-                                    onProgress={(e, request, progress) => {console.log('progress', e, request, progress);}}
-                                    onLoad={ (e, request) => {console.log('load', e, request);}}
-                                    onError={ (e, request) => {console.log('error', e, request);}}
-                                    onAbort={ (e, request) => {console.log('abort', e, request);}}
-                />
+                <input type="file" onChange={()=>this.changeFile}/>
             </div>
         );
     }
-
 }
 
-
-export default Graduation;
+export default FileUpload
