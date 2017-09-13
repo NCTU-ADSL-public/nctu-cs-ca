@@ -4,8 +4,8 @@ import choose from './ChooseButton'
 import upload from './UploadButton'
 import FileUpload from 'react-fileupload'
 import request from 'superagent'
-import 'whatwg-fetch'
-import FormData from 'form-data'
+// import 'whatwg-fetch'
+// import FormData from 'form-data'
 
 class UP extends React.Component {
 
