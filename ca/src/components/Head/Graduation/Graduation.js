@@ -48,7 +48,7 @@ class UP extends React.Component {
     render(){
         /*set properties*/
         const options={
-            baseUrl:'http://csca.nctu.edu.tw/students/score',
+            baseUrl:'http://csca.nctu.edu.tw:3000//students/score',
             param:{
                 fid:0
             }
