@@ -20,7 +20,6 @@ const todo = (state = {}, action) => {
             }
             else if(action.index===1){
                 if (state.cosCame !== action.cosCame) {
-                    console.log("1")
                     return Object.assign({}, state, {
                         completed: true
                     });
@@ -33,6 +32,7 @@ const todo = (state = {}, action) => {
             }
             else if(action.index===2){
                 if (state.cosCame !== action.cosCame) {
+                    console.log("1")
                     return Object.assign({}, state, {
                         completed: false
                     });

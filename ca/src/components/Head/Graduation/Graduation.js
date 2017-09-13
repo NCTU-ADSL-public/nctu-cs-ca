@@ -1,9 +1,11 @@
 import React from 'react'
 import axios from 'axios';
-import FormData from 'form-data'
+import choose from './ChooseButton'
+import upload from './UploadButton'
+import FileUpload from 'react-fileupload'
+import request from 'superagent'
 
-
-class FileUpload extends React.Component {
+class UP extends React.Component {
 
 
 
@@ -11,17 +13,24 @@ class FileUpload extends React.Component {
         let data = new FormData();
         data.append('file', e.target.files[0]);
         console.log(e.target.files[0])
-
-        axios.post('/students/score', e.target.files[0] , {
-            headers: {
-                    'Content-Type': 'multipart/form-data; boundary=${data._boundary}',
-            }
-        }).then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
+        request
+            .post('http://localhost/students/score')
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({ username: "username", password: "password" })
+            .end(function(err, res){
+                // console.log(res.text);
             });
+        // ajax().post('/api/users', { slug: 'john', age: 37 })
+        // return axios.put('/students/score', '5666' , {
+        //     headers: {
+        //             'Content-Type': 'file.type',
+        //     }
+        // }).then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
     }
     render(){
         return (
@@ -32,4 +41,4 @@ class FileUpload extends React.Component {
     }
 }
 
-export default FileUpload
+export default UP
