@@ -1,5 +1,5 @@
 var Client = require('mariasql');
-//var lineReader = require('line-reader');
+var lineReader = require('line-reader');
 
 var c = new Client({
     host: 'localhost',
@@ -13,9 +13,13 @@ var sql_findStudent = c.prepare('\
     select sname,program,grade from student \
     where student_id=:id');
 
-var sql_findProfessor=c.prepare('\
+var sql_findProfessor = c.prepare('\
     select teacher_id,tname from teacher\
     where teacher_id=:id');
+
+var sql_findAssistant = c.prepare('\
+    select assistant_id,aname from assistant\
+    where assistant_id=:id');
 
 var sql_addEmail = c.prepare('\
     update student set email=:email \
@@ -59,29 +63,34 @@ var sql_PassCos = c.prepare('\
     where sc.student_id=:id;');
 
 var sql_uploadGrade = c.prepare('\
-	insert into cos_result \
-	values(:unique_id,:id,:score) \
-	on duplicate key update \
-	unique_id=:unique_id,student_id=:id,score=:score;');
+    insert into cos_result \
+    values(:unique_id,:id,:score) \
+    on duplicate key update \
+    unique_id=:unique_id,student_id=:id,score=:score;');
 
 module.exports = {
 
     findPerson: function(id, callback) {
-        if(id.match(/^[0-9].*/g))
-        {
+        if (id.match(/^[0-9].*/g)) {
             c.query(sql_findStudent({ id: id }), function(err, result) {
                 if (err)
                     throw err;
-                result[0]['status']='s';
+                result[0]['status'] = 's';
                 callback(null, JSON.stringify(result));
             });
-        }
-        else if(id.match(/^T.*/g))
+        } else if (id.match(/^T.*/g)) {
+            c.query(sql_findProfessor({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                result[0]['status'] = 'p';
+                callback(null, JSON.stringify(result));
+            });
+        } else
         {
-            c.query(sql_findProfessor({id:id}),function(err,result){
+            c.query(sql_findAssistant({id:id}),function(err,result){
                 if(err)
                     throw err;
-                result[0]['status']='p';
+                result[0]['status']='a';
                 callback(null,JSON.stringify(result));
             });
         }
@@ -122,7 +131,7 @@ module.exports = {
     uploadGrade: function(pt) {
         var now = 0,
             num = "";
-        lineReader.eachLine(pt, function(line,last) {
+        lineReader.eachLine(pt, function(line, last) {
             if (now == 0) {
                 var a = line.match(/[0-9]+/g);
                 num = num + a[0] + "-" + a[1] + "-";
@@ -137,10 +146,9 @@ module.exports = {
                         throw err;
                 });
             }
-            if(last)
-            {
-            	c.end();
-            	return false;
+            if (last) {
+                c.end();
+                return false;
             }
             now++;
         });
