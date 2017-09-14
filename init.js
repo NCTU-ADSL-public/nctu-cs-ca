@@ -13,10 +13,12 @@ module.exports.init = function(){
     activeDuration : 5 * 60 * 1000,
   }));
 
+  app.use(require('./middleware/setProfile').setProfile);
   app.use('/', express.static('./build'));
-  app.use('/Head', express.static('./build'));
+  app.use('/Head', require('./utils').verifyUser,  express.static('./build'));
   app.use('/Login', express.static('./build'));
-  app.use(require('./routes/auth/nctu/nctu.js'));
+  app.use(require('./routes/auth/nctu/nctu'));
+  app.use(require('./routes/students/profile'));
   
   return app;
 };

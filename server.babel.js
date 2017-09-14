@@ -1,3 +1,3 @@
 var initialize = require('./init');
 
-initialize.init().listen(3000);
+initialize.init().listen(1234);

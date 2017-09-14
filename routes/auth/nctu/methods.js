@@ -1,13 +1,13 @@
 const request = require('request');
 var methods = {};
 
-var url = "https://id.nctu.edu.tw/o/authorize/?client_id=h0gpKBJOxUr76R9nTYBGk9IFa1jkXFxi8EJsD6GV&response_type=code&scope=profile%20name";
+var url = "https://id.nctu.edu.tw/o/authorize/?client_id=whzg3iNMpyLCy0jNFqq6iTSyEayJkvhYCRYbC9MY&response_type=code&scope=profile%20name";
 
 var oAuthNctu = {
     grant_type : "authorization_code",
-    client_id : "h0gpKBJOxUr76R9nTYBGk9IFa1jkXFxi8EJsD6GV",
-    client_secret : "jAWuok0zGrpNsDEjGTch9iIObqJEuUDCcdcs35QY9D2d1EIRbWY4A52F4kC3pQoGh6MND2IaWM5bIq4ty74NNWmrXuY7K2Qh2gUvD6D2gDgDmWuELB5QS75URZwJ9Wx0",
-    redirect_uri : "http://csca.nctu.edu.tw:3000/auth/Nctu/callback"
+    client_id : "whzg3iNMpyLCy0jNFqq6iTSyEayJkvhYCRYbC9MY",
+    client_secret : "c1qTwPMeCv8cJvT99sJ7wVzCdvqySdbBPjehFqHcpdA5FweRiffx9Z4uDR1VUB3YRayWlRTecfgBoPKl3sZw0abJ1UpEklbmuurG1TymWizumooHJPNlSu1OYSvFbnpq",
+    redirect_uri : "http://csca.nctu.edu.tw:1234/auth/Nctu/callback"
 }
 
 

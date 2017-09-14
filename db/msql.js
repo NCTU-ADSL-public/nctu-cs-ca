@@ -1,4 +1,5 @@
 var Client = require('mariasql');
+var lineReader = require('line-reader');
 
 var c = new Client({
     host: 'localhost',
@@ -12,11 +13,19 @@ var sql_findStudent = c.prepare('\
     select sname,program,grade from student \
     where student_id=:id');
 
+var sql_findProfessor = c.prepare('\
+    select teacher_id,tname from teacher\
+    where teacher_id=:id');
+
+var sql_findAssistant = c.prepare('\
+    select assistant_id,aname from assistant\
+    where assistant_id=:id');
+
 var sql_addEmail = c.prepare('\
     update student set email=:email \
     where student_id=:id');
 
-var sql_showCowMap=c.prepare('\
+var sql_showCowMap = c.prepare('\
     select a.cos_cname, a.grade, a.semester, b.pre_cos_cname as suggest, c.pre_cos_cname as pre \
     from (\
         select c.cos_cname,c.grade,c.semester \
@@ -45,21 +54,46 @@ var sql_showCosMapPass = c.prepare('\
     where sc.student_id=:id and sc.cos_code=c.cos_code and \
     (sc.cos_code like \'DCP%\' or sc.cos_code like \'IOE%\' or cos_cname like \'微積分甲%\' or cos_cname like \'物理%\' or cos_cname like \'化學%\' )');
 
-var sql_PassCos=c.prepare('\
+
+var sql_PassCos = c.prepare('\
     select sc.cos_code,cos_cname \
     from student_cos_relation as sc \
     left outer join cos_name as c \
     on sc.cos_code=c.cos_code \
     where sc.student_id=:id;');
 
+var sql_uploadGrade = c.prepare('\
+    insert into cos_result \
+    values(:unique_id,:id,:score) \
+    on duplicate key update \
+    unique_id=:unique_id,student_id=:id,score=:score;');
+
 module.exports = {
 
-    findStudent: function(id, callback) {
-        c.query(sql_findStudent({ id: id }), function(err, result) {
-            if (err)
-                throw err;
-            callback(null, JSON.stringify(result));
-        });
+    findPerson: function(id, callback) {
+        if (id.match(/^[0-9].*/g)) {
+            c.query(sql_findStudent({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                result[0]['status'] = 's';
+                callback(null, JSON.stringify(result));
+            });
+        } else if (id.match(/^T.*/g)) {
+            c.query(sql_findProfessor({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                result[0]['status'] = 'p';
+                callback(null, JSON.stringify(result));
+            });
+        } else
+        {
+            c.query(sql_findAssistant({id:id}),function(err,result){
+                if(err)
+                    throw err;
+                result[0]['status']='a';
+                callback(null,JSON.stringify(result));
+            });
+        }
         c.end();
     },
     addEmail: function(id, email) {
@@ -86,12 +120,37 @@ module.exports = {
         });
         c.end();
     },
-    PassCos: function(id,callback){
-        c.query(sql_PassCos({id:id}),function(err,result){
-            if(err)
+    PassCos: function(id, callback) {
+        c.query(sql_PassCos({ id: id }), function(err, result) {
+            if (err)
                 throw err;
-            callback(null,JSON.stringify(result));
+            callback(null, JSON.stringify(result));
         });
         c.end();
+    },
+    uploadGrade: function(pt) {
+        var now = 0,
+            num = "";
+        lineReader.eachLine(pt, function(line, last) {
+            if (now == 0) {
+                var a = line.match(/[0-9]+/g);
+                num = num + a[0] + "-" + a[1] + "-";
+            } else if (now == 1) {
+                var a = line.match(/[0-9]+/g);
+                num = num + a[0];
+            } else if (/[0-9+]/.test(line.split(',')[2])) {
+                line = line.split(',');
+                console.log(line[2], line[4]);
+                c.query(sql_uploadGrade({ unique_id: num, id: line[2], score: line[4] }), function(err) {
+                    if (err)
+                        throw err;
+                });
+            }
+            if (last) {
+                c.end();
+                return false;
+            }
+            now++;
+        });
     }
 };
