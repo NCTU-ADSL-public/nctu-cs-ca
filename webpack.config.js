@@ -1,14 +1,9 @@
+var path = require('path');
+
 module.exports = {
   entry: [
     './src/index.js',
-    './src/components/App.js',
-    './src/components/Main.js',
-    './src/components/Head/BottomNavigationExampleSimple.js',
-    './src/components/Head/Head.js',
-    './src/components/Login/Login.js',
-    './src/components/Login/LoginButtom.js',
-    './src/components/Login/ToggleButtom.js'
-    ],
+   ],
   output: {
       path: './build',
       filename: 'bundle.js'       
@@ -22,8 +17,7 @@ module.exports = {
                   },
                   {
                     test: /\.js$/,
-                    exclude: /node_modules/,
-                    loader: 'babel-loader'
+                    loader: 'babel',
                   },
                   {
                     test: /\.(png|jpg|gif)$/,                

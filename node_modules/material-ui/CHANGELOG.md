@@ -1,5 +1,73 @@
 ## HEAD
 
+## 0.19.1
+###### _Sep 2, 2017_
+
+Big thanks to the 7 contributors who made this release possible.
+
+##### Component Fixes / Enhancements
+
+- [Popover] Fix PopOver animation origin when targetOrigin.horizontal=middle (#7930) @tsholmes
+- [Slider] Resolve slider value to respect max and min (#7863) @janmarsicek
+- [IconMenu] Stop preventing event default on open (#7933) @DoloMike
+- [AutoComplete] Fix bug where controlled component behaves uncontrolled (#7967) @djblue
+- [Tabs] Fix InkBar location for controlled component (#8010) @jgreubel
+
+##### Docs
+
+- [Autocomplete] Fix onNewRequest documentation (#7835) @baerrach
+
+##### Core
+
+N.A
+
+## 0.19.0
+###### _Aug 15, 2017_
+
+Big thanks to the 11 contributors who made this release possible.
+As always, we are focusing on bug fixes but this time, we introduce an exceptional breaking change.
+
+##### Breaking Changes
+
+- [core] Removed module's reliance on react-tap-event-plugin (#7624) @lostpebble
+
+The `react-tap-event-plugin` dependency was removed.
+This change is paving the way toward supporting the upcoming react@16 release a.k.a Fiber.
+The `react-tap-event-plugin` dependency was first introduced 3 years ago in order to remove
+the click delay on mobile devices.
+Mobiles devices' browsers have improved since then, it's no longer required.
+It's time to remove that dependency as we have done it a year ago on the `v1-beta` branch.
+You need to replace the `onTouchTap` property callbacks with `onClick`.
+
+```diff
+-<div onTouchTap={this.handleEvent} />
++<div onClick={this.handleEvent} />
+```
+
+Thanks @lostpebble for your hard work!
+
+##### Component Fixes / Enhancements
+
+- [EnhancedSwitch] Fix checked prop (#7499) @LeoIannacone
+- [Table] Row click on empty cell to not die in IE (#7520) @Brianzchen
+- [Popover] Fix unknown "scrollableContainer" prop warning (#7560) @husterk
+- [Popover] Fixed bug where Popover renders relative to screen (#7663) @lostpebble
+- [Menu] Broken touch scroll on nested menu items (#7557 @adam187
+- [DatePicker] Fix bug where 'isSelectedDateDisabled' was returning undefined (#7735) @lostpebble
+
+##### Docs
+
+- [docs] Update ROADMAP (#7543) @kgregory
+- [docs] Replace deprecated babel-plugin-material-ui with babel-plugin-direct-import (#7706) @umidbekkarimov
+- [docs] Fix comment typo (#7523) @ruffle1986
+- [examples] Remove browserify @oliviertassinari (0cb504cf830abd805c1a7699f828bf5b0a6c23be)
+- [docs] added showcase of 'HoopHubs.com' (#7677) @ngxiaoyi
+- [docs] Create CODE_OF_CONDUCT.md (#7704) @oliviertassinari
+
+##### Core
+
+- [core] Add react^16.0.0-beta.5 in peer dependencies @oliviertassinari (8032d51c3faf4ddc5bcf814c9458fbc227a083e2)
+
 ## 0.18.7
 ###### _Jul 23, 2017_
 

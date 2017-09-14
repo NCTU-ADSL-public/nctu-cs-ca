@@ -218,6 +218,11 @@ var EnhancedSwitch = function (_Component) {
   }
 
   (0, _createClass3.default)(EnhancedSwitch, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.componentWillReceiveProps(this.props);
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var inputNode = this.refs.checkbox;
@@ -285,6 +290,7 @@ var EnhancedSwitch = function (_Component) {
       var _props = this.props,
           name = _props.name,
           value = _props.value,
+          checked = _props.checked,
           iconStyle = _props.iconStyle,
           inputStyle = _props.inputStyle,
           inputType = _props.inputType,
@@ -311,7 +317,7 @@ var EnhancedSwitch = function (_Component) {
           switchElement = _props.switchElement,
           thumbStyle = _props.thumbStyle,
           trackStyle = _props.trackStyle,
-          other = (0, _objectWithoutProperties3.default)(_props, ['name', 'value', 'iconStyle', 'inputStyle', 'inputType', 'label', 'labelStyle', 'labelPosition', 'onSwitch', 'onBlur', 'onFocus', 'onMouseUp', 'onMouseDown', 'onMouseLeave', 'onTouchStart', 'onTouchEnd', 'onParentShouldUpdate', 'disabled', 'disableTouchRipple', 'disableFocusRipple', 'className', 'rippleColor', 'rippleStyle', 'style', 'switched', 'switchElement', 'thumbStyle', 'trackStyle']);
+          other = (0, _objectWithoutProperties3.default)(_props, ['name', 'value', 'checked', 'iconStyle', 'inputStyle', 'inputType', 'label', 'labelStyle', 'labelPosition', 'onSwitch', 'onBlur', 'onFocus', 'onMouseUp', 'onMouseDown', 'onMouseLeave', 'onTouchStart', 'onTouchEnd', 'onParentShouldUpdate', 'disabled', 'disableTouchRipple', 'disableFocusRipple', 'className', 'rippleColor', 'rippleStyle', 'style', 'switched', 'switchElement', 'thumbStyle', 'trackStyle']);
       var prepareStyles = this.context.muiTheme.prepareStyles;
 
       var styles = getStyles(this.props, this.context);
@@ -357,6 +363,7 @@ var EnhancedSwitch = function (_Component) {
         style: prepareStyles((0, _simpleAssign2.default)(styles.input, inputStyle)),
         name: name,
         value: value,
+        checked: this.state.switched,
         disabled: disabled,
         onBlur: this.handleBlur,
         onFocus: this.handleFocus,
