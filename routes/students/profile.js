@@ -1,35 +1,33 @@
+var bodyParser = require('body-parser');
 var express = require('express');
 var router = express.Router();
 var query = require('../../db/msql');
-
-console.log(query);
+var utils = require('../../utils');
 
 router.get('/students/info', function(req, res){
 
-    console.log('Get request to /students/info');
-    var tempObj = JSON.parse(req.session.profile);
-    var studentId = tempObj.username;
+    var studentId = utils.getStudentId(JSON.parse(req.session.profile));
+
     if(!studentId){
           console.log("No Student Id");
           return
     }
-    var result;
-    var studentId = "0312512";
-    query.findPerson(studentId, function(err,student){
+    query.findPerson(studentId, function(err,result){
         if(err){
             console.log("Can't find student");
             throw err;
             return;
         }
-        if(!student){
+        if(!result){
             return;
         }
-        console.log("find student");
-        student = JSON.parse(student);
-        result = JSON.parse(req.session.profile);
-        //console.log("student");
-        //console.log(student);
-        result.studentInfo = student;
+	// check if not student ?
+	// Doing this just to fit previous style
+	// Personally I think we just should just do res.send(result) 
+	// Idk how frontend parsed the data though
+	var s = JSON.parse(req.session.profile);
+        s.studentInfo = JSON.parse(result);
+	res.send(s);
      });
 
     

@@ -69,20 +69,21 @@ var sql_uploadGrade = c.prepare('\
     unique_id=:unique_id,student_id=:id,score=:score;');
 
 module.exports = {
-
     findPerson: function(id, callback) {
         if (id.match(/^[0-9].*/g)) {
             c.query(sql_findStudent({ id: id }), function(err, result) {
                 if (err)
                     throw err;
-                result[0]['status'] = 's';
+                if(typeof result === "undefined")
+                    result[0]['status'] = 's';
                 callback(null, JSON.stringify(result));
             });
         } else if (id.match(/^T.*/g)) {
             c.query(sql_findProfessor({ id: id }), function(err, result) {
                 if (err)
                     throw err;
-                result[0]['status'] = 'p';
+                if(typeof result === "undefined")
+                    result[0]['status'] = 'p';
                 callback(null, JSON.stringify(result));
             });
         } else
@@ -90,7 +91,8 @@ module.exports = {
             c.query(sql_findAssistant({id:id}),function(err,result){
                 if(err)
                     throw err;
-                result[0]['status']='a';
+                if(typeof result === "undefined")
+                    result[0]['status']='a';
                 callback(null,JSON.stringify(result));
             });
         }

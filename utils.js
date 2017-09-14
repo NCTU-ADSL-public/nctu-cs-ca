@@ -1,9 +1,6 @@
 module.exports.getStudentId = function(profileObj){
 
-  console.log("Utils:" + profileObj);
-
   return profileObj.username;
-
   next();
 }
 
