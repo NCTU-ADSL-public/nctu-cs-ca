@@ -3,10 +3,14 @@ import axios from 'axios';
 import choose from './ChooseButton'
 import upload from './UploadButton'
 import FileUpload from 'react-fileupload'
-import request from 'superagent'
+import DropzoneComponent from 'react-dropzone-component';
 // import 'whatwg-fetch'
 // import FormData from 'form-data'
-
+const componentConfig = {
+    iconFiletypes: ['.txt'],
+    showFiletypeIcon: true,
+    postUrl: 'http://localhost/uploadHandler'
+};
 class UP extends React.Component {
 
 
@@ -48,7 +52,7 @@ class UP extends React.Component {
     render(){
         /*set properties*/
         const options={
-            baseUrl:'/students/score',
+            baseUrl:'http://localhost/students/score',
             param:{
                 fid:0
             }
@@ -56,10 +60,12 @@ class UP extends React.Component {
         /*Use FileUpload with options*/
         /*Set two dom with ref*/
         return (
+            <div>
+            <DropzoneComponent config={componentConfig}/>
             <FileUpload options={options}>
                 <button ref="chooseBtn">choose</button>
                 <button ref="uploadBtn">upload</button>
-            </FileUpload>
+            </FileUpload></div>
         )
     }
 }

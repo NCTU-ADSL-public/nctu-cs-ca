@@ -4,7 +4,7 @@ import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FadeIn from 'react-fade-in';
 import axios from 'axios';
-import {ToastContainer, ToastStore} from 'react-toasts';
+// import {ToastContainer, ToastStore} from 'react-toasts';
 
 class Login extends Component {
 
@@ -37,17 +37,17 @@ class Login extends Component {
     };
 
     componentDidMount() {
-            if (this.state.LoginMessage_state === "1")
-                ToastStore.error("Oops you are not cs student !(status 1)")
-            else if(this.state.LoginMessage_state === "2")
-                ToastStore.error("Please login first(status 2)")
+            // if (this.state.LoginMessage_state === "1")
+            //     ToastStore.error("Oops you are not cs student !(status 1)")
+            // else if(this.state.LoginMessage_state === "2")
+            //     ToastStore.error("Please login first(status 2)")
     }
-
+//
+// <ToastContainer store={ToastStore}/>
     render() {
         return (
           <div className="Login"  >
 
-              <ToastContainer store={ToastStore}/>
                 <div id="AjustToggleButtom"></div>
                 <div className="Login-header"   ref="tip">
 
