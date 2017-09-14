@@ -1,2 +1,7 @@
-# nctu-cs-ca
-nctu-ca-ca
+# Nctu-CS-CA
+
+
+| Path | Description |
+| --------- | ------ |
+| auth/Nctu | Redirect to oAuth Nctu|
+| auth/Nctu/callback | Callback Page from oAuth Nctu
