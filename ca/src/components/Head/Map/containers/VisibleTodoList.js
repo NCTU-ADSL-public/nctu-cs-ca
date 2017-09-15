@@ -13,13 +13,13 @@ const getVisibleTodos = (todos, filter, grad, sem) => {
         default:
             return false
     }
-}
-//
+};
+
 const mapStateToProps = (state, ownProps) => {
     return {
         todos: getVisibleTodos(state.todos, state.visibilityFilter, ownProps.grad, ownProps.sem)
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(handleCoursedata(suggest))
         }
     }
-}
+};
 
 const VisibleTodoList = connect(
     mapStateToProps,

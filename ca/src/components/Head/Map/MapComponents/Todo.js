@@ -10,7 +10,7 @@ const optionsCursorTrueWithMargin = {
     followCursor: true,
     shiftX: 20,
     shiftY: 0
-}
+};
 
 class Todo extends React.Component {
 
@@ -59,6 +59,6 @@ Todo.PropTypes = {
     pre_flag: PropTypes.bool.isRequired,
     completed: PropTypes.number.isRequired,
     cos_cname: PropTypes.string.isRequired
-}
+};
 
 export default Todo
