@@ -4,7 +4,7 @@ var router = express.Router();
 var query = require('../../db/msql');
 var utils = require('../../utils');
 
-router.get('/students/info', function(req, res){
+router.get('/students/profile', function(req, res){
 
     var studentId = utils.getStudentId(JSON.parse(req.session.profile));
 
@@ -21,13 +21,7 @@ router.get('/students/info', function(req, res){
         if(!result){
             return;
         }
-	// check if not student ?
-	// Doing this just to fit previous style
-	// Personally I think we just should just do res.send(result) 
-	// Idk how frontend parsed the data though
-	var s = JSON.parse(req.session.profile);
-        s.studentInfo = JSON.parse(result);
-	res.send(s);
+	res.send(result);
      });
 
     

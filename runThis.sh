@@ -1,3 +1,4 @@
+export BABEL_DISABLE_CACHE=1
 sudo git clone -b danny https://github.com/NCTU-ADSL-public/nctu-cs-ca.git
 sudo rm -rf src
 sudo rm -rf public

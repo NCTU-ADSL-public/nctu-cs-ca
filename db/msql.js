@@ -74,7 +74,7 @@ module.exports = {
             c.query(sql_findStudent({ id: id }), function(err, result) {
                 if (err)
                     throw err;
-                if(typeof result === "undefined")
+                if (result.info.numRows != 0)
                     result[0]['status'] = 's';
                 callback(null, JSON.stringify(result));
             });
@@ -82,18 +82,17 @@ module.exports = {
             c.query(sql_findProfessor({ id: id }), function(err, result) {
                 if (err)
                     throw err;
-                if(typeof result === "undefined")
+                if (result.info.numRows != 0)
                     result[0]['status'] = 'p';
                 callback(null, JSON.stringify(result));
             });
-        } else
-        {
-            c.query(sql_findAssistant({id:id}),function(err,result){
-                if(err)
+        } else {
+            c.query(sql_findAssistant({ id: id }), function(err, result) {
+                if (err)
                     throw err;
-                if(typeof result === "undefined")
-                    result[0]['status']='a';
-                callback(null,JSON.stringify(result));
+                if (result.info.numRows != 0)
+                    result[0]['status'] = 'a';
+                callback(null, JSON.stringify(result));
             });
         }
         c.end();

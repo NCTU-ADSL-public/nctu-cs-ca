@@ -16,7 +16,6 @@ module.exports.setProfile = function(req, res, next){
               next();
           }
           else{
-              console.log("Not cs student.");
               next();
           }
       });
