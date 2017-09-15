@@ -3,11 +3,10 @@ import axios from 'axios';
 
 class Credit extends React.Component{
     componentWillMount(){
-            var _this = this;
             return axios.get('/students/score').then(studentData => {
-                studentData.status // HTTP response code (e.g., 200, 401)
-                studentData.data // object parsed from HTTP response body
-                studentData.headers // HTTP presonse headers
+                //studentData.status  HTTP response code (e.g., 200, 401)
+                //studentData.data  object parsed from HTTP response body
+                //studentData.headers  HTTP presonse headers
 
 
                 console.log(studentData.data)

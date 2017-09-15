@@ -1,7 +1,7 @@
 import React from 'react'
-import axios from 'axios';
-import choose from './ChooseButton'
-import upload from './UploadButton'
+// import axios from 'axios';
+// import choose from './ChooseButton'
+// import upload from './UploadButton'
 import FileUpload from 'react-fileupload'
 import DropzoneComponent from 'react-dropzone-component';
 // import 'whatwg-fetch'

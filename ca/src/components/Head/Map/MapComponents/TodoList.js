@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import Todo from './Todo'
 import './Map.css';
+import PropTypes from 'prop-types';
 
 const TodoList = ({ todos, onTodoClick }) => (
     <div>
