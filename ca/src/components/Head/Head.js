@@ -57,7 +57,7 @@ class Head extends Component {
             // studentData.data object parsed from HTTP response body
             // studentData.headers  HTTP presonse headers
 
-
+			console.log(studentData.data.studentCos)
             StudentCosPas = Object.keys(studentData.data.studentPass).map(function(key) {
                 let user = studentData.data.studentPass[key];
                 user.id = key;
