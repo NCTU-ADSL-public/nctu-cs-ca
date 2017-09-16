@@ -8,5 +8,5 @@
 | students/profile | Return student information |
 | students/courseMap | Return course map |
 | students/coursePass | Return course passed |
-| person/state| Return the status of the person(0:normal 1: not CS student 2: not login) |
+| user/state| Return the status of the person(0:CS student 1: not CS student 2: not login) |
 
