@@ -53,6 +53,7 @@ class Head extends Component {
     getdata(){
     	var _this = this;
         axios.get('/students/profile').then(studentData => {
+            console.log(studentData.data.sname);
             _this.setState({
                 studentIdcard: {
                     name: studentData.data.sname,
