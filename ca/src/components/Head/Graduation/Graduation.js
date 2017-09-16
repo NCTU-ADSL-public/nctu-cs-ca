@@ -52,7 +52,7 @@ class UP extends React.Component {
     render(){
         /*set properties*/
         const options={
-            baseUrl:'http://csca.nctu.edu.tw/students/score',
+            baseUrl:'/students/score',
             param:{
                 fid:0
             }
