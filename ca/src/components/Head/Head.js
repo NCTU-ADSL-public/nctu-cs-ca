@@ -56,9 +56,9 @@ class Head extends Component {
             console.log(studentData.data);
             _this.setState({
                 studentIdcard: {
-                    name: studentData.data.sname,
-                    prog: studentData.data.program ,
-                    grad: "大" + studentData.data.grade,
+                    name: studentData.data[0].sname,
+                    prog: studentData.data[0].program ,
+                    grad: "大" + studentData[0].data.grade,
                 }
             })
         }).catch(err => {
