@@ -61,21 +61,21 @@ class UP extends React.Component {
         /*Set two dom with ref*/
         return (
             <div>
-            <form action="/students/score" method="post" enctype="multipart/form-data">
+            <form action="/students/score" method="post" encType="multipart/form-data">
                 <h1>Register Account.</h1>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                <div className="form-group">
+                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                        <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
+                <div className="form-group">
+                    <label htmlFor="exampleInputPassword1">Password</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputFile">File input</label>
                             <input type="file" name="pdf"/>
                         </div>
                 </div>
-                <button type="submit" id="duck" class="btn btn-primary">Submit</button>
+                <button type="submit" id="duck" className="btn btn-primary">Submit</button>
             </form>
             </div>
         )
