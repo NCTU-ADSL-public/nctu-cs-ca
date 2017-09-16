@@ -1,23 +1,24 @@
+var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
   entry: [
-    './src/index.js',
-   ],
+    path.join(__dirname, 'src/index.js') 
+  ],
   output: {
-      path: './build',
-      filename: 'bundle.js'       
+        path: path.resolve(__dirname, 'build'),
+        filename: 'bundle.js'       
     },
   module: {
       loaders: [
                   {
                     test: /\.css$/,
                     exclude: /node_modules/,
-                    loader: ["style", "css", "sass"]
+                    loader: ['style-loader', 'css-loader', 'sass-loader']
                   },
                   {
                     test: /\.js$/,
-                    loader: 'babel',
+                    loader: 'babel-loader',
                   },
                   {
                     test: /\.(png|jpg|gif)$/,                
@@ -26,6 +27,6 @@ module.exports = {
        ]
     },
   resolve: {
-      extensions: ['', '.js', '.json'] 
+      extensions: ['*', '.js', '.json'] 
     }
 };

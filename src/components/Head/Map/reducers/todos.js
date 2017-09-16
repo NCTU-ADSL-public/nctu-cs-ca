@@ -58,7 +58,7 @@ const todo = (state = {}, action) => {
         default:
             return state
     }
-}
+};
 
 const todos = (state = [], action) => {
     switch (action.type) {
@@ -79,6 +79,6 @@ const todos = (state = [], action) => {
         default:
             return state
     }
-}
+};
 
 export default todos

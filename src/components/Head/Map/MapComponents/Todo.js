@@ -1,15 +1,16 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import './Map.css';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactHover from 'react-hover';
+import PropTypes from 'prop-types';
 
 
 const optionsCursorTrueWithMargin = {
     followCursor: true,
     shiftX: 20,
     shiftY: 0
-}
+};
 
 class Todo extends React.Component {
 
@@ -58,6 +59,6 @@ Todo.PropTypes = {
     pre_flag: PropTypes.bool.isRequired,
     completed: PropTypes.number.isRequired,
     cos_cname: PropTypes.string.isRequired
-}
+};
 
 export default Todo

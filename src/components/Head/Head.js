@@ -52,31 +52,39 @@ class Head extends Component {
 
     getdata(){
     	var _this = this;
-        return axios.get('/students/info').then(studentData => {
-            studentData.status // HTTP response code (e.g., 200, 401)
-            studentData.data // object parsed from HTTP response body
-            studentData.headers // HTTP presonse headers
-
-
-            StudentCosPas = Object.keys(studentData.data.studentPass).map(function(key) {
-                var user = studentData.data.studentPass[key];
-                user.id = key;
-                return user;
-            });
-
-            MapCourseData = Object.keys(studentData.data.studentCos).map(function(key) {
-                var user = studentData.data.studentCos[key];
-                user.id = key;
-                return user;
-            });
-
+        axios.get('/students/profile').then(studentData => {
+            console.log(studentData.data);
             _this.setState({
-				studentIdcard: {
-                    name: studentData.data.studentInfo[0].sname,
-					prog: studentData.data.studentInfo[0].program ,
-                	grad: "大" + studentData.data.studentInfo[0].grade,
-				}
-			})
+                studentIdcard: {
+                    name: studentData.data[0].sname,
+                    prog: studentData.data[0].program ,
+                    grad: "大" + studentData[0].data.grade,
+                }
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/courseMap').then(studentData => {
+
+            MapCourseData = Object.keys(studentData.data).map(function(key) {
+                let user = studentData.data[key];
+                user.id = key;
+                return user;
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/coursePass').then(studentData => {
+            // studentData.status HTTP response code (e.g., 200, 401)
+            // studentData.data object parsed from HTTP response body
+            // studentData.headers  HTTP presonse headers
+
+            StudentCosPas = Object.keys(studentData.data).map(function(key) {
+                let user = studentData.data[key];
+                user.id = key;
+                return user;
+            });
+
         }).catch(err => {
             console.log(err);
         });
@@ -128,7 +136,7 @@ class Head extends Component {
 		    <div id="Head">
 				<div id="ontopDiv">
 					<div className="Head-header" >
-							<div id="rectangle1"></div>
+							<div id="rectangle1"> </div>
 							<div id="h1">交大資工線上助理</div>
 							<div id="h2">NCTU Curriculum Assistant</div>
 						<div id="adjust">

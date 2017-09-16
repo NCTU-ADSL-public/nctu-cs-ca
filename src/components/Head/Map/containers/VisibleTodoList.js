@@ -10,14 +10,16 @@ const getVisibleTodos = (todos, filter, grad, sem) => {
             return todos.filter(t => (t.grade===grad && t.semester===sem ));
         case 'SHOW_ACTIVE':
             return todos.filter(t => (t.grade===grad && t.semester===sem ));
+        default:
+            return false
     }
-}
-//
+};
+
 const mapStateToProps = (state, ownProps) => {
     return {
         todos: getVisibleTodos(state.todos, state.visibilityFilter, ownProps.grad, ownProps.sem)
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -25,11 +27,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(handleCoursedata(suggest))
         }
     }
-}
+};
 
 const VisibleTodoList = connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoList)
+)(TodoList);
 
 export default VisibleTodoList

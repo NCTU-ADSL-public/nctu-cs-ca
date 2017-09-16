@@ -15,12 +15,11 @@ class Login extends Component {
 
     getLoginstatus(){
         var _this = this;
-        return axios.get('/home/status').then(loginStatus => {
-            loginStatus.status // HTTP response code (e.g., 200, 401)
-            loginStatus.data // object parsed from HTTP response body
-            loginStatus.headers // HTTP presonse headers
+        return axios.get('/user/state').then(loginStatus => {
+            // loginStatus.status HTTP response code (e.g., 200, 401)
+            //loginStatus.data  object parsed from HTTP response body
+            //loginStatus.headers  HTTP presonse headers
             _this.loginStatusHandler(loginStatus.data.state);
-            console.log(loginStatus.data);
         }).catch(err => {
             console.log(err);
         });
