@@ -52,31 +52,38 @@ class Head extends Component {
 
     getdata(){
     	var _this = this;
-        return axios.get('/students/profile').then(studentData => {
-            // studentData.status HTTP response code (e.g., 200, 401)
-            // studentData.data object parsed from HTTP response body
-            // studentData.headers  HTTP presonse headers
-
-			console.log(studentData.data.studentCos)
-            StudentCosPas = Object.keys(studentData.data.studentPass).map(function(key) {
-                let user = studentData.data.studentPass[key];
-                user.id = key;
-                return user;
-            });
+        axios.get('/students/profile').then(studentData => {
+            _this.setState({
+                studentIdcard: {
+                    name: studentData.data.studentInfo[0].sname,
+                    prog: studentData.data.studentInfo[0].program ,
+                    grad: "大" + studentData.data.studentInfo[0].grade,
+                }
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/courseMap').then(studentData => {
 
             MapCourseData = Object.keys(studentData.data.studentCos).map(function(key) {
                 let user = studentData.data.studentCos[key];
                 user.id = key;
                 return user;
             });
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/coursePass').then(studentData => {
+            // studentData.status HTTP response code (e.g., 200, 401)
+            // studentData.data object parsed from HTTP response body
+            // studentData.headers  HTTP presonse headers
 
-            _this.setState({
-				studentIdcard: {
-                    name: studentData.data.studentInfo[0].sname,
-					prog: studentData.data.studentInfo[0].program ,
-                	grad: "大" + studentData.data.studentInfo[0].grade,
-				}
-			})
+            StudentCosPas = Object.keys(studentData.data.studentPass).map(function(key) {
+                let user = studentData.data.studentPass[key];
+                user.id = key;
+                return user;
+            });
+
         }).catch(err => {
             console.log(err);
         });
