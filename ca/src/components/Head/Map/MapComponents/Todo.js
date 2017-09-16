@@ -54,11 +54,11 @@ class Todo extends React.Component {
 }
 
 
-Todo.PropTypes = {
-    onClick: PropTypes.func.isRequired,
-    pre_flag: PropTypes.bool.isRequired,
-    completed: PropTypes.number.isRequired,
-    cos_cname: PropTypes.string.isRequired
-};
+// Todo.PropTypes = {
+//     onClick: PropTypes.func.isRequired,
+//     pre_flag: PropTypes.bool.isRequired,
+//     completed: PropTypes.number.isRequired,
+//     cos_cname: PropTypes.string.isRequired
+// };
 
 export default Todo
