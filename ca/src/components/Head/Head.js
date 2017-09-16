@@ -55,9 +55,9 @@ class Head extends Component {
         axios.get('/students/profile').then(studentData => {
             _this.setState({
                 studentIdcard: {
-                    name: studentData.data.studentInfo[0].sname,
-                    prog: studentData.data.studentInfo[0].program ,
-                    grad: "大" + studentData.data.studentInfo[0].grade,
+                    name: studentData.data[0].sname,
+                    prog: studentData.data[0].program ,
+                    grad: "大" + studentData.data[0].grade,
                 }
             })
         }).catch(err => {
@@ -65,8 +65,8 @@ class Head extends Component {
         });
         axios.get('/students/courseMap').then(studentData => {
 
-            MapCourseData = Object.keys(studentData.data.studentCos).map(function(key) {
-                let user = studentData.data.studentCos[key];
+            MapCourseData = Object.keys(studentData.data[0]).map(function(key) {
+                let user = studentData.data[0][key];
                 user.id = key;
                 return user;
             });
@@ -78,8 +78,8 @@ class Head extends Component {
             // studentData.data object parsed from HTTP response body
             // studentData.headers  HTTP presonse headers
 
-            StudentCosPas = Object.keys(studentData.data.studentPass).map(function(key) {
-                let user = studentData.data.studentPass[key];
+            StudentCosPas = Object.keys(studentData.data[0]).map(function(key) {
+                let user = studentData.data[0][key];
                 user.id = key;
                 return user;
             });
