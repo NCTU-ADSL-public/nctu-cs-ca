@@ -18,6 +18,7 @@ module.exports.setProfile = function(req, res, next){
           else{
               next();
           }
+	 //query.close();
       });
     } else {
       next();

@@ -44504,6 +44504,8 @@ var checkIcon = _react2.default.createElement(_featuredPlayList2.default, null);
 var MapCourseData = void 0;
 var StudentCosPas = void 0;
 
+var studentCos = [{ "cos_cname": "化學(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "微積分甲(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "普通生物(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "物理(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "線性代數", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "計算機概論與程式設計", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "化學(二)", "grade": "1", "semester": "2", "suggest": "化學(一)", "pre": null }, { "cos_cname": "微積分甲(二)", "grade": "1", "semester": "2", "suggest": "微積分甲(一) ", "pre": null }, { "cos_cname": "微積分甲(二)", "grade": "1", "semester": "2", "suggest": "線性代數", "pre": null }, { "cos_cname": "數位電路設計", "grade": "1", "semester": "2", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "普通生物(二)", "grade": "1", "semester": "2", "suggest": null, "pre": null }, { "cos_cname": "物件導向程式設計", "grade": "1", "semester": "2", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "物理(二)", "grade": "1", "semester": "2", "suggest": "物理(一)", "pre": null }, { "cos_cname": "離散數學", "grade": "1", "semester": "2", "suggest": null, "pre": null }, { "cos_cname": "數位電路實驗", "grade": "2", "semester": "1", "suggest": "數位電路設計", "pre": null }, { "cos_cname": "機率", "grade": "2", "semester": "1", "suggest": "微積分甲(二)", "pre": null }, { "cos_cname": "計算機網路概論", "grade": "2", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "資料結構", "grade": "2", "semester": "1", "suggest": "離散數學", "pre": "物件導向程式設計" }, { "cos_cname": "基礎程式設計(檢定考試)", "grade": "2", "semester": "2", "suggest": "資料結構", "pre": null }, { "cos_cname": "正規語言概論", "grade": "2", "semester": "2", "suggest": "離散數學", "pre": null }, { "cos_cname": "演算法概論", "grade": "2", "semester": "2", "suggest": null, "pre": "資料結構" }, { "cos_cname": "計算機組織", "grade": "2", "semester": "2", "suggest": "數位電路實驗", "pre": null }, { "cos_cname": "作業系統概論", "grade": "3", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "微處理機系統實驗", "grade": "3", "semester": "1", "suggest": "計算機組織", "pre": null }, { "cos_cname": "編譯器設計概論", "grade": "3", "semester": "1", "suggest": "正規語言概論", "pre": "基礎程式設計(檢定考試)" }, { "cos_cname": "資訊工程研討", "grade": "3", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "資訊工程專題(一)", "grade": "3", "semester": "2", "suggest": null, "pre": "基礎程式設計(檢定考試)" }, { "cos_cname": "資訊工程專題(二)", "grade": "4", "semester": "1", "suggest": null, "pre": "資訊工程專題(一)" }];
+
 var Head = function (_Component) {
 	(0, _inherits3.default)(Head, _Component);
 
@@ -44542,14 +44544,24 @@ var Head = function (_Component) {
 					studentIdcard: {
 						name: studentData.data[0].sname,
 						prog: studentData.data[0].program,
-						grad: "大" + studentData[0].data.grade
+						grad: "大" + studentData.data[0].grade
 					}
 				});
 			}).catch(function (err) {
 				console.log(err);
 			});
+			MapCourseData = (0, _keys2.default)(studentCos).map(function (key) {
+				var user = studentCos[key];
+				user.id = key;
+				return user;
+			});
+			StudentCosPas = (0, _keys2.default)(studentCos).map(function (key) {
+				var user = studentCos[key];
+				user.id = key;
+				return user;
+			});
 			_axios2.default.get('/students/courseMap').then(function (studentData) {
-
+				console.log(studentData.data);
 				MapCourseData = (0, _keys2.default)(studentData.data).map(function (key) {
 					var user = studentData.data[key];
 					user.id = key;
@@ -45775,13 +45787,16 @@ var Map = function (_React$Component) {
                 for (var i = 0; i < this.props.data.length; i++) {
                     if (i !== 0) {
                         if (this.props.data[i - 1].cos_cname !== this.props.data[i].cos_cname) {
+                            console.log("addTodo");
                             store.dispatch((0, _index.addTodo)(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre));
                         }
                     } else {
+                        console.log("addTodo");
                         store.dispatch((0, _index.addTodo)(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre));
                     }
                 }
                 for (var j = 0; j < this.props.studentPasdata.length; j++) {
+                    console.log("setPascos");
                     store.dispatch((0, _index.setPascos)(this.props.studentPasdata[j].cos_cname, 0));
                 }
             }
@@ -47379,6 +47394,7 @@ var todos = function todos() {
 
     switch (action.type) {
         case 'ADD_TODO':
+            console.log("success");
             return [].concat((0, _toConsumableArray3.default)(state), [todo(undefined, action)]);
         case 'SET_PASCOS':
             return state.map(function (t) {
@@ -47711,14 +47727,14 @@ var TodoList = function TodoList(_ref) {
     );
 };
 
-TodoList.propTypes = {
-    todos: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-        id: _propTypes2.default.number.isRequired,
-        completed: _propTypes2.default.bool.isRequired,
-        text: _propTypes2.default.string.isRequired
-    }).isRequired).isRequired,
-    onTodoClick: _propTypes2.default.func.isRequired
-};
+// TodoList.propTypes = {
+//     todos: PropTypes.arrayOf(PropTypes.shape({
+//         id: PropTypes.number.isRequired,
+//         completed: PropTypes.bool.isRequired,
+//         text: PropTypes.string.isRequired
+//     }).isRequired).isRequired,
+//     onTodoClick: PropTypes.func.isRequired
+// };
 
 exports.default = TodoList;
 
@@ -47843,12 +47859,12 @@ var Todo = function (_React$Component) {
     return Todo;
 }(_react2.default.Component);
 
-Todo.PropTypes = {
-    onClick: _propTypes2.default.func.isRequired,
-    pre_flag: _propTypes2.default.bool.isRequired,
-    completed: _propTypes2.default.number.isRequired,
-    cos_cname: _propTypes2.default.string.isRequired
-};
+// Todo.PropTypes = {
+//     onClick: PropTypes.func.isRequired,
+//     pre_flag: PropTypes.bool.isRequired,
+//     completed: PropTypes.number.isRequired,
+//     cos_cname: PropTypes.string.isRequired
+// };
 
 exports.default = Todo;
 
@@ -49067,11 +49083,11 @@ var Link = function Link(_ref) {
     );
 };
 
-Link.propTypes = {
-    active: _propTypes2.default.bool.isRequired,
-    children: _propTypes2.default.node.isRequired,
-    onClick: _propTypes2.default.func.isRequired
-};
+// Link.propTypes = {
+//     active: PropTypes.bool.isRequired,
+//     children: PropTypes.node.isRequired,
+//     onClick: PropTypes.func.isRequired
+// };
 
 exports.default = Link;
 

@@ -9,7 +9,8 @@ var redirectAfterAuth = utils.method.redirectAfterAuth;
 var router = express.Router();
 
 router.get('/auth/Nctu', function(req, res) {
-    res.redirect('https://id.nctu.edu.tw/o/authorize/?client_id=p6twozVJk4nRwNE5A2mLKT7uzvWeedr6GOL6LXz8&response_type=code&scope=profile%20name');
+    console.log("Redirecting from /auth/Nctu");
+    res.redirect('https://id.nctu.edu.tw/o/authorize/?client_id=' + utils.oAuthNctu.client_id + '&response_type=code&scope=profile%20name');
 });
 
 router.get('/auth/Nctu/callback', getCode, getToken, getProfile,  redirectAfterAuth);

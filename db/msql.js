@@ -69,6 +69,7 @@ var sql_uploadGrade = c.prepare('\
     unique_id=:unique_id,student_id=:id,score=:score;');
 
 module.exports = {
+
     findPerson: function(id, callback) {
         if (id.match(/^[0-9].*/g)) {
             c.query(sql_findStudent({ id: id }), function(err, result) {
@@ -95,14 +96,12 @@ module.exports = {
                 callback(null, JSON.stringify(result));
             });
         }
-        c.end();
     },
     addEmail: function(id, email) {
         c.query(sql_addEmail({ id: id, email: email }), function(err) {
             if (err)
                 throw err;
         });
-        c.end();
     },
     showCosMap: function(id, callback) {
         var year = '1' + id[0] + id[1];
@@ -111,7 +110,6 @@ module.exports = {
                 throw err;
             callback(null, JSON.stringify(result));
         });
-        c.end();
     },
     showCosMapPass: function(id, callback) {
         c.query(sql_showCosMapPass({ id: id }), function(err, result) {
@@ -119,7 +117,6 @@ module.exports = {
                 throw err;
             callback(null, JSON.stringify(result));
         });
-        c.end();
     },
     PassCos: function(id, callback) {
         c.query(sql_PassCos({ id: id }), function(err, result) {
@@ -127,7 +124,6 @@ module.exports = {
                 throw err;
             callback(null, JSON.stringify(result));
         });
-        c.end();
     },
     uploadGrade: function(pt) {
         var now = 0,
@@ -148,10 +144,12 @@ module.exports = {
                 });
             }
             if (last) {
-                c.end();
                 return false;
             }
             now++;
         });
-    }
+    },
+    close: function(){
+        c.end();
+    },
 };
