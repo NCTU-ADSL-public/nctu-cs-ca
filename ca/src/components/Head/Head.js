@@ -111,9 +111,11 @@ class Head extends Component {
         });
   		if(index===0){
         	ReactDOM.render(
-				<FadeIn>
-					<HomeItem />
-				</FadeIn>,
+        		<font>
+					<FadeIn>
+						<HomeItem />
+					</FadeIn>
+				</font>,
             document.getElementById('page'));
 		}
         else if(index===1){

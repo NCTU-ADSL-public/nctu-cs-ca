@@ -19,7 +19,7 @@ class Todo extends React.Component {
             <div className="course"
                  style={{
                      transition: "opacity .2s linear",
-                     opacity: !this.props.completed ? "1" : "0.1",
+                     opacity: !this.props.completed ? "1" : "0.2",
                  }}>
                 <ReactHover
                     options={optionsCursorTrueWithMargin}>
