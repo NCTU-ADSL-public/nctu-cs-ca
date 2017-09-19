@@ -1,5 +1,10 @@
 # Nctu-CS-CA
 
+```
+nginx 1.10.3 
+Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7
+```
+
 
 | Method | Path | Description |
 |------- | --------- | ------ |
