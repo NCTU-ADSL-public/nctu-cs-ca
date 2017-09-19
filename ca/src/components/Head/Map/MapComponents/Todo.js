@@ -18,7 +18,7 @@ class Todo extends React.Component {
         return(
             <div className="course"
                  style={{
-                     transition: "opacity .1s ease-in-out",
+                     transition: "opacity .2s linear",
                      opacity: !this.props.completed ? "1" : "0.1",
                  }}>
                 <ReactHover

@@ -33,12 +33,6 @@ const todo = (state = {}, action) => {
 
             return state;
 
-        case 'SET_NOPASCOSPRE':
-             return Object.assign({}, state, {
-                 completed: true
-             });
-
-
         case 'SET_NOPASCOS':
             if (state.cosCame === action.cosCame) {
                 return Object.assign({}, state, {

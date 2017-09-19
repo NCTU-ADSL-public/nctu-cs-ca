@@ -31,13 +31,6 @@ export const setPascos = (cosCame) => {
     }
 };
 
-export const setNopascospre = (cosCame) => {
-    return {
-        type: 'SET_NOPASCOSPRE',
-        cosCame
-    }
-};
-
 export const setNopascos = (cosCame) => {
     return {
         type: 'SET_NOPASCOS',

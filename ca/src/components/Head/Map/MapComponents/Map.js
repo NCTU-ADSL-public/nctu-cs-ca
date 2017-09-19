@@ -45,7 +45,7 @@ class Map extends React.Component{
 
                 <div className="Map-Row">
                     <Provider store={store}>
-                        <App studentPasdata={this.props.studentPasdata} data={this.props.data}/>
+                        <App studentPasdata={this.props.studentPasdata} data={this.props.data} studentsGrad={this.props.studentsGrad}/>
                     </Provider>
                 </div>
             </div>

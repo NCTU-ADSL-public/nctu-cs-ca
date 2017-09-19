@@ -120,7 +120,8 @@ class Head extends Component {
             ReactDOM.render(
             	<div>
 					<FadeIn>
-						<MapItem studentPasdata={StudentCosPas} data={MapCourseData} studentId={this.state.studentIdcard.prog}/>
+						<MapItem studentPasdata={StudentCosPas} data={MapCourseData} studentId={this.state.studentIdcard.prog}
+						studentsGrad={this.state.studentIdcard.grad}/>
 					</FadeIn>
 				</div>,
 				document.getElementById('page'));
