@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setVisibilityFilter ,setPascos} from '../actions'
+import { setVisibilityFilter ,setPascos, setAll, setNopascos, setNopascospre} from '../actions'
 import Link from '../MapComponents/Link'
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,21 +13,24 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onClick: () => {
             dispatch(setVisibilityFilter(ownProps.filter));
             if(ownProps.filter === "SHOW_ALL"){
-                console.log(ownProps.filter);
-                for(let i=0;i<ownProps.studentPasdata.length;i++){
-                    dispatch(setPascos(ownProps.studentPasdata[i].cos_cname,0));
+                for(let i=0;i<ownProps.data.length;i++){
+                    dispatch(setAll(ownProps.data[i].cos_cname,0));
                 }
             }
             else if(ownProps.filter === "SHOW_COMPLETED"){
-                console.log(ownProps.filter);
-                for(let j=0;j<ownProps.studentPasdata.length;j++){
-                    dispatch(setPascos(ownProps.studentPasdata[j].cos_cname,1));
+                for(let i=0;i<ownProps.data.length;i++){
+                    dispatch(setAll(ownProps.data[i].cos_cname,1));
+                }
+                for(let k=0;k<ownProps.studentPasdata.length;k++){
+                    dispatch(setNopascos(ownProps.studentPasdata[k].cos_cname));
                 }
             }
             else if(ownProps.filter === "SHOW_ACTIVE"){
-                console.log(ownProps.filter);
-                for(let k=0;k<ownProps.studentPasdata.length;k++){
-                    dispatch(setPascos(ownProps.studentPasdata[k].cos_cname,2));
+                for(let i=0;i<ownProps.data.length;i++){
+                    dispatch(setAll(ownProps.data[i].cos_cname,0));
+                }
+                for(let j=0;j<ownProps.studentPasdata.length;j++){
+                    dispatch(setPascos(ownProps.studentPasdata[j].cos_cname));
                 }
             }
         }

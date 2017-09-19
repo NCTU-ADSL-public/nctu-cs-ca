@@ -12,38 +12,42 @@ const todo = (state = {}, action) => {
                 suggest_flag:false,
                 pre_flag:false,
             };
-        case 'SET_PASCOS':
+        case 'SET_ALL':
             if(action.index===0){
                 return Object.assign({}, state, {
                     completed: false
                 });
             }
-            else if(action.index===1){
-                if (state.cosCame !== action.cosCame) {
-                    console.log("1 0")
-                    return Object.assign({}, state, {
-                        completed: true
-                    });
-                }
-                    console.log("1 1")
-                    return Object.assign({}, state, {
-                        completed: false
-                    });
-            }
-            else if(action.index===2){
-                console.log("2 0")
-                if (state.cosCame !== action.cosCame) {
-                    console.log("1")
-                    return Object.assign({}, state, {
-                        completed: false
-                    });
-                }
-                console.log("2 1")
-
+            if(action.index===1){
                 return Object.assign({}, state, {
                     completed: true
                 });
             }
+
+        case 'SET_PASCOS':
+            if (state.cosCame === action.cosCame ) {
+                return Object.assign({}, state, {
+                    completed: true
+                });
+            }
+
+            return state;
+
+        case 'SET_NOPASCOSPRE':
+             return Object.assign({}, state, {
+                 completed: true
+             });
+
+
+        case 'SET_NOPASCOS':
+            if (state.cosCame === action.cosCame) {
+                return Object.assign({}, state, {
+                    completed: false
+                });
+            }
+
+            return state;
+
         case 'HANDLE_DATA':
             if (state.cosCame !== action.pre) {
                 return Object.assign({}, state, {
@@ -63,12 +67,19 @@ const todo = (state = {}, action) => {
 const todos = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            console.log("success")
             return [
                 ...state,
                 todo(undefined, action)
             ];
         case 'SET_PASCOS':
+            return state.map(t =>
+                todo(t, action)
+            );
+        case 'SET_ALL':
+            return state.map(t =>
+                todo(t, action)
+            );
+        case 'SET_NOPASCOS':
             return state.map(t =>
                 todo(t, action)
             );

@@ -16,11 +16,32 @@ export const setVisibilityFilter = (filter) => {
     }
 };
 
-export const setPascos = (cosCame, index) => {
+export const setAll = (cosCame,index) => {
+    return {
+        type: 'SET_ALL',
+        cosCame,
+        index
+    }
+};
+
+export const setPascos = (cosCame) => {
     return {
         type: 'SET_PASCOS',
-        cosCame,
-        index,
+        cosCame
+    }
+};
+
+export const setNopascospre = (cosCame) => {
+    return {
+        type: 'SET_NOPASCOSPRE',
+        cosCame
+    }
+};
+
+export const setNopascos = (cosCame) => {
+    return {
+        type: 'SET_NOPASCOS',
+        cosCame
     }
 };
 
