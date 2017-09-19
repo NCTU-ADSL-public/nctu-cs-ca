@@ -10,4 +10,7 @@
 | get | students/coursePass | Return course passed |
 | get | user/state| Return the status of the person(0:CS student 1: not CS student 2: not login) |
 | post | students/score | post the .csv score file here |
+| | /students/Head | The page for student |
+| | /assistants/Head | The page for assistants |
+| | /professors/Head | The page for professors |
 
