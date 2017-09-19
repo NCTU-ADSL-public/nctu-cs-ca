@@ -12,6 +12,7 @@
 | post | students/score | post the .csv score file here |
 
 > Static Page
+
 | /students/Head | The page for student |
 | /assistants/Head | The page for assistants |
 | /professors/Head | The page for professors |
