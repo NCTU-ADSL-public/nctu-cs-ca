@@ -11759,11 +11759,25 @@ var setVisibilityFilter = exports.setVisibilityFilter = function setVisibilityFi
     };
 };
 
-var setPascos = exports.setPascos = function setPascos(cosCame, index) {
+var setAll = exports.setAll = function setAll(cosCame, index) {
     return {
-        type: 'SET_PASCOS',
+        type: 'SET_ALL',
         cosCame: cosCame,
         index: index
+    };
+};
+
+var setPascos = exports.setPascos = function setPascos(cosCame) {
+    return {
+        type: 'SET_PASCOS',
+        cosCame: cosCame
+    };
+};
+
+var setNopascos = exports.setNopascos = function setNopascos(cosCame) {
+    return {
+        type: 'SET_NOPASCOS',
+        cosCame: cosCame
     };
 };
 
@@ -32137,7 +32151,7 @@ var Main = function Main() {
       _reactRouterDom.Switch,
       null,
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Login2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/Head', component: _Head2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/students/Head', component: _Head2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/students/score', component: _Graduation2.default })
     )
   );
@@ -44505,6 +44519,7 @@ var MapCourseData = void 0;
 var StudentCosPas = void 0;
 
 var studentCos = [{ "cos_cname": "化學(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "微積分甲(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "普通生物(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "物理(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "線性代數", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "計算機概論與程式設計", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "化學(二)", "grade": "1", "semester": "2", "suggest": "化學(一)", "pre": null }, { "cos_cname": "微積分甲(二)", "grade": "1", "semester": "2", "suggest": "微積分甲(一) ", "pre": null }, { "cos_cname": "微積分甲(二)", "grade": "1", "semester": "2", "suggest": "線性代數", "pre": null }, { "cos_cname": "數位電路設計", "grade": "1", "semester": "2", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "普通生物(二)", "grade": "1", "semester": "2", "suggest": null, "pre": null }, { "cos_cname": "物件導向程式設計", "grade": "1", "semester": "2", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "物理(二)", "grade": "1", "semester": "2", "suggest": "物理(一)", "pre": null }, { "cos_cname": "離散數學", "grade": "1", "semester": "2", "suggest": null, "pre": null }, { "cos_cname": "數位電路實驗", "grade": "2", "semester": "1", "suggest": "數位電路設計", "pre": null }, { "cos_cname": "機率", "grade": "2", "semester": "1", "suggest": "微積分甲(二)", "pre": null }, { "cos_cname": "計算機網路概論", "grade": "2", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "資料結構", "grade": "2", "semester": "1", "suggest": "離散數學", "pre": "物件導向程式設計" }, { "cos_cname": "基礎程式設計(檢定考試)", "grade": "2", "semester": "2", "suggest": "資料結構", "pre": null }, { "cos_cname": "正規語言概論", "grade": "2", "semester": "2", "suggest": "離散數學", "pre": null }, { "cos_cname": "演算法概論", "grade": "2", "semester": "2", "suggest": null, "pre": "資料結構" }, { "cos_cname": "計算機組織", "grade": "2", "semester": "2", "suggest": "數位電路實驗", "pre": null }, { "cos_cname": "作業系統概論", "grade": "3", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "微處理機系統實驗", "grade": "3", "semester": "1", "suggest": "計算機組織", "pre": null }, { "cos_cname": "編譯器設計概論", "grade": "3", "semester": "1", "suggest": "正規語言概論", "pre": "基礎程式設計(檢定考試)" }, { "cos_cname": "資訊工程研討", "grade": "3", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "資訊工程專題(一)", "grade": "3", "semester": "2", "suggest": null, "pre": "基礎程式設計(檢定考試)" }, { "cos_cname": "資訊工程專題(二)", "grade": "4", "semester": "1", "suggest": null, "pre": "資訊工程專題(一)" }];
+var studentPas = [{ "cos_cname": "普通生物(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "物理(一)", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "線性代數", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "計算機概論與程式設計", "grade": "1", "semester": "1", "suggest": null, "pre": null }, { "cos_cname": "化學(二)", "grade": "1", "semester": "2", "suggest": "化學(一)", "pre": null }, { "cos_cname": "微積分甲(二)", "grade": "1", "semester": "2", "suggest": "微積分甲(一) ", "pre": null }, { "cos_cname": "微積分甲(二)", "grade": "1", "semester": "2", "suggest": "線性代數", "pre": null }, { "cos_cname": "數位電路設計", "grade": "1", "semester": "2", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "普通生物(二)", "grade": "1", "semester": "2", "suggest": null, "pre": null }, { "cos_cname": "物件導向程式設計", "grade": "1", "semester": "2", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "物理(二)", "grade": "1", "semester": "2", "suggest": "物理(一)", "pre": null }, { "cos_cname": "離散數學", "grade": "1", "semester": "2", "suggest": null, "pre": null }, { "cos_cname": "數位電路實驗", "grade": "2", "semester": "1", "suggest": "數位電路設計", "pre": null }, { "cos_cname": "機率", "grade": "2", "semester": "1", "suggest": "微積分甲(二)", "pre": null }, { "cos_cname": "計算機網路概論", "grade": "2", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "資料結構", "grade": "2", "semester": "1", "suggest": "離散數學", "pre": "物件導向程式設計" }, { "cos_cname": "基礎程式設計(檢定考試)", "grade": "2", "semester": "2", "suggest": "資料結構", "pre": null }, { "cos_cname": "正規語言概論", "grade": "2", "semester": "2", "suggest": "離散數學", "pre": null }, { "cos_cname": "演算法概論", "grade": "2", "semester": "2", "suggest": null, "pre": "資料結構" }, { "cos_cname": "計算機組織", "grade": "2", "semester": "2", "suggest": "數位電路實驗", "pre": null }, { "cos_cname": "作業系統概論", "grade": "3", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "微處理機系統實驗", "grade": "3", "semester": "1", "suggest": "計算機組織", "pre": null }, { "cos_cname": "編譯器設計概論", "grade": "3", "semester": "1", "suggest": "正規語言概論", "pre": "基礎程式設計(檢定考試)" }, { "cos_cname": "資訊工程研討", "grade": "3", "semester": "1", "suggest": "計算機概論與程式設計", "pre": null }, { "cos_cname": "資訊工程專題(一)", "grade": "3", "semester": "2", "suggest": null, "pre": "基礎程式設計(檢定考試)" }, { "cos_cname": "資訊工程專題(二)", "grade": "4", "semester": "1", "suggest": null, "pre": "資訊工程專題(一)" }];
 
 var Head = function (_Component) {
 	(0, _inherits3.default)(Head, _Component);
@@ -44555,8 +44570,8 @@ var Head = function (_Component) {
 				user.id = key;
 				return user;
 			});
-			StudentCosPas = (0, _keys2.default)(studentCos).map(function (key) {
-				var user = studentCos[key];
+			StudentCosPas = (0, _keys2.default)(studentPas).map(function (key) {
+				var user = studentPas[key];
 				user.id = key;
 				return user;
 			});
@@ -44592,9 +44607,13 @@ var Head = function (_Component) {
 			});
 			if (index === 0) {
 				_reactDom2.default.render(_react2.default.createElement(
-					_reactFadeIn2.default,
+					'font',
 					null,
-					_react2.default.createElement(_Home2.default, null)
+					_react2.default.createElement(
+						_reactFadeIn2.default,
+						null,
+						_react2.default.createElement(_Home2.default, null)
+					)
 				), document.getElementById('page'));
 			} else if (index === 1) {
 				_reactDom2.default.render(_react2.default.createElement(
@@ -44603,7 +44622,8 @@ var Head = function (_Component) {
 					_react2.default.createElement(
 						_reactFadeIn2.default,
 						null,
-						_react2.default.createElement(_Map2.default, { studentPasdata: StudentCosPas, data: MapCourseData, studentId: this.state.studentIdcard.prog })
+						_react2.default.createElement(_Map2.default, { studentPasdata: StudentCosPas, data: MapCourseData, studentId: this.state.studentIdcard.prog,
+							studentsGrad: this.state.studentIdcard.grad })
 					)
 				), document.getElementById('page'));
 			} else if (index === 2) {
@@ -45787,17 +45807,11 @@ var Map = function (_React$Component) {
                 for (var i = 0; i < this.props.data.length; i++) {
                     if (i !== 0) {
                         if (this.props.data[i - 1].cos_cname !== this.props.data[i].cos_cname) {
-                            console.log("addTodo");
                             store.dispatch((0, _index.addTodo)(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre));
                         }
                     } else {
-                        console.log("addTodo");
                         store.dispatch((0, _index.addTodo)(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre));
                     }
-                }
-                for (var j = 0; j < this.props.studentPasdata.length; j++) {
-                    console.log("setPascos");
-                    store.dispatch((0, _index.setPascos)(this.props.studentPasdata[j].cos_cname, 0));
                 }
             }
         }
@@ -45828,7 +45842,7 @@ var Map = function (_React$Component) {
                     _react2.default.createElement(
                         _reactRedux.Provider,
                         { store: store },
-                        _react2.default.createElement(_App2.default, { studentPasdata: this.props.studentPasdata })
+                        _react2.default.createElement(_App2.default, { studentPasdata: this.props.studentPasdata, data: this.props.data, studentsGrad: this.props.studentsGrad })
                     )
                 )
             );
@@ -45848,7 +45862,7 @@ exports = module.exports = __webpack_require__(97)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);", ""]);
 
 // module
-exports.push([module.i, "#font_adjust {\n  background: #F5F5F5; }\n\n.Map-title-text {\n  margin: 0 5% 6% 5%;\n  padding: 35px 10px 3px 65px;\n  color: #7B7B7B;\n  font-size: 1.5em; }\n\n#lessons-title {\n  font-size: 2.3em;\n  font-weight: 500;\n  margin: 0;\n  float: left; }\n\n#lessons-little-title {\n  margin: 1.3% 0 0 20px;\n  font-size: 1.7em;\n  float: left; }\n\nh3 {\n  font-size: 1.5em;\n  margin: 0; }\n\n.Map-Row {\n  padding: 0 7% 0 7%;\n  background: #F5F5F5;\n  height: 600px; }\n\n.grades {\n  float: left;\n  margin: 5px 5px 0 5px;\n  border: 0.5px solid #e3e3e3;\n  height: 500px;\n  width: 80%; }\n\n.mods {\n  float: left;\n  margin: 2% 0 0 1%;\n  height: 500px;\n  width: 15%; }\n\n.grade {\n  float: left;\n  background: #AFEEEE;\n  height: 100%;\n  width: 25%; }\n\n.grade-cur .grade-num {\n  color: #fcfffa;\n  background-color: #e8a840;\n  opacity: 1; }\n\n.grade-cur .session {\n  opacity: 1; }\n\n#grade-2, #grade-4 {\n  background: #F0FFFF; }\n\n.grade-num {\n  padding: 3px 3px 3px 10px;\n  height: 30px;\n  background: #FFF;\n  opacity: 0.5;\n  color: #222; }\n\n.session {\n  height: 464px;\n  width: 100%;\n  opacity: 1; }\n\n.up-session {\n  float: left;\n  height: 100%;\n  width: 50%;\n  background: #AFEEEE; }\n\n.down-session {\n  float: left;\n  height: 100%;\n  width: 50%;\n  background: #96dcdc; }\n\n.course-group {\n  height: 30%; }\n\n.course-group-1 {\n  height: 22%; }\n\n.course-group-2 {\n  height: 42%; }\n\n.course-group-3 {\n  height: 20%; }\n\n.course {\n  padding: 8px 8px 4px 8px; }\n\n.course-btn {\n  overflow: visible;\n  border-radius: 2px;\n  transition: background .2s ease-in-out;\n  background-color: #616161; }\n\n.course-btn:hover {\n  background-color: #338d68; }\n\n.session-cur {\n  background: #fbe099; }\n\n.session-cur .course-group .course .course-btn {\n  background: #e8a840;\n  color: #f2fff8;\n  font-weight: 300; }\n\n.btn-default {\n  background: #222; }\n\n.btn-green {\n  background: #5ed6ae;\n  color: #222; }\n\n.btn-orange {\n  background: #ffff61;\n  color: #222; }\n\n.btn-red {\n  background: #f56161; }\n\n@media only screen and (max-width: 500px) {\n  .Map-title-text {\n    margin: 0 5% 6% 5%;\n    padding: 60px 10px 3px 25px;\n    color: #7B7B7B;\n    font-size: 1.5em; }\n  #lessons-title {\n    font-size: 1.7em;\n    font-weight: 500;\n    margin: 0;\n    float: left; }\n  #lessons-little-title {\n    margin: 4% 0 0 20px;\n    font-size: 1.1em;\n    float: left; }\n  .Map-Row {\n    height: 1000px; }\n  .grades {\n    margin-bottom: 10px;\n    width: 100%;\n    height: 750px; }\n  .grade-num {\n    padding: 3px 0px 3px 0px;\n    height: 7.5%;\n    text-align: center; }\n  .session {\n    height: 92%; }\n  .course-group-1 {\n    height: 22%; }\n  .course-group-2 {\n    height: 42%; }\n  .course-group-3 {\n    height: 20%; }\n  .course {\n    padding: 5px;\n    height: 54px; }\n  .course-btn {\n    height: 100%;\n    overflow: hidden; }\n  .mods {\n    width: 100%; } }\n", ""]);
+exports.push([module.i, "#font_adjust {\n  background: #F5F5F5; }\n\n.Map-title-text {\n  margin: 0 5% 6% 5%;\n  padding: 35px 10px 3px 65px;\n  color: #7B7B7B;\n  font-size: 1.5em; }\n\n#lessons-title {\n  font-size: 2.3em;\n  font-weight: 500;\n  margin: 0;\n  float: left; }\n\n#lessons-little-title {\n  margin: 1.3% 0 0 20px;\n  font-size: 1.7em;\n  float: left; }\n\nh3 {\n  font-size: 1.5em;\n  margin: 0; }\n\n.Map-Row {\n  padding: 0 7% 0 7%;\n  background: #F5F5F5;\n  height: 600px; }\n\n.grades {\n  float: left;\n  margin: 5px 5px 0 5px;\n  border: 0.5px solid #e3e3e3;\n  height: 500px;\n  width: 80%; }\n\n.mods {\n  float: left;\n  margin: 2% 0 0 1%;\n  height: 500px;\n  width: 15%; }\n\n.grade {\n  float: left;\n  background: #AFEEEE;\n  height: 100%;\n  width: 25%; }\n\n.grade-cur .grade-num {\n  color: #fcfffa;\n  background-color: #e8a840;\n  opacity: 1; }\n\n.grade-cur .session {\n  opacity: 1; }\n\n#grade-2, #grade-4 {\n  background: #F0FFFF; }\n\n.grade-num {\n  padding: 3px 3px 3px 10px;\n  height: 30px;\n  background: #FFF;\n  opacity: 0.5;\n  color: #222; }\n\n.session {\n  height: 464px;\n  width: 100%;\n  opacity: 1; }\n\n.up-session {\n  float: left;\n  height: 100%;\n  width: 50%;\n  background: #AFEEEE; }\n\n.down-session {\n  float: left;\n  height: 100%;\n  width: 50%;\n  background: #96dcdc; }\n\n.course-group {\n  height: 30%; }\n\n.course-group-1 {\n  height: 22%; }\n\n.course-group-2 {\n  height: 42%; }\n\n.course-group-3 {\n  height: 20%; }\n\n.course {\n  padding: 8px 8px 4px 8px; }\n\n.course-btn {\n  overflow: visible;\n  border-radius: 2px;\n  transition: background .25s ease-in-out;\n  background-color: #616161; }\n\n.course-btn:hover {\n  background-color: #338d68; }\n\n.session-cur {\n  background: #fbe099; }\n\n.session-cur .course-group .course .course-btn {\n  background: #e8a840;\n  color: #f2fff8;\n  font-weight: 300; }\n\n.btn-default {\n  background: #222; }\n\n.btn-green {\n  background: #5ed6ae;\n  color: #222; }\n\n.btn-orange {\n  background: #ffff61;\n  color: #222; }\n\n.btn-red {\n  background: #f56161; }\n\n@media only screen and (max-width: 500px) {\n  .Map-title-text {\n    margin: 0 5% 6% 5%;\n    padding: 60px 10px 3px 25px;\n    color: #7B7B7B;\n    font-size: 1.5em; }\n  #lessons-title {\n    font-size: 1.7em;\n    font-weight: 500;\n    margin: 0;\n    float: left; }\n  #lessons-little-title {\n    margin: 4% 0 0 20px;\n    font-size: 1.1em;\n    float: left; }\n  .Map-Row {\n    height: 1000px; }\n  .grades {\n    margin-bottom: 10px;\n    width: 100%;\n    height: 750px; }\n  .grade-num {\n    padding: 3px 0px 3px 0px;\n    height: 7.5%;\n    text-align: center; }\n  .session {\n    height: 92%; }\n  .course-group-1 {\n    height: 22%; }\n  .course-group-2 {\n    height: 42%; }\n  .course-group-3 {\n    height: 20%; }\n  .course {\n    padding: 5px;\n    height: 54px; }\n  .course-btn {\n    height: 100%;\n    overflow: hidden; }\n  .mods {\n    width: 100%; } }\n", ""]);
 
 // exports
 
@@ -47342,36 +47356,36 @@ var todo = function todo() {
                 suggest_flag: false,
                 pre_flag: false
             };
-        case 'SET_PASCOS':
+        case 'SET_ALL':
             if (action.index === 0) {
                 return (0, _assign2.default)({}, state, {
                     completed: false
                 });
-            } else if (action.index === 1) {
-                if (state.cosCame !== action.cosCame) {
-                    console.log("1 0");
-                    return (0, _assign2.default)({}, state, {
-                        completed: true
-                    });
-                }
-                console.log("1 1");
-                return (0, _assign2.default)({}, state, {
-                    completed: false
-                });
-            } else if (action.index === 2) {
-                console.log("2 0");
-                if (state.cosCame !== action.cosCame) {
-                    console.log("1");
-                    return (0, _assign2.default)({}, state, {
-                        completed: false
-                    });
-                }
-                console.log("2 1");
-
+            }
+            if (action.index === 1) {
                 return (0, _assign2.default)({}, state, {
                     completed: true
                 });
             }
+
+        case 'SET_PASCOS':
+            if (state.cosCame === action.cosCame) {
+                return (0, _assign2.default)({}, state, {
+                    completed: true
+                });
+            }
+
+            return state;
+
+        case 'SET_NOPASCOS':
+            if (state.cosCame === action.cosCame) {
+                return (0, _assign2.default)({}, state, {
+                    completed: false
+                });
+            }
+
+            return state;
+
         case 'HANDLE_DATA':
             if (state.cosCame !== action.pre) {
                 return (0, _assign2.default)({}, state, {
@@ -47394,9 +47408,16 @@ var todos = function todos() {
 
     switch (action.type) {
         case 'ADD_TODO':
-            console.log("success");
             return [].concat((0, _toConsumableArray3.default)(state), [todo(undefined, action)]);
         case 'SET_PASCOS':
+            return state.map(function (t) {
+                return todo(t, action);
+            });
+        case 'SET_ALL':
+            return state.map(function (t) {
+                return todo(t, action);
+            });
+        case 'SET_NOPASCOS':
             return state.map(function (t) {
                 return todo(t, action);
             });
@@ -47485,11 +47506,137 @@ var App = function (_React$Component) {
     (0, _inherits3.default)(App, _React$Component);
 
     function App() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         (0, _classCallCheck3.default)(this, App);
-        return (0, _possibleConstructorReturn3.default)(this, (App.__proto__ || (0, _getPrototypeOf2.default)(App)).apply(this, arguments));
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = App.__proto__ || (0, _getPrototypeOf2.default)(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            year: 0,
+            grad1: {
+                grad: "grade",
+                upSession: "up-session",
+                downSession: "down-session"
+            },
+            grad2: {
+                grad: "grade",
+                upSession: "up-session",
+                downSession: "down-session"
+            },
+            grad3: {
+                grad: "grade",
+                upSession: "up-session",
+                downSession: "down-session"
+            },
+            grad4: {
+                grad: "grade",
+                upSession: "up-session",
+                downSession: "down-session"
+            }
+
+        }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
     }
 
     (0, _createClass3.default)(App, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+
+            var Today = new Date();
+            var month = Today.getMonth() + 1;
+            var year = Today.getFullYear() - 1911;
+
+            if (this.props.studentsGrad === "大一") {
+                this.setState({
+                    year: year
+                });
+                if (month > 7 || month < 2) {
+                    this.setState({
+                        grad1: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session session-cur",
+                            downSession: "down-session"
+                        }
+                    });
+                } else {
+                    this.setState({
+                        grad1: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session",
+                            downSession: "down-session session-cur"
+                        }
+                    });
+                }
+            } else if (this.props.studentsGrad === "大二") {
+                this.setState({
+                    year: year - 1
+                });
+                if (month > 7 || month < 2) {
+                    this.setState({
+                        grad2: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session session-cur",
+                            downSession: "down-session"
+                        }
+                    });
+                } else {
+                    this.setState({
+                        grad2: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session",
+                            downSession: "down-session session-cur"
+                        }
+                    });
+                }
+            } else if (this.props.studentsGrad === "大三") {
+                this.setState({
+                    year: year - 2
+                });
+                if (month > 7 || month < 2) {
+                    this.setState({
+                        grad3: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session session-cur",
+                            downSession: "down-session"
+                        }
+                    });
+                } else {
+                    this.setState({
+                        grad3: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session",
+                            downSession: "down-session session-cur"
+                        }
+                    });
+                }
+            } else if (this.props.studentsGrad === "大四") {
+                this.setState({
+                    year: year - 3
+                });
+                if (month > 7 || month < 2) {
+                    this.setState({
+                        grad4: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session session-cur",
+                            downSession: "down-session"
+                        }
+                    });
+                } else {
+                    this.setState({
+                        grad4: {
+                            grad: "grade grade-cur",
+                            upSession: "up-session",
+                            downSession: "down-session session-cur"
+                        }
+                    });
+                }
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -47500,14 +47647,16 @@ var App = function (_React$Component) {
                     { className: 'grades' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'grade', id: 'grade-1' },
+                        { className: this.state.grad1.grad, id: 'grade-1' },
                         _react2.default.createElement(
                             'div',
                             { className: 'grade-num' },
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '\u5927\u4E00(104)'
+                                '\u5927\u4E00(',
+                                this.state.year,
+                                ')'
                             )
                         ),
                         _react2.default.createElement(
@@ -47515,26 +47664,28 @@ var App = function (_React$Component) {
                             { className: 'session' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'up-session' },
+                                { className: this.state.grad1.upSession },
                                 _react2.default.createElement(_VisibleTodoList2.default, { grad: '1', sem: '1' })
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { className: 'down-session' },
+                                { className: this.state.grad1.downSession },
                                 _react2.default.createElement(_VisibleTodoList2.default, { grad: '1', sem: '2' })
                             )
                         )
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'grade', id: 'grade-2' },
+                        { className: this.state.grad2.grad, id: 'grade-2' },
                         _react2.default.createElement(
                             'div',
                             { className: 'grade-num' },
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '\u5927\u4E8C(105)'
+                                '\u5927\u4E8C(',
+                                this.state.year + 1,
+                                ')'
                             )
                         ),
                         _react2.default.createElement(
@@ -47542,26 +47693,28 @@ var App = function (_React$Component) {
                             { className: 'session' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'up-session' },
+                                { className: this.state.grad2.upSession },
                                 _react2.default.createElement(_VisibleTodoList2.default, { grad: '2', sem: '1' })
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { className: 'down-session' },
+                                { className: this.state.grad2.downSession },
                                 _react2.default.createElement(_VisibleTodoList2.default, { grad: '2', sem: '2' })
                             )
                         )
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'grade grade-cur', id: 'grade-3' },
+                        { className: this.state.grad3.grad, id: 'grade-3' },
                         _react2.default.createElement(
                             'div',
                             { className: 'grade-num' },
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '\u5927\u4E09(106)'
+                                '\u5927\u4E09(',
+                                this.state.year + 2,
+                                ')'
                             )
                         ),
                         _react2.default.createElement(
@@ -47569,26 +47722,28 @@ var App = function (_React$Component) {
                             { className: 'session' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'up-session session-cur' },
+                                { className: this.state.grad3.upSession },
                                 _react2.default.createElement(_VisibleTodoList2.default, { grad: '3', sem: '1' })
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { className: 'down-session' },
+                                { className: this.state.grad3.downSession },
                                 _react2.default.createElement(_VisibleTodoList2.default, { grad: '3', sem: '2' })
                             )
                         )
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'grade', id: 'grade-4' },
+                        { className: this.state.grad4.grad, id: 'grade-4' },
                         _react2.default.createElement(
                             'div',
                             { className: 'grade-num' },
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                '\u5927\u56DB(107)'
+                                '\u5927\u56DB(',
+                                this.state.year + 3,
+                                ')'
                             )
                         ),
                         _react2.default.createElement(
@@ -47596,7 +47751,7 @@ var App = function (_React$Component) {
                             { className: 'session' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'up-session' },
+                                { className: this.state.grad4.upSession },
                                 _react2.default.createElement(_VisibleTodoList2.default, { grad: '4', sem: '1' })
                             ),
                             _react2.default.createElement(
@@ -47610,7 +47765,7 @@ var App = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'mods' },
-                    _react2.default.createElement(_Button2.default, { studentPasdata: this.props.studentPasdata })
+                    _react2.default.createElement(_Button2.default, { studentPasdata: this.props.studentPasdata, data: this.props.data })
                 )
             );
         }
@@ -47727,14 +47882,14 @@ var TodoList = function TodoList(_ref) {
     );
 };
 
-// TodoList.propTypes = {
-//     todos: PropTypes.arrayOf(PropTypes.shape({
-//         id: PropTypes.number.isRequired,
-//         completed: PropTypes.bool.isRequired,
-//         text: PropTypes.string.isRequired
-//     }).isRequired).isRequired,
-//     onTodoClick: PropTypes.func.isRequired
-// };
+TodoList.propTypes = {
+    todos: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+        id: _propTypes2.default.number.isRequired,
+        completed: _propTypes2.default.bool.isRequired,
+        text: _propTypes2.default.string.isRequired
+    }).isRequired).isRequired,
+    onTodoClick: _propTypes2.default.func.isRequired
+};
 
 exports.default = TodoList;
 
@@ -47814,7 +47969,8 @@ var Todo = function (_React$Component) {
                 'div',
                 { className: 'course',
                     style: {
-                        opacity: !this.props.completed ? "1" : "0.1"
+                        transition: "opacity .2s linear",
+                        opacity: !this.props.completed ? "1" : "0.2"
                     } },
                 _react2.default.createElement(
                     _reactHover2.default,
@@ -47859,12 +48015,12 @@ var Todo = function (_React$Component) {
     return Todo;
 }(_react2.default.Component);
 
-// Todo.PropTypes = {
-//     onClick: PropTypes.func.isRequired,
-//     pre_flag: PropTypes.bool.isRequired,
-//     completed: PropTypes.number.isRequired,
-//     cos_cname: PropTypes.string.isRequired
-// };
+Todo.PropTypes = {
+    onClick: _propTypes2.default.func.isRequired,
+    pre_flag: _propTypes2.default.bool.isRequired,
+    completed: _propTypes2.default.bool.isRequired,
+    cos_cname: _propTypes2.default.string.isRequired
+};
 
 exports.default = Todo;
 
@@ -48944,21 +49100,21 @@ var Footer = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     _FilterLink2.default,
-                    { filter: 'SHOW_ALL', studentPasdata: this.props.studentPasdata },
+                    { filter: 'SHOW_ALL', studentPasdata: this.props.studentPasdata, data: this.props.data },
                     '\u5168\u89BD'
                 ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     _FilterLink2.default,
-                    { filter: 'SHOW_COMPLETED', studentPasdata: this.props.studentPasdata },
+                    { filter: 'SHOW_COMPLETED', studentPasdata: this.props.studentPasdata, data: this.props.data },
                     '\u5DF2\u4FEE'
                 ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     _FilterLink2.default,
-                    { filter: 'SHOW_ACTIVE', studentPasdata: this.props.studentPasdata },
+                    { filter: 'SHOW_ACTIVE', studentPasdata: this.props.studentPasdata, data: this.props.data },
                     '\u672A\u4FEE'
                 )
             );
@@ -49001,19 +49157,22 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
         onClick: function onClick() {
             dispatch((0, _actions.setVisibilityFilter)(ownProps.filter));
             if (ownProps.filter === "SHOW_ALL") {
-                console.log(ownProps.filter);
-                for (var i = 0; i < ownProps.studentPasdata.length; i++) {
-                    dispatch((0, _actions.setPascos)(ownProps.studentPasdata[i].cos_cname, 0));
+                for (var i = 0; i < ownProps.data.length; i++) {
+                    dispatch((0, _actions.setAll)(ownProps.data[i].cos_cname, 0));
                 }
             } else if (ownProps.filter === "SHOW_COMPLETED") {
-                console.log(ownProps.filter);
-                for (var j = 0; j < ownProps.studentPasdata.length; j++) {
-                    dispatch((0, _actions.setPascos)(ownProps.studentPasdata[j].cos_cname, 1));
+                for (var _i = 0; _i < ownProps.data.length; _i++) {
+                    dispatch((0, _actions.setAll)(ownProps.data[_i].cos_cname, 1));
+                }
+                for (var k = 0; k < ownProps.studentPasdata.length; k++) {
+                    dispatch((0, _actions.setNopascos)(ownProps.studentPasdata[k].cos_cname));
                 }
             } else if (ownProps.filter === "SHOW_ACTIVE") {
-                console.log(ownProps.filter);
-                for (var k = 0; k < ownProps.studentPasdata.length; k++) {
-                    dispatch((0, _actions.setPascos)(ownProps.studentPasdata[k].cos_cname, 2));
+                for (var _i2 = 0; _i2 < ownProps.data.length; _i2++) {
+                    dispatch((0, _actions.setAll)(ownProps.data[_i2].cos_cname, 0));
+                }
+                for (var j = 0; j < ownProps.studentPasdata.length; j++) {
+                    dispatch((0, _actions.setPascos)(ownProps.studentPasdata[j].cos_cname));
                 }
             }
         }
@@ -49083,11 +49242,11 @@ var Link = function Link(_ref) {
     );
 };
 
-// Link.propTypes = {
-//     active: PropTypes.bool.isRequired,
-//     children: PropTypes.node.isRequired,
-//     onClick: PropTypes.func.isRequired
-// };
+Link.propTypes = {
+    active: _propTypes2.default.bool.isRequired,
+    children: _propTypes2.default.node.isRequired,
+    onClick: _propTypes2.default.func.isRequired
+};
 
 exports.default = Link;
 

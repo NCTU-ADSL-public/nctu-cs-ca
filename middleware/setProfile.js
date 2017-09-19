@@ -4,8 +4,8 @@ var query = require('../db/msql');
 module.exports.setProfile = function(req, res, next){
   if(req.session.profile) {
       var profileObj = JSON.parse(req.session.profile);
-      var studentId = utils.getStudentId(profileObj);
-      query.findPerson(studentId,function(err,result){
+      var personId = utils.getPersonId(profileObj);
+      query.findPerson(personId,function(err,result){
           if(err){
                 throw err;
                 return;

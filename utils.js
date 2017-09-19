@@ -1,8 +1,7 @@
-module.exports.getStudentId = function(profileObj){
-
+module.exports.getPersonId = function(profileObj){
   return profileObj.username;
-  next();
 }
+
 
 module.exports.verifyUser = function(req, res, next){
   if(!(req.profile && req.profile.length)){
@@ -15,3 +14,4 @@ module.exports.verifyUser = function(req, res, next){
         next();
     }
 }
+

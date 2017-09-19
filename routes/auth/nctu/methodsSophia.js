@@ -70,8 +70,9 @@ methods.getProfile = function(req, res, next){
    });
 }
 
-methods.redirectAfterAuth = function(req, res, next){
+methods.redirectAfterAuth = function(req, res){
         
+      var personStatus;  
       if(req.session.profile){
             var personId = utils.getPersonId(JSON.parse(req.session.profile));
             if(!personId){
@@ -87,33 +88,34 @@ methods.redirectAfterAuth = function(req, res, next){
                 if(!result){
                     return;
                 }
+                //console.log("in methods.js");
                 var temp = JSON.parse(result);
-		var profileObj = JSON.parse(req.session.profile);
-                profileObj.personStatus = temp[0].status;
-		req.session.profile = JSON.stringify(profileObj);
-		next();
+                personStatus = utils.getPersonStatus(temp[0]);
+                req.session.status = personStatus;
+
+                
+                console.log("status");
+                console.log(req.session);
+                console.log(req.session.status);
+                /*
+                switch(personStatus){
+                    case 's':
+                      break;
+                    case 'p':
+                      console.log("This is a professor");
+                      //res.redirect('/professors/Head');
+                      break;
+                    case 'a':
+                      console.log("This is an assistant");
+                      //res.redirect('/assistants/Head);
+                      break;
+                }*/
             });
          }    
         else
-	    next();
-}
-
-methods.redirectPath = function(req, res, next){
-    var personStatus = JSON.parse(req.session.profile).personStatus;
-    switch(personStatus){
-        case 's':
-            console.log("This is a student");
-            res.redirect('/students/Head');
-            break;
-        case 'p':
-            console.log("This is a professor");
-            res.redirect('/professors/Head');
-            break;
-        case 'a':
-            console.log("This is an assistant");
-            res.redirect('/assistants/Head');
-            break;
-    }
+          return;
+        redirectPath();
+        //res.redirect('/students/Head');
 }
 
 exports.method = methods;

@@ -1,3 +1,4 @@
+var path = require('path');
 var https = require('https');
 var session = require('client-sessions');
 var express = require('express');
@@ -14,8 +15,9 @@ module.exports.init = function(){
 
   app.use(require('./middleware/setProfile').setProfile);
   app.use('/', express.static('./build'));
-  app.use('/teacherHead', express.static('./build'));
-  app.use('/Head', require('./utils').verifyUser,  express.static('./build'));
+  //app.use('/professors/Head', require('./utils').verifyUser, express.static('./DogUserInput'));
+  //app.use('/assistants/Head', require('./utils').verifyUser, express.static('./Bulb'));
+  app.use('/students/Head', require('./utils').verifyUser,  express.static('./build'));
   app.use('/Login', express.static('./build'));
   app.use(require('./routes/user/students/profile'));
   app.use(require('./routes/user/students/courseMap'));

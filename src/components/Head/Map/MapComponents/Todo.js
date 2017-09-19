@@ -18,7 +18,8 @@ class Todo extends React.Component {
         return(
             <div className="course"
                  style={{
-                     opacity: !this.props.completed ? "1" : "0.1",
+                     transition: "opacity .2s linear",
+                     opacity: !this.props.completed ? "1" : "0.2",
                  }}>
                 <ReactHover
                     options={optionsCursorTrueWithMargin}>
@@ -54,11 +55,11 @@ class Todo extends React.Component {
 }
 
 
-// Todo.PropTypes = {
-//     onClick: PropTypes.func.isRequired,
-//     pre_flag: PropTypes.bool.isRequired,
-//     completed: PropTypes.number.isRequired,
-//     cos_cname: PropTypes.string.isRequired
-// };
+Todo.PropTypes = {
+    onClick: PropTypes.func.isRequired,
+    pre_flag: PropTypes.bool.isRequired,
+    completed: PropTypes.bool.isRequired,
+    cos_cname: PropTypes.string.isRequired
+};
 
 export default Todo

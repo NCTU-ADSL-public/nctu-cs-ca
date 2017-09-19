@@ -7,7 +7,7 @@ var utils = require('../../../utils');
 router.get('/students/coursePass', function(req, res){
 
     if(req.session.profile){
-        var studentId = utils.getStudentId(JSON.parse(req.session.profile));
+        var studentId = utils.getPersonId(JSON.parse(req.session.profile));
 
         if(!studentId){
               console.log("No Student Id");

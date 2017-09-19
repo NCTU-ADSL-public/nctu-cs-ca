@@ -7,4 +7,6 @@ sudo mv ./nctu-cs-ca/ca/public ./public
 sudo rm -rf nctu-cs-ca
 sudo pkill node
 sudo npm run build
-sudo npm run dev
+sudo chmod 777 build/bundle.js
+ npm run dev
+
