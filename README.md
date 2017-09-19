@@ -13,6 +13,7 @@
 
 > Static Page
 
+| Path | Description |
 | /students/Head | The page for student |
 | /assistants/Head | The page for assistants |
 | /professors/Head | The page for professors |
