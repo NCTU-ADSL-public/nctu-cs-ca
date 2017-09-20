@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactHover from 'react-hover';
 import PropTypes from 'prop-types';
-
+import './Todo.css';
 
 const optionsCursorTrueWithMargin = {
     followCursor: true,
@@ -28,13 +28,16 @@ class Todo extends React.Component {
                                         backgroundColor="#616161"
                                         fullWidth="true"
                                         labelStyle={{
+                                            padding: "5px",
+                                            height: "45px",
+                                            verticalAlign: "default",
                                             color: "#fcfcfc",
                                             fontSize: "1em",
-                                            fontWeight: "100",
+                                            fontWeight: "300",
                                             letterSpacing: "1px"
                                         }}
                                         style={{
-                                            border: this.props.pre_flag ? "solid 2px #611505":"#616161",
+                                            background: this.props.pre_flag ? "#FF2D2D":"",
                                             paddingRight: 0,
                                         }}
                                         label={this.props.cosCame}
@@ -44,7 +47,7 @@ class Todo extends React.Component {
                         </MuiThemeProvider>
                     </ReactHover.Trigger>
                     <ReactHover.Hover>
-                        <h1>{this.props.cosCame}</h1>
+                        <div className="hover-info">{this.props.cosCame}</div>
                     </ReactHover.Hover>
                 </ReactHover>
             </div>

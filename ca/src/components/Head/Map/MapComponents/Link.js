@@ -12,8 +12,12 @@ const Link = ({ active, children, onClick }) => {
     if (active) {
         return (
             <MuiThemeProvider>
-                <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
-                                 disabled={true}>
+                <RaisedButton label={children}
+                              backgroundColor = "#D3D3D3"
+                              labelColor = '#778899'
+                              labelStyle={style}
+                              fullWidth={true}
+                              disabled={true}>
                 </RaisedButton>
             </MuiThemeProvider>
             )
@@ -21,7 +25,11 @@ const Link = ({ active, children, onClick }) => {
 
     return (
         <MuiThemeProvider>
-            <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
+            <RaisedButton label={children}
+                          backgroundColor = "#D3D3D3"
+                          labelColor = '#778899'
+                          labelStyle={style}
+                          fullWidth={true}
                           onTouchTap={e => {
                               e.preventDefault()
                               onClick()
