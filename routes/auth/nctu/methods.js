@@ -79,19 +79,30 @@ methods.redirectAfterAuth = function(req, res, next){
                 return;
             }
             query.findPerson(personId, function(err, result){
+		console.log(result + typeof(result));
+                if(!result){
+                    return;
+                }
+		
                 if(err){
                     console.log("Can't find this person");
                     throw err;
                     return;
                 }
-                if(!result){
-                    return;
-                }
-                var temp = JSON.parse(result);
-		var profileObj = JSON.parse(req.session.profile);
-                profileObj.personStatus = temp[0].status;
-		req.session.profile = JSON.stringify(profileObj);
-		next();
+		if(result == '[]'){
+		    var temp = JSON.parse(result);
+                    var profileObj = JSON.parse(req.session.profile);
+                    profileObj.personStatus = '!';
+                    req.session.profile = JSON.stringify(profileObj);
+            	    next();
+		}
+		else{
+                    var temp = JSON.parse(result);
+		    var profileObj = JSON.parse(req.session.profile);
+                    profileObj.personStatus = temp[0].status;
+		    req.session.profile = JSON.stringify(profileObj);
+		    next();
+		}
             });
          }    
         else
@@ -99,7 +110,9 @@ methods.redirectAfterAuth = function(req, res, next){
 }
 
 methods.redirectPath = function(req, res, next){
+    console.log(req.session.profile); 
     var personStatus = JSON.parse(req.session.profile).personStatus;
+    
     switch(personStatus){
         case 's':
             console.log("This is a student");
@@ -113,6 +126,9 @@ methods.redirectPath = function(req, res, next){
             console.log("This is an assistant");
             res.redirect('/assistants/Head');
             break;
+	case '!':
+	    res.redirect('/');
+	    break;
     }
 }
 

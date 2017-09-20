@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/public/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 252);
@@ -11166,7 +11166,6 @@ var EnhancedButton = function (_Component) {
           return _this2.button = node;
         },
         disabled: disabled,
-        href: href,
         onBlur: this.handleBlur,
         onFocus: this.handleFocus,
         onKeyUp: this.handleKeyUp,
@@ -11174,6 +11173,8 @@ var EnhancedButton = function (_Component) {
         onClick: this.handleTouchTap,
         tabIndex: disabled || disableKeyboardFocus ? -1 : tabIndex
       });
+
+      if (href) buttonProps.href = href;
 
       var buttonChildren = this.createButtonChildren();
 
@@ -11357,7 +11358,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = isPrefixedValue;
-
 var regex = /-webkit-|-moz-|-ms-/;
 
 function isPrefixedValue(value) {
@@ -17041,21 +17041,18 @@ var TransitionGroup = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
 
-    _this.performAppear = function (key) {
+    _this.performAppear = function (key, component) {
       _this.currentlyTransitioningKeys[key] = true;
 
-      var component = _this.childRefs[key];
-
       if (component.componentWillAppear) {
-        component.componentWillAppear(_this._handleDoneAppearing.bind(_this, key));
+        component.componentWillAppear(_this._handleDoneAppearing.bind(_this, key, component));
       } else {
-        _this._handleDoneAppearing(key);
+        _this._handleDoneAppearing(key, component);
       }
     };
 
-    _this._handleDoneAppearing = function (key) {
-      var component = _this.childRefs[key];
-      if (component && component.componentDidAppear) {
+    _this._handleDoneAppearing = function (key, component) {
+      if (component.componentDidAppear) {
         component.componentDidAppear();
       }
 
@@ -17065,25 +17062,22 @@ var TransitionGroup = function (_React$Component) {
 
       if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
         // This was removed before it had fully appeared. Remove it.
-        _this.performLeave(key);
+        _this.performLeave(key, component);
       }
     };
 
-    _this.performEnter = function (key) {
+    _this.performEnter = function (key, component) {
       _this.currentlyTransitioningKeys[key] = true;
 
-      var component = _this.childRefs[key];
-
       if (component.componentWillEnter) {
-        component.componentWillEnter(_this._handleDoneEntering.bind(_this, key));
+        component.componentWillEnter(_this._handleDoneEntering.bind(_this, key, component));
       } else {
-        _this._handleDoneEntering(key);
+        _this._handleDoneEntering(key, component);
       }
     };
 
-    _this._handleDoneEntering = function (key) {
-      var component = _this.childRefs[key];
-      if (component && component.componentDidEnter) {
+    _this._handleDoneEntering = function (key, component) {
+      if (component.componentDidEnter) {
         component.componentDidEnter();
       }
 
@@ -17093,28 +17087,25 @@ var TransitionGroup = function (_React$Component) {
 
       if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
         // This was removed before it had fully entered. Remove it.
-        _this.performLeave(key);
+        _this.performLeave(key, component);
       }
     };
 
-    _this.performLeave = function (key) {
+    _this.performLeave = function (key, component) {
       _this.currentlyTransitioningKeys[key] = true;
 
-      var component = _this.childRefs[key];
       if (component.componentWillLeave) {
-        component.componentWillLeave(_this._handleDoneLeaving.bind(_this, key));
+        component.componentWillLeave(_this._handleDoneLeaving.bind(_this, key, component));
       } else {
         // Note that this is somewhat dangerous b/c it calls setState()
         // again, effectively mutating the component before all the work
         // is done.
-        _this._handleDoneLeaving(key);
+        _this._handleDoneLeaving(key, component);
       }
     };
 
-    _this._handleDoneLeaving = function (key) {
-      var component = _this.childRefs[key];
-
-      if (component && component.componentDidLeave) {
+    _this._handleDoneLeaving = function (key, component) {
+      if (component.componentDidLeave) {
         component.componentDidLeave();
       }
 
@@ -17124,7 +17115,7 @@ var TransitionGroup = function (_React$Component) {
 
       if (currentChildMapping && currentChildMapping.hasOwnProperty(key)) {
         // This entered again before it fully left. Add it again.
-        _this.performEnter(key);
+        _this.keysToEnter.push(key);
       } else {
         _this.setState(function (state) {
           var newChildren = _extends({}, state.children);
@@ -17152,7 +17143,7 @@ var TransitionGroup = function (_React$Component) {
     var initialChildMapping = this.state.children;
     for (var key in initialChildMapping) {
       if (initialChildMapping[key]) {
-        this.performAppear(key);
+        this.performAppear(key, this.childRefs[key]);
       }
     }
   };
@@ -17183,38 +17174,55 @@ var TransitionGroup = function (_React$Component) {
   };
 
   TransitionGroup.prototype.componentDidUpdate = function componentDidUpdate() {
+    var _this2 = this;
+
     var keysToEnter = this.keysToEnter;
     this.keysToEnter = [];
-    keysToEnter.forEach(this.performEnter);
+    keysToEnter.forEach(function (key) {
+      return _this2.performEnter(key, _this2.childRefs[key]);
+    });
 
     var keysToLeave = this.keysToLeave;
     this.keysToLeave = [];
-    keysToLeave.forEach(this.performLeave);
+    keysToLeave.forEach(function (key) {
+      return _this2.performLeave(key, _this2.childRefs[key]);
+    });
   };
 
   TransitionGroup.prototype.render = function render() {
-    var _this2 = this;
+    var _this3 = this;
 
     // TODO: we could get rid of the need for the wrapper node
     // by cloning a single child
     var childrenToRender = [];
 
     var _loop = function _loop(key) {
-      var child = _this2.state.children[key];
+      var child = _this3.state.children[key];
       if (child) {
         var isCallbackRef = typeof child.ref !== 'string';
+        var factoryChild = _this3.props.childFactory(child);
+        var ref = function ref(r) {
+          _this3.childRefs[key] = r;
+        };
+
         process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(isCallbackRef, 'string refs are not supported on children of TransitionGroup and will be ignored. ' + 'Please use a callback ref instead: https://facebook.github.io/react/docs/refs-and-the-dom.html#the-ref-callback-attribute') : void 0;
+
+        // Always chaining the refs leads to problems when the childFactory
+        // wraps the child. The child ref callback gets called twice with the
+        // wrapper and the child. So we only need to chain the ref if the
+        // factoryChild is not different from child.
+        if (factoryChild === child && isCallbackRef) {
+          ref = (0, _chainFunction2.default)(child.ref, ref);
+        }
 
         // You may need to apply reactive updates to a child as it is leaving.
         // The normal React way to do it won't work since the child will have
         // already been removed. In case you need this behavior you can provide
         // a childFactory function to wrap every child, even the ones that are
         // leaving.
-        childrenToRender.push(_react2.default.cloneElement(_this2.props.childFactory(child), {
+        childrenToRender.push(_react2.default.cloneElement(factoryChild, {
           key: key,
-          ref: (0, _chainFunction2.default)(isCallbackRef ? child.ref : null, function (r) {
-            _this2.childRefs[key] = r;
-          })
+          ref: ref
         }));
       }
     };
@@ -17243,7 +17251,7 @@ var TransitionGroup = function (_React$Component) {
 
 TransitionGroup.displayName = 'TransitionGroup';
 
-TransitionGroup.propTypes = propTypes;
+TransitionGroup.propTypes = process.env.NODE_ENV !== "production" ? propTypes : {};
 TransitionGroup.defaultProps = defaultProps;
 
 exports.default = TransitionGroup;
@@ -17293,11 +17301,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = prefixValue;
 function prefixValue(plugins, property, value, style, metaData) {
   for (var i = 0, len = plugins.length; i < len; ++i) {
-    var processedValue = plugins[i](property, value, style, metaData
+    var processedValue = plugins[i](property, value, style, metaData);
 
     // we can stop processing if a value is returned
     // as all plugin criteria are unique
-    );if (processedValue) {
+    if (processedValue) {
       return processedValue;
     }
   }
@@ -18876,7 +18884,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_App2.default, null)
 ), document.getElementById('root'));
 
-(0, _registerServiceWorker2.default)();
+//registerServiceWorker();
 
 /***/ }),
 /* 254 */
@@ -41018,9 +41026,8 @@ function createPrefixer(_ref) {
 
       // handle nested objects
       if ((0, _isObject2.default)(value)) {
-        style[property] = prefixAll(value
+        style[property] = prefixAll(value);
         // handle array values
-        );
       } else if (Array.isArray(value)) {
         var combinedValue = [];
 
@@ -41035,11 +41042,11 @@ function createPrefixer(_ref) {
           style[property] = combinedValue;
         }
       } else {
-        var _processedValue = (0, _prefixValue2.default)(plugins, property, value, style, prefixMap
+        var _processedValue = (0, _prefixValue2.default)(plugins, property, value, style, prefixMap);
 
         // only modify the value if it was touched
         // by any plugin to prevent unnecessary mutations
-        );if (_processedValue) {
+        if (_processedValue) {
           style[property] = _processedValue;
         }
 
@@ -41234,9 +41241,8 @@ function createPrefixer(_ref) {
 
           // handle nested objects
           if ((0, _isObject2.default)(value)) {
-            style[property] = this.prefix(value
+            style[property] = this.prefix(value);
             // handle array values
-            );
           } else if (Array.isArray(value)) {
             var combinedValue = [];
 
@@ -41251,11 +41257,11 @@ function createPrefixer(_ref) {
               style[property] = combinedValue;
             }
           } else {
-            var _processedValue = (0, _prefixValue2.default)(plugins, property, value, style, this._metaData
+            var _processedValue = (0, _prefixValue2.default)(plugins, property, value, style, this._metaData);
 
             // only modify the value if it was touched
             // by any plugin to prevent unnecessary mutations
-            );if (_processedValue) {
+            if (_processedValue) {
               style[property] = _processedValue;
             }
 
@@ -41385,22 +41391,22 @@ function getBrowserInformation(userAgent) {
     }
   }
 
-  browserInfo.browserName = getBrowserName(browserInfo
+  browserInfo.browserName = getBrowserName(browserInfo);
 
   // For cordova IOS 8 the version is missing, set truncated osversion to prevent NaN
-  );if (browserInfo.version) {
+  if (browserInfo.version) {
     browserInfo.browserVersion = parseFloat(browserInfo.version);
   } else {
     browserInfo.browserVersion = parseInt(parseFloat(browserInfo.osversion), 10);
   }
 
-  browserInfo.osVersion = parseFloat(browserInfo.osversion
+  browserInfo.osVersion = parseFloat(browserInfo.osversion);
 
   // iOS forces all browsers to use Safari under the hood
   // as the Safari version seems to match the iOS version
   // we just explicitely use the osversion instead
   // https://github.com/rofrischmann/inline-style-prefixer/issues/72
-  );if (browserInfo.browserName === 'ios_saf' && browserInfo.browserVersion > browserInfo.osVersion) {
+  if (browserInfo.browserName === 'ios_saf' && browserInfo.browserVersion > browserInfo.osVersion) {
     browserInfo.browserVersion = browserInfo.osVersion;
   }
 
@@ -42762,9 +42768,9 @@ function prefixValue(value, propertyPrefixMap) {
 function transition(property, value, style, propertyPrefixMap) {
   // also check for already prefixed transitions
   if (typeof value === 'string' && properties.hasOwnProperty(property)) {
-    var outputValue = prefixValue(value, propertyPrefixMap
+    var outputValue = prefixValue(value, propertyPrefixMap);
     // if the property is already prefixed
-    );var webkitOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
+    var webkitOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
       return !/-moz-|-ms-/.test(val);
     }).join(',');
 

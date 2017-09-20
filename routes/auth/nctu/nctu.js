@@ -11,6 +11,7 @@ var router = express.Router();
 
 router.get('/auth/Nctu', function(req, res) {
     console.log("Redirecting from /auth/Nctu");
+    res.status(302);
     res.redirect('https://id.nctu.edu.tw/o/authorize/?client_id=' + methods.oAuthNctu.client_id + '&response_type=code&scope=profile%20name');
 });
 
