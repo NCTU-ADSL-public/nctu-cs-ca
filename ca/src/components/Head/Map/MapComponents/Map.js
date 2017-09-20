@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import todoApp from '../reducers';
 import {addTodo} from "../actions/index";
-import {setPascos} from "../actions/index";
 import App from './App';
 
 let store = createStore(todoApp);
@@ -25,18 +24,12 @@ class Map extends React.Component{
             for(let i=0;i<this.props.data.length;i++){
                 if(i!==0){
                     if(this.props.data[i-1].cos_cname !== this.props.data[i].cos_cname){
-                        console.log("addTodo")
                         store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                     }
                 }
                 else{
-                    console.log("addTodo")
                     store.dispatch(addTodo(this.props.data[i].cos_cname,this.props.data[i].grade,this.props.data[i].semester,this.props.data[i].suggest,this.props.data[i].pre));
                 }
-            }
-            for(let j=0;j<this.props.studentPasdata.length;j++){
-                console.log("setPascos")
-                store.dispatch(setPascos(this.props.studentPasdata[j].cos_cname,0));
             }
         }
     }
@@ -51,7 +44,7 @@ class Map extends React.Component{
 
                 <div className="Map-Row">
                     <Provider store={store}>
-                        <App studentPasdata={this.props.studentPasdata}/>
+                        <App studentPasdata={this.props.studentPasdata} data={this.props.data} studentsGrad={this.props.studentsGrad}/>
                     </Provider>
                 </div>
             </div>
