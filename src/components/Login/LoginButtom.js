@@ -11,6 +11,7 @@ class LoginButtom extends React.Component{
 						  backgroundColor = "#00AEAE"
 						  labelColor = {grey50}
 						  href="/auth/Nctu"
+						  //href = "https://id.nctu.edu.tw/o/authorize/?client_id=LtdkznMFdoasXeNs23sRGnjodszIhlVbeujg27Fg&response_type=code&scope=profile%20name"
 						  style={{
                               width: '13%',
                               fontFamily: 'Noto Sans CJK TC',

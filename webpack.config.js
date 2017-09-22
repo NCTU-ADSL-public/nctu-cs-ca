@@ -6,9 +6,9 @@ module.exports = {
     path.join(__dirname, '/src/index.js') 
   ],
   output: {
-    path: path.join(__dirname, '/dist'), 
+    path: path.join(__dirname, '/build'), 
     filename: 'bundle.js',
-    publicPath: '/public/'
+    publicPath: '/build/'
     },
   module: {
       loaders: [
@@ -19,15 +19,17 @@ module.exports = {
                   },
                   {
                     test: /\.js$/,
+                    exclude: /node_modules/,
                     loader: 'babel-loader',
                   },
                   {
                     test: /\.(png|jpg|gif)$/,                
                     loader: 'url-loader'
                   }
-       ]
+      ] 
     },
   resolve: {
       extensions: ['*', '.js', '.json'] 
-    }
+    },
+  watch: true
 };

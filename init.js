@@ -24,6 +24,7 @@ module.exports.init = function(){
   app.use('/', express.static('./build'));
   //app.use('/professors/Head', require('./utils').verifyUser, express.static('./DogUserInput'));
   //app.use('/assistants/Head', require('./utils').verifyUser, express.static('./Bulb'));
+  //app.use('/students/Head', require('./utils').verifyUser,  express.static('./build'));
   app.use('/students/Head', require('./utils').verifyUser,  express.static('./build'));
   app.use('/Login', express.static('./build'));
   app.use(require('./routes/user/students/profile'));

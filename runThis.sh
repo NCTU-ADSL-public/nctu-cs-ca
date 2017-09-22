@@ -8,5 +8,5 @@ sudo rm -rf nctu-cs-ca
 sudo pkill node
 sudo npm run build
 sudo chmod 777 build/bundle.js
- npm run dev
+sudo npm run dev
 
