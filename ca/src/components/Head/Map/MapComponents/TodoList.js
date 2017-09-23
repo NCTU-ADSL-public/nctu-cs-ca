@@ -17,7 +17,6 @@ const TodoList = ({ todos, onTodoClick }) => (
 
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.shape({
-        onClick: PropTypes.func.isRequired,
         pre_flag: PropTypes.bool.isRequired,
         completed: PropTypes.bool.isRequired,
         cos_cname: PropTypes.string.isRequired
