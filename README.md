@@ -12,7 +12,7 @@ $ git clone https://github.com/NCTU-ADSL-public/nctu-cs-ca.git
 $ cd nctu-cs-ca
 $ sudo npm run dev
 ```
-Deploy with Docker, Instead of sudo npm run dev do the following
+Deploy with Docker, instead of sudo npm run dev do the following
 ```
 $ docker build -t $imageName
 $ docker run -d -p 1111:1111 --name $name --net=host $imageName
