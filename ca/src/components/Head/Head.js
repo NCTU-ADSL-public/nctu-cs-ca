@@ -68,16 +68,16 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
-        //     MapCourseData = Object.keys(studentCos).map(function(key) {
-        //         let user = studentCos[key];
-        //         user.id = key;
-        //         return user;
-        //     });
-        // StudentCosPas = Object.keys(studentPas).map(function(key) {
-        //     let user = studentPas[key];
-        //     user.id = key;
-        //     return user;
-        // });
+            MapCourseData = Object.keys(studentCos).map(function(key) {
+                let user = studentCos[key];
+                user.id = key;
+                return user;
+            });
+        StudentCosPas = Object.keys(studentPas).map(function(key) {
+            let user = studentPas[key];
+            user.id = key;
+            return user;
+        });
         axios.get('/students/courseMap').then(studentData => {
         	console.log(studentData.data);
                 MapCourseData = Object.keys(studentData.data).map(function(key) {
@@ -213,11 +213,6 @@ class Head extends Component {
 				</div>
 
 				<div id="page"></div>
-				<div style={this.state.styleindex}>
-					<FadeIn>
-						<HomeItem/>
-					</FadeIn>
-				</div>
 				<footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
 	  		</div>
 	    );
