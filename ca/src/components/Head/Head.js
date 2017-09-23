@@ -47,9 +47,9 @@ class Head extends Component {
             display : 'inline',
        },
 		studentIdcard:{
-       		name:'流川楓',
-			prog:'資工',
-			grad:'大三',
+       		name:'',
+			prog:'',
+			grad:'',
 		},
     };
 
