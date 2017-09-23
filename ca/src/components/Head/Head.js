@@ -68,16 +68,16 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
-            MapCourseData = Object.keys(studentCos).map(function(key) {
-                let user = studentCos[key];
-                user.id = key;
-                return user;
-            });
-        StudentCosPas = Object.keys(studentPas).map(function(key) {
-            let user = studentPas[key];
-            user.id = key;
-            return user;
-        });
+        //     MapCourseData = Object.keys(studentCos).map(function(key) {
+        //         let user = studentCos[key];
+        //         user.id = key;
+        //         return user;
+        //     });
+        // StudentCosPas = Object.keys(studentPas).map(function(key) {
+        //     let user = studentPas[key];
+        //     user.id = key;
+        //     return user;
+        // });
         axios.get('/students/courseMap').then(studentData => {
         	console.log(studentData.data);
                 MapCourseData = Object.keys(studentData.data).map(function(key) {
