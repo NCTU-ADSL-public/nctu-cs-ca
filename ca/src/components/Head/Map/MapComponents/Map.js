@@ -14,7 +14,6 @@ let flag = 1;
 class Map extends React.Component{
     constructor(props) {
         super(props);
-        console.log(this.props.data);
         this.SavingCourseData();
     }
 
