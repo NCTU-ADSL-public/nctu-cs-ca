@@ -14,7 +14,7 @@ $ sudo npm run dev
 ```
 Deploy with Docker, Instead of sudo npm run dev do the following
 ```
-$ docker build -t $name
+$ docker build -t $imageName
 $ docker run -d -p 1111:1111 --name $name --net=host $imageName
 ```
 
