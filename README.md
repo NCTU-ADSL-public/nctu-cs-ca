@@ -34,7 +34,7 @@ $ docker run -d -p 1111:1111 --name $name --net=host $imageName
 
 | Path | Description |
 | --------- | ------ |
-| /students/Head | The page for student |
+| /students/Head | The page for students |
 | /assistants/Head | The page for assistants |
 | /professors/Head | The page for professors |
 | / | Login Page |
