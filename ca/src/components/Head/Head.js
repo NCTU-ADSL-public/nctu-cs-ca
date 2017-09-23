@@ -35,7 +35,6 @@ class Head extends Component {
 
     constructor(props) {
         super(props);
-        this.getdata();
     }
 
     state = {
@@ -54,7 +53,8 @@ class Head extends Component {
 		},
     };
 
-    getdata(){
+
+    componentWillMount(){
     	var _this = this;
         axios.get('/students/profile').then(studentData => {
             console.log(studentData.data);
