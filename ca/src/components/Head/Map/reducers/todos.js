@@ -1,7 +1,6 @@
 const todo = (state = {}, action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            console.log("1");
             return {
                 id: action.id,
                 cosCame: action.cosCame,

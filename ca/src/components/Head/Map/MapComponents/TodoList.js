@@ -15,13 +15,13 @@ const TodoList = ({ todos, onTodoClick }) => (
     </div>
 );
 
-TodoList.propTypes = {
-    todos: PropTypes.arrayOf(PropTypes.shape({
-        pre_flag: PropTypes.bool.isRequired,
-        completed: PropTypes.bool.isRequired,
-        cos_cname: PropTypes.string.isRequired
-    }).isRequired).isRequired,
-    onTodoClick: PropTypes.func.isRequired
-};
+// TodoList.propTypes = {
+//     todos: PropTypes.arrayOf(PropTypes.shape({
+//         pre_flag: PropTypes.bool.isRequired,
+//         completed: PropTypes.bool.isRequired,
+//         cos_cname: PropTypes.string.isRequired
+//     }).isRequired).isRequired,
+//     onTodoClick: PropTypes.func.isRequired
+// };
 
 export default TodoList

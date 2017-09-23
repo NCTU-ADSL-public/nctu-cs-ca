@@ -58,7 +58,6 @@ class Head extends Component {
     	var _this = this;
 
         axios.get('/students/profile').then(studentData => {
-            console.log(studentData.data);
             _this.setState({
                 studentIdcard: {
                     name: studentData.data[0].sname,
@@ -80,7 +79,6 @@ class Head extends Component {
             return user;
         });
         axios.get('/students/courseMap').then(studentData => {
-        	console.log(studentData.data);
                 MapCourseData = Object.keys(studentData.data).map(function(key) {
                     let user = studentData.data[key];
                     user.id = key;
