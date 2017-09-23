@@ -56,6 +56,7 @@ class Head extends Component {
 
     componentWillMount(){
     	var _this = this;
+
         axios.get('/students/profile').then(studentData => {
             console.log(studentData.data);
             _this.setState({
@@ -102,6 +103,7 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
+        this.select(0)
     }
 
   	select(index){
