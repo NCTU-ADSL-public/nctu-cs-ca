@@ -103,8 +103,12 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
-        this.select(0)
+
     }
+
+    componentDidMount(){
+    	this.select(0);
+	}
 
   	select(index){
   		this.setState({styleindex:
@@ -214,7 +218,7 @@ class Head extends Component {
 				<div id="topRec">
 				</div>
 
-				<div id="page"></div>
+				<div id="page" > </div>
 				<footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
 	  		</div>
 	    );
