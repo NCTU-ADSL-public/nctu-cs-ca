@@ -3,16 +3,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 
-const style =[{
-    fontFamily: 'Noto Sans CJK TC',
-    fontWeight: 'bold',
-}];
-
 const Link = ({ active, children, onClick }) => {
     if (active) {
         return (
             <MuiThemeProvider>
-                <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
+                <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={{
+                    fontFamily: 'Noto Sans CJK TC',
+                    fontWeight: 'bold',
+                }} fullWidth={true}
                                  disabled={true}>
                 </RaisedButton>
             </MuiThemeProvider>
@@ -21,7 +19,10 @@ const Link = ({ active, children, onClick }) => {
 
     return (
         <MuiThemeProvider>
-            <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={style} fullWidth={true}
+            <RaisedButton label={children} backgroundColor = "#D3D3D3" labelColor = '#778899' labelStyle={{
+                fontFamily: 'Noto Sans CJK TC',
+                fontWeight: 'bold',
+            }} fullWidth={true}
                           onTouchTap={e => {
                               e.preventDefault()
                               onClick()
