@@ -27,7 +27,7 @@ class Todo extends React.Component {
                         <MuiThemeProvider>
                             <FlatButton className="course-btn"
                                         backgroundColor="#616161"
-                                        fullWidth="true"
+                                        fullWidth={true}
                                         labelStyle={{
                                             color: "#fcfcfc",
                                             fontSize: "1em",
