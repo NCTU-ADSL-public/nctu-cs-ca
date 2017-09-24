@@ -17,14 +17,12 @@ var upload = multer({ storage: storage });
 
 
 router.post('/students/score', upload.any(), function(req, res){
-    console.log('Banana');
-    console.log("Post request to /students/score");
     if(!req.files){
         console.log("No files");
         return;
     }
     console.log(req.files);
-    res.redirect('/Head?e='+encodeURIComponent('Upload File'));
+    res.redirect('/students/Head?e='+encodeURIComponent('Upload File'));
   });
 
 
