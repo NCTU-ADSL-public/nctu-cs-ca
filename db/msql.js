@@ -1,18 +1,8 @@
-//var Client = require('mariasql');
 var lineReader = require('line-reader');
 var psw = require('./dbpsw');
 
 var c = psw.dbpsw();
-//`c.dbpsw();
-/*
-var c = new Client({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    db: 'ca',
-    charset: 'utf8'
-});
-*/
+
 var sql_findStudent = c.prepare('\
     select sname,program,grade from student \
     where student_id=:id');
