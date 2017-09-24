@@ -9,7 +9,7 @@ import './Todo.css';
 const optionsCursorTrueWithMargin = {
     followCursor: true,
     shiftX: 20,
-    shiftY: 0
+    shiftY: -15
 };
 
 class Todo extends React.Component {
