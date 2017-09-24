@@ -1,13 +1,13 @@
-[0]  [324] ./src/index.css 1.13 kB {0} [built]
-[0]  [325] ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/index.css 540 bytes {0} [built]
-[0]  [423] (webpack)/buildin/amd-define.js 88 bytes {0} [built]
-[0]  [549] ./src/registerServiceWorker.js 4.03 kB {0} [built]
-[0]     + 542 hidden modules
+[1] Verified
+[1] profile:
+[1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]
+[1] profile:
+[1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]
 [1] person state:2
 [1] person state:2
 [1] Redirecting from /auth/Nctu
-[1] XMyDO4V6fWtIkNyiCDJThqHSPtV7wJ
-[1] Token:NnSeeK2zI3VOdOGYbhfEMIyYA6AISx
+[1] nCxzb1LRxN1d5FOm0Jw27z9nNyCvNV
+[1] Token:rORv45B7bnKJPNn6UXuMn3iReCIKBQ
 [1] Profile:{"email": "friedmeow.ac03@nctu.edu.tw", "username": "0312512"}
 [1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]string
 [1] {"email":"friedmeow.ac03@nctu.edu.tw","username":"0312512","personStatus":"s"}
@@ -19,23 +19,3 @@
 [1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]
 [1] profile:
 [1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]
-[1] person state:0
-[1] person state:0
-[1] Redirecting from /auth/Nctu
-[1] ddVk99baq0yDeBB6mHhwGGqYLX9zVK
-[1] Token:ZugTYQvWItRVxGl0oviPNg91WhGQ7d
-[1] Profile:{"email": "friedmeow.ac03@nctu.edu.tw", "username": "0312512"}
-[1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]string
-[1] {"email":"friedmeow.ac03@nctu.edu.tw","username":"0312512","personStatus":"s"}
-[1] This is a student
-[1] Verified
-[1] Verified
-[1] Verified
-[1] profile:
-[1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]
-[1] profile:
-[1] [{"sname":"楊卓耘","program":"資工","grade":"四","status":"s"}]
-[1] person state:2
-[1] person state:2
-[1] person state:2
-[1] person state:2
