@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link href="https://fonts.googleapis.com/css?family=Give+You+Glory" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://raw.github.com/makeusabrew/bootbox/v2.4.2/bootbox.min.js"></script>
+	<style type="text/css">
+		h1 { font-family: "Give You Glory"; font-weight: bold}
+		h2 { font-family: "Permanent Marker"; font-weight: bold}
+		#container{
+			left: 30%;
+			margin-top: 30px;
+  			margin-right: auto;
+	                margin-bottom: 0;
+    			margin-left: auto;
+			padding: 50px;
+			position: fixed;
+			border-style: solid;
+			border-color: black;
+		}
+	</style>
+    </head>
+    <body>
+	<div id="container">
+		<h1> Change Your Profile Picture. </h1>
+	<form method="post" enctype="multipart/form-data" action="/students/ProfilePic">
+		<div class="form-group">
+		    <small> Limit size: 600kb </small>
+                            <input type="file" name="profilePic"/>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+	<br>
+	<img src="/profilePic.png" / >
+	<h2>Resized &#8595;</h2>
+	<img src="/profilePicCrop.png" / >
+	</div>
+    </body>
+
+</html>

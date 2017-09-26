@@ -186,8 +186,10 @@ class Head extends Component {
 						</div>
 						<div className="idcard">
 							<div id="idcard-data">
-								<div id="idcard-photo">
-									<img src={defalt} width="44px" />
+								<div id="idcard-photo" >
+									<a href="/students/ProfilePic">
+							        		<img src={defalt} href="/students/ProfilePic"  width="44px" />
+									</a>
 								</div>
 								<div id="idcard-top">
                                     {this.state.studentIdcard.name}

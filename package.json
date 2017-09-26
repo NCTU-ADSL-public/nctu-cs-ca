@@ -60,6 +60,7 @@
     "concurrently": "^3.5.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
+    "gm": "^1.23.0",
     "helmet": "^3.8.1",
     "material-ui": "^0.19.2",
     "mute-stream": "0.0.7",

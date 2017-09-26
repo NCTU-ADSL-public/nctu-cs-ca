@@ -88,6 +88,16 @@
     float: left;
 }
 
+#uploadProfilePic:hover {
+    z-index: 10000;
+    display: block;
+    margin: 0 0 0 0;
+    height: 44px;
+    width: 44px;
+    float: left;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 #logout-button{
     height: 60px;
     width: 70px;
