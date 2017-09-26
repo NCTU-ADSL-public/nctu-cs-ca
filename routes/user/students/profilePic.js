@@ -14,28 +14,47 @@ var storage = multer.diskStorage({
       var personId = utils.getPersonId(JSON.parse(req.session.profile));
       cb(null, personId + '.png');
     } 
-})
+});
 var upload = multer({ storage: storage, limits:{ fileSize: 600 * 1024 }}).single('profilePic');
 
+router.get('/students/ProfilePicExist', utils.verifyUser, function(req, res){
+  var personId = utils.getPersonId(JSON.parse(req.session.profile));
+  if (fs.existsSync(path.join(__dirname, '../../../profilePic/') + personId + '_crop.png')) {
+    res.sendFile(path.join(__dirname, '../../../profilePic') + '/' + personId + '_crop.png');
+  }
+  else{
+    res.sendFile(path.join(__dirname, '../../../profilePic') + '/' +  'defalt.jpg');
+  }
+});
 
-
-router.post('/students/ProfilePic',  function(req, res){
+var uploadImage = function(req, res, next){
     upload(req, res, function(err){
     if(err){
-	console.log('err' + err);
-	return res.end("File too big, GG");
-    }});
-    var personId = utils.getPersonId(JSON.parse(req.session.profile));
+        console.log('err' + err);
+        return res.end("File too big, GG");
+    }
+    else
+	next();
+    });
+};
+
+var cropImage = function(req, res, next){
+	var personId = utils.getPersonId(JSON.parse(req.session.profile));
     gm(path.join(__dirname, '../../../profilePic/') + personId + '.png')
-    .resize(44, 44)
+    .resize(44,44, "!")
     .noProfile()
     .write(path.join(__dirname, '../../../profilePic/') + personId + '_crop.png', function (err) {
-      if (!err) console.log('done');
-      else{
-	console.log(err);
+      if (!err){
+	 console.log('done');
+	 res.redirect('/students/ProfilePic');
       }
-    res.redirect('/students/ProfilePic');
-  })});
+      else{
+        console.log(err);
+      }
+    })
+};
+
+router.post('/students/ProfilePic', uploadImage, cropImage); 
 
 
 
