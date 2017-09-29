@@ -78,5 +78,5 @@ ___
 ## Nginx
 ```
 Configure reverse proxy for https to backend server
-Set 302 code for http and redirect traffic to https
+Set 301 code for http and redirect traffic to https
 ```
