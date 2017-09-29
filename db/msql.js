@@ -1,149 +1,192 @@
 var lineReader = require('line-reader');
+var s = require('./sqlString.js');
 var psw = require('./dbpsw');
 
-var c = psw.dbpsw();
 
-var sql_findStudent = c.prepare('\
-    select sname,program,grade from student \
-    where student_id=:id');
+var pool = psw.dbpsw();
 
-var sql_findProfessor = c.prepare('\
-    select teacher_id,tname from teacher\
-    where teacher_id=:id');
-
-var sql_findAssistant = c.prepare('\
-    select assistant_id,aname from assistant\
-    where assistant_id=:id');
-
-var sql_addEmail = c.prepare('\
-    update student set email=:email \
-    where student_id=:id');
-
-var sql_showCowMap = c.prepare('\
-    select a.cos_cname, a.grade, a.semester, b.pre_cos_cname as suggest, c.pre_cos_cname as pre \
-    from (\
-        select c.cos_cname,c.grade,c.semester \
-        from cos_require as c, student as s \
-        where s.student_id=:id and c.school_year=:year and c.program=s.program \
-        order by grade, semester\
-        ) as a \
-    left outer join \
-        (\
-        select pre_cos_cname, after_cos_cname \
-        from cos_suggest as c, student as s \
-        where s.student_id=:id and s.program=c.program and c.school_year=:year\
-        ) as b \
-    on a.cos_cname=b.after_cos_cname \
-    left outer join \
-        (\
-        select pre_cos_cname, after_cos_cname \
-        from cos_pre as c, student as s \
-        where s.student_id=:id and s.program=c.program and c.school_year=:year\
-        ) as c \
-    on a.cos_cname=c.after_cos_cname \
-    order by a.grade,a.semester,a.cos_cname;');
-
-var sql_showCosMapPass = c.prepare('\
-    select cos_cname from student_cos_relation as sc,cos_name as c \
-    where sc.student_id=:id and sc.cos_code=c.cos_code and \
-    (sc.cos_code like \'DCP%\' or sc.cos_code like \'IOE%\' or cos_cname like \'微積分甲%\' or cos_cname like \'物理%\' or cos_cname like \'化學%\' )');
-
-
-var sql_PassCos = c.prepare('\
-    select sc.cos_code,cos_cname \
-    from student_cos_relation as sc \
-    left outer join cos_name as c \
-    on sc.cos_code=c.cos_code \
-    where sc.student_id=:id;');
-
-var sql_uploadGrade = c.prepare('\
-    insert into cos_result \
-    values(:unique_id,:id,:score) \
-    on duplicate key update \
-    unique_id=:unique_id,student_id=:id,score=:score;');
+function padLeft(str, len) {
+    str = '' + str;
+    if (str.length >= len) {
+        return str;
+    } else {
+        return padLeft("0" + str, len);
+    }
+}
 
 module.exports = {
 
     findPerson: function(id, callback) {
         if (id.match(/^[0-9].*/g)) {
-            c.query(sql_findStudent({ id: id }), function(err, result) {
-                if (err)
-                    throw err;
-                if (result.info.numRows != 0)
-                    result[0]['status'] = 's';
-                callback(null, JSON.stringify(result));
+            const resource = pool.acquire();
+            resource.then(function(c) {
+                var sql_findStudent = c.prepare(s.findStudent);
+                c.query(sql_findStudent({ id: id }), function(err, result) {
+                    if (err)
+                        throw err;
+                    if (result.info.numRows != 0)
+                        result[0]['status'] = 's';
+                    callback(null, JSON.stringify(result));
+                    pool.release(c);
+                })
             });
         } else if (id.match(/^T.*/g)) {
-            c.query(sql_findProfessor({ id: id }), function(err, result) {
-                if (err)
-                    throw err;
-                if (result.info.numRows != 0)
-                    result[0]['status'] = 'p';
-                callback(null, JSON.stringify(result));
-            });
+            const resource = pool.acquire();
+            resource.then(function(c) {
+                var sql_findProfessor = c.prepare(s.findProfessor);
+                c.query(sql_findProfessor({ id: id }), function(err, result) {
+                    if (err)
+                        throw err;
+                    if (result.info.numRows != 0)
+                        result[0]['status'] = 'p';
+                    callback(null, JSON.stringify(result));
+                    pool.release(c);
+                });
+            })
         } else {
-            c.query(sql_findAssistant({ id: id }), function(err, result) {
-                if (err)
-                    throw err;
-                if (result.info.numRows != 0)
-                    result[0]['status'] = 'a';
-                callback(null, JSON.stringify(result));
-            });
+            const resource = pool.acquire();
+            resource.then(function(c) {
+                var sql_findAssistant = c.prepare(s.findAssistant);
+                c.query(sql_findAssistant({ id: id }), function(err, result) {
+                    if (err)
+                        throw err;
+                    if (result.info.numRows != 0)
+                        result[0]['status'] = 'a';
+                    callback(null, JSON.stringify(result));
+                    pool.release(c);
+                });
+            })
         }
     },
     addEmail: function(id, email) {
-        c.query(sql_addEmail({ id: id, email: email }), function(err) {
-            if (err)
-                throw err;
-        });
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_addEmail = c.prepare(s.addEmail);
+            c.query(sql_addEmail({ id: id, email: email }), function(err) {
+                if (err)
+                    throw err;
+                pool.release(c);
+            });
+        })
     },
     showCosMap: function(id, callback) {
-        var year = '1' + id[0] + id[1];
-        c.query(sql_showCowMap({ id: id, year: year }), function(err, result) {
-            if (err)
-                throw err;
-            callback(null, JSON.stringify(result));
-        });
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_showCowMap = c.prepare(s.showCowMap);
+            var year = '1' + id[0] + id[1];
+            c.query(sql_showCowMap({ id: id, year: year }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            });
+        })
     },
     showCosMapPass: function(id, callback) {
-        c.query(sql_showCosMapPass({ id: id }), function(err, result) {
-            if (err)
-                throw err;
-            callback(null, JSON.stringify(result));
-        });
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_showCosMapPass = c.prepare(s.showCosMapPass);
+            c.query(sql_showCosMapPass({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            });
+        })
     },
-    PassCos: function(id, callback) {
-        c.query(sql_PassCos({ id: id }), function(err, result) {
-            if (err)
-                throw err;
-            callback(null, JSON.stringify(result));
-        });
+    p_uploadGrade: function(pt) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_p_uploadGrade = c.prepare(s.p_uploadGrade);
+            var now = 0,
+                num = "";
+            lineReader.eachLine(pt, function(line, last) {
+                if (now == 0) {
+                    var a = line.match(/[0-9]+/g);
+                    num = num + a[0] + "-" + a[1] + "-";
+                } else if (now == 1) {
+                    var a = line.match(/[0-9]+/g);
+                    num = num + a[0];
+                } else if (/[0-9+]/.test(line.split(',')[2])) {
+                    line = line.split(',');
+                    c.query(sql_p_uploadGrade({ unique_id: num, id: line[2], score: line[4] }), function(err) {
+                        if (err)
+                            throw err;
+                    });
+                }
+                if (last) {
+                    pool.release(c);
+                    return false;
+                }
+                now++;
+            });
+        })
     },
-    uploadGrade: function(pt) {
-        var now = 0,
-            num = "";
-        lineReader.eachLine(pt, function(line, last) {
-            if (now == 0) {
-                var a = line.match(/[0-9]+/g);
-                num = num + a[0] + "-" + a[1] + "-";
-            } else if (now == 1) {
-                var a = line.match(/[0-9]+/g);
-                num = num + a[0];
-            } else if (/[0-9+]/.test(line.split(',')[2])) {
-                line = line.split(',');
-                console.log(line[2], line[4]);
-                c.query(sql_uploadGrade({ unique_id: num, id: line[2], score: line[4] }), function(err) {
-                    if (err)
-                        throw err;
-                });
-            }
-            if (last) {
-                return false;
-            }
-            now++;
-        });
+    a_uploadGrade: function(pt) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_a_uploadGrade = c.prepare(s.a_uploadGrade);
+            var sql_updateStudentCosPass = c.prepare(s.updateStudentCosPass);
+            var num = "",
+                now = 0;
+            lineReader.eachLine(pt, function(line, last) {
+                if (now != 0) {
+                    line = line.split(',');
+                    num = line[4] + '-' + line[5] + '-' + padLeft(line[6], 4);
+                    c.query(sql_a_uploadGrade({ unique_id: num, id: line[0], score: line[15], grade: line[16], GP: line[17] }), function(err) {
+                        if (err)
+                            throw err;
+                    });
+                    if (line[14] == '通過')
+                        c.query(sql_updateStudentCosPass({ id: line[0], code: line[9], year: line[4], semester: line[5] }), function(err) {
+                            if (err)
+                                throw err;
+                        });
+                }
+                if (last) {
+                    pool.release(c);
+                    return false;
+                }
+                now++;
+            });
+        })
     },
-    close: function(){
-        c.end();
+    totalCredit: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_totalCredit = c.prepare(s.totalCredit);
+            var str = id.split("");
+            str = '%' + id[0] + id[1];
+            c.query(sql_totalCredit({ id: id, year: str }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            })
+        })
     },
+    oldGeneralCredit: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_oldGeneralCredit = c.prepare(s.oldGeneralCredit);
+            c.query(sql_oldGeneralCredit({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            })
+        })
+    },
+    Pass: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_Pass = c.prepare(s.Pass);
+            c.query(sql_Pass({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            })
+        })
+    }
 };

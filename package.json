@@ -32,6 +32,7 @@
     "client-sessions": "^0.8.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
+    "generic-pool": "^3.1.8",
     "line-reader": "^0.4.0",
     "mariadb": "^1.0.2",
     "mariasql": "^0.2.6",
