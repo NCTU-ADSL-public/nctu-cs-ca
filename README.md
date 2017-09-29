@@ -7,7 +7,7 @@ Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows
 ### Installation
 
 ```
-Configure Nginx (Nginx section below) +  Mariadb (see database section below)
+Configure Nginx (see nginx section below) +  Mariadb (see database section below)
 $ git clone https://github.com/NCTU-ADSL-public/nctu-cs-ca.git
 $ cd nctu-cs-ca
 $ sudo npm run dev
@@ -43,7 +43,7 @@ $ docker run -d -p 1111:1111 --name $name --net=host $imageName
 
 ___
 
-## DataBase
+## Database
 ```
 Please npm install the following packages before using
 1. [mariasql](https://github.com/mscdex/node-mariasql)
