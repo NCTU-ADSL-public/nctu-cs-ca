@@ -7,7 +7,7 @@ Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows
 ### Installation
 
 ```
-Configure Nginx +  Mariadb (see the section database below)
+Configure Nginx (Nginx section below) +  Mariadb (see database section below)
 $ git clone https://github.com/NCTU-ADSL-public/nctu-cs-ca.git
 $ cd nctu-cs-ca
 $ sudo npm run dev
@@ -73,3 +73,10 @@ Please npm install the following packages before using
 | oldGeneralCredit(student_id,cb) | return someone's credits of 舊版通識 ((bug |
 | Pass(student_id,cb) | return all of someone's passing course |
 
+___
+
+## Nginx
+```
+Configure reverse proxy for https to backend server
+Set 302 code for http and redirect traffic to https
+```
