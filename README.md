@@ -7,13 +7,14 @@ Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows
 ### Installation
 
 ```
-Configure Nginx +  Mariadb
+Configure Nginx +  Mariadb (see the section database below)
 $ git clone https://github.com/NCTU-ADSL-public/nctu-cs-ca.git
 $ cd nctu-cs-ca
 $ sudo npm run dev
 ```
-Deploy with Docker, instead of sudo npm run dev do the following
+
 ```
+Deploy with Docker, instead of sudo npm run dev do the following
 $ docker build -t $imageName .
 $ docker run -d -p 1111:1111 --name $name --net=host $imageName
 ```
@@ -40,13 +41,17 @@ $ docker run -d -p 1111:1111 --name $name --net=host $imageName
 | / | Login Page |
 
 
-# DB
-### please npm install the following packages before using
+___
+
+## DataBase
+```
+Please npm install the following packages before using
 1. [mariasql](https://github.com/mscdex/node-mariasql)
 2. [line-reader](https://github.com/nickewing/line-reader)
 3. [generic-pool](https://github.com/coopernurse/node-pool)
+```
 
-## Introduction
+### Introduction
 
 ### Personal Information of Student
 | function | description |
