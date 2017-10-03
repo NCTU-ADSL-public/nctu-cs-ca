@@ -69,7 +69,8 @@ Please npm install the following packages before using
 | function | description |
 | ------- | ----- |
 | a_uploadGrade(file_path) | assistant upload grades |
-| totalCredit(student_id,cb) | return someone's credits of 必選修  ((bug |
+| totalCredit(student_id,cb) | return someone's total credits |
+| totalRequiredCredit(student_id,cb) | return someone's credits of 必選修  ((bug |
 | oldGeneralCredit(student_id,cb) | return someone's credits of 舊版通識 ((bug |
 | Pass(student_id,cb) | return all of someone's passing course |
 
