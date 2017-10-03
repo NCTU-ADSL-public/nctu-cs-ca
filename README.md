@@ -70,7 +70,7 @@ Please npm install the following packages before using
 | ------- | ----- |
 | a_uploadGrade(file_path) | assistant upload grades |
 | totalCredit(student_id,cb) | return someone's total credits |
-| totalRequiredCredit(student_id,cb) | return someone's credits of 必選修  ((bug |
+| totalRequiredCredit(student_id,cb) | return someone's credits of 必選修 |
 | oldGeneralCredit(student_id,cb) | return someone's credits of 舊版通識 ((bug |
 | Pass(student_id,cb) | return all of someone's passing course |
 
