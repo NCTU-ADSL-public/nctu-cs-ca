@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { handleCoursedata } from '../actions'
+import { setThisbutton } from '../actions'
+import { setAll } from '../actions'
 import TodoList from '../MapComponents/TodoList'
 
 const getVisibleTodos = (todos, filter, grad, sem) => {
@@ -17,14 +19,16 @@ const getVisibleTodos = (todos, filter, grad, sem) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        todos: getVisibleTodos(state.todos, state.visibilityFilter, ownProps.grad, ownProps.sem)
+        todos: getVisibleTodos(state.todos, state.visibilityFilter, ownProps.grad, ownProps.sem),
+        active: ownProps.cosCame === state.setThisbutton
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onTodoClick: (suggest) => {
+        onTodoClick: (suggest,cosCame) => {
             dispatch(handleCoursedata(suggest))
+            dispatch(setThisbutton(cosCame))
         }
     }
 };

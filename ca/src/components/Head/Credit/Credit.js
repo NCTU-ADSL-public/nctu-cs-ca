@@ -1,30 +1,56 @@
+import { Layout, Menu, Icon } from 'antd';
+import './Credit.css';
 import React from 'react';
-import axios from 'axios';
+const { Header, Sider, Content } = Layout;
 
-class Credit extends React.Component{
-    componentWillMount(){
-            return axios.get('/students/score').then(studentData => {
-                //studentData.status  HTTP response code (e.g., 200, 401)
-                //studentData.data  object parsed from HTTP response body
-                //studentData.headers  HTTP presonse headers
-
-
-                console.log(studentData.data)
-            }).catch(err => {
-                console.log(err);
-            });
-
-    }
-
+class SiderDemo extends React.Component {
+    state = {
+        collapsed: false,
+    };
+    toggle = () => {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
+    };
     render() {
         return (
-            <div >
-                OK
-            </div>
+            <Layout>
+                <Sider
+                    trigger={null}
+                    collapsible
+                    collapsed={this.state.collapsed}
+                >
+                    <div className="logo" />
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                        <Menu.Item key="1">
+                            <Icon type="user" />
+                            <span>nav 1</span>
+                        </Menu.Item>
+                        <Menu.Item key="2">
+                            <Icon type="video-camera" />
+                            <span>nav 2</span>
+                        </Menu.Item>
+                        <Menu.Item key="3">
+                            <Icon type="upload" />
+                            <span>nav 3</span>
+                        </Menu.Item>
+                    </Menu>
+                </Sider>
+                <Layout>
+                    <Header style={{ background: '#fff', padding: 0 }}>
+                        <Icon
+                            className="trigger"
+                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                            onClick={this.toggle}
+                        />
+                    </Header>
+                    <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+                        Content
+                    </Content>
+                </Layout>
+            </Layout>
         );
     }
-
 }
 
-
-export default Credit;
+export default SiderDemo;

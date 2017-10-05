@@ -1,4 +1,4 @@
-let nextTodoId = 0
+let nextTodoId = 0;
 export const addTodo = (cosCame,grade,semester,suggest,pre) => {
     return {
         type: 'ADD_TODO',
@@ -13,6 +13,13 @@ export const setVisibilityFilter = (filter) => {
     return {
         type: 'SET_VISIBILITY_FILTER',
         filter
+    }
+};
+
+export const setThisbutton = (cosCame) => {
+    return {
+        type: 'SET_THIS_BUTTON',
+        cosCame
     }
 };
 
