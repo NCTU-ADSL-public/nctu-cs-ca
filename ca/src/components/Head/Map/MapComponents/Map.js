@@ -38,8 +38,8 @@ class Map extends React.Component{
         return (
             <div id="font_adjust">
             <div className="Map-title-text">
-            <div id="lessons-title">課程地圖</div><div id="lessons-little-title">-{this.props.studentId}</div>
-        </div>
+                <div id="lessons-title">課程地圖</div><div id="lessons-little-title">-{this.props.studentId}</div>
+            </div>
 
         <div className="Map-Row">
             <Provider store={store}>

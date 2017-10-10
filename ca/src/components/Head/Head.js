@@ -111,7 +111,8 @@ class Head extends Component {
                 ReactDOM.render(
 					<font>
 						<FadeIn>
-							<HomeItem />
+							<GraduationItem
+								studentId={this.state.studentIdcard.prog}/>
 						</FadeIn>
 					</font>,
                     document.getElementById('page'));
@@ -120,8 +121,11 @@ class Head extends Component {
                 ReactDOM.render(
 					<div>
 						<FadeIn>
-							<MapItem studentPasdata={StudentCosPas} data={MapCourseData} studentId={this.state.studentIdcard.prog}
-									 studentsGrad={this.state.studentIdcard.grad}/>
+							<MapItem
+								studentPasdata={StudentCosPas}
+								data={MapCourseData}
+								studentId={this.state.studentIdcard.prog}
+								studentsGrad={this.state.studentIdcard.grad}/>
 						</FadeIn>
 					</div>,
                     document.getElementById('page'));
@@ -129,7 +133,7 @@ class Head extends Component {
             else if(index===2){
                 ReactDOM.render(
 					<FadeIn>
-						<GraduationItem />
+						<HomeItem />
 					</FadeIn>,
                     document.getElementById('page'));
             }
