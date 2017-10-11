@@ -4,7 +4,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 import LinearProgressExampleDeterminate from './OverviewProgress'
 import IndividualProgress from './IndividualProgress'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import LinearProgress from 'material-ui/LinearProgress';
+import CircularProgress from 'material-ui/CircularProgress';
 import Course from './Course';
 
 
@@ -26,12 +26,17 @@ class Grad extends React.Component {
                             <div id="lessons-title">畢業預審</div><div id="lessons-little-title-grad">-資工系{this.props.studentId}</div>
                         </div>
                         <div id="schedule-bar">
-                            <CircularProgressbar
-                                className="circle-progress"
-                                strokeWidth={4}
-                                percentage={96/128*100}
-                                initialAnimation={true}
-                                textForPercentage={(percentage) => `畢業${percentage}%`}/>
+                            <div className="circle-progress">
+                                <div id="circle-in">畢業96/128</div>
+                                <MuiThemeProvider>
+                                    <CircularProgress
+                                        mode="determinate"
+                                        value={80}
+                                        size={80}
+                                        thickness={5}
+                                    />
+                                </MuiThemeProvider>
+                            </div>
                             <div id="overview-course">
                                 體&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;育&nbsp;&nbsp;<font size={5} color='#338d68'>5</font>/6門<br/><LinearProgressExampleDeterminate/>
                                 服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>2</font>/2門<br/><LinearProgressExampleDeterminate/>
