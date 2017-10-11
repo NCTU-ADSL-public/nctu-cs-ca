@@ -60,35 +60,35 @@ class Grad extends React.Component {
                         </div>
                         <div id="course-button">
                             <div className="OneRow">
-                                <Course cosCame="物化生三合一(一)" completed={false}/>
-                                <Course cosCame="物化生三合一(二)" completed={true}/>
-                                <Course cosCame="微積分(一)" completed={true}/>
-                                <Course cosCame="微積分(二)" completed={true}/>
+                                <Course cosCame="物化生三合一(一)" completed={false} goard={4}/>
+                                <Course cosCame="物化生三合一(二)" completed={true} goard={4}/>
+                                <Course cosCame="微積分(一)" completed={true} goard={4}/>
+                                <Course cosCame="微積分(二)" completed={true} goard={4}/>
                             </div>
                             <div className="OneRow">
-                                <Course cosCame="線性代數(一)" completed={true}/>
-                                <Course cosCame="線性代數(二)" completed={true}/>
-                                <Course cosCame="物件導向程式設計" completed={true}/>
-                                <Course cosCame="離散數學" completed={true}/>
-                                <Course cosCame="資料結構" completed={true}/>
+                                <Course cosCame="線性代數(一)" completed={true} goard={3}/>
+                                <Course cosCame="線性代數(二)" completed={true} goard={3}/>
+                                <Course cosCame="物件導向程式設計" completed={true} goard={3}/>
+                                <Course cosCame="離散數學" completed={true} goard={3}/>
+                                <Course cosCame="資料結構" completed={true} goard={3}/>
                             </div>
                             <div className="OneRow">
-                                <Course cosCame="資訊工程專題(一)" completed={true}/>
-                                <Course cosCame="資訊工程專題(二)" completed={true}/>
-                                <Course cosCame="數位電路設計" completed={false}/>
-                                <Course cosCame="數位電路實驗" completed={true}/>
-                                <Course cosCame="機率" completed={true}/>
-                                <Course cosCame="演算法概論" completed={false}/>
+                                <Course cosCame="資訊工程專題(一)" completed={true} goard={2}/>
+                                <Course cosCame="資訊工程專題(二)" completed={true} goard={2}/>
+                                <Course cosCame="數位電路設計" completed={false} goard={3}/>
+                                <Course cosCame="數位電路實驗" completed={true} goard={2}/>
+                                <Course cosCame="機率" completed={true} goard={3}/>
+                                <Course cosCame="演算法概論" completed={false} goard={3}/>
                             </div>
                             <div className="OneRow">
-                                <Course cosCame="作業系統概論" completed={true}/>
-                                <Course cosCame="正規語言概論" completed={true}/>
-                                <Course cosCame="計算機組織" completed={false}/>
-                                <Course cosCame="微處理機系統實驗" completed={true}/>
+                                <Course cosCame="作業系統概論" completed={true} goard={3}/>
+                                <Course cosCame="正規語言概論" completed={true} goard={3}/>
+                                <Course cosCame="計算機組織" completed={false} goard={3}/>
+                                <Course cosCame="微處理機系統實驗" completed={true} goard={3}/>
                             </div>
                             <div className="OneRow">
-                                <Course cosCame="導師時間" completed={true}/>
-                                <Course cosCame="基礎程式設計" completed={false}/>
+                                <Course cosCame="導師時間" completed={true} goard={2}/>
+                                <Course cosCame="基礎程式設計" completed={false} goard={3}/>
                             </div>
                         </div>
                     </div>
@@ -104,24 +104,24 @@ class Grad extends React.Component {
                         </div>
                         <div id="course-button">
                             <div className="OneRow">
-                                <Course cosCame="軟體工程概論" completed={true} selection={true}/>
-                                <Course cosCame="密碼學概論" completed={true} selection={true}/>
-                                <Course cosCame="微分方程" completed={false} selection={true}/>
-                                <Course cosCame="電腦安全概論" completed={false} selection={true}/>
-                                <Course cosCame="嵌入式系統設計概論與實作" completed={false} selection={true}/>
+                                <Course cosCame="軟體工程概論" completed={true} selection={true} goard={3}/>
+                                <Course cosCame="密碼學概論" completed={true} selection={true} goard={3}/>
+                                <Course cosCame="微分方程" completed={false} selection={true} goard={3}/>
+                                <Course cosCame="電腦安全概論" completed={false} selection={true} goard={3}/>
+                                <Course cosCame="嵌入式系統設計概論與實作" completed={false} selection={true} goard={3}/>
                             </div>
                             <div className="OneRow">
-                                <Course cosCame="電子與電路學(一)" completed={true} selection={true}/>
-                                <Course cosCame="電子與電路學(二)" completed={true} selection={true}/>
-                                <Course cosCame="訊號與系統" completed={false} selection={true}/>
-                                <Course cosCame="軟硬協同設計概論與實作" completed={false} selection={true}/>
+                                <Course cosCame="電子與電路學(一)" completed={true} selection={true} goard={3}/>
+                                <Course cosCame="電子與電路學(二)" completed={true} selection={true} goard={3}/>
+                                <Course cosCame="訊號與系統" completed={false} selection={true} goard={3}/>
+                                <Course cosCame="軟硬協同設計概論與實作" completed={false} selection={true} goard={3}/>
                             </div>
                             <div className="OneRow">
-                                <Course cosCame="軟體工程概論" completed={true} selection={true}/>
-                                <Course cosCame="網路程式設計概論" completed={false} selection={true}/>
-                                <Course cosCame="網路通訊原理" completed={false} selection={true}/>
-                                <Course cosCame="計算機圖學概論" completed={false} selection={true}/>
-                                <Course cosCame="影像處理概論" completed={false} selection={true}/>
+                                <Course cosCame="軟體工程概論" completed={true} selection={true} goard={3}/>
+                                <Course cosCame="網路程式設計概論" completed={false} selection={true} goard={3}/>
+                                <Course cosCame="網路通訊原理" completed={false} selection={true} goard={3}/>
+                                <Course cosCame="計算機圖學概論" completed={false} selection={true} goard={3}/>
+                                <Course cosCame="影像處理概論" completed={false} selection={true} goard={3}/>
                             </div>
 
                         </div>
@@ -138,9 +138,9 @@ class Grad extends React.Component {
                         </div>
                         <div id="course-button">
                             <div className="OneRow">
-                                <Course cosCame="編譯器設計概論" completed={true}/>
-                                <Course cosCame="資料庫系統概論" completed={true}/>
-                                <Course cosCame="人工智慧概論" completed={true}/>
+                                <Course cosCame="編譯器設計概論" completed={true} goard={3}/>
+                                <Course cosCame="資料庫系統概論" completed={true} goard={3}/>
+                                <Course cosCame="人工智慧概論" completed={true} goard={3}/>
                             </div>
                         </div>
                     </div>
@@ -156,12 +156,12 @@ class Grad extends React.Component {
                         </div>
                         <div id="course-button">
                             <div className="OneRow">
-                                <Course cosCame="當代" completed={true}/>
-                                <Course cosCame="文化" completed={true}/>
-                                <Course cosCame="歷史" completed={true}/>
-                                <Course cosCame="公民" completed={true}/>
-                                <Course cosCame="群己" completed={true}/>
-                                <Course cosCame="自然" completed={true}/>
+                                <Course cosCame="當代" completed={true} goard={2}/>
+                                <Course cosCame="文化" completed={true} goard={2}/>
+                                <Course cosCame="歷史" completed={true} goard={2}/>
+                                <Course cosCame="公民" completed={true} goard={2}/>
+                                <Course cosCame="群己" completed={true} goard={2}/>
+                                <Course cosCame="自然" completed={true} goard={2}/>
                             </div>
                         </div>
                     </div>
@@ -177,11 +177,11 @@ class Grad extends React.Component {
                         </div>
                         <div id="course-button">
                             <div className="OneRow">
-                                <Course cosCame="基礎課程" completed={true}/>
-                                <Course cosCame="基礎課程" completed={true}/>
-                                <Course cosCame="進階課程" completed={true}/>
-                                <Course cosCame="進階課程" completed={true}/>
-                                <Course cosCame="英文檢定/英文進程課程" completed={false}/>
+                                <Course cosCame="基礎課程" completed={true} goard={2}/>
+                                <Course cosCame="基礎課程" completed={true} goard={2}/>
+                                <Course cosCame="進階課程" completed={true} goard={2}/>
+                                <Course cosCame="進階課程" completed={true} goard={2}/>
+                                <Course cosCame="英文檢定/英文進程課程" completed={false} goard={3}/>
                             </div>
 
                         </div>

@@ -5,11 +5,6 @@ import ReactHover from 'react-hover';
 import 'animate.css'
 import './Course.css';
 
-const optionsCursorTrueWithMargin = {
-    followCursor: true,
-    shiftX: 20,
-    shiftY: -15
-};
 
 const CourseButtonStyle = {
     transition: "background .2s linear",
@@ -19,14 +14,25 @@ const CourseButtonStyle = {
 
 class Course extends React.Component {
 
+    state={
+        transition: "background .2s linear",
+        width:"200px",
+        paddingRight: 0,
+    };
 
+    componentWillMount(){
+        let tmp;
+        tmp = this.props.goard * 200 / 3
+        tmp = tmp + "px";
+        this.setState({
+            width:tmp,
+            paddingRight: 0,
+        })
+    }
 
     render(){
         return(
             <div className={this.props.completed?"grad":this.props.selection?"grad":"grad animated flash"}>
-                <ReactHover
-                    options={optionsCursorTrueWithMargin}>
-                    <ReactHover.Trigger>
                         <MuiThemeProvider>
                             <FlatButton
                                         className="grad-btn"
@@ -40,17 +46,12 @@ class Course extends React.Component {
                                             letterSpacing: "1px"
                                         }}
                                         backgroundColor={this.props.completed?"#3aa276":this.props.selection?"gray":"#d93a64"}
-                                        style={CourseButtonStyle}
+                                        style={this.state}
                                         label={this.props.cosCame}
                                         onClick={this.props.onClick}>
 
                             </FlatButton>
                         </MuiThemeProvider>
-                    </ReactHover.Trigger>
-                    <ReactHover.Hover>
-                        <div className="hover-info">{this.props.cosCame}</div>
-                    </ReactHover.Hover>
-                </ReactHover>
             </div>
 
         )
