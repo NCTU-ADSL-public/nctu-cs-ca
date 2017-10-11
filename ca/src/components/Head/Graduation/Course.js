@@ -2,6 +2,7 @@ import React from 'react'
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactHover from 'react-hover';
+import 'animate.css'
 import './Course.css';
 
 const optionsCursorTrueWithMargin = {
@@ -22,7 +23,7 @@ class Course extends React.Component {
 
     render(){
         return(
-            <div id="grad">
+            <div className={this.props.completed?"grad":this.props.selection?"grad":"grad animated flash"}>
                 <ReactHover
                     options={optionsCursorTrueWithMargin}>
                     <ReactHover.Trigger>

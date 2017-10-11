@@ -5,6 +5,7 @@
   "author": "Danny",
   "dependencies": {
     "@types/react": "^16.0.5",
+    "animate.css": "^3.5.2",
     "axios": "^0.16.2",
     "express": "^4.15.4",
     "material-ui": "^0.19.4",
