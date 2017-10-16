@@ -1,11 +1,13 @@
 #Grad-title-adjust{
+    width: 1300px;
+    height: 200px;
 }
 
 .Grad-title-text{
     margin: 0 0 0 5%;
     padding: 35px 10px 3px 65px;
     color: #7B7B7B;
-    width: 500px;
+    width: auto;
     height: 200px;
     font-size: 1.5em;
     float: left;
@@ -19,7 +21,7 @@
 
 #schedule-bar{
     height: 200px;
-    width: 500px;
+    width: auto;
     float: left;
     padding: 40px 0 0 200px;
 }
@@ -43,9 +45,10 @@
 }
 
 .Grad-Row{
-    padding: 10% 7% 0 7%;
+    padding: 0 7% 0 7%;
     background: #F5F5F5;
-    height: 1300px;
+    height: 100%;
+    clear:both;
 }
 
 #little-title-title{
@@ -70,9 +73,9 @@
 
 #course-button{
     padding: 11px 0 120px 0;
+    height: auto;
     width: 1200px;
 }
 
 .OneRow{
-    clear:both;
 }
