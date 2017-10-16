@@ -1,6 +1,5 @@
 import React from 'react'
 import './Graduation.css'
-import CircularProgressbar from 'react-circular-progressbar';
 import LinearProgressExampleDeterminate from './OverviewProgress'
 import IndividualProgress from './IndividualProgress'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

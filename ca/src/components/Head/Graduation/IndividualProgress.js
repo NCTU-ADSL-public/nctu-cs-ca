@@ -42,7 +42,8 @@ export default class IndividualProgress extends React.Component {
                     color="#00AEAE"
                     mode="determinate"
                     style={ThisStyle}
-                    value={this.state.completed} />
+                    value={this.state.completed}
+                    thickness={7}/>
             </MuiThemeProvider>
         );
     }

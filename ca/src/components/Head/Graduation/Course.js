@@ -6,12 +6,6 @@ import 'animate.css'
 import './Course.css';
 
 
-const CourseButtonStyle = {
-    transition: "background .2s linear",
-    width:"200px",
-    paddingRight: 0,
-};
-
 class Course extends React.Component {
 
     state={
