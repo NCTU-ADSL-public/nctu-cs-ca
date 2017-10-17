@@ -5,11 +5,33 @@ import IndividualProgress from './IndividualProgress'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Course from './Course';
+import CourseList from './CourseList'
 
-
+const items=[
+    {cosCame:"物化生三合一(一)", completed:false},
+    {cosCame:"物化生三合一(二)", completed:true},
+    {cosCame:"微積分(一)", completed:true},
+    {cosCame:"微積分(二)", completed:true},
+    {cosCame:"線性代數(一)", completed:true},
+    {cosCame:"線性代數(二)", completed:true},
+    {cosCame:"物件導向程式設計", completed:true},
+    {cosCame:"離散數學", completed:true},
+    {cosCame:"資料結構", completed:true},
+    {cosCame:"資訊工程專題(一)", completed:true},
+    {cosCame:"資訊工程專題(二)", completed:true},
+    {cosCame:"數位電路設計", completed:false},
+    {cosCame:"數位電路實驗", completed:true},
+    {cosCame:"機率", completed:true},
+    {cosCame:"演算法概論", completed:false},
+    {cosCame:"作業系統概論", completed:true},
+    {cosCame:"正規語言概論", completed:true},
+    {cosCame:"計算機組織", completed:false},
+    {cosCame:"微處理機系統實驗", completed:true},
+    {cosCame:"導師時間", completed:true},
+    {cosCame:"基礎程式設計", completed:false}]
 class Grad extends React.Component {
     state={
-        percent:0,
+
     };
     componentDidMount(){
         this.setState({
@@ -58,27 +80,8 @@ class Grad extends React.Component {
 
                         </div>
                         <div id="course-button">
-                                <Course cosCame="物化生三合一(一)" completed={false} goard={4}/>
-                                <Course cosCame="物化生三合一(二)" completed={true} goard={4}/>
-                                <Course cosCame="微積分(一)" completed={true} goard={4}/>
-                                <Course cosCame="微積分(二)" completed={true} goard={4}/>
-                                <Course cosCame="線性代數(一)" completed={true} goard={3}/>
-                                <Course cosCame="線性代數(二)" completed={true} goard={3}/>
-                                <Course cosCame="物件導向程式設計" completed={true} goard={3}/>
-                                <Course cosCame="離散數學" completed={true} goard={3}/>
-                                <Course cosCame="資料結構" completed={true} goard={3}/>
-                                <Course cosCame="資訊工程專題(一)" completed={true} goard={2}/>
-                                <Course cosCame="資訊工程專題(二)" completed={true} goard={2}/>
-                                <Course cosCame="數位電路設計" completed={false} goard={3}/>
-                                <Course cosCame="數位電路實驗" completed={true} goard={2}/>
-                                <Course cosCame="機率" completed={true} goard={3}/>
-                                <Course cosCame="演算法概論" completed={false} goard={3}/>
-                                <Course cosCame="作業系統概論" completed={true} goard={3}/>
-                                <Course cosCame="正規語言概論" completed={true} goard={3}/>
-                                <Course cosCame="計算機組織" completed={false} goard={3}/>
-                                <Course cosCame="微處理機系統實驗" completed={true} goard={3}/>
-                                <Course cosCame="導師時間" completed={true} goard={2}/>
-                                <Course cosCame="基礎程式設計" completed={false} goard={3}/>
+                            <CourseList items={items} />
+
                         </div>
                     </div>
 
@@ -120,9 +123,7 @@ class Grad extends React.Component {
 
                         </div>
                         <div id="course-button">
-                                <Course cosCame="編譯器設計概論" completed={true} goard={3}/>
-                                <Course cosCame="資料庫系統概論" completed={true} goard={3}/>
-                                <Course cosCame="人工智慧概論" completed={true} goard={3}/>
+                            <CourseList items={items} />
                         </div>
                     </div>
 
@@ -136,12 +137,7 @@ class Grad extends React.Component {
 
                         </div>
                         <div id="course-button">
-                                <Course cosCame="當代" completed={true} goard={2}/>
-                                <Course cosCame="文化" completed={true} goard={2}/>
-                                <Course cosCame="歷史" completed={true} goard={2}/>
-                                <Course cosCame="公民" completed={true} goard={2}/>
-                                <Course cosCame="群己" completed={true} goard={2}/>
-                                <Course cosCame="自然" completed={true} goard={2}/>
+                            <CourseList items={items} />
                         </div>
                     </div>
 
@@ -155,11 +151,7 @@ class Grad extends React.Component {
 
                         </div>
                         <div id="course-button">
-                                <Course cosCame="基礎課程" completed={true} goard={2}/>
-                                <Course cosCame="基礎課程" completed={true} goard={2}/>
-                                <Course cosCame="進階課程" completed={true} goard={2}/>
-                                <Course cosCame="進階課程" completed={true} goard={2}/>
-                                <Course cosCame="英文檢定/英文進程課程" completed={false} goard={3}/>
+                            <CourseList items={items} />
 
                         </div>
                     </div>

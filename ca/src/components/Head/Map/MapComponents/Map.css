@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 #font_adjust{
     background: #F5F5F5;
+    height: auto;
+    width: auto;
 }
 
 .Map-title-text{

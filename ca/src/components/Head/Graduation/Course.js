@@ -19,7 +19,7 @@ class Course extends React.Component {
         tmp = this.props.goard * 200 / 3
         tmp = tmp + "px";
         this.setState({
-            width:tmp,
+            width:200,
             paddingRight: 0,
         })
     }
