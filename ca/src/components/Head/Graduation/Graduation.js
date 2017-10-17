@@ -5,6 +5,7 @@ import IndividualProgress from './IndividualProgress'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Course from './Course';
+import IndividualCourse from './IndividualCourse'
 import CourseList from './CourseList'
 
 const items=[
@@ -71,18 +72,8 @@ class Grad extends React.Component {
 
                 <div className="Grad-Row">
                     <div id="little-form">
-                        <div id="little-title">
-                            <IndividualProgress/>
-                            <div id="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>39</font>/58</div>
-                                <div id="little-title-text">資工系共同必修</div>
-                            </div>
-
-                        </div>
-                        <div id="course-button">
-                            <CourseList items={items} />
-
-                        </div>
+                        <IndividualCourse pass={58} total={96} name="資工系共同必修"/>
+                        <CourseList items={items} />
                     </div>
 
                     <div id="little-form">
@@ -114,46 +105,18 @@ class Grad extends React.Component {
                     </div>
 
                     <div id="little-form">
-                        <div id="little-title">
-                            <IndividualProgress/>
-                            <div id="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>9</font>/15</div>
-                                <div id="little-title-text"><font size={5}>資工組副核心(至少3學分)+其他組核心=(至少9學分)</font></div>
-                            </div>
-
-                        </div>
-                        <div id="course-button">
-                            <CourseList items={items} />
-                        </div>
+                        <IndividualCourse pass={9} total={15} name="資工組副核心(至少3學分)+其他組核心=(至少9學分)" fontflag/>
+                        <CourseList items={items} />
                     </div>
 
                     <div id="little-form">
-                        <div id="little-title">
-                            <IndividualProgress/>
-                            <div id="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>20</font>/20</div>
-                                <div id="little-title-text">通識</div>
-                            </div>
-
-                        </div>
-                        <div id="course-button">
-                            <CourseList items={items} />
-                        </div>
+                        <IndividualCourse pass={6} total={20} name="通識"/>
+                        <CourseList items={items} />
                     </div>
 
                     <div id="little-form">
-                        <div id="little-title">
-                            <IndividualProgress/>
-                            <div id="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>8</font>/8</div>
-                                <div id="little-title-text">外文</div>
-                            </div>
-
-                        </div>
-                        <div id="course-button">
-                            <CourseList items={items} />
-
-                        </div>
+                        <IndividualCourse pass={8} total={8} name="外文"/>
+                        <CourseList items={items} />
                     </div>
 
                 </div>

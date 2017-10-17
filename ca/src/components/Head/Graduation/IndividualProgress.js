@@ -18,7 +18,7 @@ export default class IndividualProgress extends React.Component {
     }
 
     componentDidMount(){
-        this.timer = setTimeout(() => this.progress(5), 1000);
+        this.timer = setTimeout(() => this.progress(2), 100);
     }
 
     componentWillUnmount(){
@@ -26,12 +26,12 @@ export default class IndividualProgress extends React.Component {
     }
 
     progress(completed) {
-        if (completed > 100) {
-            this.setState({completed: 100});
+        if (completed > this.props.grad) {
+            this.setState({completed: this.props.grad});
         } else {
             this.setState({completed});
-            const diff = Math.random() * 10;
-            this.timer = setTimeout(() => this.progress(completed + diff), 1000);
+            const diff = 1 * 10;
+            this.timer = setTimeout(() => this.progress(completed + diff), 200);
         }
     }
 

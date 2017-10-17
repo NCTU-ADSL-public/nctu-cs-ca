@@ -2,7 +2,7 @@ import React from 'react'
 import Course from './Course'
 
 const CourseList = ({ items, index }) => (
-    <div>
+    <div id="course-button">
         {items.map(item =>
             <Course
                 key={item.id}
