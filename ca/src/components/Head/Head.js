@@ -39,10 +39,14 @@ class Head extends Component {
 
     state = {
        selectedIndex: 0,
-       styleButton: {
-       fontFamily: 'Noto Sans CJK TC',
-       background: '#EEEEEE',
-       },
+        styleButton: {
+            fontFamily: 'Noto Sans CJK TC',
+            background: '#EEEEEE',
+            lineHeight: '15px',
+            margin: '5px 0 0',
+            fontSize: '11px',
+            width: '10px',
+        },
 		studentIdcard:{
        		name:'流川楓',
 			prog:'網多',
