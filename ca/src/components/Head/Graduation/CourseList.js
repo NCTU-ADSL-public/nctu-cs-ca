@@ -6,8 +6,8 @@ const CourseList = ({ items, index }) => (
         {items.map(item =>
             <Course
                 key={item.id}
-                cosCame={item.cosCame}
-                completed={item.completed}
+                cosCame={item.cn}
+                completed={item.complete}
                 goard={item.goard}
             />
         )}
