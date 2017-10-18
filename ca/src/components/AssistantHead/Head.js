@@ -7,22 +7,16 @@ import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import Home from 'material-ui/svg-icons/content/flag'
-import Equalizer from 'material-ui/svg-icons/av/equalizer';
-import Grouper from 'material-ui/svg-icons/social/group';
-import FreeBreakfast from 'material-ui/svg-icons/places/free-breakfast';
+import Graduation from 'material-ui/svg-icons/social/school';
 import defalt from './defalt.jpg';
 
 import HomeItem from './Home/Home.js';
-import CourseItem from './Course/Course.js';
-import GroupItem from './Group/Group.js';
-import FamilyItem from './Family/Family.js';
+import GraduationItem from './Graduation/Graduation';
 
 import FadeIn from 'react-fade-in';
 
 const homeIcon = <Home />;
-const equalizerIcon = <Equalizer />;
-const groupIcon = <Grouper />;
-const freeIcon = <FreeBreakfast />;
+const graduationIcon = <Graduation />;
 
 
 class Head extends Component {
@@ -42,8 +36,8 @@ class Head extends Component {
 		   	width: '10px',
        },
 		studentIdcard:{
-       		name:'彭文志',
-			prog:'教授',
+       		name:'小翠',
+			prog:'助理',
 			grad:'',
 		},
     };
@@ -85,25 +79,9 @@ class Head extends Component {
                 ReactDOM.render(
 					<div>
 						<FadeIn>
-							<CourseItem />
+							<GraduationItem studentId={this.state.studentIdcard.prog}/>
 						</FadeIn>
 					</div>,
-                    document.getElementById('page'));
-            }
-            else if(index===2){
-                ReactDOM.render(
-					<FadeIn>
-						<GroupItem />
-					</FadeIn>,
-                    document.getElementById('page'));
-            }
-            else if(index===3){
-                ReactDOM.render(
-					<a>
-						<FadeIn>
-							<FamilyItem />
-						</FadeIn>
-					</a>,
                     document.getElementById('page'));
             }
 
@@ -121,30 +99,18 @@ class Head extends Component {
 						<div id="adjust">
 						<MuiThemeProvider zDepth={1}>
 							<BottomNavigation selectedIndex={this.state.selectedIndex}>
-							  <BottomNavigationItem
-								label="首頁"
-								icon={homeIcon}
-								style={this.state.styleButton}
-								onTouchTap={() => this.select(0)}
-							  />
-							  <BottomNavigationItem
-								label="教授課程"
-								icon={equalizerIcon}
-								style={this.state.styleButton}
-								onTouchTap={() => this.select(1)}
-							  />
-							  <BottomNavigationItem
-								label="專題"
-								icon={groupIcon}
-								style={this.state.styleButton}
-								onTouchTap={() => this.select(2)}
-							  />
-							  <BottomNavigationItem
-								label="導生"
-								icon={freeIcon}
-								style={this.state.styleButton}
-								onTouchTap={() => this.select(3)}
-							  />
+								<BottomNavigationItem
+									label="首頁"
+									icon={homeIcon}
+									style={this.state.styleButton}
+									onTouchTap={() => this.select(0)}
+								/>
+								<BottomNavigationItem
+									label="畢業預審"
+									icon={graduationIcon}
+									style={this.state.styleButton}
+									onTouchTap={() => this.select(1)}
+								/>
 							</BottomNavigation>
 						</MuiThemeProvider>
 						</div>
