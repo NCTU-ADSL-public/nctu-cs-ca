@@ -109,7 +109,7 @@ let items=[
 class Grad extends React.Component {
     componentWillMount(){
         console.log(items);
-        axios.get('/students/profile').then(studentData => {
+        axios.get('/students/graduate').then(studentData => {
             items = studentData;
         }).catch(err => {
             console.log(err);
