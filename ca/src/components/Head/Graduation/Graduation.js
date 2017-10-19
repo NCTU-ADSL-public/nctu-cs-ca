@@ -122,6 +122,7 @@ class Grad extends React.Component {
                     <div className="Grad-Row">
                         <GraduationForm items={items}/>
                     </div>
+                    <div id="graduate-footer"> </div>
                 </div>
             </div>
         )
