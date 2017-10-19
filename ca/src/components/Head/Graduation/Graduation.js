@@ -1,18 +1,14 @@
 import React from 'react'
 import './Graduation.css'
 import LinearProgressExampleDeterminate from './OverviewProgress'
-import IndividualProgress from './IndividualProgress'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
-import Course from './Course';
-import IndividualCourse from './IndividualCourse'
 import axios from 'axios';
 import GraduationForm from './GraduationForm'
-import CourseList from './CourseList'
 
 let items=[
     { title: '必修課程',
-        credit: '20',
+        credit: '80',
         total: '60',
         course:
             [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
