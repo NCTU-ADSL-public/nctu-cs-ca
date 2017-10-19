@@ -9,7 +9,7 @@ const GraduationForm = ({ items, index }) => (
                 pass={item.course}
                 title={item.title}
                 credit={item.credit}
-                total={item.total}
+                total={item.require}
             />
         )}
     </div>
