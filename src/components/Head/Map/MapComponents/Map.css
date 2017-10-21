@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 #font_adjust{
     background: #F5F5F5;
+    height: auto;
+    width: auto;
 }
 
 .Map-title-text{
@@ -135,6 +137,7 @@ h3{
 .session-cur{
     background: #fbe099;
 }
+
 .session-cur .course-group .course .course-btn{
     background: #e8a840;
     color: #f2fff8;

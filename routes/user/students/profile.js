@@ -22,14 +22,16 @@ router.get('/students/profile', function(req, res){
             if(!result){
                 return;
             }
-            console.log("profile:");
+            console.log("profile in profile:");
             console.log(result);
+	    //req.session.profile = result;
 	    res.send(result);
 	    //query.close();
         });
     }
     else{
-        return;
+        res.redirect('/');
+	return;
     }
 
 });

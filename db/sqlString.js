@@ -39,7 +39,7 @@ exports.showCowMap = "\
     order by a.grade,a.semester,a.cos_cname;";
 
 exports.showCosMapPass = "\
-    select cos_cname from student_cos_relation as sc,cos_name as c \
+    select distinct cos_cname from student_cos_relation as sc,cos_name as c \
     where sc.student_id=:id and sc.cos_code=c.cos_code and \
     (sc.cos_code like \'DCP%\' or sc.cos_code like \'IOE%\' or cos_cname like \'微積分甲%\' or cos_cname like \'物理%\' or cos_cname like \'化學%\' )";
 
@@ -57,12 +57,22 @@ exports.a_uploadGrade = "\
 
 exports.updateStudentCosPass = "\
     insert into student_cos_relation \
-    value(:id,:code,:year,:semester) \
+    value(:id,:cos_code,:year,:semester,:code) \
     on duplicate key update \
-    student_id=:id,cos_code=:code";
+    student_id=:id,cos_code=:cos_code,year=:year,semester=:semester,code=:code";
 
 exports.totalCredit = "\
-    SELECT SUM(t.cos_credit) as total\
+    select sum(t.cos_credit) as total\
+    from\
+    (\
+        select distinct d.cos_code,d.cos_credit\
+        from student_cos_relation as s,cos_data as d\
+        where s.student_id=:id\
+        and s.cos_code=d.cos_code\
+    ) as t";
+
+exports.totalRequiredCredit = "\
+    SELECT SUM(t.cos_credit) as totalRequire\
     FROM \
     (   \
         SELECT DISTINCT a.cos_code, d.cos_credit\
@@ -76,79 +86,62 @@ exports.totalCredit = "\
                 FROM cos_require as r, cos_name as n\
                 WHERE r.program IN ( SELECT program FROM student WHERE student_id=:id )\
                 AND r.school_year LIKE :year\
-                AND r.cos_cname = n.cos_cname\
+                AND n.cos_cname LIKE CONCAT(r.cos_cname,\'%\')\
                 AND (n.cos_code like \'DCP%\' or n.cos_code like \'IOE%\' or n.cos_cname like \'微積分甲%\' or n.cos_cname like \'物理%\' or n.cos_cname like \'化學%\' )\
             )\
         ) as a\
         JOIN\
         cos_data as d\
         WHERE d.cos_code = a.cos_code\
-    )as t"; //我有bug喔 QAQ
-
-exports.oldGeneralCredit = '\
-    SELECT "公民" as brief,SUM(t.cos_credit) as credit\
-    FROM\
-    (\
-        SELECT DISTINCT d.cos_code, d.cos_credit\
-        FROM student_cos_relation as s, cos_data as d  \
-        WHERE student_id = :id\
-        AND d.cos_code = s.cos_code\
-        AND d.brief LIKE "公民%"\
-    ) as t\
-    union\
-    SELECT "文化" as brief,SUM(t.cos_credit) as credit\
-    FROM\
-    (\
-        SELECT DISTINCT d.cos_code, d.cos_credit\
-        FROM student_cos_relation as s, cos_data as d  \
-        WHERE student_id = :id\
-        AND d.cos_code = s.cos_code\
-        AND d.brief LIKE "文化%"\
-    ) as t\
-    union\
-    SELECT "群己" as brief,SUM(t.cos_credit) as credit\
-    FROM\
-    (\
-        SELECT DISTINCT d.cos_code, d.cos_credit\
-        FROM student_cos_relation as s, cos_data as d  \
-        WHERE student_id = :id\
-        AND d.cos_code = s.cos_code\
-        AND d.brief LIKE "群己%"\
-    ) as t\
-    union\
-    SELECT "自然" as brief,SUM(t.cos_credit) as credit\
-    FROM\
-    (\
-        SELECT DISTINCT d.cos_code, d.cos_credit\
-        FROM student_cos_relation as s, cos_data as d  \
-        WHERE student_id = :id\
-        AND d.cos_code = s.cos_code\
-        AND d.brief LIKE "自然%"\
-    ) as t\
-    union\
-    SELECT "歷史" as brief,SUM(t.cos_credit) as credit\
-    FROM\
-    (\
-        SELECT DISTINCT d.cos_code, d.cos_credit\
-        FROM student_cos_relation as s, cos_data as d  \
-        WHERE student_id = :id\
-        AND d.cos_code = s.cos_code\
-        AND d.brief LIKE "歷史%"\
-    ) as t\
-    union\
-    SELECT "當代世界" as brief,SUM(t.cos_credit) as credit\
-    FROM\
-    (\
-        SELECT DISTINCT d.cos_code, d.cos_credit\
-        FROM student_cos_relation as s, cos_data as d  \
-        WHERE student_id = :id\
-        AND d.cos_code = s.cos_code\
-        AND d.brief LIKE "通識%"\
-    ) as t'; //我有bug喔 QAQ
+    )as t";
 
 exports.Pass = "\
-    select DISTINCT d.cos_code, n.cos_cname, d.cos_type, d.cos_credit,s.year,s.semester\
-    from cos_data as d, student_cos_relation as s, cos_name as n\
-    where s.student_id = :id\
-    and d.cos_code = s.cos_code\
-    and d.cos_code = n.cos_code";
+    select DISTINCT a.cos_code, a.cos_cname,a.cos_ename, a.cos_type,a.cos_typeext,b.type,a.brief,a.brief_new, a.cos_credit,a.year,a.semester\
+    from\
+    (\
+        select DISTINCT d.cos_code, n.cos_cname,n.cos_ename, d.cos_type,d.cos_typeext,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
+        from cos_data as d, student_cos_relation as s, cos_name as n\
+        where s.student_id = :id\
+        and d.unique_id = concat(s.year,\'-\',s.semester,\'-\',s.code)\
+        and d.cos_code = n.cos_code\
+    ) as a left outer join\
+    (\
+        select DISTINCT d.cos_code, n.cos_cname, d.cos_type,d.cos_typeext,t.type,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
+        from cos_data as d, student_cos_relation as s, cos_name as n,cos_type as t,student as sd\
+        where s.student_id = :id\
+        and sd.student_id=:id\
+        and d.unique_id = concat(s.year,\'-\',s.semester,\'-\',s.code)\
+        and n.cos_cname like concat(t.cos_cname,\'%\')\
+        and t.school_year=:year\
+        and t.program=sd.program\
+    ) as b\
+    on b.cos_code=a.cos_code and b.cos_cname=a.cos_cname and b.year=a.year and b.semester=a.semester\
+    order by a.year,a.semester asc";
+//exports.Pass=Pass;
+
+exports.Group='\
+    select p.cos_cname,p.cos_ename,p.cos_codes,IFNULL(a.type,\'必修\') as type\
+    from cos_group as p\
+    left outer join\
+    (\
+        select t.cos_cname,t.type,t.school_year\
+        from student as s,cos_type as t\
+        where s.student_id=:id and s.program=t.program\
+        and t.school_year=:year\
+    ) as a\
+    on p.cos_cname=a.cos_cname and a.school_year=:year\
+    where a.type is not null or p.cos_cname in\
+    (\
+        select cos_cname from cos_require as r,student as s\
+        where s.student_id=:id and r.school_year=:year\
+        and r.program=s.program\
+        union\
+        select \'物化生三選一(一)\'\
+        union\
+        select \'物化生三選一(二)\'\
+    );';
+
+exports.graduateRule='\
+    select r.require_credit,r.pro_credit,r.free_credit,r.core_credit,r.sub_core_credit,r.foreign_credit\
+    from graduate_rule as r,student as s\
+    where s.student_id=:id and s.program=r.program and r.school_year=:year;';

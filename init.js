@@ -44,6 +44,9 @@ module.exports.init = function(){
   app.use(require('./routes/logout'));
   app.use(require('./routes/user/state'));
   app.use(require('./routes/auth/nctu/nctu'));
-
+  app.use(require('./routes/auth/google/google'));
+  app.use(require('./routes/auth/facebook/facebook'));
+  app.use(require('./routes/user/students/graduate/graduate'));
+  //app.use(require('./routes/user/students/graduate/result'));
   return app;
 };

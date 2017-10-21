@@ -14,6 +14,12 @@ const optionsCursorTrueWithMargin = {
 
 class Todo extends React.Component {
 
+    state={
+        hoverColor:this.props.pre_flag ?"#FF2D2D" :"#338d68",
+        backgroundColor:this.props.active ?"#338d68" :"#616161"
+    };
+
+
     render(){
         return(
             <div className="course"
@@ -26,7 +32,8 @@ class Todo extends React.Component {
                     <ReactHover.Trigger>
                         <MuiThemeProvider>
                             <FlatButton className="course-btn"
-                                        backgroundColor="#616161"
+                                        backgroundColor={this.state.backgroundColor}
+                                        hoverColor={this.state.hoverColor}
                                         fullWidth={true}
                                         labelStyle={{
                                             padding: "5px",

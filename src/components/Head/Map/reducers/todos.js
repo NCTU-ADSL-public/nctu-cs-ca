@@ -11,6 +11,7 @@ const todo = (state = {}, action) => {
                 pre:action.pre,
                 suggest_flag:false,
                 pre_flag:false,
+                active:false
             };
         case 'SET_ALL':
             if(action.index===0){
@@ -23,9 +24,14 @@ const todo = (state = {}, action) => {
                     completed: true
                 });
             }
+            if(action.index===2){
+                return Object.assign({}, state, {
+                    active: false
+                });
+            }
 
         case 'SET_PASCOS':
-            if (state.cosCame === action.cosCame ) {
+            if (state.cosCame === action.cosCame || state.cosCame + '(英文授課)' === action.cosCame) {
                 return Object.assign({}, state, {
                     completed: true
                 });
@@ -34,7 +40,7 @@ const todo = (state = {}, action) => {
             return state;
 
         case 'SET_NOPASCOS':
-            if (state.cosCame === action.cosCame) {
+            if (state.cosCame === action.cosCame || state.cosCame + '(英文授課)' === action.cosCame) {
                 return Object.assign({}, state, {
                     completed: false
                 });
@@ -51,6 +57,23 @@ const todo = (state = {}, action) => {
 
             return Object.assign({}, state, {
                 pre_flag: !state.pre_flag
+            });
+
+        case 'SET_THIS_BUTTON':
+            if (state.cosCame === action.cosCame) {
+                // if(state.active === false)
+                return Object.assign({}, state, {
+                    active: true
+                });
+                // else {
+                //     return Object.assign({}, state, {
+                //         active: false
+                //     });
+                // }
+            }
+
+            return Object.assign({}, state, {
+                active: true
             });
 
         default:

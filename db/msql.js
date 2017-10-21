@@ -1,9 +1,11 @@
+var Client = require('mariasql');
 var lineReader = require('line-reader');
 var s = require('./sqlString.js');
 var psw = require('./dbpsw');
 
 
 var pool = psw.dbpsw();
+
 
 function padLeft(str, len) {
     str = '' + str;
@@ -13,6 +15,7 @@ function padLeft(str, len) {
         return padLeft("0" + str, len);
     }
 }
+
 
 module.exports = {
 
@@ -138,7 +141,7 @@ module.exports = {
                             throw err;
                     });
                     if (line[14] == '通過')
-                        c.query(sql_updateStudentCosPass({ id: line[0], code: line[9], year: line[4], semester: line[5] }), function(err) {
+                        c.query(sql_updateStudentCosPass({ id: line[0], cos_code: line[9], year: line[4], semester: line[5] ,code:line[6]}), function(err) {
                             if (err)
                                 throw err;
                         });
@@ -155,9 +158,7 @@ module.exports = {
         const resource = pool.acquire();
         resource.then(function(c) {
             var sql_totalCredit = c.prepare(s.totalCredit);
-            var str = id.split("");
-            str = '%' + id[0] + id[1];
-            c.query(sql_totalCredit({ id: id, year: str }), function(err, result) {
+            c.query(sql_totalCredit({ id: id }), function(err, result) {
                 if (err)
                     throw err;
                 callback(null, JSON.stringify(result));
@@ -165,11 +166,13 @@ module.exports = {
             })
         })
     },
-    oldGeneralCredit: function(id, callback) {
+    totalRequiredCredit: function(id, callback) {
         const resource = pool.acquire();
         resource.then(function(c) {
-            var sql_oldGeneralCredit = c.prepare(s.oldGeneralCredit);
-            c.query(sql_oldGeneralCredit({ id: id }), function(err, result) {
+            var sql_totalRequiredCredit = c.prepare(s.totalRequiredCredit);
+            var str = id.split("");
+            str = '%' + id[0] + id[1];
+            c.query(sql_totalRequiredCredit({ id: id, year: str }), function(err, result) {
                 if (err)
                     throw err;
                 callback(null, JSON.stringify(result));
@@ -181,12 +184,44 @@ module.exports = {
         const resource = pool.acquire();
         resource.then(function(c) {
             var sql_Pass = c.prepare(s.Pass);
-            c.query(sql_Pass({ id: id }), function(err, result) {
+            var year = '1' + id[0] + id[1];
+            c.query(sql_Pass({ id: id ,year:year}), function(err, result) {
                 if (err)
                     throw err;
                 callback(null, JSON.stringify(result));
                 pool.release(c);
             })
         })
+    },
+    Group: function(id,callback){
+        const resource = pool.acquire();
+        resource.then(function(c){
+            var sql_Group=c.prepare(s.Group);
+            var year='1'+id[0]+id[1];
+            c.query(sql_Group({id:id,year:year}),function(err,result){
+                if(err)
+                    throw err;
+                callback(null,JSON.stringify(result).replace(/\"\[/g,"\[").replace(/\]\"/g,"\]").replace(/\\\"/g,"\""));
+                pool.release(c);
+            })
+        })
+    },
+    graduateRule: function(id,callback){
+        const resource = pool.acquire();
+        resource.then(function(c){
+            var sql_graduateRule=c.prepare(s.graduateRule);
+            var year='1'+id[0]+id[1];
+            c.query(sql_graduateRule({id:id,year:year}),function(err,result){
+                if(err)
+                    throw err;
+                callback(null,JSON.stringify(result));
+                pool.release(c);
+            })
+        })
+    },
+    Drain:function(){
+        pool.drain().then(function() {
+            pool.clear();
+        });
     }
 };
