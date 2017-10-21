@@ -1,6 +1,7 @@
 import React from 'react';
 import LinearProgress from 'material-ui/LinearProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import 'animate.css'
 
 const ThisStyle={
     width:"300px",
@@ -36,15 +37,30 @@ export default class IndividualProgress extends React.Component {
     }
 
     render() {
-        return (
-            <MuiThemeProvider>
-                <LinearProgress
-                    color="#00AEAE"
-                    mode="determinate"
-                    style={ThisStyle}
-                    value={this.state.completed}
-                    thickness={7}/>
-            </MuiThemeProvider>
-        );
+        if(this.state.completed >= 100){
+            return (
+                <div className="animated shake">
+                    <MuiThemeProvider>
+                        <LinearProgress
+                            color={"#ae300d"}
+                            mode="determinate"
+                            style={ThisStyle}
+                            value={this.state.completed}/>
+                    </MuiThemeProvider>
+                </div>
+            );
+
+        }
+        else{
+            return (
+                <MuiThemeProvider>
+                    <LinearProgress
+                        color="#00AEAE"
+                        mode="determinate"
+                        style={ThisStyle}
+                        value={this.state.completed}/>
+                </MuiThemeProvider>
+            );
+        }
     }
 }

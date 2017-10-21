@@ -1,18 +1,14 @@
 import React from 'react'
 import './Graduation.css'
 import LinearProgressExampleDeterminate from './OverviewProgress'
-import IndividualProgress from './IndividualProgress'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
-import Course from './Course';
-import IndividualCourse from './IndividualCourse'
 import axios from 'axios';
 import GraduationForm from './GraduationForm'
-import CourseList from './CourseList'
 
 let items=[
     { title: '必修課程',
-        credit: '20',
+        credit: '80',
         total: '60',
         course:
             [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
@@ -46,31 +42,7 @@ let items=[
         credit: '9',
         total: '15',
         course:
-            [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
-                { cn: '基礎程式設計', en: 'Basic Programming' ,complete:true},
-                { cn: '微積分(一)', en: 'Calculus (I)' ,complete:true},
-                { cn: '微積分(二)', en: 'Calculus (II)' ,complete:true},
-                { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.' ,complete:true},
-                { cn: '數位電路設計', en: 'Digital Circuit Design' ,complete:true},
-                { cn: '機率', en: 'Probability' },
-                { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true},
-                { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:true},
-                { cn: '物化生三合一(一)', en: '' ,complete:true},
-                { cn: '物化生三合一(二)', en: '' ,complete:true},
-                { cn: '線性代數', en: 'Linear Algebra' ,complete:true},
-                { cn: '編譯器設計概論', en: 'Intro. to Compiler Design' ,complete:true},
-                { cn: '計算機概論與程式設計',
-                    en: 'Introduction to Computers and Programming' ,complete:true},
-                { cn: '計算機組織', en: 'Computer Organization' ,complete:true},
-                { cn: '計算機網路概論', en: 'Intro. to Computer Networks' ,complete:true},
-                { cn: '資料結構與物件導向程式設計',
-                    en: 'Data Structures and Object-oriented Programming' ,complete:true},
-                { cn: '資訊工程專題(一)',
-                    en: 'Computer Science and Engineering Projects (I)' ,complete:true},
-                { cn: '資訊工程專題(二)',
-                    en: 'Computer Science and Engineering Projects (II)' ,complete:true},
-                { cn: '資訊工程研討', en: 'Computer Science Seminars' ,complete:true},
-                { cn: '離散數學', en: 'Discrete Mathematics' ,complete:true} ],
+            [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true}],
         notPas: [],
         complete: 'True' },
     { title: '英文',
@@ -110,10 +82,11 @@ class Grad extends React.Component {
     componentWillMount(){
         console.log(items);
         axios.get('/students/graduate').then(studentData => {
-            items = studentData;
+            items = studentData.data;
         }).catch(err => {
             console.log(err);
         });
+        //items = [{"title":"共同必修","credit":21,"require":"58","course":[{"cn":"作業系統概論","en":"Introduction to Operating Systems","complete":"True"},{"cn":"基礎程式設計","en":"Basic Programming","complete":"True"},{"cn":"微積分(一)","en":"Calculus (I)","complete":"True"},{"cn":"微積分(二)","en":"Calculus (II)","complete":"True"},{"cn":"微處理機系統實驗","en":"Microprocessor System Lab.","complete":"True"},{"cn":"數位電路實驗","en":"Digital Circuit Lab.","complete":"True"},{"cn":"數位電路設計","en":"Digital Circuit Design","complete":"True"},{"cn":"機率","en":"Probability","complete":"True"},{"cn":"正規語言概論","en":"Introduction to Formal Language","complete":"True"},{"cn":"演算法概論","en":"Introduction to Algorithms","complete":"True"},{"cn":"物件導向程式設計","en":"Object-Oriented Programming","complete":"True"},{"cn":"物化生三合一(一)","en":"","complete":"True"},{"cn":"物化生三合一(二)","en":"","complete":"True"},{"cn":"線性代數","en":"Linear Algebra","complete":"True"},{"cn":"計算機概論與程式設計","en":"Introduction to Computers and Programming","complete":"True"},{"cn":"計算機組織","en":"Computer Organization","complete":"True"},{"cn":"計算機網路概論","en":"Intro. to Computer Networks","complete":"True"},{"cn":"資料結構","en":"Data Structures","complete":"True"},{"cn":"資訊工程專題(一)","en":"Computer Science and Engineering Projects (I)","complete":"True"},{"cn":"資訊工程專題(二)","en":"Computer Science and Engineering Projects (II)","complete":"True"},{"cn":"離散數學","en":"Discrete Mathematics","complete":"True"}]},{"title":"專業選修","credit":3,"require":"12","course":[{"cn":"科技創業與營運(英文授課)","en":"","complete":"True"},{"cn":"密碼學概論","en":"","complete":"True"},{"cn":"作業系統(英文授課)","en":"","complete":"True"}]},{"title":"核心","credit":3,"require":9,"course":[{"cn":"影像處理概論","en":"Introduction to Image Processing","complete":"False"},{"cn":"網路程式設計概論","en":"Intro. to Network Programming","complete":"True"},{"cn":"網路通訊原理","en":"Principles of communications networks","complete":"True"},{"cn":"計算機圖學概論","en":"Introduction to Computer Graphics","complete":"True"}]},{"title":"副核心與他組合心","credit":2,"require":"12","course":[{"cn":"人工智慧概論","en":"Intro. to Artificial Intelligence","complete":"True"},{"cn":"編譯器設計概論","en":"Intro. to Compiler Design","complete":"False"},{"cn":"資料庫系統概論","en":"Introduction to Database Systems","complete":"True"},{"cn":"軟硬體協同設計概論與實作","en":"Introduction to Hardware-Software Codesign and Imp","complete":"False"},{"cn":"電路與電子學(一)","en":"Electrical Circuits and Electronics (I)","complete":"False"},{"cn":"電路與電子學(二)","en":"Electrical Circuits and Electronics (II)","complete":"False"}]}];
     }
     render(){
         return (
@@ -149,6 +122,7 @@ class Grad extends React.Component {
                     <div className="Grad-Row">
                         <GraduationForm items={items}/>
                     </div>
+                    <div id="graduate-footer"> </div>
                 </div>
             </div>
         )
