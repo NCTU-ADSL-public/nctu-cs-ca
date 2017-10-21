@@ -1,0 +1,30 @@
+body {
+    background: #e1e3de;
+}
+
+.filter-list {
+    padding: 60px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.filter-list input {
+    line-height: 2;
+    font-size: 18px;
+    height: auto;
+    padding-left: 20px;
+}
+
+.filter-list ul {
+    margin: 0;
+}
+.filter-list li {
+    list-style: none;
+    border: 1px solid #ccc;
+    margin-top: -1px;
+    line-height: 2;
+    padding: 5px 20px;
+    background: white;
+}
+
+

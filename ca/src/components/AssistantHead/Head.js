@@ -11,7 +11,7 @@ import Graduation from 'material-ui/svg-icons/social/school';
 import defalt from './defalt.jpg';
 
 import HomeItem from './Home/Home.js';
-import GraduationItem from './Graduation/Graduation';
+import GraduationItem from './Graduation/index';
 
 import FadeIn from 'react-fade-in';
 
