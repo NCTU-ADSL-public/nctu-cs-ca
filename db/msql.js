@@ -1,11 +1,11 @@
 var Client = require('mariasql');
 var lineReader = require('line-reader');
+var genericPool = require('generic-pool');
 var s = require('./sqlString.js');
 var psw = require('./dbpsw');
 
 
 var pool = psw.dbpsw();
-
 
 function padLeft(str, len) {
     str = '' + str;
@@ -15,7 +15,6 @@ function padLeft(str, len) {
         return padLeft("0" + str, len);
     }
 }
-
 
 module.exports = {
 
@@ -96,6 +95,7 @@ module.exports = {
                 pool.release(c);
             });
         })
+<<<<<<< HEAD
     },
     p_uploadGrade: function(pt) {
         const resource = pool.acquire();
@@ -186,12 +186,80 @@ module.exports = {
             var sql_Pass = c.prepare(s.Pass);
             var year = '1' + id[0] + id[1];
             c.query(sql_Pass({ id: id ,year:year}), function(err, result) {
+=======
+    },
+    p_uploadGrade: function(pt) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_p_uploadGrade = c.prepare(s.p_uploadGrade);
+            var now = 0,
+                num = "";
+            lineReader.eachLine(pt, function(line, last) {
+                if (now == 0) {
+                    var a = line.match(/[0-9]+/g);
+                    num = num + a[0] + "-" + a[1] + "-";
+                } else if (now == 1) {
+                    var a = line.match(/[0-9]+/g);
+                    num = num + a[0];
+                } else if (/[0-9+]/.test(line.split(',')[2])) {
+                    line = line.split(',');
+                    c.query(sql_p_uploadGrade({ unique_id: num, id: line[2], score: line[4] }), function(err) {
+                        if (err)
+                            throw err;
+                    });
+                }
+                if (last) {
+                    pool.release(c);
+                    return false;
+                }
+                now++;
+            });
+        })
+    },
+    a_uploadGrade: function(pt) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_a_uploadGrade = c.prepare(s.a_uploadGrade);
+            var sql_updateStudentCosPass = c.prepare(s.updateStudentCosPass);
+            var num = "",
+                now = 0;
+            lineReader.eachLine(pt, function(line, last) {
+                if (now != 0) {
+                    line = line.split(',');
+                    num = line[4] + '-' + line[5] + '-' + padLeft(line[6], 4);
+                    c.query(sql_a_uploadGrade({ unique_id: num, id: line[0], score: line[15], grade: line[16], GP: line[17] }), function(err) {
+                        if (err)
+                            throw err;
+                    });
+                    if (line[14] == '通過')
+                        c.query(sql_updateStudentCosPass({ id: line[0], code: line[9], year: line[4], semester: line[5] }), function(err) {
+                            if (err)
+                                throw err;
+                        });
+                }
+                if (last) {
+                    pool.release(c);
+                    return false;
+                }
+                now++;
+            });
+        })
+    },
+    totalCredit: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_totalCredit = c.prepare(s.totalCredit);
+            var str = id.split("");
+            str = '%' + id[0] + id[1];
+            c.query(sql_totalCredit({ id: id, year: str }), function(err, result) {
+>>>>>>> d9cafc3314c584b33382ce2e3e7c8f348c5d48a2
                 if (err)
                     throw err;
                 callback(null, JSON.stringify(result));
                 pool.release(c);
             })
         })
+<<<<<<< HEAD
     },
     Group: function(id,callback){
         const resource = pool.acquire();
@@ -215,13 +283,38 @@ module.exports = {
                 if(err)
                     throw err;
                 callback(null,JSON.stringify(result));
+=======
+    },
+    oldGeneralCredit: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_oldGeneralCredit = c.prepare(s.oldGeneralCredit);
+            c.query(sql_oldGeneralCredit({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+>>>>>>> d9cafc3314c584b33382ce2e3e7c8f348c5d48a2
                 pool.release(c);
             })
         })
     },
+<<<<<<< HEAD
     Drain:function(){
         pool.drain().then(function() {
             pool.clear();
         });
+=======
+    Pass: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_Pass = c.prepare(s.Pass);
+            c.query(sql_Pass({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            })
+        })
+>>>>>>> d9cafc3314c584b33382ce2e3e7c8f348c5d48a2
     }
 };
