@@ -95,7 +95,6 @@ module.exports = {
                 pool.release(c);
             });
         })
-<<<<<<< HEAD
     },
     p_uploadGrade: function(pt) {
         const resource = pool.acquire();
