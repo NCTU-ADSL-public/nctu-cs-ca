@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { handleCoursedata } from '../actions'
 import { setThisbutton } from '../actions'
-import { setAll } from '../actions'
 import TodoList from '../MapComponents/TodoList'
 
 const getVisibleTodos = (todos, filter, grad, sem) => {

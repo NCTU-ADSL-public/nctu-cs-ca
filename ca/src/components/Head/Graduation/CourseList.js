@@ -5,7 +5,7 @@ const CourseList = ({ items, index }) => (
     <div id="course-button">
         {items.map(item =>
             <Course
-                key={item.cn}
+                key={item.id}
                 cosCame={item.cn}
                 completed={item.complete}
                 goard={item.goard}

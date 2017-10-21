@@ -42,7 +42,7 @@ export default class IndividualProgress extends React.Component {
                 <div className="animated shake">
                     <MuiThemeProvider>
                         <LinearProgress
-                            color={"#ae300d"}
+                            color={"#00AEAE"}
                             mode="determinate"
                             style={ThisStyle}
                             value={this.state.completed}/>
@@ -55,7 +55,7 @@ export default class IndividualProgress extends React.Component {
             return (
                 <MuiThemeProvider>
                     <LinearProgress
-                        color="#00AEAE"
+                        color="#ae300d"
                         mode="determinate"
                         style={ThisStyle}
                         value={this.state.completed}/>

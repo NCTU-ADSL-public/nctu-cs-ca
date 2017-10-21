@@ -9,7 +9,7 @@ import GraduationForm from './GraduationForm'
 let items=[
     { title: '必修課程',
         credit: '80',
-        total: '60',
+        require: '60',
         course:
             [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
                 { cn: '基礎程式設計', en: 'Basic Programming' ,complete:true},
@@ -38,16 +38,21 @@ let items=[
                 { cn: '離散數學', en: 'Discrete Mathematics' ,complete:true} ],
         notPas: [],
         complete: 'True' },
-    { title: '核心課程',
-        credit: '9',
-        total: '15',
-        course:
-            [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true}],
-        notPas: [],
-        complete: 'True' },
+    { title: '通識',
+        credit: 16,
+        require: 20,
+        pass:
+            [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+                { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
+                { cn: '幾何造形', en: '', dimension: '自然', complete: true },
+                { cn: '經濟學概論', en: '', dimension: '公民', complete: true },
+                { cn: '霸權興衰史:從十五世紀至當代', en: '', dimension: '歷史', complete: true },
+                { cn: '紀錄片製作概論', en: '', dimension: '文化', complete: true },
+                { cn: '台灣史', en: '', dimension: '歷史', complete: true },
+                { cn: '當代中國：全球化下的兩岸關係', en: '', dimension: '歷史', complete: true } ] },
     { title: '英文',
         credit: '20',
-        total: '60',
+        require: '60',
         course:
             [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
                 { cn: '基礎程式設計', en: 'Basic Programming' ,complete:true},
