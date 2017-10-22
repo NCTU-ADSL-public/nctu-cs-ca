@@ -28,7 +28,7 @@ class GeneralCourse extends React.Component {
         })
     }
     onClick(){
-        console.log(this.state.items);
+        console.log(this.props.completed);
     }
     render(){
         return(

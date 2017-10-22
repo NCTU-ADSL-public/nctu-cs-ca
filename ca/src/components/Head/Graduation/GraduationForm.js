@@ -23,7 +23,7 @@ class GraduationForm extends React.Component{
             <div>
                 {this.state.items.map(item =>
                     <IndividualCourse
-                        key={item.title}
+                        key={item.id}
                         pass={item.course}
                         title={item.title}
                         credit={item.credit}
