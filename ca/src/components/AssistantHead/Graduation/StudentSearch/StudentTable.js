@@ -44,7 +44,7 @@ export default class StudentTable extends Component {
             enableSelectAll: false,
             deselectOnClickaway: true,
             showCheckboxes: false,
-            height: '500px',
+            height: 'auto',
         };
     }
 

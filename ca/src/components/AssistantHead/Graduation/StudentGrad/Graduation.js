@@ -121,7 +121,7 @@ class Grad extends React.Component {
                 <div id="font_adjust">
                     <div id="Grad-title-adjust">
                         <div className="Grad-title-text">
-                            <div id="lessons-title">畢業預審</div><div id="lessons-little-title-grad">-資工系{this.props.studentId}</div>
+                            <div id="lessons-title">{this.props.studentName}</div><div id="lessons-little-title-grad">-資工系{this.props.studentId}</div>
                         </div>
                         <div id="schedule-bar">
                             <div className="circle-progress">
@@ -154,37 +154,5 @@ class Grad extends React.Component {
         )
     }
 }
-//
-// <div id="little-form">
-//     <IndividualCourse pass={items[0].credit} total={items[0].total} name={items[0].title}/>
-//     <CourseList items={items[0].pass} />
-// </div>
-//
-// <div id="little-form">
-//     <div id="little-title">
-//         <IndividualProgress/>
-//         <div id="little-title-title">
-//             <div id="little-title-number"><font size={6} color='#338d68'>9</font>/9</div>
-//             <div id="little-title-text">資工組核心必修(必修)</div>
-//         </div>
-//
-//     </div>
-//     <div id="course-button">
-//         <Course cosCame="軟體工程概論" completed={true} selection={true} goard={3}/>
-//         <Course cosCame="密碼學概論" completed={true} selection={true} goard={3}/>
-//         <Course cosCame="微分方程" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="電腦安全概論" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="嵌入式系統設計概論與實作" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="電子與電路學(一)" completed={true} selection={true} goard={3}/>
-//         <Course cosCame="電子與電路學(二)" completed={true} selection={true} goard={3}/>
-//         <Course cosCame="訊號與系統" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="軟硬協同設計概論與實作" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="軟體工程概論" completed={true} selection={true} goard={3}/>
-//         <Course cosCame="網路程式設計概論" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="網路通訊原理" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="計算機圖學概論" completed={false} selection={true} goard={3}/>
-//         <Course cosCame="影像處理概論" completed={false} selection goard={3}/>
-//
-//     </div>
-// </div>
+
 export default Grad

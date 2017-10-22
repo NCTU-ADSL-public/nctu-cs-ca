@@ -56,6 +56,106 @@ class FilteredList extends React.Component {
                     group: '資電',
                     graduated: '已畢業',
                 },
+                {
+                    name: '流川楓',
+                    group: '網多',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '余治杰',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '王冠升',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '陳冠廷',
+                    group: '資工A',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '郭蕎',
+                    group: '資電',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '流川楓',
+                    group: '網多',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '余治杰',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '王冠升',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '陳冠廷',
+                    group: '資工A',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '郭蕎',
+                    group: '資電',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '流川楓',
+                    group: '網多',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '余治杰',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '王冠升',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '陳冠廷',
+                    group: '資工A',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '郭蕎',
+                    group: '資電',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '流川楓',
+                    group: '網多',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '余治杰',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '王冠升',
+                    group: '資工B',
+                    graduated: '未畢業',
+                },
+                {
+                    name: '陳冠廷',
+                    group: '資工A',
+                    graduated: '已畢業',
+                },
+                {
+                    name: '郭蕎',
+                    group: '資電',
+                    graduated: '已畢業',
+                },
 
 
             ],
@@ -72,16 +172,20 @@ class FilteredList extends React.Component {
     filterList(event){
         let updatedList = this.state.initStudents;
         updatedList = updatedList.filter(function(student){
-            return student.name.toLowerCase().search(
-                event.target.value.toLowerCase()) !== -1;
+            return (student.name.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1)||
+                (student.group.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1)||
+                (student.graduated.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1);
         });
         this.setState({students: updatedList});
     }
     render(){
         return (
-            <div>
+            <div className="filter">
                 <div className="filter-list">
-                    <input type="text" placeholder="Search" onChange={this.filterList}/>
+                    <input type="text" placeholder="搜尋 學生姓名/ 組別/ 畢業狀態" onChange={this.filterList}/>
                 </div>
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <StudentTable students={this.state.students}/>

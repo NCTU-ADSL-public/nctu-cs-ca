@@ -2,7 +2,7 @@ import React from 'react'
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ReactHover from 'react-hover';
-import 'animate.css'
+import '../../../../../node_modules/animate.css/animate.css'
 import './Course.css';
 
 

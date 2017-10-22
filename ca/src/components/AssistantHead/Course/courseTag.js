@@ -25,10 +25,10 @@ function handleActive(tab) {
 }
 const TabsExampleSimple = () => (
     <Tabs>
-        <Tab label="歷年課程" style={styles.tab} onActive={handleActive}>
+        <Tab label="歷年課程" style={styles.tab} onActive={handleActive} key='1'>
                 <TableExampleComplex/>
         </Tab>
-        <Tab label="當期課程" style={styles.tab} onActive={handleActive}>
+        <Tab label="當期課程" style={styles.tab} onActive={handleActive} key='2'>
             <div>
                 <h2 style={styles.headline}>當期課程</h2>
                 <p>
