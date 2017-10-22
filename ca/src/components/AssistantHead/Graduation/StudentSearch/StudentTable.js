@@ -8,6 +8,7 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
+
 const styles = {
     propContainer: {
         width: 200,
@@ -18,12 +19,14 @@ const styles = {
         margin: '20px auto 10px',
     },
     tabColumn0: {
-        background: '#ecfcf9',
-        border: '3px solid white',
+        cursor: 'pointer',
+      //  background: '#ecfcf9',
+       // border: '3px solid white',
     },
     tabColumn1: {
-        background: '#f9f9f9',
-        border: '3px solid white',
+        cursor: 'pointer',
+      //  background: '#f9f9f9',
+      //  border: '3px solid white',
     },
 };
 
@@ -38,14 +41,15 @@ export default class StudentTable extends Component {
             fixedHeader: true,
             fixedFooter: true,
             stripedRows: false,
-            showRowHover: false,
-            selectable: true,
+            showRowHover: true,
+            selectable: false,
             multiSelectable: false,
             enableSelectAll: false,
             deselectOnClickaway: true,
             showCheckboxes: false,
-            height: 'auto',
+            height: '60vh',
         };
+
     }
 
     static defaultProps = {
@@ -57,7 +61,9 @@ export default class StudentTable extends Component {
             }]
     };
 
-
+    handleRowClick = (rowIndex) => {
+        this.props.parentFunction(this.props.students[rowIndex]);
+    };
 
 
     render() {
@@ -71,6 +77,7 @@ export default class StudentTable extends Component {
                     fixedFooter={this.state.fixedFooter}
                     selectable={this.state.selectable}
                     multiSelectable={this.state.multiSelectable}
+                    onCellClick={this.handleRowClick}
                 >
                     <TableHeader
                         displaySelectAll={this.state.showCheckboxes}

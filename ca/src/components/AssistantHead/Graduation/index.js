@@ -9,14 +9,96 @@ import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 import StudentList from './StudentSearch/StudentList';
 import StudentGrad from './StudentGrad/Graduation';
 
-const PanelContent = ({ id }) => (
-    <div>{[1, 2, 3, 4].map(item => <p key={item}>{id}</p>)}</div>
-);
+
+const initStudents = [
+    {
+        name: '流川楓',
+        group: '網多',
+        graduated: '可畢業',
+    },
+    {
+        name: '余治杰',
+        group: '資工B',
+        graduated: '未畢業',
+    },
+    {
+        name: '王冠升',
+        group: '資工B',
+        graduated: '未畢業',
+    },
+    {
+        name: '郭毓梁',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+    {
+        name: '趙賀笙',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+    {
+        name: '王于哲',
+        group: '資工B',
+        graduated: '未畢業',
+    },
+    {
+        name: '陳奕安',
+        group: '資工B',
+        graduated: '未畢業',
+    },
+    {
+        name: '陳冠廷',
+        group: '網多',
+        graduated: '可畢業',
+    },
+    {
+        name: '郭蕎',
+        group: '資電',
+        graduated: '可畢業',
+    },
+    {
+        name: '趙賀笙',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+    {
+        name: '趙賀笙',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+    {
+        name: '趙賀笙',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+    {
+        name: '趙賀笙',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+    {
+        name: '趙賀笙',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+    {
+        name: '趙賀笙',
+        group: '資工A',
+        graduated: '未畢業',
+    },
+
+];
+    
+
 
 export default class index extends React.Component {
+
     state = {
         activeKey: '1',
         start: 0,
+        //for passing student selected by studentList
+        studentName: '流川楓',
+        studentId: '網多',
     };
 
     onChange = (activeKey) => {
@@ -33,14 +115,15 @@ export default class index extends React.Component {
         }
     };
 
-    tick = () => {
+    searchCallback = (student) => {
         this.setState({
-            start: this.state.start + 10,
+            activeKey: '2',
+            studentName: student.name,
+            studentId: student.group,
         });
     };
 
     render() {
-        const start = this.state.start;
         return (
             <div>
                 <Tabs
@@ -50,10 +133,10 @@ export default class index extends React.Component {
                     onChange={this.onChange}
                 >
                     <TabPane tab={`學生清單`} key="1">
-                        <StudentList/>
+                        <StudentList students={initStudents} parentFunction={this.searchCallback}/>
                     </TabPane>
                     <TabPane tab={`預審狀況`} key="2">
-                        <StudentGrad studentName='流川楓' studentId='網多'/>
+                        <StudentGrad studentName={this.state.studentName} studentId={this.state.studentId}/>
                     </TabPane>
                 </Tabs>
             </div>
