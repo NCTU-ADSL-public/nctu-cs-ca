@@ -19,137 +19,7 @@ export default class StudentList extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {/*
-            initStudents: [
-                {
-                    name: '流川楓',
-                    group: '網多',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '余治杰',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '王冠升',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '陳冠廷',
-                    group: '資工A',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '郭蕎',
-                    group: '資電',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '流川楓',
-                    group: '網多',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '余治杰',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '王冠升',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '陳冠廷',
-                    group: '資工A',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '郭蕎',
-                    group: '資電',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '流川楓',
-                    group: '網多',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '余治杰',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '王冠升',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '陳冠廷',
-                    group: '資工A',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '郭蕎',
-                    group: '資電',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '流川楓',
-                    group: '網多',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '余治杰',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '王冠升',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '陳冠廷',
-                    group: '資工A',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '郭蕎',
-                    group: '資電',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '流川楓',
-                    group: '網多',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '余治杰',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '王冠升',
-                    group: '資工B',
-                    graduated: '未畢業',
-                },
-                {
-                    name: '陳冠廷',
-                    group: '資工A',
-                    graduated: '已畢業',
-                },
-                {
-                    name: '郭蕎',
-                    group: '資電',
-                    graduated: '已畢業',
-                },
-
-
-            ],
-            */
+        this.state = {
             initStudents: this.props.students,
             students: [],
         };
@@ -157,7 +27,6 @@ export default class StudentList extends React.Component {
         this.filterList = this.filterList.bind(this);
 
     }
-
 
     componentWillMount(){
         this.setState({students: this.state.initStudents});
@@ -176,6 +45,13 @@ export default class StudentList extends React.Component {
         this.setState({students: updatedList});
     }
 
+    //input press ENTER
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.props.parentFunction(this.state.students[0]);
+        }
+    };
+
     searchCallback = (student) => {
         this.props.parentFunction(student);
     };
@@ -185,7 +61,7 @@ export default class StudentList extends React.Component {
             <div id="page">
                 <div className="filter">
                     <div className="filter-list">
-                        <input type="text" placeholder="搜尋 學生姓名/ 組別/ 畢業狀態" onChange={this.filterList}/>
+                        <input type="text" placeholder="搜尋 學生姓名/ 組別/ 畢業狀態" onChange={this.filterList} onKeyPress={this.handleKeyPress}/>
                     </div>
                     <MuiThemeProvider muiTheme={muiTheme}>
                         <StudentTable students={this.state.students} parentFunction={this.searchCallback}/>
