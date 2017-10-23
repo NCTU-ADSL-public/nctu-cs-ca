@@ -55,9 +55,10 @@ export default class StudentTable extends Component {
     static defaultProps = {
         students: [
             {
+                id: '0316000',
                 name: '流川楓',
                 group: '網多',
-                graduated: '已畢業',
+                graduated: 0,
             }]
     };
 
@@ -85,6 +86,7 @@ export default class StudentTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}
                     >
                         <TableRow>
+                            <TableHeaderColumn tooltip="學號">學號</TableHeaderColumn>
                             <TableHeaderColumn tooltip="學生姓名">學生姓名</TableHeaderColumn>
                             <TableHeaderColumn tooltip="組別">組別</TableHeaderColumn>
                             <TableHeaderColumn tooltip="畢業狀況">畢業狀況</TableHeaderColumn>
@@ -98,9 +100,10 @@ export default class StudentTable extends Component {
                     >
                         {this.props.students.map((row, index) => (
                             <TableRow key={index}>
+                                <TableRowColumn style={styles.tabColumn0}>{row.id}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.name}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn1}>{row.group}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.graduated}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>{row.graduated ? '可畢業' : '未達畢業標準'}</TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>

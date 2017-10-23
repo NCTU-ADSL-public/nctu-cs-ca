@@ -12,79 +12,58 @@ import StudentGrad from './StudentGrad/Graduation';
 
 const initStudents = [
     {
+        id: '0316000',
         name: '流川楓',
         group: '網多',
-        graduated: '可畢業',
+        graduated: 0,
     },
     {
+        id: '0316030',
         name: '余治杰',
         group: '資工B',
-        graduated: '未畢業',
+        graduated: 0,
     },
     {
+        id: '0316031',
         name: '王冠升',
         group: '資工B',
-        graduated: '未畢業',
+        graduated: 1,
     },
     {
+        id: '0316132',
         name: '郭毓梁',
         group: '資工A',
-        graduated: '未畢業',
+        graduated: 0,
     },
     {
+        id: '0316033',
         name: '趙賀笙',
         group: '資工A',
-        graduated: '未畢業',
+        graduated: 1,
     },
     {
+        id: '0316034',
         name: '王于哲',
         group: '資工B',
-        graduated: '未畢業',
+        graduated: 0,
     },
     {
+        id: '0316235',
         name: '陳奕安',
         group: '資工B',
-        graduated: '未畢業',
+        graduated: 0,
     },
     {
+        id: '0316036',
         name: '陳冠廷',
         group: '網多',
-        graduated: '可畢業',
+        graduated: 1,
     },
     {
+        id: '0316037',
         name: '郭蕎',
         group: '資電',
-        graduated: '可畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
+        graduated: 0,
     },
 
 ];

@@ -35,11 +35,14 @@ export default class StudentList extends React.Component {
     filterList(event){
         let updatedList = this.state.initStudents;
         updatedList = updatedList.filter(function(student){
+            let grad = student.graduated ? '可畢業' : '未達畢業標準';
             return (student.name.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
                 (student.group.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
-                (student.graduated.toLowerCase().search(
+                (student.id.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1)||
+                (grad.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1);
         });
         this.setState({students: updatedList});
@@ -61,7 +64,10 @@ export default class StudentList extends React.Component {
             <div id="page">
                 <div className="filter">
                     <div className="filter-list">
-                        <input type="text" placeholder="搜尋 學生姓名/ 組別/ 畢業狀態" onChange={this.filterList} onKeyPress={this.handleKeyPress}/>
+                        <input type="text"
+                               placeholder="搜尋 學號/ 學生姓名/ 組別/ 畢業狀態"
+                               onChange={this.filterList}
+                               onKeyPress={this.handleKeyPress}/>
                     </div>
                     <MuiThemeProvider muiTheme={muiTheme}>
                         <StudentTable students={this.state.students} parentFunction={this.searchCallback}/>
