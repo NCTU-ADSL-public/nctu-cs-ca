@@ -40,7 +40,7 @@ class GraduationForm extends React.Component{
                         </div>
 
                     </div>
-                    <GeneralCourseList items={this.state.GeneralItems[0].pass} />
+                    <GeneralCourseList items={this.state.GeneralItems[0].course} />
                 </div>
             </div>
         );
