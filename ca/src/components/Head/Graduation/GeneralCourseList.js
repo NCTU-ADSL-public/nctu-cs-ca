@@ -1,12 +1,12 @@
 import React from 'react'
 import GeneralCourse from './GeneralCourse'
 
-let item0={};
-let item1={};
-let item2={};
-let item3={};
-let item4={};
-let item5={};
+let item0=[];
+let item1=[];
+let item2=[];
+let item3=[];
+let item4=[];
+let item5=[];
 
 
 
@@ -28,7 +28,6 @@ class GenetalCourseList extends React.Component{
         let flag4=0;
         let flag5=0;
         for(let i=0;i<this.props.items.length;i++){
-            console.log(this.props.items[i]);
             if(this.props.items[i].dimension==="通識"){
                 let newitem = [...item0, this.props.items[i].cn];
                 item0 = newitem;
@@ -67,33 +66,11 @@ class GenetalCourseList extends React.Component{
                 history:flag4,
                 natural:flag5
             })
-            /*let newItem = [...this.state];
-            newItem.公民.complete = true;
-            this.setState({
-                newItem
-            })
-            if(this.props.items[i].dimension==="通識"){
-                let newItem = [...this.state];
-                let newDimensionItem=[...this.state.now.items, this.props.items[i]];
-                newItem["now"].items = newDimensionItem;
-                newItem["now"].complete = true;
-                this.setState({
-                    newItem,
-                })
-            }
-            else {
-                let newItem = [...this.state];
-                let dimension = this.props.items[i].dimension;
-                let aItem = { cn: this.props.items[i].cn, en: this.props.items[i].en, dimension: this.props.items[i].dimension};
-                //let newDimensionItem=[aItem, ...this.state.公民.items];
-                newItem[this.props.items[i].dimension].items = aItem;
-                newItem[this.props.items[i].dimension].complete = true;
-                this.setState({
-                    newItem,
-                })
-            }*/
         }
         console.log(item4)
+    }
+    componentDidMount(){
+        console.log(item0)
     }
     render(){
         return(
@@ -114,13 +91,13 @@ class GenetalCourseList extends React.Component{
                     items={item2}
                 />
                 <GeneralCourse
-                    cosCame="歷史"
-                    completed={this.state.history}
+                    cosCame="文化"
+                    completed={this.state.culture}
                     items={item3}
                 />
                 <GeneralCourse
-                    cosCame="文化"
-                    completed={this.state.culture}
+                    cosCame="歷史"
+                    completed={this.state.history}
                     items={item4}
                 />
                 <GeneralCourse

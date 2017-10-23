@@ -1,21 +1,22 @@
 import React from 'react'
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Popover from 'react-simple-popover';
 import 'animate.css'
 import './Course.css';
 
+const style=[{
+    transition: "background .2s linear",
+    width: "200px",
+    paddingRight: 0,
+
+}
+];
 
 class GeneralCourse extends React.Component {
 
     state={
-        items:this.props.items,
-        style:[{
-            transition: "background .2s linear",
-            width: "200px",
-            paddingRight: 0,
-
-        }
-        ]
+        open: false,
     };
 
     componentWillMount(){
@@ -27,12 +28,21 @@ class GeneralCourse extends React.Component {
             paddingRight: 0,
         })
     }
-    onClick(){
-        console.log(this.props.completed);
+
+    handleClick(e) {
+        this.setState({open: !this.state.open});
     }
+
+
+    handleClose(e) {
+        this.setState({open: false});
+    }
+
     render(){
         return(
-            <div className={this.props.completed?"grad":this.props.selection?"grad":"grad animated flash"}>
+            <div className="grad-popover">
+            <div className={this.props.completed?"grad":this.props.selection?"grad":"grad animated flash"} ref="target"
+                 onClick={this.handleClick.bind(this)}>
                 <MuiThemeProvider>
                     <FlatButton
                         className="grad-btn"
@@ -46,13 +56,21 @@ class GeneralCourse extends React.Component {
                             letterSpacing: "1px"
                         }}
                         backgroundColor={this.props.completed?"#3aa276":this.props.selection?"gray":"#d93a64"}
-                        style={this.state.style}
-                        label={this.props.cosCame}
-                        onClick={this.onClick}>
+                        style={style}
+                        label={this.props.cosCame}>
 
                     </FlatButton>
                 </MuiThemeProvider>
             </div>
+                <Popover
+                    placement='bottom'
+                    target={this.refs.target}
+                    show={this.state.open}
+                    onHide={this.handleClose.bind(this)}
+                  >
+                <div>{this.props.items}</div>
+                </Popover>
+        </div>
 
         )
     }

@@ -41,7 +41,7 @@ let items=[
     { title: '通識',
         credit: 16,
         require: 20,
-        pass:
+        course:
             [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
                 { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
                 { cn: '幾何造形', en: '', dimension: '自然', complete: true },
