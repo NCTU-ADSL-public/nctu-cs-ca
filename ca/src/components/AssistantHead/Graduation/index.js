@@ -108,11 +108,11 @@ export default class index extends React.Component {
     };
 
     onTabClick = (key) => {
-        if (key === this.state.activeKey) {
+        /*if (key === this.state.activeKey) {
             this.setState({
-                activeKey: '1',
+                activeKey: key,
             });
-        }
+        }*/
     };
 
     searchCallback = (student) => {
@@ -128,7 +128,7 @@ export default class index extends React.Component {
             <div>
                 <Tabs
                     renderTabBar={() => <ScrollableInkTabBar onTabClick={this.onTabClick}/>}
-                    renderTabContent={() => <TabContent animatedWithMargin />}
+                    renderTabContent={() => <TabContent/>}
                     activeKey={this.state.activeKey}
                     onChange={this.onChange}
                 >
