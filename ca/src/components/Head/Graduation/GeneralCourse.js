@@ -53,7 +53,8 @@ class GeneralCourse extends React.Component {
                             color: "#fcfcfc",
                             fontSize: "1em",
                             fontWeight: "300",
-                            letterSpacing: "1px"
+                            letterSpacing: "1px",
+                            fontFamily: 'Noto Sans CJK TC',
                         }}
                         backgroundColor={this.props.completed?"#3aa276":this.props.selection?"gray":"#d93a64"}
                         style={style}

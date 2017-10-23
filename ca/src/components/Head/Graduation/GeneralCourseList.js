@@ -20,6 +20,12 @@ class GenetalCourseList extends React.Component{
         natural:false,
     };
     componentWillMount(){
+        item0=[];
+        item1=[];
+        item2=[];
+        item3=[];
+        item4=[];
+        item5=[];
         console.log(this.props.items);
         let flag0=0;
         let flag1=0;
