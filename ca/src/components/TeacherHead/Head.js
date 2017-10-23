@@ -13,7 +13,7 @@ import FreeBreakfast from 'material-ui/svg-icons/places/free-breakfast';
 import defalt from './defalt.jpg';
 
 import HomeItem from './Home/Home.js';
-import CourseItem from './Course/Course.js';
+import CourseItem from './Course/index.js';
 import GroupItem from './Group/Group.js';
 import FamilyItem from './Family/Family.js';
 
