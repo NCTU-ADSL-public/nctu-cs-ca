@@ -47,7 +47,7 @@ export default class StudentList extends React.Component {
 
     //input press ENTER
     handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && this.state.students[0] !== undefined) {
             this.props.parentFunction(this.state.students[0]);
         }
     };
