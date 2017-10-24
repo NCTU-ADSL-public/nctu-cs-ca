@@ -1,6 +1,7 @@
-#Grad-title-adjust{
-    width: 1300px;
+.Grad-title-adjust{
+    width: 1200px;
     height: 200px;
+    margin: 0;
 }
 
 .Grad-title-text{
@@ -19,11 +20,11 @@
     float: left;
 }
 
-#schedule-bar{
+.schedule-bar{
     height: 200px;
-    width: auto;
+    width: 1200px;
     float: left;
-    padding: 40px 0 0 200px;
+    padding: 0px 0 0 110px;
 }
 
 .circle-progress{
@@ -31,17 +32,31 @@
     width: 80px;
 }
 
-#circle-in{
+.circle-in{
     color: #7B7B7B;
     float: left;
-    margin: 15px 0 -100px 17px;
+    margin: 15px 0 -100px 18px;
 }
 
-#overview-course{
+.showcourseoverview{
+    padding: 3px;
+    transition: background-color 0.8s;
+}
+
+
+.showcourseoverview:hover{
+    background-color: lightsteelblue;
+    border-style:solid;
+    border-width:1.5px;
+    border-color: #47c9d5;
+    cursor: pointer;
+}
+
+.overview-course{
     color: #7B7B7B;
     float: left;
     margin: -5px 0 0 0;
-    padding: 0 0 0 30px;
+    padding: 0 0 0 50px;
 }
 
 .Grad-Row{
