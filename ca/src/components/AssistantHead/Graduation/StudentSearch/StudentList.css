@@ -4,12 +4,12 @@ body{
 }
 
 .filter {
-    padding: 50px 15% 0 15%;
+    padding: 30px 15% 0 15%;
 }
 
 
 .filter-list {
-    padding: 30px;
+    padding: 20px;
     margin: 0;
 }
 
@@ -22,3 +22,4 @@ body{
     padding-left: 18px;
     width: 98%;
 }
+
