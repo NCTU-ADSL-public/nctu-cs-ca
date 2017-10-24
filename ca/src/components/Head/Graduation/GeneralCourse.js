@@ -56,6 +56,7 @@ class GeneralCourse extends React.Component {
                             letterSpacing: "1px",
                             fontFamily: 'Noto Sans CJK TC',
                         }}
+                        hoverColor={"#80b0d9"}
                         backgroundColor={this.props.completed?"#3aa276":this.props.selection?"gray":"#d93a64"}
                         style={style}
                         label={this.props.cosCame}>

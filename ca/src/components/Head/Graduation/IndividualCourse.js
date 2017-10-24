@@ -1,10 +1,14 @@
 import React from 'react';
 import IndividualProgress from './IndividualProgress'
 import CourseList from './CourseList'
-import GeneralCourseList from './GeneralCourseList'
+import scrollToComponent from 'react-scroll-to-component';
 
 export default class IndividualCourse extends React.Component {
-
+    componentWillUpdate(nextProps, nextState){
+        if(nextProps.scroll === this.props.title){
+            scrollToComponent(this.refs.my);
+        }
+    }
     render() {
         if(this.props.title==="通識"){
             return (<div> </div>
@@ -12,7 +16,7 @@ export default class IndividualCourse extends React.Component {
         }
         else{
             return (
-                <div  id="little-form">
+                <div  id="little-form"  ref="my">
                     <div id="little-title">
                         <IndividualProgress grad={this.props.credit/this.props.total * 100}/>
                         <div id="little-title-title">

@@ -19,6 +19,7 @@ class GenetalCourseList extends React.Component{
         history:false,
         natural:false,
     };
+
     componentWillMount(){
         item0=[];
         item1=[];
@@ -80,7 +81,7 @@ class GenetalCourseList extends React.Component{
     }
     render(){
         return(
-            <div id="course-button">
+            <div id="course-button" ref="my">
                 <GeneralCourse
                     cosCame="當代"
                     completed={this.state.now}

@@ -1,8 +1,12 @@
 import React from 'react';
 import LinearProgress from 'material-ui/LinearProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import '../../../../node_modules/animate.css/animate.css'
 
-export default class LinearProgressExampleDeterminate extends React.Component {
+const ThisStyle={
+}
+
+export default class IndividualProgress extends React.Component {
 
     constructor(props){
         super(props);
@@ -13,7 +17,7 @@ export default class LinearProgressExampleDeterminate extends React.Component {
     }
 
     componentDidMount(){
-        this.timer = setTimeout(() => this.progress(5), 1000);
+        this.timer = setTimeout(() => this.progress(2), 100);
     }
 
     componentWillUnmount(){
@@ -21,20 +25,40 @@ export default class LinearProgressExampleDeterminate extends React.Component {
     }
 
     progress(completed) {
-        if (completed > 100) {
-            this.setState({completed: 100});
+        if (completed > this.props.grad) {
+            this.setState({completed: this.props.grad});
         } else {
             this.setState({completed});
-            const diff = Math.random() * 10;
-            this.timer = setTimeout(() => this.progress(completed + diff), 1000);
+            const diff = 1 * 10;
+            this.timer = setTimeout(() => this.progress(completed + diff), 200);
         }
     }
 
     render() {
-        return (
-            <MuiThemeProvider>
-                <LinearProgress color="#00AEAE" mode="determinate" value={this.state.completed} />
-            </MuiThemeProvider>
-        );
+        if(this.state.completed >= 100){
+            return (
+                <div className="animated shake">
+                    <MuiThemeProvider>
+                        <LinearProgress
+                            color={"#00AEAE"}
+                            mode="determinate"
+                            style={ThisStyle}
+                            value={this.state.completed}/>
+                    </MuiThemeProvider>
+                </div>
+            );
+
+        }
+        else{
+            return (
+                <MuiThemeProvider>
+                    <LinearProgress
+                        color="#ae300d"
+                        mode="determinate"
+                        style={ThisStyle}
+                        value={this.state.completed}/>
+                </MuiThemeProvider>
+            );
+        }
     }
 }

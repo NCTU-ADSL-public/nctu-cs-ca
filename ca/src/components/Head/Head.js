@@ -26,6 +26,83 @@ const checkIcon = <Check />;
 
 let MapCourseData;
 let StudentCosPas;
+let Graduationitems=[
+    { title: '必修課程',
+        credit: '80',
+        require: '60',
+        course:
+            [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
+                { cn: '基礎程式設計', en: 'Basic Programming' ,complete:true},
+                { cn: '微積分(一)', en: 'Calculus (I)' ,complete:true},
+                { cn: '微積分(二)', en: 'Calculus (II)' ,complete:true},
+                { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.' ,complete:true},
+                { cn: '數位電路設計', en: 'Digital Circuit Design' ,complete:true},
+                { cn: '機率', en: 'Probability' },
+                { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true},
+                { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:true},
+                { cn: '物化生三合一(一)', en: '' ,complete:true},
+                { cn: '物化生三合一(二)', en: '' ,complete:true},
+                { cn: '線性代數', en: 'Linear Algebra' ,complete:true},
+                { cn: '編譯器設計概論', en: 'Intro. to Compiler Design' ,complete:true},
+                { cn: '計算機概論與程式設計',
+                    en: 'Introduction to Computers and Programming' ,complete:true},
+                { cn: '計算機組織', en: 'Computer Organization' ,complete:true},
+                { cn: '計算機網路概論', en: 'Intro. to Computer Networks' ,complete:true},
+                { cn: '資料結構與物件導向程式設計',
+                    en: 'Data Structures and Object-oriented Programming' ,complete:true},
+                { cn: '資訊工程專題(一)',
+                    en: 'Computer Science and Engineering Projects (I)' ,complete:true},
+                { cn: '資訊工程專題(二)',
+                    en: 'Computer Science and Engineering Projects (II)' ,complete:true},
+                { cn: '資訊工程研討', en: 'Computer Science Seminars' ,complete:true},
+                { cn: '離散數學', en: 'Discrete Mathematics' ,complete:true} ],
+        notPas: [],
+        complete: 'True' },
+    { title: '通識',
+        credit: 16,
+        require: 20,
+        course:
+            [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+                { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
+                { cn: '幾何造形', en: '', dimension: '自然', complete: true },
+                { cn: '經濟學概論', en: '', dimension: '歷史', complete: true },
+                { cn: '霸權興衰史:從十五世紀至當代', en: '', dimension: '歷史', complete: true },
+                { cn: '紀錄片製作概論', en: '', dimension: '歷史', complete: true },
+                { cn: '台灣史', en: '', dimension: '歷史', complete: true },
+                { cn: '當代中國：全球化下的兩岸關係', en: '', dimension: '歷史', complete: true } ] },
+    { title: '英文',
+        credit: '20',
+        require: '60',
+        course:
+            [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
+                { cn: '基礎程式設計', en: 'Basic Programming' ,complete:true},
+                { cn: '微積分(一)', en: 'Calculus (I)' ,complete:true},
+                { cn: '微積分(二)', en: 'Calculus (II)' ,complete:true},
+                { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.' ,complete:true},
+                { cn: '數位電路設計', en: 'Digital Circuit Design' ,complete:true},
+                { cn: '機率', en: 'Probability' },
+                { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true},
+                { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:true},
+                { cn: '物化生三合一(一)', en: '' ,complete:true},
+                { cn: '物化生三合一(二)', en: '' ,complete:true},
+                { cn: '線性代數', en: 'Linear Algebra' ,complete:true},
+                { cn: '編譯器設計概論', en: 'Intro. to Compiler Design' ,complete:true},
+                { cn: '計算機概論與程式設計',
+                    en: 'Introduction to Computers and Programming' ,complete:true},
+                { cn: '計算機組織', en: 'Computer Organization' ,complete:true},
+                { cn: '計算機網路概論', en: 'Intro. to Computer Networks' ,complete:true},
+                { cn: '資料結構與物件導向程式設計',
+                    en: 'Data Structures and Object-oriented Programming' ,complete:true},
+                { cn: '資訊工程專題(一)',
+                    en: 'Computer Science and Engineering Projects (I)' ,complete:true},
+                { cn: '資訊工程專題(二)',
+                    en: 'Computer Science and Engineering Projects (II)' ,complete:true},
+                { cn: '資訊工程研討', en: 'Computer Science Seminars' ,complete:true},
+                { cn: '離散數學', en: 'Discrete Mathematics' ,complete:true} ],
+        notPas: [],
+        complete: 'True' },
+
+];
 
 const studentCos = [{"cos_cname":"化學(一)","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"微積分甲(一)","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"普通生物(一)","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"物理(一)","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"線性代數","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"計算機概論與程式設計","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"化學(二)","grade":"1","semester":"2","suggest":"化學(一)","pre":null},{"cos_cname":"微積分甲(二)","grade":"1","semester":"2","suggest":"微積分甲(一) ","pre":null},{"cos_cname":"微積分甲(二)","grade":"1","semester":"2","suggest":"線性代數","pre":null},{"cos_cname":"數位電路設計","grade":"1","semester":"2","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"普通生物(二)","grade":"1","semester":"2","suggest":null,"pre":null},{"cos_cname":"物件導向程式設計","grade":"1","semester":"2","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"物理(二)","grade":"1","semester":"2","suggest":"物理(一)","pre":null},{"cos_cname":"離散數學","grade":"1","semester":"2","suggest":null,"pre":null},{"cos_cname":"數位電路實驗","grade":"2","semester":"1","suggest":"數位電路設計","pre":null},{"cos_cname":"機率","grade":"2","semester":"1","suggest":"微積分甲(二)","pre":null},{"cos_cname":"計算機網路概論","grade":"2","semester":"1","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"資料結構","grade":"2","semester":"1","suggest":"離散數學","pre":"物件導向程式設計"},{"cos_cname":"基礎程式設計(檢定考試)","grade":"2","semester":"2","suggest":"資料結構","pre":null},{"cos_cname":"正規語言概論","grade":"2","semester":"2","suggest":"離散數學","pre":null},{"cos_cname":"演算法概論","grade":"2","semester":"2","suggest":null,"pre":"資料結構"},{"cos_cname":"計算機組織","grade":"2","semester":"2","suggest":"數位電路實驗","pre":null},{"cos_cname":"作業系統概論","grade":"3","semester":"1","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"微處理機系統實驗","grade":"3","semester":"1","suggest":"計算機組織","pre":null},{"cos_cname":"編譯器設計概論","grade":"3","semester":"1","suggest":"正規語言概論","pre":"基礎程式設計(檢定考試)"},{"cos_cname":"資訊工程研討","grade":"3","semester":"1","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"資訊工程專題(一)","grade":"3","semester":"2","suggest":null,"pre":"基礎程式設計(檢定考試)"},{"cos_cname":"資訊工程專題(二)","grade":"4","semester":"1","suggest":null,"pre":"資訊工程專題(一)"}]
 const studentPas = [{"cos_cname":"普通生物(一)(英文授課)","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"物理(一)","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"線性代數","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"計算機概論與程式設計","grade":"1","semester":"1","suggest":null,"pre":null},{"cos_cname":"化學(二)","grade":"1","semester":"2","suggest":"化學(一)","pre":null},{"cos_cname":"微積分甲(二)","grade":"1","semester":"2","suggest":"微積分甲(一) ","pre":null},{"cos_cname":"微積分甲(二)","grade":"1","semester":"2","suggest":"線性代數","pre":null},{"cos_cname":"數位電路設計","grade":"1","semester":"2","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"普通生物(二)","grade":"1","semester":"2","suggest":null,"pre":null},{"cos_cname":"物件導向程式設計","grade":"1","semester":"2","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"物理(二)","grade":"1","semester":"2","suggest":"物理(一)","pre":null},{"cos_cname":"離散數學","grade":"1","semester":"2","suggest":null,"pre":null},{"cos_cname":"數位電路實驗","grade":"2","semester":"1","suggest":"數位電路設計","pre":null},{"cos_cname":"機率","grade":"2","semester":"1","suggest":"微積分甲(二)","pre":null},{"cos_cname":"計算機網路概論","grade":"2","semester":"1","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"資料結構","grade":"2","semester":"1","suggest":"離散數學","pre":"物件導向程式設計"},{"cos_cname":"基礎程式設計(檢定考試)","grade":"2","semester":"2","suggest":"資料結構","pre":null},{"cos_cname":"正規語言概論","grade":"2","semester":"2","suggest":"離散數學","pre":null},{"cos_cname":"演算法概論","grade":"2","semester":"2","suggest":null,"pre":"資料結構"},{"cos_cname":"計算機組織","grade":"2","semester":"2","suggest":"數位電路實驗","pre":null},{"cos_cname":"作業系統概論","grade":"3","semester":"1","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"微處理機系統實驗","grade":"3","semester":"1","suggest":"計算機組織","pre":null},{"cos_cname":"編譯器設計概論","grade":"3","semester":"1","suggest":"正規語言概論","pre":"基礎程式設計(檢定考試)"},{"cos_cname":"資訊工程研討","grade":"3","semester":"1","suggest":"計算機概論與程式設計","pre":null},{"cos_cname":"資訊工程專題(一)","grade":"3","semester":"2","suggest":null,"pre":"基礎程式設計(檢定考試)"},{"cos_cname":"資訊工程專題(二)","grade":"4","semester":"1","suggest":null,"pre":"資訊工程專題(一)"}]
@@ -57,6 +134,12 @@ class Head extends Component {
 
     componentWillMount(){
     	let _this = this;
+
+        axios.get('/students/graduate').then(studentData => {
+            Graduationitems = studentData.data;
+        }).catch(err => {
+            console.log(err);
+        });
 
         axios.get('/students/profile').then(studentData => {
             _this.setState({
@@ -116,7 +199,8 @@ class Head extends Component {
 					<font>
 						<FadeIn>
 							<GraduationItem
-								studentId={this.state.studentIdcard.prog}/>
+								studentId={this.state.studentIdcard.prog}
+								items={Graduationitems}/>
 						</FadeIn>
 					</font>,
                     document.getElementById('page'));

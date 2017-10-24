@@ -2,6 +2,8 @@ import React from 'react'
 import IndividualCourse from './IndividualCourse'
 import GeneralCourseList from './GeneralCourseList'
 import IndividualProgress from './IndividualProgress'
+import scrollToComponent from 'react-scroll-to-component';
+
 
 class GraduationForm extends React.Component{
     state={
@@ -12,6 +14,13 @@ class GraduationForm extends React.Component{
 
         ],
     };
+
+
+    componentWillUpdate(nextProps, nextState){
+        if( nextProps.scroll === this.state.GeneralItems[0].title){
+            scrollToComponent(this.refs.my);
+        }
+    }
     componentWillMount(){
         this.setState({
             items:this.props.items.filter(t => (t.title!=="通識")),
@@ -28,10 +37,11 @@ class GraduationForm extends React.Component{
                         title={item.title}
                         credit={item.credit}
                         total={item.require}
+                        scroll={this.props.scroll}
                     />
                 )}
 
-                <div  id="little-form">
+                <div  id="little-form"  ref="my">
                     <div id="little-title">
                         <IndividualProgress grad={this.state.GeneralItems[0].credit/this.state.GeneralItems[0].require * 100}/>
                         <div id="little-title-title">
@@ -40,7 +50,7 @@ class GraduationForm extends React.Component{
                         </div>
 
                     </div>
-                    <GeneralCourseList items={this.state.GeneralItems[0].course} />
+                    <GeneralCourseList items={this.state.GeneralItems[0].course} scroll={this.props.scroll}/>
                 </div>
             </div>
         );
