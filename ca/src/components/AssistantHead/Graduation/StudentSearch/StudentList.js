@@ -1,6 +1,10 @@
 import React from 'react';
 import './StudentList.css';
 
+//for Chips
+import Chip from 'material-ui/Chip';
+import {blue300} from 'material-ui/styles/colors';
+
 //for table
 import StudentTable from './StudentTable';
 
@@ -14,6 +18,18 @@ const muiTheme = getMuiTheme({
     },
 });
 
+
+const styles = {
+    chip: {
+        margin: 6,
+    },
+    wrapper: {
+        padding: '0 10px 20px 20px',
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+};
+
 export default class StudentList extends React.Component {
 
     constructor(props) {
@@ -22,10 +38,16 @@ export default class StudentList extends React.Component {
         this.state = {
             initStudents: this.props.students,
             students: [],
+
+            groupA: true,
+            groupB: true,
+            groupC: true,
+            groupD: true,
         };
 
         this.filterList = this.filterList.bind(this);
-
+        this.filterListGroup = this.filterListGroup.bind(this);
+        this.handleTouchTap = this.handleTouchTap.bind(this);
     }
 
     componentWillMount(){
@@ -33,13 +55,19 @@ export default class StudentList extends React.Component {
     }
 
     filterList(event){
+        this.setState({
+            groupA: true,
+            groupB: true,
+            groupC: true,
+            groupD: true,
+        });
         let updatedList = this.state.initStudents;
         updatedList = updatedList.filter(function(student){
             let grad = student.graduated ? '可畢業' : '未達畢業標準';
             return (student.name.toLowerCase().search(
-                    event.target.value.toLowerCase()) !== -1)||
-                (student.group.toLowerCase().search(
-                    event.target.value.toLowerCase()) !== -1)||
+                event.target.value.toLowerCase()) !== -1)||
+                ((student.group.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1) && this.state.groupA )||
                 (student.id.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
                 (grad.toLowerCase().search(
@@ -47,6 +75,36 @@ export default class StudentList extends React.Component {
         });
         this.setState({students: updatedList});
     }
+
+    filterListGroup(groupNum){
+        let updatedList = this.state.initStudents;
+        let gA = this.state.groupA;
+        let gB = this.state.groupB;
+        let gC = this.state.groupC;
+        let gD = this.state.groupD;
+        if (groupNum === 0) {
+            gA = !this.state.groupA;
+            this.setState({groupA: gA});
+        } else if (groupNum === 1) {
+            gB = !this.state.groupB;
+            this.setState({groupB: gB});
+        } else if (groupNum === 2) {
+            gC = !this.state.groupC;
+            this.setState({groupC: gC});
+        } else if (groupNum === 3) {
+            gD = !this.state.groupD;
+            this.setState({groupD: gD});
+        }
+        console.log(gA, gB, gB, gD);
+        updatedList = updatedList.filter(function(student){
+            return  ((student.group.toLowerCase().search('資工a') !== -1) && gA )||
+                    ((student.group.toLowerCase().search('資工b') !== -1) && gB )||
+                    ((student.group.toLowerCase().search('網多') !== -1) && gC )||
+                    ((student.group.toLowerCase().search('資電') !== -1) && gD );
+        });
+        this.setState({students: updatedList});
+    }
+
 
     //input press ENTER
     handleKeyPress = (e) => {
@@ -59,6 +117,10 @@ export default class StudentList extends React.Component {
         this.props.parentFunction(student);
     };
 
+    handleTouchTap(groupNum) {
+        this.filterListGroup(groupNum);
+    }
+
     render(){
         return (
             <div id="page">
@@ -67,8 +129,39 @@ export default class StudentList extends React.Component {
                         <input type="text"
                                placeholder="搜尋 學號/ 學生姓名/ 組別/ 畢業狀態"
                                onChange={this.filterList}
-                               onKeyPress={this.handleKeyPress}/>
+                               onKeyPress={this.handleKeyPress}
+                               />
                     </div>
+
+                    <MuiThemeProvider muiTheme={muiTheme}>
+                    <div style={styles.wrapper}>
+                        <Chip
+                            backgroundColor={this.state.groupA ? blue300 : '#CCC'}
+                            onClick={ () => (this.handleTouchTap(0))}
+                            style={styles.chip}>
+                            資工A班
+                        </Chip>
+                        <Chip
+                            backgroundColor={this.state.groupB ? blue300 : '#CCC'}
+                            onClick={ () => (this.handleTouchTap(1))}
+                            style={styles.chip}>
+                            資工B班
+                        </Chip>
+                        <Chip
+                            backgroundColor={this.state.groupC ? blue300 : '#CCC'}
+                            onClick={ () => (this.handleTouchTap(2))}
+                            style={styles.chip}>
+                            網多組
+                        </Chip>
+                        <Chip
+                            backgroundColor={this.state.groupD ? blue300 : '#CCC'}
+                            onClick={ () => (this.handleTouchTap(3))}
+                            style={styles.chip}>
+                            資電組
+                        </Chip>
+                    </div>
+                    </MuiThemeProvider>
+
                     <MuiThemeProvider muiTheme={muiTheme}>
                         <StudentTable students={this.state.students} parentFunction={this.searchCallback}/>
                     </MuiThemeProvider>
@@ -82,3 +175,5 @@ export default class StudentList extends React.Component {
 
 
 }
+
+
