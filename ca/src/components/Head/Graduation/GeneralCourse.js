@@ -69,7 +69,9 @@ class GeneralCourse extends React.Component {
                     show={this.state.open}
                     onHide={this.handleClose.bind(this)}
                   >
-                <div>{this.props.items}</div>
+                {this.props.items.map(function(item) {
+                    return <li key={item.id}>{item}</li>;
+                })}
                 </Popover>
         </div>
 
