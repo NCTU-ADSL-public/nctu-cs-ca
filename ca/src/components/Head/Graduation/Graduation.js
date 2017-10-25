@@ -48,7 +48,7 @@ class Grad extends React.Component {
                                 </div>
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('副核心課程')}>副核心課程&nbsp;<font size={5} color='#338d68'>{totalitems.vice}</font>/{totalitems.vice_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.vice/totalitems.vice_require*100}/></div>
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pro}</font>/{totalitems.pro}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.pro/totalitems.pro_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pro}</font>/{totalitems.pro_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.pro/totalitems.pro_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英文測驗&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;次<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
