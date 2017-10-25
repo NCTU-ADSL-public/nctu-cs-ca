@@ -13,6 +13,7 @@
     "rc-tabs": "^9.1.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-excel-workbook": "0.0.4",
     "react-fade-in": "^0.1.5",
     "react-hover": "^1.2.0",
     "react-redux": "^5.0.6",

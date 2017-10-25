@@ -23,7 +23,7 @@ class GraduationForm extends React.Component{
     }
     componentWillMount(){
         this.setState({
-            items:this.props.items.filter(t => (t.title!=="通識")),
+            items:this.props.items.filter(t => (t.title!=="通識" && t.course)),
             GeneralItems:this.props.items.filter(t => (t.title==="通識")),
         })
     }

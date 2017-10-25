@@ -55,7 +55,6 @@
 .showcourseoverview{
     color: #7B7B7B;
     margin: 4px;
-    #background-color:#eee;
     transition: background-color 0.5s;
     padding: 2px 2px 0 2px;
 }
@@ -64,8 +63,7 @@
 .showcourseoverview:hover{
     background-color: #8bdeb5;
     cursor: pointer;
-    border-top-right-radius:10px;
-    border-top-left-radius:10px;
+    border-radius:10px;
     border:2px #ccc solid;
 }
 
