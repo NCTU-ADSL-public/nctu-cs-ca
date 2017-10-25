@@ -5,6 +5,8 @@ import LinearProgressExampleDeterminate from './OverviewProgress'
 import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
 import scrollToComponent from 'react-scroll-to-component';
+import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 let totalitems;
 let items;
@@ -25,6 +27,20 @@ class Grad extends React.Component {
     scrollTotop(){
         scrollToComponent(this.refs.my);
     }
+    printGradTable() {
+        var mywindow = window.open('', 'my div', 'height=400,width=600');
+        mywindow.document.write('<html><head><title>my div</title>');
+        /*optional stylesheet*/
+        //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write('<h1>Test</h1>');
+        mywindow.document.write('</body></html>');
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    }
     render(){
         return (
             <div>
@@ -35,6 +51,21 @@ class Grad extends React.Component {
                     <div className="Grad-title-adjust" ref="my">
                         <div className="Grad-title-text">
                             <div id="lessons-title">畢業預審</div><div id="lessons-little-title-grad">-資工系{this.props.studentId}</div>
+                        </div>
+                        <div id="print-button" style={{
+                            height: '40px',
+                            width: '65px',
+                            padding: '5px 0 0 0',
+                            float: 'right',
+                            position: 'absolute',
+                            right: '50px'
+                        }}>
+                            <MuiThemeProvider>
+                                <RaisedButton style={{
+                                    width: '13%',
+                                    fontFamily: 'Noto Sans CJK TC',
+                                }}  backgroundColor = "#DDDDDD" label="列印" onClick={() => this.printGradTable()}/>
+                            </MuiThemeProvider>
                         </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">
