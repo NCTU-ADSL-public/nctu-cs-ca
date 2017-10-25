@@ -4,6 +4,47 @@
     right: 3px;
 }
 
+.red{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #d93a64;
+    float: left;
+}
+
+.green{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #3aa276;
+    float: left;
+}
+
+.gray{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: gray;
+    float: left;
+}
+
+.yellow{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #a29149;
+    float: left;
+}
+
+.text{
+    color: #7B7B7B;
+    float: left;
+}
+
+.tip{
+    padding: 80px 0 0 800px;
+}
+
 .Grad-title-adjust{
     width: 1200px;
     height: 200px;

@@ -70,7 +70,7 @@ class Course extends React.Component {
                                             fontFamily: 'Noto Sans CJK TC',
                                         }}
                                         hoverColor={"#80b0d9"}
-                                        backgroundColor={this.props.completed?"#3aa276":this.props.selection?"gray":"#d93a64"}
+                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29149":"#3aa276":this.props.selection?"gray":"#d93a64"}
                                         style={this.state.style}
                                         label={this.props.cosCame}
                                         onClick={()=>this.handleClick()}>
@@ -83,7 +83,8 @@ class Course extends React.Component {
                     show={this.state.open}
                     onHide={this.handleClose.bind(this)}
                 >
-                    <div>分數:</div>
+                    <div>分數:{this.props.score}</div>
+                    {(this.props.reason==="notCS")?<div>你修的這堂課不是資工系的，如果已經申請過底面了則算通過。</div>:<div></div>}
                 </Popover>
             </div>
 

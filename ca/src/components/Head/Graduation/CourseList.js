@@ -11,6 +11,8 @@ const CourseList = ({ items, selection , handleClick}) => (
                 selection={selection}
                 goard={item.goard}
                 handleClick={handleClick}
+                score={item.score}
+                reason={item.reason}
             />
         )}
     </div>

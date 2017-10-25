@@ -14,7 +14,6 @@ const IconButtonExampleTooltip = () => (
         <MuiThemeProvider>
             <FloatingActionButton
                 style={style}
-                mini={true}
                 backgroundColor = "grey">
                 {homeIcon}
             </FloatingActionButton>
