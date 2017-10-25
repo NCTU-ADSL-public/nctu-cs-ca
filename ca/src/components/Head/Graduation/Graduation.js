@@ -2,8 +2,7 @@ import React from 'react'
 import './Graduation.css'
 import GraduationForm from './GraduationForm'
 import LinearProgressExampleDeterminate from './OverviewProgress'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from './CircularProgress'
 
 let totalitems={ total: 113,
     total_require: 128,
@@ -55,35 +54,29 @@ class Grad extends React.Component {
                         <div className="schedule-bar">
                             <div className="circle-progress">
                                 <div className="circle-in">畢業{totalitems.total}/{totalitems.total_require}</div>
-                                <MuiThemeProvider>
-                                    <CircularProgress
-                                        mode="determinate"
-                                        value={totalitems.total/totalitems.total_require * 100}
-                                        size={90}
-                                        style={{transform: "rotate(-90deg)"}}
-                                        thickness={5}
-                                    />
-                                </MuiThemeProvider>
+                                <CircularProgress grad={totalitems.total/totalitems.total_require*100}/>
                             </div>
-                            <div className="overview-course" >
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('必修課程')}><span>必修課程&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.compulsory}</font>/{totalitems.compulse_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.compulsory/totalitems.compulse_require*100}/></span></div>
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('核心課程')}>核心課程&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.core}</font>/{totalitems.core_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.core/totalitems.core_require*100}/></div>
-                            </div>
-                            <div className="overview-course" >
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('副核心課程')}>副核心課程&nbsp;<font size={5} color='#338d68'>{totalitems.vice}</font>/{totalitems.vice_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.vice/totalitems.vice_require*100}/></div>
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pro}</font>/{totalitems.pro}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.pro/totalitems.pro_require*100}/></div>
-                            </div>
-                            <div className="overview-course" >
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英文測驗&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;次<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('其他選修')}>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.other}</font>/{totalitems.other_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.other/totalitems.other_require*100}/></div>
-                            </div>
-                            <div className="overview-course" >
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('通識')}>通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;識&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.general}</font>/{totalitems.general_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.general/totalitems.general_require*100}/></div>
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('體育')}>體&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;育&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pe}</font>/{totalitems.pe_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={totalitems.pe/totalitems.pe_require*100}/></div>
-                            </div>
-                            <div className="overview-course" >
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('外文')}>外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.language}</font>/{totalitems.language_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.language/totalitems.language_require*100}/></div>
-                                <div className="showcourseoverview" onClick={()=>this.handleClick('藝文賞析')}>藝文賞析&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.art}</font>/{totalitems.art_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={totalitems.art/totalitems.art_require*100}/></div>
+                                <div className="overview">
+                                <div className="overview-course" >
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('必修課程')}><span>必修課程&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.compulsory}</font>/{totalitems.compulse_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.compulsory/totalitems.compulse_require*100}/></span></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('核心課程')}>核心課程&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.core}</font>/{totalitems.core_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.core/totalitems.core_require*100}/></div>
+                                </div>
+                                <div className="overview-course" >
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('副核心課程')}>副核心課程&nbsp;<font size={5} color='#338d68'>{totalitems.vice}</font>/{totalitems.vice_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.vice/totalitems.vice_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pro}</font>/{totalitems.pro}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.pro/totalitems.pro_require*100}/></div>
+                                </div>
+                                <div className="overview-course" >
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英文測驗&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;次<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('其他選修')}>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.other}</font>/{totalitems.other_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.other/totalitems.other_require*100}/></div>
+                                </div>
+                                <div className="overview-course" >
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('通識')}>通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;識&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.general}</font>/{totalitems.general_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.general/totalitems.general_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('體育')}>體&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;育&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pe}</font>/{totalitems.pe_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={totalitems.pe/totalitems.pe_require*100}/></div>
+                                </div>
+                                <div className="overview-course" >
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('外文')}>外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.language}</font>/{totalitems.language_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.language/totalitems.language_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('藝文賞析')}>藝文賞析&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.art}</font>/{totalitems.art_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={totalitems.art/totalitems.art_require*100}/></div>
+                                </div>
                             </div>
                         </div>
                     </div>
