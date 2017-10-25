@@ -8,15 +8,8 @@ export default class IndividualCourse extends React.Component {
         if(nextProps.scroll === this.props.title){
             scrollToComponent(this.refs.my);
         }
-        console.log(this.props.key)
     }
     render() {
-        if(this.props.title==="通識"){
-            return (<div> </div>
-            );
-        }
-
-        else{
             return (
                 <div  id="little-form"  ref="my">
                     <div id="little-title">
@@ -27,9 +20,8 @@ export default class IndividualCourse extends React.Component {
                         </div>
 
                     </div>
-                    <CourseList items={this.props.pass} />
+                    <CourseList items={this.props.pass} selection={this.props.selection}/>
                 </div>
             );
-        }
     }
 }
