@@ -37,6 +37,7 @@ class GraduationForm extends React.Component{
                         title={item.title}
                         credit={item.credit}
                         total={item.require}
+                        selection={item.selection}
                         scroll={this.props.scroll}
                     />
                 )}

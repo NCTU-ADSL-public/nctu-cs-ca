@@ -25,7 +25,7 @@ export default class IndividualCourse extends React.Component {
                         </div>
 
                     </div>
-                    <CourseList items={this.props.pass} />
+                    <CourseList selection={this.props.selection} items={this.props.pass} />
                 </div>
             );
         }

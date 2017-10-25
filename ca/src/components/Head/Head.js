@@ -30,6 +30,7 @@ let Graduationitems=[
     { title: '必修課程',
         credit: '80',
         require: '60',
+        selection: true,
         course:
             [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
                 { cn: '基礎程式設計', en: 'Basic Programming' ,complete:true},
