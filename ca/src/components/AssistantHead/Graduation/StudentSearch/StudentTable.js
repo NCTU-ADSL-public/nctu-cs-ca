@@ -55,10 +55,10 @@ export default class StudentTable extends Component {
     static defaultProps = {
         students: [
             {
-                id: '0316000',
-                name: '流川楓',
-                group: '網多',
-                graduated: 0,
+                student_id: '0316000',
+                sname: '流川楓',
+                program: '網多',
+                graduate: 0,
             }]
     };
 
@@ -100,10 +100,10 @@ export default class StudentTable extends Component {
                     >
                         {this.props.students.map((row, index) => (
                             <TableRow key={index}>
-                                <TableRowColumn style={styles.tabColumn0}>{row.id}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.name}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn1}>{row.group}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.graduated ? '可畢業' : '未達畢業標準'}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn1}>{row.program}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>{row.graduate ? '可畢業' : '未達畢業標準'}</TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>
