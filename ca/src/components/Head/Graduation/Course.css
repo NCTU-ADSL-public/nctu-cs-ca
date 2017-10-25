@@ -10,6 +10,10 @@
     font-weight: 400;
 }
 
+.popovernote{
+    z-index: 500;
+}
+
 .grad{
     margin: 0 1px 1px 1px;
     float: left;

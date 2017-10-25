@@ -1,7 +1,7 @@
 import React from 'react'
 import Course from './Course'
 
-const CourseList = ({ items, selection }) => (
+const CourseList = ({ items, selection , handleClick}) => (
     <div id="course-button">
         {items.map(item =>
             <Course
@@ -10,6 +10,7 @@ const CourseList = ({ items, selection }) => (
                 completed={item.complete}
                 selection={selection}
                 goard={item.goard}
+                handleClick={handleClick}
             />
         )}
     </div>

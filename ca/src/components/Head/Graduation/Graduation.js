@@ -6,30 +6,7 @@ import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
 import scrollToComponent from 'react-scroll-to-component';
 
-let totalitems={ total: 113,
-    total_require: 128,
-    compulsory: 55,
-    compulse_require: 58,
-    core: 9,
-    core_require: '9',
-    vice: 9,
-    vice_require: '9',
-    pro: 9,
-    pro_require: '12',
-    english: 0,
-    english_require: 1,
-    other: 0,
-    other_require: '12',
-    general: 20,
-    general_require: 20,
-    pe: 6,
-    pe_require: 6,
-    language: 10,
-    language_require: 8,
-    service: 2,
-    service_require: 2,
-    art: 2,
-    art_require: 2 };
+let totalitems;
 let items;
 class Grad extends React.Component {
     state={
@@ -37,6 +14,7 @@ class Grad extends React.Component {
     };
     componentWillMount(){
         console.log(items);
+        totalitems=this.props.result;
         items=this.props.items;
     }
     handleClick(e){

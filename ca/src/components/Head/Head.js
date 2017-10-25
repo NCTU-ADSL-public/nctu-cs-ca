@@ -26,6 +26,31 @@ const checkIcon = <Check />;
 
 let MapCourseData;
 let StudentCosPas;
+let Graduationresult={ total: 113,
+    total_require: 128,
+    compulsory: 55,
+    compulse_require: 58,
+    core: 9,
+    core_require: '9',
+    vice: 9,
+    vice_require: '9',
+    pro: 9,
+    pro_require: '12',
+    english: 0,
+    english_require: 1,
+    other: 0,
+    other_require: '12',
+    general: 20,
+    general_require: 20,
+    pe: 6,
+    pe_require: 6,
+    language: 10,
+    language_require: 8,
+    service: 2,
+    service_require: 2,
+    art: 2,
+    art_require: 2 };
+
 let Graduationitems=[
     { title: '必修課程',
         credit: '80',
@@ -166,6 +191,12 @@ class Head extends Component {
             console.log(err);
         });
 
+        axios.get('/students/graduate/result').then(studentData => {
+            Graduationresult = studentData.data;
+        }).catch(err => {
+            console.log(err);
+        });
+
         axios.get('/students/profile').then(studentData => {
             _this.setState({
                 studentIdcard: {
@@ -225,7 +256,8 @@ class Head extends Component {
 						<FadeIn>
 							<GraduationItem
 								studentId={this.state.studentIdcard.prog}
-								items={Graduationitems}/>
+								items={Graduationitems}
+                                result={Graduationresult}/>
 						</FadeIn>
 					</font>,
                     document.getElementById('page'));
