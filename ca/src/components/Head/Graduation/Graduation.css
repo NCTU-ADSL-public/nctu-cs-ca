@@ -1,3 +1,12 @@
+.fixed {
+    position: fixed;
+    bottom: 38px;
+    left: 0;
+    width: 100px;
+    height: auto;
+    background-color: white;
+}
+
 .Grad-title-adjust{
     width: 1200px;
     height: 200px;

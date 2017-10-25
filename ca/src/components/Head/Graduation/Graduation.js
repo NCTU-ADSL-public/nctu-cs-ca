@@ -2,7 +2,9 @@ import React from 'react'
 import './Graduation.css'
 import GraduationForm from './GraduationForm'
 import LinearProgressExampleDeterminate from './OverviewProgress'
+import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
+import scrollToComponent from 'react-scroll-to-component';
 
 let totalitems={ total: 113,
     total_require: 128,
@@ -42,12 +44,17 @@ class Grad extends React.Component {
             scrollQuery:e,
         });
     }
+    scrollTotop(){
+        scrollToComponent(this.refs.my);
+    }
     render(){
         return (
             <div>
                 <div id="font_adjust">
-
-                    <div className="Grad-title-adjust">
+                    <div className="fixed" onClick={()=>this.scrollTotop()}>
+                        <TopButton cosCame="top" completed={true}/>
+                    </div>
+                    <div className="Grad-title-adjust" ref="my">
                         <div className="Grad-title-text">
                             <div id="lessons-title">畢業預審</div><div id="lessons-little-title-grad">-資工系{this.props.studentId}</div>
                         </div>
