@@ -58,7 +58,7 @@ export default class StudentTable extends Component {
                 student_id: '0316000',
                 sname: '流川楓',
                 program: '網多',
-                graduate: 0,
+                graduate: "0",
             }]
     };
 
@@ -103,7 +103,7 @@ export default class StudentTable extends Component {
                                 <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn1}>{row.program}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.graduate ? '可畢業' : '未達畢業標準'}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>{row.graduate==="1" ? '可畢業' : '未達畢業標準'}</TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>
