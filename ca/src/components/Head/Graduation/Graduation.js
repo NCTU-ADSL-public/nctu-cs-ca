@@ -1,9 +1,12 @@
 import React from 'react'
+
 import './Graduation.css'
 import GraduationForm from './GraduationForm'
 import LinearProgressExampleDeterminate from './OverviewProgress'
 import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
+import GradSubject from './GradTable'
+
 import scrollToComponent from 'react-scroll-to-component';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -28,16 +31,7 @@ class Grad extends React.Component {
         scrollToComponent(this.refs.my);
     }
     printGradTable() {
-        var mywindow = window.open('', 'my div', 'height=400,width=600');
-        mywindow.document.write('<html><head><title>my div</title>');
-        /*optional stylesheet*/
-        //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write('<h1>Test</h1>');
-        mywindow.document.write('</body></html>');
-
-        mywindow.print();
-        mywindow.close();
+        window.print();
 
         return true;
     }
@@ -98,6 +92,11 @@ class Grad extends React.Component {
                     </div>
                     <div className="Grad-Row">
                         <GraduationForm items={items} scroll={this.state.scrollQuery}/>
+                    </div>
+                    <div id="printArea">
+                        <GradSubject name="HIHI"></GradSubject>'
+                        <GradSubject name="HIHI"></GradSubject>'
+                        <GradSubject name="HIHI"></GradSubject>'
                     </div>
                     <div id="graduate-footer"> </div>
                 </div>
