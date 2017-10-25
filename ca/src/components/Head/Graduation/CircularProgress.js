@@ -1,14 +1,13 @@
 import React from 'react';
-import LinearProgress from 'material-ui/LinearProgress';
+import CircularProgress from 'material-ui/CircularProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import 'animate.css'
 
 const ThisStyle={
-    width:"300px",
-    float:"left"
+    float:"left",
+    transform: "rotate(-90deg)"
 }
 
-export default class IndividualProgress extends React.Component {
+export default class OverCircularProgress extends React.Component {
 
     constructor(props){
         super(props);
@@ -37,30 +36,17 @@ export default class IndividualProgress extends React.Component {
     }
 
     render() {
-        if(this.state.completed >= 100){
-            return (
-                <div className="animated pulse">
-                    <MuiThemeProvider>
-                        <LinearProgress
-                            color={"#00AEAE"}
-                            mode="determinate"
-                            style={ThisStyle}
-                            value={this.state.completed}/>
-                    </MuiThemeProvider>
-                </div>
-            );
-
-        }
-        else{
             return (
                 <MuiThemeProvider>
-                    <LinearProgress
-                        color="#d93a64"
+                    <CircularProgress
                         mode="determinate"
+                        size={150}
+                        color={this.state.completed >= 100?"#00AEAE":"#d93a64"}
                         style={ThisStyle}
-                        value={this.state.completed}/>
+                        thickness={7}
+                        value={this.state.completed}
+                    />
                 </MuiThemeProvider>
             );
-        }
     }
 }
