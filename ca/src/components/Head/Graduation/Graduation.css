@@ -1,10 +1,7 @@
 .fixed {
     position: fixed;
-    bottom: 38px;
-    left: 0;
-    width: 100px;
-    height: auto;
-    background-color: white;
+    bottom: 41px;
+    left: 3px;
 }
 
 .Grad-title-adjust{
@@ -58,17 +55,18 @@
 .showcourseoverview{
     color: #7B7B7B;
     margin: 4px;
-    background-color:#eee;
+    #background-color:#eee;
     transition: background-color 0.5s;
-    border:2px #ccc solid;
     padding: 2px 2px 0 2px;
-    border-top-right-radius:10px;
 }
 
 
 .showcourseoverview:hover{
     background-color: #8bdeb5;
     cursor: pointer;
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    border:2px #ccc solid;
 }
 
 .overview-course{

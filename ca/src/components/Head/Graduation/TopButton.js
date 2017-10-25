@@ -1,47 +1,25 @@
-import React from 'react'
-import FlatButton from 'material-ui/FlatButton';
+import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import 'animate.css'
-import './Course.css';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/editor/vertical-align-top'
 
+const homeIcon = <ContentAdd />;
 
-class TopButton extends React.Component {
+const style = {
+    marginRight: 20,
+};
 
-    state={
-        transition: "background .2s linear",
-        width:"50px",
-        paddingRight: 0,
-        opacity:0.8
-    };
+const IconButtonExampleTooltip = () => (
+    <div>
+        <MuiThemeProvider>
+            <FloatingActionButton
+                style={style}
+                mini={true}
+                backgroundColor = "grey">
+                {homeIcon}
+            </FloatingActionButton>
+        </MuiThemeProvider>
+    </div>
+);
 
-    render(){
-        return(
-            <div className="grad">
-                <MuiThemeProvider>
-                    <FlatButton
-                        className="grad-btn"
-                        labelStyle={{
-                            padding: "5px",
-                            height: "45px",
-                            verticalAlign: "default",
-                            color: "#fcfcfc",
-                            fontSize: "1em",
-                            fontWeight: "300",
-                            letterSpacing: "1px",
-                            fontFamily: 'Noto Sans CJK TC',
-                        }}
-                        hoverColor={"#80b0d9"}
-                        backgroundColor="gray"
-                        style={this.state}
-                        label={this.props.cosCame}
-                        >
-
-                    </FlatButton>
-                </MuiThemeProvider>
-            </div>
-
-        )
-    }
-}
-
-export default TopButton
+export default IconButtonExampleTooltip;

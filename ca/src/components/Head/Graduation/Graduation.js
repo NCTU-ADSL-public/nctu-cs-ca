@@ -52,7 +52,7 @@ class Grad extends React.Component {
             <div>
                 <div id="font_adjust">
                     <div className="fixed" onClick={()=>this.scrollTotop()}>
-                        <TopButton cosCame="top" completed={true}/>
+                        <TopButton/>
                     </div>
                     <div className="Grad-title-adjust" ref="my">
                         <div className="Grad-title-text">
