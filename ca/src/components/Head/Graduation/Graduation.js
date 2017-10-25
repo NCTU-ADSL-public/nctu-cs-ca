@@ -5,7 +5,7 @@ import GraduationForm from './GraduationForm'
 import LinearProgressExampleDeterminate from './OverviewProgress'
 import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
-import GradSubject from './GradTable'
+import GradCategory from './GradTable/GradSubject'
 
 import scrollToComponent from 'react-scroll-to-component';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -94,9 +94,7 @@ class Grad extends React.Component {
                         <GraduationForm items={items} scroll={this.state.scrollQuery}/>
                     </div>
                     <div id="printArea">
-                        <GradSubject name="HIHI"></GradSubject>'
-                        <GradSubject name="HIHI"></GradSubject>'
-                        <GradSubject name="HIHI"></GradSubject>'
+                        <GradCategory/>
                     </div>
                     <div id="graduate-footer"> </div>
                 </div>
