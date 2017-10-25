@@ -52,27 +52,30 @@
 }
 
 .overview{
-    margin:0 0 0 150px;
+    margin:0 0 0 170px;
 }
 
 .showcourseoverview{
+    color: #7B7B7B;
     margin: 4px;
+    background-color:#eee;
+    transition: background-color 0.5s;
+    border:2px #ccc solid;
+    padding: 2px 2px 0 2px;
+    border-top-right-radius:10px;
 }
 
 
 .showcourseoverview:hover{
-    background-color: lightsteelblue;
-    border-style:solid;
-    border-width:1.5px;
-    border-color: #47c9d5;
+    background-color: #8bdeb5;
     cursor: pointer;
 }
 
 .overview-course{
-    color: #7B7B7B;
+    color: #3a7b69;
     float: left;
     margin: -5px 0 0 0;
-    padding: 0 0 0 50px;
+    padding: 0 0 0 20px;
 }
 
 .Grad-Row{
