@@ -63,12 +63,12 @@ export default class StudentList extends React.Component {
         });
         let updatedList = this.state.initStudents;
         updatedList = updatedList.filter(function(student){
-            let grad = student.graduated ? '可畢業' : '未達畢業標準';
-            return (student.name.toLowerCase().search(
+            let grad = student.graduate==="1" ? '可畢業' : '未達畢業標準';
+            return (student.sname.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1)||
-                ((student.group.toLowerCase().search(
+                ((student.program.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1) && this.state.groupA )||
-                (student.id.toLowerCase().search(
+                (student.student_id.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
                 (grad.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1);
@@ -97,10 +97,10 @@ export default class StudentList extends React.Component {
         }
         console.log(gA, gB, gB, gD);
         updatedList = updatedList.filter(function(student){
-            return  ((student.group.toLowerCase().search('資工a') !== -1) && gA )||
-                    ((student.group.toLowerCase().search('資工b') !== -1) && gB )||
-                    ((student.group.toLowerCase().search('網多') !== -1) && gC )||
-                    ((student.group.toLowerCase().search('資電') !== -1) && gD );
+            return  ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
+                    ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
+                    ((student.program.toLowerCase().search('網多') !== -1) && gC )||
+                    ((student.program.toLowerCase().search('資電') !== -1) && gD );
         });
         this.setState({students: updatedList});
     }
