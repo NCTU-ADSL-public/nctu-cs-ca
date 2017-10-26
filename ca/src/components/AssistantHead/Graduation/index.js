@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 //for tabs
 import 'rc-tabs/assets/index.css';
 import './index.css';
@@ -10,88 +11,76 @@ import StudentList from './StudentSearch/StudentList';
 import StudentGrad from './StudentGrad/Graduation';
 
 
-const initStudents = [
+let initStudents = [
     {
-        name: '流川楓',
-        group: '網多',
-        graduated: '可畢業',
+        student_id: '0316000',
+        sname: '流川楓',
+        program: '網多',
+        graduate: "0",
     },
     {
-        name: '余治杰',
-        group: '資工B',
-        graduated: '未畢業',
+        student_id: '0316030',
+        sname: '余治杰',
+        program: '資工B',
+        graduate: "0",
     },
     {
-        name: '王冠升',
-        group: '資工B',
-        graduated: '未畢業',
+        student_id: '0316031',
+        sname: '王冠升',
+        program: '資工B',
+        graduate: "1",
     },
     {
-        name: '郭毓梁',
-        group: '資工A',
-        graduated: '未畢業',
+        student_id: '0316132',
+        sname: '郭毓梁',
+        program: '資工A',
+        graduate: "0",
     },
     {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
+        student_id: '0316033',
+        sname: '趙賀笙',
+        program: '資工A',
+        graduate: "1",
     },
     {
-        name: '王于哲',
-        group: '資工B',
-        graduated: '未畢業',
+        student_id: '0316034',
+        sname: '王于哲',
+        program: '資工B',
+        graduate: "0",
     },
     {
-        name: '陳奕安',
-        group: '資工B',
-        graduated: '未畢業',
+        student_id: '0316235',
+        sname: '陳奕安',
+        program: '資工B',
+        graduate:"0",
     },
     {
-        name: '陳冠廷',
-        group: '網多',
-        graduated: '可畢業',
+        student_id: '0316036',
+        sname: '陳冠廷',
+        program: '網多',
+        graduate: "1",
     },
     {
-        name: '郭蕎',
-        group: '資電',
-        graduated: '可畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
-    },
-    {
-        name: '趙賀笙',
-        group: '資工A',
-        graduated: '未畢業',
+        student_id: '0316037',
+        sname: '郭蕎',
+        program: '資電',
+        graduate: "0",
     },
 
 ];
-    
+
 
 
 export default class index extends React.Component {
+
+    componentWillMount(){
+        console.log(initStudents);
+        axios.get('/assistants/graduate/list').then(studentData => {
+            initStudents = studentData.data;
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 
     state = {
         activeKey: '1',
@@ -118,8 +107,8 @@ export default class index extends React.Component {
     searchCallback = (student) => {
         this.setState({
             activeKey: '2',
-            studentName: student.name,
-            studentId: student.group,
+            studentName: student.sname,
+            studentId: student.program,
         });
     };
 
