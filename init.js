@@ -21,6 +21,7 @@ module.exports.init = function(){
   //app.use('/assistants/Head', require('./utils').verifyUser, express.static('./Bulb'));
   //app.use('/students/Head', require('./utils').verifyUser,  express.static('./public'));
   app.use('/students/Head', require('./utils').verifyUser,  express.static('./public'));
+  app.use('/assistants/Head', require('./utils').verifyUser,  express.static('./public'));
   app.get('/profilePic.png', function (req, res) {
     var personId = utils.getPersonId(JSON.parse(req.session.profile));    
     res.sendFile(path.join(__dirname, '/profilePic') + '/' + personId + '.png');

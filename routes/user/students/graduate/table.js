@@ -52,21 +52,21 @@ function queryCourse(studentId, callback){
 		result = JSON.parse(result);
 		info.program = result[0].program;
 	        query.Group(studentId, function(err, result){
-		if(!result){
-			console.log("Cannot find the student.");
-			return;
-		}
-		if(err){
-			throw err;
-			return;
-		}
-                else{
-                    info.group = result;
-                    console.log("tablequerycourseelse");
-	            processCourse(info, function(course){		
-                        callback(course);
-                    });
-		}
+			if(!result){
+				console.log("Cannot find the student.");
+				return;
+			}
+			if(err){
+				throw err;
+				return;
+			}
+                	else{
+                    		info.group = result;
+                    		console.log("tablequerycourseelse");
+	           	 	processCourse(info, function(course){		
+                        		callback(course);
+                    		});
+			}
                 });
 	});
              //callback(course);
@@ -155,6 +155,22 @@ function processCourse(info, callback){
 
 }
 
+function queryList(studentId, callback){
+	//query.setStudentGraduate(studentId, '1');
+	query.studentGraduateList(studentId, function(err, list){
+                if(!list){
+                        console.log("Can't find the student.");
+                        return;
+                }
+                if(err){
+                        throw err;
+                        return;
+                }
+                else
+                        callback(list);
+        });
+}
+
 table.getPass = function(studentId, callback){
     queryPass(studentId, function(pass){
 	callback(pass);
@@ -167,11 +183,15 @@ table.getCourse = function(studentId, callback){
 }
 table.getRule = function(studentId, callback){
     queryRule(studentId, function(rules){
-        console.log("rule:" + JSON.stringify(rules));
+        //console.log("rule:" + JSON.stringify(rules));
         callback(rules);
     });
 }
-
+table.getList = function(studentId, callback){
+    queryList(studentId, function(list){
+	callback(list);
+    });
+}
 
 
 exports.tables = table;

@@ -1,6 +1,54 @@
-#Grad-title-adjust{
-    width: 1300px;
+.fixed {
+    position: fixed;
+    bottom: 41px;
+    right: 3px;
+}
+
+.red{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #d93a64;
+    float: left;
+}
+
+.green{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #3aa276;
+    float: left;
+}
+
+.gray{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: gray;
+    float: left;
+}
+
+.yellow{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #a29149;
+    float: left;
+}
+
+.text{
+    color: #7B7B7B;
+    float: left;
+}
+
+.tip{
+    padding: 80px 0 0 800px;
+}
+
+.Grad-title-adjust{
+    width: 1200px;
     height: 200px;
+    margin: 0;
 }
 
 .Grad-title-text{
@@ -19,29 +67,52 @@
     float: left;
 }
 
-#schedule-bar{
+.schedule-bar{
     height: 200px;
-    width: auto;
+    width: 1200px;
     float: left;
-    padding: 40px 0 0 200px;
+    padding: 0px 0 0 110px;
 }
 
 .circle-progress{
     float: left;
+    margin: -30px 0 0 0;
     width: 80px;
 }
 
-#circle-in{
+
+.circle-in{
     color: #7B7B7B;
     float: left;
-    margin: 15px 0 -100px 17px;
+    text-align: center;
+    font-size: 28px;
+    margin: 25px 0 -110px 8px;
 }
 
-#overview-course{
+.overview{
+    margin:0 0 0 170px;
+}
+
+.showcourseoverview{
     color: #7B7B7B;
+    margin: 4px;
+    transition: background-color 0.5s;
+    padding: 2px 2px 0 2px;
+}
+
+
+.showcourseoverview:hover{
+    background-color: #8bdeb5;
+    cursor: pointer;
+    border-radius:10px;
+    border:2px #ccc solid;
+}
+
+.overview-course{
+    color: #3a7b69;
     float: left;
-    margin: -8px 0 0 0;
-    padding: 0 0 0 30px;
+    margin: -5px 0 0 0;
+    padding: 0 0 0 20px;
 }
 
 .Grad-Row{
@@ -77,5 +148,6 @@
 }
 
 #graduate-footer{
-    height: 300px;
+    width: auto;
+    height: 200px;
 }

@@ -39,7 +39,7 @@ export default class IndividualProgress extends React.Component {
     render() {
         if(this.state.completed >= 100){
             return (
-                <div className="animated shake">
+                <div className="animated pulse">
                     <MuiThemeProvider>
                         <LinearProgress
                             color={"#00AEAE"}
@@ -55,7 +55,7 @@ export default class IndividualProgress extends React.Component {
             return (
                 <MuiThemeProvider>
                     <LinearProgress
-                        color="#ae300d"
+                        color="#d93a64"
                         mode="determinate"
                         style={ThisStyle}
                         value={this.state.completed}/>

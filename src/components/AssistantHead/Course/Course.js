@@ -6,7 +6,7 @@ import './Course.css';
 
 const muiTheme = getMuiTheme({
     palette: {
-        primary1Color: 'Transparent',
+        primary1Color: 'rgba(0, 0, 0, 0)',
         accent1Color: '#00AEAE',
     },
 });

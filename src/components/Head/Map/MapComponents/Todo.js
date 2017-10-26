@@ -42,7 +42,8 @@ class Todo extends React.Component {
                                             color: "#fcfcfc",
                                             fontSize: "1em",
                                             fontWeight: "300",
-                                            letterSpacing: "1px"
+                                            letterSpacing: "1px",
+                                            fontFamily: 'Noto Sans CJK TC',
                                         }}
                                         style={{
                                             background: this.props.pre_flag ? "#FF2D2D":"",

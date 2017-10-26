@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
     Table,
     TableBody,
-    TableFooter,
     TableHeader,
     TableHeaderColumn,
     TableRow,
@@ -210,7 +209,7 @@ export default class TableExampleComplex extends Component {
                         stripedRows={this.state.stripedRows}
                     >
                         {tableData.map( (row, index) => (
-                            <TableRow key={index}>
+                            <TableRow key={index} style={styles.tabRow}>
                                 <TableRowColumn style={styles.tabColumn1}>{row.sem}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.name}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn1}>{row.college}</TableRowColumn>
