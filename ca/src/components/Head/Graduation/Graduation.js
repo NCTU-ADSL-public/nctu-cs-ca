@@ -6,6 +6,8 @@ import LinearProgressExampleDeterminate from './OverviewProgress'
 import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
 import PrintForm from './GradTable/PrintForm'
+import Toggle from 'material-ui/Toggle';
+import {ToastContainer, ToastStore} from 'react-toasts';
 
 import scrollToComponent from 'react-scroll-to-component'
 import axios from 'axios'
@@ -14,28 +16,34 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 let totalitems;
 let items;
+let Graduationitems;
+const styles = {
+    toggle: {
+        padding:'10px 0 0 0',
+        marginBottom: 0,
+        maxWidth: 200,
+    },
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#7B7B7B'
+    },
+};
+
+
 class Grad extends React.Component {
     state={
         scrollQuery:'',
+        isToggle:true
     };
     componentWillMount(){
-        console.log(items);
         totalitems=this.props.result;
         items=this.props.items;
-        axios.post('/students/Head/hh', {
-            firstName: 'Fred',
-            lastName: 'Flintstone'
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        Graduationitems=this.props.revise;
     }
     handleClick(e){
         this.setState({
             scrollQuery:e,
+            isToggle:this.state.isToggle
         });
     }
     scrollTotop(){
@@ -46,10 +54,29 @@ class Grad extends React.Component {
 
         return true;
     }
+    componentWillUpdate(){
+        if(this.state.isToggle){
+            totalitems=this.props.reviseresult;
+        }
+        else{
+            totalitems=this.props.result;
+        }
+    }
+    handleToggle(){
+        this.setState({
+            scrollQuery:'',
+            isToggle:!this.state.isToggle
+        });
+        if(this.state.isToggle){
+            ToastStore.info(<div  className="text">已幫您自動排序，此為系統自動排序僅以參考為主。</div>);
+        }
+    }
+
     render(){
         return (
             <div>
                 <div id="font_adjust">
+                    <ToastContainer store={ToastStore}/>
                     <div className="fixed" onClick={()=>this.scrollTotop()}>
                         <TopButton/>
                     </div>
@@ -63,6 +90,14 @@ class Grad extends React.Component {
                             <div className="red"> </div><div  className="text">未通過</div>
                             <div className="gray"> </div><div  className="text">未修課</div>
                             <div className="yellow"> </div><div  className="text">抵免課程</div>
+                            <MuiThemeProvider>
+                                <Toggle
+                                label="系統自動排課"
+                                style={styles.toggle}
+                                labelStyle={styles.labelStyle}
+                                onToggle={(toggled)=>this.handleToggle()}
+                                />
+                            </MuiThemeProvider>
                         </div>
 
                         <div id="print-button" style={{
@@ -95,7 +130,7 @@ class Grad extends React.Component {
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pro}</font>/{totalitems.pro_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.pro/totalitems.pro_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英文測驗&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;次<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英語修課&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;次<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('其他選修')}>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.other}</font>/{totalitems.other_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.other/totalitems.other_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
@@ -110,7 +145,7 @@ class Grad extends React.Component {
                         </div>
                     </div>
                     <div className="Grad-Row">
-                        <GraduationForm items={items} scroll={this.state.scrollQuery}/>
+                        <GraduationForm isToggle={this.state.isToggle} items={items} graditems={Graduationitems} scroll={this.state.scrollQuery}/>
                     </div>
                     <div id="printArea">
                         <PrintForm/>

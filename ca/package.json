@@ -22,6 +22,7 @@
     "react-scroll-to-component": "^1.0.1",
     "react-simple-popover": "^0.2.0",
     "react-tap-event-plugin": "^2.0.1",
+    "react-toasts": "^1.2.3",
     "redux": "^3.7.2"
   },
   "scripts": {
