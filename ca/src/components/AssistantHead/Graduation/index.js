@@ -8,6 +8,7 @@ import TabContent from 'rc-tabs/lib/SwipeableTabContent';
 import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 //
 import StudentList from './StudentSearch/StudentList';
+import StudentInform from './StudentInform/StudentList';
 import StudentGrad from './StudentGrad/Graduation';
 
 
@@ -121,6 +122,9 @@ export default class index extends React.Component {
                     activeKey={this.state.activeKey}
                     onChange={this.onChange}
                 >
+                    <TabPane tab={`預審通知`} key="0">
+                        <StudentInform students={initStudents}/>
+                    </TabPane>
                     <TabPane tab={`學生清單`} key="1">
                         <StudentList students={initStudents} parentFunction={this.searchCallback}/>
                     </TabPane>
