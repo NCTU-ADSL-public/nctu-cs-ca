@@ -3,6 +3,10 @@ import IndividualCourse from './IndividualCourse'
 import GeneralCourseList from './GeneralCourseList'
 import IndividualProgress from './IndividualProgress'
 import scrollToComponent from 'react-scroll-to-component';
+import 'animate.css'
+import FadeIn from 'react-fade-in';
+
+
 
 
 class GraduationForm extends React.Component{
@@ -38,7 +42,7 @@ class GraduationForm extends React.Component{
     render(){
         if(this.props.isToggle){
             return(
-                <div>
+                <div className="animated fadeIn">
                     {this.state.items.map(item =>
                         <IndividualCourse
                             key={item.id}
@@ -67,7 +71,7 @@ class GraduationForm extends React.Component{
         }
         else{
             return(
-                <div>
+                <FadeIn>
                     {this.state.graditems.map(item =>
                         <IndividualCourse
                             key={item.id}
@@ -91,7 +95,7 @@ class GraduationForm extends React.Component{
                         </div>
                         <GeneralCourseList items={this.state.gradGeneralItems[0].course} scroll={this.props.scroll}/>
                     </div>
-                </div>
+                </FadeIn>
             );
         }
     }
