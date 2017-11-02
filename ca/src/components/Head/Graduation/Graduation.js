@@ -5,6 +5,7 @@ import LinearProgressExampleDeterminate from './OverviewProgress'
 import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
 import scrollToComponent from 'react-scroll-to-component';
+import axios from 'axios'
 
 let totalitems;
 let items;
@@ -16,6 +17,16 @@ class Grad extends React.Component {
         console.log(items);
         totalitems=this.props.result;
         items=this.props.items;
+        axios.post('/students/Head/hh', {
+            firstName: 'Fred',
+            lastName: 'Flintstone'
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     handleClick(e){
         this.setState({
