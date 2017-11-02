@@ -1,11 +1,16 @@
 import React from 'react'
+
 import './Graduation.css'
 import GraduationForm from './GraduationForm'
 import LinearProgressExampleDeterminate from './OverviewProgress'
 import TopButton from './TopButton';
 import CircularProgress from './CircularProgress'
-import scrollToComponent from 'react-scroll-to-component';
+import PrintForm from './GradTable/PrintForm'
+
+import scrollToComponent from 'react-scroll-to-component'
 import axios from 'axios'
+import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 let totalitems;
 let items;
@@ -36,6 +41,11 @@ class Grad extends React.Component {
     scrollTotop(){
         scrollToComponent(this.refs.my);
     }
+    printGradTable() {
+        window.print();
+
+        return true;
+    }
     render(){
         return (
             <div>
@@ -55,6 +65,21 @@ class Grad extends React.Component {
                             <div className="yellow"> </div><div  className="text">抵免課程</div>
                         </div>
 
+                        <div id="print-button" style={{
+                            height: '40px',
+                            width: '65px',
+                            padding: '5px 0 0 0',
+                            float: 'right',
+                            position: 'absolute',
+                            right: '50px'
+                        }}>
+                            <MuiThemeProvider>
+                                <RaisedButton style={{
+                                    width: '13%',
+                                    fontFamily: 'Noto Sans CJK TC',
+                                }}  backgroundColor = "#DDDDDD" label="列印" onClick={() => this.printGradTable()}/>
+                            </MuiThemeProvider>
+                        </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">
                                 <div className="circle-in">畢業{totalitems.total}/{totalitems.total_require}</div>
@@ -86,6 +111,9 @@ class Grad extends React.Component {
                     </div>
                     <div className="Grad-Row">
                         <GraduationForm items={items} scroll={this.state.scrollQuery}/>
+                    </div>
+                    <div id="printArea">
+                        <PrintForm/>
                     </div>
                     <div id="graduate-footer"> </div>
                 </div>
