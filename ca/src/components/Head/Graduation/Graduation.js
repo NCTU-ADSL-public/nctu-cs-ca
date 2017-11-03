@@ -8,8 +8,11 @@ import CircularProgress from './CircularProgress'
 import PrintForm from './GradTable/PrintForm'
 import Toggle from 'material-ui/Toggle';
 import {ToastContainer, ToastStore} from 'react-toasts';
+import Popover from 'react-simple-popover';
 
 import scrollToComponent from 'react-scroll-to-component'
+import IconButton from 'material-ui/IconButton';
+import ActionGrade from 'material-ui/svg-icons/image/assistant';
 import axios from 'axios'
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -17,23 +20,42 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 let totalitems;
 let items;
 let Graduationitems;
+let flag=false;
 const styles = {
     toggle: {
-        padding:'10px 0 0 0',
         marginBottom: 0,
         maxWidth: 200,
+        width:'500px'
+    },
+    button: {
+        margin:'0 -45px 0 50px',
+        width: '13%',
     },
     labelStyle: {
         fontFamily: 'Noto Sans CJK TC',
         color: '#7B7B7B'
     },
+    medium:{
+        padding:'10px 0 0 0',
+        width: 10,
+        height: 10,
+        float:'left',
+        color: '#7B7B7B'
+    }
 };
 
+
+const optionsCursorTrueWithMargin = {
+    followCursor: true,
+    shiftX: 10,
+    shiftY: -30
+};
 
 class Grad extends React.Component {
     state={
         scrollQuery:'',
-        isToggle:true
+        isToggle:true,
+        open:false
     };
     componentWillMount(){
         totalitems=this.props.result;
@@ -41,6 +63,7 @@ class Grad extends React.Component {
         Graduationitems=this.props.revise;
     }
     handleClick(e){
+        flag = false;
         this.setState({
             scrollQuery:e,
             isToggle:this.state.isToggle
@@ -50,19 +73,23 @@ class Grad extends React.Component {
         scrollToComponent(this.refs.my);
     }
     printGradTable() {
+        flag = false;
         window.print();
 
         return true;
     }
     componentWillUpdate(){
-        if(this.state.isToggle){
-            totalitems=this.props.reviseresult;
-        }
-        else{
-            totalitems=this.props.result;
+        if(!flag){
+            if(this.state.isToggle){
+                totalitems=this.props.reviseresult;
+            }
+            else{
+                totalitems=this.props.result;
+            }
         }
     }
     handleToggle(){
+        flag = false;
         this.setState({
             scrollQuery:'',
             isToggle:!this.state.isToggle
@@ -71,7 +98,25 @@ class Grad extends React.Component {
             ToastStore.info(<div  className="text">已幫您自動排序，此為系統自動排序僅以參考為主。</div>);
         }
     }
+    handleClickview(e) {
+        flag = true;
+        this.setState({
+            open: !this.state.open,
+            isToggle:this.state.isToggle
+        });
+    }
 
+
+    handleClose(e) {
+        flag = true;
+        this.setState({
+            open: false,
+        });
+    }
+    sendReview(){
+        flag = false;
+
+    }
     render(){
         return (
             <div>
@@ -91,6 +136,22 @@ class Grad extends React.Component {
                             <div className="gray"> </div><div  className="text">未修課</div>
                             <div className="yellow"> </div><div  className="text">抵免課程</div>
                             <MuiThemeProvider>
+                                <RaisedButton
+                                    label="確認送審"
+                                    style={styles.button}
+                                    labelStyle={styles.labelStyle}
+                                    backgroundColor = "#DDDDDD"
+                                    onClick={() => this.sendReview()}
+                                />
+                            </MuiThemeProvider>
+                            <MuiThemeProvider>
+                                <RaisedButton style={styles.button}
+                                              labelStyle={styles.labelStyle}
+                                              backgroundColor = "#DDDDDD"
+                                              label="列印"
+                                              onClick={() => this.printGradTable()}/>
+                            </MuiThemeProvider>
+                            <MuiThemeProvider>
                                 <Toggle
                                 label="系統自動排課"
                                 style={styles.toggle}
@@ -98,22 +159,32 @@ class Grad extends React.Component {
                                 onToggle={(toggled)=>this.handleToggle()}
                                 />
                             </MuiThemeProvider>
-                        </div>
-
-                        <div id="print-button" style={{
-                            height: '40px',
-                            width: '65px',
-                            padding: '5px 0 0 0',
-                            float: 'right',
-                            position: 'absolute',
-                            right: '50px'
-                        }}>
                             <MuiThemeProvider>
-                                <RaisedButton style={{
-                                    width: '13%',
-                                    fontFamily: 'Noto Sans CJK TC',
-                                }}  backgroundColor = "#DDDDDD" label="列印" onClick={() => this.printGradTable()}/>
+                                <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
+                                    <ActionGrade />
+                                </IconButton>
                             </MuiThemeProvider>
+                            <Popover
+                                placement='left'
+                                target={this.refs.target}
+                                show={this.state.open}
+                                onHide={this.handleClose.bind(this)}
+                            > 排序依據:
+                                - 共同必修（多的應該只會有物化生）
+                                - 依 Priority 物理 -> 化學 -> 生物 往 專業選修搬 (物理要記得+2)
+                                - 如果共同必修沒滿 -> Return 不能畢業
+                                - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
+                                - 核心課程
+                                - 如果核心課程沒滿 -> Return 不能畢業
+                                - 多的課程在搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
+                                - 副核心課程
+                                - 多的學分全部塞到專業
+                                - 如果副核心沒滿 -> Return 不能畢業
+                                - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
+                                - 專業選修
+                                - 多的學分全部塞到其他必修
+                                - 如果專業選修沒滿 -> Return 不能畢業
+                            </Popover>
                         </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">
@@ -130,7 +201,7 @@ class Grad extends React.Component {
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pro}</font>/{totalitems.pro_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.pro/totalitems.pro_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英語修課&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;次<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('其他選修')}>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.other}</font>/{totalitems.other_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.other/totalitems.other_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
