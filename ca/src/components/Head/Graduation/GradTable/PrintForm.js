@@ -29,6 +29,14 @@ class PrintForm extends React.Component {
                     <col className="col12"/>
                 </colgroup>
                 <tr>
+                    <td className="cell-text" colSpan="13" style={{fontSize: '12pt', fontWeight:'bold', backgroundColor: '#CCFFCC'}}>
+                        <span>一、本系專業科目（請填</span>
+                        <span style={{color: '#FF0000'}}>分數</span>
+                        <span>及實得學分數）</span>
+                        <span style={{fontSize: '7pt'}}>請在備註欄註明『英文授課』：畢業前須通過1門本系開授或認可之英文授課專業課程</span>
+                    </td>
+                </tr>
+                <tr>
                     <td className='cell-text' colSpan='2' style={{fontSize:'10pt', fontWeight:'bold'}}>科目名稱</td>
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>1上</td>
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>1下</td>
