@@ -9,6 +9,7 @@ import PrintForm from './GradTable/PrintForm'
 import Toggle from 'material-ui/Toggle';
 import {ToastContainer, ToastStore} from 'react-toasts';
 import Popover from 'react-simple-popover';
+import ReactHover from 'react-hover';
 
 import scrollToComponent from 'react-scroll-to-component'
 import IconButton from 'material-ui/IconButton';
@@ -21,22 +22,26 @@ let totalitems;
 let items;
 let Graduationitems;
 let flag=false;
+
 const styles = {
     toggle: {
         marginBottom: 0,
         maxWidth: 200,
-        width:'500px'
+        width:'500px',
+        float:'left',
+        margin:'10px 10px 0 20px',
     },
     button: {
-        margin:'0 -45px 0 50px',
-        width: '13%',
+        margin:'5px 10px 0 0px',
+        width:'80px',
+        float:'left'
     },
     labelStyle: {
         fontFamily: 'Noto Sans CJK TC',
         color: '#7B7B7B'
     },
     medium:{
-        padding:'10px 0 0 0',
+        padding:'10px 0 0 5px',
         width: 10,
         height: 10,
         float:'left',
@@ -55,12 +60,20 @@ class Grad extends React.Component {
     state={
         scrollQuery:'',
         isToggle:true,
-        open:false
+        open:false,
+        graduationCheck:false,
     };
     componentWillMount(){
         totalitems=this.props.result;
         items=this.props.items;
         Graduationitems=this.props.revise;
+        axios.get('/students/graduate/check').then(studentData => {
+            this.setState({
+                graduationCheck : studentData.data[0].check.state
+            })
+        }).catch(err => {
+            console.log(err);
+        });
     }
     handleClick(e){
         flag = false;
@@ -114,7 +127,19 @@ class Grad extends React.Component {
         });
     }
     sendReview(){
-        flag = false;
+        flag = true;
+        axios.post('/students/graduate/check', {
+            check:{state:true}
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        this.setState({
+            graduationCheck:true,
+        })
 
     }
     render(){
@@ -135,15 +160,23 @@ class Grad extends React.Component {
                             <div className="red"> </div><div  className="text">未通過</div>
                             <div className="gray"> </div><div  className="text">未修課</div>
                             <div className="yellow"> </div><div  className="text">抵免課程</div>
-                            <MuiThemeProvider>
-                                <RaisedButton
-                                    label="確認送審"
-                                    style={styles.button}
-                                    labelStyle={styles.labelStyle}
-                                    backgroundColor = "#DDDDDD"
-                                    onClick={() => this.sendReview()}
-                                />
-                            </MuiThemeProvider>
+                            <ReactHover
+                                options={optionsCursorTrueWithMargin}>
+                                <ReactHover.Trigger>
+                                    <MuiThemeProvider>
+                                        <RaisedButton
+                                            label="確認送審"
+                                            style={styles.button}
+                                            labelStyle={styles.labelStyle}
+                                            backgroundColor = "#DDDDDD"
+                                            onClick={() => this.sendReview()}
+                                        />
+                                    </MuiThemeProvider>
+                                </ReactHover.Trigger>
+                                <ReactHover.Hover>
+                                    <div className="grad-hover-info">{this.state.graduationCheck?"已送審":"尚未送審"}</div>
+                                </ReactHover.Hover>
+                            </ReactHover>
                             <MuiThemeProvider>
                                 <RaisedButton style={styles.button}
                                               labelStyle={styles.labelStyle}
@@ -201,7 +234,7 @@ class Grad extends React.Component {
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.pro}</font>/{totalitems.pro_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.pro/totalitems.pro_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文測驗')}>英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文授課')}>英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.english}</font>/{totalitems.english_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={totalitems.english/totalitems.english_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('其他選修')}>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{totalitems.other}</font>/{totalitems.other_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={totalitems.other/totalitems.other_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
