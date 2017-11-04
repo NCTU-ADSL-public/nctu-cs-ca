@@ -17,10 +17,15 @@ import TextField from './TextField';
 export default class SendEmail extends React.Component {
     state = {
         open: false,
+        studentString: "",
     };
 
     handleOpen = () => {
         this.setState({open: true});
+
+        {this.props.selectedRow.map((row) => {
+            this.state.studentString = this.state.studentString + " " + this.props.students[row].sname + "<3";
+        })}
     };
 
     handleClose = () => {
@@ -52,7 +57,7 @@ export default class SendEmail extends React.Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    The actions in this window were passed in as an array of React objects.
+                    寄給: {this.state.studentString}
                     <MuiThemeProvider>
                         <TextField/>
                     </MuiThemeProvider>

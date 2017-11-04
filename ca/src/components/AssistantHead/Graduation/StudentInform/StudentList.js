@@ -32,7 +32,7 @@ const styles = {
     },
 };
 
-export default class StudentList extends React.Component {
+export default class StudentInform extends React.Component {
 
     constructor(props) {
         super(props);
@@ -46,11 +46,14 @@ export default class StudentList extends React.Component {
             groupC: true,
             groupD: true,
             gGrad: true,
+
+            _selectedRow: [],
         };
 
         this.filterList = this.filterList.bind(this);
         this.filterListGroup = this.filterListGroup.bind(this);
         this.handleTouchTap = this.handleTouchTap.bind(this);
+
     }
 
     componentWillMount(){
@@ -125,8 +128,14 @@ export default class StudentList extends React.Component {
         }
     };
 
-    searchCallback = (student) => {
-        this.props.parentFunction(student);
+    selectCallback = (selectedRow) => {
+        this.state._selectedRow = selectedRow;
+        let s = "";
+        {selectedRow.map((row) => {
+            s = s + " " + this.props.students[row].sname + "<3"
+        })}
+
+        console.log(this.state._selectedRow);
     };
 
     handleTouchTap(groupNum) {
@@ -139,8 +148,9 @@ export default class StudentList extends React.Component {
                 <div className="filter">
 
                     <MuiThemeProvider>
-                        <SendEmail/>
+                        <SendEmail students={this.state.students} selectedRow={this.state._selectedRow}/>
                     </MuiThemeProvider>
+
                     <div className="filter-list">
                         <input type="text"
                                placeholder="搜尋 學號/ 學生姓名/ 組別/ 畢業狀態"
@@ -184,7 +194,7 @@ export default class StudentList extends React.Component {
                     </div>
                     </MuiThemeProvider>
                     <MuiThemeProvider>
-                        <StudentTable students={this.state.students} parentFunction={this.searchCallback}/>
+                        <StudentTable students={this.state.students} parentFunction={this.selectCallback}/>
                     </MuiThemeProvider>
                 </div>
             </div>

@@ -67,9 +67,8 @@ export default class StudentTable extends Component {
     };
 
     handleRowSelection = (selectedRow) => {
-        {selectedRow.map((row, index) => (
-            console.log(this.props.students[row].sname + "<3")
-        ))}
+
+        this.props.parentFunction(selectedRow);
     };
 
     render() {
