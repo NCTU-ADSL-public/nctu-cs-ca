@@ -1,6 +1,16 @@
 import React from 'react'
-class UP extends React.Component {
+import axios from 'axios'
 
+
+class UP extends React.Component {
+    componentWillUpdate(){
+
+        axios.get('/students/head/hh').then(studentData => {
+            console.log(studentData.data);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
     render(){
         return (
             <div>

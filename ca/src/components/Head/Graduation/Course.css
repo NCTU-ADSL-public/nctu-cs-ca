@@ -17,6 +17,7 @@
 .grad{
     margin: 0 1px 1px 1px;
     float: left;
+    height: auto;
 }
 
 .grad-popover{

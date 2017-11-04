@@ -24,6 +24,10 @@ export default class IndividualProgress extends React.Component {
         clearTimeout(this.timer);
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({completed: nextProps.grad});
+    }
+
     progress(completed) {
         if (completed > this.props.grad) {
             this.setState({completed: this.props.grad});

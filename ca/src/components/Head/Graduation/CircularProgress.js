@@ -35,6 +35,9 @@ export default class OverCircularProgress extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({completed: nextProps.grad});
+    }
     render() {
             return (
                 <MuiThemeProvider>

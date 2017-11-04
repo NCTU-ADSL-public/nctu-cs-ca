@@ -26,6 +26,10 @@ export default class IndividualProgress extends React.Component {
         clearTimeout(this.timer);
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({completed: nextProps.grad});
+    }
+
     progress(completed) {
         if (completed > this.props.grad) {
             this.setState({completed: this.props.grad});
@@ -39,7 +43,7 @@ export default class IndividualProgress extends React.Component {
     render() {
         if(this.state.completed >= 100){
             return (
-                <div className="animated pulse">
+                <div className="animated">
                     <MuiThemeProvider>
                         <LinearProgress
                             color={"#00AEAE"}
