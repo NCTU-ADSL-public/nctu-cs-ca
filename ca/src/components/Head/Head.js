@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Head.css';
+import './StudentsHead.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import ReactDOM from 'react-dom';

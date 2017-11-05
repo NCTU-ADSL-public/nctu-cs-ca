@@ -70,7 +70,7 @@ class Grad extends React.Component {
         })
         axios.get('/students/graduate/check').then(studentData => {
             this.setState({
-                graduationCheck : studentData.data[0].check.state
+                graduationCheck : studentData.data[0].check[0].state
             })
         }).catch(err => {
             console.log(err);

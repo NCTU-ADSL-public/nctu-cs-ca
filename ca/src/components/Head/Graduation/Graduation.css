@@ -68,7 +68,7 @@
 .grad-hover-info{
     position: absolute;
     z-index: 100;
-    width: 200px;
+    width: 100px;
     height: auto;
     background: #ddaa55;
     opacity: 0.7;
