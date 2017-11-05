@@ -130,12 +130,12 @@ let Graduationitems=[
 
 ];
 let revise=[
-    { title: '必修課程',
+    { title: '必修程',
         credit: '80',
         require: '60',
         selection: true,
         course:
-            [ { cn: '作業系統概論', en: 'Introduction to Operating Systems',"score":60 ,complete:true},
+            [
                 { cn: '基礎程式設計', en: 'Basic Programming',"score":60  ,complete:true},
                 { cn: '微積分(一)', en: 'Calculus (I)' ,"score":60 ,complete:true},
                 { cn: '微積分(二)', en: 'Calculus (II)',"score":60  ,complete:true},
@@ -242,7 +242,7 @@ class Head extends Component {
     }
 
     state = {
-       selectedIndex: 0,
+        selectedIndex: 0,
         styleButton: {
             fontFamily: 'Noto Sans CJK TC',
             background: '#EEEEEE',

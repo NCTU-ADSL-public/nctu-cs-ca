@@ -123,12 +123,12 @@ class Grad extends React.Component {
         axios.post('/students/graduate/check', {
             check:{state:true}
         })
-            .then(function (response) {
-                console.log(response);
+            .then(res => {
+                console.log(res)
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            .catch(err => {
+                console.log(err)
+            })
         this.setState({
             graduationCheck:true,
         })

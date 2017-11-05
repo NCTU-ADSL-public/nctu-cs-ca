@@ -4,6 +4,7 @@ import GeneralCourseList from './GeneralCourseList'
 import IndividualProgress from './IndividualProgress'
 import scrollToComponent from 'react-scroll-to-component';
 import 'animate.css'
+import './Graduation.css'
 import FadeIn from 'react-fade-in';
 
 
@@ -55,10 +56,10 @@ class GraduationForm extends React.Component{
                         />
                     )}
 
-                    <div  id="little-form"  ref="my">
+                    <div  className="little-form"  ref="my">
                         <div id="little-title">
                             <IndividualProgress grad={this.state.GeneralItems[0].credit/this.state.GeneralItems[0].require * 100}/>
-                            <div id="little-title-title">
+                            <div className="little-title-title">
                                 <div id="little-title-number"><font size={6} color='#338d68'>{this.state.GeneralItems[0].credit}</font>/{this.state.GeneralItems[0].require}</div>
                                 <div id="little-title-text" ><font size={this.state.GeneralItems[0].fontflag?5:6}>{this.state.GeneralItems[0].title}</font></div>
                             </div>
@@ -84,10 +85,10 @@ class GraduationForm extends React.Component{
                         />
                     )}
 
-                    <div  id="little-form"  ref="my">
+                    <div  className="little-form"  ref="my">
                         <div id="little-title">
                             <IndividualProgress grad={this.state.gradGeneralItems[0].credit/this.state.gradGeneralItems[0].require * 100}/>
-                            <div id="little-title-title">
+                            <div className="little-title-title">
                                 <div id="little-title-number"><font size={6} color='#338d68'>{this.state.gradGeneralItems[0].credit}</font>/{this.state.gradGeneralItems[0].require}</div>
                                 <div id="little-title-text" ><font size={this.state.gradGeneralItems[0].fontflag?5:6}>{this.state.gradGeneralItems[0].title}</font></div>
                             </div>
