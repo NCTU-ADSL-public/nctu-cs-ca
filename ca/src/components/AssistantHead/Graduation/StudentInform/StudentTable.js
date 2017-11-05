@@ -28,6 +28,18 @@ const styles = {
       //  background: '#f9f9f9',
       //  border: '3px solid white',
     },
+    colorGreen: {
+        cursor: 'pointer',
+        color: '#418166',
+    },
+    colorBrown: {
+        cursor: 'pointer',
+        color: '#816039',
+    },
+    colorRed: {
+        cursor: 'pointer',
+        color: '#c61234',
+    },
 };
 
 /**
@@ -109,9 +121,14 @@ export default class StudentTable extends Component {
                             <TableRow key={index}>
                                 <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn1}>{row.program}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>{row.program}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.graduate==="1" ? '可畢業' : '未達畢業標準'}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.graduate_submit==="1" ? '已送審' : row.graduate_submit==="2" ? '完成審核' : '未送審'}</TableRowColumn>
+                                <TableRowColumn style={ row.graduate_submit==="2" ? styles.colorGreen :
+                                    row.graduate_submit==="1" ? styles.colorBrown :
+                                        styles.colorRed }>
+                                    {row.graduate_submit==="1" ? '已送審' :
+                                        row.graduate_submit==="2" ? '完成審核' : '未送審'}
+                                </TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>
