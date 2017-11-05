@@ -90,6 +90,7 @@ export default class StudentTable extends Component {
                             <TableHeaderColumn tooltip="學生姓名">學生姓名</TableHeaderColumn>
                             <TableHeaderColumn tooltip="組別">組別</TableHeaderColumn>
                             <TableHeaderColumn tooltip="畢業狀況">畢業狀況</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="送審狀態">送審狀態</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -104,6 +105,7 @@ export default class StudentTable extends Component {
                                 <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn1}>{row.program}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.graduate==="1" ? '可畢業' : '未達畢業標準'}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>{row.graduate_submit==="1" ? '已送審' : row.graduate_submit==="2" ? '完成審核' : '未送審'}</TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>
