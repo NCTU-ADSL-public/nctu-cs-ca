@@ -29,7 +29,7 @@ const styles = {
     },
     button: {
         margin:'5px 10px 0 0px',
-        width:'80px',
+        width:'100px',
         float:'left'
     },
     labelStyle: {
