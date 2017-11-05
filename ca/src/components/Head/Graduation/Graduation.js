@@ -18,6 +18,7 @@ import axios from 'axios'
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+let test={"check":{"state":false}}
 
 const styles = {
     toggle: {
@@ -71,7 +72,7 @@ class Grad extends React.Component {
         let _this=this;
         axios.get('/students/graduate/check').then(studentData => {
             _this.setState({
-                graduationCheck : studentData.data[0].check.state
+                graduationCheck : studentData.data.check.state
             })
         }).catch(err => {
             console.log(err);
