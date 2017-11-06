@@ -38,6 +38,23 @@ class PrintForm extends React.Component {
                     <col className="col12"/>
                 </colgroup>
 
+                <tr className="borderLess">
+                    <td colSpan="13" style={{fontSize: '16pt', fontWeight:'bold', height: '1.5em', color: '#0000FF'}}>
+                        103學年度--{this.props.program}工程組
+                    </td>
+                </tr>
+                <tr className="borderLess left-text">
+                    <td colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '2.5em'}}>
+                        <div width='100%'>
+                            <div className="personal-info">班別：{this.props.program}工程組</div>
+                            <div className="personal-info">學號：</div>
+                            <div className="personal-info">姓名：</div><br/>
+                            <div className="personal-info">聯絡電話：</div>
+                            <div className="personal-info">E-mail：</div>
+                        </div>
+                    </td>
+                </tr>
+
                 <tr>
                     <td className="bg-green left-text" colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '24pt'}}>
                         <span>一、本系專業科目（請填</span>

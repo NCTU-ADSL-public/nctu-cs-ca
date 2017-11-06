@@ -6,15 +6,21 @@
     font-size: 8pt;
 }
 
-.default-table, .default-table td  {
-    border-bottom: 1px solid #000000 !important;
-    border-top: 1px solid #000000 !important;
-    border-left: 1px solid #000000 !important;
-    border-right: 1px solid #000000 !important;
+.default-table, .default-table td {
     border-spacing: 0px;
     border-collapse:collapse;
     background-color: white;
 
+}
+.default-table td {
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+.borderLess, .borderLess td {
+    border: 0px;
 }
 
 .title-text {
@@ -35,6 +41,11 @@
 }
 .bg-yellow {
     background-color: #FFFF99 !important;
+}
+
+.personal-info {
+    width: 25%;
+    display: inline-block;
 }
 
 .col0 { width:7.7307% }

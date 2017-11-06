@@ -96,7 +96,7 @@ class Grad extends React.Component {
                     <div id="graduate-footer"> </div>
                 </div>
                 <div id="printArea">
-                    <PrintForm/>
+                    <PrintForm program={this.props.studentId}/>
                 </div>
             </div>
         )
