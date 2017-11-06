@@ -1,16 +1,17 @@
 #printArea {
-    display: none;
+    /*display: none;*/
 }
 
 @media print {
-
-    body * {
-        visibility: hidden;
-    }
-    #printArea, #printArea * {
-        visibility: visible;
+    #ontopDiv,
+    #font_adjust,
+    #topRec,
+    footer {
+        display: none;
     }
     #printArea {
+        height: auto;
+        width: auto;
         display: block;
         -webkit-print-color-adjust: exact;
         color-adjust: exact;

@@ -94,9 +94,9 @@ class Grad extends React.Component {
                         <GraduationForm items={items} scroll={this.state.scrollQuery}/>
                     </div>
                     <div id="graduate-footer"> </div>
-                    <div id="printArea">
-                        <PrintForm/>
-                    </div>
+                </div>
+                <div id="printArea">
+                    <PrintForm/>
                 </div>
             </div>
         )

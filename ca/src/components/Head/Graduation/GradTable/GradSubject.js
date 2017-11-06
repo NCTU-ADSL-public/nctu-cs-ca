@@ -30,7 +30,7 @@ class GradSubject extends React.Component {
                 <td>{this.realscore[7]}</td>
                 <td>{this.state.credit}</td>
                 <td></td>
-                <td>{this.state.comment}</td>
+                <td className="left-text">{this.state.comment}</td>
             </tr>
         );
     }
