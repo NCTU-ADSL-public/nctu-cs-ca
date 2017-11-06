@@ -33,6 +33,9 @@
 .bg-green {
     background-color: #CCFFCC !important;
 }
+.bg-yellow {
+    background-color: #FFFF99 !important;
+}
 
 .col0 { width:7.7307% }
 .col1 { width:39.1526% }

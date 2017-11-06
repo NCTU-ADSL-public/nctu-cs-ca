@@ -11,8 +11,14 @@ class PrintForm extends React.Component {
     }
 
     render() {
-
-
+        let generalCatTitle = ['外語','通識','體育','服務學習','藝文賞析'];
+        let depCat = [], generalCat = [];
+        this.state.categories.forEach((item, i) => {
+            if (generalCatTitle.indexOf(item.title ) != -1)
+                generalCat.push(item);
+            else
+                depCat.push(item);
+        });
 
         return (
             <table className="default-text default-table">
@@ -31,6 +37,7 @@ class PrintForm extends React.Component {
                     <col className="col11"/>
                     <col className="col12"/>
                 </colgroup>
+
                 <tr>
                     <td className="bg-green left-text" colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '24pt'}}>
                         <span>一、本系專業科目（請填</span>
@@ -39,22 +46,21 @@ class PrintForm extends React.Component {
                         <span style={{fontSize: '6pt'}}>請在備註欄註明『英文授課』：畢業前須通過1門本系開授或認可之英文授課專業課程</span>
                     </td>
                 </tr>
-                <tr>
-                    <td className='title-text' colSpan='2'>科目名稱</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>1上</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>1下</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>2上</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>2下</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>3上</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>3下</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>4上</td>
-                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>4下</td>
-                    <td style={{fontSize: '6pt', fontWeight:'bold'}}>應修<br/>學分</td>
-                    <td style={{fontSize: '6pt', fontWeight:'bold'}}>實得<br/>學分</td>
-                    <td className='title-text'>備註</td>
-                </tr>
+                {depCat.map(category =>
+                    <GradCategory
+                        subjects={category.course}
+                        name={category.title}
+                    />
+                )}
 
-                {this.state.categories.map(category =>
+                <tr>
+                    <td className="bg-yellow left-text" colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '24pt'}}>
+                        <span>二、校訂共同科目 (請填</span>
+                        <span style={{color: '#FF0000'}}>分數</span>
+                        <span>及實得學分數）</span>
+                    </td>
+                </tr>
+                {generalCat.map(category =>
                     <GradCategory
                         subjects={category.course}
                         name={category.title}

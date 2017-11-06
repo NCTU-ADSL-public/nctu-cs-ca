@@ -11,8 +11,20 @@ class GradCategory extends React.Component {
     render(){
         return(
             <tbody>
-                <tr className='no-height'>
+                <tr>
                     <td className="title-text" rowSpan={this.state.subjects.length+1}>{this.state.name}</td>
+                    <td className='title-text'>科目名稱</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>1上</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>1下</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>2上</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>2下</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>3上</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>3下</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>4上</td>
+                    <td style={{fontSize: '8pt', fontWeight:'bold'}}>4下</td>
+                    <td style={{fontSize: '6pt', fontWeight:'bold'}}>應修<br/>學分</td>
+                    <td style={{fontSize: '6pt', fontWeight:'bold'}}>實得<br/>學分</td>
+                    <td className='title-text'>備註</td>
                 </tr>
 
                 {this.state.subjects.map(subject =>
