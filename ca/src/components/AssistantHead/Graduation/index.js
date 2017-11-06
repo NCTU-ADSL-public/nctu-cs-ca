@@ -303,7 +303,7 @@ export default class index extends React.Component {
             },
 
         ],
-
+        print_courseCategoryArray:[],
     };
 
     onChange = (activeKey) => {
@@ -351,6 +351,14 @@ export default class index extends React.Component {
         }).catch(err => {
             console.log(err);
         });
+
+        axios.get('/students/graduate/print').then(function(resp){
+            this.setState({
+                print_courseCategoryArray: resp.data
+            });
+        }.bind(this)).catch(err => {
+            console.log(err);
+        });
     };
 
     render() {
@@ -375,7 +383,8 @@ export default class index extends React.Component {
                             items={this.state.Graduationitems}
                             result={this.state.Graduationitems[10]}
                             revise={this.state.revise}
-                            reviseresult={this.state.revise[10]}/>
+                            reviseresult={this.state.revise[10]}
+                            courseCategoryArray={this.state.print_courseCategoryArray}/>
                         />
                     </TabPane>
                 </Tabs>
