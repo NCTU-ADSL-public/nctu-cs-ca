@@ -66,10 +66,14 @@ methods.getProfile = function(req, res, next){
             return;
         }
 	console.log("Profile:" + body);
-        req.session.profile = body;
+	var profile = { username: '' };
+        //req.session.profile = body;
 	body = JSON.parse(body);
-	//req.session.profile.username = body.username;
-	console.log("req only ID:" + req.session.profile);
+	profile.username = body.username;
+	console.log(profile);
+	req.session.profile = profile;
+	console.log("req.sesision:" + req.session.profile);
+	//console.log("req only ID:" + req.session.profile);
 	console.log("Profile username: " + body);
 	if(body){
 		var studentId = body.username;
