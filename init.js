@@ -4,15 +4,12 @@ var https = require('https');
 var session = require('client-sessions');
 var express = require('express');
 var app = express();
-var multer = require('multer');
 var utils = require('./utils');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 var csrf = require('csurf');
 var csrfProtection = csrf();
 
 module.exports.init = function(){
-  app.set('view engine', 'ejs');
   app.use(session({
     cookieName: "session",
     secret: randoms.randomVals.sessionKey,
