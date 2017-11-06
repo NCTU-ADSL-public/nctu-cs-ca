@@ -62,6 +62,7 @@ class Grad extends React.Component {
         Graduationitems:[],
         items:[],
         totalitems:[],
+        courseCategoryArray:[],
     };
     componentWillMount(){
         this.setState({
@@ -248,7 +249,7 @@ class Grad extends React.Component {
                     <div id="graduate-footer"> </div>
                 </div>
                 <div id="printArea">
-                    <PrintForm program={this.props.studentId}/>
+                    <PrintForm program={this.props.studentId} courseCategoryArray={this.props.courseCategoryArray}/>
                 </div>
             </div>
         )
