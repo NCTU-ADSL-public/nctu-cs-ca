@@ -256,6 +256,8 @@ class Head extends Component {
 			prog:'網多',
 			grad:'大一',
 		},
+        print_courseCategoryArray:[]
+
     };
 
 
@@ -284,11 +286,11 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
-            MapCourseData = Object.keys(studentCos).map(function(key) {
-                let user = studentCos[key];
-                user.id = key;
-                return user;
-            });
+        MapCourseData = Object.keys(studentCos).map(function(key) {
+            let user = studentCos[key];
+            user.id = key;
+            return user;
+        });
         StudentCosPas = Object.keys(studentPas).map(function(key) {
             let user = studentPas[key];
             user.id = key;
@@ -323,7 +325,17 @@ class Head extends Component {
 
     componentDidMount(){
     	this.select(0);
-	}
+
+    	let self = this;
+        axios.get('/students/graduate/print').then(function(resp){
+            this.setState({
+                print_courseCategoryArray: resp.data
+            });
+        }.bind(this)).catch(err => {
+            console.log(err);
+        });
+
+    }
 
   	select(index){
             if(index===0){
@@ -335,7 +347,8 @@ class Head extends Component {
 								items={Graduationitems}
                                 result={Graduationitems[10]}
                                 revise={revise}
-                                reviseresult={revise[10]}/>
+                                reviseresult={revise[10]}
+                                courseCategoryArray={this.state.print_courseCategoryArray}/>
 						</FadeIn>
 					</font>,
                     document.getElementById('page'));
