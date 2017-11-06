@@ -1,15 +1,16 @@
-#printArea, #printArea * {
-    visibility: hidden;
+#printArea {
+    display: none;
 }
 
 @media print {
     body * {
         visibility: hidden;
     }
-    #printArea, #printArea * {
+    #printArea * {
         visibility: visible;
     }
     #printArea {
+        display: block;
         position: absolute;
         left: 0;
         top: 0;

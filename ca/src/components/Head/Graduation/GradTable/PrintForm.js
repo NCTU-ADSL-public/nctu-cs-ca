@@ -29,7 +29,7 @@ class PrintForm extends React.Component {
                     <col className="col12"/>
                 </colgroup>
                 <tr>
-                    <td className="cell-text" colSpan="13" style={{fontSize: '12pt', fontWeight:'bold', backgroundColor: '#CCFFCC'}}>
+                    <td className="cell-text" colSpan="13" style={{fontSize: '12pt', fontWeight:'bold', backgroundColor: '#CCFFCC' + ' !important' }}>
                         <span>一、本系專業科目（請填</span>
                         <span style={{color: '#FF0000'}}>分數</span>
                         <span>及實得學分數）</span>
@@ -37,7 +37,7 @@ class PrintForm extends React.Component {
                     </td>
                 </tr>
                 <tr>
-                    <td className='cell-text' colSpan='2' style={{fontSize:'10pt', fontWeight:'bold'}}>科目名稱</td>
+                    <td className='cell-text' colSpan='2' style={{fontSize:'12pt', fontWeight:'bold'}}>科目名稱</td>
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>1上</td>
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>1下</td>
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>2上</td>
@@ -48,7 +48,7 @@ class PrintForm extends React.Component {
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>4下</td>
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>應修<br/>學分</td>
                     <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>實得<br/>學分</td>
-                    <td className='cell-text' style={{fontSize: '12pt', fontWeight:'bold'}}>備註</td>
+                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>備註</td>
                 </tr>
 
                 {this.state.categories.map(category =>
