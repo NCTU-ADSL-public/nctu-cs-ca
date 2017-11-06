@@ -20,7 +20,8 @@ methods.getCode = function(req, res, next){
         console.log("Did not recieve code.");
         res.redirect('/');
         return;
-    }
+et   }
+    console.log("token:");
     console.log(oAuthNctu.code);
     next();
 }
@@ -66,6 +67,15 @@ methods.getProfile = function(req, res, next){
         }
 	console.log("Profile:" + body);
         req.session.profile = body;
+	body = JSON.parse(body);
+	//req.session.profile.username = body.username;
+	console.log("req only ID:" + req.session.profile);
+	console.log("Profile username: " + body);
+	if(body){
+		var studentId = body.username;
+        	var email = body.email;
+		query.addEmail(studentId, email);
+	}
         next();
    });
 }

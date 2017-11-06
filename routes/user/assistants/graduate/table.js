@@ -6,7 +6,6 @@ var utils = require('../../../../utils');
 var table = {};
 
 function queryPass(studentId, callback){
-	
 	query.Pass(studentId, function(err, pass){
 		if(!pass){
 			console.log("Can't find the student.");

@@ -14,7 +14,7 @@ exports.addEmail = "\
     update student set email=:email \
     where student_id=:id";
 
-exports.showCowMap = "\
+exports.showCosMap = "\
     select a.cos_cname, a.grade, a.semester, b.pre_cos_cname as suggest, c.pre_cos_cname as pre \
     from (\
         select c.cos_cname,c.grade,c.semester \
@@ -39,78 +39,66 @@ exports.showCowMap = "\
     order by a.grade,a.semester,a.cos_cname;";
 
 exports.showCosMapPass = "\
-    select distinct cos_cname from student_cos_relation as sc,cos_name as c \
-    where sc.student_id=:id and sc.cos_code=c.cos_code and \
-    (sc.cos_code like \'DCP%\' or sc.cos_code like \'IOE%\' or cos_cname like \'微積分甲%\' or cos_cname like \'物理%\' or cos_cname like \'化學%\' )";
-
-exports.p_uploadGrade = "\
-    insert into cos_result \
-    values(:unique_id,:id,:score) \
-    on duplicate key update \
-    unique_id=:unique_id,student_id=:id,score=:score;";
+    select distinct c.cos_cname\
+    from\
+    (\
+        select cos_code,concat(cos_year,\'-\',semester,\'-\',cos_id) as unique_id\
+        from cos_score where student_id=:id and pass_fail=\'通過\'\
+    ) as cs left outer join cos_name as c\
+    on cs.unique_id=c.unique_id\
+    where c.cos_code like \'DCP%\' or c.cos_code like \'IOE%\'\
+    or cos_cname like \'微積分甲%\' or cos_cname like \'物理%\'\
+    or cos_cname like \'化學%\' or cos_cname like \'生物%\';"
 
 exports.a_uploadGrade = "\
-    insert into cos_result \
-    values(:unique_id,:id,:score,:grade,:GP) \
-    on duplicate key update \
-    unique_id=:unique_id,student_id=:id,score=:score,grade_score=:grade,GP=:GP";
-
-exports.updateStudentCosPass = "\
-    insert into student_cos_relation \
-    value(:id,:cos_code,:year,:semester,:code) \
-    on duplicate key update \
-    student_id=:id,cos_code=:cos_code,year=:year,semester=:semester,code=:code";
+    load data local infile\
+    :pt\
+    into table cos_score\
+    fields terminated by \',\'\
+    enclosed by \'\"\'\
+    lines terminated by \'\n\'\
+    ignore 1 lines;";
 
 exports.totalCredit = "\
     select sum(t.cos_credit) as total\
     from\
     (\
         select distinct d.cos_code,d.cos_credit\
-        from student_cos_relation as s,cos_data as d\
-        where s.student_id=:id\
-        and s.cos_code=d.cos_code\
+        from\
+        (\
+            select cos_code\
+            from cos_score where student_id=:id and pass_fail=\'通過\'\
+        ) as s,cos_data as d\
+        where s.cos_code=d.cos_code\
     ) as t";
 
-exports.totalRequiredCredit = "\
-    SELECT SUM(t.cos_credit) as totalRequire\
-    FROM \
-    (   \
-        SELECT DISTINCT a.cos_code, d.cos_credit\
-        FROM (\
-            SELECT s.cos_code\
-            FROM student_cos_relation as s\
-            WHERE s.student_id = :id\
-            AND s.cos_code IN \
-            (\
-                SELECT n.cos_code\
-                FROM cos_require as r, cos_name as n\
-                WHERE r.program IN ( SELECT program FROM student WHERE student_id=:id )\
-                AND r.school_year LIKE :year\
-                AND n.cos_cname LIKE CONCAT(r.cos_cname,\'%\')\
-                AND (n.cos_code like \'DCP%\' or n.cos_code like \'IOE%\' or n.cos_cname like \'微積分甲%\' or n.cos_cname like \'物理%\' or n.cos_cname like \'化學%\' )\
-            )\
-        ) as a\
-        JOIN\
-        cos_data as d\
-        WHERE d.cos_code = a.cos_code\
-    )as t";
-
 exports.Pass = "\
-    select DISTINCT a.cos_code, a.cos_cname,a.cos_ename, a.cos_type,a.cos_typeext,b.type,a.brief,a.brief_new, a.cos_credit,a.year,a.semester\
+    select DISTINCT a.cos_code, a.cos_cname,a.cos_ename,a.pass_fail,a.score,a.score_level, a.cos_type,a.cos_typeext,b.type,a.brief,a.brief_new, a.cos_credit,a.year,a.semester\
     from\
     (\
-        select DISTINCT d.cos_code, n.cos_cname,n.cos_ename, d.cos_type,d.cos_typeext,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
-        from cos_data as d, student_cos_relation as s, cos_name as n\
-        where s.student_id = :id\
-        and d.unique_id = concat(s.year,\'-\',s.semester,\'-\',s.code)\
+        select DISTINCT s.pass_fail,s.score,s.score_level,d.cos_code, n.cos_cname,n.cos_ename, d.cos_type,d.cos_typeext,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
+        from cos_data as d,\
+        (\
+            select cos_year as year,semester,cos_id as code,cos_code,pass_fail,score,score_level,concat(cos_year,\'-\',semester,\'-\',cos_id) as unique_id\
+            from cos_score where student_id=:id\
+        ) as s,\
+        cos_name as n\
+        where\
+        d.unique_id = concat(s.year,\'-\',s.semester,\'-\',s.code)\
         and d.cos_code = n.cos_code\
+        and n.unique_id=d.unique_id\
     ) as a left outer join\
     (\
-        select DISTINCT d.cos_code, n.cos_cname, d.cos_type,d.cos_typeext,t.type,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
-        from cos_data as d, student_cos_relation as s, cos_name as n,cos_type as t,student as sd\
-        where s.student_id = :id\
-        and sd.student_id=:id\
+        select DISTINCT s.pass_fail,s.score,s.score_level,d.cos_code, n.cos_cname, d.cos_type,d.cos_typeext,t.type,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
+        from cos_data as d,\
+        (\
+            select cos_year as year,semester,cos_id as code,cos_code,pass_fail,score,score_level,concat(cos_year,\'-\',semester,\'-\',cos_id) as unique_id\
+            from cos_score where student_id=:id\
+        ) as s,\
+        cos_name as n,cos_type as t,student as sd\
+        where sd.student_id=:id\
         and d.unique_id = concat(s.year,\'-\',s.semester,\'-\',s.code)\
+        and n.unique_id=d.unique_id\
         and n.cos_cname like concat(t.cos_cname,\'%\')\
         and t.school_year=:year\
         and t.program=sd.program\
@@ -146,9 +134,21 @@ exports.graduateRule = '\
     where s.student_id=:id and s.program=r.program and r.school_year=:year;';
 
 exports.studentGraduateList = '\
-    select student_id,sname,program,graduate\
+    select student_id,sname,program,graduate_submit,graduate\
     from student\
     where student_id like concat(:sem,\'%\');';
 
 exports.setStudentGraduate='\
     update student set graduate=:graduate where student_id=:id';
+
+exports.setStudentGraduateSubmit='\
+    update student set graduate_submit=:graduate_submit where student_id=:id';
+
+exports.setGmail='\
+    update student set gmail=:gmail where student_id=:id';
+
+exports.setFbId='\
+    update student set fb_id=:fb_id where student_id=:id';
+
+exports.setGithubId='\
+    update student set github_id=:github_id where student_id=:id';

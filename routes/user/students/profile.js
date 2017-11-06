@@ -3,8 +3,11 @@ var express = require('express');
 var router = express.Router();
 var query = require('../../../db/msql');
 var utils = require('../../../utils');
+var csrf = require('csurf');
 
-router.get('/students/profile', function(req, res){
+var csrfProtection = csrf();
+
+router.get('/students/profile', csrfProtection, function(req, res){
 
     if(req.session.profile){
         var studentId = utils.getPersonId(JSON.parse(req.session.profile));

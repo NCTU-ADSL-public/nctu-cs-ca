@@ -1,8 +1,9 @@
 import React from 'react'
 import Course from './Course'
+import './Graduation.css'
 
 const CourseList = ({ items, selection , handleClick}) => (
-    <div id="course-button">
+    <div className="course-button">
         {items.map(item =>
             <Course
                 key={item.id}

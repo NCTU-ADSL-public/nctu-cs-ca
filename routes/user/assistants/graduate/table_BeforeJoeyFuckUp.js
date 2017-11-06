@@ -67,27 +67,27 @@ function queryCourse(studentId, callback){
 			return;
 		}
                 else{
-			
+
 			result = JSON.parse(result);
 			course.total = result;
-			//console.log("in table second program:" + program);	
+			//console.log("in table second program:" + program);
 			if(program == '資電' ){
 				for(var i = 0; i < result.length; i++){
 
                                 	switch(result[i].type){
                                         	case '必修' :
                                                 	course.compulse.push(result[i]);
-                                                	break;  
+                                                	break;
                                         	case '核心' :
                                                 	course.core.push(result[i]);
-                                                	break;  
+                                                	break;
                                         	case '副核心' :
                                                 	course.vice.push(result[i]);
-                                                	break;  
+                                                	break;
                                         	case '網多核心': case '資工核心' :
                                                 	course.others.push(result[i]);
-                                                	break;  
-                                        } 
+                                                	break;
+                                        }
                        		 }
 			}
 			else if(program == '資工'){
@@ -96,23 +96,23 @@ function queryCourse(studentId, callback){
                                 	switch(result[i].type){
                                         	case '必修' :
                                                 	course.compulse.push(result[i]);
-                                                	break;  
+                                                	break;
                                         	case '核心' :
                                                 	course.core.push(result[i]);
-                                                	break;  
+                                                	break;
                                         	case '副核心' :
                                                 	course.vice.push(result[i]);
-                                                	break;  
+                                                	break;
                                         	case '資電核心': case '網多核心' :
                                                 	course.others.push(result[i]);
-                                                	break;  
-                                        } 
+                                                	break;
+                                        }
 
                         	}
 			}
 			if(program == '網多'){
 				for(var i = 0; i < result.length; i++){
-				
+
 					switch(result[i].type){
 						case '必修' :
 							course.compulse.push(result[i]);
@@ -126,8 +126,8 @@ function queryCourse(studentId, callback){
 						case '資電核心': case '資工核心' :
 							course.others.push(result[i]);
 							break;
-					}	
-			
+					}
+
 				}
 			}
                     callback(course);
@@ -159,4 +159,3 @@ table.getRule = function(studentId, callback){
 
 
 exports.tables = table;
-

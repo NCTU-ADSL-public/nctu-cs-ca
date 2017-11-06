@@ -2,6 +2,10 @@ module.exports.getPersonId = function(profileObj){
   return profileObj.username;
 }
 
+module.exports.getPersonIdwCb = function(profileObj, callback){
+  callback(profileObj.username);
+}
+
 module.exports.getPersonProgram = function(profileObj){
   return profileObj.program;
 }
