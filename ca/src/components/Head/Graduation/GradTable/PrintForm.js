@@ -11,8 +11,17 @@ class PrintForm extends React.Component {
     }
 
     render() {
+        let generalCatTitle = ['外語','通識','體育','服務學習','藝文賞析'];
+        let depCat = [], generalCat = [];
+        this.state.categories.forEach((item, i) => {
+            if (generalCatTitle.indexOf(item.title ) != -1)
+                generalCat.push(item);
+            else
+                depCat.push(item);
+        });
+
         return (
-            <table style={{ borderSpacing:'0' }}>
+            <table className="default-text default-table">
                 <colgroup>
                     <col className="col0"/>
                     <col className="col1"/>
@@ -28,22 +37,47 @@ class PrintForm extends React.Component {
                     <col className="col11"/>
                     <col className="col12"/>
                 </colgroup>
-                <tr>
-                    <td className='cell-text' colSpan='2' style={{fontSize:'10pt', fontWeight:'bold'}}>科目名稱</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>1上</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>1下</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>2上</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>2下</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>3上</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>3下</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>4上</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>4下</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>應修<br/>學分</td>
-                    <td className='cell-text' style={{fontSize: '8pt', fontWeight:'bold'}}>實得<br/>學分</td>
-                    <td className='cell-text' style={{fontSize: '12pt', fontWeight:'bold'}}>備註</td>
+
+                <tr className="borderLess">
+                    <td colSpan="13" style={{fontSize: '16pt', fontWeight:'bold', height: '1.5em', color: '#0000FF'}}>
+                        103學年度--{this.props.program}工程組
+                    </td>
+                </tr>
+                <tr className="borderLess left-text">
+                    <td colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '2.5em'}}>
+                        <div width='100%'>
+                            <div className="personal-info">班別：{this.props.program}工程組</div>
+                            <div className="personal-info">學號：</div>
+                            <div className="personal-info">姓名：</div><br/>
+                            <div className="personal-info">聯絡電話：</div>
+                            <div className="personal-info">E-mail：</div>
+                        </div>
+                    </td>
                 </tr>
 
-                {this.state.categories.map(category =>
+                <tr>
+                    <td className="bg-green left-text" colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '24pt'}}>
+                        <span>一、本系專業科目（請填</span>
+                        <span style={{color: '#FF0000'}}>分數</span>
+                        <span>及實得學分數）</span>
+                        <span style={{fontSize: '6pt'}}>請在備註欄註明『英文授課』：畢業前須通過1門本系開授或認可之英文授課專業課程</span>
+                    </td>
+                </tr>
+                {depCat.map(category =>
+                    <GradCategory
+                        subjects={category.course}
+                        name={category.title}
+                    />
+                )}
+
+                <tr>
+                    <td className="bg-yellow left-text" colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '24pt'}}>
+                        <span>二、校訂共同科目 (請填</span>
+                        <span style={{color: '#FF0000'}}>分數</span>
+                        <span>及實得學分數）</span>
+                    </td>
+                </tr>
+                {generalCat.map(category =>
                     <GradCategory
                         subjects={category.course}
                         name={category.title}

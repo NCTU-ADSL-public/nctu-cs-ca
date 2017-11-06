@@ -245,10 +245,10 @@ class Grad extends React.Component {
                     <div className="Grad-Row">
                         <GraduationForm isToggle={this.state.isToggle} items={this.state.items} graditems={this.state.Graduationitems} scroll={this.state.scrollQuery}/>
                     </div>
-                    <div id="printArea">
-                        <PrintForm/>
-                    </div>
                     <div id="graduate-footer"> </div>
+                </div>
+                <div id="printArea">
+                    <PrintForm program={this.props.studentId}/>
                 </div>
             </div>
         )
