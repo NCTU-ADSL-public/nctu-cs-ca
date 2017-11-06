@@ -1,13 +1,24 @@
-.cell-text {
-    vertical-align: top;
-    border-bottom: 1px solid #000000;
-    border-top: 1px solid #000000 !important;
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000 !important;
+.default-text{
+    vertical-align: middle;
     color: #000000;
     font-family: 'Times New Roman, 標楷體';
     font-size: 10pt;
+}
+
+.default-table, .default-table td  {
+    border-bottom: 1px solid #000000 !important;
+    border-top: 1px solid #000000 !important;
+    border-left: 1px solid #000000 !important;
+    border-right: 1px solid #000000 !important;
+    border-spacing: 0px;
     background-color: white;
+
+}
+
+.title-text {
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
 }
 
 .left-text {
@@ -16,6 +27,10 @@
 
 .no-height {
     height: 0px;
+}
+
+.bg-green {
+    background-color: #CCFFCC !important;
 }
 
 .col0 { width:7.7307% }

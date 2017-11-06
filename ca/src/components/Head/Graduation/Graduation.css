@@ -3,18 +3,22 @@
 }
 
 @media print {
+
     body * {
         visibility: hidden;
     }
-    #printArea * {
+    #printArea, #printArea * {
         visibility: visible;
     }
     #printArea {
         display: block;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
         position: absolute;
         left: 0;
         top: 0;
     }
+
 }
 
 .fixed {

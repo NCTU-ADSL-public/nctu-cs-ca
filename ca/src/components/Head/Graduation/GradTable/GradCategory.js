@@ -12,10 +12,7 @@ class GradCategory extends React.Component {
         return(
             <tbody>
             <tr className='no-height'>
-                <td className="cell-text" rowSpan={this.state.subjects.length+1} style={{
-                    fontSize:'12pt',
-                    fontWeight:'bold'
-                }}>{this.state.name}</td>
+                <td className="title-text" rowSpan={this.state.subjects.length+1}>{this.state.name}</td>
             </tr>
 
             {this.state.subjects.map(subject =>
