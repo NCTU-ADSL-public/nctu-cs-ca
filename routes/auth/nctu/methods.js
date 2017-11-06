@@ -1,6 +1,7 @@
 const request = require('request');
 var query = require('../../../db/msql');
 var utils = require('../../../utils');
+var randoms = require('../../../randomVals');
 var methods = {};
 
 var url = "https://id.nctu.edu.tw/o/authorize/?client_id=LtdkznMFdoasXeNs23sRGnjodszIhlVbeujg27Fg&response_type=code&scope=profile%20name";
@@ -8,7 +9,7 @@ var redirectPath = utils.redirectPath;
 var oAuthNctu = {
     grant_type : "authorization_code",
     client_id : "LtdkznMFdoasXeNs23sRGnjodszIhlVbeujg27Fg",
-    client_secret : "WfUUvhOjAJVECHdklTrXfRR9kK8euQNTm9qPzd3k7oLbfTr0nsMf1NVRyNqVaso38zLYTj0YJOKyyhyUM4OepQIAXn5aL16tgGrDEfJaeV5m89MfYtOQipityolX83Lu",
+    client_secret : randoms.randomVals.nctuClientKey;
     redirect_uri : "https://csca.nctu.edu.tw/auth/Nctu/callback"
 }
 
@@ -66,12 +67,8 @@ methods.getProfile = function(req, res, next){
             return;
         }
 	console.log("Profile:" + body);
-	var profile = { username: '' };
-        //req.session.profile = body;
+	req.session.profile = body;
 	body = JSON.parse(body);
-	profile.username = body.username;
-	console.log(profile);
-	req.session.profile = profile;
 	console.log("req.sesision:" + req.session.profile);
 	//console.log("req only ID:" + req.session.profile);
 	console.log("Profile username: " + body);
