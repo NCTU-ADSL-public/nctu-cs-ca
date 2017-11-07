@@ -50,6 +50,7 @@ function queryCourse(studentId, callback){
 		if(!result)
 			return;
 		result = JSON.parse(result);
+		console.log(result);
 		info.program = result[0].program;
 	        query.Group(studentId, function(err, result){
 			if(!result){

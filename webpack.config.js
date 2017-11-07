@@ -1,20 +1,27 @@
 var webpack = require('webpack');
 var path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: [
-    path.join(__dirname, '/src/index.js') 
-  ],
+  entry: {
+    students : './src/index.student.js', 
+    assistants : './src/index.assistant.js', 
+    teachers : './src/index.teacher.js', 
+    login : './src/index.login.js', 
+  },
   output: {
     path: path.join(__dirname, '/public'), 
-    filename: 'bundle.js',
+    filename: 'bundle.[name].js',
     publicPath: '/public/'
     },
   module: {
       loaders: [
                   {
                     test: /\.css$/,
-                    loader: ['style-loader', 'css-loader', 'sass-loader']
+                    loader:  ExtractTextPlugin.extract({
+                          fallback: 'style-loader',
+                          use: ['css-loader','sass-loader']
+                        })	
                   },
                   {
                     test: /\.js$/,
@@ -30,5 +37,8 @@ module.exports = {
   resolve: {
       extensions: ['*', '.js', '.json'] 
     },
+  plugins: [
+    new ExtractTextPlugin({filename: 'style.bye.css', publicPath: '/public/'})
+  ],
   watch: true
 };

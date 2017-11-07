@@ -68,6 +68,7 @@ function queryCourse(req, res, next){
 	    	table.tables.getCourse(studentId, function(course){
 			req.course = course;
 			if(req.course)
+
 				next();
 			else{
 				console.log("Cannot get course");

@@ -9,7 +9,7 @@ var redirectPath = utils.redirectPath;
 var oAuthNctu = {
     grant_type : "authorization_code",
     client_id : "LtdkznMFdoasXeNs23sRGnjodszIhlVbeujg27Fg",
-    client_secret : randoms.randomVals.nctuClientKey;
+    client_secret : randoms.randomVals.nctuClientKey,
     redirect_uri : "https://csca.nctu.edu.tw/auth/Nctu/callback"
 }
 
