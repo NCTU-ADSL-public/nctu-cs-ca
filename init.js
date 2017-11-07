@@ -32,9 +32,6 @@ module.exports.init = function(){
     extended: true
   }));
 
-  app.use(csrfProtection);
-  app.use(require('./middleware/setCsrf').setCsrf);
-  app.use(require('./middleware/setProfile').setProfile);
   app.use('/', express.static('./public', { index: 'index.login.html'}));
   app.use('/students/Head', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents, express.static('./public', { index: 'index.student.html'}));
   app.use('/assistants/Head', require('./middleware/verifyUser').verifyUser,  require('./middleware/verifyUser').verifyAssistants, express.static('./public', { index: 'index.assistant.html'}));
