@@ -23,43 +23,40 @@ class Head extends Component {
 
     constructor(props) {
         super(props);
-    }
 
-    state = {
-       selectedIndex: 0,
-       styleButton: {
-		    fontFamily: 'Noto Sans CJK TC',
-		    background: '#EEEEEE',
-           	lineHeight: '15px',
-           	margin: '5px 0 0',
-		   	fontSize: '11px',
-		   	width: '10px',
-       },
-		studentIdcard:{
-       		name:'小翠',
-			prog:'助理',
-			grad:'',
-		},
-    };
-
-
-    componentWillMount(){
-    	let _this = this;
-
-        axios.get('/students/profile').then(studentData => {
-            _this.setState({
+        axios.get('/assistants/profile').then(studentData => {
+            this.setState({
                 studentIdcard: {
                     name: studentData.data[0].sname,
                     prog: studentData.data[0].program ,
-                    grad: "大" + studentData.data[0].grade,
+                    grad: "",
                 }
             })
         }).catch(err => {
             console.log(err);
         });
 
-
+        this.state = {
+            selectedIndex: 0,
+            styleButton: {
+                fontFamily: 'Noto Sans CJK TC',
+                background: '#EEEEEE',
+                lineHeight: '15px',
+                margin: '5px 0 0',
+                fontSize: '11px',
+                width: '10px',
+            },
+            studentIdcard:{
+                name:'小翠',
+                prog:'助理',
+                grad:'',
+            },
+        };
     }
+
+
+
+
 
     componentDidMount(){
     	this.select(1);

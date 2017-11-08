@@ -137,50 +137,50 @@ export default class StudentList extends React.Component {
         return (
             <div id="page">
                 <div className="filter">
+
                     <div className="filter-list">
                         <input type="text"
                                placeholder="搜尋 學號/ 學生姓名/ 組別/ 畢業狀態"
                                onChange={this.filterList}
                                onKeyPress={this.handleKeyPress}
-                               />
+                        />
                     </div>
 
                     <MuiThemeProvider muiTheme={muiTheme}>
-                    <div style={styles.wrapper}>
-                        <Chip
-                            backgroundColor={this.state.gGrad ? '#5fc86f' : '#CCC'}
-                            onClick={ () => (this.handleTouchTap(4))}
-                            style={styles.chip}>
-                            可畢業
-                        </Chip>
-                        <Chip
-                            backgroundColor={this.state.groupA ? blue300 : '#CCC'}
-                            onClick={ () => (this.handleTouchTap(0))}
-                            style={styles.chip}>
-                            資工A班
-                        </Chip>
-                        <Chip
-                            backgroundColor={this.state.groupB ? blue300 : '#CCC'}
-                            onClick={ () => (this.handleTouchTap(1))}
-                            style={styles.chip}>
-                            資工B班
-                        </Chip>
-                        <Chip
-                            backgroundColor={this.state.groupC ? blue300 : '#CCC'}
-                            onClick={ () => (this.handleTouchTap(2))}
-                            style={styles.chip}>
-                            網多組
-                        </Chip>
-                        <Chip
-                            backgroundColor={this.state.groupD ? blue300 : '#CCC'}
-                            onClick={ () => (this.handleTouchTap(3))}
-                            style={styles.chip}>
-                            資電組
-                        </Chip>
-                    </div>
+                        <div style={styles.wrapper}>
+                            <Chip
+                                backgroundColor={this.state.gGrad ? '#5fc86f' : '#CCC'}
+                                onClick={ () => (this.handleTouchTap(4))}
+                                style={styles.chip}>
+                                可畢業
+                            </Chip>
+                            <Chip
+                                backgroundColor={this.state.groupA ? blue300 : '#CCC'}
+                                onClick={ () => (this.handleTouchTap(0))}
+                                style={styles.chip}>
+                                資工A班
+                            </Chip>
+                            <Chip
+                                backgroundColor={this.state.groupB ? blue300 : '#CCC'}
+                                onClick={ () => (this.handleTouchTap(1))}
+                                style={styles.chip}>
+                                資工B班
+                            </Chip>
+                            <Chip
+                                backgroundColor={this.state.groupC ? blue300 : '#CCC'}
+                                onClick={ () => (this.handleTouchTap(2))}
+                                style={styles.chip}>
+                                網多組
+                            </Chip>
+                            <Chip
+                                backgroundColor={this.state.groupD ? blue300 : '#CCC'}
+                                onClick={ () => (this.handleTouchTap(3))}
+                                style={styles.chip}>
+                                資電組
+                            </Chip>
+                        </div>
                     </MuiThemeProvider>
-
-                    <MuiThemeProvider muiTheme={muiTheme}>
+                    <MuiThemeProvider>
                         <StudentTable students={this.state.students} parentFunction={this.searchCallback}/>
                     </MuiThemeProvider>
                 </div>
