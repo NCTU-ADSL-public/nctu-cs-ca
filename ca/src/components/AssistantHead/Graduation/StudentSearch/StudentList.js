@@ -65,6 +65,7 @@ export default class StudentList extends React.Component {
             groupB: true,
             groupC: true,
             groupD: true,
+            gG: true,
         });
         let updatedList = this.state.initStudents;
         updatedList = updatedList.filter(function(student){
@@ -87,7 +88,7 @@ export default class StudentList extends React.Component {
         let gB = this.state.groupB;
         let gC = this.state.groupC;
         let gD = this.state.groupD;
-        let _this = this;
+        let gG = this.state.gGrad;
         if (groupNum === 0) {
             gA = !this.state.groupA;
             this.setState({groupA: gA});
@@ -101,16 +102,17 @@ export default class StudentList extends React.Component {
             gD = !this.state.groupD;
             this.setState({groupD: gD});
         } else if (groupNum === 4){
-            this.setState({gGrad: !this.state.gGrad});
+            gG = !this.state.gGrad;
+            this.setState({gGrad: gG});
         }
-        console.log(gA, gB, gB, gD);
+        console.log(gG, gA, gB, gB, gD);
         updatedList = updatedList.filter(function(student){
             return (    ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
                         ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
                         ((student.program.toLowerCase().search('網多') !== -1) && gC )||
                         ((student.program.toLowerCase().search('資電') !== -1) && gD )  )&&
-                   (    ((student.graduate.toLowerCase().search('0') !== -1) && _this.state.gGrad)||
-                         !_this.state.gGrad );
+                   (    ((student.graduate.toLowerCase().search('0') !== -1) && !gG)||
+                         gG );
         });
         this.setState({students: updatedList});
     }

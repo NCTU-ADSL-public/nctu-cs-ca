@@ -63,7 +63,7 @@ export default class StudentTable extends Component {
         };
 
     }
-
+/*
     static defaultProps = {
         students: [
             {
@@ -71,9 +71,10 @@ export default class StudentTable extends Component {
                 sname: '流川楓',
                 program: '網多',
                 graduate: "0",
+                graduate_submit: "0",
             }]
     };
-
+*/
     handleRowClick = (rowIndex) => {
         this.props.parentFunction(this.props.students[rowIndex]);
     };
