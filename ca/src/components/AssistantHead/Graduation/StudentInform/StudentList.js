@@ -113,11 +113,11 @@ export default class StudentInform extends React.Component {
         console.log(gG, gA, gB, gB, gD);
         updatedList = updatedList.filter(function(student){
             return (    ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
-                ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
-                ((student.program.toLowerCase().search('網多') !== -1) && gC )||
-                ((student.program.toLowerCase().search('資電') !== -1) && gD )  )&&
-                (    ((student.graduate.toLowerCase().search('0') !== -1) && !gG)||
-                    gG );
+                        ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
+                        ((student.program.toLowerCase().search('網多') !== -1) && gC )||
+                        ((student.program.toLowerCase().search('資電') !== -1) && gD )  )&&
+                        (    ((student.graduate.toLowerCase().search('0') !== -1) && !gG)||
+                            gG );
         });
         this.setState({students: updatedList});
     }
