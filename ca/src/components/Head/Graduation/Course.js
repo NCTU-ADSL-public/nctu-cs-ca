@@ -13,7 +13,9 @@ class Course extends React.Component {
         style:{
             transition: "background .2s linear",
             width:"200px",
+            height:'36px',
             paddingRight: 0,
+            paddingLeft: 0,
             zIndex: "",
         }
     };
@@ -80,9 +82,11 @@ class Course extends React.Component {
                     show={this.state.open}
                     onHide={this.handleClose.bind(this)}
                 >
-                    <div>分數:{this.props.score}</div>
-                    <div>等級:{(this.props.grade===0)?'-':this.props.grade}</div>
-                    <div>是否為英文授課:{this.props.english}</div>
+                    <div>{this.props.cosCame}</div>
+                    <div>分數:&nbsp;{(this.props.score===-1)?'-':this.props.score}</div>
+                    <div>等級:&nbsp;{(this.props.grade==='0')?'-':this.props.grade}</div>
+                    <div>英文授課:&nbsp;{(this.props.english)?'是':'否'}</div>
+                    <br/>
                     {(this.props.reason==="notCS")?<div>你修的這堂課不是資工系的，如果已經申請過抵免了則算通過。</div>:<div> </div>}
                 </Popover>
             </div>

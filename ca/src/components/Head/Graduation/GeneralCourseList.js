@@ -27,7 +27,6 @@ class GenetalCourseList extends React.Component{
         item3=[];
         item4=[];
         item5=[];
-        console.log(this.props.items);
         let flag0=0;
         let flag1=0;
         let flag2=0;
@@ -74,10 +73,6 @@ class GenetalCourseList extends React.Component{
                 natural:flag5
             })
         }
-        console.log(item4)
-    }
-    componentDidMount(){
-        console.log(item0)
     }
     render(){
         return(

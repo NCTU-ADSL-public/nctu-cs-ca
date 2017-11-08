@@ -156,7 +156,7 @@ class Grad extends React.Component {
                             <div className="yellow"> </div><div  className="text">抵免課程</div>
                             <ReactHover
                                 options={optionsCursorTrueWithMargin}>
-                                <ReactHover.Trigger>
+                                <ReactHover.Trigger type='trigger'>
                                     <MuiThemeProvider>
                                         <RaisedButton
                                             label="確認送審"
@@ -167,7 +167,7 @@ class Grad extends React.Component {
                                         />
                                     </MuiThemeProvider>
                                 </ReactHover.Trigger>
-                                <ReactHover.Hover>
+                                <ReactHover.Hover type='hover'>
                                     <div className="grad-hover-info">{this.state.graduationCheck?"已送審":"尚未送審"}</div>
                                 </ReactHover.Hover>
                             </ReactHover>

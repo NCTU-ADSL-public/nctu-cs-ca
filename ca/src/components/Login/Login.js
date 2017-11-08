@@ -8,9 +8,6 @@ import {ToastContainer, ToastStore} from 'react-toasts';
 
 class Login extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     getLoginstatus(){
         let _this = this;
