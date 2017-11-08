@@ -57,7 +57,7 @@ export default class StudentTable extends Component {
             selectable: true,
             multiSelectable: true,
             enableSelectAll: true,
-            deselectOnClickaway: true,
+            deselectOnClickaway: false,
             showCheckboxes: true,
             height: '60vh',
         };
@@ -80,7 +80,6 @@ export default class StudentTable extends Component {
     };
 
     handleRowSelection = (selectedRow) => {
-
         this.props.parentFunction(selectedRow);
     };
 

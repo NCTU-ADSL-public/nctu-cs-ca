@@ -47,7 +47,7 @@ export default class StudentInform extends React.Component {
             groupD: true,
             gGrad: true,
 
-            _selectedRow: [],
+            selectedRow: [],
         };
 
         this.filterList = this.filterList.bind(this);
@@ -131,13 +131,7 @@ export default class StudentInform extends React.Component {
     };
 
     selectCallback = (selectedRow) => {
-        this.state._selectedRow = selectedRow;
-        let s = "";
-        {selectedRow.map((row) => {
-            s = s + " " + this.props.students[row].sname + "<3"
-        })}
-
-        console.log(this.state._selectedRow);
+        this.setState({selectedRow: selectedRow,});
     };
 
     handleTouchTap(groupNum) {
@@ -150,7 +144,7 @@ export default class StudentInform extends React.Component {
                 <div className="filter">
 
                     <MuiThemeProvider>
-                        <SendEmail students={this.state.students} selectedRow={this.state._selectedRow}/>
+                        <SendEmail { ...this.state }/>
                     </MuiThemeProvider>
 
                     <div className="filter-list">

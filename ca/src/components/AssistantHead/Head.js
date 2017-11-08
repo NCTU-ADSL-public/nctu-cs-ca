@@ -27,9 +27,9 @@ class Head extends Component {
         axios.get('/assistants/profile').then(studentData => {
             this.setState({
                 studentIdcard: {
-                    name: studentData.data[0].sname,
-                    prog: studentData.data[0].program ,
-                    grad: "",
+                    name: studentData.data[0].aname,
+                    prog: studentData.data[0].assistant_id,
+                    grad: studentData.data[0].status,
                 }
             })
         }).catch(err => {
@@ -76,7 +76,7 @@ class Head extends Component {
                 ReactDOM.render(
 					<div>
 						<FadeIn>
-							<GraduationItem studentId={this.state.studentIdcard.prog}/>
+							<GraduationItem/>
 						</FadeIn>
 					</div>,
                     document.getElementById('page'));

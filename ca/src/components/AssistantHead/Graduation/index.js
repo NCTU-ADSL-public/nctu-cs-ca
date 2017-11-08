@@ -371,9 +371,6 @@ export default class index extends React.Component {
                     activeKey={this.state.activeKey}
                     onChange={this.onChange}
                 >
-                    <TabPane tab={`預審通知`} key="0">
-                        <StudentInform students={this.state.initStudents}/>
-                    </TabPane>
                     <TabPane tab={`學生清單`} key="1">
                         <StudentList students={this.state.initStudents} parentFunction={this.searchCallback}/>
                     </TabPane>
@@ -387,6 +384,10 @@ export default class index extends React.Component {
                             reviseresult={this.state.revise[10]}
                             courseCategoryArray={this.state.print_courseCategoryArray}
                         />
+                    </TabPane>
+
+                    <TabPane tab={`預審通知`} key="0">
+                        <StudentInform students={this.state.initStudents}/>
                     </TabPane>
                 </Tabs>
             </div>
