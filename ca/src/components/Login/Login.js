@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginButtom from './LoginButtom.js';
 import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

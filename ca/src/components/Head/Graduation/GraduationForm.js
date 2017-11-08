@@ -42,11 +42,12 @@ class GraduationForm extends React.Component{
     }
     render(){
         if(this.props.isToggle){
+            let id=0;
             return(
                 <div className="animated fadeIn">
                     {this.state.items.map(item =>
                         <IndividualCourse
-                            key={item.id}
+                            key={id++}
                             pass={item.course}
                             title={item.title}
                             credit={item.credit}
@@ -71,11 +72,12 @@ class GraduationForm extends React.Component{
             );
         }
         else{
+            let id=0;
             return(
                 <FadeIn>
                     {this.state.graditems.map(item =>
                         <IndividualCourse
-                            key={item.id}
+                            key={id++}
                             pass={item.course}
                             title={item.title}
                             credit={item.credit}

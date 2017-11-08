@@ -237,9 +237,6 @@ const studentPas = [{"cos_cname":"普通生物(一)(英文授課)","grade":"1","
 
 class Head extends Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     state = {
         selectedIndex: 0,
@@ -326,7 +323,6 @@ class Head extends Component {
     componentDidMount(){
     	this.select(0);
 
-    	let self = this;
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data
@@ -427,7 +423,7 @@ class Head extends Component {
 						<div className="idcard">
 							<div id="idcard-data">
 								<div id="idcard-photo">
-									<img src={defalt} width="44px" />
+									<img src={defalt} width="44px" alt=""/>
 								</div>
 								<div id="idcard-top">
                                     {this.state.studentIdcard.name}

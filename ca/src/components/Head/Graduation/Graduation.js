@@ -18,7 +18,6 @@ import axios from 'axios'
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-let test={"check":{"state":false}}
 
 const styles = {
     toggle: {

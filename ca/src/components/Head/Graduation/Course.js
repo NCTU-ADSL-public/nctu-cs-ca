@@ -19,9 +19,6 @@ class Course extends React.Component {
     };
 
     componentWillMount(){
-        let tmp;
-        tmp = this.props.goard * 200 / 3
-        tmp = tmp + "px";
         this.setState({
             width:200,
             paddingRight: 0,
@@ -84,7 +81,9 @@ class Course extends React.Component {
                     onHide={this.handleClose.bind(this)}
                 >
                     <div>分數:{this.props.score}</div>
-                    {(this.props.reason==="notCS")?<div>你修的這堂課不是資工系的，如果已經申請過抵免了則算通過。</div>:<div></div>}
+                    <div>等級:{(this.props.grade===0)?'-':this.props.grade}</div>
+                    <div>是否為英文授課:{this.props.english}</div>
+                    {(this.props.reason==="notCS")?<div>你修的這堂課不是資工系的，如果已經申請過抵免了則算通過。</div>:<div> </div>}
                 </Popover>
             </div>
 

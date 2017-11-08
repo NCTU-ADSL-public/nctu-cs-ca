@@ -5,13 +5,6 @@ import Popover from 'react-simple-popover';
 import 'animate.css'
 import './Course.css';
 
-const style=[{
-    transition: "background .2s linear",
-    width: "200px",
-    paddingRight: 0,
-
-}
-];
 
 class GeneralCourse extends React.Component {
 
@@ -20,9 +13,6 @@ class GeneralCourse extends React.Component {
     };
 
     componentWillMount(){
-        let tmp;
-        tmp = this.props.goard * 200 / 3
-        tmp = tmp + "px";
         this.setState({
             width:200,
             paddingRight: 0,
@@ -39,6 +29,7 @@ class GeneralCourse extends React.Component {
     }
 
     render(){
+        let id=0;
         return(
             <div className="grad-popover">
             <div className={this.props.completed?"grad":this.props.selection?"grad":"grad animated flash"} ref="target"
@@ -58,7 +49,12 @@ class GeneralCourse extends React.Component {
                         }}
                         hoverColor={"#80b0d9"}
                         backgroundColor={this.props.completed?"#3aa276":this.props.selection?"gray":"#d93a64"}
-                        style={style}
+                        style={{
+                            transition: "background .2s linear",
+                            width: "200px",
+                            paddingRight: 0,
+
+                        }}
                         label={this.props.cosCame}>
 
                     </FlatButton>
@@ -71,7 +67,7 @@ class GeneralCourse extends React.Component {
                     onHide={this.handleClose.bind(this)}
                   >
                 {this.props.items.map(function(item) {
-                    return <li key={item.id}>{item}</li>;
+                    return <li key={id++}>{item}</li>;
                 })}
                 </Popover>
         </div>
