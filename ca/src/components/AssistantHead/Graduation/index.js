@@ -12,72 +12,14 @@ import StudentInform from './StudentInform/StudentList';
 import StudentGrad from '../../Head/Graduation/Graduation';
 
 
-let initStudents = [
-    {
-        student_id: '0316000',
-        sname: '流川楓',
-        program: '網多',
-        graduate: "0",
-    },
-    {
-        student_id: '0316030',
-        sname: '余治杰',
-        program: '資工B',
-        graduate: "0",
-    },
-    {
-        student_id: '0316031',
-        sname: '王冠升',
-        program: '資工B',
-        graduate: "1",
-    },
-    {
-        student_id: '0316132',
-        sname: '郭毓梁',
-        program: '資工A',
-        graduate: "0",
-    },
-    {
-        student_id: '0316033',
-        sname: '趙賀笙',
-        program: '資工A',
-        graduate: "1",
-    },
-    {
-        student_id: '0316034',
-        sname: '王于哲',
-        program: '資工B',
-        graduate: "0",
-    },
-    {
-        student_id: '0316235',
-        sname: '陳奕安',
-        program: '資工B',
-        graduate:"0",
-    },
-    {
-        student_id: '0316036',
-        sname: '陳冠廷',
-        program: '網多',
-        graduate: "1",
-    },
-    {
-        student_id: '0316037',
-        sname: '郭蕎',
-        program: '資電',
-        graduate: "0",
-    },
-
-];
-
 
 
 export default class index extends React.Component {
 
     componentWillMount(){
-        console.log(initStudents);
+        console.log(this.state.initStudents);
         axios.get('/assistants/graduate/list').then(studentData => {
-            initStudents = studentData.data;
+            this.setState({ initStudents: studentData.data, })
         }).catch(err => {
             console.log(err);
         });
@@ -295,7 +237,73 @@ export default class index extends React.Component {
             complete: 'True' },{},{},{},{},{"total":115,"total_require":156,"compulsory":55,"compulse_require":58,"core":1,"core_require":"9","vice":9,"vice_require":"9","pro":9,"pro_require":"12","english":0,"english_require":1,"other":0,"other_require":"12","general":20,"general_require":20,"pe":6,"pe_require":6,"language":10,"language_require":8,"service":2,"service_require":2,"art":2,"art_require":2}
 
     ],
+        initStudents: [
+            {
+                student_id: '0316000',
+                sname: '流川楓',
+                program: '網多',
+                graduate: "0",
+                graduate_submit: "0",
+            },
+            {
+                student_id: '0316030',
+                sname: '余治杰',
+                program: '資工B',
+                graduate: "0",
+                graduate_submit: "1",
+            },
+            {
+                student_id: '0316031',
+                sname: '王冠升',
+                program: '資工B',
+                graduate: "1",
+                graduate_submit: "1",
+            },
+            {
+                student_id: '0316132',
+                sname: '郭毓梁',
+                program: '資工A',
+                graduate: "0",
+                graduate_submit: "1",
+            },
+            {
+                student_id: '0316033',
+                sname: '趙賀笙',
+                program: '資工A',
+                graduate: "1",
+                graduate_submit: "2",
+            },
+            {
+                student_id: '0316034',
+                sname: '王于哲',
+                program: '資工B',
+                graduate: "0",
+                graduate_submit: "2",
+            },
+            {
+                student_id: '0316235',
+                sname: '陳奕安',
+                program: '資工B',
+                graduate: "0",
+                graduate_submit: "0",
+            },
+            {
+                student_id: '0316036',
+                sname: '陳冠廷',
+                program: '網多',
+                graduate: "1",
+                graduate_submit: "0",
+            },
+            {
+                student_id: '0316037',
+                sname: '郭蕎',
+                program: '資電',
+                graduate: "0",
+                graduate_submit: "0",
+            },
 
+        ],
+        print_courseCategoryArray:[],
     };
 
     onChange = (activeKey) => {
@@ -343,6 +351,14 @@ export default class index extends React.Component {
         }).catch(err => {
             console.log(err);
         });
+
+        axios.get('/students/graduate/print').then(function(resp){
+            this.setState({
+                print_courseCategoryArray: resp.data
+            });
+        }.bind(this)).catch(err => {
+            console.log(err);
+        });
     };
 
     render() {
@@ -355,10 +371,10 @@ export default class index extends React.Component {
                     onChange={this.onChange}
                 >
                     <TabPane tab={`預審通知`} key="0">
-                        <StudentInform students={initStudents}/>
+                        <StudentInform students={this.state.initStudents}/>
                     </TabPane>
                     <TabPane tab={`學生清單`} key="1">
-                        <StudentList students={initStudents} parentFunction={this.searchCallback}/>
+                        <StudentList students={this.state.initStudents} parentFunction={this.searchCallback}/>
                     </TabPane>
                     <TabPane tab={`預審狀況`} key="2">
                         <StudentGrad
@@ -367,7 +383,8 @@ export default class index extends React.Component {
                             items={this.state.Graduationitems}
                             result={this.state.Graduationitems[10]}
                             revise={this.state.revise}
-                            reviseresult={this.state.revise[10]}/>
+                            reviseresult={this.state.revise[10]}
+                            courseCategoryArray={this.state.print_courseCategoryArray}/>
                         />
                     </TabPane>
                 </Tabs>

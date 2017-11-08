@@ -1,13 +1,31 @@
-.cell-text {
-    vertical-align: top;
-    border-bottom: 1px solid #000000;
-    border-top: 1px solid #000000 !important;
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000 !important;
+.default-text{
+    vertical-align: middle;
+    text-align: center;
     color: #000000;
     font-family: 'Times New Roman, 標楷體';
-    font-size: 10pt;
+    font-size: 8pt;
+}
+
+.default-table, .default-table td {
+    border-spacing: 0px;
+    border-collapse:collapse;
     background-color: white;
+
+}
+.default-table td {
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+.borderLess, .borderLess td {
+    border: 0px;
+}
+
+.title-text {
+    font-size: 10pt;
+    font-weight: bold;
 }
 
 .left-text {
@@ -16,6 +34,18 @@
 
 .no-height {
     height: 0px;
+}
+
+.bg-green {
+    background-color: #CCFFCC !important;
+}
+.bg-yellow {
+    background-color: #FFFF99 !important;
+}
+
+.personal-info {
+    width: 25%;
+    display: inline-block;
 }
 
 .col0 { width:7.7307% }

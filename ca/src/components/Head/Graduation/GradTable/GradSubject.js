@@ -19,18 +19,18 @@ class GradSubject extends React.Component {
     render(){
         return (
             <tr>
-                <td className="cell-text left-text">{this.state.name}</td>
-                <td className="cell-text">{this.realscore[0]}</td>
-                <td className="cell-text">{this.realscore[1]}</td>
-                <td className="cell-text">{this.realscore[2]}</td>
-                <td className="cell-text">{this.realscore[3]}</td>
-                <td className="cell-text">{this.realscore[4]}</td>
-                <td className="cell-text">{this.realscore[5]}</td>
-                <td className="cell-text">{this.realscore[6]}</td>
-                <td className="cell-text">{this.realscore[7]}</td>
-                <td className="cell-text">{this.state.credit}</td>
-                <td className="cell-text"></td>
-                <td className="cell-text">{this.state.comment}</td>
+                <td className="left-text">{this.state.name}</td>
+                <td>{this.realscore[0]}</td>
+                <td>{this.realscore[1]}</td>
+                <td>{this.realscore[2]}</td>
+                <td>{this.realscore[3]}</td>
+                <td>{this.realscore[4]}</td>
+                <td>{this.realscore[5]}</td>
+                <td>{this.realscore[6]}</td>
+                <td>{this.realscore[7]}</td>
+                <td>{this.state.credit}</td>
+                <td></td>
+                <td className="left-text">{this.state.comment}</td>
             </tr>
         );
     }
