@@ -81,6 +81,7 @@ export default class StudentTable extends Component {
 
     handleRowSelection = (selectedRow) => {
         this.props.parentFunction(selectedRow);
+
     };
 
     render() {

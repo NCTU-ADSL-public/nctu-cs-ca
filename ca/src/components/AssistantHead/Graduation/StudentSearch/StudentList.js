@@ -105,7 +105,6 @@ export default class StudentList extends React.Component {
             gG = !this.state.gGrad;
             this.setState({gGrad: gG});
         }
-        console.log(gG, gA, gB, gB, gD);
         updatedList = updatedList.filter(function(student){
             return (    ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
                         ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
