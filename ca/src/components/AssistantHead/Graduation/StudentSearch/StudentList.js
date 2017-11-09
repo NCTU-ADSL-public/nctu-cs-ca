@@ -132,8 +132,9 @@ export default class StudentList extends React.Component {
     }
 
     forceRefresh(){
-        console.log("FUCK");
+        console.log("MAJAMI");
         this.setState({initStudents: this.props.students,});
+        this.filterListGroup(999);
     }
 
     render(){
