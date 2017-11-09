@@ -133,7 +133,7 @@ export default class StudentList extends React.Component {
 
     forceRefresh(){
         console.log("FUCK");
-        this.forceUpdate();
+        this.setState({initStudents: this.props.students,});
     }
 
     render(){
