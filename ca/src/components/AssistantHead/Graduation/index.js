@@ -18,13 +18,6 @@ export default class index extends React.Component {
 
     constructor(props) {
         super(props);
-        const self = this;
-        axios.get('/assistants/graduate/list').then(studentData => {
-            self.setState({ initStudents: studentData.data, });
-            self.forceUpdate();
-        }).catch(err => {
-            console.log(err);
-        });
 
         this.state = {
             activeKey: '1',
@@ -306,13 +299,19 @@ export default class index extends React.Component {
         };
     }
 
-
+    componentDidMount(){
+        const self = this;
+        axios.get('/assistants/graduate/list').then(studentData => {
+            self.setState({ initStudents: studentData.data, });
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 
     onChange = (activeKey) => {
         this.setState({
             activeKey,
         });
-        this.forceUpdate();
     };
 
     onTabClick = (key) => {
@@ -330,7 +329,6 @@ export default class index extends React.Component {
             studentName: student.sname,
             studentId: student.student_id,
         });
-        this.forceUpdate();
         //for Graduation
         axios.get('/assistants/graduate/original', {
             params: {

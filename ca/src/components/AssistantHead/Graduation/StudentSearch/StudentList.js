@@ -56,6 +56,15 @@ export default class StudentList extends React.Component {
 
     componentDidMount(){
         this.filterListGroup(4);
+        this.setState({students: this.state.initStudents});
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.students !== undefined){
+            console.log("MAJAMI");
+            this.setState({initStudents: this.props.students,});
+            this.filterListGroup(999);
+        }
     }
 
     filterList(event){
