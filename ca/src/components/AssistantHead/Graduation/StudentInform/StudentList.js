@@ -131,7 +131,6 @@ export default class StudentInform extends React.Component {
 
     selectCallback = (selectedRow) => {
         this.setState({selectedRow: selectedRow,});
-
     };
 
     handleTouchTap(groupNum) {

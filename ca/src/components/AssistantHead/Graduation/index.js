@@ -18,7 +18,6 @@ export default class index extends React.Component {
 
     constructor(props) {
         super(props);
-
         const self = this;
         axios.get('/assistants/graduate/list').then(studentData => {
             self.setState({ initStudents: studentData.data, })
@@ -376,9 +375,6 @@ export default class index extends React.Component {
                     activeKey={this.state.activeKey}
                     onChange={this.onChange}
                 >
-                    <TabPane tab={`預審通知`} key="0">
-                        <StudentInform students={this.state.initStudents}/>
-                    </TabPane>
                     <TabPane tab={`學生清單`} key="1">
                         <StudentList
                             students={this.state.initStudents}
@@ -396,7 +392,9 @@ export default class index extends React.Component {
                             courseCategoryArray={this.state.print_courseCategoryArray}
                         />
                     </TabPane>
-
+                    <TabPane tab={`預審通知`} key="0">
+                        <StudentInform students={this.state.initStudents}/>
+                    </TabPane>
                 </Tabs>
             </div>
         );

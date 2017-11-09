@@ -65,13 +65,13 @@ let Graduationitems=[
         require: 20,
         course:
             [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
-                { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
-                { cn: '幾何造形', en: '', dimension: '自然', complete: true },
+                { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true,"score":60 },
+                { cn: '幾何造形', en: '', dimension: '自然', complete: true,"score":60 },
                 { cn: '經濟學概論', en: '', dimension: '歷史', complete: true },
-                { cn: '霸權興衰史:從十五世紀至當代', en: '', dimension: '歷史', complete: true },
-                { cn: '紀錄片製作概論', en: '', dimension: '歷史', complete: true },
-                { cn: '台灣史', en: '', dimension: '歷史', complete: true },
-                { cn: '當代中國：全球化下的兩岸關係', en: '', dimension: '歷史', complete: true } ] },
+                { cn: '霸權興衰史:從十五世紀至當代', en: '', dimension: '歷史', complete: true ,"score":60},
+                { cn: '紀錄片製作概論', en: '', dimension: '歷史', complete: true ,"score":60},
+                { cn: '台灣史', en: '', dimension: '歷史', complete: true ,"score":60},
+                { cn: '當代中國：全球化下的兩岸關係', en: '', dimension: '歷史', complete: true ,"score":60} ] },
     { title: '副核心課程',
         credit: 16,
         require: 20,
@@ -336,17 +336,9 @@ class Head extends Component {
   	select(index){
             if(index===0){
                 ReactDOM.render(
-					<font>
-						<FadeIn>
-							<GraduationItem
-								studentId={this.state.studentIdcard.prog}
-								items={Graduationitems}
-                                result={Graduationitems[10]}
-                                revise={revise}
-                                reviseresult={revise[10]}
-                                courseCategoryArray={this.state.print_courseCategoryArray}/>
-						</FadeIn>
-					</font>,
+                    <FadeIn>
+                        <HomeItem />
+                    </FadeIn>,
                     document.getElementById('page'));
             }
             else if(index===1){
@@ -364,9 +356,17 @@ class Head extends Component {
             }
             else if(index===2){
                 ReactDOM.render(
-					<FadeIn>
-						<HomeItem />
-					</FadeIn>,
+                    <font>
+                        <FadeIn>
+                            <GraduationItem
+                                studentId={this.state.studentIdcard.prog}
+                                items={Graduationitems}
+                                result={Graduationitems[10]}
+                                revise={revise}
+                                reviseresult={revise[10]}
+                                courseCategoryArray={this.state.print_courseCategoryArray}/>
+                        </FadeIn>
+                    </font>,
                     document.getElementById('page'));
             }
             else if(index===3){

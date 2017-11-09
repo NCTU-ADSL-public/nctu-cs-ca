@@ -67,7 +67,7 @@ class GeneralCourse extends React.Component {
                     onHide={this.handleClose.bind(this)}
                   >
                 {this.props.items.map(function(item) {
-                    return <li key={id++}>{item}</li>;
+                    return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'green'}}>{item.score}</div></li></div>;
                 })}
                 </Popover>
         </div>
