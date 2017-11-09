@@ -5,8 +5,6 @@ import Chip from 'material-ui/Chip';
 import {blue300} from 'material-ui/styles/colors';
 //for table
 import StudentTable from './StudentTable';
-//for test
-import RaisedButton from 'material-ui/RaisedButton';
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -47,7 +45,6 @@ export default class StudentList extends React.Component {
         this.filterList = this.filterList.bind(this);
         this.filterListGroup = this.filterListGroup.bind(this);
         this.handleTouchTap = this.handleTouchTap.bind(this);
-        this.forceRefresh = this.forceRefresh.bind(this);
     }
 
     componentWillMount(){
@@ -56,24 +53,17 @@ export default class StudentList extends React.Component {
 
     componentDidMount(){
         this.filterListGroup(4);
-        this.setState({students: this.state.initStudents});
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.students !== undefined){
-            console.log("MAJAMI");
             this.setState({initStudents: this.props.students,});
             this.filterListGroup(999);
         }
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevProps.students !== this.props.students) {
-            console.log("MAJAJA");
-            this.setState({initStudents: this.props.students,});
-        }
         if(prevState.initStudents !== this.state.initStudents){
-            console.log("MAJA");
             this.filterListGroup(999);
         }
     }
@@ -152,11 +142,6 @@ export default class StudentList extends React.Component {
         this.filterListGroup(groupNum);
     }
 
-    forceRefresh(){
-        console.log("MAJAMI");
-        this.setState({initStudents: this.props.students,});
-        this.filterListGroup(999);
-    }
 
     render(){
         return (
@@ -170,13 +155,6 @@ export default class StudentList extends React.Component {
                                onKeyPress={this.handleKeyPress}
                         />
                     </div>
-                    <MuiThemeProvider><div>
-                        <RaisedButton
-                            label="Primary"
-                            primary={true}
-                            onClick={ () => this.forceRefresh() }
-                        />
-                    </div></MuiThemeProvider>
                     <MuiThemeProvider muiTheme={muiTheme}>
                         <div style={styles.wrapper}>
                             <Chip
