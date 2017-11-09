@@ -15,18 +15,27 @@ import TextField from './TextField';
  * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
  */
 export default class SendEmail extends React.Component {
-    state = {
-        open: false,
-        studentString: "",
-    };
+
+    constructor(props){
+        super(props);
+        this.state = {
+            open: false,
+            studentString: "",
+        };
+    }
+
+
 
     handleOpen = () => {
         this.setState({open: true});
-
+        console.log(this.props.selectedRow);
+        let s = '';
         {this.props.selectedRow.map((row) => {
-            this.state.studentString = this.state.studentString + " " + this.props.students[row].sname + "<3";
+            s += " " + this.props.students[row].sname + '<3';
         })}
+        this.setState({studentString: s});
     };
+
 
     handleClose = () => {
         this.setState({open: false});

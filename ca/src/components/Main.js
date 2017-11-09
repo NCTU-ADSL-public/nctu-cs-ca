@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './Login/Login';
-import Head from './Head/Head';
 import TeacherHead from './TeacherHead/Head';
+import Head from './Head/Head';
 import AssistantHead from './AssistantHead/Head';
 
 
@@ -18,9 +18,9 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path='/' component={Login}/>
-      <Route exact path='/students/head' component={Head}/>
-      <Route exact path='/teachers/head' component={TeacherHead}/>
-      <Route exact path='/assistants/head' component={AssistantHead}/>
+        <Route exact path='/students/head' component={Head}/>
+        <Route exact path='/teachers/head' component={TeacherHead}/>
+        <Route exact path='/assistants/head' component={AssistantHead}/>
     </Switch>
   </main>
 );

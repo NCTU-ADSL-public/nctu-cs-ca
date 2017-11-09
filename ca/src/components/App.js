@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from './Main';
+import Main from './Main.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 

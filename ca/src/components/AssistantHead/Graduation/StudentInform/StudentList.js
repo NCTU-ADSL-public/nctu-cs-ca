@@ -47,7 +47,7 @@ export default class StudentInform extends React.Component {
             groupD: true,
             gGrad: true,
 
-            _selectedRow: [],
+            selectedRow: [],
         };
 
         this.filterList = this.filterList.bind(this);
@@ -113,11 +113,11 @@ export default class StudentInform extends React.Component {
         console.log(gG, gA, gB, gB, gD);
         updatedList = updatedList.filter(function(student){
             return (    ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
-                ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
-                ((student.program.toLowerCase().search('網多') !== -1) && gC )||
-                ((student.program.toLowerCase().search('資電') !== -1) && gD )  )&&
-                (    ((student.graduate.toLowerCase().search('0') !== -1) && !gG)||
-                    gG );
+                        ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
+                        ((student.program.toLowerCase().search('網多') !== -1) && gC )||
+                        ((student.program.toLowerCase().search('資電') !== -1) && gD )  )&&
+                        (    ((student.graduate.toLowerCase().search('0') !== -1) && !gG)||
+                            gG );
         });
         this.setState({students: updatedList});
     }
@@ -131,13 +131,7 @@ export default class StudentInform extends React.Component {
     };
 
     selectCallback = (selectedRow) => {
-        this.state._selectedRow = selectedRow;
-        let s = "";
-        {selectedRow.map((row) => {
-            s = s + " " + this.props.students[row].sname + "<3"
-        })}
-
-        console.log(this.state._selectedRow);
+        this.setState({selectedRow: selectedRow,});
     };
 
     handleTouchTap(groupNum) {
@@ -150,7 +144,7 @@ export default class StudentInform extends React.Component {
                 <div className="filter">
 
                     <MuiThemeProvider>
-                        <SendEmail students={this.state.students} selectedRow={this.state._selectedRow}/>
+                        <SendEmail { ...this.state }/>
                     </MuiThemeProvider>
 
                     <div className="filter-list">
