@@ -373,7 +373,7 @@ class Head extends Component {
                 ReactDOM.render(
 					<a>
 						<FadeIn>
-							<CreditItem />
+							<MapItem />
 						</FadeIn>
 					</a>,
                     document.getElementById('page'));
@@ -401,7 +401,6 @@ class Head extends Component {
 							  />
 							  <BottomNavigationItem
 								label="課程地圖"
-                                disabled={true}
 								icon={mapIcon}
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(1)}
@@ -415,7 +414,6 @@ class Head extends Component {
 							  <BottomNavigationItem
 								label="抵免"
 								icon={checkIcon}
-                                disabled={true}
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(3)}
 							  />
