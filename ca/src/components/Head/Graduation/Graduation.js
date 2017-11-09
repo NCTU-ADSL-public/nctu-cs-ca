@@ -82,6 +82,7 @@ class Grad extends React.Component {
             console.log(err);
         });
     }
+
     handleClick(e){
         this.setState({
             scrollQuery:e,
@@ -134,7 +135,7 @@ class Grad extends React.Component {
             })
             .catch(err => {
                 console.log(err)
-            })
+            });
         this.setState({
             graduationCheck:true,
         })

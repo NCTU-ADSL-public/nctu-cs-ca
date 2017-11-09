@@ -40,6 +40,7 @@ class GraduationForm extends React.Component{
             gradGeneralItems:this.props.graditems.filter(t => (t.title==="通識")),
         })
     }
+
     render(){
         if(this.props.isToggle){
             let id=0;
