@@ -1,13 +1,10 @@
 import React from 'react';
 import './StudentList.css';
-
 //for Chips
 import Chip from 'material-ui/Chip';
 import {blue300} from 'material-ui/styles/colors';
-
 //for table
 import StudentTable from './StudentTable';
-
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -17,7 +14,6 @@ const muiTheme = getMuiTheme({
         accent1Color: '#00AEAE',
     },
 });
-
 
 const styles = {
     chip: {
@@ -57,7 +53,18 @@ export default class StudentList extends React.Component {
 
     componentDidMount(){
         this.filterListGroup(4);
+        this.setState({students: this.state.initStudents});
     }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.students !== this.props.students) {
+            this.setState({initStudents: this.props.students,});
+        }
+        if(prevState.initStudents !== this.state.initStudents){
+            this.filterListGroup(999);
+        }
+    }
+
 
     filterList(event){
         this.setState({
@@ -105,7 +112,6 @@ export default class StudentList extends React.Component {
             gG = !this.state.gGrad;
             this.setState({gGrad: gG});
         }
-        console.log(gG, gA, gB, gB, gD);
         updatedList = updatedList.filter(function(student){
             return (    ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
                         ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
@@ -133,6 +139,7 @@ export default class StudentList extends React.Component {
         this.filterListGroup(groupNum);
     }
 
+
     render(){
         return (
             <div id="page">
@@ -145,7 +152,6 @@ export default class StudentList extends React.Component {
                                onKeyPress={this.handleKeyPress}
                         />
                     </div>
-
                     <MuiThemeProvider muiTheme={muiTheme}>
                         <div style={styles.wrapper}>
                             <Chip

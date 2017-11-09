@@ -28,12 +28,14 @@ export default class SendEmail extends React.Component {
 
     handleOpen = () => {
         this.setState({open: true});
-        console.log(this.props.selectedRow);
-        let s = '';
+        //console.log(this.props.selectedRow);
+        const self = this;
+        self.setState({studentString: ''});
         {this.props.selectedRow.map((row) => {
-            s += " " + this.props.students[row].sname + '<3';
+            self.setState({
+                studentString: self.state.studentString.concat(self.props.students[row].sname + "<3 "),
+            });
         })}
-        this.setState({studentString: s});
     };
 
 
@@ -66,7 +68,9 @@ export default class SendEmail extends React.Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    寄給: {this.state.studentString}
+                    寄給: {this.props.selectedRow.map((row, index) => (
+                                this.props.students[row].sname + "<3 "
+                            ))}
                     <MuiThemeProvider>
                         <TextField/>
                     </MuiThemeProvider>
