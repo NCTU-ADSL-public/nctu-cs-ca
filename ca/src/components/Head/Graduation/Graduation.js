@@ -42,6 +42,10 @@ const styles = {
         height: 10,
         float:'left',
         color: '#7B7B7B'
+    },
+    pop:{
+        width: '200px',
+        height: 'auto',
     }
 };
 
@@ -100,7 +104,7 @@ class Grad extends React.Component {
             this.setState({
                 totalitems:this.props.reviseresult
             });
-            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的加號標誌，此為系統自動排序僅以參考為主。</div>, 20000);
+            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主。</div>, 20000);
         }
         else{
             this.setState({
@@ -192,25 +196,21 @@ class Grad extends React.Component {
                                     </IconButton>
                                 </MuiThemeProvider>
                                 <Popover
-                                    placement='left'
+                                    placement='bottom'
                                     target={this.refs.target}
                                     show={this.state.open}
-                                    onHide={this.handleClose.bind(this)}
-                                > 排序依據:
-                                    - 共同必修（多的應該只會有物化生）
-                                    - 依 Priority 物理 -> 化學 -> 生物 往 專業選修搬 (物理要記得+2)
-                                    - 如果共同必修沒滿 -> Return 不能畢業
-                                    - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                    - 核心課程
-                                    - 如果核心課程沒滿 -> Return 不能畢業
-                                    - 多的課程在搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                    - 副核心課程
-                                    - 多的學分全部塞到專業
-                                    - 如果副核心沒滿 -> Return 不能畢業
-                                    - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                    - 專業選修
-                                    - 多的學分全部塞到其他必修
-                                    - 如果專業選修沒滿 -> Return 不能畢業
+                                    onHide={this.handleClose.bind(this)}>
+                                    <div
+                                        style={styles.pop}>
+                                    -未排的<br/>
+                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                    -排序過的<br/>
+                                    重複修課：將只顯示一次,取成績最高的那次<br/>
+                                    必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                    核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                    專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
+                                    </div>
                                 </Popover></div>}
 
                         </div>
