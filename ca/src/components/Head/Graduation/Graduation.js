@@ -159,7 +159,8 @@ class Grad extends React.Component {
                                 <ReactHover.Trigger type='trigger'>
                                     <MuiThemeProvider>
                                         <RaisedButton
-                                            label="確認送審"
+                                            label={this.state.graduationCheck?'已送審':"確認送審"}
+                                            disabled={this.state.graduationCheck}
                                             style={styles.button}
                                             labelStyle={styles.labelStyle}
                                             backgroundColor = "#DDDDDD"
@@ -238,6 +239,9 @@ class Grad extends React.Component {
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('外語')}>外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.language}</font>/{this.state.totalitems.language_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.language/this.state.totalitems.language_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('藝文賞析')}>藝文賞析&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.art}</font>/{this.state.totalitems.art_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.art/this.state.totalitems.art_require*100}/></div>
+                                </div>
+                                <div className="overview-course" >
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('服務學習')}>服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.service}</font>/{this.state.totalitems.service_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.service/this.state.totalitems.service_require*100}/></div>
                                 </div>
                             </div>
                         </div>

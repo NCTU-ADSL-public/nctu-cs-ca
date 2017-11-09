@@ -35,32 +35,32 @@ class GenetalCourseList extends React.Component{
         let flag5=0;
         for(let i=0;i<this.props.items.length;i++){
             if(this.props.items[i].dimension==="通識"){
-                let newitem = [...item0, this.props.items[i].cn];
+                let newitem = [...item0, this.props.items[i]];
                 item0 = newitem;
                 flag0 = 1;
             }
             else if(this.props.items[i].dimension==='公民'){
-                let newitem = [...item1, this.props.items[i].cn];
+                let newitem = [...item1, this.props.items[i]];
                 item1 = newitem;
                 flag1 = 1;
             }
             else if(this.props.items[i].dimension==="群己"){
-                let newitem = [...item2, this.props.items[i].cn];
+                let newitem = [...item2, this.props.items[i]];
                 item2 = newitem;
                 flag2 = 1;
             }
             else if(this.props.items[i].dimension==="文化"){
-                let newitem = [...item3, this.props.items[i].cn];
+                let newitem = [...item3, this.props.items[i]];
                 item3 = newitem;
                 flag3 = 1;
             }
             else if(this.props.items[i].dimension==="歷史"){
-                let newitem = [...item4, this.props.items[i].cn];
+                let newitem = [...item4, this.props.items[i]];
                 item4 = newitem;
                 flag4 = 1;
             }
             else if(this.props.items[i].dimension==="自然"){
-                let newitem = [...item5, this.props.items[i].cn];
+                let newitem = [...item5, this.props.items[i]];
                 item5 = newitem;
                 flag5 = 1;
             }
