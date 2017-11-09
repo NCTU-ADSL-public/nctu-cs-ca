@@ -19,8 +19,10 @@ export default class index extends React.Component {
     constructor(props) {
         super(props);
 
+        const self = this;
         axios.get('/assistants/graduate/list').then(studentData => {
-            this.setState({ initStudents: studentData.data, })
+            self.setState({ initStudents: studentData.data, })
+            self.forceUpdate();
         }).catch(err => {
             console.log(err);
         });
@@ -311,6 +313,7 @@ export default class index extends React.Component {
         this.setState({
             activeKey,
         });
+        this.forceUpdate();
     };
 
     onTabClick = (key) => {
@@ -322,18 +325,20 @@ export default class index extends React.Component {
     };
 
     searchCallback = (student) => {
+        const self = this;
         this.setState({
             activeKey: '2',
             studentName: student.sname,
             studentId: student.student_id,
         });
+        this.forceUpdate();
         //for Graduation
         axios.get('/assistants/graduate/original', {
             params: {
                 student_id: student.student_id,
             }
         }).then(studentData => {
-            this.setState({
+            self.setState({
                 Graduationitems: studentData.data,
             });
 
@@ -346,7 +351,7 @@ export default class index extends React.Component {
                 student_id: student.student_id,
             }
         }).then(studentData => {
-            this.setState({
+            self.setState({
                 revise: studentData.data,
             });
         }).catch(err => {
@@ -371,8 +376,14 @@ export default class index extends React.Component {
                     activeKey={this.state.activeKey}
                     onChange={this.onChange}
                 >
+                    <TabPane tab={`預審通知`} key="0">
+                        <StudentInform students={this.state.initStudents}/>
+                    </TabPane>
                     <TabPane tab={`學生清單`} key="1">
-                        <StudentList students={this.state.initStudents} parentFunction={this.searchCallback}/>
+                        <StudentList
+                            students={this.state.initStudents}
+                            parentFunction={this.searchCallback}
+                        />
                     </TabPane>
                     <TabPane tab={`預審狀況`} key="2">
                         <StudentGrad
@@ -386,9 +397,6 @@ export default class index extends React.Component {
                         />
                     </TabPane>
 
-                    <TabPane tab={`預審通知`} key="0">
-                        <StudentInform students={this.state.initStudents}/>
-                    </TabPane>
                 </Tabs>
             </div>
         );

@@ -57,7 +57,7 @@ export default class StudentTable extends Component {
             selectable: false,
             multiSelectable: false,
             enableSelectAll: false,
-            deselectOnClickaway: true,
+            deselectOnClickaway: false,
             showCheckboxes: false,
             height: '60vh',
         };
@@ -117,7 +117,9 @@ export default class StudentTable extends Component {
                                 <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.program}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.graduate==="1" ? '可畢業' : '未達畢業標準'}</TableRowColumn>
+                                <TableRowColumn style={styles.tabColumn0}>
+                                    {row.graduate==="1" ? '可畢業' : '未達畢業標準'}
+                                </TableRowColumn>
                                 <TableRowColumn
                                     style={ row.graduate_submit==="2" ? styles.colorGreen :
                                             row.graduate_submit==="1" ? styles.colorBrown :
