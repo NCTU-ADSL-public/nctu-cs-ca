@@ -69,7 +69,7 @@ class Course extends React.Component {
                                             fontFamily: 'Noto Sans CJK TC',
                                         }}
                                         hoverColor={"#80b0d9"}
-                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29149":"#3aa276":this.props.selection?"gray":"#d93a64"}
+                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29149":(this.props.reason==="free1"　|| this.props.reason==="free2"　)?"#6A94A2":"#3aa276":this.props.selection?(this.props.reason==="now")?"#9e48d9":"gray":(this.props.reason==="now")?"#9e48d9":"#d93a64"}
                                         style={this.state.style}
                                         label={this.props.cosCame}
                                         onClick={()=>this.handleClick()}>
@@ -87,7 +87,10 @@ class Course extends React.Component {
                     <div>等級:&nbsp;{(this.props.grade==='0')?'-':this.props.grade}</div>
                     <div>英文授課:&nbsp;{(this.props.english)?'是':'否'}</div>
                     <br/>
-                    {(this.props.reason==="notCS")?<div>你修的這堂課不是資工系的，如果已經申請過抵免了則算通過。</div>:<div> </div>}
+                    {(this.props.reason==="notCS")?<div>此為外系課程，必須申請過抵免才能算通過。</div>:<div> </div>}
+                    {(this.props.reason==="free1")?<div>您已申請過抵免了。</div>:<div> </div>}
+                    {(this.props.reason==="free2")?<div>免修課程。</div>:<div> </div>}
+                    {(this.props.reason==="now")?<div>當期課程。</div>:<div> </div>}
                 </Popover>
             </div>
 

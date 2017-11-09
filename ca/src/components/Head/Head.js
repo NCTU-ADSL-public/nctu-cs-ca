@@ -38,10 +38,10 @@ let Graduationitems=[
                 { cn: '微積分(一)', en: 'Calculus (I)' ,"score":60 ,complete:true, grade:'B'},
                 { cn: '微積分(二)', en: 'Calculus (II)',"score":60  ,complete:true, grade:'A'},
                 { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.',"score":60  ,complete:true, reason:'notCS', grade:'0'},
-                { cn: '數位電路設計', en: 'Digital Circuit Design',"score":60  ,complete:true},
-                { cn: '機率', en: 'Probability' ,"score":60 },
-                { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true,"score":60 },
-                { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:true,"score":60 },
+                { cn: '數位電路設計', en: 'Digital Circuit Design',"score":60  ,complete:false, reason:'now'},
+                { cn: '機率', en: 'Probability' ,"score":60 ,complete:true, reason:'free1'},
+                { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true,"score":60 , reason:'free2'},
+                { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:false,"score":60 },
                 { cn: '物化生三合一(一)', en: '' ,complete:true,"score":60 },
                 { cn: '物化生三合一(二)', en: '' ,complete:true,"score":60 },
                 { cn: '線性代數', en: 'Linear Algebra' ,complete:true},
@@ -88,7 +88,7 @@ let Graduationitems=[
                 { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
                 { cn: '幾何造形', en: '', dimension: '自然', complete: true },
                 { cn: '經濟學概論', en: '', dimension: '歷史', complete: true } ] },
-    { title: '專業選修',
+    { title: '體育',
         credit: 16,
         require: 20,
         course:
@@ -401,6 +401,7 @@ class Head extends Component {
 							  />
 							  <BottomNavigationItem
 								label="課程地圖"
+                                disabled={true}
 								icon={mapIcon}
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(1)}
@@ -414,6 +415,7 @@ class Head extends Component {
 							  <BottomNavigationItem
 								label="抵免"
 								icon={checkIcon}
+                                disabled={true}
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(3)}
 							  />
