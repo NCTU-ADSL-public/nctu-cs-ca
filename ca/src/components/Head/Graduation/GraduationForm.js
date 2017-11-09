@@ -61,7 +61,7 @@ class GraduationForm extends React.Component{
                         <div id="little-title">
                             <IndividualProgress grad={this.state.GeneralItems[0].credit/this.state.GeneralItems[0].require * 100}/>
                             <div className="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.GeneralItems[0].credit}</font>/{this.state.GeneralItems[0].require}</div>
+                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.GeneralItems[0].credit}</font>/{this.state.GeneralItems[0].require}(學分)</div>
                                 <div id="little-title-text" ><font size={this.state.GeneralItems[0].fontflag?5:6}>{this.state.GeneralItems[0].title}</font></div>
                             </div>
 
@@ -91,7 +91,7 @@ class GraduationForm extends React.Component{
                         <div id="little-title">
                             <IndividualProgress grad={this.state.gradGeneralItems[0].credit/this.state.gradGeneralItems[0].require * 100}/>
                             <div className="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.gradGeneralItems[0].credit}</font>/{this.state.gradGeneralItems[0].require}</div>
+                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.gradGeneralItems[0].credit}</font>/{this.state.gradGeneralItems[0].require}(學分)</div>
                                 <div id="little-title-text" ><font size={this.state.gradGeneralItems[0].fontflag?5:6}>{this.state.gradGeneralItems[0].title}</font></div>
                             </div>
 
