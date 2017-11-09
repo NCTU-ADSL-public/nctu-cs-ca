@@ -67,6 +67,15 @@ export default class StudentList extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps.students !== this.props.students) {
+            console.log("MAJAMI");
+            this.setState({initStudents: this.props.students,});
+            this.filterListGroup(999);
+        }
+    }
+
+
     filterList(event){
         this.setState({
             groupA: true,
