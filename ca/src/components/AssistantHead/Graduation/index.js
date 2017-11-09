@@ -20,7 +20,7 @@ export default class index extends React.Component {
         super(props);
         const self = this;
         axios.get('/assistants/graduate/list').then(studentData => {
-            self.setState({ initStudents: studentData.data, })
+            self.setState({ initStudents: studentData.data, });
             self.forceUpdate();
         }).catch(err => {
             console.log(err);
