@@ -100,7 +100,7 @@ class Grad extends React.Component {
             this.setState({
                 totalitems:this.props.reviseresult
             });
-            ToastStore.info(<div  className="text">已幫您自動排序，此為系統自動排序僅以參考為主。</div>);
+            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的加號標誌，此為系統自動排序僅以參考為主。</div>, 20000);
         }
         else{
             this.setState({
@@ -154,13 +154,14 @@ class Grad extends React.Component {
                             <div className="red"> </div><div  className="text">未通過</div>
                             <div className="gray"> </div><div  className="text">未修課</div>
                             <div className="yellow"> </div><div  className="text">抵免課程</div>
-                            <ReactHover
+                            {this.props.assistant?<div> </div>:<div> <ReactHover
                                 options={optionsCursorTrueWithMargin}>
                                 <ReactHover.Trigger type='trigger'>
                                     <MuiThemeProvider>
                                         <RaisedButton
-                                            label="確認送審"
+                                            label={this.state.graduationCheck?"已送審":"確認送審"}
                                             style={styles.button}
+                                            disabled={this.state.graduationCheck}
                                             labelStyle={styles.labelStyle}
                                             backgroundColor = "#DDDDDD"
                                             onClick={() => this.sendReview()}
@@ -168,50 +169,50 @@ class Grad extends React.Component {
                                     </MuiThemeProvider>
                                 </ReactHover.Trigger>
                                 <ReactHover.Hover type='hover'>
-                                    <div className="grad-hover-info">{this.state.graduationCheck?"已送審":"尚未送審"}</div>
                                 </ReactHover.Hover>
                             </ReactHover>
-                            <MuiThemeProvider>
-                                <RaisedButton style={styles.button}
-                                              labelStyle={styles.labelStyle}
-                                              backgroundColor = "#DDDDDD"
-                                              label="列印"
-                                              onClick={() => this.printGradTable()}/>
-                            </MuiThemeProvider>
-                            <MuiThemeProvider>
-                                <Toggle
-                                label="系統自動排課"
-                                style={styles.toggle}
-                                labelStyle={styles.labelStyle}
-                                onToggle={(toggled)=>this.handleToggle()}
-                                />
-                            </MuiThemeProvider>
-                            <MuiThemeProvider>
-                                <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
-                                    <ActionGrade />
-                                </IconButton>
-                            </MuiThemeProvider>
-                            <Popover
-                                placement='left'
-                                target={this.refs.target}
-                                show={this.state.open}
-                                onHide={this.handleClose.bind(this)}
-                            > 排序依據:
-                                - 共同必修（多的應該只會有物化生）
-                                - 依 Priority 物理 -> 化學 -> 生物 往 專業選修搬 (物理要記得+2)
-                                - 如果共同必修沒滿 -> Return 不能畢業
-                                - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                - 核心課程
-                                - 如果核心課程沒滿 -> Return 不能畢業
-                                - 多的課程在搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                - 副核心課程
-                                - 多的學分全部塞到專業
-                                - 如果副核心沒滿 -> Return 不能畢業
-                                - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                - 專業選修
-                                - 多的學分全部塞到其他必修
-                                - 如果專業選修沒滿 -> Return 不能畢業
-                            </Popover>
+                                <MuiThemeProvider>
+                                    <RaisedButton style={styles.button}
+                                                  labelStyle={styles.labelStyle}
+                                                  backgroundColor = "#DDDDDD"
+                                                  label="列印"
+                                                  onClick={() => this.printGradTable()}/>
+                                </MuiThemeProvider>
+                                <MuiThemeProvider>
+                                    <Toggle
+                                        label="系統自動排序"
+                                        style={styles.toggle}
+                                        labelStyle={styles.labelStyle}
+                                        onToggle={(toggled)=>this.handleToggle()}
+                                    />
+                                </MuiThemeProvider>
+                                <MuiThemeProvider>
+                                    <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
+                                        <ActionGrade />
+                                    </IconButton>
+                                </MuiThemeProvider>
+                                <Popover
+                                    placement='left'
+                                    target={this.refs.target}
+                                    show={this.state.open}
+                                    onHide={this.handleClose.bind(this)}
+                                > 排序依據:
+                                    - 共同必修（多的應該只會有物化生）
+                                    - 依 Priority 物理 -> 化學 -> 生物 往 專業選修搬 (物理要記得+2)
+                                    - 如果共同必修沒滿 -> Return 不能畢業
+                                    - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
+                                    - 核心課程
+                                    - 如果核心課程沒滿 -> Return 不能畢業
+                                    - 多的課程在搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
+                                    - 副核心課程
+                                    - 多的學分全部塞到專業
+                                    - 如果副核心沒滿 -> Return 不能畢業
+                                    - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
+                                    - 專業選修
+                                    - 多的學分全部塞到其他必修
+                                    - 如果專業選修沒滿 -> Return 不能畢業
+                                </Popover></div>}
+
                         </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">
