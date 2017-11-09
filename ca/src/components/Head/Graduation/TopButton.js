@@ -7,10 +7,13 @@ const homeIcon = <ContentAdd />;
 
 const style = {
     marginRight: 20,
+    position: 'fixed',
+    bottom: '41px',
+    right: '3px',
 };
 
 const IconButtonExampleTooltip = () => (
-    <div>
+    <div className="fixed" >
         <MuiThemeProvider>
             <FloatingActionButton
                 style={style}

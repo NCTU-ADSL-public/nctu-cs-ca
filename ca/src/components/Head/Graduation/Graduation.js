@@ -42,6 +42,10 @@ const styles = {
         height: 10,
         float:'left',
         color: '#7B7B7B'
+    },
+    pop:{
+        width: '200px',
+        height: 'auto',
     }
 };
 
@@ -100,7 +104,7 @@ class Grad extends React.Component {
             this.setState({
                 totalitems:this.props.reviseresult
             });
-            ToastStore.info(<div  className="text">已幫您自動排序，此為系統自動排序僅以參考為主。</div>);
+            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主。</div>, 20000);
         }
         else{
             this.setState({
@@ -154,13 +158,14 @@ class Grad extends React.Component {
                             <div className="red"> </div><div  className="text">未通過</div>
                             <div className="gray"> </div><div  className="text">未修課</div>
                             <div className="yellow"> </div><div  className="text">抵免課程</div>
-                            <ReactHover
+                            {this.props.assistant?<div> </div>:<div> <ReactHover
                                 options={optionsCursorTrueWithMargin}>
                                 <ReactHover.Trigger type='trigger'>
                                     <MuiThemeProvider>
                                         <RaisedButton
-                                            label="確認送審"
+                                            label={this.state.graduationCheck?"已送審":"確認送審"}
                                             style={styles.button}
+                                            disabled={this.state.graduationCheck}
                                             labelStyle={styles.labelStyle}
                                             backgroundColor = "#DDDDDD"
                                             onClick={() => this.sendReview()}
@@ -168,50 +173,46 @@ class Grad extends React.Component {
                                     </MuiThemeProvider>
                                 </ReactHover.Trigger>
                                 <ReactHover.Hover type='hover'>
-                                    <div className="grad-hover-info">{this.state.graduationCheck?"已送審":"尚未送審"}</div>
                                 </ReactHover.Hover>
                             </ReactHover>
-                            <MuiThemeProvider>
-                                <RaisedButton style={styles.button}
-                                              labelStyle={styles.labelStyle}
-                                              backgroundColor = "#DDDDDD"
-                                              label="列印"
-                                              onClick={() => this.printGradTable()}/>
-                            </MuiThemeProvider>
-                            <MuiThemeProvider>
-                                <Toggle
-                                label="系統自動排課"
-                                style={styles.toggle}
-                                labelStyle={styles.labelStyle}
-                                onToggle={(toggled)=>this.handleToggle()}
-                                />
-                            </MuiThemeProvider>
-                            <MuiThemeProvider>
-                                <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
-                                    <ActionGrade />
-                                </IconButton>
-                            </MuiThemeProvider>
-                            <Popover
-                                placement='left'
-                                target={this.refs.target}
-                                show={this.state.open}
-                                onHide={this.handleClose.bind(this)}
-                            > 排序依據:
-                                - 共同必修（多的應該只會有物化生）
-                                - 依 Priority 物理 -> 化學 -> 生物 往 專業選修搬 (物理要記得+2)
-                                - 如果共同必修沒滿 -> Return 不能畢業
-                                - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                - 核心課程
-                                - 如果核心課程沒滿 -> Return 不能畢業
-                                - 多的課程在搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                - 副核心課程
-                                - 多的學分全部塞到專業
-                                - 如果副核心沒滿 -> Return 不能畢業
-                                - 多的課程再搬到專業選修之前,先看專業選修有沒有滿,若有,則搬到其他選修
-                                - 專業選修
-                                - 多的學分全部塞到其他必修
-                                - 如果專業選修沒滿 -> Return 不能畢業
-                            </Popover>
+                                <MuiThemeProvider>
+                                    <RaisedButton style={styles.button}
+                                                  labelStyle={styles.labelStyle}
+                                                  backgroundColor = "#DDDDDD"
+                                                  label="列印"
+                                                  onClick={() => this.printGradTable()}/>
+                                </MuiThemeProvider>
+                                <MuiThemeProvider>
+                                    <Toggle
+                                        label="系統自動排序"
+                                        style={styles.toggle}
+                                        labelStyle={styles.labelStyle}
+                                        onToggle={(toggled)=>this.handleToggle()}
+                                    />
+                                </MuiThemeProvider>
+                                <MuiThemeProvider>
+                                    <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
+                                        <ActionGrade />
+                                    </IconButton>
+                                </MuiThemeProvider>
+                                <Popover
+                                    placement='bottom'
+                                    target={this.refs.target}
+                                    show={this.state.open}
+                                    onHide={this.handleClose.bind(this)}>
+                                    <div
+                                        style={styles.pop}>
+                                    -未排的<br/>
+                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                    -排序過的<br/>
+                                    重複修課：將只顯示一次,取成績最高的那次<br/>
+                                    必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                    核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                    專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
+                                    </div>
+                                </Popover></div>}
+
                         </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">
@@ -222,6 +223,7 @@ class Grad extends React.Component {
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('共同必修')}>共同必修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.compulsory}</font>/{this.state.totalitems.compulse_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.compulsory/this.state.totalitems.compulse_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('核心課程')}>核心課程&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.core}</font>/{this.state.totalitems.core_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.core/this.state.totalitems.core_require*100}/></div>
+                                    <div className="showcourseoverview" onClick={()=>this.handleClick('服務學習')}>服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.service}</font>/{this.state.totalitems.service_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.service/this.state.totalitems.service_require*100}/></div>
                                 </div>
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('副核心與他組核心')}>副核心與他組核心&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.vice}</font>/{this.state.totalitems.vice_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.vice/this.state.totalitems.vice_require*100}/></div>
