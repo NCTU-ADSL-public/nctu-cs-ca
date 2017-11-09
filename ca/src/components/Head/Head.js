@@ -336,17 +336,9 @@ class Head extends Component {
   	select(index){
             if(index===0){
                 ReactDOM.render(
-					<font>
-						<FadeIn>
-							<GraduationItem
-								studentId={this.state.studentIdcard.prog}
-								items={Graduationitems}
-                                result={Graduationitems[10]}
-                                revise={revise}
-                                reviseresult={revise[10]}
-                                courseCategoryArray={this.state.print_courseCategoryArray}/>
-						</FadeIn>
-					</font>,
+                    <FadeIn>
+                        <HomeItem />
+                    </FadeIn>,
                     document.getElementById('page'));
             }
             else if(index===1){
@@ -364,9 +356,17 @@ class Head extends Component {
             }
             else if(index===2){
                 ReactDOM.render(
-					<FadeIn>
-						<HomeItem />
-					</FadeIn>,
+                    <font>
+                        <FadeIn>
+                            <GraduationItem
+                                studentId={this.state.studentIdcard.prog}
+                                items={Graduationitems}
+                                result={Graduationitems[10]}
+                                revise={revise}
+                                reviseresult={revise[10]}
+                                courseCategoryArray={this.state.print_courseCategoryArray}/>
+                        </FadeIn>
+                    </font>,
                     document.getElementById('page'));
             }
             else if(index===3){
