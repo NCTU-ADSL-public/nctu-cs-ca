@@ -88,7 +88,7 @@ let Graduationitems=[
                 { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
                 { cn: '幾何造形', en: '', dimension: '自然', complete: true },
                 { cn: '經濟學概論', en: '', dimension: '歷史', complete: true } ] },
-    { title: '專業選修',
+    { title: '體育',
         credit: 16,
         require: 20,
         course:
@@ -401,6 +401,7 @@ class Head extends Component {
 							  />
 							  <BottomNavigationItem
 								label="課程地圖"
+                                disabled={true}
 								icon={mapIcon}
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(1)}
@@ -414,6 +415,7 @@ class Head extends Component {
 							  <BottomNavigationItem
 								label="抵免"
 								icon={checkIcon}
+                                disabled={true}
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(3)}
 							  />
