@@ -53,16 +53,13 @@ export default class StudentList extends React.Component {
 
     componentDidMount(){
         this.filterListGroup(4);
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.students !== undefined){
-            this.setState({initStudents: this.props.students,});
-            this.filterListGroup(999);
-        }
+        this.setState({students: this.state.initStudents});
     }
 
     componentDidUpdate(prevProps, prevState){
+        if(prevProps.students !== this.props.students) {
+            this.setState({initStudents: this.props.students,});
+        }
         if(prevState.initStudents !== this.state.initStudents){
             this.filterListGroup(999);
         }
