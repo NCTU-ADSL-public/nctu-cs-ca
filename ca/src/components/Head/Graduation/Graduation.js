@@ -157,7 +157,9 @@ class Grad extends React.Component {
                             <div className="green"> </div><div className="text">已通過</div>
                             <div className="red"> </div><div  className="text">未通過</div>
                             <div className="gray"> </div><div  className="text">未修課</div>
-                            <div className="yellow"> </div><div  className="text">抵免課程</div>
+                            <div className="yellow"> </div><div  className="text">未抵免課程</div>
+                            <div className="purple"> </div><div  className="text">免修或抵免課程</div>
+                            <div className="blue"> </div><div  className="text">當期課程</div>
                             {this.props.assistant?<div> </div>:<div> <ReactHover
                                 options={optionsCursorTrueWithMargin}>
                                 <ReactHover.Trigger type='trigger'>
