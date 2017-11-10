@@ -91,6 +91,7 @@ class Course extends React.Component {
                     {(this.props.reason==="free1")?<div>您已申請過抵免了。</div>:<div> </div>}
                     {(this.props.reason==="free2")?<div>免修課程。</div>:<div> </div>}
                     {(this.props.reason==="now")?<div>當期課程。</div>:<div> </div>}
+                    {(this.props.reason==="now" && this.props.completed)?<div>已修過這堂課，目前正重複修課中。</div>:<div> </div>}
                 </Popover>
             </div>
 
