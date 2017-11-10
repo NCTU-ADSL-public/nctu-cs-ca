@@ -67,8 +67,16 @@ class GeneralCourse extends React.Component {
                     onHide={this.handleClose.bind(this)}
                   >
                 {this.props.items.map(function(item) {
-                    return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'green'}}>{item.score}</div></li></div>;
-                })}
+                    if(item.reason==='now'){
+                        return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'#9e48d9'}}>(當期課程)</div></li></div>;
+                    }
+                    else if(item.reason==='free1' || item.reason==='free2'){
+                        return <div><li key={id++}>{item.cn} (抵免課程)<div style={{float:'right', color:'#6A94A2'}}>{item.score}</div></li></div>;
+                    }
+                    else{
+                        return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'green'}}>{item.score}</div></li></div>;
+                    }
+                    })}
                 </Popover>
         </div>
 
