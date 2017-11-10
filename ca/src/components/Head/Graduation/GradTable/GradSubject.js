@@ -7,13 +7,14 @@ class GradSubject extends React.Component {
     state = {
         name: this.props.name,
         credit: this.props.credit,
+        realCredit: this.props.realCredit,
         semester: this.props.semester,
         year: this.props.year,
         comment: ''
     };
 
     componentWillMount(){
-        this.realscore[(this.state.year-103)*2 + this.state.semester - 1] = this.props.score;
+        this.realscore[this.state.year*2 + this.state.semester - 3] = this.props.score;
     }
 
     render(){
@@ -29,7 +30,7 @@ class GradSubject extends React.Component {
                 <td>{this.realscore[6]}</td>
                 <td>{this.realscore[7]}</td>
                 <td>{this.state.credit}</td>
-                <td></td>
+                <td>{this.state.realCredit}</td>
                 <td className="left-text">{this.state.comment}</td>
             </tr>
         );

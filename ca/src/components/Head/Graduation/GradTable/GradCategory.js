@@ -30,8 +30,9 @@ class GradCategory extends React.Component {
                 {this.state.subjects.map(subject =>
                     <GradSubject
                         key={subject.name}
-                        name={subject.cn + ' ' + subject.en}
-                        credit={2}
+                        name={subject.cn + ' ' + subject.en + ((subject.english==true)? ' [英語授課]': '')}
+                        credit={subject.originalCredit}
+                        realCredit={subject.realCredit}
                         score={subject.score}
                         semester={subject.semester}
                         year={subject.year}
