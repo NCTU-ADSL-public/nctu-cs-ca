@@ -9,6 +9,53 @@ class GradCategory extends React.Component {
         subjects: this.props.subjects
     }
     render(){
+        if (this.state.name == '其他選修')
+            for (let i=0; i<this.state.subjects.length; i++) {
+                this.state.subjects[i].score = '';
+                this.state.subjects[i].english = false;
+                this.state.subjects[i].realCredit = '　';
+                this.state.subjects[i].originalCredit = '';
+            }
+        else {
+            let subjects = this.state.subjects;
+            for (let i = 0; i < subjects.length; i++) {
+                // score
+                if (this.state.name == '藝文賞析' || subjects[i].cn == '導師時間' || (this.state.name=='服務學習'&&subjects[i].originalCredit==0))
+                    if (subjects[i].complete == true)
+                        subjects[i].score = '通過';
+                    else
+                        subjects[i].score = '未過';
+
+                // comment
+                if (this.state.name=='通識')
+                    subjects[i].comment = subjects[i].dimension+'向度 ';
+                else
+                    subjects[i].comment = '';
+
+                // 抵免
+                if (subjects[i].reason=="notCS") {
+                    subjects[i].comment += '此為外系課程，必須申請過抵免才能算通過。';
+                    subjects[i].score = '';
+                } else if (subjects[i].reason=="free1") {
+                    subjects[i].comment += '已抵免';
+                    subjects[i].score = '抵免';
+                } else if (subjects[i].reason=="free2") {
+                    subjects[i].comment += '免修課程';
+                    subjects[i].score = '';
+                } else if (subjects[i].reason=="now") {
+                    subjects[i].comment += '當期課程';
+                    subjects[i].score = '';
+                }
+
+                // 未修
+                if ((subjects[i].score==null || subjects[i].score==-1) && subjects[i].complete==false) {
+                    this.state.subjects[i].realCredit = '　';
+                    this.state.subjects[i].originalCredit = '　';
+                }
+
+            }
+        }
+
         return(
             <tbody>
                 <tr>
@@ -30,12 +77,13 @@ class GradCategory extends React.Component {
                 {this.state.subjects.map(subject =>
                     <GradSubject
                         key={subject.name}
-                        name={subject.cn + ' ' + subject.en}
-                        credit={2}
-                        score={subject.score}
+                        name={subject.cn + ' ' + subject.en + ((subject.english==true)? ' [英語授課]': '')}
+                        credit={subject.originalCredit}
+                        realCredit={subject.realCredit}
+                        score={this.state.name=='藝文賞析'? (subject.complete==true)? '通過': '未過': subject.score}
                         semester={subject.semester}
                         year={subject.year}
-                        comment={''}
+                        comment={subject.comment}
                     />
                 )}
             </tbody>

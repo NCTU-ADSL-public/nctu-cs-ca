@@ -4,6 +4,7 @@ import Login from './Login/Login';
 import TeacherHead from './TeacherHead/Head';
 import Head from './Head/Head';
 import AssistantHead from './AssistantHead/Head';
+import StudentDetail from './AssistantHead/Graduation/StudentDetail';
 
 
 // The Main component renders one of the three provided
@@ -21,6 +22,7 @@ const Main = () => (
         <Route exact path='/students/head' component={Head}/>
         <Route exact path='/teachers/head' component={TeacherHead}/>
         <Route exact path='/assistants/head' component={AssistantHead}/>
+        <Route exact path='/assistants/head/s/:sid' component={StudentDetail}/>
     </Switch>
   </main>
 );
