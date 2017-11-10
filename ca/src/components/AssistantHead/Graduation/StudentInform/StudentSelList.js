@@ -170,7 +170,7 @@ export default class StudentInform extends React.Component {
                     <MuiThemeProvider muiTheme={muiTheme}>
                         <div style={styles.wrapper}>
                             <Chip
-                                backgroundColor={this.state.gGrad ? '#5fc86f' : '#CCC'}
+                                backgroundColor={this.state.gSubmit ? '#5fc86f' : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(5))}
                                 style={styles.chip}>
                                 完成審核
