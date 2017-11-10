@@ -32,6 +32,15 @@ class GraduationForm extends React.Component{
             scrollToComponent(this.refs.my);
         }
     }
+    //For updating as props changes!!!
+    componentWillReceiveProps(){
+        this.setState({
+            items:this.props.items.filter(t => (t.title!=="通識" && ( t.course || t.selection))),
+            GeneralItems:this.props.items.filter(t => (t.title==="通識")),
+            graditems:this.props.graditems.filter(t => (t.title!=="通識" && ( t.course || t.selection))),
+            gradGeneralItems:this.props.graditems.filter(t => (t.title==="通識")),
+        })
+    }
     componentWillMount(){
         this.setState({
             items:this.props.items.filter(t => (t.title!=="通識" && ( t.course || t.selection))),

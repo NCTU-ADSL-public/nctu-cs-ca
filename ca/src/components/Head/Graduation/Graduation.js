@@ -83,6 +83,19 @@ class Grad extends React.Component {
         });
     }
 
+    //For updating as props changes!!!
+    componentDidUpdate(prevProps, prevState){
+        if( prevProps.items !== this.props.items ||
+            prevProps.revise !== this.props.revise ||
+            prevProps.result !== this.props.result ) {
+            this.setState({
+                items:this.props.items,
+                Graduationitems:this.props.revise,
+                totalitems:this.props.result
+            });
+        }
+    }
+
     handleClick(e){
         this.setState({
             scrollQuery:e,
