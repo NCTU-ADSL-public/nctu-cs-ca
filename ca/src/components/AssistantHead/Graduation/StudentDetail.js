@@ -337,7 +337,8 @@ export default class index extends React.Component {
         console.log(this.props.match.params.sid);
         this.setState({
             studentId: this.props.match.params.sid,
-            studentName: '<3',
+            studentName: '陳罐頭',
+            studentGroup: '網多!'
         });
 
 
@@ -382,12 +383,14 @@ export default class index extends React.Component {
             <div>
                 <StudentGrad
                     studentName={this.state.studentName}
-                    studentId={this.state.studentId + this.state.studentName}
+                    studentId={this.state.studentId}
+                    studentGroup={this.state.studentGroup}
                     items={this.state.Graduationitems}
                     result={this.state.Graduationitems[10]}
                     revise={this.state.revise}
                     reviseresult={this.state.revise[10]}
                     courseCategoryArray={this.state.print_courseCategoryArray}
+                    assistant={1}
                 />
             </div>
         );

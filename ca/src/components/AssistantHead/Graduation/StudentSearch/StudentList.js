@@ -40,6 +40,7 @@ export default class StudentList extends React.Component {
             groupC: true,
             groupD: true,
             gGrad: true,
+            gSubmit: true,
         };
 
         this.filterList = this.filterList.bind(this);
@@ -52,15 +53,14 @@ export default class StudentList extends React.Component {
     }
 
     componentDidMount(){
-        this.filterListGroup(4);
+        this.filterListGroup(999);
         this.setState({students: this.state.initStudents});
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevProps.students !== this.props.students) {
+        if( prevProps.students !== this.props.students ||
+            prevState.initStudents !== this.state.initStudents) {
             this.setState({initStudents: this.props.students,});
-        }
-        if(prevState.initStudents !== this.state.initStudents){
             this.filterListGroup(999);
         }
     }
@@ -72,15 +72,16 @@ export default class StudentList extends React.Component {
             groupB: true,
             groupC: true,
             groupD: true,
-            gG: true,
+            gGrad: true,
+            gSubmit: true,
         });
         let updatedList = this.state.initStudents;
         updatedList = updatedList.filter(function(student){
             let grad = student.graduate==="1" ? '可畢業' : '未達畢業標準';
             return (student.sname.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1)||
-                ((student.program.toLowerCase().search(
-                    event.target.value.toLowerCase()) !== -1) && this.state.groupA )||
+                (student.program.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1)||
                 (student.student_id.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
                 (grad.toLowerCase().search(
@@ -96,6 +97,7 @@ export default class StudentList extends React.Component {
         let gC = this.state.groupC;
         let gD = this.state.groupD;
         let gG = this.state.gGrad;
+        let gS = this.state.gSubmit;
         if (groupNum === 0) {
             gA = !this.state.groupA;
             this.setState({groupA: gA});
@@ -111,14 +113,17 @@ export default class StudentList extends React.Component {
         } else if (groupNum === 4){
             gG = !this.state.gGrad;
             this.setState({gGrad: gG});
+        } else if (groupNum === 5){
+            gS = !this.state.gSubmit;
+            this.setState({gSubmit: gS});
         }
         updatedList = updatedList.filter(function(student){
             return (    ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
                         ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
                         ((student.program.toLowerCase().search('網多') !== -1) && gC )||
-                        ((student.program.toLowerCase().search('資電') !== -1) && gD )  )&&
-                   (    ((student.graduate.toLowerCase().search('0') !== -1) && !gG)||
-                         gG );
+                        ((student.program.toLowerCase().search('資電') !== -1) && gD )
+                )&&(    ((student.graduate==='0') && !gG)|| gG
+                )&&(    ((student.graduate_submit==='1' || student.graduate_submit==='0') && !gS) || gS );
         });
         this.setState({students: updatedList});
     }
@@ -127,12 +132,14 @@ export default class StudentList extends React.Component {
     //input press ENTER
     handleKeyPress = (e) => {
         if (e.key === 'Enter' && this.state.students[0] !== undefined) {
-            this.props.parentFunction(this.state.students[0]);
+            let sid = this.state.students[0].student_id;
+            window.open('/assistants/head/s/' + sid);
         }
     };
 
     searchCallback = (student) => {
-        this.props.parentFunction(student);
+        let sid = student.student_id;
+        window.open('/assistants/head/s/' + sid);
     };
 
     handleTouchTap(groupNum) {
@@ -154,6 +161,12 @@ export default class StudentList extends React.Component {
                     </div>
                     <MuiThemeProvider muiTheme={muiTheme}>
                         <div style={styles.wrapper}>
+                            <Chip
+                                backgroundColor={this.state.gGrad ? '#5fc86f' : '#CCC'}
+                                onClick={ () => (this.handleTouchTap(5))}
+                                style={styles.chip}>
+                                完成審核
+                            </Chip>
                             <Chip
                                 backgroundColor={this.state.gGrad ? '#5fc86f' : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(4))}

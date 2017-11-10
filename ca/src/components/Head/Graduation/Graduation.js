@@ -164,7 +164,18 @@ class Grad extends React.Component {
                     </div>
                     <div className="Grad-title-adjust" ref="my">
                         <div className="Grad-title-text">
-                            <div id="lessons-title">畢業預審</div><div id="lessons-little-title-grad">-資工系{this.props.studentId}</div>
+                            {this.props.assistant?
+                                <div>
+                                    <div id="lessons-title">畢業預審</div>
+                                    <div id="lessons-little-title-grad">-資工系{this.props.studentGroup}組{this.props.studentId}{this.props.studentName}</div>
+                                </div>
+                            :
+                                <div>
+                                    <div id="lessons-title">畢業預審</div>
+                                    <div id="lessons-little-title-grad">-資工系{this.props.studentId}組</div>
+                                </div>
+                            }
+
                         </div>
 
                         <div className="tip">

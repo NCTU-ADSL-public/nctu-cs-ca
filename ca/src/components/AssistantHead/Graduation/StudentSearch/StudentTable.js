@@ -75,13 +75,7 @@ export default class StudentTable extends Component {
     };
 
     handleRowClick = (rowIndex) => {
-      //  this.props.parentFunction(this.props.students[rowIndex]);
-     /*   this.props.router.push({
-            pathname: '/assistants/head/s',
-            state: 'MAJAJA'
-        })*/
-        let sid = this.props.students[rowIndex].student_id;
-        window.open('/assistants/head/s/' + sid);
+        this.props.parentFunction(this.props.students[rowIndex]);
     };
 
 
