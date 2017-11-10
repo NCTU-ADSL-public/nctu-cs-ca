@@ -10,7 +10,7 @@ class GradSubject extends React.Component {
         realCredit: this.props.realCredit,
         semester: this.props.semester,
         year: this.props.year,
-        comment: ''
+        comment: this.props.comment
     };
 
     componentWillMount(){

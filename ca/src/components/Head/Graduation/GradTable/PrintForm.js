@@ -12,9 +12,15 @@ class PrintForm extends React.Component {
         let generalCatTitle = ['外語','通識','體育','服務學習','藝文賞析'];
         let depCat = [], generalCat = [];
         this.props.courseCategoryArray.forEach((item, i) => {
-            if (generalCatTitle.indexOf(item.title ) !== -1)
+            if (generalCatTitle.indexOf(item.title ) !== -1) {
+                if (item.title=='通識')
+                    item.course.sort(function(a, b){
+                        if(a.dimension < b.dimension) return -1;
+                        if(a.dimension > b.dimension) return 1;
+                        return 0;
+                    })
                 generalCat.push(item);
-            else
+            } else
                 depCat.push(item);
         });
 
