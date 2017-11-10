@@ -35,7 +35,7 @@ let Graduationitems=[
         course:
             [ { cn: '作業系統概論', en: 'Introduction to Operating Systems',"score":60 ,complete:true, grade:'0'},
                 { cn: '基礎程式設計', en: 'Basic Programming',"score":60  ,complete:true, grade:'C'},
-                { cn: '微積分(一)', en: 'Calculus (I)' ,"score":60 ,complete:true, grade:'B'},
+                { cn: '微積分(一)', en: 'Calculus (I)' ,"score":60 ,complete:true, grade:'B',reason:'now'},
                 { cn: '微積分(二)', en: 'Calculus (II)',"score":60  ,complete:true, grade:'A'},
                 { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.',"score":60  ,complete:true, reason:'notCS', grade:'0'},
                 { cn: '數位電路設計', en: 'Digital Circuit Design',"score":60  ,complete:false, reason:'now'},

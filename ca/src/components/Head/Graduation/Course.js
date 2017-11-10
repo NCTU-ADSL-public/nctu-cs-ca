@@ -69,7 +69,7 @@ class Course extends React.Component {
                                             fontFamily: 'Noto Sans CJK TC',
                                         }}
                                         hoverColor={"#80b0d9"}
-                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29149":(this.props.reason==="free1"　|| this.props.reason==="free2"　)?"#6A94A2":"#3aa276":this.props.selection?(this.props.reason==="now")?"#9e48d9":"gray":(this.props.reason==="now")?"#9e48d9":"#d93a64"}
+                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29149":(this.props.reason==="free1"　|| this.props.reason==="free2"　)?"#6A94A2":(this.props.reason==="now" )?"#9e48d9":"#3aa276":this.props.selection?(this.props.reason==="now")?"#9e48d9":"gray":(this.props.reason==="now")?"#9e48d9":"#d93a64"}
                                         style={this.state.style}
                                         label={this.props.cosCame}
                                         onClick={()=>this.handleClick()}>
