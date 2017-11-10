@@ -8,7 +8,7 @@ import TabContent from 'rc-tabs/lib/SwipeableTabContent';
 import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 //
 import StudentList from './StudentSearch/StudentList';
-import StudentInform from './StudentInform/StudentList';
+import StudentInform from './StudentInform/StudentSelList';
 
 
 
@@ -23,7 +23,7 @@ export default class index extends React.Component {
             start: 0,
             initStudents: [
                 {
-                    student_id: '0316000',
+                    student_id: '0316099',
                     sname: '流川楓',
                     program: '網多',
                     graduate: "0",

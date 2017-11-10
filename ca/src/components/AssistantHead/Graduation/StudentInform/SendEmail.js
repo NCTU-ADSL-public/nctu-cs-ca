@@ -24,8 +24,6 @@ export default class SendEmail extends React.Component {
         };
     }
 
-
-
     handleOpen = () => {
         this.setState({open: true});
         //console.log(this.props.selectedRow);
