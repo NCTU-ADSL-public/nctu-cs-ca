@@ -16,6 +16,19 @@ export default class index extends React.Component {
             //for passing student selected by studentList
             studentName: '流川楓',
             studentId: '0416030',
+            student_profile: {
+                student_id:"0316000",
+                sname:"陳罐頭",
+                program:"網多",
+                grade:"四",
+                email:"6666666666666@nctu.edu.tw",
+                graduate:"0",
+                graduate_submit:"0",
+                github_id:null,
+                fb_id:null,
+                gmail:null,
+                status:"s"
+            },
             Graduationitems: [
                 { title: '必修課程',
                     credit: '80',
@@ -369,6 +382,18 @@ export default class index extends React.Component {
             console.log(err);
         });
 
+        axios.get('/assistants/students', {
+            params: {
+                student_id: this.props.match.params.sid,
+            }
+        }).then(studentData => {
+            self.setState({
+                student_profile: studentData.data[0],
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data
@@ -382,9 +407,9 @@ export default class index extends React.Component {
         return (
             <div>
                 <StudentGrad
-                    studentName={this.state.studentName}
-                    studentId={this.state.studentId}
-                    studentGroup={this.state.studentGroup}
+                    studentName={this.state.student_profile.sname}
+                    studentId={this.state.student_profile.student_id}
+                    studentProgram={this.state.student_profile.program}
                     items={this.state.Graduationitems}
                     result={this.state.Graduationitems[10]}
                     revise={this.state.revise}
