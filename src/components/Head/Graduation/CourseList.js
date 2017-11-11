@@ -1,12 +1,12 @@
 import React from 'react'
 import Course from './Course'
 import './Graduation.css'
-
+let id=0;
 const CourseList = ({ items, selection , handleClick}) => (
     <div className="course-button">
         {items.map(item =>
             <Course
-                key={item.id}
+                key={id++}
                 cosCame={item.cn}
                 completed={item.complete}
                 selection={selection}
@@ -14,6 +14,8 @@ const CourseList = ({ items, selection , handleClick}) => (
                 handleClick={handleClick}
                 score={item.score}
                 reason={item.reason}
+                grade={item.grade}
+                english={item.english}
             />
         )}
     </div>

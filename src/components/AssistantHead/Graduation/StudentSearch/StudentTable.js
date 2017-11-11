@@ -8,7 +8,6 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
-
 const styles = {
     propContainer: {
         width: 200,
@@ -57,7 +56,7 @@ export default class StudentTable extends Component {
             selectable: false,
             multiSelectable: false,
             enableSelectAll: false,
-            deselectOnClickaway: true,
+            deselectOnClickaway: false,
             showCheckboxes: false,
             height: '60vh',
         };
@@ -71,6 +70,7 @@ export default class StudentTable extends Component {
                 sname: '流川楓',
                 program: '網多',
                 graduate: "0",
+                graduate_submit: "0",
             }]
     };
 
@@ -116,13 +116,16 @@ export default class StudentTable extends Component {
                                 <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
                                 <TableRowColumn style={styles.tabColumn0}>{row.program}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.graduate==="1" ? '可畢業' : '未達畢業標準'}</TableRowColumn>
-                                <TableRowColumn style={ row.graduate_submit==="2" ? styles.colorGreen :
-                                                        row.graduate_submit==="1" ? styles.colorBrown :
-                                                                                    styles.colorRed }>
+                                <TableRowColumn style={styles.tabColumn0}>
+                                    {row.graduate==="1" ? '可畢業' : '未達畢業標準'}
+                                </TableRowColumn>
+                                <TableRowColumn
+                                    style={ row.graduate_submit==="2" ? styles.colorGreen :
+                                            row.graduate_submit==="1" ? styles.colorBrown :
+                                            styles.colorRed }>
                                         {row.graduate_submit==="1" ? '已送審' :
                                         row.graduate_submit==="2" ? '完成審核' : '未送審'}
-                                    </TableRowColumn>
+                                </TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>

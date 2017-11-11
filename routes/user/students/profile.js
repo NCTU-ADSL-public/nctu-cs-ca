@@ -5,9 +5,8 @@ var query = require('../../../db/msql');
 var utils = require('../../../utils');
 var csrf = require('csurf');
 
-var csrfProtection = csrf();
 
-router.get('/students/profile', csrfProtection, function(req, res){
+router.get('/students/profile', function(req, res){
 
     if(req.session.profile){
         

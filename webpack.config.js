@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
@@ -30,15 +31,37 @@ module.exports = {
                   },
                   {
                     test: /\.(png|woff|woff2|eot|ttf|svg|jpg|gif)$/,                
-                    loader: 'url-loader'
+		    loader: 'url-loader?limit=8192&name=[name].[ext]&publicPath=../../',
+                    //loader: "url-loader?name=public/[name].[ext]"
+
                   }
+                  /*{
+                       test: /\.(png|woff|woff2|eot|ttf|svg|jpg|gif)$/,
+                       use: [
+                       {
+                            loader: 'file-loader?name=[name].[ext]',
+                       }
+                      ]
+                  }*/
       ] 
     },
   resolve: {
       extensions: ['*', '.js', '.json'] 
     },
   plugins: [
-    new ExtractTextPlugin({filename: 'style.bye.css', publicPath: '/public/'})
+    	new BundleAnalyzerPlugin({
+		analyzerMode: 'server',
+		analyzerHost: '140.113.168.202',
+		analyzerPort: 1112,
+		reportFilename: 'report.html',
+		defaultSizes: 'parsed',
+		openAnalyzer: true,
+		generateStatsFile: true,
+		statsFilename: 'stats.json',
+		statsOptions: null,
+		logLevel: 'info'
+	}),
+	new ExtractTextPlugin({filename: 'style.[name].css', publicPath: '/public/'})
   ],
   watch: true
 };

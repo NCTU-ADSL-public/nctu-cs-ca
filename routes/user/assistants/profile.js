@@ -19,7 +19,7 @@ router.get('/assistants/profile', csrfProtection, function(req, res){
               		console.log("No Student Id");
               		return;
         	}
-        	query.findPerson(assistantId, function(err,result){
+        	query.findPerson('E9604', function(err,result){
             		if(err){
                 		console.log("Can't find student");
                 		throw err;

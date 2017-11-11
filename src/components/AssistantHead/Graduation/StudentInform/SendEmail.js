@@ -15,18 +15,27 @@ import TextField from './TextField';
  * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
  */
 export default class SendEmail extends React.Component {
-    state = {
-        open: false,
-        studentString: "",
-    };
+
+    constructor(props){
+        super(props);
+        this.state = {
+            open: false,
+            studentString: "",
+        };
+    }
 
     handleOpen = () => {
         this.setState({open: true});
-
+        //console.log(this.props.selectedRow);
+        const self = this;
+        self.setState({studentString: ''});
         {this.props.selectedRow.map((row) => {
-            this.state.studentString = this.state.studentString + " " + this.props.students[row].sname + "<3";
+            self.setState({
+                studentString: self.state.studentString.concat(self.props.students[row].sname + "<3 "),
+            });
         })}
     };
+
 
     handleClose = () => {
         this.setState({open: false});
@@ -57,7 +66,9 @@ export default class SendEmail extends React.Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    寄給: {this.state.studentString}
+                    寄給: {this.props.selectedRow.map((row, index) => (
+                                this.props.students[row].sname + "<3 "
+                            ))}
                     <MuiThemeProvider>
                         <TextField/>
                     </MuiThemeProvider>

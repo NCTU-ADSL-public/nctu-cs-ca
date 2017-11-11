@@ -50,7 +50,6 @@ function queryCourse(studentId, callback){
 		if(!result)
 			return;
 		result = JSON.parse(result);
-		console.log(result);
 		info.program = result[0].program;
 	        query.Group(studentId, function(err, result){
 			if(!result){
@@ -172,6 +171,50 @@ function queryList(studentId, callback){
         });
 }
 
+function queryFree(studentId, callback){
+	query.offset(studentId, function(err, free){
+		if(!free){
+			console.log("Can't find free course list");
+			return;
+		}
+		if(err){
+			throw err;
+			return;
+		}
+		else
+			callback(free);
+	});
+}
+
+function queryNow(studentId, callback){
+	query.on_cos_data(studentId, function(err, now){
+		if(!now){
+			console.log("Can't find now course");
+			return;
+		}
+		if(err){
+			throw err;
+			return;
+		}
+		else
+			callback(now);
+	});
+}
+
+function queryGeneral(callback){
+	query.general_cos_rule(function(err, general){
+		if(!general){
+			console.log("Can't find geberal courses");
+			return;
+		}
+		if(err){
+			throw err;
+			return;
+		}
+		else
+			callback(general);
+	});
+}
 table.getPass = function(studentId, callback){
     queryPass(studentId, function(pass){
 	callback(pass);
@@ -184,7 +227,6 @@ table.getCourse = function(studentId, callback){
 }
 table.getRule = function(studentId, callback){
     queryRule(studentId, function(rules){
-        //console.log("rule:" + JSON.stringify(rules));
         callback(rules);
     });
 }
@@ -193,7 +235,21 @@ table.getList = function(studentId, callback){
 	callback(list);
     });
 }
-
+table.getFree = function(studentId, callback){
+    queryFree(studentId, function(free){
+	callback(free);
+    });
+}
+table.getNow = function(studentId, callback){
+    queryNow(studentId, function(now){
+        callback(now);
+    });
+}
+table.getGeneral = function(callback){
+    queryGeneral(function(general){
+        callback(general);
+    });
+}
 
 exports.tables = table;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AssistantHead from './AssistantHead/Head';
+import StudentDetail from './AssistantHead/Graduation/StudentDetail';
 
 
 // The Main component renders one of the three provided
@@ -15,6 +16,7 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path='/assistants/head' component={AssistantHead}/>
+      <Route exact path='/assistants/head/s/:sid' component={StudentDetail}/>
     </Switch>
   </main>
 );

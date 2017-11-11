@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginButtom from './LoginButtom.js';
 import './Login.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,9 +8,6 @@ import {ToastContainer, ToastStore} from 'react-toasts';
 
 class Login extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     getLoginstatus(){
         let _this = this;

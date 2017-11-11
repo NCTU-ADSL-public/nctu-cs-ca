@@ -1,10 +1,10 @@
-var randoms = require('./randomVals');
 var path = require('path');
 var https = require('https');
 var session = require('client-sessions');
 var express = require('express');
 var app = express();
 var utils = require('./utils');
+var randoms = require('./randomVals');
 var bodyParser = require('body-parser');
 var csrf = require('csurf');
 var csrfProtection = csrf();
@@ -32,9 +32,13 @@ module.exports.init = function(){
     extended: true
   }));
 
+  app.use('/students/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents);
+  //app.use('/assistants/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyAssistants);
+
   app.use('/', express.static('./public', { index: 'index.login.html'}));
-  app.use('/students/Head', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents, express.static('./public', { index: 'index.student.html'}));
-  app.use('/assistants/Head', require('./middleware/verifyUser').verifyUser,  require('./middleware/verifyUser').verifyAssistants, express.static('./public', { index: 'index.assistant.html'}));
+  app.use('/students/head', express.static('./public', { index: 'index.student.html'}));
+  app.use('/assistants/head', express.static('./public', { index: 'index.assistant.html'}));
+  app.use('/assistants/head/s/:sid', express.static('./public', { index: 'index.assistant.html'}));
 
   app.use(require('./routes/user/students/profile'));
   app.use(require('./routes/user/students/courseMap'));
@@ -49,6 +53,8 @@ module.exports.init = function(){
   app.use(require('./routes/user/assistants/profile'));
   app.use(require('./routes/user/assistants/graduate/graduate'));
   app.use(require('./routes/user/assistants/graduate/graduateRevised'));
+  app.use(require('./routes/user/assistants/graduate/studentList'));
+  app.use(require('./routes/user/assistants/getStudent'));
 
 
   return app;

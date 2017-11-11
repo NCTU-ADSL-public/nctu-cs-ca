@@ -89,7 +89,7 @@ methods.redirectAfterAuth = function(req, res, next){
                 console.log("no student id");
                 return;
             }
-            query.findPerson(personId, function(err, result){
+            query.findPerson('0316201', function(err, result){
 		console.log(result + typeof(result));
                 if(!result){
                     return;
@@ -123,19 +123,18 @@ methods.redirectAfterAuth = function(req, res, next){
 methods.redirectPath = function(req, res, next){
     console.log(req.session.profile); 
     var personStatus = JSON.parse(req.session.profile).personStatus;
-    
     switch(personStatus){
         case 's':
             console.log("This is a student");
-            res.redirect('/students/Head');
+            res.redirect('/students/head');
             break;
         case 'p':
             console.log("This is a professor");
-            res.redirect('/professors/Head');
+            res.redirect('/professors/head');
             break;
         case 'a':
             console.log("This is an assistant");
-            res.redirect('/assistants/Head');
+            res.redirect('/assistants/head');
             break;
 	case '!':
 	    res.redirect('/');

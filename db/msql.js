@@ -218,13 +218,62 @@ module.exports = {
                         throw err;
                     pool.release(c);
                 });                
-        })
+        });
+    },
+    offset: function(id,callback){
+        const resource=pool.acquire();
+        resource.then(function(c){
+            if(id!='all')
+            {
+                var sql_offset=c.prepare(s.offset_single);
+                c.query(sql_offset({id:id}), function(err,result) {
+                    if (err)
+                        throw err;
+                    callback(null, JSON.stringify(result));
+                    pool.release(c);
+                });
+            }
+            else
+            {
+                var sql_offset=c.prepare(s.offset_all);
+                c.query(sql_offset({}), function(err,result) {
+                    if (err)
+                        throw err;
+                    callback(null, JSON.stringify(result));
+                    pool.release(c);
+                });
+            }
+        });
+    },
+    on_cos_data: function(id,callback){
+        const resource=pool.acquire();
+        resource.then(function(c){
+            var sql_on_cos_data=c.prepare(s.on_cos_data);
+            c.query(sql_on_cos_data({id:id}),function(err,result){
+                if(err)
+                    throw err;
+                callback(null,JSON.stringify(result));
+                pool.release(c);
+            });
+        });
+    },
+    general_cos_rule: function(callback){
+        const resource=pool.acquire();
+        resource.then(function(c){
+            var sql_general_cos_rule=c.prepare(s.general_cos_rule);
+            c.query(sql_general_cos_rule({}),function(err,result){
+                if(err)
+                    throw err;
+                callback(null,JSON.stringify(result));
+                pool.release(c);
+            });
+        });
     },
     Drain: function() {
         pool.drain().then(function() {
             pool.clear();
         });
-    },
+    }
     // p_uploadGrade: function(pt) {
     //     const resource = pool.acquire();
     //     resource.then(function(c) {

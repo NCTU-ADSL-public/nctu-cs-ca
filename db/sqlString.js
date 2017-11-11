@@ -152,3 +152,34 @@ exports.setFbId='\
 
 exports.setGithubId='\
     update student set github_id=:github_id where student_id=:id';
+
+exports.offset_single='\
+    select os.student_id,os.apply_year,os.apply_semester,\
+    os.cos_code,os.cos_cname,cn.cos_ename,os.credit,os.offset_type,\
+    os.brief,os.cos_type\
+    from offset as os\
+    left outer join (select distinct cos_cname,cos_ename from cos_name) as cn\
+    on cn.cos_cname=os.cos_cname\
+    where student_id=:id;';
+
+exports.offset_all='\
+    select os.student_id,os.apply_year,os.apply_semester,\
+    os.cos_code,os.cos_cname,cn.cos_ename,os.credit,os.offset_type,\
+    os.brief,os.cos_type\
+    from offset as os\
+    left outer join (select distinct cos_cname,cos_ename from cos_name) as cn\
+    on cn.cos_cname=os.cos_cname;';
+
+exports.on_cos_data='\
+    select s.student_id,cd.cos_code,cn.cos_cname,cn.cos_ename,cd.cos_type,cd.cos_typeext,cd.brief,cd.brief_new\
+    from on_cos_data as o left outer join student as s\
+    on o.student_id=s.student_id\
+    left outer join cos_data as cd\
+    on cd.unique_id=concat(o.year,\'-\',o.semester,\'-\',o.code)\
+    left outer join cos_name as cn\
+    on cn.unique_id=cd.unique_id\
+    where s.student_id=:id;'
+
+exports.general_cos_rule='\
+    select cos_code,cos_cname,brief,brief_new\
+    from general_cos_rule;'

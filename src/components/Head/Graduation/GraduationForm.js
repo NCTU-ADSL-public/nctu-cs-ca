@@ -32,6 +32,15 @@ class GraduationForm extends React.Component{
             scrollToComponent(this.refs.my);
         }
     }
+    //For updating as props changes!!!
+    componentWillReceiveProps(){
+        this.setState({
+            items:this.props.items.filter(t => (t.title!=="通識" && ( t.course || t.selection))),
+            GeneralItems:this.props.items.filter(t => (t.title==="通識")),
+            graditems:this.props.graditems.filter(t => (t.title!=="通識" && ( t.course || t.selection))),
+            gradGeneralItems:this.props.graditems.filter(t => (t.title==="通識")),
+        })
+    }
     componentWillMount(){
         this.setState({
             items:this.props.items.filter(t => (t.title!=="通識" && ( t.course || t.selection))),
@@ -40,13 +49,15 @@ class GraduationForm extends React.Component{
             gradGeneralItems:this.props.graditems.filter(t => (t.title==="通識")),
         })
     }
+
     render(){
         if(this.props.isToggle){
+            let id=0;
             return(
                 <div className="animated fadeIn">
                     {this.state.items.map(item =>
                         <IndividualCourse
-                            key={item.id}
+                            key={id++}
                             pass={item.course}
                             title={item.title}
                             credit={item.credit}
@@ -60,7 +71,7 @@ class GraduationForm extends React.Component{
                         <div id="little-title">
                             <IndividualProgress grad={this.state.GeneralItems[0].credit/this.state.GeneralItems[0].require * 100}/>
                             <div className="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.GeneralItems[0].credit}</font>/{this.state.GeneralItems[0].require}</div>
+                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.GeneralItems[0].credit}</font>/{this.state.GeneralItems[0].require}(學分)</div>
                                 <div id="little-title-text" ><font size={this.state.GeneralItems[0].fontflag?5:6}>{this.state.GeneralItems[0].title}</font></div>
                             </div>
 
@@ -71,11 +82,12 @@ class GraduationForm extends React.Component{
             );
         }
         else{
+            let id=0;
             return(
                 <FadeIn>
                     {this.state.graditems.map(item =>
                         <IndividualCourse
-                            key={item.id}
+                            key={id++}
                             pass={item.course}
                             title={item.title}
                             credit={item.credit}
@@ -89,7 +101,7 @@ class GraduationForm extends React.Component{
                         <div id="little-title">
                             <IndividualProgress grad={this.state.gradGeneralItems[0].credit/this.state.gradGeneralItems[0].require * 100}/>
                             <div className="little-title-title">
-                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.gradGeneralItems[0].credit}</font>/{this.state.gradGeneralItems[0].require}</div>
+                                <div id="little-title-number"><font size={6} color='#338d68'>{this.state.gradGeneralItems[0].credit}</font>/{this.state.gradGeneralItems[0].require}(學分)</div>
                                 <div id="little-title-text" ><font size={this.state.gradGeneralItems[0].fontflag?5:6}>{this.state.gradGeneralItems[0].title}</font></div>
                             </div>
 
