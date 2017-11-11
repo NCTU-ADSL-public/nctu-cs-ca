@@ -28,7 +28,7 @@ const styles = {
         margin:'10px 10px 0 20px',
     },
     button: {
-        margin:'5px 10px 0 0px',
+        margin:'5px 10px 0 10px',
         width:'100px',
         float:'left'
     },
@@ -305,6 +305,7 @@ class Grad extends React.Component {
                                 </Popover>
                                 </div>
                             }
+
 
                         </div>
                         <div className="schedule-bar">
