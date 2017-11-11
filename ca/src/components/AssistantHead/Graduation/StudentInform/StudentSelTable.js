@@ -89,8 +89,7 @@ export default class StudentTable extends Component {
     }
 
     componentDidUpdate(NextProp, NextState){
-        if( NextProp.students !== this.props.students ||
-            NextProp.selectedRow !== this.props.selectedRow){
+        if( NextProp.students !== this.props.students ){
             this.orderList(this.state.orderBy);
         }
     }
@@ -113,7 +112,7 @@ export default class StudentTable extends Component {
                     return a.student_id > b.student_id;
             }).map((row, i) =>
                 <TableRow key={i}
-                          selected={self.props.selectedRow.find((item) => item.sid === row.student_id) !== undefined}>
+                          selected={row.selected}>
                     <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
                     <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
                     <TableRowColumn style={styles.tabColumn0}>{row.program}</TableRowColumn>
@@ -133,10 +132,6 @@ export default class StudentTable extends Component {
             orderBy: orderBy,
         });
     }
-
-    handleRowSelection = (selectedRow) => {
-        this.props.parentFunction(selectedRow);
-    };
 
     handleRowClick = (rowIndex) => {
         //pass student_id to parent(i.e., StudentSelList)

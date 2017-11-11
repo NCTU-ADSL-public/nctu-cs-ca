@@ -47,7 +47,6 @@ export default class StudentInform extends React.Component {
             groupD: true,
             gGrad: true,
             gSubmit: true,
-            selectedRow: [],
         };
 
         this.filterList = this.filterList.bind(this);
@@ -144,16 +143,17 @@ export default class StudentInform extends React.Component {
     };
 
     selectCallback = (studentId) => {
-        let newRow = this.state.selectedRow;
-        let foundSidExist = newRow.find( (item) =>  item.sid === studentId );
-        if(foundSidExist){
-            newRow = newRow.filter(function(item) {
-                return item.sid !== studentId;
-            });
-        }else {
-            newRow.push({sid: studentId});
-        }
-        this.setState({selectedRow: newRow,});
+        let newInitStudent = this.state.initStudents;
+        let tmp = newInitStudent.find((item) => (studentId === item.student_id));
+
+        if(tmp.selected === undefined)
+            tmp.selected = true;
+        else
+            tmp.selected = !tmp.selected;
+
+        this.setState({
+            initStudents: newInitStudent,
+        });
     };
 
     handleTouchTap(groupNum) {
@@ -219,7 +219,6 @@ export default class StudentInform extends React.Component {
                     <MuiThemeProvider>
                         <StudentTable students={this.state.students}
                                       parentFunction={this.selectCallback}
-                                      selectedRow={this.state.selectedRow}
                         />
                     </MuiThemeProvider>
                 </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -35,18 +36,10 @@ export default class SendEmail extends React.Component {
         this.setState({open: false});
     };
 
-    componentDidUpdate(NextProp, NextState){
-        if( NextProp.selectedRow !== this.props.selectedRow ){
-            this.studentDataMatch();
-        }
-    }
-
     studentDataMatch(){
-        let self = this;
         let newList = [];
         this.props.initStudents.forEach( (item) => {
-            let tmp = self.props.selectedRow.find((row) => (row.sid === item.student_id));
-            if(tmp !== undefined){
+            if(item.selected){
                 newList.push({
                     studentId: item.student_id,
                     studentName: item.sname,
