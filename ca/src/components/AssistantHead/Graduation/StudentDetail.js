@@ -2,8 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import StudentGrad from '../../Head/Graduation/Graduation';
 
-
-
+import LoadingComponent from '../Loading';
 
 export default class index extends React.Component {
 
@@ -300,58 +299,18 @@ export default class index extends React.Component {
 
             ],
             print_courseCategoryArray:[],
+
+            loadingG: true,
+            loadingR: true,
+            loadingS: true,
+            loadingP: true,
         };
     }
-  /*
-    searchCallback = (student) => {
-        const self = this;
-        this.setState({
-            activeKey: '2',
-            studentName: student.sname,
-            studentId: student.student_id,
-        });
-        //for Graduation
-        axios.get('/assistants/graduate/original', {
-            params: {
-                student_id: student.student_id,
-            }
-        }).then(studentData => {
-            self.setState({
-                Graduationitems: studentData.data,
-            });
-
-        }).catch(err => {
-            console.log(err);
-        });
-
-        axios.get('/assistants/graduate/revised', {
-            params: {
-                student_id: student.student_id,
-            }
-        }).then(studentData => {
-            self.setState({
-                revise: studentData.data,
-            });
-        }).catch(err => {
-            console.log(err);
-        });
-
-        axios.get('/students/graduate/print').then(function(resp){
-            this.setState({
-                print_courseCategoryArray: resp.data
-            });
-        }.bind(this)).catch(err => {
-            console.log(err);
-        });
-    };
-*/
 
     componentDidMount(){
         console.log(this.props.match.params.sid);
         this.setState({
             studentId: this.props.match.params.sid,
-            studentName: '陳罐頭',
-            studentGroup: '網多!'
         });
 
 
@@ -364,6 +323,7 @@ export default class index extends React.Component {
         }).then(studentData => {
             self.setState({
                 Graduationitems: studentData.data,
+                loadingG: false,
             });
 
         }).catch(err => {
@@ -377,6 +337,7 @@ export default class index extends React.Component {
         }).then(studentData => {
             self.setState({
                 revise: studentData.data,
+                loadingR: false,
             });
         }).catch(err => {
             console.log(err);
@@ -389,6 +350,7 @@ export default class index extends React.Component {
         }).then(studentData => {
             self.setState({
                 student_profile: studentData.data[0],
+                loadingS: false,
             });
         }).catch(err => {
             console.log(err);
@@ -396,7 +358,8 @@ export default class index extends React.Component {
 
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
-                print_courseCategoryArray: resp.data
+                print_courseCategoryArray: resp.data,
+                loadingP: false,
             });
         }.bind(this)).catch(err => {
             console.log(err);
@@ -404,20 +367,28 @@ export default class index extends React.Component {
     };
 
     render() {
-        return (
-            <div>
-                <StudentGrad
-                    studentName={this.state.student_profile.sname}
-                    studentId={this.state.student_profile.student_id}
-                    studentProgram={this.state.student_profile.program}
-                    items={this.state.Graduationitems}
-                    result={this.state.Graduationitems[10]}
-                    revise={this.state.revise}
-                    reviseresult={this.state.revise[10]}
-                    courseCategoryArray={this.state.print_courseCategoryArray}
-                    assistant={1}
-                />
-            </div>
-        );
+        if( this.state.loadingG ||
+            this.state.loadingR ||
+            this.state.loadingS ||
+            this.state.loadingP )
+            return (
+                <LoadingComponent/>
+            );
+        else
+            return (
+                <div>
+                    <StudentGrad
+                        studentName={this.state.student_profile.sname}
+                        studentId={this.state.student_profile.student_id}
+                        studentProgram={this.state.student_profile.program}
+                        items={this.state.Graduationitems}
+                        result={this.state.Graduationitems[10]}
+                        revise={this.state.revise}
+                        reviseresult={this.state.revise[10]}
+                        courseCategoryArray={this.state.print_courseCategoryArray}
+                        assistant={1}
+                    />
+                </div>
+            );
     }
 }

@@ -190,7 +190,7 @@ class Grad extends React.Component {
                                         <ReactHover.Trigger type='trigger'>
                                             <MuiThemeProvider>
                                                 <RaisedButton
-                                                    label={this.state.graduationCheck?"已送審":"未送審"}尚
+                                                    label={this.state.graduationCheck?"已送審":"未送審"}
                                                     style={styles.button}
                                                     disabled={1}
                                                     labelStyle={styles.labelStyle}
