@@ -1,23 +1,23 @@
 const request = require('request');
 var utils = require('../../../../../utils');
-var Othercourse = {};
+let Othercourse = {};
 
 Othercourse.processOther = function(req, res, next){
-	var courseResult = [];
-	var compulsory = {
+	let courseResult = [];
+	let compulsory = {
                 title: '共同必修',
                 credit: 0,
                 require: 0,
                 course: []
         }
-        var coreClass = {
+        let coreClass = {
                 title: '核心課程',
                 credit: 0,
                 require: 0,
                 selection: false,
                 course: []
         }
-        var otherClass = {
+        let otherClass = {
                 title: '副核心與他組核心',
                 credit: 0,
                 require: 0,
@@ -25,70 +25,70 @@ Othercourse.processOther = function(req, res, next){
                 course: []
         }
 
-	var elective = {
+	let elective = {
                 title: '專業選修',
                 credit: 0,
                 require: 0,
                 course: []
         }
-	var language = {
+	let language = {
                 title: '外語',
                 credit: 0,
                 require: 8,
                 course: []
         }
-        var general = {
+        let general = {
                 title: '通識',
                 credit: 0,
                 require: 20,
                 course: []
         }
-        var otherElect = {
+        let otherElect = {
                 title: '其他選修',
                 credit: 0,
                 require: 0,
                 course: []
         }
-	var peClass = {
+	let peClass = {
                 title: '體育',
                 credit: 0,
                 require: 6,
                 course: []
         }
-        var service = {
+        let service = {
                 title: '服務學習',
                 credit: 0,
                 require: 2,
                 course: []
         }
-        var art = {
+        let art = {
                 title: '藝文賞析',
                 credit: 0,
                 require: 2,
                 course: []
         }
-	var rules = JSON.parse(req.rules);
-	var program = req.profile[0].program;
-        var pass = JSON.parse(req.pass);
-	var offset = JSON.parse(req.free);
-	var generalCourse = JSON.parse(req.general);
-	var generalCheck = [];
-	var rule = [];
-	var free = [];
-	var CSname = [];
-	var notCS = [];
-	var EnglishCourse = [];
-	var total = req.course.total;
+	let rules = JSON.parse(req.rules);
+	let program = req.profile[0].program;
+        let pass = JSON.parse(req.pass);
+	let offset = JSON.parse(req.free);
+	let generalCourse = JSON.parse(req.general);
+	let generalCheck = [];
+	let rule = [];
+	let free = [];
+	let CSname = [];
+	let notCS = [];
+	let EnglishCourse = [];
+	let total = req.course.total;
 	if(req.session.profile){
 
-		var studentId = req.query.student_id;
-	        var temp = parseInt(studentId.substring(0,2));
+		let studentId = req.query.student_id;
+	        let temp = parseInt(studentId.substring(0,2));
 	        //console.log(temp);
 	        // the year the student enter school
-	        var school_year = (100 + temp);
+	        let school_year = (100 + temp);
 
-		for(var i = 0; i<offset.length; i++){
-			var cosInfo = {
+		for(let i = 0; i<offset.length; i++){
+			let cosInfo = {
                                 cn:'',
                                 en:'',
                                 score: -1,
@@ -111,7 +111,7 @@ Othercourse.processOther = function(req, res, next){
                                 compulsory.credit += parseInt(offset[i].credit);
                         }
 			            else if(offset[i].cos_type == '選修'){
-                                var temp = offset[i].cos_code.substring(0,3);
+                                let temp = offset[i].cos_code.substring(0,3);
                                 if(temp == 'DCP' || temp == 'IOC' || temp == 'IOE' || temp == 'ILE' || temp == 'IDS'){
                                         elective.course.push(cosInfo);
                                         elective.credit += parseInt(offset[i].credit);
@@ -139,7 +139,7 @@ Othercourse.processOther = function(req, res, next){
                                 peClass.credit += parseInt(offset[i].credit);
                         }
 		}
-		for(var g = 0; g<generalCourse.length; g++){
+		for(let g = 0; g<generalCourse.length; g++){
                         generalCheck[generalCourse[g].cos_code] = true;
                 }
 		//console.log("After checking free");
@@ -150,16 +150,16 @@ Othercourse.processOther = function(req, res, next){
 	        otherElect.require = parseInt(rules[0].free_credit);
 	        language.require = parseInt(rules[0].foreign_credit);
 
-		for(var x = 0; x<total.length; x++){
-	        	for(var a = 0; a<total[x].cos_codes.length; a++){
+		for(let x = 0; x<total.length; x++){
+	        	for(let a = 0; a<total[x].cos_codes.length; a++){
 	               		rule[total[x].cos_codes[a]] = true;
 	                 }
 	        }
 		for(x = 0; x<total.length; x++){
 	                 CSname[total[x].cos_cname] = true;
 	        }
-		for(var q = 0; q<pass.length; q++){
-	        	var cosInfo = {
+		for(let q = 0; q<pass.length; q++){
+	        	let cosInfo = {
 	                	cn:'',
 	                       	en:'',
 				score: -1,
@@ -173,7 +173,7 @@ Othercourse.processOther = function(req, res, next){
 				semester: '',
 				move: false
 	                 };
-	                var temp = pass[q].cos_code.substring(0,3);
+	                let temp = pass[q].cos_code.substring(0,3);
 	                cosInfo.cn = pass[q].cos_cname;
 	                cosInfo.en = pass[q].cos_ename;
 			cosInfo.originalCredit = parseInt(pass[q].cos_credit);
@@ -190,7 +190,7 @@ Othercourse.processOther = function(req, res, next){
 				if(cosInfo.complete === true){
 				if(temp == 'DCP' || temp == 'IOC' || temp == 'IOE' || temp == 'ILE'){
 	                        	if(pass[q].cos_cname == '服務學習(一)' || pass[q].cos_cname == '服務學習(二)'){
-	                                	for(var w = 0; w< service.course.length; w++){
+	                                	for(let w = 0; w< service.course.length; w++){
                                                 	if(service.course[w].cn == pass[q].cos_cname){
                                                         	if(pass[q].score >= service.course[w].score){
                                                                 	service.course[w] = cosInfo;
@@ -205,7 +205,7 @@ Othercourse.processOther = function(req, res, next){
 					}
 	                                else{
 	                                        if(pass[q].cos_cname != '導師時間'){
-							for(var x = 0; x< elective.course.length; x++){
+							for(let x = 0; x< elective.course.length; x++){
                                                         	if(elective.course[x].cn == pass[q].cos_cname){
                                                                 	if(pass[q].score >= elective.course[x].score){
                                                                         	elective.course[x] = cosInfo;
@@ -242,7 +242,7 @@ Othercourse.processOther = function(req, res, next){
 				 }
 	                         else{
 	                                 if(pass[q].cos_type == '外語'){
-						for(var h = 0; h< language.course.length; h++){
+						for(let h = 0; h< language.course.length; h++){
                                                 	if(language.course[h].cn == pass[q].cos_cname){
                                                         	if(pass[q].score >= language.course[h].score){
                                                                 	language.course[h] = cosInfo;
@@ -263,9 +263,9 @@ Othercourse.processOther = function(req, res, next){
 						}
 					 }
 	                                 else if(pass[q].cos_type == '通識'){
-						var brief = pass[q].brief.substring(0,2);
+						let brief = pass[q].brief.substring(0,2);
                                                 cosInfo.dimension = brief;
-                                                for(var z = 0; z< general.course.length; z++){
+                                                for(let z = 0; z< general.course.length; z++){
                                                 	if(general.course[z].cn == pass[q].cos_cname){
                                                         	if(pass[q].score >= general.course[z].score){
                                                                 	general.course[z] = cosInfo;
@@ -306,7 +306,7 @@ Othercourse.processOther = function(req, res, next){
 									notCS[cosInfo.cn] = true;
 									free[cosInfo.cn] = cosInfo;
 								}
-								for(var m = 0; m< otherElect.course.length; m++){
+								for(let m = 0; m< otherElect.course.length; m++){
                                                                 	if(otherElect.course[m].cn == pass[q].cos_cname){
                                                                         	if(pass[q].score >= otherElect.course[m].score){
                                                                                 	otherElect.course[m] = cosInfo;

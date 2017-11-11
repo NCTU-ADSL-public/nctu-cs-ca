@@ -1,51 +1,51 @@
 const request = require('request');
 var utils = require('../../../../../utils');
-var CScourse = {};
+let CScourse = {};
 
 CScourse.processCS = function(req, res, next){
 
-	var courseResult = res.locals.courseResult;
-	var notCS = res.locals.notCS;
-	var EnglishCourse = res.locals.English;
-	var free = res.locals.free;
-	var offset = JSON.parse(req.free);
+	let courseResult = res.locals.courseResult;
+	let notCS = res.locals.notCS;
+	let EnglishCourse = res.locals.English;
+	let free = res.locals.free;
+	let offset = JSON.parse(req.free);
 	//console.log(notCS);
-	var PCB = {
+	let PCB = {
 		physic: [],
 		chemistry: [],
 		biology: []
 	}
-	var taken = [];
-	var detail = [];
-	var trueCounter;
-	var cosNumber;
+	let taken = [];
+	let detail = [];
+	let trueCounter;
+	let cosNumber;
 	if(req.session.profile){
-		var studentId = req.query.student_id;
-		var temp = parseInt(studentId.substring(0,2));
-		var school_year = (100 + temp);
-		var program = req.profile[0].program;
+		let studentId = req.query.student_id;
+		let temp = parseInt(studentId.substring(0,2));
+		let school_year = (100 + temp);
+		let program = req.profile[0].program;
 		if(!studentId){
 			console.log("No Student Id");
 			return;
 		}
-		var pass = JSON.parse(req.pass);
+		let pass = JSON.parse(req.pass);
 		//console.log(pass);
-		var rules = JSON.parse(req.rules);
+		let rules = JSON.parse(req.rules);
                 //language.require = 8;
-		for(var i=0; i<pass.length; i++){
+		for(let i=0; i<pass.length; i++){
 			detail[pass[i].cos_code] = pass[i];
 			taken[pass[i].cos_code] = true;
 		}
 		// determine compulsory courses
-		var compulse = req.course.compulse;
-		var PCBnum = [];
-		var offsetNameCheck = [];
+		let compulse = req.course.compulse;
+		let PCBnum = [];
+		let offsetNameCheck = [];
 		for(i = 0; i<offset.length; i++){
                         offsetNameCheck[offset[i].cos_cname] = true;
                 }
-		for(var q=0; q<compulse.length; q++){
+		for(let q=0; q<compulse.length; q++){
 			trueCounter = 0;
-			var more = [];
+			let more = [];
 			cosNumber = compulse[q].cos_codes;
 			if(notCS[compulse[q].cos_cname] === true){
 				free[compulse[q].cos_cname].reason = 'notCS';
@@ -53,8 +53,8 @@ CScourse.processCS = function(req, res, next){
 				courseResult[0].course.push(free[compulse[q].cos_cname]);
 			}
 			else{
-				for(var k=0; k<cosNumber.length; k++){
-					var cosInfo = {
+				for(let k=0; k<cosNumber.length; k++){
+					let cosInfo = {
                                 		cn:'',
                                 		en:'',
                                 		score: -1,
@@ -79,7 +79,7 @@ CScourse.processCS = function(req, res, next){
 						cosInfo.semester = parseInt(detail[cosNumber[k]].semester);
 						cosInfo.originalCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
-						var reg = detail[cosNumber[k]].cos_cname.substring(0,2);
+						let reg = detail[cosNumber[k]].cos_cname.substring(0,2);
 						trueCounter++;
 				     		if(detail[cosNumber[k]].pass_fail == '通過'){
 						//trueCounter++;
@@ -119,10 +119,10 @@ CScourse.processCS = function(req, res, next){
 
 				}
 				else if(more.length >= 1){
-					var max = 0;
-                                        var credit;
-                                        var index;
-                                        var code;
+					let max = 0;
+                                        let credit;
+                                        let index;
+                                        let code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
                                                         code = more[0].code;
@@ -142,7 +142,7 @@ CScourse.processCS = function(req, res, next){
                                                         courseResult[0].course.push(more[0]);
                                         }
 					else{
-                                                for(var d = 0; d<more.length; d++){
+                                                for(let d = 0; d<more.length; d++){
                                                         credit = parseInt(detail[more[d].code].cos_credit);
                                                         if(more[d].complete == true){
                                                                 if(more[d].score >= max){
@@ -172,7 +172,7 @@ CScourse.processCS = function(req, res, next){
 		}
 		//determine PCB to put in compulse or professional
 		for(i = 0; i<PCBnum.length; i++){
-			 var PCBcos = {
+			 let PCBcos = {
                                  cn:'',
                                  en:'',
                                  score: -1,
@@ -195,7 +195,7 @@ CScourse.processCS = function(req, res, next){
 			PCBcos.complete = true;
 			PCBcos.year = parseInt(detail[PCBnum[i]].year) - school_year + 1;
 			PCBcos.semester = parseInt(detail[PCBnum[i]].semester);
-			var temp = detail[PCBnum[i]].cos_cname.substring(0,2);
+			let temp = detail[PCBnum[i]].cos_cname.substring(0,2);
 			if(temp == '物理')
 				PCB.physic.push(PCBcos);
 			else if(temp == '化學')
@@ -205,11 +205,11 @@ CScourse.processCS = function(req, res, next){
 		}
 		if(PCB.biology.length != 0){
 			if(PCB.biology.length == 2){
-				for(var s = 0; s<PCB.biology.length; s++){
+				for(let s = 0; s<PCB.biology.length; s++){
                                         courseResult[0].credit += PCB.biology[s].originalCredit;
                                         courseResult[0].course.push(PCB.biology[s]);
                                 }
-				for(var s = 0; s<PCB.chemistry.length; s++){
+				for(let s = 0; s<PCB.chemistry.length; s++){
                                         PCB.chemistry[s].move = true;
 					if(courseResult[3].credit < courseResult[3].require){
 						courseResult[3].credit += PCB.chemistry[s].originalCredit;
@@ -220,7 +220,7 @@ CScourse.processCS = function(req, res, next){
                                                 courseResult[4].course.push(PCB.chemistry[s]);
 					}
                                 }
-				for(var s = 0; s<PCB.physic.length; s++){
+				for(let s = 0; s<PCB.physic.length; s++){
                                         PCB.physic[s].move = true;
 					if(courseResult[3].credit < courseResult[3].require){
 						courseResult[3].credit += PCB.physic[s].originalCredit;
@@ -363,9 +363,9 @@ CScourse.processCS = function(req, res, next){
 
 		}
 		//determine the core
-		var core = req.course.core;
-		for(var q=0; q<core.length; q++){
-                        var more = [];
+		let core = req.course.core;
+		for(let q=0; q<core.length; q++){
+                        let more = [];
 			trueCounter = 0;
 			if(notCS[core[q].cos_cname] === true){
                                 free[core[q].cos_cname].reason = 'notCS';
@@ -375,8 +375,8 @@ CScourse.processCS = function(req, res, next){
 			else{
                         	cosNumber = core[q].cos_codes;
 				//console.log(cosNumber);
-                        	for(var k=0; k<cosNumber.length; k++){
-                                	var cosInfo = {
+                        	for(let k=0; k<cosNumber.length; k++){
+                                	let cosInfo = {
                                 		cn:'',
                                 		en:'',
                                 		score: -1,
@@ -415,10 +415,10 @@ CScourse.processCS = function(req, res, next){
 					}
 				}
 				else if(more.length >= 1){
-					var max = 0;
-                                        var credit;
-                                        var index;
-                                        var code;
+					let max = 0;
+                                        let credit;
+                                        let index;
+                                        let code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
                                                         code = more[0].code;
@@ -448,7 +448,7 @@ CScourse.processCS = function(req, res, next){
                                                         courseResult[1].course.push(more[0]);
                                         }
 					else{
-                                                for(var d = 0; d<more.length; d++){
+                                                for(let d = 0; d<more.length; d++){
                                                         credit = parseInt(detail[more[d].code].cos_credit);
                                                         if(more[d].complete == true){
                                                                 if(more[d].score >= max){
@@ -489,9 +489,9 @@ CScourse.processCS = function(req, res, next){
 		if(courseResult[1].credit >= courseResult[1].require)
 			courseResult[1].selection = true;
 		//determine the other classes
-		var other = req.course.others;
-		for(var q=0; q<other.length; q++){
-                        var more = [];
+		let other = req.course.others;
+		for(let q=0; q<other.length; q++){
+                        let more = [];
 			trueCounter = 0;
 			if(notCS[other[q].cos_cname] === true){
                                 free[other[q].cos_cname].reason = 'notCS';
@@ -501,8 +501,8 @@ CScourse.processCS = function(req, res, next){
 			else{
                         	cosNumber = other[q].cos_codes;
                         	//console.log(cosNumber);
-                        	for(var k=0; k<cosNumber.length; k++){
-                               		var cosInfo = {
+                        	for(let k=0; k<cosNumber.length; k++){
+                               		let cosInfo = {
                                 		cn:'',
                                 		en:'',
 						code:'',
@@ -541,10 +541,10 @@ CScourse.processCS = function(req, res, next){
 					}
 				}
 				else if(more.length >= 1){
-					var max = 0;
-                                        var credit;
-                                        var index;
-                                        var code;
+					let max = 0;
+                                        let credit;
+                                        let index;
+                                        let code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
                                                         code = more[0].code;
@@ -574,7 +574,7 @@ CScourse.processCS = function(req, res, next){
                                                         courseResult[2].course.push(more[0]);
                                         }
 					else{
-                                                for(var d = 0; d<more.length; d++){
+                                                for(let d = 0; d<more.length; d++){
                                                         credit = parseInt(detail[more[d].code].cos_credit);
                                                         if(more[d].complete == true){
                                                                 if(more[d].score >= max){
@@ -613,9 +613,9 @@ CScourse.processCS = function(req, res, next){
 			}
                 }
 		//determine the vice
-		var vice = req.course.vice;
-		for(var q=0; q<vice.length; q++){
-                        var more = [];
+		let vice = req.course.vice;
+		for(let q=0; q<vice.length; q++){
+                        let more = [];
 			trueCounter = 0;
 			if(notCS[vice[q].cos_cname] === true){
                                  free[vice[q].cos_cname].reason = 'notCS';
@@ -625,8 +625,8 @@ CScourse.processCS = function(req, res, next){
 			else{
                         	cosNumber = vice[q].cos_codes;
                         	//console.log(cosNumber);
-                        	for(var k=0; k<cosNumber.length; k++){
-                                	var cosInfo = {
+                        	for(let k=0; k<cosNumber.length; k++){
+                                	let cosInfo = {
                                 		cn:'',
                                 		en:'',
 						code:'',
@@ -668,10 +668,10 @@ CScourse.processCS = function(req, res, next){
 					}
 				}
 				else if(more.length >= 1){
-					var max = 0;
-                                        var credit;
-                                        var index;
-                                        var code;
+					let max = 0;
+                                        let credit;
+                                        let index;
+                                        let code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
                                                         code = more[0].code;
@@ -700,7 +700,7 @@ CScourse.processCS = function(req, res, next){
                                                         courseResult[2].course.push(more[0]);
                                         }
 					else{
-                                                for(var d = 0; d<more.length; d++){
+                                                for(let d = 0; d<more.length; d++){
                                                         credit = parseInt(detail[more[d].code].cos_credit);
                                                         if(more[d].complete == true){
                                                                 if(more[d].score >= max){

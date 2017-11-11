@@ -3,7 +3,7 @@ var query = require('../../../../db/msql');
 var utils = require('../../../../utils');
 
 //資電A 資工B 網多C
-var table = {};
+let table = {};
 
 function queryPass(studentId, callback){
 	query.Pass(studentId, function(err, pass){
@@ -37,7 +37,7 @@ function queryRule(studentId, callback){
 }
 
 function queryCourse(studentId, callback){
-        var info = {
+        let info = {
             group: '',
             program: '',
         };
@@ -47,8 +47,10 @@ function queryCourse(studentId, callback){
 			throw err;
 			return;
 		}
-		if(!result)
+		if(result == []){
+            console.log("no student");
 			return;
+        }
 		result = JSON.parse(result);
 		info.program = result[0].program;
 	        query.Group(studentId, function(err, result){
@@ -76,9 +78,9 @@ function queryCourse(studentId, callback){
 
 function processCourse(info, callback){
          
-	var program = info.program;
-        var result = info.group;
-	var course = {
+	let program = info.program;
+        let result = info.group;
+	let course = {
                 compulse: [],
                 core: [],
                 vice:[],
@@ -91,7 +93,7 @@ function processCourse(info, callback){
         console.log("processcourse" + program);
 	//console.log("in table second program:" + program);	
 	if(program == '資電' ){
-		for(var i = 0; i < result.length; i++){
+		for(let i = 0; i < result.length; i++){
 
 			switch(result[i].type){
 				case '必修' :
@@ -111,7 +113,7 @@ function processCourse(info, callback){
                 callback(course);
 	}
 	else if(program == '資工'){
-		for(var i = 0; i < result.length; i++){
+		for(let i = 0; i < result.length; i++){
 
 			switch(result[i].type){
 				case '必修' :
@@ -132,7 +134,7 @@ function processCourse(info, callback){
                 callback(course);
 	}
 	else if(program == '網多'){
-		for(var i = 0; i < result.length; i++){
+		for(let i = 0; i < result.length; i++){
 		
 			switch(result[i].type){
 				case '必修' :

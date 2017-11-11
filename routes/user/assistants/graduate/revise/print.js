@@ -1,11 +1,11 @@
 const request = require('request');
-var print = {};
+let print = {};
 
 print.processPrint = function(req, res, next){
 
   if(req.session.profile){
-      var courseResult = res.locals.courseResult;
-      for(var i = 0; i<courseResult[4].course.length; i++){
+      let courseResult = res.locals.courseResult;
+      for(let i = 0; i<courseResult[4].course.length; i++){
           courseResult[4].course[i].cn = '';
           courseResult[4].course[i].en = '';
       }

@@ -12,7 +12,7 @@ query.queryPass = function(req, res, next){
                 return;
          }
          else{
-           	table.tables.getPass('0312546',function(pass){
+           	table.tables.getPass(studentId,function(pass){
                 req.pass = pass;
 		if(req.pass)
                   next();
@@ -38,7 +38,7 @@ query.queryCourse = function(req, res, next){
   			return;
   	  	}
       		else{
-        		table.tables.getCourse('0312546', function(course){
+        		table.tables.getCourse(studentId, function(course){
           			req.course = course;
 	  			if(req.course)
             				next();
@@ -62,7 +62,7 @@ query.queryRule = function(req, res, next){
                         return;
                 }
                 else{
-                     table.tables.getRule('0312546',function(rules){
+                     table.tables.getRule(studentId,function(rules){
                           req.rules = rules;
 			  if(req.rules)
                              next();
@@ -86,7 +86,7 @@ query.queryFree = function(req, res, next){
                         return;
                 }
                 else{     
-		table.tables.getFree('0312512',function(free){
+		table.tables.getFree(studentId,function(free){
                           req.free = free;
                           console.log("free!!");
 			              console.log(free);
@@ -112,7 +112,7 @@ query.queryNow = function(req, res, next){
                         return;
                 }
                 else{
-                     table.tables.getNow('0312512',function(now){
+                     table.tables.getNow(studentId,function(now){
                           req.now = now;
                           if(req.now)
                              next();

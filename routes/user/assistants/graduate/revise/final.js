@@ -1,13 +1,13 @@
 const request = require('request');
 var utils = require('../../../../../utils');
-var finalProcess = {};
+let finalProcess = {};
 
 finalProcess.processFinal = function(req, res, next){
 
 	if(req.session.profile){
-		var courseResult = res.locals.courseResult;
+		let courseResult = res.locals.courseResult;
 		if(courseResult[6].credit < courseResult[6].require){
-			for(var i = 0; i<courseResult[4].course.length; i++){
+			for(let i = 0; i<courseResult[4].course.length; i++){
 				if(courseResult[4].course[i].reason == 'general'){
 					courseResult[6].course.push(courseResult[4].course[i]);
 					courseResult[6].credit += parseInt(courseResult[4].course[i].credit);

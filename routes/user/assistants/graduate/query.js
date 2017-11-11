@@ -1,12 +1,12 @@
 const request = require('request');
 var table = require('./table');
 var utils = require('../../../../utils');
-var query = {};
+let query = {};
 
 query.queryPass = function(req, res, next){
     //console.log("queryPass");
    if(req.session.profile){
-	 var studentId = req.query.student_id;
+	 let studentId = req.query.student_id;
          if(!studentId){
          	console.log("No Student Id");
                 return;
@@ -31,8 +31,8 @@ query.queryPass = function(req, res, next){
 query.queryCourse = function(req, res, next){
 
     if(req.session.profile){
-    	var studentId = req.query.student_id;
-  		//var program = req.profile[0].program;
+    	let studentId = req.query.student_id;
+  		//let program = req.profile[0].program;
   		if(!studentId){
   			console.log("No Student Id");
   			return;
@@ -56,7 +56,7 @@ query.queryCourse = function(req, res, next){
 
 query.queryRule = function(req, res, next){
     if(req.session.profile){
-         var studentId = req.query.student_id;
+         let studentId = req.query.student_id;
                 if(!studentId){
                         console.log("No Student Id");
                         return;
@@ -80,7 +80,7 @@ query.queryRule = function(req, res, next){
 
 query.queryFree = function(req, res, next){
     if(req.session.profile){
-         var studentId = req.query.student_id;
+         let studentId = req.query.student_id;
                 if(!studentId){
                         console.log("No Student Id");
                         return;
@@ -105,7 +105,7 @@ query.queryFree = function(req, res, next){
 
 query.queryNow = function(req, res, next){
     if(req.session.profile){
-         var studentId = req.query.student_id;
+         let studentId = req.query.student_id;
                 if(!studentId){
                         console.log("No Student Id");
                         return;
