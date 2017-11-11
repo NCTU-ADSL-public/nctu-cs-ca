@@ -28,7 +28,7 @@ const styles = {
         margin:'10px 10px 0 20px',
     },
     button: {
-        margin:'5px 10px 0 0px',
+        margin:'5px 10px 0 10px',
         width:'100px',
         float:'left'
     },
@@ -201,34 +201,34 @@ class Grad extends React.Component {
                                 </ReactHover.Trigger>
                                 <ReactHover.Hover type='hover'>
                                 </ReactHover.Hover>
-                            </ReactHover>
-                                <MuiThemeProvider>
-                                    <RaisedButton style={styles.button}
-                                                  labelStyle={styles.labelStyle}
-                                                  backgroundColor = "#DDDDDD"
-                                                  label="列印"
-                                                  onClick={() => this.printGradTable()}/>
-                                </MuiThemeProvider>
-                                <MuiThemeProvider>
-                                    <Toggle
-                                        label="系統自動排序"
-                                        style={styles.toggle}
-                                        labelStyle={styles.labelStyle}
-                                        onToggle={(toggled)=>this.handleToggle()}
-                                    />
-                                </MuiThemeProvider>
-                                <MuiThemeProvider>
-                                    <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
-                                        <ActionGrade />
-                                    </IconButton>
-                                </MuiThemeProvider>
-                                <Popover
-                                    placement='bottom'
-                                    target={this.refs.target}
-                                    show={this.state.open}
-                                    onHide={this.handleClose.bind(this)}>
-                                    <div
-                                        style={styles.pop}>
+                            </ReactHover></div>}
+                            <MuiThemeProvider>
+                                <RaisedButton style={styles.button}
+                                              labelStyle={styles.labelStyle}
+                                              backgroundColor = "#DDDDDD"
+                                              label="列印"
+                                              onClick={() => this.printGradTable()}/>
+                            </MuiThemeProvider>
+                            <MuiThemeProvider>
+                                <Toggle
+                                    label="系統自動排序"
+                                    style={styles.toggle}
+                                    labelStyle={styles.labelStyle}
+                                    onToggle={(toggled)=>this.handleToggle()}
+                                />
+                            </MuiThemeProvider>
+                            <MuiThemeProvider>
+                                <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
+                                    <ActionGrade />
+                                </IconButton>
+                            </MuiThemeProvider>
+                            <Popover
+                                placement='bottom'
+                                target={this.refs.target}
+                                show={this.state.open}
+                                onHide={this.handleClose.bind(this)}>
+                                <div
+                                    style={styles.pop}>
                                     -未排的<br/>
                                     物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
                                     -排序過的<br/>
@@ -237,8 +237,8 @@ class Grad extends React.Component {
                                     物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
                                     核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
                                     專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
-                                    </div>
-                                </Popover></div>}
+                                </div>
+                            </Popover>
 
                         </div>
                         <div className="schedule-bar">
