@@ -20,26 +20,43 @@ export default class SendEmail extends React.Component {
         super(props);
         this.state = {
             open: false,
-            studentString: "",
+            studentList: [],
         };
+        this.studentDataMatch = this.studentDataMatch.bind(this);
     }
 
     handleOpen = () => {
         this.setState({open: true});
-        //console.log(this.props.selectedRow);
-        const self = this;
-        self.setState({studentString: ''});
-        {this.props.selectedRow.map((row) => {
-            self.setState({
-                studentString: self.state.studentString.concat(self.props.students[row].sname + "<3 "),
-            });
-        })}
+        this.studentDataMatch();
     };
 
 
     handleClose = () => {
         this.setState({open: false});
     };
+
+    componentDidUpdate(NextProp, NextState){
+        if( NextProp.selectedRow !== this.props.selectedRow ){
+            this.studentDataMatch();
+        }
+    }
+
+    studentDataMatch(){
+        let self = this;
+        let newList = [];
+        this.props.initStudents.forEach( (item) => {
+            let tmp = self.props.selectedRow.find((row) => (row.sid === item.student_id));
+            if(tmp !== undefined){
+                newList.push({
+                    studentId: item.student_id,
+                    studentName: item.sname,
+                    studentEmail: item.email,
+                });
+            }
+            return 1;
+        });
+        this.setState({studentList: newList});
+    }
 
     render() {
         const actions = [
@@ -66,9 +83,10 @@ export default class SendEmail extends React.Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    寄給: {this.props.selectedRow.map((row, index) => (
-                                this.props.students[row].sname + "<3 "
-                            ))}
+                    寄給:
+                    {this.state.studentList.map( (item, i) => (
+                        <div key={i}>{item.studentId} {item.studentName} {item.studentEmail}, </div>
+                    ))}
                     <MuiThemeProvider>
                         <TextField/>
                     </MuiThemeProvider>

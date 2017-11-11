@@ -143,8 +143,17 @@ export default class StudentInform extends React.Component {
         }
     };
 
-    selectCallback = (selectedRow) => {
-        //this.setState({selectedRow: selectedRow,});
+    selectCallback = (studentId) => {
+        let newRow = this.state.selectedRow;
+        let foundSidExist = newRow.find( (item) =>  item.sid === studentId );
+        if(foundSidExist){
+            newRow = newRow.filter(function(item) {
+                return item.sid !== studentId;
+            });
+        }else {
+            newRow.push({sid: studentId});
+        }
+        this.setState({selectedRow: newRow,});
     };
 
     handleTouchTap(groupNum) {
@@ -208,7 +217,10 @@ export default class StudentInform extends React.Component {
                         </div>
                     </MuiThemeProvider>
                     <MuiThemeProvider>
-                        <StudentTable students={this.state.students} parentFunction={this.selectCallback}/>
+                        <StudentTable students={this.state.students}
+                                      parentFunction={this.selectCallback}
+                                      selectedRow={this.state.selectedRow}
+                        />
                     </MuiThemeProvider>
                 </div>
             </div>
