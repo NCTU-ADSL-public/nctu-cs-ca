@@ -30,6 +30,11 @@ const styles = {
         color: '#979797',
         size: '8px',
     },
+    itemsReceiver:{
+        padding: '5px 0 7px 20px',
+        maxHeight: 60,
+        overflow: 'auto',
+    },
 };
 
 export default class SendEmail extends React.Component {
@@ -100,7 +105,7 @@ export default class SendEmail extends React.Component {
                         <div style={styles.item}>{this.props.idCard.name}</div>
                     </div>
                     <div style={styles.title}>密件副本:</div>
-                    <div style={styles.items}>
+                    <div style={styles.itemsReceiver}>
                     {this.state.studentList.map( (item, i) => (
                         <div key={i} style={styles.item}>{item.studentId} {item.studentName} {item.studentEmail},</div>
                     ))}
