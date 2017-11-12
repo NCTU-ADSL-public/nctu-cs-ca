@@ -1,4 +1,5 @@
 import React from 'react';
+import Toggle from 'material-ui/Toggle';
 import './StudentSelList.css';
 
 //for Chips
@@ -30,6 +31,9 @@ const styles = {
         display: 'flex',
         flexWrap: 'wrap',
     },
+    toggle: {
+        marginBottom: 0,
+    },
 };
 
 export default class StudentInform extends React.Component {
@@ -47,6 +51,8 @@ export default class StudentInform extends React.Component {
             groupD: true,
             gGrad: true,
             gSubmit: true,
+
+            isToggle: false,
         };
 
         this.filterList = this.filterList.bind(this);
@@ -64,9 +70,11 @@ export default class StudentInform extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if( prevProps.students !== this.props.students ||
-            prevState.initStudents !== this.state.initStudents) {
+        if( prevProps.students !== this.props.students) {
             this.setState({initStudents: this.props.students,});
+            this.filterListGroup(999);
+        }
+        if(prevState.initStudents !== this.state.initStudents) {
             this.filterListGroup(999);
         }
     }
@@ -160,14 +168,50 @@ export default class StudentInform extends React.Component {
         this.filterListGroup(groupNum);
     }
 
+    handleToggle = () => {
+        this.setState({
+              isToggle: !this.state.isToggle,
+        });
+
+        let newInitStudent = this.state.initStudents;
+        newInitStudent.forEach((item) => {
+            item.selected = !this.state.isToggle;
+        });
+
+        this.setState({
+            initStudents: newInitStudent,
+        });
+        this.filterListGroup(999);
+    };
+
+
     render(){
         return (
             <div id="page">
                 <div className="filter">
+                    <div style={styles.wrapper}>
+                        <div style={{
+                            width: '200px',
+                            padding: '5px',
+                        }}>
+                            <MuiThemeProvider>
+                                <SendEmail { ...this.state } idCard={this.props.idCard}/>
+                            </MuiThemeProvider>
+                        </div>
 
-                    <MuiThemeProvider>
-                        <SendEmail { ...this.state } idCard={this.props.idCard}/>
-                    </MuiThemeProvider>
+                        <div style={{
+                            width: '200px',
+                            padding: '15px 0 0 0',
+                        }}>
+                            <MuiThemeProvider>
+                                <Toggle
+                                    label="全選/全不選"
+                                    style={styles.toggle}
+                                    onToggle={() => this.handleToggle() }
+                                />
+                            </MuiThemeProvider>
+                        </div>
+                    </div>
 
                     <div className="filter-list">
                         <input type="text"
