@@ -126,7 +126,7 @@ export default class index extends React.Component {
                     >
                         <TabPane tab={`學生清單`} key="1">
 
-                            <StudentList students={this.sttate.initStudents}/>
+                            <StudentList students={this.state.initStudents}/>
                         </TabPane>
                         <TabPane tab={`預審通知`} key="2">
                             <StudentInform students={this.state.initStudents}/>
