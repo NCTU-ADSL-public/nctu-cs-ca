@@ -15,6 +15,23 @@ import TextField from './TextField';
  *
  * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
  */
+const styles = {
+    title:{
+        padding: '3px 3px 0px 3px',
+    },
+    items:{
+        padding: '5px 0 7px 20px',
+    },
+    item:{
+        display: 'inline-block',
+        height: '15px',
+        width: 'auto',
+        padding: '3px',
+        color: '#979797',
+        size: '8px',
+    },
+};
+
 export default class SendEmail extends React.Component {
 
     constructor(props){
@@ -38,16 +55,18 @@ export default class SendEmail extends React.Component {
 
     studentDataMatch(){
         let newList = [];
-        this.props.initStudents.forEach( (item) => {
-            if(item.selected){
-                newList.push({
-                    studentId: item.student_id,
-                    studentName: item.sname,
-                    studentEmail: item.email,
-                });
-            }
-            return 1;
-        });
+        this.props.initStudents
+            .sort((a, b) => (parseInt(a.student_id) - parseInt(b.student_id)))
+            .forEach( (item) => {
+                if(item.selected){
+                    newList.push({
+                        studentId: item.student_id,
+                        studentName: item.sname,
+                        studentEmail: item.email,
+                    });
+                }
+                return 1;
+            });
         this.setState({studentList: newList});
     }
 
@@ -76,10 +95,16 @@ export default class SendEmail extends React.Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    寄給:
+                    <div style={styles.title}>寄件人:</div>
+                    <div style={styles.items}>
+                        <div style={styles.item}>{this.props.idCard.name}</div>
+                    </div>
+                    <div style={styles.title}>密件副本:</div>
+                    <div style={styles.items}>
                     {this.state.studentList.map( (item, i) => (
-                        <div key={i}>{item.studentId} {item.studentName} {item.studentEmail}, </div>
+                        <div key={i} style={styles.item}>{item.studentId} {item.studentName} {item.studentEmail},</div>
                     ))}
+                    </div>
                     <MuiThemeProvider>
                         <TextField/>
                     </MuiThemeProvider>

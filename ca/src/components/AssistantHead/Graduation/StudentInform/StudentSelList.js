@@ -166,7 +166,7 @@ export default class StudentInform extends React.Component {
                 <div className="filter">
 
                     <MuiThemeProvider>
-                        <SendEmail { ...this.state }/>
+                        <SendEmail { ...this.state } idCard={this.props.idCard}/>
                     </MuiThemeProvider>
 
                     <div className="filter-list">
