@@ -10,6 +10,7 @@ import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 import StudentList from './StudentSearch/StudentList';
 import StudentInform from './StudentInform/StudentSelList';
 
+import LoadingComponent from '../Loading';
 
 
 
@@ -87,13 +88,17 @@ export default class index extends React.Component {
                 },
 
             ],
+            loading: true,
         };
     }
 
     componentDidMount(){
         const self = this;
         axios.get('/assistants/graduate/list').then(studentData => {
-            self.setState({ initStudents: studentData.data, });
+            self.setState({
+                initStudents: studentData.data,
+                loading: false,
+            });
         }).catch(err => {
             console.log(err);
         });
@@ -106,22 +111,28 @@ export default class index extends React.Component {
     };
 
     render() {
-        return (
-            <div>
-                <Tabs
-                    renderTabBar={() => <ScrollableInkTabBar onTabClick={this.onTabClick}/>}
-                    renderTabContent={() => <TabContent/>}
-                    activeKey={this.state.activeKey}
-                    onChange={this.onChange}
-                >
-                    <TabPane tab={`學生清單`} key="1">
-                        <StudentList students={this.state.initStudents}/>
-                    </TabPane>
-                    <TabPane tab={`預審通知`} key="2">
-                        <StudentInform students={this.state.initStudents}/>
-                    </TabPane>
-                </Tabs>
-            </div>
-        );
+        if( this.state.loading )
+            return (
+                <LoadingComponent/>
+            );
+        else
+            return (
+                <div>
+                    <Tabs
+                        renderTabBar={() => <ScrollableInkTabBar onTabClick={this.onTabClick}/>}
+                        renderTabContent={() => <TabContent/>}
+                        activeKey={this.state.activeKey}
+                        onChange={this.onChange}
+                    >
+                        <TabPane tab={`學生清單`} key="1">
+
+                            <StudentList students={this.sttate.initStudents}/>
+                        </TabPane>
+                        <TabPane tab={`預審通知`} key="2">
+                            <StudentInform students={this.state.initStudents}/>
+                        </TabPane>
+                    </Tabs>
+                </div>
+            );
     }
 }

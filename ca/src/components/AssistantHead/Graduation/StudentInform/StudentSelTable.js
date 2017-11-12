@@ -69,7 +69,6 @@ export default class StudentTable extends Component {
 
             studentListOrdered: [],
             orderBy: 'student_id',
-            sortLog: [],
         };
 
         this.orderList = this.orderList.bind(this);
@@ -93,9 +92,6 @@ export default class StudentTable extends Component {
         if( NextProp.students !== this.props.students ){
             this.orderList(this.state.orderBy);
         }
-        if( NextState.sortLog !== this.state.sortLog ){
-            console.log(this.state.sortLog);
-        }
     }
 
     orderList(orderBy){
@@ -103,11 +99,6 @@ export default class StudentTable extends Component {
          let newLog = [];
          let NewStudentList = [].concat(this.props.students)
             .sort((a, b) => {
-                newLog.push({
-                    a: a.student_id,
-                    cmp: (a.student_id > b.student_id ? '>' : '<='),
-                    b: b.student_id,
-                });
                 if(orderBy === 'student_id')
                     return a.student_id > b.student_id;
                 else if(orderBy === 'sname')
