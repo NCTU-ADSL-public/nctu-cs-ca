@@ -100,17 +100,17 @@ export default class StudentTable extends Component {
          let NewStudentList = [].concat(this.props.students)
             .sort((a, b) => {
                 if(orderBy === 'student_id')
-                    return a.student_id > b.student_id;
+                    return parseInt(a.student_id) - parseInt(b.student_id);
                 else if(orderBy === 'sname')
-                    return a.sname > b.sname;
+                    return a.sname.localeCompare(b.sname, 'zh-Hans-CN');
                 else if(orderBy === 'program')
-                    return a.program > b.program;
+                    return a.program.localeCompare(b.program, 'zh-Hans-CN');
                 else if(orderBy === 'graduate')
-                    return a.graduate > b.graduate;
+                    return a.graduate - b.graduate;
                 else if(orderBy === 'graduate_submit')
-                    return a.graduate_submit > b.graduate_submit;
+                    return a.graduate_submit - b.graduate_submit;
                 else
-                    return a.student_id > b.student_id;
+                    return a.student_id - b.student_id;
             }).map((row, i) =>
                 <TableRow key={i}
                           selected={row.selected}>

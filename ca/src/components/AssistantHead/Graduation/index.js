@@ -111,11 +111,6 @@ export default class index extends React.Component {
     };
 
     render() {
-        if( this.state.loading )
-            return (
-                <LoadingComponent/>
-            );
-        else
             return (
                 <div>
                     <Tabs
