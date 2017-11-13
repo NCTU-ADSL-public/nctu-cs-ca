@@ -190,7 +190,7 @@ class Grad extends React.Component {
             check:{state:true}
         })
             .then(res => {
-                console.log(res)
+                ()=>this.EnglishCallBack();
             })
             .catch(err => {
                 console.log(err)
@@ -199,7 +199,10 @@ class Grad extends React.Component {
             graduationCheckEnglishTest:true,
             opendialog: false
         });
+    }
 
+    EnglishCallBack(){
+        let _this = this;
         axios.get('/students/graduate/revised').then(studentData => {
             _this.setState({
                 Graduationitems:studentData.data
