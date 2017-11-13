@@ -182,6 +182,7 @@ class Grad extends React.Component {
 
     }
     sendEnglishTest(){
+        let _this=this;
         axios.post('/students/graduate/english', {
             check:{state:true}
         })
@@ -191,10 +192,18 @@ class Grad extends React.Component {
             .catch(err => {
                 console.log(err)
             });
-        this.setState({
+        _this.setState({
             graduationCheckEnglishTest:true,
             opendialog: false
-        })
+        });
+
+        axios.get('/students/graduate/revised').then(studentData => {
+            _this.setState({
+                Graduationitems:studentData.data
+            })
+        }).catch(err => {
+            console.log(err);
+        });
 
     }
 
@@ -245,7 +254,7 @@ class Grad extends React.Component {
                 <RaisedButton style={styles.buttonDia}
                               labelStyle={styles.labelStyle}
                               backgroundColor = "#DDDDDD"
-                              label="取消"
+                              label="否"
                               keyboardFocused={true}
                               onClick={this.handleClosedialog}/>
             </MuiThemeProvider>,
@@ -253,7 +262,7 @@ class Grad extends React.Component {
                 <RaisedButton style={styles.buttonDia}
                               labelStyle={styles.labelStyle}
                               backgroundColor = "#DDDDDD"
-                              label="確認"
+                              label="是"
                               keyboardFocused={true}
                 onClick={()=>this.sendEnglishTest()}
             />
@@ -346,7 +355,7 @@ class Grad extends React.Component {
                                         open={this.state.opendialog}
                                         onRequestClose={this.handleClosedialog}
                                     >
-                                        <div style={styles.labelStyle}>須通過英檢後再按確認</div>
+                                        <div style={styles.labelStyle}>須通過英檢後再按'是'，按下'是'後可確認看看自動排序。</div>
                                     </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
