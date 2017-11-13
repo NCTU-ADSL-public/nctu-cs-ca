@@ -21,6 +21,9 @@
 .default-table tr {
     height: 15px;
 }
+.bigger-row {
+    height: 30px !important;
+}
 
 .borderLess, .borderLess td {
     border: 0px;
