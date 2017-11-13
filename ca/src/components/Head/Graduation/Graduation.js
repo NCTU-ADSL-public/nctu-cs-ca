@@ -74,6 +74,7 @@ class Grad extends React.Component {
         open:false,
         opendialog: false,
         opendialog1: false,
+        opendialogprint: false,
         graduationCheck:false,
         graduationCheckEnglishTest:false,
         Graduationitems:[],
@@ -131,6 +132,8 @@ class Grad extends React.Component {
             document.title = fileName;
         window.print();
         document.title = original;
+        this.setState({
+            scrollQuery:'',opendialogprint: true});
         return true;
     }
     handleToggle(){
@@ -217,6 +220,10 @@ class Grad extends React.Component {
             scrollQuery:'',opendialog1: true});
     };
 
+    handleClosedialogprint = () => {
+        this.setState({opendialogprint: false});
+    };
+
     handleClosedialog = () => {
         this.setState({opendialog: false});
     };
@@ -267,6 +274,18 @@ class Grad extends React.Component {
                 onClick={()=>this.sendEnglishTest()}
             />
             </MuiThemeProvider>,
+        ];
+
+        const actions3 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="確認"
+                              keyboardFocused={true}
+                              onClick={this.handleClosedialogprint}/>
+            </MuiThemeProvider>
         ];
         return (
             <div>
@@ -336,6 +355,19 @@ class Grad extends React.Component {
                                                   backgroundColor = "#DDDDDD"
                                                   label="列印"
                                                   onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
+                                </MuiThemeProvider>
+
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions3}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialogprint}
+                                        onRequestClose={this.handleClosedialogprint}
+                                    >
+                                        <div style={styles.labelStyle}>列印系統所排之課程預審。<br/>專業選修, 其他選修,外文,的課程請自行填寫調整。</div>
+                                    </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <RaisedButton style={styles.buttonEn}
