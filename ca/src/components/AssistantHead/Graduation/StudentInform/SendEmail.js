@@ -16,23 +16,30 @@ import TextField from './TextField';
  * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
  */
 const styles = {
+    titleSender:{
+        padding: '3px 3px 5px 3px',
+    },
     title:{
         padding: '3px 3px 0px 3px',
     },
     items:{
-        padding: '5px 0 7px 20px',
+        padding: '2px 0 3px 20px',
     },
     item:{
         display: 'inline-block',
-        height: '15px',
+        height: '10px',
         width: 'auto',
-        padding: '3px',
+        padding: '2px',
         color: '#979797',
-        size: '8px',
+        fontSize: '8px',
     },
     itemsReceiver:{
         padding: '5px 0 7px 20px',
-        maxHeight: 60,
+        maxHeight: 50,
+        overflow: 'auto',
+    },
+    dialog:{
+        height: '800px',
         overflow: 'auto',
     },
 };
@@ -100,19 +107,16 @@ export default class SendEmail extends React.Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    <div style={styles.title}>寄件人:</div>
-                    <div style={styles.items}>
-                        <div style={styles.item}>{this.props.idCard.name}</div>
-                    </div>
-                    <div style={styles.title}>密件副本:</div>
-                    <div style={styles.itemsReceiver}>
-                    {this.state.studentList.map( (item, i) => (
-                        <div key={i} style={styles.item}>{item.studentId} {item.studentName} {item.studentEmail},</div>
-                    ))}
-                    </div>
-                    <MuiThemeProvider>
-                        <TextField/>
-                    </MuiThemeProvider>
+                        <div style={styles.titleSender}>寄件人: {this.props.idCard.name}</div>
+                        <div style={styles.title}>密件副本:</div>
+                        <div style={styles.itemsReceiver}>
+                        {this.state.studentList.map( (item, i) => (
+                            <div key={i} style={styles.item}>{item.studentId} {item.studentName} {item.studentEmail},</div>
+                        ))}
+                        </div>
+                        <MuiThemeProvider>
+                            <TextField/>
+                        </MuiThemeProvider>
                 </Dialog>
             </div>
         );
