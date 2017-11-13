@@ -104,9 +104,12 @@ class Grad extends React.Component {
     scrollTotop(){
         scrollToComponent(this.refs.my);
     }
-    printGradTable() {
+    printGradTable(fileName) {
+        let original = document.title;
+        if (fileName != null)
+            document.title = fileName;
         window.print();
-
+        document.title = original;
         return true;
     }
     handleToggle(){
@@ -207,7 +210,7 @@ class Grad extends React.Component {
                                                       labelStyle={styles.labelStyle}
                                                       backgroundColor = "#DDDDDD"
                                                       label="列印"
-                                                      onClick={() => this.printGradTable()}/>
+                                                      onClick={() => this.printGradTable('畢業預審表-'+this.state.studentIdcard.student_id)}/>
                                     </MuiThemeProvider>
                                     <MuiThemeProvider>
                                         <Toggle
@@ -267,7 +270,7 @@ class Grad extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   label="列印"
-                                                  onClick={() => this.printGradTable()}/>
+                                                  onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <Toggle
