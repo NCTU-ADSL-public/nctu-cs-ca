@@ -207,7 +207,6 @@ class Grad extends React.Component {
 
     EnglishCallBack(){
         let _this = this;
-        alert("22")
         axios.get('/students/graduate/revised').then(studentData => {
             _this.setState({
                 Graduationitems:studentData.data,
