@@ -166,12 +166,12 @@ class Grad extends React.Component {
                         <div className="Grad-title-text">
                             {this.props.assistant?
                                 <div>
-                                    <div id="lessons-little-title-grad">資工系{this.props.studentProfile.prog}組 - {this.props.studentProfile.student_id}{this.props.studentProfile.sname}</div>
+                                    <div id="lessons-little-title-grad">資工系{this.props.studentProfile.program}組 - {this.props.studentProfile.student_id}{this.props.studentProfile.sname}</div>
                                 </div>
                             :
                                 <div>
                                     <div id="lessons-title">畢業預審</div>
-                                    <div id="lessons-little-title-grad">-資工系{this.props.studentProfile.prog}組</div>
+                                    <div id="lessons-little-title-grad">-資工系{this.props.studentProfile.program}組</div>
                                 </div>
                             }
 
