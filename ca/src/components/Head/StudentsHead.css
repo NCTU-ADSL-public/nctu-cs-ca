@@ -42,6 +42,7 @@
     margin: -10px 0 0 0;
     padding: 0.15% 3% 0 15%;
     float:left;
+    width: auto;
     height: 30px;
     float:left;
 }

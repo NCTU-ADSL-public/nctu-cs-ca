@@ -221,8 +221,24 @@
 @media (max-width: 480px) {
 
     .tip{
-        padding: 0 0 70px 150px;
+        padding: 0 0 200px 75px;
         display: inline-block;
         width: 700px;
     }
+
+    #lessons-little-title-grad{
+        margin: 8px 0 0 10px;
+
+    }
+
+    .Grad-title-text{
+        margin: 0 0 0 0;
+        padding: 0px 10px 3px 65px;
+        color: #7B7B7B;
+        width: 500px;
+        height: 100px;
+        font-size: 1.5em;
+        float: left;
+    }
+
 }

@@ -55,7 +55,7 @@ const styles = {
         color: '#7B7B7B'
     },
     pop:{
-        width: '200px',
+        width:'auto',
         height: 'auto',
     }
 };

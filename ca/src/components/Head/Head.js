@@ -246,7 +246,7 @@ class Head extends Component {
             margin:'5px 0 0',
             lineHeight: '15px',
             fontSize: '11px',
-            width: '10px',
+            width: '15px',
         },
 		studentIdcard:{
             sname:'流川楓',
