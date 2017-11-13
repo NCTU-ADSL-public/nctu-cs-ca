@@ -26,6 +26,7 @@
     position: fixed;
     bottom: 41px;
     right: 3px;
+    z-index: 10000;
 }
 
 .red{
