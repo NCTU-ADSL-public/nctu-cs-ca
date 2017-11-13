@@ -25,12 +25,12 @@ const styles = {
     toggle: {
         marginBottom: 0,
         maxWidth: 200,
-        width:'500px',
+        width:'400px',
         float:'left',
-        margin:'10px 10px 0 20px',
+        margin:'15px 10px 0 20px',
     },
     button: {
-        margin:'5px 10px 0 10px',
+        margin:'9px 10px 0 0px',
         width:'100px',
         float:'left'
     },
@@ -39,7 +39,7 @@ const styles = {
         width:'100px'
     },
     buttonEn: {
-        margin:'5px 10px 0 10px',
+        margin:'9px 10px 0 0px',
         width:'150px',
         float:'left'
     },
@@ -48,7 +48,7 @@ const styles = {
         color: '#7B7B7B'
     },
     medium:{
-        padding:'10px 0 0 5px',
+        padding:'15px 0 0 5px',
         width: 10,
         height: 10,
         float:'left',
@@ -152,6 +152,7 @@ class Grad extends React.Component {
     }
     handleClickview(e) {
         this.setState({
+            scrollQuery:'',
             open: !this.state.open,
             isToggle:this.state.isToggle
         });
@@ -160,6 +161,7 @@ class Grad extends React.Component {
 
     handleClose(e) {
         this.setState({
+            scrollQuery:'',
             open: false
         });
     }
@@ -197,11 +199,13 @@ class Grad extends React.Component {
     }
 
     handleClosedialog1 = () => {
-        this.setState({opendialog1: false});
+        this.setState({
+            scrollQuery:'',opendialog1: false});
     };
 
     handleOpen1 = () => {
-        this.setState({opendialog1: true});
+        this.setState({
+            scrollQuery:'',opendialog1: true});
     };
 
     handleClosedialog = () => {
@@ -209,7 +213,8 @@ class Grad extends React.Component {
     };
 
     handleOpen = () => {
-        this.setState({opendialog: true});
+        this.setState({
+            scrollQuery:'',opendialog: true});
     };
     render(){
 
