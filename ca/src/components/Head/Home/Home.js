@@ -9,7 +9,7 @@ class Home extends React.Component{
     render() {
         return (
             <div >
-                <img src={img} width="100%" alt=""/>
+                <img src={img} width="1300px" alt=""/>
             </div>
         );
     }
