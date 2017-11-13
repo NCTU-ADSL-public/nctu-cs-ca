@@ -18,6 +18,9 @@
     border-left: 1px solid #000000;
     border-right: 1px solid #000000;
 }
+.default-table tr {
+    height: 15px;
+}
 
 .borderLess, .borderLess td {
     border: 0px;
