@@ -10,6 +10,8 @@ import Toggle from 'material-ui/Toggle';
 import {ToastContainer, ToastStore} from 'react-toasts';
 import Popover from 'react-simple-popover';
 import ReactHover from 'react-hover';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 import scrollToComponent from 'react-scroll-to-component'
 import IconButton from 'material-ui/IconButton';
@@ -23,13 +25,22 @@ const styles = {
     toggle: {
         marginBottom: 0,
         maxWidth: 200,
-        width:'500px',
+        width:'400px',
         float:'left',
-        margin:'10px 10px 0 20px',
+        margin:'15px 10px 0 20px',
     },
     button: {
-        margin:'5px 10px 0 10px',
+        margin:'9px 10px 0 0px',
         width:'100px',
+        float:'left'
+    },
+    buttonDia: {
+        margin:'0 10px 0 10px',
+        width:'100px'
+    },
+    buttonEn: {
+        margin:'9px 10px 0 0px',
+        width:'150px',
         float:'left'
     },
     labelStyle: {
@@ -37,14 +48,14 @@ const styles = {
         color: '#7B7B7B'
     },
     medium:{
-        padding:'10px 0 0 5px',
+        padding:'15px 0 0 5px',
         width: 10,
         height: 10,
         float:'left',
         color: '#7B7B7B'
     },
     pop:{
-        width: '200px',
+        width:'auto',
         height: 'auto',
     }
 };
@@ -61,7 +72,11 @@ class Grad extends React.Component {
         scrollQuery:'',
         isToggle:true,
         open:false,
+        opendialog: false,
+        opendialog1: false,
+        opendialogprint: false,
         graduationCheck:false,
+        graduationCheckEnglishTest:false,
         Graduationitems:[],
         items:[],
         totalitems:[],
@@ -77,6 +92,13 @@ class Grad extends React.Component {
         axios.get('/students/graduate/check').then(studentData => {
             _this.setState({
                 graduationCheck : studentData.data.check.state
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/graduate/english').then(studentData => {
+            _this.setState({
+                graduationCheckEnglishTest : studentData.data.check.state
             })
         }).catch(err => {
             console.log(err);
@@ -106,10 +128,12 @@ class Grad extends React.Component {
     }
     printGradTable(fileName) {
         let original = document.title;
-        if (fileName != null)
+        if (fileName !== null)
             document.title = fileName;
         window.print();
         document.title = original;
+        this.setState({
+            scrollQuery:'',opendialogprint: true});
         return true;
     }
     handleToggle(){
@@ -131,6 +155,7 @@ class Grad extends React.Component {
     }
     handleClickview(e) {
         this.setState({
+            scrollQuery:'',
             open: !this.state.open,
             isToggle:this.state.isToggle
         });
@@ -139,6 +164,7 @@ class Grad extends React.Component {
 
     handleClose(e) {
         this.setState({
+            scrollQuery:'',
             open: false
         });
     }
@@ -154,13 +180,119 @@ class Grad extends React.Component {
             });
         this.setState({
             graduationCheck:true,
-        })
+            opendialog1: false
+        });
 
     }
+    sendEnglishTest(){
+        let _this=this;
+        axios.post('/students/graduate/english', {
+            check:{state:true}
+        })
+            .then(res => {
+                ()=>this.EnglishCallBack();
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        _this.setState({
+            graduationCheckEnglishTest:true,
+            opendialog: false
+        });
+    }
+
+    EnglishCallBack(){
+        let _this = this;
+        axios.get('/students/graduate/revised').then(studentData => {
+            _this.setState({
+                Graduationitems:studentData.data
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+
+    }
+
+    handleClosedialog1 = () => {
+        this.setState({
+            scrollQuery:'',opendialog1: false});
+    };
+
+    handleOpen1 = () => {
+        this.setState({
+            scrollQuery:'',opendialog1: true});
+    };
+
+    handleClosedialogprint = () => {
+        this.setState({opendialogprint: false});
+    };
+
+    handleClosedialog = () => {
+        this.setState({opendialog: false});
+    };
+
+    handleOpen = () => {
+        this.setState({
+            scrollQuery:'',opendialog: true});
+    };
     render(){
+
+        const actions1 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="取消"
+                              keyboardFocused={true}
+                              onClick={this.handleClosedialog1}/>
+            </MuiThemeProvider>,
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="確認"
+                              keyboardFocused={true}
+                              onClick={() => this.sendReview()}
+                />
+            </MuiThemeProvider>,
+        ];
+
+        const actions2 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="否"
+                              keyboardFocused={true}
+                              onClick={this.handleClosedialog}/>
+            </MuiThemeProvider>,
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="是"
+                              keyboardFocused={true}
+                onClick={()=>this.sendEnglishTest()}
+            />
+            </MuiThemeProvider>,
+        ];
+
+        const actions3 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="確認"
+                              keyboardFocused={true}
+                              onClick={this.handleClosedialogprint}/>
+            </MuiThemeProvider>
+        ];
         return (
             <div>
-                <div id="font_adjust">
+                <div className="font_adjust">
                     <ToastContainer store={ToastStore}/>
                     <div className="fixed" onClick={()=>this.scrollTotop()}>
                         <TopButton/>
@@ -187,90 +319,79 @@ class Grad extends React.Component {
                             <div className="yellow"> </div><div  className="text">未抵免課程</div>
                             <div className="purple"> </div><div  className="text">免修或抵免課程</div>
                             <div className="blue"> </div><div  className="text">當期課程</div>
-                            {this.props.assistant?
-                                <div>
-                                    <ReactHover options={optionsCursorTrueWithMargin}>
-                                        <ReactHover.Trigger type='trigger'>
-                                            <MuiThemeProvider>
-                                                <RaisedButton
-                                                    label={this.state.graduationCheck?"已送審":"未送審"}
-                                                    style={styles.button}
-                                                    disabled={1}
-                                                    labelStyle={styles.labelStyle}
-                                                    backgroundColor = "#DDDDDD"
-                                                    onClick={() => this.sendReview()}
-                                                />
-                                            </MuiThemeProvider>
-                                        </ReactHover.Trigger>
-                                        <ReactHover.Hover type='hover'>
-                                        </ReactHover.Hover>
-                                    </ReactHover>
-                                    <MuiThemeProvider>
-                                        <RaisedButton style={styles.button}
-                                                      labelStyle={styles.labelStyle}
-                                                      backgroundColor = "#DDDDDD"
-                                                      label="列印"
-                                                      onClick={() => this.printGradTable('畢業預審表-'+this.state.studentIdcard.student_id)}/>
-                                    </MuiThemeProvider>
-                                    <MuiThemeProvider>
-                                        <Toggle
-                                            label="系統自動排序"
-                                            style={styles.toggle}
-                                            labelStyle={styles.labelStyle}
-                                            onToggle={(toggled)=>this.handleToggle()}
-                                        />
-                                    </MuiThemeProvider>
-                                    <MuiThemeProvider>
-                                        <IconButton style={styles.medium}
-                                                    tooltip="排序依據"
-                                                    tooltipPosition="top-right"
-                                                    ref="target"
-                                                    onClick={()=>this.handleClickview()}>
-                                            <ActionGrade />
-                                        </IconButton>
-                                    </MuiThemeProvider>
-                                    <Popover
-                                        placement='bottom'
-                                        target={this.refs.target}
-                                        show={this.state.open}
-                                        onHide={this.handleClose.bind(this)}>
-                                        <div
-                                            style={styles.pop}>
-                                            -未排的<br/>
-                                            物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                            -排序過的<br/>
-                                            重複修課：將只顯示一次,取成績最高的那次<br/>
-                                            必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                            物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                            核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                            專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
-                                        </div>
-                                    </Popover>
-                                </div>
-                            :
-                                <div>
+                            <div>
                                 <ReactHover options={optionsCursorTrueWithMargin}>
                                     <ReactHover.Trigger type='trigger'>
                                         <MuiThemeProvider>
                                             <RaisedButton
-                                                label={this.state.graduationCheck?"已送審":"確認送審"}
+                                                label={ this.props.assistant ?
+                                                    this.state.graduationCheck?"已送審":"未送審"
+                                                    :
+                                                    this.state.graduationCheck?"已送審":"確認送審"}
+                                                disabled={this.props.assistant ?true : this.state.graduationCheck}
                                                 style={styles.button}
-                                                disabled={this.state.graduationCheck}
                                                 labelStyle={styles.labelStyle}
                                                 backgroundColor = "#DDDDDD"
-                                                onClick={() => this.sendReview()}
+                                                onClick={this.handleOpen1}
                                             />
                                         </MuiThemeProvider>
                                     </ReactHover.Trigger>
                                     <ReactHover.Hover type='hover'>
                                     </ReactHover.Hover>
                                 </ReactHover>
+
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions1}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialog1}
+                                        onRequestClose={this.handleClosedialog1}
+                                    >
+                                        <div style={styles.labelStyle}>按下確認讓助理知道您看過這個網站。</div>
+                                    </Dialog>
+                                </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <RaisedButton style={styles.button}
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   label="列印"
                                                   onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
+                                </MuiThemeProvider>
+
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions3}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialogprint}
+                                        onRequestClose={this.handleClosedialogprint}
+                                    >
+                                        <div style={styles.labelStyle}>列印系統所排之課程預審。<br/>專業選修, 其他選修,外文,的課程請自行填寫調整。</div>
+                                    </Dialog>
+                                </MuiThemeProvider>
+                                <MuiThemeProvider>
+                                    <RaisedButton style={styles.buttonEn}
+                                                  labelStyle={styles.labelStyle}
+                                                  backgroundColor = "#DDDDDD"
+                                                  label={this.state.graduationCheckEnglishTest?"已考過英檢":"是否考過英檢?"}
+                                                  disabled={this.state.graduationCheckEnglishTest}
+                                                  onClick={this.handleOpen}/>
+                                </MuiThemeProvider>
+
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions2}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialog}
+                                        onRequestClose={this.handleClosedialog}
+                                    >
+                                        <div style={styles.labelStyle}>須通過英檢後再按'是'，按下'是'後可確認看看自動排序。</div>
+                                    </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <Toggle
@@ -296,18 +417,17 @@ class Grad extends React.Component {
                                     onHide={this.handleClose.bind(this)}>
                                     <div
                                         style={styles.pop}>
-                                    -未排的<br/>
-                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                    -排序過的<br/>
-                                    重複修課：將只顯示一次,取成績最高的那次<br/>
-                                    必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                    核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                    專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
+                                        -未排的<br/>
+                                        物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                        -排序過的<br/>
+                                        重複修課：將只顯示一次,取成績最高的那次<br/>
+                                        必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                        物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                        核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                        專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
                                     </div>
                                 </Popover>
-                                </div>
-                            }
+                            </div>
                         </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">

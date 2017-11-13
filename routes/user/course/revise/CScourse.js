@@ -270,16 +270,22 @@ CScourse.processCS = function(req, res, next){
                                                         PCB.physic[s].realCredit = PCB.physic[s].originalCredit - 1;
 							courseResult[0].credit += PCB.physic[s].realCredit;
 							if(courseResult[3].credit < courseResult[3].require){
-								courseResult[3].credit++;
-								courseResult[3].course.push(PCB.physic[s]);
+								var cosInfo = JSON.stringify(PCB.physic[s]);
+                                cosInfo = JSON.parse(cosInfo);
+                                cosInfo.realCredit = 1;
+                                courseResult[3].credit++;
+								courseResult[3].course.push(cosInfo);
 							}
 							else{
-								courseResult[4].credit++;
-								courseResult[4].course.push(PCB.physic[s]);
+                                var cosInfo = JSON.stringify(PCB.physic[s]);
+                                cosInfo = JSON.parse(cosInfo);
+                                cosInfo.realCredit = 1;
+                                courseResult[4].credit++;
+								courseResult[4].course.push(cosInfo);
 							}
-                                                        courseResult[0].course.push(PCB.physic[s]);
+                            courseResult[0].course.push(PCB.physic[s]);
                                                 }
-                                                else{
+                                                       else{
                                                         PCB.physic[s].move = true;
 							if(courseResult[3].credit < courseResult[3].require){
 								courseResult[3].credit += PCB.physic[s].originalCredit;
@@ -321,12 +327,18 @@ CScourse.processCS = function(req, res, next){
                                                         PCB.physic[s].realCredit = PCB.physic[s].originalCredit - 1;
 							courseResult[0].credit += PCB.physic[s].realCredit;
 							if(courseResult[3].credit < courseResult[3].require){
-								courseResult[3].credit++;
-								courseResult[3].course.push(PCB.physic[s]);
+                                var cosInfo = JSON.stringify(PCB.physic[s]);
+                                cosInfo = JSON.parse(cosInfo);
+                                cosInfo.realCredit = 1;
+                                courseResult[3].credit++;
+								courseResult[3].course.push(cosInfo);
 							}
 							else{
-								courseResult[4].credit++;
-								courseResult[4].course.push(PCB.physic[s]);
+                                var cosInfo = JSON.stringify(PCB.physic[s]);
+                                cosInfo = JSON.parse(cosInfo);
+                                cosInfo.realCredit = 1;
+                                courseResult[4].credit++;
+								courseResult[4].course.push(cosInfo);
 							}
                                                         courseResult[0].course.push(PCB.physic[s]);
                                                 }
@@ -350,12 +362,18 @@ CScourse.processCS = function(req, res, next){
                         	PCB.physic[s].realCredit = PCB.physic[s].originalCredit - 1;
 				courseResult[0].credit += PCB.physic[s].realCredit;
 				if(courseResult[3].credit < courseResult[3].require){
-					courseResult[3].credit++;
-					courseResult[3].course.push(PCB.physic[s]);
+                    var cosInfo = JSON.stringify(PCB.physic[s]);
+                    cosInfo = JSON.parse(cosInfo);
+                    cosInfo.realCredit = 1;
+                    courseResult[3].credit++;
+					courseResult[3].course.push(cosInfo);
 				}
 				else{
-					courseResult[4].credit++;
-					courseResult[4].course.push(PCB.physic[s]);
+                    var cosInfo = JSON.stringify(PCB.physic[s]);
+                    cosInfo = JSON.parse(cosInfo);
+                    cosInfo.realCredit = 1;
+                    courseResult[4].credit++;
+					courseResult[4].course.push(cosInfo);
 				}
                                 courseResult[0].course.push(PCB.physic[s]);
                         }

@@ -101,8 +101,8 @@ module.exports = {
         const resource = pool.acquire();
         resource.then(function(c) {
             var sql_a_uploadGrade = c.prepare(s.a_uploadGrade);
-            c.query(sql_a_uploadGrade({pt:pt},function(err){
-                if(err)
+            c.query(sql_a_uploadGrade({ pt: pt }, function(err) {
+                if (err)
                     throw err;
                 pool.release(c);
             }));
@@ -194,49 +194,46 @@ module.exports = {
             })
         })
     },
-    bindAccount: function(id,str,type){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_setGmail=c.prepare(s.setGmail);
-            var sql_setFbId=c.prepare(s.setFbId);
-            var sql_setGithubId=c.prepare(s.setGithubId);
-            if(type==1)
-                c.query(sql_setGmail({ id: id,gmail:str}), function(err, result) {
+    bindAccount: function(id, str, type) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_setGmail = c.prepare(s.setGmail);
+            var sql_setFbId = c.prepare(s.setFbId);
+            var sql_setGithubId = c.prepare(s.setGithubId);
+            if (type == 1)
+                c.query(sql_setGmail({ id: id, gmail: str }), function(err, result) {
                     if (err)
                         throw err;
                     pool.release(c);
                 });
-            else if(type==2)
-                c.query(sql_setFbId({ id: id,fb_id:str}), function(err, result) {
+            else if (type == 2)
+                c.query(sql_setFbId({ id: id, fb_id: str }), function(err, result) {
                     if (err)
                         throw err;
                     pool.release(c);
                 });
-            else if(type==3)
-                c.query(sql_setGithubId({ id: id,github_id:str}), function(err, result) {
+            else if (type == 3)
+                c.query(sql_setGithubId({ id: id, github_id: str }), function(err, result) {
                     if (err)
                         throw err;
                     pool.release(c);
-                });                
+                });
         });
     },
-    offset: function(id,callback){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            if(id!='all')
-            {
-                var sql_offset=c.prepare(s.offset_single);
-                c.query(sql_offset({id:id}), function(err,result) {
+    offset: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            if (id != 'all') {
+                var sql_offset = c.prepare(s.offset_single);
+                c.query(sql_offset({ id: id }), function(err, result) {
                     if (err)
                         throw err;
                     callback(null, JSON.stringify(result));
                     pool.release(c);
                 });
-            }
-            else
-            {
-                var sql_offset=c.prepare(s.offset_all);
-                c.query(sql_offset({}), function(err,result) {
+            } else {
+                var sql_offset = c.prepare(s.offset_all);
+                c.query(sql_offset({}), function(err, result) {
                     if (err)
                         throw err;
                     callback(null, JSON.stringify(result));
@@ -245,26 +242,37 @@ module.exports = {
             }
         });
     },
-    on_cos_data: function(id,callback){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_on_cos_data=c.prepare(s.on_cos_data);
-            c.query(sql_on_cos_data({id:id}),function(err,result){
-                if(err)
+    on_cos_data: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_on_cos_data = c.prepare(s.on_cos_data);
+            c.query(sql_on_cos_data({ id: id }), function(err, result) {
+                if (err)
                     throw err;
-                callback(null,JSON.stringify(result));
+                callback(null, JSON.stringify(result));
                 pool.release(c);
             });
         });
     },
-    general_cos_rule: function(callback){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_general_cos_rule=c.prepare(s.general_cos_rule);
-            c.query(sql_general_cos_rule({}),function(err,result){
-                if(err)
+    general_cos_rule: function(callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_general_cos_rule = c.prepare(s.general_cos_rule);
+            c.query(sql_general_cos_rule({}), function(err, result) {
+                if (err)
                     throw err;
-                callback(null,JSON.stringify(result));
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            });
+        });
+    },
+    setEnCertificate: function(id, check) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_setEnCertificate = c.prepare(s.setEnCertificate);
+            c.query(sql_setEnCertificate({ id: id, check: check }), function(err) {
+                if (err)
+                    throw err;
                 pool.release(c);
             });
         });

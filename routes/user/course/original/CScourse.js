@@ -61,6 +61,7 @@ CScourse.processCS = function(req, res, next){
                                 		en:'',
 						code:'',
                                 		score: -1,
+                                        realCredit:0,
                                 		complete:'0',
 						english:false,
                                 		grade: '0',
@@ -74,6 +75,7 @@ CScourse.processCS = function(req, res, next){
   				  		cosInfo.code = cosNumber[k];
 						cosInfo.score = parseInt(detail[cosNumber[k]].score);
   						cosInfo.grade = detail[cosNumber[k]].score_level;
+                        cosInfo.realCredit = detail[cosNumber[k]].cos_credit;
   						cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;
   						cosInfo.semester = parseInt(detail[cosNumber[k]].semester);
   						var reg = detail[cosNumber[k]].cos_cname.substring(0,2);
@@ -172,8 +174,9 @@ CScourse.processCS = function(req, res, next){
                                 cn:'',
                                 en:'',
                                 score: -1,
+                                realCredit:0,
                                 complete:'0',
-				grade:'0',
+				                grade:'0',
                                 year:'',
                                 semester:'',
                                 reason: 'CS'
@@ -181,26 +184,34 @@ CScourse.processCS = function(req, res, next){
                         PCBcos.cn = detail[PCBnum[i]].cos_cname;
                         PCBcos.en = detail[PCBnum[i]].cos_ename;
                         PCBcos.score = detail[PCBnum[i]].score;
-			PCBcos.grade = detail[PCBnum[i]].score_level;
+			            PCBcos.grade = detail[PCBnum[i]].score_level;
+                        PCBcos.realCredit = parseInt(detail[PCBnum[i]].cos_credit);
                         PCBcos.complete = true;
                         PCBcos.year = parseInt(detail[PCBnum[i]].year) - school_year + 1;
                         PCBcos.semester = parseInt(detail[PCBnum[i]].semester);
                         var temp = detail[PCBnum[i]].cos_cname.substring(0,2);
+                        courseResult[0].course.push(PCBcos);
                         if(temp == '物理'){
                                 courseResult[0].credit += (parseInt(detail[PCBnum[i]].cos_credit) - 1);
-				if(courseResult[3].credit < courseResult[3].require){
-					courseResult[3].credit++;
-					courseResult[3].course.push(PCBcos);
-
-				}
-				else{
-					courseResult[4].credit++;
-					courseResult[4].course.push(PCBcos);
-				}
-			}
+                                PCBcos.realCredit = parseInt(detail[PCBnum[i]].cos_credit) - 1;
+				                if(courseResult[3].credit < courseResult[3].require){
+					                    var cosInfo = JSON.stringify(PCBcos);
+                                        cosInfo = JSON.parse(cosInfo);
+                                        cosInfo.realCredit = 1;
+                                        courseResult[3].credit++;
+                                        courseResult[3].course.push(cosInfo);
+				                }
+				                else{
+				    	                var cosInfo = JSON.stringify(PCBcos);
+                                        cosInfo = JSON.parse(cosInfo);
+                                        cosInfo.realCredit = 1;
+                                        courseResult[4].credit++;
+					                    courseResult[4].course.push(cosInfo);
+				                }
+			            }
                         else
-				courseResult[0].credit += parseInt(detail[PCBnum[i]].cos_credit);
-			courseResult[0].course.push(PCBcos);
+				                courseResult[0].credit += parseInt(detail[PCBnum[i]].cos_credit);
+			            //courseResult[0].course.push(PCBcos);
                 }
 		//determine the core
 		var core = req.course.core;
@@ -218,10 +229,11 @@ CScourse.processCS = function(req, res, next){
                                 	 var cosInfo = {
                                                 cn:'',
                                                 en:'',
-						code:'',
+						                        code:'',
+                                                realCredit:0,
                                                 score: -1,
                                                 complete:'0',
-						english:false,
+						                        english:false,
                                                 grade: '0',
                                                 year:'',
                                                 semester:'',
@@ -231,6 +243,7 @@ CScourse.processCS = function(req, res, next){
                                         cosInfo.en = core[q].cos_ename;
 					if(taken[cosNumber[k]] === true){
                                   		cosInfo.code = cosNumber[k];
+                                        cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						cosInfo.score = parseInt(detail[cosNumber[k]].score);
                                   		cosInfo.grade = detail[cosNumber[k]].score_level;
                                   		cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;
@@ -313,6 +326,7 @@ CScourse.processCS = function(req, res, next){
                                 	var cosInfo = {
                                 		cn:'',
                                	 		en:'',
+                                        realCredit:0,
 						code:'',
                                 		score: -1,
 						english:false,
@@ -327,7 +341,8 @@ CScourse.processCS = function(req, res, next){
 
 					if(taken[cosNumber[k]] === true){
                                   		cosInfo.code = cosNumber[k];
-						cosInfo.score = parseInt(detail[cosNumber[k]].score);
+						                cosInfo.score = parseInt(detail[cosNumber[k]].score);
+                                        cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
                                   		cosInfo.grade = detail[cosNumber[k]].score_level;
                                   		cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;
                                  		cosInfo.semester = parseInt(detail[cosNumber[k]].semester);
@@ -408,6 +423,7 @@ CScourse.processCS = function(req, res, next){
                                 		en:'',
 						code:'',
                                 		score: -1,
+                                        realCredit:0,
 						english:false,
                                 		complete:'0',
                                 		grade:'0',
@@ -419,6 +435,7 @@ CScourse.processCS = function(req, res, next){
                         		cosInfo.en = vice[q].cos_ename;
 					if(taken[cosNumber[k]] === true){
                                   		cosInfo.code = cosNumber[k];
+                                        cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						cosInfo.score = parseInt(detail[cosNumber[k]].score);
                                   		cosInfo.grade = detail[cosNumber[k]].score_level;
                                   		cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;

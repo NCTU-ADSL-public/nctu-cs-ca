@@ -16,5 +16,5 @@ RUN npm install pm2 -g
 COPY . .
 
 EXPOSE 1111 
-CMD [ "pm2", "server.babel.js" ]
+CMD [ "pm2-docker", "nctuca.json", "--env", "production" ]
 

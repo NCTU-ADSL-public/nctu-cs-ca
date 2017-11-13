@@ -69,7 +69,7 @@ class Course extends React.Component {
                                             fontFamily: 'Noto Sans CJK TC',
                                         }}
                                         hoverColor={"#80b0d9"}
-                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29149":(this.props.reason==="free1"　|| this.props.reason==="free2"　)?"#6A94A2":(this.props.reason==="now" )?"#9e48d9":"#3aa276":this.props.selection?(this.props.reason==="now")?"#9e48d9":"gray":(this.props.reason==="now")?"#9e48d9":"#d93a64"}
+                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29951":(this.props.reason==="free1"　|| this.props.reason==="free2"　|| this.props.reason === "english")?"#6A94A2":(this.props.reason==="now" )?"#ab6bd9":"#3cab7d":this.props.selection?(this.props.reason==="now")?"#ab6bd9":"gray":(this.props.reason==="now")?"#ab6bd9":"#d95467"}
                                         style={this.state.style}
                                         label={this.props.cosCame}
                                         onClick={()=>this.handleClick()}>
@@ -86,10 +86,12 @@ class Course extends React.Component {
                     <div>分數:&nbsp;{(this.props.score===-1)?'-':this.props.score}</div>
                     <div>等級:&nbsp;{(this.props.grade==='0')?'-':this.props.grade}</div>
                     <div>英文授課:&nbsp;{(this.props.english)?'是':'否'}</div>
+                    <div>實得學分:&nbsp;{this.props.realCredit}</div>
                     <br/>
                     {(this.props.reason==="notCS")?<div>此為外系課程，必須申請過抵免才能算通過。</div>:<div> </div>}
                     {(this.props.reason==="free1")?<div>您已申請過抵免了。</div>:<div> </div>}
                     {(this.props.reason==="free2")?<div>免修課程。</div>:<div> </div>}
+                    {(this.props.reason==="english")?<div>此為抵免英文檢定考試的課程。</div>:<div> </div>}
                     {(this.props.reason==="now")?<div>當期課程。</div>:<div> </div>}
                     {(this.props.reason==="now" && this.props.completed)?<div>已修過這堂課，目前正重複修課中。</div>:<div> </div>}
                 </Popover>

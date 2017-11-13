@@ -88,11 +88,13 @@ Othercourse.processOther = function(req, res, next){
         var noEnglish = false;
         var Ecredit = 0;
         var Ecount = 0;
+        var englishFree = [];
 		for(var i = 0; i<offset.length; i++){
 			var cosInfo = {
                                 cn:'',
                                 en:'',
                                 score: -1,
+                                realCredit:0,
                                 reason: 'CS',
                                 complete:true,
                                 grade:'0',
@@ -101,6 +103,7 @@ Othercourse.processOther = function(req, res, next){
                         };
 			cosInfo.complete = true;
 			cosInfo.cn = offset[i].cos_cname;
+            cosInfo.realCredit = parseInt(offset[i].credit);
 			cosInfo.year = parseInt(offset[i].apply_year) - school_year + 1; 
 			cosInfo.semester = parseInt(offset[i].apply_semester);
 			if(offset[i].offset_type == '抵免')
@@ -124,14 +127,12 @@ Othercourse.processOther = function(req, res, next){
 			}
 			else if(offset[i].cos_type == '外語'){
 				if(offset[i].cos_cname == '外語榮譽學分'){
-                    if(Ecount == 0)
-                        language.course.push(cosInfo);
-                    Ecount++;
-                    Ecredit += parseInt(offset[i].credit);
+                    englishFree.push(cosInfo);
                 }
-                else
+                else{
                     language.course.push(cosInfo);
-                language.credit += parseInt(offset[i].credit);
+                    language.credit += parseInt(offset[i].credit);
+                }
 			}
 			else if(offset[i].cos_type == '通識'){
 				cosInfo.dimension = offset[i].brief;
@@ -147,10 +148,17 @@ Othercourse.processOther = function(req, res, next){
                                 peClass.credit += parseInt(offset[i].credit);
                         }
 		}
-        if(Ecredit == 8){
-            noEnglish = true;
-            console.log("英文免修");
+
+        for(var i = 0; i<englishFree.length; i++){
+            if(i != 0)
+                englishFree[0].realCredit += englishFree[i].realCredit;
         }
+        if(englishFree.length != 0){
+            englishFree[0].originalCredit = englishFree[0].realCredit;
+            language.credit += parseInt(englishFree[0].realCredit);
+            language.course.push(englishFree[0]);
+        }
+
 
 		for(var g = 0; g<generalCourse.length; g++){
 			generalCheck[generalCourse[g].cos_code] = true;
@@ -176,6 +184,7 @@ Othercourse.processOther = function(req, res, next){
                   		cn:'',
                          	en:'',
   				score: -1,
+                realCredit:0,
   				reason: 'CS',
                           	complete:'0',
   				grade:'0',
@@ -185,6 +194,7 @@ Othercourse.processOther = function(req, res, next){
                   	var temp = pass[q].cos_code.substring(0,3);
                   	cosInfo.cn = pass[q].cos_cname;
                   	cosInfo.en = pass[q].cos_ename;
+                    cosInfo.realCredit = parseInt(pass[q].cos_credit);
   			cosInfo.score = pass[q].score;
   			cosInfo.grade = pass[q].score_level;
   			if(pass[q].pass_fail == '通過')

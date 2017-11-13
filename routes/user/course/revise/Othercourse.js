@@ -69,6 +69,10 @@ Othercourse.processOther = function(req, res, next){
 	var rules = JSON.parse(req.rules);
 	var program = req.profile[0].program;
         var pass = JSON.parse(req.pass);
+    var englishTest = req.profile[0].en_certificate;
+    console.log("english test:");
+    console.log(englishTest);
+    var noEnglish = 0;
 	var offset = JSON.parse(req.free);
 	var generalCourse = JSON.parse(req.general);
 	var generalCheck = [];
@@ -78,6 +82,7 @@ Othercourse.processOther = function(req, res, next){
 	var notCS = [];
 	var EnglishCourse = [];
 	var total = req.course.total;
+    var advanceEnglish = 0;
 	if(req.session.profile){
 
 		var studentId = res.locals.studentId;
@@ -87,12 +92,15 @@ Othercourse.processOther = function(req, res, next){
 	        var school_year = (100 + temp);
             var Ecount = 0;
             var Ecredit = 0;
+            var englishFree = [];
 		for(var i = 0; i<offset.length; i++){
 			var cosInfo = {
                                 cn:'',
                                 en:'',
                                 score: -1,
                                 reason: 'CS',
+                                realCredit:0,
+                                originalCredit:0,
                                 complete:'0',
                                 grade:'0',
                                 year: '',
@@ -101,6 +109,8 @@ Othercourse.processOther = function(req, res, next){
                         cosInfo.complete = true;
                         cosInfo.cn = offset[i].cos_cname;
                         cosInfo.year = parseInt(offset[i].apply_year) - school_year + 1;
+                        cosInfo.realCredit = parseInt(offset[i].credit);
+                        cosInfo.originalCredit = parseInt(offset[i].credit);
                         cosInfo.semester = parseInt(offset[i].apply_semester);
                         if(offset[i].offset_type == '抵免')
                                 cosInfo.reason = 'free1';
@@ -123,14 +133,12 @@ Othercourse.processOther = function(req, res, next){
                         }
                         else if(offset[i].cos_type == '外語'){
                                 if(offset[i].cos_cname == '外語榮譽學分'){
-                                    if(Ecount == 0)
-                                        language.course.push(cosInfo);
-                                    Ecount++;
-                                    Ecredit += parseInt(offset[i].credit);
+                                    englishFree.push(cosInfo);
                                 }
-                                else
+                                else{
                                     language.course.push(cosInfo);
-                                language.credit += parseInt(offset[i].credit);
+                                    language.credit += parseInt(offset[i].credit);
+                                }
                         }
                         else if(offset[i].cos_type == '通識'){
                                 cosInfo.dimension = offset[i].brief;
@@ -146,6 +154,23 @@ Othercourse.processOther = function(req, res, next){
                                 peClass.credit += parseInt(offset[i].credit);
                         }
 		}
+        if(englishFree.length != 0){
+            for(var i = 0; i<englishFree.length; i++){
+                if(i != 0)
+                    englishFree[0].realCredit += englishFree[i].realCredit;
+            }
+            englishFree[0].originalCredit = englishFree[0].realCredit;
+            if(englishFree[0].originalCredit == 8)
+                noEnglish = 1; 
+            else if(englishFree[0].originalCredit <8 && englishFree[0].originalCredit >0)
+                noEnglish = 2;
+            language.credit += parseInt(englishFree[0].realCredit);
+            language.course.push(englishFree[0]);
+        }
+        else
+            noEnglish = 0;
+         console.log("No english:" + noEnglish);
+
 		for(var g = 0; g<generalCourse.length; g++){
                         generalCheck[generalCourse[g].cos_code] = true;
                 }
@@ -247,9 +272,10 @@ Othercourse.processOther = function(req, res, next){
                                  	art.credit += parseInt(pass[q].cos_credit);
                                         art.course.push(cosInfo);
 				 }
-	                         else{
-	                                 if(pass[q].cos_type == '外語'){
-						for(var h = 0; h< language.course.length; h++){
+	             else{
+	                    if(pass[q].cos_type == '外語'){
+						    var reg = pass[q].cos_cname.substring(0,4);
+                            for(var h = 0; h< language.course.length; h++){
                                                 	if(language.course[h].cn == pass[q].cos_cname){
                                                         	if(pass[q].score >= language.course[h].score){
                                                                 	language.course[h] = cosInfo;
@@ -257,18 +283,69 @@ Othercourse.processOther = function(req, res, next){
                                                                 break;
                                                         }
                                                  }
-                                                 if(h == language.course.length){
-						 	if(language.credit >= language.require){
-								cosInfo.move = true;
-								otherElect.course.push(cosInfo);
-								otherElect.credit += parseInt(pass[q].cos_credit);
-							}
-							else{
-								language.course.push(cosInfo);
-	                                        		language.credit += parseInt(pass[q].cos_credit);
-							}
-						}
-					 }
+                            if(h == language.course.length){
+                                if(reg == '進階英文'){
+                                    advanceEnglish ++;
+                                   // console.log(cosInfo);
+                                }
+                                if(noEnglish == 0){
+                                    if(englishTest == 0){
+                                        //console.log("advance count: "+advanceEnglish);
+                                        if(advanceEnglish <= 2){
+                                            if(reg == '進階英文'){
+                                                cosInfo.realCredit = 0;
+                                                cosInfo.reason = 'english';
+                                                //console.log("class to change english");
+                                                //console.log(cosInfo);
+                                                language.course.push(cosInfo);
+                                            }
+                                            else{
+                                                if(language.credit >= language.require){
+                                                        cosInfo.move = true;
+                                                        otherElect.course.push(cosInfo);                                                                                                     otherElect.credit += parseInt(pass[q].cos_credit);
+                                                }                                                                                                                                    else{
+                                                        language.course.push(cosInfo);
+                                                        language.credit += parseInt(pass[q].cos_credit);
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            if(language.credit >= language.require){
+								                cosInfo.move = true;
+								                otherElect.course.push(cosInfo);
+								                otherElect.credit += parseInt(pass[q].cos_credit);
+							                }
+							                else{
+								                language.course.push(cosInfo);
+	                                            language.credit += parseInt(pass[q].cos_credit);
+                                            }
+							            }           
+                                    }
+                                    else{
+                                        if(language.credit >= language.require){
+                                             cosInfo.move = true;
+                                             otherElect.course.push(cosInfo);
+                                             otherElect.credit += parseInt(pass[q].cos_credit);
+                                        }
+                                        else{
+                                            language.course.push(cosInfo);
+                                            language.credit += parseInt(pass[q].cos_credit);
+                                        }
+                                    }
+						        }
+                                else{
+                                    if(language.credit >= language.require){
+                                        cosInfo.move = true;
+                                        otherElect.course.push(cosInfo);
+                                        otherElect.credit += parseInt(pass[q].cos_credit);
+                                    }
+                                    else{
+                                        language.course.push(cosInfo);
+                                        language.credit += parseInt(pass[q].cos_credit);
+                                    }
+                                }
+					    }
+                        }
 	                                 else if(pass[q].cos_type == '通識'){
 						var brief = pass[q].brief.substring(0,2);
                                                 cosInfo.dimension = brief;

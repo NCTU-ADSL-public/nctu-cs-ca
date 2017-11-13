@@ -61,7 +61,7 @@ class GeneralCourse extends React.Component {
                 </MuiThemeProvider>
             </div>
                 <Popover
-                    placement='bottom'
+                    placement='top'
                     target={this.refs.target}
                     show={this.state.open}
                     onHide={this.handleClose.bind(this)}

@@ -3,8 +3,8 @@ var currentOther = {};
 currentOther.processOther = function(req, res, next){
         
 	var now = JSON.parse(req.now);
-    console.log("course this semester:");
-    console.log(now);
+//    console.log("course this semester:");
+  //  console.log(now);
 	var total = req.course.total;
 	var courseResult = res.locals.courseResult;
 	

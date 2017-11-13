@@ -9,7 +9,7 @@ getStudentId.studentId = function(req, res, next){
         console.log(req.session.profile);
         if(personStatus == 's')
             //res.locals.studentId = utils.getPersonId(JSON.parse(req.session.profile));
-            res.locals.studentId = '0312512';
+            res.locals.studentId = '0316248';
         else if(personStatus == 'a')
             res.locals.studentId = req.query.student_id;
         console.log("studentId in get:");

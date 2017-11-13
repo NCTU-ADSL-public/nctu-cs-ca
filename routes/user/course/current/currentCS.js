@@ -81,7 +81,7 @@ currentCS.processCS = function(req, res, next){
                                         en:'',
                                         code:'',
                                         score: -1,
-                                        complete:'false',
+                                        complete:false,
                                         english:false,
                                         grade: '0',
                                         year: 4,
@@ -113,12 +113,12 @@ currentCS.processCS = function(req, res, next){
                                         en:'',
                                         code:'',
                                         score: -1,
-                                        complete:'false',
+                                        complete:false,
                                         english:false,
                                         grade: '0',
                                         year: 4,
                                         semester:1,
-                                        reason: 'CS'
+                                        reason: 'now'
                                 };
                         for(var k=0; k<cosNumber.length; k++){
                                 if(taken[cosNumber[k]] === true){
@@ -145,7 +145,7 @@ currentCS.processCS = function(req, res, next){
                                         en:'',
                                         code:'',
                                         score: -1,
-                                        complete:'false',
+                                        complete:false,
                                         english:false,
                                         grade: '0',
                                         year: 4,

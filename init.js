@@ -32,7 +32,7 @@ module.exports.init = function(){
     extended: true
   }));
 
-  app.use('/students/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents);
+//  app.use('/students/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents);
   //app.use('/assistants/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyAssistants);
 
   app.use('/', express.static('./public', { index: 'index.login.html'}));

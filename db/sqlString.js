@@ -183,3 +183,6 @@ exports.on_cos_data='\
 exports.general_cos_rule='\
     select cos_code,cos_cname,brief,brief_new\
     from general_cos_rule;'
+
+exports.setEnCertificate='\
+    update student set en_certificate=:check where student_id=:id';
