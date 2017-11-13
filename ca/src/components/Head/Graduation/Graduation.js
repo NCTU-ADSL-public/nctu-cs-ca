@@ -194,7 +194,7 @@ class Grad extends React.Component {
             check:{state:true}
         })
             .then(res => {
-                ()=>this.EnglishCallBack();
+                this.EnglishCallBack();
             })
             .catch(err => {
                 console.log(err)
