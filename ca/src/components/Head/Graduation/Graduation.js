@@ -10,6 +10,8 @@ import Toggle from 'material-ui/Toggle';
 import {ToastContainer, ToastStore} from 'react-toasts';
 import Popover from 'react-simple-popover';
 import ReactHover from 'react-hover';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 import scrollToComponent from 'react-scroll-to-component'
 import IconButton from 'material-ui/IconButton';
@@ -31,6 +33,10 @@ const styles = {
         margin:'5px 10px 0 10px',
         width:'100px',
         float:'left'
+    },
+    buttonDia: {
+        margin:'0 10px 0 10px',
+        width:'100px'
     },
     buttonEn: {
         margin:'5px 10px 0 10px',
@@ -66,7 +72,10 @@ class Grad extends React.Component {
         scrollQuery:'',
         isToggle:true,
         open:false,
+        opendialog: false,
+        opendialog1: false,
         graduationCheck:false,
+        graduationCheckEnglishTest:false,
         Graduationitems:[],
         items:[],
         totalitems:[],
@@ -82,6 +91,13 @@ class Grad extends React.Component {
         axios.get('/students/graduate/check').then(studentData => {
             _this.setState({
                 graduationCheck : studentData.data.check.state
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/graduate/english').then(studentData => {
+            _this.setState({
+                graduationCheckEnglishTest : studentData.data.check.state
             })
         }).catch(err => {
             console.log(err);
@@ -111,7 +127,7 @@ class Grad extends React.Component {
     }
     printGradTable(fileName) {
         let original = document.title;
-        if (fileName != null)
+        if (fileName !== null)
             document.title = fileName;
         window.print();
         document.title = original;
@@ -159,10 +175,85 @@ class Grad extends React.Component {
             });
         this.setState({
             graduationCheck:true,
+            opendialog1: false
+        });
+
+    }
+    sendEnglishTest(){
+        axios.post('/students/graduate/english', {
+            check:{state:true}
+        })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        this.setState({
+            graduationCheckEnglishTest:true,
+            opendialog: false
         })
 
     }
+
+    handleClosedialog1 = () => {
+        this.setState({opendialog1: false});
+    };
+
+    handleOpen1 = () => {
+        this.setState({opendialog1: true});
+    };
+
+    handleClosedialog = () => {
+        this.setState({opendialog: false});
+    };
+
+    handleOpen = () => {
+        this.setState({opendialog: true});
+    };
     render(){
+
+        const actions1 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="取消"
+                              keyboardFocused={true}
+                              onClick={this.handleClosedialog1}/>
+            </MuiThemeProvider>,
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="確認"
+                              keyboardFocused={true}
+                              onClick={() => this.sendReview()}
+                />
+            </MuiThemeProvider>,
+        ];
+
+        const actions2 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="取消"
+                              keyboardFocused={true}
+                              onClick={this.handleClosedialog}/>
+            </MuiThemeProvider>,
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="確認"
+                              keyboardFocused={true}
+                onClick={()=>this.sendEnglishTest()}
+            />
+            </MuiThemeProvider>,
+        ];
         return (
             <div>
                 <div id="font_adjust">
@@ -205,13 +296,26 @@ class Grad extends React.Component {
                                                 style={styles.button}
                                                 labelStyle={styles.labelStyle}
                                                 backgroundColor = "#DDDDDD"
-                                                onClick={() => this.sendReview()}
+                                                onClick={this.handleOpen1}
                                             />
                                         </MuiThemeProvider>
                                     </ReactHover.Trigger>
                                     <ReactHover.Hover type='hover'>
                                     </ReactHover.Hover>
                                 </ReactHover>
+
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions1}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialog1}
+                                        onRequestClose={this.handleClosedialog1}
+                                    >
+                                        <div style={styles.labelStyle}>按下確認讓助理知道您看過這個網站。</div>
+                                    </Dialog>
+                                </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <RaisedButton style={styles.button}
                                                   labelStyle={styles.labelStyle}
@@ -223,8 +327,22 @@ class Grad extends React.Component {
                                     <RaisedButton style={styles.buttonEn}
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
-                                                  label="是否考過英檢?"
-                                                  onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
+                                                  label={this.state.graduationCheckEnglishTest?"已考過英檢":"是否考過英檢?"}
+                                                  disabled={this.state.graduationCheckEnglishTest}
+                                                  onClick={this.handleOpen}/>
+                                </MuiThemeProvider>
+
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions2}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialog}
+                                        onRequestClose={this.handleClosedialog}
+                                    >
+                                        <div style={styles.labelStyle}>須通過英檢後再按確認</div>
+                                    </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <Toggle
