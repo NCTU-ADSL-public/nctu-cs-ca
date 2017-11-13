@@ -81,11 +81,15 @@ class Grad extends React.Component {
         items:[],
         totalitems:[],
         courseCategoryArray:[],
+        Result:[],
+        ReviseResult:[]
     };
     componentWillMount(){
         this.setState({
             items:this.props.items,
             Graduationitems:this.props.revise,
+            Result:this.props.result,
+            ReviseResult:this.props.reviseresult,
             totalitems:this.props.result
         });
         let _this=this;
@@ -143,13 +147,13 @@ class Grad extends React.Component {
         });
         if(this.state.isToggle){
             this.setState({
-                totalitems:this.props.reviseresult
+                totalitems:this.state.ReviseResult
             });
-            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主。</div>, 20000);
+            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主。</div>, 10000);
         }
         else{
             this.setState({
-                totalitems:this.props.result
+                totalitems:this.state.Result
             });
         }
     }
@@ -203,9 +207,11 @@ class Grad extends React.Component {
 
     EnglishCallBack(){
         let _this = this;
+        alert("22")
         axios.get('/students/graduate/revised').then(studentData => {
             _this.setState({
-                Graduationitems:studentData.data
+                Graduationitems:studentData.data,
+                ReviseResult:studentData.data[10],
             })
         }).catch(err => {
             console.log(err);
