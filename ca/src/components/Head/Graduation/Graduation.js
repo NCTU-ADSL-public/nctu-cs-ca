@@ -187,75 +187,19 @@ class Grad extends React.Component {
                             <div className="yellow"> </div><div  className="text">未抵免課程</div>
                             <div className="purple"> </div><div  className="text">免修或抵免課程</div>
                             <div className="blue"> </div><div  className="text">當期課程</div>
-                            {this.props.assistant?
-                                <div>
-                                    <ReactHover options={optionsCursorTrueWithMargin}>
-                                        <ReactHover.Trigger type='trigger'>
-                                            <MuiThemeProvider>
-                                                <RaisedButton
-                                                    label={this.state.graduationCheck?"已送審":"未送審"}
-                                                    style={styles.button}
-                                                    disabled={1}
-                                                    labelStyle={styles.labelStyle}
-                                                    backgroundColor = "#DDDDDD"
-                                                    onClick={() => this.sendReview()}
-                                                />
-                                            </MuiThemeProvider>
-                                        </ReactHover.Trigger>
-                                        <ReactHover.Hover type='hover'>
-                                        </ReactHover.Hover>
-                                    </ReactHover>
-                                    <MuiThemeProvider>
-                                        <RaisedButton style={styles.button}
-                                                      labelStyle={styles.labelStyle}
-                                                      backgroundColor = "#DDDDDD"
-                                                      label="列印"
-                                                      onClick={() => this.printGradTable('畢業預審表-'+this.state.studentIdcard.student_id)}/>
-                                    </MuiThemeProvider>
-                                    <MuiThemeProvider>
-                                        <Toggle
-                                            label="系統自動排序"
-                                            style={styles.toggle}
-                                            labelStyle={styles.labelStyle}
-                                            onToggle={(toggled)=>this.handleToggle()}
-                                        />
-                                    </MuiThemeProvider>
-                                    <MuiThemeProvider>
-                                        <IconButton style={styles.medium}
-                                                    tooltip="排序依據"
-                                                    tooltipPosition="top-right"
-                                                    ref="target"
-                                                    onClick={()=>this.handleClickview()}>
-                                            <ActionGrade />
-                                        </IconButton>
-                                    </MuiThemeProvider>
-                                    <Popover
-                                        placement='bottom'
-                                        target={this.refs.target}
-                                        show={this.state.open}
-                                        onHide={this.handleClose.bind(this)}>
-                                        <div
-                                            style={styles.pop}>
-                                            -未排的<br/>
-                                            物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                            -排序過的<br/>
-                                            重複修課：將只顯示一次,取成績最高的那次<br/>
-                                            必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                            物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                            核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                            專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
-                                        </div>
-                                    </Popover>
-                                </div>
-                            :
-                                <div>
+                            <div>
                                 <ReactHover options={optionsCursorTrueWithMargin}>
                                     <ReactHover.Trigger type='trigger'>
                                         <MuiThemeProvider>
                                             <RaisedButton
+                                            { this.props.assistant ?
+                                                label={this.state.graduationCheck?"已送審":"未送審"}
+                                                disabled={1}
+                                            :
                                                 label={this.state.graduationCheck?"已送審":"確認送審"}
-                                                style={styles.button}
                                                 disabled={this.state.graduationCheck}
+                                            }
+                                                style={styles.button}
                                                 labelStyle={styles.labelStyle}
                                                 backgroundColor = "#DDDDDD"
                                                 onClick={() => this.sendReview()}
@@ -296,18 +240,17 @@ class Grad extends React.Component {
                                     onHide={this.handleClose.bind(this)}>
                                     <div
                                         style={styles.pop}>
-                                    -未排的<br/>
-                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                    -排序過的<br/>
-                                    重複修課：將只顯示一次,取成績最高的那次<br/>
-                                    必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                    物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
-                                    核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
-                                    專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
+                                        -未排的<br/>
+                                        物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                        -排序過的<br/>
+                                        重複修課：將只顯示一次,取成績最高的那次<br/>
+                                        必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                        物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                        核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                        專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
                                     </div>
                                 </Popover>
-                                </div>
-                            }
+                            </div>
                         </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">
