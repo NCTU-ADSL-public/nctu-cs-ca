@@ -38,7 +38,7 @@ let Graduationitems=[
                 { cn: '微積分(一)', en: 'Calculus (I)' ,"score":60 ,complete:true, grade:'B',reason:'now'},
                 { cn: '微積分(二)', en: 'Calculus (II)',"score":60  ,complete:true, grade:'A'},
                 { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.',"score":60  ,complete:true, reason:'notCS', grade:'0'},
-                { cn: '數位電路設計', en: 'Digital Circuit Design',"score":60  ,complete:false, reason:'now'},
+                { cn: '數位電路設計', en: 'Digital Circuit Design',"score":60  ,complete:false, reason:'now', realCredit:3},
                 { cn: '機率', en: 'Probability' ,"score":60 ,complete:true, reason:'free1'},
                 { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true,"score":60 , reason:'free2'},
                 { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:false,"score":60 },

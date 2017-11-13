@@ -32,6 +32,11 @@ const styles = {
         width:'100px',
         float:'left'
     },
+    buttonEn: {
+        margin:'5px 10px 0 10px',
+        width:'150px',
+        float:'left'
+    },
     labelStyle: {
         fontFamily: 'Noto Sans CJK TC',
         color: '#7B7B7B'
@@ -212,6 +217,13 @@ class Grad extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   label="列印"
+                                                  onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
+                                </MuiThemeProvider>
+                                <MuiThemeProvider>
+                                    <RaisedButton style={styles.buttonEn}
+                                                  labelStyle={styles.labelStyle}
+                                                  backgroundColor = "#DDDDDD"
+                                                  label="是否考過英檢?"
                                                   onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>

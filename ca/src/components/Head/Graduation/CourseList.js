@@ -16,6 +16,7 @@ const CourseList = ({ items, selection , handleClick}) => (
                 reason={item.reason}
                 grade={item.grade}
                 english={item.english}
+                realCredit={item.realCredit}
             />
         )}
     </div>
