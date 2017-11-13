@@ -192,13 +192,11 @@ class Grad extends React.Component {
                                     <ReactHover.Trigger type='trigger'>
                                         <MuiThemeProvider>
                                             <RaisedButton
-                                            { this.props.assistant ?
-                                                label={this.state.graduationCheck?"已送審":"未送審"}
-                                                disabled={1}
-                                            :
-                                                label={this.state.graduationCheck?"已送審":"確認送審"}
-                                                disabled={this.state.graduationCheck}
-                                            }
+                                                label={ this.props.assistant ?
+                                                    this.state.graduationCheck?"已送審":"未送審"
+                                                    :
+                                                    this.state.graduationCheck?"已送審":"確認送審"}
+                                                disabled={this.props.assistant ?true : this.state.graduationCheck}
                                                 style={styles.button}
                                                 labelStyle={styles.labelStyle}
                                                 backgroundColor = "#DDDDDD"

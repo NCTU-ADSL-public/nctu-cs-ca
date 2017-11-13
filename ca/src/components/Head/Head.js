@@ -243,8 +243,8 @@ class Head extends Component {
         styleButton: {
             fontFamily: 'Noto Sans CJK TC',
             background: '#EEEEEE',
+            margin:'5px 0 0',
             lineHeight: '15px',
-            margin: '5px 0 0',
             fontSize: '11px',
             width: '10px',
         },
@@ -342,19 +342,6 @@ class Head extends Component {
             }
             else if(index===1){
                 ReactDOM.render(
-					<div>
-						<FadeIn>
-							<MapItem
-					q			studentPasdata={StudentCosPas}
-								data={MapCourseData}
-                                studentId={this.state.studentIdcard.program}
-                                studentsGrad={this.state.studentIdcard.grade}/>
-						</FadeIn>
-					</div>,
-                    document.getElementById('page'));
-            }
-            else if(index===2){
-                ReactDOM.render(
                     <font>
                         <FadeIn>
                             <GraduationItem
@@ -366,6 +353,19 @@ class Head extends Component {
                                 courseCategoryArray={this.state.print_courseCategoryArray}/>
                         </FadeIn>
                     </font>,
+                    document.getElementById('page'));
+            }
+            else if(index===2){
+                ReactDOM.render(
+                    <div>
+                        <FadeIn>
+                            <MapItem
+                                studentPasdata={StudentCosPas}
+                                data={MapCourseData}
+                                studentId={this.state.studentIdcard.program}
+                                studentsGrad={this.state.studentIdcard.grade}/>
+                        </FadeIn>
+                    </div>,
                     document.getElementById('page'));
             }
             else if(index===3){
@@ -399,22 +399,24 @@ class Head extends Component {
 				<div id="ontopDiv">
 					<div className="Head-header" >
 							<div id="rectangle1"> </div>
-							<div id="h1">交大資工線上助理</div>
-							<div id="h2">NCTU Curriculum Assistant</div>
-						<div id="adjust">
+							<div className="h1">交大資工線上助理</div>
+							<div className="h2">NCTU Curriculum Assistant</div>
+						<div className="adjust">
 						<MuiThemeProvider zDepth={1}>
 							<BottomNavigation selectedIndex={this.state.selectedIndex}>
 							  <BottomNavigationItem
 								label="首頁"
+                                className="TopButton"
 								icon={homeIcon}
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(0)}
 							  />
 							  <BottomNavigationItem
 								label="畢業預審"
+                                className="TopButton"
 								icon={graduationIcon}
 								style={this.state.styleButton}
-								onTouchTap={() => this.select(2)}
+								onTouchTap={() => this.select(1)}
 							  />
 							</BottomNavigation>
 						</MuiThemeProvider>
