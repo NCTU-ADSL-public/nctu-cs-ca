@@ -13,6 +13,8 @@ class PrintForm extends React.Component {
         let depCat = [], generalCat = [];
         this.props.courseCategoryArray.forEach((item, i) => {
             if (generalCatTitle.indexOf(item.title ) !== -1) {
+
+                // Sort general course by 向度
                 if (item.title=='通識')
                     item.course.sort(function(a, b){
                         if(a.dimension < b.dimension) return -1;
@@ -23,6 +25,20 @@ class PrintForm extends React.Component {
             } else
                 depCat.push(item);
         });
+
+        let programName = '';
+        switch (this.props.profile.program) {
+            case '資工A':
+            case '資工B':
+                programName = '資訊工程組';
+                break;
+            case '網多':
+                programName = '網路與多媒體工程組';
+                break;
+            case '資電':
+                programName = '資電工程組';
+                break;
+        }
 
         return (
             <table className="default-text default-table">
@@ -44,15 +60,15 @@ class PrintForm extends React.Component {
 
                 <tr className="borderLess">
                     <td colSpan="13" style={{fontSize: '16pt', fontWeight:'bold', height: '1.5em', color: '#0000FF'}}>
-                        103學年度--{this.props.program}工程組
+                        103學年度--{programName}
                     </td>
                 </tr>
                 <tr className="borderLess left-text">
                     <td colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '2.5em'}}>
                         <div width='100%'>
-                            <div className="personal-info">班別：{this.props.program}工程組</div>
-                            <div className="personal-info">學號：</div>
-                            <div className="personal-info">姓名：</div><br/>
+                            <div className="personal-info">班別：{programName}</div>
+                            <div className="personal-info">學號：{this.props.profile.student_id}</div>
+                            <div className="personal-info">姓名：{this.props.profile.sname}</div><br/>
                             <div className="personal-info">聯絡電話：</div>
                             <div className="personal-info">E-mail：</div>
                         </div>

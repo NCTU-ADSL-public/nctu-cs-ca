@@ -83,8 +83,9 @@
 }
 
 .tip{
-    padding: 60px 0 0 700px;
-    width: 800px;
+    padding: 25px 0 0 150px;
+    display: inline-block;
+    width: 700px;
 }
 
 .grad-hover-info{
@@ -103,14 +104,14 @@
 }
 
 .Grad-title-adjust{
-    width: 1200px;
     height: 200px;
     margin: 0;
+    padding-top: 35px;
 }
 
 .Grad-title-text{
     margin: 0 0 0 5%;
-    padding: 35px 10px 3px 65px;
+    padding: 0px 10px 3px 65px;
     color: #7B7B7B;
     width: auto;
     height: 200px;
@@ -126,7 +127,7 @@
 
 .schedule-bar{
     height: 300px;
-    width: 1400px;
+    width: 1350px;
     float: left;
     padding: 0px 0 0 5%;
 }

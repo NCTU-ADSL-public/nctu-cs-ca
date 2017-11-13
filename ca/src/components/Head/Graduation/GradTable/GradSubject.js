@@ -19,7 +19,7 @@ class GradSubject extends React.Component {
 
     render(){
         return (
-            <tr>
+            <tr className={(this.state.name==' ')? 'bigger-row': ''}>
                 <td className="left-text">{this.state.name}</td>
                 <td>{this.realscore[0]}</td>
                 <td>{this.realscore[1]}</td>

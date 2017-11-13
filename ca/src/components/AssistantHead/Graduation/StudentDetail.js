@@ -378,9 +378,7 @@ export default class index extends React.Component {
             return (
                 <div>
                     <StudentGrad
-                        studentName={this.state.student_profile.sname}
-                        studentId={this.state.student_profile.student_id}
-                        studentProgram={this.state.student_profile.program}
+                        studentProfile={this.state.student_profile}
                         items={this.state.Graduationitems}
                         result={this.state.Graduationitems[10]}
                         revise={this.state.revise}
