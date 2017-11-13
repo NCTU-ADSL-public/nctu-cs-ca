@@ -28,7 +28,7 @@ const styles = {
         margin:'10px 10px 0 20px',
     },
     button: {
-        margin:'5px 10px 0 0px',
+        margin:'5px 10px 0 10px',
         width:'100px',
         float:'left'
     },
@@ -104,9 +104,12 @@ class Grad extends React.Component {
     scrollTotop(){
         scrollToComponent(this.refs.my);
     }
-    printGradTable() {
+    printGradTable(fileName) {
+        let original = document.title;
+        if (fileName != null)
+            document.title = fileName;
         window.print();
-
+        document.title = original;
         return true;
     }
     handleToggle(){
@@ -166,13 +169,12 @@ class Grad extends React.Component {
                         <div className="Grad-title-text">
                             {this.props.assistant?
                                 <div>
-                                    <div id="lessons-title">畢業預審</div>
-                                    <div id="lessons-little-title-grad">-資工系{this.props.studentGroup}組{this.props.studentId}{this.props.studentName}</div>
+                                    <div id="lessons-little-title-grad">資工系{this.props.studentProfile.program}組 - {this.props.studentProfile.student_id}{this.props.studentProfile.sname}</div>
                                 </div>
                             :
                                 <div>
                                     <div id="lessons-title">畢業預審</div>
-                                    <div id="lessons-little-title-grad">-資工系{this.props.studentId}組</div>
+                                    <div id="lessons-little-title-grad">-資工系{this.props.studentProfile.program}組</div>
                                 </div>
                             }
 
@@ -185,29 +187,90 @@ class Grad extends React.Component {
                             <div className="yellow"> </div><div  className="text">未抵免課程</div>
                             <div className="purple"> </div><div  className="text">免修或抵免課程</div>
                             <div className="blue"> </div><div  className="text">當期課程</div>
-                            {this.props.assistant?<div> </div>:<div> <ReactHover
-                                options={optionsCursorTrueWithMargin}>
-                                <ReactHover.Trigger type='trigger'>
+                            {this.props.assistant?
+                                <div>
+                                    <ReactHover options={optionsCursorTrueWithMargin}>
+                                        <ReactHover.Trigger type='trigger'>
+                                            <MuiThemeProvider>
+                                                <RaisedButton
+                                                    label={this.state.graduationCheck?"已送審":"未送審"}
+                                                    style={styles.button}
+                                                    disabled={1}
+                                                    labelStyle={styles.labelStyle}
+                                                    backgroundColor = "#DDDDDD"
+                                                    onClick={() => this.sendReview()}
+                                                />
+                                            </MuiThemeProvider>
+                                        </ReactHover.Trigger>
+                                        <ReactHover.Hover type='hover'>
+                                        </ReactHover.Hover>
+                                    </ReactHover>
                                     <MuiThemeProvider>
-                                        <RaisedButton
-                                            label={this.state.graduationCheck?"已送審":"確認送審"}
-                                            style={styles.button}
-                                            disabled={this.state.graduationCheck}
+                                        <RaisedButton style={styles.button}
+                                                      labelStyle={styles.labelStyle}
+                                                      backgroundColor = "#DDDDDD"
+                                                      label="列印"
+                                                      onClick={() => this.printGradTable('畢業預審表-'+this.state.studentIdcard.student_id)}/>
+                                    </MuiThemeProvider>
+                                    <MuiThemeProvider>
+                                        <Toggle
+                                            label="系統自動排序"
+                                            style={styles.toggle}
                                             labelStyle={styles.labelStyle}
-                                            backgroundColor = "#DDDDDD"
-                                            onClick={() => this.sendReview()}
+                                            onToggle={(toggled)=>this.handleToggle()}
                                         />
                                     </MuiThemeProvider>
-                                </ReactHover.Trigger>
-                                <ReactHover.Hover type='hover'>
-                                </ReactHover.Hover>
-                            </ReactHover>
+                                    <MuiThemeProvider>
+                                        <IconButton style={styles.medium}
+                                                    tooltip="排序依據"
+                                                    tooltipPosition="top-right"
+                                                    ref="target"
+                                                    onClick={()=>this.handleClickview()}>
+                                            <ActionGrade />
+                                        </IconButton>
+                                    </MuiThemeProvider>
+                                    <Popover
+                                        placement='bottom'
+                                        target={this.refs.target}
+                                        show={this.state.open}
+                                        onHide={this.handleClose.bind(this)}>
+                                        <div
+                                            style={styles.pop}>
+                                            -未排的<br/>
+                                            物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                            -排序過的<br/>
+                                            重複修課：將只顯示一次,取成績最高的那次<br/>
+                                            必修：若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                            物理學分放置規則：於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中<br/>
+                                            核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
+                                            專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
+                                        </div>
+                                    </Popover>
+                                </div>
+                            :
+                                <div>
+                                <ReactHover options={optionsCursorTrueWithMargin}>
+                                    <ReactHover.Trigger type='trigger'>
+                                        <MuiThemeProvider>
+                                            <RaisedButton
+                                                label={this.state.graduationCheck?"已送審":"確認送審"}
+                                                style={styles.button}
+                                                disabled={this.state.graduationCheck}
+                                                labelStyle={styles.labelStyle}
+                                                backgroundColor = "#DDDDDD"
+                                                onClick={() => this.sendReview()}
+                                            />
+                                        </MuiThemeProvider>
+                                    </ReactHover.Trigger>
+                                    <ReactHover.Hover type='hover'>
+                                    </ReactHover.Hover>
+                                </ReactHover>
                                 <MuiThemeProvider>
                                     <RaisedButton style={styles.button}
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   label="列印"
-                                                  onClick={() => this.printGradTable()}/>
+                                                  onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <Toggle
@@ -218,7 +281,11 @@ class Grad extends React.Component {
                                     />
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
-                                    <IconButton style={styles.medium} tooltip="排序依據"  tooltipPosition="top-right"  ref="target" onClick={()=>this.handleClickview()}>
+                                    <IconButton style={styles.medium}
+                                                tooltip="排序依據"
+                                                tooltipPosition="top-right"
+                                                ref="target"
+                                                onClick={()=>this.handleClickview()}>
                                         <ActionGrade />
                                     </IconButton>
                                 </MuiThemeProvider>
@@ -238,35 +305,34 @@ class Grad extends React.Component {
                                     核心課程/副核心及他組合心課程：若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修<br/>
                                     專業選修/外語/通識：若該項總學分已達畢業標準,會將多修的課程放至其他選修<br/>
                                     </div>
-                                </Popover></div>}
-
+                                </Popover>
+                                </div>
+                            }
                         </div>
                         <div className="schedule-bar">
                             <div className="circle-progress">
                                 <div className="circle-in">畢業{this.state.totalitems.total}/{this.state.totalitems.total_require}</div>
                                 <CircularProgress grad={this.state.totalitems.total/this.state.totalitems.total_require*100}/>
                             </div>
-                                <div className="overview">
-                                <div className="overview-course" >
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('共同必修')}>共同必修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.compulsory}</font>/{this.state.totalitems.compulse_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.compulsory/this.state.totalitems.compulse_require*100}/></div>
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('核心課程')}>核心課程&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.core}</font>/{this.state.totalitems.core_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.core/this.state.totalitems.core_require*100}/></div>
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('服務學習')}>服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.service}</font>/{this.state.totalitems.service_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.service/this.state.totalitems.service_require*100}/></div>
-                                </div>
+                            <div className="overview">
+                            <div className="overview-course" >
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('共同必修')}>共同必修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.compulsory}</font>/{this.state.totalitems.compulse_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.compulsory/this.state.totalitems.compulse_require*100}/></div>
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('核心課程')}>核心課程&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.core}</font>/{this.state.totalitems.core_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.core/this.state.totalitems.core_require*100}/></div>
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('服務學習')}>服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.service}</font>/{this.state.totalitems.service_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.service/this.state.totalitems.service_require*100}/></div>
+                            </div>
+                            <div className="overview-course" >
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('英文授課')}>英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.english}</font>/{this.state.totalitems.english_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.english/this.state.totalitems.english_require*100}/></div>
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('藝文賞析')}>藝文賞析&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.art}</font>/{this.state.totalitems.art_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.art/this.state.totalitems.art_require*100}/></div>
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('其他選修')}>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.other}</font>/{this.state.totalitems.other_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.other/this.state.totalitems.other_require*100}/></div>
+                            </div>
+                            <div className="overview-course" >
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('通識')}>通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;識&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.general}</font>/{this.state.totalitems.general_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.general/this.state.totalitems.general_require*100}/></div>
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('體育')}>體&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;育&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.pe}</font>/{this.state.totalitems.pe_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.pe/this.state.totalitems.pe_require*100}/></div>
+                                <div className="showcourseoverview" onClick={()=>this.handleClick('外語')}>外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.language}</font>/{this.state.totalitems.language_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.language/this.state.totalitems.language_require*100}/></div>
+                            </div>
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('副核心與他組核心')}>副核心與他組核心&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.vice}</font>/{this.state.totalitems.vice_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.vice/this.state.totalitems.vice_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.pro}</font>/{this.state.totalitems.pro_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.pro/this.state.totalitems.pro_require*100}/></div>
-                                </div>
-                                <div className="overview-course" >
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('英文授課')}>英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.english}</font>/{this.state.totalitems.english_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.english/this.state.totalitems.english_require*100}/></div>
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('其他選修')}>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.other}</font>/{this.state.totalitems.other_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.other/this.state.totalitems.other_require*100}/></div>
-                                </div>
-                                <div className="overview-course" >
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('通識')}>通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;識&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.general}</font>/{this.state.totalitems.general_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.general/this.state.totalitems.general_require*100}/></div>
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('體育')}>體&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;育&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.pe}</font>/{this.state.totalitems.pe_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.pe/this.state.totalitems.pe_require*100}/></div>
-                                </div>
-                                <div className="overview-course" >
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('外語')}>外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.language}</font>/{this.state.totalitems.language_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.language/this.state.totalitems.language_require*100}/></div>
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('藝文賞析')}>藝文賞析&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.art}</font>/{this.state.totalitems.art_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.art/this.state.totalitems.art_require*100}/></div>
                                 </div>
                             </div>
                         </div>
@@ -277,7 +343,7 @@ class Grad extends React.Component {
                     <div id="graduate-footer"> </div>
                 </div>
                 <div id="printArea">
-                    <PrintForm program={this.props.studentId} courseCategoryArray={this.props.courseCategoryArray}/>
+                    <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.props.courseCategoryArray}/>
                 </div>
             </div>
         )

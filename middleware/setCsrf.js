@@ -6,6 +6,5 @@ module.exports.setCsrf = function(req, res, next){
   let csrftoken = req.csrfToken();
   res.locals.csrfToken = csrftoken;
   res.cookie('XSRF-TOKEN', csrftoken);
-  console.log(res.locals.csrfToken);
   next();
 }

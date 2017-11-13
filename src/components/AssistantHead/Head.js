@@ -26,7 +26,7 @@ class Head extends Component {
 
         axios.get('/assistants/profile').then(studentData => {
             this.setState({
-                studentIdcard: {
+                idCard: {
                     name: studentData.data[0].aname,
                     prog: studentData.data[0].assistant_id,
                     grad: studentData.data[0].status,
@@ -46,7 +46,7 @@ class Head extends Component {
                 fontSize: '11px',
                 width: '10px',
             },
-            studentIdcard:{
+            idCard:{
                 name:'小翠',
                 prog:'助理',
                 grad:'',
@@ -76,7 +76,7 @@ class Head extends Component {
                 ReactDOM.render(
 					<div>
 						<FadeIn>
-							<GraduationItem/>
+							<GraduationItem idCard={this.state.idCard}/>
 						</FadeIn>
 					</div>,
                     document.getElementById('page'));
@@ -117,10 +117,10 @@ class Head extends Component {
 									<img src={defalt} width="44px" />
 								</div>
 								<div id="idcard-top">
-                                    {this.state.studentIdcard.name}
+                                    {this.state.idCard.name}
 								</div>
 								<div id="idcard-buttom">
-                                    {this.state.studentIdcard.prog}{this.state.studentIdcard.grad}
+                                    {this.state.idCard.prog}{this.state.idCard.grad}
 								</div>
 							</div>
 						</div>

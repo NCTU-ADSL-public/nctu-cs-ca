@@ -1,6 +1,6 @@
 var express = require('express');
 var apps = express();
-var table = require('./table');
+var table = require('../../course/table');
 var utils = require('../../../../utils');
 var router = express.Router();
 var getList = table.tables.getList;

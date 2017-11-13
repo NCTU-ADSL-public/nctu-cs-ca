@@ -83,8 +83,9 @@
 }
 
 .tip{
-    padding: 80px 0 0 700px;
-    width: 800px;
+    padding: 25px 0 0 150px;
+    display: inline-block;
+    width: 700px;
 }
 
 .grad-hover-info{
@@ -103,14 +104,14 @@
 }
 
 .Grad-title-adjust{
-    width: 1200px;
     height: 200px;
     margin: 0;
+    padding-top: 35px;
 }
 
 .Grad-title-text{
     margin: 0 0 0 5%;
-    padding: 35px 10px 3px 65px;
+    padding: 0px 10px 3px 65px;
     color: #7B7B7B;
     width: auto;
     height: 200px;
@@ -119,21 +120,21 @@
 }
 
 #lessons-little-title-grad{
-    margin: 4% 0 0 20px;
-    font-size: 1.7em;
+    margin: 5.6% 0 0 20px;
+    font-size: 1.5em;
     float: left;
 }
 
 .schedule-bar{
     height: 300px;
-    width: 1400px;
+    width: 1350px;
     float: left;
     padding: 0px 0 0 5%;
 }
 
 .circle-progress{
     float: left;
-    margin: -30px 0 0 0;
+    margin: 10px 0 0 0;
     width: 80px;
 }
 
@@ -143,7 +144,7 @@
     float: left;
     text-align: center;
     font-size: 28px;
-    margin: 25px 0 -110px 15px;
+    margin: 25px 0 -110px 9px;
 }
 
 .overview{
@@ -154,7 +155,7 @@
     color: #7B7B7B;
     margin: 4px;
     transition: background-color 0.5s;
-    width: 200px;
+    width: 250px;
     height: 50px;
     padding: 2px 2px 0 2px;
 }

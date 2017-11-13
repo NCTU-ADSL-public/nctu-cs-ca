@@ -46,16 +46,15 @@ module.exports.init = function(){
   app.use(require('./routes/user/students/score'));
   app.use(require('./routes/logout'));
   app.use(require('./routes/auth/nctu/nctu'));
-  app.use(require('./routes/user/students/graduate/graduate'));
+  app.use(require('./routes/user/students/graduate/graduateOriginal'));
   app.use(require('./routes/user/students/graduate/graduateRevised'));
   app.use(require('./routes/user/students/graduate/graduatePrint'));
   app.use(require('./routes/user/students/graduate/graduateCheck'));
   app.use(require('./routes/user/assistants/profile'));
-  app.use(require('./routes/user/assistants/graduate/graduate'));
+  app.use(require('./routes/user/assistants/graduate/graduateOriginal'));
   app.use(require('./routes/user/assistants/graduate/graduateRevised'));
   app.use(require('./routes/user/assistants/graduate/studentList'));
   app.use(require('./routes/user/assistants/getStudent'));
-
 
   return app;
 };

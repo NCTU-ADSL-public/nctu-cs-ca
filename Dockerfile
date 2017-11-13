@@ -10,10 +10,11 @@ COPY package-lock.json .
 # COPY package.json package-lock.json ./
 
 RUN npm install
+RUN npm install pm2 -g
 
 # Bundle app source
 COPY . .
 
 EXPOSE 1111 
-CMD [ "npm", "run", "dev" ]
+CMD [ "pm2", "server.babel.js" ]
 

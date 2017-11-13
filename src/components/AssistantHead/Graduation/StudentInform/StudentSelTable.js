@@ -51,9 +51,6 @@ const styles = {
     },
 };
 
-/**
- * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
- */
 export default class StudentTable extends Component {
 
     constructor(props) {
@@ -65,7 +62,7 @@ export default class StudentTable extends Component {
             showRowHover: true,
             selectable: true,
             multiSelectable: true,
-            enableSelectAll: true,
+            enableSelectAll: false,
             deselectOnClickaway: false,
             showCheckboxes: true,
             height: '60vh',
@@ -74,7 +71,7 @@ export default class StudentTable extends Component {
             orderBy: 'student_id',
         };
 
-        this.OrderList = this.OrderList.bind(this);
+        this.orderList = this.orderList.bind(this);
     }
 
     static defaultProps = {
@@ -87,39 +84,36 @@ export default class StudentTable extends Component {
                 graduate_submit: "0",
             }]
     };
-
-
-    handleRowSelection = (selectedRow) => {
-        this.props.parentFunction(selectedRow);
-    };
-
     componentWillMount(){
-        this.OrderList('student_id');
+        this.orderList(this.state.orderBy);
     }
 
     componentDidUpdate(NextProp, NextState){
-        if( NextProp.students !== this.props.students){
-            this.OrderList('student_id');
+        if( NextProp.students !== this.props.students ){
+            this.orderList(this.state.orderBy);
         }
     }
 
-    OrderList(orderBy){
+    orderList(orderBy){
+         let self = this;
+         let newLog = [];
          let NewStudentList = [].concat(this.props.students)
             .sort((a, b) => {
                 if(orderBy === 'student_id')
-                    return a.student_id > b.student_id;
+                    return parseInt(a.student_id) - parseInt(b.student_id);
                 else if(orderBy === 'sname')
-                    return a.sname > b.sname;
+                    return a.sname.localeCompare(b.sname, 'zh-Hans-CN');
                 else if(orderBy === 'program')
-                    return a.program > b.program;
+                    return a.program.localeCompare(b.program, 'zh-Hans-CN');
                 else if(orderBy === 'graduate')
-                    return a.graduate > b.graduate;
+                    return a.graduate - b.graduate;
                 else if(orderBy === 'graduate_submit')
-                    return a.graduate_submit > b.graduate_submit;
+                    return a.graduate_submit - b.graduate_submit;
                 else
-                    return a.student_id > b.student_id;
+                    return a.student_id - b.student_id;
             }).map((row, i) =>
-                <TableRow key={i}>
+                <TableRow key={i}
+                          selected={row.selected}>
                     <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
                     <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
                     <TableRowColumn style={styles.tabColumn0}>{row.program}</TableRowColumn>
@@ -137,8 +131,16 @@ export default class StudentTable extends Component {
         this.setState({
             studentListOrdered: NewStudentList,
             orderBy: orderBy,
+            sortLog: newLog,
         });
     }
+
+    handleRowClick = (rowIndex) => {
+        //pass student_id to parent(i.e., StudentSelList)
+        let rowStudentId = this.state.studentListOrdered[rowIndex].props.children[0].props.children;
+        this.props.parentFunction(rowStudentId);
+        this.orderList(this.state.orderBy);
+    };
 
     render() {
         return (
@@ -151,7 +153,8 @@ export default class StudentTable extends Component {
                     fixedFooter={this.state.fixedFooter}
                     selectable={this.state.selectable}
                     multiSelectable={this.state.multiSelectable}
-                    onRowSelection={this.handleRowSelection}
+                    //onRowSelection={this.handleRowSelection}
+                    onCellClick={this.handleRowClick}
                 >
                     <TableHeader
                         displaySelectAll={this.state.showCheckboxes}
@@ -159,28 +162,28 @@ export default class StudentTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}
                     >
                         <TableRow>
-                            <TableHeaderColumn tooltip="Order by 學號">
-                                <div style={this.state.orderBy === 'student_id' ? styles.headerB : styles.header} onClick={ () => this.OrderList('student_id') }>
+                            <TableHeaderColumn tooltip="以學號排序">
+                                <div style={this.state.orderBy === 'student_id' ? styles.headerB : styles.header} onClick={ () => this.orderList('student_id') }>
                                     學號{this.state.orderBy === 'student_id' ? '↓' : ''}
                                 </div>
                             </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Order by 學生姓名">
-                                <div style={this.state.orderBy === 'sname' ? styles.headerB : styles.header} onClick={ () => this.OrderList('sname') }>
+                            <TableHeaderColumn tooltip="以學生姓名排序">
+                                <div style={this.state.orderBy === 'sname' ? styles.headerB : styles.header} onClick={ () => this.orderList('sname') }>
                                     學生姓名{this.state.orderBy === 'sname' ? '↓' : ''}
                                 </div>
                             </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Order by 組別">
-                                <div style={this.state.orderBy === 'program' ? styles.headerB : styles.header} onClick={ () => this.OrderList('program') }>
+                            <TableHeaderColumn tooltip="以組別排序">
+                                <div style={this.state.orderBy === 'program' ? styles.headerB : styles.header} onClick={ () => this.orderList('program') }>
                                     組別{this.state.orderBy === 'program' ? '↓' : ''}
                                 </div>
                             </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Order by 畢業狀況">
-                                <div style={this.state.orderBy === 'graduate' ? styles.headerB : styles.header} onClick={ () => this.OrderList('graduate') }>
+                            <TableHeaderColumn tooltip="以畢業狀況排序">
+                                <div style={this.state.orderBy === 'graduate' ? styles.headerB : styles.header} onClick={ () => this.orderList('graduate') }>
                                     畢業狀況{this.state.orderBy === 'graduate' ? '↓' : ''}
                                 </div>
                             </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Order by 送審狀態">
-                                <div style={this.state.orderBy === 'graduate_submit' ? styles.headerB : styles.header} onClick={ () => this.OrderList('graduate_submit') }>
+                            <TableHeaderColumn tooltip="以送審狀態排序">
+                                <div style={this.state.orderBy === 'graduate_submit' ? styles.headerB : styles.header} onClick={ () => this.orderList('graduate_submit') }>
                                     送審狀態{this.state.orderBy === 'graduate_submit' ? '↓' : ''}
                                 </div>
                             </TableHeaderColumn>
