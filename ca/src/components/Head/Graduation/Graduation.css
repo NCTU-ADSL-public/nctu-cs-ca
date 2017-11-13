@@ -2,6 +2,12 @@
     display: none;
 }
 
+.font_adjust{
+    background: #F5F5F5;
+    height: auto;
+    width: 1500px;
+}
+
 @media print {
     #ontopDiv,
     #font_adjust,

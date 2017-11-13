@@ -289,7 +289,7 @@ class Grad extends React.Component {
         ];
         return (
             <div>
-                <div id="font_adjust">
+                <div className="font_adjust">
                     <ToastContainer store={ToastStore}/>
                     <div className="fixed" onClick={()=>this.scrollTotop()}>
                         <TopButton/>
