@@ -166,12 +166,12 @@ class Grad extends React.Component {
                         <div className="Grad-title-text">
                             {this.props.assistant?
                                 <div>
-                                    <div id="lessons-little-title-grad">資工系{this.props.studentProgram}組 - {this.props.studentId}{this.props.studentName}</div>
+                                    <div id="lessons-little-title-grad">資工系{this.props.studentProfile.prog}組 - {this.props.studentProfile.student_id}{this.props.studentProfile.sname}</div>
                                 </div>
                             :
                                 <div>
                                     <div id="lessons-title">畢業預審</div>
-                                    <div id="lessons-little-title-grad">-資工系{this.props.studentId}組</div>
+                                    <div id="lessons-little-title-grad">-資工系{this.props.studentProfile.prog}組</div>
                                 </div>
                             }
 
@@ -340,7 +340,7 @@ class Grad extends React.Component {
                     <div id="graduate-footer"> </div>
                 </div>
                 <div id="printArea">
-                    <PrintForm program={this.props.studentId} courseCategoryArray={this.props.courseCategoryArray}/>
+                    <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.props.courseCategoryArray}/>
                 </div>
             </div>
         )

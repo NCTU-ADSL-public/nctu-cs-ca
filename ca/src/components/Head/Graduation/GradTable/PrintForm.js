@@ -44,17 +44,17 @@ class PrintForm extends React.Component {
 
                 <tr className="borderLess">
                     <td colSpan="13" style={{fontSize: '16pt', fontWeight:'bold', height: '1.5em', color: '#0000FF'}}>
-                        103學年度--{this.props.program}工程組
+                        103學年度--{this.props.profile.program}
                     </td>
                 </tr>
                 <tr className="borderLess left-text">
                     <td colSpan="13" style={{fontSize: '10pt', fontWeight:'bold', height: '2.5em'}}>
                         <div width='100%'>
-                            <div className="personal-info">班別：{this.props.program}工程組</div>
-                            <div className="personal-info">學號：</div>
-                            <div className="personal-info">姓名：</div><br/>
+                            <div className="personal-info">班別：{this.props.profile.program}</div>
+                            <div className="personal-info">學號：{this.props.profile.student_id}</div>
+                            <div className="personal-info">姓名：{this.props.profile.sname}</div><br/>
                             <div className="personal-info">聯絡電話：</div>
-                            <div className="personal-info">E-mail：</div>
+                            <div className="personal-info">E-mail：{this.props.profile.email}</div>
                         </div>
                     </td>
                 </tr>

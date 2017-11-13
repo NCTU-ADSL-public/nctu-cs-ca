@@ -249,9 +249,11 @@ class Head extends Component {
             width: '10px',
         },
 		studentIdcard:{
-       		name:'流川楓',
-			prog:'網多',
-			grad:'大一',
+            sname:'流川楓',
+            student_id:'0123456',
+			program:'網多',
+            grade:'大一',
+            email:'hihi@gmail.com',
 		},
         print_courseCategoryArray:printData
 
@@ -273,12 +275,9 @@ class Head extends Component {
         });
 
         axios.get('/students/profile').then(studentData => {
+            studentData.data[0].grade = "大" + studentData.data[0].grade;
             _this.setState({
-                studentIdcard: {
-                    name: studentData.data[0].sname,
-                    prog: studentData.data[0].program ,
-                    grad: "大" + studentData.data[0].grade,
-                }
+                studentIdcard: studentData.data[0]
             })
         }).catch(err => {
             console.log(err);
@@ -346,10 +345,10 @@ class Head extends Component {
 					<div>
 						<FadeIn>
 							<MapItem
-								studentPasdata={StudentCosPas}
+					q			studentPasdata={StudentCosPas}
 								data={MapCourseData}
-								studentId={this.state.studentIdcard.prog}
-								studentsGrad={this.state.studentIdcard.grad}/>
+                                studentId={this.state.studentIdcard.program}
+                                studentsGrad={this.state.studentIdcard.grade}/>
 						</FadeIn>
 					</div>,
                     document.getElementById('page'));
@@ -359,11 +358,11 @@ class Head extends Component {
                     <font>
                         <FadeIn>
                             <GraduationItem
-                                studentId={this.state.studentIdcard.prog}
                                 items={Graduationitems}
                                 result={Graduationitems[10]}
                                 revise={revise}
                                 reviseresult={revise[10]}
+                                studentProfile={this.state.studentIdcard}
                                 courseCategoryArray={this.state.print_courseCategoryArray}/>
                         </FadeIn>
                     </font>,
@@ -426,10 +425,10 @@ class Head extends Component {
 									<img src={defalt} width="44px" alt=""/>
 								</div>
 								<div id="idcard-top">
-                                    {this.state.studentIdcard.name}
+                                    {this.state.studentIdcard.sname}
 								</div>
 								<div id="idcard-buttom">
-                                    {this.state.studentIdcard.prog}{this.state.studentIdcard.grad}
+                                    {this.state.studentIdcard.program}{this.state.studentIdcard.grade}
 								</div>
 							</div>
 						</div>
