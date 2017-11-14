@@ -404,8 +404,9 @@ class Grad extends React.Component {
     };
 
     componentDidMount(){
-        if(this.state.graduationCheckEnglishTest==="0")
+        if(this.state.graduationCheckEnglishTest==="0"){
             ToastStore.warning(<div  className="text">請確認英文狀態。</div>, 10000);
+        }
 
     }
     render(){
@@ -522,7 +523,7 @@ class Grad extends React.Component {
                                                     this.state.graduationCheck?"已送審":"未送審"
                                                     :
                                                     this.state.graduationCheck?"已送審":"確認送審"}
-                                                disabled={this.props.assistant ?true : (this.state.graduationCheck || !this.state.graduationCheckEnglishTest)}
+                                                disabled={this.props.assistant ?true : (this.state.graduationCheck || this.state.graduationCheckEnglishTest==="0")}
                                                 style={styles.button}
                                                 labelStyle={styles.labelStyle}
                                                 backgroundColor = "#DDDDDD"
@@ -551,7 +552,7 @@ class Grad extends React.Component {
                                                       labelStyle={styles.labelStyle}
                                                       backgroundColor = "#DDDDDD"
                                                       label="列印"
-                                                      disabled={!this.state.graduationCheckEnglishTest}
+                                                      disabled={this.state.graduationCheckEnglishTest==="0"}
                                                       onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
                                     </MuiThemeProvider>
 
