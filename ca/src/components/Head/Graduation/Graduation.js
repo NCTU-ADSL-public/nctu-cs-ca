@@ -11,7 +11,6 @@ import {ToastContainer, ToastStore} from 'react-toasts';
 import Popover from 'react-simple-popover';
 import ReactHover from 'react-hover';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 import scrollToComponent from 'react-scroll-to-component'
 import IconButton from 'material-ui/IconButton';
@@ -450,7 +449,7 @@ class Grad extends React.Component {
                               keyboardFocused={true}
                               onClick={()=>this.sendEnglishTest2(true)}
             />
-            </MuiThemeProvider>
+            </MuiThemeProvider>,
         ];
 
         const actions21 = [
