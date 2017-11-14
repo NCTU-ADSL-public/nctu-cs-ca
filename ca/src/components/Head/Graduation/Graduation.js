@@ -92,7 +92,8 @@ class Grad extends React.Component {
             Graduationitems:this.props.revise,
             Result:this.props.result,
             ReviseResult:this.props.reviseresult,
-            totalitems:this.props.result
+            totalitems:this.props.result,
+            print_courseCategoryArray:this.props.courseCategoryArray,
         });
         let _this=this;
         axios.get('/students/graduate/check').then(studentData => {
