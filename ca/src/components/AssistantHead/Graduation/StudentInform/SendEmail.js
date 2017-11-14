@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import Snackbar from 'material-ui/Snackbar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TextField from './TextField';
+import TextField from 'material-ui/TextField';
 
 /**
  * Dialog with action buttons. The actions are passed in as an array of React objects,
@@ -17,9 +17,11 @@ import TextField from './TextField';
  */
 const styles = {
     titleSender:{
+        fontFamily: 'Noto Sans CJK TC',
         padding: '3px 3px 5px 3px',
     },
     title:{
+        fontFamily: 'Noto Sans CJK TC',
         padding: '3px 3px 0px 3px',
     },
     items:{
@@ -42,6 +44,21 @@ const styles = {
         height: '800px',
         overflow: 'auto',
     },
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#434343'
+    },
+    text1:{
+        width: '90%',
+        padding: '5px',
+        fontFamily: 'Noto Sans CJK TC',
+    },
+    text2:{
+        width: '90%',
+        padding: '5px',
+        fontSize: '12px',
+        fontFamily: 'Noto Sans CJK TC',
+    },
 };
 
 export default class SendEmail extends React.Component {
@@ -51,8 +68,12 @@ export default class SendEmail extends React.Component {
         this.state = {
             open: false,
             studentList: [],
+            title: '',
+            content: '',
         };
         this.studentDataMatch = this.studentDataMatch.bind(this);
+        this.titleCallback = this.titleCallback.bind(this);
+        this.contentCallback= this.contentCallback.bind(this);
     }
 
     handleOpen = () => {
@@ -62,7 +83,39 @@ export default class SendEmail extends React.Component {
 
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({
+            open: false,
+            title: '',
+            content: '',
+        });
+    };
+
+    handleSend = () => {
+        this.setState({
+            open: false,
+            title: '',
+            content: '',
+        });
+
+        let recipients = this.state.studentList
+            .map( (item, i) => item.studentId );
+
+
+        axios.post('/assistants/mail', {
+            title: this.state.title,
+            recipients: recipients,
+            message: this.state.content,
+        }).then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        });
+
+        console.log('Send out:');
+        console.log(recipients);
+        console.log(this.state.title);
+        console.log(this.state.content);
     };
 
     studentDataMatch(){
@@ -82,40 +135,84 @@ export default class SendEmail extends React.Component {
         this.setState({studentList: newList});
     }
 
+    titleCallback(title){
+        this.setState({title: title});
+    }
+
+    contentCallback(content){
+        this.setState({content: content});
+    }
+
+    handleChangeTitle = (event) => {
+        this.setState({
+            title: event.target.value,
+        });
+    };
+
+    handleChangeContent = (event) => {
+        this.setState({
+            content: event.target.value,
+        });
+    };
+
     render() {
         const actions = [
             <FlatButton
                 label="取消"
                 primary={true}
                 onClick={this.handleClose}
+                labelStyle={styles.labelStyle}
             />,
             <FlatButton
                 label="送出"
                 primary={true}
                 keyboardFocused={false}
-                onClick={this.handleClose}
+                onClick={this.handleSend}
+                labelStyle={styles.labelStyle}
             />,
         ];
 
         return (
             <div>
-                <RaisedButton label="寄信通知" onClick={this.handleOpen} />
+                <RaisedButton label="寄信通知"
+                              onClick={this.handleOpen}
+                              labelStyle={styles.labelStyle}/>
                 <Dialog
                     title="寄信通知"
                     actions={actions}
                     modal={false}
                     open={this.state.open}
                     onRequestClose={this.handleClose}
+                    style={styles.labelStyle}
+                    titleStyle={styles.labelStyle}
                 >
                         <div style={styles.titleSender}>寄件人: {this.props.idCard.name}</div>
                         <div style={styles.title}>密件副本:</div>
                         <div style={styles.itemsReceiver}>
                         {this.state.studentList.map( (item, i) => (
-                            <div key={i} style={styles.item}>{item.studentId} {item.studentName} {item.studentEmail},</div>
+                            <div key={i} style={styles.item}>{item.studentId} {item.studentName},</div>
                         ))}
                         </div>
                         <MuiThemeProvider>
-                            <TextField/>
+                            <TextField
+                                hintText="【助理通知】同學快送審哦"
+                                floatingLabelText="主旨"
+                                style={styles.text1}
+                                value={this.state.title}
+                                onChange={this.handleChangeTitle}
+                            />
+                        </MuiThemeProvider>
+                        <MuiThemeProvider>
+                            <TextField
+                                hintText="同學快送審!"
+                                floatingLabelText="內文"
+                                multiLine={true}
+                                rows={3}
+                                rowsMax={6}
+                                style={styles.text2}
+                                value={this.state.content}
+                                onChange={this.handleChangeContent}
+                            />
                         </MuiThemeProvider>
                 </Dialog>
             </div>
