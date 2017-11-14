@@ -72,7 +72,6 @@ class Grad extends React.Component {
         scrollQuery:'',
         isToggle:true,
         open:false,
-        openEn:true,
         opendialog: false,
         opendialog1: false,
         opendialogprint: false,
@@ -110,6 +109,7 @@ class Grad extends React.Component {
         }).catch(err => {
             console.log(err);
         });
+
     }
 
     //For updating as props changes!!!
@@ -173,12 +173,6 @@ class Grad extends React.Component {
         this.setState({
             scrollQuery:'',
             open: false
-        });
-    }
-    handleCloseEnPop(e) {
-        this.setState({
-            scrollQuery:'',
-            openEn: false
         });
     }
     sendReview(){
@@ -366,6 +360,11 @@ class Grad extends React.Component {
         this.setState({
             scrollQuery:'',opendialog: true});
     };
+
+    componentDidMount(){
+        ToastStore.warning(<div  className="text">請先確認自己是否通過英檢。</div>, 10000);
+
+    }
     render(){
 
         const actions1 = [
@@ -471,16 +470,6 @@ class Grad extends React.Component {
                                     </ReactHover.Hover>
                                 </ReactHover>
 
-                                <Popover
-                                    placement='top'
-                                    target={this.refs.targetEn}
-                                    show={this.state.openEn}
-                                    onHide={this.handleCloseEnPop.bind(this)}>
-                                    <div
-                                        style={styles.pop}>
-                                        請先確認自己是否考過英檢
-                                    </div>
-                                </Popover>
                                 <MuiThemeProvider>
                                     <Dialog
                                         title="注意"
@@ -493,14 +482,14 @@ class Grad extends React.Component {
                                         <div style={styles.labelStyle}>按下確認將畢業預審送交系辦。</div>
                                     </Dialog>
                                 </MuiThemeProvider>
-                                <MuiThemeProvider>
-                                    <RaisedButton style={styles.button}
-                                                  labelStyle={styles.labelStyle}
-                                                  backgroundColor = "#DDDDDD"
-                                                  label="列印"
-                                                  disabled={!this.state.graduationCheckEnglishTest}
-                                                  onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
-                                </MuiThemeProvider>
+                                    <MuiThemeProvider>
+                                        <RaisedButton style={styles.button}
+                                                      labelStyle={styles.labelStyle}
+                                                      backgroundColor = "#DDDDDD"
+                                                      label="列印"
+                                                      disabled={!this.state.graduationCheckEnglishTest}
+                                                      onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
+                                    </MuiThemeProvider>
 
                                 <MuiThemeProvider>
                                     <Dialog
@@ -514,14 +503,16 @@ class Grad extends React.Component {
                                         <div style={styles.labelStyle}>列印系統所排之課程預審。<br/>專業選修, 其他選修,外文,的課程請自行填寫調整。</div>
                                     </Dialog>
                                 </MuiThemeProvider>
+                            <div className={this.state.graduationCheckEnglishTest?"":"animated swing"}>
                                 <MuiThemeProvider>
                                     <RaisedButton style={styles.buttonEn}
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
+                                                  ref="targetEn"
                                                   label={this.state.graduationCheckEnglishTest?(this.state.graduationCheckEnglishTest===1)?"已考過英檢":"未考過英檢":"是否考過英檢?"}
                                                   onClick={this.handleOpen}/>
                                 </MuiThemeProvider>
-
+                            </div>
                                 <MuiThemeProvider>
                                     <Dialog
                                         title="注意"
@@ -530,7 +521,6 @@ class Grad extends React.Component {
                                         style={styles.labelStyle}
                                         open={this.state.opendialog}
                                         onRequestClose={this.handleClosedialog}
-                                        ref="targetEn"
                                     >
                                         <div style={styles.labelStyle}>是否通過英檢?</div>
                                     </Dialog>
