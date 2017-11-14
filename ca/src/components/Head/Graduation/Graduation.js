@@ -396,7 +396,7 @@ class Grad extends React.Component {
 
     componentDidMount(){
         if(!this.state.graduationCheckEnglishTest)
-            ToastStore.warning(<div  className="text">請先確認自己是否通過英檢。</div>, 10000);
+            ToastStore.warning(<div  className="text">請確認英文狀態。</div>, 10000);
 
     }
     render(){
@@ -587,7 +587,7 @@ class Grad extends React.Component {
                                         modal={false}
                                         style={styles.labelStyle}
                                         open={this.state.opendialog}
-                                        onRequestClose={this.handleClosedialog}
+                                        onRequestClose={this.handleClosedialogEn2}
                                     >
                                         <div style={styles.labelStyle}>是否通過英檢?</div>
                                     </Dialog>
