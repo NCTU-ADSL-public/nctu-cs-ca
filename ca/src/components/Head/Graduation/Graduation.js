@@ -40,7 +40,7 @@ const styles = {
     },
     buttonEn: {
         margin:'9px 10px 0 0px',
-        width:'200px',
+        width:'250px',
         float:'left'
     },
     labelStyle: {
@@ -77,7 +77,7 @@ class Grad extends React.Component {
         opendialog1: false,
         opendialogprint: false,
         graduationCheck:false,
-        graduationCheckEnglishTest:false,
+        graduationCheckEnglishTest:"0",
         Graduationitems:[],
         items:[],
         totalitems:[],
@@ -404,7 +404,7 @@ class Grad extends React.Component {
     };
 
     componentDidMount(){
-        if(!this.state.graduationCheckEnglishTest)
+        if(this.state.graduationCheckEnglishTest==="0")
             ToastStore.warning(<div  className="text">請確認英文狀態。</div>, 10000);
 
     }
@@ -567,13 +567,13 @@ class Grad extends React.Component {
                                         <div style={styles.labelStyle}>列印系統所排之課程預審。<br/>專業選修, 其他選修,外文,的課程請自行填寫調整。</div>
                                     </Dialog>
                                 </MuiThemeProvider>
-                            <div className={this.state.graduationCheckEnglishTest?"":"animated swing"}>
+                            <div className={this.state.graduationCheckEnglishTest!=="0"?"":"animated swing"}>
                                 <MuiThemeProvider>
                                     <RaisedButton style={styles.buttonEn}
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   ref="targetEn"
-                                                  label={this.state.graduationCheckEnglishTest!==0?(this.state.graduationCheckEnglishTest===21)?"已考過英檢":(this.state.graduationCheckEnglishTest===22)?"未考過英檢":"英檢已抵免或換修":"確認英文狀態?"}
+                                                  label={this.state.graduationCheckEnglishTest!=="0"?(this.state.graduationCheckEnglishTest===21)?"已考過英檢":(this.state.graduationCheckEnglishTest===22)?"未考過英檢":"英檢已抵免或換修":"確認英文狀態?"}
                                                   onClick={this.handleOpenEn}/>
                                 </MuiThemeProvider>
                             </div>
