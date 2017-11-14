@@ -10,7 +10,7 @@
 
 @media print {
     #ontopDiv,
-    #font_adjust,
+    .font_adjust,
     #topRec,
     footer {
         display: none;
@@ -93,6 +93,7 @@
     padding: 25px 0 0 50px;
     display: inline-block;
     width: 700px;
+    height: 125px;
 }
 
 .grad-hover-info{
@@ -112,6 +113,7 @@
 
 .Grad-title-adjust{
     height: 200px;
+    width: 1500px;
     margin: 0;
     padding-top: 35px;
 }
@@ -121,7 +123,7 @@
     padding: 0px 10px 3px 65px;
     color: #7B7B7B;
     width: auto;
-    height: 200px;
+    height: 150px;
     font-size: 1.5em;
     float: left;
 }
@@ -136,7 +138,7 @@
     height: 300px;
     width: 1350px;
     float: left;
-    padding: 0px 0 0 5%;
+    padding: 30px 0 0 5%;
 }
 
 .circle-progress{
@@ -231,11 +233,6 @@
         width: 1500px;
     }
 
-    .tip{
-        padding: 0 0 200px 75px;
-        display: inline-block;
-        width: 700px;
-    }
 
     #lessons-little-title-grad{
         margin: 8px 0 0 10px;

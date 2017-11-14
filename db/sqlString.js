@@ -134,7 +134,7 @@ exports.graduateRule = '\
     where s.student_id=:id and s.program like concat(r.program,\'%\') and r.school_year=:year;';
 
 exports.studentGraduateList = '\
-    select student_id,sname,program,graduate_submit,graduate,email\
+    select student_id,sname,program,graduate_submit,graduate,email,en_certificate\
     from student\
     where student_id like concat(:sem,\'%\');';
 
@@ -171,7 +171,7 @@ exports.offset_all='\
     on cn.cos_cname=os.cos_cname;';
 
 exports.on_cos_data='\
-    select s.student_id,cd.cos_code,cn.cos_cname,cn.cos_ename,cd.cos_type,cd.cos_typeext,cd.brief,cd.brief_new\
+    select s.student_id,cd.cos_code,cn.cos_cname,cn.cos_ename,cd.cos_type,cd.cos_typeext,cd.brief,cd.brief_new,cd.cos_credit\
     from on_cos_data as o left outer join student as s\
     on o.student_id=s.student_id\
     left outer join cos_data as cd\

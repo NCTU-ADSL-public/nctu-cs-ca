@@ -10,7 +10,7 @@ router.get('/assistants/graduate/list', function(req, res){
 	var list;
         table.tables.getList('0316201', function(list){
         	if(!list){
-			console.log("No list");
+			//console.log("No list");
 			return;
 		}
 		else

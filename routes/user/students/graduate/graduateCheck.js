@@ -21,7 +21,7 @@ router.get('/students/graduate/check',function(req, res){
     let personId = utils.getPersonId(JSON.parse(req.session.profile));
     query.findPerson(personId, function(err, result){
         if(err){
-            console.log(err);
+            //console.log(err);
             res.redirect('/');
         }
         else {

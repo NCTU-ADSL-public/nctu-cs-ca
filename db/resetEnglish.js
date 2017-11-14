@@ -27,7 +27,7 @@ var resetAllStudent = function(list){
     for(let i = 0; i < list.length ; i++){
         query.setEnCertificate(list[i].student_id, '0');
     }
-    console.log(list);
+//    console.log(list);
     console.log("Finished resetting all students' english state.");
     process.exit();
 }

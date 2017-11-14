@@ -37,6 +37,7 @@ CScourse.processCS = function(req, res, next){
 		}
 		// determine compulsory courses
 		var compulse = req.course.compulse;
+        //console.log(compulse);
 		var PCBnum = [];
 		var offsetNameCheck = [];
 		for(i = 0; i<offset.length; i++){
@@ -47,16 +48,19 @@ CScourse.processCS = function(req, res, next){
 			var more = [];
 			cosNumber = compulse[q].cos_codes;
 			if(notCS[compulse[q].cos_cname] === true){
-				free[compulse[q].cos_cname].reason = 'notCS';
+                free[compulse[q].cos_cname].reason = 'notCS';
 				free[compulse[q].cos_cname].complete = true;
-				courseResult[0].course.push(free[compulse[q].cos_cname]);
+                var cosInfo = JSON.stringify(free[compulse[q].cos_cname]);
+                cosInfo = JSON.parse(cosInfo);
+                cosInfo.realCredit = 0;
+				courseResult[0].course.push(cosInfo);
 			}
 			else{
 				for(var k=0; k<cosNumber.length; k++){
 					var cosInfo = {
                                 		cn:'',
                                 		en:'',
-                                		score: -1,
+                                		score: '',
 						code:'',
                                 		realCredit: 0,
                                 		originalCredit: 0,
@@ -72,17 +76,16 @@ CScourse.processCS = function(req, res, next){
                         		cosInfo.en = compulse[q].cos_ename;
 					if(taken[cosNumber[k]] === true){
 						cosInfo.code = cosNumber[k];
-						cosInfo.score = parseInt(detail[cosNumber[k]].score);
-						cosInfo.grade = detail[cosNumber[k]].score_level;
 						cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;
 						cosInfo.semester = parseInt(detail[cosNumber[k]].semester);
 						cosInfo.originalCredit = parseInt(detail[cosNumber[k]].cos_credit);
-						cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						var reg = detail[cosNumber[k]].cos_cname.substring(0,2);
 						trueCounter++;
 				     		if(detail[cosNumber[k]].pass_fail == '通過'){
-						//trueCounter++;
-							cosInfo.complete = true;
+							cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
+                            cosInfo.complete = true;
+                            cosInfo.score = parseInt(detail[cosNumber[k]].score);
+                            cosInfo.grade = detail[cosNumber[k]].score_level;
 							if(reg == '物理' || reg == '化學' || reg == '生物'){
 								if(reg == '物理')
 									PCBnum.push(cosNumber[k]);
@@ -396,7 +399,7 @@ CScourse.processCS = function(req, res, next){
                                 	var cosInfo = {
                                 		cn:'',
                                 		en:'',
-                                		score: -1,
+                                		score: '',
 						code:'',
                                 		grade:'0',
                                 		complete:'0',
@@ -412,14 +415,15 @@ CScourse.processCS = function(req, res, next){
                         		cosInfo.en = core[q].cos_ename;
                                 	if(taken[cosNumber[k]] === true){
 						cosInfo.code = cosNumber[k];
-						cosInfo.score = parseInt(detail[cosNumber[k]].score);
-						cosInfo.grade = detail[cosNumber[k]].score_level;
 						cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;
 						cosInfo.semester = parseInt(detail[cosNumber[k]].semester);					                		     cosInfo.originalCredit = parseInt(detail[cosNumber[k]].cos_credit);
-	  	   				cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						trueCounter++;
-				    		if(detail[cosNumber[k]].pass_fail == '通過')
-							cosInfo.complete = true;
+				    		if(detail[cosNumber[k]].pass_fail == '通過'){
+							    cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
+                                cosInfo.score = parseInt(detail[cosNumber[k]].score);
+                                cosInfo.grade = detail[cosNumber[k]].score_level;
+                                cosInfo.complete = true;
+                            }
 				     		else
 				      			cosInfo.complete = false;
 						more.push(cosInfo);
@@ -524,7 +528,7 @@ CScourse.processCS = function(req, res, next){
                                 		en:'',
 						code:'',
 						english:false,
-                                		score: -1,
+                                		score: '',
                                 		grade:'0',
                                 		complete:'0',
                                 		realCredit: 0,
@@ -538,14 +542,15 @@ CScourse.processCS = function(req, res, next){
                         		cosInfo.en = other[q].cos_ename;
                                		if(taken[cosNumber[k]] === true){
 						cosInfo.code = cosNumber[k];
-						cosInfo.score = parseInt(detail[cosNumber[k]].score);
-		  				cosInfo.grade = detail[cosNumber[k]].score_level;
 						cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;								     cosInfo.semester = parseInt(detail[cosNumber[k]].semester);
 						cosInfo.originalCredit = parseInt(detail[cosNumber[k]].cos_credit);
-						cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						trueCounter++;
-						if(detail[cosNumber[k]].pass_fail == '通過')
+						if(detail[cosNumber[k]].pass_fail == '通過'){
 							cosInfo.complete = true;
+                            cosInfo.score = parseInt(detail[cosNumber[k]].score);
+                            cosInfo.grade = detail[cosNumber[k]].score_level;
+                            cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
+                        }
 						else
 							cosInfo.complete = false;
 						more.push(cosInfo);
@@ -648,7 +653,7 @@ CScourse.processCS = function(req, res, next){
                                 		en:'',
 						code:'',
 						english:false,
-                                		score: -1,
+                                		score: '',
                                 		grade:'0',
                                 		complete:'0',
                                 		realCredit: 0,
@@ -663,15 +668,15 @@ CScourse.processCS = function(req, res, next){
 					//console.log(cosNumber[k]);
                                 	if(taken[cosNumber[k]] === true){
 						cosInfo.code = cosNumber[k];
-						cosInfo.score = parseInt(detail[cosNumber[k]].score);
-						cosInfo.grade = detail[cosNumber[k]].score_level;
 						cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;
 						cosInfo.semester = parseInt(detail[cosNumber[k]].semester);
 						cosInfo.originalCredit = parseInt(detail[cosNumber[k]].cos_credit);
-						cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						trueCounter++;
 						if(detail[cosNumber[k]].pass_fail == '通過'){
 							cosInfo.complete = true;
+                            cosInfo.score = parseInt(detail[cosNumber[k]].score);
+                            cosInfo.grade = detail[cosNumber[k]].score_level;
+                            cosInfo.realCredit = parseInt(detail[cosNumber[k]].cos_credit);
 						}
 						else
 							cosInfo.complete = false;

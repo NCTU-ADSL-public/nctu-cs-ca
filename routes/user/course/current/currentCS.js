@@ -14,7 +14,7 @@ currentCS.processCS = function(req, res, next){
 		// the year the student enter school
 		var school_year = (100 + temp);
 		if(!studentId){
-			console.log("No Student Id");
+			//console.log("No Student Id");
 			return;
 		}
 		for(var i=0; i<now.length; i++){
@@ -23,7 +23,7 @@ currentCS.processCS = function(req, res, next){
 		}
 		// determine compulsory courses
 		var compulse = req.course.compulse;
-		//console.log(compulse);
+		////console.log(compulse);
 		for(var q=0; q<compulse.length; q++){
 			cosNumber = compulse[q].cos_codes;
   			for(var k=0; k<cosNumber.length; k++){
@@ -44,10 +44,18 @@ currentCS.processCS = function(req, res, next){
 					if(reg == '物化生'){
 						var temp = datail[cosNumber[k]].cos_cname.substring(0,2);
 						cosInfo.cn = detail[cosNumber[k]].cos_cname;
-                                        	cosInfo.en = detail[cosNumber[k]].cos_ename;
+                        cosInfo.en = detail[cosNumber[k]].cos_ename;
 					}
-					cosInfo.cn = compulse[q].cos_cname;
-                                	cosInfo.en = compulse[q].cos_ename;
+                    else{
+					    cosInfo.cn = compulse[q].cos_cname;
+                        cosInfo.en = compulse[q].cos_ename;
+                        if(detail[cosNumber[k]].cos_typeext == '英文授課'){
+                            if((detail[cosNumber[k]].cos_cname!= '基礎程式設計')&&(detail[cosNumber[k]].cos_cname!= '跨領域專題(一)')&&(detail[cosNumber[k]].cos_cname!='資訊工程專題(一)(英文授課)')&&(detail[cosNumber[k]].cos_cname!= '資訊工程專題(二)(英文授課)')&&(detail[cosNumber[k]].cos_cname!= '資訊工程研討(英文授課)')&&(detail[cosNumber[k]].cos_cname!= '資訊工程研討')){
+                                if(cosNumber[k].substring(0,3) == 'DCP')
+                                    cosInfo.english = true;
+                            }
+                        }
+                    }
 					cosInfo.code = cosNumber[k];
 					for(var a = 0; a<courseResult[0].course.length; a++){
 						var reg1 = courseResult[0].course[a].cn;
@@ -63,7 +71,7 @@ currentCS.processCS = function(req, res, next){
 							if(reg == '物化生三選一(一)'){
 								if(reg2 == '物理'||reg2 == '化學'||reg2 == '生物'){
 									courseResult[0].course[a] = cosInfo;
-                                                        		break;
+                                break;
 								}
 							}
 						}
@@ -93,6 +101,8 @@ currentCS.processCS = function(req, res, next){
                                         cosInfo.cn = core[q].cos_cname;
                                         cosInfo.en = core[q].cos_ename;
                                         cosInfo.code = cosNumber[k];
+                                        if(detail[cosNumber[k]].cos_typeext == '英文授課')
+                                            cosInfo.english = true;
 					for(var a = 0; a<courseResult[1].course.length; a++){
                                                 if(courseResult[1].course[a].cn == cosInfo.cn){
                                                         courseResult[1].course[a] = cosInfo;
@@ -125,6 +135,8 @@ currentCS.processCS = function(req, res, next){
                                         cosInfo.cn = other[q].cos_cname;
                                         cosInfo.en = other[q].cos_ename;
                                         cosInfo.code = cosNumber[k];
+                                        if(detail[cosNumber[k]].cos_typeext == '英文授課')
+                                            cosInfo.english = true;
 					for(var a = 0; a<courseResult[2].course.length; a++){
                                                 if(courseResult[2].course[a].cn == cosInfo.cn){
                                                         courseResult[2].course[a] = cosInfo;
@@ -157,6 +169,8 @@ currentCS.processCS = function(req, res, next){
                                         cosInfo.cn = vice[q].cos_cname;
                                         cosInfo.en = vice[q].cos_ename;
                                         cosInfo.code = cosNumber[k];
+                                        if(detail[cosNumber[k]].cos_typeext == '英文授課')
+                                            cosInfo.english = true;
                                         for(var a = 0; a<courseResult[2].course.length; a++){
                                                 if(courseResult[2].course[a].cn == cosInfo.cn){
                                                         courseResult[2].course[a] = cosInfo;

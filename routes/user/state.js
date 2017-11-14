@@ -24,7 +24,7 @@ router.get('/user/state', function(req, res){
 			userState = '3';
           }
       }
-      console.log("person state:" + userState);
+      //console.log("person state:" + userState);
       res.send(userState);
 
 });

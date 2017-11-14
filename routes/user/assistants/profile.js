@@ -16,20 +16,20 @@ router.get('/assistants/profile', csrfProtection, function(req, res){
 		var assistantId = utils.getPersonId(JSON.parse(req.session.profile));
 
         	if(!assistantId){
-              		console.log("No Student Id");
+              		//console.log("No Student Id");
               		return;
         	}
-        	query.findPerson('E9604', function(err,result){
+        	query.findPerson(assistantId, function(err,result){
             		if(err){
-                		console.log("Can't find student");
+                		//console.log("Can't find student");
                 		throw err;
                 		return;
             		}
             		if(!result){
                 		return;
             		}
-            		console.log("profile in profile:");
-            		console.log(result);
+            		//console.log("profile in profile:");
+            		//console.log(result);
 	    		//req.session.profile = result;
 	    		res.send(result);
 	   		 //query.close();

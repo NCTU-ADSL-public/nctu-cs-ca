@@ -4,11 +4,11 @@ var utils = require('../../../utils');
 var query = {};
 
 query.queryPass = function(req, res, next){
-    //console.log("queryPass");
+    ////console.log("queryPass");
    if(req.session.profile){
 	 var studentId = res.locals.studentId;
          if(!studentId){
-         	console.log("No Student Id in queryPass");
+         	//console.log("No Student Id in queryPass");
                 return;
          }
          else{
@@ -17,7 +17,7 @@ query.queryPass = function(req, res, next){
 		if(req.pass)
                   next();
                 else{
-                  console.log("Cannot get pass");
+                  //console.log("Cannot get pass");
                   return;
                 }
             });
@@ -34,7 +34,7 @@ query.queryCourse = function(req, res, next){
     	var studentId = res.locals.studentId;
   		//var program = req.profile[0].program;
   		if(!studentId){
-  			console.log("No Student Id in queryCourse");
+  			//console.log("No Student Id in queryCourse");
   			return;
   	  	}
       		else{
@@ -43,7 +43,7 @@ query.queryCourse = function(req, res, next){
 	  			if(req.course)
             				next();
           			else{
-              				console.log("Cannot get course");
+              				//console.log("Cannot get course");
               				return;
           			}
         		});
@@ -58,7 +58,7 @@ query.queryRule = function(req, res, next){
     if(req.session.profile){
          var studentId = res.locals.studentId;
                 if(!studentId){
-                        console.log("No Student Id in queryRule");
+                        //console.log("No Student Id in queryRule");
                         return;
                 }
                 else{
@@ -67,7 +67,7 @@ query.queryRule = function(req, res, next){
 			  if(req.rules)
                              next();
                           else{
-                             console.log("Cannot get rules");
+                             //console.log("Cannot get rules");
                              return;
                           }
                      });
@@ -82,18 +82,18 @@ query.queryFree = function(req, res, next){
     if(req.session.profile){
          var studentId = res.locals.studentId; 
                 if(!studentId){
-                        console.log("No Student Id in queryFree");
+                        //console.log("No Student Id in queryFree");
                         return;
                 }
                 else{     
 		                table.tables.getFree(studentId,function(free){
                                 req.free = free;
-                                console.log("free!!");
-			                    console.log(free);
+                                //console.log("free!!");
+			                    //console.log(free);
                                 if(req.free)
                                         next();
                                 else{
-                                        console.log("Cannot get free course");
+                                        //console.log("Cannot get free course");
                                         return;
                                 }
                         });
@@ -108,7 +108,7 @@ query.queryNow = function(req, res, next){
     if(req.session.profile){
          var studentId = res.locals.studentId;
                 if(!studentId){
-                        console.log("No Student Id in queryNow");
+                        //console.log("No Student Id in queryNow");
                         return;
                 }
                 else{
@@ -117,7 +117,7 @@ query.queryNow = function(req, res, next){
                           if(req.now)
                              next();
                           else{
-                             console.log("Cannot get current course");
+                             //console.log("Cannot get current course");
                              return;
                           }
                      });
@@ -135,7 +135,7 @@ query.queryGeneral = function(req, res, next){
                 if(req.general)
                 	next();
                 else{
-                        console.log("Cannot get general courses");
+                        //console.log("Cannot get general courses");
                         return;
                 }
         });

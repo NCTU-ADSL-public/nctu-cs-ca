@@ -25,7 +25,7 @@ var resetOneStudent = function(studentId){
 var resetAllStudent = function(list){
     
     for(let i = 0; i < list.length ; i++){
-        query.setStudentGraduateSubmit(list[i].student_id, '0');
+        query.setStudentGraduateSubmit(JSON.stringify(list[i].student_id), '0');
     }
     console.log(list);
     console.log("Finished resetting all students' submit state.");

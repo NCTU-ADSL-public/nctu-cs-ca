@@ -15,20 +15,20 @@ router.get('/students/profile', function(req, res){
 		var studentId = utils.getPersonId(JSON.parse(req.session.profile));
 
         	if(!studentId){
-              		console.log("No Student Id");
+              		//console.log("No Student Id");
               		return;
         	}
         	query.findPerson(studentId, function(err,result){
             		if(err){
-                		console.log("Can't find student");
+                		//console.log("Can't find student");
                 		throw err;
                 		return;
             		}
             		if(!result){
                 		return;
            	 	}
-            		console.log("profile in profile:");
-            		console.log(result);
+            		//console.log("profile in profile:");
+            		//console.log(result);
 	    		//req.session.profile = result;
 	    		res.send(result);
 	    		//query.close();

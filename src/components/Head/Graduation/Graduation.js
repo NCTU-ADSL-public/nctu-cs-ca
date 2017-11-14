@@ -11,7 +11,6 @@ import {ToastContainer, ToastStore} from 'react-toasts';
 import Popover from 'react-simple-popover';
 import ReactHover from 'react-hover';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 import scrollToComponent from 'react-scroll-to-component'
 import IconButton from 'material-ui/IconButton';
@@ -40,7 +39,7 @@ const styles = {
     },
     buttonEn: {
         margin:'9px 10px 0 0px',
-        width:'150px',
+        width:'250px',
         float:'left'
     },
     labelStyle: {
@@ -73,20 +72,27 @@ class Grad extends React.Component {
         isToggle:true,
         open:false,
         opendialog: false,
+        opendialogEn: false,
         opendialog1: false,
         opendialogprint: false,
         graduationCheck:false,
-        graduationCheckEnglishTest:false,
+        graduationCheckEnglishTest:"0",
         Graduationitems:[],
         items:[],
         totalitems:[],
         courseCategoryArray:[],
+        Result:[],
+        ReviseResult:[],
+        print_courseCategoryArray:[],
     };
     componentWillMount(){
         this.setState({
             items:this.props.items,
             Graduationitems:this.props.revise,
-            totalitems:this.props.result
+            Result:this.props.result,
+            ReviseResult:this.props.reviseresult,
+            totalitems:this.props.result,
+            print_courseCategoryArray:this.props.courseCategoryArray,
         });
         let _this=this;
         axios.get('/students/graduate/check').then(studentData => {
@@ -103,6 +109,7 @@ class Grad extends React.Component {
         }).catch(err => {
             console.log(err);
         });
+
     }
 
     //For updating as props changes!!!
@@ -143,13 +150,13 @@ class Grad extends React.Component {
         });
         if(this.state.isToggle){
             this.setState({
-                totalitems:this.props.reviseresult
+                totalitems:this.state.ReviseResult
             });
-            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主。</div>, 20000);
+            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主。</div>, 10000);
         }
         else{
             this.setState({
-                totalitems:this.props.result
+                totalitems:this.state.Result
             });
         }
     }
@@ -184,30 +191,180 @@ class Grad extends React.Component {
         });
 
     }
-    sendEnglishTest(){
+    sendEnglishTest1(){
         let _this=this;
         axios.post('/students/graduate/english', {
-            check:{state:true}
+            "check1":{"state":true}, "check2":{"state":true}
         })
             .then(res => {
-                ()=>this.EnglishCallBack();
+                _this.setState({
+                    graduationCheckEnglishTest : res.data.check.state
+                });
+                this.EnglishCallBack();
             })
             .catch(err => {
                 console.log(err)
             });
         _this.setState({
-            graduationCheckEnglishTest:true,
-            opendialog: false
+            graduationCheckEnglishTest:"1",
+            opendialog: false,
+            opendialogEn:false
         });
+        this.EnglishCallBack();
+    }
+
+    sendEnglishTest2(e){
+        let _this=this;
+        axios.post('/students/graduate/english', {
+            "check1":{"state":false}, "check2":{"state":e}
+        })
+            .then(res => {
+                _this.setState({
+                    graduationCheckEnglishTest : res.data.check.state
+                })
+                this.EnglishCallBack();
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        if(e){
+            _this.setState({
+                graduationCheckEnglishTest:"21",
+                opendialog: false,
+                opendialogEn:false
+            });
+        }
+        else{
+            _this.setState({
+                graduationCheckEnglishTest:"22",
+                opendialog: false,
+                opendialogEn:false
+            });
+        }
+        this.EnglishCallBack();
     }
 
     EnglishCallBack(){
-        let _this = this;
+        let Graduationitems=[
+            { title: '必修課程',
+                credit: '80',
+                require: '60',
+                selection: true,
+                course:
+                    [ {"cn":"資料庫系統概論","en":"Introduction to Database Systems","code":"DCP1187","score":-1,"complete":"false","english":false,"grade":"0","year":4,"semester":1,"reason":"CS"},{ cn: '作業系統概論', en: 'Introduction to Operating Systems',"score":60 ,complete:true, grade:'0'},
+                        { cn: '基礎程式設計', en: 'Basic Programming',"score":60  ,complete:true, grade:'C'},
+                        { cn: '微積分(一)', en: 'Calculus (I)' ,"score":60 ,complete:true, grade:'B',reason:'now'},
+                        { cn: '微積分(二)', en: 'Calculus (II)',"score":60  ,complete:true, grade:'A'},
+                        { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.',"score":60  ,complete:true, reason:'notCS', grade:'0'},
+                        { cn: '數位電路設計', en: 'Digital Circuit Design',"score":60  ,complete:false, reason:'now', realCredit:3},
+                        { cn: '機率', en: 'Probability' ,"score":60 ,complete:true, reason:'free1'},
+                        { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true,"score":60 , reason:'free2'},
+                        { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:false,"score":60 },
+                        { cn: '物化生三合一(一)', en: '' ,complete:true,"score":60 },
+                        { cn: '物化生三合一(二)', en: '' ,complete:true,"score":60 },
+                        { cn: '線性代數', en: 'Linear Algebra' ,complete:true},
+                        { cn: '編譯器設計概論', en: 'Intro. to Compiler Design' ,complete:true},
+                        { cn: '計算機概論與程式設計',
+                            en: 'Introduction to Computers and Programming' ,complete:true},
+                        { cn: '計算機組織', en: 'Computer Organization' ,complete:true},
+                        { cn: '計算機網路概論', en: 'Intro. to Computer Networks' ,complete:true},
+                        { cn: '資料結構與物件導向程式設計',
+                            en: 'Data Structures and Object-oriented Programming' ,complete:true},
+                        { cn: '資訊工程專題(一)',
+                            en: 'Computer Science and Engineering Projects (I)' ,complete:true},
+                        { cn: '資訊工程專題(二)',
+                            en: 'Computer Science and Engineering Projects (II)' ,complete:true},
+                        { cn: '資訊工程研討', en: 'Computer Science Seminars' ,complete:true},
+                        { cn: '離散數學', en: 'Discrete Mathematics' ,complete:true} ],
+                notPas: [],
+                complete: 'True' },
+            { title: '通識',
+                credit: 16,
+                require: 20,
+                course:
+                    [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+                        { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true,"score":60 },
+                        { cn: '幾何造形', en: '', dimension: '自然', complete: true,"score":60 },
+                        { cn: '經濟學概論', en: '', dimension: '歷史', complete: true ,reason:'now'},
+                        { cn: '霸權興衰史:從十五世紀至當代', en: '', dimension: '歷史', complete: true ,"score":60,reason:'free2'},
+                        { cn: '紀錄片製作概論', en: '', dimension: '歷史', complete: true ,"score":60},
+                        { cn: '台灣史', en: '', dimension: '歷史', complete: true ,"score":60},
+                        { cn: '當代中國：全球化下的兩岸關係', en: '', dimension: '歷史', complete: true ,"score":60} ] },
+            { title: '副核心課程與他組核心',
+                credit: 16,
+                require: 20,
+                course:
+                    [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+                        { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
+                        { cn: '幾何造形', en: '', dimension: '自然', complete: true },
+                        { cn: '經濟學概論', en: '', dimension: '歷史', complete: true } ] },
+            { title: '核心課程',
+                credit: 16,
+                require: 20,
+                course:
+                    [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+                        { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
+                        { cn: '幾何造形', en: '', dimension: '自然', complete: true },
+                        { cn: '經濟學概論', en: '', dimension: '歷史', complete: true } ] },
+            { title: '體育',
+                credit: 16,
+                require: 20,
+                course:
+                    [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+                        { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
+                        { cn: '幾何造形', en: '', dimension: '自然', complete: true },
+                        { cn: '經濟學概論', en: '', dimension: '歷史', complete: true } ] },
+            { title: '外文',
+                credit: '20',
+                require: '60',
+                course:
+                    [ { cn: '作業系統概論', en: 'Introduction to Operating Systems' ,complete:true},
+                        { cn: '基礎程式設計', en: 'Basic Programming' ,complete:true},
+                        { cn: '微積分(一)', en: 'Calculus (I)' ,complete:true},
+                        { cn: '微積分(二)', en: 'Calculus (II)' ,complete:true},
+                        { cn: '微處理機系統實驗', en: 'Microprocessor System Lab.' ,complete:true},
+                        { cn: '數位電路設計', en: 'Digital Circuit Design' ,complete:true},
+                        { cn: '機率', en: 'Probability' },
+                        { cn: '正規語言概論', en: 'Introduction to Formal Language' ,complete:true},
+                        { cn: '演算法概論', en: 'Introduction to Algorithms' ,complete:true},
+                        { cn: '物化生三合一(一)', en: '' ,complete:true},
+                        { cn: '物化生三合一(二)', en: '' ,complete:true},
+                        { cn: '線性代數', en: 'Linear Algebra' ,complete:true},
+                        { cn: '編譯器設計概論', en: 'Intro. to Compiler Design' ,complete:true},
+                        { cn: '計算機概論與程式設計',
+                            en: 'Introduction to Computers and Programming' ,complete:true},
+                        { cn: '計算機組織', en: 'Computer Organization' ,complete:true},
+                        { cn: '計算機網路概論', en: 'Intro. to Computer Networks' ,complete:true},
+                        { cn: '資料結構與物件導向程式設計',
+                            en: 'Data Structures and Object-oriented Programming' ,complete:true},
+                        { cn: '資訊工程專題(一)',
+                            en: 'Computer Science and Engineering Projects (I)' ,complete:true},
+                        { cn: '資訊工程專題(二)',
+                            en: 'Computer Science and Engineering Projects (II)' ,complete:true},
+                        { cn: '資訊工程研討', en: 'Computer Science Seminars' ,complete:true},
+                        { cn: '離散數學', en: 'Discrete Mathematics' ,complete:true} ],
+                notPas: [],
+                complete: 'True' },{},{},{},{},{"total":113,"total_require":128,"compulsory":55,"compulse_require":58,"core":9,"core_require":"9","vice":9,"vice_require":"9","pro":9,"pro_require":"12","english":0,"english_require":1,"other":0,"other_require":"12","general":20,"general_require":20,"pe":6,"pe_require":6,"language":10,"language_require":8,"service":2,"service_require":2,"art":2,"art_require":2}
+
+        ];
+
+        this.setState({
+            Graduationitems:Graduationitems,
+            ReviseResult:Graduationitems[10],
+        });
         axios.get('/students/graduate/revised').then(studentData => {
-            _this.setState({
-                Graduationitems:studentData.data
-            })
+            this.setState({
+                Graduationitems:studentData.data,
+                ReviseResult:studentData.data[10],
+            }.bind(this))
         }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/graduate/print').then(function(resp){
+            this.setState({
+                print_courseCategoryArray: resp.data
+            });
+        }.bind(this)).catch(err => {
             console.log(err);
         });
 
@@ -227,14 +384,30 @@ class Grad extends React.Component {
         this.setState({opendialogprint: false});
     };
 
-    handleClosedialog = () => {
-        this.setState({opendialog: false});
+    handleClosedialogEn = () => {
+        this.setState({opendialogEn: false});
     };
 
-    handleOpen = () => {
+    handleOpenEn = () => {
+        this.setState({
+            scrollQuery:'',opendialogEn: true});
+    };
+
+    handleOpenEn2 = () => {
         this.setState({
             scrollQuery:'',opendialog: true});
     };
+
+    handleClosedialogEn2 = () => {
+        this.setState({opendialog: false});
+    };
+
+    componentDidMount(){
+        if(this.state.graduationCheckEnglishTest==="0"){
+            ToastStore.warning(<div  className="text">請確認英文狀態。</div>, 10000);
+        }
+
+    }
     render(){
 
         const actions1 = [
@@ -266,7 +439,7 @@ class Grad extends React.Component {
                               backgroundColor = "#DDDDDD"
                               label="否"
                               keyboardFocused={true}
-                              onClick={this.handleClosedialog}/>
+                              onClick={()=>this.sendEnglishTest2(false)}/>
             </MuiThemeProvider>,
             <MuiThemeProvider>
                 <RaisedButton style={styles.buttonDia}
@@ -274,7 +447,28 @@ class Grad extends React.Component {
                               backgroundColor = "#DDDDDD"
                               label="是"
                               keyboardFocused={true}
-                onClick={()=>this.sendEnglishTest()}
+                              onClick={()=>this.sendEnglishTest2(true)}
+            />
+            </MuiThemeProvider>,
+        ];
+
+        const actions21 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="否"
+                              keyboardFocused={true}
+                              onClick={()=>this.handleOpenEn2()}/>
+            </MuiThemeProvider>,
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="是"
+                              keyboardFocused={true}
+                              onClick={()=>this.sendEnglishTest1(true)}
             />
             </MuiThemeProvider>,
         ];
@@ -328,7 +522,7 @@ class Grad extends React.Component {
                                                     this.state.graduationCheck?"已送審":"未送審"
                                                     :
                                                     this.state.graduationCheck?"已送審":"確認送審"}
-                                                disabled={this.props.assistant ?true : this.state.graduationCheck}
+                                                disabled={this.props.assistant ?true : (this.state.graduationCheck || this.state.graduationCheckEnglishTest==="0")}
                                                 style={styles.button}
                                                 labelStyle={styles.labelStyle}
                                                 backgroundColor = "#DDDDDD"
@@ -349,16 +543,17 @@ class Grad extends React.Component {
                                         open={this.state.opendialog1}
                                         onRequestClose={this.handleClosedialog1}
                                     >
-                                        <div style={styles.labelStyle}>按下確認讓助理知道您看過這個網站。</div>
+                                        <div style={styles.labelStyle}>按下確認將畢業預審送交系辦。</div>
                                     </Dialog>
                                 </MuiThemeProvider>
-                                <MuiThemeProvider>
-                                    <RaisedButton style={styles.button}
-                                                  labelStyle={styles.labelStyle}
-                                                  backgroundColor = "#DDDDDD"
-                                                  label="列印"
-                                                  onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
-                                </MuiThemeProvider>
+                                    <MuiThemeProvider>
+                                        <RaisedButton style={styles.button}
+                                                      labelStyle={styles.labelStyle}
+                                                      backgroundColor = "#DDDDDD"
+                                                      label="列印"
+                                                      disabled={this.state.graduationCheckEnglishTest==="0"}
+                                                      onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
+                                    </MuiThemeProvider>
 
                                 <MuiThemeProvider>
                                     <Dialog
@@ -372,15 +567,28 @@ class Grad extends React.Component {
                                         <div style={styles.labelStyle}>列印系統所排之課程預審。<br/>專業選修, 其他選修,外文,的課程請自行填寫調整。</div>
                                     </Dialog>
                                 </MuiThemeProvider>
+                            <div className={this.state.graduationCheckEnglishTest!=="0"?"":"animated swing"}>
                                 <MuiThemeProvider>
                                     <RaisedButton style={styles.buttonEn}
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
-                                                  label={this.state.graduationCheckEnglishTest?"已考過英檢":"是否考過英檢?"}
-                                                  disabled={this.state.graduationCheckEnglishTest}
-                                                  onClick={this.handleOpen}/>
+                                                  ref="targetEn"
+                                                  label={this.state.graduationCheckEnglishTest!=="0"?(this.state.graduationCheckEnglishTest==="21")?"已考過英檢":(this.state.graduationCheckEnglishTest==="22")?"未考過英檢":"英文已抵免或換修":"確認英文狀態?"}
+                                                  onClick={this.handleOpenEn}/>
                                 </MuiThemeProvider>
-
+                            </div>
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions21}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialogEn}
+                                        onRequestClose={this.handleClosedialogEn}
+                                    >
+                                        <div style={styles.labelStyle}>英文有沒有抵免或換修?</div>
+                                    </Dialog>
+                                </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <Dialog
                                         title="注意"
@@ -388,9 +596,9 @@ class Grad extends React.Component {
                                         modal={false}
                                         style={styles.labelStyle}
                                         open={this.state.opendialog}
-                                        onRequestClose={this.handleClosedialog}
+                                        onRequestClose={this.handleClosedialogEn2}
                                     >
-                                        <div style={styles.labelStyle}>須通過英檢後再按'是'，按下'是'後可確認看看自動排序。</div>
+                                        <div style={styles.labelStyle}>是否通過英檢?</div>
                                     </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
@@ -463,7 +671,7 @@ class Grad extends React.Component {
                     <div id="graduate-footer"> </div>
                 </div>
                 <div id="printArea">
-                    <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.props.courseCategoryArray}/>
+                    <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.state.print_courseCategoryArray}/>
                 </div>
             </div>
         )

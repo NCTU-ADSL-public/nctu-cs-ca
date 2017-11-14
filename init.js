@@ -32,8 +32,8 @@ module.exports.init = function(){
     extended: true
   }));
 
-//  app.use('/students/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents);
-  //app.use('/assistants/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyAssistants);
+//  app.use('/students/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents, require('./middleware/verifyUser').verifyGrade, require('./middleware/verifyUser').verifyProgram);
+//  app.use('/assistants/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyAssistants);
 
   app.use('/', express.static('./public', { index: 'index.login.html'}));
   app.use('/students/head', express.static('./public', { index: 'index.student.html'}));
@@ -50,6 +50,7 @@ module.exports.init = function(){
   app.use(require('./routes/user/students/graduate/graduateRevised'));
   app.use(require('./routes/user/students/graduate/graduatePrint'));
   app.use(require('./routes/user/students/graduate/graduateCheck'));
+  app.use(require('./routes/user/students/graduate/graduateEnglish'));
   app.use(require('./routes/user/assistants/profile'));
   app.use(require('./routes/user/assistants/graduate/graduateOriginal'));
   app.use(require('./routes/user/assistants/graduate/graduateRevised'));

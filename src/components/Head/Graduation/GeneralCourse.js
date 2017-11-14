@@ -69,13 +69,13 @@ class GeneralCourse extends React.Component {
                   >
                 {this.props.items.map(function(item) {
                     if(item.reason==='now'){
-                        return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'#9e48d9'}}>(當期課程)</div></li></div>;
+                        return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'#9e48d9'}}>&nbsp;&nbsp;&nbsp;(當期課程)</div></li></div>;
                     }
                     else if(item.reason==='free1' || item.reason==='free2'){
-                        return <div><li key={id++}>{item.cn} (抵免課程)<div style={{float:'right', color:'#6A94A2'}}>{item.score}</div></li></div>;
+                        return <div><li key={id++}>{item.cn} (抵免課程)<div style={{float:'right', color:'#6A94A2'}}>&nbsp;&nbsp;&nbsp;{item.score}</div></li></div>;
                     }
                     else{
-                        return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'green'}}>{item.score}</div></li></div>;
+                        return <div><li key={id++}>{item.cn} <div style={{float:'right', color:'green'}}>&nbsp;&nbsp;&nbsp;{item.score}</div></li></div>;
                     }
                     })}
                 </Popover>

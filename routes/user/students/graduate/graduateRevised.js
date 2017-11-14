@@ -27,7 +27,7 @@ var currentCS = nowCS.currentCS.processCS;
 
 
 router.get('/students/graduate/revised', StudentId, queryFree, queryGeneral, queryPass, queryCourse, queryNow,queryRule, processOther, processCS, processFinal, processResult, currentOther, currentCS, function(req, res){
-	console.log(" get revised");
+	//console.log(" get revised");
     res.send(res.locals.courseResult);
 
 });

@@ -3,15 +3,15 @@ var currentOther = {};
 currentOther.processOther = function(req, res, next){
         
 	var now = JSON.parse(req.now);
-//    console.log("course this semester:");
-  //  console.log(now);
+//    //console.log("course this semester:");
+  //  //console.log(now);
 	var total = req.course.total;
 	var courseResult = res.locals.courseResult;
 	
 	if(req.session.profile){
 
   		var studentId = res.locals.studentId;
-        console.log("studentId in currentOther:"  + studentId);
+        //console.log("studentId in currentOther:"  + studentId);
         var temp = parseInt(studentId.substring(0,2));
           	// the year the student enter school
         var school_year = (100 + temp);
@@ -40,8 +40,8 @@ currentOther.processOther = function(req, res, next){
             if(rule[now[q].cos_code] != true){
                   		//if(cosInfo.complete === true){
   					if(temp == 'DCP' || temp == 'IOC' || temp == 'IOE' || temp == 'ILE'|| temp == 'IDS'){
-                        //console.log("CS course");
-                        //console.log(now[q]);
+                        ////console.log("CS course");
+                        ////console.log(now[q]);
                         if(now[q].cos_cname == '服務學習(一)' || now[q].cos_cname == '服務學習(二)'){
                             courseResult[8].course.push(cosInfo);
                         }
@@ -63,8 +63,8 @@ currentOther.processOther = function(req, res, next){
   				 		}
                         else if(now[q].cos_type == '通識'){
   						    var brief = now[q].brief.substring(0,2);
-                            //console.log("general course:");
-                            //console.log(now[q]);
+                            ////console.log("general course:");
+                            ////console.log(now[q]);
                             cosInfo.dimension = brief;
                             courseResult[6].course.push(cosInfo);
                         }
