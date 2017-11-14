@@ -518,7 +518,6 @@ class Grad extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   label={this.state.graduationCheckEnglishTest?(this.state.graduationCheckEnglishTest===1)?"已考過英檢":"未考過英檢":"是否考過英檢?"}
-                                                  disabled={this.state.graduationCheckEnglishTest}
                                                   onClick={this.handleOpen}/>
                                 </MuiThemeProvider>
 
