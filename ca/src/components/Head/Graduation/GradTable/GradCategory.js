@@ -13,11 +13,12 @@ class GradCategory extends React.Component {
         let subjects = this.state.subjects;
         for (let i = 0; i < subjects.length; i++) {
             // score
-            if (this.state.name == '藝文賞析' || subjects[i].cn == '導師時間' || (this.state.name=='服務學習'&&subjects[i].originalCredit==0))
-                if (subjects[i].complete == true)
-                    subjects[i].score = '通過';
+            if (subjects[i].score == null) {
+                if (subjects.grade == null)
+                    subjects[i].score = (subjects[i].complete == true)? '通過': '未過';
                 else
-                    subjects[i].score = '未過';
+                    subjects[i].score = subjects[i].grade;
+            }
 
             // comment
             if (this.state.name=='通識')
@@ -72,7 +73,7 @@ class GradCategory extends React.Component {
                         name={subject.cn + ' ' + subject.en + ((subject.english==true)? ' [英語授課]': '')}
                         credit={subject.originalCredit}
                         realCredit={subject.realCredit}
-                        score={this.state.name=='藝文賞析'? (subject.complete==true)? '通過': '未過': subject.score}
+                        score={subject.score}
                         semester={subject.semester}
                         year={subject.year}
                         comment={subject.comment}
