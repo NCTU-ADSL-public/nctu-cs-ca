@@ -72,6 +72,7 @@ class Grad extends React.Component {
         scrollQuery:'',
         isToggle:true,
         open:false,
+        openEn:true,
         opendialog: false,
         opendialog1: false,
         opendialogprint: false,
@@ -82,7 +83,8 @@ class Grad extends React.Component {
         totalitems:[],
         courseCategoryArray:[],
         Result:[],
-        ReviseResult:[]
+        ReviseResult:[],
+        print_courseCategoryArray:[],
     };
     componentWillMount(){
         this.setState({
@@ -172,6 +174,12 @@ class Grad extends React.Component {
             open: false
         });
     }
+    handleCloseEnPop(e) {
+        this.setState({
+            scrollQuery:'',
+            openEn: false
+        });
+    }
     sendReview(){
         axios.post('/students/graduate/check', {
             check:{state:true}
@@ -188,12 +196,15 @@ class Grad extends React.Component {
         });
 
     }
-    sendEnglishTest(){
+    sendEnglishTest(e){
         let _this=this;
         axios.post('/students/graduate/english', {
-            check:{state:true}
+            check:{state:e}
         })
             .then(res => {
+                _this.setState({
+                    graduationCheckEnglishTest : res.data.check.state
+                })
                 this.EnglishCallBack();
             })
             .catch(err => {
@@ -207,7 +218,6 @@ class Grad extends React.Component {
     }
 
     EnglishCallBack(){
-        let _this = this;
         let Graduationitems=[
             { title: '必修課程',
                 credit: '80',
@@ -314,13 +324,20 @@ class Grad extends React.Component {
         this.setState({
             Graduationitems:Graduationitems,
             ReviseResult:Graduationitems[10],
-        })
+        });
         axios.get('/students/graduate/revised').then(studentData => {
             this.setState({
                 Graduationitems:studentData.data,
                 ReviseResult:studentData.data[10],
-            })
+            }.bind(this))
         }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/graduate/print').then(function(resp){
+            this.setState({
+                print_courseCategoryArray: resp.data
+            });
+        }.bind(this)).catch(err => {
             console.log(err);
         });
 
@@ -379,7 +396,7 @@ class Grad extends React.Component {
                               backgroundColor = "#DDDDDD"
                               label="否"
                               keyboardFocused={true}
-                              onClick={this.handleClosedialog}/>
+                              onClick={()=>this.sendEnglishTest(false)}/>
             </MuiThemeProvider>,
             <MuiThemeProvider>
                 <RaisedButton style={styles.buttonDia}
@@ -387,7 +404,7 @@ class Grad extends React.Component {
                               backgroundColor = "#DDDDDD"
                               label="是"
                               keyboardFocused={true}
-                onClick={()=>this.sendEnglishTest()}
+                onClick={()=>this.sendEnglishTest(true)}
             />
             </MuiThemeProvider>,
         ];
@@ -441,7 +458,7 @@ class Grad extends React.Component {
                                                     this.state.graduationCheck?"已送審":"未送審"
                                                     :
                                                     this.state.graduationCheck?"已送審":"確認送審"}
-                                                disabled={this.props.assistant ?true : this.state.graduationCheck}
+                                                disabled={this.props.assistant ?true : (this.state.graduationCheck || !this.state.graduationCheckEnglishTest)}
                                                 style={styles.button}
                                                 labelStyle={styles.labelStyle}
                                                 backgroundColor = "#DDDDDD"
@@ -453,6 +470,16 @@ class Grad extends React.Component {
                                     </ReactHover.Hover>
                                 </ReactHover>
 
+                                <Popover
+                                    placement='top'
+                                    target={this.refs.targetEn}
+                                    show={this.state.openEn}
+                                    onHide={this.handleCloseEnPop.bind(this)}>
+                                    <div
+                                        style={styles.pop}>
+                                        請先確認自己是否考過英檢
+                                    </div>
+                                </Popover>
                                 <MuiThemeProvider>
                                     <Dialog
                                         title="注意"
@@ -462,7 +489,7 @@ class Grad extends React.Component {
                                         open={this.state.opendialog1}
                                         onRequestClose={this.handleClosedialog1}
                                     >
-                                        <div style={styles.labelStyle}>按下確認讓助理知道您看過這個網站。</div>
+                                        <div style={styles.labelStyle}>按下確認將畢業預審送交系辦。</div>
                                     </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
@@ -470,6 +497,7 @@ class Grad extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   label="列印"
+                                                  disabled={!this.state.graduationCheckEnglishTest}
                                                   onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
                                 </MuiThemeProvider>
 
@@ -489,7 +517,7 @@ class Grad extends React.Component {
                                     <RaisedButton style={styles.buttonEn}
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
-                                                  label={this.state.graduationCheckEnglishTest?"已考過英檢":"是否考過英檢?"}
+                                                  label={this.state.graduationCheckEnglishTest?(this.state.graduationCheckEnglishTest===1)?"已考過英檢":"未考過英檢":"是否考過英檢?"}
                                                   disabled={this.state.graduationCheckEnglishTest}
                                                   onClick={this.handleOpen}/>
                                 </MuiThemeProvider>
@@ -502,8 +530,9 @@ class Grad extends React.Component {
                                         style={styles.labelStyle}
                                         open={this.state.opendialog}
                                         onRequestClose={this.handleClosedialog}
+                                        ref="targetEn"
                                     >
-                                        <div style={styles.labelStyle}>須通過英檢後再按'是'，按下'是'後可確認看看自動排序。</div>
+                                        <div style={styles.labelStyle}>是否通過英檢?</div>
                                     </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
@@ -576,7 +605,7 @@ class Grad extends React.Component {
                     <div id="graduate-footer"> </div>
                 </div>
                 <div id="printArea">
-                    <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.props.courseCategoryArray}/>
+                    <PrintForm profile={this.state.print_courseCategoryArray} courseCategoryArray={this.props.courseCategoryArray}/>
                 </div>
             </div>
         )
