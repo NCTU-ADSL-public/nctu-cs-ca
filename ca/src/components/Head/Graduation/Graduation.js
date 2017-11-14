@@ -564,7 +564,7 @@ class Grad extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   ref="targetEn"
-                                                  label={this.state.graduationCheckEnglishTest?(this.state.graduationCheckEnglishTest===21)?"已考過英檢":(this.state.graduationCheckEnglishTest===22)?"未考過英檢":"英檢已抵免或換修":"是否考過英檢?"}
+                                                  label={this.state.graduationCheckEnglishTest?(this.state.graduationCheckEnglishTest===21)?"已考過英檢":(this.state.graduationCheckEnglishTest===22)?"未考過英檢":"英檢已抵免或換修":"確認英文狀態?"}
                                                   onClick={this.handleOpenEn}/>
                                 </MuiThemeProvider>
                             </div>
@@ -577,7 +577,7 @@ class Grad extends React.Component {
                                         open={this.state.opendialogEn}
                                         onRequestClose={this.handleClosedialogEn}
                                     >
-                                        <div style={styles.labelStyle}>英檢是否有抵免或是換修?</div>
+                                        <div style={styles.labelStyle}>英文有沒有抵免或換修?</div>
                                     </Dialog>
                                 </MuiThemeProvider>
                                 <MuiThemeProvider>
