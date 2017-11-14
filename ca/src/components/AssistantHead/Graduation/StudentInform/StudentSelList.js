@@ -34,6 +34,10 @@ const styles = {
     toggle: {
         marginBottom: 0,
     },
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#7B7B7B'
+    },
 };
 
 export default class StudentInform extends React.Component {
