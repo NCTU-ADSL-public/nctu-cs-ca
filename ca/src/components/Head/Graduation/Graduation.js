@@ -40,7 +40,7 @@ const styles = {
     },
     buttonEn: {
         margin:'9px 10px 0 0px',
-        width:'150px',
+        width:'200px',
         float:'left'
     },
     labelStyle: {
@@ -73,6 +73,7 @@ class Grad extends React.Component {
         isToggle:true,
         open:false,
         opendialog: false,
+        opendialogEn: false,
         opendialog1: false,
         opendialogprint: false,
         graduationCheck:false,
@@ -191,10 +192,32 @@ class Grad extends React.Component {
         });
 
     }
-    sendEnglishTest(e){
+    sendEnglishTest1(){
         let _this=this;
         axios.post('/students/graduate/english', {
-            check:{state:e}
+            "check1":{"state":true}, "check2":{"state":true}
+        })
+            .then(res => {
+                _this.setState({
+                    graduationCheckEnglishTest : res.data.check.state
+                });
+                this.EnglishCallBack();
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        _this.setState({
+            graduationCheckEnglishTest:true,
+            opendialog: false,
+            opendialogEn: false
+        });
+        this.EnglishCallBack();
+    }
+
+    sendEnglishTest2(e){
+        let _this=this;
+        axios.post('/students/graduate/english', {
+            "check1":{"state":false}, "check2":{"state":e}
         })
             .then(res => {
                 _this.setState({
@@ -207,7 +230,8 @@ class Grad extends React.Component {
             });
         _this.setState({
             graduationCheckEnglishTest:true,
-            opendialog: false
+            opendialog: false,
+            opendialogEn:false
         });
         this.EnglishCallBack();
     }
@@ -352,13 +376,22 @@ class Grad extends React.Component {
         this.setState({opendialogprint: false});
     };
 
-    handleClosedialog = () => {
-        this.setState({opendialog: false});
+    handleClosedialogEn = () => {
+        this.setState({opendialogEn: false});
     };
 
-    handleOpen = () => {
+    handleOpenEn = () => {
+        this.setState({
+            scrollQuery:'',opendialogEn: true});
+    };
+
+    handleOpenEn2 = () => {
         this.setState({
             scrollQuery:'',opendialog: true});
+    };
+
+    handleClosedialogEn2 = () => {
+        this.setState({opendialog: false});
     };
 
     componentDidMount(){
@@ -397,7 +430,7 @@ class Grad extends React.Component {
                               backgroundColor = "#DDDDDD"
                               label="否"
                               keyboardFocused={true}
-                              onClick={()=>this.sendEnglishTest(false)}/>
+                              onClick={()=>this.sendEnglishTest2(false)}/>
             </MuiThemeProvider>,
             <MuiThemeProvider>
                 <RaisedButton style={styles.buttonDia}
@@ -405,7 +438,28 @@ class Grad extends React.Component {
                               backgroundColor = "#DDDDDD"
                               label="是"
                               keyboardFocused={true}
-                onClick={()=>this.sendEnglishTest(true)}
+                              onClick={()=>this.sendEnglishTest2(true)}
+            />
+            </MuiThemeProvider>
+        ];
+
+        const actions21 = [
+
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="否"
+                              keyboardFocused={true}
+                              onClick={()=>this.handleOpenEn2()}/>
+            </MuiThemeProvider>,
+            <MuiThemeProvider>
+                <RaisedButton style={styles.buttonDia}
+                              labelStyle={styles.labelStyle}
+                              backgroundColor = "#DDDDDD"
+                              label="是"
+                              keyboardFocused={true}
+                              onClick={()=>this.sendEnglishTest1(true)}
             />
             </MuiThemeProvider>,
         ];
@@ -510,10 +564,22 @@ class Grad extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   ref="targetEn"
-                                                  label={this.state.graduationCheckEnglishTest?(this.state.graduationCheckEnglishTest===1)?"已考過英檢":"未考過英檢":"是否考過英檢?"}
-                                                  onClick={this.handleOpen}/>
+                                                  label={this.state.graduationCheckEnglishTest?(this.state.graduationCheckEnglishTest===21)?"已考過英檢":(this.state.graduationCheckEnglishTest===22)?"未考過英檢":"英檢已抵免或換修":"是否考過英檢?"}
+                                                  onClick={this.handleOpenEn}/>
                                 </MuiThemeProvider>
                             </div>
+                                <MuiThemeProvider>
+                                    <Dialog
+                                        title="注意"
+                                        actions={actions21}
+                                        modal={false}
+                                        style={styles.labelStyle}
+                                        open={this.state.opendialogEn}
+                                        onRequestClose={this.handleClosedialogEn}
+                                    >
+                                        <div style={styles.labelStyle}>英檢是否有抵免或是換修?</div>
+                                    </Dialog>
+                                </MuiThemeProvider>
                                 <MuiThemeProvider>
                                     <Dialog
                                         title="注意"
