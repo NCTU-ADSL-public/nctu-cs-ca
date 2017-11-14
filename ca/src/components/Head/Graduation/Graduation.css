@@ -10,7 +10,7 @@
 
 @media print {
     #ontopDiv,
-    #font_adjust,
+    .font_adjust,
     #topRec,
     footer {
         display: none;
