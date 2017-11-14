@@ -113,6 +113,7 @@
 
 .Grad-title-adjust{
     height: 200px;
+    width: 1500px;
     margin: 0;
     padding-top: 35px;
 }
@@ -232,11 +233,6 @@
         width: 1500px;
     }
 
-    .tip{
-        padding: 0 0 200px 75px;
-        display: inline-block;
-        width: 700px;
-    }
 
     #lessons-little-title-grad{
         margin: 8px 0 0 10px;
