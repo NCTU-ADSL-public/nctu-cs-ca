@@ -604,7 +604,7 @@ class Grad extends React.Component {
                     <div id="graduate-footer"> </div>
                 </div>
                 <div id="printArea">
-                    <PrintForm profile={this.state.print_courseCategoryArray} courseCategoryArray={this.props.courseCategoryArray}/>
+                    <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.state.print_courseCategoryArray}/>
                 </div>
             </div>
         )
