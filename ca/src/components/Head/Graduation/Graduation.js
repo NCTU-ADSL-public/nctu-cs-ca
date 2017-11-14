@@ -362,7 +362,8 @@ class Grad extends React.Component {
     };
 
     componentDidMount(){
-        ToastStore.warning(<div  className="text">請先確認自己是否通過英檢。</div>, 10000);
+        if(!this.state.graduationCheckEnglishTest)
+            ToastStore.warning(<div  className="text">請先確認自己是否通過英檢。</div>, 10000);
 
     }
     render(){
