@@ -414,7 +414,6 @@ class Grad extends React.Component {
         if(this.state.graduationCheckEnglishTest==="0"){
             ToastStore.warning(<div  className="text">請確認英文狀態。</div>, 5000);
         }
-
     }
     render(){
 

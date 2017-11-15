@@ -328,7 +328,9 @@ class Head extends Component {
             this.setState({
                 print_courseCategoryArray: resp.data
             });
-            this.select(1);
+            setTimeout(function(){ this.select(1); }, 700);
+
+
         }.bind(this)).catch(err => {
             console.log(err);
         });
