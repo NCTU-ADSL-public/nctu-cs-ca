@@ -347,24 +347,24 @@ class Grad extends React.Component {
                 complete: 'True' },{},{},{},{},{"total":113,"total_require":128,"compulsory":55,"compulse_require":58,"core":9,"core_require":"9","vice":9,"vice_require":"9","pro":9,"pro_require":"12","english":0,"english_require":1,"other":0,"other_require":"12","general":20,"general_require":20,"pe":6,"pe_require":6,"language":10,"language_require":8,"service":2,"service_require":2,"art":2,"art_require":2}
 
         ];
-
+        let _this=this;
         this.setState({
             Graduationitems:Graduationitems,
             ReviseResult:Graduationitems[10],
         });
         axios.get('/students/graduate/revised').then(studentData => {
-            this.setState({
+            _this.setState({
                 Graduationitems:studentData.data,
                 ReviseResult:studentData.data[10],
-            }.bind(this))
+            })
         }).catch(err => {
             console.log(err);
         });
         axios.get('/students/graduate/print').then(function(resp){
-            this.setState({
+            _this.setState({
                 print_courseCategoryArray: resp.data
             });
-        }.bind(this)).catch(err => {
+        }).catch(err => {
             console.log(err);
         });
 
@@ -622,7 +622,7 @@ class Grad extends React.Component {
                                     placement='bottom'
                                     target={this.refs.target}
                                     show={this.state.open}
-                                    onHide={this.handleClose.bind(this)}>
+                                    onHide={()=>this.handleClose()}>
                                     <div
                                         style={styles.pop}>
                                         -未排的<br/>
