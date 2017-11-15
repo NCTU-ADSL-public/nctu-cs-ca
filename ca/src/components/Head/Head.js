@@ -323,12 +323,12 @@ class Head extends Component {
     }
 
     componentDidMount(){
-    	this.select(1);
 
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data
             });
+            this.select(1);
         }.bind(this)).catch(err => {
             console.log(err);
         });
