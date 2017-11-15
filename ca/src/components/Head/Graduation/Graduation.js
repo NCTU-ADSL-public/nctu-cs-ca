@@ -346,7 +346,6 @@ class Grad extends React.Component {
         ];
         let _this=this;
         this.setState({
-            graduationCheckEnglishTest:e,
             Graduationitems:Graduationitems,
             ReviseResult:Graduationitems[10],
         });
@@ -369,6 +368,7 @@ class Grad extends React.Component {
         });
         axios.get('/students/graduate/print').then(function(resp){
             _this.setState({
+                graduationCheckEnglishTest:e,
                 print_courseCategoryArray: resp.data
             });
         }).catch(err => {
