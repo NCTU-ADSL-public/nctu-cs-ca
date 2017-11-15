@@ -40,10 +40,6 @@ const styles = {
         maxHeight: 50,
         overflow: 'auto',
     },
-    dialog:{
-        height: '800px',
-        overflow: 'auto',
-    },
     labelStyle: {
         fontFamily: 'Noto Sans CJK TC',
         color: '#434343'
@@ -67,13 +63,15 @@ export default class SendEmail extends React.Component {
         super(props);
         this.state = {
             open: false,
+            loginOpen: false,
             studentList: [],
             title: '',
             content: '',
+            account: '',
+            password: '',
+            login: '',
         };
         this.studentDataMatch = this.studentDataMatch.bind(this);
-        this.titleCallback = this.titleCallback.bind(this);
-        this.contentCallback= this.contentCallback.bind(this);
     }
 
     handleOpen = () => {
@@ -85,18 +83,43 @@ export default class SendEmail extends React.Component {
     handleClose = () => {
         this.setState({
             open: false,
+            loginOpen: false,
             title: '',
             content: '',
         });
     };
 
     handleSend = () => {
+        this.setState({loginOpen: true});
+    };
+
+    handleLoginClose = () => {
+        this.setState({loginOpen: false});
+    };
+
+    handleLogin = () => {
+        axios.post('/assistants/mail/login', {
+            account: this.state.account,
+            password: this.state.password,
+        }).then(res => {
+            console.log(res);
+            if(res.login)
+                this.loginSendSuccess();
+            else
+                this.setState({login: '登入失敗!'});
+        }).catch(err => {
+            console.log(err);
+            this.setState({login: '登入失敗!'});
+        });
+    };
+
+    loginSendSuccess(){
         this.setState({
             open: false,
+            loginOpen: false,
             title: '',
             content: '',
         });
-
         let recipients = this.state.studentList
             .map( (item, i) => item.studentId );
 
@@ -107,8 +130,7 @@ export default class SendEmail extends React.Component {
             message: this.state.content,
         }).then(res => {
             console.log(res)
-        })
-        .catch(err => {
+        }).catch(err => {
             console.log(err)
         });
 
@@ -116,7 +138,8 @@ export default class SendEmail extends React.Component {
         console.log(recipients);
         console.log(this.state.title);
         console.log(this.state.content);
-    };
+        console.log(this.state.account);
+    }
 
     studentDataMatch(){
         let newList = [];
@@ -135,14 +158,6 @@ export default class SendEmail extends React.Component {
         this.setState({studentList: newList});
     }
 
-    titleCallback(title){
-        this.setState({title: title});
-    }
-
-    contentCallback(content){
-        this.setState({content: content});
-    }
-
     handleChangeTitle = (event) => {
         this.setState({
             title: event.target.value,
@@ -152,6 +167,18 @@ export default class SendEmail extends React.Component {
     handleChangeContent = (event) => {
         this.setState({
             content: event.target.value,
+        });
+    };
+
+    handleChangeAccount = (event) => {
+        this.setState({
+            account: event.target.value,
+        });
+    };
+
+    handleChangePassword = (event) => {
+        this.setState({
+            password: event.target.value,
         });
     };
 
@@ -172,18 +199,63 @@ export default class SendEmail extends React.Component {
             />,
         ];
 
+        const actionsLogin = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onClick={this.handleLoginClose}
+                labelStyle={styles.labelStyle}
+            />,
+            <FlatButton
+                label="Login"
+                primary={true}
+                keyboardFocused={false}
+                onClick={this.handleLogin}
+                labelStyle={styles.labelStyle}
+            />,
+        ];
+
+
         return (
             <div>
                 <RaisedButton label="寄信通知"
                               onClick={this.handleOpen}
                               labelStyle={styles.labelStyle}/>
                 <Dialog
+                    title="登入助理信箱"
+                    actions={actionsLogin}
+                    modal={false}
+                    open={this.state.loginOpen}
+                    style={{zIndex: '11',}}
+                    titleStyle={styles.labelStyle}
+                >
+                    <div style={{color: '#cc4b61'}}>{this.state.login}</div>
+                    <MuiThemeProvider>
+                        <TextField
+                            floatingLabelText="帳號"
+                            style={styles.text1}
+                            value={this.state.account}
+                            onChange={this.handleChangeAccount}
+                        />
+                    </MuiThemeProvider>
+                    <MuiThemeProvider>
+                        <TextField
+                            floatingLabelText="密碼"
+                            type="password"
+                            style={styles.text1}
+                            value={this.state.password}
+                            onChange={this.handleChangePassword}
+                        />
+                    </MuiThemeProvider>
+                </Dialog>
+
+                <Dialog
                     title="寄信通知"
                     actions={actions}
                     modal={false}
                     open={this.state.open}
                     onRequestClose={this.handleClose}
-                    style={styles.labelStyle}
+                    style={{zIndex: '10',}}
                     titleStyle={styles.labelStyle}
                 >
                         <div style={styles.titleSender}>寄件人: {this.props.idCard.name}</div>
@@ -215,6 +287,8 @@ export default class SendEmail extends React.Component {
                             />
                         </MuiThemeProvider>
                 </Dialog>
+
+
             </div>
         );
     }
