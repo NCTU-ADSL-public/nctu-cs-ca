@@ -347,6 +347,10 @@ class Grad extends React.Component {
         ];
         let _this=this;
         this.setState({
+            scrollQuery:'',
+            isToggle:false
+        });
+        this.setState({
             Graduationitems:Graduationitems,
             ReviseResult:Graduationitems[10],
         });
