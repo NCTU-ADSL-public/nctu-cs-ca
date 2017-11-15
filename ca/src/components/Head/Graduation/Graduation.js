@@ -210,7 +210,7 @@ class Grad extends React.Component {
                 console.log(res)
             })
             .catch(err => {
-                window.location.replace("/");
+                window.location.replace("/logout ");
                 console.log(err)
             });
         this.setState({
@@ -231,7 +231,7 @@ class Grad extends React.Component {
                 this.EnglishCallBack();
             })
             .catch(err => {
-                window.location.replace("/");
+                window.location.replace("/logout ");
                 console.log(err)
             });
         _this.setState({
@@ -253,7 +253,7 @@ class Grad extends React.Component {
                 this.EnglishCallBack();
             })
             .catch(err => {
-                window.location.replace("/");
+                window.location.replace("/logout ");
                 console.log(err)
             });
         if(e){
