@@ -356,7 +356,7 @@ export default class index extends React.Component {
             console.log(err);
         });
 
-        axios.get('/students/graduate/print').then(function(resp){
+        axios.get('/assistants/graduate/print').then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data,
                 loadingP: false,
