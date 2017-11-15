@@ -76,7 +76,7 @@ class Grad extends React.Component {
         opendialog1: false,
         opendialogprint: false,
         graduationCheck:false,
-        graduationCheckEnglishTest:"0",
+        graduationCheckEnglishTest:"",
         Graduationitems:[],
         items:[],
         totalitems:[],
