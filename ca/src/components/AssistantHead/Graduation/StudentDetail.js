@@ -23,6 +23,7 @@ export default class index extends React.Component {
                 email:"6666666666666@nctu.edu.tw",
                 graduate:"0",
                 graduate_submit:"0",
+                graduationCheckEnglishTest:"0",
                 github_id:null,
                 fb_id:null,
                 gmail:null,
@@ -385,6 +386,7 @@ export default class index extends React.Component {
                         reviseresult={this.state.revise[10]}
                         courseCategoryArray={this.state.print_courseCategoryArray}
                         assistant={1}
+                        graduationCheckEnglishTest={this.state.graduationCheckEnglishTest}
                     />
                 </div>
             );
