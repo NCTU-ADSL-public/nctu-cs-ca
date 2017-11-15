@@ -323,7 +323,7 @@ class Head extends Component {
     }
 
     componentDidMount(){
-    	this.select(0);
+    	this.select(1);
 
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
