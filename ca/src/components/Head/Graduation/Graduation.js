@@ -210,6 +210,7 @@ class Grad extends React.Component {
             opendialog: false,
             opendialogEn:false
         });
+        this.EnglishCallBack();
     }
 
     sendEnglishTest2(e){
