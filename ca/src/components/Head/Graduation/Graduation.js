@@ -183,6 +183,7 @@ class Grad extends React.Component {
                 console.log(res)
             })
             .catch(err => {
+                window.location.replace("/");
                 console.log(err)
             });
         this.setState({
@@ -203,6 +204,7 @@ class Grad extends React.Component {
                 this.EnglishCallBack();
             })
             .catch(err => {
+                window.location.replace("/");
                 console.log(err)
             });
         _this.setState({
@@ -224,6 +226,7 @@ class Grad extends React.Component {
                 this.EnglishCallBack();
             })
             .catch(err => {
+                window.location.replace("/");
                 console.log(err)
             });
         if(e){
