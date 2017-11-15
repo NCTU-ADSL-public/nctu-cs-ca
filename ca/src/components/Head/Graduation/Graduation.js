@@ -19,7 +19,7 @@ import axios from 'axios'
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-
+let defaultToggled=false;
 const styles = {
     toggle: {
         marginBottom: 0,
@@ -76,7 +76,7 @@ class Grad extends React.Component {
         opendialog1: false,
         opendialogprint: false,
         graduationCheck:false,
-        graduationCheckEnglishTest:"",
+        graduationCheckEnglishTest:"0",
         Graduationitems:[],
         items:[],
         totalitems:[],
@@ -193,6 +193,7 @@ class Grad extends React.Component {
     }
     sendEnglishTest1(){
         let _this=this;
+        defaultToggled=!this.state.isToggle;
         axios.post('/students/graduate/english', {
             "check1":{"state":true}, "check2":{"state":true}
         })
@@ -214,6 +215,8 @@ class Grad extends React.Component {
 
     sendEnglishTest2(e){
         let _this=this;
+
+        defaultToggled=!this.state.isToggle;
         axios.post('/students/graduate/english', {
             "check1":{"state":false}, "check2":{"state":e}
         })
@@ -346,10 +349,6 @@ class Grad extends React.Component {
 
         ];
         let _this=this;
-        this.setState({
-            scrollQuery:'',
-            isToggle:false
-        });
         this.setState({
             Graduationitems:Graduationitems,
             ReviseResult:Graduationitems[10],
@@ -618,6 +617,7 @@ class Grad extends React.Component {
                                             label="系統自動排序"
                                             style={styles.toggle}
                                             labelStyle={styles.labelStyle}
+                                            defaultToggled={defaultToggled}
                                             onToggle={(toggled)=>this.handleToggle()}
                                         />
                                     </MuiThemeProvider>
@@ -811,6 +811,7 @@ class Grad extends React.Component {
                                             label="系統自動排序"
                                             style={styles.toggle}
                                             labelStyle={styles.labelStyle}
+                                            defaultToggled={defaultToggled}
                                             onToggle={(toggled)=>this.handleToggle()}
                                         />
                                     </MuiThemeProvider>
@@ -1005,6 +1006,7 @@ class Grad extends React.Component {
                                             label="系統自動排序"
                                             style={styles.toggle}
                                             labelStyle={styles.labelStyle}
+                                            defaultToggled={defaultToggled}
                                             onToggle={(toggled)=>this.handleToggle()}
                                         />
                                     </MuiThemeProvider>
@@ -1199,6 +1201,7 @@ class Grad extends React.Component {
                                             label="系統自動排序"
                                             style={styles.toggle}
                                             labelStyle={styles.labelStyle}
+                                            defaultToggled={defaultToggled}
                                             onToggle={(toggled)=>this.handleToggle()}
                                         />
                                     </MuiThemeProvider>
