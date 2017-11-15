@@ -101,6 +101,7 @@ class PrintForm extends React.Component {
                     <GradCategory
                         subjects={category.course}
                         name={category.title}
+                        graduationCheckEnglishTest={this.props.graduationCheckEnglishTest}
                     />
                 )}
             </table>

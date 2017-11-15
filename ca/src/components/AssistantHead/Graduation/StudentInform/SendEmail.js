@@ -16,6 +16,10 @@ import TextField from 'material-ui/TextField';
  * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
  */
 const styles = {
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#434343'
+    },
     titleSender:{
         fontFamily: 'Noto Sans CJK TC',
         padding: '3px 3px 5px 3px',
@@ -39,10 +43,6 @@ const styles = {
         padding: '5px 0 7px 20px',
         maxHeight: 50,
         overflow: 'auto',
-    },
-    labelStyle: {
-        fontFamily: 'Noto Sans CJK TC',
-        color: '#434343'
     },
     text1:{
         width: '90%',
@@ -258,7 +258,6 @@ export default class SendEmail extends React.Component {
                     style={{zIndex: '10',}}
                     titleStyle={styles.labelStyle}
                 >
-                        <div style={styles.titleSender}>寄件人: {this.props.idCard.name}</div>
                         <div style={styles.title}>密件副本:</div>
                         <div style={styles.itemsReceiver}>
                         {this.state.studentList.map( (item, i) => (
