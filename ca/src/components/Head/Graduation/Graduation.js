@@ -210,7 +210,6 @@ class Grad extends React.Component {
             opendialog: false,
             opendialogEn:false
         });
-        this.EnglishCallBack();
     }
 
     sendEnglishTest2(e){
@@ -241,7 +240,6 @@ class Grad extends React.Component {
                 opendialogEn:false
             });
         }
-        this.EnglishCallBack();
     }
 
     EnglishCallBack(){
@@ -495,7 +493,7 @@ class Grad extends React.Component {
         ];
         if(this.state.graduationCheckEnglishTest==="0"){
             return (
-                <div>
+                <a>
                     <div className="font_adjust">
                         <ToastContainer store={ToastStore}/>
                         <div className="fixed" onClick={()=>this.scrollTotop()}>
@@ -683,7 +681,7 @@ class Grad extends React.Component {
                     <div id="printArea">
                         <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.state.print_courseCategoryArray}/>
                     </div>
-                </div>
+                </a>
             );
         }
         else if(this.state.graduationCheckEnglishTest==="21"){
@@ -882,7 +880,7 @@ class Grad extends React.Component {
         }
         else if(this.state.graduationCheckEnglishTest==="22"){
             return (
-                <div>
+                <p>
                     <div className="font_adjust">
                         <ToastContainer store={ToastStore}/>
                         <div className="fixed" onClick={()=>this.scrollTotop()}>
@@ -1070,13 +1068,13 @@ class Grad extends React.Component {
                     <div id="printArea">
                         <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.state.print_courseCategoryArray}/>
                     </div>
-                </div>
+                </p>
             );
 
         }
         else{
             return (
-                <div>
+                <font>
                     <div className="font_adjust">
                         <ToastContainer store={ToastStore}/>
                         <div className="fixed" onClick={()=>this.scrollTotop()}>
@@ -1264,7 +1262,7 @@ class Grad extends React.Component {
                     <div id="printArea">
                         <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.state.print_courseCategoryArray}/>
                     </div>
-                </div>
+                </font>
             );
 
         }
