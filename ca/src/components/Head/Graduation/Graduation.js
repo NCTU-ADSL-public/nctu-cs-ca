@@ -199,18 +199,15 @@ class Grad extends React.Component {
         })
             .then(res => {
                 _this.setState({
-                    graduationCheckEnglishTest : res.data.check.state
+                    graduationCheckEnglishTest : res.data.check.state,
+                    opendialog: false,
+                    opendialogEn:false
                 });
-                this.EnglishCallBack();
+                this.EnglishCallBack("1");
             })
             .catch(err => {
                 console.log(err)
             });
-        _this.setState({
-            graduationCheckEnglishTest:"1",
-            opendialog: false,
-            opendialogEn:false
-        });
     }
 
     sendEnglishTest2(e){
@@ -223,29 +220,28 @@ class Grad extends React.Component {
             .then(res => {
                 _this.setState({
                     graduationCheckEnglishTest : res.data.check.state
-                })
-                this.EnglishCallBack();
+                });
+                if(e){
+                    _this.setState({
+                        opendialog: false,
+                        opendialogEn:false
+                    });
+                    _this.EnglishCallBack("21");
+                }
+                else{
+                    _this.setState({
+                        opendialog: false,
+                        opendialogEn:false
+                    });
+                    _this.EnglishCallBack("22");
+                }
             })
             .catch(err => {
                 console.log(err)
             });
-        if(e){
-            _this.setState({
-                graduationCheckEnglishTest:"21",
-                opendialog: false,
-                opendialogEn:false
-            });
-        }
-        else{
-            _this.setState({
-                graduationCheckEnglishTest:"22",
-                opendialog: false,
-                opendialogEn:false
-            });
-        }
     }
 
-    EnglishCallBack(){
+    EnglishCallBack(e){
         let Graduationitems=[
             { title: '必修課程',
                 credit: '80',
@@ -350,6 +346,7 @@ class Grad extends React.Component {
         ];
         let _this=this;
         this.setState({
+            graduationCheckEnglishTest:e,
             Graduationitems:Graduationitems,
             ReviseResult:Graduationitems[10],
         });
