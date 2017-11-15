@@ -1074,7 +1074,7 @@ class Grad extends React.Component {
             );
 
         }
-        else if(this.state.graduationCheckEnglishTest==="1"){
+        else{
             return (
                 <div>
                     <div className="font_adjust">
