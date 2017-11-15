@@ -9,6 +9,10 @@ import {
 } from 'material-ui/Table';
 
 const styles = {
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#434343'
+    },
     propContainer: {
         width: 200,
         overflow: 'hidden',
@@ -83,7 +87,6 @@ export default class StudentTable extends Component {
                 graduate_submit: "0",
             }]
     };
-
     componentWillMount(){
         this.orderList(this.state.orderBy);
     }
@@ -149,6 +152,7 @@ export default class StudentTable extends Component {
                     selectable={this.state.selectable}
                     multiSelectable={this.state.multiSelectable}
                     onCellClick={this.handleRowClick}
+                    style={styles.labelStyle}
                 >
                     <TableHeader
                         displaySelectAll={this.state.showCheckboxes}

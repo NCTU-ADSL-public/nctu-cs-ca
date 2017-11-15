@@ -9,6 +9,10 @@ import {
 } from 'material-ui/Table';
 
 const styles = {
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#434343'
+    },
     propContainer: {
         width: 200,
         overflow: 'hidden',
@@ -71,7 +75,6 @@ export default class StudentTable extends Component {
             orderBy: 'student_id',
         };
 
-        this.orderList = this.orderList.bind(this);
     }
 
     static defaultProps = {
@@ -95,7 +98,7 @@ export default class StudentTable extends Component {
     }
 
     orderList(orderBy){
-         let NewStudentList = [].concat(this.props.students)
+        let NewStudentList = [].concat(this.props.students)
             .sort((a, b) => {
                 if(orderBy === 'student_id')
                     return parseInt(a.student_id) - parseInt(b.student_id);
@@ -151,6 +154,7 @@ export default class StudentTable extends Component {
                     selectable={this.state.selectable}
                     multiSelectable={this.state.multiSelectable}
                     onCellClick={this.handleRowClick}
+                    style={styles.labelStyle}
                 >
                     <TableHeader
                         displaySelectAll={this.state.showCheckboxes}
