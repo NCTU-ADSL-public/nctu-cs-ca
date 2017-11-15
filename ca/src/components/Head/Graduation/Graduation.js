@@ -76,7 +76,7 @@ class Grad extends React.Component {
         opendialog1: false,
         opendialogprint: false,
         graduationCheck:false,
-        graduationCheckEnglishTest:"",
+        graduationCheckEnglishTest:"0",
         Graduationitems:[],
         items:[],
         totalitems:[],
@@ -678,7 +678,7 @@ class Grad extends React.Component {
                         <div id="graduate-footer"> </div>
                     </div>
                     <div id="printArea">
-                        <PrintForm profile={this.props.studentProfile} courseCategoryArray={this.state.print_courseCategoryArray}/>
+                        <PrintForm profile={this.props.studentProfile} graduationCheckEnglishTest={this.state.graduationCheckEnglishTest} courseCategoryArray={this.state.print_courseCategoryArray}/>
                     </div>
                 </div>
             );

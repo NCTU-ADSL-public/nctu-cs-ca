@@ -48,6 +48,9 @@
 .bg-yellow {
     background-color: #FFFF99 !important;
 }
+.bg-orange {
+    background-color: #FFCC99 !important;
+}
 
 .personal-info {
     width: 25%;
