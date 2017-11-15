@@ -95,20 +95,47 @@ class Grad extends React.Component {
             print_courseCategoryArray:this.props.courseCategoryArray,
         });
         let _this=this;
-        axios.get('/students/graduate/check').then(studentData => {
-            _this.setState({
-                graduationCheck : studentData.data.check.state
-            })
-        }).catch(err => {
-            console.log(err);
-        });
-        axios.get('/students/graduate/english').then(studentData => {
-            _this.setState({
-                graduationCheckEnglishTest : studentData.data.check.state
-            })
-        }).catch(err => {
-            console.log(err);
-        });
+
+        if(this.props.assistant) {
+            axios.get('/assistants/graduate/check', {
+                params: {
+                    student_id: this.props.studentProfile.student_id,
+                }
+            }).then(studentData => {
+                _this.setState({
+                    graduationCheck: studentData.data.check.state
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+            axios.get('/assistants/graduate/english', {
+                params: {
+                    student_id: this.props.studentProfile.student_id,
+                }
+            }).then(studentData => {
+                _this.setState({
+                    graduationCheckEnglishTest: studentData.data.check.state
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+
+        }else{
+            axios.get('/students/graduate/check').then(studentData => {
+                _this.setState({
+                    graduationCheck: studentData.data.check.state
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+            axios.get('/students/graduate/english').then(studentData => {
+                _this.setState({
+                    graduationCheckEnglishTest: studentData.data.check.state
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+        }
 
     }
 
@@ -350,30 +377,71 @@ class Grad extends React.Component {
             Graduationitems:Graduationitems,
             ReviseResult:Graduationitems[10],
         });
-        axios.get('/students/graduate/revised').then(studentData => {
-            _this.setState({
-                Graduationitems:studentData.data,
-                ReviseResult:studentData.data[10],
-            })
-        }).catch(err => {
-            console.log(err);
-        });
 
-        axios.get('/students/graduate/original').then(studentData => {
-            _this.setState({
-                items:studentData.data,
-                Result:studentData.data[10],
-            })
-        }).catch(err => {
-            console.log(err);
-        });
-        axios.get('/students/graduate/print').then(function(resp){
-            _this.setState({
-                print_courseCategoryArray: resp.data
+        if(this.props.assistant){
+            axios.get('/assistants/graduate/revised', {
+                params: {
+                    student_id: this.props.studentProfile.student_id,
+                }
+            }).then(studentData => {
+                _this.setState({
+                    Graduationitems: studentData.data,
+                    ReviseResult: studentData.data[10],
+                })
+            }).catch(err => {
+                console.log(err);
             });
-        }).catch(err => {
-            console.log(err);
-        });
+
+            axios.get('/assistants/graduate/original', {
+                params: {
+                    student_id: this.props.studentProfile.student_id,
+                }
+            }).then(studentData => {
+                _this.setState({
+                    items: studentData.data,
+                    Result: studentData.data[10],
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+            axios.get('/assistants/graduate/print', {
+                params: {
+                    student_id: this.props.studentProfile.student_id,
+                }
+            }).then(function (resp) {
+                _this.setState({
+                    print_courseCategoryArray: resp.data
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+
+        }else {
+            axios.get('/students/graduate/revised').then(studentData => {
+                _this.setState({
+                    Graduationitems: studentData.data,
+                    ReviseResult: studentData.data[10],
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+
+            axios.get('/students/graduate/original').then(studentData => {
+                _this.setState({
+                    items: studentData.data,
+                    Result: studentData.data[10],
+                })
+            }).catch(err => {
+                console.log(err);
+            });
+            axios.get('/students/graduate/print').then(function (resp) {
+                _this.setState({
+                    print_courseCategoryArray: resp.data
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+        }
         this.props.ReloadGrad();
 
     }
@@ -581,6 +649,7 @@ class Grad extends React.Component {
                                                           backgroundColor = "#DDDDDD"
                                                           ref="targetEn"
                                                           label={this.state.graduationCheckEnglishTest!=="0"?(this.state.graduationCheckEnglishTest==="21")?"已考過英檢":(this.state.graduationCheckEnglishTest==="22")?"未考過英檢":"英文已抵免或換修":"確認英文狀態?"}
+                                                          disabled={this.props.assistant}
                                                           onClick={this.handleOpenEn}/>
                                         </MuiThemeProvider>
                                     </div>
