@@ -16,7 +16,7 @@ export default class DrawerSimpleExample extends React.Component {
         this.state = {open: false};
     }
     componentWillMount(){
-        return axios.get('/bugs').then(loginStatus => {
+        axios.get('/bugs').then(loginStatus => {
             // loginStatus.status HTTP response code (e.g., 200, 401)
             //loginStatus.data  object parsed from HTTP response body
             //loginStatus.headers  HTTP presonse headers
@@ -25,7 +25,7 @@ export default class DrawerSimpleExample extends React.Component {
         }).catch(err => {
             console.log(err);
         });
-        return axios.get('/updates').then(loginStatus => {
+        axios.get('/updates').then(loginStatus => {
             // loginStatus.status HTTP response code (e.g., 200, 401)
             //loginStatus.data  object parsed from HTTP response body
             //loginStatus.headers  HTTP presonse headers
