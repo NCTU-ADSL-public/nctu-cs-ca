@@ -54,8 +54,8 @@ class Login extends React.Component {
                     <div id="eng-title"><div id="h11">NCTU Curriculum Assistant</div></div>
                     <div id="ch-title"><div id="h22">交大資工線上助理</div></div>
 
-                    <DrawerSimpleExample/>
                     <div className = "Login-login">
+                    <DrawerSimpleExample/>
                       <MuiThemeProvider>
                         <LoginButtom />
                       </MuiThemeProvider>

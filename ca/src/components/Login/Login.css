@@ -13,7 +13,7 @@
 }
 .Login-login {
     text-align:center;
-    margin: -7% 0 0 30%;
+    margin: -2% 0 0 2%;
  }
 .drawer{
     width: 20px;
@@ -81,10 +81,11 @@
   }
     .Login-login {
         text-align:center;
-        margin: -7% 0 0 40%;
+        margin: -7% 0 0 35%;
     }
     .drawer{
-        display: none;
+        float: left;
+        margin: 1px 0 0 -15%;
     }
 
     h1 {

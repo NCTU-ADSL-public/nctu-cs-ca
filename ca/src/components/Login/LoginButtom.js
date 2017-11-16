@@ -12,7 +12,7 @@ class LoginButtom extends React.Component{
 						  labelColor = {grey50}
 						  href="/auth/Nctu"
 						  style={{
-                              width: '30%',
+                              width: '20%',
                               fontFamily: 'Noto Sans CJK TC',
                               float: 'left',
                               margin: '2px'
