@@ -13,8 +13,13 @@
 }
 .Login-login {
     text-align:center;
-    margin: -7% 0 0 -15%;
+    margin: -7% 0 0 30%;
  }
+.drawer{
+    width: 20px;
+    float: left;
+    margin: 2px 2px 2px 30%;
+}
 
 .Login-Choose {
     text-align:center;
@@ -76,8 +81,16 @@
   }
     .Login-login {
         text-align:center;
-        margin: -7% 0 0 0%;
+        margin: -7% 0 0 34%;
     }
+    .drawer{
+        float: left;
+        position: fixed;
+        bottom: 6.5%;
+        right: 2%;
+        margin: 2px 2px 0 5%;
+    }
+
     h1 {
       font-size: 18px;
     }

@@ -12,8 +12,10 @@ class LoginButtom extends React.Component{
 						  labelColor = {grey50}
 						  href="/auth/Nctu"
 						  style={{
-                              width: '13%',
+                              width: '30%',
                               fontFamily: 'Noto Sans CJK TC',
+                              float: 'left',
+                              margin: '2px'
                           }}
 						  onTouchTap={
                               () => this.kk()

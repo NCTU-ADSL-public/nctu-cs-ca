@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FadeIn from 'react-fade-in';
 import axios from 'axios';
 import {ToastContainer, ToastStore} from 'react-toasts';
+import DrawerSimpleExample from './Drawer';
 
 class Login extends React.Component {
 
@@ -49,10 +50,11 @@ class Login extends React.Component {
                 <div className="Login-header"   ref="tip">
 
                 <FadeIn>
-                    <div id="rectangle">{this.state.LoginMessage_state}</div>
+                    <div id="rectangle"> </div>
                     <div id="eng-title"><div id="h11">NCTU Curriculum Assistant</div></div>
                     <div id="ch-title"><div id="h22">交大資工線上助理</div></div>
 
+                    <DrawerSimpleExample/>
                     <div className = "Login-login">
                       <MuiThemeProvider>
                         <LoginButtom />
@@ -61,7 +63,6 @@ class Login extends React.Component {
 
                 </FadeIn>
                 </div>
-
 
 
                 <footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>

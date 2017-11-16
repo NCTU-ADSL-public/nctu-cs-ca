@@ -64,7 +64,7 @@ let Graduationitems=[
         credit: 16,
         require: 20,
         course:
-            [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+            [ { cn: '心理學概論', en: '', dimension: '群己', complete: true ,reason:"now"},
                 { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true,"score":60 },
                 { cn: '幾何造形', en: '', dimension: '自然', complete: true,"score":60 },
                 { cn: '經濟學概論', en: '', dimension: '歷史', complete: true ,reason:'now'},
@@ -84,7 +84,7 @@ let Graduationitems=[
         credit: 16,
         require: 20,
         course:
-            [ { cn: '心理學概論', en: '', dimension: '群己', complete: true },
+            [ { cn: '心理學概論', en: '', dimension: '群己', complete: true,reason:"now"},
                 { cn: '當代世界:環境危機與生態永續', en: '', dimension: '通識', complete: true },
                 { cn: '幾何造形', en: '', dimension: '自然', complete: true },
                 { cn: '經濟學概論', en: '', dimension: '歷史', complete: true } ] },
