@@ -7,7 +7,7 @@ import './Login.css'
 import axios from 'axios';
 import PopoverExampleAnimation from './popover';
 
-let updates=["丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼", "丹尼丹尼", "丹尼丹尼丹尼co c oc oco co ocsasasasasassssssssssssssssssssss"];
+let updates=["丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼", "丹尼丹尼", "丹尼丹尼丹尼co c dddddddddddddddddddddddddoc oco co ocsasasasasassssssssssssssssssssss"];
 let bug=[""];
 export default class DrawerSimpleExample extends React.Component {
 
@@ -43,7 +43,7 @@ export default class DrawerSimpleExample extends React.Component {
                 <MuiThemeProvider>
                     <RaisedButton
                         label="公告"
-                        backgroundColor = "#00AEAE"
+                        backgroundColor = {"#bb5976"}
                         labelColor = {grey50}
                         className="drawer"
                         labelStyle={{
