@@ -45,7 +45,7 @@
 }
 
 #ch-title {
-  height: 35vh;
+  height: 22vh;
 }
 
 
@@ -92,5 +92,8 @@
     }
     h2 {
       font-size: 30px;
+    }
+    #ch-title {
+        height: 35vh;
     }
 }
