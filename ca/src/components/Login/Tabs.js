@@ -1,13 +1,14 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import './Login.css'
 
-const styles = {
-    headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-    },
+const style={
+    backgroundImage: 'radial-gradient(circle, #3c3b52 0%, #252233 80%',
+    backgroundImage: '-webkit-radial-gradient(circle, #3c3b52 0%, #252233 80%)',
+    height: '100%',
+    textAlign: 'center',
+    font: "1.33em 'Roboto Condensed', arial",
+    overflowY: 'scroll'
 };
 
 export default class TabsExampleControlled extends React.Component {
@@ -30,27 +31,30 @@ export default class TabsExampleControlled extends React.Component {
             <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
-                inkBarStyle={{color:'blue'}}
+                style={style}
             >
                 <Tab label="修正中" value="a"
                      style = {{backgroundColor: "#ae5164", fontFamily: 'Noto Sans CJK TC',}}>
-                    <div>
-                        <p>
-                            {this.props.bugs.map(item =>
-                                <li style={{ opacity:'1',fontFamily: 'Noto Sans CJK TC', margin:"5px 20px", color:'#2E3133'}} >{item}</li>
-                            )}
-                        </p>
+                    <div style={{}}>
+                        <ul className="live type2">
+                            <li>霹靂優課程尚無法處理</li>
+                            <li>其他選修課程轉為通識尚無法處理</li>
+                            <li>微學分課程尚無法處理</li>
+                        </ul>
                     </div>
                 </Tab>
                 <Tab label="已修正項目" value="b"
                      style = {{backgroundColor: "#ae5164", fontFamily: 'Noto Sans CJK TC',}}>
-                    <div>
-                        <p>
-                            {this.props.updates.map(item =>
-                                <li style={{ opacity:'1',fontFamily: 'Noto Sans CJK TC', margin:"5px 20px", color:'#2E3133'}} >{item}</li>
-                            )}
-                        </p>
-                    </div>
+                    <ul className="live type2">
+                        <li>抵免課程算一次</li>
+                        <li>物理抵免多的一學分放至專業選修</li>
+                        <li>普通生物學放至必修</li>
+                        <li>畢業預審表加印當其課程</li>
+                        <li>抵免課程將服學及藝文賞析移至服學及藝文賞析項目</li>
+                        <li>通識及其他選修學分計算錯誤更正</li>
+                        <li>圖書館學概論也可算至服務學習</li>
+                        <li>可當通識之其他選修課程的向度補上</li>
+                    </ul>
                 </Tab>
             </Tabs>
         );

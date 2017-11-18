@@ -54,8 +54,7 @@ export default class PopoverExampleAnimation extends React.Component {
                     style={{
                         width:'30%',
                         opacity:'0.7',
-                        height: '40%',
-                        overflow:'scroll'
+                        height: '40%'
                     }}
                 >
                     <TabsExampleControlled bugs={this.props.bugs} updates={this.props.updates}/>
