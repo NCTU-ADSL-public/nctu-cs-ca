@@ -6,6 +6,10 @@ import FadeIn from 'react-fade-in';
 import axios from 'axios';
 import {ToastContainer, ToastStore} from 'react-toasts';
 import DrawerSimpleExample from './Drawer';
+import PopoverExampleAnimation from './popover';
+
+let updates=["丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼", "丹尼丹尼", "丹尼丹尼丹尼co c dddddddddddddddddddddddddoc oco co ocsasasasasassssssssssssssssssssss"];
+let bug=["丹尼","丹尼","丹尼","丹尼","丹尼","丹尼"];
 
 class Login extends React.Component {
 
@@ -34,6 +38,23 @@ class Login extends React.Component {
 
     componentWillMount(){
         this.getLoginstatus();
+        axios.get('/bugs').then(loginStatus => {
+            // loginStatus.status HTTP response code (e.g., 200, 401)
+            //loginStatus.data  object parsed from HTTP response body
+            //loginStatus.headers  HTTP presonse headers
+            bug=loginStatus.data;
+
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/updates').then(loginStatus => {
+            // loginStatus.status HTTP response code (e.g., 200, 401)
+            //loginStatus.data  object parsed from HTTP response body
+            //loginStatus.headers  HTTP presonse headers
+            updates=loginStatus.data;
+        }).catch(err => {
+            console.log(err);
+        });
     }
     componentDidMount() {
              if (this.state.LoginMessage_state === "1")
@@ -55,7 +76,9 @@ class Login extends React.Component {
                     <div id="ch-title"><div id="h22">交大資工線上助理</div></div>
 
                     <div className = "Login-login">
-                    <DrawerSimpleExample/>
+                        <MuiThemeProvider>
+                    <PopoverExampleAnimation title="待改進項目" bugs={bug} updates={updates}/>
+                        </MuiThemeProvider>
                       <MuiThemeProvider>
                         <LoginButtom />
                       </MuiThemeProvider>

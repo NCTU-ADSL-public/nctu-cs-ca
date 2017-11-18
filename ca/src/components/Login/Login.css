@@ -20,6 +20,9 @@
     float: left;
     margin: 2px 2px 2px 30%;
 }
+.drawerIn{
+    height: 50%;
+}
 
 .Login-Choose {
     text-align:center;

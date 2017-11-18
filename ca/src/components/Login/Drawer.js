@@ -8,7 +8,7 @@ import axios from 'axios';
 import PopoverExampleAnimation from './popover';
 
 let updates=["丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼","丹尼", "丹尼丹尼", "丹尼丹尼丹尼co c dddddddddddddddddddddddddoc oco co ocsasasasasassssssssssssssssssssss"];
-let bug=[""];
+let bug=["丹尼","丹尼","丹尼","丹尼","丹尼","丹尼"];
 export default class DrawerSimpleExample extends React.Component {
 
     constructor(props) {
@@ -16,23 +16,7 @@ export default class DrawerSimpleExample extends React.Component {
         this.state = {open: false};
     }
     componentWillMount(){
-        axios.get('/bugs').then(loginStatus => {
-            // loginStatus.status HTTP response code (e.g., 200, 401)
-            //loginStatus.data  object parsed from HTTP response body
-            //loginStatus.headers  HTTP presonse headers
-            bug=loginStatus.data;
 
-        }).catch(err => {
-            console.log(err);
-        });
-        axios.get('/updates').then(loginStatus => {
-            // loginStatus.status HTTP response code (e.g., 200, 401)
-            //loginStatus.data  object parsed from HTTP response body
-            //loginStatus.headers  HTTP presonse headers
-            updates=loginStatus.data;
-        }).catch(err => {
-            console.log(err);
-        });
     }
     handleToggle = () => this.setState({open: !this.state.open});
     handleClose = () => this.setState({open: false});
@@ -58,8 +42,11 @@ export default class DrawerSimpleExample extends React.Component {
                         width={200}
                         open={this.state.open}
                         onRequestChange={(open) => this.setState({open})}
+                        className="drawerIn"
                         style={{
-                            background: '#EEEEEE'
+                            opacity:'0%',
+                            backgroundColor: '#ee215e',
+                            height:'50%'
                         }}
                     >
                         <PopoverExampleAnimation title="待改進項目" data={bug}/>

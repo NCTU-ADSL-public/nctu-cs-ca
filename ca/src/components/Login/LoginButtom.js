@@ -17,17 +17,14 @@ class LoginButtom extends React.Component{
                               float: 'left',
                               margin: '2px'
                           }}
-						  onTouchTap={
-                              () => this.kk()
-                          }
+                          labelStyle={{
+                              fontFamily: 'Noto Sans CJK TC',
+                          }}
 			>
 			</RaisedButton>
         );
 	}
 
-    kk (event){
-        console.log('1234567');
-    }
 }
 
 
