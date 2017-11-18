@@ -52,8 +52,9 @@ export default class PopoverExampleAnimation extends React.Component {
                     onRequestClose={this.handleRequestClose}
                     animation={PopoverAnimationVertical}
                     style={{
-                        width:'60%',
-                        height: '50%',
+                        width:'30%',
+                        opacity:'0.7',
+                        height: '40%',
                         overflow:'scroll'
                     }}
                 >

@@ -32,22 +32,22 @@ export default class TabsExampleControlled extends React.Component {
                 onChange={this.handleChange}
                 inkBarStyle={{color:'blue'}}
             >
-                <Tab label="待改進項目" value="a"
-                     buttonStyle = {{backgroundColor: "#ae5164", fontFamily: 'Noto Sans CJK TC',}}>
+                <Tab label="修正中" value="a"
+                     style = {{backgroundColor: "#ae5164", fontFamily: 'Noto Sans CJK TC',}}>
                     <div>
                         <p>
                             {this.props.bugs.map(item =>
-                                <li style={{ fontFamily: 'Noto Sans CJK TC', margin:"5px 20px", color:'#2E3133'}} >{item}</li>
+                                <li style={{ opacity:'1',fontFamily: 'Noto Sans CJK TC', margin:"5px 20px", color:'#2E3133'}} >{item}</li>
                             )}
                         </p>
                     </div>
                 </Tab>
-                <Tab label="已更新項目" value="b"
-                     buttonStyle = {{backgroundColor: "#ae5164", fontFamily: 'Noto Sans CJK TC',}}>
+                <Tab label="已修正項目" value="b"
+                     style = {{backgroundColor: "#ae5164", fontFamily: 'Noto Sans CJK TC',}}>
                     <div>
                         <p>
                             {this.props.updates.map(item =>
-                                <li style={{ fontFamily: 'Noto Sans CJK TC', margin:"5px 20px", color:'#2E3133'}} >{item}</li>
+                                <li style={{ opacity:'1',fontFamily: 'Noto Sans CJK TC', margin:"5px 20px", color:'#2E3133'}} >{item}</li>
                             )}
                         </p>
                     </div>

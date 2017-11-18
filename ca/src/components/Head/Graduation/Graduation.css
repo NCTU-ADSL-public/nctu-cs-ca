@@ -86,6 +86,7 @@
 .text{
     color: #7B7B7B;
     float: left;
+    opacity: 0.8;
     font-family: 'Noto Sans CJK TC';
 }
 
