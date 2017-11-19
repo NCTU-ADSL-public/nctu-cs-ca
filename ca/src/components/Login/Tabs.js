@@ -49,7 +49,7 @@ export default class TabsExampleControlled extends React.Component {
                         <li>抵免課程算一次</li>
                         <li>物理抵免多的一學分放至專業選修</li>
                         <li>普通生物學放至必修</li>
-                        <li>畢業預審表加印當其課程</li>
+                        <li>畢業預審表加印當期課程</li>
                         <li>抵免課程將服學及藝文賞析移至服學及藝文賞析項目</li>
                         <li>通識及其他選修學分計算錯誤更正</li>
                         <li>圖書館學概論也可算至服務學習</li>

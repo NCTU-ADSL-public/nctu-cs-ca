@@ -57,7 +57,7 @@ export default class PopoverExampleAnimation extends React.Component {
                         height: '40%'
                     }}
                 >
-                    <TabsExampleControlled bugs={this.props.bugs} updates={this.props.updates}/>
+                    <TabsExampleControlled/>
                 </Popover>
             </div>
         );
