@@ -12,13 +12,6 @@ class GradCategory extends React.Component {
 
         let subjects = this.state.subjects;
         for (let i = 0; i < subjects.length; i++) {
-            // score
-            if (subjects[i].score == null) {
-                if (subjects.grade == null)
-                    subjects[i].score = (subjects[i].complete == true)? '通過': '未過';
-                else
-                    subjects[i].score = subjects[i].grade;
-            }
 
             // comment
             if (this.state.name=='通識')
@@ -35,16 +28,22 @@ class GradCategory extends React.Component {
                 subjects[i].score = '抵免';
             } else if (subjects[i].reason=="free2") {
                 subjects[i].comment += '免修課程';
-                subjects[i].score = '';
             } else if (subjects[i].reason=="now") {
                 subjects[i].comment += '當期課程';
-                subjects[i].score = '';
             }
 
             // 未修
             if ((subjects[i].score==null || subjects[i].score==-1) && subjects[i].complete==false) {
                 this.state.subjects[i].realCredit = '　';
                 this.state.subjects[i].originalCredit = '　';
+            }
+
+            // score
+            if (subjects[i].score == null) {
+                if (subjects.grade == null)
+                    subjects[i].score = (subjects[i].complete == true)? '通過': '未過';
+                else
+                    subjects[i].score = subjects[i].grade;
             }
 
         }

@@ -16,6 +16,7 @@
         display: none;
     }
     #printArea {
+        padding: 5px;
         height: auto;
         width: auto;
         display: block;
