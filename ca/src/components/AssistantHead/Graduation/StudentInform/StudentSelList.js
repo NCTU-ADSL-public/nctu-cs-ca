@@ -107,8 +107,8 @@ export default class StudentInform extends React.Component {
                 ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
                 ((student.program.toLowerCase().search('網多') !== -1) && gC )||
                 ((student.program.toLowerCase().search('資電') !== -1) && gD )
-            )&&(    ((student.graduate==='0') && !gG)|| gG
-            )&&(    ((student.graduate_submit==='1' || student.graduate_submit==='0') && !gS) || gS );
+            )&&(    ((student.graduate==='0' || !student.graduate) && !gG)|| gG
+            )&&(    ((student.graduate_submit==='1' || student.graduate_submit==='0' || !student.graduate_submit) && !gS) || gS );
         });
         this.setState({students: updatedList});
     }
