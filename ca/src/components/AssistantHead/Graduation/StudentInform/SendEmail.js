@@ -69,7 +69,8 @@ export default class SendEmail extends React.Component {
             content: '',
             account: '',
             password: '',
-            login: '',
+            loginState: '',
+            senderEmail: 'error',
         };
         this.studentDataMatch = this.studentDataMatch.bind(this);
     }
@@ -81,7 +82,10 @@ export default class SendEmail extends React.Component {
 
 
     handleLoginClose = () => {
-        this.setState({loginOpen: false});
+        this.setState({
+            loginOpen: false,
+            loginState: '',
+        });
     };
 
     studentDataMatch(){
@@ -102,18 +106,20 @@ export default class SendEmail extends React.Component {
     }
 
     handleLogin = () => {
-        axios.post('/assistants/mail/login', {
+        axios.post('/assistants/mail/loginState', {
             account: this.state.account,
             password: this.state.password,
         }).then(res => {
             console.log(res);
-            if(res.login)
+            if(res.loginState) {
                 this.loginSuccess();
-            else
-                this.setState({login: '登入失敗!'});
+                this.setState({senderEmail: res.emailId});
+            }else {
+                this.setState({loginState: '登入失敗!'});
+            }
         }).catch(err => {
             console.log(err);
-            this.setState({login: '登入失敗!'});
+            this.setState({loginState: '登入失敗!'});
         });
     };
 
@@ -161,6 +167,7 @@ export default class SendEmail extends React.Component {
             loginOpen: false,
             title: '',
             content: '',
+            loginState: '',
         });
     };
 
@@ -233,10 +240,11 @@ export default class SendEmail extends React.Component {
                     actions={actionsLogin}
                     modal={false}
                     open={this.state.loginOpen}
+                    onRequestClose={this.handleLoginClose}
                     style={{zIndex: '10',}}
                     titleStyle={styles.labelStyle}
                 >
-                    <div style={{color: '#cc4b61'}}>{this.state.login}</div>
+                    <div style={{color: '#cc4b61'}}>{this.state.loginState}</div>
                     <MuiThemeProvider>
                         <TextField
                             floatingLabelText="帳號"
@@ -261,10 +269,10 @@ export default class SendEmail extends React.Component {
                     actions={actions}
                     modal={false}
                     open={this.state.sendOpen}
-                    onRequestClose={this.handleClose}
                     style={{zIndex: '11',}}
                     titleStyle={styles.labelStyle}
                 >
+                        <div style={styles.title}>寄信者: {this.state.senderEmail}</div>
                         <div style={styles.title}>密件副本:</div>
                         <div style={styles.itemsReceiver}>
                         {this.state.studentList.map( (item, i) => (
