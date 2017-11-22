@@ -597,10 +597,12 @@ class Grad extends React.Component {
                                             <MuiThemeProvider>
                                                 <RaisedButton
                                                     label={ this.props.assistant ?
-                                                        this.state.graduationCheck?"已送審":"未送審"
+                                                        this.state.graduationCheck?"已審核":"確認審核"
                                                         :
-                                                        this.state.graduationCheck?"已送審":"確認送審"}
-                                                    disabled={this.props.assistant ?true : (this.state.graduationCheck || this.state.graduationCheckEnglishTest==="0")}
+                                                        this.state.graduationCheck?"已審核":"未審核"}
+                                                    disabled=
+                                                        {this.props.assistant ? (this.state.graduationCheck || this.state.graduationCheckEnglishTest==="0")
+                                                        : true}
                                                     style={styles.button}
                                                     labelStyle={styles.labelStyle}
                                                     backgroundColor = "#DDDDDD"
