@@ -13,11 +13,11 @@ export default class infotip extends React.Component {
     };
 
     handleOpen = () => {
-        this.setState({open: true});
+        this.setState({sendOpen: true});
     };
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({sendOpen: false});
     };
 
     render() {
@@ -45,7 +45,7 @@ export default class infotip extends React.Component {
                     <Dialog
                     actions={actions}
                     modal={false}
-                    open={this.state.open}
+                    open={this.state.sendOpen}
                     onRequestClose={this.handleClose}
                 >
                     Discard draft?

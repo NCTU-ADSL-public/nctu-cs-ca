@@ -20,14 +20,14 @@ export default class PopoverExampleAnimation extends React.Component {
         event.preventDefault();
 
         this.setState({
-            open: true,
+            sendOpen: true,
             anchorEl: event.currentTarget,
         });
     };
 
     handleRequestClose = () => {
         this.setState({
-            open: false,
+            sendOpen: false,
         });
     };
 
@@ -45,7 +45,7 @@ export default class PopoverExampleAnimation extends React.Component {
                     }}
                 />
                 <Popover
-                    open={this.state.open}
+                    open={this.state.sendOpen}
                     anchorEl={this.state.anchorEl}
                     anchorOrigin={{"horizontal":"left","vertical":"top"}}
                     targetOrigin={{"horizontal":"left","vertical":"bottom"}}

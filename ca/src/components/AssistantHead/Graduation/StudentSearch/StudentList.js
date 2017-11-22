@@ -142,13 +142,13 @@ export default class StudentList extends React.Component {
     handleKeyPress = (e) => {
         if (e.key === 'Enter' && this.state.students[0] !== undefined) {
             let sid = this.state.students[0].student_id;
-            window.open('/assistants/head/s/' + sid);
+            window.sendOpen('/assistants/head/s/' + sid);
         }
     };
 
     searchCallback = (student) => {
         let sid = student.student_id;
-        window.open('/assistants/head/s/' + sid);
+        window.sendOpen('/assistants/head/s/' + sid);
     };
 
     handleTouchTap(groupNum) {

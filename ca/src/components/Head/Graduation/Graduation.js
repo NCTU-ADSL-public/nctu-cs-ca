@@ -190,7 +190,7 @@ class Grad extends React.Component {
     handleClickview(e) {
         this.setState({
             scrollQuery:'',
-            open: !this.state.open,
+            open: !this.state.sendOpen,
             isToggle:this.state.isToggle
         });
     }
@@ -702,7 +702,7 @@ class Grad extends React.Component {
                                     <Popover
                                         placement='bottom'
                                         target={this.refs.target}
-                                        show={this.state.open}
+                                        show={this.state.sendOpen}
                                         onHide={()=>this.handleClose()}
                                         style={{
                                             width:'auto',

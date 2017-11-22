@@ -20,7 +20,7 @@ class GeneralCourse extends React.Component {
     }
 
     handleClick(e) {
-        this.setState({open: !this.state.open});
+        this.setState({open: !this.state.sendOpen});
     }
 
 
@@ -63,7 +63,7 @@ class GeneralCourse extends React.Component {
                 <Popover
                     placement='top'
                     target={this.refs.target}
-                    show={this.state.open}
+                    show={this.state.sendOpen}
                     onHide={this.handleClose.bind(this)}
                     style={{width:'auto'}}
                   >
