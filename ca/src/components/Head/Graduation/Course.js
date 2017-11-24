@@ -29,12 +29,12 @@ class Course extends React.Component {
 
     handleClick(e) {
         this.setState({
-            open: !this.state.sendOpen,
+            open: !this.state.open,
             style:{
                 transition: "background .2s linear",
                 width:"200px",
                 paddingRight: 0,
-                zIndex: !this.state.sendOpen?"1000":"",
+                zIndex: !this.state.open?"1000":"",
             }
         });
     }
@@ -79,7 +79,7 @@ class Course extends React.Component {
                 <Popover
                     placement='top'
                     target={this.refs.target}
-                    show={this.state.sendOpen}
+                    show={this.state.open}
                     onHide={this.handleClose.bind(this)}
                 >
                     <div>{this.props.cosCame}</div>
