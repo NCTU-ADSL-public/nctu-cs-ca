@@ -1,31 +1,45 @@
 import React, {Component} from 'react'
 import './App.css'
 import {Board} from 'react-trello'
+import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
+import axios from 'axios';
+import {ToastContainer, ToastStore} from 'react-toasts';
+
+
+
 
 const data = require('./data.json')
 
-const handleDragStart = (cardId, laneId) => {
-    console.log('drag started')
-    console.log(`cardId: ${cardId}`)
-    console.log(`laneId: ${laneId}`)
-}
-
-const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-    console.log('drag ended')
-    console.log(`cardId: ${cardId}`)
-    console.log(`sourceLaneId: ${sourceLaneId}`)
-    console.log(`targetLaneId: ${targetLaneId}`)
-}
-
 class App extends Component {
-    state = {boardData: {lanes: []}}
+    state = {
+        boardData: {lanes: []},
+        beforeError:{},
+        postData:{},
+        open: false,
+        msgstring:''};
 
     setEventBus = eventBus => {
         this.setState({eventBus})
+    };
+
+    componentWillUpdate(nextProps, nextState){
+        if(nextProps.post){
+            let POST = this.state.postData;
+            axios.post('/graduate/change', {
+                POST
+            })
+                .then(res => {
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+        }
     }
 
     async componentWillMount() {
-        const response = await this.getBoard()
+        const response = await this.getBoard();
+        const response2 = await this.getOrder();
         this.setState({boardData: response})
     }
 
@@ -35,52 +49,150 @@ class App extends Component {
         })
     }
 
-    completeCard = () => {
-        this.state.eventBus.publish({
-            type: 'ADD_CARD',
-            laneId: 'COMPLETED',
-            card: {id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app'}
-        })
-        this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: '共同必修', cardId: '物理(一)'})
+    getOrder(){
+       let  _this = this;
+        return axios.get('/graduate/reorder').then(response => {
+            _this.setState({boardData: response.data})
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
-    addCard = () => {
-        this.state.eventBus.publish({
-            type: 'ADD_CARD',
-            laneId: 'BLOCKED',
-            card: {id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down'}
+
+    handleDragStart = (cardId, laneId) => {
+        console.log('drag started')
+        console.log(`cardId: ${cardId}`)
+        console.log(`laneId: ${laneId}`)
+        this.setState({
+            beforeError:this.state.postData
         })
-    }
+    };
+
+    handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
+        console.log('drag ended')
+        console.log(`cardId: ${cardId}`)
+        console.log(`sourceLaneId: ${sourceLaneId}`)
+        console.log(`targetLaneId: ${targetLaneId}`)
+        let _this=this;
+        axios.post('/graduate/change/check ', {
+            check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
+        })
+            .then(res => {
+                if(!res.data.check.flag){
+                    let string = res.data.check.reason;
+                    _this.setState({
+                        postData:this.state.beforeError,
+                        open:true,
+                        msgstring:{cardId}+"只能被加進"+ string
+                    });
+                    this.state.eventBus.publish({
+                        type: 'ADD_CARD',
+                        laneId: {sourceLaneId},
+                        card: {id: {cardId}, title: {cardId}, label: '15 mins', description: 'Use Headspace app'}
+                    });
+                    this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: {targetLaneId}, cardId: {cardId}})
+                    //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
+                }
+            })
+            .catch(err => {
+                //window.location.replace("/logout ");
+                console.log(err)
+            });
+    };
 
     shouldReceiveNewData = nextData => {
         console.log('New card has been added')
+        console.log(this.state.boardData)
         console.log(nextData)
+        this.setState({
+            postData:nextData
+        })
+    };
+
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
+    };
+    completeCard= () => {this.state.eventBus.publish({
+        type: 'ADD_CARD',
+        laneId: "專業選修",
+        card: {id: "物理", title: "物理", label: '15 mins', description: 'Use Headspace app'}
+    });
     }
+
 
     render() {
         return (
             <div className="App">
-                <div className="App-header">
-                    <h3>React Trello Demo</h3>
-                </div>
-                <div className="App-intro">
-                    <button onClick={this.completeCard} style={{margin: 5}}>
-                        Complete Buy Milk
-                    </button>
-                    <button onClick={this.addCard} style={{margin: 5}}>
-                        Add Blocked
-                    </button>
+
+
+                <div className="App-Intro">
                     <Board
                         data={this.state.boardData}
+                        style={{backgroundColor:'#00AEAE'}}
                         draggable
                         onDataChange={this.shouldReceiveNewData}
                         eventBusHandle={this.setEventBus}
-                        handleDragStart={handleDragStart}
-                        handleDragEnd={handleDragEnd}
-                    />
+                        handleDragStart={this.handleDragStart}
+                        handleDragEnd={this.handleDragEnd}
+                    >
+                    </Board>
                 </div>
+                <Snackbar
+                    open={this.state.open}
+                    message={this.state.msgstring}
+                    autoHideDuration={4000}
+                    onRequestClose={this.handleRequestClose}
+                />
             </div>
         )
     }
 }
 export default App
+// <FlatButton
+// backgroundColor={'#c9745f'}
+// labelStyle={{
+//     padding: "5px",
+//         height: "45px",
+//         verticalAlign: "default",
+//         color: "#fcfcfc",
+//         fontSize: "1em",
+//         fontWeight: "300",
+//         letterSpacing: "1px",
+//         fontFamily: 'Noto Sans CJK TC',
+// }} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}>
+//
+// </FlatButton>
+// <FlatButton
+//     backgroundColor={'#c9745f'}
+//     labelStyle={{
+//         padding: "5px",
+//         height: "45px",
+//         verticalAlign: "default",
+//         color: "#fcfcfc",
+//         fontSize: "1em",
+//         fontWeight: "300",
+//         letterSpacing: "1px",
+//         fontFamily: 'Noto Sans CJK TC',
+//     }}
+//     label="取消"
+//     onClick={this.props.HandleClose}
+//     style={{margin: 5}}>
+//
+// </FlatButton>
+// <FlatButton
+// backgroundColor={'#c9745f'}
+// labelStyle={{
+//     padding: "5px",
+//         height: "45px",
+//         verticalAlign: "default",
+//         color: "#fcfcfc",
+//         fontSize: "1em",
+//         fontWeight: "300",
+//         letterSpacing: "1px",
+//         fontFamily: 'Noto Sans CJK TC',
+// }} label="Add Blocked"
+// onClick={this.addCard}
+// style={{margin: 5}}>
+// </FlatButton>

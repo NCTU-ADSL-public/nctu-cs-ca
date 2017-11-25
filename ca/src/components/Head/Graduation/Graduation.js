@@ -3,13 +3,11 @@ import React from 'react'
 import './Graduation.css'
 import GraduationForm from './GraduationForm'
 import PrintForm from './GradTable/PrintForm'
-import App from './Trello/List'
 import LinearProgressExampleDeterminate from './OverviewProgress'
 import CircularProgress from './CircularProgress'
-
-import scrollToComponent from 'react-scroll-to-component'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import App from './Trello/List'
 import axios from 'axios'
-
 
 
 class Grad extends React.Component {
@@ -40,6 +38,7 @@ class Grad extends React.Component {
             ReviseResult:this.props.reviseresult,
             totalitems:this.props.result,
             print_courseCategoryArray:this.props.courseCategoryArray,
+            scrollQuery:'',
         });
         let _this=this;
 
@@ -83,7 +82,11 @@ class Grad extends React.Component {
                 console.log(err);
             });
         }
-
+    }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            scrollQuery:''
+        })
     }
 
     //For updating as props changes!!!
@@ -99,24 +102,16 @@ class Grad extends React.Component {
         }
     }
 
+    componentDidMount(){
+
+    }
+
     handleClick(e){
         this.setState({
             scrollQuery:e,
         });
     }
-    scrollTotop(){
-        scrollToComponent(this.refs.my);
-    }
-    printGradTable(fileName) {
-        let original = document.title;
-        if (fileName !== null)
-            document.title = fileName;
-        window.print();
-        document.title = original;
-        this.setState({
-            scrollQuery:'',opendialogprint: true});
-        return true;
-    }
+
     handleClickview(e) {
         this.setState({
             scrollQuery:'',
@@ -126,12 +121,11 @@ class Grad extends React.Component {
     }
 
     render(){
-        if(!this.state.isMod){
 
             return (
                 <div>
+                <div style={{display:this.props.isMod?"none":"inline"}}>
                     <div className="font_adjust">
-
                         <div className="schedule-bar">
                             <div className="circle-progress">
                                 <div className="circle-in">畢業{this.state.totalitems.total}/{this.state.totalitems.total_require}</div>
@@ -142,6 +136,7 @@ class Grad extends React.Component {
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('共同必修')}>共同必修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.compulsory}</font>/{this.state.totalitems.compulse_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.compulsory/this.state.totalitems.compulse_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('核心課程')}>核心課程&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.core}</font>/{this.state.totalitems.core_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.core/this.state.totalitems.core_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('服務學習')}>服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.service}</font>/{this.state.totalitems.service_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.service/this.state.totalitems.service_require*100}/></div>
+
                                 </div>
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('英文授課')}>英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.english}</font>/{this.state.totalitems.english_require}&nbsp;門<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.english/this.state.totalitems.english_require*100}/></div>
@@ -160,7 +155,7 @@ class Grad extends React.Component {
                             </div>
                         </div>
                         <div className="Grad-Row">
-                            <GraduationForm isToggle={this.state.isToggle} items={this.state.items} graditems={this.state.Graduationitems} scroll={this.state.scrollQuery}/>
+                            <GraduationForm isToggle={this.props.isToggle} items={this.state.items} graditems={this.state.Graduationitems} scroll={this.state.scrollQuery}/>
                         </div>
                         <div id="graduate-footer"> </div>
                     </div>
@@ -168,11 +163,13 @@ class Grad extends React.Component {
                         <PrintForm profile={this.props.studentProfile} graduationCheckEnglishTest={this.state.graduationCheckEnglishTest} courseCategoryArray={this.state.print_courseCategoryArray}/>
                     </div>
                 </div>
+                <div style={{display:this.props.isMod?"inline":"none"}}>
+                    <MuiThemeProvider>
+                        <App/>
+                    </MuiThemeProvider>
+                </div>
+                </div>
             );
-        }
-        else{
-            <App/>
-        }
 
 
     }

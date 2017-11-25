@@ -14,6 +14,7 @@ import TopButton from './TopButton';
 import axios from 'axios'
 import scrollToComponent from 'react-scroll-to-component'
 import Graduation from './Graduation';
+import DialogExampleSimple from './Trello/DiaList'
 
 
 const optionsCursorTrueWithMargin = {
@@ -21,7 +22,47 @@ const optionsCursorTrueWithMargin = {
     shiftX: 10,
     shiftY: -30
 };
-class Course extends React.Component {
+
+const styles = {
+    toggle: {
+        marginBottom: 0,
+        maxWidth: 200,
+        width:'400px',
+        float:'left',
+        margin:'15px 10px 0 20px',
+    },
+    button: {
+        margin:'9px 10px 0 0px',
+        width:'200px',
+        float:'left'
+    },
+    buttonDia: {
+        margin:'0 10px 0 10px',
+        width:'100px'
+    },
+    buttonEn: {
+        margin:'9px 10px 0 0px',
+        width:'250px',
+        float:'left'
+    },
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#7B7B7B'
+    },
+    medium:{
+        padding:'15px 0 0 5px',
+        width: 10,
+        height: 10,
+        float:'left',
+        color: '#7B7B7B'
+    },
+    pop:{
+        width:'auto',
+        height: 'auto',
+    }
+};
+
+class GraduationItem extends React.Component {
 
 
     state={
@@ -104,12 +145,6 @@ class Course extends React.Component {
             });
         }
     }
-
-    handleClick(e){
-        this.setState({
-            scrollQuery:e,
-        });
-    }
     scrollTotop(){
         scrollToComponent(this.refs.my);
     }
@@ -148,9 +183,17 @@ class Course extends React.Component {
         });
     }
 
+    handleClickview(e) {
+        this.setState({
+            scrollQuery:'',
+            open: !this.state.open,
+            isToggle:this.state.isToggle
+        });
+    }
+
     Modify(){
         this.setState({
-            isMod:true
+            isMod:!this.state.isMod
         })
     }
 
@@ -234,13 +277,9 @@ class Course extends React.Component {
                                 </MuiThemeProvider>
                             </div>
                             <MuiThemeProvider>
-                                <RaisedButton style={styles.button}
-                                              labelStyle={styles.labelStyle}
-                                              backgroundColor = "#DDDDDD"
-                                              label="編輯課程"
-                                              onClick={()=>this.Modify()}/>
-                            </MuiThemeProvider>
+                                <DialogExampleSimple/>
 
+                            </MuiThemeProvider>
                             <MuiThemeProvider>
                                 <Toggle
                                     label="系統自動排序"
@@ -284,13 +323,17 @@ class Course extends React.Component {
                         </div>
                     </div>
                 </div>
+                <MuiThemeProvider>
                 <Graduation
                 items={this.state.items}
-                result={this.state.Result}
+                result={this.state.totalitems}
                 revise={this.state.Graduationitems}
                 reviseresult={this.state.ReviseResult}
                 studentProfile={this.props.studentProfile}
-                courseCategoryArray={this.state.print_courseCategoryArray}/>
+                courseCategoryArray={this.state.print_courseCategoryArray}
+                isMod={this.state.isMod}
+                isToggle={this.state.isToggle}/>
+                </MuiThemeProvider>
             </div>
 
         )
@@ -298,3 +341,9 @@ class Course extends React.Component {
 }
 
 export default GraduationItem
+
+// <RaisedButton style={styles.button}
+// labelStyle={styles.labelStyle}
+// backgroundColor = "#DDDDDD"
+// label={this.state.isMod?"查看課程":"編輯課程"}
+// onClick={()=>this.Modify()}/>
