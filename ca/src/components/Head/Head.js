@@ -14,7 +14,7 @@ import defalt from './defalt.jpg';
 
 import HomeItem from './Home/Home.js';
 import MapItem from './Map/MapComponents/Map.js';
-import GraduationItem from './Graduation/Graduation.js';
+import GraduationItem from './Graduation/GradationMain.js';
 import CreditItem from './Credit/Credit.js';
 
 import FadeIn from 'react-fade-in';

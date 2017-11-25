@@ -23,6 +23,7 @@
     "react-simple-popover": "^0.2.0",
     "react-tap-event-plugin": "^2.0.1",
     "react-toasts": "^1.2.3",
+    "react-trello": "^1.24.1",
     "redux": "^3.7.2"
   },
   "scripts": {
