@@ -83,6 +83,7 @@ class GraduationItem extends React.Component {
         Result:[],
         ReviseResult:[],
         print_courseCategoryArray:[],
+        getRevise:false,
     };
     componentWillMount(){
         this.setState({
@@ -137,7 +138,47 @@ class GraduationItem extends React.Component {
         }
 
     }
+    ReviseClick(){
+        let _this=this;
+        axios.get('/students/graduate/print').then(function(resp){
+            this.setState({
+                print_courseCategoryArray: resp.data
+            });
 
+
+        }.bind(this)).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/graduate/original').then(studentData => {
+            _this.setState({
+                items: studentData.data,
+                Result: studentData.data[10],
+                totalitems: studentData.data[10],
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/graduate/revised').then(studentData => {
+            _this.setState({
+                Graduationitems: studentData.data,
+                ReviseResult: studentData.data[10]
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+        this.setState({
+            items:this.props.revise,
+            Graduationitems:this.props.items,
+            Result:this.props.result,
+            ReviseResult:this.props.reviseresult,
+            totalitems:this.props.result,
+            print_courseCategoryArray:this.props.courseCategoryArray,
+        });
+        this.setState({
+            getRevise:true,
+        });
+        console.log(this.state.getRevise)
+    }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){
         if( prevProps.items !== this.props.items ||
@@ -283,7 +324,8 @@ class GraduationItem extends React.Component {
                                 </MuiThemeProvider>
                             </div>
                             <MuiThemeProvider>
-                                <DialogExampleSimple/>
+
+                                <DialogExampleSimple onClick={()=>this.ReviseClick()} getRevise={this.state.getRevise}/>
 
                             </MuiThemeProvider>
                             <MuiThemeProvider>
@@ -332,15 +374,15 @@ class GraduationItem extends React.Component {
                     </div>
                 </div>
                 <MuiThemeProvider>
-                <Graduation
-                items={this.state.items}
-                result={this.state.totalitems}
-                revise={this.state.Graduationitems}
-                reviseresult={this.state.ReviseResult}
-                studentProfile={this.props.studentProfile}
-                courseCategoryArray={this.state.print_courseCategoryArray}
-                isMod={this.state.isMod}
-                isToggle={this.state.isToggle}/>
+                    <Graduation
+                    items={this.state.items}
+                    result={this.state.totalitems}
+                    revise={this.state.Graduationitems}
+                    reviseresult={this.state.ReviseResult}
+                    studentProfile={this.props.studentProfile}
+                    courseCategoryArray={this.state.print_courseCategoryArray}
+                    isMod={this.state.isMod}
+                    isToggle={this.state.isToggle}/>
                 </MuiThemeProvider>
             </div>
 

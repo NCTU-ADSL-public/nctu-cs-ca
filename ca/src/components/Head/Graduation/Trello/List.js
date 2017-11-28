@@ -82,7 +82,7 @@ class App extends Component {
         //     open:true,
         //     msgstring:{cardId}+"只能被加進"+ string
         // });
-        axios.post('/graduate/change/check ', {
+        axios.post('/students/graduate/change', {
             check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
         })
             .then(res => {

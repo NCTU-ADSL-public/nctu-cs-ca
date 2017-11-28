@@ -355,8 +355,7 @@ class Head extends Component {
                                 revise={revise}
                                 reviseresult={revise[10]}
                                 studentProfile={this.state.studentIdcard}
-                                courseCategoryArray={this.state.print_courseCategoryArray}
-                                ReloadGrad={()=>this.ReloadGrad()}/>
+                                courseCategoryArray={this.state.print_courseCategoryArray}/>
                         </FadeIn>
                     </font>,
                     document.getElementById('page'));

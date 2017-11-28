@@ -77,10 +77,11 @@ export default class DialogExampleSimple extends React.Component {
     handleClose = () => {
         this.setState({open: false});
     };
-
-    handleClick = () => {
-        this.setState({post: true,open: false});
-    };
+    componentWillReceiveProps(nextProps){
+        if(nextProps.getRevise){
+            this.setState({open: false});
+        }
+    }
     /*
 
     componentWillMount(){
@@ -104,7 +105,7 @@ export default class DialogExampleSimple extends React.Component {
                 label="儲存"
                 labelStyle={styles.labelStyle}
                 keyboardFocused={true}
-                onClick={this.handleClick}
+                onClick={this.props.hadleClick}
             />,
         ];
 
