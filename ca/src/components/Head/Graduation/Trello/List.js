@@ -75,13 +75,13 @@ class App extends Component {
         console.log(`sourceLaneId: ${sourceLaneId}`)
         console.log(`targetLaneId: ${targetLaneId}`)
         let _this=this;
-        // let string = ""
-        // _this.setState({
-        //     postData:this.state.beforeError,
-        //     boardData:this.state.beforeError,
-        //     open:true,
-        //     msgstring:{cardId}+"只能被加進"+ string
-        // });
+        let string = ""
+        _this.setState({
+            postData:this.state.beforeError,
+            boardData:this.state.beforeError,
+            open:true,
+            msgstring:cardId+"只能被加進"+ string
+        });
         axios.post('/students/graduate/change', {
             check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
         })
