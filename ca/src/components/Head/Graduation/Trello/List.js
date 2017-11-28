@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
 import {ToastContainer, ToastStore} from 'react-toasts';
+import CAicon from './CAicon.svg'
 
 
 
@@ -39,8 +40,8 @@ class App extends Component {
 
     async componentWillMount() {
         const response = await this.getBoard();
-        const response2 = await this.getOrder();
-        this.setState({boardData: response})
+        this.getOrder();
+        //this.setState({boardData: response})
     }
 
     getBoard() {
@@ -51,7 +52,7 @@ class App extends Component {
 
     getOrder(){
        let  _this = this;
-        return axios.get('/graduate/reorder').then(response => {
+        axios.get('/graduate/reorder').then(response => {
             _this.setState({boardData: response.data})
         }).catch(err => {
             console.log(err);
@@ -130,7 +131,7 @@ class App extends Component {
                 <div className="App-Intro">
                     <Board
                         data={this.state.boardData}
-                        style={{backgroundColor:'#00AEAE'}}
+                        style={{backgroundColor:'#00AEAE', backgroundImage:'CAicon'}}
                         draggable
                         onDataChange={this.shouldReceiveNewData}
                         eventBusHandle={this.setEventBus}

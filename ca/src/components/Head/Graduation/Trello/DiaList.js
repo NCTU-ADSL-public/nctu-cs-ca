@@ -3,6 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import App from './List'
+
 const customContentStyle = {
     width: '100%',
     maxWidth: 'none',
@@ -28,7 +29,8 @@ const styles = {
     button: {
         margin:'9px 10px 0 0px',
         width:'200px',
-        float:'left'
+        float:'left',
+        zIndex:'-100'
     },
     buttonDia: {
         margin:'0 10px 0 10px',
@@ -79,7 +81,18 @@ export default class DialogExampleSimple extends React.Component {
     handleClick = () => {
         this.setState({post: true,open: false});
     };
+    /*
 
+    componentWillMount(){
+
+        let  _this = this;
+        return axios.get('/students/graduate/reorder').then(response => {
+            _this.setState({boardData: response.data})
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+*/
     render() {
         const actions = [
             <FlatButton
@@ -113,7 +126,7 @@ export default class DialogExampleSimple extends React.Component {
                     bodyStyle={bodyStyle}
                     titleStyle={titleStyle}
                 >
-                    <App post = {this.state.post}/>
+                    <App post = {this.state.post} />
                 </Dialog>
             </div>
         );

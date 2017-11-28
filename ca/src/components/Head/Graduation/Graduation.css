@@ -12,6 +12,8 @@
     #ontopDiv,
     .font_adjust,
     #topRec,
+    .fixed,
+    .Grad-title-adjust,
     footer {
         display: none;
     }

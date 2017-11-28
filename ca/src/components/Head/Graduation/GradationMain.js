@@ -50,11 +50,9 @@ const styles = {
         color: '#7B7B7B'
     },
     medium:{
-        padding:'15px 0 0 5px',
-        width: 10,
-        height: 10,
         float:'left',
-        color: '#7B7B7B'
+        color: '#7B7B7B',
+        Zindex: '100000000'
     },
     pop:{
         width:'auto',
@@ -289,7 +287,8 @@ class GraduationItem extends React.Component {
                                 />
                             </MuiThemeProvider>
                             <MuiThemeProvider>
-                                <IconButton style={styles.medium}
+                                <IconButton tooltipStyles={{zIndex:'1000'}}
+                                            iconStyle={styles.medium}
                                             tooltip="排序依據"
                                             tooltipPosition="top-right"
                                             ref="target"
@@ -298,13 +297,14 @@ class GraduationItem extends React.Component {
                                 </IconButton>
                             </MuiThemeProvider>
                             <Popover
-                                placement='bottom'
+                                placement='right'
                                 target={this.refs.target}
                                 show={this.state.open}
                                 onHide={()=>this.handleClose()}
                                 style={{
                                     width:'auto',
                                     opacity:'0.8',
+                                    zIndex:'100'
                                 }}>
                                 <div
                                     style={styles.pop}>
