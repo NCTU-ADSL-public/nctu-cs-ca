@@ -27,7 +27,6 @@ class App extends Component {
     };
     componentWillUpdate(nextProps, nextState){
         if(nextProps.post){
-            alert("1")
             let POST = this.state.postData;
             axios.post('/graduate/change', {
                 POST
