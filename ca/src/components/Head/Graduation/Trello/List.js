@@ -41,7 +41,7 @@ class App extends Component {
     async componentWillMount() {
         const response = await this.getBoard();
         await this.getOrder();
-        //this.setState({boardData: response})
+        this.setState({boardData: response})
     }
 
     getBoard() {
@@ -75,6 +75,13 @@ class App extends Component {
         console.log(`sourceLaneId: ${sourceLaneId}`)
         console.log(`targetLaneId: ${targetLaneId}`)
         let _this=this;
+        // let string = ""
+        // _this.setState({
+        //     postData:this.state.beforeError,
+        //     boardData:this.state.beforeError,
+        //     open:true,
+        //     msgstring:{cardId}+"只能被加進"+ string
+        // });
         axios.post('/graduate/change/check ', {
             check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
         })
@@ -83,15 +90,10 @@ class App extends Component {
                     let string = res.data.check.reason;
                     _this.setState({
                         postData:this.state.beforeError,
+                        boardData:this.state.beforeError,
                         open:true,
                         msgstring:{cardId}+"只能被加進"+ string
                     });
-                    this.state.eventBus.publish({
-                        type: 'ADD_CARD',
-                        laneId: {sourceLaneId},
-                        card: {id: {cardId}, title: {cardId}, label: '15 mins', description: 'Use Headspace app'}
-                    });
-                    this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: {targetLaneId}, cardId: {cardId}})
                     //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
                 }
             })
@@ -116,9 +118,10 @@ class App extends Component {
         });
     };
     completeCard= () => {this.state.eventBus.publish({
-        type: 'ADD_CARD',
-        laneId: "專業選修",
-        card: {id: "物理", title: "物理", label: '15 mins', description: 'Use Headspace app'}
+        type: 'MOVE_CARD',
+        cardId: "物理(一)",
+        sourceLaneId: "共同必修",
+        targetLaneId: "專業選修"
     });
     }
 
@@ -127,7 +130,18 @@ class App extends Component {
         return (
             <div className="App">
 
-
+                <FlatButton
+                    backgroundColor={'#c9745f'}
+                    labelStyle={{
+                        padding: "5px",
+                        height: "45px",
+                        verticalAlign: "default",
+                        color: "#fcfcfc",
+                        fontSize: "1em",
+                        fontWeight: "300",
+                        letterSpacing: "1px",
+                        fontFamily: 'Noto Sans CJK TC',
+                    }} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}/>
                 <div className="App-Intro">
                     <Board
                         data={this.state.boardData}
@@ -145,24 +159,14 @@ class App extends Component {
                     message={this.state.msgstring}
                     autoHideDuration={4000}
                     onRequestClose={this.handleRequestClose}
+                    contentStyle={{fontFamily:'Noto Sans CJK TC'}}
                 />
             </div>
         )
     }
 }
 export default App
-// <FlatButton
-// backgroundColor={'#c9745f'}
-// labelStyle={{
-//     padding: "5px",
-//         height: "45px",
-//         verticalAlign: "default",
-//         color: "#fcfcfc",
-//         fontSize: "1em",
-//         fontWeight: "300",
-//         letterSpacing: "1px",
-//         fontFamily: 'Noto Sans CJK TC',
-// }} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}>
+
 //
 // </FlatButton>
 // <FlatButton
