@@ -146,7 +146,7 @@ class App extends Component {
                     <Board
                         data={this.state.boardData}
                         style={{backgroundColor:'#00AEAE',
-                            height:'500px'}}
+                            height:'550px'}}
                         draggable
                         onDataChange={this.shouldReceiveNewData}
                         eventBusHandle={this.setEventBus}
