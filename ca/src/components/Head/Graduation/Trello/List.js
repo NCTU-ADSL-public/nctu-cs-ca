@@ -52,7 +52,7 @@ class App extends Component {
 
     getOrder(){
        let  _this = this;
-        axios.get('/graduate/reorder').then(response => {
+        axios.get('/students/graduate/reorder').then(response => {
             _this.setState({boardData: response.data})
         }).catch(err => {
             console.log(err);
