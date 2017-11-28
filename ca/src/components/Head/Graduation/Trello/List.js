@@ -18,14 +18,16 @@ class App extends Component {
         beforeError:{},
         postData:{},
         open: false,
-        msgstring:''};
+        msgstring:'',
+        post:this.props.post
+    };
 
     setEventBus = eventBus => {
         this.setState({eventBus})
     };
-
     componentWillUpdate(nextProps, nextState){
         if(nextProps.post){
+            alert("1")
             let POST = this.state.postData;
             axios.post('/graduate/change', {
                 POST
@@ -36,12 +38,13 @@ class App extends Component {
                     console.log(err)
                 });
         }
+
     }
 
     async componentWillMount() {
         const response = await this.getBoard();
+        this.setState({boardData: response})
         await this.getOrder();
-        //this.setState({boardData: response})
     }
 
     getBoard() {
@@ -64,6 +67,7 @@ class App extends Component {
         console.log('drag started')
         console.log(`cardId: ${cardId}`)
         console.log(`laneId: ${laneId}`)
+        console.log(this.state.boardData)
         this.setState({
             beforeError:this.state.postData
         })
@@ -75,13 +79,13 @@ class App extends Component {
         console.log(`sourceLaneId: ${sourceLaneId}`)
         console.log(`targetLaneId: ${targetLaneId}`)
         let _this=this;
-        let string = ""
-        _this.setState({
-            postData:this.state.beforeError,
-            boardData:this.state.beforeError,
-            open:true,
-            msgstring:cardId+"只能被加進"+ string
-        });
+        // let string = "";
+        // _this.setState({
+        //     //postData:this.state.beforeError,
+        //     boardData:this.state.beforeError,
+        //     open:true,
+        //     msgstring:cardId+"只能被加進"+ string
+        // });
         axios.post('/students/graduate/change', {
             check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
         })
@@ -89,7 +93,7 @@ class App extends Component {
                 if(!res.data.check.flag){
                     let string = res.data.check.reason;
                     _this.setState({
-                        postData:this.state.beforeError,
+                        //postData:this.state.beforeError,
                         boardData:this.state.beforeError,
                         open:true,
                         msgstring:cardId+"只能被加進"+ string
@@ -117,13 +121,6 @@ class App extends Component {
             open: false,
         });
     };
-    completeCard= () => {this.state.eventBus.publish({
-        type: 'MOVE_CARD',
-        cardId: "物理(一)",
-        sourceLaneId: "共同必修",
-        targetLaneId: "專業選修"
-    });
-    }
 
 
     render() {

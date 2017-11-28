@@ -99,7 +99,8 @@ class GraduationItem extends React.Component {
         courseCategoryArray:[],
         Result:[],
         ReviseResult:[],
-        print_courseCategoryArray:[]
+        print_courseCategoryArray:[],
+        post:false
     };
     componentWillMount(){
         this.setState({
@@ -200,7 +201,7 @@ class GraduationItem extends React.Component {
             totalitems:this.props.result,
             print_courseCategoryArray:this.props.courseCategoryArray,
         });
-        this.setState({openforRevise: false});
+        this.setState({openforRevise: false, post:true});
     }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){

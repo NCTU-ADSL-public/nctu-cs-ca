@@ -23,7 +23,7 @@ class Grad extends React.Component {
         graduationCheck:false,
         graduationCheckEnglishTest:"",
         Graduationitems:[],
-        items:[],
+        items:this.props.items,
         totalitems:[],
         courseCategoryArray:[],
         Result:[],
@@ -32,7 +32,6 @@ class Grad extends React.Component {
     };
     componentWillMount(){
         this.setState({
-            items:this.props.items,
             Graduationitems:this.props.revise,
             Result:this.props.result,
             ReviseResult:this.props.reviseresult,
