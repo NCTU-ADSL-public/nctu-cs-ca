@@ -12,6 +12,30 @@
     "description": "{reason}"
     },
     {
+    "id": "物理一)",
+    "title": "物理(一)",
+    "label": "{分數}",
+    "description": "{reason}"
+    },
+    {
+    "id": "物理()",
+    "title": "物理(一)",
+    "label": "{分數}",
+    "description": "{reason}"
+    },
+    {
+    "id": "物理(",
+    "title": "物理(一)",
+    "label": "{分數}",
+    "description": "{reason}"
+    },
+    {
+    "id": "物理)",
+    "title": "物理(一)",
+    "label": "{分數}",
+    "description": "{reason}"
+    },
+    {
     "id": "微積分(一)",
     "title": "微積分(一)",
     "label": "{分數}",

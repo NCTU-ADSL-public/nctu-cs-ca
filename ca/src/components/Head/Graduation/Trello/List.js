@@ -41,7 +41,7 @@ class App extends Component {
     async componentWillMount() {
         const response = await this.getBoard();
         await this.getOrder();
-        this.setState({boardData: response})
+        //this.setState({boardData: response})
     }
 
     getBoard() {
@@ -145,7 +145,8 @@ class App extends Component {
                 <div className="App-Intro">
                     <Board
                         data={this.state.boardData}
-                        style={{backgroundColor:'#00AEAE', backgroundImage:'CAicon'}}
+                        style={{backgroundColor:'#00AEAE',
+                            height:'500px'}}
                         draggable
                         onDataChange={this.shouldReceiveNewData}
                         eventBusHandle={this.setEventBus}

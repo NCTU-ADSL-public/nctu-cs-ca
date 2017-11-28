@@ -34,7 +34,14 @@ const styles = {
     button: {
         margin:'9px 10px 0 0px',
         width:'200px',
-        float:'left'
+        float:'left',
+        zIndex:'-1'
+    },
+    button1: {
+        margin:'9px 10px 0 0px',
+        width:'200px',
+        float:'left',
+        zIndex:'1000'
     },
     buttonDia: {
         margin:'0 10px 0 10px',
@@ -43,7 +50,8 @@ const styles = {
     buttonEn: {
         margin:'9px 10px 0 0px',
         width:'250px',
-        float:'left'
+        float:'left',
+        zIndex:'-1'
     },
     labelStyle: {
         fontFamily: 'Noto Sans CJK TC',
@@ -51,12 +59,11 @@ const styles = {
     },
     medium:{
         float:'left',
-        color: '#7B7B7B',
-        Zindex: '100000000'
+        color: '#7B7B7B'
     },
     pop:{
         width:'auto',
-        height: 'auto',
+        height: 'auto'
     }
 };
 
@@ -270,6 +277,7 @@ class GraduationItem extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   backgroundColor = "#DDDDDD"
                                                   ref="targetEn"
+                                                  buttonStyle={{zIndex:'0'}}
                                                   label={(this.state.graduationCheckEnglishTest==="21")?"已考過英檢":(this.state.graduationCheckEnglishTest==="22")?"未考過英檢":"英文已抵免或換修"}
                                                   disabled={true}/>
                                 </MuiThemeProvider>
