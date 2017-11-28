@@ -130,18 +130,18 @@ class App extends Component {
         return (
             <div className="App">
 
-                <FlatButton
-                    backgroundColor={'#c9745f'}
-                    labelStyle={{
-                        padding: "5px",
-                        height: "45px",
-                        verticalAlign: "default",
-                        color: "#fcfcfc",
-                        fontSize: "1em",
-                        fontWeight: "300",
-                        letterSpacing: "1px",
-                        fontFamily: 'Noto Sans CJK TC',
-                    }} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}/>
+                {/*<FlatButton*/}
+                    {/*backgroundColor={'#c9745f'}*/}
+                    {/*labelStyle={{*/}
+                        {/*padding: "5px",*/}
+                        {/*height: "45px",*/}
+                        {/*verticalAlign: "default",*/}
+                        {/*color: "#fcfcfc",*/}
+                        {/*fontSize: "1em",*/}
+                        {/*fontWeight: "300",*/}
+                        {/*letterSpacing: "1px",*/}
+                        {/*fontFamily: 'Noto Sans CJK TC',*/}
+                    {/*}} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}/>*/}
                 <div className="App-Intro">
                     <Board
                         data={this.state.boardData}
