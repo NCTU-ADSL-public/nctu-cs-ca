@@ -14,7 +14,23 @@ import TopButton from './TopButton';
 import axios from 'axios'
 import scrollToComponent from 'react-scroll-to-component'
 import Graduation from './Graduation';
-import DialogExampleSimple from './Trello/DiaList'
+import App from './Trello/List'
+import FlatButton from 'material-ui/FlatButton';
+
+const customContentStyle = {
+    width: '100%',
+    maxWidth: 'none',
+    maxHeight: 'none',
+};
+
+const bodyStyle = {
+    fontFamily: 'Noto Sans CJK TC',
+    padding:'0'
+};
+const titleStyle = {
+    fontFamily: 'Noto Sans CJK TC',
+    color:'#565656'
+};
 
 
 const optionsCursorTrueWithMargin = {
@@ -74,6 +90,7 @@ class GraduationItem extends React.Component {
         isMod:false,
         isToggle:true,
         opendialogprint: false,
+        openforRevise:false,
         graduationCheck:false,
         graduationCheckEnglishTest:"",
         Graduationitems:[],
@@ -82,8 +99,7 @@ class GraduationItem extends React.Component {
         courseCategoryArray:[],
         Result:[],
         ReviseResult:[],
-        print_courseCategoryArray:[],
-        getRevise:false,
+        print_courseCategoryArray:[]
     };
     componentWillMount(){
         this.setState({
@@ -138,7 +154,17 @@ class GraduationItem extends React.Component {
         }
 
     }
-    ReviseClick(){
+    handleOpenforRevise = () => {
+        this.setState({openforRevise: true});
+    };
+
+    handleCloseforRevise = () => {
+        this.setState({openforRevise: false});
+    };
+    async ReviseClick () {
+        await this.ReviseClickCallBack();
+    }
+    ReviseClickCallBack ()  {
         let _this=this;
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
@@ -174,10 +200,7 @@ class GraduationItem extends React.Component {
             totalitems:this.props.result,
             print_courseCategoryArray:this.props.courseCategoryArray,
         });
-        this.setState({
-            getRevise:true,
-        });
-        console.log(this.state.getRevise)
+        this.setState({openforRevise: false});
     }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){
@@ -254,6 +277,19 @@ class GraduationItem extends React.Component {
     }
 
     render(){
+        const actions = [
+        <FlatButton
+            label="取消"
+            labelStyle={styles.labelStyle}
+            onClick={this.handleCloseforRevise}
+        />,
+        <FlatButton
+            label="儲存"
+            labelStyle={styles.labelStyle}
+            keyboardFocused={true}
+            onClick={()=>this.ReviseClick()}
+        />,
+    ];
         return(
             <div>
                 <ToastContainer store={ToastStore}/>
@@ -325,7 +361,26 @@ class GraduationItem extends React.Component {
                             </div>
                             <MuiThemeProvider>
 
-                                <DialogExampleSimple onClick={()=>this.ReviseClick()} getRevise={this.state.getRevise}/>
+                                <div>
+                                    <RaisedButton style={styles.button}
+                                                  labelStyle={styles.labelStyle}
+                                                  label="編輯課程"
+                                                  onClick={this.handleOpenforRevise}
+                                                  backgroundColor = "#DDDDDD" />
+                                    <Dialog
+                                        title="編輯課程"
+                                        actions={actions}
+                                        modal={false}
+                                        open={this.state.openforRevise}
+                                        onRequestClose={this.handleCloseforRevise}
+                                        autoScrollBodyContent
+                                        contentStyle={customContentStyle}
+                                        bodyStyle={bodyStyle}
+                                        titleStyle={titleStyle}
+                                    >
+                                        <App post = {this.state.post} />
+                                    </Dialog>
+                                </div>
 
                             </MuiThemeProvider>
                             <MuiThemeProvider>
@@ -382,7 +437,8 @@ class GraduationItem extends React.Component {
                     studentProfile={this.props.studentProfile}
                     courseCategoryArray={this.state.print_courseCategoryArray}
                     isMod={this.state.isMod}
-                    isToggle={this.state.isToggle}/>
+                    isToggle={this.state.isToggle}
+                    openforRevise/>
                 </MuiThemeProvider>
             </div>
 

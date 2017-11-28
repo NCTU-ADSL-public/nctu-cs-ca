@@ -92,7 +92,7 @@ class App extends Component {
                         postData:this.state.beforeError,
                         boardData:this.state.beforeError,
                         open:true,
-                        msgstring:{cardId}+"只能被加進"+ string
+                        msgstring:cardId+"只能被加進"+ string
                     });
                     //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
                 }
