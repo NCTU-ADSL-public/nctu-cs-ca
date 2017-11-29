@@ -30,7 +30,7 @@ class App extends Component {
         if(this.props.post  ){
 
             let POST = this.state.postArray;
-            axios.post('/students/graduate/reorder', {
+            axios.post('/students/graduate/orderResult', {
                 POST
             })
                 .then(res => {

@@ -22,23 +22,15 @@ class Grad extends React.Component {
         opendialogprint: false,
         graduationCheck:false,
         graduationCheckEnglishTest:"",
-        Graduationitems:[],
+        Graduationitems:this.props.revise,
         items:this.props.items,
-        totalitems:[],
+        totalitems:this.props.result,
         courseCategoryArray:[],
-        Result:[],
-        ReviseResult:[],
-        print_courseCategoryArray:[],
+        Result:this.props.result,
+        ReviseResult:this.props.reviseresult,
+        print_courseCategoryArray:this.props.courseCategoryArray,
     };
     componentWillMount(){
-        this.setState({
-            Graduationitems:this.props.revise,
-            Result:this.props.result,
-            ReviseResult:this.props.reviseresult,
-            totalitems:this.props.result,
-            print_courseCategoryArray:this.props.courseCategoryArray,
-            scrollQuery:'',
-        });
         let _this=this;
 
         if(this.props.assistant) {
