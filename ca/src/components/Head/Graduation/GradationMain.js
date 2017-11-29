@@ -6,7 +6,6 @@ import Popover from 'react-simple-popover';
 import 'animate.css'
 import './Course.css';
 import Toggle from 'material-ui/Toggle';
-import {ToastContainer, ToastStore} from 'react-toasts';
 import ReactHover from 'react-hover';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -16,9 +15,12 @@ import scrollToComponent from 'react-scroll-to-component'
 import Graduation from './Graduation';
 import App from './Trello/List'
 import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
+import DialogWaring from './Trello/warning'
 
 const customContentStyle = {
     width: '100%',
+    height:'80vh',
     maxWidth: 'none',
     maxHeight: 'none',
 };
@@ -74,8 +76,8 @@ const styles = {
         color: '#7B7B7B'
     },
     medium:{
-        float:'left',
-        color: '#7B7B7B'
+        color: '#7B7B7B',
+        float:'right'
     },
     pop:{
         width:'auto',
@@ -89,6 +91,7 @@ class GraduationItem extends React.Component {
     state={
         isMod:false,
         isToggle:true,
+        openSnack: false,
         opendialogprint: false,
         openforRevise:false,
         graduationCheck:false,
@@ -155,6 +158,12 @@ class GraduationItem extends React.Component {
         }
 
     }
+
+    handleRequestClose = () => {
+        this.setState({
+            openSnack: false,
+        });
+    };
     handleOpenforRevise = () => {
         this.setState({openforRevise: true});
     };
@@ -194,14 +203,14 @@ class GraduationItem extends React.Component {
         }).catch(err => {
             console.log(err);
         });
-        this.setState({
-            items:this.props.revise,
-            Graduationitems:this.props.items,
-            Result:this.props.result,
-            ReviseResult:this.props.reviseresult,
-            totalitems:this.props.result,
-            print_courseCategoryArray:this.props.courseCategoryArray,
-        });
+        // this.setState({
+        //     items:this.props.revise,
+        //     Graduationitems:this.props.items,
+        //     Result:this.props.result,
+        //     ReviseResult:this.props.reviseresult,
+        //     totalitems:this.props.result,
+        //     print_courseCategoryArray:this.props.courseCategoryArray,
+        // });
         this.setState({/*openforRevise: false,*/ post:true});
     }
     //For updating as props changes!!!
@@ -236,9 +245,9 @@ class GraduationItem extends React.Component {
         });
         if(this.state.isToggle){
             this.setState({
-                totalitems:this.state.ReviseResult
+                totalitems:this.state.ReviseResult,
+                openSnack:true,
             });
-            ToastStore.info(<div  className="text">已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主。</div>, 10000);
         }
         else{
             this.setState({
@@ -272,12 +281,6 @@ class GraduationItem extends React.Component {
         this.setState({opendialogprint: false});
     };
 
-    componentDidMount(){
-        if(this.state.graduationCheckEnglishTest==="0"){
-            ToastStore.warning(<div  className="text">請確認英文狀態。</div>, 5000);
-        }
-    }
-
     render(){
         const actions = [
         <FlatButton
@@ -285,16 +288,11 @@ class GraduationItem extends React.Component {
             labelStyle={styles.labelStyle}
             onClick={this.handleCloseforRevise}
         />,
-        <FlatButton
-            label="儲存"
-            labelStyle={styles.labelStyle}
-            keyboardFocused={true}
-            onClick={()=>this.ReviseClick()}
+        <DialogWaring onClick={()=>this.ReviseClick()}
         />,
     ];
         return(
             <div>
-                <ToastContainer store={ToastStore}/>
                 <div className="fixed" onClick={()=>this.scrollTotop()}>
                     <TopButton/>
                 </div>
@@ -363,12 +361,13 @@ class GraduationItem extends React.Component {
                             </div>
                             <MuiThemeProvider>
 
-                                <div>
                                     <RaisedButton style={styles.button}
                                                   labelStyle={styles.labelStyle}
                                                   label="編輯課程"
                                                   onClick={this.handleOpenforRevise}
                                                   backgroundColor = "#DDDDDD" />
+                            </MuiThemeProvider>
+                                    <MuiThemeProvider>
                                     <Dialog
                                         title="編輯課程"
                                         actions={actions}
@@ -382,9 +381,9 @@ class GraduationItem extends React.Component {
                                     >
                                         <App post = {this.state.post} />
                                     </Dialog>
-                                </div>
 
                             </MuiThemeProvider>
+                            <div style={{width:'500px', height:'50px'}}>
                             <MuiThemeProvider>
                                 <Toggle
                                     label="系統自動排序"
@@ -394,7 +393,7 @@ class GraduationItem extends React.Component {
                                 />
                             </MuiThemeProvider>
                             <MuiThemeProvider>
-                                <IconButton tooltipStyles={{zIndex:'1000'}}
+                                <IconButton tooltipStyles={{zIndex:'1000',fontFamily:'Noto Sans CJK TC'}}
                                             iconStyle={styles.medium}
                                             tooltip="排序依據"
                                             tooltipPosition="top-right"
@@ -402,6 +401,17 @@ class GraduationItem extends React.Component {
                                             onClick={()=>this.handleClickview()}>
                                     <ActionGrade />
                                 </IconButton>
+                            </MuiThemeProvider>
+                            </div>
+                            <MuiThemeProvider>
+                            <Snackbar
+                                open={this.state.openSnack}
+                                message={<div>已幫您自動排序，欲知排序依據請點選自動排序旁的星號標誌，此為系統自動排序僅以參考為主，<font color='red'>若已經編輯過課程此為顯示手動編輯後的課程。</font></div>}
+                                autoHideDuration={5000}
+                                onRequestClose={this.handleRequestClose}
+                                contentStyle={{fontFamily:'Noto Sans CJK TC'}}
+                                bodyStyle	={{height:'100px'}}
+                            />
                             </MuiThemeProvider>
                             <Popover
                                 placement='right'

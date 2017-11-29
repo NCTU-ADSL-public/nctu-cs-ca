@@ -36,6 +36,7 @@ class App extends Component {
                 .then(res => {
                 })
                 .catch(err => {
+                    window.location.replace("/logout ");
                     console.log(err)
                 });
             //console.log(this.state.postArray);
@@ -43,7 +44,7 @@ class App extends Component {
     }
     async componentWillMount() {
         const response = await this.getBoard();
-        this.setState({boardData: response})
+        //this.setState({boardData: response})
         await this.getOrder();
     }
 
@@ -86,25 +87,24 @@ class App extends Component {
         //     open:true,
         //     msgstring:cardId+"只能被加進"+ string
         // });
-        let flag = 1;
-        console.log(_this.state.postArray.length)
-        for(let i=0;i<_this.state.postArray.length;i++){
-            if(_this.state.postArray[i].cosname===cardId){
-                flag = 0;
-                let clone = Object.assign({}, _this.state.postArray);
-                clone[i].next = targetLaneId;
-                _this.setState({
-                    postArray:clone
-                })
-            }
-        }
-        if(flag){
-            let array=[..._this.state.postArray,{cosname:cardId,pre:sourceLaneId, next:targetLaneId}]
-            _this.setState({
-                postArray:array
-            })
-        }
-        console.log(_this.state.postArray);
+        // console.log(_this.state.postArray.length)
+        // for(let i=0;i<_this.state.postArray.length;i++){
+        //     if(_this.state.postArray[i].cosname===cardId){
+        //         flag = 0;
+        //         let clone = Object.assign({}, _this.state.postArray);
+        //         clone[i].next = targetLaneId;
+        //         _this.setState({
+        //             postArray:clone
+        //         })
+        //     }
+        // }
+        // if(flag){
+        //     let array=[..._this.state.postArray,{cosname:cardId,pre:sourceLaneId, next:targetLaneId}]
+        //     _this.setState({
+        //         postArray:array
+        //     })
+        // }
+        //console.log(_this.state.postArray);
         axios.post('/students/graduate/change', {
             check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
         })
@@ -124,22 +124,23 @@ class App extends Component {
                     for(let i=0;i<_this.state.postArray.length;i++){
                         if(_this.state.postArray[i].cosname===cardId){
                             flag = 0;
+                            let clone = Object.assign({}, _this.state.postArray);
+                            clone[i].next = targetLaneId;
+                            _this.setState({
+                                postArray:clone
+                            })
                         }
                     }
                     if(flag){
-                        let array={..._this.state.postArray,cardId:{pre:sourceLaneId, next:targetLaneId}}
+                        let array=[..._this.state.postArray,{cosname:cardId,pre:sourceLaneId, next:targetLaneId}]
                         _this.setState({
                             postArray:array
                         })
                     }
-                    else{
-                        let clone = Object.assign({}, _this.state.postArray);
-                        clone.cardId.next = targetLaneId;
-                    }
                 }
             })
             .catch(err => {
-                //window.location.replace("/logout ");
+                window.location.replace("/logout ");
                 console.log(err)
             });
     };
@@ -179,8 +180,8 @@ class App extends Component {
                 <div className="App-Intro">
                     <Board
                         data={this.state.boardData}
-                        style={{backgroundColor:'#00AEAE',
-                            height:'550px'}}
+                        style={{backgroundColor:'#00a0a0',
+                            height:'65vh',}}
                         draggable
                         onDataChange={this.shouldReceiveNewData}
                         eventBusHandle={this.setEventBus}
