@@ -2,6 +2,10 @@
     display: none;
 }
 
+.dark-toast{
+    background-color: black;
+}
+
 .font_adjust{
     background: #F5F5F5;
     height: auto;
