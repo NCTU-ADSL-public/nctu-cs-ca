@@ -292,7 +292,7 @@ class GraduationItem extends React.Component {
         />,
     ];
         return(
-            <div>
+            <div className="font_adjust">
                 <div className="fixed" onClick={()=>this.scrollTotop()}>
                     <TopButton/>
                 </div>
