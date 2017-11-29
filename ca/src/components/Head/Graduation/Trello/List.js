@@ -19,16 +19,18 @@ class App extends Component {
         postData:{},
         open: false,
         msgstring:'',
-        post:this.props.post
+        post:this.props.post,
+        postArray:[]
     };
 
     setEventBus = eventBus => {
         this.setState({eventBus})
     };
-    componentWillUpdate(nextProps, nextState){
-        if(nextProps.post){
-            let POST = this.state.postData;
-            axios.post('/graduate/change', {
+    componentWillReceiveProps(){
+        if(this.props.post  ){
+
+            let POST = this.state.postArray;
+            axios.post('/students/graduate/reorder', {
                 POST
             })
                 .then(res => {
@@ -36,10 +38,9 @@ class App extends Component {
                 .catch(err => {
                     console.log(err)
                 });
+            //console.log(this.state.postArray);
         }
-
     }
-
     async componentWillMount() {
         const response = await this.getBoard();
         this.setState({boardData: response})
@@ -85,6 +86,25 @@ class App extends Component {
         //     open:true,
         //     msgstring:cardId+"只能被加進"+ string
         // });
+        let flag = 1;
+        console.log(_this.state.postArray.length)
+        for(let i=0;i<_this.state.postArray.length;i++){
+            if(_this.state.postArray[i].cosname===cardId){
+                flag = 0;
+                let clone = Object.assign({}, _this.state.postArray);
+                clone[i].next = targetLaneId;
+                _this.setState({
+                    postArray:clone
+                })
+            }
+        }
+        if(flag){
+            let array=[..._this.state.postArray,{cosname:cardId,pre:sourceLaneId, next:targetLaneId}]
+            _this.setState({
+                postArray:array
+            })
+        }
+        console.log(_this.state.postArray);
         axios.post('/students/graduate/change', {
             check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
         })
@@ -98,6 +118,24 @@ class App extends Component {
                         msgstring:cardId+"只能被加進"+ string
                     });
                     //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
+                }
+                else{
+                    let flag = 1;
+                    for(let i=0;i<_this.state.postArray.length;i++){
+                        if(_this.state.postArray[i].cosname===cardId){
+                            flag = 0;
+                        }
+                    }
+                    if(flag){
+                        let array={..._this.state.postArray,cardId:{pre:sourceLaneId, next:targetLaneId}}
+                        _this.setState({
+                            postArray:array
+                        })
+                    }
+                    else{
+                        let clone = Object.assign({}, _this.state.postArray);
+                        clone.cardId.next = targetLaneId;
+                    }
                 }
             })
             .catch(err => {

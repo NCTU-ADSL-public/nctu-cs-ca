@@ -164,6 +164,7 @@ class GraduationItem extends React.Component {
     };
     async ReviseClick () {
         await this.ReviseClickCallBack();
+        this.setState({openforRevise: false, post:false});
     }
     ReviseClickCallBack ()  {
         let _this=this;
@@ -201,7 +202,7 @@ class GraduationItem extends React.Component {
             totalitems:this.props.result,
             print_courseCategoryArray:this.props.courseCategoryArray,
         });
-        this.setState({openforRevise: false, post:true});
+        this.setState({/*openforRevise: false,*/ post:true});
     }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){
