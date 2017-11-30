@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import StudentGrad from '../../Head/Graduation/Graduation';
+import StudentGrad from '../../Head/Graduation/GradationMain';
 
 import LoadingComponent from '../Loading';
 
