@@ -363,7 +363,14 @@ class GraduationItem extends React.Component {
                             </div>
                             <MuiThemeProvider>
 
-                                    <RaisedButton style={styles.button}
+                                    <RaisedButton style={{
+                                        margin:'9px 10px 0 0px',
+                                        width:'200px',
+                                        float:'left',
+                                        zIndex:'-1',
+                                        transition:'visibility 0.5s',
+                                        visibility:this.state.isToggle?'hidden':''
+                                    }}
                                                   labelStyle={styles.labelStyle}
                                                   label="編輯課程"
                                                   onClick={this.handleOpenforRevise}
@@ -385,7 +392,7 @@ class GraduationItem extends React.Component {
                                     </Dialog>
 
                             </MuiThemeProvider>
-                            <div style={{width:'500px', height:'50px'}}>
+                            <div style={{width:'500px', height:'50px'}} className="animated shake">
                             <MuiThemeProvider>
                                 <Toggle
                                     label="系統自動排序"
