@@ -122,46 +122,57 @@ class App extends Component {
                 complete = _this.state.searchData[j].complete;
             }
         }
-        /*let st ={ check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:type, complete:{complete}}}
-        console.log(st);*/
-        axios.post('/students/graduate/change', {
-            check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:{type}, complete:{complete}}
-        })
-            .then(res => {
-                if(!res.data.check.flag){
-                    let string = res.data.check.reason;
-                    _this.setState({
-                        //postData:this.state.beforeError,
-                        boardData:this.state.beforeError,
-                        open:true,
-                        msgstring:cardId+"只能被加進"+ string
-                    });
-                    //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
-                }
-                else{
-                    let flag = 1;
-                    for(let i=0;i<_this.state.postArray.length;i++){
-                        if(_this.state.postArray[i].cosname===cardId){
-                            flag = 0;
-                            let clone = Object.assign({}, _this.state.postArray);
-                            clone[i].next = targetLaneId;
+        if(!complete){
+            _this.setState({
+                //postData:this.state.beforeError,
+                boardData:this.state.beforeError,
+                open:true,
+                msgstring:"您不能移動尚未修課過或當期課程!"
+            });
+        }
+        else{
+
+            axios.post('/students/graduate/change', {
+                check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:{type}, complete:{complete}}
+            })
+                .then(res => {
+                    if(!res.data.check.flag){
+                        let string = res.data.check.reason;
+                        _this.setState({
+                            //postData:this.state.beforeError,
+                            boardData:this.state.beforeError,
+                            open:true,
+                            msgstring:cardId+"只能被加進"+ string
+                        });
+                        //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
+                    }
+                    else{
+                        let flag = 1;
+                        for(let i=0;i<_this.state.postArray.length;i++){
+                            if(_this.state.postArray[i].cosname===cardId){
+                                flag = 0;
+                                let clone = Object.assign({}, _this.state.postArray);
+                                clone[i].next = targetLaneId;
+                                _this.setState({
+                                    postArray:clone
+                                })
+                            }
+                        }
+                        if(flag){
+                            let array=[..._this.state.postArray,{cosname:cardId,pre:sourceLaneId, next:targetLaneId}]
                             _this.setState({
-                                postArray:clone
+                                postArray:array
                             })
                         }
                     }
-                    if(flag){
-                        let array=[..._this.state.postArray,{cosname:cardId,pre:sourceLaneId, next:targetLaneId}]
-                        _this.setState({
-                            postArray:array
-                        })
-                    }
-                }
-            })
-            .catch(err => {
-                window.location.replace("/logout ");
-                console.log(err)
-            });
+                })
+                .catch(err => {
+                    window.location.replace("/logout ");
+                    console.log(err)
+                });
+        }
+        /*let st ={ check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:type, complete:{complete}}}
+        console.log(st);*/
     };
 
     shouldReceiveNewData = nextData => {
