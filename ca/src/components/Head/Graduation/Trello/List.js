@@ -114,15 +114,18 @@ class App extends Component {
         let code;
         let type;
         let complete;
+        console.log(_this.state.searchData);
         for(let j=0;j<_this.state.searchData.length;j++){
-            if(cardId===_this.state.searchData[j]){
+            if(cardId===_this.state.searchData[j].id){
                 code = _this.state.searchData[j].code;
                 type = _this.state.searchData[j].type;
                 complete = _this.state.searchData[j].complete;
             }
         }
+        /*let st ={ check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:type, complete:{complete}}}
+        console.log(st);*/
         axios.post('/students/graduate/change', {
-            check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:code, type:type, complete:complete}
+            check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:{type}, complete:{complete}}
         })
             .then(res => {
                 if(!res.data.check.flag){
