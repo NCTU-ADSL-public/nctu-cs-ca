@@ -20,7 +20,8 @@ class App extends Component {
         open: false,
         msgstring:'',
         post:this.props.post,
-        postArray:[]
+        postArray:[],
+        searchData:[]
     };
 
     setEventBus = eventBus => {
@@ -58,6 +59,11 @@ class App extends Component {
        let  _this = this;
         axios.get('/students/graduate/reorder').then(response => {
             _this.setState({boardData: response.data})
+        }).catch(err => {
+            console.log(err);
+        });
+        axios.get('/students/graduate/orderInfo').then(response => {
+            _this.setState({searchData: response.data})
         }).catch(err => {
             console.log(err);
         });
@@ -105,8 +111,16 @@ class App extends Component {
         //     })
         // }
         //console.log(_this.state.postArray);
+        let code;
+        let type;
+        for(let j=0;j<_this.state.searchData.length;j++){
+            if(cardId===_this.state.searchData[j]){
+                code = _this.state.searchData[j].code;
+                type = _this.state.searchData[j].type;
+            }
+        }
         axios.post('/students/graduate/change', {
-            check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}}
+            check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:{type}}
         })
             .then(res => {
                 if(!res.data.check.flag){
