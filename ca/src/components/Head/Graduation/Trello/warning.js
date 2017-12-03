@@ -17,7 +17,6 @@ const customContentStyle = {
 
 const bodyStyle = {
     fontFamily: 'Noto Sans CJK TC',
-    padding:'0'
 };
 const titleStyle = {
     fontFamily: 'Noto Sans CJK TC',

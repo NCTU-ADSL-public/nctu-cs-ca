@@ -114,6 +114,29 @@ class App extends Component {
         });
     }
 
+    HandleLaneClick = (laneId) => {
+            let sum=0;
+            let total;
+            for(let i=0;i<this.state.boardData.lanes.length;i++){
+                if(this.state.boardData.lanes[i].id === laneId){
+                    total = this.state.boardData.lanes[i].total;
+                    for(let j=0;j<this.state.boardData.lanes[i].cards.length;j++){
+                        for(let k=0;k<this.state.searchData.length;j++){
+                            if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[j].id){
+                                if(this.state.searchData[j].complete)sum+=this.state.boardData.lanes[i].cards[j].label;
+                            }
+                        }
+
+                    }
+                }
+            }
+            //alert(total-sum);
+            this.setState({
+                open:true,
+                msgstring:"尚須 "+(total-sum)+" 學分"
+            });
+    }
+
 
     handleDragStart = (cardId, laneId) => {
         console.log('drag started')
@@ -263,6 +286,7 @@ class App extends Component {
                         eventBusHandle={this.setEventBus}
                         handleDragStart={this.handleDragStart}
                         handleDragEnd={this.handleDragEnd}
+                        onLaneClick={this.HandleLaneClick}
                         customCardLayout
                     >
                         <CustomCard/>
