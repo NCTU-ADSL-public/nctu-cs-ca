@@ -4,36 +4,6 @@ import {Board} from 'react-trello'
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
 
-const CustomLane = props => {
-    const buttonHandler = () => {
-        alert(`The label passed to the lane was: ${props.label}. The lane has ${props.cards.length} cards!`)
-    }
-    return (
-        <div>
-            <header
-                style={{
-                    borderBottom: '2px solid #c5c5c5',
-                    paddingBottom: 6,
-                    marginBottom: 10,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between'
-                }}
-            >
-                <div style={{fontSize: 14, fontWeight: 'bold'}}>
-                    {props.title}
-                </div>
-                {props.label &&
-                <div style={{width: '30%', textAlign: 'right', fontSize: 13}}>
-                    <button onClick={buttonHandler} style={{cursor: 'pointer'}}>
-                        ?
-                    </button>
-                </div>}
-            </header>
-        </div>
-    )
-}
-
 const CustomCard = props => {
     return (
         <div>
@@ -89,8 +59,8 @@ class App extends Component {
         }
     }
     async componentWillMount() {
-        const response = await this.getBoard();
-        this.setState({boardData: response})
+        //const response = await this.getBoard();
+        //this.setState({boardData: response})
         await this.getOrder();
     }
 
@@ -128,8 +98,8 @@ class App extends Component {
             let ans = total-sum;
             if(ans<0)
                 ans=0;
-            console.log(sum)
-            console.log(total)
+            // console.log(sum);
+            // console.log(total);
             this.setState({
                 open:true,
                 msgstring:"尚須 "+ ans +" 門"
@@ -163,20 +133,20 @@ class App extends Component {
 
 
     handleDragStart = (cardId, laneId) => {
-        console.log('drag started')
-        console.log(`cardId: ${cardId}`)
-        console.log(`laneId: ${laneId}`)
-        console.log(this.state.boardData)
+        // console.log('drag started')
+        // console.log(`cardId: ${cardId}`)
+        // console.log(`laneId: ${laneId}`)
+        // console.log(this.state.boardData)
         this.setState({
             beforeError:this.state.postData
         })
     };
 
     handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-        console.log('drag ended')
-        console.log(`cardId: ${cardId}`)
-        console.log(`sourceLaneId: ${sourceLaneId}`)
-        console.log(`targetLaneId: ${targetLaneId}`)
+        // console.log('drag ended')
+        // console.log(`cardId: ${cardId}`)
+        // console.log(`sourceLaneId: ${sourceLaneId}`)
+        // console.log(`targetLaneId: ${targetLaneId}`)
         let _this=this;
         // let string = "";
         // _this.setState({
@@ -262,16 +232,16 @@ class App extends Component {
                     window.location.replace("/logout ");
                     console.log(err)
                 });
-            console.log(_this.state.boardData);
+            //console.log(_this.state.boardData);
         }
         /*let st ={ check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:type, complete:{complete}}}
         console.log(st);*/
     };
 
     shouldReceiveNewData = nextData => {
-        console.log('New card has been added')
-        console.log(this.state.boardData)
-        console.log(nextData)
+        // console.log('New card has been added')
+        // console.log(this.state.boardData)
+        // console.log(nextData)
         this.setState({
             postData:nextData
         })
