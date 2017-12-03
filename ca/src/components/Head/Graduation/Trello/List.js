@@ -48,7 +48,7 @@ const CustomCard = props => {
             </header>
             <div style={{ fontSize: 12, color: '#BD3B36' }}>
                 <div style={{ color: '#4C4C4C', fontWeight: 'bold' }}>學分: {props.label}</div>
-                <div style={{ padding: '5px 0px' }}><i>分數: {props.description}</i></div>
+                <div style={{ padding: '5px 0px', fontWeight: 'bold'  }}><i>分數: {props.description}</i></div>
             </div>
         </div>
     )
