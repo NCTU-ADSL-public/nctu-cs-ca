@@ -122,21 +122,14 @@ class App extends Component {
             for(let i=0;i<this.state.boardData.lanes.length;i++){
                 if(this.state.boardData.lanes[i].id === laneId){
                     total = this.state.boardData.lanes[i].total;
-                    for(let j=0;j<this.state.boardData.lanes[i].cards.length;j++){
-                        for(let k=0;k<this.state.searchData.length;k++){
-                            if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[k].id){
-                                if(this.state.searchData[k].complete)sum+=1;
-                            }
-                        }
-
-                    }
+                    sum=this.state.boardData.lanes[i].cards.length;
                 }
             }
             console.log(sum)
             console.log(total)
             this.setState({
                 open:true,
-                msgstring:"尚須 "+(total-sum)+" 門"
+                msgstring:"尚須 "+(total-sum)<0?0:(total-sum)+" 門"
             });
         }
         else {
@@ -155,7 +148,7 @@ class App extends Component {
             }
             this.setState({
                 open:true,
-                msgstring:"尚須 "+(total-sum)+" 學分"
+                msgstring:"尚須 "+(total-sum)<0?0:(total-sum)+" 學分"
             });
 
         }
