@@ -47,8 +47,8 @@ const CustomCard = props => {
                 <div style={{ fontSize: 11 }}>{props.dueOn}</div>
             </header>
             <div style={{ fontSize: 12, color: '#BD3B36' }}>
-                <div style={{ color: '#4C4C4C', fontWeight: 'bold' }}>分數: {props.label}</div>
-                <div style={{ padding: '5px 0px' }}><i>{props.description}</i></div>
+                <div style={{ color: '#4C4C4C', fontWeight: 'bold' }}>學分: {props.label}</div>
+                <div style={{ padding: '5px 0px' }}><i>分數: {props.description}</i></div>
             </div>
         </div>
     )
