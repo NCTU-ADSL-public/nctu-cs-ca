@@ -1,141 +1,37 @@
 {
   "lanes": [
     {
-    "id": "共同必修",
-    "title": "共同必修",
-    "label": "20/70",
-    "cards": [
-    {
-    "id": "物理(一)",
-    "title": "物理(一)",
-    "label": "{分數}",
-    "description": "{reason}"
-    },
-    {
-    "id": "物理一)",
-    "title": "物理(一)",
-    "label": "{分數}",
-    "description": "{reason}"
-    },
-    {
-    "id": "物理()",
-    "title": "物理(一)",
-    "label": "{分數}",
-    "description": "{reason}"
-    },
-    {
-    "id": "物理(",
-    "title": "物理(一)",
-    "label": "{分數}",
-    "description": "{reason}"
-    },
-    {
-    "id": "物理)",
-    "title": "物理(一)",
-    "label": "{分數}",
-    "description": "{reason}"
-    },
-    {
-    "id": "微積分(一)",
-    "title": "微積分(一)",
-    "label": "{分數}",
-    "description": "{reason}"
-    },
-    {
-    "id": "作業系統概論",
-    "title": "作業系統概論",
-    "label": "{分數}",
-    "description": "{reason}"
-    }
-    ]
-    },
-    {
-    "id": "專業選修",
-    "title": "專業選修",
-    "label": "10/20",
-    "cards": [
-    {
-    "id": "人工智慧",
-    "title": "人工智慧",
-    "label": "{分數}",
-    "description": "{reason}"
-    }
-    ]
-    },
-    {
-      "id": "BLOCKED",
-      "title": "Blocked",
-      "label": "0/0",
-      "cards": []
-    },
-    {
-      "id": "COMPLETED",
-      "title": "Completed",
-      "label": "2/5",
+      "id": "lane1",
+      "title": "Planned Tasks",
+      "label": "'First Lane here'",
       "cards": [
         {
-          "id": "Completed1",
-          "title": "Practice Meditation",
-          "label": "15 mins",
-          "description": "Use Headspace app"
+          "id": "Card1",
+          "name": "John Smith",
+          "dueOn": "due in a day",
+          "subTitle": "SMS received at 12:13pm today",
+          "body": "Thanks. Please schedule me for an estimate on Monday.",
+          "escalationText": "Escalated to OPS-ESCALATIONS!",
+          "cardColor": "#BD3B36",
+          "cardStyle": {"borderRadius": 6, "boxShadow": "0 0 6px 1px #BD3B36", "marginBottom": 15 },
+          "tags": [
+            {"title": "Critical", "color": "white", "bgcolor": "red"},
+            {"title": "2d ETA", "color": "white", "bgcolor": "#0079BF"}
+            ]
         },
         {
-          "id": "Completed2",
-          "title": "Maintain Daily Journal",
-          "label": "15 mins",
-          "description": "Use Spreadsheet for now"
-        }
-      ]
-    },
-    {
-      "id": "REPEAT",
-      "title": "Repeat",
-      "label": "1/1",
-      "cards": [
-        {
-          "id": "Repeat1",
-          "title": "Morning Jog",
-          "label": "30 mins",
-          "description": "Track using fitbit"
-        }
-      ]
-    },
-    {
-      "id": "ARCHIVED",
-      "title": "Archived",
-      "label": "1/1",
-      "cards": [
-        {
-          "id": "Archived1",
-          "title": "Go Trekking",
-          "label": "300 mins",
-          "description": "Completed 10km on cycle"
-        }
-      ]
-    },
-    {
-      "id": "a",
-      "title": "Archived",
-      "label": "1/1",
-      "cards": [
-        {
-          "id": "Archived1",
-          "title": "Go Trekking",
-          "label": "300 mins",
-          "description": "Completed 10km on cycle"
-        }
-      ]
-    },
-    {
-      "id": "a",
-      "title": "Archived",
-      "label": "1/1",
-      "cards": [
-        {
-          "id": "Archived1",
-          "title": "Go Trekking",
-          "label": "300 mins",
-          "description": "Completed 10km on cycle"
+          "id": "Card2",
+          "name": "Card Weathers",
+          "dueOn": "due now",
+          "subTitle": "Email received at 1:14pm",
+          "body": "Is the estimate free, and can someone call me soon?",
+          "escalationText": "Escalated to Admin",
+          "cardColor": "#E08521",
+          "cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #E08521", "marginBottom": 15 },
+          "tags": [
+            {"title": "Critical", "color": "white", "bgcolor": "red"},
+            {"title": "2d ETA", "color": "white", "bgcolor": "#0079BF"}
+            ]
         }
       ]
     }

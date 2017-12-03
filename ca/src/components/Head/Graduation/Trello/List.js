@@ -1,13 +1,58 @@
 import React, {Component} from 'react'
 import './App.css'
 import {Board} from 'react-trello'
-import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
-import {ToastContainer, ToastStore} from 'react-toasts';
-import CAicon from './CAicon.svg'
 
+const CustomLane = props => {
+    const buttonHandler = () => {
+        alert(`The label passed to the lane was: ${props.label}. The lane has ${props.cards.length} cards!`)
+    }
+    return (
+        <div>
+            <header
+                style={{
+                    borderBottom: '2px solid #c5c5c5',
+                    paddingBottom: 6,
+                    marginBottom: 10,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between'
+                }}
+            >
+                <div style={{fontSize: 14, fontWeight: 'bold'}}>
+                    {props.title}
+                </div>
+                {props.label &&
+                <div style={{width: '30%', textAlign: 'right', fontSize: 13}}>
+                    <button onClick={buttonHandler} style={{cursor: 'pointer'}}>
+                        ?
+                    </button>
+                </div>}
+            </header>
+        </div>
+    )
+}
 
+const CustomCard = props => {
+    return (
+        <div>
+            <header
+                style={{borderBottom: '1px solid #eee', paddingBottom: 6, marginBottom: 10,
+                    display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
+                    color: props.cardColor
+                }}
+            >
+                <div style={{ fontSize: 14, fontWeight: 'bold' }}>{props.title}</div>
+                <div style={{ fontSize: 11 }}>{props.dueOn}</div>
+            </header>
+            <div style={{ fontSize: 12, color: '#BD3B36' }}>
+                <div style={{ color: '#4C4C4C', fontWeight: 'bold' }}>分數: {props.label}</div>
+                <div style={{ padding: '5px 0px' }}><i>{props.description}</i></div>
+            </div>
+        </div>
+    )
+}
 
 
 const data = require('./data.json')
@@ -114,7 +159,7 @@ class App extends Component {
         let code;
         let type;
         let complete;
-        console.log(_this.state.searchData);
+        //console.log(_this.state.searchData);
         for(let j=0;j<_this.state.searchData.length;j++){
             if(cardId===_this.state.searchData[j].id){
                 code = _this.state.searchData[j].code;
@@ -170,6 +215,7 @@ class App extends Component {
                     window.location.replace("/logout ");
                     console.log(err)
                 });
+            console.log(_this.state.boardData);
         }
         /*let st ={ check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:type, complete:{complete}}}
         console.log(st);*/
@@ -217,7 +263,9 @@ class App extends Component {
                         eventBusHandle={this.setEventBus}
                         handleDragStart={this.handleDragStart}
                         handleDragEnd={this.handleDragEnd}
+                        customCardLayout
                     >
+                        <CustomCard/>
                     </Board>
                 </div>
                 <Snackbar
