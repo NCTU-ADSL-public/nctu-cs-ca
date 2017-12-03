@@ -378,7 +378,7 @@ class GraduationItem extends React.Component {
                             </MuiThemeProvider>
                                     <MuiThemeProvider>
                                     <Dialog
-                                        title="編輯課程"
+                                        title="編輯課程(您可以點選標題確認自己尚需幾學分 ex:共同必修)"
                                         actions={actions}
                                         modal={false}
                                         open={this.state.openforRevise}
