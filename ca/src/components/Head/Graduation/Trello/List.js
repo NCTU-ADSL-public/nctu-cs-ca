@@ -132,6 +132,8 @@ class App extends Component {
                     }
                 }
             }
+            console.log(sum)
+            console.log(total)
             this.setState({
                 open:true,
                 msgstring:"尚須 "+(total-sum)+" 門"
