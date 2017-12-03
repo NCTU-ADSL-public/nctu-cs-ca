@@ -173,13 +173,13 @@ class App extends Component {
         //     })
         // }
         //console.log(_this.state.postArray);
-        let code;
+        let id;
         let type;
         let complete;
         //console.log(_this.state.searchData);
         for(let j=0;j<_this.state.searchData.length;j++){
-            if(cardId===_this.state.searchData[j].id){
-                code = _this.state.searchData[j].code;
+            if(cardId===_this.state.searchData[j].code){
+                id = _this.state.searchData[j].id;
                 type = _this.state.searchData[j].type;
                 complete = _this.state.searchData[j].complete;
             }
@@ -195,23 +195,22 @@ class App extends Component {
         else{
 
             axios.post('/students/graduate/change', {
-                check:{cosname:{cardId}, pre:{sourceLaneId}, next:{targetLaneId}, code:{code}, type:{type}, complete:{complete}}
+                check:{cosname:{id}, pre:{sourceLaneId}, next:{targetLaneId}, code:{cardId}, type:{type}, complete:{complete}}
             })
                 .then(res => {
                     if(!res.data.check.flag){
-                        let string = res.data.check.reason;
                         _this.setState({
                             //postData:this.state.beforeError,
                             boardData:this.state.beforeError,
                             open:true,
-                            msgstring:cardId+"不能被加進" + targetLaneId
+                            msgstring:id+"不能被加進" + targetLaneId
                         });
                         //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
                     }
                     else{
                         let flag = 1;
                         for(let i=0;i<_this.state.postArray.length;i++){
-                            if(_this.state.postArray[i].cosname===cardId){
+                            if(_this.state.postArray[i].id===cardId){
                                 flag = 0;
                                 let clone = Object.assign({}, _this.state.postArray);
                                 clone[i].next = targetLaneId;
@@ -221,7 +220,7 @@ class App extends Component {
                             }
                         }
                         if(flag){
-                            let array=[..._this.state.postArray,{cosname:cardId,pre:sourceLaneId, next:targetLaneId}]
+                            let array=[..._this.state.postArray,{id:id,pre:sourceLaneId, next:targetLaneId}]
                             _this.setState({
                                 postArray:array
                             })
