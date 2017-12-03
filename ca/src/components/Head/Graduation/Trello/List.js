@@ -117,11 +117,32 @@ class App extends Component {
     HandleLaneClick = (laneId) => {
             let sum=0;
             let total;
+            //alert(total-sum);
+        if(laneId==="體育" || laneId==="藝文賞析" || laneId==="服務學習"){
             for(let i=0;i<this.state.boardData.lanes.length;i++){
                 if(this.state.boardData.lanes[i].id === laneId){
                     total = this.state.boardData.lanes[i].total;
                     for(let j=0;j<this.state.boardData.lanes[i].cards.length;j++){
-                        for(let k=0;k<this.state.searchData.length;j++){
+                        for(let k=0;k<this.state.searchData.length;k++){
+                            if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[k].id){
+                                if(this.state.searchData[k].complete)sum+=1;
+                            }
+                        }
+
+                    }
+                }
+            }
+            this.setState({
+                open:true,
+                msgstring:"尚須 "+(total-sum)+" 門"
+            });
+        }
+        else {
+            for(let i=0;i<this.state.boardData.lanes.length;i++){
+                if(this.state.boardData.lanes[i].id === laneId){
+                    total = this.state.boardData.lanes[i].total;
+                    for(let j=0;j<this.state.boardData.lanes[i].cards.length;j++){
+                        for(let k=0;k<this.state.searchData.length;k++){
                             if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[k].id){
                                 if(this.state.searchData[k].complete)sum+=this.state.boardData.lanes[i].cards[j].label;
                             }
@@ -130,14 +151,6 @@ class App extends Component {
                     }
                 }
             }
-            //alert(total-sum);
-        if(laneId==="體育" || laneId==="藝文賞析" || laneId==="服務學習"){
-            this.setState({
-                open:true,
-                msgstring:"尚須 "+(total-sum)+" 門"
-            });
-        }
-        else {
             this.setState({
                 open:true,
                 msgstring:"尚須 "+(total-sum)+" 學分"
