@@ -131,19 +131,19 @@ class App extends Component {
                 }
             }
             //alert(total-sum);
-        if(laneId==="體育" || laneId==="藝文賞析" || laneId==="服務學習"){
+        /*if(laneId==="體育" || laneId==="藝文賞析" || laneId==="服務學習"){
             this.setState({
                 open:true,
                 msgstring:"尚須 "+(total-sum)+" 門"
             });
         }
-        else {
+        else {*/
             this.setState({
                 open:true,
                 msgstring:"尚須 "+(total-sum)+" 學分"
             });
 
-        }
+        //}
     }
 
 
