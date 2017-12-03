@@ -125,11 +125,14 @@ class App extends Component {
                     sum=this.state.boardData.lanes[i].cards.length;
                 }
             }
+            let ans = total-sum;
+            if(ans<0)
+                ans=0;
             console.log(sum)
             console.log(total)
             this.setState({
                 open:true,
-                msgstring:"尚須 "+(total-sum)<0?0:(total-sum)+" 門"
+                msgstring:"尚須 "+ ans +" 門"
             });
         }
         else {
@@ -146,9 +149,13 @@ class App extends Component {
                     }
                 }
             }
+
+            let ans = total-sum;
+            if(ans<0)
+                ans=0;
             this.setState({
                 open:true,
-                msgstring:"尚須 "+(total-sum)<0?0:(total-sum)+" 學分"
+                msgstring:"尚須 "+ans+" 學分"
             });
 
         }
