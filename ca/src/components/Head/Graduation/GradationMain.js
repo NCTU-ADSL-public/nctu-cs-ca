@@ -91,7 +91,7 @@ class GraduationItem extends React.Component {
 
     state={
         isMod:false,
-        isToggle:true,
+        isToggle:false,
         opendialogprint: false,
         openforRevise:false,
         graduationCheck:false,
@@ -245,10 +245,6 @@ class GraduationItem extends React.Component {
 
     componentDidMount(){
 
-        toast(<div style={{fontFamily: 'Noto Sans CJK TC'}}>第一次使用請先按系統自動排序。</div>, {
-            position: toast.POSITION.TOP_RIGHT,
-            className: "dark-toast",
-        });
     }
 
     render(){
@@ -365,6 +361,7 @@ class GraduationItem extends React.Component {
                                 <Toggle
                                     label="系統自動排序"
                                     style={styles.toggle}
+                                    defaultToggled
                                     labelStyle={styles.labelStyle}
                                     onToggle={(toggled)=>this.handleToggle()}
                                 />
