@@ -238,7 +238,7 @@ class GraduationItem extends React.Component {
     }
 
     handleAssistantPost(){
-        axios.post('/students/graduate/orderResult', {
+        axios.post(' /assistants/graduate/check', {
         check: {state: true }
     })
             .then(res => {
