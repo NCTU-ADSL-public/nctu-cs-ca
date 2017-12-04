@@ -111,7 +111,7 @@ class App extends Component {
                     total = this.state.boardData.lanes[i].total;
                     for(let j=0;j<this.state.boardData.lanes[i].cards.length;j++){
                         for(let k=0;k<this.state.searchData.length;k++){
-                            if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[k].id){
+                            if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[k].code){
                                 if(this.state.searchData[k].complete)sum+=this.state.boardData.lanes[i].cards[j].label;
                             }
                         }
