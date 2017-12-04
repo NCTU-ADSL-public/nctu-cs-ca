@@ -336,7 +336,7 @@ class Head extends Component {
 
         setTimeout(function () {
             _this.select(1);
-        }, 300);
+        }, 200);
 
 
 
