@@ -210,7 +210,7 @@ class App extends Component {
                     else{
                         let flag = 1;
                         for(let i=0;i<_this.state.postArray.length;i++){
-                            if(_this.state.postArray[i].id===cardId){
+                            if(_this.state.postArray[i].code===cardId){
                                 flag = 0;
                                 let clone = Object.assign({}, _this.state.postArray);
                                 clone[i].next = targetLaneId;
@@ -220,7 +220,7 @@ class App extends Component {
                             }
                         }
                         if(flag){
-                            let array=[..._this.state.postArray,{id:id,pre:sourceLaneId, next:targetLaneId}]
+                            let array=[..._this.state.postArray,{id:cardId,pre:sourceLaneId, next:targetLaneId}]
                             _this.setState({
                                 postArray:array
                             })
