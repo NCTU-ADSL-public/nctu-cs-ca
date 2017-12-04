@@ -333,7 +333,7 @@ class Head extends Component {
         }.bind(this)).catch(err => {
             console.log(err);
         });
-        this.select(0);
+        this.select(1);
 
     }
 
