@@ -392,7 +392,7 @@ class GraduationItem extends React.Component {
                                     </Dialog>
 
                             </MuiThemeProvider>
-                            <div className="animated shake">
+                            <div style={{width:'500px', height:'30px'}} className="animated shake">
                             <MuiThemeProvider>
                                 <Toggle
                                     label="系統自動排序"
