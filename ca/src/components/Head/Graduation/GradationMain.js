@@ -284,6 +284,14 @@ class GraduationItem extends React.Component {
         this.setState({opendialogprint: false});
     };
 
+    componentDidMount(){
+
+        toast(<div style={{fontFamily: 'Noto Sans CJK TC'}}>第一次使用請先按系統自動排序。</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            className: "dark-toast",
+        });
+    }
+
     render(){
         const actions = [
         <FlatButton
