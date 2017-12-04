@@ -20,7 +20,7 @@ export default class index extends React.Component {
         super(props);
 
         this.state = {
-            activeKey: '2',
+            activeKey: '1',
             start: 0,
             initStudents: [
                 {
