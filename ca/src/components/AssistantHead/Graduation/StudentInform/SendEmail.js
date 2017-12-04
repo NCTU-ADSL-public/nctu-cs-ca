@@ -106,12 +106,12 @@ export default class SendEmail extends React.Component {
     }
 
     handleLogin = () => {
-        axios.post('/assistants/mail/loginState', {
+        axios.post('/assistants/mail/login', {
             account: this.state.account,
             password: this.state.password,
         }).then(res => {
             console.log(res);
-            if(res.loginState) {
+            if(res.data.login) {
                 this.loginSuccess();
                 this.setState({senderEmail: res.emailId});
             }else {

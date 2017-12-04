@@ -173,7 +173,11 @@ class GraduationItem extends React.Component {
         this.setState({openforRevise: false});
     };
     async ReviseClick () {
-        window.location.replace("/students/Head ");
+        if(this.props.assistant){
+            window.location.reload();
+        }else{
+            window.location.replace("/students/Head ");
+        }
     }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){
