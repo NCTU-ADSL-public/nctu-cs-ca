@@ -30,12 +30,13 @@ class GradCategory extends React.Component {
                 subjects[i].comment += '免修課程';
             } else if (subjects[i].reason=="now") {
                 subjects[i].comment += '當期課程';
+                subjects[i].score = '　';
             }
 
             // 未修
             if ((subjects[i].score==null || subjects[i].score==-1) && subjects[i].complete==false) {
-                this.state.subjects[i].realCredit = '　';
-                this.state.subjects[i].originalCredit = '　';
+                this.state.subjects[i].realCredit += '　';
+                this.state.subjects[i].originalCredit += '　';
             }
 
             // score
