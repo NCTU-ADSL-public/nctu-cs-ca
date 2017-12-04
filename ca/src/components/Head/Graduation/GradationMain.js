@@ -356,7 +356,6 @@ class GraduationItem extends React.Component {
                                               labelStyle={styles.labelStyle}
                                               backgroundColor = "#DDDDDD"
                                               label="列印"
-                                              disabled={this.state.graduationCheckEnglishTest==="0"}
                                               onClick={() => this.printGradTable('103學年度畢業預審表-'+this.props.studentProfile.student_id)}/>
                             </MuiThemeProvider>
 
@@ -367,7 +366,7 @@ class GraduationItem extends React.Component {
                                                   backgroundColor = "#DDDDDD"
                                                   ref="targetEn"
                                                   buttonStyle={{zIndex:'0'}}
-                                                  label={(this.state.graduationCheckEnglishTest==="21")?"已考過英檢":(this.state.graduationCheckEnglishTest==="22")?"未考過英檢":"英文已抵免或換修"}
+                                                  label={(this.state.graduationCheckEnglishTest==="3" || this.state.graduationCheckEnglishTest==="4" )?"已考過英檢":(this.state.graduationCheckEnglishTest==="0")?"未考過英檢":(this.state.graduationCheckEnglishTest==="2")?"英文已換修":"英文已抵免"}
                                                   disabled={true}/>
                                 </MuiThemeProvider>
                             </div>
