@@ -233,15 +233,9 @@ class GraduationItem extends React.Component {
         });
     }
 
-    Modify(){
-        this.setState({
-            isMod:!this.state.isMod
-        })
+    handleAssistantPost(){
+        
     }
-
-    handleClosedialogprint = () => {
-        this.setState({opendialogprint: false});
-    };
 
     componentDidMount(){
 
