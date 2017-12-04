@@ -272,7 +272,7 @@ class App extends Component {
                 <div className="App-Intro">
                     <Board
                         data={this.state.boardData}
-                        style={{backgroundColor:'#00a0a0',
+                        style={{backgroundColor:'#8596a0',
                             height:'65vh',}}
                         draggable
                         onDataChange={this.shouldReceiveNewData}
