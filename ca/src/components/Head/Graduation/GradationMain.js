@@ -238,7 +238,15 @@ class GraduationItem extends React.Component {
     }
 
     handleAssistantPost(){
-        
+        axios.post('/students/graduate/orderResult', {
+        check: {state: true }
+    })
+            .then(res => {
+            })
+            .catch(err => {
+                window.location.replace("/logout ");
+                console.log(err)
+            });
     }
 
     componentDidMount(){
@@ -296,7 +304,7 @@ class GraduationItem extends React.Component {
                                             style={styles.button}
                                             labelStyle={styles.labelStyle}
                                             backgroundColor = "#DDDDDD"
-                                            onClick={this.handleOpen1}
+                                            onClick={()=>this.handleAssistantPost()}
                                         />
                                     </MuiThemeProvider>
                                 </ReactHover.Trigger>
