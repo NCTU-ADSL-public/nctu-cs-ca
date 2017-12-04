@@ -178,6 +178,7 @@ class GraduationItem extends React.Component {
     }
     ReviseClickCallBack ()  {
         let _this=this;
+        this.setState({/*openforRevise: false,*/ post:true});
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data
@@ -196,14 +197,16 @@ class GraduationItem extends React.Component {
         }).catch(err => {
             console.log(err);
         });
-        axios.get('/students/graduate/revised').then(studentData => {
-            _this.setState({
-                Graduationitems: studentData.data,
-                ReviseResult: studentData.data[10]
-            });
-        }).catch(err => {
-            console.log(err);
-        });
+            setTimeout(function () {
+                axios.get('/students/graduate/revised').then(studentData => {
+                    _this.setState({
+                        Graduationitems: studentData.data,
+                        ReviseResult: studentData.data[10]
+                    });
+                }).catch(err => {
+                    console.log(err);
+                });
+            }, 100);
         // this.setState({
         //     items:this.props.revise,
         //     Graduationitems:this.props.items,
@@ -212,7 +215,6 @@ class GraduationItem extends React.Component {
         //     totalitems:this.props.result,
         //     print_courseCategoryArray:this.props.courseCategoryArray,
         // });
-        this.setState({/*openforRevise: false,*/ post:true});
     }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){
