@@ -333,7 +333,12 @@ class Head extends Component {
         }.bind(this)).catch(err => {
             console.log(err);
         });
-        this.select(1);
+
+        setTimeout(function () {
+            _this.select(1);
+        }, 300);
+
+
 
     }
 
