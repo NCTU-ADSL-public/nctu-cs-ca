@@ -111,7 +111,7 @@ class GraduationItem extends React.Component {
             Graduationitems:this.props.revise,
             Result:this.props.result,
             ReviseResult:this.props.reviseresult,
-            totalitems:this.props.result,
+            totalitems:this.props.reviseresult,
             print_courseCategoryArray:this.props.courseCategoryArray,
         });
         let _this=this;
