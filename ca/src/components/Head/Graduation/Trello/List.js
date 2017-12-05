@@ -143,7 +143,7 @@ class App extends Component {
     };
 
     handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-        console.log(this.state.searchData)
+        //console.log(this.state.searchData)
         // console.log('drag ended')
         // console.log(`cardId: ${cardId}`)
         // console.log(`sourceLaneId: ${sourceLaneId}`)
@@ -204,7 +204,7 @@ class App extends Component {
             });
         }
         else{
-            console.log(description)
+            //console.log(description)
             axios.post('/students/graduate/change', {
                 check:{cosname:{id}, pre:{sourceLaneId}, next:{targetLaneId}, code:{cardId}, type:{type}, complete:{complete}}
             })
