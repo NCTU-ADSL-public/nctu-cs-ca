@@ -173,7 +173,7 @@ class GraduationItem extends React.Component {
         this.setState({openforRevise: false});
     };
     clearManual = () => {
-        axios.post(' /graduate/reorder/reset', {
+        axios.post('/students/graduate/reorder/reset', {
                 Danny:"Danny"
         })
             .then(res => {

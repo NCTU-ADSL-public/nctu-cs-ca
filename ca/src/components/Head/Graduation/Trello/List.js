@@ -176,12 +176,14 @@ class App extends Component {
         let id;
         let type;
         let complete;
+        let description;
         //console.log(_this.state.searchData);
         for(let j=0;j<_this.state.searchData.length;j++){
             if(cardId===_this.state.searchData[j].code){
                 id = _this.state.searchData[j].id;
                 type = _this.state.searchData[j].type;
                 complete = _this.state.searchData[j].complete;
+                description = _this.state.searchData[j].description;
             }
         }
         if(!complete){
@@ -190,6 +192,14 @@ class App extends Component {
                 boardData:this.state.beforeError,
                 open:true,
                 msgstring:"您不能移動尚未修課過或當期課程!"
+            });
+        }
+        else if(description === "notCS"){
+            _this.setState({
+                //postData:this.state.beforeError,
+                boardData:this.state.beforeError,
+                open:true,
+                msgstring:"您不能移動尚未抵免過的課程!"
             });
         }
         else{
@@ -203,7 +213,7 @@ class App extends Component {
                             //postData:this.state.beforeError,
                             boardData:this.state.beforeError,
                             open:true,
-                            msgstring:id+"不能被加進" + targetLaneId
+                            msgstring:id+"不能被加進" + targetLaneId + "!"
                         });
                         //ToastStore.error(<div  className="text">{cardId}只能被加進{res.data.check.reason.map(res=><div>{res}</div>)}</div>, 5000);
                     }
