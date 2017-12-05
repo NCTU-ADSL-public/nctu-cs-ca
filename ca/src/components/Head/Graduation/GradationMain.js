@@ -182,6 +182,8 @@ class GraduationItem extends React.Component {
                 window.location.replace("/logout ");
                 console.log(err)
             });
+        window.location.replace("/students/Head ");
+
     };
     async ReviseClick () {
         if(this.props.assistant){
