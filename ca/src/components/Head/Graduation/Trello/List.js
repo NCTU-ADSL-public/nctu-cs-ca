@@ -194,7 +194,7 @@ class App extends Component {
                 msgstring:"您不能移動尚未修課過或當期課程!"
             });
         }
-        else if(description === "notCS"){
+        if(description === "notCS"){
             _this.setState({
                 //postData:this.state.beforeError,
                 boardData:this.state.beforeError,
