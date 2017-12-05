@@ -319,7 +319,7 @@ class GraduationItem extends React.Component {
                                                 :
                                                 this.state.graduationCheck?"助理已經收到囉":"助理尚未收到"}
                                             disabled={this.props.assistant ?(this.state.graduationCheck) : true}
-                                            style={styles.button}
+                                            style={{visibility:'hidden'}}
                                             labelStyle={styles.labelStyle}
                                             backgroundColor = "#DDDDDD"
                                             onClick={()=>this.handleAssistantPost()}
