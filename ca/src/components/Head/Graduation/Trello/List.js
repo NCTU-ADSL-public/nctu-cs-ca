@@ -59,8 +59,8 @@ class App extends Component {
         }
     }
     async componentWillMount() {
-        // const response = await this.getBoard();
-        // this.setState({boardData: response})
+        const response = await this.getBoard();
+        this.setState({boardData: response})
         await this.getOrder();
     }
 
@@ -195,7 +195,7 @@ class App extends Component {
                 msgstring:"您不能移動尚未修課過或當期課程!"
             });
         }
-        if(description === "notCS"){
+        else if(description === "notCS"){
             _this.setState({
                 //postData:this.state.beforeError,
                 boardData:this.state.beforeError,
