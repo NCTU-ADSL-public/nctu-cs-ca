@@ -362,7 +362,8 @@ class GraduationItem extends React.Component {
                                                   labelStyle={styles.labelStyle}
                                                   label="編輯課程"
                                                   onClick={this.handleOpenforRevise}
-                                                  backgroundColor = "#DDDDDD" />
+                                                  backgroundColor = "#DDDDDD"
+                                                  disabled={this.props.assistant}/>
                             </MuiThemeProvider>
                                     <MuiThemeProvider>
                                     <Dialog
