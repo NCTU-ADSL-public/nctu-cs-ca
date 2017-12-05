@@ -172,6 +172,17 @@ class GraduationItem extends React.Component {
     handleCloseforRevise = () => {
         this.setState({openforRevise: false});
     };
+    clearManual = () => {
+        axios.post(' /graduate/reorder/reset', {
+                Danny:"Danny"
+        })
+            .then(res => {
+            })
+            .catch(err => {
+                window.location.replace("/logout ");
+                console.log(err)
+            });
+    };
     async ReviseClick () {
         if(this.props.assistant){
             window.location.reload();
@@ -255,6 +266,11 @@ class GraduationItem extends React.Component {
 
     render(){
         const actions = [
+        <FlatButton
+            label="清除手動排序"
+            labelStyle={styles.labelStyle}
+            onClick={this.clearManual}
+        />,
         <FlatButton
             label="取消"
             labelStyle={styles.labelStyle}

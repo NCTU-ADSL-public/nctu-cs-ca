@@ -59,8 +59,8 @@ class App extends Component {
         }
     }
     async componentWillMount() {
-        //const response = await this.getBoard();
-        //this.setState({boardData: response})
+        const response = await this.getBoard();
+        this.setState({boardData: response})
         await this.getOrder();
     }
 
