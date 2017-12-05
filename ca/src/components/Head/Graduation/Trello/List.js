@@ -203,7 +203,7 @@ class App extends Component {
             });
         }
         else{
-
+            console.log(description)
             axios.post('/students/graduate/change', {
                 check:{cosname:{id}, pre:{sourceLaneId}, next:{targetLaneId}, code:{cardId}, type:{type}, complete:{complete}}
             })

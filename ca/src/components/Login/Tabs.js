@@ -54,6 +54,7 @@ export default class TabsExampleControlled extends React.Component {
                     <div style={{}}>
                         <ul className="live type2">
                             <li>霹靂優課程尚無法處理</li>
+                            <li>尚無製作手機版</li>
                             <li>其他選修課程轉為通識尚無法處理</li>
                             <li>微學分課程尚無法處理</li>
                         </ul>
