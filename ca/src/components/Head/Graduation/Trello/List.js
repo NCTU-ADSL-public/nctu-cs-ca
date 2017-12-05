@@ -82,7 +82,6 @@ class App extends Component {
         }).catch(err => {
             console.log(err);
         });
-        console.log(this.state.searchData)
     }
 
     HandleLaneClick = (laneId) => {
@@ -144,6 +143,7 @@ class App extends Component {
     };
 
     handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
+        console.log(this.state.searchData)
         // console.log('drag ended')
         // console.log(`cardId: ${cardId}`)
         // console.log(`sourceLaneId: ${sourceLaneId}`)
