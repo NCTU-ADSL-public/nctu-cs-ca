@@ -126,7 +126,7 @@ methods.redirectPath = function(req, res, next){
     var personStatus = JSON.parse(req.session.profile).personStatus;
     switch(personStatus){
         case 'w':
-            res.redirect('/students/head');
+            res.redirect('/assistants/head');
             break;
         case 's':
             ////console.log("This is a student");

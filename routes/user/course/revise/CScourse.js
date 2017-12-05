@@ -56,8 +56,14 @@ CScourse.processCS = function(req, res, next){
             }
             else{
                 if(taken[pass[i].cos_code] == true){
-                    if(parseInt(pass[i].score) > parseInt(detail[pass[i].cos_code].score))
-                        detail[pass[i].cos_code] = pass[i];
+                    if(pass[i].pass_fail == '通過'){
+                        if(detail[pass[i].cos_code].pass_fail == '通過'){
+                            if(parseInt(pass[i].score) > parseInt(detail[pass[i].cos_code].score))
+                                detail[pass[i].cos_code] = pass[i];
+                        }
+                        else
+                            detail[pass[i].cos_code] = pass[i];
+                    }
                 }
                 else{
                     detail[pass[i].cos_code] = pass[i];

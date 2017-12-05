@@ -80,7 +80,7 @@ Othercourse.processOther = function(req, res, next){
         var compulse = req.course.compulse;
         var compulseCodeCheck = [];
         //record the complulse course code
-        for(var i = 0; i<compulse.legth; i++)
+        for(var i = 0; i<compulse.length; i++)
             for(var q = 0; q<compulse[i].cos_codes.length; q++)
                 compulseCodeCheck[compulse[i].cos_codes[q]] = true;
         ////console.log(offset);
@@ -187,7 +187,7 @@ Othercourse.processOther = function(req, res, next){
                     compulsory.credit += parseInt(offset[i].credit);
                 }
                 else{
-                    var temp = offset[i].cos_code_new.substring(0,3);
+                    var temp = offset[i].cos_code.substring(0,3);
                     if(temp == 'DCP' || temp == 'IOC' || temp == 'IOE' || temp == 'ILE' || temp == 'IDS'){
                         elective.course.push(cosInfo);
                         elective.credit += parseInt(offset[i].credit);

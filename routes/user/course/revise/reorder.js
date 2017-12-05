@@ -108,7 +108,8 @@ reorder.processOrder = function(req, res, next){
                     id: '',
                     title: '',
                     label: '',
-                    description: ''
+                    description: '',
+                    cardStyle:{ borderRadius:6, boxShadow:'0 0 6px 1px #E08521', marginBottom: 15}
                 }
                 //if(!courseResult[i].course[q].code)
                     //cosInfo.id = 'DCP';

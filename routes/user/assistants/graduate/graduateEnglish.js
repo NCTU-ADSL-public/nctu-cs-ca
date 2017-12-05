@@ -4,8 +4,9 @@ var express = require('express');
 var utils = require('../../../../utils');
 var query = require('../../../../db/msql');
 var utils = require('../../../../utils');
+var getStudentId = require('../../course/getStudentId');
 var router = express.Router();
-
+var studentId = getStudentId.getStudentId.studentId; 
 var csrf = require('csurf');
 var csrfProtection = csrf();
 
@@ -31,7 +32,7 @@ router.post('/assistants/graduate/english', csrfProtection, function(req, res){
     res.json({ check: {state: eng_state } });
 });
 
-router.get('/assistants/graduate/english',function(req, res){
+router.get('/assistants/graduate/english', studentId, function(req, res){
     var personId =res.locals.studentId;
     query.findPerson(personId, function(err, result){
         if(err){
