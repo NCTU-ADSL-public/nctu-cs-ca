@@ -49,18 +49,6 @@ module.exports = {
       extensions: ['*', '.js', '.json'] 
     },
   plugins: [
-    	new BundleAnalyzerPlugin({
-		analyzerMode: 'server',
-		analyzerHost: '140.113.168.202',
-		analyzerPort: 1112,
-		reportFilename: 'report.html',
-		defaultSizes: 'parsed',
-		openAnalyzer: true,
-		generateStatsFile: true,
-		statsFilename: 'stats.json',
-		statsOptions: null,
-		logLevel: 'info'
-	}),
 	new ExtractTextPlugin({filename: 'style.[name].css', publicPath: '/public/'})
   ],
   watch: true

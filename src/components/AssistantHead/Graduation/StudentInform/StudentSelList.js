@@ -23,6 +23,9 @@ const muiTheme = getMuiTheme({
 
 
 const styles = {
+    labelStyle: {
+        fontFamily: 'Noto Sans CJK TC',
+    },
     chip: {
         margin: 6,
     },
@@ -33,10 +36,6 @@ const styles = {
     },
     toggle: {
         marginBottom: 0,
-    },
-    labelStyle: {
-        fontFamily: 'Noto Sans CJK TC',
-        color: '#7B7B7B'
     },
 };
 
@@ -85,25 +84,31 @@ export default class StudentInform extends React.Component {
 
 
     filterList(event){
-        this.setState({
-            groupA: true,
-            groupB: true,
-            groupC: true,
-            groupD: true,
-            gGrad: true,
-            gSubmit: true,
-        });
         let updatedList = this.state.initStudents;
+        let gA = this.state.groupA;
+        let gB = this.state.groupB;
+        let gC = this.state.groupC;
+        let gD = this.state.groupD;
+        let gG = this.state.gGrad;
+        let gS = this.state.gSubmit;
         updatedList = updatedList.filter(function(student){
             let grad = student.graduate==="1" ? '可畢業' : '未達畢業標準';
-            return (student.sname.toLowerCase().search(
-                event.target.value.toLowerCase()) !== -1)||
+            return (
+                (student.sname.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1)||
                 (student.program.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
                 (student.student_id.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
                 (grad.toLowerCase().search(
-                    event.target.value.toLowerCase()) !== -1);
+                    event.target.value.toLowerCase()) !== -1)
+            )&&(
+                ((student.program.toLowerCase().search('資工a') !== -1) && gA )||
+                ((student.program.toLowerCase().search('資工b') !== -1) && gB )||
+                ((student.program.toLowerCase().search('網多') !== -1) && gC )||
+                ((student.program.toLowerCase().search('資電') !== -1) && gD )
+            )&&(    ((student.graduate==='0' || !student.graduate) && !gG)|| gG
+            )&&(    ((student.graduate_submit==='1' || student.graduate_submit==='0' || !student.graduate_submit) && !gS) || gS );
         });
         this.setState({students: updatedList});
     }
@@ -150,7 +155,19 @@ export default class StudentInform extends React.Component {
     //input press ENTER
     handleKeyPress = (e) => {
         if (e.key === 'Enter' && this.state.students[0] !== undefined) {
-           // this.props.parentFunction(this.state.students[0]);
+            let studentId = this.state.students[0].student_id;
+            let newInitStudent = this.state.initStudents;
+            let tmp = newInitStudent.find((item) => (studentId === item.student_id));
+
+            if(tmp.selected === undefined)
+                tmp.selected = true;
+            else
+                tmp.selected = !tmp.selected;
+
+            this.setState({
+                initStudents: newInitStudent,
+            });
+            this.filterListGroup(999);
         }
     };
 
@@ -211,6 +228,7 @@ export default class StudentInform extends React.Component {
                                 <Toggle
                                     label="全選/全不選"
                                     style={styles.toggle}
+                                    labelStyle={styles.labelStyle}
                                     onToggle={() => this.handleToggle() }
                                 />
                             </MuiThemeProvider>
@@ -229,37 +247,43 @@ export default class StudentInform extends React.Component {
                             <Chip
                                 backgroundColor={this.state.gSubmit ? '#5fc86f' : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(5))}
-                                style={styles.chip}>
+                                style={styles.chip}
+                                labelStyle={styles.labelStyle}>
                                 完成審核
                             </Chip>
                             <Chip
                                 backgroundColor={this.state.gGrad ? '#5fc86f' : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(4))}
-                                style={styles.chip}>
+                                style={styles.chip}
+                                labelStyle={styles.labelStyle}>
                                 可畢業
                             </Chip>
                             <Chip
                                 backgroundColor={this.state.groupA ? blue300 : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(0))}
-                                style={styles.chip}>
+                                style={styles.chip}
+                                labelStyle={styles.labelStyle}>
                                 資工A班
                             </Chip>
                             <Chip
                                 backgroundColor={this.state.groupB ? blue300 : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(1))}
-                                style={styles.chip}>
+                                style={styles.chip}
+                                labelStyle={styles.labelStyle}>
                                 資工B班
                             </Chip>
                             <Chip
                                 backgroundColor={this.state.groupC ? blue300 : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(2))}
-                                style={styles.chip}>
+                                style={styles.chip}
+                                labelStyle={styles.labelStyle}>
                                 網多組
                             </Chip>
                             <Chip
                                 backgroundColor={this.state.groupD ? blue300 : '#CCC'}
                                 onClick={ () => (this.handleTouchTap(3))}
-                                style={styles.chip}>
+                                style={styles.chip}
+                                labelStyle={styles.labelStyle}>
                                 資電組
                             </Chip>
                         </div>

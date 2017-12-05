@@ -5,6 +5,7 @@ finalProcess.processFinal = function(req, res, next){
 
 	if(req.session.profile){
 		var courseResult = res.locals.courseResult;
+        ////console.log(courseResult[6]);
         var dimension = res.locals.dimension;
         var dimension_count = 0;
         var incomplete = [];
@@ -32,10 +33,10 @@ finalProcess.processFinal = function(req, res, next){
 				if(courseResult[4].course[i].reason == 'general'){
                     if(incomplete[courseResult[4].course[i].dimension] == true){     
                         courseResult[6].course.push(courseResult[4].course[i]);
-					    courseResult[6].credit += parseInt(courseResult[4].course[i].credit);
-					    courseResult[4].course.splice(i,1);
-					    courseResult[4].credit -= parseInt(courseResult[4].course[i].credit);
+					    courseResult[6].credit += courseResult[4].course[i].realCredit;
+					    courseResult[4].credit -= courseResult[4].course[i].realCredit;
                         incomplete[courseResult[4].course[i].dimension] == false;
+                        courseResult[4].course.splice(i,1);
                     }
 				}
 			}
@@ -45,9 +46,9 @@ finalProcess.processFinal = function(req, res, next){
             for(var i = 0; i<courseResult[4].course.length; i++){
                 if(courseResult[4].course[i].reason == 'general'){
                     courseResult[6].course.push(courseResult[4].course[i]);
-                    courseResult[6].credit += parseInt(courseResult[4].course[i].credit);
+                    courseResult[6].credit += courseResult[4].course[i].realCredit;
+                    courseResult[4].credit -= courseResult[4].course[i].realCredit;
                     courseResult[4].course.splice(i,1);
-                    courseResult[4].credit -= parseInt(courseResult[4].course[i].credit);
                 }
             }
         }

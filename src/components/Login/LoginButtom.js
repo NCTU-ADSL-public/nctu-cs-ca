@@ -12,20 +12,19 @@ class LoginButtom extends React.Component{
 						  labelColor = {grey50}
 						  href="/auth/Nctu"
 						  style={{
-                              width: '13%',
+                              width: '20%',
+                              fontFamily: 'Noto Sans CJK TC',
+                              float: 'left',
+                              margin: '2px'
+                          }}
+                          labelStyle={{
                               fontFamily: 'Noto Sans CJK TC',
                           }}
-						  onTouchTap={
-                              () => this.kk()
-                          }
 			>
 			</RaisedButton>
         );
 	}
 
-    kk (event){
-        console.log('1234567');
-    }
 }
 
 

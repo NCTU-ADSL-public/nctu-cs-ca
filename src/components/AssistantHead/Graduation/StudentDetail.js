@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import StudentGrad from '../../Head/Graduation/Graduation';
+import StudentGrad from '../../Head/Graduation/GradationMain';
 
 import LoadingComponent from '../Loading';
 
@@ -23,6 +23,7 @@ export default class index extends React.Component {
                 email:"6666666666666@nctu.edu.tw",
                 graduate:"0",
                 graduate_submit:"0",
+                graduationCheckEnglishTest:"0",
                 github_id:null,
                 fb_id:null,
                 gmail:null,
@@ -356,7 +357,11 @@ export default class index extends React.Component {
             console.log(err);
         });
 
-        axios.get('/students/graduate/print').then(function(resp){
+        axios.get('/assistants/graduate/print', {
+            params: {
+                student_id: this.props.match.params.sid,
+            }
+        }).then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data,
                 loadingP: false,
@@ -385,6 +390,7 @@ export default class index extends React.Component {
                         reviseresult={this.state.revise[10]}
                         courseCategoryArray={this.state.print_courseCategoryArray}
                         assistant={1}
+                        graduationCheckEnglishTest={this.state.graduationCheckEnglishTest}
                     />
                 </div>
             );

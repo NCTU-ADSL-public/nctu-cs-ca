@@ -48,7 +48,7 @@ class GeneralCourse extends React.Component {
                             fontFamily: 'Noto Sans CJK TC',
                         }}
                         hoverColor={"#80b0d9"}
-                        backgroundColor={this.props.completed?"#3aa276":this.props.selection?"gray":"#d93a64"}
+                        backgroundColor={this.props.items.length>0?(this.props.items.length===1 && this.props.items[0].reason==='now')?"#AB6BD9":"#3cab7d":"#D95467"}
                         style={{
                             transition: "background .2s linear",
                             width: "200px",

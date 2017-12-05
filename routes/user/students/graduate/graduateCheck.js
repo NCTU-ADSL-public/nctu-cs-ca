@@ -18,10 +18,11 @@ router.post('/students/graduate/check', csrfProtection, function(req, res){
 });
 
 router.get('/students/graduate/check',function(req, res){
-    let personId = utils.getPersonId(JSON.parse(req.session.profile));
+    let personId = res.locals.studentId;
+    //console.log(personId);
     query.findPerson(personId, function(err, result){
         if(err){
-            //console.log(err);
+            ////console.log(err);
             res.redirect('/');
         }
         else {

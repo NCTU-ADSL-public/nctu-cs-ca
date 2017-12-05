@@ -2,20 +2,38 @@
     display: none;
 }
 
+.dark-toast{
+    background-color: black;
+}
+
 .font_adjust{
     background: #F5F5F5;
     height: auto;
     width: 100%;
 }
+@page{
+    margin:25px;
+}
 
 @media print {
+
+    /* Set body padding to header and footer */
+    body{
+        background: #fff !important;
+        padding: 40px 0;;
+    }
     #ontopDiv,
-    .font_adjust,
+    .schedule-bar,
+    .Grad-Row,
     #topRec,
+    .fixed,
+    .Grad-title-adjust,
     footer {
         display: none;
     }
     #printArea {
+        background: #fff;
+        padding: 5px;
         height: auto;
         width: auto;
         display: block;
@@ -24,6 +42,7 @@
         position: absolute;
         left: 0;
         top: 0;
+        -webkit-text-size-adjust: 100%;
     }
 
 }
@@ -32,7 +51,7 @@
     position: fixed;
     bottom: 41px;
     right: 3px;
-    z-index: 10000;
+    z-index: 100;
 }
 
 .red{
@@ -86,6 +105,7 @@
 .text{
     color: #7B7B7B;
     float: left;
+    opacity: 0.8;
     font-family: 'Noto Sans CJK TC';
 }
 
@@ -93,7 +113,7 @@
     padding: 25px 0 0 50px;
     display: inline-block;
     width: 700px;
-    height: 125px;
+    height: 130px;
 }
 
 .grad-hover-info{
@@ -216,8 +236,6 @@
 
 .course-button{
     padding: 11px 0 120px 0;
-    height: 100px;
-    width: 1300px;
 }
 
 #graduate-footer{

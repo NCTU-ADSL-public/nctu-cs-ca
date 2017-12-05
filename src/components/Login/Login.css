@@ -4,8 +4,87 @@
     background: #EEEEEE;
 
 }
+ .live {
+     overflow: hidden;
+     padding: 0 0 0 2%;
+     font-family:'Noto Sans CJK TC';
+ }
+ .live > li {
+     list-style: none;
+     position: relative;
+     color: #c9c9c9;
+     padding: 0 3em 0 2em;
+     margin: 0 0 0 1%;
+     -webkit-transition: .12s;
+     transition: .12s;
+ }
+ .live > li::before {
+     position: absolute;
+     content: '\2022';
+     font-family: Arial;
+     color: #FFF;
+     top: 0;
+     left: 0;
+     text-align: center;
+     font-size: 2em;
+     opacity: .5;
+     line-height: .75;
+     -webkit-transition: .5s;
+     transition: .5s;
+ }
+ .live > li:hover {
+     color: #ffffff;
+ }
+ .live > li:hover::before {
+     -webkit-transform: scale(2);
+     transform: scale(2);
+     opacity: 1;
+     text-shadow: 0 0 4px;
+     -webkit-transition: .1s;
+     transition: .1s;
+ }
+ .live.type2 > li::before {
+     content: '';
+     width: 10px;
+     height: 10px;
+     background: #FFF;
+     border-radius: 3px;
+     line-height: 0;
+     top: .27em;
+     left: 5px;
+ }
+ .live.type2 > li:hover::before {
+     -webkit-transform: none;
+     transform: none;
+     border-radius: 5px;
+     width: 25px;
+     left: -10px;
+     background: #BA5353;
+ }
 
-.Login-header {
+ .live.numbers {
+     counter-reset: xxx 0;
+ }
+ .live.numbers > li::before {
+     content: counter(xxx,decimal) ".";
+     counter-increment: xxx 1;
+     font-family: 'Roboto Condensed';
+     font-size: 1em;
+     opacity: .5;
+     line-height: 1.4;
+     -webkit-transition: .5s;
+     transition: .5s;
+ }
+ .live.numbers > li:hover:before {
+     opacity: 1;
+     left: -10px;
+     -webkit-transform: none;
+     transform: none;
+     text-shadow: none;
+     -webkit-transition: .12s;
+     transition: .12s;
+ }
+ .Login-header {
   margin: 0 0 0 0;
   padding: 0 0 0 13%;
   color:  #7B7B7B;
@@ -13,8 +92,16 @@
 }
 .Login-login {
     text-align:center;
-    margin: -7% 0 0 -15%;
+    margin: -2% 0 0 2%;
  }
+.drawer{
+    width: 20px;
+    float: left;
+    margin: 2px 2px 2px 30%;
+}
+.drawerIn{
+    height: 50%;
+}
 
 .Login-Choose {
     text-align:center;
@@ -40,7 +127,7 @@
 }
 
 #ch-title {
-  height: 35vh;
+  height: 27vh;
 }
 
 
@@ -76,12 +163,20 @@
   }
     .Login-login {
         text-align:center;
-        margin: -7% 0 0 0%;
+        margin: -7% 0 0 35%;
     }
+    .drawer{
+        float: left;
+        margin: 1px 0 0 -15%;
+    }
+
     h1 {
       font-size: 18px;
     }
     h2 {
       font-size: 30px;
+    }
+    #ch-title {
+        height: 35vh;
     }
 }

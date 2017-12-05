@@ -31,7 +31,7 @@ courseResult.processResult = function(req, res, next){
   	if(req.session.profile){
   		var rules = JSON.parse(req.rules);
           	var CourseResult = res.locals.courseResult;
-  		//console.log(CourseResult[0].course);
+  		////console.log(CourseResult[0].course);
   		var EnglishCourse = res.locals.English;
           	result.compulsory = CourseResult[0].credit;
           	result.core =  CourseResult[1].credit;

@@ -18,12 +18,12 @@ exports.oAuthNctu = oAuthNctu;
 methods.getCode = function(req, res, next){
     oAuthNctu.code = req.query.code;
     if(!oAuthNctu.code){
-        //console.log("Did not recieve code.");
+        ////console.log("Did not recieve code.");
         res.redirect('/');
         return;
 et   }
-    //console.log("token:");
-    //console.log(oAuthNctu.code);
+    ////console.log("token:");
+    ////console.log(oAuthNctu.code);
     next();
 }
 
@@ -44,12 +44,12 @@ methods.getToken = function(req, res, next){
         formData: formData
         }, function(err, res, body){
             if(body == '{"error": "invalid_grant"}'){
-                //console.log("invalid code!");
+                ////console.log("invalid code!");
                 return;
             }
             var bodyObj = JSON.parse(body);
             var access_token = bodyObj.access_token;
-	    //console.log("Token:" + access_token);
+	    ////console.log("Token:" + access_token);
             oAuthNctu.token = access_token;
             next();
         });
@@ -63,15 +63,15 @@ methods.getProfile = function(req, res, next){
           'Authorization' : 'Bearer ' + oAuthNctu.token,
     },}, function(err, res, body){
         if(body == '<h1>Server Error (500)</h1>'){
-            //console.log("invalid token!!");
+            ////console.log("invalid token!!");
             return;
         }
-	//console.log("Profile:" + body);
+	////console.log("Profile:" + body);
 	req.session.profile = body;
 	body = JSON.parse(body);
-	//console.log("req.sesision:" + req.session.profile);
-	////console.log("req only ID:" + req.session.profile);
-	//console.log("Profile username: " + body);
+	////console.log("req.sesision:" + req.session.profile);
+	//////console.log("req only ID:" + req.session.profile);
+	////console.log("Profile username: " + body);
 	if(body){
 		var studentId = body.username;
         	var email = body.email;
@@ -86,17 +86,17 @@ methods.redirectAfterAuth = function(req, res, next){
       if(req.session.profile){
             var personId = utils.getPersonId(JSON.parse(req.session.profile));
             if(!personId){
-                //console.log("no student id");
+                ////console.log("no student id");
                 return;
             }
             query.findPerson(personId, function(err, result){
-		//console.log(result + typeof(result));
+		////console.log(result + typeof(result));
                 if(!result){
                     return;
                 }
 		
                 if(err){
-                    //console.log("Can't find this person");
+                    ////console.log("Can't find this person");
                     throw err;
                     return;
                 }
@@ -108,7 +108,7 @@ methods.redirectAfterAuth = function(req, res, next){
             	    next();
 		}
 		else{
-                    console.log(result);
+                    ////console.log(result);
                     var temp = JSON.parse(result);
 		    var profileObj = JSON.parse(req.session.profile);
                     profileObj.personStatus = temp[0].status;
@@ -122,19 +122,22 @@ methods.redirectAfterAuth = function(req, res, next){
 }
 
 methods.redirectPath = function(req, res, next){
-    //console.log(req.session.profile); 
+    ////console.log(req.session.profile); 
     var personStatus = JSON.parse(req.session.profile).personStatus;
     switch(personStatus){
+        case 'w':
+            res.redirect('/students/head');
+            break;
         case 's':
-            //console.log("This is a student");
+            ////console.log("This is a student");
             res.redirect('/students/head');
             break;
         case 'p':
-            //console.log("This is a professor");
+            ////console.log("This is a professor");
             res.redirect('/professors/head');
             break;
         case 'a':
-            //console.log("This is an assistant");
+            ////console.log("This is an assistant");
             res.redirect('/assistants/head');
             break;
 	case '!':

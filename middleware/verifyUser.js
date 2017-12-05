@@ -1,19 +1,19 @@
 module.exports.verifyUser = function(req, res, next){
   if(!(req.profile && req.profile.length)){
-        //console.log("Unverified User");
-        //console.log(req.profile);
+        //////console.log("Unverified User");
+        //////console.log(req.profile);
         res.redirect("/");
         return;
   } else{
-        //console.log("Verified");
+        //////console.log("Verified");
         next();
     }
 }
 
 module.exports.verifyProgram = function(req, res, next){
   if(!(req.profile && req.profile.length)){
-        //console.log("Unverified User");
-        //console.log(req.profile);
+        //////console.log("Unverified User");
+        //////console.log(req.profile);
         res.redirect("/");
         return;
   } else{
@@ -26,8 +26,8 @@ module.exports.verifyProgram = function(req, res, next){
 
 module.exports.verifyGrade = function(req, res, next){
   if(!(req.profile && req.profile.length)){
-        //console.log("Unverified User");
-        //console.log(req.profile);
+        //////console.log("Unverified User");
+        //////console.log(req.profile);
         res.redirect("/");
         return;
   } else{
@@ -40,14 +40,14 @@ module.exports.verifyGrade = function(req, res, next){
 
 module.exports.verifyAssistants = function(req, res, next){
   if(!(req.profile && req.profile.length)){
-        //console.log("Unverified User");
-        //console.log(req.profile);
+        //////console.log("Unverified User");
+        //////console.log(req.profile);
         res.redirect("/");
         return;
   } else{
-        //console.log("Verified");
+        //////console.log("Verified");
         var personStatus = JSON.parse(req.session.profile).personStatus;
-        if(personStatus == 'a')
+        if(personStatus == 'a' || personStatus == 'w')
                 next();
         else
                 res.redirect("/");
@@ -56,14 +56,14 @@ module.exports.verifyAssistants = function(req, res, next){
 
 module.exports.verifyStudents = function(req, res, next){
   if(!(req.profile && req.profile.length)){
-        //console.log("Unverified User");
-        //console.log(req.profile);
+        //////console.log("Unverified User");
+        //////console.log(req.profile);
         res.redirect("/");
         return;
   } else{
-        //console.log("Verified");
+        //////console.log("Verified");
         var personStatus = JSON.parse(req.session.profile).personStatus;
-        if(personStatus == 's')
+        if(personStatus == 's' || personStatus == 'w')
                 next();
         else
                 res.redirect("/");
