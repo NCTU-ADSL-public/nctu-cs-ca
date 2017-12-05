@@ -82,6 +82,7 @@ class App extends Component {
         }).catch(err => {
             console.log(err);
         });
+        console.log(this.state.searchData)
     }
 
     HandleLaneClick = (laneId) => {
@@ -203,7 +204,7 @@ class App extends Component {
             });
         }
         else{
-            alert(description)
+            console.log(description)
             axios.post('/students/graduate/change', {
                 check:{cosname:{id}, pre:{sourceLaneId}, next:{targetLaneId}, code:{cardId}, type:{type}, complete:{complete}}
             })
