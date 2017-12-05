@@ -11,8 +11,17 @@
     height: auto;
     width: 100%;
 }
+@page{
+    margin:25px;
+}
 
 @media print {
+
+    /* Set body padding to header and footer */
+    body{
+        background: #fff !important;
+        padding: 40px 0;;
+    }
     #ontopDiv,
     .schedule-bar,
     .Grad-Row,
@@ -23,6 +32,7 @@
         display: none;
     }
     #printArea {
+        background: #fff;
         padding: 5px;
         height: auto;
         width: auto;
@@ -32,6 +42,7 @@
         position: absolute;
         left: 0;
         top: 0;
+        -webkit-text-size-adjust: 100%;
     }
 
 }

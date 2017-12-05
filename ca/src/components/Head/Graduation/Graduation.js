@@ -21,7 +21,7 @@ class Grad extends React.Component {
         opendialog1: false,
         opendialogprint: false,
         graduationCheck:false,
-        graduationCheckEnglishTest:"",
+        graduationCheckEnglishTest:"2",
         Graduationitems:this.props.revise,
         items:this.props.items,
         totalitems:this.props.result,

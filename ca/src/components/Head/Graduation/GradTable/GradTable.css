@@ -2,8 +2,8 @@
     vertical-align: middle;
     text-align: center;
     color: #000000;
-    font-family: 'Times New Roman, 標楷體';
-    font-size: 8px;
+    font-family: 'Times New Roman, BiauKai, DFKai-SB, MingLiU' !important;
+    font-size: 10px !important;
 }
 
 .default-table, .default-table td {
