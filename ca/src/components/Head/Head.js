@@ -33,7 +33,7 @@ let Graduationitems=[
         require: '60',
         selection: true,
         course:
-            [ {"cn":"資料庫系統概論","en":"Introduction to Database Systems","code":"DCP1187","score":-1,"complete":"false","english":false,"grade":"0","year":4,"semester":1,"reason":"CS"},{ cn: '作業系統概論', en: 'Introduction to Operating Systems',"score":60 ,complete:true, grade:'0'},
+            [ {"cn":"資料庫系統概論","en":"Introduction to Database Systems","code":"DCP1187","score":-1,"complete":"true","english":false,"grade":"0","year":4,"semester":1,"reason":"NotCS"},{ cn: '作業系統概論', en: 'Introduction to Operating Systems',"score":60 ,complete:true, grade:'0'},
                 { cn: '基礎程式設計', en: 'Basic Programming',"score":60  ,complete:true, grade:'C'},
                 { cn: '微積分(一)', en: 'Calculus (I)' ,"score":60 ,complete:true, grade:'B',reason:'now'},
                 { cn: '微積分(二)', en: 'Calculus (II)',"score":60  ,complete:true, grade:'A'},

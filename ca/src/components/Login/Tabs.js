@@ -38,6 +38,7 @@ export default class TabsExampleControlled extends React.Component {
                     <ul className="live type2">
                         <li>新增編輯課程功能</li>
                         <li>因交通大學單一入口帳密驗證問題，點選登出不能切換帳號。欲切換帳號可以到交大oauth網頁切換。</li>
+                        <li>修正 http 無法導向到 https 問題。</li>
                         <li>抵免課程算一次</li>
                         <li>物理抵免多的一學分放至專業選修</li>
                         <li>普通生物學放至必修</li>
