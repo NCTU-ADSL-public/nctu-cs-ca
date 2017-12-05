@@ -406,7 +406,7 @@ Othercourse.processOther = function(req, res, next){
                                         if(m == otherElect.course.length){
                                             if(CSname[cosInfo.cn] == true){
                                                 cosInfo.complete = true;
-                                                cosInfo.reason = 'NotCS';
+                                                cosInfo.reason = 'CS';
                                                 notCS[cosInfo.cn] = true;
                                                 notCS[cosInfo.cn] = true;
                                                 free[cosInfo.cn] = cosInfo;
@@ -422,7 +422,7 @@ Othercourse.processOther = function(req, res, next){
                                     else{
                                         if(CSname[cosInfo.cn] == true){
                                             cosInfo.complete = true;
-                                            cosInfo.reason = 'NotCS';
+                                            cosInfo.reason = 'CS';
                                             notCS[cosInfo.cn] = true;
                                             notCS[cosInfo.cn] = true;
                                             free[cosInfo.cn] = cosInfo;

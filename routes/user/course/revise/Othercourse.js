@@ -83,7 +83,7 @@ Othercourse.processOther = function(req, res, next){
         for(var i = 0; i<compulse.length; i++)
             for(var q = 0; q<compulse[i].cos_codes.length; q++)
                 compulseCodeCheck[compulse[i].cos_codes[q]] = true;
-        ////console.log(offset);
+      // console.log(offset);
         var TeacherTime = [];
 	    var generalCourse = JSON.parse(req.general);
 	    var generalCheck = [];

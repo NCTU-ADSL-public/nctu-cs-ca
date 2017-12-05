@@ -310,25 +310,25 @@ class GraduationItem extends React.Component {
                         <div className="purple"> </div><div  className="text">免修或抵免課程</div>
                         <div className="blue"> </div><div  className="text">當期課程</div>
                         <div>
-                            <ReactHover options={optionsCursorTrueWithMargin}>
-                                <ReactHover.Trigger type='trigger'>
-                                    <MuiThemeProvider>
-                                        <RaisedButton
-                                            label={ this.props.assistant ?
-                                                this.state.graduationCheck?"已送審":"未送審"
-                                                :
-                                                this.state.graduationCheck?"助理已經收到囉":"助理尚未收到"}
-                                            disabled={this.props.assistant ?(this.state.graduationCheck) : true}
-                                            style={{visibility:'hidden'}}
-                                            labelStyle={styles.labelStyle}
-                                            backgroundColor = "#DDDDDD"
-                                            onClick={()=>this.handleAssistantPost()}
-                                        />
-                                    </MuiThemeProvider>
-                                </ReactHover.Trigger>
-                                <ReactHover.Hover type='hover'>
-                                </ReactHover.Hover>
-                            </ReactHover>
+                            {/*<ReactHover options={optionsCursorTrueWithMargin}>*/}
+                                {/*<ReactHover.Trigger type='trigger'>*/}
+                                    {/*<MuiThemeProvider>*/}
+                                        {/*<RaisedButton*/}
+                                            {/*label={ this.props.assistant ?*/}
+                                                {/*this.state.graduationCheck?"已送審":"未送審"*/}
+                                                {/*:*/}
+                                                {/*this.state.graduationCheck?"助理已經收到囉":"助理尚未收到"}*/}
+                                            {/*disabled={this.props.assistant ?(this.state.graduationCheck) : true}*/}
+                                            {/*style={{visibility:'hidden'}}*/}
+                                            {/*labelStyle={styles.labelStyle}*/}
+                                            {/*backgroundColor = "#DDDDDD"*/}
+                                            {/*onClick={()=>this.handleAssistantPost()}*/}
+                                        {/*/>*/}
+                                    {/*</MuiThemeProvider>*/}
+                                {/*</ReactHover.Trigger>*/}
+                                {/*<ReactHover.Hover type='hover'>*/}
+                                {/*</ReactHover.Hover>*/}
+                            {/*</ReactHover>*/}
 
                             <MuiThemeProvider>
                                 <RaisedButton style={styles.button}
@@ -381,7 +381,7 @@ class GraduationItem extends React.Component {
                                     </Dialog>
 
                             </MuiThemeProvider>
-                            <div style={{width:'500px', height:'30px'}} className="animated shake">
+                            <div style={{width:'500px', height:'10px'}} className="animated shake">
                             <MuiThemeProvider>
                                 <Toggle
                                     label="系統自動排序"

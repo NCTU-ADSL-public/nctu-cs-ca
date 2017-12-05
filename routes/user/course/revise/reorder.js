@@ -119,14 +119,20 @@ reorder.processOrder = function(req, res, next){
                 cosInfo.title = courseResult[i].course[q].cn + '(' + courseResult[i].course[q].en + ')';
                 if(courseResult[i].course[q].complete == true){
                     cosInfo.label = courseResult[i].course[q].realCredit;
-                    if(courseResult[i].course[q].reason == 'notCS')
+                    if(courseResult[i].course[q].reason == 'notCS'){
                         cosInfo.description = '尚未抵免此課程';
-                    else
+                        cosInfo.cardStyle = { borderRadius:6, boxShadow:'0 0 6px 1px #E08521', marginBottom: 15};
+                    }
+                    else{
                         cosInfo.description = courseResult[i].course[q].score;
+                        cosInfo.cardStyle = { borderRadius:6, boxShadow:'0 0 6px 1px #41c836', marginBottom: 15};
+                    }
                 }
                 else{
-                    if(courseResult[i].course[q].reason == 'now')
+                    cosInfo.cardStyle = { borderRadius:6, boxShadow:'0 0 6px 1px #BD3B36', marginBottom: 15};;
+                    if(courseResult[i].course[q].reason == 'now'){
                         cosInfo.description = '當期課程';
+                    }
                     else
                         cosInfo.description = '未修此課程';
                 }

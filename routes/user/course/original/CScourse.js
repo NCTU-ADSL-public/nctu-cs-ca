@@ -50,8 +50,14 @@ CScourse.processCS = function(req, res, next){
             }
             else{
                 if(taken[pass[i].cos_code] == true){
-                    if(parseInt(pass[i].score) > parseInt(detail[pass[i].cos_code].score))
-                        detail[pass[i].cos_code] = pass[i];
+                    if(pass[i].pass_fail == '通過'){
+                        if(detail[pass[i].cos_code].pass_fail == '通過'){
+                            if(parseInt(pass[i].score) > parseInt(detail[pass[i].cos_code].score))
+                                detail[pass[i].cos_code] = pass[i];
+                        }
+                        else
+                            detail[pass[i].cos_code] = pass[i];
+                    }
                 }
                 else{    
                     detail[pass[i].cos_code] = pass[i];
@@ -74,6 +80,7 @@ CScourse.processCS = function(req, res, next){
                     var cosInfo  = JSON.stringify(TeacherTime[t]);
                     cosInfo = JSON.parse(cosInfo);
                     cosInfo.realCredit = 0;
+                    cosInfo.reason = 'notCS';
                     courseResult[0].course.push(cosInfo);
                     Tcount++;   
                 }
@@ -141,11 +148,11 @@ CScourse.processCS = function(req, res, next){
 			trueCounter = 0;
 			cosNumber = compulse[q].cos_codes;
 			if(notCS[compulse[q].cos_cname] === true){ // Find the courses in [notCS] which belongs to compulse 
-				free[compulse[q].cos_cname].reason = 'notCS';
 				free[compulse[q].cos_cname].complete = true;
                 var cosInfo = JSON.stringify(free[compulse[q].cos_cname]);
                 cosInfo = JSON.parse(cosInfo);
                 cosInfo.realCredit = 0;
+                cosInfo.reason = 'notCS';
 				courseResult[0].course.push(cosInfo);
 			}
 			else{ // Process compulse course that is taken
@@ -350,11 +357,11 @@ CScourse.processCS = function(req, res, next){
             var more = [];
 			trueCounter = 0;
 			if(notCS[core[q].cos_cname] === true){
-                free[core[q].cos_cname].reason = 'notCS';
 				free[core[q].cos_cname].complete = true;
                 var cosInfo = JSON.stringify(free[core[q].cos_cname]);
                 cosInfo = JSON.parse(cosInfo);
                 cosInfo.realCredit = 0;
+                cosInfo.reason = 'notCS';
                 courseResult[1].course.push(cosInfo);
             }
 			else{
@@ -445,11 +452,11 @@ CScourse.processCS = function(req, res, next){
             var more = [];
 			trueCounter = 0;
 			if(notCS[other[q].cos_cname] === true){
-                free[other[q].cos_cname].reason = 'notCS';
 				free[other[q].cos_cname].complete = true;
                 var cosInfo = JSON.stringify(free[other[q].cos_cname]);
                 cosInfo = JSON.parse(cosInfo);
                 cosInfo.realCredit = 0;
+                cosInfo.reason = 'notCS';
                 courseResult[2].course.push(cosInfo);
             }
 			else{
@@ -542,11 +549,11 @@ CScourse.processCS = function(req, res, next){
             var more = [];
 			trueCounter = 0;
 	        if(notCS[vice[q].cos_cname] === true){
-                free[vice[q].cos_cname].reason = 'notCS';
 				free[vice[q].cos_cname].complete = true;
                 var cosInfo = JSON.stringify(free[vice[q].cos_cname]);
                 cosInfo = JSON.parse(cosInfo);
                 cosInfo.realCredit = 0;
+                cosInfo.reason = 'notCS';
                 courseResult[2].course.push(cosInfo);
              }
 			else{

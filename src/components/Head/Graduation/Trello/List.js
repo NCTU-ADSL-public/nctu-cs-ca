@@ -6,15 +6,13 @@ import axios from 'axios';
 
 const CustomCard = props => {
     return (
-        <div>
+        <div >
             <header
-                style={{borderBottom: '1px solid #eee', paddingBottom: 6, marginBottom: 10,
-                    display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-                    color: props.cardColor
+                style={{borderBottom: '1px solid #eee', paddingBottom: 6, marginBottom: 10
+                    ,flexDirection: 'row', justifyContent: 'space-between', textAlign:'center'
                 }}
             >
-                <div style={{ fontSize: 14, fontWeight: 'bold' }}>{props.title}</div>
-                <div style={{ fontSize: 11 }}>{props.dueOn}</div>
+                <div style={{ fontSize: 14, fontWeight: 'bold'}}>{props.title}</div>
             </header>
             <div style={{ fontSize: 12, color: '#BD3B36' }}>
                 <div style={{ color: '#4C4C4C', fontWeight: 'bold' }}>學分: {props.label}</div>
@@ -59,15 +57,49 @@ class App extends Component {
         }
     }
     async componentWillMount() {
-        const response = await this.getBoard();
-        this.setState({boardData: response})
+        // const response = await this.getBoard();
+        // this.setState({boardData: response})
         await this.getOrder();
+        //await this.modifyCard();
     }
 
     getBoard() {
         return new Promise(resolve => {
             resolve(data)
         })
+    }
+
+    modifyCard(){
+        // let clone = Object.assign({}, this.state.boardData);
+        // let id;
+        // let type;
+        // let complete;
+        // let description;
+        // for(let i=0;i<clone.lanes.length;i++){
+        //     for(let k=0;k<clone.lanes[i].cards.length;k++){
+        //
+        //         //console.log(_this.state.searchData);
+        //         for(let j=0;j<this.state.searchData.length;j++){
+        //             if(clone.lanes[i].lanes.cards[k].id===this.state.searchData[j].code){
+        //                 id = this.state.searchData[j].id;
+        //                 type = this.state.searchData[j].type;
+        //                 complete = this.state.searchData[j].complete;
+        //                 description = this.state.searchData[j].description;
+        //             }
+        //         }
+        //         if(description === "now" || description === "notCS")
+        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #E08521", "marginBottom": "15" }}];
+        //         if(complete)
+        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #41c836", "marginBottom": "15" }}];
+        //         else if(!complete)
+        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #BD3B36", "marginBottom": "15" }}];
+        //         else
+        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #BD3B36", "marginBottom": "15" }}];
+        //     }
+        // }
+        // this.setState({
+        //     boardData:clone
+        // });
     }
 
     getOrder(){
@@ -187,12 +219,12 @@ class App extends Component {
                 description = _this.state.searchData[j].description;
             }
         }
-        if(!complete){
+        if(!complete && description !== "now"){
             _this.setState({
                 //postData:this.state.beforeError,
                 boardData:this.state.beforeError,
                 open:true,
-                msgstring:"您不能移動尚未修課過或當期課程!"
+                msgstring:"您不能移動尚未修課課程!"
             });
         }
         else if(description === "notCS"){
