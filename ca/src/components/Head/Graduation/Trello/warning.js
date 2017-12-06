@@ -109,7 +109,7 @@ export default class DialogWaring extends React.Component {
                     bodyStyle={bodyStyle}
                     titleStyle={titleStyle}
                 >
-                    您即將送出手動修改的課程，此資料將會覆蓋系統幫您自動排序的資料。雙點擊確認以送出。
+                    您即將送出手動修改的課程，此資料將會覆蓋系統幫您自動排序的資料。<font color="#8b0000">雙點擊儲存 </font>以送出。
                 </Dialog>
             </div>
         );
