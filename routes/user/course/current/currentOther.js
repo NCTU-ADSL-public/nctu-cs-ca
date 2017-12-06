@@ -14,6 +14,13 @@ currentOther.processOther = function(req, res, next){
         ////console.log("studentId in currentOther:"  + studentId);
         var temp = parseInt(studentId.substring(0,2));
           	// the year the student enter school
+        var taken = [];
+        
+        for(var i = 0; i<(courseResult.length-1); i++)
+            for(var q = 0; q<courseResult[i].course.length; q++){
+                taken[courseResult[i].course[q].code] = true;
+            }
+        
         var school_year = (100 + temp);
   		var rule= [];
 		for(var q = 0; q<now.length; q++){
@@ -31,7 +38,8 @@ currentOther.processOther = function(req, res, next){
                         code:''
             };
 			var temp = now[q].cos_code.substring(0,3);
-            cosInfo.code = now[q].cos_code;
+            else
+                cosInfo.code = now[q].cos_code;
             cosInfo.cn = now[q].cos_cname;
             cosInfo.en = now[q].cos_ename;
   			cosInfo.year = 106 - school_year + 1;
@@ -60,7 +68,11 @@ currentOther.processOther = function(req, res, next){
                         }
                     }
   			 		else if(temp == 'ART'){
-  						courseResult[9].course.push(cosInfo);
+  						if(taken[now[q].cos_code] === true){
+                            console.log("get it");
+                            cosInfo.code = now[q].cos_code + "_now";
+                        }
+                        courseResult[9].course.push(cosInfo);
   		            }
                     else{
                         if(now[q].cos_type == '外語'){

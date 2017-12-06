@@ -39,7 +39,10 @@ router.get('/assistants/graduate/english', studentId, function(req, res){
             res.redirect('/');
         }
         else {
+            var english = JSON.parse(result)[0].en_certificate;
+            res.json({ check: {state: english } });
             ////console.log(result);
+            /*
             if(JSON.parse(result)[0].en_certificate == "1")
                 res.json({ check: {state: "1" } });
             else if(JSON.parse(result)[0].en_certificate === "21")
@@ -47,7 +50,7 @@ router.get('/assistants/graduate/english', studentId, function(req, res){
             else if(JSON.parse(result)[0].en_certificate === "22")
                 res.json({ check: {state: "22" } });
             else 
-                res.json({ check: {state: "0" } });
+                res.json({ check: {state: "0" } });*/
         }
     });
 });

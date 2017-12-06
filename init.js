@@ -10,7 +10,6 @@ var csrf = require('csurf');
 var csrfProtection = csrf();
 var helmet = require('helmet');
 
-
 module.exports.init = function(){
 
   app.use(helmet());

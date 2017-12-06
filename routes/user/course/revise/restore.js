@@ -115,23 +115,15 @@ restore.processRestore = function(req, res, next){
                restore[i].pre[courseResult[i].course[q].code] = false;
                 tempPre[courseResult[i].course[q].code] = courseResult[i].course[q];
                 courseResult[i].credit -= courseResult[i].course[q].realCredit;
-                //if(i == 3){
-                    ////console.log("after minus" + courseResult[i].credit);
-                //}
                 courseResult[i].course.splice(q,1);
                 q--;
             }
         }
        }
-       //console.log(restoreIndex);
        //push the course the course in next to the new position
        for(var i = 0; i<courseResult.length; i++){
         for(var q = 0; q<restoreIndex[i].next.length; q++){
                 courseResult[i].course.push(tempPre[restoreIndex[i].next[q]]);
-                if(i == 4){
-                //console.log("i: "+i+" p: "+q);
-                //console.log(tempPre[restoreIndex[i].next[q]]);
-                }
                 courseResult[i].credit += tempPre[restoreIndex[i].next[q]].realCredit;
             }
         }

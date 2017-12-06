@@ -184,7 +184,7 @@ cardsets.General.prototype.check = function(callback){
         callback(true);
     else{
     // some classes can be admit as general course
-        query.general_cos_rule(function(err, result){
+        /*query.general_cos_rule(function(err, result){
             let table = JSON.parse(result);
             for(let i = 0; i < table.length; i++){
                 if(checkCode === table[i].cos_code){
@@ -194,7 +194,8 @@ cardsets.General.prototype.check = function(callback){
                 
             }            
             callback(false);
-       });
+       });*/
+            callback(false);
     }
 
 }

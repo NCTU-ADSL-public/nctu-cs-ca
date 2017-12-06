@@ -70,13 +70,15 @@ Othercourse.processOther = function(req, res, next){
 	    var rules = JSON.parse(req.rules);
 	    var program = req.profile[0].program;
         var pass = JSON.parse(req.pass);
-       // //console.log(pass);
+       // console.log("pass ");
+        //console.log(pass);
         var profile = JSON.parse(req.profile);
-        ////console.log(req.profile);
+        //console.log(req.profile);
         var englishState = profile[0].en_certificate;
         var noEnglish = 0;
 	    var offset = JSON.parse(req.free);
-        ////console.log(offset);
+        //console.log("offset");
+       // console.log(offset);
         var compulse = req.course.compulse;
         var compulseCodeCheck = [];
         //record the complulse course code
@@ -106,9 +108,39 @@ Othercourse.processOther = function(req, res, next){
         var offsetTeacherTime = [];
         var repeatCounter = [];
         var taken = [];
+        var offsetInfo = [];
+        var offsetTaken = [];
+        var offsetTakenCheck = [];
+        
+        for(var i = 0; i<offset.length; i++){
+            if(offset[i].score !=null){
+                if(offsetTaken[offset[i].cos_code] == true){
+                    //console.log("find the same");
+                    if(parseInt(offset[i].score) > parseInt(offsetInfo[offset[i].cos_code].score)){
+                        //console.log(offset[i].score);
+                        offsetInfo[offset[i].cos_code] = offset[i];
+                    }
+                }
+                else{
+                    offsetTaken[offset[i].cos_code] = true;
+                    offsetInfo[offset[i].cos_code] = offset[i];
+                }
+            }
+            else{
+                offsetInfo[offset[i].cos_code] = offset[i];
+                offsetTaken[offset[i].cos_code] = true;
+            }
+        }
+        
+        for(var i = 0; i<offset.length; i++){
+            offset[i] = offsetInfo[offset[i].cos_code];
+        }
+        //console.log("after");
+        //console.log(offset);
 
 		for(var i = 0; i<offset.length; i++){
-			var cosInfo = {
+			if(offsetTakenCheck[offset[i].cos_code] != true){
+            var cosInfo = {
                     cn:'',
                     en:'',
                     score: -1,
@@ -207,7 +239,7 @@ Othercourse.processOther = function(req, res, next){
                                     language.credit += parseInt(offset[i].credit);
                                 }
                         }
-                        else if(offset[i].cos_type == '通識'){
+                       else if(offset[i].cos_type == '通識'){
                                 cosInfo.dimension = offset[i].brief.substring(0,2);
                                 if(cosInfo.dimension == '當代')
                                     dimension[0] = true;
@@ -243,6 +275,8 @@ Othercourse.processOther = function(req, res, next){
                             peClass.course.push(cosInfo);
                             peClass.credit += parseInt(offset[i].credit);
                         }
+                        offsetTakenCheck[offset[i].cos_code] = true;
+                    }
 		}
         if(englishFree.length != 0){
             for(var i = 0; i<englishFree.length; i++){
@@ -433,6 +467,11 @@ Othercourse.processOther = function(req, res, next){
                            }
 					    }
                     }
+                    else if(pass[q].brief == '軍訓'){
+                        cosInfo.originalCredit = 0;
+                        cosInfo.realCredit = 0;
+                        otherElect.course.push(cosInfo);   
+                    }           
 	                else if(pass[q].cos_type == '通識'){
 				            var brief = pass[q].brief.substring(0,2);
                             dimension_count = 0;

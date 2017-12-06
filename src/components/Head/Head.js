@@ -17,6 +17,8 @@ import MapItem from './Map/MapComponents/Map.js';
 import GraduationItem from './Graduation/GradationMain.js';
 import CreditItem from './Credit/Credit.js';
 
+
+import Loading from './Graduation/Loading';
 import FadeIn from 'react-fade-in';
 
 const homeIcon = <Home />;
@@ -249,8 +251,8 @@ class Head extends Component {
             width: '15px',
         },
 		studentIdcard:{
-            sname:'流川楓',
-            student_id:'0123456',
+            sname:'資料錯誤',
+            student_id:'0000000',
 			program:'網多',
             grade:'大一',
             email:'hihi@gmail.com',
@@ -263,9 +265,8 @@ class Head extends Component {
         window.location.reload();
     }
 
-    componentWillMount(){
-    	let _this = this;
-
+    async componentWillMount(){
+        let _this = this;
         axios.get('/students/graduate/original').then(studentData => {
             Graduationitems = studentData.data;
         }).catch(err => {
@@ -273,6 +274,10 @@ class Head extends Component {
         });
         axios.get('/students/graduate/revised').then(studentData => {
             revise = studentData.data;
+
+            setTimeout(function () {
+                _this.select(1);
+            }, 100);
         }).catch(err => {
             console.log(err);
         });
@@ -296,11 +301,11 @@ class Head extends Component {
             return user;
         });
         axios.get('/students/courseMap').then(studentData => {
-                MapCourseData = Object.keys(studentData.data).map(function(key) {
-                    let user = studentData.data[key];
-                    user.id = key;
-                    return user;
-                });
+            MapCourseData = Object.keys(studentData.data).map(function(key) {
+                let user = studentData.data[key];
+                user.id = key;
+                return user;
+            });
         }).catch(err => {
             console.log(err);
         });
@@ -319,11 +324,6 @@ class Head extends Component {
             console.log(err);
         });
 
-
-    }
-
-    componentDidMount(){
-        let _this=this;
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data
@@ -334,11 +334,9 @@ class Head extends Component {
             console.log(err);
         });
 
-        setTimeout(function () {
-            _this.select(1);
-        }, 200);
-
-
+    }
+    componentDidMount(){
+        let _this=this;
 
     }
 
@@ -457,7 +455,10 @@ class Head extends Component {
 				<div id="topRec">
 				</div>
 
-				<div id="page" > </div>
+				<div id="page" ><Loading
+                    size={300}
+                    left={600}
+                    top={200} status={this.state.loading}/> </div>
 				<footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
 	  		</div>
 	    );

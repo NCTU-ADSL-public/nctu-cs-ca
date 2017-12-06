@@ -195,6 +195,7 @@ CScourse.processCS = function(req, res, next){
                 cosInfo.realCredit = 0;
 				courseResult[0].course.push(cosInfo);
 			}
+            else if(offsetNameCheck[compulse[q].cos_cname] == true);
 			else{
 				for(var k=0; k<cosNumber.length; k++){
 					var cosInfo = {
@@ -217,7 +218,7 @@ CScourse.processCS = function(req, res, next){
                         		cosInfo.en = compulse[q].cos_ename;
                                
 					if(taken[cosNumber[k]] === true){
-						cosInfo.code = cosNumber[k];
+                        cosInfo.code = cosNumber[k];
 						cosInfo.year = parseInt(detail[cosNumber[k]].year) - school_year + 1;
 						cosInfo.semester = parseInt(detail[cosNumber[k]].semester);
 						cosInfo.originalCredit = parseInt(detail[cosNumber[k]].cos_credit);
@@ -570,6 +571,7 @@ CScourse.processCS = function(req, res, next){
                 cosInfo.reason = 'notCS';
                 courseResult[1].course.push(cosInfo);
             }
+            else if(offsetNameCheck[core[q].cos_cname] == true);
 			else{
                         	cosNumber = core[q].cos_codes;
 				////console.log(cosNumber);
@@ -704,6 +706,7 @@ CScourse.processCS = function(req, res, next){
                 cosInfo.reason = 'notCS';
                 courseResult[2].course.push(cosInfo);
             }
+            else if(offsetNameCheck[other[q].cos_cname] == true);
 			else{
                         	cosNumber = other[q].cos_codes;
                         	////console.log(cosNumber);
@@ -835,6 +838,7 @@ CScourse.processCS = function(req, res, next){
                  cosInfo.reason = 'notCS';
                  courseResult[2].course.push(cosInfo);
             }
+            else if(offsetNameCheck[vice[q].cos_cname] == true);
 			else{
                         	cosNumber = vice[q].cos_codes;
                         	////console.log(cosNumber);

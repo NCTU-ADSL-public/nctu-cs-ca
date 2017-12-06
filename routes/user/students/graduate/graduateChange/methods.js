@@ -77,7 +77,7 @@ methods.checkCard = function(req, res){
     theCard.check(function(flag){
         if(flag){
             checkResult.check.flag = true;
-            insertToDB(req, res);
+            //insertToDB(req, res);
         }
         else            
             checkResult.check.flag = false;

@@ -28,7 +28,8 @@
     #topRec,
     .fixed,
     .Grad-title-adjust,
-    footer {
+    footer,
+    body>div:not(#root) {
         display: none;
     }
     #printArea {

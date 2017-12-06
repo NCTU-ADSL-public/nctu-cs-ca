@@ -28,6 +28,8 @@ orderInfo.getOrderInfo = function(req, res, next){
                 cosInfo.type = courseResult[i].course[q].type;
                 if(courseResult[i].course[q].reason == 'notCS')
                     cosInfo.description = 'notCS';
+                if(courseResult[i].course[q].reason == 'now')
+                    cosInfo.description = 'now';
 
                 if(courseResult[i].course[q].complete == true)
                     cosInfo.complete = true;

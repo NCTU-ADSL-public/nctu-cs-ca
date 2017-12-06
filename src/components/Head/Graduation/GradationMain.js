@@ -18,6 +18,7 @@ import FlatButton from 'material-ui/FlatButton';
 import DialogWaring from './Trello/warning'
 import { ToastContainer, toast } from 'react-toastify';
 import './Graduation.css'
+import Snow from 'react-snow-effect'
 
 const customContentStyle = {
     width: '100%',
@@ -101,7 +102,7 @@ class GraduationItem extends React.Component {
         totalitems:[],
         courseCategoryArray:[],
         Result:[],
-        ReviseResult:[],
+        ReviseResult:this.props.reviseresult,
         print_courseCategoryArray:[],
         post:false
     };
@@ -186,11 +187,13 @@ class GraduationItem extends React.Component {
 
     };
     async ReviseClick () {
-        if(this.props.assistant){
-            window.location.reload();
-        }else{
-            window.location.replace("/students/Head ");
-        }
+        this.setState({
+            post:true
+        });
+        // if(this.props.assistant){
+        //     window.location.reload();
+        // }else{
+        // }
     }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){
@@ -283,7 +286,7 @@ class GraduationItem extends React.Component {
     ];
         return(
             <div className="font_adjust">
-
+                <Snow/>
                 <div className="fixed" onClick={()=>this.scrollTotop()}>
                     <TopButton/>
                 </div>
@@ -367,7 +370,7 @@ class GraduationItem extends React.Component {
                             </MuiThemeProvider>
                                     <MuiThemeProvider>
                                     <Dialog
-                                        title="編輯課程(您可以點選標題 ex:共同必修，確認自己尚需幾學分)"
+                                        title={<div>編輯課程  (用<font color="#8b0000">拖曳</font>課程的方式編輯。您可以<font color="#8b0000">點選標題</font> ex:共同必修，確認自己尚需幾學分)</div>}
                                         actions={actions}
                                         modal={false}
                                         open={this.state.openforRevise}
@@ -421,7 +424,7 @@ class GraduationItem extends React.Component {
                                         <div><b>-已排序</b><br/><br/>
                                             <b>重複修課</b>：將只顯示一次,取成績最高的那次<br/>
                                             <br/><b>必修：</b>若有多修物理,化學或生物,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修。<br/>
-                                            <br/><b>物理學分放置規則：</b>於必修項目會算為3學分,多的2學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中。<br/>
+                                            <br/><b>物理學分放置規則：</b>於必修項目會算為3學分,多的1學分將優先放至專業選修,若專業選修已滿,則會放至其他選修,物理也會顯示在該項項目中。<br/>
                                             <br/><b>核心課程/副核心及他組合心課程：</b>若該項總學分已達畢業標準,會將多修的課程優先放至專業選修,若專業選修學分已滿,則放至其他選修。<br/>
                                             <br/><b>專業選修/外語/通識：</b>若該項總學分已達畢業標準,會將多修的課程放至其他選修。<br/></div>}
                                 </div>

@@ -13,19 +13,14 @@ router.post('/students/graduate/orderResult', StudentId, function(req, res){
     //console.log(orderResult);
     var courses = orderResult.POST;
     var studentId = res.locals.studentId;
-    ////console.log("order Result");
-    ////console.log(courses);
     
-    /*for(var i = 0; i<courses.length; i++){
-        var cos = courses[i].cosname;
+    for(var i = 0; i<courses.length; i++){
+        var cos = courses[i].id;
         var pre = courses[i].pre;
         var next = courses[i].next;
-        ////console.log(cos);
-        ////console.log(pre);
-        ////console.log(next);
         query.insertCosMotion(studentId, cos, pre, next);
-    }*/
-
+    }
+    res.send("{danny danny}");
 
 });
 

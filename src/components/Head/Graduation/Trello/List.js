@@ -3,6 +3,7 @@ import './App.css'
 import {Board} from 'react-trello'
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
+import Loading from '../Loading'
 
 const CustomCard = props => {
     return (
@@ -16,7 +17,7 @@ const CustomCard = props => {
             </header>
             <div style={{ fontSize: 12, color: '#BD3B36' }}>
                 <div style={{ color: '#4C4C4C', fontWeight: 'bold' }}>學分: {props.label}</div>
-                <div style={{ padding: '5px 0px', fontWeight: 'bold'  }}>{(props.description === "當期課程" || props.description === "未修此課程" || props.description === "尚未抵免此課程" )?<i>{props.description}</i>:<i>分數: {props.description}</i>}</div>
+                <div style={{ padding: '5px 0px', fontWeight: 'bold'  }}>{(props.description === "當期課程" || props.description === "未修此課程" || props.description === "尚未抵免此課程" )?<i>{props.description}</i>:<i>分數: {props.description===-1?"-":props.description}</i>}</div>
             </div>
         </div>
     )
@@ -34,7 +35,8 @@ class App extends Component {
         msgstring:'',
         post:this.props.post,
         postArray:[],
-        searchData:[]
+        searchData:[],
+        loading:false
     };
 
     setEventBus = eventBus => {
@@ -48,9 +50,10 @@ class App extends Component {
                 POST
             })
                 .then(res => {
+                    window.location.replace("/students/Head ");
                 })
                 .catch(err => {
-                    window.location.replace("/logout ");
+                    //window.location.replace("/logout ");
                     console.log(err)
                 });
             //console.log(this.state.postArray);
@@ -60,7 +63,12 @@ class App extends Component {
         // const response = await this.getBoard();
         // this.setState({boardData: response})
         await this.getOrder();
-        //await this.modifyCard();
+        let _this = this;
+        // setTimeout(function () {
+        //     _this.setState({
+        //         loading:true
+        //     })
+        // }, 500);
     }
 
     getBoard() {
@@ -69,43 +77,12 @@ class App extends Component {
         })
     }
 
-    modifyCard(){
-        // let clone = Object.assign({}, this.state.boardData);
-        // let id;
-        // let type;
-        // let complete;
-        // let description;
-        // for(let i=0;i<clone.lanes.length;i++){
-        //     for(let k=0;k<clone.lanes[i].cards.length;k++){
-        //
-        //         //console.log(_this.state.searchData);
-        //         for(let j=0;j<this.state.searchData.length;j++){
-        //             if(clone.lanes[i].lanes.cards[k].id===this.state.searchData[j].code){
-        //                 id = this.state.searchData[j].id;
-        //                 type = this.state.searchData[j].type;
-        //                 complete = this.state.searchData[j].complete;
-        //                 description = this.state.searchData[j].description;
-        //             }
-        //         }
-        //         if(description === "now" || description === "notCS")
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #E08521", "marginBottom": "15" }}];
-        //         if(complete)
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #41c836", "marginBottom": "15" }}];
-        //         else if(!complete)
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #BD3B36", "marginBottom": "15" }}];
-        //         else
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #BD3B36", "marginBottom": "15" }}];
-        //     }
-        // }
-        // this.setState({
-        //     boardData:clone
-        // });
-    }
 
     getOrder(){
        let  _this = this;
         axios.get('/students/graduate/reorder').then(response => {
-            _this.setState({boardData: response.data})
+            _this.setState({boardData: response.data,
+                loading:true})
         }).catch(err => {
             console.log(err);
         });
@@ -124,14 +101,20 @@ class App extends Component {
             for(let i=0;i<this.state.boardData.lanes.length;i++){
                 if(this.state.boardData.lanes[i].id === laneId){
                     total = this.state.boardData.lanes[i].total;
-                    sum=this.state.boardData.lanes[i].cards.length;
+                    for(let j=0;j<this.state.boardData.lanes[i].cards.length;j++){
+                        for(let k=0;k<this.state.searchData.length;k++){
+                            if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[k].code){
+                                if(this.state.searchData[k].complete)sum+=1;
+                            }
+                        }
+
+                    }
+
                 }
             }
             let ans = total-sum;
             if(ans<0)
                 ans=0;
-            // console.log(sum);
-            // console.log(total);
             this.setState({
                 open:true,
                 msgstring:"尚須 "+ ans +" 門"
@@ -313,6 +296,10 @@ class App extends Component {
                         {/*fontFamily: 'Noto Sans CJK TC',*/}
                     {/*}} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}/>*/}
                 <div className="App-Intro">
+                    <Loading
+                        size={200}
+                        left={40}
+                        top={100} status={this.state.loading}/>
                     <Board
                         data={this.state.boardData}
                         style={{backgroundColor:'#8596a0',
