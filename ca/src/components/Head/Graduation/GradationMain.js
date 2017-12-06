@@ -101,7 +101,7 @@ class GraduationItem extends React.Component {
         totalitems:[],
         courseCategoryArray:[],
         Result:[],
-        ReviseResult:[],
+        ReviseResult:this.props.reviseresult,
         print_courseCategoryArray:[],
         post:false
     };
