@@ -64,9 +64,6 @@ class App extends Component {
         // this.setState({boardData: response})
         await this.getOrder();
         let _this = this;
-        this.setState({
-            loading:true
-        })
         // setTimeout(function () {
         //     _this.setState({
         //         loading:true
@@ -84,7 +81,8 @@ class App extends Component {
     getOrder(){
        let  _this = this;
         axios.get('/students/graduate/reorder').then(response => {
-            _this.setState({boardData: response.data})
+            _this.setState({boardData: response.data,
+                loading:true})
         }).catch(err => {
             console.log(err);
         });
