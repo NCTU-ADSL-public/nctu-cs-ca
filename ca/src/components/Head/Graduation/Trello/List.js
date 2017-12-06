@@ -292,7 +292,7 @@ class App extends Component {
                 <div className="App-Intro">
                     <Loading
                         size={200}
-                        left={100}
+                        left={40}
                         top={100} status={this.state.loading}/>
                     <Board
                         data={this.state.boardData}
