@@ -249,8 +249,8 @@ class Head extends Component {
             width: '15px',
         },
 		studentIdcard:{
-            sname:'流川楓',
-            student_id:'0123456',
+            sname:'資料錯誤',
+            student_id:'0000000',
 			program:'網多',
             grade:'大一',
             email:'hihi@gmail.com',

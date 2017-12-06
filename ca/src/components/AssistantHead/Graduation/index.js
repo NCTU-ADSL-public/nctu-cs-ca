@@ -25,7 +25,7 @@ export default class index extends React.Component {
             initStudents: [
                 {
                     student_id: '0316099',
-                    sname: '流川楓',
+                    sname: '資料錯誤',
                     program: '網多',
                     graduate: "0",
                     graduate_submit: "0",

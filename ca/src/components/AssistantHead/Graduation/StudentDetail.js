@@ -13,7 +13,7 @@ export default class index extends React.Component {
             activeKey: '1',
             start: 0,
             //for passing student selected by studentList
-            studentName: '流川楓',
+            studentName: '資料錯誤',
             studentId: '0416030',
             student_profile: {
                 student_id:"0316000",
@@ -236,7 +236,7 @@ export default class index extends React.Component {
             initStudents: [
                 {
                     student_id: '0316000',
-                    sname: '流川楓',
+                    sname: '資料錯誤',
                     program: '網多',
                     graduate: "0",
                     graduate_submit: "0",
