@@ -57,7 +57,6 @@ class App extends Component {
                     console.log(err)
                 });
             //console.log(this.state.postArray);
-            alert("1")
         }
     }
     async componentWillMount() {
