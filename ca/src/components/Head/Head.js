@@ -263,8 +263,13 @@ class Head extends Component {
         window.location.reload();
     }
 
-    componentWillMount(){
-    	let _this = this;
+    async componentWillMount(){
+    	await this.getData();
+
+
+    }
+    getData(){
+        let _this = this;
 
         axios.get('/students/graduate/original').then(studentData => {
             Graduationitems = studentData.data;
@@ -296,11 +301,11 @@ class Head extends Component {
             return user;
         });
         axios.get('/students/courseMap').then(studentData => {
-                MapCourseData = Object.keys(studentData.data).map(function(key) {
-                    let user = studentData.data[key];
-                    user.id = key;
-                    return user;
-                });
+            MapCourseData = Object.keys(studentData.data).map(function(key) {
+                let user = studentData.data[key];
+                user.id = key;
+                return user;
+            });
         }).catch(err => {
             console.log(err);
         });
@@ -318,10 +323,7 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
-
-
     }
-
     componentDidMount(){
         let _this=this;
         axios.get('/students/graduate/print').then(function(resp){
