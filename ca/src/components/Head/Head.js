@@ -17,6 +17,8 @@ import MapItem from './Map/MapComponents/Map.js';
 import GraduationItem from './Graduation/GradationMain.js';
 import CreditItem from './Credit/Credit.js';
 
+
+import Loading from './Graduation/Loading';
 import FadeIn from 'react-fade-in';
 
 const homeIcon = <Home />;
@@ -453,7 +455,10 @@ class Head extends Component {
 				<div id="topRec">
 				</div>
 
-				<div id="page" > </div>
+				<div id="page" ><Loading
+                    size={300}
+                    left={600}
+                    top={200} status={this.state.loading}/> </div>
 				<footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
 	  		</div>
 	    );

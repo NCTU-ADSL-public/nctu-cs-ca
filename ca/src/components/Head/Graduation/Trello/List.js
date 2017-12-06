@@ -3,6 +3,7 @@ import './App.css'
 import {Board} from 'react-trello'
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
+import Loading from '../Loading'
 
 const CustomCard = props => {
     return (
@@ -34,7 +35,8 @@ class App extends Component {
         msgstring:'',
         post:this.props.post,
         postArray:[],
-        searchData:[]
+        searchData:[],
+        loading:false
     };
 
     setEventBus = eventBus => {
@@ -57,10 +59,12 @@ class App extends Component {
         }
     }
     async componentWillMount() {
-        const response = await this.getBoard();
-        this.setState({boardData: response})
+        // const response = await this.getBoard();
+        // this.setState({boardData: response})
         await this.getOrder();
-        //await this.modifyCard();
+        this.setState({
+            loading:true
+        })
     }
 
     getBoard() {
@@ -69,38 +73,6 @@ class App extends Component {
         })
     }
 
-    modifyCard(){
-        // let clone = Object.assign({}, this.state.boardData);
-        // let id;
-        // let type;
-        // let complete;
-        // let description;
-        // for(let i=0;i<clone.lanes.length;i++){
-        //     for(let k=0;k<clone.lanes[i].cards.length;k++){
-        //
-        //         //console.log(_this.state.searchData);
-        //         for(let j=0;j<this.state.searchData.length;j++){
-        //             if(clone.lanes[i].lanes.cards[k].id===this.state.searchData[j].code){
-        //                 id = this.state.searchData[j].id;
-        //                 type = this.state.searchData[j].type;
-        //                 complete = this.state.searchData[j].complete;
-        //                 description = this.state.searchData[j].description;
-        //             }
-        //         }
-        //         if(description === "now" || description === "notCS")
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #E08521", "marginBottom": "15" }}];
-        //         if(complete)
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #41c836", "marginBottom": "15" }}];
-        //         else if(!complete)
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #BD3B36", "marginBottom": "15" }}];
-        //         else
-        //             clone.lanes[i].cards[k] = [...clone.lanes[i].cards[k] , {"cardStyle": { "borderRadius": 6, "boxShadow": "0 0 6px 1px #BD3B36", "marginBottom": "15" }}];
-        //     }
-        // }
-        // this.setState({
-        //     boardData:clone
-        // });
-    }
 
     getOrder(){
        let  _this = this;
@@ -313,6 +285,10 @@ class App extends Component {
                         {/*fontFamily: 'Noto Sans CJK TC',*/}
                     {/*}} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}/>*/}
                 <div className="App-Intro">
+                    <Loading
+                        size={200}
+                        left={100}
+                        top={100} status={this.state.loading}/>
                     <Board
                         data={this.state.boardData}
                         style={{backgroundColor:'#8596a0',
