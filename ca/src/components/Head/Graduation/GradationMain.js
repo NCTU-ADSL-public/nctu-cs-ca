@@ -189,11 +189,10 @@ class GraduationItem extends React.Component {
         this.setState({
             post:true
         });
-        if(this.props.assistant){
-            window.location.reload();
-        }else{
-            window.location.replace("/students/Head ");
-        }
+        // if(this.props.assistant){
+        //     window.location.reload();
+        // }else{
+        // }
     }
     //For updating as props changes!!!
     componentDidUpdate(prevProps, prevState){

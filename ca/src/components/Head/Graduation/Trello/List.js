@@ -5,6 +5,7 @@ import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
 import Loading from '../Loading'
 import HorizontalNonLinearStepper from './Stepper'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const CustomCard = props => {
     return (
@@ -51,6 +52,7 @@ class App extends Component {
                 POST
             })
                 .then(res => {
+                    window.location.replace("/students/Head ");
                 })
                 .catch(err => {
                     //window.location.replace("/logout ");
@@ -286,11 +288,13 @@ class App extends Component {
                         {/*fontFamily: 'Noto Sans CJK TC',*/}
                     {/*}} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}/>*/}
                 <div className="App-Intro">
-                    {/*<HorizontalNonLinearStepper/>*/}
                     <Loading
                         size={200}
                         left={100}
                         top={100} status={this.state.loading}/>
+                    <MuiThemeProvider>
+                        <HorizontalNonLinearStepper/>
+                    </MuiThemeProvider>
                     <Board
                         data={this.state.boardData}
                         style={{backgroundColor:'#8596a0',

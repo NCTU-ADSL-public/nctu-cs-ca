@@ -6,7 +6,6 @@ import {
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 /**
  * Non-linear steppers allow users to enter a multi-step flow at any point.
@@ -54,7 +53,7 @@ class HorizontalNonLinearStepper extends React.Component {
         const contentStyle = {margin: '0 16px'};
 
         return (
-            <MuiThemeProvider style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+            <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
                 <Stepper linear={false} activeStep={stepIndex}>
                     <Step>
                         <StepButton onClick={() => this.setState({stepIndex: 0})}>
@@ -89,7 +88,7 @@ class HorizontalNonLinearStepper extends React.Component {
                         />
                     </div>
                 </div>
-            </MuiThemeProvider>
+            </div>
         );
     }
 }

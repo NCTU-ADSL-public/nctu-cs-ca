@@ -21,6 +21,7 @@
     "react-scripts": "1.0.10",
     "react-scroll-to-component": "^1.0.1",
     "react-simple-popover": "^0.2.0",
+    "react-snow-effect": "^1.2.0",
     "react-tap-event-plugin": "^2.0.1",
     "react-toastify": "^3.0.0",
     "react-toasts": "^1.2.3",
