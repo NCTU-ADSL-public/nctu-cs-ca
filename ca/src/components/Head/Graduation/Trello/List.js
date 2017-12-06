@@ -4,6 +4,7 @@ import {Board} from 'react-trello'
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
 import Loading from '../Loading'
+import HorizontalNonLinearStepper from './Stepper'
 
 const CustomCard = props => {
     return (
@@ -52,10 +53,11 @@ class App extends Component {
                 .then(res => {
                 })
                 .catch(err => {
-                    window.location.replace("/logout ");
+                    //window.location.replace("/logout ");
                     console.log(err)
                 });
             //console.log(this.state.postArray);
+            alert("1")
         }
     }
     async componentWillMount() {
@@ -285,6 +287,7 @@ class App extends Component {
                         {/*fontFamily: 'Noto Sans CJK TC',*/}
                     {/*}} label="Complete Buy Milk" onClick={this.completeCard} style={{margin: 5}}/>*/}
                 <div className="App-Intro">
+                    {/*<HorizontalNonLinearStepper/>*/}
                     <Loading
                         size={200}
                         left={100}

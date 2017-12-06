@@ -186,6 +186,9 @@ class GraduationItem extends React.Component {
 
     };
     async ReviseClick () {
+        this.setState({
+            post:true
+        });
         if(this.props.assistant){
             window.location.reload();
         }else{
