@@ -89,7 +89,6 @@ export default class DialogWaring extends React.Component {
             <FlatButton
                 label="儲存"
                 labelStyle={styles.labelStyle}
-                keyboardFocused={true}
                 onClick={this.props.onClick}
             />,
         ];

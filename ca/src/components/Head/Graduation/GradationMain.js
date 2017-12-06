@@ -18,6 +18,7 @@ import FlatButton from 'material-ui/FlatButton';
 import DialogWaring from './Trello/warning'
 import { ToastContainer, toast } from 'react-toastify';
 import './Graduation.css'
+import Snow from 'react-snow-effect'
 
 const customContentStyle = {
     width: '100%',
@@ -285,7 +286,7 @@ class GraduationItem extends React.Component {
     ];
         return(
             <div className="font_adjust">
-
+                <Snow/>
                 <div className="fixed" onClick={()=>this.scrollTotop()}>
                     <TopButton/>
                 </div>

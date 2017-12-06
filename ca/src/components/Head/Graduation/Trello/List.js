@@ -63,9 +63,15 @@ class App extends Component {
         // const response = await this.getBoard();
         // this.setState({boardData: response})
         await this.getOrder();
+        let _this = this;
         this.setState({
             loading:true
         })
+        // setTimeout(function () {
+        //     _this.setState({
+        //         loading:true
+        //     })
+        // }, 500);
     }
 
     getBoard() {
