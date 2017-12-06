@@ -4,8 +4,6 @@ import {Board} from 'react-trello'
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
 import Loading from '../Loading'
-import HorizontalNonLinearStepper from './Stepper'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const CustomCard = props => {
     return (
@@ -292,9 +290,6 @@ class App extends Component {
                         size={200}
                         left={100}
                         top={100} status={this.state.loading}/>
-                    <MuiThemeProvider>
-                        <HorizontalNonLinearStepper/>
-                    </MuiThemeProvider>
                     <Board
                         data={this.state.boardData}
                         style={{backgroundColor:'#8596a0',

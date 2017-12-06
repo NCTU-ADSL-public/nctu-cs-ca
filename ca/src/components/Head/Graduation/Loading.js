@@ -15,7 +15,7 @@ const Loading = (props) => (
             size={props.size}
             left={props.left}
             top={props.top}
-            loadingColor={"#b1bfff"}
+            loadingColor={"#00AEAE"}
             status={props.status?"hid":"loading"}
             style={{
                 display : props.status?'none':'inline-block',
