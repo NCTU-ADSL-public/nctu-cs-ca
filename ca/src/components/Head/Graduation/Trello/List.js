@@ -101,14 +101,20 @@ class App extends Component {
             for(let i=0;i<this.state.boardData.lanes.length;i++){
                 if(this.state.boardData.lanes[i].id === laneId){
                     total = this.state.boardData.lanes[i].total;
-                    sum=this.state.boardData.lanes[i].cards.length;
+                    for(let j=0;j<this.state.boardData.lanes[i].cards.length;j++){
+                        for(let k=0;k<this.state.searchData.length;k++){
+                            if(this.state.boardData.lanes[i].cards[j].id===this.state.searchData[k].code){
+                                if(this.state.searchData[k].complete)sum+=1;
+                            }
+                        }
+
+                    }
+
                 }
             }
             let ans = total-sum;
             if(ans<0)
                 ans=0;
-            // console.log(sum);
-            // console.log(total);
             this.setState({
                 open:true,
                 msgstring:"尚須 "+ ans +" 門"
