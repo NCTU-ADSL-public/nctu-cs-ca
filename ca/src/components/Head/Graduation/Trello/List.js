@@ -16,7 +16,7 @@ const CustomCard = props => {
             </header>
             <div style={{ fontSize: 12, color: '#BD3B36' }}>
                 <div style={{ color: '#4C4C4C', fontWeight: 'bold' }}>學分: {props.label}</div>
-                <div style={{ padding: '5px 0px', fontWeight: 'bold'  }}>{(props.description === "當期課程" || props.description === "未修此課程" || props.description === "尚未抵免此課程" )?<i>{props.description}</i>:<i>分數: {props.description===-1?"-":{props.description}}</i>}</div>
+                <div style={{ padding: '5px 0px', fontWeight: 'bold'  }}>{(props.description === "當期課程" || props.description === "未修此課程" || props.description === "尚未抵免此課程" )?<i>{props.description}</i>:<i>分數: {props.description===-1?"-":props.description}</i>}</div>
             </div>
         </div>
     )
@@ -57,8 +57,8 @@ class App extends Component {
         }
     }
     async componentWillMount() {
-        // const response = await this.getBoard();
-        // this.setState({boardData: response})
+        const response = await this.getBoard();
+        this.setState({boardData: response})
         await this.getOrder();
         //await this.modifyCard();
     }

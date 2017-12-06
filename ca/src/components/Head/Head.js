@@ -323,9 +323,7 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
-    }
-    componentDidMount(){
-        let _this=this;
+
         axios.get('/students/graduate/print').then(function(resp){
             this.setState({
                 print_courseCategoryArray: resp.data
@@ -335,13 +333,13 @@ class Head extends Component {
         }.bind(this)).catch(err => {
             console.log(err);
         });
+    }
+    componentDidMount(){
+        let _this=this;
 
         setTimeout(function () {
             _this.select(1);
-        }, 200);
-
-
-
+        }, 50);
     }
 
   	select(index){
