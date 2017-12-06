@@ -264,13 +264,7 @@ class Head extends Component {
     }
 
     async componentWillMount(){
-    	await this.getData();
-
-
-    }
-    getData(){
         let _this = this;
-
         axios.get('/students/graduate/original').then(studentData => {
             Graduationitems = studentData.data;
         }).catch(err => {
@@ -278,6 +272,10 @@ class Head extends Component {
         });
         axios.get('/students/graduate/revised').then(studentData => {
             revise = studentData.data;
+
+            setTimeout(function () {
+                _this.select(1);
+            }, 100);
         }).catch(err => {
             console.log(err);
         });
@@ -333,13 +331,11 @@ class Head extends Component {
         }.bind(this)).catch(err => {
             console.log(err);
         });
+
     }
     componentDidMount(){
         let _this=this;
 
-        setTimeout(function () {
-            _this.select(1);
-        }, 50);
     }
 
   	select(index){
