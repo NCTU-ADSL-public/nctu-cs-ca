@@ -22,8 +22,8 @@ class Course extends React.Component {
     };
 
     componentWillMount(){
-        let string = (this.props.cosCame === "物理(一)" || this.props.cosCame === "物理(二)")?this.props.realCredit:"";
-        let ph = (this.props.cosCame === "物理(一)" || this.props.cosCame === "物理(二)")?"學分":"";
+        let string = (this.props.cosCame === "物理(一)" || this.props.cosCame === "物理(二)"||this.props.cosCame === "物理(一)榮譽班" || this.props.cosCame === "物理(二)榮譽班")?this.props.realCredit:"";
+        let ph = (this.props.cosCame === "物理(一)" || this.props.cosCame === "物理(二)"||this.props.cosCame === "物理(一)榮譽班" || this.props.cosCame === "物理(二)榮譽班")?"學分":"";
         string = "   " + string + ph
         this.setState({
             width:200,
