@@ -385,9 +385,9 @@ export default class index extends React.Component {
                     <StudentGrad
                         studentProfile={this.state.student_profile}
                         items={this.state.Graduationitems}
-                        result={this.state.Graduationitems[10]}
+                        result={this.state.Graduationitems[11]}
                         revise={this.state.revise}
-                        reviseresult={this.state.revise[10]}
+                        reviseresult={this.state.revise[11]}
                         courseCategoryArray={this.state.print_courseCategoryArray}
                         assistant={1}
                         graduationCheckEnglishTest={this.state.graduationCheckEnglishTest}
