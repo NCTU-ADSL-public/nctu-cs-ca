@@ -86,6 +86,8 @@ CScourse.processCS = function(req, res, next){
                 }
                 for(var t = 0; t<offsetTeacherTime.length; t++)
                     Tcount++;
+                if(offsetNameCheck[compulse[q].cos_cname] == true);
+                else{
                 cosNumber = compulse[q].cos_codes;
                 for(var k = 0; k<cosNumber.length; k++){
                     var cosInfo = {
@@ -121,7 +123,8 @@ CScourse.processCS = function(req, res, next){
                                 }    
                             }   
                         }   
-                    }   
+                    } 
+                    }
                 } 
                 for(var w = 0; w < (2 - Tcount); w++){
                     var cosInfo = {
@@ -238,7 +241,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
 					var max = 0;
 					var credit;
-					var index;
+					var index = 0;
 					var code;
 					if(more.length == 1){
 						if(more[0].complete == true){
@@ -409,7 +412,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
                     var max = 0;
                     var credit;
-                    var index;
+                    var index = 0;
                     var code;
                     if(more.length == 1){
                         if(more[0].complete == true){
@@ -505,7 +508,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
                     var max = 0;
                     var credit;
-                    var index;
+                    var index = 0;
                     var code;
                     if(more.length == 1){
 					    if(more[0].complete == true){
@@ -603,7 +606,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){

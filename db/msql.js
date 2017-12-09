@@ -314,6 +314,49 @@ module.exports = {
             });
         });
     },
+    qaInsert:function(que,ans,callback){
+        const resource=pool.acquire();
+        resource.then(function(c){
+            var sql_qaInsert=c.prepare(s.qaInsert);
+            var sql_qaMaxId=c.prepare(s.qaMaxId);
+            c.query(sql_qaMaxId({}),function(err,result){
+                if(err)
+                    throw err;
+                var id=0;
+                if(result[0]['maxID']!=null)
+                    id=parseInt(result[0]['maxID'])+1;
+                c.query(sql_qaInsert({id:id,que:que,ans:ans}),function(err,result){
+                    if(err)
+                        throw err;
+                    callback(null,JSON.stringify(result));
+                    pool.release(c);
+                });
+            });
+        });
+    },
+    qaDelete:function(id,callback){
+        const resource=pool.acquire();
+        resource.then(function(c){
+            var sql_qaDelete=c.prepare(s.qaDelete);
+            c.query(sql_qaDelete({id:id}),function(err){
+                if(err)
+                    throw err;
+                pool.release(c);
+            });
+        });
+    },
+    qaSearch:function(callback){
+        const resource=pool.acquire();
+        resource.then(function(c){
+            var sql_qaSearch=c.prepare(s.qaSearch);
+            c.query(sql_qaSearch({}),function(err,result){
+                if(err)
+                    throw err;
+                callback(null,JSON.stringify(result));
+                pool.release(c);
+            });
+        });
+    },
     Drain: function() {
         pool.drain().then(function() {
             pool.clear();

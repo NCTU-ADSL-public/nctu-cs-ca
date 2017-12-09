@@ -24,7 +24,7 @@ var processResult = result.courseResult.processResult;
 var currentOther = nowOther.currentOther.processOther;
 var currentCS = nowCS.currentCS.processCS;
 
-router.get('/students/graduate/original', StudentId, StudentProfile, queryFree, queryGeneral, queryPass, queryCourse, queryRule, queryNow, processOther, processCS, processResult, currentOther, currentCS, function(req, res){
+router.get('/students/graduate/original', StudentId, StudentProfile, queryFree, queryGeneral, queryPass, queryCourse, queryRule, queryNow, processOther, processCS, currentOther, currentCS, processResult, function(req, res){
 	res.send(res.locals.courseResult);
 });
 

@@ -3,7 +3,8 @@ import Course from './Course'
 import './Graduation.css'
 let id=0;
 const CourseList = ({ items, selection , handleClick}) => (
-    <div className="course-button" style={{
+    <div style={{
+        padding: '11px 0 120px 0',
         height: '100px',
         width: '1300px'}}>
         {items.map(item =>

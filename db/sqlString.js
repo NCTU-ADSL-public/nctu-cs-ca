@@ -79,16 +79,16 @@ exports.Pass = "\
     if(ISNULL(c.cos_code),a.cos_code,c.cos_code) as cos_code,\
     if(ISNULL(c.cos_cname),a.cos_cname,c.cos_cname) as cos_cname,\
     c.cos_code_old,cos_cname_old,a.cos_ename,a.pass_fail,a.cos_type,\
-    if(a.cos_cname like \'\%導師時間\%\' or a.cos_cname like \'\%教學實務\%\' or a.cos_cname like \'\%個別研究\%\',NULL,a.score) as score,\
-    if(a.cos_cname like \'\%導師時間\%\' or a.cos_cname like \'\%教學實務\%\' or a.cos_cname like \'\%個別研究\%\',NULL,a.score_level) as score_level,\
+    if(a.score_type=\'通過不通過\',NULL,a.score) as score,\
+    if(a.score_type=\'通過不通過\',NULL,a.score_level) as score_level,\
     if((a.cos_typeext=\'\'&&a.brief like \'體育%\'),\'體育\',a.cos_typeext) as cos_typeext,\
     b.type,a.brief,a.brief_new, a.cos_credit,a.year,a.semester,c.offset_type\
     from\
     (\
-        select DISTINCT s.pass_fail,s.score,s.score_level,d.cos_code, n.cos_cname,n.cos_ename, d.cos_type,d.cos_typeext,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
+        select DISTINCT s.score_type,s.pass_fail,s.score,s.score_level,d.cos_code, n.cos_cname,n.cos_ename, d.cos_type,d.cos_typeext,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
         from cos_data as d,\
         (\
-            select cos_year as year,semester,cos_id as code,cos_code,pass_fail,score,score_level,concat(cos_year,\'-\',semester,\'-\',cos_id) as unique_id\
+            select score_type,cos_year as year,semester,cos_id as code,cos_code,pass_fail,score,score_level,concat(cos_year,\'-\',semester,\'-\',cos_id) as unique_id\
             from cos_score where student_id=:id\
         ) as s,\
         cos_name as n\
@@ -98,10 +98,10 @@ exports.Pass = "\
         and n.unique_id=d.unique_id\
     ) as a left outer join\
     (\
-        select DISTINCT s.pass_fail,s.score,s.score_level,d.cos_code, n.cos_cname, d.cos_type,d.cos_typeext,t.type,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
+        select DISTINCT s.score_type,s.pass_fail,s.score,s.score_level,d.cos_code, n.cos_cname, d.cos_type,d.cos_typeext,t.type,d.brief,d.brief_new, d.cos_credit,s.year,s.semester\
         from cos_data as d,\
         (\
-            select cos_year as year,semester,cos_id as code,cos_code,pass_fail,score,score_level,concat(cos_year,\'-\',semester,\'-\',cos_id) as unique_id\
+            select score_type,cos_year as year,semester,cos_id as code,cos_code,pass_fail,score,score_level,concat(cos_year,\'-\',semester,\'-\',cos_id) as unique_id\
             from cos_score where student_id=:id\
         ) as s,\
         cos_name as n,cos_type as t,student as sd\
@@ -221,3 +221,13 @@ exports.cosMotion='\
     select cos_cname,orig_pos,now_pos from cos_motion where student_id=:id';
 exports.cosMotionDelete='\
     delete from cos_motion where student_id=:id';
+
+exports.qaSearch='\
+    select * from qa_record';
+exports.qaInsert='\
+    insert into qa_record (id,que,ans)\
+    values (:id,:que,:ans)';
+exports.qaMaxId='\
+    select max(id) as maxID from qa_record'
+exports.qaDelete='\
+    delete from qa_record where id=:id';

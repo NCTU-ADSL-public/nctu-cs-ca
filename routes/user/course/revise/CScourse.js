@@ -98,6 +98,8 @@ CScourse.processCS = function(req, res, next){
                 }
                 for(var t = 0; t<offsetTeacherTime.length; t++)
                     Tcount++;
+                if(offsetNameCheck[compulse[q].cos_cname] == true);
+                else{
                 cosNumber = compulse[q].cos_codes;
                 for(var k = 0; k<cosNumber.length; k++){
                     var cosInfo = {
@@ -158,6 +160,7 @@ CScourse.processCS = function(req, res, next){
                                 }
                             }
                         }
+                    }
                     }
                 }
                 for(var w = 0; w<(2 - Tcount); w++){
@@ -280,7 +283,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
@@ -310,7 +313,9 @@ CScourse.processCS = function(req, res, next){
                                                                 }
                                                         }
                                                 }
+                                                if((typeof(more[index].code) != undefined) && (more[index].code)){
                                                 code = more[index].code;
+
                                                 if(more[index].complete == true){
                                                         courseResult[0].credit += credit;
                                                         if(detail[code].cos_typeext == '英文授課'){
@@ -325,6 +330,10 @@ CScourse.processCS = function(req, res, next){
                                                 }
                                                 else
                                                         courseResult[0].course.push(more[index]);
+                                                }
+                                                else{
+                                                    console.log(res.locals.studentId + " : " + more[index]);
+                                                }
                                         }
 				}
 			}
@@ -378,8 +387,8 @@ CScourse.processCS = function(req, res, next){
             }
             else{
                 PCBcos.complete = false;
-                courseResult[0].course.push(PCBcos);
-            }
+               // courseResult[0].course.push(PCBcos);
+          }
 		}
 		if(PCB.biology.length != 0){
 			if(PCB.biology.length == 2){
@@ -399,14 +408,23 @@ CScourse.processCS = function(req, res, next){
 					}
                                 }
 				for(var s = 0; s<PCB.physic.length; s++){
-                                        PCB.physic[s].move = true;
-					if(courseResult[3].credit < courseResult[3].require){
-						courseResult[3].credit += PCB.physic[s].originalCredit;
-                                        	courseResult[3].course.push(PCB.physic[s]);
+                    PCB.physic[s].move = true;
+					var cosAdd = JSON.stringify(PCB.physic[s]);
+                    cosAdd = JSON.parse(cosAdd);
+                    cosAdd.realCredit = 1;
+                    cosAdd.code = PCB.physic[s].code + '_one';
+                    PCB.physic[s].realCredit = 3;
+                    if(courseResult[3].credit < courseResult[3].require){
+						courseResult[3].credit += PCB.physic[s].realCredit;
+                        courseResult[3].course.push(PCB.physic[s]);
+                        courseResult[3].credit += cosAdd.realCredit;
+                        courseResult[3].course.push(cosAdd);
 					}
 					else{
-                                                courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                courseResult[4].credit += PCB.physic[s].realCredit;
                                                 courseResult[4].course.push(PCB.physic[s]);
+                                                courseResult[4].credit += cosAdd.realCredit;
+                                                courseResult[4].course.push(cosAdd);
                                         }
                                 }
 			}
@@ -433,13 +451,22 @@ CScourse.processCS = function(req, res, next){
 					}
 					for(s = 0; s<PCB.physic.length; s++){
 						PCB.physic[s].move = true;
+                        var cosAdd = JSON.stringify(PCB.physic[s]);
+                        cosAdd = JSON.parse(cosAdd);
+                        cosAdd.realCredit = 1;
+                        cosAdd.code = PCB.physic[s].code + '_one';
+                        PCB.physic[s].realCredit = 3;
 						if(courseResult[3].credit < courseResult[3].require){
-							courseResult[3].credit += PCB.physic[s].originalCredit;
+							courseResult[3].credit += PCB.physic[s].realCredit;
 							courseResult[3].course.push(PCB.physic[s]);
+                            courseResult[3].credit += cosAdd.realCredit;
+                            courseResult[3].course.push(cosAdd);
 						}
 						else{
-                                                	courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                	courseResult[4].credit += PCB.physic[s].realCredit;
                                                 	courseResult[4].course.push(PCB.physic[s]);
+                                                    courseResult[4].credit += cosAdd.realCredit;
+                                                    courseResult[4].course.push(cosAdd);
                                         	}
 					}
 				}
@@ -452,6 +479,7 @@ CScourse.processCS = function(req, res, next){
 								var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[3].credit++;
 								courseResult[3].course.push(cosInfo);
 							}
@@ -459,20 +487,30 @@ CScourse.processCS = function(req, res, next){
                                 var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[4].credit++;
 								courseResult[4].course.push(cosInfo);
 							}
                             courseResult[0].course.push(PCB.physic[s]);
                                                 }
-                                                       else{
-                                                        PCB.physic[s].move = true;
+                        else{
+                            PCB.physic[s].move = true;
+                            var cosAdd = JSON.stringify(PCB.physic[s]);
+                            cosAdd = JSON.parse(cosAdd);
+                            cosAdd.realCredit = 1;
+                            cosAdd.code = PCB.physic[s].code + '_one';
+                            PCB.physic[s].realCredit = 3;
 							if(courseResult[3].credit < courseResult[3].require){
-								courseResult[3].credit += PCB.physic[s].originalCredit;
-                                                       		courseResult[3].course.push(PCB.physic[s]);
+								courseResult[3].credit += PCB.physic[s].realCredit;
+                                courseResult[3].course.push(PCB.physic[s]);
+                                courseResult[3].credit += cosAdd.realCredit;
+                                courseResult[3].course.push(cosAdd);
 							}
 							else{
-                                                        	courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                        	courseResult[4].credit += PCB.physic[s].realCredit;
                                                         	courseResult[4].course.push(PCB.physic[s]);
+                                                            courseResult[4].credit += cosAdd.realCredit;
+                                                            courseResult[4].course.push(cosAdd);
                                                 	}
                                                 }
                                         }
@@ -487,13 +525,22 @@ CScourse.processCS = function(req, res, next){
 				}
 				for(s = 0; s<PCB.physic.length; s++){
                                         PCB.physic[s].move = true;
+                                        var cosAdd = JSON.stringify(PCB.physic[s]);
+                                        cosAdd = JSON.parse(cosAdd);
+                                        cosAdd.realCredit = 1;
+                                        cosAdd.code = PCB.physic[s].code + '_one';
+                                        PCB.physic[s].realCredit = 3;
 					if(courseResult[3].credit < courseResult[3].require){
-						courseResult[3].credit += PCB.physic[s].originalCredit;
+						courseResult[3].credit += PCB.physic[s].realCredit;
                                        	 	courseResult[3].course.push(PCB.physic[s]);
+                                            courseResult[3].credit += cosAdd.realCredit;
+                                            courseResult[3].course.push(cosAdd);
 					}
 					else{
-                                                courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                courseResult[4].credit += PCB.physic[s].realCredit;
                                                 courseResult[4].course.push(PCB.physic[s]);
+                                                courseResult[4].credit += cosAdd.realCredit;
+                                                courseResult[4].course.push(cosAdd);
                                         }
                                 }
 
@@ -509,6 +556,7 @@ CScourse.processCS = function(req, res, next){
                                 var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[3].credit++;
 								courseResult[3].course.push(cosInfo);
 							}
@@ -516,6 +564,7 @@ CScourse.processCS = function(req, res, next){
                                 var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[4].credit++;
 								courseResult[4].course.push(cosInfo);
 							}
@@ -523,13 +572,22 @@ CScourse.processCS = function(req, res, next){
                                                 }
                                                 else{
                                                         PCB.physic[s].move = true;
+                                                        var cosAdd = JSON.stringify(PCB.physic[s]);
+                                                        cosAdd = JSON.parse(cosAdd);
+                                                        cosAdd.realCredit = 1;
+                                                        cosAdd.code = PCB.physic[s].code + '_one';
+                                                        PCB.physic[s].realCredit = 3;
 							if(courseResult[3].credit < courseResult[3].require){
-								courseResult[3].credit += PCB.physic[s].originalCredit;
+								courseResult[3].credit += PCB.physic[s].realCredit;
                                                         	courseResult[3].course.push(PCB.physic[s]);
+                                                            courseResult[3].credit += cosAdd.realCredit;
+                                                            courseResult[3].course.push(cosAdd);
 							}
 							else{
-                                                		courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                		courseResult[4].credit += PCB.physic[s].realCredit;
                                                 		courseResult[4].course.push(PCB.physic[s]);
+                                                        courseResult[4].credit += cosAdd.realCredit;
+                                                        courseResult[4].course.push(cosAdd);
                                         		}
                                                 }
                                         }
@@ -544,6 +602,7 @@ CScourse.processCS = function(req, res, next){
                     var cosInfo = JSON.stringify(PCB.physic[s]);
                     cosInfo = JSON.parse(cosInfo);
                     cosInfo.realCredit = 1;
+                    cosInfo.code = PCB.physic[s].code + '_one';
                     courseResult[3].credit++;
 					courseResult[3].course.push(cosInfo);
 				}
@@ -551,6 +610,7 @@ CScourse.processCS = function(req, res, next){
                     var cosInfo = JSON.stringify(PCB.physic[s]);
                     cosInfo = JSON.parse(cosInfo);
                     cosInfo.realCredit = 1;
+                    cosInfo.code = PCB.physic[s].code + '_one';
                     courseResult[4].credit++;
 					courseResult[4].course.push(cosInfo);
 				}
@@ -622,7 +682,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
@@ -662,6 +722,7 @@ CScourse.processCS = function(req, res, next){
                                                                 }
                                                         }
                                                 }
+                                                if((typeof(more[index]) != undefined) && (more[index])){
                                                 if(more[index].complete == true){
                                                         code = more[index].code;
 							if(detail[code].cos_typeext == '英文授課'){
@@ -687,6 +748,9 @@ CScourse.processCS = function(req, res, next){
                                                 }
                                                 else
                                                         courseResult[1].course.push(more[index]);
+                                                }
+                                                else
+                                                    console.log(res.locals.studentId + " : " + more[index]);
                                         }
 				}
 			}
@@ -756,7 +820,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
@@ -796,6 +860,7 @@ CScourse.processCS = function(req, res, next){
                                                                 }
                                                         }
                                                 }
+                                                if((typeof(more[index]) != undefined) && (more[index])){
                                                 if(more[index].complete == true){
                                                         code = more[index].code;
 							if(detail[code].cos_typeext == '英文授課'){
@@ -821,6 +886,9 @@ CScourse.processCS = function(req, res, next){
                                                 }
                                                 else
                                                         courseResult[2].course.push(more[index]);
+                                               }
+                                               else
+                                                   console.log(res.locals + " : " + more[index]);
                                         }
 				}
 			}
@@ -890,7 +958,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
@@ -929,6 +997,7 @@ CScourse.processCS = function(req, res, next){
                                                                 }
                                                         }
                                                 }
+                                                if((typeof(more[index]) != undefined) && (more[index])){
                                                 if(more[index].complete == true){
                                                         code = more[index].code;
 							if(detail[code].cos_typeext == '英文授課'){
@@ -954,6 +1023,9 @@ CScourse.processCS = function(req, res, next){
                                                 }
                                                 else
                                                         courseResult[2].course.push(more[index]);
+                                                }
+                                                else
+                                                    console.log(res.locals.studentId + " : " + more[index]);
                                         }
 				}
 			}
