@@ -254,12 +254,16 @@ class GraduationItem extends React.Component {
     }
 
     handleAssistantPost(){
+
+        console.log(res);
         axios.post(' /assistants/graduate/check', {
-            params: {
-                student_id: this.props.studentProfile.student_id,
-            },
-            check: {state: true }
+            student_id: this.props.studentProfile.student_id,
         }).then(res => {
+            console.log(res);
+            if(res.check)
+                this.setState({
+                    graduationCheck:true,
+                });
         }).catch(err => {
             window.location.replace("/logout ");
             console.log(err)
