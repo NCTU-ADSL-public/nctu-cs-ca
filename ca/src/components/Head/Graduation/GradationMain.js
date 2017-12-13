@@ -53,7 +53,7 @@ const styles = {
     },
     button: {
         margin:'9px 10px 0 0px',
-        width:'200px',
+        width:'150px',
         float:'left',
         zIndex:'-1'
     },
