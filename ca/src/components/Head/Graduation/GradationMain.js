@@ -53,7 +53,7 @@ const styles = {
     },
     button: {
         margin:'9px 10px 0 0px',
-        width:'200px',
+        width:'150px',
         float:'left',
         zIndex:'-1'
     },
@@ -255,11 +255,13 @@ class GraduationItem extends React.Component {
 
     handleAssistantPost(){
         axios.post(' /assistants/graduate/check', {
-            params: {
-                student_id: this.props.studentProfile.student_id,
-            },
-            check: {state: true }
+            student_id: this.props.studentProfile.student_id,
         }).then(res => {
+            console.log(res);
+            if(res.check)
+                this.setState({
+                    graduationCheck:true,
+                });
         }).catch(err => {
             window.location.replace("/logout ");
             console.log(err)
@@ -323,6 +325,7 @@ class GraduationItem extends React.Component {
                                                 :
                                                 this.state.graduationCheck?"助理已經收到囉":"助理尚未收到"}
                                             disabled={this.props.assistant ?(this.state.graduationCheck) : true}
+                                            style={styles.button}
                                             // style={{visibility:'hidden'}}
                                             labelStyle={styles.labelStyle}
                                             backgroundColor = "#DDDDDD"
