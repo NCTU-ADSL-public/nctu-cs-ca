@@ -352,14 +352,12 @@ class Head extends Component {
                 ReactDOM.render(
                     <font>
                         <FadeIn>
-                            <GraduationItem
-                                items={Graduationitems}
-                                result={Graduationitems[11]}
-                                revise={revise}
-                                reviseresult={revise[11]}
-                                studentProfile={this.state.studentIdcard}
-                                courseCategoryArray={this.state.print_courseCategoryArray}/>
-                        </FadeIn>
+                                <MapItem
+                                    studentPasdata={StudentCosPas}
+                                    data={MapCourseData}
+                                    studentId={this.state.studentIdcard.program}
+                                    studentsGrad={this.state.studentIdcard.grade}/>
+                            </FadeIn>
                     </font>,
                     document.getElementById('page'));
             }
@@ -367,12 +365,14 @@ class Head extends Component {
                 ReactDOM.render(
                     <div>
                         <FadeIn>
-                            <MapItem
-                                studentPasdata={StudentCosPas}
-                                data={MapCourseData}
-                                studentId={this.state.studentIdcard.program}
-                                studentsGrad={this.state.studentIdcard.grade}/>
-                        </FadeIn>
+                        <GraduationItem
+                            items={Graduationitems}
+                            result={Graduationitems[11]}
+                            revise={revise}
+                            reviseresult={revise[11]}
+                            studentProfile={this.state.studentIdcard}
+                            courseCategoryArray={this.state.print_courseCategoryArray}/>
+                    </FadeIn>
                     </div>,
                     document.getElementById('page'));
             }
@@ -388,13 +388,7 @@ class Head extends Component {
 
   		this.setState({selectedIndex: index});
   	}
-//
-// <BottomNavigationItem
-// label="課程地圖"
-// icon={mapIcon}
-// style={this.state.styleButton}
-// onTouchTap={() => this.select(1)}
-// />
+
 // <BottomNavigationItem
 //     label="抵免"
 //     icon={checkIcon}
@@ -419,13 +413,19 @@ class Head extends Component {
 								style={this.state.styleButton}
 								onTouchTap={() => this.select(0)}
 							  />
-							  <BottomNavigationItem
-								label="畢業預審"
-                                className="TopButton"
-								icon={graduationIcon}
-								style={this.state.styleButton}
-								onTouchTap={() => this.select(1)}
-							  />
+							  {/*<BottomNavigationItem*/}
+								{/*label="畢業預審"*/}
+                                {/*className="TopButton"*/}
+								{/*icon={graduationIcon}*/}
+								{/*style={this.state.styleButton}*/}
+								{/*onTouchTap={() => this.select(1)}*/}
+							  {/*/>*/}
+                                <BottomNavigationItem
+                                    label="課程地圖"
+                                    icon={mapIcon}
+                                    style={this.state.styleButton}
+                                    onTouchTap={() => this.select(1)}
+                                />
 							</BottomNavigation>
 						</MuiThemeProvider>
 						</div>

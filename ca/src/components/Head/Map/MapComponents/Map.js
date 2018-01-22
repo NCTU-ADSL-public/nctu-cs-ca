@@ -38,7 +38,13 @@ class Map extends React.Component{
         return (
             <div id="font_adjust">
             <div className="Map-title-text">
-                <div id="lessons-title">敬請期待</div>
+                <div id="lessons-title">課程地圖</div>
+                <div id="lessons-little-title">王冠升-{this.props.studentId}</div>
+                <div className="Map-Row">
+                <Provider store={store}>
+                <App studentPasdata={this.props.studentPasdata} data={this.props.data} studentsGrad={this.props.studentsGrad}/>
+                </Provider>
+                </div>
             </div>
 
         </div>
@@ -46,11 +52,6 @@ class Map extends React.Component{
     }
 
 }
-{/*<div id="lessons-little-title">-{this.props.studentId}</div>*/}
-{/*<div className="Map-Row">*/}
-    {/*<Provider store={store}>*/}
-        {/*<App studentPasdata={this.props.studentPasdata} data={this.props.data} studentsGrad={this.props.studentsGrad}/>*/}
-    {/*</Provider>*/}
-{/*</div>*/}
+
 
 export default Map;
