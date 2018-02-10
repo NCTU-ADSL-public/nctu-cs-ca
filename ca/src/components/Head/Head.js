@@ -6,25 +6,18 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import Home from 'material-ui/svg-icons/content/flag';
-import Map from 'material-ui/svg-icons/maps/map';
-import Graduation from 'material-ui/svg-icons/social/school';
-import Check from 'material-ui/svg-icons/av/featured-play-list';
-import defalt from './defalt.jpg';
 
 import HomeItem from './Home/Home.js';
 import MapItem from './Map/MapComponents/Map.js';
 import GraduationItem from './Graduation/GradationMain.js';
 import CreditItem from './Credit/Credit.js';
 
+import Navbar from '../Components/Navbar'
+
 
 import Loading from './Graduation/Loading';
 import FadeIn from 'react-fade-in';
 
-const homeIcon = <Home />;
-const mapIcon = <Map />;
-const graduationIcon = <Graduation />;
-const checkIcon = <Check />;
 
 let MapCourseData;
 let StudentCosPas;
@@ -400,71 +393,19 @@ class Head extends Component {
 // onTouchTap={() => this.select(3)}
 // />
 	render() {
+        const onTouchTaps = [
+            () => this.select(0),
+            () => this.select(1),
+            () => this.select(2),
+        ]
 	    return (
 		    <div id="Head">
-				<div id="ontopDiv">
-					<div className="Head-header" >
-							<div id="rectangle1"> </div>
-							<div className="h1">交大資工線上助理</div>
-							<div className="h2">NCTU Curriculum Assistant</div>
-						<div className="adjust">
-						<MuiThemeProvider zDepth={1}>
-							<BottomNavigation selectedIndex={this.state.selectedIndex}>
-							  <BottomNavigationItem
-								label="首頁"
-                                className="TopButton"
-								icon={homeIcon}
-								style={this.state.styleButton}
-								onTouchTap={() => this.select(0)}
-							  />
-							  <BottomNavigationItem
-								label="畢業預審"
-                                className="TopButton"
-								icon={graduationIcon}
-								style={this.state.styleButton}
-								onTouchTap={() => this.select(1)}
-							  />
-                                <BottomNavigationItem
-                                    label="課程地圖"
-                                    icon={mapIcon}
-                                    style={this.state.styleButton}
-                                    onTouchTap={() => this.select(2)}
-                                />
-							</BottomNavigation>
-						</MuiThemeProvider>
-						</div>
-						<div className="idcard">
-							<div id="idcard-data">
-								<div id="idcard-photo">
-									<img src={defalt} width="44px" alt=""/>
-								</div>
-								<div id="idcard-top">
-                                    {this.state.studentIdcard.sname}
-								</div>
-								<div id="idcard-buttom">
-                                    {this.state.studentIdcard.program}{this.state.studentIdcard.grade}
-								</div>
-							</div>
-						</div>
-						<div id="logout-button">
-							<MuiThemeProvider>
-								<RaisedButton style={{
-                                    width: '13%',
-                                    fontFamily: 'Noto Sans CJK TC',
-                                }}  backgroundColor = "#DDDDDD" label="Logout" onClick={()=>{
-                                    let cookies = document.cookie.split(";");
-
-                                    for (let i = 0; i < cookies.length; i++) {
-                                        let cookie = cookies[i];
-                                        let eqPos = cookie.indexOf("=");
-                                        let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                                        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                                    }
-                                }} href="/logout"/>
-							</MuiThemeProvider>
-						</div>
-					</div>
-				</div>
+                <Navbar type='student'
+                        name={this.state.studentIdcard.sname}
+                        subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
+                        selectedIndex={this.state.selectedIndex}
+                        onTouchTaps={onTouchTaps}
+                />
 				<div id="topRec">
 				</div>
 
