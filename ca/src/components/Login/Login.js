@@ -66,9 +66,6 @@ class Login extends React.Component {
 
                 </FadeIn>
                 </div>
-
-
-                <footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
           </div>
         );
       }

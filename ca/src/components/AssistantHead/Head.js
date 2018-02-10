@@ -75,10 +75,8 @@ class Head extends React.Component {
                         selectedIndex={this.state.selectedIndex}
                         onTouchTaps={onTouchTaps}
                 />
-                <div id='topRec' />
-
-                <div id='page' />
-                <footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
+                <div id='topRec'/>
+                <div id='page'/>
             </div>
         )
     }

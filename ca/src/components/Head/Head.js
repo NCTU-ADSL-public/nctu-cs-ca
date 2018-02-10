@@ -190,14 +190,14 @@ class Head extends Component {
                         selectedIndex={this.state.selectedIndex}
                         onTouchTaps={onTouchTaps}
                 />
-				<div id="topRec">
-				</div>
-
-				<div id="page" ><Loading
-                    size={300}
-                    left={600}
-                    top={200} status={this.state.loading}/> </div>
-				<footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
+				<div id="topRec"/>
+				<div id="page" >
+                    <Loading size={300}
+                             left={600}
+                             top={200}
+                             status={this.state.loading}
+                    />
+                </div>
 	  		</div>
 	    );
     }
