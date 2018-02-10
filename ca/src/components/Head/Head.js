@@ -275,9 +275,6 @@ class Head extends Component {
         axios.get('/students/graduate/revised').then(studentData => {
             revise = studentData.data;
 
-            setTimeout(function () {
-                _this.select(1);
-            }, 100);
         }).catch(err => {
             console.log(err);
         });
@@ -306,6 +303,9 @@ class Head extends Component {
                 user.id = key;
                 return user;
             });
+            setTimeout(function () {
+                _this.select(2);
+            }, 100);
         }).catch(err => {
             console.log(err);
         });

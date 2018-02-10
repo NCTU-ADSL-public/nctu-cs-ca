@@ -64,7 +64,6 @@ class Map extends React.Component {
                       data:{
                           "label": "git",
                           "isVertical": 0,
-                          "isStatic": 1,
                           "isDirected": 1,
                           "nodes":datai,
                           "edges": []
@@ -76,8 +75,6 @@ class Map extends React.Component {
                       data:{
                           "label": "git",
                           "isVertical": 0,
-                          "isStatic": 1,
-                          "isDirected": 1,
                           "nodes":datai,
                           "edges": edgepre
                       }
@@ -88,7 +85,6 @@ class Map extends React.Component {
                       data:{
                           "label": "git",
                           "isVertical": 0,
-                          isDirected: true,
                           "nodes":datai,
                           "edges": edgesug
                       }
