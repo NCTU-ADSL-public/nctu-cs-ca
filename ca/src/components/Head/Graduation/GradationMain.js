@@ -97,7 +97,7 @@ class GraduationItem extends React.Component {
         openforRevise:false,
         graduationCheck:false,
         graduationCheckEnglishTest:"",
-        Graduationitems:[],
+        graduationItems:[],
         items:[],
         totalitems:[],
         courseCategoryArray:[],
@@ -109,7 +109,7 @@ class GraduationItem extends React.Component {
     componentWillMount(){
         this.setState({
             items:this.props.items,
-            Graduationitems:this.props.revise,
+            graduationItems:this.props.revise,
             Result:this.props.result,
             ReviseResult:this.props.reviseresult,
             totalitems:this.props.reviseresult,
@@ -202,7 +202,7 @@ class GraduationItem extends React.Component {
             prevProps.result !== this.props.result ) {
             this.setState({
                 items:this.props.items,
-                Graduationitems:this.props.revise,
+                graduationItems:this.props.revise,
                 totalitems:this.props.result
             });
         }
@@ -441,7 +441,7 @@ class GraduationItem extends React.Component {
                     <Graduation
                     items={this.state.items}
                     result={this.state.totalitems}
-                    revise={this.state.GraduationItems}
+                    revise={this.state.graduationItems}
                     reviseresult={this.state.ReviseResult}
                     studentProfile={this.props.studentProfile}
                     courseCategoryArray={this.state.print_courseCategoryArray}

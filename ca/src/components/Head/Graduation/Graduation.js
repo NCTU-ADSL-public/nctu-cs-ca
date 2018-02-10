@@ -22,7 +22,7 @@ class Grad extends React.Component {
         opendialogprint: false,
         graduationCheck:false,
         graduationCheckEnglishTest:"2",
-        Graduationitems:this.props.revise,
+        graduationItems:this.props.revise,
         items:this.props.items,
         totalitems:this.props.result,
         courseCategoryArray:[],
@@ -87,7 +87,7 @@ class Grad extends React.Component {
             prevProps.result !== this.props.result ) {
             this.setState({
                 items:this.props.items,
-                Graduationitems:this.props.revise,
+                graduationItems:this.props.revise,
                 totalitems:this.props.result
             });
         }
@@ -140,7 +140,7 @@ class Grad extends React.Component {
                             </div>
                         </div>
                         <div className="Grad-Row">
-                            <GraduationForm isToggle={this.props.isToggle} openforRevise={this.props.openforRevise} items={this.state.items} graditems={this.state.GraduationItems} scroll={this.state.scrollQuery}/>
+                            <GraduationForm isToggle={this.props.isToggle} openforRevise={this.props.openforRevise} items={this.state.items} graditems={this.state.graduationItems} scroll={this.state.scrollQuery}/>
                         </div>
                         <div id="graduate-footer"> </div>
                     </div>

@@ -14,7 +14,7 @@ import Loading from '../Components/Loading';
 
 import defaultData from '../FakeData'
 
-let GraduationItems = defaultData.GraduationItems
+let graduationItems = defaultData.GraduationItems
 let revise = defaultData.GraduationItems_Revised
 let studentCos = defaultData.Course
 let studentPas = defaultData.CoursePass
@@ -54,7 +54,7 @@ class Head extends Component {
     res(){
         let _this = this;
         axios.get('/students/graduate/original').then(studentData => {
-            GraduationItems = studentData.data;
+            graduationItems = studentData.data;
         }).catch(err => {
             console.log(err);
         });
@@ -134,8 +134,8 @@ class Head extends Component {
                 <font>
                     <FadeIn>
                         <GraduationItem
-                            items={GraduationItems}
-                            result={GraduationItems[11]}
+                            items={graduationItems}
+                            result={graduationItems[11]}
                             revise={revise}
                             reviseresult={revise[11]}
                             studentProfile={this.state.studentIdcard}
