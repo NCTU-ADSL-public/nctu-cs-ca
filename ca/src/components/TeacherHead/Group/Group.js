@@ -1,17 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-class Group extends React.Component{
-
-
-    render() {
-        return (
-            <div >
+class Group extends React.Component {
+  render () {
+    return (
+      <div >
                 15118181
             </div>
-        );
-    }
-
+    )
+  }
 }
 
-
-export default Group;
+export default Group

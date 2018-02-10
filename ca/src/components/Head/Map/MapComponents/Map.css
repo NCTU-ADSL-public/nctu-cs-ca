@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
 #font_adjust{
     background: #F5F5F5;
     height: auto;
@@ -6,11 +7,18 @@
 }
 
 .Map-title-text{
-    margin: 0 5% 6% 5%;
-    padding: 35px 10px 3px 65px;
+    margin: 0 5% 0 5%;
+    padding: 35px 10px 0 65px;
     color: #7B7B7B;
     font-size: 1.5em;
 
+}
+
+.selectFieldStyle{
+    position: fixed;
+    top: 200px;
+    right: 200px;
+    z-index: 100;
 }
 
 #lessons-title{
@@ -33,7 +41,7 @@ h3{
 
 
 .Map-Row{
-    padding: 0 7% 0 7%;
+    padding: 5% 7% 0 7%;
     background: #F5F5F5;
     height: 600px;
 }
@@ -43,7 +51,7 @@ h3{
     margin: 5px 5px 0 5px;
 
     border: 0.5px solid #e3e3e3;
-    height: 500px;
+    height: 490px;
     width: 80%;
 }
 
@@ -126,13 +134,15 @@ h3{
 .course-btn{
     overflow: visible;
     border-radius: 2px;
-    transition: background .25s ease-in-out;
     background-color: #616161;
 }
 
-.course-btn:hover{
-    background-color: #338d68;
+.course-btn-map{
+    overflow: visible;
+    border-radius: 2px;
+    background-color: #616161;
 }
+
 
 .session-cur{
     background: #fbe099;
@@ -160,16 +170,24 @@ h3{
 .btn-red{
     background: #f56161;
 }
+.zoom {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+}
+
+.zoom_in {
+    margin-right: 10px;
+}
 
 
 @media only screen and (max-width: 500px) {
 
     .Map-title-text{
         margin: 0 5% 6% 5%;
-        padding: 60px 10px 3px 25px;
+        padding: 60px 10px 3px 10px;
         color: #7B7B7B;
         font-size: 1.5em;
-
     }
 
     #lessons-title{
@@ -224,6 +242,10 @@ h3{
     .course-btn{
         height: 100%;
         overflow: hidden;
+        -webkit-transition: width 1s;
+        transition: width 1s;
+        -o-transition:width 1s;
+        -moz-transition:width 1s;
     }
 
 

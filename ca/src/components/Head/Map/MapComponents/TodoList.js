@@ -1,19 +1,19 @@
 import React from 'react'
 import Todo from './Todo'
-import './Map.css';
-import PropTypes from 'prop-types';
+import './Map.css'
+import PropTypes from 'prop-types'
 
 const TodoList = ({ todos, onTodoClick }) => (
-    <div>
-        {todos.map(todo =>
-            <Todo
-                key={todo.id}
-                {...todo}
-                onClick={() => onTodoClick(todo.pre, todo.cosCame)}
+  <div>
+    {todos.map(todo =>
+      <Todo
+        key={todo.id}
+        {...todo}
+        onClick={() => onTodoClick(todo.pre, todo.cosCame)}
             />
         )}
-    </div>
-);
+  </div>
+)
 
 // TodoList.propTypes = {
 //     todos: PropTypes.arrayOf(PropTypes.shape({
