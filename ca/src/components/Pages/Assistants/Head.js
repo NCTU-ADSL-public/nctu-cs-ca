@@ -7,7 +7,7 @@ import HomeItem from './Home/Home.js'
 import GraduationItem from './Graduation/index'
 
 import './Head.css'
-import Navbar from '../Components/Navbar'
+import Navbar from '../../Components/Navbar'
 
 class Head extends React.Component {
 

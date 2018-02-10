@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
-import StudentGrad from '../../Head/Graduation/GradationMain'
+import StudentGrad from '../../../Head/Graduation/GradationMain'
 
 import Loading from '../../../Components/Loading';
 
-import FakeData from '../../FakeData'
+import FakeData from '../../../FakeData'
 
 export default class index extends React.Component {
     constructor (props) {

@@ -10,7 +10,7 @@ import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 import StudentList from './StudentSearch/StudentList';
 import StudentInform from './StudentInform/StudentSelList';
 
-import FakeData from '../../FakeData'
+import FakeData from '../../../FakeData'
 
 export default class index extends React.Component {
 

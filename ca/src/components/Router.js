@@ -5,8 +5,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import Login from './Login/Login'
 import TeacherHead from './TeacherHead/Head'
 import Head from './Head/Head'
-import AssistantHead from './AssistantHead/Head'
-import StudentDetail from './AssistantHead/Graduation/StudentDetail'
+import AssistantHead from './Pages/Assistants/Head'
+import StudentDetail from './Pages/Assistants/Graduation/StudentDetail'
 import Footer from './Components/Footer'
 
 
