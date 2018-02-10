@@ -10,7 +10,7 @@ import CreditItem from './Credit/Credit.js';
 
 import './StudentsHead.css';
 import Navbar from '../Components/Navbar'
-import Loading from './Graduation/Loading';
+import Loading from '../Components/Loading';
 
 import defaultData from './FakeData'
 
@@ -195,7 +195,7 @@ class Head extends Component {
                     <Loading size={300}
                              left={600}
                              top={200}
-                             status={this.state.loading}
+                             isLoading={true}
                     />
                 </div>
 	  		</div>

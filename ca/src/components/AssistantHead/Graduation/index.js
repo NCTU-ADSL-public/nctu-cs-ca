@@ -10,10 +10,6 @@ import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 import StudentList from './StudentSearch/StudentList';
 import StudentInform from './StudentInform/StudentSelList';
 
-import LoadingComponent from '../Loading';
-
-
-
 export default class index extends React.Component {
 
     constructor(props) {

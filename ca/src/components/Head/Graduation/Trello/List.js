@@ -3,7 +3,7 @@ import './App.css'
 import {Board} from 'react-trello'
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
-import Loading from '../Loading'
+import Loading from '../../../Components/Loading'
 
 const CustomCard = props => {
     return (
@@ -23,7 +23,6 @@ const CustomCard = props => {
     )
 }
 
-
 const data = require('./data.json')
 
 class App extends Component {
@@ -36,7 +35,7 @@ class App extends Component {
         post:this.props.post,
         postArray:[],
         searchData:[],
-        loading:false
+        loading: true
     };
 
     setEventBus = eventBus => {
@@ -66,7 +65,7 @@ class App extends Component {
         let _this = this;
         // setTimeout(function () {
         //     _this.setState({
-        //         loading:true
+        //         loading:false
         //     })
         // }, 500);
     }
@@ -82,7 +81,7 @@ class App extends Component {
        let  _this = this;
         axios.get('/students/graduate/reorder').then(response => {
             _this.setState({boardData: response.data,
-                loading:true})
+                loading:false})
         }).catch(err => {
             console.log(err);
         });
@@ -299,7 +298,8 @@ class App extends Component {
                     <Loading
                         size={200}
                         left={40}
-                        top={100} status={this.state.loading}/>
+                        top={100}
+                        isLoading={this.state.loading}/>
                     <Board
                         data={this.state.boardData}
                         style={{backgroundColor:'#8596a0',

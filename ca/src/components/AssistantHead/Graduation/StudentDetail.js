@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import StudentGrad from '../../Head/Graduation/GradationMain'
 
-import LoadingComponent from '../Loading'
+import Loading from '../../../Components/Loading';
 
 export default class index extends React.Component {
   constructor (props) {
@@ -390,7 +390,11 @@ export default class index extends React.Component {
             this.state.loadingS ||
             this.state.loadingP) {
       return (
-        <LoadingComponent />
+          <Loading size={100}
+                   left={100}
+                   top={100}
+                   isLoading={true}
+          />
       )
     } else {
       return (
