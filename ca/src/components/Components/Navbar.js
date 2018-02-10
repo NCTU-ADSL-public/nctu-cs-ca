@@ -12,6 +12,8 @@ import Grouper from 'material-ui/svg-icons/social/group';
 import FreeBreakfast from 'material-ui/svg-icons/places/free-breakfast';
 
 import NavItem from './NavItem'
+
+import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
 
 
