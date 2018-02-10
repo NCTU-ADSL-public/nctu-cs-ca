@@ -13,26 +13,16 @@ import Navbar from '../Components/Navbar'
 
 class Head extends Component {
 
-
     state = {
-       selectedIndex: 0,
-       styleButton: {
-		    fontFamily: 'Noto Sans CJK TC',
-		    background: '#EEEEEE',
-           	lineHeight: '15px',
-           	margin: '5px 0 0',
-		   	fontSize: '11px',
-		   	width: '10px',
-       },
-		studentIdcard:{
-       		name:'彭文志',
-			prog:'教授',
-			grad:'',
-		},
+        selectedIndex: 0,
+        studentIdcard:{
+            name:'彭文志',
+            prog:'教授',
+            grad:'',
+        },
     };
 
-
-    componentWillMount(){
+    componentWillMount () {
     	let _this = this;
 
         axios.get('/students/profile').then(studentData => {
@@ -46,52 +36,50 @@ class Head extends Component {
         }).catch(err => {
             console.log(err);
         });
-
-
     }
 
-    componentDidMount(){
+    componentDidMount () {
     	this.select(1);
 	}
 
-  	select(index){
-            if(index===0){
-                ReactDOM.render(
-					<font>
-						<FadeIn>
-							<HomeItem />
-						</FadeIn>
-					</font>,
-                    document.getElementById('page'));
-            }
-            else if(index===1){
-                ReactDOM.render(
-					<div>
-						<FadeIn>
-							<CourseItem />
-						</FadeIn>
-					</div>,
-                    document.getElementById('page'));
-            }
-            else if(index===2){
-                ReactDOM.render(
-					<FadeIn>
-						<GroupItem />
-					</FadeIn>,
-                    document.getElementById('page'));
-            }
-            else if(index===3){
-                ReactDOM.render(
-					<a>
-						<FadeIn>
-							<FamilyItem />
-						</FadeIn>
-					</a>,
-                    document.getElementById('page'));
-            }
+    select (index) {
+        if(index===0){
+            ReactDOM.render(
+                <div>
+                    <FadeIn>
+                        <HomeItem />
+                    </FadeIn>
+                </div>,
+                document.getElementById('page'));
+        }
+        else if(index===1){
+            ReactDOM.render(
+                <div>
+                    <FadeIn>
+                        <CourseItem />
+                    </FadeIn>
+                </div>,
+                document.getElementById('page'));
+        }
+        else if(index===2){
+            ReactDOM.render(
+                <FadeIn>
+                    <GroupItem />
+                </FadeIn>,
+                document.getElementById('page'));
+        }
+        else if(index===3){
+            ReactDOM.render(
+                <a>
+                    <FadeIn>
+                        <FamilyItem />
+                    </FadeIn>
+                </a>,
+                document.getElementById('page'));
+        }
 
-  		this.setState({selectedIndex: index});
-  	}
+        this.setState({selectedIndex: index});
+    }
 
 	render() {
         const onTouchTaps = [
@@ -115,7 +103,7 @@ class Head extends Component {
 				<footer>Copyright @2017 NCTUCS 交通大學資訊工程學系</footer>
 	  		</div>
 	    );
-	  }
+    }
 }
 
 export default Head;
