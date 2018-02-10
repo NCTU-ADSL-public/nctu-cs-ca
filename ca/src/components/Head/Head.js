@@ -352,11 +352,13 @@ class Head extends Component {
                 ReactDOM.render(
                     <font>
                         <FadeIn>
-                                <MapItem
-                                    studentPasdata={StudentCosPas}
-                                    data={MapCourseData}
-                                    studentId={this.state.studentIdcard.program}
-                                    studentsGrad={this.state.studentIdcard.grade}/>
+                            <GraduationItem
+                                items={Graduationitems}
+                                result={Graduationitems[11]}
+                                revise={revise}
+                                reviseresult={revise[11]}
+                                studentProfile={this.state.studentIdcard}
+                                courseCategoryArray={this.state.print_courseCategoryArray}/>
                             </FadeIn>
                     </font>,
                     document.getElementById('page'));
@@ -365,13 +367,11 @@ class Head extends Component {
                 ReactDOM.render(
                     <div>
                         <FadeIn>
-                        <GraduationItem
-                            items={Graduationitems}
-                            result={Graduationitems[11]}
-                            revise={revise}
-                            reviseresult={revise[11]}
-                            studentProfile={this.state.studentIdcard}
-                            courseCategoryArray={this.state.print_courseCategoryArray}/>
+                            <MapItem
+                                studentPasdata={StudentCosPas}
+                                data={MapCourseData}
+                                studentId={this.state.studentIdcard.program}
+                                studentsGrad={this.state.studentIdcard.grade}/>
                     </FadeIn>
                     </div>,
                     document.getElementById('page'));
@@ -424,7 +424,7 @@ class Head extends Component {
                                     label="課程地圖"
                                     icon={mapIcon}
                                     style={this.state.styleButton}
-                                    onTouchTap={() => this.select(1)}
+                                    onTouchTap={() => this.select(2)}
                                 />
 							</BottomNavigation>
 						</MuiThemeProvider>
