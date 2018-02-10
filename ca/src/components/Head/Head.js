@@ -304,7 +304,7 @@ class Head extends Component {
                 return user;
             });
             setTimeout(function () {
-                _this.select(2);
+                _this.select(0);
             }, 100);
         }).catch(err => {
             console.log(err);
@@ -448,10 +448,13 @@ class Head extends Component {
                                     width: '13%',
                                     fontFamily: 'Noto Sans CJK TC',
                                 }}  backgroundColor = "#DDDDDD" label="Logout" onClick={()=>{
-                                    let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
-                                    if(keys) {
-                                        for(let i = keys.length; i--;)
-                                            document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+                                    let cookies = document.cookie.split(";");
+
+                                    for (let i = 0; i < cookies.length; i++) {
+                                        let cookie = cookies[i];
+                                        let eqPos = cookie.indexOf("=");
+                                        let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                                        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
                                     }
                                 }} href="/logout"/>
 							</MuiThemeProvider>
