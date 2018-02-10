@@ -267,6 +267,7 @@ class Head extends Component {
     async componentWillMount(){
         await this.res()
         let _this=this;
+        console.log(MapCourseData)
         setTimeout(function () {
             _this.select(0);
         }, 100);
