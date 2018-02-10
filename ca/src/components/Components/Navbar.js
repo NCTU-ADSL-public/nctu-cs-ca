@@ -35,11 +35,11 @@ class Navbar extends React.Component {
                 <NavItem key={1} label='畢業預審' icon={graduationIcon} onTouchTap={onTouchTaps[1]}/>,
                 <NavItem key={2} label='課程地圖' icon={mapIcon} onTouchTap={onTouchTaps[2]}/>,
             ],
-            'teacher': [
+            'assistant': [
                 <NavItem key={0} label='首頁' icon={homeIcon} onTouchTap={onTouchTaps[0]}/>,
                 <NavItem key={1} label='畢業預審' icon={graduationIcon} onTouchTap={onTouchTaps[1]}/>,
             ],
-            'assistant': [
+            'teacher': [
                 <NavItem key={0} label='首頁' icon={homeIcon} onTouchTap={onTouchTaps[0]}/>,
                 <NavItem key={1} label='教授課程' icon={equalizerIcon} onTouchTap={onTouchTaps[1]}/>,
                 <NavItem key={2} label='專題' icon={groupIcon} onTouchTap={onTouchTaps[2]}/>,
