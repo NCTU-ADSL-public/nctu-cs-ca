@@ -3,10 +3,26 @@ import FadeIn from 'react-fade-in';
 import axios from 'axios';
 import {ToastContainer, ToastStore} from 'react-toasts';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import './Login.css';
-import LoginButtom from './LoginButtom.js';
 import PopoverExampleAnimation from './popover';
+import {grey50} from "material-ui/styles/colors";
+
+
+const style = {
+    Login: {
+        Button: {
+            width: '20%',
+            fontFamily: 'Noto Sans CJK TC',
+            float: 'left',
+            margin: '2px'
+        },
+        ButtonLabel: {
+            fontFamily: 'Noto Sans CJK TC'
+        }
+    }
+}
 
 class Login extends React.Component {
 
@@ -59,7 +75,13 @@ class Login extends React.Component {
                                 <PopoverExampleAnimation />
                             </MuiThemeProvider>
                             <MuiThemeProvider>
-                                <LoginButtom />
+                                <RaisedButton label='Login'
+                                              backgroundColor='#00AEAE'
+                                              labelColor={grey50}
+                                              href='/auth/Nctu'
+                                              style={style.Login.Button}
+                                              labelStyle={style.Login.ButtonLabel}
+                                />
                             </MuiThemeProvider>
                         </div>
 

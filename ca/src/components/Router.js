@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
-import Login from './Login/Login'
+import Login from './Pages/Login/Login'
 import TeacherHead from './TeacherHead/Head'
 import Head from './Head/Head'
 import AssistantHead from './Pages/Assistants/Head'
