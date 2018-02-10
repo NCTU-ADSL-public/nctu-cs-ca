@@ -50,7 +50,6 @@ class Todo extends React.Component {
         return(
             <div className="course"
                  style={{
-                     transition: 'opacity .2s ease',
                      opacity: !this.props.completed ? "1" : "0.2",
                  }}>
                  <MuiThemeProvider>
@@ -76,6 +75,20 @@ class Todo extends React.Component {
                           onClick={this.handleOpen}
                      />
                  </MuiThemeProvider>
+                <MuiThemeProvider>
+                <Dialog
+                    title={this.props.cosCame}
+                    actions={actions}
+                    modal={false}
+                    open={this.state.open}
+                    contentStyle={customContentStyle}
+                    bodyStyle={bodyStyle}
+                    titleStyle={titleStyle}
+                    onRequestClose={this.handleClose}
+                >
+
+                </Dialog>
+                </MuiThemeProvider>
             </div>
 
         )
