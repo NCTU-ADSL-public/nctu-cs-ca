@@ -264,8 +264,15 @@ class Head extends Component {
         loadflag=true;
         window.location.reload();
     }
-
     async componentWillMount(){
+        await this.res()
+        let _this=this;
+        setTimeout(function () {
+            _this.select(0);
+        }, 100);
+    }
+
+    res(){
         let _this = this;
         axios.get('/students/graduate/original').then(studentData => {
             Graduationitems = studentData.data;
@@ -303,9 +310,6 @@ class Head extends Component {
                 user.id = key;
                 return user;
             });
-            setTimeout(function () {
-                _this.select(0);
-            }, 100);
         }).catch(err => {
             console.log(err);
         });
@@ -336,7 +340,6 @@ class Head extends Component {
 
     }
     componentDidMount(){
-        let _this=this;
 
     }
 
