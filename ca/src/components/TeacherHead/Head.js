@@ -24,6 +24,16 @@ const equalizerIcon = <Equalizer />;
 const groupIcon = <Grouper />;
 const freeIcon = <FreeBreakfast />;
 
+const styles = {
+    adjust: {
+		margin: '-10px 0 0 0',
+		padding: '0.15% 3% 0 8%',
+		float: 'left',
+		width: '500px',
+		height: '30px',
+	},
+};
+
 
 class Head extends Component {
 
@@ -115,7 +125,7 @@ class Head extends Component {
 							<div id="rectangle1"> </div>
 							<div id="h1">交大資工線上助理</div>
 							<div id="h2">NCTU Curriculum Assistant</div>
-						<div id="adjust">
+						<div style={styles.adjust}>
 						<MuiThemeProvider zDepth={1}>
 							<BottomNavigation selectedIndex={this.state.selectedIndex}>
 							  <BottomNavigationItem

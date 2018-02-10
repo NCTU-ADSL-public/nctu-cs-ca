@@ -42,9 +42,8 @@
     margin: -10px 0 0 0;
     padding: 0.15% 3% 0 8%;
     float:left;
-    width: 500px;
+    # width: 250px;
     height: 30px;
-    float:left;
 }
 
 #ontopDiv {
