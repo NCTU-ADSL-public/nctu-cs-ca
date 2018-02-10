@@ -88,7 +88,6 @@ class Map extends React.Component {
                       data:{
                           "label": "git",
                           "isVertical": 0,
-                          "isStatic": 1,
                           isDirected: true,
                           "nodes":datai,
                           "edges": edgesug
@@ -104,12 +103,11 @@ class Map extends React.Component {
           });
       };
 
-      componentWillMount(){
+    async componentWillMount(){
           this.setState({
               data:{
                 "label": "git",
                 "isVertical": 0,
-                "isStatic": 1,
                 "nodes":datai,
                 "edges": []
               },
@@ -119,7 +117,7 @@ class Map extends React.Component {
 
     componentDidMount(){
         console.log("data")
-        console.log(this.props.studentPasdata)
+        console.log(this.props.data)
 
     }
 
