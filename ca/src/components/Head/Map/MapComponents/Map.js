@@ -201,6 +201,27 @@ class Map extends React.Component {
                               else basic += 40
                               ny = basic
                           }
+                          else if(this.props.data[i].cos_cname.match('作業系統概論')!==null ) {
+                              ny = 600
+                          }
+                          else if(this.props.data[i].cos_cname.match('基礎程式設計')!==null ) {
+                              ny = 280
+                          }
+                          else if(this.props.data[i].cos_cname.match('訊號與系統')!==null ) {
+                              ny = 150
+                          }
+                          else if(this.props.data[i].cos_cname.match('數值方法')!==null ) {
+                              ny = 150
+                          }
+                          else if(this.props.data[i].cos_cname.match('影像處理概論')!==null ) {
+                              ny = 200
+                          }
+                          else if(this.props.data[i].cos_cname.match('計算機圖學概論')!==null ) {
+                              ny = 240
+                          }
+                          else if(this.props.data[i].cos_cname.match('軟硬體協同設計概論與實作')!==null ) {
+                              ny = 320
+                          }
                           else if(this.props.data[i].cos_cname.match('計算機概論')!==null ) {
                               ny = 350
                           }
@@ -216,6 +237,9 @@ class Map extends React.Component {
                           else if(this.props.data[i].cos_cname.match('資訊工程研討')!==null ) {
                               computer += 200
                               ny = computer
+                          }
+                          else if(this.props.data[i].cos_cname.match('資訊工程專題')!==null ) {
+                              ny = 280
                           }
 
                           else if(this.props.data[i].cos_cname.match('計算機網路概論')!==null ) {
