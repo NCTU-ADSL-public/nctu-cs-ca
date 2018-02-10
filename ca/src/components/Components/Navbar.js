@@ -2,48 +2,40 @@ import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BottomNavigation} from 'material-ui/BottomNavigation';
 import RaisedButton from 'material-ui/RaisedButton';
-
-import Home from 'material-ui/svg-icons/content/flag';
-import Map from 'material-ui/svg-icons/maps/map';
-import Graduation from 'material-ui/svg-icons/social/school';
-import Check from 'material-ui/svg-icons/av/featured-play-list';
-import Equalizer from 'material-ui/svg-icons/av/equalizer';
-import Grouper from 'material-ui/svg-icons/social/group';
-import FreeBreakfast from 'material-ui/svg-icons/places/free-breakfast';
+import HomeIcon from 'material-ui/svg-icons/content/flag';
+import MapIcon from 'material-ui/svg-icons/maps/map';
+import GraduationIcon from 'material-ui/svg-icons/social/school';
+import CheckIcon from 'material-ui/svg-icons/av/featured-play-list';
+import EqualizerIcon from 'material-ui/svg-icons/av/equalizer';
+import GroupIcon from 'material-ui/svg-icons/social/group';
+import FreeBreakfastIcon from 'material-ui/svg-icons/places/free-breakfast';
 
 import NavItem from './NavItem'
 
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
 
-
-const homeIcon = <Home />;
-const mapIcon = <Map />;
-const graduationIcon = <Graduation />;
-const checkIcon = <Check />;
-const equalizerIcon = <Equalizer />;
-const groupIcon = <Grouper />;
-const freeIcon = <FreeBreakfast />;
+const checkIcon = <CheckIcon/>;
 
 class Navbar extends React.Component {
 
     render() {
         const {onTouchTaps} = this.props
-        let navItems = {
+        const navItems = {
             'student': [
-                <NavItem key={0} label='首頁' icon={homeIcon} onTouchTap={onTouchTaps[0]}/>,
-                <NavItem key={1} label='畢業預審' icon={graduationIcon} onTouchTap={onTouchTaps[1]}/>,
-                <NavItem key={2} label='課程地圖' icon={mapIcon} onTouchTap={onTouchTaps[2]}/>,
+                <NavItem key={0} label='首頁' icon={<HomeIcon/>} onTouchTap={onTouchTaps[0]}/>,
+                <NavItem key={1} label='畢業預審' icon={<GraduationIcon/>} onTouchTap={onTouchTaps[1]}/>,
+                <NavItem key={2} label='課程地圖' icon={<MapIcon/>} onTouchTap={onTouchTaps[2]}/>,
             ],
             'assistant': [
-                <NavItem key={0} label='首頁' icon={homeIcon} onTouchTap={onTouchTaps[0]}/>,
-                <NavItem key={1} label='畢業預審' icon={graduationIcon} onTouchTap={onTouchTaps[1]}/>,
+                <NavItem key={0} label='首頁' icon={<HomeIcon/>} onTouchTap={onTouchTaps[0]}/>,
+                <NavItem key={1} label='畢業預審' icon={<GraduationIcon/>} onTouchTap={onTouchTaps[1]}/>,
             ],
             'teacher': [
-                <NavItem key={0} label='首頁' icon={homeIcon} onTouchTap={onTouchTaps[0]}/>,
-                <NavItem key={1} label='教授課程' icon={equalizerIcon} onTouchTap={onTouchTaps[1]}/>,
-                <NavItem key={2} label='專題' icon={groupIcon} onTouchTap={onTouchTaps[2]}/>,
-                <NavItem key={3} label='導生' icon={freeIcon} onTouchTap={onTouchTaps[3]}/>,
+                <NavItem key={0} label='首頁' icon={<HomeIcon/>} onTouchTap={onTouchTaps[0]}/>,
+                <NavItem key={1} label='教授課程' icon={<EqualizerIcon/>} onTouchTap={onTouchTaps[1]}/>,
+                <NavItem key={2} label='專題' icon={<GroupIcon/>} onTouchTap={onTouchTaps[2]}/>,
+                <NavItem key={3} label='導生' icon={<FreeBreakfastIcon/>} onTouchTap={onTouchTaps[3]}/>,
             ]
         }
         return (
