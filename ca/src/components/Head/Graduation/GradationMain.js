@@ -441,7 +441,7 @@ class GraduationItem extends React.Component {
                     <Graduation
                     items={this.state.items}
                     result={this.state.totalitems}
-                    revise={this.state.Graduationitems}
+                    revise={this.state.GraduationItems}
                     reviseresult={this.state.ReviseResult}
                     studentProfile={this.props.studentProfile}
                     courseCategoryArray={this.state.print_courseCategoryArray}

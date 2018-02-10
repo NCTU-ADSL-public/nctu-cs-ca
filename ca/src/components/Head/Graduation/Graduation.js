@@ -140,7 +140,7 @@ class Grad extends React.Component {
                             </div>
                         </div>
                         <div className="Grad-Row">
-                            <GraduationForm isToggle={this.props.isToggle} openforRevise={this.props.openforRevise} items={this.state.items} graditems={this.state.Graduationitems} scroll={this.state.scrollQuery}/>
+                            <GraduationForm isToggle={this.props.isToggle} openforRevise={this.props.openforRevise} items={this.state.items} graditems={this.state.GraduationItems} scroll={this.state.scrollQuery}/>
                         </div>
                         <div id="graduate-footer"> </div>
                     </div>
