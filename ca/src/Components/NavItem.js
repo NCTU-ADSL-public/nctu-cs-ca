@@ -11,7 +11,7 @@ const style = {
 
 class NavItem extends React.Component {
     render() {
-        const {label, icon, select, onTouchTap} = this.props
+        const {label, icon, selected, onTouchTap} = this.props
         return (
             <BottomNavigationItem
                 label={label}
@@ -19,6 +19,7 @@ class NavItem extends React.Component {
                 icon={icon}
                 style={style}
                 onTouchTap={onTouchTap}
+                selected={selected}
             />
         )
     }
