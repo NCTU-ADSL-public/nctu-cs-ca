@@ -9,7 +9,9 @@ import App from './App'
 import {GitNode, GitEdgePre, GitEdgeSug} from './NodeExtension';
 import Graph from 'react-json-graph';
 import DragAndZoom from  'react-drag-and-zoom'
+import Icon from 'material-ui/svg-icons/maps/directions-walk';
 
+import FlatButton from 'material-ui/FlatButton';
 //for tabs
 // import 'rc-tabs/assets/index.css';
 // import Tabs, { TabPane } from 'rc-tabs';
@@ -218,6 +220,9 @@ class Map extends React.Component {
                           else if(this.props.data[i].cos_cname.match('計算機網路概論')!==null ) {
                               ny = 700
                           }
+                          else if(this.props.data[i].cos_cname.match('網路通訊原理')!==null ) {
+                              ny = 700
+                          }
                           else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('機率')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
                               math = 200
                               ny = math
@@ -273,8 +278,10 @@ class Map extends React.Component {
                           else if(this.props.data[i].cos_cname.match('資訊工程專題')!==null ) {
                               ny = 280
                           }
-
                           else if(this.props.data[i].cos_cname.match('計算機網路概論')!==null ) {
+                              ny = 700
+                          }
+                          else if(this.props.data[i].cos_cname.match('網路通訊原理')!==null ) {
                               ny = 700
                           }
                           else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('機率')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
@@ -373,11 +380,11 @@ class Map extends React.Component {
       const width = document.body.clientWidth;
       const height = document.body.clientHeight;
       const heightWrap = height;
-      let selectFieldStyle = `selectFieldStyle ${this.state.slideIndex?'':' animated bounceInRight'}`
-    return (
+      return (
       <div>
         <div className="selectFieldStyle animated bounceInRight" style={{display:this.state.slideIndex?'':'none'}} >
-              <MuiThemeProvider >
+            <div>
+            <MuiThemeProvider >
                   <SelectField
                       floatingLabelText="選取查看事項"
                       value={this.state.value}
@@ -390,6 +397,26 @@ class Map extends React.Component {
                       <MenuItem style={fontStyle} value={3} primaryText="建議修課" />
                   </SelectField>
               </MuiThemeProvider>
+            </div>
+            <div>
+            <MuiThemeProvider >
+                <FlatButton
+                    disabled={true}
+                    label="已修過"
+                    labelStyle={{
+                        padding: "5px",
+                        height: "45px",
+                        verticalAlign: "default",
+                        color: "#1d1d1d",
+                        fontSize: "1em",
+                        fontWeight: "300",
+                        letterSpacing: "1px",
+                        fontFamily: 'Noto Sans CJK TC',
+                    }}
+                    icon={<Icon color={"#26A69A"} />}
+                />
+            </MuiThemeProvider>
+            </div>
         </div>
           <Provider store={store}>
         <div className='Map-title-text'>
@@ -418,7 +445,7 @@ class Map extends React.Component {
                 <DragAndZoom
                     minZoom={40}
                     maxZoom={150}
-                    initialZoom={80}
+                    initialZoom={100}
                     zoomStep={2}
                     onZoom={(zoom, e) => {}}
                 >

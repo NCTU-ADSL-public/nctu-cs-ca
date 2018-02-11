@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import './Todo.css';
+import axios from 'axios';
 
 
 const customContentStyle = {
@@ -24,15 +25,43 @@ class Todo extends React.Component {
 
     state = {
         open: false,
+        coursedata:[ {'teacher':'彭文志','code':['DCP123', 'DCP456', 'DCP123'], 'stuNum': [56, 77, 22], 'english': [true, false, false]}]
     };
 
     handleOpen = () => {
+        let _this = this
+        axios.post('/students/courseMap/courseInfo', {
+            cos_cname:_this.props.cosCame
+        })
+            .then(res => {
+                console.log(res.data)
+                this.setState({coursedata: res.data});
+            })
+            .catch(err => {
+                //window.location.replace("/logout ");
+                console.log(err)
+            });
         this.setState({open: true});
     };
 
     handleClose = () => {
         this.setState({open: false});
     };
+
+    getinfo = () => {
+        return (
+            <div>
+                <div>授課教授: {this.state.coursedata[0].teacher}</div>
+                <br/>
+                <div>課號: {this.state.coursedata[0].code[0]}</div>
+                <br/>
+                <div>學生人數: {this.state.coursedata[0].stuNum[0]}</div>
+                <br/>
+                <div>英文授課: {this.state.coursedata[0].english[0]}</div>
+                <br/>
+            </div>
+        )
+    }
 
     render(){
         const actions = [
@@ -50,6 +79,7 @@ class Todo extends React.Component {
         return(
             <div className="course"
                  style={{
+                     transition: 'all .2s',
                      opacity: !this.props.completed ? "1" : "0.2",
                  }}>
                  <MuiThemeProvider>
@@ -86,7 +116,7 @@ class Todo extends React.Component {
                     titleStyle={titleStyle}
                     onRequestClose={this.handleClose}
                 >
-
+                    {this.state.coursedata===null?'':this.getinfo()}
                 </Dialog>
                 </MuiThemeProvider>
             </div>

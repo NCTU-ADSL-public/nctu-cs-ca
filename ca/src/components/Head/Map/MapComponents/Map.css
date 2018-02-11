@@ -132,6 +132,7 @@ h3{
 }
 
 .course:hover{
+    border-radius: 2px;
 }
 
 .course-btn{
