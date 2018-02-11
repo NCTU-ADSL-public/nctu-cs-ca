@@ -7,12 +7,12 @@ import CourseTable from './CourseTable';
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-const muiTheme = getMuiTheme({
-    palette: {
-        primary1Color: 'rgba(0, 0, 0, 0)',
-        accent1Color: '#00AEAE',
+
+const styles = {
+    filter: {
+        padding: '50px 4% 0 8%',
     },
-});
+};
 
 export default class StudentList extends React.Component {
 
@@ -22,24 +22,30 @@ export default class StudentList extends React.Component {
         this.state = {
             initItems: this.props.items,
             items: [],
+
         };
 
         this.filterList = this.filterList.bind(this);
-
     }
-
 
     componentWillMount(){
         this.setState({items: this.state.initItems});
     }
 
+    componentDidMount(){
+        this.setState({items: this.state.initItems});
+    }
+
+
     filterList(event){
         let updatedList = this.state.initItems;
         updatedList = updatedList.filter(function(item){
-            return (item.name.toLowerCase().search(
-                    event.target.value.toLowerCase()) !== -1)||
+            return (
                 (item.sem.toLowerCase().search(
-                    event.target.value.toLowerCase()) !== -1);
+                    event.target.value.toLowerCase()) !== -1)||
+                (item.name.toLowerCase().search(
+                    event.target.value.toLowerCase()) !== -1)
+            );
         });
         this.setState({items: updatedList});
     }
@@ -47,7 +53,8 @@ export default class StudentList extends React.Component {
     //input press ENTER
     handleKeyPress = (e) => {
         if (e.key === 'Enter' && this.state.items[0] !== undefined) {
-            this.props.parentFunction(this.state.items[0]);
+            let sid = this.state.items[0].student_id;
+            // window.open('/assistants/head/s/' + sid);
         }
     };
 
@@ -55,17 +62,24 @@ export default class StudentList extends React.Component {
         this.props.parentFunction(item);
     };
 
+
     render(){
         return (
             <div id="page">
-                <div className="filter">
+                <div style={styles.filter}>
+
                     <div className="filter-list">
-                        <input type="text" placeholder="搜尋 課程名稱/ 學期"
+                        <input type="text"
+                               placeholder="搜尋 課程名稱/ 學期"
                                onChange={this.filterList}
-                               onKeyPress={this.handleKeyPress}/>
+                               onKeyPress={this.handleKeyPress}
+                        />
                     </div>
-                    <MuiThemeProvider muiTheme={muiTheme}>
-                        <CourseTable items={this.state.items} parentFunction={this.searchCallback}/>
+
+                    <MuiThemeProvider>
+                        <CourseTable items={this.state.items}
+                                     parentFunction={this.searchCallback}
+                        />
                     </MuiThemeProvider>
                 </div>
             </div>

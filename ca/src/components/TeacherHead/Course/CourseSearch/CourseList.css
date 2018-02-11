@@ -4,19 +4,19 @@ body{
 }
 
 .filter {
-    padding: 50px 15% 0 15%;
+    padding: 50px 1% 0 1%;
 }
 
 
 .filter-list {
-    padding: 30px;
+    padding: 5px;
     margin: 0;
 }
 
 .filter-list input {
     line-height: 2;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 300;
     opacity: 0.9;
     height: auto;
     padding-left: 18px;
