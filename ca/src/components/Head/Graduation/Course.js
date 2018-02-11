@@ -59,28 +59,29 @@ class Course extends React.Component {
 
     render(){
         return(
-            <div className={this.props.completed?"grad":this.props.selection?"grad":"grad animated flash"} ref="target">
-                        <MuiThemeProvider>
-                            <FlatButton
-                                        className="grad-btn"
-                                        labelStyle={{
-                                            padding: "5px",
-                                            height: "45px",
-                                            verticalAlign: "default",
-                                            color: "#fcfcfc",
-                                            fontSize: "1em",
-                                            fontWeight: "300",
-                                            letterSpacing: "1px",
-                                            fontFamily: 'Noto Sans CJK TC',
-                                        }}
-                                        hoverColor={"#80b0d9"}
-                                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29951":(this.props.reason==="free1"　|| this.props.reason==="free2"　|| this.props.reason === "english")?"#6A94A2":(this.props.reason==="now" )?"#ab6bd9":"#3cab7d":this.props.selection?(this.props.reason==="now")?"#ab6bd9":"gray":(this.props.reason==="now")?"#ab6bd9":"#d95467"}
-                                        style={this.state.style}
-                                        label={this.state.name}
-                                        onClick={()=>this.handleClick()}>
+            <div className={this.props.completed?"grad":this.props.selection?"grad":"grad animated flash"}
+                 ref="target">
+                <MuiThemeProvider>
+                    <FlatButton
+                        className="grad-btn"
+                        labelStyle={{
+                            padding: "5px",
+                            height: "45px",
+                            verticalAlign: "default",
+                            color: "#fcfcfc",
+                            fontSize: "1em",
+                            fontWeight: "300",
+                            letterSpacing: "1px",
+                            fontFamily: 'Noto Sans CJK TC',
+                        }}
+                        hoverColor={"#80b0d9"}
+                        backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29951":(this.props.reason==="free1"　|| this.props.reason==="free2"　|| this.props.reason === "english")?"#6A94A2":(this.props.reason==="now" )?"#ab6bd9":"#3cab7d":this.props.selection?(this.props.reason==="now")?"#ab6bd9":"gray":(this.props.reason==="now")?"#ab6bd9":"#d95467"}
+                        style={this.state.style}
+                        label={this.state.name}
+                        onClick={()=>this.handleClick()}>
 
-                            </FlatButton>
-                        </MuiThemeProvider>
+                    </FlatButton>
+                </MuiThemeProvider>
                 <Popover
                     placement='top'
                     target={this.refs.target}
