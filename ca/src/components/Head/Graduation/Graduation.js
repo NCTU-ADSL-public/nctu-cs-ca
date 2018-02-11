@@ -159,7 +159,7 @@ class Grad extends React.Component {
                                         </div>
 
                                     </div>
-                                    <GeneralCourseList items={generalCourseType.course}/>
+                                    <GeneralCourseList courses={generalCourseType.course}/>
                                 </div>
                             </div>
                         </div>
