@@ -1,14 +1,17 @@
 import React from 'react'
+import axios from 'axios'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 import './Graduation.css'
-import GraduationForm from './GraduationForm'
+
 import PrintForm from './GradTable/PrintForm'
 import LinearProgressExampleDeterminate from './OverviewProgress'
 import CircularProgress from './CircularProgress'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './Trello/List'
-import axios from 'axios'
-
+import IndividualCourse from './IndividualCourse'
+import GeneralCourseList from './GeneralCourseList'
+import IndividualProgress from './IndividualProgress'
 
 class Grad extends React.Component {
     state={
@@ -105,7 +108,9 @@ class Grad extends React.Component {
 
 
     render(){
-
+        const itemsToShow = (this.props.isToggle)? this.state.items: this.state.graduationItems
+        const generalCourseType = itemsToShow.filter(t => (t.title==="通識"))[0]
+        const otherCourseType = itemsToShow.filter(t => (t.title!=="通識" && ( t.course || t.selection)))
             return (
                 <div>
                 <div style={{display:this.props.isMod?"none":"inline"}}>
@@ -140,7 +145,31 @@ class Grad extends React.Component {
                             </div>
                         </div>
                         <div className="Grad-Row">
-                            <GraduationForm isToggle={this.props.isToggle} openforRevise={this.props.openforRevise} items={this.state.items} graditems={this.state.graduationItems} scroll={this.state.scrollQuery}/>
+                            <div className="animated fadeIn">
+                                {otherCourseType.map((item,key) =>
+                                    <IndividualCourse
+                                        key={key}
+                                        pass={item.course}
+                                        title={item.title}
+                                        credit={item.credit}
+                                        total={item.require}
+                                        selection={item.selection}
+                                        scroll={this.state.scrollQuery}
+                                    />
+                                )}
+
+                                <div  className="little-form"  ref="my">
+                                    <div id="little-title">
+                                        <IndividualProgress grad={generalCourseType.credit/generalCourseType.require * 100}/>
+                                        <div className="little-title-title">
+                                            <div id="little-title-number"><font size={6} color='#338d68'>{generalCourseType.credit}</font>/{generalCourseType.require}(學分)</div>
+                                            <div id="little-title-text" ><font size={generalCourseType.fontflag?5:6}>{generalCourseType.title}</font></div>
+                                        </div>
+
+                                    </div>
+                                    <GeneralCourseList items={generalCourseType.course} scroll={this.state.scrollQuery}/>
+                                </div>
+                            </div>
                         </div>
                         <div id="graduate-footer"> </div>
                     </div>
