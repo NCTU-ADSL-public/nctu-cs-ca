@@ -6,6 +6,12 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import './Todo.css';
 import axios from 'axios';
+import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
+import photo from './TodoExtension/defalt.jpg'
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import Drawer from 'material-ui/Drawer';
 
 
 const customContentStyle = {
@@ -21,11 +27,21 @@ const titleStyle = {
     color:'#565656'
 };
 
+const fontStyle={
+    verticalAlign: "default",
+    fontSize: "1em",
+    fontWeight: "300",
+    letterSpacing: "1px",
+    fontFamily: 'Noto Sans CJK TC',
+}
+
 class Todo extends React.Component {
 
     state = {
         open: false,
-        coursedata:[ {'teacher':'彭文志','code':['DCP123', 'DCP456', 'DCP123'], 'stuNum': [56, 77, 22], 'english': [true, false, false]}]
+        opendrawer:false,
+        value:0,
+        coursedata:[ {'teacher':['彭文志','彭文志','彭文志'],'code':['DCP123', 'DCP456', 'DCP123'],stuLimit:[80], 'stuNum': [56, 77, 22],time:["104-1","104-1","104-1"], 'english': [true, false, false]}]
     };
 
     handleOpen = () => {
@@ -46,19 +62,78 @@ class Todo extends React.Component {
 
     handleClose = () => {
         this.setState({open: false});
+        this.setState({open: false});
     };
+
+    handleChipClick = () => {
+        this.setState({opendrawer: true});
+    };
+
+    handleChange = (event, index, value)  => {
+        this.setState({value:value-1});
+    }
+
+    handleCloseDrawer = () => this.setState({opendrawer: false});
+
+    getMenuItem = () => {
+        let items=[]
+        for (let i = 0; i < this.state.coursedata[0].time.length; i++ ) {
+            items.push(
+                    <MenuItem style={fontStyle}  value={i+1} key={i} primaryText={`${this.state.coursedata[0].time[i].match('^[0-9]*')}學年度 ${this.state.coursedata[0].time[i].charAt(4)==='1'?'上學期':'下學期'}   ${this.state.coursedata[0].teacher[i]} 教授`} />
+                )
+        }
+        return items
+
+    }
 
     getinfo = () => {
         return (
             <div>
-                <div>授課教授: {this.state.coursedata[0].teacher}</div>
+                <div style={{float:'left'}}>授課教授:&nbsp;&nbsp;&nbsp;
+                    <MuiThemeProvider>
+                        <Chip
+                            onClick={this.handleChipClick}
+                            labelStyle={fontStyle}
+                            style={{
+                                margin: 4,
+                                float:'right',
+                            }}
+                        >
+                            <Avatar src={photo}/>
+                            {this.state.coursedata[0].teacher[this.state.value]}
+                        </Chip>
+                    </MuiThemeProvider></div>
                 <br/>
-                <div>課號: {this.state.coursedata[0].code[0]}</div>
                 <br/>
-                <div>學生人數: {this.state.coursedata[0].stuNum[0]}</div>
                 <br/>
-                <div>英文授課: {this.state.coursedata[0].english[0]}</div>
+                <div style={{clear: 'left'}}>課號: &nbsp;{this.state.coursedata[0].code[this.state.value]}</div>
                 <br/>
+                <div style={{float:'left'}}>
+                    時間:&nbsp;&nbsp;&nbsp;
+                    <MuiThemeProvider>
+                        <SelectField
+                            value={this.state.value+1}
+                            onChange={this.handleChange}
+                            style={{float:'right', marginTop:'-15px', width:'500px'}}
+                            maxHeight={200}
+                            labelStyle={fontStyle}
+                            selectedMenuItemStyle={{color:'#26A69A'}}
+                        >
+                            {this.getMenuItem()}
+                        </SelectField>
+                    </MuiThemeProvider>
+                </div>
+                <br/>
+                <div style={{clear: 'left'}}>學生上限: &nbsp;{this.state.coursedata[0].stuLimit[this.state.value]}</div>
+                <br/>
+                <div>學生人數: &nbsp;{this.state.coursedata[0].stuNum[this.state.value]}</div>
+                <br/>
+                <div>英文授課: &nbsp;{this.state.coursedata[0].english[this.state.value]}</div>
+                <br/>
+                <div>簡介: &nbsp;{this.state.coursedata[0].english[this.state.value]}</div>
+                <br/>
+                <div>
+                </div>
             </div>
         )
     }
@@ -117,6 +192,16 @@ class Todo extends React.Component {
                     onRequestClose={this.handleClose}
                 >
                     {this.state.coursedata===null?'':this.getinfo()}
+                    <MuiThemeProvider>
+                        <Drawer
+                            docked={false}
+                            width={"50%"}
+                            open={this.state.opendrawer}
+                            onRequestChange={(opendrawer) => this.setState({opendrawer})}
+                            openSecondary
+                        >
+                        </Drawer>
+                    </MuiThemeProvider>
                 </Dialog>
                 </MuiThemeProvider>
             </div>

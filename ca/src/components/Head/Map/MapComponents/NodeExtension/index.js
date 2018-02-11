@@ -19,10 +19,8 @@ class GitnodeItem extends React.Component {
         super(props)
     }
     componentWillMount(){
-        console.log(this.state.data)
     }
     componentWillUpdate(nextProps, nextState){
-        console.log(this.state.data)
     }
     state={
         data:this.props.info.filter(t=>(t.cosCame === this.props.content))
