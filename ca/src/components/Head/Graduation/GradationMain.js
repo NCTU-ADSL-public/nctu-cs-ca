@@ -8,7 +8,7 @@ import Toggle from 'material-ui/Toggle';
 import ReactHover from 'react-hover';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import TopButton from './TopButton';
+import ScrollToTopBtn from '../../Components/ScrollToTopBtn';
 import axios from 'axios'
 import scrollToComponent from 'react-scroll-to-component'
 import Graduation from './Graduation';
@@ -282,7 +282,7 @@ class GraduationItem extends React.Component {
             <div className="font_adjust">
                 <Snow/>
                 <div className="fixed" onClick={()=>this.scrollTotop()}>
-                    <TopButton/>
+                    <ScrollToTopBtn/>
                 </div>
                 <div className="Grad-title-adjust" ref="my">
                     <div className="Grad-title-text">
