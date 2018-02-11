@@ -32,7 +32,7 @@ const style = {
     }
 }
 
-class GeneralCourse extends React.Component {
+class PopoverButton extends React.Component {
 
     constructor(props) {
         super(props);
@@ -46,10 +46,11 @@ class GeneralCourse extends React.Component {
     }
 
     render(){
-        const {completed, selection, backgroundColor} = this.props
+        const {label, flash, backgroundColor, children} = this.props
+        console.log(this.props)
         return(
             <div style={style.Popover}>
-                <div className={(completed | selection) ? '' : 'animated flash'}
+                <div className={flash ? 'animated flash' : ''}
                      onClick={() => this.setIsOpened(!this.state.isOpened)}
                      style={style.ButtonBox}
                      ref="target"
@@ -61,18 +62,17 @@ class GeneralCourse extends React.Component {
                             hoverColor={"#80b0d9"}
                             backgroundColor={backgroundColor ? backgroundColor : '#616161'}
                             style={style.Button}
-                            label={this.props.label}
+                            label={label}
                         />
                     </MuiThemeProvider>
                 </div>
                 <Popover
                     placement='top'
                     target={this.refs.target}
-                    show={this.state.open}
+                    show={this.state.isOpened}
                     onHide={() => this.setIsOpened(false)}
-                    style={{width:'auto'}}
                 >
-                    {this.props.children}
+                    {children}
                 </Popover>
             </div>
 
@@ -80,4 +80,4 @@ class GeneralCourse extends React.Component {
     }
 }
 
-export default GeneralCourse
+export default PopoverButton
