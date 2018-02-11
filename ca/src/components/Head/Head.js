@@ -5,7 +5,7 @@ import FadeIn from 'react-fade-in';
 
 import HomeItem from './Home/Home.js';
 import MapItem from './Map/MapComponents/Map.js';
-import GraduationItem from './Graduation/GradationMain.js';
+import GradCreditCheckPage from './Graduation/GradCreditCheck.js';
 import CreditItem from './Credit/Credit.js';
 
 import './StudentsHead.css';
@@ -133,7 +133,7 @@ class Head extends Component {
             ReactDOM.render(
                 <font>
                     <FadeIn>
-                        <GraduationItem
+                        <GradCreditCheckPage
                             items={graduationItems}
                             result={graduationItems[11]}
                             revise={revise}

@@ -11,7 +11,7 @@ import IndividualCourse from './IndividualCourse'
 import GeneralCourseList from './GeneralCourseList'
 import AnimatedProgress from '../../Components/AnimatedProgress'
 
-class Grad extends React.Component {
+class CreditOverview extends React.Component {
     state = {
         isMod:false,
         isToggle:true,
@@ -186,4 +186,4 @@ class Grad extends React.Component {
     }
 }
 
-export default Grad
+export default CreditOverview

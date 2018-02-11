@@ -11,7 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ScrollToTopBtn from '../../Components/ScrollToTopBtn';
 import axios from 'axios'
 import scrollToComponent from 'react-scroll-to-component'
-import Graduation from './Graduation';
+import CreditOverview from './CreditOverview';
 import App from './Trello/List'
 import FlatButton from 'material-ui/FlatButton';
 import DialogWaring from './Trello/warning'
@@ -86,7 +86,7 @@ const styles = {
     }
 };
 
-class GraduationItem extends React.Component {
+class GradCreditCheck extends React.Component {
 
 
     state={
@@ -429,7 +429,7 @@ class GraduationItem extends React.Component {
                 </div>
                 <ToastContainer autoClose={10000} style={{margin:'50px 0 0 0'}}/>
                 <MuiThemeProvider>
-                    <Graduation
+                    <CreditOverview
                     items={this.state.items}
                     result={this.state.totalitems}
                     revise={this.state.graduationItems}
@@ -446,7 +446,7 @@ class GraduationItem extends React.Component {
     }
 }
 
-export default GraduationItem
+export default GradCreditCheck
 
 // <RaisedButton style={styles.button}
 // labelStyle={styles.labelStyle}
