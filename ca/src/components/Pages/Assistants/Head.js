@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
 
-import HomeItem from './Home/Home.js'
+import HomeItem from './Home.js'
 import GraduationItem from './Graduation/index'
 
 import './Head.css'
