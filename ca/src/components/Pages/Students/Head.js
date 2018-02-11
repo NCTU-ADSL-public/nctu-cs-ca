@@ -9,10 +9,10 @@ import GradCreditCheckPage from './Graduation/GradCreditCheck.js';
 import CreditItem from './Credit/Credit.js';
 
 import './StudentsHead.css';
-import Navbar from '../Components/Navbar'
-import Loading from '../Components/Loading';
+import Navbar from '../../Components/Navbar'
+import Loading from '../../Components/Loading';
 
-import defaultData from '../Resources/FakeData'
+import defaultData from '../../Resources/FakeData'
 
 let graduationItems = defaultData.GraduationItems
 let revise = defaultData.GraduationItems_Revised

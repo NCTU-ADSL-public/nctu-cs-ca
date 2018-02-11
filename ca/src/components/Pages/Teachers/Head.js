@@ -9,7 +9,7 @@ import GroupItem from './Group/Group.js';
 import FamilyItem from './Family/Family.js';
 
 import './Head.css';
-import Navbar from '../Components/Navbar'
+import Navbar from '../../Components/Navbar'
 
 class Head extends Component {
 

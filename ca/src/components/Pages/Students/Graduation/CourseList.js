@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './Graduation.css'
-import PopoverButton from '../../Components/PopoverButton'
+import PopoverButton from '../../../Components/PopoverButton'
 
 const CourseList = (props) => {
     const { items, selection, handleClick} = props

@@ -1,5 +1,5 @@
 import React from 'react'
-import index from '../../Resources/index+.png'
+import index from '../../../Resources/index+.png'
 import './Home.css'
 import Snow from 'react-snow-effect'
 

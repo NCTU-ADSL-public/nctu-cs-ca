@@ -1,5 +1,5 @@
 import React from 'react'
-import PopoverButton from '../../Components/PopoverButton'
+import PopoverButton from '../../../Components/PopoverButton'
 
 class GeneralCourseList extends React.Component {
 

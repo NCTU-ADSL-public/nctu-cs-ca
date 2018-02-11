@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimatedProgress from '../../Components/AnimatedProgress'
+import AnimatedProgress from '../../../Components/AnimatedProgress'
 import CourseList from './CourseList'
 import './Graduation.css'
 

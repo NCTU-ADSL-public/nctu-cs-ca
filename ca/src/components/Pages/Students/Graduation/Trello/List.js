@@ -3,7 +3,7 @@ import './App.css'
 import {Board} from 'react-trello'
 import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
-import Loading from '../../../Components/Loading'
+import Loading from '../../../../Components/Loading'
 
 const CustomCard = props => {
     return (

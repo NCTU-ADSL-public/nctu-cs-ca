@@ -1,5 +1,5 @@
 import React from 'react'
-import index from '../Resources/DSC03961.png'
+import index from '../../Resources/DSC03961.png'
 
 const img = index
 
