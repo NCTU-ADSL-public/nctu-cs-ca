@@ -7,8 +7,8 @@
 }
 
 .Map-title-text{
-    margin: 0 5% 0 5%;
-    padding: 35px 10px 0 65px;
+    background: #F5F5F5;
+    padding: 35px 6% 0 6%;
     color: #7B7B7B;
     font-size: 1.5em;
 
@@ -131,10 +131,20 @@ h3{
     padding: 8px 8px 4px 8px;
 }
 
-.course-btn{
-    overflow: visible;
+.course:hover{
     border-radius: 2px;
+}
+
+.course-btn{
+    overflow: auto;
+    border-radius: 2px;
+    transition: all 2s ease;
     background-color: #616161;
+    width:100px;
+}
+.course-btn:hover{
+    width: 200px;
+    z-index: 1000;
 }
 
 .course-btn-map{
@@ -242,10 +252,6 @@ h3{
     .course-btn{
         height: 100%;
         overflow: hidden;
-        -webkit-transition: width 1s;
-        transition: width 1s;
-        -o-transition:width 1s;
-        -moz-transition:width 1s;
     }
 
 

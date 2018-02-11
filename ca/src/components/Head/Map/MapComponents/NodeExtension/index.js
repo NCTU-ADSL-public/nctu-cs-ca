@@ -31,7 +31,7 @@ class GitnodeItem extends React.Component {
     render () {
         return(
             <MuiThemeProvider>
-                <div on={alert(1)}>
+                <div>
                     <FlatButton className="course-btn-map animated pulse"
                                 backgroundColor="#616161"
                                 hoverColor="#338d68"
