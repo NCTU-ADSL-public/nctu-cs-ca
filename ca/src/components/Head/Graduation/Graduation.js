@@ -5,7 +5,7 @@ import scrollToComponent from "react-scroll-to-component";
 
 import './Graduation.css'
 import PrintForm from './GradTable/PrintForm'
-import CircularProgress from './CircularProgress'
+import CircularProgress from '../../Components/CircularProgress'
 import App from './Trello/List'
 import IndividualCourse from './IndividualCourse'
 import GeneralCourseList from './GeneralCourseList'
