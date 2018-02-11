@@ -216,15 +216,11 @@ class GraduationItem extends React.Component {
             document.title = fileName;
         window.print();
         document.title = original;
-        this.setState({
-            scrollQuery:'',opendialogprint: true});
+        this.setState({opendialogprint: true});
         return true;
     }
     handleToggle(){
-        this.setState({
-            scrollQuery:'',
-            isToggle:!this.state.isToggle
-        });
+        this.setState({isToggle:!this.state.isToggle});
         if(this.state.isToggle){
             this.setState({
                 totalitems:this.state.ReviseResult,
@@ -239,15 +235,11 @@ class GraduationItem extends React.Component {
     }
 
     handleClose(e) {
-        this.setState({
-            scrollQuery:'',
-            open: false
-        });
+        this.setState({open: false});
     }
 
     handleClickview(e) {
         this.setState({
-            scrollQuery:'',
             open: !this.state.open,
             isToggle:this.state.isToggle
         });

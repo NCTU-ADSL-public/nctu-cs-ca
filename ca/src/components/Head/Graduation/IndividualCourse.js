@@ -1,7 +1,6 @@
 import React from 'react';
 import IndividualProgress from './IndividualProgress'
 import CourseList from './CourseList'
-import scrollToComponent from 'react-scroll-to-component';
 import './Graduation.css'
 
 export default class IndividualCourse extends React.Component {
@@ -17,11 +16,7 @@ export default class IndividualCourse extends React.Component {
             }
         }
     }
-    componentWillUpdate(nextProps, nextState){
-        if(nextProps.scroll === this.props.title){
-            scrollToComponent(this.refs.my);
-        }
-    }
+
     render() {
             return (
                 <div  className="little-form"  ref="my">
