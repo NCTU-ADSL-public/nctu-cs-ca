@@ -18,6 +18,11 @@ footer {
   height: 100vh;
 }
 
+#page {
+    min-height: 100vh;
+    margin-top: 70px;
+}
+
 /*
  * react-circular-progressbar styles
  *

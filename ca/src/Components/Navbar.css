@@ -1,99 +1,54 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
-.Head-header {
-    margin: 0 0 0 0;
-    padding: 0 0 0 3.5%;
-    color:  #7B7B7B;
-    width: 1300px;
-    height: 40px;
-    float: left;
-}
-
-#rectangle1 {
-    margin: 11px 10px 0 0;
-    width: 6px;
-    height: 28px;
-    background: #00AEAE;
-    float:left;
-}
-
-.h1 {
-    font-family: 'Noto Sans CJK TC';
-    font-weight:  400;
-    font-size: 20px;
-    margin: 0.6% 0.8% 0 0;
-    float: left;
-}
-
-.h2 {
-    font-family: 'Noto Sans CJK TC';
-    font-weight:  lighter;
-    font-size: 14px;
-    margin: 1.1% -100px 0 0;
-    float: left;
-}
-
 .adjust{
-    margin: -10px 0 0 0;
-    padding: 0.15% 3% 0 15%;
-    float:left;
-    width: 300px;
-    height: 30px;
-    float:left;
+    display: inline-block;
 }
 
 #ontopDiv {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     z-index: 10000;
     background: #EEEEEE;
-    height: 50px;
+    padding: 0px 30px 0px 50px;
+    color:  #7B7B7B;
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
 }
 
 .idcard{
-    padding: 0 0 0 20px;
-    font-size: 14px;
-    font-family: 'Noto Sans CJK TC';
-    color: #7B7B7B;
-    float: right;
-    height: 45px;
-    width: 190px;
-    position: absolute;
-    right: 60px;
+    margin: 0 20px;
+    display: inline-block;
 }
 
 #idcard-top{
-    margin: 3px 2% 0 58px;
+    font-size: 14px;
     text-align: left;
 }
 
 #idcard-buttom{
-    margin: 0 2% 0 58px;
+    font-size: 14px;
     text-align: left;
-}
-
-#dcard-data{
 }
 
 #idcard-photo{
     margin: 0 0 0 0;
-    height: 40px;
-    width: 40px;
-    float: left;
+    height: 44px;
+    width: 44px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #logout-button{
     height: 40px;
     width: 65px;
     padding: 5px 0 0 0;
-    float: right;
-    position: absolute;
-    right: 50px;
+
 }
 
 @media (max-width: 480px) {
-    .Head-header {
+    .align-right-box {
         padding: 0 0 0 0;
         text-align: center;
     }
@@ -103,12 +58,6 @@
         background: #EEEEEE;
     }
 
-
-    #rectangle1 {
-        margin: 10px 13px 0 10px;
-        width: 6.5px;
-        height: 35px;
-    }
     .h1 {
         font-size: 25px;
         margin: 0.6% 20% 0 0;

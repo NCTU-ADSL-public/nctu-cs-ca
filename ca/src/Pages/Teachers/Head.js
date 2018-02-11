@@ -96,7 +96,6 @@ class Head extends Component {
                         selectedIndex={this.state.selectedIndex}
                         onTouchTaps={onTouchTaps}
                 />
-				<div id="topRec"/>
 				<div id="page"/>
 	  		</div>
 	    );

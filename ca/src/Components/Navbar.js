@@ -17,6 +17,28 @@ import defalt from '../Resources/defalt.jpg';
 
 const checkIcon = <CheckIcon/>;
 
+const style = {
+    BrandBox: {
+        borderLeft: '6px solid #00AEAE',
+        height: 28,
+        display: 'inline-block',
+        marginTop: 12,
+        verticalAlign: 'top',
+    },
+    BrandName: {
+        fontFamily: 'Noto Sans CJK TC',
+        fontWeight:  400,
+        fontSize: 20,
+        marginLeft: 10,
+    },
+    BrandSubName: {
+        fontFamily: 'Noto Sans CJK TC',
+        fontWeight:  'lighter',
+        fontSize: 14,
+        marginLeft: 10,
+    }
+}
+
 class Navbar extends React.Component {
 
     render() {
@@ -40,10 +62,11 @@ class Navbar extends React.Component {
         }
         return (
             <div id="ontopDiv">
-                <div className="Head-header" >
-                    <div id="rectangle1"> </div>
-                    <div className="h1">交大資工線上助理</div>
-                    <div className="h2">NCTU Curriculum Assistant</div>
+                <div>
+                    <div style={style.BrandBox}>
+                        <span style={style.BrandName}>交大資工線上助理</span>
+                        <span style={style.BrandSubName}>NCTU Curriculum Assistant</span>
+                    </div>
                     <div className="adjust">
                         <MuiThemeProvider zDepth={1}>
                             <BottomNavigation selectedIndex={this.props.selectedIndex}>
@@ -51,11 +74,17 @@ class Navbar extends React.Component {
                             </BottomNavigation>
                         </MuiThemeProvider>
                     </div>
+                </div>
+                <div style={{height: 56, padding: '6px 0px'}}>
                     <div className="idcard">
-                        <div id="idcard-data">
-                            <div id="idcard-photo">
-                                <img src={defalt} width="44px" alt=""/>
-                            </div>
+                        <div id="idcard-photo">
+                            <img src={defalt} width="44px" alt=""/>
+                        </div>
+                        <div style={{
+                            display: 'inline-block',
+                            verticalAlign: 'middle',
+                            marginLeft: 9,
+                        }}>
                             <div id="idcard-top">
                                 {this.props.name}
                             </div>
@@ -64,20 +93,18 @@ class Navbar extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div id="logout-button">
-                        <MuiThemeProvider>
-                            <RaisedButton style={{
-                                width: '13%',
-                                fontFamily: 'Noto Sans CJK TC',
-                            }}  backgroundColor = "#DDDDDD" label="Logout" onClick={()=>{
-                                let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
-                                if(keys) {
-                                    for(let i = keys.length; i--;)
-                                        document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
-                                }
-                            }} href="/logout"/>
-                        </MuiThemeProvider>
-                    </div>
+                    <MuiThemeProvider>
+                        <RaisedButton backgroundColor = "#DDDDDD"
+                                      label="Logout"
+                                      onClick={()=>{
+                                          let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+                                          if(keys) {
+                                              for(let i = keys.length; i--;)
+                                                  document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+                                          }}}
+                                      href="/logout"
+                        />
+                    </MuiThemeProvider>
                 </div>
             </div>
         )

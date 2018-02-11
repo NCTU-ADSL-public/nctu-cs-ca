@@ -65,23 +65,21 @@ export default class StudentList extends React.Component {
 
     render(){
         return (
-            <div id="page">
-                <div style={styles.filter}>
+            <div style={styles.filter}>
 
-                    <div className="filter-list">
-                        <input type="text"
-                               placeholder="搜尋 課程名稱/ 學期"
-                               onChange={this.filterList}
-                               onKeyPress={this.handleKeyPress}
-                        />
-                    </div>
-
-                    <MuiThemeProvider>
-                        <CourseTable items={this.state.items}
-                                     parentFunction={this.searchCallback}
-                        />
-                    </MuiThemeProvider>
+                <div className="filter-list">
+                    <input type="text"
+                           placeholder="搜尋 課程名稱/ 學期"
+                           onChange={this.filterList}
+                           onKeyPress={this.handleKeyPress}
+                    />
                 </div>
+
+                <MuiThemeProvider>
+                    <CourseTable items={this.state.items}
+                                 parentFunction={this.searchCallback}
+                    />
+                </MuiThemeProvider>
             </div>
         );
     }

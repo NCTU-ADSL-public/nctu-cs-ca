@@ -5,7 +5,6 @@ const style = {
     fontFamily: 'Noto Sans CJK TC',
     background: '#EEEEEE',
     lineHeight: '15px',
-    margin: '5px 0 0',
     fontSize: '11px',
     width: '10px',
 }
