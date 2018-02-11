@@ -10,14 +10,6 @@ import {
 
 
 const styles = {
-    propContainer: {
-        width: 200,
-        overflow: 'hidden',
-        margin: '20px auto 0',
-    },
-    propToggleHeader: {
-        margin: '20px auto 10px',
-    },
     tabColumn0: {
         cursor: 'pointer',
       //  background: '#ecfcf9',
@@ -28,26 +20,54 @@ const styles = {
       //  background: '#f9f9f9',
       //  border: '3px solid white',
     },
+    header: {
+        cursor: 'pointer',
+        fontSize: '1.2em',
+    },
+    headerB: {
+        cursor: 'pointer',
+        fontSize: '1.5em',
+        fontWeight: 700,
+        color: '#35916e',
+    },
+    table: {
+        fontFamily: 'Noto Sans CJK TC',
+        color: '#434343',
+        tableLayout: 'auto',
+    },
+    colorGreen: {
+        cursor: 'pointer',
+        color: '#418166',
+    },
+    colorBrown: {
+        cursor: 'pointer',
+        color: '#816039',
+    },
+    colorRed: {
+        cursor: 'pointer',
+        color: '#c61234',
+    },
 };
 
-/**
- * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
- */
 export default class CourseTable extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            fixedHeader: true,
+            fixedHeader: false,
             fixedFooter: true,
-            stripedRows: false,
+            stripedRows: true,
             showRowHover: true,
             selectable: false,
             multiSelectable: false,
             enableSelectAll: false,
             deselectOnClickaway: true,
             showCheckboxes: false,
-            height: '60vh',
+            height: 900,
+
+            itemListRows: [],
+            itemList: [],
+            orderBy: 'sem',
         };
 
     }
@@ -64,8 +84,46 @@ export default class CourseTable extends Component {
         ]
     };
 
+    componentWillMount(){
+        this.orderList(this.state.orderBy);
+    }
+
+    componentDidUpdate(NextProp, NextState){
+        if( NextProp.items !== this.props.items ){
+            this.orderList(this.state.orderBy);
+        }
+    }
+
+    orderList(orderBy){
+        let NewItemList = [].concat(this.props.items)
+            .sort((a, b) => {
+                if(orderBy === 'name')
+                    return a.name.localeCompare(b.name, 'zh-Hans-CN');
+                else if(orderBy === 'sem')
+                    return a.sem.localeCompare(b.sem, 'zh-Hans-CN');
+            });
+
+        let itemListRows = NewItemList
+            .map((row, i) =>
+                <TableRow key={i}>
+                    <TableRowColumn style={styles.tabColumn0}>{row.sem}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.name}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.avgScore}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.pAvgScore}</TableRowColumn>
+                </TableRow>
+            );
+
+        this.setState({
+            itemList: NewItemList,
+            itemListRows,
+            orderBy,
+        });
+    }
+
+
+
     handleRowClick = (rowIndex) => {
-        this.props.parentFunction(this.props.items[rowIndex]);
+        this.props.parentFunction(this.state.itemList[rowIndex]);
     };
 
 
@@ -81,6 +139,7 @@ export default class CourseTable extends Component {
                     selectable={this.state.selectable}
                     multiSelectable={this.state.multiSelectable}
                     onCellClick={this.handleRowClick}
+                    style={styles.table}
                 >
                     <TableHeader
                         displaySelectAll={this.state.showCheckboxes}
@@ -88,10 +147,26 @@ export default class CourseTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}
                     >
                         <TableRow>
-                            <TableHeaderColumn tooltip="學期">學期</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="課程名稱">課程名稱</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="全部平均成績">平均成績</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="已通過學生平均成績">已通過平均成績</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="學期">
+                                <div style={this.state.orderBy === 'sem' ? styles.headerB : styles.header} onClick={ () => this.orderList('sem') }>
+                                    學期{this.state.orderBy === 'sem' ? '↓' : ''}
+                                </div>
+                            </TableHeaderColumn>
+                            <TableHeaderColumn tooltip="課程名稱">
+                                <div style={this.state.orderBy === 'name' ? styles.headerB : styles.header} onClick={ () => this.orderList('name') }>
+                                    課程名稱{this.state.orderBy === 'name' ? '↓' : ''}
+                                </div>
+                            </TableHeaderColumn>
+                            <TableHeaderColumn tooltip="全部平均成績">
+                                <div style={styles.header}>
+                                    平均成績
+                                </div>
+                            </TableHeaderColumn>
+                            <TableHeaderColumn tooltip="已通過學生平均成績">
+                                <div style={styles.header}>
+                                    平均成績+
+                                </div>
+                            </TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -100,14 +175,7 @@ export default class CourseTable extends Component {
                         showRowHover={this.state.showRowHover}
                         stripedRows={this.state.stripedRows}
                     >
-                        {this.props.items.map((row, index) => (
-                            <TableRow key={index}>
-                                <TableRowColumn style={styles.tabColumn0}>{row.sem}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.name}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn1}>{row.avgScore}</TableRowColumn>
-                                <TableRowColumn style={styles.tabColumn0}>{row.pAvgScore}</TableRowColumn>
-                            </TableRow>
-                        ))}
+                        {this.state.itemListRows}
                     </TableBody>
                 </Table>
 
