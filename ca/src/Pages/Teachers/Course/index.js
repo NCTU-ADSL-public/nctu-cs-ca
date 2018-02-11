@@ -90,15 +90,14 @@ const styles = {
     },
     courseList: {
         width: '50%',
-        float: 'left',
-        height: 1900,
+        display: 'inline-block'
     },
     course: {
         main: {
             width: '50%',
             padding: '40px 20px 0 0',
-            float: 'left',
-            height: 1000,
+            display: 'inline-block',
+            verticalAlign: 'top'
         },
         title: {
             padding: '10px 0 0 60px',
