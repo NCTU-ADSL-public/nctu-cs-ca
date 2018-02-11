@@ -12,7 +12,7 @@ import './StudentsHead.css';
 import Navbar from '../Components/Navbar'
 import Loading from '../Components/Loading';
 
-import defaultData from '../FakeData'
+import defaultData from '../Resources/FakeData'
 
 let graduationItems = defaultData.GraduationItems
 let revise = defaultData.GraduationItems_Revised
