@@ -4,7 +4,6 @@ import ActionGrade from 'material-ui/svg-icons/image/assistant';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Popover from 'react-simple-popover';
 import 'animate.css'
-import './Course.css';
 import Toggle from 'material-ui/Toggle';
 import ReactHover from 'react-hover';
 import Dialog from 'material-ui/Dialog';

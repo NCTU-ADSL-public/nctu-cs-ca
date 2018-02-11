@@ -47,7 +47,7 @@ class PopoverButton extends React.Component {
 
     render(){
         const {label, flash, backgroundColor, children} = this.props
-        console.log(this.props)
+
         return(
             <div style={style.Popover}>
                 <div className={flash ? 'animated flash' : ''}
