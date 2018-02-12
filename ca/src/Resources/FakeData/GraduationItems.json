@@ -1,0 +1,454 @@
+[
+  {
+    "title": "必修課程",
+    "credit": "80",
+    "require": "60",
+    "selection": true,
+    "course": [
+      {
+        "cn": "資料庫系統概論",
+        "en": "Introduction to Database Systems",
+        "code": "DCP1187",
+        "score": -1,
+        "complete": "true",
+        "english": false,
+        "grade": "0",
+        "year": 4,
+        "semester": 1,
+        "reason": "NotCS"
+      },
+      {
+        "cn": "作業系統概論",
+        "en": "Introduction to Operating Systems",
+        "score": 60,
+        "complete": true,
+        "grade": "0"
+      },
+      {
+        "cn": "基礎程式設計",
+        "en": "Basic Programming",
+        "score": 60,
+        "complete": true,
+        "grade": "C"
+      },
+      {
+        "cn": "微積分(一)",
+        "en": "Calculus (I)",
+        "score": 60,
+        "complete": true,
+        "grade": "B",
+        "reason": "now"
+      },
+      {
+        "cn": "微積分(二)",
+        "en": "Calculus (II)",
+        "score": 60,
+        "complete": true,
+        "grade": "A"
+      },
+      {
+        "cn": "微處理機系統實驗",
+        "en": "Microprocessor System Lab.",
+        "score": 60,
+        "complete": true,
+        "reason": "notCS",
+        "grade": "0"
+      },
+      {
+        "cn": "數位電路設計",
+        "en": "Digital Circuit Design",
+        "score": 60,
+        "complete": false,
+        "reason": "now",
+        "realCredit": 3
+      },
+      {
+        "cn": "機率",
+        "en": "Probability",
+        "score": 60,
+        "complete": true,
+        "reason": "free1"
+      },
+      {
+        "cn": "正規語言概論",
+        "en": "Introduction to Formal Language",
+        "complete": true,
+        "score": 60,
+        "reason": "free2"
+      },
+      {
+        "cn": "演算法概論",
+        "en": "Introduction to Algorithms",
+        "complete": false,
+        "score": 60
+      },
+      {
+        "cn": "物理(一)",
+        "realCredit": 3,
+        "en": "",
+        "complete": true,
+        "score": 60
+      },
+      {
+        "cn": "物化生三合一(二)",
+        "en": "",
+        "complete": true,
+        "score": 60
+      },
+      {
+        "cn": "線性代數",
+        "en": "Linear Algebra",
+        "complete": true
+      },
+      {
+        "cn": "編譯器設計概論",
+        "en": "Intro. to Compiler Design",
+        "complete": true
+      },
+      {
+        "cn": "計算機概論與程式設計",
+        "en": "Introduction to Computers and Programming",
+        "complete": true
+      },
+      {
+        "cn": "計算機組織",
+        "en": "Computer Organization",
+        "complete": true
+      },
+      {
+        "cn": "計算機網路概論",
+        "en": "Intro. to Computer Networks",
+        "complete": true
+      },
+      {
+        "cn": "資料結構與物件導向程式設計",
+        "en": "Data Structures and Object-oriented Programming",
+        "complete": true
+      },
+      {
+        "cn": "資訊工程專題(一)",
+        "en": "Computer Science and Engineering Projects (I)",
+        "complete": true
+      },
+      {
+        "cn": "資訊工程專題(二)",
+        "en": "Computer Science and Engineering Projects (II)",
+        "complete": true
+      },
+      {
+        "cn": "資訊工程研討",
+        "en": "Computer Science Seminars",
+        "complete": true
+      },
+      {
+        "cn": "離散數學",
+        "en": "Discrete Mathematics",
+        "complete": true
+      }
+    ],
+    "notPas": [],
+    "complete": "True"
+  },
+  {
+    "title": "通識",
+    "credit": 16,
+    "require": 20,
+    "course": [
+      {
+        "cn": "心理學概論",
+        "en": "",
+        "dimension": "群己",
+        "complete": true,
+        "reason": "now"
+      },
+      {
+        "cn": "當代世界:環境危機與生態永續",
+        "en": "",
+        "dimension": "通識",
+        "complete": true,
+        "score": 60
+      },
+      {
+        "cn": "幾何造形",
+        "en": "",
+        "dimension": "自然",
+        "complete": true,
+        "score": 60
+      },
+      {
+        "cn": "經濟學概論",
+        "en": "",
+        "dimension": "歷史",
+        "complete": true,
+        "reason": "now"
+      },
+      {
+        "cn": "霸權興衰史:從十五世紀至當代",
+        "en": "",
+        "dimension": "歷史",
+        "complete": true,
+        "score": 60,
+        "reason": "free2"
+      },
+      {
+        "cn": "紀錄片製作概論",
+        "en": "",
+        "dimension": "歷史",
+        "complete": true,
+        "score": 60
+      },
+      {
+        "cn": "台灣史",
+        "en": "",
+        "dimension": "歷史",
+        "complete": true,
+        "score": 60
+      },
+      {
+        "cn": "當代中國：全球化下的兩岸關係",
+        "en": "",
+        "dimension": "歷史",
+        "complete": true,
+        "score": 60
+      }
+    ]
+  },
+  {
+    "title": "副核心課程與他組核心",
+    "credit": 16,
+    "require": 20,
+    "course": [
+      {
+        "cn": "心理學概論",
+        "en": "",
+        "dimension": "群己",
+        "complete": true
+      },
+      {
+        "cn": "當代世界:環境危機與生態永續",
+        "en": "",
+        "dimension": "通識",
+        "complete": true
+      },
+      {
+        "cn": "幾何造形",
+        "en": "",
+        "dimension": "自然",
+        "complete": true
+      },
+      {
+        "cn": "經濟學概論",
+        "en": "",
+        "dimension": "歷史",
+        "complete": true
+      }
+    ]
+  },
+  {
+    "title": "核心課程",
+    "credit": 16,
+    "require": 20,
+    "course": [
+      {
+        "cn": "心理學概論",
+        "en": "",
+        "dimension": "群己",
+        "complete": true,
+        "reason": "now"
+      },
+      {
+        "cn": "當代世界:環境危機與生態永續",
+        "en": "",
+        "dimension": "通識",
+        "complete": true
+      },
+      {
+        "cn": "幾何造形",
+        "en": "",
+        "dimension": "自然",
+        "complete": true
+      },
+      {
+        "cn": "經濟學概論",
+        "en": "",
+        "dimension": "歷史",
+        "complete": true
+      }
+    ]
+  },
+  {
+    "title": "體育",
+    "credit": 16,
+    "require": 20,
+    "course": [
+      {
+        "cn": "心理學概論",
+        "en": "",
+        "dimension": "群己",
+        "complete": true
+      },
+      {
+        "cn": "當代世界:環境危機與生態永續",
+        "en": "",
+        "dimension": "通識",
+        "complete": true
+      },
+      {
+        "cn": "幾何造形",
+        "en": "",
+        "dimension": "自然",
+        "complete": true
+      },
+      {
+        "cn": "經濟學概論",
+        "en": "",
+        "dimension": "歷史",
+        "complete": false
+      }
+    ]
+  },
+  {
+    "title": "外文",
+    "credit": "20",
+    "require": "60",
+    "course": [
+      {
+        "cn": "作業系統概論",
+        "en": "Introduction to Operating Systems",
+        "complete": true
+      },
+      {
+        "cn": "基礎程式設計",
+        "en": "Basic Programming",
+        "complete": true
+      },
+      {
+        "cn": "微積分(一)",
+        "en": "Calculus (I)",
+        "complete": true
+      },
+      {
+        "cn": "微積分(二)",
+        "en": "Calculus (II)",
+        "complete": true
+      },
+      {
+        "cn": "微處理機系統實驗",
+        "en": "Microprocessor System Lab.",
+        "complete": true
+      },
+      {
+        "cn": "數位電路設計",
+        "en": "Digital Circuit Design",
+        "complete": true
+      },
+      {
+        "cn": "機率",
+        "en": "Probability"
+      },
+      {
+        "cn": "正規語言概論",
+        "en": "Introduction to Formal Language",
+        "complete": true
+      },
+      {
+        "cn": "演算法概論",
+        "en": "Introduction to Algorithms",
+        "complete": true
+      },
+      {
+        "cn": "物化生三合一(一)",
+        "en": "",
+        "complete": true
+      },
+      {
+        "cn": "物化生三合一(二)",
+        "en": "",
+        "complete": true
+      },
+      {
+        "cn": "線性代數",
+        "en": "Linear Algebra",
+        "complete": true
+      },
+      {
+        "cn": "編譯器設計概論",
+        "en": "Intro. to Compiler Design",
+        "complete": true
+      },
+      {
+        "cn": "計算機概論與程式設計",
+        "en": "Introduction to Computers and Programming",
+        "complete": true
+      },
+      {
+        "cn": "計算機組織",
+        "en": "Computer Organization",
+        "complete": true
+      },
+      {
+        "cn": "計算機網路概論",
+        "en": "Intro. to Computer Networks",
+        "complete": true
+      },
+      {
+        "cn": "資料結構與物件導向程式設計",
+        "en": "Data Structures and Object-oriented Programming",
+        "complete": true
+      },
+      {
+        "cn": "資訊工程專題(一)",
+        "en": "Computer Science and Engineering Projects (I)",
+        "complete": true
+      },
+      {
+        "cn": "資訊工程專題(二)",
+        "en": "Computer Science and Engineering Projects (II)",
+        "complete": true
+      },
+      {
+        "cn": "資訊工程研討",
+        "en": "Computer Science Seminars",
+        "complete": true
+      },
+      {
+        "cn": "離散數學",
+        "en": "Discrete Mathematics",
+        "complete": true
+      }
+    ],
+    "notPas": [],
+    "complete": "True"
+  },
+  {},
+  {},
+  {},
+  {},
+  {},
+  {
+    "total": 113,
+    "total_require": 128,
+    "compulsory": 55,
+    "compulse_require": 58,
+    "core": 9,
+    "core_require": "9",
+    "vice": 9,
+    "vice_require": "9",
+    "pro": 9,
+    "pro_require": "12",
+    "english": 0,
+    "english_require": 1,
+    "other": 0,
+    "other_require": "12",
+    "general": 20,
+    "general_require": 20,
+    "pe": 6,
+    "pe_require": 6,
+    "language": 10,
+    "language_require": 8,
+    "service": 2,
+    "service_require": 2,
+    "art": 2,
+    "art_require": 2
+  }
+]
