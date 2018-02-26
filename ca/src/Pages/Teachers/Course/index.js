@@ -83,8 +83,8 @@ export default class index extends React.Component {
         },
 
         scoreDetail: {
-            avgScore: 87,
-            pAvgScore: 94.9,
+            avg: 87,
+            Pavg: 94.9,
             member: 115,
             passed: 110,
             max: 100,
@@ -207,7 +207,32 @@ export default class index extends React.Component {
     searchCallback = (item) => {
         this.setState({ item });
 
-        this._randomSetScore();
+
+        axios.post('/professors/courseInfo/score', {
+            cos_code: item.cos_code,
+            unique_id: item.unique_id,
+        }).then(res => {
+            console.log(res);
+          this.setState({ scoreDetail: res.data });
+        }).catch(err => {
+            console.log(err);
+        });
+
+
+        axios.post('/professors/courseInfo/scoreInterval', {
+            cos_code: item.cos_code,
+            unique_id: item.unique_id,
+        }).then(res => {
+            console.log(res);
+            this.setState({ scoreChartDetail: res.data });
+        }).catch(err => {
+            console.log(err);
+        });
+
+
+
+        // this._randomSetScore();
+
     };
 
     render() {
@@ -221,8 +246,8 @@ export default class index extends React.Component {
                 <div style={styles.course.main}>
                     <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem} - {this.state.item.cos_cname}</div>
                     <div style={styles.course.score}>
-                        <div style={styles.course.scoreItem}> <ShowScore title={'平均成績'} score={this.state.scoreDetail.avgScore}/> </div>
-                        <div style={styles.course.scoreItem}> <ShowScore title={'及格平均成績'} score={this.state.scoreDetail.pAvgScore}/> </div>
+                        <div style={styles.course.scoreItem}> <ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/> </div>
+                        <div style={styles.course.scoreItem}> <ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/> </div>
                         <div style={styles.course.scoreItem}> <ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/> </div>
                         <div style={styles.course.scoreItem}> <ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/> </div>
                         <div style={styles.course.scoreItem}> <ShowScore title={'不及格人數'} score={this.state.scoreDetail.member - this.state.scoreDetail.passed}/> </div>
