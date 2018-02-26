@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import HomeIcon from 'material-ui/svg-icons/content/flag';
 import MapIcon from 'material-ui/svg-icons/maps/map';
 import GraduationIcon from 'material-ui/svg-icons/social/school';
-import CheckIcon from 'material-ui/svg-icons/av/featured-play-list';
 import EqualizerIcon from 'material-ui/svg-icons/av/equalizer';
 import GroupIcon from 'material-ui/svg-icons/social/group';
 import FreeBreakfastIcon from 'material-ui/svg-icons/places/free-breakfast';
@@ -14,8 +13,6 @@ import NavItem from './NavItem'
 
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
-
-const checkIcon = <CheckIcon/>;
 
 const style = {
     BrandBox: {
@@ -97,7 +94,7 @@ class Navbar extends React.Component {
                         <RaisedButton backgroundColor = "#DDDDDD"
                                       label="Logout"
                                       onClick={()=>{
-                                          let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+                                          let keys = document.cookie.match(/[^ =;]+(?==)/g);
                                           if(keys) {
                                               for(let i = keys.length; i--;)
                                                   document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
