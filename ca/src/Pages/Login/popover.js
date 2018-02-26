@@ -49,6 +49,7 @@ export default class PopoverExampleAnimation extends React.Component {
                     animation={PopoverAnimationVertical}
                     style={{
                         width:'30%',
+                        minWidth: 250,
                         opacity:'0.7',
                         height: '40%'
                     }}
