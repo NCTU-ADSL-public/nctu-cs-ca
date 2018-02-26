@@ -22,7 +22,7 @@ const Router = () => (
               <Route exact path='/assistants/head' component={AssistantHead} />
               <Route exact path='/assistants/head/s/:sid' component={StudentDetail} />
           </Switch>
-          <Route path='/*/*' component={Footer}/>
+          <Route path='/' component={Footer}/>
       </div>
   </BrowserRouter>
 )
