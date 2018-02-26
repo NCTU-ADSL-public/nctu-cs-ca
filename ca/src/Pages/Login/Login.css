@@ -115,6 +115,16 @@
     top: -8px;
 }
 
+.login-btn {
+    width: 30%;
+    vertical-align: top;
+}
+
+.announce-btn {
+    display: inline-block;
+    margin-right: 8px;
+}
+
 @media (max-width: 768px) {
     .Login-header {
         padding-left: 17px;
@@ -122,7 +132,15 @@
         height: 50px;
     }
     .Login-buttons {
-        margin-top: 20px;
+        margin-top: 30vh;
+        text-align: center;
+    }
+
+    .announce-btn {
+        width: 40%;
+    }
+    .login-btn {
+        width: 40%;
     }
 
     #eng-title {

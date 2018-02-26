@@ -61,7 +61,7 @@ class Login extends React.Component {
                         </Row>
                         <Row>
                             <div className="Login-buttons">
-                                <Col xs={9} xsOffset={3} sm={7} smOffset={5}>
+                                <Col xs={12} sm={7} smOffset={5}>
                                     <MuiThemeProvider>
                                         <PopoverExampleAnimation />
                                     </MuiThemeProvider>
@@ -70,7 +70,7 @@ class Login extends React.Component {
                                                       backgroundColor='#00AEAE'
                                                       labelColor={grey50}
                                                       href='/auth/Nctu'
-                                                      style={{width: '30%', verticalAlign: 'top'}}
+                                                      className='login-btn'
                                         />
                                     </MuiThemeProvider>
                                 </Col>
