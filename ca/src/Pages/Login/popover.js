@@ -33,7 +33,7 @@ export default class PopoverExampleAnimation extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{display: 'inline-block'}}>
                 <RaisedButton
                     onClick={this.handleTouchTap}
                     label="公告"
