@@ -11,20 +11,6 @@ import PopoverExampleAnimation from './popover';
 import {grey50} from "material-ui/styles/colors";
 
 
-const style = {
-    Login: {
-        Button: {
-            width: '20%',
-            fontFamily: 'Noto Sans CJK TC',
-            float: 'left',
-            margin: '2px'
-        },
-        ButtonLabel: {
-            fontFamily: 'Noto Sans CJK TC'
-        }
-    }
-}
-
 class Login extends React.Component {
 
     getLoginstatus(){
@@ -81,8 +67,7 @@ class Login extends React.Component {
                                                   backgroundColor='#00AEAE'
                                                   labelColor={grey50}
                                                   href='/auth/Nctu'
-                                                  style={style.Login.Button}
-                                                  labelStyle={style.Login.ButtonLabel}
+                                                  style={{width: '20%', verticalAlign: 'top'}}
                                     />
                                 </MuiThemeProvider>
                             </div>

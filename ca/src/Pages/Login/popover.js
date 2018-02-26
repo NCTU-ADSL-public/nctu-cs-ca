@@ -39,7 +39,6 @@ export default class PopoverExampleAnimation extends React.Component {
                     label="公告"
                     backgroundColor = {"#ae5164"}
                     labelColor = {grey50}
-                    className="drawer"
                     labelStyle={{
                         fontFamily: 'Noto Sans CJK TC',
                     }}
