@@ -6,72 +6,6 @@ import ScoreChart from './ScoreChart';
 import GaugeChart from './GaugeChart';
 
 
-const initItem = [
-    {
-        id: 'dcp9999',
-        sem: '105下',
-        name: '資料庫系統概論',
-        avgScore: '81.5',
-        pAvgScore: '87.8',
-    },
-    {
-        id: 'dcp9998',
-        sem: '105上',
-        name: '計算機網路概論',
-        avgScore: '87.87',
-        pAvgScore: '94.87',
-    },
-    {
-        id: 'dcp9997',
-        sem: '105下',
-        name: '計算機圖學概論',
-        avgScore: '80.7',
-        pAvgScore: '83.2',
-    },
-    {
-        id: 'dcp9996',
-        sem: '105上',
-        name: '建築概論',
-        avgScore: '88.1',
-        pAvgScore: '97.3',
-    },
-    {
-        id: 'dcp9995',
-        sem: '105上',
-        name: '離散數學',
-        avgScore: '77.87',
-        pAvgScore: '94.87',
-    },
-    {
-        id: 'dcp9994',
-        sem: '105上',
-        name: '密碼學概論',
-        avgScore: '60',
-        pAvgScore: '78',
-    },
-    {
-        id: 'dcp9993',
-        sem: '105上',
-        name: '數位電路設計',
-        avgScore: '86.6',
-        pAvgScore: '94.87',
-    },
-    {
-        id: 'dcp9992',
-        sem: '105下',
-        name: '數位電路實驗',
-        avgScore: '87.7',
-        pAvgScore: '94.2',
-    },
-    {
-        id: 'dcp9998',
-        sem: '105上',
-        name: '無線網路',
-        avgScore: '87.1',
-        pAvgScore: '94.3',
-    },
-
-];
 
 // const scoreDetail = {
 //     avgScore: 87,
@@ -161,7 +95,72 @@ export default class index extends React.Component {
             failed: [0, 3, 5, 7, 15, 0, 0, 0, 0, 0],
         },
 
-        initItem: [],
+        initItem: [
+          {
+            id: 'dcp9999',
+            sem: '105下',
+            name: '資料庫系統概論',
+            avgScore: '81.5',
+            pAvgScore: '87.8',
+          },
+          {
+            id: 'dcp9998',
+            sem: '105上',
+            name: '計算機網路概論',
+            avgScore: '87.87',
+            pAvgScore: '94.87',
+          },
+          {
+            id: 'dcp9997',
+            sem: '105下',
+            name: '計算機圖學概論',
+            avgScore: '80.7',
+            pAvgScore: '83.2',
+          },
+          {
+            id: 'dcp9996',
+            sem: '105上',
+            name: '建築概論',
+            avgScore: '88.1',
+            pAvgScore: '97.3',
+          },
+          {
+            id: 'dcp9995',
+            sem: '105上',
+            name: '離散數學',
+            avgScore: '77.87',
+            pAvgScore: '94.87',
+          },
+          {
+            id: 'dcp9994',
+            sem: '105上',
+            name: '密碼學概論',
+            avgScore: '60',
+            pAvgScore: '78',
+          },
+          {
+            id: 'dcp9993',
+            sem: '105上',
+            name: '數位電路設計',
+            avgScore: '86.6',
+            pAvgScore: '94.87',
+          },
+          {
+            id: 'dcp9992',
+            sem: '105下',
+            name: '數位電路實驗',
+            avgScore: '87.7',
+            pAvgScore: '94.2',
+          },
+          {
+            id: 'dcp9998',
+            sem: '105上',
+            name: '無線網路',
+            avgScore: '87.1',
+            pAvgScore: '94.3',
+          },
+
+        ],
     };
 
     componentWillMount = () => {
@@ -216,11 +215,11 @@ export default class index extends React.Component {
             <div style={styles.container}>
 
                 <div style={styles.courseList}>
-                    <CourseList items={initItem} parentFunction={this.searchCallback}/>
+                    <CourseList items={this.state.initItem} parentFunction={this.searchCallback}/>
                 </div>
 
                 <div style={styles.course.main}>
-                    <div style={styles.course.title}>[{this.state.item.id}] {this.state.item.sem} - {this.state.item.name}</div>
+                    <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem} - {this.state.item.cos_cname}</div>
                     <div style={styles.course.score}>
                         <div style={styles.course.scoreItem}> <ShowScore title={'平均成績'} score={this.state.scoreDetail.avgScore}/> </div>
                         <div style={styles.course.scoreItem}> <ShowScore title={'及格平均成績'} score={this.state.scoreDetail.pAvgScore}/> </div>
