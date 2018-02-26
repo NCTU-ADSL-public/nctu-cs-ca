@@ -28,10 +28,6 @@ export default class StudentList extends React.Component {
         this.filterList = this.filterList.bind(this);
     }
 
-    componentWillMount(){
-        this.setState({items: this.state.initItems});
-    }
-
     componentDidMount(){
         this.setState({items: this.state.initItems});
     }
@@ -76,7 +72,7 @@ export default class StudentList extends React.Component {
                 </div>
 
                 <MuiThemeProvider>
-                    <CourseTable items={this.state.items}
+                    <CourseTable items={this.props.initItems}
                                  parentFunction={this.searchCallback}
                     />
                 </MuiThemeProvider>
