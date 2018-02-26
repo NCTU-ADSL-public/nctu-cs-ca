@@ -72,7 +72,7 @@ export default class StudentList extends React.Component {
                 </div>
 
                 <MuiThemeProvider>
-                    <CourseTable items={this.props.initItems}
+                    <CourseTable items={this.props.items}
                                  parentFunction={this.searchCallback}
                     />
                 </MuiThemeProvider>

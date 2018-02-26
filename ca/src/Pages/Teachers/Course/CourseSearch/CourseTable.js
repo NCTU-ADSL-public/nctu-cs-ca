@@ -89,6 +89,7 @@ export default class CourseTable extends Component {
     }
 
     componentDidUpdate(NextProp, NextState){
+        console.log(this.props.items);
         if( NextProp.items !== this.props.items ){
             this.orderList(this.state.orderBy);
         }
@@ -98,7 +99,7 @@ export default class CourseTable extends Component {
         let NewItemList = [].concat(this.props.items)
             .sort((a, b) => {
                 if(orderBy === 'name')
-                    return a.name.localeCompare(b.name, 'zh-Hans-CN');
+                    return a.cos_cname.localeCompare(b.cos_cname, 'zh-Hans-CN');
                 else if(orderBy === 'sem')
                     return a.sem.localeCompare(b.sem, 'zh-Hans-CN');
             });
