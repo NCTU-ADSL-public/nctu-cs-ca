@@ -4,7 +4,6 @@ import './Home.css'
 import Snow from 'react-snow-effect'
 
 const img = index
-const data = ['丹尼', '丹尼丹尼', '丹尼丹尼丹尼']
 class Home extends React.Component {
   render () {
     return (
