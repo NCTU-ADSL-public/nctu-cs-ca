@@ -33,15 +33,12 @@ export default class PopoverExampleAnimation extends React.Component {
 
     render() {
         return (
-            <div style={{display: 'inline-block'}}>
+            <div style={{display: 'inline-block', marginRight: 8}}>
                 <RaisedButton
                     onClick={this.handleTouchTap}
                     label="公告"
                     backgroundColor = {"#ae5164"}
                     labelColor = {grey50}
-                    labelStyle={{
-                        fontFamily: 'Noto Sans CJK TC',
-                    }}
                 />
                 <Popover
                     open={this.state.open}

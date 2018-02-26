@@ -92,15 +92,9 @@
     border-left: 17px solid #00AEAE;
     height: 100px;
 }
-.Login-login {
-    text-align:center;
+.Login-buttons {
     margin-top: 40px;
- }
-
-.Login-Choose {
-    text-align:center;
-    margin: 5% auto;
- }
+}
 
 #eng-title {
     height: 40%;
@@ -129,9 +123,8 @@
         border-left: 12px solid #00AEAE;
         height: 50px;
     }
-    .Login-login {
-        text-align:center;
-        margin: -7% 0 0 35%;
+    .Login-buttons {
+        margin-top: 20px;
     }
 
     #eng-title {

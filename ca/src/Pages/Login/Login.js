@@ -52,24 +52,28 @@ class Login extends React.Component {
                 <Grid>
                     <FadeIn>
                         <Row>
-                            <div className="Login-header" ref="tip">
+                            <Col xs={11} xsOffset={1} sm={12} smOffset={0}>
+                                <div className="Login-header" ref="tip">
                                     <div id="eng-title">NCTU Curriculum Assistant</div>
                                     <div id="ch-title">交大資工線上助理</div>
-                            </div>
+                                </div>
+                            </Col>
                         </Row>
                         <Row>
-                            <div className = "Login-login">
-                                <MuiThemeProvider>
-                                    <PopoverExampleAnimation />
-                                </MuiThemeProvider>
-                                <MuiThemeProvider>
-                                    <RaisedButton label='Login'
-                                                  backgroundColor='#00AEAE'
-                                                  labelColor={grey50}
-                                                  href='/auth/Nctu'
-                                                  style={{width: '20%', verticalAlign: 'top'}}
-                                    />
-                                </MuiThemeProvider>
+                            <div className="Login-buttons">
+                                <Col xs={9} xsOffset={3} sm={7} smOffset={5}>
+                                    <MuiThemeProvider>
+                                        <PopoverExampleAnimation />
+                                    </MuiThemeProvider>
+                                    <MuiThemeProvider>
+                                        <RaisedButton label='Login'
+                                                      backgroundColor='#00AEAE'
+                                                      labelColor={grey50}
+                                                      href='/auth/Nctu'
+                                                      style={{width: '30%', verticalAlign: 'top'}}
+                                        />
+                                    </MuiThemeProvider>
+                                </Col>
                             </div>
                         </Row>
                     </FadeIn>
