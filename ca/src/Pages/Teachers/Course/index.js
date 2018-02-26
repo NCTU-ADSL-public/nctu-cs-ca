@@ -1,5 +1,6 @@
 import React from 'react';
 //
+import axios from 'axios';
 import CourseList from './CourseSearch/CourseList';
 import ScoreChart from './ScoreChart';
 import GaugeChart from './GaugeChart';
@@ -160,7 +161,19 @@ export default class index extends React.Component {
             failed: [0, 3, 5, 7, 15, 0, 0, 0, 0, 0],
         },
 
+        initItem: [],
     };
+
+    componentWillMount = () => {
+        axios.post('/professors/courseInfo/courses', {
+            id: 'T9229',
+        }).then(res => {
+            console.log(res);
+            this.setState({ initItem: res });
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 
     onTabClick = (key) => {
         if (key === this.state.activeKey) {
