@@ -97,20 +97,20 @@ export default class CourseTable extends Component {
 
     orderList(orderBy){
         let NewItemList = [].concat(this.props.items)
-            .sort((a, b) => {
-                if(orderBy === 'name')
-                    return a.cos_cname.localeCompare(b.cos_cname, 'zh-Hans-CN');
-                else if(orderBy === 'sem')
-                    return a.sem.localeCompare(b.sem, 'zh-Hans-CN');
-            });
+            // .sort((a, b) => {
+            //     if(orderBy === 'name')
+            //         return a.cos_cname.localeCompare(b.cos_cname, 'zh-Hans-CN');
+            //     else if(orderBy === 'sem')
+            //         return a.unique_id.localeCompare(b.unique_id, 'zh-Hans-CN');
+            // });
 
         let itemListRows = NewItemList
             .map((row, i) =>
                 <TableRow key={i}>
-                    <TableRowColumn style={styles.tabColumn0}>{row.sem}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.unique_id}</TableRowColumn>
                     <TableRowColumn style={styles.tabColumn0}>{row.cos_cname}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.avg}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.Pavg}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.cos_code}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.cos_ename}</TableRowColumn>
                 </TableRow>
             );
 
