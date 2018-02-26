@@ -107,9 +107,9 @@ export default class CourseTable extends Component {
             .map((row, i) =>
                 <TableRow key={i}>
                     <TableRowColumn style={styles.tabColumn0}>{row.sem}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.name}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.avgScore}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.pAvgScore}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.cos_cname}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.avg}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.Pavg}</TableRowColumn>
                 </TableRow>
             );
 

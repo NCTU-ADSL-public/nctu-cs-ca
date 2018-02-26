@@ -168,7 +168,7 @@ export default class index extends React.Component {
             id: 'T9229',
         }).then(res => {
             console.log(res);
-            this.setState({ initItem: res });
+            this.setState({ initItem: res.data });
         }).catch(err => {
             console.log(err);
         });
