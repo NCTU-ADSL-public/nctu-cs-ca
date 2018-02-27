@@ -77,9 +77,10 @@ export default class index extends React.Component {
         item: {
             id: 'dcp9999',
             sem: '105下',
-            name: '資料庫系統概論',
-            avgScore: '81.5',
-            pAvgScore: '87.8',
+            cos_cname: '資料庫系統概論',
+            unique_id: '103-999-999',
+            avg: '81.5',
+            Pavg: '87.8',
         },
 
         scoreDetail: {
@@ -97,67 +98,10 @@ export default class index extends React.Component {
 
         initItem: [
           {
-            id: 'dcp9999',
-            sem: '105下',
-            name: '資料庫系統概論',
-            avgScore: '81.5',
-            pAvgScore: '87.8',
-          },
-          {
-            id: 'dcp9998',
-            sem: '105上',
-            name: '計算機網路概論',
-            avgScore: '87.87',
-            pAvgScore: '94.87',
-          },
-          {
-            id: 'dcp9997',
-            sem: '105下',
-            name: '計算機圖學概論',
-            avgScore: '80.7',
-            pAvgScore: '83.2',
-          },
-          {
-            id: 'dcp9996',
-            sem: '105上',
-            name: '建築概論',
-            avgScore: '88.1',
-            pAvgScore: '97.3',
-          },
-          {
-            id: 'dcp9995',
-            sem: '105上',
-            name: '離散數學',
-            avgScore: '77.87',
-            pAvgScore: '94.87',
-          },
-          {
-            id: 'dcp9994',
-            sem: '105上',
-            name: '密碼學概論',
-            avgScore: '60',
-            pAvgScore: '78',
-          },
-          {
-            id: 'dcp9993',
-            sem: '105上',
-            name: '數位電路設計',
-            avgScore: '86.6',
-            pAvgScore: '94.87',
-          },
-          {
-            id: 'dcp9992',
-            sem: '105下',
-            name: '數位電路實驗',
-            avgScore: '87.7',
-            pAvgScore: '94.2',
-          },
-          {
-            id: 'dcp9998',
-            sem: '105上',
-            name: '無線網路',
-            avgScore: '87.1',
-            pAvgScore: '94.3',
+            unique_id: '103-999-999',
+            cos_code: 'DCP9999',
+            cos_cname: '資料庫系統概論',
+            cos_ename: 'dadadadada',
           },
 
         ],
@@ -207,6 +151,7 @@ export default class index extends React.Component {
     searchCallback = (item) => {
         this.setState({ item });
 
+        console.log('YO');
         console.log(item);
 
         axios.post('/professors/courseInfo/score', {

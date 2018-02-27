@@ -80,6 +80,8 @@ export default class CourseTable extends Component {
                 name: '資料庫系統概論',
                 avgScore: '81.5',
                 pAvgScore: '87.8',
+                cos_cname: '1',
+                unique_id: '1',
             },
         ]
     };
@@ -96,13 +98,20 @@ export default class CourseTable extends Component {
     }
 
     orderList(orderBy){
-        let NewItemList = [].concat(this.props.items)
-            // .sort((a, b) => {
-            //     if(orderBy === 'name')
-            //         return a.cos_cname.localeCompare(b.cos_cname, 'zh-Hans-CN');
-            //     else if(orderBy === 'sem')
-            //         return a.unique_id.localeCompare(b.unique_id, 'zh-Hans-CN');
-            // });
+        let NewItemList = [];
+
+        console.log('MAJAMI');
+        console.log(this.props.items);
+
+        if(this.props.items !== undefined){
+            NewItemList = [].concat(this.props.items)
+                .sort((a, b) => {
+                    if(orderBy === 'name')
+                        return a.cos_cname.localeCompare(b.cos_cname, 'zh-Hans-CN');
+                    else if(orderBy === 'sem')
+                        return a.unique_id.localeCompare(b.unique_id, 'zh-Hans-CN');
+                });
+        }
 
         let itemListRows = NewItemList
             .map((row, i) =>
