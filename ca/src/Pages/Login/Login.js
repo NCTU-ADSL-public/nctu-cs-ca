@@ -1,6 +1,7 @@
 import React from 'react';
 import FadeIn from 'react-fade-in';
 import axios from 'axios';
+import {Grid, Col, Row} from 'react-bootstrap'
 import {ToastContainer, ToastStore} from 'react-toasts';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,20 +10,6 @@ import './Login.css';
 import PopoverExampleAnimation from './popover';
 import {grey50} from "material-ui/styles/colors";
 
-
-const style = {
-    Login: {
-        Button: {
-            width: '20%',
-            fontFamily: 'Noto Sans CJK TC',
-            float: 'left',
-            margin: '2px'
-        },
-        ButtonLabel: {
-            fontFamily: 'Noto Sans CJK TC'
-        }
-    }
-}
 
 class Login extends React.Component {
 
@@ -60,33 +47,37 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="Login"  >
+            <div className="full-page">
                 <ToastContainer store={ToastStore}/>
-                <div id="AjustToggleButtom"> </div>
-                <div className="Login-header"   ref="tip">
-
+                <Grid>
                     <FadeIn>
-                        <div id="rectangle"> </div>
-                        <div id="eng-title"><div id="h11">NCTU Curriculum Assistant</div></div>
-                        <div id="ch-title"><div id="h22">交大資工線上助理</div></div>
-
-                        <div className = "Login-login">
-                            <MuiThemeProvider>
-                                <PopoverExampleAnimation />
-                            </MuiThemeProvider>
-                            <MuiThemeProvider>
-                                <RaisedButton label='Login'
-                                              backgroundColor='#00AEAE'
-                                              labelColor={grey50}
-                                              href='/auth/Nctu'
-                                              style={style.Login.Button}
-                                              labelStyle={style.Login.ButtonLabel}
-                                />
-                            </MuiThemeProvider>
-                        </div>
-
+                        <Row>
+                            <Col xs={11} xsOffset={1} sm={12} smOffset={0}>
+                                <div className="Login-header" ref="tip">
+                                    <div id="eng-title">NCTU Curriculum Assistant</div>
+                                    <div id="ch-title">交大資工線上助理</div>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <div className="Login-buttons">
+                                <Col xs={12} sm={7} smOffset={5}>
+                                    <MuiThemeProvider>
+                                        <PopoverExampleAnimation />
+                                    </MuiThemeProvider>
+                                    <MuiThemeProvider>
+                                        <RaisedButton label='Login'
+                                                      backgroundColor='#00AEAE'
+                                                      labelColor={grey50}
+                                                      href='/auth/Nctu'
+                                                      className='login-btn'
+                                        />
+                                    </MuiThemeProvider>
+                                </Col>
+                            </div>
+                        </Row>
                     </FadeIn>
-                </div>
+                </Grid>
             </div>
         );
       }

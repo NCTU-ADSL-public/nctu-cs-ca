@@ -61,7 +61,7 @@ class GitnodeItem extends React.Component {
 
 export class Gitnode extends Node {
     renderContainer({content, isDragging,onClick}) {
-        const className = `container`;
+        const className = `container_gitnode`;
 
         return (
             <GitnodeItem content={content} info={this.props.CourseItem}/>

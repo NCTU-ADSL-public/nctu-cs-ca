@@ -33,16 +33,13 @@ export default class PopoverExampleAnimation extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='announce-btn'>
                 <RaisedButton
                     onClick={this.handleTouchTap}
                     label="公告"
                     backgroundColor = {"#ae5164"}
                     labelColor = {grey50}
-                    className="drawer"
-                    labelStyle={{
-                        fontFamily: 'Noto Sans CJK TC',
-                    }}
+                    style={{width: '100%'}}
                 />
                 <Popover
                     open={this.state.open}
@@ -53,6 +50,7 @@ export default class PopoverExampleAnimation extends React.Component {
                     animation={PopoverAnimationVertical}
                     style={{
                         width:'30%',
+                        minWidth: 300,
                         opacity:'0.7',
                         height: '40%'
                     }}
