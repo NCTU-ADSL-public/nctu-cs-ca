@@ -159,7 +159,7 @@ export default class index extends React.Component {
             unique_id: item.unique_id,
         }).then(res => {
             console.log(res);
-          this.setState({ scoreDetail: res.data });
+          this.setState({ scoreDetail: res.data[0] });
         }).catch(err => {
             console.log(err);
         });

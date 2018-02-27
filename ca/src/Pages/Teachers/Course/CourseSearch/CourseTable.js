@@ -75,13 +75,9 @@ export default class CourseTable extends Component {
     static defaultProps = {
         items: [
             {
-                id: 'dcp9999',
+                unique_id: 'DCP9999',
                 sem: '105下',
-                name: '資料庫系統概論',
-                avgScore: '81.5',
-                pAvgScore: '87.8',
-                cos_cname: '1',
-                unique_id: '1',
+                cos_cname: '資料庫系統概論',
             },
         ]
     };
@@ -100,9 +96,6 @@ export default class CourseTable extends Component {
     orderList(orderBy){
         let NewItemList = [];
 
-        console.log('MAJAMI');
-        console.log(this.props.items);
-
         if(this.props.items !== undefined){
             NewItemList = [].concat(this.props.items)
                 .sort((a, b) => {
@@ -118,8 +111,6 @@ export default class CourseTable extends Component {
                 <TableRow key={i}>
                     <TableRowColumn style={styles.tabColumn0}>{row.unique_id}</TableRowColumn>
                     <TableRowColumn style={styles.tabColumn0}>{row.cos_cname}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.cos_code}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.cos_ename}</TableRowColumn>
                 </TableRow>
             );
 
@@ -165,16 +156,6 @@ export default class CourseTable extends Component {
                             <TableHeaderColumn tooltip="課程名稱">
                                 <div style={this.state.orderBy === 'name' ? styles.headerB : styles.header} onClick={ () => this.orderList('name') }>
                                     課程名稱{this.state.orderBy === 'name' ? '↓' : ''}
-                                </div>
-                            </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="全部平均成績">
-                                <div style={styles.header}>
-                                    平均成績
-                                </div>
-                            </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="已通過學生平均成績">
-                                <div style={styles.header}>
-                                    平均成績+
                                 </div>
                             </TableHeaderColumn>
                         </TableRow>
