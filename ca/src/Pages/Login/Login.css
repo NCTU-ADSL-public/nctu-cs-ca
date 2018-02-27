@@ -125,7 +125,7 @@
     margin-right: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .Login-header {
         padding-left: 17px;
         border-left: 12px solid #00AEAE;
