@@ -37,9 +37,9 @@ export default class StudentList extends React.Component {
         let updatedList = this.state.initItems;
         updatedList = updatedList.filter(function(item){
             return (
-                (item.sem.toLowerCase().search(
+                (item.unique_id.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
-                (item.name.toLowerCase().search(
+                (item.cos_cname.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)
             );
         });
