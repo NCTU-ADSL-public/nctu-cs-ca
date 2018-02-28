@@ -41,7 +41,7 @@ export default class Course extends React.Component {
     let data = {
       x: 'x',
       columns: [
-        ['x', 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        ['x', 5, 15, 25, 35, 45, 55, 65, 75, 85, 95],
         ['及格', ...this.props.detail.passed],
         ['不及格', ...this.props.detail.failed],
       ],
