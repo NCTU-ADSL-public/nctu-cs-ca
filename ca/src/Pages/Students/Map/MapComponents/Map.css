@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 
+
 #font_adjust{
     background: #F5F5F5;
     height: auto;
@@ -11,12 +12,12 @@
     padding: 35px 6% 0 6%;
     color: #7B7B7B;
     font-size: 1.5em;
-
+    zoom: 80%;
 }
 
 .selectFieldStyle{
     position: fixed;
-    top: 300px;
+    top: 200px;
     right: 200px;
     z-index: 100;
 }

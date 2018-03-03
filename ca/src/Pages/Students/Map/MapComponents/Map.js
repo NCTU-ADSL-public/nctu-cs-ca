@@ -443,7 +443,7 @@ class Map extends React.Component {
             <div className='Map-Row'>
               <App studentPasdata={this.props.studentPasdata} data={this.props.data} studentsGrad={this.props.studentsGrad} />
             </div>
-            <div style={{marginLeft:'-100px', marginTop:'-100px'}}>
+            <div style={{marginLeft:'-100px', marginTop:'-80px'}}>
                 <DragAndZoom
                     minZoom={40}
                     maxZoom={150}
