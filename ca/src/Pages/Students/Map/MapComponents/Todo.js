@@ -39,9 +39,9 @@ class Todo extends React.Component {
 
     state = {
         open: false,
-        opendrawer:false,
+        opendia2:false,
         value:0,
-        coursedata:[ {'teacher':['彭文志','彭文志','彭文志'],'code':['DCP123', 'DCP456', 'DCP123'],stuLimit:[80], 'stuNum': [56, 77, 22],time:["104-1","104-1","104-1"], 'english': [true, false, false]}]
+        coursedata:[ {'teacher':['彭文志','彭文志','彭文志'],'code':['DCP123', 'DCP456', 'DCP123'],'stuLimit':[80, 70, 80], 'stuNum': [56, 77, 22],time:["104-1","104-1","104-1"], 'english': ['是' , '否', '否'], 'info':['HI','HEY','HO']}]
     };
 
     handleOpen = () => {
@@ -62,18 +62,17 @@ class Todo extends React.Component {
 
     handleClose = () => {
         this.setState({open: false});
-        this.setState({open: false});
     };
 
     handleChipClick = () => {
-        this.setState({opendrawer: true});
+        this.setState({opendia2: true});
     };
 
     handleChange = (event, index, value)  => {
         this.setState({value:value-1});
     }
 
-    handleCloseDrawer = () => this.setState({opendrawer: false});
+    handleDia2Close = () => this.setState({opendia2:false})
 
     getMenuItem = () => {
         let items=[]
@@ -130,7 +129,7 @@ class Todo extends React.Component {
                 <br/>
                 <div>英文授課: &nbsp;{this.state.coursedata[0].english[this.state.value]}</div>
                 <br/>
-                <div>簡介: &nbsp;{this.state.coursedata[0].english[this.state.value]}</div>
+                <div>簡介: &nbsp;{this.state.coursedata[0].info[this.state.value]}</div>
                 <br/>
                 <div>
                 </div>
@@ -149,6 +148,18 @@ class Todo extends React.Component {
                 }}
                 keyboardFocused={true}
                 onClick={this.handleClose}
+            />,
+        ];
+        const actions2 = [
+            <FlatButton
+                label="Exit"
+                primary={true}
+                style={{
+                    fontFamily: 'Noto Sans CJK TC',
+                    color: '#7B7B7B'
+                }}
+                keyboardFocused={true}
+                onClick={this.handleDia2Close}
             />,
         ];
         return(
@@ -175,6 +186,7 @@ class Todo extends React.Component {
                           style={{
                               background: this.props.pre_flag ? "#FF2D2D":"",
                               paddingRight: 0,
+                              borderRadius:'5px'
                           }}
                           label={this.props.cosCame}
                           onClick={this.handleOpen}
@@ -193,14 +205,16 @@ class Todo extends React.Component {
                 >
                     {this.state.coursedata===null?'':this.getinfo()}
                     <MuiThemeProvider>
-                        <Drawer
-                            docked={false}
-                            width={"50%"}
-                            open={this.state.opendrawer}
-                            onRequestChange={(opendrawer) => this.setState({opendrawer})}
-                            openSecondary
+                        <Dialog
+                            title={this.state.coursedata[0].teacher[this.state.value]}
+                            actions={actions2}
+                            open={this.state.opendia2}
+                            onRequestClose={this.handleDia2Close}
+                            contentStyle={customContentStyle}
+                            bodyStyle={bodyStyle}
+                            titleStyle={titleStyle}
                         >
-                        </Drawer>
+                        </Dialog>
                     </MuiThemeProvider>
                 </Dialog>
                 </MuiThemeProvider>

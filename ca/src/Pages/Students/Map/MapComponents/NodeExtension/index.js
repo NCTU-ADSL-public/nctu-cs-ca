@@ -5,6 +5,8 @@ import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from 'react-redux'
 import Icon from 'material-ui/svg-icons/maps/directions-walk';
+import Arrow from 'react-arrow'
+
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,25 +19,81 @@ const mapStateToProps = (state, ownProps) => {
 class GitnodeItem extends React.Component {
     constructor (props) {
         super(props)
+      //console.log(this.props)
     }
     componentWillMount(){
-    }
-    componentWillUpdate(nextProps, nextState){
-    }
-    state={
-        data:this.props.info.filter(t=>(t.cosCame === this.props.content))
+        if(this.state.data[0].pre !== null){
+          this.setState({pre:true})
+        }
+        if(this.state.data[0].suggest !== null ){
+          this.setState({suggest:true})
+          console.log(this.state.data[0])
+        }
+      //console.log(this.state.data)
     }
 
+    componentWillReceiveProps(nextProps){
+      this.setState({
+        data:nextProps.CourseItem.filter(t=>(t.cosCame === this.props.content))
+      })
+      console.log(nextProps.CourseItem.filter(t=>(t.cosCame === this.props.content)))
+    }
+    state={
+        data:this.props.CourseItem.filter(t=>(t.cosCame === this.props.content)),
+        pre:false,
+        suggest:false
+    }
+
+    getarrow = () => {
+      if(this.state.data[0].selectvalue === 2){
+        if(this.state.pre) {
+          return (
+            <div style={{marginTop: '15px', float: 'left'}}>
+              <Arrow
+                direction="right"
+                shaftWidth={10}
+                shaftLength={0}
+                headWidth={10}
+                headLength={15}
+                fill={'#ff291c'}
+                strokeWidth={2}
+                onClick={() => alert('You clicked the arrow!')}
+              />
+            </div>
+          )
+        }
+      }
+      if(this.state.data[0].selectvalue === 3){
+        if(this.state.suggest) {
+          return (
+            <div style={{marginTop: '15px', float: 'left'}}>
+              <Arrow
+                direction="right"
+                shaftWidth={10}
+                shaftLength={0}
+                headWidth={10}
+                headLength={15}
+                fill={'#5144ff'}
+                strokeWidth={2}
+                onClick={() => {}}
+              />
+            </div>
+          )
+        }
+      }
+      return ''
+    }
     render () {
         return(
             <MuiThemeProvider>
                 <div>
+                  {this.state.data[0].selectvalue === 1?'':this.getarrow()}
                     <FlatButton className="course-btn-map animated pulse"
-                                backgroundColor="#616161"
-                                hoverColor="#338d68"
-                                icon={this.state.data[0].realComplete?<Icon color={"#26A69A"}/>:''}
+                                backgroundColor={this.state.data[0].realComplete?"#616161":"#a42926"}
+                                hoverColor={"#8d347b"}
+                                icon={this.state.data[0].realComplete?<Icon color={"#26A69A"} style={{paddingLeft: 0,}}/>:''}
                                 labelStyle={{
-                                    padding: "5px",
+                                    padding: "0 5px 0 5px",
                                     height: "45px",
                                     verticalAlign: "default",
                                     color: "#fcfcfc",
@@ -45,10 +103,10 @@ class GitnodeItem extends React.Component {
                                     fontFamily: 'Noto Sans CJK TC',
                                 }}
                                 style={{
-                                    background: this.state.data[0].pre_flag ? "#FF2D2D":"",
                                     paddingRight: 0,
                                     animationDuration:'5s',
-                                    animationIterationCount:10000
+                                    animationIterationCount:10000,
+                                    borderRadius:'8px'
                                 }}
                                 label={this.props.content}>
 
@@ -59,12 +117,16 @@ class GitnodeItem extends React.Component {
     }
 }
 
+
+const GitNode = connect(
+  mapStateToProps
+)(GitnodeItem)
+
 export class Gitnode extends Node {
     renderContainer({content, isDragging,onClick}) {
         const className = `container`;
-
         return (
-            <GitnodeItem content={content} info={this.props.CourseItem}/>
+            <GitNode content={content} />
         );
     }
 }
@@ -91,6 +153,3 @@ export class GitEdgeSug extends Edge {
     }
 }
 
-export const GitNode = connect(
-    mapStateToProps
-)(Gitnode)

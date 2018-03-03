@@ -14,18 +14,17 @@ injectTapEventPlugin()
 
 const Router = () => (
   <BrowserRouter>
-      <div>
-          <Switch>
-              <Route exact path='/' component={Login} />
-              <Route exact path='/students/head' component={Head} />
-              <Route exact path='/teachers/head' component={TeacherHead} />
-              <Route exact path='/assistants/head' component={AssistantHead} />
-              <Route exact path='/assistants/head/s/:sid' component={StudentDetail} />
-          </Switch>
-          <Route path='/' component={Footer}/>
-      </div>
+    <div>
+      <Switch>
+        <Route exact path='/' component={Login} />
+        <Route exact path='/students/head' component={Head} />
+        <Route exact path='/teachers/head' component={TeacherHead} />
+        <Route exact path='/assistants/head' component={AssistantHead} />
+        <Route exact path='/assistants/head/s/:sid' component={StudentDetail} />
+      </Switch>
+      <Route path='/' component={Footer} />
+    </div>
   </BrowserRouter>
 )
 
 export default Router
-

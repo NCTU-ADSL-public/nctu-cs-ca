@@ -16,7 +16,7 @@
 
 .selectFieldStyle{
     position: fixed;
-    top: 200px;
+    top: 300px;
     right: 200px;
     z-index: 100;
 }
@@ -87,7 +87,7 @@ h3{
 .grade-num{
     padding: 3px 3px 3px 10px;
 
-    height: 30px;
+    height: 40px;
     background: #FFF;
     opacity: 0.5;
     color: #222;
@@ -149,8 +149,12 @@ h3{
 
 .course-btn-map{
     overflow: visible;
-    border-radius: 2px;
-    background-color: #616161;
+    border-radius: 5px;
+    width:120px;
+    opacity: 1;
+}
+.course-btn-map:hover{
+    width:200px;
 }
 
 

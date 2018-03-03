@@ -14,38 +14,38 @@ class GradCategory extends React.Component {
         for (let i = 0; i < subjects.length; i++) {
 
             // comment
-            if (this.state.name=='通識')
+            if (this.state.name==='通識')
                 subjects[i].comment = subjects[i].dimension+'向度 ';
             else
                 subjects[i].comment = '';
 
             // 抵免
-            if (subjects[i].reason=="notCS") {
+            if (subjects[i].reason==="notCS") {
                 subjects[i].comment += '此為外系課程，必須申請過抵免才能算通過。';
                 subjects[i].score = '';
-            } else if (subjects[i].reason=="free1") {
+            } else if (subjects[i].reason==="free1") {
                 subjects[i].comment += '已抵免';
                 subjects[i].score = '抵免';
-            } else if (subjects[i].reason=="free2") {
+            } else if (subjects[i].reason==="free2") {
                 subjects[i].comment += '免修課程';
-            } else if (subjects[i].reason=="now") {
+            } else if (subjects[i].reason==="now") {
                 subjects[i].comment += '當期課程';
                 subjects[i].score = '　';
             }
 
-            if ( subjects[i].score == -1 )
+            if ( subjects[i].score === -1 )
                 subjects[i].score = '';
 
             // score
-            if (subjects[i].score == null) {
-                if (subjects.grade == null)
-                    subjects[i].score = (subjects[i].complete == true)? '通過': '未過';
+            if (subjects[i].score === null) {
+                if (subjects.grade === null)
+                    subjects[i].score = (subjects[i].complete === true)? '通過': '未過';
                 else
                     subjects[i].score = subjects[i].grade;
             }
 
             // 未修
-            if ((subjects[i].score==null || subjects[i].score==-1) && subjects[i].complete==false) {
+            if ((subjects[i].score===null || subjects[i].score===-1) && subjects[i].complete===false) {
                 this.state.subjects[i].realCredit = '　';
                 this.state.subjects[i].originalCredit += '　';
             }
@@ -76,7 +76,7 @@ class GradCategory extends React.Component {
                 {this.state.subjects.map(subject =>
                     <GradSubject
                         key={subject.name}
-                        name={subject.cn + ' ' + subject.en + ((subject.english==true)? ' [英語授課]': '')}
+                        name={subject.cn + ' ' + subject.en + ((subject.english===true)? ' [英語授課]': '')}
                         credit={subject.originalCredit}
                         realCredit={subject.realCredit}
                         score={subject.score}

@@ -4,19 +4,15 @@ import './Map.css'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import todoApp from '../reducers'
-import {addTodo} from '../actions/index'
+import {addTodo, reviseselectvalue, reviseEdgeinfo} from '../actions/index'
 import App from './App'
-import {GitNode, GitEdgePre, GitEdgeSug} from './NodeExtension';
+import {Gitnode, GitEdgePre, GitEdgeSug} from './NodeExtension';
 import Graph from 'react-json-graph';
+//import Graph from 'react-json-graph';
 import DragAndZoom from  'react-drag-and-zoom'
 import Icon from 'material-ui/svg-icons/maps/directions-walk';
 
 import FlatButton from 'material-ui/FlatButton';
-//for tabs
-// import 'rc-tabs/assets/index.css';
-// import Tabs, { TabPane } from 'rc-tabs';
-// import TabContent from 'rc-tabs/lib/SwipeableTabContent';
-// import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
@@ -42,12 +38,15 @@ const fontStyle={
     letterSpacing: "1px",
     fontFamily: 'Noto Sans CJK TC',
 }
+const MapTiltleStyle={
+    float:'left',
+    margin:'70px 6.5% 20px 2%'
+}
 
 
 class Map extends React.Component {
       constructor (props) {
             super(props)
-            this.SavingCourseData()
             this.state = {
                 slideIndex: 0,
             };
@@ -95,6 +94,7 @@ class Map extends React.Component {
                   })
               }
           this.setState({value});
+          store.dispatch(reviseselectvalue(value))
       }
 
       onChange = (value) => {
@@ -104,6 +104,7 @@ class Map extends React.Component {
       };
 
     async componentWillMount(){
+          await this.SavingCourseData()
           this.setState({
               data:{
                 "label": "git",
@@ -117,16 +118,16 @@ class Map extends React.Component {
       }
 
     componentDidMount(){
-        console.log("data")
-        console.log(this.props.data)
 
     }
 
     getEdgeColor(){
-        if(this.state.value===2)
-            return GitEdgePre
-        else if(this.state.value===3)
-            return GitEdgeSug
+        if(this.state.value===2) {
+          return GitEdgePre
+        }
+        else if(this.state.value===3) {
+          return GitEdgeSug
+        }
     }
 
     SavingCourseData () {
@@ -223,7 +224,10 @@ class Map extends React.Component {
                           else if(this.props.data[i].cos_cname.match('網路通訊原理')!==null ) {
                               ny = 700
                           }
-                          else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('機率')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
+                          else if(this.props.data[i].cos_cname.match('機率')!==null ) {
+                              ny = 150
+                          }
+                          else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
                               math = 200
                               ny = math
                           }
@@ -258,6 +262,9 @@ class Map extends React.Component {
                           }
                           else if(this.props.data[i].cos_cname.match('軟硬體協同設計概論與實作')!==null ) {
                               ny = 320
+                          }
+                          else if(this.props.data[i].cos_cname.match('機率')!==null ) {
+                            ny = 150
                           }
                           else if(this.props.data[i].cos_cname.match('計算機概論')!==null ) {
                               ny = 350
@@ -352,7 +359,7 @@ class Map extends React.Component {
 
           for (let i = 0; i < datar.length; i++) {
               if(datar[i].pre !== null){
-                  for(let j=0;j<i;j++){
+                  for(let j=0;j<=i;j++){
                       if(datar[j].label === datar[i].pre){
                           edgepre.push({
                               "source": datar[j].id,
@@ -362,12 +369,16 @@ class Map extends React.Component {
                   }
               }
               if(datar[i].suggest !== null){
-                  for(let j=0;j<i;j++){
+                console.log(i)
+                console.log(datar[i].suggest)
+                  for(let j=0;j<=i;j++){
+                    console.log(datar[j].label)
                       if(datar[j].label === datar[i].suggest){
                           edgesug.push({
                               "source": datar[i].id,
                               "target": datar[j].id
                           })
+                        console.log(datar[j].id)
                       }
                   }
               }
@@ -391,6 +402,12 @@ class Map extends React.Component {
                       onChange={this.handleChange}
                       labelStyle={fontStyle}
                       selectedMenuItemStyle={{color:'#26A69A'}}
+                      floatingLabelStyle={{color: "#a42926",
+                        verticalAlign: "default",
+                        fontSize: "1em",
+                        fontWeight: "300",
+                        letterSpacing: "1px",
+                        fontFamily: 'Noto Sans CJK TC',}}
                   >
                       <MenuItem style={fontStyle} value={1} primaryText="無" />
                       <MenuItem style={fontStyle} value={2} primaryText="擋修" />
@@ -399,23 +416,8 @@ class Map extends React.Component {
               </MuiThemeProvider>
             </div>
             <div>
-            <MuiThemeProvider >
-                <FlatButton
-                    disabled={true}
-                    label="已修過"
-                    labelStyle={{
-                        padding: "5px",
-                        height: "45px",
-                        verticalAlign: "default",
-                        color: "#1d1d1d",
-                        fontSize: "1em",
-                        fontWeight: "300",
-                        letterSpacing: "1px",
-                        fontFamily: 'Noto Sans CJK TC',
-                    }}
-                    icon={<Icon color={"#26A69A"} />}
-                />
-            </MuiThemeProvider>
+              <div className="green" style={{backgroundColor:"#616161"}}> </div><div className="text">已通過</div>
+              <div className="red" style={{backgroundColor:"#a42926"}}> </div><div  className="text">未通過</div>
             </div>
         </div>
           <Provider store={store}>
@@ -445,18 +447,29 @@ class Map extends React.Component {
                 <DragAndZoom
                     minZoom={40}
                     maxZoom={150}
-                    initialZoom={100}
+                    initialZoom={85}
                     zoomStep={2}
                     onZoom={(zoom, e) => {}}
                 >
+                  <div>
+                    <div style={MapTiltleStyle}>大一 上</div>
+                    <div style={MapTiltleStyle}>大一 下</div>
+                    <div style={MapTiltleStyle}>大二 上</div>
+                    <div style={MapTiltleStyle}>大二 下</div>
+                    <div style={MapTiltleStyle}>大三 上</div>
+                    <div style={MapTiltleStyle}>大三 下</div>
+                    <div style={MapTiltleStyle}>大四 上</div>
+                    {/*<div style={MapTiltleStyle}>大四 下</div>*/}
+
                     <Graph
                         width={width}
                         height={height}
                         json={this.state.data}
                         onChange={(newGraphJSON) => {}}
-                        Node={GitNode}
+                        Node={Gitnode}
                         Edge={this.getEdgeColor()}
                     />
+                </div>
                 </DragAndZoom>
             </div>
             </SwipeableViews>
