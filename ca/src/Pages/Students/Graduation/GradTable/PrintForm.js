@@ -15,7 +15,7 @@ class PrintForm extends React.Component {
             if (generalCatTitle.indexOf(item.title ) !== -1) {
 
                 // Sort general course by 向度
-                if (item.title=='通識')
+                if (item.title === '通識')
                     item.course.sort(function(a, b){
                         if(a.dimension < b.dimension) return -1;
                         if(a.dimension > b.dimension) return 1;
@@ -37,6 +37,8 @@ class PrintForm extends React.Component {
                 break;
             case '資電':
                 programName = '資電工程組';
+                break;
+            default:
                 break;
         }
 

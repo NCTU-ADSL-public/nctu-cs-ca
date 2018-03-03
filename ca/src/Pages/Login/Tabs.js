@@ -4,7 +4,6 @@ import './Login.css'
 
 const style={
     backgroundImage: 'radial-gradient(circle, #3c3b52 0%, #252233 80%',
-    backgroundImage: '-webkit-radial-gradient(circle, #3c3b52 0%, #252233 80%)',
     height: '100%',
     textAlign: 'center',
     font: "1.33em 'Roboto Condensed', arial",

@@ -124,7 +124,6 @@ const GitNode = connect(
 
 export class Gitnode extends Node {
     renderContainer({content, isDragging,onClick}) {
-        const className = `container`;
         return (
             <GitNode content={content} />
         );

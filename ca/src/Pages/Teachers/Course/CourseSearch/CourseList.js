@@ -28,10 +28,6 @@ export default class StudentList extends React.Component {
         this.filterList = this.filterList.bind(this);
     }
 
-    componentWillMount(){
-        this.setState({items: this.state.initItems});
-    }
-
     componentDidMount(){
         this.setState({items: this.state.initItems});
     }
@@ -41,9 +37,9 @@ export default class StudentList extends React.Component {
         let updatedList = this.state.initItems;
         updatedList = updatedList.filter(function(item){
             return (
-                (item.sem.toLowerCase().search(
+                (item.unique_id.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)||
-                (item.name.toLowerCase().search(
+                (item.cos_cname.toLowerCase().search(
                     event.target.value.toLowerCase()) !== -1)
             );
         });
@@ -76,7 +72,7 @@ export default class StudentList extends React.Component {
                 </div>
 
                 <MuiThemeProvider>
-                    <CourseTable items={this.state.items}
+                    <CourseTable items={this.props.items}
                                  parentFunction={this.searchCallback}
                     />
                 </MuiThemeProvider>

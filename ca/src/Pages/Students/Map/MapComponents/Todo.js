@@ -21,6 +21,7 @@ const customContentStyle = {
 
 const bodyStyle = {
     fontFamily: 'Noto Sans CJK TC',
+    color:'#454545'
 };
 const titleStyle = {
     fontFamily: 'Noto Sans CJK TC',
@@ -88,7 +89,7 @@ class Todo extends React.Component {
     getinfo = () => {
         return (
             <div>
-                <div style={{float:'left'}}>授課教授:&nbsp;&nbsp;&nbsp;
+                <div style={{float:'left',}}>授課教授:&nbsp;&nbsp;&nbsp;
                     <MuiThemeProvider>
                         <Chip
                             onClick={this.handleChipClick}

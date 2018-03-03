@@ -75,11 +75,9 @@ export default class CourseTable extends Component {
     static defaultProps = {
         items: [
             {
-                id: 'dcp9999',
+                unique_id: 'DCP9999',
                 sem: '105下',
-                name: '資料庫系統概論',
-                avgScore: '81.5',
-                pAvgScore: '87.8',
+                cos_cname: '資料庫系統概論',
             },
         ]
     };
@@ -89,27 +87,30 @@ export default class CourseTable extends Component {
     }
 
     componentDidUpdate(NextProp, NextState){
+        console.log(this.props.items);
         if( NextProp.items !== this.props.items ){
             this.orderList(this.state.orderBy);
         }
     }
 
     orderList(orderBy){
-        let NewItemList = [].concat(this.props.items)
-            .sort((a, b) => {
-                if(orderBy === 'name')
-                    return a.name.localeCompare(b.name, 'zh-Hans-CN');
-                else if(orderBy === 'sem')
-                    return a.sem.localeCompare(b.sem, 'zh-Hans-CN');
-            });
+        let NewItemList = [];
+
+        if(this.props.items !== undefined){
+            NewItemList = [].concat(this.props.items)
+                .sort((a, b) => {
+                    if(orderBy === 'name')
+                        return a.cos_cname.localeCompare(b.cos_cname, 'zh-Hans-CN');
+                    else if(orderBy === 'sem')
+                        return a.unique_id.localeCompare(b.unique_id, 'zh-Hans-CN');
+                });
+        }
 
         let itemListRows = NewItemList
             .map((row, i) =>
                 <TableRow key={i}>
-                    <TableRowColumn style={styles.tabColumn0}>{row.sem}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.name}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.avgScore}</TableRowColumn>
-                    <TableRowColumn style={styles.tabColumn0}>{row.pAvgScore}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.unique_id}</TableRowColumn>
+                    <TableRowColumn style={styles.tabColumn0}>{row.cos_cname}</TableRowColumn>
                 </TableRow>
             );
 
@@ -155,16 +156,6 @@ export default class CourseTable extends Component {
                             <TableHeaderColumn tooltip="課程名稱">
                                 <div style={this.state.orderBy === 'name' ? styles.headerB : styles.header} onClick={ () => this.orderList('name') }>
                                     課程名稱{this.state.orderBy === 'name' ? '↓' : ''}
-                                </div>
-                            </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="全部平均成績">
-                                <div style={styles.header}>
-                                    平均成績
-                                </div>
-                            </TableHeaderColumn>
-                            <TableHeaderColumn tooltip="已通過學生平均成績">
-                                <div style={styles.header}>
-                                    平均成績+
                                 </div>
                             </TableHeaderColumn>
                         </TableRow>
