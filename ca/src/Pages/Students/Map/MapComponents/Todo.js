@@ -166,7 +166,20 @@ class Todo extends React.Component {
           }
         }
 
+    }
 
+  componentWillMount(){
+
+      this.initial()
+      this.setState({
+        searchCourse: searchCourse
+      })
+    }
+
+
+    handleOpen = () => {
+
+      let _this = this
 
       axios.post('/students/courseMap/courseInfo', {
         cos_cname:_this.props.cosCame
@@ -194,23 +207,15 @@ class Todo extends React.Component {
             }
           )
 
+          _this.setState({
+            searchCourse: searchCourse
+          })
+
         })
         .catch(err => {
           //window.location.replace("/logout ");
           console.log(err)
         })
-    }
-
-  componentWillMount(){
-
-      this.initial()
-      this.setState({
-        searchCourse: searchCourse
-      })
-    }
-
-
-    handleOpen = () => {
         this.setState({open: true})
     }
 
