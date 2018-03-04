@@ -8,11 +8,10 @@ import {addTodo, reviseselectvalue, reviseEdgeinfo} from '../actions/index'
 import App from './App'
 import {Gitnode, GitEdgePre, GitEdgeSug} from './NodeExtension';
 import Graph from 'react-json-graph';
+
+import MapsLocation from './MapsLocation.json'
 //import Graph from 'react-json-graph';
 import DragAndZoom from  'react-drag-and-zoom'
-import Icon from 'material-ui/svg-icons/maps/directions-walk';
-
-import FlatButton from 'material-ui/FlatButton';
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
@@ -55,7 +54,8 @@ class Map extends React.Component {
       state = {
           value: 1,
           data:[],
-          datar:[]
+          datar:[],
+          location:MapsLocation
       };
 
       handleChange = (event, index, value) => {
@@ -113,13 +113,14 @@ class Map extends React.Component {
                 "nodes":datai,
                 "edges": []
               },
-              datar:datar
+              datar:datar,
+              location:Object.keys(MapsLocation).map(function(key) {
+                let user = MapsLocation[key];
+                user.id = key;
+                return user;
+              })
           })
       }
-
-    componentDidMount(){
-
-    }
 
     getEdgeColor(){
         if(this.state.value===2) {
@@ -159,149 +160,16 @@ class Map extends React.Component {
           let id=0
           let semflag=0;
 
-          let basic = 0
-          let math = 0
-          let computer=0
-
+          console.log(MapsLocation)
           for (let i = 0; i < this.props.data.length; i++) {
               id++
               if (i !== 0) {
                   if (this.props.data[i - 1].cos_cname !== this.props.data[i].cos_cname) {
                       if(semflag !== this.props.data[i].semester) {
-                          basic = 0
-                          math = 0
-                          computer=0
                           semflag = this.props.data[i].semester
                           nx += 220
-                          if(this.props.data[i].cos_cname.match('物理')!==null || this.props.data[i].cos_cname.match('化學')!==null || this.props.data[i].cos_cname.match('生物')!==null){
-                              basic = 50
-                              ny = basic
-                          }
-                          else if(this.props.data[i].cos_cname.match('作業系統概論')!==null ) {
-                              ny = 600
-                          }
-                          else if(this.props.data[i].cos_cname.match('基礎程式設計')!==null ) {
-                              ny = 280
-                          }
-                          else if(this.props.data[i].cos_cname.match('訊號與系統')!==null ) {
-                              ny = 150
-                          }
-                          else if(this.props.data[i].cos_cname.match('數值方法')!==null ) {
-                              ny = 150
-                          }
-                          else if(this.props.data[i].cos_cname.match('影像處理概論')!==null ) {
-                              ny = 200
-                          }
-                          else if(this.props.data[i].cos_cname.match('計算機圖學概論')!==null ) {
-                              ny = 240
-                          }
-                          else if(this.props.data[i].cos_cname.match('軟硬體協同設計概論與實作')!==null ) {
-                              ny = 320
-                          }
-                          else if(this.props.data[i].cos_cname.match('計算機概論')!==null ) {
-                              ny = 350
-                          }
-                          else if(this.props.data[i].cos_cname.match('正規語言')!==null ) {
-                              ny = 200
-                          }
-                          else if(this.props.data[i].cos_cname.match('編譯器設計概論')!==null ) {
-                              ny = 200
-                          }
-                          else if(this.props.data[i].cos_cname.match('資料結構')!==null ) {
-                              ny = 280
-                          }
-                          else if(this.props.data[i].cos_cname.match('資訊工程研討')!==null ) {
-                              computer += 200
-                              ny = computer
-                          }
-                          else if(this.props.data[i].cos_cname.match('資訊工程專題')!==null ) {
-                              ny = 280
-                          }
-
-                          else if(this.props.data[i].cos_cname.match('計算機網路概論')!==null ) {
-                              ny = 700
-                          }
-                          else if(this.props.data[i].cos_cname.match('網路通訊原理')!==null ) {
-                              ny = 700
-                          }
-                          else if(this.props.data[i].cos_cname.match('機率')!==null ) {
-                              ny = 150
-                          }
-                          else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
-                              math = 200
-                              ny = math
-                          }
-                          else {
-                              computer = 350
-                              ny = computer
-                          }
                       }
-                      else{
-                          if(this.props.data[i].cos_cname.match('物理')!==null || this.props.data[i].cos_cname.match('化學')!==null || this.props.data[i].cos_cname.match('生物')!==null){
-                              if(basic===0)basic=50
-                              else basic += 40
-                              ny = basic
-                          }
-                          else if(this.props.data[i].cos_cname.match('作業系統概論')!==null ) {
-                              ny = 600
-                          }
-                          else if(this.props.data[i].cos_cname.match('基礎程式設計')!==null ) {
-                              ny = 280
-                          }
-                          else if(this.props.data[i].cos_cname.match('訊號與系統')!==null ) {
-                              ny = 150
-                          }
-                          else if(this.props.data[i].cos_cname.match('數值方法')!==null ) {
-                              ny = 150
-                          }
-                          else if(this.props.data[i].cos_cname.match('影像處理概論')!==null ) {
-                              ny = 200
-                          }
-                          else if(this.props.data[i].cos_cname.match('計算機圖學概論')!==null ) {
-                              ny = 240
-                          }
-                          else if(this.props.data[i].cos_cname.match('軟硬體協同設計概論與實作')!==null ) {
-                              ny = 320
-                          }
-                          else if(this.props.data[i].cos_cname.match('機率')!==null ) {
-                            ny = 150
-                          }
-                          else if(this.props.data[i].cos_cname.match('計算機概論')!==null ) {
-                              ny = 350
-                          }
-                          else if(this.props.data[i].cos_cname.match('正規語言')!==null ) {
-                              ny = 200
-                          }
-                          else if(this.props.data[i].cos_cname.match('編譯器設計概論')!==null ) {
-                              ny = 200
-                          }
-                          else if(this.props.data[i].cos_cname.match('資料結構')!==null ) {
-                              ny = 280
-                          }
-                          else if(this.props.data[i].cos_cname.match('資訊工程研討')!==null ) {
-                              computer += 200
-                              ny = computer
-                          }
-                          else if(this.props.data[i].cos_cname.match('資訊工程專題')!==null ) {
-                              ny = 280
-                          }
-                          else if(this.props.data[i].cos_cname.match('計算機網路概論')!==null ) {
-                              ny = 700
-                          }
-                          else if(this.props.data[i].cos_cname.match('網路通訊原理')!==null ) {
-                              ny = 700
-                          }
-                          else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('機率')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
-                              if(math===0)math=200
-                              else math += 40
-                              ny = math
-                          }
-                          else {
-                              if(computer===0)computer=350
-                              else computer += 100
-                              ny = computer
-                          }
-                      }
+                    let ny = MapsLocation.filter( t =>(t.cos_cname === this.props.data[i].cos_cname))[0].ny
                       datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                           "size": {
                               "width": 80,
@@ -311,41 +179,10 @@ class Map extends React.Component {
                   }
               } else {
                   if(semflag !== this.props.data[i].semester) {
-                      basic = 0
-                      math = 0
-                      computer=0
                       semflag = this.props.data[i].semester
                       nx += 220
-                      if(this.props.data[i].cos_cname.match('物理')!==null || this.props.data[i].cos_cname.match('化學')!==null || this.props.data[i].cos_cname.match('生物')!==null){
-                          basic = 50
-                          ny = basic
-                      }
-                      else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('機率')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
-                          math = 200
-                          ny = math
-                      }
-                      else {
-                          computer = 350
-                          ny = computer
-                      }
                   }
-                  else{
-                      if(this.props.data[i].cos_cname.match('物理')!==null || this.props.data[i].cos_cname.match('化學')!==null || this.props.data[i].cos_cname.match('生物')!==null){
-                          if(basic===0)basic=50
-                          else basic += 40
-                          ny = basic
-                      }
-                      else if(this.props.data[i].cos_cname.match('微積分')!==null || this.props.data[i].cos_cname.match('機率')!==null || this.props.data[i].cos_cname.match('線性代數')!==null|| this.props.data[i].cos_cname.match('離散數學')!==null){
-                          if(math===0)math=200
-                          else math += 40
-                          ny = math
-                      }
-                      else {
-                          if(computer===0)computer=350
-                          else computer += 100
-                          ny = computer
-                      }
-                  }
+                  let ny = MapsLocation.filter( t =>(t.cos_cname === this.props.data[i].cos_cname))[0].ny
                   datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                       "size": {
                           "width": 80,
@@ -369,16 +206,12 @@ class Map extends React.Component {
                   }
               }
               if(datar[i].suggest !== null){
-                console.log(i)
-                console.log(datar[i].suggest)
                   for(let j=0;j<=i;j++){
-                    console.log(datar[j].label)
                       if(datar[j].label === datar[i].suggest){
                           edgesug.push({
                               "source": datar[i].id,
                               "target": datar[j].id
                           })
-                        console.log(datar[j].id)
                       }
                   }
               }
@@ -443,7 +276,7 @@ class Map extends React.Component {
             <div className='Map-Row'>
               <App studentPasdata={this.props.studentPasdata} data={this.props.data} studentsGrad={this.props.studentsGrad} />
             </div>
-            <div style={{marginLeft:'-100px', marginTop:'-80px'}}>
+            <div style={{marginLeft:'-100px', marginTop:'-100px'}}>
                 <DragAndZoom
                     minZoom={40}
                     maxZoom={150}

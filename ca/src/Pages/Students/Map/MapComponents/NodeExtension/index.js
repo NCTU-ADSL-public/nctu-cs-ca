@@ -27,7 +27,6 @@ class GitnodeItem extends React.Component {
         }
         if(this.state.data[0].suggest !== null ){
           this.setState({suggest:true})
-          console.log(this.state.data[0])
         }
       //console.log(this.state.data)
     }
@@ -36,7 +35,6 @@ class GitnodeItem extends React.Component {
       this.setState({
         data:nextProps.CourseItem.filter(t=>(t.cosCame === this.props.content))
       })
-      console.log(nextProps.CourseItem.filter(t=>(t.cosCame === this.props.content)))
     }
     state={
         data:this.props.CourseItem.filter(t=>(t.cosCame === this.props.content)),
