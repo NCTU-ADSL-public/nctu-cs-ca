@@ -1,8 +1,7 @@
 import React from 'react'
 import './Map.css';
 import FlatButton from 'material-ui/FlatButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import PropTypes from 'prop-types';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Dialog from 'material-ui/Dialog';
 import './Todo.css';
 import axios from 'axios';
@@ -10,7 +9,9 @@ import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import defaultimg from './TodoExtension/defalt.jpg'
 
+let searchCourse=[]
 
 const customContentStyle = {
     maxWidth: 'none',
@@ -145,75 +146,76 @@ class Todo extends React.Component {
           }
         ]};
 
-    componentWillMount(){
+    initial = () => {
       let id = 0
-      let searchCourse=[]
-      this.state.coursedata.map( data => {
-
-          for (let i = 0; i < data.time.length; i++) {
+      let _this = this
+      for (let j = 0; j < this.state.coursedata.length; j++) {
+          for (let i = 0; i < this.state.coursedata[j].time.length; i++) {
             id++
             searchCourse.push({
-              key: id,
-              teacher: data.name,
-              code: data.codes[i],
-              stuLimit: data.stuLimit[i],
-              stuNum: data.stuNum[i],
-              photo: data.photo,
-              english: data.english[i],
+              id: id,
+              teacher: this.state.coursedata[j].name,
+              code: this.state.coursedata[j].codes[i],
+              stuLimit: this.state.coursedata[j].stuLimit[i],
+              stuNum: this.state.coursedata[j].stuNum[i],
+              photo: this.state.coursedata[j].photo,
+              english: this.state.coursedata[j].english[i],
               info: '敬請期待',
             })
+
           }
         }
-      )
 
+
+
+      axios.post('/students/courseMap/courseInfo', {
+        cos_cname:_this.props.cosCame
+      })
+        .then(res => {
+          console.log(res.data)
+          this.setState({coursedata: res.data});
+          let id = 0
+          let searchCourse=[]
+          res.data.map( data => {
+
+              for (let i = 0; i < data.time.length; i++) {
+                id++
+                searchCourse.push({
+                  id: id,
+                  teacher: data.name,
+                  code: data.codes[i],
+                  stuLimit: data.stuLimit[i],
+                  stuNum: data.stuNum[i],
+                  photo: data.photo,
+                  english: data.english[i],
+                  info: '敬請期待',
+                })
+              }
+            }
+          )
+
+        })
+        .catch(err => {
+          //window.location.replace("/logout ");
+          console.log(err)
+        })
+    }
+
+  componentWillMount(){
+
+      this.initial()
       this.setState({
         searchCourse: searchCourse
       })
     }
 
-  handleOpen = () => {
-        let _this = this
 
-        axios.post('/students/courseMap/courseInfo', {
-            cos_cname:_this.props.cosCame
-        })
-            .then(res => {
-                console.log(res.data)
-                this.setState({coursedata: res.data});
-                let id = 0
-                let searchCourse=[]
-                res.data.map( data => {
-
-                    for (let i = 0; i < data.time.length; i++) {
-                      id++
-                      searchCourse.push({
-                        key: id,
-                        teacher: data.name,
-                        code: data.codes[i],
-                        stuLimit: data.stuLimit[i],
-                        stuNum: data.stuNum[i],
-                        photo: data.photo,
-                        english: data.english[i],
-                        info: '敬請期待',
-                      })
-                    }
-                  }
-                )
-
-                this.setState({
-                  searchCourse: searchCourse
-                })
-            })
-            .catch(err => {
-                //window.location.replace("/logout ");
-                console.log(err)
-            });
-
-        this.setState({open: true});
+    handleOpen = () => {
+        this.setState({open: true})
     }
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({open: false})
     }
 
     handleChipClick = () => {
@@ -230,14 +232,12 @@ class Todo extends React.Component {
       let items = []
       let id = 0
       for (let j = 0; j < this.state.coursedata.length; j++) {
-        let data = this.state.coursedata[j]
-        console.log(data)
-        for (let i = 0; i < data.time.length; i++) {
+        for (let i = 0; i < this.state.coursedata[j].time.length; i++) {
           id++;
-          console.log(`${data.time[i].match('^[0-9]*')}學年度 ${data.time[i].charAt(4) === '1' ? '上學期' : '下學期'}   ${data.name} 教授`)
+          //console.log(`${this.state.coursedata[j].time[i].match('^[0-9]*')}學年度 ${this.state.coursedata[j].time[i].charAt(4) === '1' ? '上學期' : '下學期'}   ${this.state.coursedata[j].name} 教授`)
           items.push(
             <MenuItem style={fontStyle} value={id} key={id - 1}
-                      primaryText={`${data.time[i].match('^[0-9]*')}學年度 ${data.time[i].charAt(4) === '1' ? '上學期' : '下學期'}   ${data.name} 教授`}/>
+                      primaryText={`${this.state.coursedata[j].time[i].match('^[0-9]*')}學年度 ${this.state.coursedata[j].time[i].charAt(4) === '1' ? '上學期' : '下學期'}   ${this.state.coursedata[j].name} ${this.state.coursedata[j].name==="資工系"?'':'教授'}`}/>
               )
         }
       }
@@ -245,7 +245,6 @@ class Todo extends React.Component {
     }
 
     getinfo = () => {
-        console.log(this.state.searchCourse[this.state.value].photo)
         return (
             <div>
                 <div style={{float:'left',}}>授課教授:&nbsp;&nbsp;&nbsp;
@@ -258,7 +257,7 @@ class Todo extends React.Component {
                                 float:'right',
                             }}
                         >
-                            <Avatar src={this.state.searchCourse[this.state.value].photo}/>
+                            <Avatar src={this.state.searchCourse[this.state.value].photo===null?defaultimg:this.state.searchCourse[this.state.value].photo}/>
                             {this.state.searchCourse[this.state.value].teacher}
                         </Chip>
                     </MuiThemeProvider></div>
@@ -363,7 +362,7 @@ class Todo extends React.Component {
                     titleStyle={titleStyle}
                     onRequestClose={this.handleClose}
                 >
-                    {this.state.coursedata===null?'':this.getinfo()}
+                    {this.state.coursedata!==null?this.getinfo():'暫無簡介'}
                     <MuiThemeProvider>
                         <Dialog
                             title={this.state.searchCourse[this.state.value].teacher}
