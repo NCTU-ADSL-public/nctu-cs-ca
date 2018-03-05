@@ -104,7 +104,7 @@ export default class index extends React.Component {
     ],
   }
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps(nextProps){
     console.log(nextProps.tid);
 
     axios.post('/professors/courseInfo/courses', {
