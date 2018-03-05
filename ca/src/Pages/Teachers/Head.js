@@ -30,7 +30,7 @@ class Head extends Component {
         idCard: {
           name: res.data[0].tname,
           status: res.data[0].status,
-          id: res.data[0].id,
+          id: res.data[0].teacher_id,
         }
       })
     }).catch(err => {
