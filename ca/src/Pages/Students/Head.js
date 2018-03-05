@@ -31,7 +31,7 @@ class Head extends Component {
             sname:'資料錯誤',
             student_id:'0000000',
 			program:'網多',
-            grade:'大一',
+            grade:'大二',
             email:'hihi@gmail.com',
 		},
         print_courseCategoryArray: printData

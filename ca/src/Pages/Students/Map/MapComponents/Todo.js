@@ -41,10 +41,11 @@ class Todo extends React.Component {
         open: false,
         opendia2:false,
         value:0,
+        searchteachername:'',
         searchCourse:[],
         coursedata:[
           {
-            "name":'蔡錫鈞',
+            "name":'蔡錫鈞 蔡錫鈞',
             "codes":[
               'DCP3573'
             ],
@@ -223,8 +224,8 @@ class Todo extends React.Component {
         this.setState({open: false})
     }
 
-    handleChipClick = () => {
-        this.setState({opendia2: true});
+    handleChipClick = (name) => {
+        this.setState({opendia2: true, searchteachername:name});
     }
 
     handleChange = (event, index, value)  => {
@@ -253,19 +254,23 @@ class Todo extends React.Component {
         return (
             <div>
                 <div style={{float:'left',}}>授課教授:&nbsp;&nbsp;&nbsp;
+                  {this.state.searchCourse[this.state.value].teacher.split(" ").map(name=>
+
                     <MuiThemeProvider>
-                        <Chip
-                            onClick={this.handleChipClick}
-                            labelStyle={fontStyle}
-                            style={{
-                                margin: 4,
-                                float:'right',
-                            }}
-                        >
-                            <Avatar src={this.state.searchCourse[this.state.value].photo===null?defaultimg:this.state.searchCourse[this.state.value].photo}/>
-                            {this.state.searchCourse[this.state.value].teacher}
-                        </Chip>
-                    </MuiThemeProvider></div>
+                      <Chip
+                        onClick={()=>this.handleChipClick(name)}
+                        labelStyle={fontStyle}
+                        style={{
+                          margin: 4,
+                          float:'right',
+                        }}
+                      >
+                        <Avatar src={this.state.searchCourse[this.state.value].photo===null?defaultimg:this.state.searchCourse[this.state.value].photo}/>
+                        {name}
+                      </Chip>
+                    </MuiThemeProvider>
+                  )}
+                </div>
                 <br/>
                 <br/>
                 <br/>
@@ -367,10 +372,10 @@ class Todo extends React.Component {
                     titleStyle={titleStyle}
                     onRequestClose={this.handleClose}
                 >
-                    {this.state.coursedata!==null?this.getinfo():'暫無簡介'}
+                    {(this.props.cosCame.match("化學")||this.props.cosCame.match("生物")||this.props.cosCame.match("物理")||this.props.cosCame.match("微積分"))?'暫無簡介':this.getinfo()}
                     <MuiThemeProvider>
                         <Dialog
-                            title={this.state.searchCourse[this.state.value].teacher}
+                            title={this.state.searchteachername}
                             actions={actions2}
                             open={this.state.opendia2}
                             onRequestClose={this.handleDia2Close}
@@ -378,6 +383,7 @@ class Todo extends React.Component {
                             bodyStyle={bodyStyle}
                             titleStyle={titleStyle}
                         >
+                          敬請期待
                         </Dialog>
                     </MuiThemeProvider>
                 </Dialog>

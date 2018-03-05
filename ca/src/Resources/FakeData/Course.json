@@ -77,7 +77,7 @@
     "pre":null
   },
   {
-    "cos_cname":"物件導向程式設計",
+    "cos_cname":"資料結構與物件導向程式設計",
     "grade":"1",
     "semester":"2",
     "suggest":"計算機概論與程式設計",
@@ -105,6 +105,13 @@
     "pre":null
   },
   {
+    "cos_cname":"演算法概論",
+    "grade":"2",
+    "semester":"1",
+    "suggest":null,
+    "pre":"資料結構與物件導向程式設計"
+  },
+  {
     "cos_cname":"數位電路實驗",
     "grade":"2",
     "semester":"1",
@@ -126,17 +133,10 @@
     "pre":null
   },
   {
-    "cos_cname":"資料結構",
-    "grade":"2",
-    "semester":"1",
-    "suggest":"離散數學",
-    "pre":"物件導向程式設計"
-  },
-  {
     "cos_cname":"基礎程式設計",
     "grade":"2",
     "semester":"2",
-    "suggest":"資料結構",
+    "suggest":"演算法概論",
     "pre":null
   },
   {
@@ -152,13 +152,6 @@
     "semester":"2",
     "suggest":"離散數學",
     "pre":null
-  },
-  {
-    "cos_cname":"演算法概論",
-    "grade":"2",
-    "semester":"2",
-    "suggest":null,
-    "pre":"資料結構"
   },
   {
     "cos_cname":"計算機組織",

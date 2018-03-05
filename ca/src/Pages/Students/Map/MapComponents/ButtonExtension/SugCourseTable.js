@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import axios from 'axios'
 import {
   Table,
   TableBody,
@@ -90,7 +91,19 @@ export default class TableExampleComplex extends Component {
     deselectOnClickaway: true,
     showCheckboxes: false,
     height: '300px',
+    tableData:tableData
   };
+
+  componentWillMount () {
+    let _this = this
+    axios.get('/students/courses/recommend').then(res => {
+      _this.setState({
+        tableData:res.data
+      })
+    }).catch(err => {
+      console.log(err);
+    });
+  }
 
 
   handleChange = (event) => {
@@ -114,7 +127,7 @@ export default class TableExampleComplex extends Component {
               enableSelectAll={this.state.enableSelectAll}
             >
               <TableRow>
-                <TableHeaderColumn tooltip="按優先順序排列課程">順序</TableHeaderColumn>
+                <TableHeaderColumn tooltip="按推薦優先順序排列課程">順序</TableHeaderColumn>
                 <TableHeaderColumn tooltip="課程名稱">課程</TableHeaderColumn>
                 <TableHeaderColumn tooltip="開課老師">開課老師</TableHeaderColumn>
                 <TableHeaderColumn tooltip="同一門課不同老師授課時段可能不一樣">時段</TableHeaderColumn>
@@ -127,7 +140,7 @@ export default class TableExampleComplex extends Component {
               showRowHover={this.state.showRowHover}
               stripedRows={this.state.stripedRows}
             >
-              {tableData.map( (row, index) => (
+              {this.state.tableData.map( (row, index) => (
                 <TableRow key={index}
                           style = {TableRowStyle}>
                   <TableRowColumn>{index+1}</TableRowColumn>
