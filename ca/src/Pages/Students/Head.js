@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
+import {Grid,Row,Col} from 'react-bootstrap'
 
 import HomeItem from './Home/Home.js'
 import MapItem from './Map/MapComponents/Map.js'
 import GradCreditCheckPage from './Graduation/GradCreditCheck.js'
 
-import './StudentsHead.css'
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
 
@@ -183,22 +183,30 @@ class Head extends Component {
       () => this.select(2),
     ]
     return (
-      <div id="Head">
-        <Navbar type={this.state.studentIdcard.grade === "大一" ? 'studentonlyformap' : 'student'}
-                version={this.state.studentIdcard.grad}
-                name={this.state.studentIdcard.sname}
-                subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
-                selectedIndex={this.state.studentIdcard.grade === "大一" ? this.state.selectedIndex - 1 : this.state.selectedIndex}
-                onTouchTaps={onTouchTaps}
-        />
-        <div id="page">
-          <Loading size={300}
-                   left={600}
-                   top={200}
-                   isLoading={true}
+      <Grid id="Head">
+        <Row>
+          <Navbar type={this.state.studentIdcard.grade === "大一" ? 'studentonlyformap' : 'student'}
+                  version={this.state.studentIdcard.grad}
+                  name={this.state.studentIdcard.sname}
+                  subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
+                  selectedIndex={this.state.studentIdcard.grade === "大一" ? this.state.selectedIndex - 1 : this.state.selectedIndex}
+                  onTouchTaps={onTouchTaps}
           />
-        </div>
-      </div>
+          <Col sm={12} xsHidden smHidden>
+            <div id="page" >
+              <Loading size={300}
+                       left={600}
+                       top={200}
+                       isLoading={true}
+              />
+            </div>
+          </Col>
+          {/* For mobile, tablet user */}
+          <Col xs={12} mdHidden lgHidden>
+            <h2>手機版功能目前測試中，造成不便敬請見諒。</h2>
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }

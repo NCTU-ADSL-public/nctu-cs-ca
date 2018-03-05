@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
+import {Grid,Row,Col} from 'react-bootstrap'
 
 import HomeItem from './Home.js'
 import GraduationItem from './Graduation/index'
 
-import './Head.css'
 import Navbar from '../../Components/Navbar'
 
 class Head extends React.Component {
@@ -63,21 +63,29 @@ class Head extends React.Component {
     }
 
     render () {
-        const onTouchTaps = [
-            () => this.select(0),
-            () => this.select(1),
-        ]
-        return (
-            <div id="Head">
-                <Navbar type='assistant'
-                        name={this.state.idCard.name}
-                        subname={this.state.idCard.prog + this.state.idCard.grad}
-                        selectedIndex={this.state.selectedIndex}
-                        onTouchTaps={onTouchTaps}
-                />
-                <div id='page'/>
-            </div>
-        )
+      const onTouchTaps = [
+        () => this.select(0),
+        () => this.select(1),
+      ]
+      return (
+        <Grid id="Head">
+          <Row>
+            <Navbar type='assistant'
+                    name={this.state.idCard.name}
+                    subname={this.state.idCard.prog + this.state.idCard.grad}
+                    selectedIndex={this.state.selectedIndex}
+                    onTouchTaps={onTouchTaps}
+            />
+            <Col sm={12} xsHidden smHidden>
+              <div id="page"/>
+            </Col>
+            {/* For mobile, tablet user */}
+            <Col xs={12} mdHidden lgHidden>
+              <h2>手機版功能目前測試中，造成不便敬請見諒。</h2>
+            </Col>
+          </Row>
+        </Grid>
+      )
     }
 }
 

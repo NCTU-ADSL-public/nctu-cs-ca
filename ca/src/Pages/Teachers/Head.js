@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
+import {Grid,Row,Col} from 'react-bootstrap'
 
 import HomeItem from './Home.js'
 import CourseItem from './Course/index.js'
 import GroupItem from './Group/Group.js'
 import FamilyItem from './Family/Family.js'
 
-import './Head.css'
 import Navbar from '../../Components/Navbar'
 
 class Head extends Component {
@@ -89,15 +89,23 @@ class Head extends Component {
       () => this.select(3),
     ]
     return (
-      <div id="Head">
-        <Navbar type='teacher'
-                name={this.state.idCard.name}
-                subname={this.state.idCard.id}
-                selectedIndex={this.state.selectedIndex}
-                onTouchTaps={onTouchTaps}
-        />
-        <div id="page"/>
-      </div>
+      <Grid id="Head">
+        <Row>
+          <Navbar type='teacher'
+                  name={this.state.idCard.name}
+                  subname={this.state.idCard.id}
+                  selectedIndex={this.state.selectedIndex}
+                  onTouchTaps={onTouchTaps}
+          />
+          <Col sm={12} xsHidden smHidden>
+            <div id="page"/>
+          </Col>
+          {/* For mobile, tablet user */}
+          <Col xs={12} mdHidden lgHidden>
+            <h2>手機版功能目前測試中，造成不便敬請見諒。</h2>
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }
