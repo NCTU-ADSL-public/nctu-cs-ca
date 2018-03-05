@@ -18,7 +18,7 @@ class Head extends Component {
     idCard: {
       name: '資料錯誤',
       status: '',
-      id: 'T9228',
+      id: 'T9229',
     },
   }
 
