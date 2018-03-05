@@ -31,7 +31,7 @@ class Head extends Component {
             sname:'資料錯誤',
             student_id:'0000000',
 			program:'網多',
-            grade:'大二',
+            grade:"大一",
             email:'hihi@gmail.com',
 		},
         print_courseCategoryArray: printData
@@ -128,20 +128,20 @@ class Head extends Component {
                 </FadeIn>,
                 document.getElementById('page'));
         }
-        else if(index===1){
+        else if(index===1 ){
             ReactDOM.render(
-                <font>
-                    <FadeIn>
-                        <GradCreditCheckPage
-                            items={graduationItems}
-                            result={graduationItems[11]}
-                            revise={revise}
-                            reviseresult={revise[11]}
-                            studentProfile={this.state.studentIdcard}
-                            courseCategoryArray={this.state.print_courseCategoryArray}/>
-                        </FadeIn>
-                </font>,
-                document.getElementById('page'));
+              <font>
+                  <FadeIn>
+                      <GradCreditCheckPage
+                        items={graduationItems}
+                        result={graduationItems[11]}
+                        revise={revise}
+                        reviseresult={revise[11]}
+                        studentProfile={this.state.studentIdcard}
+                        courseCategoryArray={this.state.print_courseCategoryArray}/>
+                  </FadeIn>
+              </font>,
+              document.getElementById('page'));
         }
         else if(index===2){
             ReactDOM.render(
@@ -183,10 +183,11 @@ class Head extends Component {
         ]
 	    return (
 		    <div id="Head">
-                <Navbar type='student'
+                <Navbar type={this.state.studentIdcard.grade==="大一"?"studentonlyformap":'student'}
+                        version={this.state.studentIdcard.grad}
                         name={this.state.studentIdcard.sname}
                         subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
-                        selectedIndex={this.state.selectedIndex}
+                        selectedIndex={this.state.studentIdcard.grade==="大一"?this.state.selectedIndex-1:this.state.selectedIndex}
                         onTouchTaps={onTouchTaps}
                 />
 				<div id="page" >

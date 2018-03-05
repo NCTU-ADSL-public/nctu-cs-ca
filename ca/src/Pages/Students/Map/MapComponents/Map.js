@@ -39,7 +39,12 @@ const fontStyle={
 }
 const MapTiltleStyle={
     float:'left',
-    margin:'70px 6.5% 20px 2%'
+    verticalAlign: "default",
+    fontSize: "1em",
+    fontWeight: "700",
+    letterSpacing: "1px",
+    fontFamily: 'Noto Sans CJK TC',
+    margin:'70px 110px 20px 40px'
 }
 
 
@@ -169,7 +174,7 @@ class Map extends React.Component {
                           semflag = this.props.data[i].semester
                           nx += 220
                       }
-                    let ny = MapsLocation.filter( t =>(t.cos_cname === this.props.data[i].cos_cname))[0].ny
+                    let ny = MapsLocation.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname))[0].ny
                       datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                           "size": {
                               "width": 80,
@@ -222,7 +227,7 @@ class Map extends React.Component {
 
   render () {
       const width = document.body.clientWidth;
-      const height = document.body.clientHeight;
+      const height = document.body.clientHeight + 10;
       const heightWrap = height;
       return (
       <div>
