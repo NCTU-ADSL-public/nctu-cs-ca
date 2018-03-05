@@ -56,7 +56,7 @@ class Head extends Component {
       ReactDOM.render(
         <div>
           <FadeIn>
-            <CourseItem tid={this.state.id}/>
+            <CourseItem tid={this.state.idCard.id}/>
           </FadeIn>
         </div>,
         document.getElementById('page'))
