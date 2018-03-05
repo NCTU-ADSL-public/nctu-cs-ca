@@ -203,7 +203,7 @@ class Head extends Component {
           </Col>
           {/* For mobile, tablet user */}
           <Col xs={12} mdHidden lgHidden>
-            <h2>手機版功能目前測試中，造成不便敬請見諒。</h2>
+            <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
           </Col>
         </Row>
       </Grid>
