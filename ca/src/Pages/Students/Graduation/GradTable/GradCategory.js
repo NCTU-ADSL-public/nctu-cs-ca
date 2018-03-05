@@ -37,17 +37,17 @@ class GradCategory extends React.Component {
                 subjects[i].score = '';
 
             // score
-            if (subjects[i].score == null) {
-                if (subjects.grade == null)
+            if (subjects[i].score === null) {
+                if (subjects.grade === null)
                     subjects[i].score = (subjects[i].complete === true)? '通過': '未過';
                 else
                     subjects[i].score = subjects[i].grade;
             }
 
             // 未修
-            if ((subjects[i].score == null || subjects[i].score === -1) && subjects[i].complete === false) {
-                subjects[i].realCredit = '　';
-                subjects[i].originalCredit += '　';
+            if ((subjects[i].score===null || subjects[i].score===-1) && subjects[i].complete===false) {
+                this.state.subjects[i].realCredit = '　';
+                this.state.subjects[i].originalCredit += '　';
             }
 
         }

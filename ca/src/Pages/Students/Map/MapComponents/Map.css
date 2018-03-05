@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 
+
 #font_adjust{
     background: #F5F5F5;
     height: auto;
@@ -11,7 +12,7 @@
     padding: 35px 6% 0 6%;
     color: #7B7B7B;
     font-size: 1.5em;
-
+    zoom: 80%;
 }
 
 .selectFieldStyle{
@@ -87,7 +88,7 @@ h3{
 .grade-num{
     padding: 3px 3px 3px 10px;
 
-    height: 30px;
+    height: 40px;
     background: #FFF;
     opacity: 0.5;
     color: #222;
@@ -149,8 +150,12 @@ h3{
 
 .course-btn-map{
     overflow: visible;
-    border-radius: 2px;
-    background-color: #616161;
+    border-radius: 5px;
+    width:120px;
+    opacity: 1;
+}
+.course-btn-map:hover{
+    width:200px;
 }
 
 

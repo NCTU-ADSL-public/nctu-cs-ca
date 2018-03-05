@@ -12,6 +12,7 @@
     "prop-types": "^15.6.0",
     "rc-tabs": "^9.2.0",
     "react": "^15.6.2",
+    "react-arrow": "^2.0.2",
     "react-bootstrap": "^0.32.1",
     "react-c3js": "^0.1.20",
     "react-dom": "^15.6.2",

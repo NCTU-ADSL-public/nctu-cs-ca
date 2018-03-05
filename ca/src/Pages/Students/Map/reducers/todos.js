@@ -13,6 +13,7 @@ const todo = (state = {}, action) => {
         pre_flag: false,
         active: false,
         realComplete: action.completed,
+        selectvalue: 1
       }
     case 'SET_ALL':
       if (action.index === 0) {
@@ -29,6 +30,8 @@ const todo = (state = {}, action) => {
         return Object.assign({}, state, {
           active: false
         })
+      }
+      else {
       }
 
     case 'SET_PASCOS':
@@ -49,6 +52,31 @@ const todo = (state = {}, action) => {
 
       return state
 
+    case 'REVISE_SELECT_VALUE':
+      return Object.assign({}, state, {
+        selectvalue: action.value
+      })
+    case 'REVISE_EDGE_INFO':
+      console.log(action.value)
+      if (action.value === 2) {
+        if (state.cosCame === action.cosCame || state.cosCame + '(英文授課)' === action.cosCame) {
+          return Object.assign({}, state, {
+            pre_flag: true
+          })
+        }
+        return state
+      }
+      if (action.value === 3) {
+        if (state.cosCame === action.cosCame || state.cosCame + '(英文授課)' === action.cosCame) {
+          return Object.assign({}, state, {
+            suggest_flag: true
+          })
+        }
+        return state
+      }
+      else {
+        return state
+      }
     case 'HANDLE_DATA':
       if (state.cosCame !== action.pre) {
         return Object.assign({}, state, {
@@ -99,6 +127,16 @@ const todos = (state = [], action) => {
       return state.map(t =>
                 todo(t, action)
             )
+
+    case 'REVISE_EDGE_INFO':
+      console.log(1212)
+      return state.map(t =>
+        todo(t, action)
+      )
+    case 'REVISE_SELECT_VALUE':
+      return state.map(t =>
+        todo(t, action)
+      )
 
     default:
       return state

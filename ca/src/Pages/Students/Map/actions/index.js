@@ -1,5 +1,5 @@
 let nextTodoId = 0
-export const addTodo = (cosCame, grade, semester, suggest, pre,completed) => {
+export const addTodo = (cosCame, grade, semester, suggest, pre, completed, selectvalue) => {
   return {
     type: 'ADD_TODO',
     id: nextTodoId++,
@@ -10,7 +10,8 @@ export const addTodo = (cosCame, grade, semester, suggest, pre,completed) => {
     pre,
     suggest_flag: 0,
     pre_flag: 0,
-      completed
+    completed,
+    selectvalue
   }
 }
 
@@ -54,5 +55,18 @@ export const handleCoursedata = (pre) => {
   return {
     type: 'HANDLE_DATA',
     pre
+  }
+}
+export const reviseselectvalue = (value) => {
+  return {
+    type: 'REVISE_SELECT_VALUE',
+    value
+  }
+}
+export const reviseEdgeinfo = (value, cosCame) => {
+  return {
+    type: 'REVISE_EDGE_INFO',
+    value,
+    cosCame
   }
 }

@@ -46,6 +46,10 @@ class Navbar extends React.Component {
                 <NavItem key={1} label='畢業預審' icon={<GraduationIcon/>} onTouchTap={onTouchTaps[1]}/>,
                 <NavItem key={2} label='課程地圖' icon={<MapIcon/>} onTouchTap={onTouchTaps[2]}/>,
             ],
+            'studentonlyformap': [
+                <NavItem key={0} label='首頁' icon={<HomeIcon/>} onTouchTap={onTouchTaps[0]}/>,
+                <NavItem key={1} label='課程地圖' icon={<MapIcon/>} onTouchTap={onTouchTaps[2]}/>,
+            ],
             'assistant': [
                 <NavItem key={0} label='首頁' icon={<HomeIcon/>} onTouchTap={onTouchTaps[0]}/>,
                 <NavItem key={1} label='畢業預審' icon={<GraduationIcon/>} onTouchTap={onTouchTaps[1]}/>,
