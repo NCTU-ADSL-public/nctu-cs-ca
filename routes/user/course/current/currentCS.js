@@ -71,8 +71,8 @@ currentCS.processCS = function(req, res, next){
 							break;
 						}
 						else{
-							if(reg == '物化生'){
-								if(reg2 == '物理'||reg2 == '化學'||reg2 == '普通'){
+							if(reg == '物化生三選一(一)'){
+								if(reg2 == '物理'||reg2 == '化學'||reg2 == '生物'){
 									courseResult[0].course[a] = cosInfo;
                                 break;
 								}

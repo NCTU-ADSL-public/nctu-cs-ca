@@ -135,7 +135,6 @@ class Grad extends React.Component {
                                 <div className="overview-course" >
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('副核心與他組核心')}>副核心與他組核心&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.vice}</font>/{this.state.totalitems.vice_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.vice/this.state.totalitems.vice_require*100}/></div>
                                     <div className="showcourseoverview" onClick={()=>this.handleClick('專業選修')}>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.state.totalitems.pro}</font>/{this.state.totalitems.pro_require}&nbsp;學分<br/><LinearProgressExampleDeterminate grad={this.state.totalitems.pro/this.state.totalitems.pro_require*100}/></div>
-                                    <div className="showcourseoverview" onClick={()=>this.handleClick('抵免研究所課程')}>抵免研究所課程<font size={5} color='#338d68'>&nbsp;{this.state.totalitems.graduate}</font>&nbsp;學分<br/></div>
                                 </div>
                             </div>
                         </div>

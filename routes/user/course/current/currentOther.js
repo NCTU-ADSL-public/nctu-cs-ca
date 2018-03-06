@@ -3,6 +3,8 @@ var currentOther = {};
 currentOther.processOther = function(req, res, next){
         
 	var now = JSON.parse(req.now);
+//    ////console.log("course this semester:");
+   // console.log(now);
 	var total = req.course.total;
 	var courseResult = res.locals.courseResult;
 	
@@ -14,10 +16,11 @@ currentOther.processOther = function(req, res, next){
           	// the year the student enter school
         var taken = [];
         
-        for(var i = 0; i< courseResult.length; i++)
+        for(var i = 0; i<(courseResult.length-1); i++)
             for(var q = 0; q<courseResult[i].course.length; q++){
                 taken[courseResult[i].course[q].code] = true;
             }
+        
         var school_year = (100 + temp);
   		var rule= [];
 		for(var q = 0; q<now.length; q++){
@@ -35,7 +38,8 @@ currentOther.processOther = function(req, res, next){
                         code:''
             };
 			var temp = now[q].cos_code.substring(0,3);
-            cosInfo.code = now[q].cos_code;
+            else
+                cosInfo.code = now[q].cos_code;
             cosInfo.cn = now[q].cos_cname;
             cosInfo.en = now[q].cos_ename;
   			cosInfo.year = 106 - school_year + 1;
@@ -64,8 +68,10 @@ currentOther.processOther = function(req, res, next){
                         }
                     }
   			 		else if(temp == 'ART'){
-                        if(taken[now[q].cos_code] === true)
+  						if(taken[now[q].cos_code] === true){
+                            console.log("get it");
                             cosInfo.code = now[q].cos_code + "_now";
+                        }
                         courseResult[9].course.push(cosInfo);
   		            }
                     else{
@@ -81,9 +87,7 @@ currentOther.processOther = function(req, res, next){
                         }
   			            else{
                             if(temp == 'PYY'){
-  						        if(taken[now[q].cos_code] === true)
-                                    cosInfo.code = now[q].cos_code + "_now";
-                                courseResult[7].course.push(cosInfo);
+  						        courseResult[7].course.push(cosInfo);
                             }
                             else{
                                 if(now[q].cos_typeext == '服務學習'){

@@ -36,9 +36,6 @@ export default class TabsExampleControlled extends React.Component {
                 <Tab label="已修正項目" value="a"
                      style = {{backgroundColor: "#ae5164", fontFamily: 'Noto Sans CJK TC',}}>
                     <ul className="live type2">
-                        <li>增加放置抵免研究所課程功能</li>
-                        <li>物理拆為3+1形式。</li>
-                        <li>抵免及通過課程不重複顯示。</li>
                         <li>新增編輯課程功能</li>
                         <li>因交通大學單一入口帳密驗證問題，點選登出不能切換帳號。欲切換帳號可以到交大oauth網頁切換。</li>
                         <li>修正 http 無法導向到 https 問題。</li>

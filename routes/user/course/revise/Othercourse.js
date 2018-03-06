@@ -67,11 +67,6 @@ Othercourse.processOther = function(req, res, next){
                 require: 2,
                 course: []
         }
-        var graduate = {
-                title: '抵免研究所課程',
-                credit: 0,
-                course: []
-        }
 	    var rules = JSON.parse(req.rules);
 	    var program = req.profile[0].program;
         var pass = JSON.parse(req.pass);
@@ -113,7 +108,6 @@ Othercourse.processOther = function(req, res, next){
         var offsetTeacherTime = [];
         var repeatCounter = [];
         var taken = [];
-        var offsetNameCheck = [];
         var offsetInfo = [];
         var offsetTaken = [];
         var offsetTakenCheck = [];
@@ -140,7 +134,6 @@ Othercourse.processOther = function(req, res, next){
         
         for(var i = 0; i<offset.length; i++){
             offset[i] = offsetInfo[offset[i].cos_code];
-            offsetNameCheck[offset[i].cos_cname] = true;
         }
         //console.log("after");
         //console.log(offset);
@@ -180,7 +173,6 @@ Othercourse.processOther = function(req, res, next){
                     var cosAdd = JSON.stringify(cosInfo);
                     cosAdd = JSON.parse(cosAdd);
                     cosAdd.realCredit = 1;
-                    cosAdd.code = offset[i].cos_code + '_one';
                     elective.credit++;
                     elective.course.push(cosAdd);
                 }
@@ -218,22 +210,13 @@ Othercourse.processOther = function(req, res, next){
                         offsetTeacherTime.push(cosInfo);
                     }
                     compulsory.course.push(cosInfo);
-                    compulsory.credit += cosInfo.realCredit;
+                    compulsory.credit += parseInt(offset[i].credit);
                 }
             }
 			else if(offset[i].cos_type == '選修'){
                 if(compulseCodeCheck[offset[i].cos_code] === true){
-                    if(offset[i].cos_cname.substring(0,2) == '物理'){
-                        cosInfo.realCredit = parseInt(offset[i].credit) - 1;
-                        var cosAdd = JSON.stringify(cosInfo);
-                        cosAdd = JSON.parse(cosAdd);
-                        cosAdd.realCredit = 1;
-                        cosAdd.code = offset[i].cos_code + '_one';
-                        elective.credit++;
-                        elective.course.push(cosAdd);
-                    }
                     compulsory.course.push(cosInfo);
-                    compulsory.credit += cosInfo.realCredit;
+                    compulsory.credit += parseInt(offset[i].credit);
                 }
                 else{
                     var temp = offset[i].cos_code.substring(0,3);
@@ -361,9 +344,7 @@ Othercourse.processOther = function(req, res, next){
 		        if(cosInfo.complete === true){
 				    if(temp == 'DCP' || temp == 'IOC' || temp == 'IOE' || temp == 'ILE'){
 	                    if(pass[q].cos_cname == '服務學習(一)' || pass[q].cos_cname == '服務學習(二)'){
-	                        if(offsetNameCheck[pass[q].cos_cname] == true);
-                            else{
-                            cosInfo.type = pass[q].cos_typeext;
+	                        cosInfo.type = pass[q].cos_typeext;
                             for(var w = 0; w< service.course.length; w++){
                                 if(service.course[w].cn == pass[q].cos_cname){
                                     if(pass[q].score >= service.course[w].score)
@@ -375,7 +356,6 @@ Othercourse.processOther = function(req, res, next){
                                 cosInfo.type = pass[q].cos_typeext;
                                 service.credit += parseInt(pass[q].cos_credit);
                                 service.course.push(cosInfo);
-                            }
                             }
 					    }
 	                    else{
@@ -563,9 +543,7 @@ Othercourse.processOther = function(req, res, next){
 	                    }
 	                    else{
 	                        if(pass[q].cos_typeext == '服務學習'){
-								if(pass[q].cos_cname == '服務學習(一)')
-                                    cosInfo.reason = 'notCS';
-                                cosInfo.type = pass[q].cos_typeext;
+								cosInfo.type = pass[q].cos_typeext;
                                 service.course.push(cosInfo);
 	                            service.credit += parseInt(pass[q].cos_credit);
 	                    }
@@ -627,7 +605,7 @@ Othercourse.processOther = function(req, res, next){
 		if(englishState == '0' || englishState == '3' || englishState == '4'){
             for(var i = 0; i<2; i++){
                if(basicEnglish[i] != true){
-                   var cosInfo = {
+                    var cosInfo = {
                             cn:'',
                             en:'',
                             score:-1,
@@ -663,7 +641,6 @@ Othercourse.processOther = function(req, res, next){
 	    courseResult.push(peClass);
 	    courseResult.push(service);
 	    courseResult.push(art);
-        courseResult.push(graduate);
 	}
 	else {
 			res.redirect('/');

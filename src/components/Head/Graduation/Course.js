@@ -16,19 +16,14 @@ class Course extends React.Component {
             height:'36px',
             paddingRight: 0,
             paddingLeft: 0,
-            zIndex:  (this.props.cosCame === "物理(一)" || this.props.cosCame === "物理(二)")?'500':'' ,
-        },
-        name:''
+            zIndex: "",
+        }
     };
 
     componentWillMount(){
-        let string = (this.props.cosCame === "物理(一)" || this.props.cosCame === "物理(二)"||this.props.cosCame === "物理(一)榮譽班" || this.props.cosCame === "物理(二)榮譽班")?this.props.realCredit:"";
-        let ph = (this.props.cosCame === "物理(一)" || this.props.cosCame === "物理(二)"||this.props.cosCame === "物理(一)榮譽班" || this.props.cosCame === "物理(二)榮譽班")?"學分":"";
-        string = "   " + string + ph
         this.setState({
             width:200,
             paddingRight: 0,
-            name: this.props.cosCame + string
         })
     }
 
@@ -76,7 +71,7 @@ class Course extends React.Component {
                                         hoverColor={"#80b0d9"}
                                         backgroundColor={this.props.completed?(this.props.reason==="notCS")?"#a29951":(this.props.reason==="free1"　|| this.props.reason==="free2"　|| this.props.reason === "english")?"#6A94A2":(this.props.reason==="now" )?"#ab6bd9":"#3cab7d":this.props.selection?(this.props.reason==="now")?"#ab6bd9":"gray":(this.props.reason==="now")?"#ab6bd9":"#d95467"}
                                         style={this.state.style}
-                                        label={this.state.name}
+                                        label={this.props.cosCame}
                                         onClick={()=>this.handleClick()}>
 
                             </FlatButton>

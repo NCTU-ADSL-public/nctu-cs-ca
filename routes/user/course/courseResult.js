@@ -26,8 +26,7 @@ courseResult.processResult = function(req, res, next){
                 service: 0,
                 service_require: 2,
                 art: 0,
-                art_require: 2,
-                graduate: 0
+                art_require: 2
         }
   	if(req.session.profile){
   		var rules = JSON.parse(req.rules);
@@ -41,7 +40,7 @@ courseResult.processResult = function(req, res, next){
           	result.vice_require = parseInt(rules[0].sub_core_credit);
           	result.pro = CourseResult[3].credit;
           	result.pro_require = parseInt(rules[0].pro_credit);
-  		    result.english = EnglishCourse.length;
+  		result.english = EnglishCourse.length;
           	result.other = CourseResult[4].credit;
           	result.other_require = parseInt(rules[0].free_credit);
           	result.language = CourseResult[5].credit;
@@ -49,30 +48,8 @@ courseResult.processResult = function(req, res, next){
           	result.pe = CourseResult[7].course.length;
           	result.service = CourseResult[8].course.length;
           	result.art = CourseResult[9].course.length;
-            result.graduate = CourseResult[10].credit;
-          	
-            for(var i = 0; i<CourseResult[7].course.length; i++){
-                if(CourseResult[7].course[i].reason == 'now')
-                    result.pe--;
-            }
-            for(var i = 0; i<CourseResult[8].course.length; i++){
-                if(CourseResult[8].course[i].reason == 'now')
-                    result.service--;
-            }
-            for(var i = 0; i<CourseResult[9].course.length; i++){
-                if(CourseResult[9].course[i].reason == 'now')
-                    result.art--;
-            }
-            
-            for(var i = 0; i<CourseResult.length; i++){
-                if((typeof(CourseResult[i].credit) != undefined) && (CourseResult[i].credit)){
-                    if(i != 10)
-                        result.total += CourseResult[i].credit;
-                }
-                else
-                    console.log(res.locals.studentId + ": " + CourseResult[i].title);
-
-           }
+          	for(var i = 0; i<CourseResult.length; i++)
+                  	result.total += CourseResult[i].credit;
 
   		CourseResult.push(result);
   	}
