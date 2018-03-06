@@ -10,12 +10,12 @@ router.get('/students/courseMap', function(req, res){
         var studentId = utils.getPersonId(JSON.parse(req.session.profile));
 
         if(!studentId){
-              ////console.log("No Student Id");
+              console.log("No Student Id");
               return;
         }
         query.showCosMap(studentId, function(err,result){
             if(err){
-                ////console.log("Can't find student");
+                console.log("Can't find student");
                 throw err;
                 return;
             }

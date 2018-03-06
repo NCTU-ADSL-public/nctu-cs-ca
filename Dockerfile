@@ -10,11 +10,10 @@ COPY package-lock.json .
 # COPY package.json package-lock.json ./
 
 RUN npm install
-RUN npm install pm2 -g
 
 # Bundle app source
 COPY . .
 
 EXPOSE 1111 
-CMD [ "pm2-docker", "nctuca.json", "--env", "production" ]
+CMD [ "npm", "run", "dev" ]
 

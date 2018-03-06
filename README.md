@@ -16,7 +16,7 @@ $ sudo npm run dev
 ```
 Deploy with Docker, instead of sudo npm run dev do the following
 $ docker build -t $imageName .
-$ docker run --restart=always -d -p 1111:1111 --name $name --net=host $imageName
+$ docker run -d -p 1111:1111 --name $name --net=host $imageName
 ```
 
 ### API
@@ -51,7 +51,7 @@ Please npm install the following packages before using
 3. [generic-pool](https://github.com/coopernurse/node-pool)
 ```
 
-### Functions
+### Introduction
 
 ### Personal Information of Student
 | function | description |
@@ -80,10 +80,4 @@ ___
 ```
 Configure reverse proxy for https to backend server
 Set 301 code for http and redirect traffic to https
-```
-___
-
-## csrf
-```
-Prevent cross-site post
 ```

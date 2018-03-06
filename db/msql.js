@@ -27,11 +27,8 @@ module.exports = {
                 c.query(sql_findStudent({ id: id }), function(err, result) {
                     if (err)
                         throw err;
-                    if (result.info.numRows != 0) {
+                    if (result.info.numRows != 0)
                         result[0]['status'] = 's';
-                        if (id=='0316201'||id=='0316201'||id=='0312512'||id=='0416014'||id=='0416008'||id=='0416081'||id=='0516003'||id=='0516205')
-                            result[0]['status'] = 'w';
-                    }
                     callback(null, JSON.stringify(result));
                     pool.release(c);
                 })
@@ -78,9 +75,9 @@ module.exports = {
     showCosMap: function(id, callback) {
         const resource = pool.acquire();
         resource.then(function(c) {
-            var sql_showCosMap = c.prepare(s.showCosMap);
+            var sql_showCowMap = c.prepare(s.showCowMap);
             var year = '1' + id[0] + id[1];
-            c.query(sql_showCosMap({ id: id, year: year }), function(err, result) {
+            c.query(sql_showCowMap({ id: id, year: year }), function(err, result) {
                 if (err)
                     throw err;
                 callback(null, JSON.stringify(result));
@@ -98,24 +95,84 @@ module.exports = {
                 callback(null, JSON.stringify(result));
                 pool.release(c);
             });
-        });
+        })
+    },
+    p_uploadGrade: function(pt) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_p_uploadGrade = c.prepare(s.p_uploadGrade);
+            var now = 0,
+                num = "";
+            lineReader.eachLine(pt, function(line, last) {
+                if (now == 0) {
+                    var a = line.match(/[0-9]+/g);
+                    num = num + a[0] + "-" + a[1] + "-";
+                } else if (now == 1) {
+                    var a = line.match(/[0-9]+/g);
+                    num = num + a[0];
+                } else if (/[0-9+]/.test(line.split(',')[2])) {
+                    line = line.split(',');
+                    c.query(sql_p_uploadGrade({ unique_id: num, id: line[2], score: line[4] }), function(err) {
+                        if (err)
+                            throw err;
+                    });
+                }
+                if (last) {
+                    pool.release(c);
+                    return false;
+                }
+                now++;
+            });
+        })
     },
     a_uploadGrade: function(pt) {
         const resource = pool.acquire();
         resource.then(function(c) {
             var sql_a_uploadGrade = c.prepare(s.a_uploadGrade);
-            c.query(sql_a_uploadGrade({ pt: pt }, function(err) {
-                if (err)
-                    throw err;
-                pool.release(c);
-            }));
-        });
+            var sql_updateStudentCosPass = c.prepare(s.updateStudentCosPass);
+            var num = "",
+                now = 0;
+            lineReader.eachLine(pt, function(line, last) {
+                if (now != 0) {
+                    line = line.split(',');
+                    num = line[4] + '-' + line[5] + '-' + padLeft(line[6], 4);
+                    c.query(sql_a_uploadGrade({ unique_id: num, id: line[0], score: line[15], grade: line[16], GP: line[17] }), function(err) {
+                        if (err)
+                            throw err;
+                    });
+                    if (line[14] == '通過')
+                        c.query(sql_updateStudentCosPass({ id: line[0], cos_code: line[9], year: line[4], semester: line[5], code: line[6] }), function(err) {
+                            if (err)
+                                throw err;
+                        });
+                }
+                if (last) {
+                    pool.release(c);
+                    return false;
+                }
+                now++;
+            });
+        })
     },
     totalCredit: function(id, callback) {
         const resource = pool.acquire();
         resource.then(function(c) {
             var sql_totalCredit = c.prepare(s.totalCredit);
             c.query(sql_totalCredit({ id: id }), function(err, result) {
+                if (err)
+                    throw err;
+                callback(null, JSON.stringify(result));
+                pool.release(c);
+            })
+        })
+    },
+    totalRequiredCredit: function(id, callback) {
+        const resource = pool.acquire();
+        resource.then(function(c) {
+            var sql_totalRequiredCredit = c.prepare(s.totalRequiredCredit);
+            var str = id.split("");
+            str = '%' + id[0] + id[1];
+            c.query(sql_totalRequiredCredit({ id: id, year: str }), function(err, result) {
                 if (err)
                     throw err;
                 callback(null, JSON.stringify(result));
@@ -179,215 +236,16 @@ module.exports = {
         const resource = pool.acquire();
         resource.then(function(c) {
             var sql_setStudentGraduate = c.prepare(s.setStudentGraduate);
-            c.query(sql_setStudentGraduate({ id: id, graduate: graduate }), function(err) {
+            c.query(sql_setStudentGraduate({ id: id, graduate: graduate }), function(err, result) {
                 if (err)
                     throw err;
                 pool.release(c);
             })
         })
-    },
-    setStudentGraduateSubmit: function(id, graduate_submit) {
-        const resource = pool.acquire();
-        resource.then(function(c) {
-            var sql_setStudentGraduateSubmit = c.prepare(s.setStudentGraduateSubmit);
-            c.query(sql_setStudentGraduateSubmit({ id: id, graduate_submit: graduate_submit }), function(err) {
-                if (err)
-                    throw err;
-                pool.release(c);
-            })
-        })
-    },
-    bindAccount: function(id, str, type) {
-        const resource = pool.acquire();
-        resource.then(function(c) {
-            var sql_setGmail = c.prepare(s.setGmail);
-            var sql_setFbId = c.prepare(s.setFbId);
-            var sql_setGithubId = c.prepare(s.setGithubId);
-            if (type == 1)
-                c.query(sql_setGmail({ id: id, gmail: str }), function(err, result) {
-                    if (err)
-                        throw err;
-                    pool.release(c);
-                });
-            else if (type == 2)
-                c.query(sql_setFbId({ id: id, fb_id: str }), function(err, result) {
-                    if (err)
-                        throw err;
-                    pool.release(c);
-                });
-            else if (type == 3)
-                c.query(sql_setGithubId({ id: id, github_id: str }), function(err, result) {
-                    if (err)
-                        throw err;
-                    pool.release(c);
-                });
-        });
-    },
-    offset: function(id, callback) {
-        const resource = pool.acquire();
-        resource.then(function(c) {
-            if (id != 'all') {
-                var sql_offset = c.prepare(s.offset_single);
-                c.query(sql_offset({ id: id }), function(err, result) {
-                    if (err)
-                        throw err;
-                    callback(null, JSON.stringify(result));
-                    pool.release(c);
-                });
-            } else {
-                var sql_offset = c.prepare(s.offset_all);
-                c.query(sql_offset({}), function(err, result) {
-                    if (err)
-                        throw err;
-                    callback(null, JSON.stringify(result));
-                    pool.release(c);
-                });
-            }
-        });
-    },
-    on_cos_data: function(id, callback) {
-        const resource = pool.acquire();
-        resource.then(function(c) {
-            var sql_on_cos_data = c.prepare(s.on_cos_data);
-            c.query(sql_on_cos_data({ id: id }), function(err, result) {
-                if (err)
-                    throw err;
-                callback(null, JSON.stringify(result));
-                pool.release(c);
-            });
-        });
-    },
-    general_cos_rule: function(callback) {
-        const resource = pool.acquire();
-        resource.then(function(c) {
-            var sql_general_cos_rule = c.prepare(s.general_cos_rule);
-            c.query(sql_general_cos_rule({}), function(err, result) {
-                if (err)
-                    throw err;
-                callback(null, JSON.stringify(result));
-                pool.release(c);
-            });
-        });
-    },
-    setEnCertificate: function(id, check) {
-        const resource = pool.acquire();
-        resource.then(function(c) {
-            var sql_setEnCertificate = c.prepare(s.setEnCertificate);
-            c.query(sql_setEnCertificate({ id: id, check: check }), function(err) {
-                if (err)
-                    throw err;
-                pool.release(c);
-            });
-        });
-    },
-    insertCosMotion: function(id,name,orig,now){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_insertCosMotion=c.prepare(s.insertCosMotion);
-            c.query(sql_insertCosMotion({id:id,name:name,orig:orig,now:now}),function(err){
-                if(err)
-                    throw err;
-                pool.release(c);
-            });
-        });
-    },
-    cosMotion: function(id,callback){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_cosMotion=c.prepare(s.cosMotion);
-            c.query(sql_cosMotion({id:id}),function(err,result){
-                if(err)
-                    throw err;
-                callback(null,JSON.stringify(result));
-                pool.release(c);
-            });
-        });
-    },
-    cosMotionDelete:function(id){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_cosMotionDelete=c.prepare(s.cosMotionDelete);
-            c.query(sql_cosMotionDelete({id:id}),function(err){
-                if(err)
-                    throw err;
-                pool.release(c);
-            });
-        });
-    },
-    qaInsert:function(que,ans,callback){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_qaInsert=c.prepare(s.qaInsert);
-            var sql_qaMaxId=c.prepare(s.qaMaxId);
-            c.query(sql_qaMaxId({}),function(err,result){
-                if(err)
-                    throw err;
-                var id=0;
-                if(result[0]['maxID']!=null)
-                    id=parseInt(result[0]['maxID'])+1;
-                c.query(sql_qaInsert({id:id,que:que,ans:ans}),function(err,result){
-                    if(err)
-                        throw err;
-                    callback(null,JSON.stringify(result));
-                    pool.release(c);
-                });
-            });
-        });
-    },
-    qaDelete:function(id,callback){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_qaDelete=c.prepare(s.qaDelete);
-            c.query(sql_qaDelete({id:id}),function(err){
-                if(err)
-                    throw err;
-                pool.release(c);
-            });
-        });
-    },
-    qaSearch:function(callback){
-        const resource=pool.acquire();
-        resource.then(function(c){
-            var sql_qaSearch=c.prepare(s.qaSearch);
-            c.query(sql_qaSearch({}),function(err,result){
-                if(err)
-                    throw err;
-                callback(null,JSON.stringify(result));
-                pool.release(c);
-            });
-        });
     },
     Drain: function() {
         pool.drain().then(function() {
             pool.clear();
         });
     }
-    // p_uploadGrade: function(pt) {
-    //     const resource = pool.acquire();
-    //     resource.then(function(c) {
-    //         var sql_p_uploadGrade = c.prepare(s.p_uploadGrade);
-    //         var now = 0,
-    //             num = "";
-    //         lineReader.eachLine(pt, function(line, last) {
-    //             if (now == 0) {
-    //                 var a = line.match(/[0-9]+/g);
-    //                 num = num + a[0] + "-" + a[1] + "-";
-    //             } else if (now == 1) {
-    //                 var a = line.match(/[0-9]+/g);
-    //                 num = num + a[0];
-    //             } else if (/[0-9+]/.test(line.split(',')[2])) {
-    //                 line = line.split(',');
-    //                 c.query(sql_p_uploadGrade({ unique_id: num, id: line[2], score: line[4] }), function(err) {
-    //                     if (err)
-    //                         throw err;
-    //                 });
-    //             }
-    //             if (last) {
-    //                 pool.release(c);
-    //                 return false;
-    //             }
-    //             now++;
-    //         });
-    //     })
-    // },
 };

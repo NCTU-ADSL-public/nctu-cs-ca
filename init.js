@@ -1,66 +1,53 @@
+var helmet = require('helmet');
 var path = require('path');
 var https = require('https');
 var session = require('client-sessions');
 var express = require('express');
 var app = express();
+var multer = require('multer');
 var utils = require('./utils');
-var randoms = require('./randomVals');
-var bodyParser = require('body-parser');
-var csrf = require('csurf');
-var csrfProtection = csrf();
-var helmet = require('helmet');
 
 module.exports.init = function(){
-
-  app.use(helmet());
-  //app.use(require('./middleware/setSession').setSession);
+  app.set('view engine', 'ejs');
   app.use(session({
     cookieName: "session",
-    secret: randoms.randomVals.sessionKey,
-    httpOnly: true,
-    secure: true,
-    duration: 40 * 60 * 1000,
-    activeDuration : 25 * 60 * 1000,
+    secret: "19da32fgadiama007catflyingintheskyadsfdsaf",
+    duration: 20 * 60 * 1000,
+    activeDuration : 5 * 60 * 1000,
   }));
-  app.use(csrfProtection);
-  app.use(require('./middleware/setCsrf').setCsrf);
   app.use(require('./middleware/setProfile').setProfile);
+  app.use('/', express.static('./public'));
+  //app.use('/professors/Head', require('./utils').verifyUser, express.static('./DogUserInput'));
+  //app.use('/assistants/Head', require('./utils').verifyUser, express.static('./Bulb'));
+  //app.use('/students/Head', require('./utils').verifyUser,  express.static('./public'));
+  app.use('/students/Head', require('./utils').verifyUser,  express.static('./public'));
+  app.use('/assistants/Head', require('./utils').verifyUser,  express.static('./public'));
+  app.get('/profilePic.png', function (req, res) {
+    var personId = utils.getPersonId(JSON.parse(req.session.profile));    
+    res.sendFile(path.join(__dirname, '/profilePic') + '/' + personId + '.png');
+  }); 
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
-
-  app.use('/students/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyStudents, require('./middleware/verifyUser').verifyGrade);
-  app.use('/assistants/*', require('./middleware/verifyUser').verifyUser, require('./middleware/verifyUser').verifyAssistants);
-
-  app.use('/', express.static('./public', { index: 'index.login.html'}));
-  app.use('/students/head', express.static('./public', { index: 'index.student.html'}));
-  app.use('/assistants/head', express.static('./public', { index: 'index.assistant.html'}));
-  app.use('/assistants/head/s/:sid', express.static('./public', { index: 'index.assistant.html'}));
-
+  app.get('/profilePicCrop.png', function (req, res) {
+    var personId = utils.getPersonId(JSON.parse(req.session.profile));    
+    res.sendFile(path.join(__dirname, '/profilePic') + '/' + personId + '_crop.png');
+  }); 
+  //app.engine('html', require('ejs').renderFile);
+  //app.use('/students/ProfilePic', require('./utils').verifyUser, function(req, res){
+  //	res.render(__dirname + '/routes/user/students/profilePic.html');
+  //});
+  app.use('/students/ProfilePic', require('./utils').verifyUser,  express.static('./routes/user/students/profilePic.html'));
+  app.use('/Login', express.static('./public'));
   app.use(require('./routes/user/students/profile'));
+  app.use(require('./routes/user/students/profilePic'));
   app.use(require('./routes/user/students/courseMap'));
   app.use(require('./routes/user/students/coursePass'));
+  app.use(require('./routes/user/students/score'));
   app.use(require('./routes/logout'));
+  app.use(require('./routes/user/state'));
   app.use(require('./routes/auth/nctu/nctu'));
-  app.use(require('./routes/user/students/graduate/graduateOriginal'));
-  app.use(require('./routes/user/students/graduate/graduateRevised'));
-  app.use(require('./routes/user/students/graduate/graduatePrint'));
-  app.use(require('./routes/user/students/graduate/graduateEnglish'));
-  app.use(require('./routes/user/students/graduate/graduateReorder'));
-  app.use(require('./routes/user/students/graduate/graduateChange/graduateChange'));
-  app.use(require('./routes/user/students/graduate/graduateOrderResult'));
-  app.use(require('./routes/user/students/graduate/graduateReorderReset'));
-  app.use(require('./routes/user/students/graduate/graduateOrderInfo'));
-  app.use(require('./routes/user/assistants/profile'));
-  app.use(require('./routes/user/assistants/graduate/graduateOriginal'));
-  app.use(require('./routes/user/assistants/graduate/graduateRevised'));
-  app.use(require('./routes/user/assistants/graduate/graduatePrint'));
-  app.use(require('./routes/user/assistants/graduate/graduateCheck'));
-  app.use(require('./routes/user/assistants/graduate/graduateEnglish'));
-  app.use(require('./routes/user/assistants/graduate/studentList'));
-  app.use(require('./routes/user/assistants/getStudent'));
-
+  app.use(require('./routes/auth/google/google'));
+  app.use(require('./routes/auth/facebook/facebook'));
+  app.use(require('./routes/user/students/graduate/graduate'));
+  //app.use(require('./routes/user/students/graduate/result'));
   return app;
 };
