@@ -171,13 +171,13 @@ reorder.processOrder = function(req, res, next){
         reorderResult.push(coreClass);
         reorderResult.push(otherClass);
         reorderResult.push(elective);
+        reorderResult.push(graduate);
         reorderResult.push(otherElect);
         reorderResult.push(language);
         reorderResult.push(general);
         reorderResult.push(peClass);
         reorderResult.push(service);
         reorderResult.push(art);
-        reorderResult.push(graduate);
         lanes.lanes = reorderResult;
         //console.log("reorder result");
         //console.log(lanes.lanes[1]);
