@@ -32,7 +32,7 @@ class NavButton extends React.Component {
                 selected={selected}
             />*/
       <NavItem className='nav-button' onClick={onClick}>
-        <Glyphicon glyph='flag' style={{...style.Icon, ...(selected && style.IconSelected)}} className='hidden-xs'/>
+        <i className={icon + ' hidden-xs'} style={{...style.Icon, ...(selected && style.IconSelected)}}  aria-hidden="true"></i>
         <div style={{...style.Label, ...(selected && style.LabelSelected)}}>{label}</div>
       </NavItem>
     )

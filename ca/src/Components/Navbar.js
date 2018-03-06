@@ -57,30 +57,34 @@ class _Navbar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    // console.log(nextProps.onTouchTaps)
+    // this.setState({
+    //   ...this.state,
+    //   onClicks: nextProps.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index))
+    // })
   }
 
   render() {
     const {onClicks,selectedButtonIndex} = this.state
     const navItems = {
       'student': [
-        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
-        <NavButton key={1} label='畢業預審' icon={<GraduationIcon/>} onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
-        <NavButton key={2} label='課程地圖' icon={<MapIcon/>} onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
+        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
+        <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
+        <NavButton key={2} label='課程地圖' icon='fa fa-map' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
       ],
       'studentonlyformap': [
-        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
-        <NavButton key={1} label='課程地圖' icon={<MapIcon/>} onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
+        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
+        <NavButton key={1} label='課程地圖' icon='fa fa-map' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
       ],
       'assistant': [
-        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
-        <NavButton key={1} label='畢業預審' icon={<GraduationIcon/>} onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
+        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
+        <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
       ],
       'teacher': [
-        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
-        <NavButton key={1} label='教授課程' icon={<EqualizerIcon/>} onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
-        <NavButton key={2} label='專題' icon={<GroupIcon/>} onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
-        <NavButton key={3} label='導生' icon={<FreeBreakfastIcon/>} onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
+        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
+        <NavButton key={1} label='教授課程' icon='fa fa-pie-chart' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
+        <NavButton key={2} label='專題' icon='fa fa-users' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
+        <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
       ]
     }
     return (
