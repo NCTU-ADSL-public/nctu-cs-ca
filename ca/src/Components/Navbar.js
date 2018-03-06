@@ -15,95 +15,95 @@ import defalt from '../Resources/defalt.jpg';
 import NavButton from './NavButton'
 
 const style = {
-    BrandBox: {
-        borderLeft: '6px solid #00AEAE',
-        height: 28,
-        display: 'inline-block',
-        marginTop: 12,
-        verticalAlign: 'top',
-    },
-    BrandName: {
-        fontFamily: 'Noto Sans CJK TC',
-        fontWeight:  400,
-        fontSize: 20,
-        marginLeft: 10,
-    },
-    BrandSubName: {
-        fontFamily: 'Noto Sans CJK TC',
-        fontWeight:  'lighter',
-        fontSize: 14,
-        marginLeft: 10,
-    }
+  BrandBox: {
+    borderLeft: '6px solid #00AEAE',
+    height: 28,
+    display: 'inline-block',
+    marginTop: 12,
+    verticalAlign: 'top',
+  },
+  BrandName: {
+    fontFamily: 'Noto Sans CJK TC',
+    fontWeight:  400,
+    fontSize: 20,
+    marginLeft: 10,
+  },
+  BrandSubName: {
+    fontFamily: 'Noto Sans CJK TC',
+    fontWeight:  'lighter',
+    fontSize: 14,
+    marginLeft: 10,
+  }
 }
 
 class _Navbar extends React.Component {
 
-    render() {
-        const {onTouchTaps} = this.props
-        const navItems = {
-            'student': [
-                <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]} selected={true}/>,
-                <NavButton key={1} label='畢業預審' icon={<GraduationIcon/>} onClick={onTouchTaps[1]}/>,
-                <NavButton key={2} label='課程地圖' icon={<MapIcon/>} onClick={onTouchTaps[2]}/>,
-            ],
-            'studentonlyformap': [
-                <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]}/>,
-                <NavButton key={1} label='課程地圖' icon={<MapIcon/>} onClick={onTouchTaps[2]}/>,
-            ],
-            'assistant': [
-                <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]}/>,
-                <NavButton key={1} label='畢業預審' icon={<GraduationIcon/>} onClick={onTouchTaps[1]}/>,
-            ],
-            'teacher': [
-                <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]}/>,
-                <NavButton key={1} label='教授課程' icon={<EqualizerIcon/>} onClick={onTouchTaps[1]}/>,
-                <NavButton key={2} label='專題' icon={<GroupIcon/>} onClick={onTouchTaps[2]}/>,
-                <NavButton key={3} label='導生' icon={<FreeBreakfastIcon/>} onClick={onTouchTaps[3]}/>,
-            ]
-        }
-        return (
-          <Navbar staticTop fixedTop>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="#home">交大資工線上助理</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              <Nav>
-                {navItems[this.props.type]}
-              </Nav>
-
-              <Nav pullRight>
-                <NavItem>
-                  <div className="idcard">
-                    <img id="idcard-photo" src={defalt} alt=""/>
-                    <div style={{
-                      display: 'inline-block',
-                      verticalAlign: 'middle',
-                      marginLeft: 9,
-                    }}>
-                      <div id="idcard-top">
-                        {this.props.name}
-                      </div>
-                      <div id="idcard-buttom">
-                        {this.props.subname}
-                      </div>
-                    </div>
-                  </div>
-                  <MuiThemeProvider>
-                    <RaisedButton backgroundColor = "#DDDDDD"
-                                  label="Logout"
-                                  href="/logout"
-                    />
-                  </MuiThemeProvider>
-                </NavItem>
-              </Nav>
-
-            </Navbar.Collapse>
-          </Navbar>
-        )
+  render() {
+    const {onTouchTaps} = this.props
+    const navItems = {
+      'student': [
+        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]}/>,
+        <NavButton key={1} label='畢業預審' icon={<GraduationIcon/>} onClick={onTouchTaps[1]}/>,
+        <NavButton key={2} label='課程地圖' icon={<MapIcon/>} onClick={onTouchTaps[2]}/>,
+      ],
+      'studentonlyformap': [
+        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]}/>,
+        <NavButton key={1} label='課程地圖' icon={<MapIcon/>} onClick={onTouchTaps[2]}/>,
+      ],
+      'assistant': [
+        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]}/>,
+        <NavButton key={1} label='畢業預審' icon={<GraduationIcon/>} onClick={onTouchTaps[1]}/>,
+      ],
+      'teacher': [
+        <NavButton key={0} label='首頁' icon={<HomeIcon/>} onClick={onTouchTaps[0]}/>,
+        <NavButton key={1} label='教授課程' icon={<EqualizerIcon/>} onClick={onTouchTaps[1]}/>,
+        <NavButton key={2} label='專題' icon={<GroupIcon/>} onClick={onTouchTaps[2]}/>,
+        <NavButton key={3} label='導生' icon={<FreeBreakfastIcon/>} onClick={onTouchTaps[3]}/>,
+      ]
     }
+    return (
+      <Navbar staticTop fixedTop>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="#home">交大資工線上助理</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            {navItems[this.props.type]}
+          </Nav>
+
+          <Nav pullRight>
+            <NavItem>
+              <div className="idcard">
+                <img id="idcard-photo" src={defalt} alt=""/>
+                <div style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  marginLeft: 9,
+                }}>
+                  <div id="idcard-top">
+                    {this.props.name}
+                  </div>
+                  <div id="idcard-buttom">
+                    {this.props.subname}
+                  </div>
+                </div>
+              </div>
+              <MuiThemeProvider>
+                <RaisedButton backgroundColor = "#DDDDDD"
+                              label="登出"
+                              href="/logout"
+                />
+              </MuiThemeProvider>
+            </NavItem>
+          </Nav>
+
+        </Navbar.Collapse>
+      </Navbar>
+    )
+  }
 }
 
 export default _Navbar

@@ -22,22 +22,22 @@ const style = {
 }
 
 class NavButton extends React.Component {
-    render() {
-        const {label, icon, selected, onClick} = this.props
-        return (/*
+  render() {
+    const {label, icon, selected, onClick} = this.props
+    return (/*
             <BottomNavigationItem
                 icon={icon}
                 style={style}
                 onTouchTap={onTouchTap}
                 selected={selected}
             />*/
-          <NavItem className='nav-button' onClick={onClick}>
-            <Glyphicon glyph='flag' style={{...style.Icon, ...(selected && style.IconSelected)}} className='hidden-xs'/>
-            <div style={{...style.Label, ...(selected && style.LabelSelected)}}>{label}</div>
-          </NavItem>
-        )
+      <NavItem className='nav-button' onClick={onClick}>
+        <Glyphicon glyph='flag' style={{...style.Icon, ...(selected && style.IconSelected)}} className='hidden-xs'/>
+        <div style={{...style.Label, ...(selected && style.LabelSelected)}}>{label}</div>
+      </NavItem>
+    )
 
-    }
+  }
 }
 
 export default NavButton
