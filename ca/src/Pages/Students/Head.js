@@ -183,7 +183,7 @@ class Head extends Component {
       () => this.select(2),
     ]
     return (
-      <Grid id="Head">
+      <Grid id="Head" fluid={true}>
         <Row>
           <Navbar type={this.state.studentIdcard.grade === "大一" ? 'studentonlyformap' : 'student'}
                   version={this.state.studentIdcard.grad}

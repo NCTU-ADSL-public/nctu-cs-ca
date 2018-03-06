@@ -89,7 +89,7 @@ class Head extends Component {
       () => this.select(3),
     ]
     return (
-      <Grid id="Head">
+      <Grid id="Head" fluid={true}>
         <Row>
           <Navbar type='teacher'
                   name={this.state.idCard.name}

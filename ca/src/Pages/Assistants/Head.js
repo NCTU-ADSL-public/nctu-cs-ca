@@ -68,7 +68,7 @@ class Head extends React.Component {
         () => this.select(1),
       ]
       return (
-        <Grid id="Head">
+        <Grid id="Head" fluid={true}>
           <Row>
             <Navbar type='assistant'
                     name={this.state.idCard.name}
