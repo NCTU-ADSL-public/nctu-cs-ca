@@ -183,15 +183,16 @@ class Head extends Component {
       () => this.select(2),
     ]
     return (
+      <div>
+      <Navbar type={this.state.studentIdcard.grade === "大一" ? 'studentonlyformap' : 'student'}
+              version={this.state.studentIdcard.grad}
+              name={this.state.studentIdcard.sname}
+              subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
+              selectedIndex={this.state.studentIdcard.grade === "大一" ? this.state.selectedIndex - 1 : this.state.selectedIndex}
+              onTouchTaps={onTouchTaps}
+      />
       <Grid id="Head" fluid={true}>
         <Row>
-          <Navbar type={this.state.studentIdcard.grade === "大一" ? 'studentonlyformap' : 'student'}
-                  version={this.state.studentIdcard.grad}
-                  name={this.state.studentIdcard.sname}
-                  subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
-                  selectedIndex={this.state.studentIdcard.grade === "大一" ? this.state.selectedIndex - 1 : this.state.selectedIndex}
-                  onTouchTaps={onTouchTaps}
-          />
           <Col sm={12} xsHidden smHidden>
             <div id="page" >
               <Loading size={300}
@@ -207,6 +208,7 @@ class Head extends Component {
           </Col>
         </Row>
       </Grid>
+      </div>
     )
   }
 }
