@@ -7,10 +7,12 @@
     "eject": "react-scripts eject",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build_prod": "webpack -wp",
     "webpack-watch": "webpack -w",
     "productionBuild" : "webpack -w",
     "express-server": "nodemon ./server",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
+    "prod": "concurrently --kill-others \"npm run build_prod\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
