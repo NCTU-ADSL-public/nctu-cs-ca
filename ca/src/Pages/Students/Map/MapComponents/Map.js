@@ -46,6 +46,16 @@ const MapTiltleStyle={
     fontFamily: 'Noto Sans CJK TC',
     margin:'70px 110px 20px 40px'
 }
+const infpTiltleStyle={
+    float:'left',
+    verticalAlign: "default",
+    fontSize: "1em",
+    fontWeight: "700",
+    letterSpacing: "1px",
+    fontFamily: 'Noto Sans CJK TC',
+    margin:'70px 110px 20px 40px',
+    color:"#7B7B7B"
+}
 
 
 class Map extends React.Component {
@@ -228,93 +238,106 @@ class Map extends React.Component {
       const width = document.body.clientWidth;
       const height = document.body.clientHeight + 10;
       const heightWrap = height;
-      return (
-      <div>
-        <div className="selectFieldStyle animated bounceInRight" style={{display:this.state.slideIndex?'':'none'}} >
-            <div>
-            <MuiThemeProvider >
+      if(this.props.studentsGrad === "大一") {
+        return (
+          <div>
+            <div className="selectFieldStyle animated bounceInRight"
+                 style={{display: this.state.slideIndex ? '' : 'none'}}>
+              <div>
+                <MuiThemeProvider>
                   <SelectField
-                      floatingLabelText="選取查看事項"
-                      value={this.state.value}
-                      onChange={this.handleChange}
-                      labelStyle={fontStyle}
-                      selectedMenuItemStyle={{color:'#26A69A'}}
-                      floatingLabelStyle={{color: "#a42926",
-                        verticalAlign: "default",
-                        fontSize: "1em",
-                        fontWeight: "300",
-                        letterSpacing: "1px",
-                        fontFamily: 'Noto Sans CJK TC',}}
+                    floatingLabelText="選取查看事項"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    labelStyle={fontStyle}
+                    selectedMenuItemStyle={{color: '#26A69A'}}
+                    floatingLabelStyle={{
+                      color: "#a42926",
+                      verticalAlign: "default",
+                      fontSize: "1em",
+                      fontWeight: "300",
+                      letterSpacing: "1px",
+                      fontFamily: 'Noto Sans CJK TC',
+                    }}
                   >
-                      <MenuItem style={fontStyle} value={1} primaryText="無" />
-                      <MenuItem style={fontStyle} value={2} primaryText="擋修" />
-                      <MenuItem style={fontStyle} value={3} primaryText="建議修課" />
+                    <MenuItem style={fontStyle} value={1} primaryText="無"/>
+                    <MenuItem style={fontStyle} value={2} primaryText="擋修"/>
+                    <MenuItem style={fontStyle} value={3} primaryText="建議修課"/>
                   </SelectField>
-              </MuiThemeProvider>
+                </MuiThemeProvider>
+              </div>
+              <div>
+                <div className="green" style={{backgroundColor: "#616161"}}></div>
+                <div className="text">已通過</div>
+                <div className="red" style={{backgroundColor: "#a42926"}}></div>
+                <div className="text">未通過</div>
+              </div>
             </div>
-            <div>
-              <div className="green" style={{backgroundColor:"#616161"}}> </div><div className="text">已通過</div>
-              <div className="red" style={{backgroundColor:"#a42926"}}> </div><div  className="text">未通過</div>
-            </div>
-        </div>
-          <Provider store={store}>
-        <div className='Map-title-text'>
-            <MuiThemeProvider>
-            <Tabs
-                onChange={this.onChange}
-                value={this.state.slideIndex}
-                style={{color:"#26A69A"}}
-                inkBarStyle={{backgroundColor:"#8b8b8b"}}
+            <Provider store={store}>
+              <div className='Map-title-text'>
+                <MuiThemeProvider>
+                  <Tabs
+                    onChange={this.onChange}
+                    value={this.state.slideIndex}
+                    style={{color: "#26A69A"}}
+                    inkBarStyle={{backgroundColor: "#8b8b8b"}}
 
-            >
-                <Tab label="課程" value={0} buttonStyle={fontStyle}/>
-                <Tab label="地圖" value={1} buttonStyle={fontStyle}/>
-            </Tabs>
-            </MuiThemeProvider>
-            <SwipeableViews
-                index={this.state.slideIndex}
-                onChangeIndex={this.onChange}
-                style={{height:{heightWrap}}}
-            >
-
-            <div className='Map-Row'>
-              <App studentPasdata={this.props.studentPasdata} data={this.props.data} studentsGrad={this.props.studentsGrad} />
-            </div>
-            <div style={{marginLeft:'-100px', marginTop:'-100px'}}>
-                <DragAndZoom
-                    minZoom={40}
-                    maxZoom={150}
-                    initialZoom={85}
-                    zoomStep={2}
-                    onZoom={(zoom, e) => {}}
+                  >
+                    <Tab label="課程" value={0} buttonStyle={fontStyle}/>
+                    <Tab label="地圖" value={1} buttonStyle={fontStyle}/>
+                  </Tabs>
+                </MuiThemeProvider>
+                <SwipeableViews
+                  index={this.state.slideIndex}
+                  onChangeIndex={this.onChange}
+                  style={{height: {heightWrap}}}
                 >
-                  <div>
-                    <div style={MapTiltleStyle}>大一 上</div>
-                    <div style={MapTiltleStyle}>大一 下</div>
-                    <div style={MapTiltleStyle}>大二 上</div>
-                    <div style={MapTiltleStyle}>大二 下</div>
-                    <div style={MapTiltleStyle}>大三 上</div>
-                    <div style={MapTiltleStyle}>大三 下</div>
-                    <div style={MapTiltleStyle}>大四 上</div>
-                    {/*<div style={MapTiltleStyle}>大四 下</div>*/}
 
-                    <Graph
-                        width={width}
-                        height={height}
-                        json={this.state.data}
-                        onChange={(newGraphJSON) => {}}
-                        Node={Gitnode}
-                        Edge={this.getEdgeColor()}
-                    />
-                </div>
-                </DragAndZoom>
-            </div>
-            </SwipeableViews>
-        </div>
-          </Provider>
+                  <div className='Map-Row'>
+                    <App studentPasdata={this.props.studentPasdata} data={this.props.data}
+                         studentsGrad={this.props.studentsGrad}/>
+                  </div>
+                  <div style={{marginLeft: '-100px', marginTop: '-100px'}}>
+                    <DragAndZoom
+                      minZoom={40}
+                      maxZoom={150}
+                      initialZoom={85}
+                      zoomStep={2}
+                      onZoom={(zoom, e) => {}}
+                    >
+                      <div>
+                        <div style={MapTiltleStyle}>大一 上</div>
+                        <div style={MapTiltleStyle}>大一 下</div>
+                        <div style={MapTiltleStyle}>大二 上</div>
+                        <div style={MapTiltleStyle}>大二 下</div>
+                        <div style={MapTiltleStyle}>大三 上</div>
+                        <div style={MapTiltleStyle}>大三 下</div>
+                        <div style={MapTiltleStyle}>大四 上</div>
+                        {/*<div style={MapTiltleStyle}>大四 下</div>*/}
 
-      </div>
-    )
+                        <Graph
+                          width={width}
+                          height={height}
+                          json={this.state.data}
+                          onChange={(newGraphJSON) => {}}
+                          Node={Gitnode}
+                          Edge={this.getEdgeColor()}
+                        />
+                      </div>
+                    </DragAndZoom>
+                  </div>
+                </SwipeableViews>
+              </div>
+            </Provider>
+
+          </div>
+        )
+      }
+      else{
+        return(
+          <div style={infpTiltleStyle} >尚未開放</div>
+        )
+      }
   }
 }
 
