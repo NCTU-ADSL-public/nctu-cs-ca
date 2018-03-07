@@ -10,6 +10,8 @@ import Chip from 'material-ui/Chip';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import defaultimg from './TodoExtension/defalt.jpg'
+import Loading from '../../../../Components/Loading'
+
 
 let searchCourse=[]
 
@@ -38,6 +40,7 @@ const fontStyle={
 class Todo extends React.Component {
 
     state = {
+        isDone:false,
         open: false,
         opendia2:false,
         value:0,
@@ -209,7 +212,8 @@ class Todo extends React.Component {
           )
 
           _this.setState({
-            searchCourse: searchCourse
+            searchCourse: searchCourse,
+            isDone:true
           })
 
         })
@@ -372,7 +376,12 @@ class Todo extends React.Component {
                     titleStyle={titleStyle}
                     onRequestClose={this.handleClose}
                 >
-                    {(this.props.cosCame.match("化學")||this.props.cosCame.match("生物")||this.props.cosCame.match("物理")||this.props.cosCame.match("微積分"))?'暫無簡介':this.getinfo()}
+
+
+                    {(this.props.cosCame.match("化學")||this.props.cosCame.match("生物")||this.props.cosCame.match("物理")||this.props.cosCame.match("微積分"))?'暫無簡介':this.state.isDone?this.getinfo():<Loading size={300}
+                                                                                                                                                                                                        left={400}
+                                                                                                                                                                                                        top={20}
+                                                                                                                                                                                                        isLoading={true}/>}
                     <MuiThemeProvider>
                         <Dialog
                             title={this.state.searchteachername}
