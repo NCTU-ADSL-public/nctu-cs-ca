@@ -383,7 +383,6 @@ class Todo extends React.Component {
                             bodyStyle={bodyStyle}
                             titleStyle={titleStyle}
                         >
-                          <img src={this.state.searchCourse[this.state.value].photo}/>
                           敬請期待
                         </Dialog>
                     </MuiThemeProvider>
