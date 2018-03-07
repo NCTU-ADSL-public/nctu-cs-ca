@@ -129,7 +129,6 @@ const todos = (state = [], action) => {
             )
 
     case 'REVISE_EDGE_INFO':
-      console.log(1212)
       return state.map(t =>
         todo(t, action)
       )
