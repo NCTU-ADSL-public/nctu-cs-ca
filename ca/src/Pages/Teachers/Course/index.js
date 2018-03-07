@@ -104,6 +104,17 @@ export default class index extends React.Component {
     ],
   }
 
+  componentWillMount(){
+    axios.post('/professors/courseInfo/courses', {
+      id: this.props.tid,
+    }).then(res => {
+      console.log(res)
+      this.setState({initItem: res.data})
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
   componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
       console.log(nextProps.tid);
@@ -153,8 +164,8 @@ export default class index extends React.Component {
   searchCallback = (item) => {
     this.setState({item})
 
-    console.log('YO')
-    console.log(item)
+    // console.log('YO')
+    // console.log(item)
 
     axios.post('/professors/courseInfo/score', {
       cos_code: item.cos_code,
@@ -169,7 +180,7 @@ export default class index extends React.Component {
       cos_code: item.cos_code,
       unique_id: item.unique_id,
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       this.ChartData(res.data)
     }).catch(err => {
       console.log(err)
