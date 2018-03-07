@@ -76,7 +76,7 @@ class Head extends React.Component {
                     selectedIndex={this.state.selectedIndex}
                     onTouchTaps={onTouchTaps}
             />
-            <Col sm={12} xsHidden smHidden>
+            <Col xsHidden smHidden>
               <div id="page"/>
             </Col>
             {/* For mobile, tablet user */}
