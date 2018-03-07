@@ -145,14 +145,14 @@ class Map extends React.Component {
               if (this.props.data[i - 1].cos_cname !== this.props.data[i].cos_cname) {
                   let complete=0
                   for(let j=1;j<this.props.studentPasdata.length;j++){
-                      if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname)complete=1
+                      if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname + "(英文授課)" === this.props.data[i].cos_cname )complete=1
                   }
                   store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
               }
             } else {
                 let complete=0
                 for(let j=1;j<this.props.studentPasdata.length;j++){
-                    if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname)complete=1
+                    if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname + "(英文授課)" === this.props.data[i].cos_cname  )complete=1
                 }
                 store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
             }
@@ -165,7 +165,6 @@ class Map extends React.Component {
           let id=0
           let semflag=0;
 
-          console.log(MapsLocation)
           for (let i = 0; i < this.props.data.length; i++) {
               id++
               if (i !== 0) {
