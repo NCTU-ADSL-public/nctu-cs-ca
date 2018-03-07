@@ -32,9 +32,15 @@ export default class StudentList extends React.Component {
     this.setState({items: this.state.initItems})
   }
 
+  componentWillReceiveProps(nextProps){
+    if( nextProps.items !== this.props.items ) {
+      this.setState({initItems: this.props.items});
+    }
+  }
+
   filterList (event) {
-    let updatedList = this.state.items;
-    updatedList = updatedList.filter(function (item) {
+    let updatedList = this.state.initItems;
+    updatedList = updatedList.filter( (item) => {
       return (
         (item.unique_id.toLowerCase().search(
           event.target.value.toLowerCase()) !== -1) ||
