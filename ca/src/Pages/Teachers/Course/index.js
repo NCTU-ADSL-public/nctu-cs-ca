@@ -116,11 +116,13 @@ export default class index extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
+    console.log("MAJAJA");
     if(this.props.tid !== nextProps.tid){
+      console.log("MAJAMI");
       console.log(nextProps.tid);
 
       axios.post('/professors/courseInfo/courses', {
-        id: this.props.tid,
+        id: nextProps.tid,
       }).then(res => {
         console.log(res)
         this.setState({initItem: res.data})
