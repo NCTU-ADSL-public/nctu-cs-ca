@@ -33,7 +33,7 @@ export default class StudentList extends React.Component {
   }
 
   filterList (event) {
-    let updatedList = this.state.initItems
+    let updatedList = this.state.initItems;
     updatedList = updatedList.filter(function (item) {
       return (
         (item.unique_id.toLowerCase().search(
@@ -42,19 +42,18 @@ export default class StudentList extends React.Component {
           event.target.value.toLowerCase()) !== -1)
       )
     })
-    this.setState({items: updatedList})
+    this.setState({items: updatedList});
   }
 
   //input press ENTER
   handleKeyPress = (e) => {
     if (e.key === 'Enter' && this.state.items[0] !== undefined) {
       let sid = this.state.items[0].student_id
-      // window.open('/assistants/head/s/' + sid);
     }
   }
 
   searchCallback = (item) => {
-    this.props.parentFunction(item)
+    if(item.cos_code !== undefined) this.props.parentFunction(item)
   }
 
   render () {
