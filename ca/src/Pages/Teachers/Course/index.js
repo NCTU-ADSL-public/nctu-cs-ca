@@ -108,7 +108,7 @@ export default class index extends React.Component {
     axios.post('/professors/courseInfo/courses', {
       id: this.props.tid,
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       this.setState({initItem: res.data})
     }).catch(err => {
       console.log(err)
