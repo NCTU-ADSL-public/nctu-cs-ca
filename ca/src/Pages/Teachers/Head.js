@@ -91,7 +91,7 @@ class Head extends Component {
     ]
     return (
       <Grid id="Head" fluid={true}>
-        <Row>
+        <Row style={{background: '#F5F5F5'}}>
           <Navbar type='teacher'
                   name={this.state.idCard.name}
                   subname={this.state.idCard.id}
