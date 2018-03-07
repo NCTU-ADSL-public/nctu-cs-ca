@@ -20,13 +20,14 @@ const style = {
     height: 28,
     display: 'inline-block',
     marginTop: 12,
+    marginLeft: 7,
     verticalAlign: 'top',
   },
   BrandName: {
     fontFamily: 'Noto Sans CJK TC',
     fontWeight:  400,
     fontSize: 20,
-    marginLeft: 10,
+    marginLeft: 9,
   },
   BrandSubName: {
     fontFamily: 'Noto Sans CJK TC',
@@ -88,11 +89,12 @@ class _Navbar extends React.Component {
       ]
     }
     return (
-      <Navbar staticTop fixedTop>
+      <Navbar staticTop fixedTop fluid>
         <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#home">交大資工線上助理</a>
-          </Navbar.Brand>
+            <div style={style.BrandBox}>
+              <span style={style.BrandName}>交大資工線上助理</span>
+              <span style={style.BrandSubName} className='hidden-xs hidden-sm'>NCTU Curriculum Assistant</span>
+            </div>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
