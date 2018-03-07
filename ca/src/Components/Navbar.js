@@ -103,7 +103,7 @@ class _Navbar extends React.Component {
           </Nav>
 
           <Nav pullRight>
-            <NavItem>
+            <NavItem className='logout-box'>
               <div className="idcard">
                 <img id="idcard-photo" src={defalt} alt=""/>
                 <div style={{

@@ -8,7 +8,6 @@
 .idcard{
     margin-right: 20px;
     display: inline-block;
-    padding: 6px 0px;
 }
 
 #idcard-top{
@@ -60,5 +59,9 @@
     }
     .navbar-nav > li > a {
         padding: 0px;
+    }
+
+    .logout-box {
+        padding: 6px 12px 6px 0px;
     }
 }
