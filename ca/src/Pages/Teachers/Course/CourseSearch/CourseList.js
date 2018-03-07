@@ -33,7 +33,7 @@ export default class StudentList extends React.Component {
   }
 
   filterList (event) {
-    let updatedList = this.state.initItems;
+    let updatedList = this.state.items;
     updatedList = updatedList.filter(function (item) {
       return (
         (item.unique_id.toLowerCase().search(
