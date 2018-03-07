@@ -33,13 +33,14 @@ class Head extends Component {
           id: res.data[0].teacher_id,
         }
       })
+      this.select(1);
     }).catch(err => {
       console.log(err)
     })
   }
 
   componentDidMount () {
-    this.select(1)
+    this.select(1);
   }
 
   select (index) {
