@@ -49,6 +49,7 @@ export default class StudentList extends React.Component {
       )
     })
     this.setState({items: updatedList});
+    console.log("What've I done.");
   }
 
   //input press ENTER
