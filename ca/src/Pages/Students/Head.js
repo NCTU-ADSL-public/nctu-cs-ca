@@ -191,7 +191,7 @@ class Head extends Component {
                   selectedIndex={this.state.studentIdcard.grade === "大一" ? this.state.selectedIndex===2?1:0 : this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
           />
-          <Col sm={12} xsHidden smHidden>
+          <Col xsHidden smHidden>
             <div id="page" >
               <Loading size={300}
                        left={600}

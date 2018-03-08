@@ -18,7 +18,7 @@ class Head extends Component {
     idCard: {
       name: '資料錯誤',
       status: '',
-      id: 'T9455',
+      id: '',
     },
   }
 
@@ -33,13 +33,14 @@ class Head extends Component {
           id: res.data[0].teacher_id,
         }
       })
+      this.select(1);
     }).catch(err => {
       console.log(err)
     })
   }
 
   componentDidMount () {
-    this.select(1)
+    this.select(1);
   }
 
   select (index) {
@@ -90,14 +91,14 @@ class Head extends Component {
     ]
     return (
       <Grid id="Head" fluid={true}>
-        <Row>
+        <Row style={{background: '#F5F5F5'}}>
           <Navbar type='teacher'
                   name={this.state.idCard.name}
                   subname={this.state.idCard.id}
                   selectedIndex={this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
           />
-          <Col sm={12} xsHidden smHidden>
+          <Col xsHidden smHidden>
             <div id="page"/>
           </Col>
           {/* For mobile, tablet user */}

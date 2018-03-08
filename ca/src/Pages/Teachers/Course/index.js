@@ -5,18 +5,6 @@ import CourseList from './CourseSearch/CourseList'
 import ScoreChart from './ScoreChart'
 import GaugeChart from './GaugeChart'
 
-// const scoreDetail = {
-//     avgScore: 87,
-//     pAvgScore: 94.9,
-//     member: 195,
-//     passed: 170,
-//     max: 100,
-// };
-//
-// const scoreChartDetail = {
-//     passed: [0, 0, 0, 0, 0, 25, 50, 33, 12, 1],
-//     failed: [0, 3, 5, 7, 15, 0, 0, 0, 0, 0],
-// };
 
 const styles = {
   container: {},
@@ -72,33 +60,33 @@ export default class index extends React.Component {
     start: 0,
     //for passing Course id selected by List
     item: {
-      id: 'dcp9999',
-      sem: '105下',
-      cos_cname: '資料庫系統概論',
-      unique_id: '103-999-999',
-      avg: '81.5',
-      Pavg: '87.8',
+      id: '無資料',
+      sem: '',
+      cos_cname: '無資料',
+      unique_id: '',
+      avg: '-',
+      Pavg: '-',
     },
 
     scoreDetail: {
-      avg: 87,
-      Pavg: 94.9,
-      member: 115,
-      passed: 110,
-      max: 100,
+      avg: '-',
+      Pavg: '-',
+      member: '-',
+      passed: '-',
+      max: '-',
     },
 
     scoreChartDetail: {
-      passed: [0, 0, 0, 0, 0, 25, 50, 33, 12, 1],
-      failed: [0, 3, 5, 7, 15, 0, 0, 0, 0, 0],
+      passed: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      failed: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
 
     initItem: [
       {
-        unique_id: '103-999-999',
-        cos_code: 'DCP9999',
-        cos_cname: '資料庫系統概論',
-        cos_ename: 'dadadadada',
+        unique_id: '無資料',
+        cos_code: '',
+        cos_cname: '-',
+        cos_ename: '',
       },
 
     ],
@@ -108,7 +96,6 @@ export default class index extends React.Component {
     axios.post('/professors/courseInfo/courses', {
       id: this.props.tid,
     }).then(res => {
-      // console.log(res)
       this.setState({initItem: res.data})
     }).catch(err => {
       console.log(err)
@@ -117,12 +104,9 @@ export default class index extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
-      console.log(nextProps.tid);
-
       axios.post('/professors/courseInfo/courses', {
-        id: this.props.tid,
+        id: nextProps.tid,
       }).then(res => {
-        console.log(res)
         this.setState({initItem: res.data})
       }).catch(err => {
         console.log(err)
@@ -139,7 +123,7 @@ export default class index extends React.Component {
     }
   }
 
-  _randInt = (num) => ( Math.floor(Math.random() * 10 + num) )
+  /*_randInt = (num) => ( Math.floor(Math.random() * 10 + num) )
 
   _randomSetScore = () => {
     let member = Math.floor(Math.random() * 20 + 100)
@@ -159,13 +143,10 @@ export default class index extends React.Component {
     console.log(scoreChartDetail)
 
     this.setState({scoreDetail, scoreChartDetail,})
-  }
+  }*/
 
   searchCallback = (item) => {
     this.setState({item})
-
-    // console.log('YO')
-    // console.log(item)
 
     axios.post('/professors/courseInfo/score', {
       cos_code: item.cos_code,
@@ -180,13 +161,10 @@ export default class index extends React.Component {
       cos_code: item.cos_code,
       unique_id: item.unique_id,
     }).then(res => {
-      // console.log(res)
       this.ChartData(res.data)
     }).catch(err => {
       console.log(err)
     })
-
-    // this._randomSetScore();
 
   }
 
@@ -215,7 +193,9 @@ export default class index extends React.Component {
             <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/></div>
             <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/></div>
             <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
-                                                            score={this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
+                                                            score={ this.state.scoreDetail.member === '-'
+                                                                    ? '-'
+                                                                    : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
             </div>
             <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
           </div>
