@@ -239,7 +239,6 @@ class Map extends React.Component {
       const width = document.body.clientWidth;
       const height = document.body.clientHeight + 10;
       const heightWrap = height;
-      if(this.props.studentsGrad === "大一") {
         return (
           <div>
             <div className="selectFieldStyle animated bounceInRight"
@@ -333,12 +332,6 @@ class Map extends React.Component {
 
           </div>
         )
-      }
-      else{
-        return(
-          <div style={infpTiltleStyle} >尚未開放</div>
-        )
-      }
   }
 }
 
