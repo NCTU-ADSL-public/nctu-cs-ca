@@ -186,7 +186,7 @@ class Map extends React.Component {
                           semflag = this.props.data[i].semester
                           nx += 220
                       }
-                    let ny = MapsLocation.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname))[0].ny
+                    let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname))[0].ny
                       datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                           "size": {
                               "width": 80,
@@ -199,7 +199,7 @@ class Map extends React.Component {
                       semflag = this.props.data[i].semester
                       nx += 220
                   }
-                  let ny = MapsLocation.filter( t =>(t.cos_cname === this.props.data[i].cos_cname))[0].ny
+                  let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname))[0].ny
                   datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                       "size": {
                           "width": 80,
