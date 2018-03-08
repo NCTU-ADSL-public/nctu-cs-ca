@@ -49,15 +49,8 @@ export default class StudentList extends React.Component {
       )
     })
     this.setState({items: updatedList});
-    console.log("What've I done.");
   }
 
-  //input press ENTER
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter' && this.state.items[0] !== undefined) {
-      let sid = this.state.items[0].student_id
-    }
-  }
 
   searchCallback = (item) => {
     if(item.cos_code !== undefined) this.props.parentFunction(item)
@@ -71,12 +64,11 @@ export default class StudentList extends React.Component {
           <input type="text"
                  placeholder="搜尋 課程名稱/ 學期"
                  onChange={this.filterList}
-                 onKeyPress={this.handleKeyPress}
           />
         </div>
 
         <MuiThemeProvider>
-          <CourseTable items={this.props.items}
+          <CourseTable items={this.state.items}
                        parentFunction={this.searchCallback}
           />
         </MuiThemeProvider>
