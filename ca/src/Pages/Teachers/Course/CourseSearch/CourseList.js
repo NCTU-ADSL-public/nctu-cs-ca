@@ -51,7 +51,7 @@ export default class StudentList extends React.Component {
     this.setState({items: updatedList})
   }
 
-  searchCallback (item) {
+  searchCallback = (item) => {
     if (item.cos_code !== undefined) this.props.parentFunction(item)
   }
 
