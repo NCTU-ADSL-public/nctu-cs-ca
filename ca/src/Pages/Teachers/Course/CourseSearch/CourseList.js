@@ -29,17 +29,17 @@ export default class StudentList extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({items: this.state.initItems})
+    this.setState({items: this.props.items})
   }
 
   componentWillReceiveProps(nextProps){
     if( nextProps.items !== this.props.items ) {
-      this.setState({initItems: this.props.items});
+      this.filterList();
     }
   }
 
   filterList (event) {
-    let updatedList = this.state.initItems;
+    let updatedList = this.props.items;
     updatedList = updatedList.filter( (item) => {
       return (
         (item.unique_id.toLowerCase().search(
