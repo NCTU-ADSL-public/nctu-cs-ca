@@ -10,7 +10,7 @@ import {Gitnode, GitEdgePre, GitEdgeSug} from './NodeExtension';
 import Graph from 'react-json-graph';
 
 import MapsLocation from './MapsLocation.json'
-import MapsLocation3 from './MapsLocation3.json'
+import MapsLocation3 from './MapsLocationV2.json'
 //import Graph from 'react-json-graph';
 import DragAndZoom from  'react-drag-and-zoom'
 
@@ -64,14 +64,14 @@ class Map extends React.Component {
             super(props)
             this.state = {
                 slideIndex: 0,
+              location:(this.props.studentsGrad==="大一" || this.props.studentsGrad==="大二" )?MapsLocation:MapsLocation3
             };
       }
 
       state = {
           value: 1,
           data:[],
-          datar:[],
-          location:(this.props.studentsGrad==="大一" || this.props.studentsGrad==="大二" )?MapsLocation:MapsLocation3
+          datar:[]
       };
 
       handleChange = (event, index, value) => {
@@ -120,6 +120,8 @@ class Map extends React.Component {
       };
 
     async componentWillMount(){
+          console.log(this.state.location)
+          console.log(this.props.studentsGrad)
           await this.SavingCourseData()
           this.setState({
               data:{

@@ -55,7 +55,6 @@ class GitnodeItem extends React.Component {
                 headLength={15}
                 fill={'#ff291c'}
                 strokeWidth={2}
-                onClick={() => alert('You clicked the arrow!')}
               />
             </div>
           )
