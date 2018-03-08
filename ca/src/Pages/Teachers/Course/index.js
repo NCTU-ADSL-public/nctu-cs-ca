@@ -58,6 +58,15 @@ export default class index extends React.Component {
   state = {
     activeKey: '1',
     start: 0,
+    //for passing Course id selected by List
+    item: {
+      id: '',
+      sem: '',
+      cos_cname: '(無資料)',
+      unique_id: '',
+      avg: '-',
+      Pavg: '-',
+    },
 
     scoreDetail: {
       avg: '-',
@@ -95,6 +104,7 @@ export default class index extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
+
       console.log("index receive props tid");
       axios.post('/professors/courseInfo/courses', {
         id: nextProps.tid,
