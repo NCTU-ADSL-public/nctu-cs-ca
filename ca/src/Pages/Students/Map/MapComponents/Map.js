@@ -45,7 +45,16 @@ const MapTiltleStyle={
     fontWeight: "700",
     letterSpacing: "1px",
     fontFamily: 'Noto Sans CJK TC',
-    margin:'70px 110px 20px 40px'
+    width:"14.5vw",
+    margin:'70px 0 20px 0',
+}
+
+
+const MapTiltleStyle1={
+  float:'left',
+  width:"3vw",
+  height:'5%',
+  margin:'70px 0 20px 0'
 }
 const infpTiltleStyle={
     float:'left',
@@ -158,14 +167,14 @@ class Map extends React.Component {
               if (this.props.data[i - 1].cos_cname !== this.props.data[i].cos_cname) {
                   let complete=0
                   for(let j=1;j<this.props.studentPasdata.length;j++){
-                      if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname + "(英文授課)" === this.props.data[i].cos_cname )complete=1
+                      if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname  === this.props.data[i].cos_cname + "(英文授課)" || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"  )complete=1
                   }
                   store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
               }
             } else {
                 let complete=0
                 for(let j=1;j<this.props.studentPasdata.length;j++){
-                    if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname + "(英文授課)" === this.props.data[i].cos_cname  )complete=1
+                    if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname  + "(英文授課)"  || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"   )complete=1
                 }
                 store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
             }
@@ -186,7 +195,7 @@ class Map extends React.Component {
                           semflag = this.props.data[i].semester
                           nx += 220
                       }
-                    let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname))[0].ny
+                    let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname))[0].ny
                       datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                           "size": {
                               "width": 80,
@@ -199,7 +208,7 @@ class Map extends React.Component {
                       semflag = this.props.data[i].semester
                       nx += 220
                   }
-                  let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname))[0].ny
+                  let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname))[0].ny
                   datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                       "size": {
                           "width": 80,
@@ -269,9 +278,9 @@ class Map extends React.Component {
                 </MuiThemeProvider>
               </div>
               <div>
-                <div className="green" style={{backgroundColor: "#616161"}}></div>
+                <div className="green" style={{backgroundColor: "#616161"}}> </div>
                 <div className="text">已通過</div>
-                <div className="red" style={{backgroundColor: "#a42926"}}></div>
+                <div className="red" style={{backgroundColor: "#a42926"}}> </div>
                 <div className="text">未通過</div>
               </div>
             </div>
@@ -308,15 +317,17 @@ class Map extends React.Component {
                       onZoom={(zoom, e) => {}}
                     >
                       <div>
-                        <div style={MapTiltleStyle}>大一 上</div>
-                        <div style={MapTiltleStyle}>大一 下</div>
-                        <div style={MapTiltleStyle}>大二 上</div>
-                        <div style={MapTiltleStyle}>大二 下</div>
-                        <div style={MapTiltleStyle}>大三 上</div>
-                        <div style={MapTiltleStyle}>大三 下</div>
-                        <div style={MapTiltleStyle}>大四 上</div>
-                        {/*<div style={MapTiltleStyle}>大四 下</div>*/}
 
+                        <div style={MapTiltleStyle1}>
+                        </div>
+                          <div style={MapTiltleStyle}>大一 上</div>
+                          <div style={MapTiltleStyle}>大一 下</div>
+                          <div style={MapTiltleStyle}>大二 上</div>
+                          <div style={MapTiltleStyle}>大二 下</div>
+                          <div style={MapTiltleStyle}>大三 上</div>
+                          <div style={MapTiltleStyle}>大三 下</div>
+                          <div style={MapTiltleStyle}>大四 上</div>
+                          {/*<div style={MapTiltleStyle}>大四 下</div>*/}
                         <Graph
                           width={width}
                           height={height}
