@@ -10,6 +10,7 @@ import {Gitnode, GitEdgePre, GitEdgeSug} from './NodeExtension';
 import Graph from 'react-json-graph';
 
 import MapsLocation from './MapsLocation.json'
+import MapsLocation3 from './MapsLocation3.json'
 //import Graph from 'react-json-graph';
 import DragAndZoom from  'react-drag-and-zoom'
 
@@ -70,7 +71,7 @@ class Map extends React.Component {
           value: 1,
           data:[],
           datar:[],
-          location:MapsLocation
+          location:(this.props.studentsGrad==="大一" || this.props.studentsGrad==="大二" )?MapsLocation:MapsLocation3
       };
 
       handleChange = (event, index, value) => {

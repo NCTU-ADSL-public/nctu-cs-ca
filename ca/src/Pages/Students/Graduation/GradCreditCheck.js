@@ -389,19 +389,21 @@ class GradCreditCheck extends React.Component {
                                     onToggle={(toggled)=>this.handleToggle()}
                                 />
                             </MuiThemeProvider>
+                                <div
+                                  ref="target">
                             <MuiThemeProvider>
                                 <IconButton tooltipStyles={{zIndex:'1000',fontFamily:'Noto Sans CJK TC'}}
                                             iconStyle={styles.medium}
                                             tooltip="排序依據"
                                             tooltipPosition="top-right"
-                                            ref="target"
                                             onClick={()=>this.handleClickview()}>
                                     <ActionGrade />
                                 </IconButton>
                             </MuiThemeProvider>
+                                </div>
                             </div>
                             <Popover
-                                placement='right'
+                                placement='bottom'
                                 target={this.refs.target}
                                 show={this.state.open}
                                 onHide={()=>this.handleClose()}
