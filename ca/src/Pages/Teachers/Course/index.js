@@ -58,15 +58,6 @@ export default class index extends React.Component {
   state = {
     activeKey: '1',
     start: 0,
-    //for passing Course id selected by List
-    item: {
-      id: '無資料',
-      sem: '',
-      cos_cname: '無資料',
-      unique_id: '',
-      avg: '-',
-      Pavg: '-',
-    },
 
     scoreDetail: {
       avg: '-',
@@ -83,9 +74,9 @@ export default class index extends React.Component {
 
     initItem: [
       {
-        unique_id: '無資料',
+        unique_id: '',
         cos_code: '',
-        cos_cname: '-',
+        cos_cname: '(無資料)',
         cos_ename: '',
       },
 
@@ -104,6 +95,7 @@ export default class index extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
+      console.log("index receive props tid");
       axios.post('/professors/courseInfo/courses', {
         id: nextProps.tid,
       }).then(res => {
@@ -177,6 +169,34 @@ export default class index extends React.Component {
   }
 
   render () {
+    const showCourse = (
+      <div style={styles.course.main}>
+        <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem}
+          - {this.state.item.cos_cname}</div>
+        <div style={styles.course.score}>
+          <div style={styles.course.scoreItem}><ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/></div>
+          <div style={styles.course.scoreItem}><ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/></div>
+          <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/></div>
+          <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/></div>
+          <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
+                                                          score={ this.state.scoreDetail.member === '-'
+                                                            ? '-'
+                                                            : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
+          </div>
+          <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
+        </div>
+        <div style={styles.course.box}><GaugeChart member={this.state.scoreDetail.member}
+                                                   passed={this.state.scoreDetail.passed}/></div>
+        <div style={styles.course.box}><ScoreChart detail={this.state.scoreChartDetail}/></div>
+      </div>
+    );
+
+    const showDefault = (
+      <div style={styles.course.main}>
+        <div style={styles.course.title}>請由左方列表點選課程</div>
+      </div>
+    );
+
     return (
       <div style={styles.container}>
 
@@ -184,25 +204,7 @@ export default class index extends React.Component {
           <CourseList items={this.state.initItem} parentFunction={this.searchCallback}/>
         </div>
 
-        <div style={styles.course.main}>
-          <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem}
-            - {this.state.item.cos_cname}</div>
-          <div style={styles.course.score}>
-            <div style={styles.course.scoreItem}><ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/></div>
-            <div style={styles.course.scoreItem}><ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/></div>
-            <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/></div>
-            <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/></div>
-            <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
-                                                            score={ this.state.scoreDetail.member === '-'
-                                                                    ? '-'
-                                                                    : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
-            </div>
-            <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
-          </div>
-          <div style={styles.course.box}><GaugeChart member={this.state.scoreDetail.member}
-                                                     passed={this.state.scoreDetail.passed}/></div>
-          <div style={styles.course.box}><ScoreChart detail={this.state.scoreChartDetail}/></div>
-        </div>
+        { this.state.item.unique_id ? showCourse : showDefault }
 
       </div>
     )
