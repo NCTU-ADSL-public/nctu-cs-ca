@@ -34,9 +34,7 @@ export default class StudentList extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.items !== this.props.items) {
-      console.log('nextProps.items')
-      console.log(nextProps.items)
-      this.setState({items: this.props.items})
+      this.setState({items: nextProps.items})
     }
   }
 
