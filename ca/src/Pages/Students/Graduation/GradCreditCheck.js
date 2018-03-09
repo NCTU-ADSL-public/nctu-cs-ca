@@ -379,7 +379,7 @@ class GradCreditCheck extends React.Component {
                                     </Dialog>
 
                             </MuiThemeProvider>
-                            <div style={{width:'500px', height:'10px'}} className="animated shake">
+                            <div style={{width:'500px', height:'10px'}} className="animated shake" ref="target">
                             <MuiThemeProvider>
                                 <Toggle
                                     label="系統自動排序"
@@ -389,9 +389,7 @@ class GradCreditCheck extends React.Component {
                                     onToggle={(toggled)=>this.handleToggle()}
                                 />
                             </MuiThemeProvider>
-                                <div
-                                  ref="target">
-                            <MuiThemeProvider>
+                            <MuiThemeProvider >
                                 <IconButton tooltipStyles={{zIndex:'1000',fontFamily:'Noto Sans CJK TC'}}
                                             iconStyle={styles.medium}
                                             tooltip="排序依據"
@@ -400,7 +398,6 @@ class GradCreditCheck extends React.Component {
                                     <ActionGrade />
                                 </IconButton>
                             </MuiThemeProvider>
-                                </div>
                             </div>
                             <Popover
                                 placement='bottom'
