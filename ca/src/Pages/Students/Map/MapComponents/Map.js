@@ -167,14 +167,14 @@ class Map extends React.Component {
               if (this.props.data[i - 1].cos_cname !== this.props.data[i].cos_cname) {
                   let complete=0
                   for(let j=1;j<this.props.studentPasdata.length;j++){
-                      if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname  === this.props.data[i].cos_cname + "(英文授課)" || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"  )complete=1
+                      if(this.props.studentPasdata[j].cos_cname === "微積分甲(二)" || this.props.studentPasdata[j].cos_cname === "微積分甲(一)" || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname  === this.props.data[i].cos_cname + "(英文授課)" || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"  )complete=1
                   }
                   store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
               }
             } else {
                 let complete=0
                 for(let j=1;j<this.props.studentPasdata.length;j++){
-                    if(this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname  + "(英文授課)"  || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"   )complete=1
+                    if(this.props.studentPasdata[j].cos_cname === "微積分甲(二)" || this.props.studentPasdata[j].cos_cname === "微積分甲(一)" || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname  + "(英文授課)"  || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"   )complete=1
                 }
                 store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
             }
@@ -195,7 +195,7 @@ class Map extends React.Component {
                           semflag = this.props.data[i].semester
                           nx += 220
                       }
-                    let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname))[0].ny
+                    let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname || (t.cos_cname + " ") === this.props.data[i].cos_cname))[0].ny
                       datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                           "size": {
                               "width": 80,
@@ -208,7 +208,7 @@ class Map extends React.Component {
                       semflag = this.props.data[i].semester
                       nx += 220
                   }
-                  let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname))[0].ny
+                  let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname || (t.cos_cname + " ") === this.props.data[i].cos_cname))[0].ny
                   datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                       "size": {
                           "width": 80,
