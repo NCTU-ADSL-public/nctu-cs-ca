@@ -1,23 +1,26 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+import scrollToComponent from 'react-scroll-to-component'
+import { ToastContainer, toast } from 'react-toastify';
+import Snow from 'react-snow-effect'
 import IconButton from 'material-ui/IconButton';
 import ActionGrade from 'material-ui/svg-icons/image/assistant';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Popover from 'react-simple-popover';
-import 'animate.css'
 import Toggle from 'material-ui/Toggle';
 import ReactHover from 'react-hover';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import ScrollToTopBtn from '../../../Components/ScrollToTopBtn';
-import axios from 'axios'
-import scrollToComponent from 'react-scroll-to-component'
-import CreditOverview from './CreditOverview';
-import App from './Trello/List'
 import FlatButton from 'material-ui/FlatButton';
-import DialogWaring from './Trello/warning'
-import { ToastContainer, toast } from 'react-toastify';
+
+import 'animate.css'
 import './Graduation.css'
-import Snow from 'react-snow-effect'
+import App from './Trello/List'
+import DialogWaring from './Trello/warning'
+import ScrollToTopBtn from '../../../Components/ScrollToTopBtn';
+import CreditOverview from './CreditOverview';
+import PrintForm from './GradTable/PrintForm'
 
 const customContentStyle = {
     width: '100%',
@@ -213,6 +216,13 @@ class GradCreditCheck extends React.Component {
         let original = document.title;
         if (fileName !== null)
             document.title = fileName;
+        ReactDOM.render(
+          <PrintForm
+              profile={this.props.studentProfile}
+              graduationCheckEnglishTest={this.state.graduationCheckEnglishTest}
+              courseCategoryArray={this.state.print_courseCategoryArray}
+          />, document.getElementById('printArea'))
+
         window.print();
         document.title = original;
         this.setState({opendialogprint: true});
@@ -381,13 +391,13 @@ class GradCreditCheck extends React.Component {
                             </MuiThemeProvider>
                             <div style={{width:'500px', height:'10px'}} className="animated shake" ref="target">
                             <MuiThemeProvider>
-                                <Toggle
-                                    label="系統自動排序"
-                                    style={styles.toggle}
-                                    defaultToggled
-                                    labelStyle={styles.labelStyle}
-                                    onToggle={(toggled)=>this.handleToggle()}
-                                />
+                              <Toggle
+                                label="系統自動排序"
+                                style={styles.toggle}
+                                defaultToggled
+                                labelStyle={styles.labelStyle}
+                                onToggle={(toggled)=>this.handleToggle()}
+                              />
                             </MuiThemeProvider>
                             <MuiThemeProvider >
                                 <IconButton tooltipStyles={{zIndex:'1000',fontFamily:'Noto Sans CJK TC'}}
@@ -395,10 +405,11 @@ class GradCreditCheck extends React.Component {
                                             tooltip="排序依據"
                                             tooltipPosition="top-right"
                                             onClick={()=>this.handleClickview()}>
-                                    <ActionGrade />
+                                  <ActionGrade />
                                 </IconButton>
                             </MuiThemeProvider>
                             </div>
+                          </div>
                             <Popover
                                 placement='bottom'
                                 target={this.refs.target}
@@ -425,21 +436,20 @@ class GradCreditCheck extends React.Component {
                             </Popover>
                         </div>
                     </div>
+                    <ToastContainer autoClose={10000} style={{margin:'50px 0 0 0'}}/>
+                    <MuiThemeProvider>
+                        <CreditOverview
+                        items={this.state.items}
+                        result={this.state.totalitems}
+                        revise={this.state.graduationItems}
+                        reviseresult={this.state.ReviseResult}
+                        studentProfile={this.props.studentProfile}
+                        courseCategoryArray={this.state.print_courseCategoryArray}
+                        isMod={this.state.isMod}
+                        isToggle={this.state.isToggle}
+                        openforRevise/>
+                    </MuiThemeProvider>
                 </div>
-                <ToastContainer autoClose={10000} style={{margin:'50px 0 0 0'}}/>
-                <MuiThemeProvider>
-                    <CreditOverview
-                    items={this.state.items}
-                    result={this.state.totalitems}
-                    revise={this.state.graduationItems}
-                    reviseresult={this.state.ReviseResult}
-                    studentProfile={this.props.studentProfile}
-                    courseCategoryArray={this.state.print_courseCategoryArray}
-                    isMod={this.state.isMod}
-                    isToggle={this.state.isToggle}
-                    openforRevise/>
-                </MuiThemeProvider>
-            </div>
 
         )
     }

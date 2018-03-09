@@ -68,7 +68,7 @@ class Head extends React.Component {
         () => this.select(1),
       ]
       return (
-        <Grid id="Head" fluid={true}>
+        <Grid id='Head' fluid={true}>
           <Row>
             <Navbar type='assistant'
                     name={this.state.idCard.name}
@@ -77,7 +77,7 @@ class Head extends React.Component {
                     onTouchTaps={onTouchTaps}
             />
             <Col xsHidden smHidden>
-              <div id="page"/>
+              <div id='page' />
             </Col>
             {/* For mobile, tablet user */}
             <Col xs={12} mdHidden lgHidden>

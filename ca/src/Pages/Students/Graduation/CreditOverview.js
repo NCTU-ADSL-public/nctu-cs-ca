@@ -4,7 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import scrollToComponent from "react-scroll-to-component";
 
 import './Graduation.css'
-import PrintForm from './GradTable/PrintForm'
 import CircularProgress from '../../../Components/CircularProgress'
 import App from './Trello/List'
 import IndividualCourse from './IndividualCourse'
@@ -169,9 +168,6 @@ class CreditOverview extends React.Component {
                             </div>
                         </div>
                         <div id="graduate-footer"> </div>
-                    </div>
-                    <div id="printArea">
-                        <PrintForm profile={this.props.studentProfile} graduationCheckEnglishTest={this.state.graduationCheckEnglishTest} courseCategoryArray={this.state.print_courseCategoryArray}/>
                     </div>
                 </div>
                 <div style={{display:this.props.isMod?"inline":"none"}}>
