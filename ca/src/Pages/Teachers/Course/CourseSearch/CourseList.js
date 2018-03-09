@@ -32,15 +32,15 @@ export default class StudentList extends React.Component {
     this.setState({items: this.props.items})
   }
 
-  componentWillReceiveProps(nextProps){
-    if( nextProps.items !== this.props.items ) {
-      this.setState({items: this.props.items});
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.items !== this.props.items) {
+      this.setState({items: nextProps.items})
     }
   }
 
   filterList (event) {
-    let updatedList = this.props.items;
-    updatedList = updatedList.filter( (item) => {
+    let updatedList = this.props.items
+    updatedList = updatedList.filter((item) => {
       return (
         (item.unique_id.toLowerCase().search(
           event.target.value.toLowerCase()) !== -1) ||
@@ -48,12 +48,11 @@ export default class StudentList extends React.Component {
           event.target.value.toLowerCase()) !== -1)
       )
     })
-    this.setState({items: updatedList});
+    this.setState({items: updatedList})
   }
 
-
   searchCallback = (item) => {
-    if(item.cos_code !== undefined) this.props.parentFunction(item)
+    if (item.cos_code !== undefined) this.props.parentFunction(item)
   }
 
   render () {
