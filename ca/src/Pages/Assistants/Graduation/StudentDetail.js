@@ -33,7 +33,7 @@ export default class index extends React.Component {
             GraduationItems: FakeData.GraduationItems,
             revise: FakeData.GraduationItems_Revised,
             initStudents: FakeData.StudentList,
-            print_courseCategoryArray: [],
+            print_courseCategoryArray: FakeData.PrintData,
 
             loadingG: true,
             loadingR: true,
@@ -117,7 +117,7 @@ export default class index extends React.Component {
             )
         } else {
             return (
-                <div>
+                <div id='Head'>
                     <StudentGrad
                         studentProfile={this.state.student_profile}
                         items={this.state.GraduationItems}

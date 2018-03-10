@@ -23,6 +23,7 @@ const Router = () => (
         <Route exact path='/assistants/head/s/:sid' component={StudentDetail} />
       </Switch>
       <Route path='/' component={Footer} />
+      <div id='printArea' />
     </div>
   </BrowserRouter>
 )
