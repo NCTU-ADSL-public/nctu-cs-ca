@@ -38,24 +38,8 @@ const fontStyle={
     letterSpacing: "1px",
     fontFamily: 'Noto Sans CJK TC',
 }
-const MapTiltleStyle={
-    float:'left',
-    verticalAlign: "default",
-    fontSize: "1em",
-    fontWeight: "700",
-    letterSpacing: "1px",
-    fontFamily: 'Noto Sans CJK TC',
-    width:"14.5vw",
-    margin:'70px 0 20px 0',
-}
 
 
-const MapTiltleStyle1={
-  float:'left',
-  width:"3vw",
-  height:'5%',
-  margin:'70px 0 20px 0'
-}
 const infpTiltleStyle={
     float:'left',
     verticalAlign: "default",
@@ -129,8 +113,6 @@ class Map extends React.Component {
       };
 
     async componentWillMount(){
-          console.log(this.state.location)
-          console.log(this.props.studentsGrad)
           await this.SavingCourseData()
           this.setState({
               data:{
@@ -167,14 +149,14 @@ class Map extends React.Component {
               if (this.props.data[i - 1].cos_cname !== this.props.data[i].cos_cname) {
                   let complete=0
                   for(let j=1;j<this.props.studentPasdata.length;j++){
-                      if(this.props.studentPasdata[j].cos_cname === "微積分甲(二)" || this.props.studentPasdata[j].cos_cname === "微積分甲(一)" || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname  === this.props.data[i].cos_cname + "(英文授課)" || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"  )complete=1
+                      if((this.props.studentPasdata[j].cos_cname === "微積分甲(二)" && this.props.data[i].cos_cname === "微積分(二)") || (this.props.studentPasdata[j].cos_cname === "微積分甲(一)" && this.props.data[i].cos_cname === "微積分(一)") || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname  === this.props.data[i].cos_cname + "(英文授課)" || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"  )complete=1
                   }
                   store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
               }
             } else {
                 let complete=0
                 for(let j=1;j<this.props.studentPasdata.length;j++){
-                    if(this.props.studentPasdata[j].cos_cname === "微積分甲(二)" || this.props.studentPasdata[j].cos_cname === "微積分甲(一)" || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname  + "(英文授課)"  || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"   )complete=1
+                    if((this.props.studentPasdata[j].cos_cname === "微積分甲(二)" && this.props.data[i].cos_cname === "微積分(二)") || (this.props.studentPasdata[j].cos_cname === "微積分甲(一)" && this.props.data[i].cos_cname === "微積分(一)") || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname || this.props.studentPasdata[j].cos_cname === this.props.data[i].cos_cname  + "(英文授課)"  || this.props.studentPasdata[j].cos_cname=== this.props.data[i].cos_cname + "(檢定考試)"   )complete=1
                 }
                 store.dispatch(addTodo(this.props.data[i].cos_cname, this.props.data[i].grade, this.props.data[i].semester, this.props.data[i].suggest, this.props.data[i].pre,complete))
             }
@@ -183,9 +165,11 @@ class Map extends React.Component {
 
 
           let nx=-200
-          let ny=0
           let id=0
           let semflag=0;
+
+          let semcount = 0
+          let semarr = ["大一 上", "大一 下", "大二 上", "大二 下", "大三 上", "大三 下", "大四 上" , "大四 下" ]
 
           for (let i = 0; i < this.props.data.length; i++) {
               id++
@@ -194,8 +178,14 @@ class Map extends React.Component {
                       if(semflag !== this.props.data[i].semester) {
                           semflag = this.props.data[i].semester
                           nx += 220
+                          datai.push({"id":(id++).toString(),"label": semarr[semcount],"position":{"x": nx,"y": 0},
+                            "size": {
+                              "width": 80,
+                              "height": 50
+                            }})
+                          semcount++
                       }
-                    let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname || (t.cos_cname + " ") === this.props.data[i].cos_cname))[0].ny
+                    let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname || (t.cos_cname + " ") === this.props.data[i].cos_cname))[0].ny + 50
                       datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                           "size": {
                               "width": 80,
@@ -207,8 +197,14 @@ class Map extends React.Component {
                   if(semflag !== this.props.data[i].semester) {
                       semflag = this.props.data[i].semester
                       nx += 220
+                      datai.push({"id":(id++).toString(),"label": semarr[semcount],"position":{"x": nx,"y": 0},
+                        "size": {
+                          "width": 80,
+                          "height": 50
+                        }})
+                      semcount++
                   }
-                  let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname || (t.cos_cname + " ") === this.props.data[i].cos_cname))[0].ny
+                  let ny = this.state.location.filter( t =>(t.cos_cname === this.props.data[i].cos_cname || (t.cos_cname + "(英文授課)") === this.props.data[i].cos_cname || (t.cos_cname + "(檢定考試)") === this.props.data[i].cos_cname || (t.cos_cname + " ") === this.props.data[i].cos_cname))[0].ny + 50
                   datai.push({"id":(id).toString(),"label": this.props.data[i].cos_cname,"position":{"x": nx,"y": ny},
                       "size": {
                           "width": 80,
@@ -301,14 +297,13 @@ class Map extends React.Component {
                 <SwipeableViews
                   index={this.state.slideIndex}
                   onChangeIndex={this.onChange}
-                  style={{height: {heightWrap}}}
                 >
 
                   <div className='Map-Row'>
                     <App studentPasdata={this.props.studentPasdata} data={this.props.data}
                          studentsGrad={this.props.studentsGrad}/>
                   </div>
-                  <div style={{marginLeft: '-100px', marginTop: '-100px'}}>
+                  <div style={{marginLeft: '-70px', marginTop: '-20px'}}>
                     <DragAndZoom
                       minZoom={40}
                       maxZoom={150}
@@ -318,18 +313,9 @@ class Map extends React.Component {
                     >
                       <div>
 
-                        <div style={MapTiltleStyle1}>
-                        </div>
-                          <div style={MapTiltleStyle}>大一 上</div>
-                          <div style={MapTiltleStyle}>大一 下</div>
-                          <div style={MapTiltleStyle}>大二 上</div>
-                          <div style={MapTiltleStyle}>大二 下</div>
-                          <div style={MapTiltleStyle}>大三 上</div>
-                          <div style={MapTiltleStyle}>大三 下</div>
-                          <div style={MapTiltleStyle}>大四 上</div>
                           {/*<div style={MapTiltleStyle}>大四 下</div>*/}
                         <Graph
-                          width={width}
+                          width='2000px'
                           height={height}
                           json={this.state.data}
                           onChange={(newGraphJSON) => {}}

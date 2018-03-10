@@ -119,11 +119,31 @@ const GitNode = connect(
   mapStateToProps
 )(GitnodeItem)
 
+const MapTiltleStyle={
+  float:'left',
+  verticalAlign: "default",
+  fontSize: "2em",
+  fontWeight: "700",
+  letterSpacing: "1px",
+  fontFamily: 'Noto Sans CJK TC',
+  width:'120px',
+  height:'50px',
+  textAlign:'center'
+
+}
+
 export class Gitnode extends Node {
     renderContainer({content, isDragging,onClick}) {
+      if(content === "大一 上" || content === "大二 上" || content === "大三 上" || content === "大四 上" || content === "大一 下" || content === "大二 下" || content === "大三 下" || content === "大四 下" ){
         return (
-            <GitNode content={content} />
+          <div style={MapTiltleStyle}>{content}</div>
         );
+      }
+      else {
+        return (
+          <GitNode content={content}/>
+        );
+      }
     }
 }
 export class GitEdgePre extends Edge {
