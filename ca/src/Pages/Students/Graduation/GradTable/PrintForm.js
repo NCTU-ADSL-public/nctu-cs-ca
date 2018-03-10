@@ -43,7 +43,7 @@ class PrintForm extends React.Component {
         }
 
         return (
-            <table className="default-text default-table">
+            <table className="default-text default-table" style={{width: '100%'}}>
                 <colgroup>
                     <col className="col0"/>
                     <col className="col1"/>

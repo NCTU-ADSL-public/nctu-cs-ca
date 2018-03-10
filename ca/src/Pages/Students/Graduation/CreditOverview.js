@@ -24,10 +24,8 @@ class CreditOverview extends React.Component {
         graduationItems:this.props.revise,
         items:this.props.items,
         totalitems:this.props.result,
-        courseCategoryArray:[],
         Result:this.props.result,
-        ReviseResult:this.props.reviseresult,
-        print_courseCategoryArray:this.props.courseCategoryArray,
+        ReviseResult:this.props.reviseresult
     };
 
     componentDOM = {}

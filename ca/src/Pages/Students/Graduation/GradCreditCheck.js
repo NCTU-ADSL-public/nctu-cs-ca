@@ -444,7 +444,6 @@ class GradCreditCheck extends React.Component {
                         revise={this.state.graduationItems}
                         reviseresult={this.state.ReviseResult}
                         studentProfile={this.props.studentProfile}
-                        courseCategoryArray={this.state.print_courseCategoryArray}
                         isMod={this.state.isMod}
                         isToggle={this.state.isToggle}
                         openforRevise/>
