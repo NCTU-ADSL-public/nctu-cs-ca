@@ -34,7 +34,8 @@ class Head extends Component {
       grade: "大三",
       email: 'hihi@gmail.com',
     },
-    print_courseCategoryArray: printData
+    print_courseCategoryArray: printData,
+    isLoading:true
   }
 
   ReloadGrad () {
@@ -45,6 +46,8 @@ class Head extends Component {
   async componentWillMount () {
     await this.res()
     let _this = this
+    this.setState({isLoading:false})
+    this.select(0)
     setTimeout(function () {
       _this.select(0)
     }, 100)
@@ -120,17 +123,18 @@ class Head extends Component {
   componentDidMount () {
   }
 
-  select (index) {
-    if (index === 0) {
-      ReactDOM.render(
+  getpage = () => {
+
+    if (this.state.selectedIndex === 0) {
+      return(
         <FadeIn>
           <HomeItem/>
-        </FadeIn>,
-        document.getElementById('page'))
+        </FadeIn>
+      )
     }
-    else if (index === 1) {
-      ReactDOM.render(
-        <font>
+    else if (this.state.selectedIndex === 1) {
+      return(
+        <a>
           <FadeIn>
             <GradCreditCheckPage
               items={graduationItems}
@@ -140,11 +144,12 @@ class Head extends Component {
               studentProfile={this.state.studentIdcard}
               courseCategoryArray={this.state.print_courseCategoryArray}/>
           </FadeIn>
-        </font>,
-        document.getElementById('page'))
+        </a>
+
+      )
     }
-    else if (index === 2) {
-      ReactDOM.render(
+    else if (this.state.selectedIndex === 2) {
+      return(
         <div>
           <FadeIn>
             <MapItem
@@ -153,19 +158,19 @@ class Head extends Component {
               studentId={this.state.studentIdcard.program}
               studentsGrad={this.state.studentIdcard.grade}/>
           </FadeIn>
-        </div>,
-        document.getElementById('page'))
+        </div>
+      )
     }
-    else if (index === 3) {
-      ReactDOM.render(
-        <a>
+    else if (this.state.selectedIndex === 3) {
+      return(
           <FadeIn>
             <MapItem/>
           </FadeIn>
-        </a>,
-        document.getElementById('page'))
+      )
     }
+  }
 
+  select (index) {
     this.setState({selectedIndex: index})
   }
 
@@ -196,8 +201,9 @@ class Head extends Component {
               <Loading size={300}
                        left={600}
                        top={200}
-                       isLoading={true}
+                       isLoading={this.state.isLoading}
               />
+              {this.getpage()}
             </div>
           </Col>
           {/* For mobile, tablet user */}
