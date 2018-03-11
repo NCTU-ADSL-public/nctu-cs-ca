@@ -167,7 +167,6 @@ export default class index extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-
   }
 
   ChartData = (data) => {
