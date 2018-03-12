@@ -61,7 +61,7 @@ export default class StudentList extends React.Component {
 
         <div className="filter-list">
           <input type="text"
-                 placeholder="搜尋 課程名稱/ 學期"
+                 placeholder="搜尋 學號/ 姓名"
                  onChange={this.filterList}
           />
         </div>
