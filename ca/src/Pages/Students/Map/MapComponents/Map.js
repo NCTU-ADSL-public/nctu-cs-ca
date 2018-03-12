@@ -113,6 +113,7 @@ class Map extends React.Component {
       };
 
     async componentWillMount(){
+          console.log(this.props.studentPasdata)
           await this.SavingCourseData()
           this.setState({
               data:{
