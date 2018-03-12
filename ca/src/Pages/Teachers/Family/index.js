@@ -85,7 +85,7 @@ export default class index extends React.Component {
   }
 
   fetchData(){
-    axios.post('/professors/students', {
+    axios.post('/professors/students/list', {
       id: this.props.tid,
     }).then(res => {
       this.setState({initItem: res.data})
