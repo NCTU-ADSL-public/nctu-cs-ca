@@ -123,12 +123,16 @@ class Head extends Component {
   componentDidMount () {
   }
 
+  picButtonCallback = (selection) => {
+    this.select(selection)
+  }
+
   getpageitem = () => {
 
     if (this.state.selectedIndex === 0) {
       return(
         <FadeIn>
-          <HomeItem/>
+          <HomeItem parentFunction={this.picButtonCallback}/>
         </FadeIn>
       )
     }
