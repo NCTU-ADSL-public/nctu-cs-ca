@@ -8,7 +8,6 @@ class Home extends React.Component {
   render () {
     return (
       <div >
-        <Snow />
         <img src={img} className='image' alt='' />
       </div>
     )

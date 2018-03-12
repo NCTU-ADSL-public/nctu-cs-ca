@@ -94,7 +94,7 @@ class GitnodeItem extends React.Component {
                                     height: "45px",
                                     verticalAlign: "default",
                                     color: "#fcfcfc",
-                                    fontSize: "1em",
+                                    fontSize: "1.4em",
                                     fontWeight: "300",
                                     letterSpacing: "1px",
                                     fontFamily: 'Noto Sans CJK TC',

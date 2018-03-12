@@ -7,7 +7,7 @@ import {Grid,Row,Col} from 'react-bootstrap'
 import HomeItem from './Home.js'
 import CourseItem from './Course/index.js'
 import GroupItem from './Group/Group.js'
-import FamilyItem from './Family/index.js'
+//import FamilyItem from './Family/index.js'
 
 import Navbar from '../../Components/Navbar'
 
@@ -69,15 +69,15 @@ class Head extends Component {
         </FadeIn>,
         document.getElementById('page'))
     }
-    else if (index === 3) {
-      ReactDOM.render(
-        <a>
-          <FadeIn>
-            <FamilyItem tid={this.state.idCard.id}/>
-          </FadeIn>
-        </a>,
-        document.getElementById('page'))
-    }
+    // else if (index === 3) {
+    //   ReactDOM.render(
+    //     <a>
+    //       <FadeIn>
+    //         <FamilyItem tid={this.state.idCard.id}/>
+    //       </FadeIn>
+    //     </a>,
+    //     document.getElementById('page'))
+    // }
 
     this.setState({selectedIndex: index})
   }

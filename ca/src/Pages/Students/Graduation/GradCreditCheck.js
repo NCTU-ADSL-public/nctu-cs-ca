@@ -290,7 +290,6 @@ class GradCreditCheck extends React.Component {
     ];
         return(
             <div className="font_adjust">
-                <Snow/>
                 <div className="fixed" onClick={()=>this.scrollTotop()}>
                     <ScrollToTopBtn/>
                 </div>
