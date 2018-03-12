@@ -1,13 +1,6 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import HomeIcon from 'material-ui/svg-icons/content/flag';
-import MapIcon from 'material-ui/svg-icons/maps/map';
-import GraduationIcon from 'material-ui/svg-icons/social/school';
-import EqualizerIcon from 'material-ui/svg-icons/av/equalizer';
-import GroupIcon from 'material-ui/svg-icons/social/group';
-import FreeBreakfastIcon from 'material-ui/svg-icons/places/free-breakfast';
-
 import {Navbar,Nav,NavItem} from 'react-bootstrap'
 
 import './Navbar.css'
@@ -118,7 +111,7 @@ class _Navbar extends React.Component {
               <MuiThemeProvider>
                 <RaisedButton backgroundColor = "#DDDDDD"
                               label="登出"
-                              href="/logout"
+                              onClick={() => {window.location = '/logout'}}
                 />
               </MuiThemeProvider>
             </NavItem>
