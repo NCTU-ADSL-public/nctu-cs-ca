@@ -35,7 +35,8 @@ class _Navbar extends React.Component {
     return () => {
       this.setState({
         ...this.state,
-        selectedButtonIndex: index
+        selectedButtonIndex: index,
+        expanded: false
       })
       callback()
     }
@@ -58,6 +59,13 @@ class _Navbar extends React.Component {
     // })
   }
 
+  onToggleCollapse = (expanded) => {
+    this.setState({
+      ...this.state,
+      expanded: expanded
+    })
+  }
+
   render() {
     const {onClicks,selectedButtonIndex} = this.state
     const navItems = {
@@ -78,7 +86,7 @@ class _Navbar extends React.Component {
       ]
     }
     return (
-      <Navbar staticTop fixedTop fluid>
+      <Navbar staticTop fixedTop fluid expanded={this.state.expanded} onToggle={this.onToggleCollapse}>
         <Navbar.Header>
             <div style={style.BrandBox}>
               <span style={style.BrandName}>交大資工線上助理</span>
