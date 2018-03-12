@@ -105,7 +105,6 @@ export default class index extends React.Component {
   componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
 
-      console.log("index receive props tid");
       axios.post('/professors/courseInfo/courses', {
         id: nextProps.tid,
       }).then(res => {
@@ -167,7 +166,6 @@ export default class index extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-
   }
 
   ChartData = (data) => {

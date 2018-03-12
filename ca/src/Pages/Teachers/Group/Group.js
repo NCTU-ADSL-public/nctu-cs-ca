@@ -3,9 +3,7 @@ import React from 'react'
 class Group extends React.Component {
   render () {
     return (
-      <div >
-                15118181
-            </div>
+      <div>我還沒做</div>
     )
   }
 }
