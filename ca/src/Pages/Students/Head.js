@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import {Grid,Row,Col} from 'react-bootstrap'
@@ -120,10 +119,42 @@ class Head extends Component {
 
   }
 
-  componentDidMount () {
+  getpage = () => {
+    if(this.state.selectedIndex === 0){
+      return (
+        <div id="page">
+          <Loading size={300}
+                   left={600}
+                   top={200}
+                   isLoading={this.state.isLoading}
+          />
+          {this.getpageitem()}
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+          <Col xsHidden smHidden>
+            <div id="page">
+              <Loading size={300}
+                       left={600}
+                       top={200}
+                       isLoading={this.state.isLoading}
+              />
+              {this.getpageitem()}
+            </div>
+          </Col>
+          {/* For mobile, tablet user */}
+          <Col xs={12} mdHidden lgHidden>
+            <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
+          </Col>
+        </div>
+      )
+    }
   }
 
-  getpage = () => {
+  getpageitem = () => {
 
     if (this.state.selectedIndex === 0) {
       return(
@@ -196,20 +227,7 @@ class Head extends Component {
                   selectedIndex={ this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
           />
-          <Col xsHidden smHidden>
-            <div id="page" >
-              <Loading size={300}
-                       left={600}
-                       top={200}
-                       isLoading={this.state.isLoading}
-              />
-              {this.getpage()}
-            </div>
-          </Col>
-          {/* For mobile, tablet user */}
-          <Col xs={12} mdHidden lgHidden>
-            <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
-          </Col>
+          {this.getpage()}
         </Row>
       </Grid>
     )
