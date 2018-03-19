@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
-import {Grid,Row,Col} from 'react-bootstrap'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 import HomeItem from './Home.js'
 import CourseItem from './Course/index.js'
 import GroupItem from './Group/Group.js'
 import FamilyItem from './Family/index.js'
+import ProfileItem from './Profile.js'
 
 import Navbar from '../../Components/Navbar'
 
@@ -33,49 +34,63 @@ class Head extends Component {
           id: res.data[0].teacher_id,
         }
       })
-      this.select(1);
+      this.select(1)
     }).catch(err => {
       console.log(err)
     })
   }
 
   componentDidMount () {
-    this.select(1);
+    this.select(99)
   }
 
   select (index) {
     if (index === 0) {
       ReactDOM.render(
-        <div>
-          <FadeIn>
-            <HomeItem/>
-          </FadeIn>
-        </div>,
+        <Col xsHidden smHidden>
+          <div>
+            <FadeIn>
+              <HomeItem/>
+            </FadeIn>
+          </div>
+        </Col>,
         document.getElementById('page'))
     }
     else if (index === 1) {
       ReactDOM.render(
-        <div>
-          <FadeIn>
-            <CourseItem tid={this.state.idCard.id}/>
-          </FadeIn>
-        </div>,
+        <Col xsHidden smHidden>
+          <div>
+            <FadeIn>
+              <CourseItem tid={this.state.idCard.id}/>
+            </FadeIn>
+          </div>
+        </Col>,
         document.getElementById('page'))
     }
     else if (index === 2) {
       ReactDOM.render(
-        <FadeIn>
-          <GroupItem/>
-        </FadeIn>,
+        <Col xsHidden smHidden>
+          <FadeIn>
+            <GroupItem/>
+          </FadeIn>
+        </Col>,
         document.getElementById('page'))
     }
     else if (index === 3) {
       ReactDOM.render(
-        <a>
-          <FadeIn>
-            <FamilyItem tid={this.state.idCard.id}/>
-          </FadeIn>
-        </a>,
+        <Col xsHidden smHidden>
+          <a>
+            <FadeIn>
+              <FamilyItem tid={this.state.idCard.id}/>
+            </FadeIn>
+          </a>
+        </Col>,
+        document.getElementById('page'))
+    } else if (index === 99) {
+      ReactDOM.render(
+        <FadeIn>
+          <ProfileItem idCard={this.state.idCard}/>
+        </FadeIn>,
         document.getElementById('page'))
     }
 
@@ -88,6 +103,7 @@ class Head extends Component {
       () => this.select(1),
       () => this.select(2),
       () => this.select(3),
+      () => this.select(99),
     ]
     return (
       <Grid id="Head" fluid={true}>
@@ -98,15 +114,14 @@ class Head extends Component {
                   selectedIndex={this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
           />
-          <Col xsHidden smHidden>
-            <div id="page"/>
-          </Col>
+
+          <div id="page"/>
           {/* For mobile, tablet user */}
           <Col xs={12} mdHidden lgHidden>
-            <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
+            <h2> { this.state.selectedIndex === 99 ? '' : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
           </Col>
-        </Row>
-      </Grid>
+      </Row>
+      < /Grid>
     )
   }
 }

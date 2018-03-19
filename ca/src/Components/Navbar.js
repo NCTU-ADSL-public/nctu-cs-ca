@@ -101,7 +101,7 @@ class _Navbar extends React.Component {
 
           <Nav pullRight>
             <NavItem className='logout-box'>
-              <div className="idcard">
+              <div className="idcard" onClick={onClicks[4]}>
                 <img id="idcard-photo" src={defalt} alt=""/>
                 <div style={{
                   display: 'inline-block',
