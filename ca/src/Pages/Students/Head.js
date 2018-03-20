@@ -7,6 +7,7 @@ import {Grid,Row,Col} from 'react-bootstrap'
 import HomeItem from './Home/Home.js'
 import MapItem from './Map/MapComponents/Map.js'
 import GradCreditCheckPage from './Graduation/GradCreditCheck.js'
+import CreditItem from './Credit/Credit.js'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
@@ -168,7 +169,7 @@ class Head extends Component {
     else if (this.state.selectedIndex === 3) {
       return(
         <FadeIn>
-          <MapItem/>
+          <CreditItem studentIdcard={this.state.studentIdcard}/>
         </FadeIn>
       )
     }
@@ -218,6 +219,7 @@ class Head extends Component {
       () => this.select(0),
       () => this.select(1),
       () => this.select(2),
+      () => this.select(3),
     ]
     return (
       <Grid id="Head" fluid={true}>

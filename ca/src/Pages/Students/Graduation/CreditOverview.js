@@ -32,7 +32,7 @@ class CreditOverview extends React.Component {
 
     componentWillMount(){
         let _this=this;
-
+        console.log(this.props.studentProfile.grade)
         if(this.props.assistant) {
             axios.get('/assistants/graduate/check', {
                 params: {
@@ -132,17 +132,39 @@ class CreditOverview extends React.Component {
                         </div>
                         <div className="Grad-Row">
                             <div className="animated fadeIn">
-                                {otherCourseType.map((item,key) =>
-                                    <IndividualCourse
-                                        key={key}
-                                        pass={item.course}
-                                        title={item.title}
-                                        credit={item.credit}
-                                        total={item.require}
-                                        selection={item.selection}
-                                        ref={(DOM) => { this.componentDOM[item.title] = DOM }}
-                                    />
-                                )}
+                              {otherCourseType.map((item,key) =>
+                                (item.title === "核心課程" || item.title === "副核心與他組核心" ) ?this.props.studentProfile.grade==="大四" ?
+                                <IndividualCourse
+                                  key={key}
+                                  pass={item.course}
+                                  title={item.title}
+                                  credit={item.credit}
+                                  total={item.require}
+                                  selection={item.selection}
+                                  ref={(DOM) => { this.componentDOM[item.title] = DOM }}
+                                />:
+                                <div> </div>
+                                :
+                                <IndividualCourse
+                                  key={key}
+                                  pass={item.course}
+                                  title={item.title}
+                                  credit={item.credit}
+                                  total={item.require}
+                                  selection={item.selection}
+                                  ref={(DOM) => { this.componentDOM[item.title] = DOM }}
+                                />
+                              // <IndividualCourse
+                              //   key={key}
+                              //   pass={item.course}
+                              //   title={item.title}
+                              //   credit={item.credit}
+                              //   total={item.require}
+                              //   selection={item.selection}
+                              //   ref={(DOM) => { this.componentDOM[item.title] = DOM }}
+                              // />
+
+                            )}
 
                                 <div  className="little-form"
                                       ref={(DOM) => { this.componentDOM[generalCourseType.title] = DOM }}

@@ -388,7 +388,7 @@ class GradCreditCheck extends React.Component {
                                     </Dialog>
 
                             </MuiThemeProvider>
-                            <div style={{width:'500px', height:'10px'}} className="animated shake" ref="target">
+                            <div style={{width:'500px', height:'10px'}} ref="target">
                             <MuiThemeProvider>
                               <Toggle
                                 label="系統自動排序"
@@ -438,13 +438,13 @@ class GradCreditCheck extends React.Component {
                     <ToastContainer autoClose={10000} style={{margin:'50px 0 0 0'}}/>
                     <MuiThemeProvider>
                         <CreditOverview
-                        items={this.state.items}
-                        result={this.state.totalitems}
-                        revise={this.state.graduationItems}
-                        reviseresult={this.state.ReviseResult}
-                        studentProfile={this.props.studentProfile}
-                        isMod={this.state.isMod}
-                        isToggle={this.state.isToggle}
+                            items={this.state.items}
+                            result={this.state.totalitems}
+                            revise={this.state.graduationItems}
+                            reviseresult={this.state.ReviseResult}
+                            studentProfile={this.props.studentProfile}
+                            isMod={this.state.isMod}
+                            isToggle={this.state.isToggle}
                         openforRevise/>
                     </MuiThemeProvider>
                 </div>
