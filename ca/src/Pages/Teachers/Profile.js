@@ -9,41 +9,41 @@ const styles = {
   row: {
     textAlign: 'center',
     margin: '50px',
-    color: '#5f6f75',
+    color: '#5f6f75'
   },
   pic: {
     width: 250,
-    padding: 10,
+    padding: 10
   },
   name: {
     fontSize: '4em',
-    padding: 10,
+    padding: 10
   },
   item: {
     fontSize: '1.4em',
     padding: 5,
-    fontWeight: 100,
+    fontWeight: 100
   }
 }
 
 class Profile extends React.Component {
-
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       profile: {
         name: '彭文志',
         phone: '48763',
         email: 'wcpeng@nctu.edu.tw',
         expertise: '資料庫、電腦視覺、深度學習',
-        info: '我的經歷就是範例...',
+        info: '我的經歷就是範例...'
       }
     }
   }
 
-  componentWillMount () {
+  fetchData () {
+    console.log(this.props.idCard.name)
     axios.get('/professors/info', {
-      name: this.props.idCard.name,
+      name: this.props.idCard.name
     }).then(res => {
       this.setState({
         profile: {
@@ -51,7 +51,7 @@ class Profile extends React.Component {
           phone: res.data[0].phone,
           email: res.data[0].email,
           expertise: res.data[0].expertise,
-          info: res.data[0].info,
+          info: res.data[0].info
         }
       })
     }).catch(err => {
@@ -59,22 +59,28 @@ class Profile extends React.Component {
     })
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (this.props.idCard !== nextProps.idCard) {
+      this.fetchData()
+    }
+  }
+
   render () {
     return (
-        <Grid>
-          <FadeIn>
-            <Row>
-              <div style={styles.row}>
-                <Image style={styles.pic} src={pic} circle />
-                <div style={styles.name}> {this.state.profile.name} </div>
-                <div style={styles.item}> <Glyphicon glyph="earphone" /> #{this.state.profile.phone} </div>
-                <div style={styles.item}> {this.state.profile.email} </div>
-                <div style={styles.item}> {this.state.profile.expertise} </div>
-                <div style={styles.item}> { new Array(20).fill(0).map(() => ('我的經歷就是範例...')) } </div>
-              </div>
-            </Row>
-          </FadeIn>
-        </Grid>
+      <Grid>
+        <FadeIn>
+          <Row>
+            <div style={styles.row}>
+              <Image style={styles.pic} src={pic} circle />
+              <div style={styles.name}> {this.state.profile.name} </div>
+              <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.state.profile.phone} </div>
+              <div style={styles.item}> {this.state.profile.email} </div>
+              <div style={styles.item}> {this.state.profile.expertise} </div>
+              <div style={styles.item}> {new Array(20).fill(0).map(() => ('我的經歷就是範例...'))} </div>
+            </div>
+          </Row>
+        </FadeIn>
+      </Grid>
     )
   }
 }
