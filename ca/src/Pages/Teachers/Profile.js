@@ -16,13 +16,13 @@ const styles = {
     padding: 10
   },
   name: {
-    fontSize: '4em',
+    fontSize: '3em',
     padding: 10
   },
   item: {
-    fontSize: '1.4em',
+    fontSize: '1.2em',
     padding: 5,
-    fontWeight: 100
+    fontWeight: 300
   }
 }
 
