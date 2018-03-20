@@ -59,6 +59,10 @@ class Profile extends React.Component {
     })
   }
 
+  componentDidMount () {
+    this.fetchData()
+  }
+
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
       this.fetchData()
