@@ -34,14 +34,14 @@ class Head extends Component {
           id: res.data[0].teacher_id,
         }
       })
-      this.select(1)
+      this.select(2)
     }).catch(err => {
       console.log(err)
     })
   }
 
   componentDidMount () {
-    this.select(99)
+    this.select(2)
   }
 
   select (index) {
@@ -69,11 +69,9 @@ class Head extends Component {
     }
     else if (index === 2) {
       ReactDOM.render(
-        <Col xsHidden smHidden>
           <FadeIn>
-            <GroupItem/>
-          </FadeIn>
-        </Col>,
+            <GroupItem tid={this.state.idCard.id}/>
+          </FadeIn>,
         document.getElementById('page'))
     }
     else if (index === 3) {
@@ -118,10 +116,12 @@ class Head extends Component {
           <div id="page"/>
           {/* For mobile, tablet user */}
           <Col xs={12} mdHidden lgHidden>
-            <h2> { this.state.selectedIndex === 99 ? '' : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
+            <h2> { this.state.selectedIndex === 99 || this.state.selectedIndex === 2
+              ? ''
+              : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
           </Col>
       </Row>
-      < /Grid>
+      </Grid>
     )
   }
 }
