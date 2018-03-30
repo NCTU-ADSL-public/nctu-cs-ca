@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
-import pic from '../../../Resources/BeautifalGalaxy.jpeg'
+import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 
 import Avatar from 'material-ui/Avatar'
