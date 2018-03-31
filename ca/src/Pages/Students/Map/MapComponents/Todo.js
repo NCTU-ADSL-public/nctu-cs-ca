@@ -11,11 +11,16 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import defaultimg from './TodoExtension/defalt.jpg'
 import Loading from '../../../../Components/Loading'
-
+import TeacherProfile from './TodoExtension/Profile'
 
 let searchCourse=[]
 
 const customContentStyle = {
+    maxWidth: 'none',
+    maxHeight: 'none',
+};
+const customteacherContentStyle = {
+    width: '100%',
     maxWidth: 'none',
     maxHeight: 'none',
 };
@@ -40,7 +45,7 @@ const fontStyle={
 class Todo extends React.Component {
 
     state = {
-        isDone:false,
+        isDone:true,
         open: false,
         opendia2:false,
         value:0,
@@ -384,15 +389,16 @@ class Todo extends React.Component {
                                                                                                                                                                                                         isLoading={true}/>}
                     <MuiThemeProvider>
                         <Dialog
-                            title={this.state.searchteachername}
+                            // title={this.state.searchteachername}
                             actions={actions2}
                             open={this.state.opendia2}
                             onRequestClose={this.handleDia2Close}
-                            contentStyle={customContentStyle}
+                            contentStyle={customteacherContentStyle}
                             bodyStyle={bodyStyle}
                             titleStyle={titleStyle}
+                            autoScrollBodyContent={true}
                         >
-                          敬請期待
+                          <TeacherProfile name={this.state.searchteachername}/>
                         </Dialog>
                     </MuiThemeProvider>
                 </Dialog>

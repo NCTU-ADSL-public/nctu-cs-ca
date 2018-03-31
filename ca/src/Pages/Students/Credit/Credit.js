@@ -3,6 +3,7 @@ import axios from 'axios'
 import TextForm from './TextForm'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './Credit.css'
+import Stepper from './Stepper'
 
 class Credit extends React.Component {
   componentWillUpdate () {
@@ -11,7 +12,7 @@ class Credit extends React.Component {
     return (
       <div className='Credt-title-text'>
         <MuiThemeProvider>
-          <TextForm studentIdcard={this.props.studentIdcard}/>
+          <Stepper studentIdcard={this.props.studentIdcard}/>
         </MuiThemeProvider>
       </div>
     )

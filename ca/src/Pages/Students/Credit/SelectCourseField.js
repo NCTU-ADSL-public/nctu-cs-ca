@@ -5,6 +5,31 @@ import axios from 'axios'
 
 let items = []
 
+const bodyStyle = {
+  fontFamily: 'Noto Sans CJK TC',
+  color:'#454545'
+};
+const titleStyle = {
+  fontFamily: 'Noto Sans CJK TC',
+  color:'#565656'
+};
+
+const fontStyle={
+  verticalAlign: "default",
+  fontSize: "1em",
+  fontWeight: "300",
+  letterSpacing: "1px",
+  fontFamily: 'Noto Sans CJK TC',
+}
+
+const fontlabelStyle={
+  verticalAlign: "default",
+  fontSize: "1em",
+  fontWeight: "300",
+  letterSpacing: "1px",
+  fontFamily: 'Noto Sans CJK TC',
+  color:'#a42926'
+}
 // failcourse:[
 //   {
 //     "cn":"線性代數",
@@ -15,7 +40,7 @@ let items = []
 //     "year":103,
 //     "semester":1,
 //     "teacher":"易志偉"
-//   },
+//   }npm,
 //   {
 //     "cn":"服務學習(一)",
 //     "en":"Service Learning I",
@@ -40,7 +65,7 @@ let items = []
 
 export default class SelectCourseField extends Component {
   state = {
-    value: 1,
+    valueFailure: 1,
   };
 
   componentWillMount () {
@@ -52,37 +77,43 @@ export default class SelectCourseField extends Component {
   }
 
   handleChange = (event, index, value) => {
-    this.setState({value});
+    this.setState({valueFailure:value});
   }
 
   getGradeStm = () => {
-    if(this.props.failcourse[this.state.value].score!==null){
+    if(this.props.failcourse[this.state.valueFailure].score!==null){
       return(
-        `因成績得分 ${this.props.failcourse[this.state.value].score} 分`
+        <font color={"#a42926"}>因成績得分 {this.props.failcourse[this.state.valueFailure].score} 分未通過</font>
       )
     }
-    else if(this.props.failcourse[this.state.value].grade!==null){
+    else if(this.props.failcourse[this.state.valueFailure].grade!==null){
       return(
-        `因等級評分 ${this.props.failcourse[this.state.value].grade} `
+        <font color={"#a42926"}>因等級評分 ${this.props.failcourse[this.state.valueFailure].grade} 未通過</font>
       )
     }
     else{
-      return "因"
+      return <font color={"#a42926"}>未通過</font>
     }
   }
 
   render() {
     return (
       <div>
-        1. 學生於&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.value].year}</font>&nbsp;學年度&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.value].semester===1?"上":"下"}</font>&nbsp;學期，修習本系&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.value].teacher}</font>&nbsp;老師所授之課程&nbsp;
+        學生於&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.valueFailure].year}</font>&nbsp;學年度&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.valueFailure].semester===1?"上":"下"}</font>&nbsp;學期，修習本系&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.valueFailure].teacher}</font>&nbsp;老師所授之課程&nbsp;
         <SelectField
-          value={this.state.value}
+          value={this.state.valueFailure}
           onChange={this.handleChange}
+          autoWidth={true}
           maxHeight={200}
+          labelStyle={fontlabelStyle}
+          menuStyle={fontlabelStyle}
+          selectedMenuItemStyle={fontlabelStyle}
+          listStyle={fontStyle}
+          menuItemStyle={fontStyle}
         >
           {items}
         </SelectField>
-        &nbsp;，{this.getGradeStm()}未通過，故需重修此必修課。
+        &nbsp;&nbsp;，{this.getGradeStm()}，故需重修此必修課。
 
       </div>
     );
