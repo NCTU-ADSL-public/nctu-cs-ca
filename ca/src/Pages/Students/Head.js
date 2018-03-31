@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import {Grid,Row,Col} from 'react-bootstrap'
@@ -8,6 +7,7 @@ import HomeItem from './Home/Home.js'
 import MapItem from './Map/MapComponents/Map.js'
 import GradCreditCheckPage from './Graduation/GradCreditCheck.js'
 import CreditItem from './Credit/Credit.js'
+import Project from './Project/index'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
@@ -173,6 +173,13 @@ class Head extends Component {
         </FadeIn>
       )
     }
+    else if (this.state.selectedIndex === 4) {
+      return(
+        <FadeIn>
+          <Project/>
+        </FadeIn>
+      )
+    }
 
 
   }
@@ -220,6 +227,7 @@ class Head extends Component {
       () => this.select(1),
       () => this.select(2),
       () => this.select(3),
+      () => this.select(4),
     ]
     return (
       <Grid id="Head" fluid={true}>
