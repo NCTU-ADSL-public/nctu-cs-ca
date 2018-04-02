@@ -98,7 +98,7 @@ export default class index extends React.Component {
   }
 
   searchCallback = (item) => {
-    console.log(item)
+    //console.log(item)
     this.setState({teacher: item})
 
     // axios.post('/professors/courseInfo/score', {

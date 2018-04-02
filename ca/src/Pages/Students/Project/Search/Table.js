@@ -66,7 +66,7 @@ export default class ListTable extends Component {
 
       itemListRows: [],
       itemList: [],
-      orderBy: 'sid',
+      orderBy: 'name',
     }
 
   }
@@ -75,10 +75,11 @@ export default class ListTable extends Component {
     this.orderList(this.state.orderBy)
   }
 
+
   componentDidUpdate (NextProp, NextState) {
     if (NextProp.items !== this.props.items) {
       this.orderList(this.state.orderBy)
-      if(this.state.itemList.length !== 0) this.handleRowClick(0)
+      //if(this.state.itemList.length !== 0) this.handleRowClick(0)
     }
   }
 
@@ -111,6 +112,8 @@ export default class ListTable extends Component {
   }
 
   handleRowClick = (rowIndex) => {
+    //console.log(rowIndex)
+    //console.log(this.state.itemList)
     this.props.parentFunction(this.state.itemList[rowIndex].tname)
   }
 
@@ -135,15 +138,13 @@ export default class ListTable extends Component {
           >
             <TableRow>
               <TableHeaderColumn tooltip="教授">
-                <div style={this.state.orderBy === 'sid' ? styles.headerB : styles.header}
-                     onClick={() => this.orderList('sid')}>
-                  教授{this.state.orderBy === 'sid' ? '↓' : ''}
+                <div style={styles.header}>
+                  教授
                 </div>
               </TableHeaderColumn>
               <TableHeaderColumn tooltip="已收學生人數">
-                <div style={this.state.orderBy === 'name' ? styles.headerB : styles.header}
-                     onClick={() => this.orderList('name')}>
-                  已收學生人數{this.state.orderBy === 'name' ? '↓' : ''}
+                <div style={ styles.header}>
+                  已收學生人數
                 </div>
               </TableHeaderColumn>
             </TableRow>
