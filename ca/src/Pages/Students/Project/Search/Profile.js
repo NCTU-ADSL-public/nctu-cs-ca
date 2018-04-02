@@ -51,7 +51,7 @@ class Profile extends React.Component {
   }
 
   fetchData () {
-    axios.get('/professors/info', {
+    axios.post('/professors/info', {
       name: this.props.name
     }).then(res => {
       this.setState({
