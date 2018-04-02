@@ -7,6 +7,14 @@ import pic from '../../../../Resources/defalt.jpg'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+const fontStyle={
+  verticalAlign: "default",
+  fontSize: "1em",
+  fontWeight: "300",
+  letterSpacing: "1px",
+  fontFamily: 'Noto Sans CJK TC',
+}
+
 const styles = {
   row: {
     textAlign: 'center',
@@ -75,10 +83,10 @@ class Profile extends React.Component {
       <Grid>
         <Row style={styles.row}>
           <MuiThemeProvider>
-            <Card>
+            <Card >
               <CardText>
                 <FadeIn>
-                    <div>
+                    <div style={fontStyle}>
                       <Image style={styles.pic} src={pic} circle />
                       <div style={styles.name}> {this.state.profile.name} </div>
                       <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.state.profile.phone} </div>

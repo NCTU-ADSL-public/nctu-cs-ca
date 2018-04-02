@@ -98,6 +98,7 @@ export default class index extends React.Component {
   }
 
   searchCallback = (item) => {
+    //console.log(item)
     this.setState({teacher: item})
 
     // axios.post('/professors/courseInfo/score', {
@@ -146,7 +147,7 @@ export default class index extends React.Component {
           <List items={this.state.initItem} parentFunction={this.searchCallback}/>
         </div>
 
-        { this.state.teacher === "default" ?
+        { this.state.teacher !== "default" ?
           <div style={styles.course.main}>
             <Profile name = {this.state.teacher}/>
           </div>: showDefault }
