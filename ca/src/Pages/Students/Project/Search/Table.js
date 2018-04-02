@@ -86,16 +86,11 @@ export default class ListTable extends Component {
   orderList (orderBy) {
     let NewItemList = []
 
-    if (this.props.items) {
-      NewItemList = [].concat(this.props.items)
-        .sort((a, b) => {
-          if (orderBy === 'name')
-            return a.tname.localeCompare(b.tname, 'zh-Hans-CN')
-          else if (orderBy === 'sid')
-            return a.scount.localeCompare(b.scount, 'zh-Hans-CN')
-        })
+    for(let i=0;i<this.props.items.length;i++){
+      NewItemList.push({tname:this.props.items[i].tname})
     }
 
+    
     let itemListRows = this.props.items
       .map((row, i) =>
         <TableRow key={i}>
