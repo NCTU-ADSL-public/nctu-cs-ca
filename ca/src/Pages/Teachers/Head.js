@@ -70,7 +70,7 @@ class Head extends Component {
     else if (index === 2) {
       ReactDOM.render(
           <FadeIn>
-            <GroupItem tid={this.state.idCard.id}/>
+            <GroupItem idCard={this.state.idCard}/>
           </FadeIn>,
         document.getElementById('page'))
     }
