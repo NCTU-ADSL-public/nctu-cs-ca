@@ -13,14 +13,16 @@ import ProfileItem from './Profile.js'
 import Navbar from '../../Components/Navbar'
 
 class Head extends Component {
-
-  state = {
-    selectedIndex: 0,
-    idCard: {
-      name: '資料錯誤',
-      status: '',
-      id: '',
-    },
+  constructor (props) {
+    super(props)
+    this.state = {
+      selectedIndex: 0,
+      idCard: {
+        name: '資料錯誤',
+        status: '',
+        id: ''
+      }
+    }
   }
 
   componentWillMount () {
@@ -31,7 +33,7 @@ class Head extends Component {
         idCard: {
           name: res.data[0].tname,
           status: res.data[0].status,
-          id: res.data[0].teacher_id,
+          id: res.data[0].teacher_id
         }
       })
       this.select(2)
@@ -50,36 +52,33 @@ class Head extends Component {
         <Col xsHidden smHidden>
           <div>
             <FadeIn>
-              <HomeItem/>
+              <HomeItem />
             </FadeIn>
           </div>
         </Col>,
         document.getElementById('page'))
-    }
-    else if (index === 1) {
+    } else if (index === 1) {
       ReactDOM.render(
         <Col xsHidden smHidden>
           <div>
             <FadeIn>
-              <CourseItem tid={this.state.idCard.id}/>
+              <CourseItem tid={this.state.idCard.id} />
             </FadeIn>
           </div>
         </Col>,
         document.getElementById('page'))
-    }
-    else if (index === 2) {
+    } else if (index === 2) {
       ReactDOM.render(
-          <FadeIn>
-            <GroupItem idCard={this.state.idCard}/>
-          </FadeIn>,
+        <FadeIn>
+          <GroupItem idCard={this.state.idCard} />
+        </FadeIn>,
         document.getElementById('page'))
-    }
-    else if (index === 3) {
+    } else if (index === 3) {
       ReactDOM.render(
         <Col xsHidden smHidden>
           <a>
             <FadeIn>
-              <FamilyItem tid={this.state.idCard.id}/>
+              <FamilyItem tid={this.state.idCard.id} />
             </FadeIn>
           </a>
         </Col>,
@@ -87,7 +86,7 @@ class Head extends Component {
     } else if (index === 99) {
       ReactDOM.render(
         <FadeIn>
-          <ProfileItem idCard={this.state.idCard}/>
+          <ProfileItem idCard={this.state.idCard} />
         </FadeIn>,
         document.getElementById('page'))
     }
@@ -101,26 +100,26 @@ class Head extends Component {
       () => this.select(1),
       () => this.select(2),
       () => this.select(3),
-      () => this.select(99),
+      () => this.select(99)
     ]
     return (
-      <Grid id="Head" fluid={true}>
+      <Grid id='Head' fluid>
         <Row style={{background: '#F5F5F5'}}>
           <Navbar type='teacher'
-                  name={this.state.idCard.name}
-                  subname={this.state.idCard.id}
-                  selectedIndex={this.state.selectedIndex}
-                  onTouchTaps={onTouchTaps}
+            name={this.state.idCard.name}
+            subname={this.state.idCard.id}
+            selectedIndex={this.state.selectedIndex}
+            onTouchTaps={onTouchTaps}
           />
 
-          <div id="page"/>
+          <div id='page' />
           {/* For mobile, tablet user */}
           <Col xs={12} mdHidden lgHidden>
             <h2> { this.state.selectedIndex === 99 || this.state.selectedIndex === 2
               ? ''
               : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
           </Col>
-      </Row>
+        </Row>
       </Grid>
     )
   }

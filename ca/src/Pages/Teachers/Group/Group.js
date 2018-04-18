@@ -67,6 +67,7 @@ class Group extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      total_number: '?',
       groupList: [
         { research_title: '資料錯誤',
           participants: [
@@ -88,7 +89,8 @@ class Group extends React.Component {
     }).then(res => {
       console.log(res)
       this.setState({
-        groupList: res.data
+        total_number: res.data.total_number,
+        groupList: res.data.groups
       })
     }).catch(err => {
       console.log(err)
@@ -111,7 +113,7 @@ class Group extends React.Component {
             <div style={styles.mainTitle}> 學生專題列表 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 本年度已登記組數: ??? </div>
+            <div style={styles.subTitle}> 已收專題學生: {this.state.total_number} 人 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
@@ -146,7 +148,7 @@ const GroupButton = (props) => (
           </MuiThemeProvider>
         </div>
         <div style={styles.groupIntro}>
-          這是專題的簡介。
+          (尚未取得專題簡介的資料。)
       </div>
       </Col>
     </Row>
