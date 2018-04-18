@@ -86,10 +86,10 @@ class Group extends React.Component {
       name: '彭文志'
       // name: this.props.idCard.name
     }).then(res => {
+      console.log(res)
       this.setState({
         groupList: res.data[0]
       })
-      console.log(res.data[0])
     }).catch(err => {
       console.log(err)
     })
@@ -99,6 +99,7 @@ class Group extends React.Component {
   }
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
+      console.log(nextProps)
       this.fetchData()
     }
   }
