@@ -88,7 +88,7 @@ class Group extends React.Component {
     }).then(res => {
       console.log(res)
       this.setState({
-        groupList: res.data[0]
+        groupList: res.data
       })
     }).catch(err => {
       console.log(err)
