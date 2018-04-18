@@ -87,9 +87,9 @@ class Group extends React.Component {
       // name: this.props.idCard.name
     }).then(res => {
       this.setState({
-        groupList: res
+        groupList: res.data[0]
       })
-      console.log(res)
+      console.log(res.data[0])
     }).catch(err => {
       console.log(err)
     })
