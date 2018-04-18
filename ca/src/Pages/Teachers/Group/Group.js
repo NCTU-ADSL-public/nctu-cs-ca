@@ -83,7 +83,8 @@ class Group extends React.Component {
   fetchData () {
     console.log(this.props.idCard.name)
     axios.post('/professors/students/projects', {
-      name: this.props.idCard.name
+      name: ' 彭文志'
+      // name: this.props.idCard.name
     }).then(res => {
       this.setState({
         groupList: res
