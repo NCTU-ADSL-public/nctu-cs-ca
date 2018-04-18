@@ -94,7 +94,9 @@ class Group extends React.Component {
     })
   }
   componentDidMount () {
-    this.fetchData()
+    if (this.props.idCard !== '資料錯誤') {
+      this.fetchData()
+    }
   }
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
