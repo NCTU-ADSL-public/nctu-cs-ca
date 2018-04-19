@@ -66,7 +66,8 @@ export default class StudentList extends React.Component {
 
         <MuiThemeProvider>
           <Table items={this.state.items}
-                       parentFunction={this.searchCallback}
+                 parentFunction={this.searchCallback}
+                 style = {{height:'100%'}}
           />
         </MuiThemeProvider>
       </div>

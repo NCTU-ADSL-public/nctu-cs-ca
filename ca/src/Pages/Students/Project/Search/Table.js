@@ -62,7 +62,7 @@ export default class ListTable extends Component {
       enableSelectAll: false,
       deselectOnClickaway: true,
       showCheckboxes: false,
-      height: 900,
+      height: '100%',
 
       itemListRows: [],
       itemList: [],
@@ -90,7 +90,7 @@ export default class ListTable extends Component {
       NewItemList.push({tname:this.props.items[i].tname})
     }
 
-    
+
     let itemListRows = this.props.items
       .map((row, i) =>
         <TableRow key={i}>

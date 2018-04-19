@@ -6,8 +6,9 @@ import { Grid, Row, Glyphicon, Image } from 'react-bootstrap'
 import pic from '../../../../Resources/defalt.jpg'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import DialogButton from './ProdileExtend/ProfileSendmail'
 
-const fontStyle={
+const fontStyle = {
   verticalAlign: "default",
   fontSize: "1em",
   fontWeight: "300",
@@ -23,6 +24,7 @@ const styles = {
   },
   pic: {
     width: 250,
+    marginRight: '-120',
     padding: 5
   },
   name: {
@@ -83,17 +85,18 @@ class Profile extends React.Component {
       <Grid>
         <Row style={styles.row}>
           <MuiThemeProvider>
-            <Card >
+            <Card style={{backgroundColor: '#F5F5F5'}}>
               <CardText>
                 <FadeIn>
-                    <div style={fontStyle}>
-                      <Image style={styles.pic} src={pic} circle />
-                      <div style={styles.name}> {this.state.profile.name} </div>
-                      <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.state.profile.phone} </div>
-                      <div style={styles.item}> {this.state.profile.email} </div>
-                      <div style={styles.item}> {this.state.profile.expertise} </div>
-                      <div style={styles.item}> {new Array(20).fill(0).map(() => ('我的經歷就是範例...'))} </div>
-                    </div>
+                  <div style={fontStyle}>
+                    <DialogButton name={this.state.profile.name}/>
+                    <Image style={styles.pic} src={pic} circle />
+                    <div style={styles.name}> {this.state.profile.name} </div>
+                    <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.state.profile.phone} </div>
+                    <div style={styles.item}> {this.state.profile.email} </div>
+                    <div style={styles.item}> {this.state.profile.expertise} </div>
+                    <div style={styles.item}> {new Array(20).fill(0).map(() => ('我的經歷就是範例...'))} </div>
+                  </div>
                 </FadeIn>
               </CardText>
             </Card>

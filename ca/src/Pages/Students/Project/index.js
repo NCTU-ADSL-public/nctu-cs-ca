@@ -7,14 +7,15 @@ import Profile from './Search/Profile'
 import FakeData from '../../../Resources/FakeData'
 
 const styles = {
-  container: {},
+  container: {
+  },
   list: {
     width: '50%',
     display: 'inline-block'
   },
   course: {
     main: {
-      width: '50%',
+      width: '500px',
       padding: '40px 20px 0 0',
       display: 'inline-block',
       verticalAlign: 'top'
@@ -100,39 +101,9 @@ export default class index extends React.Component {
   searchCallback = (item) => {
     console.log(item)
     this.setState({teacher: item})
-
-    // axios.post('/professors/courseInfo/score', {
-    //   cos_code: item.cos_code,
-    //   unique_id: item.unique_id,
-    // }).then(res => {
-    //   this.setState({scoreDetail: res.data[0]})
-    // }).catch(err => {
-    //   console.log(err)
-    // })
   }
 
   render () {
-    // const showCourse = (
-    //   <div style={styles.course.main}>
-    //     <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem}
-    //       - {this.state.item.cos_cname}</div>
-    //     <div style={styles.course.score}>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
-    //                                                       score={ this.state.scoreDetail.member === '-'
-    //                                                         ? '-'
-    //                                                         : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
-    //       </div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
-    //     </div>
-    //     <div style={styles.course.box}><GaugeChart member={this.state.scoreDetail.member}
-    //                                                passed={this.state.scoreDetail.passed}/></div>
-    //     <div style={styles.course.box}><ScoreChart detail={this.state.scoreChartDetail}/></div>
-    //   </div>
-    // );
 
     const showDefault = (
       <div style={styles.course.main}>
@@ -151,17 +122,10 @@ export default class index extends React.Component {
           <div style={styles.course.main}>
             <Profile name = {this.state.teacher}/>
           </div>: showDefault }
-        {/*{ showDefault }*/}
 
       </div>
     )
   }
 }
 
-const ShowScore = (props) => (
-  <div>
-    <div>{props.title}</div>
-    <div style={styles.score}>{props.score}</div>
-  </div>
-)
 
