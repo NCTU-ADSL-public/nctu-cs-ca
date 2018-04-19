@@ -1,8 +1,9 @@
 import React from 'react'
+import axios from 'axios'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
-
+// mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 // for multiTheme
@@ -24,7 +25,7 @@ const styles = {
     float: 'left'
   },
   groups: {
-    margin: '0 0 60px 0',
+    margin: '0 0 60px 0'
   },
   groupBtn: {
     margin: 30,
@@ -63,6 +64,47 @@ const styles = {
 }
 
 class Group extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      total_number: '?',
+      groupList: [
+        { research_title: '資料錯誤',
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: ''
+        }
+      ]
+    }
+  }
+  fetchData () {
+    console.log(this.props.idCard.name)
+    axios.post('/professors/students/projects', {
+      name: '彭文志'
+      // name: this.props.idCard.name
+    }).then(res => {
+      console.log(res)
+      this.setState({
+        total_number: res.data.total_number,
+        groupList: res.data.groups
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  componentDidMount () {
+    this.fetchData()
+  }
+  componentWillReceiveProps (nextProps) {
+    if (this.props.idCard !== nextProps.idCard) {
+      console.log(nextProps)
+      this.fetchData()
+    }
+  }
   render () {
     return (
       <Grid>
@@ -71,13 +113,13 @@ class Group extends React.Component {
             <div style={styles.mainTitle}> 學生專題列表 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 本年度已登記組數: 6 </div>
+            <div style={styles.subTitle}> 已收專題學生: {this.state.total_number} 人 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
-          <GroupButton title={'公文認證與交換自由軟體平台實作'} />
-          <GroupButton title={'深度生成模型在facebook相簿上之應用'} />
-          <GroupButton title={'透過人工智慧的演化競賽用以淬煉惡意程式偵測模型(Hardening Malware Detection Model through the Evolutionary Arms Race of AI)'} />
+          {this.state.groupList.map((item) => (
+            <GroupButton title={item.research_title} participants={item.participants} />
+          ))}
         </Row>
       </Grid>
     )
@@ -92,27 +134,21 @@ const GroupButton = (props) => (
         <Image style={styles.pic} src={pic} circle />
       </Col>
       <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>106年度</div>
+        <div style={styles.groupYear}>???年度</div>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
             <div style={styles.chipWrapper}>
-              <Chip style={styles.chip}>
-                <Avatar src={defaultPic} /> 陳罐頭
-              </Chip>
-              <Chip style={styles.chip}>
-                <Avatar src={defaultPic} /> 胡瑄瑄
-              </Chip>
-              <Chip style={styles.chip}>
-                <Avatar src={defaultPic} /> 劉抹茶
-              </Chip>
+              {props.participants.map((item) => (
+                <Chip style={styles.chip}>
+                  <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                </Chip>
+              ))}
             </div>
           </MuiThemeProvider>
         </div>
         <div style={styles.groupIntro}>
-          這是一組專題的簡介，它的確是一個簡介，而且可能只有一行，也很有可能有一卡車的字，需要做換行。
-          這是一組專題的簡介，它的確是一個簡介，而且可能只有一行，也很有可能有一卡車的字，需要做換行。
-          這是一組專題的簡介，它的確是一個簡介，而且可能只有一行，也很有可能有一卡車的字，需要做換行。
+          (尚未取得專題簡介的資料。)
       </div>
       </Col>
     </Row>

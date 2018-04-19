@@ -41,9 +41,10 @@ class Profile extends React.Component {
   }
 
   fetchData () {
-    console.log(this.props.idCard.name)
+    // console.log(this.props.idCard.name)
     axios.post('/professors/info', {
-      name: this.props.idCard.name
+      name: '彭文志'
+      // name: this.props.idCard.name
     }).then(res => {
       this.setState({
         profile: {
