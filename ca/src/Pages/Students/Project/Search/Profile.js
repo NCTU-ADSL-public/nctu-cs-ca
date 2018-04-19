@@ -24,7 +24,7 @@ const styles = {
   },
   pic: {
     width: 250,
-    marginRight: '-120',
+    marginRight: '-135',
     padding: 5
   },
   name: {
