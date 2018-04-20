@@ -53,30 +53,16 @@ class Profile extends React.Component {
   }
 
   fetchData () {
-    axios.post('/professors/info', {
-      name: this.props.name
-    }).then(res => {
-      this.setState({
-        profile: {
-          name: this.props.name,
-          phone: res.data[0].phone,
-          email: res.data[0].email,
-          expertise: res.data[0].expertise,
-          info: res.data[0].info
-        }
-      })
-    }).catch(err => {
-      console.log(err)
-    })
+    console.log(this.props.name)
   }
 
-  componentDidMount () {
-    this.fetchData()
+  async componentDidMount () {
+    await this.fetchData()
   }
 
-  componentWillReceiveProps (nextProps) {
+  async componentWillReceiveProps (nextProps) {
     if (this.props.name !== nextProps.name) {
-      this.fetchData()
+      await this.fetchData()
     }
   }
 
@@ -89,12 +75,12 @@ class Profile extends React.Component {
               <CardText>
                 <FadeIn>
                   <div style={fontStyle}>
-                    <DialogButton name={this.state.profile.name}/>
+                    <DialogButton name={this.props.profile.name} />
                     <Image style={styles.pic} src={pic} circle />
-                    <div style={styles.name}> {this.state.profile.name} </div>
-                    <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.state.profile.phone} </div>
-                    <div style={styles.item}> {this.state.profile.email} </div>
-                    <div style={styles.item}> {this.state.profile.expertise} </div>
+                    <div style={styles.name}> {this.props.profile.name} </div>
+                    <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
+                    <div style={styles.item}> {this.props.profile.email} </div>
+                    <div style={styles.item}> {this.props.profile.expertise} </div>
                     <div style={styles.item}> {new Array(20).fill(0).map(() => ('我的經歷就是範例...'))} </div>
                   </div>
                 </FadeIn>

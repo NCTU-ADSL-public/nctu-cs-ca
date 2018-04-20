@@ -4,10 +4,10 @@ import axios from 'axios'
 import List from './Search/List'
 import Profile from './Search/Profile'
 
-import FakeData from '../../../Resources/FakeData'
 
 const styles = {
   container: {
+    width: '100%',
   },
   list: {
     width: '50%',
@@ -59,22 +59,7 @@ export default class index extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      //for passing Course id selected by List
       teacher: "default",
-
-      scoreDetail: {
-        avg: '-',
-        Pavg: '-',
-        member: '-',
-        passed: '-',
-        max: '-',
-      },
-
-      scoreChartDetail: {
-        passed: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        failed: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-
       initItem: [{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"}],
     }
   }
@@ -88,19 +73,34 @@ export default class index extends React.Component {
     })
   }
 
-  componentWillMount(){
-    this.fetchData();
+  async componentWillMount(){
+    await this.fetchData();
   }
 
-  componentWillReceiveProps(nextProps){
+  async componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
-      this.fetchData();
+      await this.fetchData();
     }
   }
 
   searchCallback = (item) => {
-    console.log(item)
+    //console.log("before"+item)
     this.setState({teacher: item})
+    axios.post('/professors/info', {
+      name: item
+    }).then(res => {
+      this.setState({
+        profile: {
+          name: item,
+          phone: res.data[0].phone,
+          email: res.data[0].email,
+          expertise: res.data[0].expertise,
+          info: res.data[0].info
+        }
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render () {
@@ -120,7 +120,7 @@ export default class index extends React.Component {
 
         { this.state.teacher !== "default" ?
           <div style={styles.course.main}>
-            <Profile name = {this.state.teacher}/>
+            <Profile profile = {this.state.profile}/>
           </div>: showDefault }
 
       </div>
