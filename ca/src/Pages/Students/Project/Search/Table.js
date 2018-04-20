@@ -33,6 +33,7 @@ const styles = {
     fontFamily: 'Noto Sans CJK TC',
     color: '#434343',
     tableLayout: 'auto',
+    overflow: 'scroll ',
   },
   colorGreen: {
     cursor: 'pointer',
@@ -53,11 +54,11 @@ export default class ListTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      fixedHeader: false,
+      fixedHeader: true,
       fixedFooter: true,
       stripedRows: true,
-      showRowHover: true,
-      selectable: false,
+      showRowHover: false,
+      selectable: true,
       multiSelectable: false,
       enableSelectAll: false,
       deselectOnClickaway: true,

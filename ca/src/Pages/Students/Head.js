@@ -176,7 +176,7 @@ class Head extends Component {
     else if (this.state.selectedIndex === 4) {
       return(
         <FadeIn>
-          <Project/>
+          <Project studentIdcard={this.state.studentIdcard}/>
         </FadeIn>
       )
     }
@@ -235,6 +235,7 @@ class Head extends Component {
           <Navbar type={ 'student'}
                   version={this.state.studentIdcard.grad}
                   name={this.state.studentIdcard.sname}
+                  id={this.state.studentIdcard.student_id}
                   subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
                   selectedIndex={ this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}

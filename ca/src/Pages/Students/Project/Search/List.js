@@ -6,7 +6,6 @@ import Table from './Table'
 
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 const styles = {
   filter: {
@@ -63,13 +62,17 @@ export default class StudentList extends React.Component {
                  onChange={this.filterList}
           />
         </div>
-
-        <MuiThemeProvider>
-          <Table items={this.state.items}
-                 parentFunction={this.searchCallback}
-                 style = {{height:'100%'}}
-          />
-        </MuiThemeProvider>
+        <div
+          style = {{
+            overflow:'scroll',
+            height:'450px'
+          }}>
+          <MuiThemeProvider>
+            <Table items={this.state.items}
+                   parentFunction={this.searchCallback}
+            />
+          </MuiThemeProvider>
+        </div>
       </div>
     )
   }

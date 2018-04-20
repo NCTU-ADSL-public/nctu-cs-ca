@@ -11,7 +11,7 @@ const styles = {
   },
   list: {
     width: '50%',
-    display: 'inline-block'
+    display: 'inline-block',
   },
   course: {
     main: {
@@ -60,7 +60,7 @@ export default class index extends React.Component {
     super(props);
     this.state = {
       teacher: "default",
-      initItem: [{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"}],
+      initItem: [{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"}],
     }
   }
 
@@ -120,7 +120,7 @@ export default class index extends React.Component {
 
         { this.state.teacher !== "default" ?
           <div style={styles.course.main}>
-            <Profile profile = {this.state.profile}/>
+            <Profile profile = {this.state.profile} studentIdcard={this.props.studentIdcard}/>
           </div>: showDefault }
 
       </div>

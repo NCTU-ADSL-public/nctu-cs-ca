@@ -74,15 +74,15 @@ export default class DialogButton extends React.Component {
     // console.log(dt.getMinutes())
     // console.log(dt.getSeconds())
     // console.log(_this.state.titlevalue)
-    // console.log(_this.state.value)
-    // console.log(_this.props.name)
     let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
     //console.log(time)
     axios.post('/students/sendtoteacher', {
       title:_this.state.titlevalue,
       content:_this.state.value,
       time:time,
-      teacher:this.props.name
+      teacher:_this.props.name,
+      name: _this.props.studentIdcard.sname,
+      id: _this.props.studentIdcard.student_id,
     })
       .then(res => {
 
