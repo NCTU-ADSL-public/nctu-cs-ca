@@ -84,7 +84,7 @@ export default class TableExampleComplex extends Component {
     fixedHeader: true,
     fixedFooter: true,
     stripedRows: true,
-    showRowHover: false,
+    showRowHover: true,
     selectable: true,
     multiSelectable: false,
     enableSelectAll: false,
@@ -98,6 +98,68 @@ export default class TableExampleComplex extends Component {
     this.setState({height: event.target.value});
   }
 
+  getTableRow = () => {
+    if(this.props.action === 'mail'){
+      return(
+        <TableRow style={fontStyle}>
+          <TableHeaderColumn tooltip="寄件者">寄件者</TableHeaderColumn>
+          <TableHeaderColumn tooltip="主旨">主旨</TableHeaderColumn>
+          <TableHeaderColumn tooltip="寄件時間">寄件時間</TableHeaderColumn>
+        </TableRow>
+      )
+    }
+    else if(this.props.action === 'mail'){
+      return(
+        <TableRow style={fontStyle}>
+          <TableHeaderColumn tooltip="收件者">收件者</TableHeaderColumn>
+          <TableHeaderColumn tooltip="主旨">主旨</TableHeaderColumn>
+          <TableHeaderColumn tooltip="寄件時間">寄件時間</TableHeaderColumn>
+        </TableRow>
+      )
+    }
+  }
+  getRowBody = () => {
+    if(this.props.action === 'mail'){
+      return(
+        <TableBody
+          displayRowCheckbox={this.state.showCheckboxes}
+          deselectOnClickaway={this.state.deselectOnClickaway}
+          showRowHover={this.state.showRowHover}
+          stripedRows={this.state.stripedRows}
+          style={fontStyle}
+        >
+          {this.props.tableData.map( (row, index) => (
+            <TableRow key={index}
+                      style = {TableRowStyle}>
+              <TableRowColumn>{row.sender}</TableRowColumn>
+              <TableRowColumn>{row.title}</TableRowColumn>
+              <TableRowColumn>{row.send_time}</TableRowColumn>
+            </TableRow>
+          ))}
+        </TableBody>
+      )
+    }
+    else if(this.props.action === 'mail'){
+        return(
+          <TableBody
+            displayRowCheckbox={this.state.showCheckboxes}
+            deselectOnClickaway={this.state.deselectOnClickaway}
+            showRowHover={this.state.showRowHover}
+            stripedRows={this.state.stripedRows}
+            style={fontStyle}
+          >
+            {this.props.tableData.map( (row, index) => (
+              <TableRow key={index}
+                        style = {TableRowStyle}>
+                <TableRowColumn>{row.receiver}</TableRowColumn>
+                <TableRowColumn>{row.title}</TableRowColumn>
+                <TableRowColumn>{row.send_time}</TableRowColumn>
+              </TableRow>
+            ))}
+          </TableBody>
+        )
+      }
+  }
   render() {
     return (
       <div style={fontStyle}>
@@ -114,27 +176,9 @@ export default class TableExampleComplex extends Component {
               adjustForCheckbox={this.state.showCheckboxes}
               enableSelectAll={this.state.enableSelectAll}
             >
-              <TableRow>
-                <TableHeaderColumn tooltip="收件者">收件者</TableHeaderColumn>
-                <TableHeaderColumn tooltip="主旨">主旨</TableHeaderColumn>
-                <TableHeaderColumn tooltip="寄件時間">課程</TableHeaderColumn>
-              </TableRow>
+              {this.getTableRow()}
             </TableHeader>
-            <TableBody
-              displayRowCheckbox={this.state.showCheckboxes}
-              deselectOnClickaway={this.state.deselectOnClickaway}
-              showRowHover={this.state.showRowHover}
-              stripedRows={this.state.stripedRows}
-            >
-              {this.props.tableData.map( (row, index) => (
-                <TableRow key={index}
-                          style = {TableRowStyle}>
-                  <TableRowColumn>{row.receiver}</TableRowColumn>
-                  <TableRowColumn>{row.title}</TableRowColumn>
-                  <TableRowColumn>{row.send_time}</TableRowColumn>
-                </TableRow>
-              ))}
-            </TableBody>
+              {this.getRowBody()}
           </Table>
         </MuiThemeProvider>
       </div>

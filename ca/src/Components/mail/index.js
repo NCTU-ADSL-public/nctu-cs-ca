@@ -40,28 +40,28 @@ export default class Mail extends React.Component {
   }
 
   filterList (event) {
-    let updatedList = this.props.items
+    let updatedList = this.props.data
     updatedList = updatedList.filter((item) => {
       return (
         (item.tname.toLowerCase().search(
           event.target.value.toLowerCase()) !== -1)
       )
     })
-    this.setState({items: updatedList})
+    this.setState({data: updatedList})
   }
 
   searchCallback = (item) => {
     this.props.parentFunction(item)
   }
 
-  handlemailaction = () => {
+  handlemailaction = (action) => {
     let _this = this
     axios.post('/students/mail/sent', {
       id: _this.props.id
     })
       .then(res => {
         this.setState({
-          action:'sent',
+          action:action,
           data:res.data
         })
       })
@@ -82,7 +82,9 @@ export default class Mail extends React.Component {
                         fontWeight: 'bold',
                         color:'#778899'
                       }}
-                      style={{width:'15vw', margin:'5'}}
+                      disabled={(this.state.action === 'mail')}
+                      style={{width:'15vw', margin:'5',opacity:this.state.action==='mail'?'0.5':'1'}}
+                      onClick={this.handlemailaction('mail')}
           />
           <FlatButton label='寄件備份'
                       backgroundColor='#D3D3D3'
@@ -91,8 +93,9 @@ export default class Mail extends React.Component {
                         fontWeight: 'bold',
                         color:'#778899'
                       }}
-                      style={{width:'15vw', margin:'5'}}
-                      onClick={this.handlemailaction}
+                      disabled={(this.state.action === 'sent')}
+                      style={{width:'15vw', margin:'5',opacity:this.state.action==='sent'?'0.5':'1'}}
+                      onClick={this.handlemailaction('sent')}
           />
         </div>
         <div style={{width:'70vw',float:'right'}}>

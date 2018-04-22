@@ -134,10 +134,9 @@ class _Navbar extends React.Component {
                   }
                 >
                   <MenuItem eventKey="1" onClick={onClicks[4]}>郵件</MenuItem>
-                  <MenuItem eventKey="2">Another action</MenuItem>
-                  <MenuItem eventKey="3">Something else here</MenuItem>
+                  <MenuItem eventKey="2">專題主頁</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey="4">Separated link</MenuItem>
+                  <MenuItem eventKey="4">個人頁面</MenuItem>
                 </DropdownButton>
                 <MuiThemeProvider>
                   <RaisedButton backgroundColor = "#DDDDDD"
