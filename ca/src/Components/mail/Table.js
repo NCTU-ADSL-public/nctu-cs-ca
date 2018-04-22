@@ -90,7 +90,7 @@ export default class TableExampleComplex extends Component {
     enableSelectAll: false,
     deselectOnClickaway: true,
     showCheckboxes: false,
-    height: '300px',
+    height: '100%',
     tableData:[]
   }
 
@@ -116,6 +116,7 @@ export default class TableExampleComplex extends Component {
             >
               <TableRow>
                 <TableHeaderColumn tooltip="收件者">收件者</TableHeaderColumn>
+                <TableHeaderColumn tooltip="主旨">主旨</TableHeaderColumn>
                 <TableHeaderColumn tooltip="寄件時間">課程</TableHeaderColumn>
               </TableRow>
             </TableHeader>
@@ -128,8 +129,8 @@ export default class TableExampleComplex extends Component {
               {this.props.tableData.map( (row, index) => (
                 <TableRow key={index}
                           style = {TableRowStyle}>
-                  <TableRowColumn>{index+1}</TableRowColumn>
                   <TableRowColumn>{row.receiver}</TableRowColumn>
+                  <TableRowColumn>{row.title}</TableRowColumn>
                   <TableRowColumn>{row.send_time}</TableRowColumn>
                 </TableRow>
               ))}
