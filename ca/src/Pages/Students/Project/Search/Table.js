@@ -19,9 +19,14 @@ const styles = {
     //  background: '#f9f9f9',
     //  border: '3px solid white',
   },
-  header: {
+  header1: {
     cursor: 'pointer',
     fontSize: '1.2em',
+  },
+  header2: {
+    cursor: 'pointer',
+    fontSize: '1.2em',
+    textAlign: 'center'
   },
   headerB: {
     cursor: 'pointer',
@@ -134,13 +139,13 @@ export default class ListTable extends Component {
           >
             <TableRow>
               <TableHeaderColumn tooltip="教授">
-                <div style={styles.header}>
+                <div style={styles.header1}>
                   教授
                 </div>
               </TableHeaderColumn>
-              <TableHeaderColumn tooltip="已收學生人數">
-                <div style={ styles.header}>
-                  已收學生人數
+              <TableHeaderColumn tooltip="已收學生人數(最多七人)">
+                <div style={ styles.header2}>
+                  已收學生人數(最多七人)
                 </div>
               </TableHeaderColumn>
             </TableRow>

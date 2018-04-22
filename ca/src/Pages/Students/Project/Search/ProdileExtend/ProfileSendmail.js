@@ -121,6 +121,8 @@ export default class DialogButton extends React.Component {
               <TextField
                 hintText="主旨"
                 onChange={this.handleChangetitle}
+                fullWidth={true}
+                //style={{width:'40vw'}}
               />
             </div>
           }
@@ -136,7 +138,7 @@ export default class DialogButton extends React.Component {
             hintText="內容"
             fullWidth = {true}
             multiLine={true}
-            rows={8}
+            rows={10}
             rowsMax={99}
             onChange={this.handleChange}
           />

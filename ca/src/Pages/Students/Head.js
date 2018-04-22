@@ -168,8 +168,11 @@ class Head extends Component {
     }
     else if (this.state.selectedIndex === 3) {
       return(
+        //<FadeIn>
+        //  <CreditItem studentIdcard={this.state.studentIdcard}/>
+        //</FadeIn>
         <FadeIn>
-          <CreditItem studentIdcard={this.state.studentIdcard}/>
+          <Project studentIdcard={this.state.studentIdcard}/>
         </FadeIn>
       )
     }

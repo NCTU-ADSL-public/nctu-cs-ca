@@ -65,7 +65,7 @@ export default class StudentList extends React.Component {
         <div
           style = {{
             overflow:'scroll',
-            height:'450px'
+            height:'65vh'
           }}>
           <MuiThemeProvider>
             <Table items={this.state.items}

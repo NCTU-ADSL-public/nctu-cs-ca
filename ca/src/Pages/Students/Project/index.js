@@ -61,6 +61,13 @@ export default class index extends React.Component {
     this.state = {
       teacher: "default",
       initItem: [{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"}],
+      profile: {
+        name: '彭文志',
+        phone: '48763',
+        email: 'wcpeng@nctu.edu.tw',
+        expertise: '資料庫、電腦視覺、深度學習',
+        info: '我的經歷就是範例...'
+      }
     }
   }
 

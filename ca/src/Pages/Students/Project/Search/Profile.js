@@ -1,6 +1,5 @@
 import React from 'react'
 
-import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import { Grid, Row, Glyphicon, Image } from 'react-bootstrap'
 import pic from '../../../../Resources/defalt.jpg'
@@ -19,9 +18,11 @@ const fontStyle = {
 const styles = {
   row: {
     textAlign: 'center',
+    marginTop: '2vh',
     color: '#5f6f75',
-    width: '60%',
-    height: '450px'
+    width: '45vw',
+    height: '74vh',
+    backgroundColor: '#F5F5F5'
   },
   pic: {
     width: 250,
@@ -42,15 +43,6 @@ const styles = {
 class Profile extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      profile: {
-        name: '彭文志',
-        phone: '48763',
-        email: 'wcpeng@nctu.edu.tw',
-        expertise: '資料庫、電腦視覺、深度學習',
-        info: '我的經歷就是範例...'
-      }
-    }
   }
 
   fetchData () {
@@ -69,10 +61,8 @@ class Profile extends React.Component {
 
   render () {
     return (
-      <Grid>
-        <Row style={styles.row}>
           <MuiThemeProvider>
-            <Card style={{backgroundColor: '#F5F5F5'}}>
+            <Card style={styles.row}>
               <CardText>
                 <FadeIn>
                   <div style={fontStyle}>
@@ -82,14 +72,16 @@ class Profile extends React.Component {
                     <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
                     <div style={styles.item}> {this.props.profile.email} </div>
                     <div style={styles.item}> {this.props.profile.expertise} </div>
-                    <div style={styles.item}> {new Array(20).fill(0).map(() => ('我的經歷就是範例...'))} </div>
+                    <div style={styles.item}> {new Array(10).fill(0).map(() => ('我的經歷就是範例...'))} </div>
                   </div>
                 </FadeIn>
               </CardText>
             </Card>
           </MuiThemeProvider>
-        </Row>
-      </Grid>
+      // <Grid>
+      // <Row style={styles.row}>
+      //   </Row>
+      // </Grid>
     )
   }
 }

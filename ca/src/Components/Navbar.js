@@ -1,7 +1,7 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Navbar,Nav,NavItem} from 'react-bootstrap'
+import {Navbar,Nav,NavItem,DropdownButton,MenuItem,ButtonToolbar } from 'react-bootstrap'
 
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
@@ -27,6 +27,11 @@ const style = {
     fontWeight:  'lighter',
     fontSize: 14,
     marginLeft: 10,
+  },
+  LogoutButtonLabel: {
+    fontFamily: 'Noto Sans CJK TC',
+    fontSize: 14,
+    color:'#7B7B7B'
   }
 }
 
@@ -73,8 +78,8 @@ class _Navbar extends React.Component {
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
         <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
         <NavButton key={2} label='課程地圖' icon='fa fa-map' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
-        <NavButton key={3} label='課程抵免' icon='fa fa-users' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
-        <NavButton key={4} label='教授' icon='fa fa-coffee' onClick={onClicks[4]} selected={selectedButtonIndex === 4}/>,
+        //<NavButton key={3} label='課程抵免' icon='fa fa-users' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
+        <NavButton key={3} label='教授' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
       ],
       'assistant': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
@@ -103,27 +108,46 @@ class _Navbar extends React.Component {
 
           <Nav pullRight>
             <NavItem className='logout-box'>
-              <div className="idcard" onClick={onClicks[4]}>
-                <img id="idcard-photo" src={defalt} alt=""/>
-                <div style={{
-                  display: 'inline-block',
-                  verticalAlign: 'middle',
-                  marginLeft: 9,
-                }}>
-                  <div id="idcard-top">
-                    {this.props.name}
-                  </div>
-                  <div id="idcard-buttom">
-                    {this.props.subname}
-                  </div>
-                </div>
-              </div>
-              <MuiThemeProvider>
-                <RaisedButton backgroundColor = "#DDDDDD"
-                              label="登出"
-                              onClick={() => {window.location = '/logout'}}
-                />
-              </MuiThemeProvider>
+              <ButtonToolbar>
+                <DropdownButton
+                  bsStyle={{
+                    background: '#EEEEEE'}}
+                  bsSize="xsmall"
+                  noCaret
+
+                  title={
+                    <div className="idcard" /*onClick={onClicks[4]}*/>
+                      <img id="idcard-photo" src={defalt} alt=""/>
+                      <div style={{
+                        display: 'inline-block',
+                        verticalAlign: 'middle',
+                        marginLeft: 9,
+                      }}>
+                        <div id="idcard-top">
+                          {this.props.name}
+                        </div>
+                        <div id="idcard-buttom">
+                          {this.props.subname}
+                        </div>
+                      </div>
+                    </div>
+                  }
+                >
+                  <MenuItem eventKey="1" onClick={onClicks[4]}>郵件</MenuItem>
+                  <MenuItem eventKey="2">Another action</MenuItem>
+                  <MenuItem eventKey="3">Something else here</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="4">Separated link</MenuItem>
+                </DropdownButton>
+                <MuiThemeProvider>
+                  <RaisedButton backgroundColor = "#DDDDDD"
+                                style={{marginLeft:'12px'}}
+                                labelStyle={style.LogoutButtonLabel}
+                                label="登出"
+                                onClick={() => {window.location = '/logout'}}
+                  />
+                </MuiThemeProvider>
+              </ButtonToolbar>
             </NavItem>
           </Nav>
 
