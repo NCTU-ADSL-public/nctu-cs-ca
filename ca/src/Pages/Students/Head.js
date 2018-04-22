@@ -32,7 +32,7 @@ class Head extends Component {
     selectedIndex: 0,
     studentIdcard: {
       sname: '資料錯誤',
-      student_id: '0000000',
+      v: '0000000',
       program: '網多',
       grade: "大三",
       email: 'hihi@gmail.com',
@@ -182,7 +182,7 @@ class Head extends Component {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <Mail id={this.state.idCard.id}/>
+            <Mail id={this.state.studentIdcard.student_id}/>
           </MuiThemeProvider>
         </FadeIn>
       )
