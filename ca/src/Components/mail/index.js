@@ -56,17 +56,17 @@ export default class Mail extends React.Component {
 
   handlemailaction = (action) => {
     let _this = this
+    console.log(action)
     axios.post('/students/mail/sent', {
       id: _this.props.id
     })
       .then(res => {
-        this.setState({
+        _this.setState({
           action:action,
           data:res.data
         })
       })
       .catch(err => {
-        //window.location.replace("/logout ");
         console.log(err)
       })
   }
@@ -84,7 +84,7 @@ export default class Mail extends React.Component {
                       }}
                       disabled={(this.state.action === 'mail')}
                       style={{width:'15vw', margin:'5',opacity:this.state.action==='mail'?'0.5':'1'}}
-                      onClick={this.handlemailaction('mail')}
+                      onClick={() => this.handlemailaction('mail')}
           />
           <FlatButton label='寄件備份'
                       backgroundColor='#D3D3D3'
@@ -95,7 +95,7 @@ export default class Mail extends React.Component {
                       }}
                       disabled={(this.state.action === 'sent')}
                       style={{width:'15vw', margin:'5',opacity:this.state.action==='sent'?'0.5':'1'}}
-                      onClick={this.handlemailaction('sent')}
+                      onClick={() => this.handlemailaction('sent')}
           />
         </div>
         <div style={{width:'70vw',float:'right'}}>
@@ -107,7 +107,6 @@ export default class Mail extends React.Component {
           </div>
           <div
             style = {{
-              overflow:'scroll',
               height:'65vh'
             }}>
             <MuiThemeProvider>
