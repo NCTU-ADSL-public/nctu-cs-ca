@@ -108,7 +108,7 @@ export default class TableExampleComplex extends Component {
         </TableRow>
       )
     }
-    else if(this.props.action === 'mail'){
+    else if(this.props.action === 'sent'){
       return(
         <TableRow style={fontStyle}>
           <TableHeaderColumn tooltip="收件者">收件者</TableHeaderColumn>
@@ -139,7 +139,7 @@ export default class TableExampleComplex extends Component {
         </TableBody>
       )
     }
-    else if(this.props.action === 'mail'){
+    else if(this.props.action === 'sent'){
         return(
           <TableBody
             displayRowCheckbox={this.state.showCheckboxes}

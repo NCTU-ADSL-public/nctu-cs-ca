@@ -57,18 +57,25 @@ export default class Mail extends React.Component {
   handlemailaction = (action) => {
     let _this = this
     console.log(action)
-    axios.post('/students/mail/sent', {
-      id: _this.props.id
-    })
-      .then(res => {
-        _this.setState({
-          action:action,
-          data:res.data
+    if(action === 'mail'){
+      _this.setState({
+        action:action,
+      })
+    }
+    else if (action === 'sent'){
+      axios.post('/students/mail/sent', {
+        id: _this.props.id
+      })
+        .then(res => {
+          _this.setState({
+            action:action,
+            data:res.data
+          })
         })
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 
   render () {
@@ -107,7 +114,8 @@ export default class Mail extends React.Component {
           </div>
           <div
             style = {{
-              height:'65vh'
+              height:'65vh',
+              overflow: 'scroll'
             }}>
             <MuiThemeProvider>
               <Table tableData={this.state.data}
