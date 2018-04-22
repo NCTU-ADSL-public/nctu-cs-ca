@@ -1,0 +1,25 @@
+.filter {
+    padding: 20px 1% 0 1%;
+}
+
+
+.filter-list {
+    padding: 5px;
+    margin: 0;
+}
+
+.filter-list input {
+    line-height: 2;
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.9;
+    height: auto;
+    padding-left: 18px;
+    width: 98%;
+}
+
+.mail-button-list{
+    margin-top: 5vh;
+    width: 15vw;
+    float: left;
+}

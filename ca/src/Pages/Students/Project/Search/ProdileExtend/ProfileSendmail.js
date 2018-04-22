@@ -20,9 +20,9 @@ const buttonStyle = {
 }
 
 
-const DialogStyle = {
+const contentStyle = {
   width:'80%',
-  height:'80%',
+  maxWidth: 'none',
 }
 
 const bodyStyle = {
@@ -132,6 +132,7 @@ export default class DialogButton extends React.Component {
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
+          contentStyle={contentStyle}
         >
 
           <TextField

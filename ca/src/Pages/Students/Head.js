@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import {Grid,Row,Col} from 'react-bootstrap'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import HomeItem from './Home/Home.js'
 import MapItem from './Map/MapComponents/Map.js'
 import GradCreditCheckPage from './Graduation/GradCreditCheck.js'
 import CreditItem from './Credit/Credit.js'
 import Project from './Project/index'
+import Mail from '../../Components/mail'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
@@ -179,7 +181,9 @@ class Head extends Component {
     else if (this.state.selectedIndex === 4) {
       return(
         <FadeIn>
-          <Project studentIdcard={this.state.studentIdcard}/>
+          <MuiThemeProvider>
+            <Mail/>
+          </MuiThemeProvider>
         </FadeIn>
       )
     }
