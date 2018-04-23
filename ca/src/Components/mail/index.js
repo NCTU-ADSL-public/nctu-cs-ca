@@ -21,7 +21,22 @@ export default class Mail extends React.Component {
     super(props)
 
     this.state = {
-      data: [],
+      data: [
+    {"mail_id":"0316201-2018-04-22 22:25:25-T9830",
+      "title":"test3",
+      "sender_id":"0316201",
+      "receiver_id":"T9830",
+      "read_bit":"0",
+      "send_time":"2018-04-22 22:25:25",
+      "sender":"王馨嫻","receiver":"吳育松"}],
+      realdata: [
+    {"mail_id":"0316201-2018-04-22 22:25:25-T9830",
+      "title":"test3",
+      "sender_id":"0316201",
+      "receiver_id":"T9830",
+      "read_bit":"0",
+      "send_time":"2018-04-22 22:25:25",
+      "sender":"王馨嫻","receiver":"吳育松"}],
       action:'mail',
 
     }
@@ -40,10 +55,14 @@ export default class Mail extends React.Component {
   }
 
   filterList (event) {
-    let updatedList = this.props.data
+    let updatedList = this.state.realdata
     updatedList = updatedList.filter((item) => {
       return (
-        (item.tname.toLowerCase().search(
+        (item.receiver.toLowerCase().search(
+          event.target.value.toLowerCase()) !== -1) ||
+        (item.sender.toLowerCase().search(
+          event.target.value.toLowerCase()) !== -1)||
+        (item.title.toLowerCase().search(
           event.target.value.toLowerCase()) !== -1)
       )
     })
@@ -69,7 +88,8 @@ export default class Mail extends React.Component {
         .then(res => {
           _this.setState({
             action:action,
-            data:res.data
+            data:res.data,
+            realdata:res.data,
           })
         })
         .catch(err => {
