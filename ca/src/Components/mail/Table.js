@@ -9,7 +9,8 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
-} from 'material-ui/Table';
+} from 'material-ui/Table'
+import MailReader from './MailReader'
 
 
 const fontStyle={
@@ -22,64 +23,15 @@ const fontStyle={
 
 const TableRowStyle={
   verticalAlign: "default",
-  fontSize: "1em",
-  fontWeight: "300",
+  fontSize: "1.5em",
+  fontWeight: "500",
   letterSpacing: "1px",
   fontFamily: 'Noto Sans CJK TC',
-  color:'#454545'
+  color:'#454545',
+  cursor: 'pointer'
 }
 
-
-
-const tableData = [
-  {
-    cos_cname: '資料庫系統概論',
-    teacher: '彭文志',
-    cos_time: '2EF',
-    cos_code: 'DCP129',
-  },
-  {
-    cos_cname: '資料庫系統概論',
-    teacher: '彭文志',
-    cos_time: '2EF',
-    cos_code: 'DCP129',
-  },
-  {
-    cos_cname: '資料庫系統概論',
-    teacher: '彭文志',
-    cos_time: '2EF',
-    cos_code: 'DCP129',
-  },
-  {
-    cos_cname: '資料庫系統概論',
-    teacher: '彭文志',
-    cos_time: '2EF',
-    cos_code: 'DCP129',
-  },
-  {
-    cos_cname: '資料庫系統概論',
-    teacher: '彭文志',
-    cos_time: '2EF',
-    cos_code: 'DCP129',
-  },
-  {
-    cos_cname: '資料庫系統概論',
-    teacher: '彭文志',
-    cos_time: '2EF',
-    cos_code: 'DCP129',
-  },
-  {
-    cos_cname: '資料庫系統概論',
-    teacher: '彭文志',
-    cos_time: '2EF',
-    cos_code: 'DCP129',
-  },
-];
-
-/**
- * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
- */
-export default class TableExampleComplex extends Component {
+export default class TableMail extends Component {
   state = {
     fixedHeader: true,
     fixedFooter: true,
@@ -91,12 +43,38 @@ export default class TableExampleComplex extends Component {
     deselectOnClickaway: true,
     showCheckboxes: false,
     height: '100%',
-    tableData:[]
+    open:false,
+    mail:[{"mail_id":"0316201-2018-04-22 22:25:25-T9830",
+      "title":"test3",
+      "sender_id":"0316201",
+      "receiver_id":"T9830",
+      "read_bit":"0",
+      "send_time":"2018-04-22 22:25:25",
+      "sender":"王馨嫻","receiver":"吳育松",
+      "content":"HeyHey"}],
+    tableData:[],
   }
 
-  handleChange = (event) => {
-    this.setState({height: event.target.value});
+  handleMailReader = (index) => {
+    let mail = this.props.tableData[index]
+    let _this = this
+    axios.post('/students/mail/content', {
+      mailID: mail.mail_id
+    })
+      .then(res => {
+        _this.setState({
+          open:true,
+          mail:res.data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
 
   getTableRow = () => {
     if(this.props.action === 'mail'){
@@ -170,6 +148,7 @@ export default class TableExampleComplex extends Component {
             fixedFooter={this.state.fixedFooter}
             selectable={this.state.selectable}
             multiSelectable={this.state.multiSelectable}
+            onCellClick={(rowNumber )=>{this.handleMailReader(rowNumber )}}
           >
             <TableHeader
               displaySelectAll={this.state.showCheckboxes}
@@ -181,6 +160,7 @@ export default class TableExampleComplex extends Component {
               {this.getRowBody()}
           </Table>
         </MuiThemeProvider>
+        <MailReader open={this.state.open} handleClose={this.handleClose} data={this.state.mail[0]}/>
       </div>
     )
   }
