@@ -44,14 +44,14 @@ export default class TableMail extends Component {
     showCheckboxes: false,
     height: '100%',
     open:false,
-    mail:{"mail_id":"0316201-2018-04-22 22:25:25-T9830",
+    mail:[{"mail_id":"0316201-2018-04-22 22:25:25-T9830",
       "title":"test3",
       "sender_id":"0316201",
       "receiver_id":"T9830",
       "read_bit":"0",
       "send_time":"2018-04-22 22:25:25",
       "sender":"王馨嫻","receiver":"吳育松",
-      "content":"HeyHey"},
+      "content":"HeyHey"}],
     tableData:[],
   }
 
@@ -160,7 +160,7 @@ export default class TableMail extends Component {
               {this.getRowBody()}
           </Table>
         </MuiThemeProvider>
-        <MailReader open={this.state.open} handleClose={this.handleClose} data={this.state.mail}/>
+        <MailReader open={this.state.open} handleClose={this.handleClose} data={this.state.mail[0]}/>
       </div>
     )
   }
