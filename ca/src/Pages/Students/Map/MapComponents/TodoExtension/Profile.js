@@ -73,7 +73,7 @@ class Profile extends React.Component {
         <FadeIn>
           <Row>
             <div style={styles.row}>
-              <Image style={styles.pic} src={pic} circle />
+              <Image style={styles.pic} src={this.props.profile.photo === '' ? pic : this.props.profile.photo} circle />
               <div style={styles.name}> {this.state.profile.name} </div>
               <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.state.profile.phone} </div>
               <div style={styles.item}> {this.state.profile.email} </div>

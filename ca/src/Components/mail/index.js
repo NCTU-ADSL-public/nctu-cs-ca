@@ -44,6 +44,23 @@ export default class Mail extends React.Component {
     this.filterList = this.filterList.bind(this)
   }
 
+  componentWillMount () {
+    let _this = this
+    axios.post('/students/mail/inbox', {
+      id: _this.props.id
+    })
+      .then(res => {
+        _this.setState({
+          action:'mail',
+          data:res.data,
+          realdata:res.data,
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   componentDidMount () {
     this.setState({items: this.props.items})
   }
@@ -75,11 +92,20 @@ export default class Mail extends React.Component {
 
   handlemailaction = (action) => {
     let _this = this
-    console.log(action)
     if(action === 'mail'){
-      _this.setState({
-        action:action,
+      axios.post('/students/mail/inbox', {
+        id: _this.props.id
       })
+        .then(res => {
+          _this.setState({
+            action:action,
+            data:res.data,
+            realdata:res.data,
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
     else if (action === 'sent'){
       axios.post('/students/mail/sent', {

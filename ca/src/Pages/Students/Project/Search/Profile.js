@@ -66,8 +66,8 @@ class Profile extends React.Component {
               <CardText>
                 <FadeIn>
                   <div style={fontStyle}>
-                    <DialogButton name={this.props.profile.name} studentIdcard={this.props.studentIdcard}/>
-                    <Image style={styles.pic} src={pic} circle />
+                    <DialogButton name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                    <Image style={styles.pic} src={this.props.profile.photo === '' ? pic : this.props.profile.photo} circle />
                     <div style={styles.name}> {this.props.profile.name} </div>
                     <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
                     <div style={styles.item}> {this.props.profile.email} </div>

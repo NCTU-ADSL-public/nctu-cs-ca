@@ -64,6 +64,7 @@ export default class index extends React.Component {
       profile: {
         name: '彭文志',
         phone: '48763',
+        photo: '',
         email: 'wcpeng@nctu.edu.tw',
         expertise: '資料庫、電腦視覺、深度學習',
         info: '我的經歷就是範例...'

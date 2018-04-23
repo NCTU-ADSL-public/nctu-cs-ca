@@ -45,7 +45,7 @@ const fontStyle={
 class Todo extends React.Component {
 
     state = {
-        isDone:true,
+        isDone:false,
         open: false,
         opendia2:false,
         value:0,
@@ -194,8 +194,7 @@ class Todo extends React.Component {
         cos_cname:_this.props.cosCame
       })
         .then(res => {
-          console.log(res.data)
-          this.setState({coursedata: res.data});
+          this.setState({coursedata: res.data, isDone:true});
           let id = 0
           let searchCourse=[]
           res.data.map( data => {
