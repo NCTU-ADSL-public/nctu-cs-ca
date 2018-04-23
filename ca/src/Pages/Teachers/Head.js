@@ -9,6 +9,7 @@ import CourseItem from './Course/index.js'
 import GroupItem from './Group/Group.js'
 import FamilyItem from './Family/index.js'
 import ProfileItem from './Profile.js'
+import Mail from './mail/index'
 
 import Navbar from '../../Components/Navbar'
 
@@ -83,6 +84,16 @@ class Head extends Component {
           </a>
         </Col>,
         document.getElementById('page'))
+    } else if (index === 4) {
+      ReactDOM.render(
+        <Col xsHidden smHidden>
+          <a>
+            <FadeIn>
+              <Mail tid={this.state.idCard.id} />
+            </FadeIn>
+          </a>
+        </Col>,
+        document.getElementById('page'))
     } else if (index === 99) {
       ReactDOM.render(
         <FadeIn>
@@ -100,6 +111,7 @@ class Head extends Component {
       () => this.select(1),
       () => this.select(2),
       () => this.select(3),
+      () => this.select(4),
       () => this.select(99)
     ]
     return (

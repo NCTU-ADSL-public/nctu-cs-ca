@@ -4,12 +4,14 @@ import Course from './Course.json'
 import CoursePass from './CoursePass.json'
 import PrintData from './PrintData.json'
 import StudentList from './StudentList.json'
+import MailList from './MailList.json'
 
 export default {
-    GraduationItems,
-    GraduationItems_Revised,
-    Course,
-    CoursePass,
-    PrintData,
-    StudentList,
+  GraduationItems,
+  GraduationItems_Revised,
+  Course,
+  CoursePass,
+  PrintData,
+  StudentList,
+  MailList
 }
