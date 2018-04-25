@@ -54,7 +54,7 @@ export default class index extends React.Component {
       id: 'T9229'
       // id: this.props.tid,
     }).then(res => {
-      console.log('MAJAJA')
+      console.log('DATA RECEIVED')
       console.log(res.data)
       this.setState({initItem: res.data})
     }).catch(err => {

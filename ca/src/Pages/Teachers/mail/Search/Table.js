@@ -114,7 +114,7 @@ export default class ListTable extends Component {
     if (this.props.items) {
       NewItemList = [].concat(this.props.items)
         .sort((a, b) => {
-            return a.send_time < b.send_time
+            return a.send_time.localeCompare(b.send_time, 'zh-Hans-CN')
         })
     }
     // row items
