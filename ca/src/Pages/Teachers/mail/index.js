@@ -62,6 +62,19 @@ export default class index extends React.Component {
     })
   }
 
+  fetchMailContent(mid){
+    axios.post('/professors/mail/content', {
+      mail_id: mid,
+    }).then(res => {
+      console.log('MAIL CONTENT RECEIVED')
+      console.log(res.data)
+      this.setState({item: res.data})
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+
   componentWillMount(){
     this.fetchData();
   }
@@ -74,15 +87,16 @@ export default class index extends React.Component {
 
   searchCallback = (item) => {
     this.setState({item})
-
+    this.fetchMailContent(item.mail_id)
   }
 
   render () {
     const showCourse = (
       <div style={styles.course.main}>
         <div style={styles.course.title}>{this.state.item.title}</div>
-        <div style={styles.course.subTitle}>寄件人: {this.state.item.sender}</div>
+        <div style={styles.course.subTitle}>寄件人: {this.state.item.sender_id} {this.state.item.sender}</div>
         <div style={styles.course.subTitle}>寄信時間: {this.state.item.send_time}</div>
+        <div style={styles.course.subTitle}>{this.state.item.content}</div>
       </div>
     );
 
