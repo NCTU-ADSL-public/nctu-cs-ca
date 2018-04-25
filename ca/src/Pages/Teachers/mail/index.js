@@ -68,7 +68,7 @@ export default class index extends React.Component {
     }).then(res => {
       console.log('MAIL CONTENT RECEIVED')
       console.log(res.data)
-      this.setState({item: res.data})
+      this.setState({item: res.data[0]})
     }).catch(err => {
       console.log(err)
     })
