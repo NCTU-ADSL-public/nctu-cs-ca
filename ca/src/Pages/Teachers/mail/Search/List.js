@@ -52,7 +52,7 @@ export default class StudentList extends React.Component {
   }
 
   searchCallback = (item) => {
-    if (item.cos_code !== undefined) this.props.parentFunction(item)
+    if (item.mail_id !== undefined) this.props.parentFunction(item)
   }
 
   render () {

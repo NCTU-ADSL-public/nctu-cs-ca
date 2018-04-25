@@ -44,7 +44,7 @@ class Head extends Component {
   }
 
   componentDidMount () {
-    this.select(2)
+    this.select(4)
   }
 
   select (index) {
