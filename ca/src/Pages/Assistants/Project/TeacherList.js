@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import {Grid, Row, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -8,8 +9,25 @@ import Table from '../../../Components/Table'
 import FakeData from '../../../Resources/FakeData/index'
 
 class TeacherList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      projectNum: FakeData.ProjectNum
+    }
+  }
+
+  componentWillMount () {
+    axios.get('/students/projectNum').then((resp) => {
+      this.setState({
+        projectNum: resp.data
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
   render () {
-    const projectNum = FakeData.ProjectNum
+    let projectNum = this.state.projectNum
     return (
       <Grid>
         <Col sm={12} xsHidden style={{height: 30}} />
