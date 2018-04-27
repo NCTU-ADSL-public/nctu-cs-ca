@@ -1,5 +1,7 @@
 import React from 'react'
-import {Grid, Row, Col, Table} from 'react-bootstrap'
+import {Grid, Row, Col} from 'react-bootstrap'
+
+import Table from '../../Components/Table'
 
 class Project extends React.Component {
   render () {
@@ -8,7 +10,7 @@ class Project extends React.Component {
         <h1>學生專題助理端</h1>
         <Row>
           <Col xs={12} sm={6}>
-            <Table responsive hover striped>
+            <Table>
               <thead>
                 <tr>
                   <th>教授</th>
@@ -16,18 +18,42 @@ class Project extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
+              <tr>
+                <td>Table cell</td>
+                <td>Table cell</td>
+              </tr>
               </tbody>
             </Table>
           </Col>
