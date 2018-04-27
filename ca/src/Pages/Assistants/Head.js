@@ -6,6 +6,7 @@ import {Grid,Row,Col} from 'react-bootstrap'
 
 import HomeItem from './Home.js'
 import GraduationItem from './Graduation/index'
+import ProjectItem from './Project'
 
 import Navbar from '../../Components/Navbar'
 
@@ -57,6 +58,14 @@ class Head extends React.Component {
                     </FadeIn>
                 </div>,
                 document.getElementById('page'))
+        } else if (index === 2) {
+          ReactDOM.render(
+            <div>
+              <FadeIn>
+                <ProjectItem />
+              </FadeIn>
+            </div>,
+            document.getElementById('page'))
         }
 
         this.setState({selectedIndex: index})
@@ -66,6 +75,7 @@ class Head extends React.Component {
       const onTouchTaps = [
         () => this.select(0),
         () => this.select(1),
+        () => this.select(2),
       ]
       return (
         <Grid id='Head' fluid={true}>
