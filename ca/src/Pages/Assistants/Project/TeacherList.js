@@ -6,13 +6,12 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Email from 'material-ui/svg-icons/communication/email'
 
 import Table from '../../../Components/Table'
-import FakeData from '../../../Resources/FakeData/index'
 
 class TeacherList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      projectNum: FakeData.ProjectNum
+      projectNum: []
     }
   }
 
