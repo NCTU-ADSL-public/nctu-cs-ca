@@ -1,15 +1,12 @@
 import React from 'react'
 import {Grid, Row, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import RaisedButton from 'material-ui/RaisedButton'
-import Email from 'material-ui/svg-icons/communication/email'
 
 import Table from '../../../Components/Table'
 import FakeData from '../../../Resources/FakeData/index'
 
 class TeacherList extends React.Component {
   render () {
-    const projectNum = FakeData.ProjectNum
+    const studentsProject = FakeData.StudentProject
     return (
       <Grid>
         <Col sm={12} xsHidden style={{height: 30}} />
@@ -17,24 +14,25 @@ class TeacherList extends React.Component {
           <Col xs={12} sm={7}>
             <Table>
               <thead>
-                <tr>
-                  <th>教授</th>
-                  <th>已收學生人數</th>
-                  <th></th>
-                </tr>
+              <tr>
+                <th>學號</th>
+                <th>學生姓名</th>
+                <th>組別</th>
+                <th>專題指導教授</th>
+              </tr>
               </thead>
               <tbody>
-              {projectNum.map((teacher) => (
-                <tr>
-                  <td>{teacher.tname}</td>
-                  <td>{teacher.scount}</td>
-                  <td>
-                    <MuiThemeProvider>
-                      <RaisedButton label='Send Mail!' icon={<Email />} />
-                    </MuiThemeProvider>
-                  </td>
-                </tr>
-              ))}
+              {studentsProject.map((student) => {
+                const foundProjectTeacher = (student.project_tname != null)
+                return (
+                  <tr>
+                    <td>{student.student_id}</td>
+                    <td>{student.sname}</td>
+                    <td>{student.program}</td>
+                    <td style={{color: foundProjectTeacher ? '#418166' : '#c61234'}}>{foundProjectTeacher ? student.project_tname : '尚未找到專題教授'}</td>
+                  </tr>
+                )
+              })}
               </tbody>
             </Table>
           </Col>

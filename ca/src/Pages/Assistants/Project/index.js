@@ -8,6 +8,7 @@ import TabContent from 'rc-tabs/lib/SwipeableTabContent'
 import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar'
 
 import TeacherList from './TeacherList'
+import StudentList from './StudentList'
 
 class Project extends React.Component {
 
@@ -38,7 +39,7 @@ class Project extends React.Component {
             <TeacherList />
           </TabPane>
           <TabPane tab={`學生狀況`} key='2'>
-
+            <StudentList />
           </TabPane>
         </Tabs>
       </div>
