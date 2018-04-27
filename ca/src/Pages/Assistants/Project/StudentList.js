@@ -2,6 +2,7 @@ import React from 'react'
 import {Grid, Row, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 
 import Table from '../../../Components/Table'
+import Badge from '../../../Components/Badge'
 import FakeData from '../../../Resources/FakeData/index'
 
 class TeacherList extends React.Component {
@@ -47,6 +48,11 @@ class TeacherList extends React.Component {
                 </FormControl>
               </FormGroup>
             </Form>
+            <Badge bgColor='#cc3333'>未找專題</Badge>
+            <Badge bgColor='#64b5f6'>資工A班</Badge>
+            <Badge bgColor='#64b5f6'>資工B班</Badge>
+            <Badge bgColor='#64b5f6'>資電組</Badge>
+            <Badge bgColor='#64b5f6'>網多組</Badge>
           </Col>
         </Row>
       </Grid>
