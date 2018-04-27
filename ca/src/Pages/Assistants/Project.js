@@ -1,10 +1,12 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-bootstrap'
-
 import Table from '../../Components/Table'
+
+import FakeData from '../../Resources/FakeData'
 
 class Project extends React.Component {
   render () {
+    const projectNum = FakeData.ProjectNum
     return (
       <Grid>
         <h1>學生專題助理端</h1>
@@ -18,42 +20,13 @@ class Project extends React.Component {
                 </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
-              <tr>
-                <td>Table cell</td>
-                <td>Table cell</td>
-              </tr>
+              {projectNum.map((teacher) => (
+
+                <tr>
+                  <td>{teacher.tname}</td>
+                  <td>{teacher.scount}</td>
+                </tr>
+              ))}
               </tbody>
             </Table>
           </Col>
