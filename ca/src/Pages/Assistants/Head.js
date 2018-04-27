@@ -6,7 +6,7 @@ import {Grid,Row,Col} from 'react-bootstrap'
 
 import HomeItem from './Home.js'
 import GraduationItem from './Graduation/index'
-import ProjectItem from './Project'
+import ProjectItem from './Project/index'
 
 import Navbar from '../../Components/Navbar'
 

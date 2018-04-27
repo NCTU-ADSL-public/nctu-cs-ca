@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 //for tabs
 import 'rc-tabs/assets/index.css';
-import './index.css';
+import '../../../Components/ca-rc-tabs.css';
 import Tabs, { TabPane } from 'rc-tabs';
 import TabContent from 'rc-tabs/lib/SwipeableTabContent';
 import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
