@@ -1,5 +1,6 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-bootstrap'
+import {Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 import Table from '../../Components/Table'
 
 import FakeData from '../../Resources/FakeData'
@@ -9,9 +10,21 @@ class Project extends React.Component {
     const projectNum = FakeData.ProjectNum
     return (
       <Grid>
-        <h1>學生專題助理端</h1>
+        <Col sm={12} xsHidden style={{height: 30}}></Col>
         <Row>
-          <Col xs={12} sm={6}>
+          <Col xs={12} sm={4}>
+            <Form >
+              <FormGroup controlId="formControlsSelect">
+                <ControlLabel>學生畢業學年度</ControlLabel>
+                <FormControl componentClass='select' placeholder='請選擇畢業學年度'>
+                  <option value='107' selected>107</option>
+                  <option value='108'>108</option>
+                  <option value='109'>109</option>
+                </FormControl>
+              </FormGroup>
+            </Form>
+          </Col>
+          <Col xs={12} sm={7}>
             <Table>
               <thead>
                 <tr>
@@ -29,9 +42,6 @@ class Project extends React.Component {
               ))}
               </tbody>
             </Table>
-          </Col>
-          <Col xs={12} sm={6}>
-            <h2>看看要放什麼</h2>
           </Col>
         </Row>
       </Grid>
