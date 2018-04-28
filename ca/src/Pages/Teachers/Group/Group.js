@@ -10,6 +10,13 @@ import Chip from 'material-ui/Chip'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const styles = {
+  noticeTitle: {
+    fontSize: '2.8em',
+    fontWeight: '500',
+    color: '#bf6468',
+    margin: '32px 0 0 50px',
+    float: 'left'
+  },
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
@@ -18,10 +25,10 @@ const styles = {
     float: 'left'
   },
   subTitle: {
-    fontSize: '1.6em',
+    fontSize: '1.2em',
     fontWeight: '4300',
     color: '#737373',
-    margin: '45px 0 0 0',
+    margin: '55px 0 0 50px',
     float: 'left'
   },
   groups: {
@@ -31,19 +38,19 @@ const styles = {
     margin: 30,
     padding: 20,
     background: '#ececec',
-    borderRadius: '10px',
+    borderRadius: '6px',
     border: '1px #dfdfdf solid'
   },
   pic: {
-    width: '100%'
+    width: '80%'
   },
   groupYear: {
-    fontSize: '1.5em',
+    fontSize: '1.2em',
     fontWeight: '200',
     color: '#575757'
   },
   groupTitle: {
-    fontSize: '2.4em',
+    fontSize: '2em',
     fontWeight: '100',
     color: '#575757'
   },
@@ -67,8 +74,19 @@ class Group extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      total_number: '?',
+      total_number: 3,
       groupList: [
+        { research_title: '資料錯誤',
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: ''
+        }
+      ],
+      applyList: [
         { research_title: '資料錯誤',
           participants: [
             { student_id: '0399999',
@@ -87,10 +105,21 @@ class Group extends React.Component {
       name: '彭文志'
       // name: this.props.idCard.name
     }).then(res => {
-      console.log(res)
       this.setState({
         total_number: res.data.total_number,
         groupList: res.data.groups
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+
+    axios.post('/professors/students/applyList', {
+      name: '彭文志'
+      // name: this.props.idCard.name
+    }).then(res => {
+      console.log(res)
+      this.setState({
+        applyList: res.data
       })
     }).catch(err => {
       console.log(err)
@@ -110,6 +139,20 @@ class Group extends React.Component {
       <Grid>
         <Row>
           <Col xs={12} md={4} lg={4}>
+            <div style={styles.noticeTitle}> 學生專題申請 </div>
+          </Col>
+          <Col xs={12} md={8} lg={8}>
+            <div style={styles.subTitle}> 尚可接受專題生數量: {7 - this.state.total_number} 人 </div>
+          </Col>
+        </Row>
+        <Row style={styles.groups}>
+          {this.state.applyList.map((item) => (
+            <ApplyButton title={item.research_title} participants={item.participants} />
+          ))}
+        </Row>
+
+        <Row>
+          <Col xs={12} md={4} lg={4}>
             <div style={styles.mainTitle}> 學生專題列表 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
@@ -127,6 +170,28 @@ class Group extends React.Component {
 }
 export default Group
 
+const ApplyButton = (props) => (
+  <Grid style={styles.groupBtn}>
+    <Row>
+      <Col xs={12} md={12} lg={12}>
+        <div style={styles.groupTitle}>{props.title}</div>
+        <div>
+          <MuiThemeProvider>
+            <div style={styles.chipWrapper}>
+              {props.participants.map((item) => (
+                <Chip style={styles.chip}>
+                  <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                </Chip>
+              ))}
+            </div>
+          </MuiThemeProvider>
+        </div>
+      </Col>
+    </Row>
+  </Grid>
+
+)
+
 const GroupButton = (props) => (
   <Grid style={styles.groupBtn}>
     <Row>
@@ -134,7 +199,7 @@ const GroupButton = (props) => (
         <Image style={styles.pic} src={pic} circle />
       </Col>
       <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>???年度</div>
+        <div style={styles.groupYear}>106年度</div>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
@@ -149,7 +214,7 @@ const GroupButton = (props) => (
         </div>
         <div style={styles.groupIntro}>
           (尚未取得專題簡介的資料。)
-      </div>
+        </div>
       </Col>
     </Row>
   </Grid>

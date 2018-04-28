@@ -11,13 +11,19 @@ import {
 const styles = {
   tabColumn0: {
     cursor: 'pointer',
-    //  background: '#ecfcf9',
-    // border: '3px solid white',
+    width: 70,
+    fontWeight: 500,
   },
   tabColumn1: {
     cursor: 'pointer',
-    //  background: '#f9f9f9',
-    //  border: '3px solid white',
+    width: 300,
+    color: '#848484',
+    fontWeight: 200,
+  },
+  tabColumn2: {
+    cursor: 'pointer',
+    width: 60,
+    fontWeight: 500,
   },
   header: {
     cursor: 'pointer',
@@ -32,7 +38,7 @@ const styles = {
   table: {
     fontFamily: 'Noto Sans CJK TC',
     color: '#434343',
-    tableLayout: 'auto',
+    // tableLayout: 'auto',
   },
   colorGreen: {
     cursor: 'pointer',
@@ -66,46 +72,66 @@ export default class ListTable extends Component {
 
       itemListRows: [],
       itemList: [],
-      orderBy: 'sid',
     }
 
   }
 
   componentWillMount () {
-    this.orderList(this.state.orderBy)
-    console.log()
+    this.orderList()
+  }
+
+  componentDidMount () {
+    window.setInterval( () => this.orderList(), 86400000)
   }
 
   componentDidUpdate (NextProp, NextState) {
     if (NextProp.items !== this.props.items) {
-      this.orderList(this.state.orderBy)
+      this.orderList()
       if(this.state.itemList.length !== 0) this.handleRowClick(0)
     }
   }
 
-  orderList (orderBy) {
+  howMuchTimeAgo (time) {
+    let ago = ( (Date.now() - new Date(time)) / 1000)
+    if( ago < 60 ) return ( Math.floor(ago) + '秒前')
+    ago /= 60
+    if( ago < 60 ) return ( Math.floor(ago) + '分鐘前')
+    ago /= 60
+    if( ago < 24 ) return ( Math.floor(ago) + '小時前')
+    ago /= 24
+    if( ago < 7 ) return ( Math.floor(ago) + '天多前')
+    ago /= 7
+    if( ago < 4 ) return ( Math.floor(ago) + '週前左右')
+    ago /= 4
+    if( ago < 12 ) return ('大約' +  Math.floor(ago) + '個月前')
+    return ('很久以前')
+  }
+
+  orderList () {
+    console.log('YOYOYOYO')
     let NewItemList = []
     // sort list
     if (this.props.items) {
       NewItemList = [].concat(this.props.items)
         .sort((a, b) => {
-            return a.send_time < b.send_time
+            return b.send_time.localeCompare(a.send_time, 'zh-Hans-CN')
         })
     }
     // row items
     let itemListRows = NewItemList
-      .map((row, i) =>
-        <TableRow key={i}>
-          <TableRowColumn style={styles.tabColumn0}>{row.sender}</TableRowColumn>
-          <TableRowColumn style={styles.tabColumn0}>{row.title}</TableRowColumn>
-          <TableRowColumn style={styles.tabColumn0}>{row.send_time}</TableRowColumn>
-        </TableRow>
+      .map((row, i) =>{
+        return (
+          <TableRow key={i}>
+            <TableRowColumn style={styles.tabColumn0}>{row.sender}</TableRowColumn>
+            <TableRowColumn style={styles.tabColumn1}>{row.title}</TableRowColumn>
+            <TableRowColumn style={styles.tabColumn2}>{this.howMuchTimeAgo(row.send_time)}</TableRowColumn>
+          </TableRow>
+        )}
       )
 
     this.setState({
       itemList: NewItemList,
       itemListRows,
-      orderBy,
     })
   }
 

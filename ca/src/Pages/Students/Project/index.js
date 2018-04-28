@@ -1,9 +1,10 @@
 import React from 'react'
-
 import axios from 'axios'
+
 import List from './Search/List'
 import Profile from './Search/Profile'
 
+import FakeData from '../../../Resources/FakeData'
 
 const styles = {
   container: {
@@ -60,7 +61,7 @@ export default class index extends React.Component {
     super(props);
     this.state = {
       teacher: "default",
-      initItem: [{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"},{"tname":"吳凱強","scount":"1"},{"tname":"吳毅成","scount":"5"},{"tname":"吳育松","scount":"1"}],
+      initItem: FakeData.ProjectNum,
       profile: {
         name: '彭文志',
         phone: '48763',
