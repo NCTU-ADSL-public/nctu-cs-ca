@@ -146,7 +146,7 @@ class Group extends React.Component {
           </Col>
         </Row>
         <Row style={styles.groups}>
-          {this.state.groupList.map((item) => (
+          {this.state.applyList.map((item) => (
             <ApplyButton title={item.research_title} participants={item.participants} />
           ))}
         </Row>
