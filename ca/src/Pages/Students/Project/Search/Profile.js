@@ -5,7 +5,8 @@ import { Grid, Row, Glyphicon, Image } from 'react-bootstrap'
 import pic from '../../../../Resources/defalt.jpg'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import DialogButton from './ProdileExtend/ProfileSendmail'
+import ProfileSendmail from './ProdileExtend/ProfileSendmail'
+import ProfileSendProjectAgree from './ProdileExtend/ProfileSendProjectAgree'
 
 const fontStyle = {
   verticalAlign: "default",
@@ -66,7 +67,10 @@ class Profile extends React.Component {
               <CardText>
                 <FadeIn>
                   <div style={fontStyle}>
-                    <DialogButton name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                    <div style={{float: 'right'}}>
+                      <ProfileSendmail name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                      <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                    </div>
                     <Image style={styles.pic} src={this.props.profile.photo === '' ? pic : this.props.profile.photo} circle />
                     <div style={styles.name}> {this.props.profile.name} </div>
                     <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>

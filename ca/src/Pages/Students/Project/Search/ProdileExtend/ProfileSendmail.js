@@ -15,8 +15,9 @@ import Email from 'material-ui/svg-icons/communication/email'
  */
 
 const buttonStyle = {
-  //marginLeft:'-40',
-  float: 'right'
+  marginTop:'4',
+  width:'140px',
+  //float: 'right'
 }
 
 
@@ -113,7 +114,7 @@ export default class DialogButton extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Send Mail!" style={buttonStyle} onClick={this.handleOpen} icon={<Email/>}/>
+        <RaisedButton label="Send Mail!" style={buttonStyle} labelStyle={bodyStyle} onClick={this.handleOpen} icon={<Email/>}/>
         <Dialog
           title={
             <div>
