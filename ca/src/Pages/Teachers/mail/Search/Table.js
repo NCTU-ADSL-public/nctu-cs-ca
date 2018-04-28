@@ -81,7 +81,7 @@ export default class ListTable extends Component {
   }
 
   componentDidMount () {
-    window.setInterval( () => this.orderList(), 5000)
+    window.setInterval( () => this.orderList(), 86400000)
   }
 
   componentDidUpdate (NextProp, NextState) {
