@@ -71,12 +71,12 @@ class Profile extends React.Component {
                       <ProfileSendmail name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
                       <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
                     </div>
-                    <Image style={styles.pic} src={this.props.profile.photo === '' ? pic : this.props.profile.photo} circle />
+                    <Image style={styles.pic} src={this.props.profile.pic  === '' ? pic : this.props.profile.pic } circle />
                     <div style={styles.name}> {this.props.profile.name} </div>
                     <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
                     <div style={styles.item}> {this.props.profile.email} </div>
                     <div style={styles.item}> {this.props.profile.expertise} </div>
-                    <div style={styles.item}> {new Array(10).fill(0).map(() => ('我的經歷就是範例...'))} </div>
+                    <div style={styles.item}> {this.props.profile.info} </div>
                   </div>
                 </FadeIn>
               </CardText>
