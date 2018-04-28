@@ -25,10 +25,10 @@ const styles = {
     float: 'left'
   },
   subTitle: {
-    fontSize: '1.6em',
+    fontSize: '1.2em',
     fontWeight: '4300',
     color: '#737373',
-    margin: '45px 0 0 0',
+    margin: '55px 0 0 50px',
     float: 'left'
   },
   groups: {
@@ -38,19 +38,19 @@ const styles = {
     margin: 30,
     padding: 20,
     background: '#ececec',
-    borderRadius: '10px',
+    borderRadius: '6px',
     border: '1px #dfdfdf solid'
   },
   pic: {
-    width: '100%'
+    width: '80%'
   },
   groupYear: {
-    fontSize: '1.5em',
+    fontSize: '1.2em',
     fontWeight: '200',
     color: '#575757'
   },
   groupTitle: {
-    fontSize: '2.4em',
+    fontSize: '2em',
     fontWeight: '100',
     color: '#575757'
   },
