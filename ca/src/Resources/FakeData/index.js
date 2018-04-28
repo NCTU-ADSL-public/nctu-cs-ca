@@ -5,6 +5,8 @@ import CoursePass from './CoursePass.json'
 import PrintData from './PrintData.json'
 import StudentList from './StudentList.json'
 import MailList from './MailList.json'
+import ProjectNum from './ProjectNum.json'
+import StudentProject from './StudentProject.json'
 
 export default {
   GraduationItems,
@@ -13,5 +15,7 @@ export default {
   CoursePass,
   PrintData,
   StudentList,
-  MailList
+  MailList,
+  ProjectNum,
+  StudentProject
 }
