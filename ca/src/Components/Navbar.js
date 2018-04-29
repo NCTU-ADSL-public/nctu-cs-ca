@@ -98,8 +98,7 @@ class _Navbar extends React.Component {
 
   deletedata = (url, data) => {
     let _this = this
-    alert(data.research_title)
-    axios.post(url, {
+    axios.post('/students/formDelete', {
       research_title:data.research_title,
       tname:data.tname
     })
