@@ -67,6 +67,28 @@ const styles = {
     color: '#9c9c9c',
     fontSize: '1.4em',
     fontWeight: 100
+  },
+  reply: {
+    default: {
+      fontSize: '1.5em',
+      fontWeight: '400',
+      color: '#575757'
+    },
+    red: {
+      fontSize: '1.5em',
+      fontWeight: '400',
+      color: '#9f2624'
+    },
+    brown: {
+      fontSize: '1.5em',
+      fontWeight: '400',
+      color: '#845b2d'
+    },
+    green: {
+      fontSize: '1.5em',
+      fontWeight: '400',
+      color: '#3c8a63'
+    }
   }
 }
 
@@ -88,6 +110,37 @@ class Group extends React.Component {
       ],
       applyList: [
         { research_title: '資料錯誤',
+          status: 0,
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: ''
+        },
+        { research_title: '資料錯誤',
+          status: 1,
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: ''
+        },
+        { research_title: '資料錯誤',
+          status: 2,
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: ''
+        },
+        { research_title: '資料錯誤',
+          status: 3,
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -135,6 +188,7 @@ class Group extends React.Component {
     }
   }
   render () {
+    const tn = this.state.total_number
     return (
       <Grid>
         <Row>
@@ -142,7 +196,9 @@ class Group extends React.Component {
             <div style={styles.noticeTitle}> 學生專題申請 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 尚可接受專題生數量: {7 - this.state.total_number} 人 </div>
+            <div style={styles.subTitle}>
+              尚可接受專題生數量: {tn <= 7 ? 7 - tn + '人' : '(已超收學生)'}
+            </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
@@ -156,7 +212,7 @@ class Group extends React.Component {
             <div style={styles.mainTitle}> 學生專題列表 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 已收專題學生: {this.state.total_number} 人 </div>
+            <div style={styles.subTitle}> 已收專題學生: {tn} 人 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
@@ -173,7 +229,7 @@ export default Group
 const ApplyButton = (props) => (
   <Grid style={styles.groupBtn}>
     <Row>
-      <Col xs={12} md={12} lg={12}>
+      <Col xs={10} md={10} lg={10}>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
@@ -187,9 +243,11 @@ const ApplyButton = (props) => (
           </MuiThemeProvider>
         </div>
       </Col>
+      <Col xs={2} md={2} lg={2}>
+        <div style={styles.reply.red}>尚未回覆</div>
+      </Col>
     </Row>
   </Grid>
-
 )
 
 const GroupButton = (props) => (
@@ -218,5 +276,4 @@ const GroupButton = (props) => (
       </Col>
     </Row>
   </Grid>
-
 )
