@@ -6,6 +6,7 @@ import {Navbar,Nav,NavItem,DropdownButton,MenuItem,ButtonToolbar } from 'react-b
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
 import NavButton from './NavButton'
+import axios from 'axios'
 
 const style = {
   BrandBox: {
@@ -52,7 +53,23 @@ class _Navbar extends React.Component {
 
     this.state = {
       selectedButtonIndex: null,
-      onClicks: props.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index))
+      onClicks: props.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index)),
+      project_status_data:[
+        {"student_id":"0316048",
+          "sname":"蘇炳立",
+          "research_title":"NCTU CS Bot",
+          "tname":"彭文志",
+          "agree":"1",
+          "phone":"222",
+          "email":"1111"},
+        {"student_id":"0316048",
+          "sname":"蘇炳立",
+          "research_title":"我要再做一個研究!",
+          "tname":"彭文志",
+          "agree":"3",
+          "phone":"222",
+          "email":"1111"}
+      ]
     }
   }
 
@@ -64,11 +81,96 @@ class _Navbar extends React.Component {
     // })
   }
 
+  componentWillMount () {
+    let _this = this
+    axios.post('/students/applyState', {
+      id:_this.props.id
+    })
+      .then(res => {
+        _this.setState({
+          project_status_data:res.data,
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  deletedata = (url, data) => {
+    let _this = this
+    axios.post(url, {
+      research_title:data.research_title,
+      tname:data.tname
+    })
+      .then(res => {
+        _this.setState({
+          project_status_data: this.state.project_status_data.filter(t=>t.research_title!==data.research_title)
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   onToggleCollapse = (expanded) => {
     this.setState({
       ...this.state,
       expanded: expanded
     })
+  }
+
+  dropButton = () => {
+    const {onClicks,selectedButtonIndex} = this.state
+    let id = 10
+    return(
+      <DropdownButton
+        bsStyle={{
+          background: '#EEEEEE'}}
+        bsSize="xsmall"
+        noCaret
+
+        title={
+          <div className="idcard" /*onClick={onClicks[4]}*/>
+            <div className='red-spot animated swing' style={{animationDuration:'2s', animationIterationCount:10000,}}/>
+            <img id="idcard-photo" src={defalt} alt=""/>
+            <div style={{
+              display: 'inline-block',
+              verticalAlign: 'middle',
+              marginLeft: 9,
+            }}>
+              <div id="idcard-top">
+                {this.props.name}
+              </div>
+              <div id="idcard-buttom">
+                {this.props.subname}
+              </div>
+            </div>
+          </div>
+        }
+      >
+        <MenuItem eventKey="1" onClick={onClicks[4]}>郵件</MenuItem>
+        <MenuItem divider />
+        <MenuItem header>專題主頁</MenuItem>
+        {this.state.project_status_data.map(t=>(
+          <MenuItem disabled = {(t.agree === "0") || (t.agree === "2") } onClick={(t.agree === '3')?this.deletedata('/students/formDelete', t) : onClicks[id++]}>{t.research_title}&nbsp;{this.getstr(t.agree)}</MenuItem>
+        ))}
+        <MenuItem divider />
+        <MenuItem eventKey="4">個人頁面</MenuItem>
+      </DropdownButton>
+    )
+  }
+
+  getstr (agree) {
+    switch (agree){
+      case '1':
+        return ''
+      case '2':
+        return '(審核中)'
+      case '3':
+        return '(已被拒絕，點按以刪除資料)'
+      case '0':
+        return '(新資料)'
+    }
   }
 
   render() {
@@ -110,35 +212,7 @@ class _Navbar extends React.Component {
           <Nav pullRight>
             <NavItem className='logout-box'>
               <ButtonToolbar>
-                <DropdownButton
-                  bsStyle={{
-                    background: '#EEEEEE'}}
-                  bsSize="xsmall"
-                  noCaret
-
-                  title={
-                    <div className="idcard" /*onClick={onClicks[4]}*/>
-                      <img id="idcard-photo" src={defalt} alt=""/>
-                      <div style={{
-                        display: 'inline-block',
-                        verticalAlign: 'middle',
-                        marginLeft: 9,
-                      }}>
-                        <div id="idcard-top">
-                          {this.props.name}
-                        </div>
-                        <div id="idcard-buttom">
-                          {this.props.subname}
-                        </div>
-                      </div>
-                    </div>
-                  }
-                >
-                  <MenuItem eventKey="1" onClick={onClicks[4]}>郵件</MenuItem>
-                  <MenuItem eventKey="2">專題主頁</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="4">個人頁面</MenuItem>
-                </DropdownButton>
+                {this.dropButton()}
                 <MuiThemeProvider>
                   <RaisedButton backgroundColor = "#DDDDDD"
                                 style={{marginLeft:'12px'}}
