@@ -32,7 +32,7 @@ class Head extends Component {
     selectedIndex: 0,
     studentIdcard: {
       sname: '資料錯誤',
-      student_id: '0000000',
+      id: '0000000',
       program: '網多',
       grade: "大三",
       email: 'hihi@gmail.com',
@@ -242,7 +242,7 @@ class Head extends Component {
           <Navbar type={ 'student'}
                   version={this.state.studentIdcard.grad}
                   name={this.state.studentIdcard.sname}
-                  id={this.state.studentIdcard.student_id}
+                  id={this.state.studentIdcard.id}
                   subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
                   selectedIndex={ this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
