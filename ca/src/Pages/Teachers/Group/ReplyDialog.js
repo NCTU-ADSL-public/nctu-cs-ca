@@ -5,7 +5,10 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 
-//for multiTheme
+// for bootstrap 3
+import {Button} from 'react-bootstrap'
+
+// for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import TextField from 'material-ui/TextField'
 
@@ -86,22 +89,34 @@ export default class ReplyDialog extends React.Component {
     this.setState({open: true})
   }
 
-  handleClose = () => {
+  handleClose = (status) => {
     this.setState({open: false})
+    axios.post('/professors/students/ApplyFormSetAgree', {
+      research_title: this.props.title,
+      tname: this.props.name,
+      agree: status
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
   render () {
     const actions = [
       <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.handleClose}
+        label='接受'
+        primary
+        onClick={ () => this.handleClose(1) }
       />,
       <FlatButton
-        label="Submit"
-        primary={true}
-        disabled={true}
-        onClick={this.handleClose}
+        label='考慮中'
+        onClick={ () => this.handleClose(2) }
       />,
+      <FlatButton
+        label='拒絕'
+        secondary
+        onClick={ () => this.handleClose(3) }
+      />
     ]
 
     return (
@@ -110,16 +125,16 @@ export default class ReplyDialog extends React.Component {
           <div onClick={this.handleOpen}>
             <ReplyStatus status={this.props.status}/>
           </div>
-          {/*<RaisedButton label="Modal Dialog" >*/}
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Dialog
-            title="Dialog With Actions"
+            title='回覆專題申請'
             actions={actions}
-            modal={true}
+            modal={false}
             open={this.state.open}
+            onRequestClose={this.handleClose}
           >
-            Only actions can close this dialog.
+            請選擇接受、拒絕或考慮中。
           </Dialog>
         </MuiThemeProvider>
       </div>
@@ -130,11 +145,11 @@ export default class ReplyDialog extends React.Component {
 const ReplyStatus = (props) => {
   switch (props.status) {
     case 0:
-      return <div style={styles.reply.default}>尚未回覆</div>
+      return <Button bsStyle='primary'>尚未回覆</Button>
     case 1:
-      return <div style={styles.reply.green}>已接受</div>
+      return <Button bsStyle='success' disabled>已接受</Button>
     case 2:
-      return <div style={styles.reply.brown}>審核中</div>
+      return <Button bsStyle='info'>審核中</Button>
     default:
       return null
   }
