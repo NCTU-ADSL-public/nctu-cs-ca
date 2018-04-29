@@ -203,7 +203,7 @@ class Group extends React.Component {
         </Row>
         <Row style={styles.groups}>
           {this.state.applyList.map((item) => (
-            <ApplyButton title={item.research_title} participants={item.participants} />
+            <ApplyButton title={item.research_title} participants={item.participants} status={item.status} />
           ))}
         </Row>
 
@@ -217,7 +217,7 @@ class Group extends React.Component {
         </Row>
         <Row style={styles.groups}>
           {this.state.groupList.map((item) => (
-            <GroupButton title={item.research_title} participants={item.participants} />
+            <GroupButton title={item.research_title} participants={item.participants}/>
           ))}
         </Row>
       </Grid>
@@ -225,6 +225,21 @@ class Group extends React.Component {
   }
 }
 export default Group
+
+const ReplyStatus = (props) => {
+  switch (props.status) {
+    case 0:
+      return <div style={styles.reply.default}>尚未回覆</div>
+    case 1:
+      return <div style={styles.reply.green}>已接受</div>
+    case 2:
+      return <div style={styles.reply.brown}>審核中</div>
+    case 3:
+      return <div style={styles.reply.red}>已拒絕</div>
+    default:
+      return null
+  }
+}
 
 const ApplyButton = (props) => (
   <Grid style={styles.groupBtn}>
@@ -244,7 +259,7 @@ const ApplyButton = (props) => (
         </div>
       </Col>
       <Col xs={2} md={2} lg={2}>
-        <div style={styles.reply.red}>尚未回覆</div>
+        <ReplyStatus status={props.status} />
       </Col>
     </Row>
   </Grid>
