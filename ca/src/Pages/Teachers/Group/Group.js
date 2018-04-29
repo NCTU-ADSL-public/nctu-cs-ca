@@ -4,7 +4,6 @@ import { Grid, Row, Col, Image } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 
-import ReplyDialog from './ReplyDialog'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -247,7 +246,6 @@ const ApplyButton = (props) => {
           </div>
         </Col>
         <Col xs={2} md={2} lg={2}>
-          <ReplyDialog status={props.status} />
         </Col>
       </Row>
     </Grid>
