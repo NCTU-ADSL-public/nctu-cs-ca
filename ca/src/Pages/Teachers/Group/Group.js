@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
+import ReplyDialog from './ReplyDialog'
 
 // mui
 import Avatar from 'material-ui/Avatar'
@@ -194,7 +195,7 @@ class Group extends React.Component {
       <Grid>
         <Row>
           <Col xs={12} md={4} lg={4}>
-            <div style={styles.noticeTitle}> 學生專題申請 </div>
+            <div style={styles.noticeTitle} onClick={() => this.fetchData()}> 學生專題申請 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
             <div style={styles.subTitle}>
@@ -204,7 +205,11 @@ class Group extends React.Component {
         </Row>
         <Row style={styles.groups}>
           {this.state.applyList.map((item) => (
-            <ApplyButton title={item.research_title} participants={item.participants} status={item.status} />
+            <ApplyButton
+              title={item.research_title}
+              participants={item.participants}
+              name={this.props.idCard.name}
+              status={item.status} />
           ))}
         </Row>
 
@@ -230,8 +235,13 @@ export default Group
 const ApplyButton = (props) => {
   return (
     <Grid style={styles.groupBtn}>
+      <Row style={{marginBottom: '10px'}}>
+        <Col xs={12} md={12} lg={12}>
+          <ReplyDialog status={props.status} title={props.title} name={props.name} />
+        </Col>
+      </Row>
       <Row>
-        <Col xs={10} md={10} lg={10}>
+        <Col xs={12} md={12} lg={12}>
           <div style={styles.groupTitle}>{props.title}</div>
           <div>
             <MuiThemeProvider>
@@ -244,8 +254,6 @@ const ApplyButton = (props) => {
               </div>
             </MuiThemeProvider>
           </div>
-        </Col>
-        <Col xs={2} md={2} lg={2}>
         </Col>
       </Row>
     </Grid>
