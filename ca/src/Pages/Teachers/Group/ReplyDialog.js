@@ -151,6 +151,6 @@ const ReplyStatus = (props) => {
     case 2:
       return <Button bsStyle='info'>審核中</Button>
     default:
-      return null
+      return <Button bsStyle='primary'>回覆</Button>
   }
 }
