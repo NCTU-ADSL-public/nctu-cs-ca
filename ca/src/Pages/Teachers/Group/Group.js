@@ -3,6 +3,8 @@ import axios from 'axios'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
+
+import ReplyDialog from './ReplyDialog'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -203,7 +205,7 @@ class Group extends React.Component {
         </Row>
         <Row style={styles.groups}>
           {this.state.applyList.map((item) => (
-            <ApplyButton title={item.research_title} participants={item.participants} />
+            <ApplyButton title={item.research_title} participants={item.participants} status={item.status} />
           ))}
         </Row>
 
@@ -226,29 +228,31 @@ class Group extends React.Component {
 }
 export default Group
 
-const ApplyButton = (props) => (
-  <Grid style={styles.groupBtn}>
-    <Row>
-      <Col xs={10} md={10} lg={10}>
-        <div style={styles.groupTitle}>{props.title}</div>
-        <div>
-          <MuiThemeProvider>
-            <div style={styles.chipWrapper}>
-              {props.participants.map((item) => (
-                <Chip style={styles.chip}>
-                  <Avatar src={defaultPic} /> {item.student_id} {item.sname}
-                </Chip>
-              ))}
-            </div>
-          </MuiThemeProvider>
-        </div>
-      </Col>
-      <Col xs={2} md={2} lg={2}>
-        <div style={styles.reply.red}>尚未回覆</div>
-      </Col>
-    </Row>
-  </Grid>
-)
+const ApplyButton = (props) => {
+  return (
+    <Grid style={styles.groupBtn}>
+      <Row>
+        <Col xs={10} md={10} lg={10}>
+          <div style={styles.groupTitle}>{props.title}</div>
+          <div>
+            <MuiThemeProvider>
+              <div style={styles.chipWrapper}>
+                {props.participants.map((item) => (
+                  <Chip style={styles.chip}>
+                    <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                  </Chip>
+                ))}
+              </div>
+            </MuiThemeProvider>
+          </div>
+        </Col>
+        <Col xs={2} md={2} lg={2}>
+          <ReplyDialog status={props.status} />
+        </Col>
+      </Row>
+    </Grid>
+  )
+}
 
 const GroupButton = (props) => (
   <Grid style={styles.groupBtn}>
