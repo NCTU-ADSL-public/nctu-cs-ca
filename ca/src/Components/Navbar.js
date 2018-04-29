@@ -79,12 +79,9 @@ class _Navbar extends React.Component {
     //   ...this.state,
     //   onClicks: nextProps.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index))
     // })
-  }
-
-  componentWillMount () {
     let _this = this
     axios.post('/students/applyState', {
-      id:_this.props.id
+      id:nextProps.id
     })
       .then(res => {
         _this.setState({
@@ -94,6 +91,9 @@ class _Navbar extends React.Component {
       .catch(err => {
         console.log(err)
       })
+  }
+
+  componentWillMount () {
   }
 
   deletedata = (url, data) => {
