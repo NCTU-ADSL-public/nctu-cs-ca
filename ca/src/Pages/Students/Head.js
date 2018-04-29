@@ -72,6 +72,7 @@ class Head extends Component {
 
     axios.get('/students/profile').then(studentData => {
       studentData.data[0].grade = '大' + studentData.data[0].grade
+      console.log(studentData.data[0])
       _this.setState({
         studentIdcard: studentData.data[0]
       })
