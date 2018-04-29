@@ -35,6 +35,18 @@
     padding: 5px 0 0 0;
 }
 
+.red-spot{
+    display:block;
+    background:#f00;
+    opacity: 0.8;
+    border-radius:50%;
+    width:1em;
+    height:1em;
+    top:-1.8px;
+    left:-0.5em;
+    position:absolute;
+}
+
 @media (max-width: 480px) {
     .h1 {
         font-size: 25px;
