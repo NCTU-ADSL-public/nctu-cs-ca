@@ -32,7 +32,7 @@ class Head extends Component {
     selectedIndex: 0,
     studentIdcard: {
       sname: '資料錯誤',
-      id: '0000000',
+      student_id: '0000000',
       program: '網多',
       grade: "大三",
       email: 'hihi@gmail.com',
@@ -72,7 +72,6 @@ class Head extends Component {
 
     axios.get('/students/profile').then(studentData => {
       studentData.data[0].grade = '大' + studentData.data[0].grade
-      console.log(studentData.data[0])
       _this.setState({
         studentIdcard: studentData.data[0]
       })
@@ -243,7 +242,7 @@ class Head extends Component {
           <Navbar type={ 'student'}
                   version={this.state.studentIdcard.grad}
                   name={this.state.studentIdcard.sname}
-                  id={this.state.studentIdcard.id}
+                  id={this.state.studentIdcard.student_id}
                   subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
                   selectedIndex={ this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
