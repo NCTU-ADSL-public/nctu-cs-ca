@@ -104,7 +104,8 @@ export default class index extends React.Component {
           phone: res.data[0].phone,
           email: res.data[0].email,
           expertise: res.data[0].expertise,
-          info: res.data[0].info
+          info: res.data[0].info,
+          photo: res.data[0].photo
         }
       })
     }).catch(err => {
