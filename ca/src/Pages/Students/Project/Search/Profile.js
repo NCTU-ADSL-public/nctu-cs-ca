@@ -71,7 +71,7 @@ class Profile extends React.Component {
                       <ProfileSendmail name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
                       <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
                     </div>
-                    <Image style={styles.pic} src={ 1 === 1 ? pic : this.props.profile.pic } circle />
+                    <Image style={styles.pic} src={ this.props.profile.photo === '' ? pic : this.props.profile.photo } circle />
                     <div style={styles.name}> {this.props.profile.name} </div>
                     <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
                     <div style={styles.item}> {this.props.profile.email} </div>
