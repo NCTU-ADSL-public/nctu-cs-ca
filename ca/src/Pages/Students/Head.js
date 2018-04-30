@@ -187,6 +187,15 @@ class Head extends Component {
         </FadeIn>
       )
     }
+    else if (this.state.selectedIndex >= 10 && this.state.selectedIndex <= 15 ) {
+      return(
+        <FadeIn style={{textAlign: 'center', width:'100%', fontSize: '50px'}}>
+          <h1>
+            你U專題咧
+          </h1>
+        </FadeIn>
+      )
+    }
 
 
   }
@@ -235,6 +244,16 @@ class Head extends Component {
       () => this.select(2),
       () => this.select(3),
       () => this.select(4),
+      () => this.select(5),
+      () => this.select(6),
+      () => this.select(7),
+      () => this.select(8),
+      () => this.select(9),
+      () => this.select(10),
+      () => this.select(11),
+      () => this.select(12),
+      () => this.select(13),
+      () => this.select(14),
     ]
     return (
       <Grid id="Head" fluid={true}>
