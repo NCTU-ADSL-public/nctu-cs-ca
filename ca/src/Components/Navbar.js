@@ -7,6 +7,7 @@ import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
 import NavButton from './NavButton'
 import axios from 'axios'
+import Notifications from 'material-ui/svg-icons/social/notifications'
 
 const style = {
   BrandBox: {
@@ -98,18 +99,20 @@ class _Navbar extends React.Component {
 
   deletedata = (url, data) => {
     let _this = this
-    axios.post('/students/formDelete', {
-      research_title:data.research_title,
-      tname:data.tname
-    })
-      .then(res => {
-        _this.setState({
-          project_status_data: this.state.project_status_data.filter(t=>t.research_title!==data.research_title)
+    if( window.confirm('請先知會您的隊友再刪除資料') ){
+      axios.post('/students/formDelete', {
+        research_title:data.research_title,
+        tname:data.tname
+      })
+        .then(res => {
+          _this.setState({
+            project_status_data: this.state.project_status_data.filter(t=>t.research_title!==data.research_title)
+          })
         })
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 
   onToggleCollapse = (expanded) => {
@@ -131,7 +134,9 @@ class _Navbar extends React.Component {
 
         title={
           <div className="idcard" /*onClick={onClicks[4]}*/>
-            <div className='red-spot animated swing' style={{animationDuration:'2s', animationIterationCount:10000,}}/>
+            <MuiThemeProvider>
+              <Notifications color = {'#c40000'} className='red-spot animated swing' style={{animationDuration:'2s', animationIterationCount:10000,}}/>
+            </MuiThemeProvider>
             <img id="idcard-photo" src={defalt} alt=""/>
             <div style={{
               display: 'inline-block',
@@ -152,7 +157,7 @@ class _Navbar extends React.Component {
         <MenuItem divider />
         <MenuItem header>專題主頁</MenuItem>
         {this.state.project_status_data.map(t=>(
-          <MenuItem disabled = {(t.agree === "0") || (t.agree === "2") } onClick={(t.agree === '3')?() => this.deletedata('/students/formDelete', t) : onClicks[id++]}>{t.research_title}&nbsp;{this.getstr(t.agree)}</MenuItem>
+          <MenuItem disabled = {(t.agree === "0") || (t.agree === "2") } onClick={(t.agree === '3' || t.agree === '0' )?() => this.deletedata('/students/formDelete', t) : onClicks[id++]}>{t.research_title}&nbsp;{this.getstr(t.agree)}</MenuItem>
         ))}
         <MenuItem divider />
         <MenuItem eventKey="4">個人頁面</MenuItem>
@@ -169,7 +174,7 @@ class _Navbar extends React.Component {
       case '3':
         return '(已被拒絕，點按以刪除資料)'
       case '0':
-        return '(新資料)'
+        return '(教授尚未查看，點按以刪除資料)'
     }
   }
 

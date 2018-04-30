@@ -23,6 +23,7 @@ const styles = {
     color: '#5f6f75',
     width: '45vw',
     height: '74vh',
+    overflow: 'scroll',
     backgroundColor: '#F5F5F5'
   },
   pic: {
@@ -42,9 +43,6 @@ const styles = {
 }
 
 class Profile extends React.Component {
-  constructor (props) {
-    super(props)
-  }
 
   fetchData () {
     console.log(this.props.name)
@@ -62,26 +60,26 @@ class Profile extends React.Component {
 
   render () {
     return (
-          <MuiThemeProvider>
-            <Card style={styles.row}>
-              <CardText>
-                <FadeIn>
-                  <div style={fontStyle}>
-                    <div style={{float: 'right'}}>
-                      <ProfileSendmail name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
-                      <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
-                    </div>
-                    <Image style={styles.pic} src={ this.props.profile.photo === '' ? pic : this.props.profile.photo } circle />
-                    <div style={styles.name}> {this.props.profile.name} </div>
-                    <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
-                    <div style={styles.item}> {this.props.profile.email} </div>
-                    <div style={styles.item}> {this.props.profile.expertise} </div>
-                    <div style={styles.item}> {this.props.profile.info} </div>
-                  </div>
-                </FadeIn>
-              </CardText>
-            </Card>
-          </MuiThemeProvider>
+       <MuiThemeProvider>
+         <Card style={styles.row} >
+           <CardText>
+             <FadeIn>
+               <div style={fontStyle}>
+                 <div style={{float: 'right'}}>
+                   <ProfileSendmail name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                   <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                 </div>
+                 <Image style={styles.pic} src={ this.props.profile.photo === '' ? pic : this.props.profile.photo } circle />
+                 <div style={styles.name}> {this.props.profile.name} </div>
+                 <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
+                 <div style={styles.item}> {this.props.profile.email} </div>
+                 <div style={styles.item}> {this.props.profile.expertise} </div>
+                 <div style={styles.item}> {this.props.profile.info} </div>
+               </div>
+             </FadeIn>
+           </CardText>
+         </Card>
+       </MuiThemeProvider>
       // <Grid>
       // <Row style={styles.row}>
       //   </Row>

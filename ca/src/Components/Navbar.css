@@ -37,13 +37,10 @@
 
 .red-spot{
     display:block;
-    background:#f00;
+    color:#f00;
     opacity: 0.8;
-    border-radius:50%;
-    width:1em;
-    height:1em;
-    top:-1.8px;
-    left:-0.5em;
+    top:-2px;
+    right:-0.8em;
     position:absolute;
 }
 
