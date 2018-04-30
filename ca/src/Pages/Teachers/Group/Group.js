@@ -122,7 +122,7 @@ class Group extends React.Component {
           year: ''
         },
         { research_title: '資料錯誤',
-          status: 1,
+          status: '1',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -132,7 +132,7 @@ class Group extends React.Component {
           year: ''
         },
         { research_title: '資料錯誤',
-          status: 2,
+          status: '2',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -142,7 +142,7 @@ class Group extends React.Component {
           year: ''
         },
         { research_title: '資料錯誤',
-          status: 3,
+          status: '3',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',

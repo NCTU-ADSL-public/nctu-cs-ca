@@ -144,11 +144,11 @@ export default class ReplyDialog extends React.Component {
 
 const ReplyStatus = (props) => {
   switch (props.status) {
-    case 0:
+    case '0':
       return <Button bsStyle='primary'>尚未回覆</Button>
-    case 1:
+    case '1':
       return <Button bsStyle='success' disabled>已接受</Button>
-    case 2:
+    case '2':
       return <Button bsStyle='info'>審核中</Button>
     default:
       return <Button bsStyle='primary'>回覆</Button>
