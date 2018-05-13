@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../../assets/styles/main.scss'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import {Grid,Row,Col} from 'react-bootstrap'
@@ -10,6 +11,7 @@ import GradCreditCheckPage from './Graduation/GradCreditCheck.js'
 import CreditItem from './Credit/Credit.js'
 import Project from './Project/index'
 import Mail from '../../Components/mail'
+import ProjectHome from './ProjectHome'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
@@ -189,15 +191,13 @@ class Head extends Component {
     }
     else if (this.state.selectedIndex >= 10 && this.state.selectedIndex <= 15 ) {
       return(
-        <FadeIn style={{textAlign: 'center', width:'100%', fontSize: '50px'}}>
-          <h1>
-            你U專題咧
-          </h1>
+        <FadeIn>
+          <MuiThemeProvider>
+            <ProjectHome/>
+          </MuiThemeProvider>
         </FadeIn>
       )
     }
-
-
   }
   getpage = () => {
     if(this.state.selectedIndex===0){
@@ -208,7 +208,7 @@ class Head extends Component {
     else {
       return (
         <div>
-          <Col xsHidden smHidden>
+          <Col  >
             <div id="page">
               <Loading size={300}
                        left={600}
@@ -219,14 +219,14 @@ class Head extends Component {
             </div>
           </Col>
           {/* For mobile, tablet user */}
-          <Col xs={12} mdHidden lgHidden>
-            <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
-          </Col>
+          {/*<Col xs={12} mdHidden lgHidden>*/}
+            {/*<h2>行動版功能目前測試中，造成不便敬請見諒。</h2>*/}
+          {/*</Col>*/}
         </div>
       )
     }
   }
-
+  // xsHidden smHidden
   select (index) {
     this.setState({selectedIndex: index})
   }
