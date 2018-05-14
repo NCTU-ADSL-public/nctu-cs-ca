@@ -42,6 +42,13 @@ const styles = {
     borderRadius: '6px',
     border: '1px #dfdfdf solid'
   },
+  groupBtnThisYear: {
+    margin: 30,
+    padding: 20,
+    background: '#f8efdd',
+    borderRadius: '6px',
+    border: '1px #dfdfdf solid'
+  },
   pic: {
     width: '80%'
   },
@@ -162,7 +169,7 @@ class GroupList extends React.Component {
 export default GroupList
 
 const GroupButton = (props) => (
-  <Grid style={styles.groupBtn}>
+  <Grid style={props.year === '106' ? styles.groupBtnThisYear : styles.groupBtn}>
     <Row>
       <Col xs={3} md={3} lg={3}>
         <Image style={styles.pic} src={pic} circle />
