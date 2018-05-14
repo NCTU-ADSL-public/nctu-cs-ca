@@ -6,14 +6,15 @@
 	}
 	.event-title{
 		position: relative;
-    top: -50px;
-    padding: 10px 30px;
-    background-color: rgba(239,239,239,0.9);
-    font-weight: bold;
-    font-size: large;
+		top: -50px;
+		padding: 10px 30px;
+		background-color: rgba(239,239,239,0.9);
+		font-weight: bold;
+		font-size: large;
 	}
-	.event-info-wrapper{ 
-		margin-top: -25px; 
+	.event-info-wrapper{
+		margin-top: -25px;
+		margin-bottom: 75px;
 		padding: 50px 30px 30px 30px;
 	}
 	.info-box{

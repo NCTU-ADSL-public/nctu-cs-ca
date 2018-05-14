@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../assets/styles/main.scss'
+//import '../../assets/styles/main.scss'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import {Grid,Row,Col} from 'react-bootstrap'
