@@ -1,6 +1,6 @@
 
 import React from 'react'
-import './style.scss'
+import './style.css'
 
 const PageWrapper = ({className, ...props}) => (
   <div className={`page-wrapper ${className || ''}`} >
