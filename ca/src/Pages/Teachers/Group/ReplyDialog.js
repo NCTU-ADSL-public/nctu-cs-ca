@@ -100,6 +100,7 @@ export default class ReplyDialog extends React.Component {
     }).catch(err => {
       console.log(err)
     })
+    this.props.parentFunction()
   }
   render () {
     const actions = [
