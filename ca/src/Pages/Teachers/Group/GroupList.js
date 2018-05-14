@@ -106,7 +106,7 @@ class GroupList extends React.Component {
               detail: '資工系 網多組3 '
             }
           ],
-          year: ''
+          year: '106'
         }
       ]
     }
@@ -148,7 +148,11 @@ class GroupList extends React.Component {
         </Row>
         <Row style={styles.groups}>
           {this.state.groupList.map((item) => (
-            <GroupButton title={item.research_title} participants={item.participants} />
+            <GroupButton
+              title={item.research_title}
+              participants={item.participants}
+              year={item.year}
+            />
           ))}
         </Row>
       </Grid>
@@ -164,7 +168,7 @@ const GroupButton = (props) => (
         <Image style={styles.pic} src={pic} circle />
       </Col>
       <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>106年度</div>
+        <div style={styles.groupYear}>{props.year}</div>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
