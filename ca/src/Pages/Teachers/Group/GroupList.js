@@ -118,7 +118,7 @@ class GroupList extends React.Component {
       // name: this.props.idCard.name
     }).then(res => {
       this.setState({
-        total_number: res.data.group04,
+        total_number: res.data.total_number,
         groupList: res.data.groups
       })
     }).catch(err => {
@@ -143,7 +143,7 @@ class GroupList extends React.Component {
             <div style={styles.mainTitle}> 學生專題列表 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 已收專題學生: {tn} 人 </div>
+            <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
@@ -168,7 +168,7 @@ const GroupButton = (props) => (
         <Image style={styles.pic} src={pic} circle />
       </Col>
       <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>{props.year}</div>
+        <div style={styles.groupYear}>{props.year}年度</div>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
