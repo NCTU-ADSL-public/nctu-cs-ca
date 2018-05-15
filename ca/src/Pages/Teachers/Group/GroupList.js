@@ -42,6 +42,13 @@ const styles = {
     borderRadius: '6px',
     border: '1px #dfdfdf solid'
   },
+  groupBtnThisYear: {
+    margin: 30,
+    padding: 20,
+    background: '#f8efdd',
+    borderRadius: '6px',
+    border: '1px #dfdfdf solid'
+  },
   pic: {
     width: '80%'
   },
@@ -106,7 +113,7 @@ class GroupList extends React.Component {
               detail: '資工系 網多組3 '
             }
           ],
-          year: ''
+          year: '106'
         }
       ]
     }
@@ -118,7 +125,7 @@ class GroupList extends React.Component {
       // name: this.props.idCard.name
     }).then(res => {
       this.setState({
-        total_number: res.data.group04,
+        total_number: res.data.total_number,
         groupList: res.data.groups
       })
     }).catch(err => {
@@ -143,12 +150,16 @@ class GroupList extends React.Component {
             <div style={styles.mainTitle}> 學生專題列表 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 已收專題學生: {tn} 人 </div>
+            <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
           {this.state.groupList.map((item) => (
-            <GroupButton title={item.research_title} participants={item.participants} />
+            <GroupButton
+              title={item.research_title}
+              participants={item.participants}
+              year={item.year}
+            />
           ))}
         </Row>
       </Grid>
@@ -158,13 +169,13 @@ class GroupList extends React.Component {
 export default GroupList
 
 const GroupButton = (props) => (
-  <Grid style={styles.groupBtn}>
+  <Grid style={props.year === '106' ? styles.groupBtnThisYear : styles.groupBtn}>
     <Row>
       <Col xs={3} md={3} lg={3}>
         <Image style={styles.pic} src={pic} circle />
       </Col>
       <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>106年度</div>
+        <div style={styles.groupYear}>{props.year}年度</div>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
