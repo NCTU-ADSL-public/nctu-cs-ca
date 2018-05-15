@@ -5,17 +5,10 @@ import { Image } from 'react-bootstrap'
 
 export default class Show extends React.Component {
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      title:'NCTUCS BOT',
-      link:'/ttt',
-      introduce:'<h1>Hey</h1><br/><br/><br/><br/><br/>'
-    }
-  }
   render () {
     return (
       <div className='container'>
+        <div className=' col-md-12 offset-1'>
         <div className='banner-wrapper'>
           <Image
             alt='Banner with text'
@@ -24,19 +17,17 @@ export default class Show extends React.Component {
             rounded
           />
         </div>
-        <h1 className='event-title'>{ this.state.title }</h1>
+        <div className='event-title'>{ this.props.show.title }</div>
         <div className='event-info-wrapper bg-white'>
           <div className='row'>
             <div className='col-7'>
-              <p><i className='fa fa-share-alt' /> 團隊網站: <a target='blank'>點這裡</a></p>
+              <p><i className='fa fa-share-alt' /> 團隊網站: <a target={this.props.show.url} style={{cursor: 'pointer'}}>{this.props.show.url}</a></p>
             </div>
           </div>
-          <div className='divide-horizontal'>
-            <span>專題簡介</span>
-          </div>
-          <section dangerouslySetInnerHTML={{__html: this.state.introduce}} />
+          <p style={{borderBottom: '1px solid #d2d2d2', paddingBottom: '12px'}}>專題簡介</p>
+          <section dangerouslySetInnerHTML={{__html: this.props.show.introduce}} />
         </div>
-
+        </div>
       </div>
     )
   }

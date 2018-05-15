@@ -40,7 +40,8 @@ class Head extends Component {
       email: 'hihi@gmail.com',
     },
     print_courseCategoryArray: printData,
-    isLoading:true
+    isLoading:true,
+    projectName:''
   }
 
   ReloadGrad () {
@@ -189,11 +190,11 @@ class Head extends Component {
         </FadeIn>
       )
     }
-    else if (this.state.selectedIndex >= 10 && this.state.selectedIndex <= 15 ) {
+    else if (this.state.selectedIndex === 10 ) {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <ProjectHome/>
+            <ProjectHome studentProfile={this.state.studentIdcard} project={this.state.project}/>
           </MuiThemeProvider>
         </FadeIn>
       )
@@ -228,9 +229,13 @@ class Head extends Component {
   }
   // xsHidden smHidden
   select (index) {
-    this.setState({selectedIndex: index})
+    this.setState({selectedIndex: index })
   }
 
+  // xsHidden smHidden
+  selectProject = (project) => {
+    this.setState({selectedIndex: 10, project})
+  }
 // <BottomNavigationItem
 //     label="抵免"
 //     icon={checkIcon}
@@ -249,12 +254,8 @@ class Head extends Component {
       () => this.select(7),
       () => this.select(8),
       () => this.select(9),
-      () => this.select(10),
-      () => this.select(11),
-      () => this.select(12),
-      () => this.select(13),
-      () => this.select(14),
     ]
+
     return (
       <Grid id="Head" fluid={true}>
         <Row>
@@ -265,6 +266,7 @@ class Head extends Component {
                   subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
                   selectedIndex={ this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
+                  onTouchProjectTaps={this.selectProject}
           />
           {this.getpage()}
         </Row>

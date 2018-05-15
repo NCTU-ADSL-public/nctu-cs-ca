@@ -157,7 +157,7 @@ class _Navbar extends React.Component {
         <MenuItem divider />
         <MenuItem header>專題主頁</MenuItem>
         {this.state.project_status_data.map(t=>(
-          <MenuItem disabled = {(t.agree === "2") } onClick={(t.agree === '3' || t.agree === '0' )?() => this.deletedata('/students/formDelete', t) : onClicks[id++]}>{t.research_title}&nbsp;{this.getstr(t.agree)}</MenuItem>
+          <MenuItem disabled = {(t.agree === "2") } onClick={(t.agree === '3' || t.agree === '0' )?() => this.deletedata('/students/formDelete', t) : () => this.props.onTouchProjectTaps(t)}>{t.research_title}&nbsp;{this.getstr(t.agree)}</MenuItem>
         ))}
         <MenuItem divider />
         <MenuItem eventKey="4">個人頁面</MenuItem>

@@ -93,7 +93,7 @@ export default class Mail extends React.Component {
   handlemailaction = (action) => {
     let _this = this
     if(action === 'mail'){
-      axios.post('/students/mail/inbox', {
+      axios.post('/mail/inbox', {
         id: _this.props.id
       })
         .then(res => {
@@ -108,7 +108,7 @@ export default class Mail extends React.Component {
         })
     }
     else if (action === 'sent'){
-      axios.post('/students/mail/sent', {
+      axios.post('/mail/sent', {
         id: _this.props.id
       })
         .then(res => {
