@@ -234,7 +234,7 @@ class Head extends Component {
 
   // xsHidden smHidden
   selectProject = (project) => {
-    this.setState({selectedIndex: 10, project})
+    this.setState({selectedIndex: 10, project:project})
   }
 // <BottomNavigationItem
 //     label="抵免"

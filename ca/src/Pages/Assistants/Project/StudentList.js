@@ -64,7 +64,7 @@ class StudentList extends React.Component {
               </thead>
               <tbody>
               {this.state.studentProjects.map((student) => {
-                const foundProjectTeacher = (student.project_tname != null)
+                const foundProjectTeacher = (student.tname != null)
                 return (
                   <tr>
                     <td>{student.student_id}</td>

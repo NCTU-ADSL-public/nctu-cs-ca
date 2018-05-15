@@ -77,11 +77,13 @@ export default class index extends React.Component {
       student_id: _this.props.studentProfile.student_id,
     })
       .then(res => {
+        let data = res.data.filter(t=>t.research_title === _this.state.project.research_title)
+        console.log(data)
         _this.setState({
           Show:{
-            url:res.data.filter(t=>t.research_title === _this.state.project.research_title).link,
-            title:res.data.filter(t=>t.research_title === _this.state.project.research_title).research_title,
-            introduce:res.data.filter(t=>t.research_title === _this.state.project.research_title).intro
+            url:data.link,
+            title:data.research_title,
+            introduce:data.intro
           }
         })
       })
