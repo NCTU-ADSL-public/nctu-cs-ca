@@ -90,11 +90,16 @@ export default class ReplyDialog extends React.Component {
   }
 
   handleClose = (status) => {
+    let students = this.props.participants.map((item)=>(
+      {'student_id': item.student_id}
+    ))
+    console.log(students)
     this.setState({open: false})
     axios.post('/professors/students/ApplyFormSetAgree', {
       research_title: this.props.title,
       tname: this.props.name,
-      agree: status
+      agree: status,
+      student: students
     }).then(res => {
       console.log(res)
     }).catch(err => {

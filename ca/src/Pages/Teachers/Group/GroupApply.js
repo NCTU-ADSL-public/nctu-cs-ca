@@ -106,6 +106,14 @@ class GroupApply extends React.Component {
             { student_id: '0399999',
               sname: '陳罐頭',
               detail: '資工系 網多組3 '
+            },
+            { student_id: '0399777',
+              sname: '李小霖',
+              detail: '資工系 網多組3 '
+            },
+            { student_id: '0391234',
+              sname: '李毛毛',
+              detail: '資工系 網多組3 '
             }
           ],
           year: ''
@@ -148,9 +156,19 @@ class GroupApply extends React.Component {
       name: '彭文志'
       // name: this.props.idCard.name
     }).then(res => {
-      console.log(res)
       this.setState({
         applyList: res.data
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+
+    axios.post('/professors/students/projects', {
+      name: '彭文志'
+      // name: this.props.idCard.name
+    }).then(res => {
+      this.setState({
+        total_number: res.data.total_number,
       })
     }).catch(err => {
       console.log(err)
@@ -208,6 +226,7 @@ const ApplyButton = (props) => {
             status={props.status}
             title={props.title}
             name={props.name}
+            participants={props.participants}
             parentFunction={props.parentFunction}
           />
         </Col>
