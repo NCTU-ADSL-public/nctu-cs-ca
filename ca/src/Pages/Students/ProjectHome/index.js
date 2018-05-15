@@ -65,6 +65,7 @@ export default class index extends React.Component {
 
   componentWillMount () {
     this.fetchData()
+    console.log(this.state.project.research_title)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,6 +80,7 @@ export default class index extends React.Component {
       .then(res => {
         let data = res.data.filter(t=>t.research_title === _this.state.project.research_title)
         console.log(data)
+        console.log(_this.state.project.research_title)
         _this.setState({
           Show:{
             url:data.link,
