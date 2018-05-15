@@ -11,7 +11,8 @@ class StudentList extends React.Component {
     super(props)
     this.state = {
       year: 109,
-      studentProjects: []
+      studentProjects: [],
+      toFilter: [false, false, false, false, false]
     }
   }
 
@@ -46,6 +47,29 @@ class StudentList extends React.Component {
     })
   }
 
+  setFilter = (checked, index) => {
+    let filters = this.state.toFilter.slice(); //creates the clone of the state
+    filters[index] = !checked;
+    this.setState({
+      ...this.state,
+      toFilter: filters
+    })
+  }
+
+  checkVisible = (student) => {
+    if (this.state.toFilter[0] && student.tname != null)
+      return false
+    if (this.state.toFilter[1] && student.program == '資工A')
+      return false
+    if (this.state.toFilter[2] && student.program == '資工B')
+      return false
+    if (this.state.toFilter[3] && student.program == '資電')
+      return false
+    if (this.state.toFilter[4] && student.program == '網多')
+      return false
+    return true
+  }
+
   render () {
     const studentsProject = FakeData.StudentProject
     return (
@@ -64,6 +88,9 @@ class StudentList extends React.Component {
               </thead>
               <tbody>
               {this.state.studentProjects.map((student) => {
+                if (!this.checkVisible(student))
+                  return
+
                 const foundProjectTeacher = (student.tname != null)
                 return (
                   <tr>
@@ -92,11 +119,11 @@ class StudentList extends React.Component {
                 </FormControl>
               </FormGroup>
             </Form>
-            <Badge bgColor='#cc3333'>未找專題</Badge>
-            <Badge bgColor='#64b5f6'>資工A班</Badge>
-            <Badge bgColor='#64b5f6'>資工B班</Badge>
-            <Badge bgColor='#64b5f6'>資電組</Badge>
-            <Badge bgColor='#64b5f6'>網多組</Badge>
+            <Badge bgColor='#5FC86F' onToggle={(checked) => this.setFilter(checked, 0)}>已找專題</Badge>
+            <Badge bgColor='#64b5f6' onToggle={(checked) => this.setFilter(checked, 1)}>資工A班</Badge>
+            <Badge bgColor='#64b5f6' onToggle={(checked) => this.setFilter(checked, 2)}>資工B班</Badge>
+            <Badge bgColor='#64b5f6' onToggle={(checked) => this.setFilter(checked, 3)}>資電組</Badge>
+            <Badge bgColor='#64b5f6' onToggle={(checked) => this.setFilter(checked, 4)}>網多組</Badge>
           </Col>
         </Row>
       </Grid>
