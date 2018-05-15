@@ -64,13 +64,13 @@ class StudentList extends React.Component {
               </thead>
               <tbody>
               {this.state.studentProjects.map((student) => {
-                const foundProjectTeacher = (student.project_tname != null)
+                const foundProjectTeacher = (student.tname != null)
                 return (
                   <tr>
                     <td>{student.student_id}</td>
                     <td>{student.name}</td>
                     <td>{student.program}</td>
-                    <td style={{color: foundProjectTeacher ? '#418166' : '#c61234'}}>{foundProjectTeacher ? student.project_tname : '尚未找到專題教授'}</td>
+                    <td style={{color: foundProjectTeacher ? '#418166' : '#c61234'}}>{foundProjectTeacher ? student.tname : '尚未找到專題教授'}</td>
                   </tr>
                 )
               })}
