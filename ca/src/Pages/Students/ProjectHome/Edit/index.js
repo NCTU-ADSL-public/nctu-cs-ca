@@ -26,7 +26,7 @@ class Edit extends React.Component {
   handleSubmit (event) {
     let _this = this
     event.preventDefault()
-    if (_this.refs.title.title !== '') {
+    if (_this.refs.title.value !== '') {
       event.preventDefault()
       axios.post('/students/editProject', {
         student_id: _this.props.studentProfile.student_id,
