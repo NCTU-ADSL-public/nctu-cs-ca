@@ -1,11 +1,51 @@
 import React from 'react'
+import axios from 'axios'
 import {Grid, Row, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
 
 import Table from '../../../Components/Table'
 import Badge from '../../../Components/Badge'
 import FakeData from '../../../Resources/FakeData/index'
 
-class TeacherList extends React.Component {
+class StudentList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      year: 109,
+      studentProjects: []
+    }
+  }
+
+  componentWillMount () {
+    this.fetchList(this.state.year)
+  }
+
+  handleYearChange = (e) => {
+    this.fetchList(e.target.value)
+  }
+
+  fetchList = (year) => {
+
+    // Format Params
+    const pad = (num, size) => {
+      const s = "000000000" + num;
+      return s.substr(s.length-size);
+    }
+    let yearParam = pad(year-104, 2)
+    console.log(yearParam)
+
+    axios.post('/assistants/researchTeacher', {
+      year: yearParam
+    }).then((resp) => {
+      this.setState({
+        ...this.state,
+        studentProjects: resp.data,
+        year: year
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
   render () {
     const studentsProject = FakeData.StudentProject
     return (
@@ -23,14 +63,14 @@ class TeacherList extends React.Component {
               </tr>
               </thead>
               <tbody>
-              {studentsProject.map((student) => {
-                const foundProjectTeacher = (student.project_tname != null)
+              {this.state.studentProjects.map((student) => {
+                const foundProjectTeacher = (student.tname != null)
                 return (
                   <tr>
                     <td>{student.student_id}</td>
-                    <td>{student.sname}</td>
+                    <td>{student.name}</td>
                     <td>{student.program}</td>
-                    <td style={{color: foundProjectTeacher ? '#418166' : '#c61234'}}>{foundProjectTeacher ? student.project_tname : '尚未找到專題教授'}</td>
+                    <td style={{color: foundProjectTeacher ? '#418166' : '#c61234'}}>{foundProjectTeacher ? student.tname : '尚未找到專題教授'}</td>
                   </tr>
                 )
               })}
@@ -41,10 +81,14 @@ class TeacherList extends React.Component {
             <Form >
               <FormGroup controlId="formControlsSelect">
                 <ControlLabel>學生畢業學年度</ControlLabel>
-                <FormControl componentClass='select' placeholder='請選擇畢業學年度'>
-                  <option value='107' selected>107</option>
+                <FormControl
+                  componentClass='select'
+                  placeholder='請選擇畢業學年度'
+                  onChange={this.handleYearChange}
+                >
+                  <option value='107'>107</option>
                   <option value='108'>108</option>
-                  <option value='109'>109</option>
+                  <option value='109' selected>109</option>
                 </FormControl>
               </FormGroup>
             </Form>
@@ -60,4 +104,4 @@ class TeacherList extends React.Component {
   }
 }
 
-export default TeacherList
+export default StudentList
