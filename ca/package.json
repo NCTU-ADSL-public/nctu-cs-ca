@@ -8,6 +8,7 @@
     "animate.css": "^3.5.2",
     "axios": "^0.16.2",
     "express": "^4.16.2",
+    "firebase": "^5.0.3",
     "material-ui": "^0.19.4",
     "prop-types": "^15.6.0",
     "rc-tabs": "^9.2.0",

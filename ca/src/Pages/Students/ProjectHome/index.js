@@ -2,8 +2,22 @@ import React from 'react'
 import Show from './Show/index'
 import Edit from  './Edit'
 import axios from 'axios'
-
+import firebase from 'firebase'
 import PageWrapper from '../../../Components/PageWrapper'
+
+let config = {
+  apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
+  authDomain: 'code-86ba4.firebaseapp.com',
+  databaseURL: 'https://code-86ba4.firebaseio.com',
+  projectId: 'code-86ba4',
+  storageBucket: 'code-86ba4.appspot.com',
+  messagingSenderId: '354539568437'
+}
+if (!firebase.apps.length) {
+  firebase.initializeApp(config)
+}
+let storageRef = firebase.storage().ref()
+
 
 export default class index extends React.Component {
 
@@ -96,6 +110,18 @@ export default class index extends React.Component {
       })
       .catch(err => {
         console.log(err)
+      })
+
+      let pathReference = storageRef.child(_this.state.project.research_title + '/image/' + 'pp.png')
+      pathReference.getDownloadURL().then(url => {
+        _this.setState({
+          Show:{
+            image:url,
+            url:_this.state.Show.url,
+            title:_this.state.Show.title,
+            introduce:_this.state.Show.introduce
+          }
+        })
       })
 
   }
