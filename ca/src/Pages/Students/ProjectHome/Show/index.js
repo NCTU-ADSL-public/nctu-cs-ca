@@ -21,8 +21,8 @@ export default class Show extends React.Component {
           <div className='event-info-wrapper bg-white'>
             <div className='row'>
               <div className='col-7'>
-                <p><i className='fa fa-share-alt' /> 團隊網站: <a target={this.props.show.url} style={{cursor: 'pointer'}}>{this.props.show.url}</a></p>
-                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a onClick={this.downloadfile} target={this.props.show.url} style={{cursor: 'pointer'}}>{this.props.show.url}</a></p>
+                <p><i className='fa fa-share-alt' /> 團隊網站: <a href={this.props.show.url} style={{cursor: 'pointer'}}>{this.props.show.url}</a></p>
+                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.show.file} style={{cursor: 'pointer'}}>{this.props.show.file}</a></p>
               </div>
             </div>
             <p style={{borderBottom: '1px solid #d2d2d2', paddingBottom: '12px'}}>專題簡介</p>

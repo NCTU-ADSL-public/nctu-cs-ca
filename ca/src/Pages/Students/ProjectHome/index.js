@@ -77,8 +77,8 @@ export default class index extends React.Component {
     }
   }
 
-  componentWillMount () {
-    this.fetchData()
+  async componentWillMount () {
+    await this.fetchData()
     console.log(this.state.project.research_title)
   }
 
@@ -111,15 +111,23 @@ export default class index extends React.Component {
       .catch(err => {
         console.log(err)
       })
-
+      let image
+      let file
       let pathReference = storageRef.child(_this.state.project.research_title + '/image/' + 'pp.png')
       pathReference.getDownloadURL().then(url => {
         _this.setState({
           Show:{
-            image:url,
-            url:_this.state.Show.url,
-            title:_this.state.Show.title,
-            introduce:_this.state.Show.introduce
+            ..._this.state.Show,
+            image:url
+          }
+        })
+      })
+      pathReference = storageRef.child(_this.state.project.research_title + '/file/' + '0416008_report.pdf')
+      pathReference.getDownloadURL().then(url => {
+        _this.setState({
+          Show:{
+            ..._this.state.Show,
+            file:url
           }
         })
       })

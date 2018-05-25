@@ -95,8 +95,7 @@ class Edit extends React.Component {
           let downloadURL = uploadTask.snapshot.downloadURL
           _this.props.onclick()
         })
-      }
-      if (this.state.file !== 'no') {
+      } else if (this.state.file !== 'no') {
         storageRef.child(this.props.show.title + '/file/').delete().then(function () {
         }).catch(function (error) {
           // Uh-oh, an error occurred!
@@ -131,6 +130,8 @@ class Edit extends React.Component {
           let downloadURL = uploadTask.snapshot.downloadURL
           _this.props.onclick()
         })
+      } else {
+        _this.props.onclick()
       }
     }
   }
