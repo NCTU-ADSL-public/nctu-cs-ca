@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
-import {Grid,Row,Col} from 'react-bootstrap'
+import {Grid, Row, Col} from 'react-bootstrap'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import HomeItem from './Home.js'
 import GraduationItem from './Graduation/index'
 import ProjectItem from './Project/index'
+import Mail from '../../Components/mail'
 
 import Navbar from '../../Components/Navbar'
 
@@ -32,7 +34,8 @@ class Head extends React.Component {
             idCard: {
                 name: '小翠',
                 prog: '助理',
-                grad: ''
+                grad: '',
+                id: 'T1234'
             }
         }
     }
@@ -66,6 +69,17 @@ class Head extends React.Component {
               </FadeIn>
             </div>,
             document.getElementById('page'))
+        } else if (index === 4) {
+          ReactDOM.render(
+            <div>
+              <FadeIn>
+                <MuiThemeProvider>
+                  <Mail id={this.state.idCard.id} />
+                </MuiThemeProvider>
+              </FadeIn>
+            </div>,
+            document.getElementById('page')
+          )
         }
 
         this.setState({selectedIndex: index})
@@ -76,6 +90,8 @@ class Head extends React.Component {
         () => this.select(0),
         () => this.select(1),
         () => this.select(2),
+        () => this.select(3),
+        () => this.select(4),
       ]
       return (
         <Grid id='Head' fluid={true}>

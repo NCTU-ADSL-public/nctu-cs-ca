@@ -60,9 +60,9 @@ class TeacherList extends React.Component {
               <FormGroup controlId="formControlsSelect">
                 <ControlLabel>學生畢業學年度</ControlLabel>
                 <FormControl componentClass='select' placeholder='請選擇畢業學年度'>
-                  <option value='107' selected>107</option>
+                  <option value='107'>107</option>
                   <option value='108'>108</option>
-                  <option value='109'>109</option>
+                  <option value='109' selected>109</option>
                 </FormControl>
               </FormGroup>
             </Form>

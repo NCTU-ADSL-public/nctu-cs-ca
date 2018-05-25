@@ -14,16 +14,32 @@ let style = {
 }
 
 class CABadge extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      toggled: true
+    }
+  }
+
+  toggle = () => {
+    const newValue = !this.state.toggled
+    this.setState({
+      toggled: newValue
+    })
+    if (this.props.onToggle)
+      this.props.onToggle(newValue)
+  }
+
   render () {
     const color = this.props.color || '#fff'
     const bgColor = this.props.bgColor || '#777'
     style = {
       ...style,
       color: color,
-      background: bgColor
+      background: this.state.toggled ? bgColor : '#CCC'
     }
     return (
-      <Badge style={style}>
+      <Badge style={style} onClick={this.toggle}>
         {this.props.children}
       </Badge>
     )
