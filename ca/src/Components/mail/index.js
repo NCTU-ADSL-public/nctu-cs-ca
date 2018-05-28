@@ -46,7 +46,7 @@ export default class Mail extends React.Component {
 
   componentWillMount () {
     let _this = this
-    axios.post('/students/mail/inbox', {
+    axios.post('/mail/inbox', {
       id: _this.props.id
     })
       .then(res => {

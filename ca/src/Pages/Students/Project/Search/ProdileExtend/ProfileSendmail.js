@@ -84,7 +84,7 @@ export default class DialogButton extends React.Component {
     this.handleClose()
   }
 
-  onChange (event) {
+  onChange = (event) => {
     this.setState({
       ckeditorContent: event.editor.getData()
     })
