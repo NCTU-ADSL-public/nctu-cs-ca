@@ -101,7 +101,7 @@ class Profile extends React.Component {
     let _this = this
     console.log(nextProps.teacher)
     _this.setState({
-      photo: Loading
+      photo: ''
     })
     if (directory !== '') {
       let pathReference = storageRef.child(directory)
