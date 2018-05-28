@@ -78,7 +78,6 @@ export default class index extends React.Component {
     this.setState({
       initItem: resp.data
     })}.bind(this)).catch(err => {
-      window.location.reload('/logout')
       console.log(err)
     })
   }

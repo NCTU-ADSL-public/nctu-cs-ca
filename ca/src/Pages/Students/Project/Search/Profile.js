@@ -60,6 +60,13 @@ const styles = {
 }
 
 class Profile extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      photo: ''
+    }
+  }
+
   fetchData () {
     let _this = this
     let directory = this.props.profile.photo
