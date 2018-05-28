@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ProfileSendmail from './ProdileExtend/ProfileSendmail'
 import ProfileSendProjectAgree from './ProdileExtend/ProfileSendProjectAgree'
 import firebase from 'firebase'
+import Loading from '../../../../Components/Loading'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
@@ -99,12 +100,20 @@ class Profile extends React.Component {
     let directory = nextProps.profile.photo
     let _this = this
     console.log(nextProps.teacher)
+    _this.setState({
+      photo: Loading
+    })
     if (directory !== '') {
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
         _this.setState({
           photo: url
         })
+      }).catch(function (error) {
+        _this.setState({
+          photo: pic
+        })
+        // Uh-oh, an error occurred!
       })
     }
   }
