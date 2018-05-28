@@ -62,7 +62,7 @@ export default class DialogButton extends React.Component {
       content:_this.state.ckeditorContent,
       time:time,
       sender_email:_this.props.studentIdcard.email,
-      receiver_email:'danny021406@gmail.com',//_this.props.profile.email,
+      receiver_email:_this.props.profile.email,
       teacher:_this.props.profile.name,
       name: _this.props.studentIdcard.sname,
       id: _this.props.studentIdcard.student_id,
@@ -72,7 +72,6 @@ export default class DialogButton extends React.Component {
       })
       .catch(err => {
         //window.location.replace("/logout ");
-        window.location.reload('/logout')
         console.log(err)
       })
     this.handleClose()

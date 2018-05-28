@@ -85,7 +85,6 @@ class Profile extends React.Component {
   componentWillMount () {
     let directory = this.props.profile.photo
     let _this = this
-    console.log(this.props.teacher)
     if (directory !== '') {
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
@@ -111,7 +110,7 @@ class Profile extends React.Component {
         })
       }).catch(function (error) {
         _this.setState({
-          photo: pic
+          photo: ''
         })
         // Uh-oh, an error occurred!
       })
@@ -129,7 +128,7 @@ class Profile extends React.Component {
                   <ProfileSendmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
                   <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
                 </div>
-                <Image style={styles.pic} src={this.props.profile.photo === '' ? pic : this.state.photo} circle />
+                <Image style={styles.pic} src={this.state.photo === '' ? pic : this.state.photo} circle />
                 <div style={styles.name}> {this.props.profile.name} </div>
                 <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
                 <div style={styles.item}> {this.props.profile.email} </div>

@@ -192,7 +192,7 @@ export default class DialogButton extends React.Component {
                 _this.handleClose()
               }
               else{
-                alert('表單建立失敗，請重新送出')
+                alert('申請失敗，請重新送出，如有審核中的專題將不能申請。')
               }
           })
           .catch(err => {
