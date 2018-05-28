@@ -87,7 +87,6 @@ class GridListExampleSingleLine extends React.Component {
         })
         .catch(err => {
           console.log(err)
-          window.location.reload('/logout')
         })
     }
   }
