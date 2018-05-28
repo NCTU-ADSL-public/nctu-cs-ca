@@ -6,14 +6,6 @@ import TextField from 'material-ui/TextField'
 import axios from 'axios'
 import Email from 'material-ui/svg-icons/communication/email'
 
-
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
-
 const buttonStyle = {
   marginTop:'4',
   width:'140px',
@@ -68,20 +60,14 @@ export default class DialogButton extends React.Component {
   handleSend = () => {
     let _this = this
     let dt = new Date();
-    // console.log(dt.getFullYear())
-    // console.log(dt.getMonth())
-    // console.log(dt.getDate())
-    // console.log(dt.getHours())
-    // console.log(dt.getMinutes())
-    // console.log(dt.getSeconds())
-    // console.log(_this.state.titlevalue)
     let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
-    //console.log(time)
     axios.post('/students/mail/sendtoteacher', {
       title:_this.state.titlevalue,
       content:_this.state.value,
       time:time,
-      teacher:_this.props.name,
+      sender_email:_this.props.profile.email,
+      receiver_email:'danny021406@gmail.com',//_this.props.studentIdcard.email,
+      teacher:_this.props.profile.name,
       name: _this.props.studentIdcard.sname,
       id: _this.props.studentIdcard.student_id,
     })

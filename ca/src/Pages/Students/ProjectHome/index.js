@@ -41,7 +41,7 @@ export default class index extends React.Component {
       Show: {
         title: this.props.project.research_title,
         teacher: this.props.project.tname,
-        url: '/ttt',
+        url: '',
         introduce: ''
       },
       state: 'show'

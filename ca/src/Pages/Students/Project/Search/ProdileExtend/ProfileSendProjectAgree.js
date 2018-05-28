@@ -2,18 +2,9 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
 import axios from 'axios'
 import People from 'material-ui/svg-icons/social/people'
 import {Form,FormGroup, ControlLabel, FormControl, Well } from 'react-bootstrap'
-
-
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
 
 const buttonStyle = {
   marginTop:'4',

@@ -66,7 +66,7 @@ class Profile extends React.Component {
              <FadeIn>
                <div style={fontStyle}>
                  <div style={{float: 'right'}}>
-                   <ProfileSendmail name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                   <ProfileSendmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
                    <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
                  </div>
                  <Image style={styles.pic} src={ this.props.profile.photo === '' ? pic : this.props.profile.photo } circle />
