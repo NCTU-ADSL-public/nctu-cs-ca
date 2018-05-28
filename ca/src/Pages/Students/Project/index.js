@@ -74,12 +74,12 @@ export default class index extends React.Component {
   }
 
   fetchData(){
-    axios.get('/students/projectNum').then(function (resp) {
+    /*axios.get('/students/projectNum').then(function (resp) {
     this.setState({
       initItem: resp.data
     })}.bind(this)).catch(err => {
       console.log(err)
-    })
+    })*/
   }
 
   async componentWillMount(){
