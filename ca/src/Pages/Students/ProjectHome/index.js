@@ -50,7 +50,6 @@ export default class index extends React.Component {
 
   async componentWillMount () {
     await this.fetchData()
-    console.log(this.state.project.research_title)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -80,7 +79,6 @@ export default class index extends React.Component {
       })
       .catch(err => {
         console.log(err)
-        window.location.reload('/logout')
       })
     let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.Show.teacher + '/' + this.state.Show.title + '/image/image.jpg'
     let pathReference = storageRef.child(directory)
