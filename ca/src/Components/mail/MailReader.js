@@ -63,7 +63,7 @@ export default class MailReader extends React.Component {
           titleStyle={titleStyle}
           bodyStyle={bodyStyle}
         >
-          {this.props.data.content}
+          <section dangerouslySetInnerHTML={{__html: this.props.data.content}} />
           <br />
           <br />
           <br />

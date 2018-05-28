@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import axios from 'axios'
 import Email from 'material-ui/svg-icons/communication/email'
+import CKEditor from 'react-ckeditor-component'
 
 const buttonStyle = {
   marginTop:'4',
@@ -16,6 +17,7 @@ const buttonStyle = {
 const contentStyle = {
   width:'80%',
   maxWidth: 'none',
+  height: '150vh'
 }
 
 const bodyStyle = {
@@ -34,6 +36,7 @@ export default class DialogButton extends React.Component {
     open: false,
     value: 'Property Value',
     titlevalue: 'Property Value',
+    ckeditorContent:''
   };
 
   handleOpen = () => {
@@ -63,7 +66,7 @@ export default class DialogButton extends React.Component {
     let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
     axios.post('/students/mail/sendtoteacher', {
       title:_this.state.titlevalue,
-      content:_this.state.value,
+      content:_this.state.ckeditorContent,
       time:time,
       sender_email:_this.props.studentIdcard.email,
       receiver_email:'danny021406@gmail.com',//_this.props.profile.email,
@@ -79,6 +82,12 @@ export default class DialogButton extends React.Component {
         console.log(err)
       })
     this.handleClose()
+  }
+
+  onChange (event) {
+    this.setState({
+      ckeditorContent: event.editor.getData()
+    })
   }
 
   render() {
@@ -121,15 +130,7 @@ export default class DialogButton extends React.Component {
           onRequestClose={this.handleClose}
           contentStyle={contentStyle}
         >
-
-          <TextField
-            hintText="內容"
-            fullWidth = {true}
-            multiLine={true}
-            rows={10}
-            rowsMax={99}
-            onChange={this.handleChange}
-          />
+          <CKEditor activeClass='p10' content={this.state.ckeditorContent} events={{'change': this.onChange}} />
         </Dialog>
       </div>
     );
