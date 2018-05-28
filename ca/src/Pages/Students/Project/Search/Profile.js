@@ -86,9 +86,7 @@ class Profile extends React.Component {
   }
 
   async componentWillReceiveProps (nextProps) {
-    if (this.props.name !== nextProps.name) {
-      await this.fetchData()
-    }
+    await this.fetchData()
   }
 
   render () {
