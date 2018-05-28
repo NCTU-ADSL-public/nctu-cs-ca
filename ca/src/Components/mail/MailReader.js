@@ -3,50 +3,42 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
 const customContentStyle = {
-  fontSize: "1em",
-  fontWeight: "500",
-  letterSpacing: "1px",
-  fontFamily: 'Noto Sans CJK TC',
-};
+  fontSize: '1em',
+  fontWeight: '500',
+  letterSpacing: '1px',
+  fontFamily: 'Noto Sans CJK TC'
+}
 
 const bodyStyle = {
   fontFamily: 'Noto Sans CJK TC',
-  fontSize: "1em",
-  fontWeight: "500",
-  letterSpacing: "1px",
-  color:'#454545'
-};
+  fontSize: '1em',
+  fontWeight: '500',
+  letterSpacing: '1px',
+  color: '#454545'
+}
 const titleStyle = {
   fontFamily: 'Noto Sans CJK TC',
-  fontSize: "2em",
-  fontWeight: "500",
-  letterSpacing: "1px",
-  color:'#565656'
-};
+  fontSize: '2em',
+  fontWeight: '500',
+  letterSpacing: '1px',
+  color: '#565656'
+}
 
-const fontStyle={
-  verticalAlign: "default",
-  fontSize: "1em",
-  fontWeight: "500",
-  letterSpacing: "1px",
-  fontFamily: 'Noto Sans CJK TC',
+const fontStyle = {
+  verticalAlign: 'default',
+  fontSize: '1em',
+  fontWeight: '500',
+  letterSpacing: '1px',
+  fontFamily: 'Noto Sans CJK TC'
 }
 
 export default class MailReader extends React.Component {
-
   render () {
     const actions = [
       <FlatButton
-        label='Cancel'
-        primary={true}
+        label='關閉'
+        primary
         labelStyle={fontStyle}
-        onClick={this.props.handleClose}
-      />,
-      <FlatButton
-        label='Submit'
-        primary={true}
-        labelStyle={fontStyle}
-        keyboardFocused={true}
         onClick={this.props.handleClose}
       />
     ]

@@ -63,7 +63,7 @@ export default class index extends React.Component {
       student_id: _this.props.studentProfile.student_id
     })
       .then(res => {
-        let data = res.data
+        let data = res.data[0]
         let data_
         for (let i = 0; i < data.length; i++) {
           if (data[i].research_title === _this.state.project.research_title) { data_ = data[i] }
