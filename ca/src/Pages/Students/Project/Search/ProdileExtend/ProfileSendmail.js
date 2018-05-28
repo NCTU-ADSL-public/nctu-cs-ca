@@ -37,22 +37,15 @@ export default class DialogButton extends React.Component {
     value: 'Property Value',
     titlevalue: 'Property Value',
     ckeditorContent:''
-  };
+  }
 
   handleOpen = () => {
     this.setState({open: true});
-  };
+  }
 
   handleClose = () => {
     this.setState({open: false});
-  };
-
-
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  };
+  }
 
   handleChangetitle = (event) => {
     this.setState({

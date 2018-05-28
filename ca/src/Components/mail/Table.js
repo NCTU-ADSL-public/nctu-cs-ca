@@ -59,7 +59,7 @@ export default class TableMail extends Component {
     let mail = this.props.tableData[index]
     let _this = this
     axios.post('/mail/content', {
-      mailID: mail.mail_id
+      mail_id: mail.mail_id
     })
       .then(res => {
         _this.setState({
