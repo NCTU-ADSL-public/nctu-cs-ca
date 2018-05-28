@@ -55,64 +55,10 @@ class _Navbar extends React.Component {
     this.state = {
       selectedButtonIndex: null,
       onClicks: props.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index)),
-      project_status_data:[
-        {"student_id":"0316048",
-          "sname":"蘇炳立",
-          "research_title":"NCTU CS Bot",
-          "tname":"彭文志",
-          "agree":"1",
-          "phone":"222",
-          "email":"1111"},
-        {"student_id":"0316048",
-          "sname":"蘇炳立",
-          "research_title":"我要再做一個研究!",
-          "tname":"彭文志",
-          "agree":"3",
-          "phone":"222",
-          "email":"1111"}
-      ]
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.onTouchTaps)
-    // this.setState({
-    //   ...this.state,
-    //   onClicks: nextProps.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index))
-    // })
-    let _this = this
-    axios.post('/students/applyState', {
-      id:nextProps.id
-    })
-      .then(res => {
-        _this.setState({
-          project_status_data:res.data,
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
   }
 
   componentWillMount () {
-  }
-
-  deletedata = (url, data) => {
-    let _this = this
-    if( window.confirm('請先知會您的隊友再刪除資料') ){
-      axios.post('/students/formDelete', {
-        research_title:data.research_title,
-        tname:data.tname
-      })
-        .then(res => {
-          _this.setState({
-            project_status_data: this.state.project_status_data.filter(t=>t.research_title!==data.research_title)
-          })
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
   }
 
   onToggleCollapse = (expanded) => {
@@ -155,11 +101,6 @@ class _Navbar extends React.Component {
       >
         <MenuItem eventKey="1" onClick={onClicks[4]}>郵件</MenuItem>
         <MenuItem divider />
-        <MenuItem header>專題主頁</MenuItem>
-        {this.state.project_status_data.map(t=>(
-          <MenuItem disabled = {(t.agree === "2") } onClick={(t.agree === '3' || t.agree === '0' )?() => this.deletedata('/students/formDelete', t) : () => this.props.onTouchProjectTaps(t)}>{t.research_title}&nbsp;{this.getstr(t.agree)}</MenuItem>
-        ))}
-        <MenuItem divider />
         <MenuItem eventKey="4">個人頁面</MenuItem>
       </DropdownButton>
     )
@@ -187,6 +128,7 @@ class _Navbar extends React.Component {
         <NavButton key={2} label='課程地圖' icon='fa fa-map' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
         //<NavButton key={3} label='課程抵免' icon='fa fa-users' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
         <NavButton key={3} label='教授' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
+        <NavButton key={5} label='專題' icon='glyphicon glyphicon-file' onClick={onClicks[5]} selected={selectedButtonIndex === 5}/>,
       ],
       'assistant': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,

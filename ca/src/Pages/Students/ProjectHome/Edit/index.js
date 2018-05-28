@@ -34,6 +34,8 @@ class Edit extends React.Component {
       image: 'no',
       file: 'no'
     }
+    console.log(Number(this.props.studentProfile.student_id[1]) + 102)
+    console.log(this.props.studentProfile)
   }
 
   onChange (event) {
@@ -42,7 +44,7 @@ class Edit extends React.Component {
     })
   }
 
-  handleSubmit (event) {
+  async handleSubmit (event) {
     let _this = this
     event.preventDefault()
     if (_this.refs.title.value !== '') {
@@ -60,77 +62,38 @@ class Edit extends React.Component {
       })
 
       if (this.state.image !== 'no') {
-        storageRef.child(this.props.show.title + '/image/').delete().then(function () {
+        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.show.teacher + '/' + this.props.show.title + '/image/'
+        storageRef.child(directory).delete().then(function () {
         }).catch(function (error) {
           // Uh-oh, an error occurred!
         })
 
         let file = this.state.image
-        let uploadTask = storageRef.child(this.props.show.title + '/image/' + file.name).put(file)
+        let uploadTask = storageRef.child(directory + 'image.jpg').put(file)
         uploadTask.on('state_changed', function (snapshot) {
-          // 觀察狀態變化，例如：progress, pause, and resume
-
-          // 取得檔案上傳狀態，並用數字顯示
-
-          let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log('Upload is ' + progress + '% done')
-          switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-
-              console.log('Upload is paused')
-              break
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-
-              console.log('Upload is running')
-              break
-          }
         }, function (error) {
-          // Handle unsuccessful uploads
           console.log(error)
         }, function () {
-          // Handle successful uploads on complete
-
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-
-          let downloadURL = uploadTask.snapshot.downloadURL
-          _this.props.onclick()
+          if (_this.state.file === 'no') {
+            _this.props.onclick()
+          }
         })
-      } else if (this.state.file !== 'no') {
-        storageRef.child(this.props.show.title + '/file/').delete().then(function () {
+      }
+      if (this.state.file !== 'no') {
+        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.show.teacher + '/' + this.props.show.title + '/file/'
+        storageRef.child(directory).delete().then(function () {
         }).catch(function (error) {
-          // Uh-oh, an error occurred!
         })
 
         let file = this.state.file
-        let uploadTask = storageRef.child(this.props.show.title + '/file/' + file.name).put(file)
+        let uploadTask = storageRef.child(directory + 'file.pdf').put(file)
         uploadTask.on('state_changed', function (snapshot) {
-          // 觀察狀態變化，例如：progress, pause, and resume
-
-          // 取得檔案上傳狀態，並用數字顯示
-          let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log('Upload is ' + progress + '% done')
-          switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-
-              console.log('Upload is paused')
-              break
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-
-              console.log('Upload is running')
-              break
-          }
         }, function (error) {
-          // Handle unsuccessful uploads
           console.log(error)
         }, function () {
-          // Handle successful uploads on complete
-
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-
-          let downloadURL = uploadTask.snapshot.downloadURL
           _this.props.onclick()
         })
-      } else {
+      } else if ((_this.state.image === 'no')) {
         _this.props.onclick()
       }
     }
@@ -155,16 +118,17 @@ class Edit extends React.Component {
       <div className='container bg-white'>
         <div className='row'>
           <div className='col-md-12 offset-1'>
-            <h1 className='title offset-1'>
+            <h1 className='title offset-1' >
               編輯專題主頁
             </h1>
-            <br />
-            <br />
+            <div className='divide-horizontal'>
+            </div>
             <form>
               <LabeledInput label='圖片'>
                 <div className='upload-btn-wrapper'>
                   <button className='btn' style={{cursor: 'pointer'}}> 上傳圖片</button>
                   <input accept='image/*' type='file' hidden onChange={(e) => this.handleImageChange(e.target.files[0])} />
+                  {this.state.image === 'no' ? '' : this.state.image.name}
                   <div className='text-center clickable upload-picture' >
                     點選以上傳,建議800x400以達最佳效果(需小於2MB)
                   </div>
@@ -172,8 +136,12 @@ class Edit extends React.Component {
               </LabeledInput>
               <LabeledInput label='報告'>
                 <div className='upload-btn-wrapper'>
-                  <button className='btn' style={{cursor: 'pointer'}}> 上傳報告</button>
+                  <button accept='application/pdf' className='btn' style={{cursor: 'pointer'}}> 上傳報告</button>
                   <input type='file' hidden onChange={(e) => this.handleFileChange(e.target.files[0])} />
+                  {this.state.file === 'no' ? '' : this.state.file.name}
+                  <div className='text-center clickable upload-picture' >
+                    限上傳PDF檔案
+                  </div>
                 </div>
               </LabeledInput>
               <LabeledInput label='主題'>

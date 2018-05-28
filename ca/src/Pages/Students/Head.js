@@ -12,6 +12,7 @@ import CreditItem from './Credit/Credit.js'
 import Project from './Project/index'
 import Mail from '../../Components/mail'
 import ProjectHome from './ProjectHome'
+import ProjectList from './ProjectList'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
@@ -41,12 +42,65 @@ class Head extends Component {
     },
     print_courseCategoryArray: printData,
     isLoading:true,
-    projectName:''
-  }
-
-  ReloadGrad () {
-    loadFlag = true
-    window.location.reload()
+    projectName:'',
+    project_status_data:[
+      {"student_id":"0316048",
+        "sname":"蘇炳立",
+        "research_title":"NCTU CS Bot",
+        "tname":"彭文志",
+        "agree":"1",
+        "phone":"222",
+        "email":"1111"},
+      {"student_id":"0316048",
+        "sname":"蘇炳",
+        "research_title":"NCTU C Bot",
+        "tname":"彭文志",
+        "agree":"2",
+        "phone":"222",
+        "email":"1111"},
+      {"student_id":"0316048",
+        "sname":"蘇炳立",
+        "research_title":"我要再做一個研究!",
+        "tname":"彭文志",
+        "agree":"3",
+        "phone":"222",
+        "email":"1111"},
+      {"student_id":"0316048",
+        "sname":"蘇炳立",
+        "research_title":"我要再做一個研究!",
+        "tname":"彭文志",
+        "agree":"3",
+        "phone":"222",
+        "email":"1111"},
+      {"student_id":"0316048",
+        "sname":"蘇炳立",
+        "research_title":"我要再做一個研究!",
+        "tname":"彭文志",
+        "agree":"3",
+        "phone":"222",
+        "email":"1111"},
+      {"student_id":"0316048",
+        "sname":"蘇炳立",
+        "research_title":"我要再做一個研究!",
+        "tname":"彭文志",
+        "agree":"3",
+        "phone":"222",
+        "email":"1111"},
+      {"student_id":"0316048",
+        "sname":"蘇炳立",
+        "research_title":"我要再做一個研究!",
+        "tname":"彭文志",
+        "agree":"3",
+        "phone":"222",
+        "email":"1111"},
+      {"student_id":"0316048",
+        "sname":"蘇炳立",
+        "research_title":"我要再做一個研究!",
+        "tname":"彭文志",
+        "agree":"3",
+        "phone":"222",
+        "email":"1111"}
+    ]
   }
 
   async componentWillMount () {
@@ -78,6 +132,19 @@ class Head extends Component {
       _this.setState({
         studentIdcard: studentData.data[0]
       })
+
+      axios.post('/students/applyState', {
+        id:studentData.data[0].student_id
+      })
+        .then(res => {
+          _this.setState({
+            project_status_data:res.data,
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
     }).catch(err => {
       console.log(err)
     })
@@ -124,9 +191,6 @@ class Head extends Component {
       console.log(err)
     })
 
-  }
-
-  componentDidMount () {
   }
 
   picButtonCallback = (selection) => {
@@ -190,11 +254,11 @@ class Head extends Component {
         </FadeIn>
       )
     }
-    else if (this.state.selectedIndex === 10 ) {
+    else if (this.state.selectedIndex === 5) {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <ProjectHome studentProfile={this.state.studentIdcard} project={this.state.project}/>
+            <ProjectList project={this.state.project_status_data} studentProfile={this.state.studentIdcard}/>
           </MuiThemeProvider>
         </FadeIn>
       )

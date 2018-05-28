@@ -1,14 +1,13 @@
 
-.edit-event{
-	.title{
-		font-size: 24px;
-		line-height: 100px;
-	}
-	.upload-picture{
-	    border: 1px #eeeeee solid;
-	    min-height: 170px;
-	    width: 100%;
-	}
+.title{
+	font-size: 40px;
+	line-height: 50px;
+	color: #7B7B7B;
+}
+.upload-picture{
+	border: 1px #eeeeee solid;
+	min-height: 50px;
+	width: 100%;
 }
 
 .upload-btn-wrapper {
@@ -16,16 +15,17 @@
 	overflow: hidden;
 	cursor: pointer;
 	display: inline-block;
-	.btn {
-		border: 2px solid gray;
-		color: gray;
-		background-color: white;
-		padding: 8px 20px;
-		border-radius: 8px;
-		cursor: pointer;
-		font-size: 20px;
-		font-weight: bold;
-	}
+}
+
+.upload-btn-wrapper-btn {
+	border: 2px solid gray;
+	color: gray;
+	background-color: white;
+	padding: 8px 20px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 
