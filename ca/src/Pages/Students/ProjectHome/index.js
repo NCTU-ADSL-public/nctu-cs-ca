@@ -70,6 +70,7 @@ export default class index extends React.Component {
         }
         console.log(data.filter(t => t.research_title === _this.state.project.research_title))
         console.log(_this.state.project.research_title)
+        console.log(res.data)
         _this.setState({
           Show: {
             url: data.filter(t => t.research_title === _this.state.project.research_title).link,
