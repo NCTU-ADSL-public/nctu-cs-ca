@@ -86,9 +86,6 @@ class Profile extends React.Component {
     let directory = this.props.profile.photo
     let _this = this
     console.log(this.props.teacher)
-    _this.setState({
-      photo: ''
-    })
     if (directory !== '') {
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
@@ -104,7 +101,7 @@ class Profile extends React.Component {
     let _this = this
     console.log(nextProps.teacher)
     _this.setState({
-      photo: ''
+      photo: Loading
     })
     if (directory !== '') {
       let pathReference = storageRef.child(directory)
