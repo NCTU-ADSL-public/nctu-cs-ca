@@ -130,7 +130,7 @@ export default class index extends React.Component {
 
         { this.state.teacher !== "default" ?
           <div style={styles.course.main}>
-            <Profile profile = {this.state.profile} studentIdcard={this.props.studentIdcard}/>
+            <Profile teacher={this.state.teacher} profile = {this.state.profile} studentIdcard={this.props.studentIdcard}/>
           </div>: showDefault }
 
       </div>

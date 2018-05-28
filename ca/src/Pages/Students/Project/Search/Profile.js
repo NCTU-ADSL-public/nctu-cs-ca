@@ -81,14 +81,24 @@ class Profile extends React.Component {
     }
   }
 
-  async componentDidMount () {
-    await this.fetchData()
+  componentWillMount () {
+    let directory = this.props.profile.photo
+    let _this = this
+    console.log(this.props.teacher)
+    if (directory !== '') {
+      let pathReference = storageRef.child(directory)
+      pathReference.getDownloadURL().then(url => {
+        _this.setState({
+          photo: url
+        })
+      })
+    }
   }
 
-  async componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps) {
     let directory = nextProps.profile.photo
     let _this = this
-    console.log(nextProps.profile)
+    console.log(nextProps.teacher)
     if (directory !== '') {
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
