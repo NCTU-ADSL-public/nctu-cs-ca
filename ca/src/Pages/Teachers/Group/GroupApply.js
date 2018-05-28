@@ -153,8 +153,8 @@ class GroupApply extends React.Component {
   }
   fetchData () {
     axios.post('/professors/students/applyList', {
-      name: '彭文志'
-      // name: this.props.idCard.name
+      // name: '彭文志'
+      name: this.props.idCard.name
     }).then(res => {
       this.setState({
         applyList: res.data
@@ -164,8 +164,8 @@ class GroupApply extends React.Component {
     })
 
     axios.post('/professors/students/projects', {
-      name: '彭文志'
-      // name: this.props.idCard.name
+      // name: '彭文志'
+      name: this.props.idCard.name
     }).then(res => {
       this.setState({
         total_number: res.data.total_number,
