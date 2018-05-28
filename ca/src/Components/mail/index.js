@@ -103,7 +103,8 @@ export default class Mail extends React.Component {
             realdata:res.data,
           })
         })
-        .catch(err => {
+        .catch(err =>{
+          window.location.reload('/logout')
           console.log(err)
         })
     }
@@ -119,6 +120,7 @@ export default class Mail extends React.Component {
           })
         })
         .catch(err => {
+          window.location.reload('/logout')
           console.log(err)
         })
     }

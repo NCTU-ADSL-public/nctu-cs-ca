@@ -59,6 +59,7 @@ class Edit extends React.Component {
       }).then(res => {
       }).catch(err => {
         console.log(err)
+        window.location.reload('/logout')
       })
 
       if (this.state.image !== 'no') {

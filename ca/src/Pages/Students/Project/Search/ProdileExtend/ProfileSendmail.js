@@ -72,6 +72,7 @@ export default class DialogButton extends React.Component {
       })
       .catch(err => {
         //window.location.replace("/logout ");
+        window.location.reload('/logout')
         console.log(err)
       })
     this.handleClose()

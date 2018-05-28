@@ -68,6 +68,7 @@ export default class TableMail extends Component {
         })
       })
       .catch(err => {
+        window.location.reload('/logout')
         console.log(err)
       })
   }
