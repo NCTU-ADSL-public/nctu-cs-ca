@@ -67,7 +67,7 @@ class GridListExampleSingleLine extends React.Component {
 
   onClick (project, t) {
     if (t === '1') {
-      this.setState({project: this.state.newprojectList.filter(t => t.research_title === project)[0], index: 1})
+      this.setState({project: this.state.newprojectList.filter(t => t.research_title === project.real_title)[0], index: 1})
     } else {
       this.deletedata('/students/formDelete', project)
     }
@@ -75,14 +75,14 @@ class GridListExampleSingleLine extends React.Component {
 
   deletedata (url, data) {
     let _this = this
-    if (window.confirm('請先知會您的隊友再刪除資料')) {
+    if (window.confirm('請先知會過您的隊友再刪除資料')) {
       axios.post('/students/formDelete', {
-        research_title: data.research_title,
+        research_title: data.real_title,
         tname: data.tname
       })
         .then(res => {
           _this.setState({
-            project_status_data: this.state.newprojectList.filter(t => t.research_title !== data.research_title)
+            newprojectList: this.state.newprojectList.filter(t => t.research_title !== data.research_title)
           })
         })
         .catch(err => {
@@ -102,13 +102,13 @@ class GridListExampleSingleLine extends React.Component {
       let newProject
       newProject = {..._this.state.projectList[i]}
       if (this.state.projectList[i].agree === '3') {
-        newProject = {...newProject, image: rejection, research_title: newProject.research_title + '   (已被教授拒絕，點擊已刪除資料)'}
+        newProject = {...newProject, image: rejection, research_title: newProject.research_title + '   (已被教授拒絕，點擊已刪除資料)', real_title: newProject.research_title}
         newProjectList.push(newProject)
         _this.setState({
           newprojectList: [..._this.state.newprojectList, newProject]
         })
       } else if (this.state.projectList[i].agree === '2' || this.state.projectList[i].agree === '0') {
-        newProject = {...newProject, image: Review, research_title: newProject.research_title + '   (審核中，點擊已刪除資料)'}
+        newProject = {...newProject, image: Review, research_title: newProject.research_title + '   (審核中，點擊已刪除資料)', real_title: newProject.research_title}
         newProjectList.push(newProject)
         _this.setState({
           newprojectList: [..._this.state.newprojectList, newProject]
@@ -117,13 +117,13 @@ class GridListExampleSingleLine extends React.Component {
         let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
-          newProject = {...newProject, image: url}
+          newProject = {...newProject, image: url, real_title: newProject.research_title}
           _this.setState({
             newprojectList: [..._this.state.newprojectList, newProject]
           })
           newProjectList.push(newProject)
         }).catch(function (error) {
-          newProject = {...newProject, image: 'undefined'}
+          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title}
           newProjectList.push(newProject)
           console.log(newProject)
           _this.setState({
@@ -162,7 +162,7 @@ class GridListExampleSingleLine extends React.Component {
                   titleStyle={styles.titleStyle}
                   titleBackground='linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
             >
-                  <img src={tile.image === 'undefined' ? img : tile.image} onClick={() => this.onClick(tile.research_title, tile.agree)} style={{cursor: 'pointer'}} />
+                  <img src={tile.image === 'undefined' ? img : tile.image} onClick={() => this.onClick(tile, tile.agree)} style={{cursor: 'pointer'}} />
                 </GridTile>
           ))}
             </GridList>
