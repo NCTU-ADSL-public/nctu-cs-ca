@@ -8,15 +8,18 @@ import IconButton from 'material-ui/IconButton'
 import ActionHome from 'material-ui/svg-icons/hardware/keyboard-backspace'
 
 let config = {
-  apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
-  authDomain: 'code-86ba4.firebaseapp.com',
-  databaseURL: 'https://code-86ba4.firebaseio.com',
-  projectId: 'code-86ba4',
-  storageBucket: 'code-86ba4.appspot.com',
-  messagingSenderId: '354539568437'
+  apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
+  authDomain: 'nctu-csca.firebaseapp.com',
+  databaseURL: 'https://nctu-csca.firebaseio.com',
+  projectId: 'nctu-csca',
+  storageBucket: 'nctu-csca.appspot.com',
+  serviceAccount: '../../../../Resources/nctu-csca-firebase-admins.json',
+  messagingSenderId: '612862784976'
 }
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
+  let auth = firebase.auth()
+  auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
 }
 let storageRef = firebase.storage().ref()
 

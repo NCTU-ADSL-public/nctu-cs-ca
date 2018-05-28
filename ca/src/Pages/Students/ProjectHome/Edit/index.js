@@ -8,15 +8,19 @@ import './style.css'
 import axios from 'axios'
 
 let config = {
-  apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
-  authDomain: 'code-86ba4.firebaseapp.com',
-  databaseURL: 'https://code-86ba4.firebaseio.com',
-  projectId: 'code-86ba4',
-  storageBucket: 'code-86ba4.appspot.com',
-  messagingSenderId: '354539568437'
+  apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
+  authDomain: 'nctu-csca.firebaseapp.com',
+  databaseURL: 'https://nctu-csca.firebaseio.com',
+  projectId: 'nctu-csca',
+  storageBucket: 'nctu-csca.appspot.com',
+  serviceAccount: '../../../../Resources/nctu-csca-firebase-admins.json',
+  messagingSenderId: '612862784976'
 }
+
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
+  let auth = firebase.auth()
+  auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
 }
 let storageRef = firebase.storage().ref()
 
@@ -34,8 +38,6 @@ class Edit extends React.Component {
       image: 'no',
       file: 'no'
     }
-    console.log(Number(this.props.studentProfile.student_id[1]) + 102)
-    console.log(this.props.studentProfile)
   }
 
   onChange (event) {
@@ -44,7 +46,7 @@ class Edit extends React.Component {
     })
   }
 
-  async handleSubmit (event) {
+  handleSubmit (event) {
     let _this = this
     event.preventDefault()
     if (_this.refs.title.value !== '') {
@@ -59,7 +61,6 @@ class Edit extends React.Component {
       }).then(res => {
       }).catch(err => {
         console.log(err)
-        window.location.reload('/logout')
       })
 
       if (this.state.image !== 'no') {
@@ -122,8 +123,7 @@ class Edit extends React.Component {
             <h1 className='title offset-1' >
               編輯專題主頁
             </h1>
-            <div className='divide-horizontal'>
-            </div>
+            <div className='divide-horizontal' />
             <form>
               <LabeledInput label='圖片'>
                 <div className='upload-btn-wrapper'>
