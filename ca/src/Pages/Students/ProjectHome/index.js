@@ -56,7 +56,10 @@ export default class index extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.fetchData()
+    let _this = this
+    setTimeout(function () {
+      _this.fetchData()
+    }, 1000)
   }
 
   fetchData () {

@@ -4,6 +4,7 @@ import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import {Grid,Row,Col} from 'react-bootstrap'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import HomeItem from './Home/Home.js'
 import MapItem from './Map/MapComponents/Map.js'
@@ -43,64 +44,7 @@ class Head extends Component {
     print_courseCategoryArray: printData,
     isLoading:true,
     projectName:'',
-    project_status_data:[
-      {"student_id":"0316048",
-        "sname":"蘇炳立",
-        "research_title":"NCTU vCS Bot",
-        "tname":"彭文志",
-        "agree":"1",
-        "phone":"222",
-        "email":"1111"},
-      {"student_id":"0316048",
-        "sname":"蘇炳",
-        "research_title":"NCTU CS Bot",
-        "tname":"彭文志",
-        "agree":"1",
-        "phone":"222",
-        "email":"1111"},
-      {"student_id":"0316048",
-        "sname":"蘇炳立",
-        "research_title":"我要再做一個研究!",
-        "tname":"彭文志",
-        "agree":"3",
-        "phone":"222",
-        "email":"1111"},
-      {"student_id":"0316048",
-        "sname":"蘇炳立",
-        "research_title":"我要再做一個研究!",
-        "tname":"彭文志",
-        "agree":"3",
-        "phone":"222",
-        "email":"1111"},
-      {"student_id":"0316048",
-        "sname":"蘇炳立",
-        "research_title":"我要再做一個研究!",
-        "tname":"彭文志",
-        "agree":"3",
-        "phone":"222",
-        "email":"1111"},
-      {"student_id":"0316048",
-        "sname":"蘇炳立",
-        "research_title":"我要再做一個研究!",
-        "tname":"彭文志",
-        "agree":"3",
-        "phone":"222",
-        "email":"1111"},
-      {"student_id":"0316048",
-        "sname":"蘇炳立",
-        "research_title":"我要再做一個研究!",
-        "tname":"彭文志",
-        "agree":"3",
-        "phone":"222",
-        "email":"1111"},
-      {"student_id":"0316048",
-        "sname":"蘇炳立",
-        "research_title":"我要再做一個研究!",
-        "tname":"彭文志",
-        "agree":"3",
-        "phone":"222",
-        "email":"1111"}
-    ]
+    project_status_data:[]
   }
 
   async componentWillMount () {
@@ -273,7 +217,7 @@ class Head extends Component {
     else {
       return (
         <div>
-          <Col  >
+          <Col  xsHidden>
             <div id="page">
               <Loading size={300}
                        left={600}
@@ -284,9 +228,9 @@ class Head extends Component {
             </div>
           </Col>
           {/* For mobile, tablet user */}
-          {/*<Col xs={12} mdHidden lgHidden>*/}
-            {/*<h2>行動版功能目前測試中，造成不便敬請見諒。</h2>*/}
-          {/*</Col>*/}
+          <Col xs={12} mdHidden lgHidden>
+            <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
+          </Col>
         </div>
       )
     }
