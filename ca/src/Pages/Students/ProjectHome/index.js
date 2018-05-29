@@ -81,6 +81,7 @@ export default class index extends React.Component {
             url: data_.link,
             title: data_.research_title,
             introduce: data_.intro,
+            teacher: data_.tname,
             score: data_.score
           }
         })
