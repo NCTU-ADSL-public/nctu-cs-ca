@@ -92,8 +92,8 @@ export default class index extends React.Component {
     ],
   }
 
-  componentWillMount(){
-    axios.post('/professors/courseInfo/courses', {
+  fetchData(){
+    axios.get('/professors/courseInfo/courses', {
       id: this.props.tid,
     }).then(res => {
       this.setState({initItem: res.data})
@@ -102,17 +102,13 @@ export default class index extends React.Component {
     })
   }
 
+  componentWillMount(){
+    this.fetchData()
+  }
+
   componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
-
-      axios.post('/professors/courseInfo/courses', {
-        id: nextProps.tid,
-      }).then(res => {
-        this.setState({initItem: res.data})
-      }).catch(err => {
-        console.log(err)
-      })
-
+      this.fetchData()
     }
   }
 
