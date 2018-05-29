@@ -45,7 +45,8 @@ export default class index extends React.Component {
         title: this.props.project.research_title,
         teacher: this.props.project.tname,
         url: '',
-        introduce: ''
+        introduce: '',
+        score: ''
       },
       state: 'show'
     }
@@ -79,7 +80,8 @@ export default class index extends React.Component {
           Show: {
             url: data_.link,
             title: data_.research_title,
-            introduce: data_.intro
+            introduce: data_.intro,
+            score: data_.score
           }
         })
       })

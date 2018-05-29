@@ -26,6 +26,7 @@ export default class Show extends React.Component {
                 <p><i className='fa fa-share-alt' /> 團隊網站: <a href={this.props.show.url} style={{cursor: 'pointer'}}>{this.props.show.url}</a></p>
                 <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.show.file} style={{cursor: 'pointer'}}>點這裡</a></p>
                 <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.teacher}</p>
+                <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
               </div>
             </div>
             <br />
