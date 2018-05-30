@@ -45,6 +45,8 @@ class GridListExampleSingleLine extends React.Component {
     this.state = {
       projectList: this.props.project,
       newprojectList: [],
+      projectList_status: this.props.project_status,
+      newprojectList_status: [],
       project: '',
       index: 0
     }
@@ -75,7 +77,7 @@ class GridListExampleSingleLine extends React.Component {
 
   deletedata (url, data) {
     let _this = this
-    if (window.confirm('請先知會過您的隊友再刪除資料')) {
+    if (window.confirm('按確定已刪除資料，請先知會過您的隊友再刪除。')) {
       axios.post('/students/formDelete', {
         research_title: data.real_title,
         tname: data.tname
@@ -117,7 +119,7 @@ class GridListExampleSingleLine extends React.Component {
         let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
-          newProject = {...newProject, image: url, real_title: newProject.research_title}
+          newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
           newProjectList.push(newProject)
           _this.setState({
             newprojectList: newProjectList
@@ -138,13 +140,54 @@ class GridListExampleSingleLine extends React.Component {
         })
       }
     }
+    let newProjectListStatus = []
+    for (let i = 0; i < this.state.projectList_status.length; i++) {
+      let newProject
+      newProject = _this.state.projectList_status[i]
+      if (this.state.projectList_status[i].agree === '3') {
+        newProject = {...newProject, image: rejection, research_title: newProject.research_title + '   (已被教授拒絕，點擊已刪除資料)', real_title: newProject.research_title}
+        newProjectListStatus.push(newProject)
+        _this.setState({
+          newprojectList_status: newProjectListStatus
+        })
+      } else if (this.state.projectList_status[i].agree === '2' || this.state.projectList_status[i].agree === '0') {
+        newProject = {...newProject, image: Review, research_title: newProject.research_title + '   (審核中，點擊已刪除資料)', real_title: newProject.research_title}
+        newProjectListStatus.push(newProject)
+        _this.setState({
+          newprojectList_status: newProjectListStatus
+        })
+      } else {
+        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
+        let pathReference = storageRef.child(directory)
+        pathReference.getDownloadURL().then(url => {
+          newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
+          newProjectListStatus.push(newProject)
+          _this.setState({
+            newprojectList_status: newProjectListStatus
+          })
+        }).catch(function (error) {
+          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title}
+          newProjectListStatus.push(newProject)
+          _this.setState({
+            newprojectList_status: newProjectListStatus
+          })
+          console.log(newProject)
+          console.log(error)
+        })
+      }
+      if (i === this.state.projectList_status.length - 1) {
+        _this.setState({
+          newprojectList_status: newProjectListStatus
+        })
+      }
+    }
   }
 
   render () {
     let id = 0
     return (
       <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} enableMouseEvents>
-        <div>
+        <div style={{height: '100vh'}}>
           <div className='divide-horizontal-list '>
             <div className='divide-horizontal-span-list'>
               <p >專題列表</p>
@@ -165,6 +208,23 @@ class GridListExampleSingleLine extends React.Component {
                   <img src={tile.image === 'undefined' ? img : tile.image} onClick={() => this.onClick(tile, tile.agree)} style={{cursor: 'pointer'}} />
                 </GridTile>
           ))}
+            </GridList>
+          </div>
+          <div className='event-footer '>
+            <GridList style={styles.gridList} cols={5} cellHeight={180} padding={1}>
+              {this.state.newprojectList_status.map((tile) => (
+                <GridTile
+                  key={id++}
+                  cols={1}
+                  rows={1}
+                  title={tile.research_title}
+                  actionIcon={<IconButton><StarBorder color='rgb(0, 188, 212)' /></IconButton>}
+                  titleStyle={styles.titleStyle}
+                  titleBackground='linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
+                >
+                  <img src={tile.image === 'undefined' ? img : tile.image} onClick={() => this.onClick(tile, tile.agree)} style={{cursor: 'pointer'}} />
+                </GridTile>
+              ))}
             </GridList>
           </div>
         </div>

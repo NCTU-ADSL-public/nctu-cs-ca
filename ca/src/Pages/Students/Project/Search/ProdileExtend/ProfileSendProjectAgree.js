@@ -165,7 +165,7 @@ export default class DialogButton extends React.Component {
           .then(res => {
               if(!res.data.status){
                 flag=0
-                alert('因某些原因導致 ' + participants[i] + ' 同學 無法申請，如該學生有審核中的專題將不能申請。')
+                alert('因某些原因導致 ' + participants[i] + ' 同學 無法申請，如該學生如有審核中的專題或當學年已有專題將不能申請。')
               }
           })
           .catch(err => {

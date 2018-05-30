@@ -44,7 +44,8 @@ class Head extends Component {
     print_courseCategoryArray: printData,
     isLoading:true,
     projectName:'',
-    project_status_data:[]
+    project_status_data:[{"student_id":"0416008","sname":"王冠升","research_title":"0416008","tname":"彭文志","agree":"2","first_second":"1","phone":"sds","email":"danny021406.cs04@nctu.edu.tw"}],
+    project_data:[{"student_id":"0416008","sname":"王冠升","research_title":"0416008","tname":"彭文志","agree":"1","first_second":"1","phone":"sds","email":"danny021406.cs04@nctu.edu.tw"}]
   }
 
   async componentWillMount () {
@@ -82,7 +83,18 @@ class Head extends Component {
       })
         .then(res => {
           _this.setState({
-            project_status_data:res.data,
+            project_status_data:res.data.filter(t => t.agree !== '1'),
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      axios.post('/students/projectPage', {
+        id:studentData.data[0].student_id
+      })
+        .then(res => {
+          _this.setState({
+            project_data:res.data,
           })
         })
         .catch(err => {
@@ -202,7 +214,7 @@ class Head extends Component {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <ProjectList project={this.state.project_status_data} studentProfile={this.state.studentIdcard}/>
+            <ProjectList project_status={this.state.project_status_data} project={this.state.project_data} studentProfile={this.state.studentIdcard}/>
           </MuiThemeProvider>
         </FadeIn>
       )
