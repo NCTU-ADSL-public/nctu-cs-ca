@@ -73,6 +73,7 @@ export default class index extends React.Component {
     if (state === 'show') {
       setTimeout(function () {
         _this.props.propsFetch()
+        _this.props.propsClick()
         _this.onFetch()
       }, 1000)
 

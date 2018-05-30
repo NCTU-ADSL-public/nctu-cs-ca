@@ -78,7 +78,7 @@ class Edit extends React.Component {
           console.log(error)
         }, function () {
           if (_this.state.file === 'no') {
-            _this.props.onFetch()
+            _this.props.onclick()
           }
         })
       }
@@ -94,10 +94,10 @@ class Edit extends React.Component {
         }, function (error) {
           console.log(error)
         }, function () {
-          _this.props.onFetch()
+          _this.props.onclick()
         })
       } else if ((_this.state.image === 'no')) {
-        _this.props.onFetch()
+        _this.props.onclick()
       }
     }
   }
