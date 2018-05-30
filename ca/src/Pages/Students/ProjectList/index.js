@@ -28,7 +28,7 @@ const styles = {
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   gridList: {
     width: 1000,
@@ -126,7 +126,7 @@ class GridListExampleSingleLine extends React.Component {
             newprojectList: newProjectList
           })
         }).catch(function (error) {
-          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title}
+          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
           newProjectList.push(newProject)
           _this.setState({
             newprojectList: newProjectList
@@ -211,23 +211,24 @@ class GridListExampleSingleLine extends React.Component {
           ))}
             </GridList>
           </div>
-          <div className='event-footer '>
-            <GridList style={styles.gridList} cols={5} cellHeight={180} padding={1}>
-              {this.state.newprojectList_status.map((tile) => (
-                <GridTile
-                  key={id++}
-                  cols={1}
-                  rows={1}
-                  title={tile.research_title}
-                  actionIcon={<IconButton><StarBorder color='rgb(0, 188, 212)' /></IconButton>}
-                  titleStyle={styles.titleStyle}
-                  titleBackground='linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
-                >
-                  <img src={tile.image === 'undefined' ? img : tile.image} onClick={() => this.onClick(tile, tile.agree)} style={{cursor: 'pointer'}} />
-                </GridTile>
-              ))}
-            </GridList>
-          </div>
+          {this.state.newprojectList_status.length > 0
+            ? <div className='event-footer' style={{marginBottom:'-20vh'}}>
+              <GridList style={styles.gridList} cols={5} cellHeight={180} padding={1}>
+                {this.state.newprojectList_status.map((tile) => (
+                  <GridTile
+                    key={id++}
+                    cols={1}
+                    rows={1}
+                    title={tile.research_title}
+                    actionIcon={<IconButton><StarBorder color='rgb(0, 188, 212)' /></IconButton>}
+                    titleStyle={styles.titleStyle}
+                    titleBackground='linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
+                  >
+                    <img src={tile.image === 'undefined' ? img : tile.image} onClick={() => this.onClick(tile, tile.agree)} style={{cursor: 'pointer'}} />
+                  </GridTile>
+                ))}
+              </GridList>
+            </div> : ''}
         </div>
         <div>
           {this.state.project === '' ? <div>11 </div> : <Project propsClick={this.onClickBack} studentProfile={this.props.studentProfile} project={this.state.project} />}
