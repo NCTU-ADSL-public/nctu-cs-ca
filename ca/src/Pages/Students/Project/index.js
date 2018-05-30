@@ -96,11 +96,11 @@ export default class index extends React.Component {
     //console.log("before"+item)
     this.setState({teacher: item})
     axios.post('/students/ProInfo', {
-      name: item
+      teacher_id: item
     }).then(res => {
       this.setState({
         profile: {
-          id: item,
+          name: res.data[0].tname,
           phone: res.data[0].phone,
           email: res.data[0].email,
           expertise: res.data[0].expertise,
