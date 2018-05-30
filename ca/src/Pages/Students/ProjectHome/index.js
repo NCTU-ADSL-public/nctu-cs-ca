@@ -66,10 +66,7 @@ export default class index extends React.Component {
   fetchData () {
     let _this = this
     axios.post('/students/projectPage', {
-      student_id: _this.props.studentProfile.student_id,
-      tname: _this.props.project.tname,
-      research_title: _this.props.project.research_title,
-      first_second: _this.props.project.first_second
+      id: _this.props.studentProfile.student_id
     })
       .then(res => {
         let data = res.data

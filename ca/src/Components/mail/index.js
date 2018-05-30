@@ -21,22 +21,8 @@ export default class Mail extends React.Component {
     super(props)
 
     this.state = {
-      data: [
-    {"mail_id":"0316201-2018-04-22 22:25:25-T9830",
-      "title":"test3",
-      "sender_id":"0316201",
-      "receiver_id":"T9830",
-      "read_bit":"0",
-      "send_time":"2018-04-22 22:25:25",
-      "sender":"王馨嫻","receiver":"吳育松"}],
-      realdata: [
-    {"mail_id":"0316201-2018-04-22 22:25:25-T9830",
-      "title":"test3",
-      "sender_id":"0316201",
-      "receiver_id":"T9830",
-      "read_bit":"0",
-      "send_time":"2018-04-22 22:25:25",
-      "sender":"王馨嫻","receiver":"吳育松"}],
+      data: [],
+      realdata: [],
       action:'mail',
 
     }
