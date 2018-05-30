@@ -65,6 +65,7 @@ export default class index extends React.Component {
       file: '',
     })
     let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
+    console.log(directory)
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({
