@@ -114,9 +114,18 @@ class GroupScore extends React.Component {
       total_number: 3,
       groupList: [
         { research_title: '資料錯誤',
+          first_second: '0',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            },
+            { student_id: '0399777',
+              sname: '李小霖',
+              detail: '資工系 網多組3 '
+            },
+            { student_id: '0391234',
+              sname: '郭小杰',
               detail: '資工系 網多組3 '
             }
           ],

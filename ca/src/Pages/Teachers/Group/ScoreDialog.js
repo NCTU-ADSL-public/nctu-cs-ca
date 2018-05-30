@@ -36,9 +36,9 @@ const styles = {
     color: '#979797',
     fontSize: '8px',
   },
-  itemsReceiver: {
-    padding: '5px 0 7px 20px',
-    maxHeight: 50,
+  itemsBlock: {
+    padding: '5px 0 7px 10px',
+    maxHeight: 900,
     overflow: 'auto',
   },
   text1: {
@@ -82,7 +82,7 @@ export default class ScoreDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      score: '',
+      score: ['','',''],
     }
   }
 
@@ -97,27 +97,49 @@ export default class ScoreDialog extends React.Component {
       console.log('tname: ' + this.props.idCard.name)
       console.log('research_title: ' + this.props.title)
       console.log('first_second: ' + this.props.firstSecond)
-      console.log('new_score: ' + this.state.score)
-      axios.post('/professors/students/setScore', {
-        student_id: this.props.participants[0].student_id,
-        tname: this.props.idCard.name,
-        research_title: this.props.title,
-        first_second: this.props.firstSecond,
-        new_score: this.state.score
-      }).then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.log(err)
+
+      this.props.participants.forEach((item, i) => {
+        console.log('new_score[' + i + ']: ' + this.state.score[i])
+
+        axios.post('/professors/students/setScore', {
+          student_id: item.student_id,
+          tname: this.props.idCard.name,
+          research_title: this.props.title,
+          first_second: this.props.firstSecond,
+          new_score: this.state.score[i]
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
       })
+
       this.props.parentFunction()
     }
   }
-  handleChangeScore = (event) => {
+  handleChangeScore0 = (event) => {
+    const score = this.state.score
+    score[0] = event.target.value
     this.setState({
-      score: event.target.value,
+      score
+    });
+  };
+  handleChangeScore1 = (event) => {
+    const score = this.state.score
+    score[1] = event.target.value
+    this.setState({
+      score
+    });
+  };
+  handleChangeScore2 = (event) => {
+    const score = this.state.score
+    score[2] = event.target.value
+    this.setState({
+      score
     });
   };
   render () {
+    const students = this.props.participants
     const actions = [
       <FlatButton
         label='確定'
@@ -146,14 +168,23 @@ export default class ScoreDialog extends React.Component {
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            <MuiThemeProvider>
-              <TextField
-                floatingLabelText="分數"
-                style={styles.text1}
-                value={this.state.score}
-                onChange={this.handleChangeScore}
-              />
-            </MuiThemeProvider>
+            <div style={styles.itemsBlock}>
+              {students.map((item, i) => (
+                <MuiThemeProvider>
+                  <TextField
+                    key={i}
+                    floatingLabelText={item.student_id + ' ' + item.sname + ' 的分數'}
+                    style={styles.text1}
+                    value={this.state.score[i]}
+                    onChange={
+                      i === 0 ? this.handleChangeScore0 :
+                      i === 1 ? this.handleChangeScore1 :
+                        this.handleChangeScore2
+                    }
+                  />
+                </MuiThemeProvider>
+              ))}
+            </div>
           </Dialog>
         </MuiThemeProvider>
       </div>
