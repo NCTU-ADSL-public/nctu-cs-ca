@@ -204,8 +204,9 @@ class GroupApply extends React.Component {
           </Col>
         </Row>
         <Row style={styles.groups}>
-          {this.state.applyList.map((item) => (
+          {this.state.applyList.map((item, i) => (
             <ApplyButton
+              key={i}
               title={item.research_title}
               participants={item.participants}
               name={this.props.idCard.name}
@@ -242,8 +243,8 @@ const ApplyButton = (props) => {
           <div>
             <MuiThemeProvider>
               <div style={styles.chipWrapper}>
-                {props.participants.map((item) => (
-                  <Chip style={styles.chip}>
+                {props.participants.map((item, i) => (
+                  <Chip style={styles.chip} key={i}>
                     <Avatar src={defaultPic} /> {item.student_id} {item.sname}
                   </Chip>
                 ))}

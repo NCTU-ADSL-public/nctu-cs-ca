@@ -94,7 +94,7 @@ class Head extends Component {
           </a>
         </Col>,
         document.getElementById('page'))
-    } else if (index === 99) {
+    } else if (index === 5) {
       ReactDOM.render(
         <FadeIn>
           <ProfileItem idCard={this.state.idCard} />
@@ -112,7 +112,7 @@ class Head extends Component {
       () => this.select(2),
       () => this.select(3),
       () => this.select(4),
-      () => this.select(99)
+      () => this.select(5)
     ]
     return (
       <Grid id='Head' fluid>
@@ -127,7 +127,7 @@ class Head extends Component {
           <div id='page' />
           {/* For mobile, tablet user */}
           <Col xs={12} mdHidden lgHidden>
-            <h2> { this.state.selectedIndex === 99 || this.state.selectedIndex === 2
+            <h2> { this.state.selectedIndex === 5 || this.state.selectedIndex === 2
               ? ''
               : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
           </Col>

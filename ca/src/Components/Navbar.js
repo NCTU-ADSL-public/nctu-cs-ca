@@ -101,7 +101,10 @@ class _Navbar extends React.Component {
       >
         <MenuItem eventKey="1" onClick={onClicks[4]}>郵件</MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey="4">個人頁面</MenuItem>
+        {this.props.type === 'teacher'
+          ? <MenuItem eventKey="4" onClick={onClicks[5]}>個人頁面</MenuItem>
+          : <MenuItem eventKey="4" disabled>個人頁面</MenuItem>
+        }
       </DropdownButton>
     )
   }
