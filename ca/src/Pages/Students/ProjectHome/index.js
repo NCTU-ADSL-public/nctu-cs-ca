@@ -59,15 +59,15 @@ export default class index extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     let _this = this
-    setTimeout(function () {
-      _this.fetchData()
-    }, 1000)
+    console.log(nextProps.project)
+    _this.fetchData()
   }
 
   fetchData () {
     let _this = this
     _this.setState({
       Show: {
+        ..._this.state.Show,
         url: _this.state.project.link,
         title: _this.state.project.research_title,
         introduce: _this.state.project.intro,
@@ -75,7 +75,7 @@ export default class index extends React.Component {
         score: _this.state.project.score
       }
     })
-    let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.Show.teacher + '/' + this.state.Show.title + '/image/image.jpg'
+    let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({
@@ -85,7 +85,7 @@ export default class index extends React.Component {
         }
       })
     })
-    directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.Show.teacher + '/' + this.state.Show.title + '/file/file.pdf'
+    directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.project.tname + '/' + this.props.project.research_title + '/file/file.pdf'
     pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({
