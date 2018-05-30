@@ -232,7 +232,7 @@ class GridListExampleSingleLine extends React.Component {
             </div> : ''}
         </div>
         <div>
-          {this.state.project === '' ? <div>11 </div> : <Project propsClick={this.onClickBack} studentProfile={this.props.studentProfile} project={this.state.project} />}
+          {this.state.project === '' ? <div> </div> : <Project propsClick={this.onClickBack} studentProfile={this.props.studentProfile} project={this.state.project} />}
         </div>
       </SwipeableViews>
     )

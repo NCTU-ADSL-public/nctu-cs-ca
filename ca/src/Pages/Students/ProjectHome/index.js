@@ -54,17 +54,18 @@ export default class index extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     let _this = this
-    _this.fetchData()
+    if(this.state.project.research_title !== nextProps.project.research_title)
+      _this.fetchData()
   }
 
   fetchData () {
     let _this = this
-    let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
-    let pathReference = storageRef.child(directory)
     _this.setState({
       image: '',
       file: '',
     })
+    let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
+    let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({
         image: url
