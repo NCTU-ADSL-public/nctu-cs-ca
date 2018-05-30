@@ -114,7 +114,7 @@ export default class ListTable extends Component {
 
   handleRowClick = (rowIndex) => {
     //console.log(rowIndex)
-    //console.log(this.state.itemList)
+    console.log(this.state.itemList)
     this.props.parentFunction(this.state.itemList[rowIndex].teacher_id)
   }
 
