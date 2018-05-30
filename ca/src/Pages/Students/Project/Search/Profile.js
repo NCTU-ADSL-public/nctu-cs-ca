@@ -103,7 +103,7 @@ class Profile extends React.Component {
     _this.setState({
       photo: ''
     })
-    if (directory !== '' && this.state.directory !== directory) {
+    if (directory !== '' && this.props.profile.photo !== nextProps.profile.photo) {
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
         _this.setState({
