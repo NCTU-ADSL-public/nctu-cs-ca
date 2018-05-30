@@ -12,8 +12,8 @@ export default class Show extends React.Component {
             <Image
               alt='無圖片'
               width='1200' height='400'
-              src={this.props.image
-                ? this.props.image
+              src={this.props.show.image !== 'undefined'
+                ? this.props.image === '' ? this.props.show.image : this.props.image
                 : img}
               responsive
               rounded
@@ -24,7 +24,7 @@ export default class Show extends React.Component {
             <div className='row'>
               <div className='col-7'>
                 <p><i className='fa fa-share-alt' /> 團隊網站: <a href={this.props.show.link} style={{cursor: 'pointer'}}>{this.props.show.link}</a></p>
-                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p>
+                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file === '' ? this.props.show.file : this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p>
                 <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.tname}</p>
                 <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
               </div>

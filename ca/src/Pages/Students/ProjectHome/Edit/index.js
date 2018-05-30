@@ -32,9 +32,9 @@ class Edit extends React.Component {
     this.handleImageChange = this.handleImageChange.bind(this)
     this.handleFileChange = this.handleFileChange.bind(this)
     this.state = {
-      title: this.props.show.title,
-      link: this.props.show.url,
-      ckeditorContent: this.props.show.introduce,
+      title: this.props.project.research_title,
+      link: this.props.project.link,
+      ckeditorContent: this.props.project.intro,
       image: 'no',
       file: 'no'
     }
@@ -55,7 +55,7 @@ class Edit extends React.Component {
         student_id: _this.props.studentProfile.student_id,
         tname: _this.props.project.tname,
         first_second: _this.props.project.first_second,
-        research_title: _this.props.show.title,
+        research_title: _this.props.project.research_title,
         new_title: _this.refs.title.value,
         new_link: _this.refs.url.value,
         new_intro: _this.state.ckeditorContent
@@ -65,7 +65,7 @@ class Edit extends React.Component {
       })
 
       if (this.state.image !== 'no') {
-        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.show.teacher + '/' + this.props.show.title + '/image/'
+        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/'
         storageRef.child(directory).delete().then(function () {
         }).catch(function (error) {
           // Uh-oh, an error occurred!
@@ -83,7 +83,7 @@ class Edit extends React.Component {
         })
       }
       if (this.state.file !== 'no') {
-        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.show.teacher + '/' + this.props.show.title + '/file/'
+        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/'
         storageRef.child(directory).delete().then(function () {
         }).catch(function (error) {
         })

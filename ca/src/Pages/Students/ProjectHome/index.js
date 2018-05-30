@@ -39,38 +39,23 @@ export default class index extends React.Component {
   constructor (props) {
     super(props)
     this.changeState = this.changeState.bind(this)
-  }
-
-  state = {
-    project: this.props.project,
-    file:'',
-    image:'',
-    state: 'show'
-  }
-
-  async componentWillMount () {
-    await this.fetchData()
-  }
-
-  componentWillReceiveProps (nextProps) {
-    let _this = this
-    if(this.state.project.research_title !== nextProps.project.research_title)
-      _this.fetchData()
-  }
-
-  fetchData () {
-    let _this = this
-    _this.setState({
+    this.onFetch = this.onFetch.bind(this)
+    this.state = {
+      state: 'show',
       image: '',
-      file: '',
-    })
+      file: ''
+    }
+  }
+
+  onFetch () {
+    let _this = this
     let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
-    console.log(directory)
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({
         image: url
       })
+    }).catch(function (error) {
     })
     directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/file.pdf'
     pathReference = storageRef.child(directory)
@@ -78,6 +63,7 @@ export default class index extends React.Component {
       _this.setState({
         file: url
       })
+    }).catch(function (error) {
     })
   }
 
@@ -86,12 +72,18 @@ export default class index extends React.Component {
     let _this = this
     if (state === 'show') {
       setTimeout(function () {
-        _this.fetchData()
+        _this.props.propsFetch()
+        _this.onFetch()
       }, 1000)
+
+      _this.setState({
+        state: state
+      })
+    } else {
+      this.setState({
+        state: state
+      })
     }
-    this.setState({
-      state: state
-    })
   }
 
   render () {
@@ -106,7 +98,7 @@ export default class index extends React.Component {
           <ActionHome />
         </IconButton>
         <div style={{marginTop: '-100px'}}>
-          {this.state.state === 'edit' ? <Edit project={this.state.project} studentProfile={this.props.studentProfile} onclick={this.changeState} show={this.state.Show} /> : <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.props.project}  image={this.state.image} file={this.state.file} />}
+          {this.state.state === 'edit' ? <Edit project={this.props.project} studentProfile={this.props.studentProfile} onclick={this.changeState} onFetch={this.onFetch} /> : <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.props.project} image={this.state.image} file={this.state.file} />}
         </div>
       </PageWrapper>
     )

@@ -28,7 +28,7 @@ const styles = {
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-around'
   },
   gridList: {
     width: 1000,
@@ -105,29 +105,21 @@ class GridListExampleSingleLine extends React.Component {
     for (let i = 0; i < this.state.projectList.length; i++) {
       let newProject
       newProject = _this.state.projectList[i]
-      if (this.state.projectList[i].agree === '3') {
-        newProject = {...newProject, image: rejection, research_title: newProject.research_title + '   (已被教授拒絕，點擊已刪除資料)', real_title: newProject.research_title}
-        newProjectList.push(newProject)
-        _this.setState({
-          newprojectList: newProjectList
-        })
-      } else if (this.state.projectList[i].agree === '2' || this.state.projectList[i].agree === '0') {
-        newProject = {...newProject, image: Review, research_title: newProject.research_title + '   (審核中，點擊已刪除資料)', real_title: newProject.research_title}
-        newProjectList.push(newProject)
-        _this.setState({
-          newprojectList: newProjectList
-        })
-      } else {
-        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
-        let pathReference = storageRef.child(directory)
+      let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
+      let pathReference = storageRef.child(directory)
+      pathReference.getDownloadURL().then(url => {
+        newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
+
+        directory = (Number(_this.props.studentProfile.student_id[0]) * 10 + Number(_this.props.studentProfile.student_id[1]) + 102).toString() + '/' + _this.state.projectList[i].tname + '/' + _this.state.projectList[i].research_title + '/file/file.pdf'
+        pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
-          newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
+          newProject = {...newProject, file: url, real_title: newProject.research_title, agree: '1'}
           newProjectList.push(newProject)
           _this.setState({
             newprojectList: newProjectList
           })
         }).catch(function (error) {
-          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
+          newProject = {...newProject, file: '', real_title: newProject.research_title, agree: '1'}
           newProjectList.push(newProject)
           _this.setState({
             newprojectList: newProjectList
@@ -135,7 +127,29 @@ class GridListExampleSingleLine extends React.Component {
           console.log(newProject)
           console.log(error)
         })
-      }
+      }).catch(function (error) {
+        newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
+        directory = (Number(_this.props.studentProfile.student_id[0]) * 10 + Number(_this.props.studentProfile.student_id[1]) + 102).toString() + '/' + _this.state.projectList[i].tname + '/' + _this.state.projectList[i].research_title + '/file/file.pdf'
+        pathReference = storageRef.child(directory)
+        pathReference.getDownloadURL().then(url => {
+          newProject = {...newProject, file: url, real_title: newProject.research_title, agree: '1'}
+          newProjectList.push(newProject)
+          _this.setState({
+            newprojectList: newProjectList
+          })
+        }).catch(function (error) {
+          newProject = {...newProject, file: '', real_title: newProject.research_title, agree: '1'}
+          newProjectList.push(newProject)
+          _this.setState({
+            newprojectList: newProjectList
+          })
+          console.log(newProject)
+          console.log(error)
+        })
+        console.log(newProject)
+        console.log(error)
+      })
+
       if (i === this.state.projectList.length - 1) {
         _this.setState({
           newprojectList: newProjectList
@@ -232,7 +246,7 @@ class GridListExampleSingleLine extends React.Component {
             </div> : ''}
         </div>
         <div>
-          {this.state.project === '' ? <div> </div> : <Project propsClick={this.onClickBack} studentProfile={this.props.studentProfile} project={this.state.project} />}
+          {this.state.project === '' ? <div /> : <Project propsFetch={this.fetchImage} propsClick={this.onClickBack} studentProfile={this.props.studentProfile} project={this.state.project} />}
         </div>
       </SwipeableViews>
     )
