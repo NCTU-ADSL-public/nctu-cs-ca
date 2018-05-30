@@ -157,6 +157,7 @@ class GroupApply extends React.Component {
       // name: this.props.idCard.name
       id: this.props.idCard.id
     }).then(res => {
+      console.log(res.data)
       this.setState({
         applyList: res.data
       })
@@ -210,6 +211,7 @@ class GroupApply extends React.Component {
               name={this.props.idCard.name}
               status={item.status}
               parentFunction={this.triggerUpdate}
+              firstSecond={item.first_second}
             />
           ))}
         </Row>
@@ -230,6 +232,7 @@ const ApplyButton = (props) => {
             name={props.name}
             participants={props.participants}
             parentFunction={props.parentFunction}
+            firstSecond={props.firstSecond}
           />
         </Col>
       </Row>
