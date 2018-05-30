@@ -168,11 +168,11 @@ class GroupScore extends React.Component {
           {this.state.groupList.map((item, i) => (
             <GroupButton
               key={i}
-              {...item}
-              // title={item.research_title}
-              // participants={item.participants}
-              // year={item.year}
-              // score={item.score}
+              title={item.research_title}
+              participants={item.participants}
+              firstSecond={item.first_second}
+              year={item.year}
+              score={item.score}
               parentFunction={this.triggerUpdate}
               idCard={this.props.idCard}
             />
@@ -193,9 +193,9 @@ const GroupButton = (props) => (
       <Col xs={9} md={9} lg={9}>
         <div style={styles.groupYear}>{props.year}年度</div>
         <ScoreDialog
-          title={props.research_title}
+          title={props.title}
           participants={props.participants}
-          firstSecond={props.first_second}
+          firstSecond={props.firstSecond}
           idCard={props.idCard}
           parentFunction={props.parentFunction}
         />

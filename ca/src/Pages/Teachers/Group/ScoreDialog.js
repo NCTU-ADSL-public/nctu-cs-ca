@@ -93,7 +93,11 @@ export default class ScoreDialog extends React.Component {
   handleClose = (status) => {
     this.setState({open: false})
     if(status === 1){
-      console.log(this.state.score)
+      console.log('student_id: ' + this.props.participants[0].student_id)
+      console.log('tname: ' + this.props.idCard.name)
+      console.log('research_title: ' + this.props.title)
+      console.log('first_second: ' + this.props.firstSecond)
+      console.log('new_score: ' + this.state.score)
       axios.post('/professors/students/setScore', {
         student_id: this.props.participants[0].student_id,
         tname: this.props.idCard.name,
