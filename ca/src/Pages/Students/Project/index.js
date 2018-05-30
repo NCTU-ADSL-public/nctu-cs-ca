@@ -100,7 +100,7 @@ export default class index extends React.Component {
     }).then(res => {
       this.setState({
         profile: {
-          name: item,
+          id: item,
           phone: res.data[0].phone,
           email: res.data[0].email,
           expertise: res.data[0].expertise,
