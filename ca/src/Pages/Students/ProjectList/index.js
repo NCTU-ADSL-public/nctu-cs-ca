@@ -166,7 +166,7 @@ class GridListExampleSingleLine extends React.Component {
             newprojectList_status: newProjectListStatus
           })
         }).catch(function (error) {
-          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title}
+          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
           newProjectListStatus.push(newProject)
           _this.setState({
             newprojectList_status: newProjectListStatus
