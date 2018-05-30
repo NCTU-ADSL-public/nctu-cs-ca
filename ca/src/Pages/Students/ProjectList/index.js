@@ -97,19 +97,23 @@ class GridListExampleSingleLine extends React.Component {
 
   onClickBack () {
     let _this = this
-    _this.setState({index: 0})
-    axios.post('/students/projectPage', {
-      id: _this.props.studentProfile.student_id
-    })
-      .then(res => {
-        _this.setState({
-          projectList: res.data
+    setTimeout(function () {
+      axios.post('/students/projectPage', {
+        id: _this.props.studentProfile.student_id
+      })
+        .then(res => {
+          let newProjectList = []
+          for (let i = 0; i < res.data.length; i++) {
+            let newProject = _this.state.newprojectList.filter(t => t.research_title === res.data[i].research_title)[0]
+            newProject.intro = res.data[i].intro
+            newProjectList.push(newProject)
+          }
+          _this.setState({index: 0, newprojectList: newProjectList})
         })
-        _this.setState({index: 0})
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .catch(err => {
+          console.log(err)
+        })
+    }, 1000)
   }
 
   fetchImage () {
