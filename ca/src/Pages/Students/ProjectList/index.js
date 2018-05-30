@@ -32,6 +32,7 @@ const styles = {
   },
   gridList: {
     width: 1000,
+    opacity: 1,
     overflowY: 'auto'
   },
   titleStyle: {
