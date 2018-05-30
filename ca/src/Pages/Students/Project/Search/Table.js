@@ -93,7 +93,7 @@ export default class ListTable extends Component {
     let NewItemList = []
 
     for(let i=0;i<this.props.items.length;i++){
-      NewItemList.push({tname:this.props.items[i].tname})
+      NewItemList.push({tname:this.props.items[i].teacher_id})
     }
 
 
