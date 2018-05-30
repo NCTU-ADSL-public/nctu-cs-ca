@@ -97,6 +97,7 @@ class GridListExampleSingleLine extends React.Component {
 
   onClickBack () {
     let _this = this
+    _this.setState({index: 0})
     setTimeout(function () {
       axios.post('/students/projectPage', {
         id: _this.props.studentProfile.student_id

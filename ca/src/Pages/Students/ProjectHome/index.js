@@ -71,9 +71,9 @@ export default class index extends React.Component {
     let state = this.state.state === 'edit' ? 'show' : 'edit'
     let _this = this
     if (state === 'show') {
+      _this.props.propsFetch()
+      _this.props.propsClick()
       setTimeout(function () {
-        _this.props.propsFetch()
-        _this.props.propsClick()
         _this.onFetch()
       }, 1000)
 
