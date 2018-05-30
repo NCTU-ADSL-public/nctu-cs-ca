@@ -105,6 +105,9 @@ class Profile extends React.Component {
     })
     if (directory !== '' && this.props.profile.photo !== nextProps.profile.photo) {
       let pathReference = storageRef.child(directory)
+      _this.setState({
+        photo: 'loading'
+      })
       pathReference.getDownloadURL().then(url => {
         _this.setState({
           photo: url,
@@ -131,7 +134,7 @@ class Profile extends React.Component {
                   <ProfileSendmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
                   <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
                 </div>
-                <Image style={styles.pic} src={this.state.photo === '' ? pic : this.state.photo} circle />
+                <Image style={styles.pic} src={this.state.photo === '' ? pic : this.state.photo === 'loading' ? <Loading /> : this.state.photo} circle />
                 <div style={styles.name}> {this.props.profile.name} </div>
                 <div style={styles.item}><Glyphicon glyph='earphone' /> #{this.props.profile.phone} </div>
                 <div style={styles.item}> {this.props.profile.email} </div>
