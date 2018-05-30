@@ -69,6 +69,7 @@ class GridListExampleSingleLine extends React.Component {
   }
 
   onClick (project, t) {
+    console.log(project)
     if (t === '1') {
       this.setState({project: this.state.newprojectList.filter(t => t.research_title === project.real_title)[0], index: 1})
     } else {
@@ -85,7 +86,7 @@ class GridListExampleSingleLine extends React.Component {
       })
         .then(res => {
           _this.setState({
-            newprojectList: this.state.newprojectList.filter(t => t.research_title !== data.research_title)
+            newprojectList_status: this.state.newprojectList_status.filter(t => t.research_title !== data.research_title)
           })
         })
         .catch(err => {
@@ -212,7 +213,7 @@ class GridListExampleSingleLine extends React.Component {
             </GridList>
           </div>
           {this.state.newprojectList_status.length > 0
-            ? <div className='event-footer' style={{marginBottom:'-20vh'}}>
+            ? <div className='event-footer' >
               <GridList style={styles.gridList} cols={5} cellHeight={180} padding={1}>
                 {this.state.newprojectList_status.map((tile) => (
                   <GridTile
