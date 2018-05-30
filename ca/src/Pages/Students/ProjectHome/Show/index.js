@@ -12,20 +12,20 @@ export default class Show extends React.Component {
             <Image
               alt='無圖片'
               width='1200' height='400'
-              src={this.props.show.image
-                ? this.props.show.image
+              src={this.props.image
+                ? this.props.image
                 : img}
               responsive
               rounded
             />
           </div>
-          <div className='event-title'>{ this.props.show.title }</div>
+          <div className='event-title'>{ this.props.show.research_title }</div>
           <div className='event-info-wrapper bg-white'>
             <div className='row'>
               <div className='col-7'>
-                <p><i className='fa fa-share-alt' /> 團隊網站: <a href={this.props.show.url} style={{cursor: 'pointer'}}>{this.props.show.url}</a></p>
-                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.show.file} style={{cursor: 'pointer'}}>點這裡</a></p>
-                <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.teacher}</p>
+                <p><i className='fa fa-share-alt' /> 團隊網站: <a href={this.props.show.link} style={{cursor: 'pointer'}}>{this.props.show.link}</a></p>
+                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p>
+                <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.tname}</p>
                 <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
               </div>
             </div>
@@ -35,7 +35,7 @@ export default class Show extends React.Component {
                 <p >專題簡介</p>
               </div>
             </div>
-            <section dangerouslySetInnerHTML={{__html: this.props.show.introduce}} />
+            <section dangerouslySetInnerHTML={{__html: this.props.show.intro}} />
             <div className='pull-right'>
               <button className='btn btn-primary nav-button' onClick={this.props.onclick}>
                 編輯

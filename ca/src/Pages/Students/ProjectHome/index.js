@@ -43,13 +43,8 @@ export default class index extends React.Component {
 
   state = {
     project: this.props.project,
-    Show: {
-      title: this.props.project.research_title,
-      teacher: this.props.project.tname,
-      url: '',
-      introduce: '',
-      score: ''
-    },
+    file:'',
+    image:'',
     state: 'show'
   }
 
@@ -59,40 +54,27 @@ export default class index extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     let _this = this
-    console.log(nextProps.project)
     _this.fetchData()
   }
 
   fetchData () {
     let _this = this
-    _this.setState({
-      Show: {
-        ..._this.state.Show,
-        url: _this.state.project.link,
-        title: _this.state.project.research_title,
-        introduce: _this.state.project.intro,
-        teacher: _this.state.project.tname,
-        score: _this.state.project.score
-      }
-    })
     let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
     let pathReference = storageRef.child(directory)
+    _this.setState({
+      image: '',
+      file: '',
+    })
     pathReference.getDownloadURL().then(url => {
       _this.setState({
-        Show: {
-          ..._this.state.Show,
-          image: url
-        }
+        image: url
       })
     })
     directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.project.tname + '/' + this.props.project.research_title + '/file/file.pdf'
     pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({
-        Show: {
-          ..._this.state.Show,
-          file: url
-        }
+        file: url
       })
     })
   }
@@ -122,7 +104,7 @@ export default class index extends React.Component {
           <ActionHome />
         </IconButton>
         <div style={{marginTop: '-100px'}}>
-          {this.state.state === 'edit' ? <Edit project={this.state.project} studentProfile={this.props.studentProfile} onclick={this.changeState} show={this.state.Show} /> : <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.state.Show} />}
+          {this.state.state === 'edit' ? <Edit project={this.state.project} studentProfile={this.props.studentProfile} onclick={this.changeState} show={this.state.Show} /> : <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.props.project}  image={this.state.image} file={this.state.file} />}
         </div>
       </PageWrapper>
     )
