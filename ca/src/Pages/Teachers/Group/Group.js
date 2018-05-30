@@ -2,6 +2,7 @@ import React from 'react'
 
 import GroupList from './GroupList'
 import GroupApply from './GroupApply'
+import GroupScore from './GroupScore'
 
 // for tabs
 import 'rc-tabs/assets/index.css'
@@ -14,7 +15,7 @@ class Group extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeKey: '1',
+      activeKey: '3',
       start: 0
     }
   }
@@ -37,6 +38,9 @@ class Group extends React.Component {
           </TabPane>
           <TabPane tab={`專題列表`} key='2'>
             <GroupList idCard={this.props.idCard} />
+          </TabPane>
+          <TabPane tab={`專題評分`} key='3'>
+            <GroupScore idCard={this.props.idCard} />
           </TabPane>
         </Tabs>
       </div>

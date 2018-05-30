@@ -4,6 +4,8 @@ import { Grid, Row, Col, Image } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 
+import ScoreDialog from './ScoreDialog'
+
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -21,7 +23,7 @@ const styles = {
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#666666',
+    color: '#c87137',
     margin: '32px 0 0 50px',
     float: 'left'
   },
@@ -62,6 +64,11 @@ const styles = {
     fontWeight: '100',
     color: '#575757'
   },
+  groupScore: {
+    fontSize: '1.6em',
+    fontWeight: '100',
+    color: '#c82230'
+  },
   chip: {
     margin: 5
   },
@@ -100,7 +107,7 @@ const styles = {
   }
 }
 
-class GroupList extends React.Component {
+class GroupScore extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -142,25 +149,32 @@ class GroupList extends React.Component {
       this.fetchData()
     }
   }
+  triggerUpdate = () => {
+    this.fetchData()
+  }
   render () {
     const tn = this.state.total_number
     return (
       <Grid>
         <Row>
           <Col xs={12} md={4} lg={4}>
-            <div style={styles.mainTitle}> 學生專題列表 </div>
+            <div style={styles.mainTitle}> 專題評分 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人 </div>
+            <div style={styles.subTitle}> 請點擊專題給予評分。 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
           {this.state.groupList.map((item, i) => (
             <GroupButton
               key={i}
-              title={item.research_title}
-              participants={item.participants}
-              year={item.year}
+              {...item}
+              // title={item.research_title}
+              // participants={item.participants}
+              // year={item.year}
+              // score={item.score}
+              parentFunction={this.triggerUpdate}
+              idCard={this.props.idCard}
             />
           ))}
         </Row>
@@ -168,7 +182,7 @@ class GroupList extends React.Component {
     )
   }
 }
-export default GroupList
+export default GroupScore
 
 const GroupButton = (props) => (
   <Grid style={props.year === '106' ? styles.groupBtnThisYear : styles.groupBtn}>
@@ -178,6 +192,14 @@ const GroupButton = (props) => (
       </Col>
       <Col xs={9} md={9} lg={9}>
         <div style={styles.groupYear}>{props.year}年度</div>
+        <ScoreDialog
+          title={props.research_title}
+          participants={props.participants}
+          firstSecond={props.first_second}
+          idCard={props.idCard}
+          parentFunction={props.parentFunction}
+        />
+        <div style={styles.groupScore}>評分: {props.score || '(尚未給評)' }</div>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
