@@ -39,17 +39,18 @@ export default class index extends React.Component {
   constructor (props) {
     super(props)
     this.changeState = this.changeState.bind(this)
-    this.state = {
-      project: this.props.project,
-      Show: {
-        title: this.props.project.research_title,
-        teacher: this.props.project.tname,
-        url: '',
-        introduce: '',
-        score: ''
-      },
-      state: 'show'
-    }
+  }
+
+  state = {
+    project: this.props.project,
+    Show: {
+      title: this.props.project.research_title,
+      teacher: this.props.project.tname,
+      url: '',
+      introduce: '',
+      score: ''
+    },
+    state: 'show'
   }
 
   async componentWillMount () {
@@ -65,30 +66,15 @@ export default class index extends React.Component {
 
   fetchData () {
     let _this = this
-    axios.post('/students/projectPage', {
-      id: _this.props.studentProfile.student_id
+    _this.setState({
+      Show: {
+        url: _this.state.project.link,
+        title: _this.state.project.research_title,
+        introduce: _this.state.project.intro,
+        teacher: _this.state.project.tname,
+        score: _this.state.project.score
+      }
     })
-      .then(res => {
-        let data = res.data
-        let data_
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].research_title === _this.state.project.research_title) { data_ = data[i] }
-        }
-        console.log(data_)
-        console.log(_this.state.project.research_title)
-        _this.setState({
-          Show: {
-            url: data_.link,
-            title: data_.research_title,
-            introduce: data_.intro,
-            teacher: data_.tname,
-            score: data_.score
-          }
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
     let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.Show.teacher + '/' + this.state.Show.title + '/image/image.jpg'
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
