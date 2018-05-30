@@ -66,7 +66,10 @@ export default class index extends React.Component {
   fetchData () {
     let _this = this
     axios.post('/students/projectPage', {
-      student_id: _this.props.studentProfile.student_id
+      student_id: _this.props.studentProfile.student_id,
+      tname: _this.props.project.tname,
+      research_title: _this.props.project.research_title,
+      first_second: _this.props.project.first_second
     })
       .then(res => {
         let data = res.data
@@ -113,8 +116,11 @@ export default class index extends React.Component {
 
   changeState () {
     let state = this.state.state === 'edit' ? 'show' : 'edit'
+    let _this = this
     if (state === 'show') {
-      this.fetchData()
+      setTimeout(function () {
+        _this.fetchData()
+      }, 1000)
     }
     this.setState({
       state: state

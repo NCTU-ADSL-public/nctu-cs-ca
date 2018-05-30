@@ -165,7 +165,7 @@ export default class DialogButton extends React.Component {
           .then(res => {
               if(!res.data.status){
                 flag=0
-                alert('因某些原因導致 ' + participants[i] + ' 同學 無法申請')
+                alert('因某些原因導致 ' + participants[i] + ' 同學 無法申請，如該學生有審核中的專題將不能申請。')
               }
           })
           .catch(err => {
@@ -174,6 +174,10 @@ export default class DialogButton extends React.Component {
             console.log(err)
           })
       }
+      if(_this.refs.event_type.value === ''){
+        alert('請填寫專題一或二')
+        flag = 0
+      }
     }
     if(flag){
       let r = window.confirm('確定送出表單嗎?')
@@ -181,6 +185,7 @@ export default class DialogButton extends React.Component {
         axios.post('/students/project_apply', {
           student_num:num,
           tname:_this.props.name,
+          first_second :_this.refs.event_type.value,
           research_title:_this.state.project_title,
           participants:participants,
           phones: phones,
@@ -241,6 +246,16 @@ export default class DialogButton extends React.Component {
               </FormGroup>{' '}
             </Form>
           </div>
+          <br/>
+            <div className='input-group '>
+              <div className='input-group-prepend'>
+                <select ref='event_type'  className="form-control">
+                  <option value=''>專題一或二?</option>
+                  <option value='1'>一</option>
+                  <option value='2'>二</option>
+                </select>
+              </div>
+            </div>
           <br/>
           <div style={{margin:'6'}}>
             <Form inline>

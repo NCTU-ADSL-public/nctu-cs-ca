@@ -89,7 +89,8 @@ class Profile extends React.Component {
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
         _this.setState({
-          photo: url
+          photo: url,
+          directory: directory
         })
       })
     }
@@ -102,15 +103,17 @@ class Profile extends React.Component {
     _this.setState({
       photo: ''
     })
-    if (directory !== '') {
+    if (directory !== '' && this.state.directory !== directory) {
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
         _this.setState({
-          photo: url
+          photo: url,
+          directory: directory
         })
       }).catch(function (error) {
         _this.setState({
-          photo: ''
+          photo: '',
+          directory: directory
         })
         // Uh-oh, an error occurred!
       })
