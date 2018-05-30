@@ -32,6 +32,11 @@ let loadFlag = 0
 
 class Head extends Component {
 
+  constructor (props) {
+    super(props)
+    this.res = this.res.bind(this)
+  }
+
   state = {
     selectedIndex: 0,
     studentIdcard: {

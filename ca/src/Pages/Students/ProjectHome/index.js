@@ -98,7 +98,7 @@ export default class index extends React.Component {
           <ActionHome />
         </IconButton>
         <div style={{marginTop: '-100px'}}>
-          {this.state.state === 'edit' ? <Edit project={this.props.project} studentProfile={this.props.studentProfile} onclick={this.changeState} onFetch={this.onFetch} /> : <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.props.project} image={this.state.image} file={this.state.file} />}
+          {this.state.state === 'edit' ? <Edit project={this.props.project} studentProfile={this.props.studentProfile} onclick={this.changeState} onFetch={this.props.propsClick} /> : <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.props.project} image={this.state.image} file={this.state.file} />}
         </div>
       </PageWrapper>
     )

@@ -96,7 +96,20 @@ class GridListExampleSingleLine extends React.Component {
   }
 
   onClickBack () {
-    this.setState({index: 0})
+    let _this = this
+    _this.setState({index: 0})
+    axios.post('/students/projectPage', {
+      id: _this.props.studentProfile.student_id
+    })
+      .then(res => {
+        _this.setState({
+          projectList: res.data
+        })
+        _this.setState({index: 0})
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   fetchImage () {
@@ -202,7 +215,7 @@ class GridListExampleSingleLine extends React.Component {
   render () {
     let id = 0
     return (
-      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} enableMouseEvents>
+      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} >
         <div style={{height: '100vh'}}>
           <div className='divide-horizontal-list '>
             <div className='divide-horizontal-span-list'>
