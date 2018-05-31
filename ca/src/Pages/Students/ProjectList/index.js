@@ -36,7 +36,8 @@ const styles = {
     overflowY: 'auto'
   },
   titleStyle: {
-    color: '#00AEAE'
+    paddingTop: '1',
+    color: '#c7b5ef'
   }
 }
 
@@ -180,30 +181,30 @@ class GridListExampleSingleLine extends React.Component {
       newProject = _this.state.projectList_status[i]
       if (this.state.projectList_status[i].agree === '3') {
         newProject = {...newProject, image: rejection, research_title: newProject.research_title + '   (已被教授拒絕，點擊已刪除資料)', real_title: newProject.research_title}
-        newProjectListStatus.push(newProject)
+        newProjectList.push(newProject)
         _this.setState({
-          newprojectList_status: newProjectListStatus
+          newprojectList: newProjectList
         })
       } else if (this.state.projectList_status[i].agree === '2' || this.state.projectList_status[i].agree === '0') {
         newProject = {...newProject, image: Review, research_title: newProject.research_title + '   (審核中，點擊已刪除資料)', real_title: newProject.research_title}
-        newProjectListStatus.push(newProject)
+        newProjectList.push(newProject)
         _this.setState({
-          newprojectList_status: newProjectListStatus
+          newprojectList: newProjectList
         })
       } else {
         let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
-          newProjectListStatus.push(newProject)
+          newProjectList.push(newProject)
           _this.setState({
-            newprojectList_status: newProjectListStatus
+            newprojectList: newProjectList
           })
         }).catch(function (error) {
           newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
-          newProjectListStatus.push(newProject)
+          newProjectList.push(newProject)
           _this.setState({
-            newprojectList_status: newProjectListStatus
+            newprojectList: newProjectList
           })
           console.log(newProject)
           console.log(error)
@@ -211,7 +212,7 @@ class GridListExampleSingleLine extends React.Component {
       }
       if (i === this.state.projectList_status.length - 1) {
         _this.setState({
-          newprojectList_status: newProjectListStatus
+          newprojectList: newProjectListStatus
         })
       }
     }
@@ -237,7 +238,7 @@ class GridListExampleSingleLine extends React.Component {
                   title={tile.research_title}
                   actionIcon={<IconButton><StarBorder color='rgb(0, 188, 212)' /></IconButton>}
                   titleStyle={styles.titleStyle}
-                  titleBackground='linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
+                  titleBackground='linear-gradient(to top, rgba(0,0,0,0.7) 70%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
             >
                   <img src={tile.image === 'undefined' ? img : tile.image} onClick={() => this.onClick(tile, tile.agree)} style={{cursor: 'pointer'}} />
                 </GridTile>
