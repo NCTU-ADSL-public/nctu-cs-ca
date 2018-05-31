@@ -119,7 +119,7 @@ class GroupScore extends React.Component {
             { student_id: '0399999',
               sname: '陳罐頭',
               detail: '資工系 網多組3 ',
-              score: 99,
+              score: 11,
             },
             { student_id: '0399777',
               sname: '李小霖',

@@ -157,7 +157,7 @@ export default class ScoreDialog extends React.Component {
       <div>
         <MuiThemeProvider>
           <div onClick={this.handleOpen}>
-            <ReplyStatus status={ Number.isNaN(students[0].score) }/>
+            <ReplyStatus status={ students[0].score === null }/>
           </div>
         </MuiThemeProvider>
         <MuiThemeProvider>
