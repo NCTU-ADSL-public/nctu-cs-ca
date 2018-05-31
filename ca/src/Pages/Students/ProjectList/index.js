@@ -66,6 +66,7 @@ class GridListExampleSingleLine extends React.Component {
   }
 
   async componentWillMount () {
+    await this.fetchImage()
     await this.onClickBack()
   }
 
