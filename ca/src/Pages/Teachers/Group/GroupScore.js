@@ -170,7 +170,7 @@ class GroupScore extends React.Component {
             <div style={styles.mainTitle}> 專題評分 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 請點擊專題給予評分。 </div>
+            <div style={styles.subTitle}> 請點擊評分按鈕給予評分。 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
@@ -205,6 +205,7 @@ const GroupButton = (props) => (
           title={props.title}
           participants={props.participants}
           firstSecond={props.firstSecond}
+          score={props.score}
           idCard={props.idCard}
           parentFunction={props.parentFunction}
         />

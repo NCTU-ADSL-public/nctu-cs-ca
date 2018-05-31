@@ -157,7 +157,7 @@ export default class ScoreDialog extends React.Component {
       <div>
         <MuiThemeProvider>
           <div onClick={this.handleOpen}>
-            <ReplyStatus status={this.props.status}/>
+            <ReplyStatus status={ !Number.isNaN(this.props.score) } score={this.props.score}/>
           </div>
         </MuiThemeProvider>
         <MuiThemeProvider>
@@ -194,10 +194,10 @@ export default class ScoreDialog extends React.Component {
 
 const ReplyStatus = (props) => {
   switch (props.status) {
-    case '0':
+    case true:
       return <Button bsStyle='primary'>評分</Button>
-    case '1':
-      return <Button bsStyle='success' disabled>已評: {props.score}</Button>
+    case false:
+      return <Button bsStyle='success'>已評: {props.score}</Button>
     default:
       return <Button bsStyle='primary'>評分</Button>
   }
