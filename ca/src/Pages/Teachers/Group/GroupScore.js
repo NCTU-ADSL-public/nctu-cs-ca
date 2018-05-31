@@ -118,15 +118,18 @@ class GroupScore extends React.Component {
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
-              detail: '資工系 網多組3 '
+              detail: '資工系 網多組3 ',
+              score: 99,
             },
             { student_id: '0399777',
               sname: '李小霖',
-              detail: '資工系 網多組3 '
+              detail: '資工系 網多組3 ',
+              score: 87,
             },
             { student_id: '0391234',
               sname: '郭小杰',
-              detail: '資工系 網多組3 '
+              detail: '資工系 網多組3 ',
+              score: 90,
             }
           ],
           year: '106'
@@ -209,7 +212,7 @@ const GroupButton = (props) => (
           idCard={props.idCard}
           parentFunction={props.parentFunction}
         />
-        <div style={styles.groupScore}>評分: {props.score || '(尚未給評)' }</div>
+        {/*<div style={styles.groupScore}>評分: {props.score || '(尚未給評)' }</div>*/}
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
@@ -217,6 +220,7 @@ const GroupButton = (props) => (
               {props.participants.map((item, i) => (
                 <Chip style={styles.chip} key={i}>
                   <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                  <span style={{color: 'red'}}>  {item.score}</span>
                 </Chip>
               ))}
             </div>
