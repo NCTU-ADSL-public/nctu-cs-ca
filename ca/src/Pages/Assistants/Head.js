@@ -74,7 +74,7 @@ class Head extends React.Component {
             <div>
               <FadeIn>
                 <MuiThemeProvider>
-                  <Mail id={this.state.idCard.id} />
+                  <Mail type='assistant' id={this.state.idCard.id} />
                 </MuiThemeProvider>
               </FadeIn>
             </div>,

@@ -210,7 +210,7 @@ class Head extends Component {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <Mail id={this.state.studentIdcard.student_id}/>
+            <Mail type='student' id={this.state.studentIdcard.student_id}/>
           </MuiThemeProvider>
         </FadeIn>
       )

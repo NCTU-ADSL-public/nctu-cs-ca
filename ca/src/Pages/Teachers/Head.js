@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import FadeIn from 'react-fade-in'
 import { Grid, Row, Col } from 'react-bootstrap'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import HomeItem from './Home.js'
 import CourseItem from './Course/index.js'
 import GroupItem from './Group/Group.js'
 import FamilyItem from './Family/index.js'
 import ProfileItem from './Profile.js'
-import Mail from './mail/index'
+import Mail from '../../Components/mail'
 
 import Navbar from '../../Components/Navbar'
 
@@ -89,7 +90,9 @@ class Head extends Component {
         <Col xsHidden smHidden>
           <a>
             <FadeIn>
-              <Mail tid={this.state.idCard.id} />
+              <MuiThemeProvider>
+                <Mail type='professor' id={this.state.idCard.id} />
+              </MuiThemeProvider>
             </FadeIn>
           </a>
         </Col>,
