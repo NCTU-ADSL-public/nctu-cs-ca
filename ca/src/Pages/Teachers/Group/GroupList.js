@@ -176,21 +176,23 @@ class GroupList extends React.Component {
         groupList: res.data.groups
       })
       let data = res.data.groups
+      let dataList = []
       for (let i = 0; i < data.length; i++) {
         let directory = data[i].year + '/' + this.props.idCard.name + '/' + data[i].research_title + '/image/image.jpg'
         console.log(directory)
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           data[i] = {...data[i], image: url}
+          dataList.push({...data[i], image: url})
           if (i === data.length - 1) {
             _this.setState({
-              groupList: data
+              groupList: dataList
             })
           }
         }).catch(function (error) {
           if (i === data.length - 1) {
             _this.setState({
-              groupList: data
+              groupList: dataList
             })
           }
         })
@@ -199,15 +201,16 @@ class GroupList extends React.Component {
         pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           data[i] = {...data[i], file: url}
+          dataList.push({...data[i], file: url})
           if (i === data.length - 1) {
             _this.setState({
-              groupList: data
+              groupList: dataList
             })
           }
         }).catch(function (error) {
           if (i === data.length - 1) {
             _this.setState({
-              groupList: data
+              groupList: dataList
             })
           }
         })
