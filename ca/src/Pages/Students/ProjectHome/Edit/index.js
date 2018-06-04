@@ -57,7 +57,6 @@ class Edit extends React.Component {
         first_second: _this.props.project.first_second,
         research_title: _this.props.project.research_title,
         new_title: _this.refs.title.value,
-        new_link: _this.refs.url.value,
         new_intro: _this.state.ckeditorContent
       }).then(res => {
       }).catch(err => {
@@ -150,9 +149,6 @@ class Edit extends React.Component {
                 <div className='input-group'>
                   <input ref='title' className='form-control' placeholder='必填' type='text' value={this.state.title} required />
                 </div>
-              </LabeledInput>
-              <LabeledInput label='團隊網站'>
-                <input ref='url' className='form-control' placeholder='選填' type='text' value={this.state.url} />
               </LabeledInput>
               <LabeledInput label='簡介'>
                 <div >

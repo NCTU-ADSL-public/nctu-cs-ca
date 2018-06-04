@@ -171,50 +171,42 @@ class GridListExampleSingleLine extends React.Component {
       })
 
       if (i === this.state.projectList.length - 1) {
-        _this.setState({
-          newprojectList: newProjectList
-        })
-      }
-    }
-    let newProjectListStatus = []
-    for (let i = 0; i < this.state.projectList_status.length; i++) {
-      let newProject
-      newProject = _this.state.projectList_status[i]
-      if (this.state.projectList_status[i].agree === '3') {
-        newProject = {...newProject, image: rejection, research_title: newProject.research_title + '   (已被教授拒絕，點擊已刪除資料)', real_title: newProject.research_title}
-        newProjectList.push(newProject)
-        _this.setState({
-          newprojectList: newProjectList
-        })
-      } else if (this.state.projectList_status[i].agree === '2' || this.state.projectList_status[i].agree === '0') {
-        newProject = {...newProject, image: Review, research_title: newProject.research_title + '   (審核中，點擊已刪除資料)', real_title: newProject.research_title}
-        newProjectList.push(newProject)
-        _this.setState({
-          newprojectList: newProjectList
-        })
-      } else {
-        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
-        let pathReference = storageRef.child(directory)
-        pathReference.getDownloadURL().then(url => {
-          newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
-          newProjectList.push(newProject)
-          _this.setState({
-            newprojectList: newProjectList
-          })
-        }).catch(function (error) {
-          newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
-          newProjectList.push(newProject)
-          _this.setState({
-            newprojectList: newProjectList
-          })
-          console.log(newProject)
-          console.log(error)
-        })
-      }
-      if (i === this.state.projectList_status.length - 1) {
-        _this.setState({
-          newprojectList: newProjectList
-        })
+
+        for (let j = 0; j < this.state.projectList_status.length; j++) {
+          let newProject
+          newProject = _this.state.projectList_status[j]
+          if (this.state.projectList_status[j].agree === '3') {
+            newProject = {...newProject, image: rejection, research_title: newProject.research_title + '   (已被教授拒絕，點擊已刪除資料)', real_title: newProject.research_title}
+            newProjectList.push(newProject)
+            _this.setState({
+              newprojectList: newProjectList
+            })
+          } else if (this.state.projectList_status[j].agree === '2' || this.state.projectList_status[j].agree === '0') {
+            newProject = {...newProject, image: Review, research_title: newProject.research_title + '   (審核中，點擊已刪除資料)', real_title: newProject.research_title}
+            newProjectList.push(newProject)
+            _this.setState({
+              newprojectList: newProjectList
+            })
+          } else {
+            let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
+            let pathReference = storageRef.child(directory)
+            pathReference.getDownloadURL().then(url => {
+              newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
+              newProjectList.push(newProject)
+              _this.setState({
+                newprojectList: newProjectList
+              })
+            }).catch(function (error) {
+              newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
+              newProjectList.push(newProject)
+              _this.setState({
+                newprojectList: newProjectList
+              })
+              console.log(newProject)
+              console.log(error)
+            })
+          }
+        }
       }
     }
   }

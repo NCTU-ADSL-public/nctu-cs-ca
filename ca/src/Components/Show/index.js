@@ -2,6 +2,24 @@ import './style.css'
 import img from './1.jpg'
 import React from 'react'
 import { Image } from 'react-bootstrap'
+import firebase from 'firebase'
+
+let config = {
+  apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
+  authDomain: 'nctu-csca.firebaseapp.com',
+  databaseURL: 'https://nctu-csca.firebaseio.com',
+  projectId: 'nctu-csca',
+  storageBucket: 'nctu-csca.appspot.com',
+  serviceAccount: '../../../../Resources/nctu-csca-firebase-admins.json',
+  messagingSenderId: '612862784976'
+}
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(config)
+  let auth = firebase.auth()
+  auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
+}
+let storageRef = firebase.storage().ref()
 
 export default class Show extends React.Component {
   render () {
