@@ -57,6 +57,7 @@ class Edit extends React.Component {
         first_second: _this.props.project.first_second,
         research_title: _this.props.project.research_title,
         new_title: _this.refs.title.value,
+        new_link: _this.refs.url.value,
         new_intro: _this.state.ckeditorContent
       }).then(res => {
       }).catch(err => {
@@ -64,7 +65,7 @@ class Edit extends React.Component {
       })
 
       if (this.state.image !== 'no') {
-        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/'
+        let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/'
         storageRef.child(directory).delete().then(function () {
         }).catch(function (error) {
           // Uh-oh, an error occurred!
@@ -82,7 +83,7 @@ class Edit extends React.Component {
         })
       }
       if (this.state.file !== 'no') {
-        let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/'
+        let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/'
         storageRef.child(directory).delete().then(function () {
         }).catch(function (error) {
         })

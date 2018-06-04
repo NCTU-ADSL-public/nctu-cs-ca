@@ -125,12 +125,12 @@ class GridListExampleSingleLine extends React.Component {
     for (let i = 0; i < this.state.projectList.length; i++) {
       let newProject
       newProject = _this.state.projectList[i]
-      let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
+      let directory = this.state.projectList[i].semester + '/' + this.state.projectList[i].tname + '/' + this.state.projectList[i].research_title + '/image/image.jpg'
       let pathReference = storageRef.child(directory)
       pathReference.getDownloadURL().then(url => {
         newProject = {...newProject, image: url, real_title: newProject.research_title, agree: '1'}
 
-        directory = (Number(_this.props.studentProfile.student_id[0]) * 10 + Number(_this.props.studentProfile.student_id[1]) + 102).toString() + '/' + _this.state.projectList[i].tname + '/' + _this.state.projectList[i].research_title + '/file/file.pdf'
+        directory = _this.state.projectList[i].semester + '/' + _this.state.projectList[i].tname + '/' + _this.state.projectList[i].research_title + '/file/file.pdf'
         pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           newProject = {...newProject, file: url, real_title: newProject.research_title, agree: '1'}
@@ -149,7 +149,7 @@ class GridListExampleSingleLine extends React.Component {
         })
       }).catch(function (error) {
         newProject = {...newProject, image: 'undefined', real_title: newProject.research_title, agree: '1'}
-        directory = (Number(_this.props.studentProfile.student_id[0]) * 10 + Number(_this.props.studentProfile.student_id[1]) + 102).toString() + '/' + _this.state.projectList[i].tname + '/' + _this.state.projectList[i].research_title + '/file/file.pdf'
+        directory = _this.state.projectList[i].semester + '/' + _this.state.projectList[i].tname + '/' + _this.state.projectList[i].research_title + '/file/file.pdf'
         pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           newProject = {...newProject, file: url, real_title: newProject.research_title, agree: '1'}

@@ -25,6 +25,7 @@ export default class Show extends React.Component {
               <div className='col-7'>
                 <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file === '' ? this.props.show.file : this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p>
                 <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.tname}</p>
+                <p><i className='glyphicon glyphicon-pencil' /> 年度: {this.props.show.semester}</p>
                 <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
               </div>
             </div>
