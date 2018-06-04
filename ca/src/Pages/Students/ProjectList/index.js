@@ -213,7 +213,7 @@ class GridListExampleSingleLine extends React.Component {
       }
       if (i === this.state.projectList_status.length - 1) {
         _this.setState({
-          newprojectList: newProjectListStatus
+          newprojectList: newProjectList
         })
       }
     }
