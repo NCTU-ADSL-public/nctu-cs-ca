@@ -173,7 +173,7 @@ class GroupList extends React.Component {
     }).then(res => {
       this.setState({
         total_number: res.data.total_number,
-        groupList: res.data.groups
+        //groupList: res.data.groups
       })
       let data = res.data.groups
       let dataList = []
