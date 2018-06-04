@@ -179,40 +179,45 @@ class GroupList extends React.Component {
       let dataList = []
       for (let i = 0; i < data.length; i++) {
         let directory = data[i].year + '/' + this.props.idCard.name + '/' + data[i].research_title + '/image/image.jpg'
-        console.log(directory)
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
-          data[i] = {...data[i], image: url}
-          dataList.push({...data[i], image: url})
-          if (i === data.length - 1) {
-            _this.setState({
-              groupList: dataList
-            })
-          }
+          let data_ = {...data[i], image: url}
+          directory = data[i].year + '/' + _this.props.idCard.name + '/' + data[i].research_title + '/file/file.pdf'
+          pathReference = storageRef.child(directory)
+          pathReference.getDownloadURL().then(url => {
+            dataList.push({...data_, file: url})
+            if (i === data.length - 1) {
+              _this.setState({
+                groupList: dataList
+              })
+            }
+          }).catch(function (error) {
+            dataList.push(data_)
+            if (i === data.length - 1) {
+              _this.setState({
+                groupList: dataList
+              })
+            }
+          })
         }).catch(function (error) {
-          if (i === data.length - 1) {
-            _this.setState({
-              groupList: dataList
-            })
-          }
-        })
-        directory = data[i].year + '/' + this.props.idCard.name + '/' + data[i].research_title + '/file/file.pdf'
-        console.log(directory)
-        pathReference = storageRef.child(directory)
-        pathReference.getDownloadURL().then(url => {
-          data[i] = {...data[i], file: url}
-          dataList.push({...data[i], file: url})
-          if (i === data.length - 1) {
-            _this.setState({
-              groupList: dataList
-            })
-          }
-        }).catch(function (error) {
-          if (i === data.length - 1) {
-            _this.setState({
-              groupList: dataList
-            })
-          }
+          let data_ = {...data[i]}
+          directory = data[i].year + '/' + _this.props.idCard.name + '/' + data[i].research_title + '/file/file.pdf'
+          pathReference = storageRef.child(directory)
+          pathReference.getDownloadURL().then(url => {
+            dataList.push({...data_, file: url})
+            if (i === data.length - 1) {
+              _this.setState({
+                groupList: dataList
+              })
+            }
+          }).catch(function (error) {
+            dataList.push(data_)
+            if (i === data.length - 1) {
+              _this.setState({
+                groupList: dataList
+              })
+            }
+          })
         })
       }
     }).catch(err => {
