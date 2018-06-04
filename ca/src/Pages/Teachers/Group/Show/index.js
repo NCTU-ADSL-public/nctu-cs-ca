@@ -2,48 +2,49 @@ import './style.css'
 import img from './1.jpg'
 import React from 'react'
 import { Image } from 'react-bootstrap'
-import firebase from 'firebase'
+import IconButton from 'material-ui/IconButton'
+import ActionHome from 'material-ui/svg-icons/hardware/keyboard-backspace'
 
-let config = {
-  apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
-  authDomain: 'nctu-csca.firebaseapp.com',
-  databaseURL: 'https://nctu-csca.firebaseio.com',
-  projectId: 'nctu-csca',
-  storageBucket: 'nctu-csca.appspot.com',
-  serviceAccount: '../../../../Resources/nctu-csca-firebase-admins.json',
-  messagingSenderId: '612862784976'
+const styles = {
+  largeIcon: {
+    width: 40,
+    height: 40,
+    zIndex: 100
+  },
+  large: {
+    width: 100,
+    height: 100,
+    padding: 30
+  }
 }
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(config)
-  let auth = firebase.auth()
-  auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
-}
-let storageRef = firebase.storage().ref()
 
 export default class Show extends React.Component {
   render () {
+    console.log(this.props.show.image)
     return (
       <div className='container'>
+        <IconButton
+          iconStyle={styles.largeIcon}
+          style={styles.large}
+          onClick={() => this.props.onclick()}
+        >
+          <ActionHome />
+        </IconButton>
         <div className=' col-md-12 offset-1'>
           <div className='banner-wrapper'>
             <Image
               alt='無圖片'
-              width='1200' height='400'
-              src={this.props.show.image !== 'undefined'
-                ? this.props.image === '' ? this.props.show.image : this.props.image
-                : img}
+              width='900' height='400'
+              src={this.props.show.image !== undefined ? this.props.show.image : img}
               responsive
               rounded
-            />
+           />
           </div>
           <div className='event-title'>{ this.props.show.research_title }</div>
           <div className='event-info-wrapper bg-white'>
             <div className='row'>
               <div className='col-7'>
                 <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file === '' ? this.props.show.file : this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p>
-                <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.tname}</p>
-                <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
               </div>
             </div>
             <br />
@@ -53,11 +54,6 @@ export default class Show extends React.Component {
               </div>
             </div>
             <section dangerouslySetInnerHTML={{__html: this.props.show.intro}} />
-            <div className='pull-right'>
-              <button className='btn btn-primary nav-button' onClick={this.props.onclick}>
-                編輯
-              </button>
-            </div>
           </div>
         </div>
       </div>

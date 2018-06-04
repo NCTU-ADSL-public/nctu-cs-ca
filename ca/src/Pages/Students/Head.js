@@ -50,7 +50,7 @@ class Head extends Component {
     isLoading:true,
     projectName:'',
     project_status_data:[{"student_id":"0416008","sname":"王冠升","research_title":"0416008","tname":"彭文志","agree":"2","first_second":"1","phone":"sds","email":"danny021406.cs04@nctu.edu.tw"}],
-    project_data:[{"student_id":"0416008","sname":"王冠升","research_title":"0416008","tname":"彭文志","agree":"1","first_second":"1","phone":"sds","email":"danny021406.cs04@nctu.edu.tw"}]
+    project_data:[{"student_id":"0416008","semester":"106-2","sname":"王冠升","research_title":"0416008","tname":"彭文志","agree":"1","first_second":"1","phone":"sds","email":"danny021406.cs04@nctu.edu.tw"}]
   }
 
   async componentWillMount () {
@@ -61,9 +61,9 @@ class Head extends Component {
     setTimeout(function () {
       _this.select(0)
     }, 100)
-    setTimeout(function () {
-      if(_this.state.studentIdcard.sname === '資料錯誤')window.location.reload('/')
-    }, 2000)
+    // setTimeout(function () {
+    //   if(_this.state.studentIdcard.sname === '資料錯誤')window.location.reload('/')
+    // }, 2000)
   }
 
   res () {

@@ -49,7 +49,7 @@ export default class index extends React.Component {
 
   onFetch () {
     let _this = this
-    let directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
+    let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/image.jpg'
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({
@@ -57,7 +57,7 @@ export default class index extends React.Component {
       })
     }).catch(function (error) {
     })
-    directory = (Number(this.props.studentProfile.student_id[0]) * 10 + Number(this.props.studentProfile.student_id[1]) + 102).toString() + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/file.pdf'
+    directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/file.pdf'
     pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       _this.setState({

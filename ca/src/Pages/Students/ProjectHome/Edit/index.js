@@ -57,7 +57,6 @@ class Edit extends React.Component {
         first_second: _this.props.project.first_second,
         research_title: _this.props.project.research_title,
         new_title: _this.refs.title.value,
-        new_link: _this.refs.url.value,
         new_intro: _this.state.ckeditorContent
       }).then(res => {
       }).catch(err => {
