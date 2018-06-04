@@ -186,8 +186,18 @@ class GroupApply extends React.Component {
       this.fetchData()
     }
   }
+  delay(t){
+    return new Promise((res, rej) => {
+      setTimeout(() => (res(1)), t)
+    })
+  }
   triggerUpdate = () => {
     this.fetchData()
+    this.delay(1000).then((v) => (
+      this.fetchData()
+    )).catch((e) => (
+      console.log('trigger update error' + e)
+    ))
   }
   render () {
     const tn = this.state.total_number

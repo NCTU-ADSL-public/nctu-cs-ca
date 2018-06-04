@@ -108,7 +108,7 @@ export default class ScoreDialog extends React.Component {
           first_second: this.props.firstSecond,
           new_score: this.state.score[i]
         }).then(res => {
-          console.log(res)
+          // console.log(res)
         }).catch(err => {
           console.log(err)
         })
