@@ -182,7 +182,7 @@ export default class DialogButton extends React.Component {
     if(flag){
       let r = window.confirm('確定送出表單嗎?')
       let Today = new Date();
-      let semester = ((Today.getFullYear()-1911)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
+      let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
       if(r){
         axios.post('/students/project_apply', {
           semester:semester,
