@@ -178,6 +178,7 @@ class GroupList extends React.Component {
       let data = res.data.groups
       for (let i = 0; i < data.length; i++) {
         let directory = data[i].year + '/' + this.props.idCard.name + '/' + data[i].research_title + '/image/image.jpg'
+        console.log(directory)
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           data[i] = {...data[i], image: url}
@@ -194,6 +195,7 @@ class GroupList extends React.Component {
           }
         })
         directory = data[i].year + '/' + this.props.idCard.name + '/' + data[i].research_title + '/file/file.pdf'
+        console.log(directory)
         pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           data[i] = {...data[i], file: url}
