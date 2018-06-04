@@ -83,16 +83,21 @@ export default class ScoreDialog extends React.Component {
     this.state = {
       open: false,
       score: ['','',''],
+      err: ['','',''],
     }
   }
 
   handleOpen = () => {
-    this.setState({open: true})
+    let score = ['','','']
+    let err =  ['','','']
+    this.setState({open: true, score, err})
   }
-  // {student_id:'0416026',tname:'彭文志', research_title:'聊天機器人', first_second:2, new_score:88}
+
   handleClose = (status) => {
-    this.setState({open: false})
-    if(status === 1){
+    if(status !== 1){
+      this.setState({open: false})
+    }else if(status === 1 && this.checkAllText() ){
+      this.setState({open: false})
       console.log('student_id: ' + this.props.participants[0].student_id)
       console.log('tname: ' + this.props.idCard.name)
       console.log('research_title: ' + this.props.title)
@@ -117,32 +122,54 @@ export default class ScoreDialog extends React.Component {
       this.props.parentFunction()
     }
   }
+
+  checkAllText = () => {
+    let score = this.state.score
+    let err = this.state.err
+    err[0] = ( this.isInt100(score[0]) ? '' :'分數必須是0~100之間的整數' )
+    err[1] = ( this.isInt100(score[1]) ? '' :'分數必須是0~100之間的整數' )
+    err[2] = ( this.isInt100(score[2]) ? '' :'分數必須是0~100之間的整數' )
+    this.setState({err})
+    const pass = ( err[0] === '' && err[1] === '' && err[2] === '' );
+    if (!pass) alert('分數輸入格式錯誤! 請修正後再送出。')
+    return pass
+  }
+
+  isInt100 = (value) => {
+    let x = parseFloat(value);
+    if( isNaN(value) || (x | 0) !== x ) return false
+    return x >= 0 && x <= 100
+  }
+
   handleChangeScore0 = (event) => {
-    const score = this.state.score
+    let score = this.state.score
+    let err = this.state.err
     score[0] = event.target.value
-    this.setState({
-      score
-    });
-  };
+    err[0] = ( this.isInt100(score[0]) ? '' :'分數必須是0~100之間的整數' )
+    this.setState({score, err})
+  }
+
   handleChangeScore1 = (event) => {
-    const score = this.state.score
+    let score = this.state.score
+    let err = this.state.err
     score[1] = event.target.value
-    this.setState({
-      score
-    });
-  };
+    err[1] = ( this.isInt100(score[1]) ? '' :'分數必須是0~100之間的整數' )
+    this.setState({score, err})
+  }
+
   handleChangeScore2 = (event) => {
-    const score = this.state.score
+    let score = this.state.score
+    let err = this.state.err
     score[2] = event.target.value
-    this.setState({
-      score
-    });
-  };
+    err[2] = ( this.isInt100(score[2]) ? '' :'分數必須是0~100之間的整數' )
+    this.setState({score, err})
+  }
+
   render () {
     const students = this.props.participants
     const actions = [
       <FlatButton
-        label='確定'
+        label='送出評分'
         primary
         onClick={ () => this.handleClose(1) }
       />,
@@ -176,6 +203,7 @@ export default class ScoreDialog extends React.Component {
                     floatingLabelText={item.student_id + ' ' + item.sname + ' 的分數'}
                     style={styles.text1}
                     value={this.state.score[i]}
+                    errorText={this.state.err[i]}
                     onChange={
                       i === 0 ? this.handleChangeScore0 :
                       i === 1 ? this.handleChangeScore1 :
