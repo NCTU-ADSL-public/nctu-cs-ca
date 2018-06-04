@@ -130,7 +130,10 @@ export default class ScoreDialog extends React.Component {
     err[1] = ( this.isInt100(score[1]) ? '' :'分數必須是0~100之間的整數' )
     err[2] = ( this.isInt100(score[2]) ? '' :'分數必須是0~100之間的整數' )
     this.setState({err})
-    const pass = ( err[0] === '' && err[1] === '' && err[2] === '' );
+    const pass = (
+      this.isInt100(score[0]) &&
+      this.isInt100(score[1]) &&
+      this.isInt100(score[2]) )
     if (!pass) alert('分數輸入格式錯誤! 請修正後再送出。')
     return pass
   }
