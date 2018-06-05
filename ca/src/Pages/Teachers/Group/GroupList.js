@@ -126,17 +126,7 @@ class GroupList extends React.Component {
       index: 0,
       groupListlength: 99,
       total_number: 3,
-      groupList: [
-        { research_title: '資料錯誤',
-          participants: [
-            { student_id: '0399999',
-              sname: '陳罐頭',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        }
-      ]
+      groupList: []
     }
   }
   fetchData () {
@@ -163,20 +153,14 @@ class GroupList extends React.Component {
           pathReference = storageRef.child(directory)
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
-            if (i === data.length - 1) {
-              console.log(dataList)
-              _this.setState({
-                groupList: dataList
-              })
-            }
+            _this.setState({
+              groupList: [..._this.state.groupList, {...data_, file: url}]
+            })
           }).catch(function (error) {
             dataList.push(data_)
-            if (i === data.length - 1) {
-              console.log(dataList)
-              _this.setState({
-                groupList: dataList
-              })
-            }
+            _this.setState({
+              groupList: [..._this.state.groupList, {...data_, file: url}]
+            })
           })
         }).catch(function (error) {
           let data_ = {...data[i]}
@@ -184,20 +168,14 @@ class GroupList extends React.Component {
           pathReference = storageRef.child(directory)
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
-            if (i === data.length - 1) {
-              console.log(dataList)
-              _this.setState({
-                groupList: dataList
-              })
-            }
+            _this.setState({
+              groupList: [..._this.state.groupList, {...data_, file: url}]
+            })
           }).catch(function (error) {
             dataList.push(data_)
-            if (i === data.length - 1) {
-              console.log(dataList)
-              _this.setState({
-                groupList: dataList
-              })
-            }
+            _this.setState({
+              groupList: [..._this.state.groupList, {...data_}]
+            })
           })
         })
       }
