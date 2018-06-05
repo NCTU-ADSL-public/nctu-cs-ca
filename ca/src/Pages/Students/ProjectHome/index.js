@@ -75,7 +75,7 @@ export default class index extends React.Component {
       _this.props.propsClick()
       setTimeout(function () {
         _this.onFetch()
-      }, 1000)
+      }, 10)
 
       _this.setState({
         state: state
