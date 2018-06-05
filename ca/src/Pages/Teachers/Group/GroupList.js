@@ -3,8 +3,6 @@ import axios from 'axios'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
-import Show from './Show'
-import SwipeableViews from 'react-swipeable-views'
 import firebase from 'firebase'
 
 // mui
@@ -124,21 +122,9 @@ const styles = {
 class GroupList extends React.Component {
   constructor (props) {
     super(props)
-    this.handleChangeIndex = this.handleChangeIndex.bind(this)
-    this.handleGroupClick = this.handleGroupClick.bind(this)
     this.state = {
       index: 0,
       groupListlength: 99,
-      item:
-      { research_title: '資料錯誤',
-        participants: [
-          { student_id: '0399999',
-            sname: '陳罐頭',
-            detail: '資工系 網多組3 '
-          }
-        ],
-        year: '106'
-      },
       total_number: 3,
       groupList: [
         { research_title: '資料錯誤',
@@ -152,17 +138,6 @@ class GroupList extends React.Component {
         }
       ]
     }
-  }
-  handleChangeIndex (index) {
-    this.setState({
-      index
-    })
-  }
-  handleGroupClick (item) {
-    this.setState({
-      item: item,
-      index: 1
-    })
   }
   fetchData () {
     console.log(this.props.idCard.name)
@@ -189,6 +164,7 @@ class GroupList extends React.Component {
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
             if (i === data.length - 1) {
+              console.log(dataList)
               _this.setState({
                 groupList: dataList
               })
@@ -196,6 +172,7 @@ class GroupList extends React.Component {
           }).catch(function (error) {
             dataList.push(data_)
             if (i === data.length - 1) {
+              console.log(dataList)
               _this.setState({
                 groupList: dataList
               })
@@ -208,6 +185,7 @@ class GroupList extends React.Component {
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
             if (i === data.length - 1) {
+              console.log(dataList)
               _this.setState({
                 groupList: dataList
               })
@@ -215,6 +193,7 @@ class GroupList extends React.Component {
           }).catch(function (error) {
             dataList.push(data_)
             if (i === data.length - 1) {
+              console.log(dataList)
               _this.setState({
                 groupList: dataList
               })
@@ -242,35 +221,28 @@ class GroupList extends React.Component {
     const tn = this.state.total_number
     return (
       <Grid>
-        <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} >
-          <div>
-            <Row>
-              <Col xs={12} md={4} lg={4}>
-                <div style={styles.mainTitle}> 學生專題列表 </div>
-              </Col>
-              <Col xs={12} md={8} lg={8}>
-                <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人 </div>
-              </Col>
-            </Row>
-            <Row style={styles.groups}>
-              {this.state.groupList.map((item, i) => (
-                <GroupButton
-                  key={i}
-                  title={item.research_title}
-                  participants={item.participants}
-                  year={item.year}
-                  item={item}
-                  onClick={this.handleGroupClick}
+        <div>
+          <Row>
+            <Col xs={12} md={4} lg={4}>
+              <div style={styles.mainTitle}> 學生專題列表 </div>
+            </Col>
+            <Col xs={12} md={8} lg={8}>
+              <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人 </div>
+            </Col>
+          </Row>
+          <Row style={styles.groups}>
+            {this.state.groupList.map((item, i) => (
+              <GroupButton
+                key={i}
+                title={item.research_title}
+                participants={item.participants}
+                year={item.year}
+                item={item}
+                onClick={this.props.handleGroupClick}
             />
           ))}
-            </Row>
-          </div>
-          <div>
-            <MuiThemeProvider>
-              <Show onclick={this.handleChangeIndex} show={this.state.item} />
-            </MuiThemeProvider>
-          </div>
-        </SwipeableViews>
+          </Row>
+        </div>
       </Grid>
     )
   }
