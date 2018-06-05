@@ -220,6 +220,7 @@ const GroupButton = (props) => (
           firstSecond={props.firstSecond}
           score={props.score}
           idCard={props.idCard}
+          year={props.year}
           parentFunction={props.parentFunction}
         />
         {/*<div style={styles.groupScore}>評分: {props.score || '(尚未給評)' }</div>*/}

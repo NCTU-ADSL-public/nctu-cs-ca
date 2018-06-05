@@ -111,6 +111,7 @@ export default class ScoreDialog extends React.Component {
           tname: this.props.idCard.name,
           research_title: this.props.title,
           first_second: this.props.firstSecond,
+          year: this.props.year,
           new_score: this.state.score[i]
         }).then(res => {
           // console.log(res)
@@ -200,9 +201,8 @@ export default class ScoreDialog extends React.Component {
           >
             <div style={styles.itemsBlock}>
               {students.map((item, i) => (
-                <MuiThemeProvider>
+                <MuiThemeProvider key={i}>
                   <TextField
-                    key={i}
                     floatingLabelText={item.student_id + ' ' + item.sname + ' 的分數'}
                     style={styles.text1}
                     value={this.state.score[i]}

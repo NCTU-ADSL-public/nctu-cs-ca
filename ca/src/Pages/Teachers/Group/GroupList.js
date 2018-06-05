@@ -159,13 +159,15 @@ class GroupList extends React.Component {
             _this.setState({
               groupList: [..._this.state.groupList, {...data_, file: url}]
             })
-          }).catch(function (error) {
+          }).catch(error => {
+            console.log(error)
             dataList.push(data_)
             _this.setState({
               groupList: [..._this.state.groupList, {...data_, file: url}]
             })
           })
-        }).catch(function (error) {
+        }).catch(error => {
+          console.log(error)
           let data_ = {...data[i]}
           directory = data[i].year + '/' + _this.props.idCard.name + '/' + data[i].research_title + '/file/file.pdf'
           pathReference = storageRef.child(directory)
@@ -174,7 +176,8 @@ class GroupList extends React.Component {
             _this.setState({
               groupList: [..._this.state.groupList, {...data_, file: url}]
             })
-          }).catch(function (error) {
+          }).catch(error => {
+            console.log(error)
             dataList.push(data_)
             _this.setState({
               groupList: [..._this.state.groupList, {...data_}]

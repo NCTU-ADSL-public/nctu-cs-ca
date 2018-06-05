@@ -100,7 +100,8 @@ export default class ReplyDialog extends React.Component {
       tname: this.props.name,
       agree: status,
       student: students,
-      first_second: this.props.firstSecond
+      first_second: this.props.firstSecond,
+      year: this.props.year
     }).then(res => {
       console.log(res)
     }).catch(err => {

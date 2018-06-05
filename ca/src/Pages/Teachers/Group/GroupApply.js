@@ -223,6 +223,7 @@ class GroupApply extends React.Component {
               status={item.status}
               parentFunction={this.triggerUpdate}
               firstSecond={item.first_second}
+              year={item.year}
             />
           ))}
         </Row>
@@ -244,6 +245,7 @@ const ApplyButton = (props) => {
             participants={props.participants}
             parentFunction={props.parentFunction}
             firstSecond={props.firstSecond}
+            year={props.year}
           />
         </Col>
       </Row>
