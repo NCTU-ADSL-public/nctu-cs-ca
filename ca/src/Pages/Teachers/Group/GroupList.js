@@ -189,16 +189,10 @@ class GroupList extends React.Component {
   componentDidMount () {
     this.fetchData()
   }
-  async componentWillMount () {
-    this.setState({
-      groupList: []
-    })
-    await this.fetchData()
-  }
-  componentWillReceiveProps (nextProps) {
+  async componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
       console.log(nextProps)
-      this.setState({
+      await this.setState({
         groupList: []
       })
       this.fetchData()
