@@ -85,7 +85,8 @@ class GridListExampleSingleLine extends React.Component {
       axios.post('/students/formDelete', {
         research_title: data.real_title,
         tname: data.tname,
-        first_second: data.first_second
+        first_second: data.first_second,
+        semester: data.semester
       })
         .then(res => {
           _this.setState({

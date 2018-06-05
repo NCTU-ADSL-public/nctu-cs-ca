@@ -34,7 +34,7 @@ export default class Show extends React.Component {
           <div className='banner-wrapper'>
             <Image
               alt='無圖片'
-              width='900' height='400'
+              width='1200' height='400'
               src={this.props.show.image !== undefined ? this.props.show.image : img}
               responsive
               rounded
