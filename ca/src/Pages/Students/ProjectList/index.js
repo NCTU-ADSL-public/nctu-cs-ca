@@ -101,8 +101,8 @@ class GridListExampleSingleLine extends React.Component {
 
   onClickBack () {
     let _this = this
-    _this.setState({index: 0})
     setTimeout(function () {
+      _this.setState({index: 0})
       axios.post('/students/projectPage', {
         id: _this.props.studentProfile.student_id
       })
@@ -118,7 +118,7 @@ class GridListExampleSingleLine extends React.Component {
         .catch(err => {
           console.log(err)
         })
-    }, 10)
+    }, 1000)
   }
 
   fetchImage () {
