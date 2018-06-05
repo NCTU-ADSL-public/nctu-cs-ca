@@ -214,18 +214,22 @@ class GroupApply extends React.Component {
           </Col>
         </Row>
         <Row style={styles.groups}>
-          {this.state.applyList.map((item, i) => (
-            <ApplyButton
-              key={i}
-              title={item.research_title}
-              participants={item.participants}
-              name={this.props.idCard.name}
-              status={item.status}
-              parentFunction={this.triggerUpdate}
-              firstSecond={item.first_second}
-              year={item.year}
-            />
-          ))}
+          {this.state.applyList.length !== 0
+            ?
+              this.state.applyList.map((item, i) => (
+                <ApplyButton
+                  key={i}
+                  title={item.research_title}
+                  participants={item.participants}
+                  name={this.props.idCard.name}
+                  status={item.status}
+                  parentFunction={this.triggerUpdate}
+                  firstSecond={item.first_second}
+                  year={item.year}
+                />
+              ))
+            : '(目前尚無專題申請)'
+          }
         </Row>
       </Grid>
     )
