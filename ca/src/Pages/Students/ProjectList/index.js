@@ -84,7 +84,8 @@ class GridListExampleSingleLine extends React.Component {
     if (window.confirm('按確定已刪除資料，請先知會過您的隊友再刪除。')) {
       axios.post('/students/formDelete', {
         research_title: data.real_title,
-        tname: data.tname
+        tname: data.tname,
+        semester: data.semester
       })
         .then(res => {
           _this.setState({

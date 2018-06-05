@@ -128,6 +128,7 @@ class GroupList extends React.Component {
     this.handleGroupClick = this.handleGroupClick.bind(this)
     this.state = {
       index: 0,
+      groupListlength: 99,
       item:
       { research_title: '資料錯誤',
         participants: [
@@ -173,7 +174,8 @@ class GroupList extends React.Component {
     }).then(res => {
       this.setState({
         total_number: res.data.total_number,
-        //groupList: res.data.groups
+        groupListlength: res.data.groups.length
+        // groupList: res.data.groups
       })
       let data = res.data.groups
       let dataList = []
@@ -235,6 +237,9 @@ class GroupList extends React.Component {
   }
   render () {
     const tn = this.state.total_number
+    if (this.state.groupListlength !== this.state.groupList.length) {
+      return ''
+    }
     return (
       <Grid>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} >
