@@ -254,9 +254,6 @@ const GroupButton = (props) => (
             </div>
           </MuiThemeProvider>
         </div>
-        <div style={styles.groupIntro}>
-          (尚未取得專題簡介的資料。)
-        </div>
       </Col>
     </Row>
   </Grid>
