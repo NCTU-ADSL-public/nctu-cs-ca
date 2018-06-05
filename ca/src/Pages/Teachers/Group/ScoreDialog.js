@@ -111,7 +111,7 @@ export default class ScoreDialog extends React.Component {
           tname: this.props.idCard.name,
           research_title: this.props.title,
           first_second: this.props.firstSecond,
-          semester: this.props.year,
+          year: this.props.year,
           new_score: this.state.score[i]
         }).then(res => {
           // console.log(res)
