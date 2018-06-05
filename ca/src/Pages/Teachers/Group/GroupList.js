@@ -5,6 +5,7 @@ import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 import firebase from 'firebase'
 
+import Loading from '../../../Components/Loading'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -123,6 +124,7 @@ class GroupList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      loading: true,
       index: 0,
       groupListlength: 99,
       total_number: 3,
@@ -141,6 +143,7 @@ class GroupList extends React.Component {
       id: this.props.idCard.id
     }).then(res => {
       this.setState({
+        loading: false,
         total_number: res.data.total_number,
         groupList: []
         // groupList: res.data.groups
@@ -215,6 +218,11 @@ class GroupList extends React.Component {
             </Col>
           </Row>
           <Row style={styles.groups}>
+            <Loading
+              size={100}
+              left={40}
+              top={100}
+              isLoading={this.state.loading} />
             {this.state.groupList.map((item, i) => (
               <GroupButton
                 key={i}
