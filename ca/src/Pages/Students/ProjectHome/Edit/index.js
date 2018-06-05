@@ -54,6 +54,7 @@ class Edit extends React.Component {
       axios.post('/students/editProject', {
         student_id: _this.props.studentProfile.student_id,
         tname: _this.props.project.tname,
+        semester: _this.props.project.semester,
         first_second: _this.props.project.first_second,
         research_title: _this.props.project.research_title,
         new_title: _this.refs.title.value,
