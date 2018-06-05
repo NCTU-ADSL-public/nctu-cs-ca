@@ -89,7 +89,7 @@ class GridListExampleSingleLine extends React.Component {
       })
         .then(res => {
           _this.setState({
-            newprojectList_status: this.state.newprojectList_status.filter(t => t.research_title !== data.research_title)
+            newprojectList: this.state.newprojectList_status.filter(t => t.research_title !== data.research_title)
           })
         })
         .catch(err => {
