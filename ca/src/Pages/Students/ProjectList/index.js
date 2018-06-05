@@ -118,7 +118,7 @@ class GridListExampleSingleLine extends React.Component {
         .catch(err => {
           console.log(err)
         })
-    }, 100)
+    }, 10)
   }
 
   fetchImage () {
