@@ -141,7 +141,8 @@ class GroupList extends React.Component {
       id: this.props.idCard.id
     }).then(res => {
       this.setState({
-        total_number: res.data.total_number
+        total_number: res.data.total_number,
+        groupList: []
         // groupList: res.data.groups
       })
       let data = res.data.groups
