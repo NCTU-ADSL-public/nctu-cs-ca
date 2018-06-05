@@ -241,8 +241,7 @@ class GroupList extends React.Component {
   render () {
     const tn = this.state.total_number
     return (
-      this.state.groupListlength !== this.state.groupList.length ? ''
-      : <Grid>
+      <Grid>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} >
           <div>
             <Row>
