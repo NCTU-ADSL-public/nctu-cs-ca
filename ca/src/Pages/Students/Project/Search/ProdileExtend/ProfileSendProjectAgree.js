@@ -265,7 +265,7 @@ export default class DialogButton extends React.Component {
             <Form inline>
             <FormGroup controlId="formInlineName">
               <ControlLabel>學號:</ControlLabel>{' '}
-              <FormControl type="text" placeholder="0416XXX"  onChange={this.handleChange_stud_num_0}/>
+              <FormControl type="text" placeholder="0416XXX"  onChange={this.handleChange_stud_num_0} />
             </FormGroup>{' '}
             <FormGroup controlId="formInlineEmail">
               <ControlLabel>Email:</ControlLabel>{' '}

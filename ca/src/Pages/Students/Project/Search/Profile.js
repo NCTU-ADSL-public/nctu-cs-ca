@@ -135,7 +135,7 @@ class Profile extends React.Component {
               <div style={fontStyle}>
                 <div style={{float: 'right'}}>
                   <ProfileSendmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-                  <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} />
+                  <ProfileSendProjectAgree name={this.props.profile.name} studentIdcard={this.props.studentIdcard} value={this.props.studentIdcard.student_id}/>
                 </div>
                 {this.state.photo === 'loading' ? <Loading left={70} top={10} size={200} isLoading /> : <Image style={styles.pic} src={this.state.photo === '' ? pic : this.state.photo} circle />}
                 <div style={styles.name}> {this.props.profile.name} </div>
