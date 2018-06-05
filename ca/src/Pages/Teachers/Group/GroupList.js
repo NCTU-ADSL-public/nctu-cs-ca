@@ -229,6 +229,9 @@ class GroupList extends React.Component {
   componentDidMount () {
     this.fetchData()
   }
+  async componentWillMount () {
+    await this.fetchData()
+  }
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
       console.log(nextProps)
