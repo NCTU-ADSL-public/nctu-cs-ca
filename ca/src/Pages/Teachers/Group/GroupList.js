@@ -138,8 +138,7 @@ class GroupList extends React.Component {
       id: this.props.idCard.id
     }).then(res => {
       this.setState({
-        total_number: res.data.total_number,
-        groupListlength: res.data.groups.length
+        total_number: res.data.total_number
         // groupList: res.data.groups
       })
       let data = res.data.groups
@@ -187,11 +186,17 @@ class GroupList extends React.Component {
     this.fetchData()
   }
   async componentWillMount () {
+    this.setState({
+      groupList: []
+    })
     await this.fetchData()
   }
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
       console.log(nextProps)
+      this.setState({
+        groupList: []
+      })
       this.fetchData()
     }
   }
