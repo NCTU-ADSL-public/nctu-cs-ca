@@ -82,14 +82,14 @@ export default class ScoreDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      score: ['100','100','100'],
-      err: ['','',''],
+      score: ['100','100','100','100'],
+      err: ['','','',''],
     }
   }
 
   handleOpen = () => {
-    let score = ['100','100','100']
-    let err =  ['','','']
+    let score = ['100','100','100','100']
+    let err =  ['','','','']
     this.setState({open: true, score, err})
   }
 
@@ -127,14 +127,15 @@ export default class ScoreDialog extends React.Component {
   checkAllText = () => {
     let score = this.state.score
     let err = this.state.err
-    err[0] = ( this.isInt100(score[0]) ? '' :'分數必須是0~100之間的整數' )
-    err[1] = ( this.isInt100(score[1]) ? '' :'分數必須是0~100之間的整數' )
-    err[2] = ( this.isInt100(score[2]) ? '' :'分數必須是0~100之間的整數' )
+    err.forEach(i => {
+      err[i] = ( this.isInt100(score[i]) ? '' :'分數必須是0~100之間的整數' )
+    })
     this.setState({err})
     const pass = (
       this.isInt100(score[0]) &&
       this.isInt100(score[1]) &&
-      this.isInt100(score[2]) )
+      this.isInt100(score[2]) &&
+      this.isInt100(score[3]) )
     if (!pass) alert('分數輸入格式錯誤! 請修正後再送出。')
     return pass
   }
@@ -166,6 +167,14 @@ export default class ScoreDialog extends React.Component {
     let err = this.state.err
     score[2] = event.target.value
     err[2] = ( this.isInt100(score[2]) ? '' :'分數必須是0~100之間的整數' )
+    this.setState({score, err})
+  }
+
+  handleChangeScore3 = (event) => {
+    let score = this.state.score
+    let err = this.state.err
+    score[3] = event.target.value
+    err[3] = ( this.isInt100(score[3]) ? '' :'分數必須是0~100之間的整數' )
     this.setState({score, err})
   }
 
@@ -208,9 +217,10 @@ export default class ScoreDialog extends React.Component {
                     value={this.state.score[i]}
                     errorText={this.state.err[i]}
                     onChange={
-                      i === 0 ? this.handleChangeScore0 :
-                      i === 1 ? this.handleChangeScore1 :
-                        this.handleChangeScore2
+                        i === 0 ? this.handleChangeScore0 :
+                        i === 1 ? this.handleChangeScore1 :
+                        i === 2 ? this.handleChangeScore2 :
+                        this.handleChangeScore3
                     }
                   />
                 </MuiThemeProvider>
