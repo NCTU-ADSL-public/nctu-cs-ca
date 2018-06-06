@@ -207,7 +207,7 @@ class GroupList extends React.Component {
   render () {
     const tn = this.state.total_number
     return (
-      <Grid>
+      <Grid style={{minHeight: 500}}>
         <div>
           <Row>
             <Col xs={12} md={4} lg={4}>
@@ -223,16 +223,19 @@ class GroupList extends React.Component {
               left={40}
               top={100}
               isLoading={this.state.loading} />
-            {this.state.groupList.map((item, i) => (
-              <GroupButton
-                key={i}
-                title={item.research_title}
-                participants={item.participants}
-                year={item.year}
-                item={item}
-                onClick={this.props.handleGroupClick}
-            />
-          ))}
+            {this.state.groupList.length !== 0
+              ? this.state.groupList.map((item, i) => (
+                <GroupButton
+                  key={i}
+                  title={item.research_title}
+                  participants={item.participants}
+                  year={item.year}
+                  item={item}
+                  onClick={this.props.handleGroupClick}
+                />
+              ))
+              : '(無專題生資料)'
+            }
           </Row>
         </div>
       </Grid>

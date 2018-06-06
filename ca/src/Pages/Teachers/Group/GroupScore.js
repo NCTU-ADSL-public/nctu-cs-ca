@@ -35,7 +35,7 @@ const styles = {
     float: 'left'
   },
   groups: {
-    margin: '0 0 60px 0'
+    margin: '60px 0 60px 0'
   },
   groupBtn: {
     margin: 30,
@@ -112,7 +112,8 @@ class GroupScore extends React.Component {
     super(props)
     this.state = {
       total_number: 3,
-      groupList: [
+      groupList: [],
+      /*groupList: [
         { research_title: '資料錯誤',
           first_second: '0',
           participants: [
@@ -134,7 +135,7 @@ class GroupScore extends React.Component {
           ],
           year: '106'
         }
-      ]
+      ]*/
     }
   }
   fetchData () {
@@ -177,7 +178,7 @@ class GroupScore extends React.Component {
   render () {
     const tn = this.state.total_number
     return (
-      <Grid>
+      <Grid style={{minHeight: 500}}>
         <Row>
           <Col xs={12} md={4} lg={4}>
             <div style={styles.mainTitle}> 專題評分 </div>
@@ -187,18 +188,21 @@ class GroupScore extends React.Component {
           </Col>
         </Row>
         <Row style={styles.groups}>
-          {this.state.groupList.map((item, i) => (
-            <GroupButton
-              key={i}
-              title={item.research_title}
-              participants={item.participants}
-              firstSecond={item.first_second}
-              year={item.year}
-              score={item.score}
-              parentFunction={this.triggerUpdate}
-              idCard={this.props.idCard}
-            />
-          ))}
+          {this.state.groupList.length !== 0
+            ? this.state.groupList.map((item, i) => (
+              <GroupButton
+                key={i}
+                title={item.research_title}
+                participants={item.participants}
+                firstSecond={item.first_second}
+                year={item.year}
+                score={item.score}
+                parentFunction={this.triggerUpdate}
+                idCard={this.props.idCard}
+              />
+            ))
+            : '(無專題生資料)'
+          }
         </Row>
       </Grid>
     )

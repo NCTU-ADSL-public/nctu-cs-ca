@@ -101,7 +101,8 @@ class GroupApply extends React.Component {
     this.state = {
       loading: true,
       total_number: '',
-      applyList: [
+      applyList: []
+      /*applyList: [
         { research_title: '資料錯誤',
           status: 0,
           participants: [
@@ -150,7 +151,7 @@ class GroupApply extends React.Component {
           ],
           year: ''
         }
-      ]
+      ]*/
     }
   }
   fetchData () {
@@ -205,7 +206,7 @@ class GroupApply extends React.Component {
   render () {
     const tn = this.state.total_number
     return (
-      <Grid>
+      <Grid style={{minHeight: 500}}>
         <Row>
           <Col xs={12} md={4} lg={4}>
             <div style={styles.noticeTitle} onClick={() => this.fetchData()}> 學生專題申請 </div>

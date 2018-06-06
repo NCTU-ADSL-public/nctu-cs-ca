@@ -71,9 +71,11 @@ class Head extends Component {
         document.getElementById('page'))
     } else if (index === 2) {
       ReactDOM.render(
-        <FadeIn xsHidden smHidden>
-          <GroupItem idCard={this.state.idCard} />
-        </FadeIn>,
+        <Col xsHidden smHidden>
+          <FadeIn>
+            <GroupItem idCard={this.state.idCard} />
+          </FadeIn>
+        </Col>,
         document.getElementById('page'))
     } else if (index === 3) {
       ReactDOM.render(
@@ -130,7 +132,7 @@ class Head extends Component {
           <div id='page' />
           {/* For mobile, tablet user */}
           <Col xs={12} mdHidden lgHidden>
-            <h2> { this.state.selectedIndex === 5 || this.state.selectedIndex === 2
+            <h2> { this.state.selectedIndex === 5
               ? ''
               : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
           </Col>
