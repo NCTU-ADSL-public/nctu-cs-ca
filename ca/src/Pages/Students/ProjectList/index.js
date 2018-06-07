@@ -61,6 +61,7 @@ class GridListExampleSingleLine extends React.Component {
   }
 
   handleChangeIndex (index) {
+    scrollToComponent(this.refs.top)
     this.setState({
       index
     })
@@ -114,7 +115,6 @@ class GridListExampleSingleLine extends React.Component {
             newProjectList.push(newProject)
           }
           _this.setState({index: 0, newprojectList: newProjectList})
-          scrollToComponent(_this.refs.top)
         })
         .catch(err => {
           console.log(err)
