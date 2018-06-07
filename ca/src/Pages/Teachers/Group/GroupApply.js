@@ -5,6 +5,7 @@ import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 import ReplyDialog from './ReplyDialog'
 
+import Loading from '../../../Components/Loading'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -98,8 +99,10 @@ class GroupApply extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      total_number: '',
-      applyList: [
+      loading: true,
+      total_number: 0,
+      applyList: []
+      /*applyList: [
         { research_title: '資料錯誤',
           status: 0,
           participants: [
@@ -148,7 +151,7 @@ class GroupApply extends React.Component {
           ],
           year: ''
         }
-      ]
+      ]*/
     }
   }
   fetchData () {
@@ -159,7 +162,8 @@ class GroupApply extends React.Component {
     }).then(res => {
       console.log(res.data)
       this.setState({
-        applyList: res.data
+        applyList: res.data,
+        loading: false
       })
     }).catch(err => {
       console.log(err)
@@ -202,7 +206,7 @@ class GroupApply extends React.Component {
   render () {
     const tn = this.state.total_number
     return (
-      <Grid>
+      <Grid style={{minHeight: 500}}>
         <Row>
           <Col xs={12} md={4} lg={4}>
             <div style={styles.noticeTitle} onClick={() => this.fetchData()}> 學生專題申請 </div>
@@ -214,17 +218,27 @@ class GroupApply extends React.Component {
           </Col>
         </Row>
         <Row style={styles.groups}>
-          {this.state.applyList.map((item, i) => (
-            <ApplyButton
-              key={i}
-              title={item.research_title}
-              participants={item.participants}
-              name={this.props.idCard.name}
-              status={item.status}
-              parentFunction={this.triggerUpdate}
-              firstSecond={item.first_second}
-            />
-          ))}
+          <Loading
+            size={100}
+            left={40}
+            top={100}
+            isLoading={this.state.loading} />
+          {this.state.applyList.length !== 0
+            ?
+              this.state.applyList.map((item, i) => (
+                <ApplyButton
+                  key={i}
+                  title={item.research_title}
+                  participants={item.participants}
+                  name={this.props.idCard.name}
+                  status={item.status}
+                  parentFunction={this.triggerUpdate}
+                  firstSecond={item.first_second}
+                  year={item.year}
+                />
+              ))
+            : '(目前尚無專題申請)'
+          }
         </Row>
       </Grid>
     )
@@ -244,6 +258,7 @@ const ApplyButton = (props) => {
             participants={props.participants}
             parentFunction={props.parentFunction}
             firstSecond={props.firstSecond}
+            year={props.year}
           />
         </Col>
       </Row>

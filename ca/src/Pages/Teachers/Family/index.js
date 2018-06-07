@@ -159,7 +159,7 @@ export default class index extends React.Component {
 
     const showDefault = (
       <div style={styles.course.main}>
-        <div style={styles.course.title}>請由左方列表點選學生</div>
+        <div style={styles.course.title}>(此功能尚在測試階段)</div>
       </div>
     );
 

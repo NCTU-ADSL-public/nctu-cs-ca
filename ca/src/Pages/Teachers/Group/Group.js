@@ -32,7 +32,7 @@ class Group extends React.Component {
           ],
           year: '106'
         },
-      activeKey: '3',
+      activeKey: '2',
       start: 0
     }
   }

@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 
 // for bootstrap 3
-import {Button} from 'react-bootstrap'
+import {Button, Glyphicon} from 'react-bootstrap'
 
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -36,9 +36,9 @@ const styles = {
     color: '#979797',
     fontSize: '8px',
   },
-  itemsReceiver: {
-    padding: '5px 0 7px 20px',
-    maxHeight: 50,
+  itemsBlock: {
+    padding: '5px 0 7px 10px',
+    maxHeight: 900,
     overflow: 'auto',
   },
   text1: {
@@ -76,54 +76,68 @@ const styles = {
   }
 }
 
-export default class ReplyDialog extends React.Component {
+export default class ChangeTitleDialog extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
       open: false,
+      title: ''
     }
   }
 
   handleOpen = () => {
-    this.setState({open: true})
+    this.setState({
+      open: true,
+      title: this.props.title
+    })
   }
 
   handleClose = (status) => {
-    let students = this.props.participants.map((item)=>(
-      {'student_id': item.student_id}
-    ))
-    console.log(students)
-    this.setState({open: false})
-    axios.post('/professors/students/ApplyFormSetAgree', {
-      research_title: this.props.title,
-      tname: this.props.name,
-      agree: status,
-      student: students,
-      first_second: this.props.firstSecond,
-      year: this.props.year
-    }).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-    })
-    this.props.parentFunction()
+    if(status !== 1){
+      this.setState({open: false})
+    }else if(status === 1){
+      this.setState({open: false})
+      console.log('research_title: ' + this.props.title)
+      console.log('tname: ' + this.props.idCard.name)
+      console.log('first_second: ' + this.props.firstSecond)
+      console.log('year: ' + this.props.yaer)
+      console.log('new_title: ' + this.state.title)
+
+      axios.post('/professors/students/setResearchTitle', {
+        research_title: this.props.title,
+        tname: this.props.idCard.name,
+        first_second: this.props.firstSecond,
+        year: this.props.year,
+        new_title: this.state.title
+      }).then(res => {
+        // console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+
+
+      this.props.parentFunction()
+    }
   }
+
+  handleChange = (event) => {
+    let title = event.target.value
+    this.setState({title})
+  }
+
   render () {
+    const students = this.props.participants
     const actions = [
       <FlatButton
-        label='接受'
+        label='送出'
         primary
         onClick={ () => this.handleClose(1) }
       />,
       <FlatButton
-        label='考慮中'
-        onClick={ () => this.handleClose(2) }
-      />,
-      <FlatButton
-        label='拒絕'
+        label='取消'
         secondary
-        onClick={ () => this.handleClose(3) }
+        onClick={ () => this.handleClose(0) }
       />
     ]
 
@@ -131,34 +145,30 @@ export default class ReplyDialog extends React.Component {
       <div>
         <MuiThemeProvider>
           <div onClick={this.handleOpen}>
-            <ReplyStatus status={this.props.status}/>
+            <Button bsStyle='warning'>修改標題 <Glyphicon glyph='pencil' /></Button>
           </div>
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Dialog
-            title='回覆專題申請'
+            title='修改專題標題'
             actions={actions}
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            請選擇接受、拒絕或考慮中。
+            <div style={styles.itemsBlock}>
+              <MuiThemeProvider>
+                <TextField
+                  floatingLabelText={'標題'}
+                  style={styles.text1}
+                  value={this.state.title}
+                  onChange={this.handleChange}
+                />
+              </MuiThemeProvider>
+            </div>
           </Dialog>
         </MuiThemeProvider>
       </div>
     )
-  }
-}
-
-const ReplyStatus = (props) => {
-  switch (props.status) {
-    case '0':
-      return <Button bsStyle='primary'>尚未回覆</Button>
-    case '1':
-      return <Button bsStyle='success' disabled>已接受</Button>
-    case '2':
-      return <Button bsStyle='info'>審核中</Button>
-    default:
-      return <Button bsStyle='primary'>回覆</Button>
   }
 }
