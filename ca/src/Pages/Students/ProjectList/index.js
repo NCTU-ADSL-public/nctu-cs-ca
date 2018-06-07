@@ -8,6 +8,7 @@ import Review from './2.jpg'
 import Project from '../ProjectHome'
 import firebase from 'firebase'
 import SwipeableViews from 'react-swipeable-views'
+import scrollToComponent from 'react-scroll-to-component'
 import axios from 'axios'
 import './style.css'
 
@@ -113,6 +114,7 @@ class GridListExampleSingleLine extends React.Component {
             newProjectList.push(newProject)
           }
           _this.setState({index: 0, newprojectList: newProjectList})
+          scrollToComponent(_this.refs.top)
         })
         .catch(err => {
           console.log(err)
@@ -218,7 +220,7 @@ class GridListExampleSingleLine extends React.Component {
       <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} >
         <div style={{height: '100vh'}}>
           <div className='divide-horizontal-list '>
-            <div className='divide-horizontal-span-list'>
+            <div className='divide-horizontal-span-list' ref='top'>
               <p >專題列表</p>
             </div>
           </div>

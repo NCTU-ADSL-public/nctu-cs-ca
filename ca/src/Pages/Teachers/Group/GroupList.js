@@ -242,6 +242,7 @@ class GroupList extends React.Component {
                   title={item.research_title}
                   participants={item.participants}
                   year={item.year}
+                  firstSecond={item.first_second}
                   item={item}
                   idCard={this.props.idCard}
                   groupClick={this.props.handleGroupClick}
