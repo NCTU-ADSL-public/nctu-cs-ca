@@ -104,6 +104,7 @@ class Edit extends React.Component {
 
   handleImageChange (e) {
     console.log(e)
+
     this.setState({
       image: e
     })
