@@ -100,7 +100,7 @@ class GroupApply extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      total_number: '',
+      total_number: 0,
       applyList: []
       /*applyList: [
         { research_title: '資料錯誤',

@@ -1,11 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import { Grid, Row, Col, Image } from 'react-bootstrap'
+import { Grid, Row, Col, Image, Glyphicon, Button } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 import firebase from 'firebase'
 
 import Loading from '../../../Components/Loading'
+import ChangeTitleDialog from './ChangeTitleDialog'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -29,25 +30,18 @@ if (!firebase.apps.length) {
 let storageRef = firebase.storage().ref()
 
 const styles = {
-  noticeTitle: {
-    fontSize: '2.8em',
-    fontWeight: '500',
-    color: '#bf6468',
-    margin: '32px 0 0 50px',
-    float: 'left'
-  },
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
     color: '#666666',
-    margin: '32px 0 0 50px',
+    margin: '32px 0 0 70px',
     float: 'left'
   },
   subTitle: {
     fontSize: '1.2em',
     fontWeight: '4300',
     color: '#737373',
-    margin: '55px 0 0 50px',
+    margin: '55px 0 0 70px',
     float: 'left'
   },
   groups: {
@@ -58,16 +52,7 @@ const styles = {
     padding: 20,
     background: '#ececec',
     borderRadius: '6px',
-    border: '1px #dfdfdf solid',
-    cursor: 'pointer'
-  },
-  groupBtnThisYear: {
-    margin: 30,
-    padding: 20,
-    background: '#f8efdd',
-    borderRadius: '6px',
-    border: '1px #dfdfdf solid',
-    cursor: 'pointer'
+    border: '1px #dfdfdf solid'
   },
   pic: {
     width: '80%'
@@ -89,34 +74,6 @@ const styles = {
     padding: 5,
     display: 'flex',
     flexWrap: 'wrap'
-  },
-  groupIntro: {
-    padding: 5,
-    color: '#9c9c9c',
-    fontSize: '1.4em',
-    fontWeight: 100
-  },
-  reply: {
-    default: {
-      fontSize: '1.5em',
-      fontWeight: '400',
-      color: '#575757'
-    },
-    red: {
-      fontSize: '1.5em',
-      fontWeight: '400',
-      color: '#9f2624'
-    },
-    brown: {
-      fontSize: '1.5em',
-      fontWeight: '400',
-      color: '#845b2d'
-    },
-    green: {
-      fontSize: '1.5em',
-      fontWeight: '400',
-      color: '#3c8a63'
-    }
   }
 }
 
@@ -127,8 +84,53 @@ class GroupList extends React.Component {
       loading: true,
       index: 0,
       groupListlength: 99,
-      total_number: 3,
-      groupList: []
+      total_number: 0,
+      groupList: [
+        { research_title: '資料錯誤',
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            },
+            { student_id: '0399777',
+              sname: '李小霖',
+              detail: '資工系 網多組3 '
+            },
+            { student_id: '0391234',
+              sname: '李毛毛',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        },
+        { research_title: '資料錯誤',
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        },
+        { research_title: '資料錯誤',
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        },
+        { research_title: '資料錯誤',
+          participants: [
+            { student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        }
+      ]
     }
   }
   fetchData () {
@@ -204,6 +206,16 @@ class GroupList extends React.Component {
       this.fetchData()
     }
   }
+
+  triggerUpdate = () => {
+    this.fetchData()
+    this.delay(1000).then((v) => (
+      this.fetchData()
+    )).catch((e) => (
+      console.log('trigger update error' + e)
+    ))
+  }
+
   render () {
     const tn = this.state.total_number
     return (
@@ -231,7 +243,9 @@ class GroupList extends React.Component {
                   participants={item.participants}
                   year={item.year}
                   item={item}
-                  onClick={this.props.handleGroupClick}
+                  idCard={this.props.idCard}
+                  groupClick={this.props.handleGroupClick}
+                  parentFunction={() => this.triggerUpdate}
                 />
               ))
               : '(無專題生資料)'
@@ -245,14 +259,22 @@ class GroupList extends React.Component {
 export default GroupList
 
 const GroupButton = (props) => (
-  <Grid style={props.year === '106' ? styles.groupBtnThisYear : styles.groupBtn}>
-    <Row
-      onClick={() => props.onClick(props.item)}>
+  <Grid style={styles.groupBtn}>
+    <Row>
       <Col xs={3} md={3} lg={3}>
         <Image style={styles.pic} src={props.item.image === undefined ? pic : props.item.image} circle />
       </Col>
       <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>{props.year}年度</div>
+        <div style={styles.groupYear}>年度 : {props.year}</div>
+        <div style={styles.groupTitle}>
+          <ChangeTitleDialog
+            title={props.title}
+            firstSecond={props.firstSecond}
+            year={props.year}
+            idCard={props.idCard}
+            parentFunction={props.parentFunction}
+          />
+        </div>
         <div style={styles.groupTitle}>{props.title}</div>
         <div>
           <MuiThemeProvider>
@@ -265,6 +287,7 @@ const GroupButton = (props) => (
             </div>
           </MuiThemeProvider>
         </div>
+        <div onClick={props.groupClick}> <Button bsStyle='link'>Learn more...</Button> </div>
       </Col>
     </Row>
   </Grid>
