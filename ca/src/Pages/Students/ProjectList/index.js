@@ -61,7 +61,6 @@ class GridListExampleSingleLine extends React.Component {
   }
 
   handleChangeIndex (index) {
-    scrollToComponent(this.refs.top)
     this.setState({
       index
     })
