@@ -288,7 +288,7 @@ const GroupButton = (props) => (
             </div>
           </MuiThemeProvider>
         </div>
-        <div > <Button bsStyle='link' onClick={props.groupClick(props.item)}>Learn more...</Button> </div>
+        <div > <Button bsStyle='link' onClick={()=>props.groupClick(props.item)}>Learn more...</Button> </div>
       </Col>
     </Row>
   </Grid>
