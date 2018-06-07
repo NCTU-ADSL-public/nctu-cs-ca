@@ -245,7 +245,7 @@ class GroupList extends React.Component {
                   firstSecond={item.first_second}
                   item={item}
                   idCard={this.props.idCard}
-                  groupClick={this.props.handleGroupClick(item)}
+                  groupClick={this.props.handleGroupClick}
                   parentFunction={() => this.triggerUpdate}
                 />
               ))
@@ -288,7 +288,7 @@ const GroupButton = (props) => (
             </div>
           </MuiThemeProvider>
         </div>
-        <div > <Button bsStyle='link' onClick={props.groupClick}>Learn more...</Button> </div>
+        <div > <Button bsStyle='link' onClick={props.groupClick(props.item)}>Learn more...</Button> </div>
       </Col>
     </Row>
   </Grid>
