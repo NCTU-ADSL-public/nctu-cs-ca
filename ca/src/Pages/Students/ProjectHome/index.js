@@ -1,7 +1,6 @@
 import React from 'react'
 import Show from './Show/index'
 import Edit from './Edit'
-import axios from 'axios'
 import firebase from 'firebase'
 import PageWrapper from '../../../Components/PageWrapper'
 import IconButton from 'material-ui/IconButton'
@@ -78,8 +77,7 @@ export default class index extends React.Component {
         _this.setState({
           state: state
         })
-      }, 1000)
-
+      }, 1500)
     } else {
       this.setState({
         state: state
@@ -96,10 +94,14 @@ export default class index extends React.Component {
           style={styles.large}
           onClick={this.state.state === 'edit' ? this.changeState : this.props.propsClick}
         >
-          <ActionHome />
+          <ActionHome/>
         </IconButton>
         <div style={{marginTop: '-100px'}}>
-          {this.state.state === 'edit' ? <Edit project={this.props.project} studentProfile={this.props.studentProfile} onclick={this.changeState} onFetch={this.props.propsClick} /> : <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.props.project} image={this.state.image} file={this.state.file} />}
+          {this.state.state === 'edit' ?
+            <Edit project={this.props.project} studentProfile={this.props.studentProfile} onclick={this.changeState}
+                  onFetch={this.props.propsClick}/> :
+            <Show onclick={this.changeState} studentProfile={this.props.studentProfile} show={this.props.project}
+                  image={this.state.image} file={this.state.file}/>}
         </div>
       </PageWrapper>
     )

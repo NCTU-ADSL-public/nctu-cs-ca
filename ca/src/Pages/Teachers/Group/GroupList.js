@@ -238,7 +238,7 @@ class GroupList extends React.Component {
             {this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
-                  key={i}
+                  key={item.research_title}
                   title={item.research_title}
                   participants={item.participants}
                   year={item.year}
