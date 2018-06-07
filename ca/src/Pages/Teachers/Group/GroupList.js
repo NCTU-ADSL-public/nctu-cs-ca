@@ -144,6 +144,8 @@ class GroupList extends React.Component {
       // name: this.props.idCard.name
       id: this.props.idCard.id
     }).then(res => {
+      console.log('PROJECT DATA!')
+      console.log(res.data)
       this.setState({
         loading: false,
         total_number: res.data.total_number,
@@ -207,6 +209,12 @@ class GroupList extends React.Component {
     }
   }
 
+  delay(t){
+    return new Promise((res, rej) => {
+      setTimeout(() => (res(1)), t)
+    })
+  }
+
   triggerUpdate = () => {
     this.fetchData()
     this.delay(1000).then((v) => (
@@ -246,7 +254,7 @@ class GroupList extends React.Component {
                   item={item}
                   idCard={this.props.idCard}
                   groupClick={this.props.handleGroupClick}
-                  parentFunction={() => this.triggerUpdate}
+                  parentFunction={this.triggerUpdate}
                 />
               ))
               : '(無專題生資料)'
