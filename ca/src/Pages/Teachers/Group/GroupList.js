@@ -216,7 +216,6 @@ class GroupList extends React.Component {
   }
 
   triggerUpdate = () => {
-    this.fetchData()
     this.delay(1000).then((v) => (
       this.fetchData()
     )).catch((e) => (
