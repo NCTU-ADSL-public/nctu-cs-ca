@@ -80,9 +80,9 @@ class _Navbar extends React.Component {
 
         title={
           <div className="idcard" /*onClick={onClicks[4]}*/>
-            <MuiThemeProvider>
-              <Notifications color = {'#c40000'} className='red-spot animated swing' style={{animationDuration:'2s', animationIterationCount:10000,}}/>
-            </MuiThemeProvider>
+            {/*<MuiThemeProvider>*/}
+              {/*<Notifications color = {'#c40000'} className='red-spot animated swing' style={{animationDuration:'2s', animationIterationCount:10000,}}/>*/}
+            {/*</MuiThemeProvider>*/}
             <img id="idcard-photo" src={defalt} alt=""/>
             <div style={{
               display: 'inline-block',
