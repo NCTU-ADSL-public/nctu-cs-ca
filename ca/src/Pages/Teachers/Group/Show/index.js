@@ -6,6 +6,13 @@ import IconButton from 'material-ui/IconButton'
 import ActionHome from 'material-ui/svg-icons/hardware/keyboard-backspace'
 import ScoreDialog from '../ScoreDialog'
 
+import defaultPic from '../../../../Resources/defalt.jpg'
+// mui
+import Avatar from 'material-ui/Avatar'
+import Chip from 'material-ui/Chip'
+// for multiTheme
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 const styles = {
   largeIcon: {
     width: 40,
@@ -50,6 +57,18 @@ export default class Show extends React.Component {
               idCard={this.props.idCard}
               year={this.props.show.year}
             />
+          </div>
+          <div>
+            <MuiThemeProvider>
+              <div style={styles.chipWrapper}>
+                {this.props.show.participants.map((item, i) => (
+                  <Chip style={styles.chip} key={i} >
+                    <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                    <span style={{color: 'red'}}> {item.score}</span>
+                  </Chip>
+                ))}
+              </div>
+            </MuiThemeProvider>
           </div>
           <div className='event-info-wrapper bg-white'>
             <div className='row'>
