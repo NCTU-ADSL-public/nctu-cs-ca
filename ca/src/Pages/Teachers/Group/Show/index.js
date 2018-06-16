@@ -23,6 +23,14 @@ const styles = {
     width: 100,
     height: 100,
     padding: 30
+  },
+  chip: {
+    margin: 5
+  },
+  chipWrapper: {
+    padding: 5,
+    display: 'flex',
+    flexWrap: 'wrap'
   }
 }
 
