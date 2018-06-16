@@ -99,11 +99,13 @@ class GroupList extends React.Component {
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
-              detail: '資工系 網多組3 '
+              detail: '資工系 網多組3 ',
+              score: 87
             },
             { student_id: '0399777',
               sname: '李小霖',
-              detail: '資工系 網多組3 '
+              detail: '資工系 網多組3 ',
+              score: 100
             },
             { student_id: '0391234',
               sname: '李毛毛',
@@ -146,7 +148,7 @@ class GroupList extends React.Component {
     console.log(this.props.idCard.name)
     let _this = this
     this.setState({
-       groupList: []
+      groupList: []
     })
     axios.get('/professors/students/projects', {
       // name: '彭文志'
@@ -156,7 +158,6 @@ class GroupList extends React.Component {
       console.log('PROJECT DATA!')
       console.log(res.data)
       this.setState({
-        loading: false,
         total_number: res.data.total_number,
         groupList: []
         // groupList: res.data.groups
@@ -173,12 +174,14 @@ class GroupList extends React.Component {
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
             _this.setState({
+              loading: false,
               groupList: [..._this.state.groupList, {...data_, file: url}]
             })
           }).catch(error => {
             console.log(error)
             dataList.push(data_)
             _this.setState({
+              loading: false,
               groupList: [..._this.state.groupList, {...data_, file: url}]
             })
           })
@@ -190,12 +193,14 @@ class GroupList extends React.Component {
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
             _this.setState({
+              loading: false,
               groupList: [..._this.state.groupList, {...data_, file: url}]
             })
           }).catch(error => {
             console.log(error)
             dataList.push(data_)
             _this.setState({
+              loading: false,
               groupList: [..._this.state.groupList, {...data_}]
             })
           })

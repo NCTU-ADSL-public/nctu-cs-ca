@@ -90,6 +90,9 @@ export default class ScoreDialog extends React.Component {
   handleOpen = () => {
     let score = ['100','100','100','100']
     let err =  ['','','','']
+    this.props.participants.forEach((item, i) => {
+      if( this.isInt100(item.score) ) score[i] = item.score
+    })
     this.setState({open: true, score, err})
   }
 
