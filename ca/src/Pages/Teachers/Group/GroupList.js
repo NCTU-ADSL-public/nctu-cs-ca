@@ -314,6 +314,7 @@ const GroupButton = (props) => (
               {props.participants.map((item, i) => (
                 <Chip style={styles.chip} key={i} >
                   <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                  <span style={{color: 'red'}}>  {item.score}</span>
                 </Chip>
               ))}
             </div>
