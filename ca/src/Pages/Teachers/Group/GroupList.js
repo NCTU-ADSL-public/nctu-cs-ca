@@ -7,6 +7,7 @@ import firebase from 'firebase'
 
 import Loading from '../../../Components/Loading'
 import ChangeTitleDialog from './ChangeTitleDialog'
+import ScoreDialog from './ScoreDialog'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -67,6 +68,10 @@ const styles = {
     fontWeight: '100',
     color: '#575757'
   },
+  groupModify: {
+    margin: '10px 10px 5px 0',
+    float: 'left'
+  },
   chip: {
     margin: 5
   },
@@ -74,6 +79,10 @@ const styles = {
     padding: 5,
     display: 'flex',
     flexWrap: 'wrap'
+  },
+  block: {
+    display: 'block',
+    height: 50
   }
 }
 
@@ -137,7 +146,7 @@ class GroupList extends React.Component {
     console.log(this.props.idCard.name)
     let _this = this
     this.setState({
-      groupList: []
+       groupList: []
     })
     axios.get('/professors/students/projects', {
       // name: '彭文志'
@@ -274,16 +283,31 @@ const GroupButton = (props) => (
       </Col>
       <Col xs={9} md={9} lg={9}>
         <div style={styles.groupYear}>年度 : {props.year}</div>
-        <div style={styles.groupTitle}>
-          <ChangeTitleDialog
-            title={props.title}
-            firstSecond={props.firstSecond}
-            year={props.year}
-            idCard={props.idCard}
-            parentFunction={props.parentFunction}
-          />
+        <div style={styles.block}>
+          <div style={styles.groupModify}>
+            <ChangeTitleDialog
+              title={props.title}
+              firstSecond={props.firstSecond}
+              year={props.year}
+              idCard={props.idCard}
+              parentFunction={props.parentFunction}
+            />
+          </div>
+          <div style={styles.groupModify}>
+            <ScoreDialog
+              title={props.title}
+              participants={props.participants}
+              firstSecond={props.firstSecond}
+              score={props.score}
+              idCard={props.idCard}
+              year={props.year}
+              parentFunction={props.parentFunction}
+            />
+          </div>
         </div>
-        <div style={styles.groupTitle}>{props.title}</div>
+        <div>
+          <div style={styles.groupTitle}>{props.title}</div>
+        </div>
         <div>
           <MuiThemeProvider>
             <div style={styles.chipWrapper}>
@@ -295,7 +319,7 @@ const GroupButton = (props) => (
             </div>
           </MuiThemeProvider>
         </div>
-        <div > <Button bsStyle='link' onClick={()=>props.groupClick(props.item)}>Learn more...</Button> </div>
+        <div> <Button bsStyle='link' onClick={()=>props.groupClick(props.item)}>Learn more...</Button> </div>
       </Col>
     </Row>
   </Grid>

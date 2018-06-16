@@ -68,9 +68,9 @@ class Group extends React.Component {
           <TabPane tab={`專題列表`} key='2'>
             <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
           </TabPane>
-          <TabPane tab={`專題評分`} key='3'>
-            <GroupScore idCard={this.props.idCard} />
-          </TabPane>
+          {/*<TabPane tab={`專題評分`} key='3'>*/}
+            {/*<GroupScore idCard={this.props.idCard} />*/}
+          {/*</TabPane>*/}
         </Tabs>
       </div>
       <div>
