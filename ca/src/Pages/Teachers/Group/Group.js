@@ -75,7 +75,11 @@ class Group extends React.Component {
       </div>
       <div>
       <MuiThemeProvider>
-          <Show onclick={this.handleChangeIndex} show={this.state.item} />
+          <Show
+            onclick={this.handleChangeIndex}
+            show={this.state.item}
+            idCard={this.props.idCard}
+          />
       </MuiThemeProvider>
       </div>
       </SwipeableViews>

@@ -303,7 +303,6 @@ const GroupButton = (props) => (
               title={props.title}
               participants={props.participants}
               firstSecond={props.firstSecond}
-              score={props.score}
               idCard={props.idCard}
               year={props.year}
               parentFunction={props.parentFunction}

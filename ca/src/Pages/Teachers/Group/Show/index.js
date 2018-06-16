@@ -4,6 +4,7 @@ import React from 'react'
 import { Image } from 'react-bootstrap'
 import IconButton from 'material-ui/IconButton'
 import ActionHome from 'material-ui/svg-icons/hardware/keyboard-backspace'
+import ScoreDialog from '../ScoreDialog'
 
 const styles = {
   largeIcon: {
@@ -41,6 +42,15 @@ export default class Show extends React.Component {
            />
           </div>
           <div className='event-title'>{ this.props.show.research_title }</div>
+          <div>
+            <ScoreDialog
+              title={this.props.show.research_title}
+              participants={this.props.show.participants}
+              firstSecond={this.props.show.firstSecond}
+              idCard={this.props.idCard}
+              year={this.props.show.year}
+            />
+          </div>
           <div className='event-info-wrapper bg-white'>
             <div className='row'>
               <div className='col-7'>
