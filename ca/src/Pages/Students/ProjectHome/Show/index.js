@@ -2,8 +2,12 @@ import './style.css'
 import img from './1.jpg'
 import React from 'react'
 import { Image } from 'react-bootstrap'
+import Vedios from './Vedio.json'
 
 export default class Show extends React.Component {
+  state={
+    link : Vedios.filter(t => t.title === this.props.show.research_title && t.link !== undefined && t.link !== '')[0]
+  }
   render () {
     return (
       <div className='container'>
@@ -30,6 +34,14 @@ export default class Show extends React.Component {
               </div>
             </div>
             <br />
+            <div className='row'>
+              <div className='col-7'>
+                <p><i className='glyphicon glyphicon-film' /> 影片(由專題二教授拍攝): </p>
+              </div>
+            </div>
+            {this.state.link !== undefined
+              ? <iframe src={this.state.link.link} width='640' height='480' />
+              : ''}
             <div className='divide-horizontal '>
               <div className='divide-horizontal-span'>
                 <p >專題簡介</p>

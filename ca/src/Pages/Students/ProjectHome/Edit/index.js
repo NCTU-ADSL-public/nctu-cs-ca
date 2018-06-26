@@ -149,7 +149,8 @@ class Edit extends React.Component {
               </LabeledInput>
               <LabeledInput label='主題'>
                 <div className='input-group'>
-                  <input ref='title' className='form-control' placeholder='必填' type='text' value={this.state.title} required />
+                  <input ref='title' className='form-control' placeholder='必填' type='text' value={this.state.title } required />
+                    (如需更改題目請聯絡教授以更改)
                 </div>
               </LabeledInput>
               <LabeledInput label='簡介'>

@@ -9,6 +9,7 @@ import ScoreDialog from './ScoreDialog'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
+import Vedios from './Vedio.json'
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
@@ -56,7 +57,7 @@ const styles = {
   },
   groupYear: {
     fontSize: '1.2em',
-    fontWeight: '200',
+    fontWeight: '500',
     color: '#575757'
   },
   groupTitle: {
@@ -107,8 +108,14 @@ const styles = {
   }
 }
 
-class GroupScore extends React.Component {
+class GroupVedio extends React.Component {
+  componentWillMount () {
+    console.log(Vedios)
+  }
   render () {
+    Vedios.map((item, i) => (
+      console.log(item)
+    ))
     return (
       <Grid style={{minHeight: 500}}>
         <Row>
@@ -116,38 +123,32 @@ class GroupScore extends React.Component {
             <div style={styles.mainTitle}> 各組專題影片 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 請點擊評分按鈕給予評分。 </div>
+            <div style={styles.subTitle}> 可作為評分依據。 </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
-          {this.state.groupList.length !== 0
-            ? this.state.groupList.map((item, i) => (
-              <GroupButton
-                key={i}
-                title={item.research_title}
-                participants={item.participants}
-                firstSecond={item.first_second}
-                year={item.year}
-                score={item.score}
-                parentFunction={this.triggerUpdate}
-                idCard={this.props.idCard}
+          { Vedios.map((item, i) => (
+            <GroupButton
+              key={i}
+              item={item}
               />
             ))
-            : '(無專題生資料)'
           }
         </Row>
       </Grid>
     )
   }
 }
-export default GroupScore
+export default GroupVedio
 
 const GroupButton = (props) => (
-  <Grid style={props.year === '106' ? styles.groupBtnThisYear : styles.groupBtn}>
+  <Grid style={styles.groupBtn}>
     <Row>
-      <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>{props.year}年度</div>
-        <div style={styles.groupTitle}>{props.title}</div>
+      <Col xs={7} md={7} lg={7}>
+        <iframe src={props.item.link} width='600' height='360' />
+      </Col>
+      <Col xs={5} md={5} lg={5}>
+        <div style={styles.groupYear}>主題 : {props.item.title}</div>
       </Col>
     </Row>
   </Grid>

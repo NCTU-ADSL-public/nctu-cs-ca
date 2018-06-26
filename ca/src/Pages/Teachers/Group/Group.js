@@ -2,7 +2,7 @@ import React from 'react'
 
 import GroupList from './GroupList'
 import GroupApply from './GroupApply'
-import GroupScore from './GroupScore'
+import GroupVedio from './GroupVedio'
 
 // for tabs
 import 'rc-tabs/assets/index.css'
@@ -23,7 +23,7 @@ class Group extends React.Component {
     this.state = {
       index: 0,
       item:
-        { research_title: '資料錯誤',
+        { research_title: '５５５',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -68,9 +68,9 @@ class Group extends React.Component {
           <TabPane tab={`專題列表`} key='2'>
             <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
           </TabPane>
-          {/*<TabPane tab={`專題評分`} key='3'>*/}
-            {/*<GroupScore idCard={this.props.idCard} />*/}
-          {/*</TabPane>*/}
+          <TabPane tab={`各組專題影片`} key='3'>
+            <GroupVedio idCard={this.props.idCard} />
+          </TabPane>
         </Tabs>
       </div>
       <div>

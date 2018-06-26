@@ -52,6 +52,12 @@ const styles = {
     fontSize: '12px',
     fontFamily: 'Noto Sans CJK TC',
   },
+  text3: {
+    width: '90%',
+    padding: '0px 5px 5px 2px',
+    marginTop: '0',
+    fontFamily: 'Noto Sans CJK TC',
+  },
   reply: {
     default: {
       fontSize: '1.5em',
@@ -82,18 +88,20 @@ export default class ScoreDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      score: ['100','100','100','100'],
+      score: ['0','0','0','0'],
+      comment: ['','','',''],
       err: ['','','',''],
     }
   }
 
   handleOpen = () => {
-    let score = ['100','100','100','100']
+    let score = ['0','0','0','0']
     let err =  ['','','','']
+    let comment = ['','','','']
     this.props.participants.forEach((item, i) => {
       if( this.isInt100(item.score) ) score[i] = item.score
     })
-    this.setState({open: true, score, err})
+    this.setState({open: true, score, err, comment})
   }
 
   handleClose = (status) => {
@@ -108,6 +116,7 @@ export default class ScoreDialog extends React.Component {
 
       this.props.participants.forEach((item, i) => {
         console.log('new_score[' + i + ']: ' + this.state.score[i])
+        console.log('comment[' + i + ']: ' + this.state.comment[i])
 
         axios.post('/professors/students/setScore', {
           student_id: item.student_id,
@@ -134,12 +143,22 @@ export default class ScoreDialog extends React.Component {
       err[i] = ( this.isInt100(score[i]) ? '' :'分數必須是0~100之間的整數' )
     })
     this.setState({err})
-    const pass = (
+    let pass = (
       this.isInt100(score[0]) &&
       this.isInt100(score[1]) &&
       this.isInt100(score[2]) &&
       this.isInt100(score[3]) )
     if (!pass) alert('分數輸入格式錯誤! 請修正後再送出。')
+    if(pass){
+      for(let i=0; i<this.state.score.length; ++i){
+        if(parseFloat(score[i]) >= 90){
+          if(this.state.comment[i] === ''){
+            pass = false
+          }
+        }
+      }
+      if (!pass)  alert('90分以上必須給評語！請修正後再送出。')
+    }
     return pass
   }
 
@@ -147,6 +166,14 @@ export default class ScoreDialog extends React.Component {
     let x = parseFloat(value);
     if( isNaN(value) || (x | 0) !== x ) return false
     return x >= 0 && x <= 100
+  }
+
+  handleComment = (event, i) => {
+    console.log(event.target.value)
+
+    let _comment = {...this.state.comment}
+    _comment[i] = event.target.value
+    this.setState({comment:_comment})
   }
 
   handleChangeScore0 = (event) => {
@@ -213,25 +240,38 @@ export default class ScoreDialog extends React.Component {
           >
             <div style={styles.itemsBlock}>
               {students.map((item, i) => (
-                <MuiThemeProvider key={i}>
-                  <TextField
-                    floatingLabelText={item.student_id + ' ' + item.sname + ' 的分數'}
-                    style={styles.text1}
-                    value={this.state.score[i]}
-                    errorText={this.state.err[i]}
-                    onChange={
-                        i === 0 ? this.handleChangeScore0 :
-                        i === 1 ? this.handleChangeScore1 :
-                        i === 2 ? this.handleChangeScore2 :
-                        this.handleChangeScore3
-                    }
-                  />
-                </MuiThemeProvider>
+                <div key={i}>
+                  <MuiThemeProvider >
+                    <TextField
+                      floatingLabelText={item.student_id + ' ' + item.sname + ' 的分數'}
+                      style={styles.text1}
+                      value={this.state.score[i]}
+                      errorText={this.state.err[i]}
+                      onChange={
+                          i === 0 ? this.handleChangeScore0 :
+                          i === 1 ? this.handleChangeScore1 :
+                          i === 2 ? this.handleChangeScore2 :
+                          this.handleChangeScore3
+                      }
+
+                    />
+                  </MuiThemeProvider>
+                  {(parseFloat(this.state.score[i])>=90)?
+
+                      <TextField
+                        floatingLabelText={'90分以上需要給評語喔!請在此填寫評語給' + item.sname +　'，謝謝！'}
+                        style={styles.text3}
+
+                        floatingLabelStyle={{color : '#6b3f1b', fontSize:'15'}}
+                        value={this.state.comment[i]}
+                        onChange={(event) =>this.handleComment(event, i)}
+                      />:''}
+                </div>
               ))}
             </div>
           </Dialog>
         </MuiThemeProvider>
-      </div>
+        </div>
     )
   }
 }
