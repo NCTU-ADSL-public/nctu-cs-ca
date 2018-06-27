@@ -131,7 +131,7 @@ class Head extends Component {
 
           <div id='page' />
           {/* For mobile, tablet user */}
-          <Col xs={12} mdHidden lgHidden>
+          <Col xs={12} lgHidden>
             <h2> { this.state.selectedIndex === 5
               ? ''
               : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
