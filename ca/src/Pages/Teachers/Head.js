@@ -71,7 +71,7 @@ class Head extends Component {
         document.getElementById('page'))
     } else if (index === 2) {
       ReactDOM.render(
-        <Col xsHidden smHidden>
+        <Col xsHidden >
           <FadeIn>
             <GroupItem idCard={this.state.idCard} />
           </FadeIn>
