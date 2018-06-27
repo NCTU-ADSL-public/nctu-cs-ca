@@ -71,7 +71,7 @@ class Head extends Component {
         document.getElementById('page'))
     } else if (index === 2) {
       ReactDOM.render(
-        <Col xsHidden >
+        <Col >
           <FadeIn>
             <GroupItem idCard={this.state.idCard} />
           </FadeIn>
@@ -128,13 +128,17 @@ class Head extends Component {
             selectedIndex={this.state.selectedIndex}
             onTouchTaps={onTouchTaps}
           />
-          <div id='page' />
-          {/* For mobile, tablet user */}
-          <Col xs={12} smHidden mdHidden lgHidden>
-            <h2> { this.state.selectedIndex === 5
+          <Col xs={12} mdHidden lgHidden>
+            { this.state.selectedIndex === 5
               ? ''
-              : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
+              : <div className='alert alert-danger'>
+                行動版網頁尚會跑版，可用電腦登入打開網頁以享有更佳的視覺效果，謝謝
+              </div> }
           </Col>
+          <Col xs={12} md={12}>
+            <div id='page' />
+          </Col>
+          {/* For mobile, tablet user */}
         </Row>
       </Grid>
     )
