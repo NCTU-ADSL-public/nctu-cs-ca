@@ -128,10 +128,9 @@ class Head extends Component {
             selectedIndex={this.state.selectedIndex}
             onTouchTaps={onTouchTaps}
           />
-
           <div id='page' />
           {/* For mobile, tablet user */}
-          <Col xs={12} lgHidden>
+          <Col xs={12} smHidden mdHidden lgHidden>
             <h2> { this.state.selectedIndex === 5
               ? ''
               : '行動版功能目前測試中，造成不便敬請見諒。' } </h2>
