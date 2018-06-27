@@ -84,6 +84,7 @@ class StudentList extends React.Component {
                 <th>學生姓名</th>
                 <th>組別</th>
                 <th>專題指導教授</th>
+                <th>成績</th>
               </tr>
               </thead>
               <tbody>

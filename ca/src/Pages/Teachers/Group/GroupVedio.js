@@ -123,7 +123,7 @@ class GroupVedio extends React.Component {
             <div style={styles.mainTitle}> 各組專題影片 </div>
           </Col>
           <Col xs={12} md={8} lg={8}>
-            <div style={styles.subTitle}> 可作為評分依據。 </div>
+            <div style={styles.subTitle}> 可作為評分依據。(影片載入時間依網路速度而定，請耐心等候，謝謝!) </div>
           </Col>
         </Row>
         <Row style={styles.groups}>
@@ -149,6 +149,9 @@ const GroupButton = (props) => (
       </Col>
       <Col xs={5} md={5} lg={5}>
         <div style={styles.groupYear}>主題 : {props.item.title}</div>
+      </Col>
+      <Col xs={5} md={5} lg={5}>
+        <div style={styles.groupYear}>成員 : {props.item.Menber}</div>
       </Col>
     </Row>
   </Grid>
