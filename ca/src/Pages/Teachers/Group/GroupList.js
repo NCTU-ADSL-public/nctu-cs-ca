@@ -100,12 +100,12 @@ class GroupList extends React.Component {
             { student_id: '0399999',
               sname: '陳罐頭',
               detail: '資工系 網多組3 ',
-              score: 87
+              score:''
             },
             { student_id: '0399777',
               sname: '李小霖',
               detail: '資工系 網多組3 ',
-              score: 100
+              score: ''
             },
             { student_id: '0391234',
               sname: '李毛毛',
