@@ -87,14 +87,14 @@ export default class ScoreDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      score: ['85','85','85','85', '85'],
+      score: ['0','0','0','0', '0'],
       comment: ['','','','', ''],
       err: ['','','','', ''],
     }
   }
 
   handleOpen = () => {
-    let score = ['85','85','85','85', '85']
+    let score = ['0','0','0','0', '0']
     let err =  ['','','','', '']
     let comment = ['','','','', '']
     this.props.participants.forEach((item, i) => {
