@@ -39,7 +39,6 @@ const styles = {
   itemsBlock: {
     padding: '5px 0 7px 10px',
     maxHeight: 900,
-    overflow: 'auto',
   },
   text1: {
     width: '90%',
@@ -88,16 +87,16 @@ export default class ScoreDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      score: ['85','85','85','85'],
-      comment: ['','','',''],
-      err: ['','','',''],
+      score: ['85','85','85','85', '85'],
+      comment: ['','','','', ''],
+      err: ['','','','', ''],
     }
   }
 
   handleOpen = () => {
-    let score = ['85','85','85','85']
-    let err =  ['','','','']
-    let comment = ['','','','']
+    let score = ['85','85','85','85', '85']
+    let err =  ['','','','', '']
+    let comment = ['','','','', '']
     this.props.participants.forEach((item, i) => {
       if( this.isInt100(item.score) ) score[i] = item.score
     })
@@ -109,12 +108,12 @@ export default class ScoreDialog extends React.Component {
       this.setState({open: false})
     }else if(status === 1 && this.checkAllText() ){
       this.setState({open: false})
-      console.log('student_id: ' + this.props.participants[0].student_id)
       console.log('tname: ' + this.props.idCard.name)
       console.log('research_title: ' + this.props.title)
       console.log('first_second: ' + this.props.firstSecond)
 
       this.props.participants.forEach((item, i) => {
+        console.log('student_id: ' + this.props.participants[i].student_id)
         console.log('new_score[' + i + ']: ' + this.state.score[i])
         console.log('comment[' + i + ']: ' + this.state.comment[i])
 
@@ -177,35 +176,11 @@ export default class ScoreDialog extends React.Component {
     this.setState({comment:_comment})
   }
 
-  handleChangeScore0 = (event) => {
+  handleChangeScore = (event, i) => {
     let score = this.state.score
     let err = this.state.err
-    score[0] = event.target.value
-    err[0] = ( this.isInt100(score[0]) ? '' :'分數必須是0~100之間的整數' )
-    this.setState({score, err})
-  }
-
-  handleChangeScore1 = (event) => {
-    let score = this.state.score
-    let err = this.state.err
-    score[1] = event.target.value
-    err[1] = ( this.isInt100(score[1]) ? '' :'分數必須是0~100之間的整數' )
-    this.setState({score, err})
-  }
-
-  handleChangeScore2 = (event) => {
-    let score = this.state.score
-    let err = this.state.err
-    score[2] = event.target.value
-    err[2] = ( this.isInt100(score[2]) ? '' :'分數必須是0~100之間的整數' )
-    this.setState({score, err})
-  }
-
-  handleChangeScore3 = (event) => {
-    let score = this.state.score
-    let err = this.state.err
-    score[3] = event.target.value
-    err[3] = ( this.isInt100(score[3]) ? '' :'分數必須是0~100之間的整數' )
+    score[i] = event.target.value
+    err[i] = ( this.isInt100(score[i]) ? '' :'分數必須是0~100之間的整數' )
     this.setState({score, err})
   }
 
@@ -234,6 +209,7 @@ export default class ScoreDialog extends React.Component {
         <MuiThemeProvider>
           <Dialog
             title='專題評分'
+            autoScrollBodyContent
             actions={actions}
             modal={false}
             open={this.state.open}
@@ -248,12 +224,7 @@ export default class ScoreDialog extends React.Component {
                       style={styles.text1}
                       value={this.state.score[i]}
                       errorText={this.state.err[i]}
-                      onChange={
-                          i === 0 ? this.handleChangeScore0 :
-                          i === 1 ? this.handleChangeScore1 :
-                          i === 2 ? this.handleChangeScore2 :
-                          this.handleChangeScore3
-                      }
+                      onChange={(event) => this.handleChangeScore(event, i)}
 
                     />
                   </MuiThemeProvider>

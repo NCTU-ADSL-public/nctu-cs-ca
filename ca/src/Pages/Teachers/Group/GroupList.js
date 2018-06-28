@@ -110,6 +110,15 @@ class GroupList extends React.Component {
             { student_id: '0391234',
               sname: '李毛毛',
               detail: '資工系 網多組3 '
+            },
+            { student_id: '0399777',
+              sname: '李小霖',
+              detail: '資工系 網多組3 ',
+              score: ''
+            },
+            { student_id: '0391234',
+              sname: '李毛毛',
+              detail: '資工系 網多組3 '
             }
           ],
           year: '106'
@@ -147,9 +156,9 @@ class GroupList extends React.Component {
   fetchData () {
     console.log(this.props.idCard.name)
     let _this = this
-    // this.setState({
-    //   groupList: []
-    // })
+    this.setState({
+      groupList: []
+    })
     axios.get('/professors/students/projects', {
       // name: '彭文志'
       // name: this.props.idCard.name
