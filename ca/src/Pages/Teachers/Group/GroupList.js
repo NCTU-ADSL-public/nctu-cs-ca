@@ -147,9 +147,9 @@ class GroupList extends React.Component {
   fetchData () {
     console.log(this.props.idCard.name)
     let _this = this
-    this.setState({
-      groupList: []
-    })
+    // this.setState({
+    //   groupList: []
+    // })
     axios.get('/professors/students/projects', {
       // name: '彭文志'
       // name: this.props.idCard.name
