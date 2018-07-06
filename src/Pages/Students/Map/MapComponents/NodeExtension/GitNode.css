@@ -1,0 +1,25 @@
+.container_gitnode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.container_dragging_yes {
+    border: 2px solid #FF5733;
+}
+
+.label {
+    font-size: 17px;
+    color: #242fff;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 10000;
+    }
+}

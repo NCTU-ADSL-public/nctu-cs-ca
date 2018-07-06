@@ -4,12 +4,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-  entry: {
+/*  entry: {
     students : './src/index.student.js', 
     assistants : './src/index.assistant.js', 
     teachers : './src/index.teacher.js', 
     login : './src/index.login.js', 
-  },
+  },*/
+    entry: './src/index.js',
   output: {
     path: path.join(__dirname, '/public'), 
     filename: 'bundle.[name].js',
@@ -48,7 +49,20 @@ module.exports = {
   resolve: {
       extensions: ['*', '.js', '.json'] 
     },
-  plugins: [
+  plugins:
+  /* [
+    	new BundleAnalyzerPlugin({
+		analyzerMode: 'server',
+		analyzerHost: '140.113.168.202',
+		analyzerPort: 1114,
+		reportFilename: 'report.html',
+		defaultSizes: 'parsed',
+		openAnalyzer: true,
+		generateStatsFile: true,
+		statsFilename: 'stats.json',
+		statsOptions: null,
+		logLevel: 'info'
+	}),*/[
 	new ExtractTextPlugin({filename: 'style.[name].css', publicPath: '/public/'})
   ],
   watch: true

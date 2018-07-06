@@ -1,0 +1,77 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+.navbar {
+    background: #EEEEEE;
+    color:  #7B7B7B;
+}
+
+.idcard{
+    margin-right: 20px;
+    display: inline-block;
+    zoom: 0.85;
+}
+
+#idcard-top{
+    font-size: 14px;
+    text-align: left;
+}
+
+#idcard-buttom{
+    font-size: 14px;
+    text-align: left;
+}
+
+#idcard-photo{
+    margin: 0 0 0 0;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#logout-button{
+    height: 40px;
+    width: 65px;
+    padding: 5px 0 0 0;
+}
+
+.red-spot{
+    display:block;
+    color:#f00;
+    opacity: 0.8;
+    top:-2px;
+    right:-0.8em;
+    position:absolute;
+}
+
+@media (max-width: 480px) {
+    .h1 {
+        font-size: 25px;
+        margin: 0.6% 20% 0 0;
+    }
+
+    .h2 {
+        font-size: 12px;
+        margin: 1.8% 0 0 -19.5%;
+    }
+
+    #logout-button {
+        right: 25px;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-button {
+        font-size: 12px;
+        padding: 8px 12px 10px;
+        text-align: center;
+        width: 80px;
+    }
+    .navbar-nav > li > a {
+        padding: 0px;
+    }
+
+    .logout-box {
+        padding: 6px 12px 6px 0px;
+    }
+}

@@ -25,7 +25,7 @@ currentCS.processCS = function(req, res, next){
 		var compulse = req.course.compulse;
 		//////console.log(compulse);
 		for(var q=0; q<compulse.length; q++){
-			cosNumber = compulse[q].cos_codes;
+            cosNumber = compulse[q].cos_codes;
   			for(var k=0; k<cosNumber.length; k++){
   				var cosInfo = {
                                         cn:'',
@@ -45,7 +45,7 @@ currentCS.processCS = function(req, res, next){
   				  	var reg = compulse[q].cos_cname.substring(0,3);
                     cosInfo.originalCredit = parseInt(detail[cosNumber[k]].cos_credit);
 					if(reg == '物化生'){
-						var temp = detail[cosNumber[k]].cos_cname.substring(0,2);
+                        var temp = detail[cosNumber[k]].cos_cname.substring(0,2);
 						cosInfo.cn = detail[cosNumber[k]].cos_cname;
                         cosInfo.en = detail[cosNumber[k]].cos_ename;
 					}
@@ -71,8 +71,8 @@ currentCS.processCS = function(req, res, next){
 							break;
 						}
 						else{
-							if(reg == '物化生三選一(一)'){
-								if(reg2 == '物理'||reg2 == '化學'||reg2 == '生物'){
+							if(reg == '物化生'){
+                                if(reg2 == '物理'||reg2 == '化學'||reg2 == '普通'){
 									courseResult[0].course[a] = cosInfo;
                                 break;
 								}

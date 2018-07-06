@@ -22,7 +22,8 @@ function queryProfile(studentId, callback){
 
 function queryPass(studentId, callback){
 	query.Pass(studentId, function(err, pass){
-		if(!pass){
+      // console.log(pass);
+       if(!pass){
 			////console.log("Can't find the student.");
 			return;
 		}
@@ -58,13 +59,17 @@ function queryCourse(studentId, callback){
     };
 	query.findPerson(studentId, function(err,result){
 		if(err){
-			////console.log("Can't find student");
+		//	console.log("Can't find student");
 			throw err;
 			return;
 		}
-		if(!result)
-			return;
+		if(!result){
+		//	console.log("no result");
+            return;
+        }
+        //console.log("result:");
 		result = JSON.parse(result);
+        //console.log(result);
 		info.program = result[0].program;
 	        query.Group(studentId, function(err, result){
 			if(!result){
@@ -240,6 +245,67 @@ function queryChange(studentId, callback){
     });
 }
 
+function queryProject(studentId, callback){
+    query.showResearchPage(studentId, function(err, project){
+        if(!project)
+            return;
+        if(err){
+            throw err;
+            return;
+        }
+        else
+            callback(project);
+    });
+}
+
+function queryProjectNum(studentId, callback){
+//	console.log("student:"+studentId);
+	var grade = studentId.substring(0,2);
+	//console.log(grade);
+	var project = []
+  
+	
+    query.findTeacherResearchCount(function(err, projectNum){
+        projectNum = JSON.parse(projectNum);
+//		console.log(projectNum[1].gradeCnt.length);
+		if(!projectNum)
+		{
+			console.log(" No ProjectNum");
+            return;
+		}
+			
+        if(err){
+            throw err;
+            return;
+        }
+        else
+		{	
+			var flag = 0;
+			
+           // console.log(projectNum);
+           // callback(JSON.stringify(projectNum));
+				for(var i = 0; i < projectNum.length; i++){
+					for(var j = 0; j < projectNum[i].gradeCnt.length; j++)
+					{
+						if(projectNum[i].gradeCnt[j].grade == grade){
+							project.push({ tname: projectNum[i].tname,teacher_id: projectNum[i].teacher_id, scount: projectNum[i].gradeCnt[j].scount});
+							flag =1;
+							break;
+						}						
+						else
+							flag = 0;
+					}
+					if (flag==0)
+						project.push({ tname: projectNum[i].tname,teacher_id:projectNum[i].teacher_id,  scount: "0" });
+			
+				}
+//			console.log(project);	
+			
+			callback(JSON.stringify(project));
+		}
+            
+    });
+}
 table.getProfile = function(studentId, callback){
     queryProfile(studentId, function(profile){
     callback(profile);
@@ -283,6 +349,16 @@ table.getGeneral = function(callback){
 table.getChange = function(studentId, callback){
     queryChange(studentId, function(change){
         callback(change);
+    });
+}
+table.getProject = function(studentId, callback){
+    queryProject(studentId, function(project){
+        callback(project);
+    });
+}
+table.getProjectNum = function(studentId, callback){
+    queryProjectNum(studentId ,function(projectNum){
+        callback(projectNum);
     });
 }
 exports.tables = table;

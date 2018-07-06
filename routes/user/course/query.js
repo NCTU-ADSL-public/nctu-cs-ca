@@ -177,5 +177,35 @@ query.queryChange = function(req, res, next){
     else
         res.redirect('/');
 }
-
+//query the project the student do
+query.queryProject = function(req, res, next){
+    if(req.session.profile){
+        var studentId = res.locals.studentId;
+        table.tables.getProject(studentId, function(project){
+            req.project = project;
+            if(req.project)
+                next();
+            else
+                return;
+        });
+    }
+    else
+        res.redirect('/');
+}
+//query the project number the teacher have
+query.queryProjectNum = function(req, res, next){
+    if(req.session.profile){
+		var studentId = res.locals.studentId;
+		//console.log(studentId);
+        table.tables.getProjectNum(studentId, function(projectNum){
+            req.projectNum = projectNum;
+            if(req.projectNum)
+                next();
+            else
+                return;
+        });
+    }
+    else
+        res.redirect('/');
+}
 exports.query = query;

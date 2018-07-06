@@ -78,7 +78,12 @@ reorder.processOrder = function(req, res, next){
                 cards: []
 
         }
-
+        var graduate = {
+                id: '抵免研究所課程',
+                title: '抵免研究所課程',
+                total:0,
+                cards: []
+        }
         //compulsory
         for(var i = 0; i<courseResult.length; i++){
             if(i == 0)
@@ -101,6 +106,8 @@ reorder.processOrder = function(req, res, next){
                 service.total = courseResult[i].require;
             else if(i == 9)
                 art.total = courseResult[i].require;
+            else if(i == 10)
+                graduate.total = courseResult[i].credit;
             
             for(var q = 0; q<courseResult[i].course.length; q++){
                 var cosCode = courseResult[i].course[q].code;
@@ -156,12 +163,15 @@ reorder.processOrder = function(req, res, next){
                     service.cards.push(cosInfo);
                 else if(i == 9)
                     art.cards.push(cosInfo);
+                else if(i == 10)
+                    graduate.cards.push(cosInfo);
             }
         }
         reorderResult.push(compulsory);
         reorderResult.push(coreClass);
         reorderResult.push(otherClass);
         reorderResult.push(elective);
+        reorderResult.push(graduate);
         reorderResult.push(otherElect);
         reorderResult.push(language);
         reorderResult.push(general);

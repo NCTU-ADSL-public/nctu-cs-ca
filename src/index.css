@@ -1,10 +1,9 @@
 body {
-  font-family: 'Noto Sans CJK TC';
-  background-color: #FCFCFC;
-  margin: 0;
+    font-family: 'Noto Sans CJK TC';
+    background: #F5F5F5;
+    margin: 0;
 }
 footer {
-  	height: 20px;
   	padding: 8px 0px 8px 0px;
 	font-size: 8px;
 	color: #FCFCFC;
@@ -12,14 +11,16 @@ footer {
     text-align:center;
     font-family: 'Noto Sans CJK TC';
   	font-weight:  400;
-    position: fixed;
-    bottom: 0;
-    z-index: 1000;
-    width: 100%;
+    margin-top: 20px;
 }
 
 #id{
   height: 100vh;
+}
+
+#Head {
+    min-height: 100vh;
+    padding-top: 58px;
 }
 
 /*

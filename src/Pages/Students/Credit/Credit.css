@@ -1,0 +1,17 @@
+.Credt-title-text{
+    background: #F5F5F5;
+    padding: 2% 8% 10% 6%;
+    color: #7B7B7B;
+    font-size: 1.5em;
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    .Credt-title-text {
+        margin: 0 5% 6% 5%;
+        padding: 60px 10px 3px 10px;
+        color: #7B7B7B;
+        font-size: 1.5em;
+    }
+}

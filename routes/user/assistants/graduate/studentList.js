@@ -8,7 +8,7 @@ var getList = table.tables.getList;
 router.get('/assistants/graduate/list', function(req, res){
 	
 	var list;
-        table.tables.getList('0316201', function(list){
+        table.tables.getList('all', function(list){
         	if(!list){
 			//console.log("No list");
 			return;

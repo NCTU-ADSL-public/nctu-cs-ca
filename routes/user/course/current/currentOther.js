@@ -3,10 +3,12 @@ var currentOther = {};
 currentOther.processOther = function(req, res, next){
         
 	var now = JSON.parse(req.now);
-//    ////console.log("course this semester:");
-   // console.log(now);
+  //  console.log(now);
+    
 	var total = req.course.total;
 	var courseResult = res.locals.courseResult;
+   // console.log("course result:");
+   // console.log(courseResult);
 	
 	if(req.session.profile){
 
@@ -16,11 +18,14 @@ currentOther.processOther = function(req, res, next){
           	// the year the student enter school
         var taken = [];
         
-        for(var i = 0; i<(courseResult.length-1); i++)
-            for(var q = 0; q<courseResult[i].course.length; q++){
-                taken[courseResult[i].course[q].code] = true;
+        for(var i = 0; i< courseResult.length; i++)
+            //console.log("first loop:");
+           // console.log(courseResult[i]);
+            if(courseResult[i].course != undefined){
+                for(var q = 0; q<courseResult[i].course.length; q++){
+                    taken[courseResult[i].course[q].code] = true;
+                }   
             }
-        
         var school_year = (100 + temp);
   		var rule= [];
 		for(var q = 0; q<now.length; q++){
@@ -38,8 +43,7 @@ currentOther.processOther = function(req, res, next){
                         code:''
             };
 			var temp = now[q].cos_code.substring(0,3);
-            else
-                cosInfo.code = now[q].cos_code;
+            cosInfo.code = now[q].cos_code;
             cosInfo.cn = now[q].cos_cname;
             cosInfo.en = now[q].cos_ename;
   			cosInfo.year = 106 - school_year + 1;
@@ -68,10 +72,8 @@ currentOther.processOther = function(req, res, next){
                         }
                     }
   			 		else if(temp == 'ART'){
-  						if(taken[now[q].cos_code] === true){
-                            console.log("get it");
+                        if(taken[now[q].cos_code] === true)
                             cosInfo.code = now[q].cos_code + "_now";
-                        }
                         courseResult[9].course.push(cosInfo);
   		            }
                     else{
@@ -87,7 +89,9 @@ currentOther.processOther = function(req, res, next){
                         }
   			            else{
                             if(temp == 'PYY'){
-  						        courseResult[7].course.push(cosInfo);
+  						        if(taken[now[q].cos_code] === true)
+                                    cosInfo.code = now[q].cos_code + "_now";
+                                courseResult[7].course.push(cosInfo);
                             }
                             else{
                                 if(now[q].cos_typeext == '服務學習'){

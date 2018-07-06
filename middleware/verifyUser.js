@@ -31,10 +31,10 @@ module.exports.verifyGrade = function(req, res, next){
         res.redirect("/");
         return;
   } else{
-        if(req.profile[0].student_id.substr(0,2) !== '03')
-            res.redirect('/');
-        else
+        if(req.profile[0].student_id.substr(0,2) === '03' || req.profile[0].student_id.substr(0,2) === '06')
             next();
+        else
+            res.redirect('/');
     }
 }
 
@@ -63,12 +63,23 @@ module.exports.verifyStudents = function(req, res, next){
   } else{
         //////console.log("Verified");
         var personStatus = JSON.parse(req.session.profile).personStatus;
-        if(personStatus == 's' || personStatus == 'w')
+        if(personStatus == 's' || personStatus == 'w' || personStatus == 'c')
                 next();
         else
                 res.redirect("/");
     }
 }
 
-
+module.exports.verifyProfessors = function(req, res, next){
+    if(!(req.profile && req.profile.length)){
+        res.redirect("/");
+        return;
+    } else{
+          var personStatus = JSON.parse(req.session.profile).personStatus;
+          if(personStatus == 'p' || personStatus == 'w' || personStatus == 't')
+              next();
+          else
+              res.redirect("/");
+      }
+}
 

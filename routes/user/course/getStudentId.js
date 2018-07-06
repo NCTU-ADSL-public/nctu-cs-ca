@@ -17,9 +17,11 @@ getStudentId.studentId = function(req, res, next){
         checkPage = checkPage.substring(1, checkIndex);
         // get students or assistants
         if(checkPage === "students"){
+             //res.locals.studentId = '0416201';  
             res.locals.studentId = utils.getPersonId(JSON.parse(req.session.profile));
         }
         else if(checkPage === "assistants"){
+            //res.locals.studentId = '0416201'; 
             res.locals.studentId = req.query.student_id;
         }
 

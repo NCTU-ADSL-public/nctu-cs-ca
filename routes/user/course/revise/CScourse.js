@@ -8,7 +8,7 @@ CScourse.processCS = function(req, res, next){
 	var EnglishCourse = res.locals.English;
 	var free = res.locals.free;
 	var offset = JSON.parse(req.free);
-	////console.log(offset);
+    //console.log(offset);
 	var PCB = {
 		physic: [],
 		chemistry: [],
@@ -24,7 +24,7 @@ CScourse.processCS = function(req, res, next){
         var offsetTeacherTime = res.locals.offsetTeacher;
         ////console.log(TeacherTime);
         var TeacherSame = [];
-		var temp = parseInt(studentId.substring(0,2));
+		var temp = parseInt(studentId.substring(1,2));
 		var school_year = (100 + temp);
 		var program = req.profile[0].program;
         var Tcount = 0;
@@ -34,7 +34,7 @@ CScourse.processCS = function(req, res, next){
 			return;
 		}
 		var pass = JSON.parse(req.pass);
-		////console.log(pass);
+//		console.log(pass);
 		var rules = JSON.parse(req.rules);
                 //language.require = 8;
 		for(var i=0; i<pass.length; i++){
@@ -98,6 +98,8 @@ CScourse.processCS = function(req, res, next){
                 }
                 for(var t = 0; t<offsetTeacherTime.length; t++)
                     Tcount++;
+                if(offsetNameCheck[compulse[q].cos_cname] == true);
+                else{
                 cosNumber = compulse[q].cos_codes;
                 for(var k = 0; k<cosNumber.length; k++){
                     var cosInfo = {
@@ -158,6 +160,7 @@ CScourse.processCS = function(req, res, next){
                                 }
                             }
                         }
+                    }
                     }
                 }
                 for(var w = 0; w<(2 - Tcount); w++){
@@ -278,15 +281,17 @@ CScourse.processCS = function(req, res, next){
 
 				}
 				else if(more.length >= 1){
-					var max = 0;
+					//console.log("more");
+                    //console.log(more);
+                    var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
                                                         code = more[0].code;
                                                         credit = parseInt(detail[more[0].code].cos_credit);
-                                                        courseResult[0].credit += credit;
+                                                       // courseResult[0].credit += credit;
                                                         if(detail[code].cos_typeext == '英文授課'){
                                                         	 if((more[0].cn!= '基礎程式設計')&&(detail[code].cos_cname!= '跨領域專題(一)')&&(detail[code].cos_cname!= '資訊工程專題(一)(英文授課)')&&(detail[code].cos_cname!= '資訊工程專題(二)(英文授課)')&&(detail[code].cos_cname!= '資訊工程研討(英文授課)')&&(detail[code].cos_cname!= '資訊工程研討')){
 									if(code.substring(0,3) == 'DCP'){
@@ -295,10 +300,38 @@ CScourse.processCS = function(req, res, next){
 									}
                                                                 }
                                                         }
-							courseResult[0].course.push(more[0]);
+                             //console.log("temp:");
+                             //console.log(temp);
+                             if(more[0].cn == '微處理機系統實驗'){
+                                if(temp > 3){
+                                    var cosAdd = JSON.stringify(more[0]);
+                                    cosAdd = JSON.parse(cosAdd);
+                                    cosAdd.realCredit = 1;  
+                                    cosAdd.code = more[0].code + '_one';
+                                    more[0].realCredit = 2;
+                                    if(courseResult[3].credit < courseResult[3].require) {
+                                        courseResult[3].credit += cosAdd.realCredit;
+                                        courseResult[3].course.push(cosAdd);
+                                    }
+                                    else{
+                                        courseResult[4].credit += cosAdd.realCredit;
+                                        courseResult[4].course.push(cosAdd);
+                                    }
+                                    courseResult[0].credit += more[0].realCredit;
+                                    courseResult[0].course.push(more[0]);
+                                } 
+                                else{
+                                  courseResult[0].credit += credit;
+                                  courseResult[0].course.push(more[0]);  
+                                 }  
+                             }     
+                             else{                                     
+                                 courseResult[0].credit += credit;                             
+							     courseResult[0].course.push(more[0]);
+                             }
                                                  }
                                                  else
-                                                        courseResult[0].course.push(more[0]);
+                                                     courseResult[0].course.push(more[0]);
                                         }
 					else{
                                                 for(var d = 0; d<more.length; d++){
@@ -310,9 +343,10 @@ CScourse.processCS = function(req, res, next){
                                                                 }
                                                         }
                                                 }
+                                                
                                                 code = more[index].code;
                                                 if(more[index].complete == true){
-                                                        courseResult[0].credit += credit;
+                                                        //courseResult[0].credit += credit;
                                                         if(detail[code].cos_typeext == '英文授課'){
                                                         	if((more[index].cn!= '基礎程式設計')&&(detail[code].cos_cname!= '跨領域專題(一)')&&(detail[code].cos_cname!= '資訊工程專題(一)(英文授課)')&&(detail[code].cos_cname!= '資訊工程專題(二)(英文授課)')&&(detail[code].cos_cname!= '資訊工程研討(英文授課)')&&(detail[code].cos_cname!= '資訊工程研討')){
 									if(code.substring(0,3) == 'DCP'){
@@ -321,8 +355,34 @@ CScourse.processCS = function(req, res, next){
 									}
                                                                 }
                                                         }
-							courseResult[0].course.push(more[index]);
-                                                }
+                            if(more[index].cn =='微處理機系統實驗'){
+                                if(temp > 3){
+                                    var cosAdd = JSON.stringify(more[index]);
+                                    cosAdd = JSON.parse(cosAdd);
+                                    cosAdd.realCredit = 1;
+                                    cosAdd.code = more[index].code + '_one';
+                                    more[index].realCredit = 2;
+                                    if(courseResult[3].credit < courseResult[3].require){
+                                        courseResult[3].credit += cosAdd.realCredit;
+                                        courseResult[3].course.push(cosAdd);
+                                    }
+                                    else{
+                                        courseResult[4].credit += cosAdd.realCredit;
+                                        courseResult[4].course.push(cosAdd);
+                                    }
+                                    courseResult[0].credit += more[index].realCredit;
+                                    courseResult[0].course.push(more[index]);
+                                }
+                                else{
+                                    courseResult[0].credit += credit;
+                                    courseResult[0].course.push(more[index]);
+                                }
+                             }
+                             else{
+                                courseResult[0].credit += credit;
+                                courseResult[0].course.push(more[index]);
+                            }
+                            }
                                                 else
                                                         courseResult[0].course.push(more[index]);
                                         }
@@ -338,7 +398,8 @@ CScourse.processCS = function(req, res, next){
                 }*/
 		}
 		//determine PCB to put in compulse or professional
-		for(i = 0; i<PCBnum.length; i++){
+		
+        for(i = 0; i<PCBnum.length; i++){
 			 var PCBcos = {
                                  cn:'',
                                  en:'',
@@ -378,7 +439,7 @@ CScourse.processCS = function(req, res, next){
             }
             else{
                 PCBcos.complete = false;
-                courseResult[0].course.push(PCBcos);
+               // courseResult[0].course.push(PCBcos);
             }
 		}
 		if(PCB.biology.length != 0){
@@ -399,19 +460,28 @@ CScourse.processCS = function(req, res, next){
 					}
                                 }
 				for(var s = 0; s<PCB.physic.length; s++){
-                                        PCB.physic[s].move = true;
-					if(courseResult[3].credit < courseResult[3].require){
-						courseResult[3].credit += PCB.physic[s].originalCredit;
-                                        	courseResult[3].course.push(PCB.physic[s]);
+                    PCB.physic[s].move = true;
+					var cosAdd = JSON.stringify(PCB.physic[s]);
+                    cosAdd = JSON.parse(cosAdd);
+                    cosAdd.realCredit = 1;
+                    cosAdd.code = PCB.physic[s].code + '_one';
+                    PCB.physic[s].realCredit = 3;
+                    if(courseResult[3].credit < courseResult[3].require){
+						courseResult[3].credit += PCB.physic[s].realCredit;
+                        courseResult[3].course.push(PCB.physic[s]);
+                        courseResult[3].credit += cosAdd.realCredit;
+                        courseResult[3].course.push(cosAdd);
 					}
 					else{
-                                                courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                courseResult[4].credit += PCB.physic[s].realCredit;
                                                 courseResult[4].course.push(PCB.physic[s]);
+                                                courseResult[4].credit += cosAdd.realCredit;
+                                                courseResult[4].course.push(cosAdd);
                                         }
                                 }
 			}
 			else{
-				courseResult[0].credit += PCB.biology[0].originalCredit;
+                courseResult[0].credit += PCB.biology[0].originalCredit;
 				courseResult[0].course.push(PCB.biology[0]);
 				if(PCB.chemistry.length != 0){
 					for(s = 0; s<PCB.chemistry.length; s++){
@@ -433,25 +503,35 @@ CScourse.processCS = function(req, res, next){
 					}
 					for(s = 0; s<PCB.physic.length; s++){
 						PCB.physic[s].move = true;
+                        var cosAdd = JSON.stringify(PCB.physic[s]);
+                        cosAdd = JSON.parse(cosAdd);
+                        cosAdd.realCredit = 1;
+                        cosAdd.code = PCB.physic[s].code + '_one';
+                        PCB.physic[s].realCredit = 3;
 						if(courseResult[3].credit < courseResult[3].require){
-							courseResult[3].credit += PCB.physic[s].originalCredit;
+							courseResult[3].credit += PCB.physic[s].realCredit;
 							courseResult[3].course.push(PCB.physic[s]);
+                            courseResult[3].credit += cosAdd.realCredit;
+                            courseResult[3].course.push(cosAdd);
 						}
 						else{
-                                                	courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                	courseResult[4].credit += PCB.physic[s].realCredit;
                                                 	courseResult[4].course.push(PCB.physic[s]);
+                                                    courseResult[4].credit += cosAdd.realCredit;
+                                                    courseResult[4].course.push(cosAdd);
                                         	}
 					}
 				}
 				else{
 					for(s = 0; s<PCB.physic.length; s++){
-                                                if(s == 0){
+                        if(s == 0){
                                                         PCB.physic[s].realCredit = PCB.physic[s].originalCredit - 1;
 							courseResult[0].credit += PCB.physic[s].realCredit;
 							if(courseResult[3].credit < courseResult[3].require){
 								var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[3].credit++;
 								courseResult[3].course.push(cosInfo);
 							}
@@ -459,6 +539,7 @@ CScourse.processCS = function(req, res, next){
                                 var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[4].credit++;
 								courseResult[4].course.push(cosInfo);
 							}
@@ -466,13 +547,22 @@ CScourse.processCS = function(req, res, next){
                                                 }
                                                        else{
                                                         PCB.physic[s].move = true;
+                                                        var cosAdd = JSON.stringify(PCB.physic[s]);
+                                                        cosAdd = JSON.parse(cosAdd);
+                                                        cosAdd.realCredit = 1;
+                                                        cosAdd.code = PCB.physic[s].code + '_one';
+                                                        PCB.physic[s].realCredit = 3;
 							if(courseResult[3].credit < courseResult[3].require){
-								courseResult[3].credit += PCB.physic[s].originalCredit;
+								courseResult[3].credit += PCB.physic[s].realCredit;
                                                        		courseResult[3].course.push(PCB.physic[s]);
+                                                            courseResult[3].credit += cosAdd.realCredit;
+                                                            courseResult[3].course.push(cosAdd);
 							}
 							else{
-                                                        	courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                        	courseResult[4].credit += PCB.physic[s].realCredit;
                                                         	courseResult[4].course.push(PCB.physic[s]);
+                                                            courseResult[4].credit += cosAdd.realCredit;
+                                                            courseResult[4].course.push(cosAdd);
                                                 	}
                                                 }
                                         }
@@ -486,14 +576,23 @@ CScourse.processCS = function(req, res, next){
 					courseResult[0].course.push(PCB.chemistry[s]);
 				}
 				for(s = 0; s<PCB.physic.length; s++){
-                                        PCB.physic[s].move = true;
+                    PCB.physic[s].move = true;
+                    var cosAdd = JSON.stringify(PCB.physic[s]);
+                    cosAdd = JSON.parse(cosAdd);
+                    cosAdd.realCredit = 1;
+                    cosAdd.code = PCB.physic[s].code + '_one';
+                    PCB.physic[s].realCredit = 3;
 					if(courseResult[3].credit < courseResult[3].require){
-						courseResult[3].credit += PCB.physic[s].originalCredit;
+						courseResult[3].credit += PCB.physic[s].realCredit;
                                        	 	courseResult[3].course.push(PCB.physic[s]);
+                                            courseResult[3].credit += cosAdd.realCredit;
+                                            courseResult[3].course.push(cosAdd);
 					}
 					else{
-                                                courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                courseResult[4].credit += PCB.physic[s].realCredit;
                                                 courseResult[4].course.push(PCB.physic[s]);
+                                                courseResult[4].credit += cosAdd.realCredit;
+                                                courseResult[4].course.push(cosAdd);
                                         }
                                 }
 
@@ -509,6 +608,7 @@ CScourse.processCS = function(req, res, next){
                                 var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[3].credit++;
 								courseResult[3].course.push(cosInfo);
 							}
@@ -516,6 +616,7 @@ CScourse.processCS = function(req, res, next){
                                 var cosInfo = JSON.stringify(PCB.physic[s]);
                                 cosInfo = JSON.parse(cosInfo);
                                 cosInfo.realCredit = 1;
+                                cosInfo.code = PCB.physic[s].code + '_one';
                                 courseResult[4].credit++;
 								courseResult[4].course.push(cosInfo);
 							}
@@ -523,13 +624,22 @@ CScourse.processCS = function(req, res, next){
                                                 }
                                                 else{
                                                         PCB.physic[s].move = true;
+                                                        var cosAdd = JSON.stringify(PCB.physic[s]);
+                                                        cosAdd = JSON.parse(cosAdd);
+                                                        cosAdd.realCredit = 1;
+                                                        cosAdd.code = PCB.physic[s].code + '_one';
+                                                         PCB.physic[s].realCredit = 3;
 							if(courseResult[3].credit < courseResult[3].require){
-								courseResult[3].credit += PCB.physic[s].originalCredit;
+								courseResult[3].credit += PCB.physic[s].realCredit;
                                                         	courseResult[3].course.push(PCB.physic[s]);
+                                                            courseResult[3].credit += cosAdd.realCredit;
+                                                            courseResult[3].course.push(cosAdd);
 							}
 							else{
-                                                		courseResult[4].credit += PCB.physic[s].originalCredit;
+                                                		courseResult[4].credit += PCB.physic[s].realCredit;
                                                 		courseResult[4].course.push(PCB.physic[s]);
+                                                        courseResult[4].credit += cosAdd.realCredit;
+                                                        courseResult[4].course.push(cosAdd);
                                         		}
                                                 }
                                         }
@@ -537,13 +647,16 @@ CScourse.processCS = function(req, res, next){
 
 		}
 		else{
-			for(s = 0; s<PCB.physic.length; s++){
-                        	PCB.physic[s].realCredit = PCB.physic[s].originalCredit - 1;
+			//console.log("PCB");
+            //console.log(PCB);
+            for(s = 0; s<PCB.physic.length; s++){
+               	PCB.physic[s].realCredit = PCB.physic[s].originalCredit - 1;
 				courseResult[0].credit += PCB.physic[s].realCredit;
 				if(courseResult[3].credit < courseResult[3].require){
                     var cosInfo = JSON.stringify(PCB.physic[s]);
                     cosInfo = JSON.parse(cosInfo);
                     cosInfo.realCredit = 1;
+                    cosInfo.code = PCB.physic[s].code + '_one';
                     courseResult[3].credit++;
 					courseResult[3].course.push(cosInfo);
 				}
@@ -551,15 +664,19 @@ CScourse.processCS = function(req, res, next){
                     var cosInfo = JSON.stringify(PCB.physic[s]);
                     cosInfo = JSON.parse(cosInfo);
                     cosInfo.realCredit = 1;
+                    cosInfo.code = PCB.physic[s].code + '_one';
                     courseResult[4].credit++;
 					courseResult[4].course.push(cosInfo);
 				}
                                 courseResult[0].course.push(PCB.physic[s]);
-                        }
+             }
 
 		}
 		//determine the core
 		var core = req.course.core;
+        //console.log(req.course);
+        //console.log("core");
+        //console.log(core);
 		for(var q=0; q<core.length; q++){
                         var more = [];
 			trueCounter = 0;
@@ -622,7 +739,7 @@ CScourse.processCS = function(req, res, next){
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
@@ -750,13 +867,13 @@ CScourse.processCS = function(req, res, next){
 					if(offsetNameCheck[cosInfo.cn] != true){
 						cosInfo.complete = false;
                         cosInfo.code = cosNumber[0];
-						courseResult[2].course.push(cosInfo);
+						//courseResult[2].course.push(cosInfo);
 					}
 				}
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
@@ -783,8 +900,8 @@ CScourse.processCS = function(req, res, next){
                                                                 courseResult[2].course.push(more[0]);
                                                         }
 						}
-                                                else
-                                                        courseResult[2].course.push(more[0]);
+                                                //else
+                                                        //courseResult[2].course.push(more[0]);
                                         }
 					else{
                                                 for(var d = 0; d<more.length; d++){
@@ -819,8 +936,8 @@ CScourse.processCS = function(req, res, next){
                                                                 courseResult[2].course.push(more[index]);
                                                         }
                                                 }
-                                                else
-                                                        courseResult[2].course.push(more[index]);
+                                                //else
+                                                        //courseResult[2].course.push(more[index]);
                                         }
 				}
 			}
@@ -884,13 +1001,13 @@ CScourse.processCS = function(req, res, next){
                                 	if(offsetNameCheck[cosInfo.cn] != true){
 						cosInfo.complete = false;
                         cosInfo.code = cosNumber[0];
-						courseResult[2].course.push(cosInfo);
+						//courseResult[2].course.push(cosInfo);
 					}
 				}
 				else if(more.length >= 1){
 					var max = 0;
                                         var credit;
-                                        var index;
+                                        var index = 0;
                                         var code;
                                         if(more.length == 1){
                                                 if(more[0].complete == true){
@@ -916,8 +1033,8 @@ CScourse.processCS = function(req, res, next){
                                                                 courseResult[2].course.push(more[0]);
                                                         }
                                                 }
-                                                else
-                                                        courseResult[2].course.push(more[0]);
+                                                //else
+                                                       // courseResult[2].course.push(more[0]);
                                         }
 					else{
                                                 for(var d = 0; d<more.length; d++){
@@ -952,8 +1069,8 @@ CScourse.processCS = function(req, res, next){
                                                                 courseResult[2].course.push(more[index]);
                                                         }
                                                 }
-                                                else
-                                                        courseResult[2].course.push(more[index]);
+                                                //else
+                                                        //courseResult[2].course.push(more[index]);
                                         }
 				}
 			}
