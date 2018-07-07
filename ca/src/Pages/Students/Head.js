@@ -20,6 +20,9 @@ import Loading from '../../Components/Loading'
 
 import defaultData from '../../Resources/FakeData'
 
+import {connect} from 'react-redux'
+import {UpdateUserInfo} from '../../Redux/Students/Actions/User'
+
 let graduationItems = defaultData.GraduationItems
 let revise = defaultData.GraduationItems_Revised
 let studentCos = defaultData.Course
@@ -39,13 +42,6 @@ class Head extends Component {
 
   state = {
     selectedIndex: 0,
-    studentIdcard: {
-      sname: '資料錯誤',
-      student_id: '0000000',
-      program: '網多',
-      grade: "大三",
-      email: 'hihi@gmail.com',
-    },
     print_courseCategoryArray: printData,
     isLoading:true,
     projectName:'',
@@ -82,8 +78,8 @@ class Head extends Component {
 
     axios.get('/students/profile').then(studentData => {
       studentData.data[0].grade = '大' + studentData.data[0].grade
-      _this.setState({
-        studentIdcard: studentData.data[0]
+      this.props.UpdateUserInfo({
+        ...studentData.data[0]
       })
 
       axios.post('/students/applyState', {
@@ -179,7 +175,7 @@ class Head extends Component {
               result={graduationItems[11]}
               revise={revise}
               reviseresult={revise[11]}
-              studentProfile={this.state.studentIdcard}
+              studentProfile={this.props.studentIdcard}
               courseCategoryArray={this.state.print_courseCategoryArray}/>
           </FadeIn>
         </a>
@@ -193,8 +189,8 @@ class Head extends Component {
             <MapItem
               studentPasdata={StudentCosPas}
               data={MapCourseData}
-              studentId={this.state.studentIdcard.program}
-              studentsGrad={this.state.studentIdcard.grade}/>
+              studentId={this.props.studentIdcard.program}
+              studentsGrad={this.props.studentIdcard.grade}/>
           </FadeIn>
         </div>
       )
@@ -205,7 +201,7 @@ class Head extends Component {
         //  <CreditItem studentIdcard={this.state.studentIdcard}/>
         //</FadeIn>
         <FadeIn>
-          <Project studentIdcard={this.state.studentIdcard}/>
+          <Project studentIdcard={this.props.studentIdcard}/>
         </FadeIn>
       )
     }
@@ -213,7 +209,7 @@ class Head extends Component {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <Mail type='student' id={this.state.studentIdcard.student_id}/>
+            <Mail type='student' id={this.props.studentIdcard.student_id}/>
           </MuiThemeProvider>
         </FadeIn>
       )
@@ -222,7 +218,7 @@ class Head extends Component {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <ProjectList project_status={this.state.project_status_data} project={this.state.project_data} studentProfile={this.state.studentIdcard}/>
+            <ProjectList project_status={this.state.project_status_data} project={this.state.project_data} studentProfile={this.props.studentIdcard}/>
           </MuiThemeProvider>
         </FadeIn>
       )
@@ -288,10 +284,10 @@ class Head extends Component {
       <Grid id="Head" fluid={true}>
         <Row>
           <Navbar type={ 'student'}
-                  version={this.state.studentIdcard.grad}
-                  name={this.state.studentIdcard.sname}
-                  id={this.state.studentIdcard.student_id}
-                  subname={this.state.studentIdcard.program + this.state.studentIdcard.grade}
+                  version={this.props.studentIdcard.grad}
+                  name={this.props.studentIdcard.sname}
+                  id={this.props.studentIdcard.student_id}
+                  subname={this.props.studentIdcard.program + this.props.studentIdcard.grade}
                   selectedIndex={ this.state.selectedIndex}
                   onTouchTaps={onTouchTaps}
                   onTouchProjectTaps={this.selectProject}
@@ -304,4 +300,13 @@ class Head extends Component {
 
 }
 
-export default Head
+
+const mapState = (state)=>({
+  studentIdcard: state.Student.User.studentIdcard
+})
+
+const mapDispatch = (dispatch)=>({
+  UpdateUserInfo: (payload) => dispatch(UpdateUserInfo(payload))
+})
+
+export default connect(mapState, mapDispatch)(Head)
