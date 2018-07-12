@@ -1,8 +1,8 @@
 import React from 'react'
 import Show from './Show/index'
-import Edit from './Edit'
+import Edit from './Edit/index'
 import firebase from 'firebase'
-import PageWrapper from '../../../Components/PageWrapper'
+import PageWrapper from '../../../../Components/PageWrapper/index'
 import IconButton from 'material-ui/IconButton'
 import ActionHome from 'material-ui/svg-icons/hardware/keyboard-backspace'
 

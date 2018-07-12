@@ -10,10 +10,11 @@ import HomeItem from './Home/Home.js'
 import MapItem from './Map/MapComponents/Map.js'
 import GradCreditCheckPage from './Graduation/GradCreditCheck.js'
 import CreditItem from './Credit/Credit.js'
-import Project from './Project/index'
+import Project from './ProfeesorsList/index'
 import Mail from '../../Components/mail'
-import ProjectHome from './ProjectHome'
+import ProjectHome from './ProjectList/ProjectHome'
 import ProjectList from './ProjectList'
+import Mentor from './Mentor'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
@@ -205,7 +206,7 @@ class Head extends Component {
         //  <CreditItem studentIdcard={this.state.studentIdcard}/>
         //</FadeIn>
         <FadeIn>
-          <Project studentIdcard={this.state.studentIdcard}/>
+          <Mentor studentIdcard={this.state.studentIdcard}/>
         </FadeIn>
       )
     }
@@ -301,7 +302,6 @@ class Head extends Component {
       </Grid>
     )
   }
-
 }
 
 export default Head

@@ -1,7 +1,7 @@
 /* eslint-disable handle-callback-err */
 
 import React from 'react'
-import { LabeledInput } from './FormUtils'
+import { LabeledInput } from './FormUtils/index'
 import CKEditor from 'react-ckeditor-component'
 import firebase from 'firebase'
 import './style.css'

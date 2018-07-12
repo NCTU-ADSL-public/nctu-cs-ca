@@ -12,7 +12,6 @@ import Graph from 'react-json-graph';
 import MapsLocation from './MapsLocation.json'
 import MapsLocation3 from './MapsLocationV2.json'
 //import Graph from 'react-json-graph';
-import DragAndZoom from  'react-drag-and-zoom'
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
@@ -246,91 +245,76 @@ class Map extends React.Component {
       const width = document.body.clientWidth;
       const height = document.body.clientHeight + 10;
       const heightWrap = height;
-        return (
-          <div>
-            <div className="selectFieldStyle animated bounceInRight"
-                 style={{display: this.state.slideIndex ? '' : 'none'}}>
+    return <div>
+      <div className="selectFieldStyle animated bounceInRight"
+           style={{display: this.state.slideIndex ? '' : 'none'}}>
+        <div>
+          <MuiThemeProvider>
+            <SelectField
+              floatingLabelText="選取查看事項"
+              value={this.state.value}
+              onChange={this.handleChange}
+              labelStyle={fontStyle}
+              selectedMenuItemStyle={{color: '#26A69A'}}
+              floatingLabelStyle={{
+                color: '#a42926',
+                verticalAlign: 'default',
+                fontSize: '1em',
+                fontWeight: '300',
+                letterSpacing: '1px',
+                fontFamily: 'Noto Sans CJK TC',
+              }}
+            >
+              <MenuItem style={fontStyle} value={1} primaryText="無"/>
+              <MenuItem style={fontStyle} value={2} primaryText="擋修"/>
+              <MenuItem style={fontStyle} value={3} primaryText="建議修課"/>
+            </SelectField>
+          </MuiThemeProvider>
+        </div>
+        <div>
+          <div className="green" style={{backgroundColor: '#616161'}}></div>
+          <div className="text">已通過</div>
+          <div className="red" style={{backgroundColor: '#a42926'}}></div>
+          <div className="text">未通過</div>
+        </div>
+      </div>
+      <Provider store={store}>
+        <div className='Map-title-text'>
+          <MuiThemeProvider>
+            <Tabs
+              onChange={this.onChange}
+              value={this.state.slideIndex}
+              style={{color: '#26A69A'}}
+              inkBarStyle={{backgroundColor: '#8b8b8b'}}
+
+            >
+              <Tab label="課程" value={0} buttonStyle={fontStyle}/>
+              <Tab label="地圖" value={1} buttonStyle={fontStyle}/>
+            </Tabs>
+          </MuiThemeProvider>
+
+            <div className='Map-Row'>
+              <App studentPasdata={this.props.studentPasdata} data={this.props.data}
+                   studentsGrad={this.props.studentsGrad}/>
+            </div>
+            <div style={{marginLeft: '-70px', marginTop: '-20px'}}>
               <div>
-                <MuiThemeProvider>
-                  <SelectField
-                    floatingLabelText="選取查看事項"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    labelStyle={fontStyle}
-                    selectedMenuItemStyle={{color: '#26A69A'}}
-                    floatingLabelStyle={{
-                      color: "#a42926",
-                      verticalAlign: "default",
-                      fontSize: "1em",
-                      fontWeight: "300",
-                      letterSpacing: "1px",
-                      fontFamily: 'Noto Sans CJK TC',
-                    }}
-                  >
-                    <MenuItem style={fontStyle} value={1} primaryText="無"/>
-                    <MenuItem style={fontStyle} value={2} primaryText="擋修"/>
-                    <MenuItem style={fontStyle} value={3} primaryText="建議修課"/>
-                  </SelectField>
-                </MuiThemeProvider>
-              </div>
-              <div>
-                <div className="green" style={{backgroundColor: "#616161"}}> </div>
-                <div className="text">已通過</div>
-                <div className="red" style={{backgroundColor: "#a42926"}}> </div>
-                <div className="text">未通過</div>
+
+                {/*<div style={MapTiltleStyle}>大四 下</div>*/}
+                {/*<Graph*/}
+                  {/*width='2000px'*/}
+                  {/*height={height}*/}
+                  {/*json={this.state.data}*/}
+                  {/*onChange={(newGraphJSON) => {}}*/}
+                  {/*Node={Gitnode}*/}
+                  {/*Edge={this.getEdgeColor()}*/}
+                {/*/>*/}
               </div>
             </div>
-            <Provider store={store}>
-              <div className='Map-title-text'>
-                <MuiThemeProvider>
-                  <Tabs
-                    onChange={this.onChange}
-                    value={this.state.slideIndex}
-                    style={{color: "#26A69A"}}
-                    inkBarStyle={{backgroundColor: "#8b8b8b"}}
+        </div>
+      </Provider>
 
-                  >
-                    <Tab label="課程" value={0} buttonStyle={fontStyle}/>
-                    <Tab label="地圖" value={1} buttonStyle={fontStyle}/>
-                  </Tabs>
-                </MuiThemeProvider>
-                <SwipeableViews
-                  index={this.state.slideIndex}
-                  onChangeIndex={this.onChange}
-                >
-
-                  <div className='Map-Row'>
-                    <App studentPasdata={this.props.studentPasdata} data={this.props.data}
-                         studentsGrad={this.props.studentsGrad}/>
-                  </div>
-                  <div style={{marginLeft: '-70px', marginTop: '-20px'}}>
-                    <DragAndZoom
-                      minZoom={40}
-                      maxZoom={150}
-                      initialZoom={85}
-                      zoomStep={2}
-                      onZoom={(zoom, e) => {}}
-                    >
-                      <div>
-
-                          {/*<div style={MapTiltleStyle}>大四 下</div>*/}
-                        <Graph
-                          width='2000px'
-                          height={height}
-                          json={this.state.data}
-                          onChange={(newGraphJSON) => {}}
-                          Node={Gitnode}
-                          Edge={this.getEdgeColor()}
-                        />
-                      </div>
-                    </DragAndZoom>
-                  </div>
-                </SwipeableViews>
-              </div>
-            </Provider>
-
-          </div>
-        )
+    </div>
   }
 }
 

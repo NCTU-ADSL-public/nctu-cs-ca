@@ -4,9 +4,8 @@ import img1 from '../../../Resources/index02.png'
 import img2 from '../../../Resources/index03.png'
 import img3 from '../../../Resources/index04.png'
 import './Home.css'
-// import Snow from 'react-snow-effect'
 
-class Home extends React.Component {
+class Mentor extends React.Component {
   render () {
     return (
       <div >
@@ -19,4 +18,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default Mentor
