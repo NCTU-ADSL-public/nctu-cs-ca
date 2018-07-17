@@ -20,8 +20,7 @@ class ProfessorsList extends React.Component {
 
 const getVisibleProfessors = (data, filterInput) => {
   if (data.length === 0) return []
-  let updatedList = data
-  updatedList = updatedList.filter((item) => {
+  let updatedList = data.filter((item) => {
     return (
       (item.tname.toLowerCase().search(
         filterInput.toLowerCase()) !== -1)
