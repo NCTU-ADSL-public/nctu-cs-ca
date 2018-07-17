@@ -69,6 +69,12 @@ class ProfessorOverviewCard extends React.Component {
   }
 
   handleImageDounLoad () {
+    if (this.props.profile.path === '') {
+      this.setState({
+        loading: false,
+        photo: ''
+      })
+    }
     let directory = this.props.profile.path
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
