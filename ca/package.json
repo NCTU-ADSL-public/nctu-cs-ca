@@ -9,6 +9,7 @@
     "@types/react": "^16.0.35",
     "animate.css": "^3.5.2",
     "axios": "^0.16.2",
+    "classnames": "^2.2.6",
     "express": "^4.16.2",
     "firebase": "^5.0.3",
     "i": "^0.3.6",
@@ -36,7 +37,9 @@
     "react-toasts": "^1.2.3",
     "react-transition-group": "^2.4.0",
     "react-trello": "^1.26.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-actions": "^2.4.0",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

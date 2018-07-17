@@ -15,11 +15,16 @@ import Mail from '../../Components/mail'
 import ProjectHome from './ProjectList/ProjectHome'
 import ProjectList from './ProjectList'
 import Mentor from './Mentor'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
+import professorStore from './Mentor/Reducers'
 
 import defaultData from '../../Resources/FakeData'
+import { createStore, applyMiddleware } from 'redux'
+let store = createStore(professorStore, applyMiddleware(thunk))
 
 let graduationItems = defaultData.GraduationItems
 let revise = defaultData.GraduationItems_Revised
@@ -29,7 +34,7 @@ let printData = defaultData.PrintData
 
 let MapCourseData
 let StudentCosPas
-let loadFlag = 0
+
 
 class Head extends Component {
 
@@ -206,7 +211,9 @@ class Head extends Component {
         //  <CreditItem studentIdcard={this.state.studentIdcard}/>
         //</FadeIn>
         <FadeIn>
-          <Mentor studentIdcard={this.state.studentIdcard}/>
+          <Provider store={store}>
+            <Mentor studentIdcard={this.state.studentIdcard}/>
+          </Provider>
         </FadeIn>
       )
     }
@@ -238,7 +245,7 @@ class Head extends Component {
     else {
       return (
         <div>
-          <Col  xsHidden>
+          <Col >
             <div id="page">
               <Loading size={300}
                        left={600}
@@ -249,9 +256,9 @@ class Head extends Component {
             </div>
           </Col>
           {/* For mobile, tablet user */}
-          <Col xs={12} mdHidden lgHidden>
-            <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
-          </Col>
+          {/*<Col xs={12} mdHidden lgHidden>*/}
+            {/*<h2>行動版功能目前測試中，造成不便敬請見諒。</h2>*/}
+          {/*</Col>*/}
         </div>
       )
     }

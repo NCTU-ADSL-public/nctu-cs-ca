@@ -1,0 +1,71 @@
+.group-title{
+    font-size: 2em;
+    font-weight: 100;
+    color: #575757;
+}
+
+.group-year{
+    font-size: 1.2em;
+    font-weight: 200;
+    color: #575757;
+}
+.group-year-rwd{
+    font-size: 0.8em;
+    font-weight: 200;
+    color: #575757;
+}
+.pic{
+    width: 80%;
+    overflow: hidden;
+    height: 200px;
+}
+.group-btn{
+    margin: 30px 0 30px 0;
+    padding: 20px;
+    background: #ececec;
+    border-radius: 6px;
+    border: 1px #dfdfdf solid;
+    position: relative;
+}
+.icon-button{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.icon-button_{
+    margin: 10px 0 0 20px;
+}
+.write-email-title{
+    max-height: 1000px;
+}
+.icon-button-rwd{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.icon-button-rwd_{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.project-member-input{
+    margin: 20px 15px 0 15px;
+}
+.project-member-input-select{
+    margin-bottom: 10px;
+}
+.project-member-button{
+    margin: 50px;
+}
+.project-member-input-rwd{
+    margin: 10px 15px 0 15px;
+}
+.dialog-content-height{
+    height: 600px;
+    position: relative;
+}
+.bottom-icon{
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+}

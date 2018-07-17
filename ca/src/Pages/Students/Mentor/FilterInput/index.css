@@ -1,0 +1,15 @@
+.professor-list-filter-list {
+    padding: 5px 0 5px 0;
+    max-width: 1000px;
+    margin: 0;
+}
+
+.professor-list-filter-list input {
+    line-height: 2;
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.9;
+    height: auto;
+    padding-left: 18px;
+    width: 98%;
+}

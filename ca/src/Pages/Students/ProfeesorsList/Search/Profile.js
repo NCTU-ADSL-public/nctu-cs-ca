@@ -7,8 +7,8 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ProfileSendmail from './ProdileExtend/ProfileSendmail'
 import ProfileSendProjectAgree from './ProdileExtend/ProfileSendProjectAgree'
-import firebase from 'firebase'
 import Loading from '../../../../Components/Loading'
+import firebase from 'firebase'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
