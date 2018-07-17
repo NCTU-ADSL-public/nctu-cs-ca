@@ -74,6 +74,7 @@ class ProfessorOverviewCard extends React.Component {
         loading: false,
         photo: ''
       })
+      return
     }
     let directory = this.props.profile.path
     let pathReference = storageRef.child(directory)
