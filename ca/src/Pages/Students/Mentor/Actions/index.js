@@ -11,8 +11,8 @@ export const storeImage = createAction('STORE_IMAGE')
 export const fetchProfessors = (page = 1) => dispatch => {
   dispatch(fetchProfessorsStart)
   axios.get('/students/ProInfo')
-    .then(json => {
-      dispatch(storeProfessors(json))
+    .then(res => {
+      dispatch(storeProfessors(res.data))
       dispatch(fetchProfessorsDone())
     })
     .catch(error => {
