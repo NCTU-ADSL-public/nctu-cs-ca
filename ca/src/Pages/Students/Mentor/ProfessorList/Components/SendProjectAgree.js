@@ -388,7 +388,7 @@ class SendProjectAgree extends React.Component {
                 </Grow>)}
             </div>
             <div className='row'>
-              <div className='bottom-icon pull-right'>
+              <div className=' pull-right'>
                 <Button variant='fab' mini color='primary' aria-label='add' style={{margin: '5px'}} onClick={this.handleremovemenber}>
                   <Remove />
                 </Button>
