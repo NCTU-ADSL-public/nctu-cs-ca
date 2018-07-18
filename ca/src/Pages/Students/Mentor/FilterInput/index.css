@@ -17,7 +17,7 @@
 @media screen and (max-width: 992px) {
    .professor-list-filter-list {
        padding: 5px 0 5px 0;
-       max-width: 500px;
+       max-width: 1500px;
        margin: 0;
    }
 }

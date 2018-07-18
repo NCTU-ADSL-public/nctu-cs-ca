@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 const styles = {
   filter: {
-    padding: '20px 0 0 0'
+    padding: '30px 0 0 0'
   }
 }
 

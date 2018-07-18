@@ -30,7 +30,7 @@ const getVisibleProfessors = (data, mentor, filterInput) => {
   let index = updatedList.findIndex((a) => {
     return a.tname === mentor
   })
-
+  if (index === -1) return updatedList
   let object = {...updatedList[index]}
   updatedList[index] = {...updatedList[0]}
   updatedList[0] = {...object}
@@ -38,9 +38,11 @@ const getVisibleProfessors = (data, mentor, filterInput) => {
   return updatedList
 }
 
-const mapStateToProps = (state) => ({
-  professors: getVisibleProfessors(state.all.data, state.all.mentor, state.all.filter_string),
-  done: state.all.status === 'DONE'
-})
+const mapStateToProps = (state) => {
+  return {
+    professors: getVisibleProfessors(state.all.data, state.all.mentor, state.all.filter_string),
+    done: state.all.status === 'DONE'
+  }
+}
 
 export default connect(mapStateToProps)(ProfessorsList)
