@@ -110,7 +110,7 @@ class ProfessorOverviewCard extends React.Component {
                     <div className='group-title'>{this.props.profile.tname}</div>
                   </Badge>
                   <div className='hidden-xs hidden-sm'>
-                    <div className='group-year' >已收專題人數（最多七人）：{this.props.profile.scount}</div>
+                    <div className='group-year' >已收專題人數（最多七人）：{this.props.profile.scount}{this.props.profile.scount > 6 ? <font color='#a52a2a' >（名額已滿）</font> : ''}</div>
                     <div className='group-year' >研究領域：{this.props.profile.expertise}</div>
                     <div className='group-year' >Email：{this.props.profile.email}</div>
                   </div>
@@ -140,7 +140,7 @@ class ProfessorOverviewCard extends React.Component {
             <div className='row'>
               <div className='visible-xs visible-sm'>
                 <div className='col-xs-9 col-sm-9' style={{marginTop: '10px'}}>
-                  <div className='group-year-rwd' >專題人數：{this.props.profile.scount}</div>
+                  <div className='group-year-rwd' >專題人數：{this.props.profile.scount}{this.props.profile.scount > 6 ? <font color='#a52a2a' >（名額已滿）</font> : ''}</div>
                   <div className='group-year-rwd' >研究領域：{this.props.profile.expertise}</div>
                   <div className='group-year-rwd' >Email：{this.props.profile.email}</div>
                 </div>

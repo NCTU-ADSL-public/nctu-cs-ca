@@ -38,7 +38,6 @@ let StudentCosPas
 
 
 class Head extends Component {
-
   constructor (props) {
     super(props)
     this.res = this.res.bind(this)

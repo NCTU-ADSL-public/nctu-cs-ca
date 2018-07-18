@@ -155,8 +155,8 @@ class SendProjectAgree extends React.Component {
 
   handleaddmenber () {
     let newnumber = this.state.menberNumber.length + 1
-    if (newnumber > 4) {
-      this.handleClickOpenSnackbar('專題成員不能超過四人！')
+    if (newnumber > 7 - this.props.profile.scount) {
+      this.handleClickOpenSnackbar('專題成員不能超過該教授上限！')
       return
     }
     this.setState({
@@ -224,17 +224,19 @@ class SendProjectAgree extends React.Component {
     return (
       <div>
         {this.props.rwd
-          ? <MenuItem onClick={this.handleClickOpen}>
+          ? <MenuItem
+            disabled={this.props.profile.scount>6} onClick={this.handleClickOpen}>
             <ListItemIcon>
               <Face />
             </ListItemIcon>
-            <ListItemText inset primary='寄送專題申請！' />
+            <ListItemText inset primary={`寄送專題申請！`} />
           </MenuItem>
           : <Tooltip title='寄送專題申請！' placement='top'>
             <IconButton
               onClick={this.handleClickOpen}
               aria-expanded={this.state.expanded}
               aria-label='Show more'
+              disabled={this.props.profile.scount>6}
             >
               <Face />
             </IconButton>
@@ -282,8 +284,9 @@ class SendProjectAgree extends React.Component {
             </FormControl>
             <div className='hidden-xs'>
               {this.state.menberNumber.map(t =>
-                <Grow in>
-                <div className='row' key={t}>
+                <Grow in  key={t}>
+                <div className='row'>
+                  <div className='col-sm-3 col-md-3 col-lg-3'>
                   <Input
                     placeholder='學號'
                     className='project-member-input'
@@ -296,6 +299,8 @@ class SendProjectAgree extends React.Component {
                     value={input[t-1].id}
                     onChange={(event)=>this.handleinputChange(event, 'id', t-1)}
                   />
+                  </div>
+                  <div className='col-sm-3 col-md-3 col-lg-3'>
                   <Input
                     placeholder='電話'
                     className='project-member-input'
@@ -307,6 +312,8 @@ class SendProjectAgree extends React.Component {
                     value={input[t-1].phone}
                     onChange={(event)=>this.handleinputChange(event, 'phone', t-1)}
                   />
+                  </div>
+                  <div className='col-sm-6 col-md-6 col-lg-6'>
                   <Input
                     placeholder='Email'
                     className='project-member-input'
@@ -318,6 +325,7 @@ class SendProjectAgree extends React.Component {
                     value={input[t-1].email}
                     onChange={(event)=>this.handleinputChange(event, 'email', t-1)}
                   />
+                  </div>
                 </div>
                 </Grow>
               )}
