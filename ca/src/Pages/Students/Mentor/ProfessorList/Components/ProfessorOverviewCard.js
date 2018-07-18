@@ -18,6 +18,7 @@ import './index.css'
 import firebase from 'firebase'
 import { storeProfessorsImage } from '../../Actions'
 import { connect } from 'react-redux'
+import LazyLoad from 'react-lazy-load'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
@@ -94,6 +95,8 @@ class ProfessorOverviewCard extends React.Component {
     const { classes } = this.props
     return (
       <div className='group-btn'>
+        <LazyLoad>
+          <div>
         <div className='row'>
           <div className='hidden-xs hidden-sm col-md-3 col-lg-3'>
             {this.state.loading ? <CircularProgress /> : <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />}
@@ -166,6 +169,8 @@ class ProfessorOverviewCard extends React.Component {
             </div>
           </div>
         </Collapse>
+          </div>
+        </LazyLoad>
       </div>
     )
   }
