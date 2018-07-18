@@ -89,6 +89,50 @@ class CheckboxesGroup extends React.Component {
                 }
                 label="電腦視覺"
               />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.電腦視覺}
+                    color='default'
+                    onChange={this.handleChange('電腦視覺')}
+                    value="電腦視覺"
+                  />
+                }
+                label="遊戲"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.電腦視覺}
+                    color='default'
+                    onChange={this.handleChange('電腦視覺')}
+                    value="電腦視覺"
+                  />
+                }
+                label="電腦視覺"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.電腦視覺}
+                    color='default'
+                    onChange={this.handleChange('電腦視覺')}
+                    value="電腦視覺"
+                  />
+                }
+                label="電腦視覺"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.電腦視覺}
+                    color='default'
+                    onChange={this.handleChange('電腦視覺')}
+                    value="電腦視覺"
+                  />
+                }
+                label="電腦視覺"
+              />
             </FormGroup>
           </FormControl>
         </div>

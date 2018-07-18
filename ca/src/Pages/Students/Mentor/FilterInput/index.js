@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 const styles = {
   filter: {
-    padding: '30px 0 0 0'
+    padding: '20px 0 0 0'
   }
 }
 
@@ -13,7 +13,7 @@ const Filter = ({onChange}) => (
   <div style={styles.filter}>
     <div className='professor-list-filter-list'>
       <input type='text'
-        placeholder='搜尋 教授姓名/ 教授研究領域'
+        placeholder='搜尋 教授姓名'
         onChange={(event) => onChange(event.target.value)}
           />
     </div>

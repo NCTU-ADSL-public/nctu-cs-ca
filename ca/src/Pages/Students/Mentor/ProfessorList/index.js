@@ -18,7 +18,7 @@ class ProfessorsList extends React.Component {
   }
 }
 
-const getVisibleProfessors = (data, filterInput) => {
+const getVisibleProfessors = (data, mentor, filterInput) => {
   if (data.length === 0) return []
   let updatedList = data.filter((item) => {
     return (
@@ -26,11 +26,20 @@ const getVisibleProfessors = (data, filterInput) => {
         filterInput.toLowerCase()) !== -1)
     )
   })
+
+  let index = updatedList.findIndex((a) => {
+    return a.tname === mentor
+  })
+
+  let object = {...updatedList[index]}
+  updatedList[index] = {...updatedList[0]}
+  updatedList[0] = {...object}
+
   return updatedList
 }
 
 const mapStateToProps = (state) => ({
-  professors: getVisibleProfessors(state.all.data, state.all.filter_string),
+  professors: getVisibleProfessors(state.all.data, state.all.mentor, state.all.filter_string),
   done: state.all.status === 'DONE'
 })
 

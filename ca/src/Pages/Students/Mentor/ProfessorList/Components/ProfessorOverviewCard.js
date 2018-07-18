@@ -106,9 +106,11 @@ class ProfessorOverviewCard extends React.Component {
               </div>
               <div className='row'>
                 <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
-                  <Badge color='primary' badgeContent={'導師'} className={classes.margin}>
-                    <div className='group-title'>{this.props.profile.tname}</div>
-                  </Badge>
+                  {this.props.isMentor
+                    ? <Badge color='primary' badgeContent={'導師'} className={classes.margin}>
+                      <div className='group-title'>{this.props.profile.tname}</div>
+                    </Badge>
+                    : <div className='group-title'>{this.props.profile.tname}</div>}
                   <div className='hidden-xs hidden-sm'>
                     <div className='group-year' >已收專題人數（最多七人）：{this.props.profile.scount}{this.props.profile.scount > 6 ? <font color='#a52a2a' >（名額已滿）</font> : ''}</div>
                     <div className='group-year' >研究領域：{this.props.profile.expertise}</div>

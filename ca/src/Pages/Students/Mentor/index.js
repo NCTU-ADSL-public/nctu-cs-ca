@@ -9,8 +9,6 @@ import { fetchProfessors } from './Actions'
 class Index extends React.Component {
   constructor (props) {
     super(props)
-    //console.log(props.done)
-    //this.props.fetch_data()
   }
   render () {
     return (
@@ -26,8 +24,7 @@ class Index extends React.Component {
             <FilterInput filterinput={this.filterinput} />
             <FilterButton />
           </div>
-          <div className='col-md-3 col-lg-3'>
-          </div>
+          <div className='col-md-3 col-lg-3' />
           <div className='col-md-9 col-lg-9'>
             <ProfessorList studentIdcard={this.props.studentIdcard} />
           </div>

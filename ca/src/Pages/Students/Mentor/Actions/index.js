@@ -7,6 +7,7 @@ export const fetchProfessorsDone = createAction('FETCH_PROFESSORS_DONE')
 export const storeProfessors = createAction('STORE_PROFESSORS')
 export const filterinput = createAction('FILTER_INPUT')
 export const storeImage = createAction('STORE_IMAGE')
+export const storeProfessorMentor = createAction('STORE_PROFESSOR_MENTOR')
 
 export const fetchProfessors = (page = 1) => dispatch => {
   dispatch(fetchProfessorsStart)
@@ -18,6 +19,16 @@ export const fetchProfessors = (page = 1) => dispatch => {
     .catch(error => {
       console.log(error)
       dispatch(storeProfessors(FakeData.ProjectNum))
+      dispatch(fetchProfessorsDone())
+    })
+  axios.get('/students/mentorInfo')
+    .then(res => {
+      dispatch(storeProfessorMentor(res.data))
+      dispatch(fetchProfessorsDone())
+    })
+    .catch(error => {
+      console.log(error)
+      dispatch(storeProfessorMentor([{'tname': '張立平'}]))
       dispatch(fetchProfessorsDone())
     })
 }

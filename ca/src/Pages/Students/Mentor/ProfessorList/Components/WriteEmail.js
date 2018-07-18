@@ -59,13 +59,17 @@ class FullScreenDialog extends React.Component {
   }
 
   handleSend = () => {
+    if(this.state.title === ''){
+      window.alert('主旨請勿留白！')
+      return
+    }
     let r = window.confirm('確定寄出？')
     if(!r)return
     let _this = this
     let dt = new Date();
     let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
     axios.post('/students/mail/sendtoteacher', {
-      title:_this.state.titlevalue,
+      title:_this.state.title,
       content:_this.state.ckeditorContent,
       time:time,
       sender_email:_this.props.studentIdcard.email,
@@ -78,6 +82,7 @@ class FullScreenDialog extends React.Component {
       this.handleClose()
     })
     .catch(err => {
+      window.alert('寄送失敗！請檢查連線並再送出去一次')
       console.log(err)
     })
   }
