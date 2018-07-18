@@ -10,9 +10,9 @@ class Index extends React.Component {
   constructor (props) {
     super(props)
     console.log(props.done)
+    this.props.fetch_data()
   }
   componentDidMount () {
-    this.props.fetch_data()
   }
   render () {
     return (

@@ -5,7 +5,7 @@ const initialState = {
   filter_select: 'ALL',
   filter_string: '',
   status: 'IDLE',
-  mentor: '',
+  mentor: ''
 }
 
 export default handleActions({
@@ -15,5 +15,13 @@ export default handleActions({
   FILTER_INPUT: (state, action) => ({ ...state, filter_string: action.payload }),
   STORE_IMAGE: (state, action) => {
     console.log(state)
+    console.log(action)
+    let newdata = state.data
+    let index = newdata.findIndex(x => { return x.tname === action.payload.tname })
+    newdata[index] = {...newdata[index], photo: action.payload.url}
+    return {
+      ...state,
+      data: [...newdata]
+    }
   }
 }, initialState)

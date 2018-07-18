@@ -24,6 +24,7 @@ import professorStore from './Mentor/Reducers'
 
 import defaultData from '../../Resources/FakeData'
 import { createStore, applyMiddleware } from 'redux'
+import { fetchProfessors } from './Mentor/Actions'
 let store = createStore(professorStore, applyMiddleware(thunk))
 
 let graduationItems = defaultData.GraduationItems
@@ -304,7 +305,7 @@ class Head extends Component {
                   onTouchTaps={onTouchTaps}
                   onTouchProjectTaps={this.selectProject}
           />
-          {this.getpage()}
+            {this.getpage()}
         </Row>
       </Grid>
     )

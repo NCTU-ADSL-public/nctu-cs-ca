@@ -23,14 +23,10 @@ export const fetchProfessors = (page = 1) => dispatch => {
 }
 
 export const storeProfessorsImage = (url, tname) => dispatch => {
-  storeImage(url, tname)
+  let object = {url, tname}
+  dispatch(storeImage(object))
 }
 
 export const filterInput = value => dispatch => {
   dispatch(filterinput(value))
-}
-
-
-function findTname(element) {
-  return element > 13;
 }

@@ -62,7 +62,7 @@ class ProfessorOverviewCard extends React.Component {
     }
     this.handleExpandClick = this.handleExpandClick.bind(this)
     this.handleImageDounLoad = this.handleImageDounLoad.bind(this)
-    this.handleImageDounLoad()
+    if (props.profile.photo === undefined) { this.handleImageDounLoad() }
   }
 
   handleExpandClick () {
@@ -76,7 +76,7 @@ class ProfessorOverviewCard extends React.Component {
     }
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
-      this.props.store_image(url, this.props.profile.tname)
+      this.props.store_image(url)
       this.setState({
         loading: false,
         photo: url
@@ -87,7 +87,7 @@ class ProfessorOverviewCard extends React.Component {
         loading: false,
         photo: ''
       })
-      this.props.store_image('', this.props.profile.tname)
+      this.props.store_image('')
     })
   }
 
@@ -97,78 +97,78 @@ class ProfessorOverviewCard extends React.Component {
       <div className='group-btn'>
         <LazyLoad>
           <div>
-        <div className='row'>
-          <div className='hidden-xs hidden-sm col-md-3 col-lg-3'>
-            {this.state.loading ? <CircularProgress /> : <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />}
-          </div>
-          <div className='visible-xs visible-sm col-xs-2 col-sm-1'>
-            {this.state.loading ? <CircularProgress /> : <Avatar alt='picture' src={this.state.photo === '' ? pic : this.state.photo} className={classes.avatar} />}
-          </div>
-          <div className='row'>
-            <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
-              <Badge color='primary' badgeContent={'導師'} className={classes.margin}>
-                <div className='group-title'>{this.props.profile.tname}</div>
-              </Badge>
-              <div className='hidden-xs hidden-sm'>
-                <div className='group-year' >已收專題人數（最多七人）：{this.props.profile.scount}</div>
-                <div className='group-year' >研究領域：{this.props.profile.expertise}</div>
-                <div className='group-year' >Email：{this.props.profile.email}</div>
+            <div className='row'>
+              <div className='hidden-xs hidden-sm col-md-3 col-lg-3'>
+                {this.state.loading ? <CircularProgress /> : <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />}
               </div>
-            </div>
-            <div className='hidden-xs hidden-sm icon-button'>
-              <div className='col-md-1 col-lg-1 icon-button_'>
-                <WriteEmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+              <div className='visible-xs visible-sm col-xs-2 col-sm-1'>
+                {this.state.loading ? <CircularProgress /> : <Avatar alt='picture' src={this.state.photo === '' ? pic : this.state.photo} className={classes.avatar} />}
               </div>
-              <div className='col-md-1 col-lg-1 icon-button_'>
-                <SendProjectAgree profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-              </div>
-              <div className='col-md-1 col-lg-1  icon-button_'>
-                <IconButton
-                  className={classnames(classes.expand, {
-                    [classes.expandOpen]: this.state.expanded
-                  })}
-                  onClick={this.handleExpandClick}
-                  aria-expanded={this.state.expanded}
-                  aria-label='Show more'
+              <div className='row'>
+                <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+                  <Badge color='primary' badgeContent={'導師'} className={classes.margin}>
+                    <div className='group-title'>{this.props.profile.tname}</div>
+                  </Badge>
+                  <div className='hidden-xs hidden-sm'>
+                    <div className='group-year' >已收專題人數（最多七人）：{this.props.profile.scount}</div>
+                    <div className='group-year' >研究領域：{this.props.profile.expertise}</div>
+                    <div className='group-year' >Email：{this.props.profile.email}</div>
+                  </div>
+                </div>
+                <div className='hidden-xs hidden-sm icon-button'>
+                  <div className='col-md-1 col-lg-1 icon-button_'>
+                    <WriteEmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+                  </div>
+                  <div className='col-md-1 col-lg-1 icon-button_'>
+                    <SendProjectAgree profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+                  </div>
+                  <div className='col-md-1 col-lg-1  icon-button_'>
+                    <IconButton
+                      className={classnames(classes.expand, {
+                        [classes.expandOpen]: this.state.expanded
+                      })}
+                      onClick={this.handleExpandClick}
+                      aria-expanded={this.state.expanded}
+                      aria-label='Show more'
                 >
-                  <ExpandMoreIcon />
-                </IconButton>
+                      <ExpandMoreIcon />
+                    </IconButton>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className='row'>
-          <div className='visible-xs visible-sm'>
-            <div className='col-xs-9 col-sm-9' style={{marginTop: '10px'}}>
-              <div className='group-year-rwd' >專題人數：{this.props.profile.scount}</div>
-              <div className='group-year-rwd' >研究領域：{this.props.profile.expertise}</div>
-              <div className='group-year-rwd' >Email：{this.props.profile.email}</div>
-            </div>
-            <div className='col-xs-3 col-sm-3 icon-button-rwd'>
-              <RwdIconButton profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-              <IconButton
-                className={classnames(classes.expand, {
-                  [classes.expandOpen]: this.state.expanded
-                })}
-                onClick={this.handleExpandClick}
-                aria-expanded={this.state.expanded}
-                aria-label='Show more'
+            <div className='row'>
+              <div className='visible-xs visible-sm'>
+                <div className='col-xs-9 col-sm-9' style={{marginTop: '10px'}}>
+                  <div className='group-year-rwd' >專題人數：{this.props.profile.scount}</div>
+                  <div className='group-year-rwd' >研究領域：{this.props.profile.expertise}</div>
+                  <div className='group-year-rwd' >Email：{this.props.profile.email}</div>
+                </div>
+                <div className='col-xs-3 col-sm-3 icon-button-rwd'>
+                  <RwdIconButton profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+                  <IconButton
+                    className={classnames(classes.expand, {
+                      [classes.expandOpen]: this.state.expanded
+                    })}
+                    onClick={this.handleExpandClick}
+                    aria-expanded={this.state.expanded}
+                    aria-label='Show more'
               >
-                <ExpandMoreIcon />
-              </IconButton>
+                    <ExpandMoreIcon />
+                  </IconButton>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <Collapse in={this.state.expanded} timeout='auto' unmountOnExit>
-          <div className='container'>
-            <div className='row' style={{marginTop: '5px'}}>
-              <Divider />
+            <Collapse in={this.state.expanded} timeout='auto' unmountOnExit>
+              <div className='container'>
+                <div className='row' style={{marginTop: '5px'}}>
+                  <Divider />
               經歷：<br />
-              {this.props.profile.info === '' ? '尚無資料' : this.props.profile.info}
-              <div style={{height: '50px'}} />
-            </div>
-          </div>
-        </Collapse>
+                  {this.props.profile.info === '' ? '尚無資料' : this.props.profile.info}
+                  <div style={{height: '50px'}} />
+                </div>
+              </div>
+            </Collapse>
           </div>
         </LazyLoad>
       </div>
@@ -184,7 +184,7 @@ const mapStateToProps = (state, ownProps) => ({
   isMentor: state.all.mentor === ownProps.profile.tname
 })
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  store_image: (url) => dispatch(storeProfessorsImage(url, ownProps.tname))
+  store_image: (url) => dispatch(storeProfessorsImage(url, ownProps.profile.tname))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ProfessorOverviewCard))
