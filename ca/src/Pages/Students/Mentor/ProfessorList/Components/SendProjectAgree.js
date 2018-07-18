@@ -388,7 +388,15 @@ class SendProjectAgree extends React.Component {
                 </Grow>)}
             </div>
             <div className='row'>
-              <div className=' pull-right'>
+              <div className='visible-xs visible-sm pull-right'>
+                <Button variant='fab' mini color='primary' aria-label='add' style={{margin: '5px'}} onClick={this.handleremovemenber}>
+                  <Remove />
+                </Button>
+                <Button variant='fab' mini color='primary' aria-label='remove' style={{margin: '5px'}} onClick={this.handleaddmenber}>
+                  <AddIcon />
+                </Button>
+              </div>
+              <div className='hidden-xs hidden-sm bottom-icon pull-right'>
                 <Button variant='fab' mini color='primary' aria-label='add' style={{margin: '5px'}} onClick={this.handleremovemenber}>
                   <Remove />
                 </Button>
