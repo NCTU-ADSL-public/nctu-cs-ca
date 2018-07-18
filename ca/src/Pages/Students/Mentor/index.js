@@ -9,10 +9,8 @@ import { fetchProfessors } from './Actions'
 class Index extends React.Component {
   constructor (props) {
     super(props)
-    console.log(props.done)
-    this.props.fetch_data()
-  }
-  componentDidMount () {
+    //console.log(props.done)
+    //this.props.fetch_data()
   }
   render () {
     return (
