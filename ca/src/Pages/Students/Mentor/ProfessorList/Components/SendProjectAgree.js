@@ -98,7 +98,10 @@ class SendProjectAgree extends React.Component {
         alert('請填寫完整資訊')
         return
       }
-      participants.push(this.state.input[i].id)
+      if(i===0)
+        participants.push(this.props.studentIdcard.student_id)
+      else
+        participants.push(this.state.input[i].id)
       phones.push(this.state.input[i].phone)
       emails.push(this.state.input[i].email)
     }
@@ -123,9 +126,8 @@ class SendProjectAgree extends React.Component {
       alert('請填寫專題一或二')
       return
     }
-
     let r = window.confirm('確定送出表單嗎?')
-    let Today = new Date();
+    let Today = new Date()
     let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
     if(r){
       axios.post('/students/project_apply', {
@@ -238,7 +240,7 @@ class SendProjectAgree extends React.Component {
               onClick={this.handleClickOpen}
               aria-expanded={this.state.expanded}
               aria-label='Show more'
-              disabled={this.props.profile.scount>6}
+              disabled={this.props.profile.scount>limitcount}
             >
               <Face />
             </IconButton>

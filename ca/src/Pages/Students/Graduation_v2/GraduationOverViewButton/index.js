@@ -20,9 +20,9 @@ const styles = theme => ({
   },
   text: {
     fontSize: '40px',
-    position: 'fixed',
-    left: '12%',
-    top: '20%',
+    left: '33%',
+    top: '15%',
+    position: 'absolute',
     textAlign: 'center'
   }
 })

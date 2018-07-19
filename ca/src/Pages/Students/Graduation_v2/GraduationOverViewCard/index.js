@@ -15,10 +15,20 @@ const styles = {
 class Index extends React.Component {
   constructor (props) {
     super(props)
-    console.log(props.overview)
+    this.state = {
+      expanded: null,
+    }
   }
+
+  handleChange = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    })
+  }
+
   render () {
     const { classes } = this.props
+    const { expanded } = this.state
     return (
       <div className='container'>
         <Card title='共同必修' complete={this.props.overview.total} require={this.props.overview.total_require} value={Number(this.props.overview.total) / Number(this.props.overview.total_require) * 100} />
