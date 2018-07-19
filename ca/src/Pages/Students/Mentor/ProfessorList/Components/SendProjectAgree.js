@@ -35,6 +35,8 @@ function Transition (props) {
   return <Slide direction='up' {...props} />
 }
 
+const limitcount = 10
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -155,7 +157,7 @@ class SendProjectAgree extends React.Component {
 
   handleaddmenber () {
     let newnumber = this.state.menberNumber.length + 1
-    if (newnumber > 7 - this.props.profile.scount) {
+    if (newnumber > limitcount - this.props.profile.scount) {
       this.handleClickOpenSnackbar('專題成員不能超過該教授上限！')
       return
     }
@@ -225,7 +227,7 @@ class SendProjectAgree extends React.Component {
       <div>
         {this.props.rwd
           ? <MenuItem
-            disabled={this.props.profile.scount>6} onClick={this.handleClickOpen}>
+            disabled={this.props.profile.scount>=limitcount} onClick={this.handleClickOpen}>
             <ListItemIcon>
               <Face />
             </ListItemIcon>
