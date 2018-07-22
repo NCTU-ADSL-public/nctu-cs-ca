@@ -1,18 +1,13 @@
 import React from 'react'
-import './List.css'
+// import './List.css'
 
 //for table
 import Table from './Table'
 
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
-const styles = {
-  filter: {
-    padding: '50px 4% 0 8%',
-  },
-}
+import {TextField} from 'material-ui'
 
 export default class StudentList extends React.Component {
 
@@ -57,20 +52,28 @@ export default class StudentList extends React.Component {
 
   render () {
     return (
-      <div style={styles.filter}>
-
-        <div className="filter-list">
-          <input type="text"
+      <div>
+          {/* <input type="text"
                  placeholder="搜尋 學號/ 姓名"
                  onChange={this.filterList}
-          />
-        </div>
-
-        <MuiThemeProvider>
-          <Table items={this.state.items}
-                       parentFunction={this.searchCallback}
-          />
-        </MuiThemeProvider>
+          /> */}
+          <div style={{textAlign:'center'}}>
+            <MuiThemeProvider>
+              <TextField
+                hintText="請輸入學號或姓名"
+                floatingLabelText="搜尋學號或姓名"
+                onChange={this.filterList}
+                style={{width:'80%'}}
+              />
+            </MuiThemeProvider>
+          </div>
+          
+          <MuiThemeProvider>
+            <Table items={this.state.items}
+                  parentFunction={this.searchCallback}
+                  choose={this.props.choose}
+            />
+          </MuiThemeProvider>
       </div>
     )
   }

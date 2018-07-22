@@ -1,65 +1,212 @@
 [
   {
+    "id": 0,
     "student_id": "0316000",
     "sname": "資料錯誤",
     "program": "網多",
     "graduate": "0",
-    "graduate_submit": "0"
+    "graduate_submit": "0",
+    "failed":true,
+    "score":[
+      {
+        "cn": "線性代數",
+        "en": "Linear Algebra",
+        "score": 98
+      },
+      {
+        "cn": "計算機概論與程式設計",
+        "en": "Introduction to Computers and Programming",
+        "score": 84
+      },
+      {
+        "cn": "資料結構",
+        "en": "Data Structures",
+        "score": 95
+      }
+    ],
+    "avg":[
+      {
+        "semester":"105上",
+        "avg":31
+      },
+      {
+        "semester":"105下",
+        "avg":19
+      },
+      {
+        "semester":"106上",
+        "avg":51
+      },
+      {
+        "semester":"106下",
+        "avg":40
+      },
+      {
+        "semester":"107上",
+        "avg":37
+      }
+    ]
   },
   {
+    "id": 1,
     "student_id": "0316030",
     "sname": "余治傑",
     "program": "資工B",
     "graduate": "0",
-    "graduate_submit": "1"
+    "graduate_submit": "1",
+    "failed":false,
+    "score":[
+      {
+        "cn": "離散數學",
+        "en": "Discrete Mathematics",
+        "score": 99
+      },
+      {
+        "cn": "數位電路設計",
+        "en": "Digital Circuit Design",
+        "score": 92
+      },
+      {
+        "cn": "機率",
+        "en": "Probability",
+        "score": 89
+      }
+    ],
+    "avg":[
+      {
+        "semester":"105上",
+        "avg":34
+      },
+      {
+        "semester":"105下",
+        "avg":98
+      },
+      {
+        "semester":"106上",
+        "avg":61
+      },
+      {
+        "semester":"106下",
+        "avg":90
+      },
+      {
+        "semester":"107上",
+        "avg":87
+      }
+    ]
   },
   {
+    "id": 2,
     "student_id": "0316031",
     "sname": "王冠升",
     "program": "資工B",
     "graduate": "1",
-    "graduate_submit": "1"
+    "graduate_submit": "1",
+    "failed":false,
+    "score":[
+      {
+        "cn": "計算機組織",
+        "en": "Computer Organization",
+        "score": 87
+      },
+      {
+        "cn": "計算機網路概論",
+        "en": "Intro. to Computer Networks",
+        "score": 90
+      }
+    ],
+    "avg":[
+      {
+        "semester":"105上",
+        "avg":34
+      },
+      {
+        "semester":"105下",
+        "avg":98
+      },
+      {
+        "semester":"106上",
+        "avg":61
+      },
+      {
+        "semester":"106下",
+        "avg":90
+      },
+      {
+        "semester":"107上",
+        "avg":87
+      }
+    ]
   },
   {
+    "id": 3,
     "student_id": "0316132",
     "sname": "郭毓梁",
     "program": "資工A",
     "graduate": "0",
-    "graduate_submit": "1"
+    "graduate_submit": "1",
+    "failed":false,
+    "score":[
+      {
+        "cn": "演算法概論",
+        "en": "Introduction to Algorithms",
+        "score": 87
+      },
+      {
+        "cn": "作業系統概論",
+        "en": "Introduction to Operating Systems",
+        "score": 81
+      },
+      {
+        "cn": "正規語言概論",
+        "en": "Introduction to Formal Language",
+        "score": 91
+      }
+    ]
   },
   {
+    "id": 4,
     "student_id": "0316033",
     "sname": "趙賀笙",
     "program": "資工A",
     "graduate": "1",
-    "graduate_submit": "2"
+    "graduate_submit": "2",
+    "failed":false
   },
   {
+    "id": 5,
     "student_id": "0316034",
     "sname": "王于哲",
     "program": "資工B",
     "graduate": "0",
-    "graduate_submit": "2"
+    "graduate_submit": "2",
+    "failed":false
   },
   {
+    "id": 6,
     "student_id": "0316235",
     "sname": "陳奕安",
     "program": "資工B",
     "graduate": "0",
-    "graduate_submit": "0"
+    "graduate_submit": "0",
+    "failed":false
   },
   {
+    "id": 7,
     "student_id": "0316036",
     "sname": "陳冠廷",
     "program": "網多",
     "graduate": "1",
-    "graduate_submit": "0"
+    "graduate_submit": "0",
+    "failed":false
   },
   {
+    "id": 8,
     "student_id": "0316037",
     "sname": "郭蕎",
     "program": "資電",
     "graduate": "0",
-    "graduate_submit": "0"
+    "graduate_submit": "0",
+    "failed":false
   }
 ]

@@ -97,7 +97,7 @@ export default class ListTable extends Component {
 
     let itemListRows = NewItemList
       .map((row, i) =>
-        <TableRow key={i}>
+        <TableRow key={i} onMouseEnter={()=>{this.props.choose(row.id)}} style={row.failed && styles.colorRed}>
           <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
           <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
         </TableRow>
@@ -116,11 +116,7 @@ export default class ListTable extends Component {
 
   render () {
     return (
-
-      <div>
-
         <Table
-          height={this.state.height}
           fixedHeader={this.state.fixedHeader}
           fixedFooter={this.state.fixedFooter}
           selectable={this.state.selectable}
@@ -134,13 +130,13 @@ export default class ListTable extends Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn tooltip="學號">
+              <TableHeaderColumn>
                 <div style={this.state.orderBy === 'sid' ? styles.headerB : styles.header}
                      onClick={() => this.orderList('sid')}>
                   學號{this.state.orderBy === 'sid' ? '↓' : ''}
                 </div>
               </TableHeaderColumn>
-              <TableHeaderColumn tooltip="學生姓名">
+              <TableHeaderColumn>
                 <div style={this.state.orderBy === 'name' ? styles.headerB : styles.header}
                      onClick={() => this.orderList('name')}>
                   學生姓名{this.state.orderBy === 'name' ? '↓' : ''}
@@ -157,9 +153,6 @@ export default class ListTable extends Component {
             {this.state.itemListRows}
           </TableBody>
         </Table>
-
-
-      </div>
     )
   }
 

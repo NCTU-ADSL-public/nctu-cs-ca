@@ -5,11 +5,18 @@ import List from './Search/List'
 
 import FakeData from '../../../Resources/FakeData'
 
+import {Card,CardHeader,CardText,Avatar,Table,TableBody,TableHeader,TableRow,TableRowColumn} from 'material-ui'
+import { MuiThemeProvider } from 'material-ui/styles';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
+import DialogButton from '../../../Components/mail/DialogButton'
+
 const styles = {
-  container: {},
-  list: {
+  content: {
     width: '50%',
-    display: 'inline-block'
+    display: 'inline-block',
+    padding: '2%',
+    marginBottom: '40px',
+    verticalAlign: 'top'
   },
   course: {
     main: {
@@ -51,6 +58,56 @@ const styles = {
     padding: '3px 0 0 0px',
   }
 }
+const InfoCard = (props)=>(
+  <MuiThemeProvider>
+      <Card style={props.selected.failed && {backgroundColor:'#FFEEEE',border:'2px solid #FF7D7D'}}>
+        <CardHeader
+          avatar={
+            <Avatar>
+            {props.selected.sname[0]}
+            </Avatar>
+          }
+          title={props.selected.sname}
+          subtitle={`${props.selected.program} / ${props.selected.student_id}`}
+        >
+        <span style={{position:'absolute',right:20}}>
+          <DialogButton
+            sender={1} receiver={1} sender_email={1} receiver_email={1}
+          />
+        </span>
+        </CardHeader>
+        <CardText>
+        <div className='text-center h5 mb-2'>各學年度平均總成績</div>
+        <LineChart width={500} height={300} data={props.selected.avg}
+            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+          <XAxis dataKey="semester"/>
+          <YAxis domain={[0, 100]}/>
+          <CartesianGrid strokeDasharray="3 3"/>
+          <Tooltip/>
+          <Line type="monotone" dataKey="avg" stroke="#8884d8" activeDot={{r: 8}}/>
+        </LineChart>
+        </CardText>         
+        <CardText>
+          <Table>
+            <TableHeader displaySelectAll={false}>
+              <TableRow>
+                <TableRowColumn>科目</TableRowColumn>
+                <TableRowColumn>成績</TableRowColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false} >
+              {props.selected.score && props.selected.score.map((v,i)=>(
+                <TableRow key={i}>
+                  <TableRowColumn>{v.cn}</TableRowColumn>
+                  <TableRowColumn>{v.score}</TableRowColumn>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardText>
+      </Card>
+    </MuiThemeProvider>
+)
 
 export default class index extends React.Component {
 
@@ -81,6 +138,7 @@ export default class index extends React.Component {
       },
 
       initItem: FakeData.StudentList,
+      chooseInfo: 0
     }
   }
 
@@ -161,19 +219,18 @@ export default class index extends React.Component {
       <div style={styles.course.main}>
         <div style={styles.course.title}>(此功能尚在測試階段)</div>
       </div>
-    );
+    )
 
     return (
-      <div style={styles.container}>
-
-        <div style={styles.list}>
-          <List items={this.state.initItem} parentFunction={this.searchCallback}/>
+        <div>
+          <div style={styles.content}>
+            <List items={this.state.initItem} parentFunction={this.searchCallback} choose={(v)=>{this.setState({chooseInfo:v})}}/>
+          </div>
+          {/*{ this.state.item.unique_id ? showCourse : showDefault }*/}
+          <div style={styles.content}>
+            <InfoCard selected={this.state.initItem[this.state.chooseInfo]}/>
+          </div>
         </div>
-
-        {/*{ this.state.item.unique_id ? showCourse : showDefault }*/}
-        { showDefault }
-
-      </div>
     )
   }
 }
