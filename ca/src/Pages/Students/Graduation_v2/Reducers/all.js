@@ -20,5 +20,20 @@ export default handleActions({
       data: [...newdata],
       overview: {...newoverview}
     }
+  },
+  UPDATE_COURSE: (state, action) => {
+    let newdata = state.data
+    let indexRef = action.payload
+    let indexFrom = newdata.findIndex(x => { return x.title === indexRef.from })
+    let indexEnd = newdata.findIndex(x => { return x.title === indexRef.end })
+    let indexCourse = newdata[indexFrom].course.findIndex(x => { return x.cn === indexRef.course })
+    let swap = {...newdata[indexFrom].course[indexCourse]}
+    newdata[indexEnd].course = [...newdata[indexEnd].course, {...swap}]
+    console.log(newdata[indexEnd].course)
+    newdata[indexFrom].course.splice(indexCourse, 1)
+    return {
+      ...state,
+      data: [...newdata]
+    }
   }
 }, initialState)

@@ -12,14 +12,18 @@ class Index extends React.Component {
     return (
       <div className='container'>
         <div className='row' style={{marginBottom: '50px'}}>
-          <div className='col-md-3 col-lg-3' >
+          <div className='col-md-3 col-lg-3 hidden-xs' >
             <GraduationOverViewButton />
           </div>
-          <div className='col-md-3 col-lg-3 visible-xs visible-sm'>
+          <div className='col-xs-12 col-sm-12 visible-xs' >
+            <GraduationOverViewButton rwd />
           </div>
           <div className='col-md-1 col-lg-1' />
-          <div className='col-md-8 col-lg-8' style={{marginTop: '20px'}}>
+          <div className=' col-md-8 col-lg-8 hidden-xs' style={{marginTop: '20px'}}>
             <GraduationOverViewCard studentIdcard={this.props.studentIdcard} />
+          </div>
+          <div className=' col-xs-12 col-lg-12 visible-xs' style={{marginTop: '20px'}}>
+            <GraduationOverViewCard rwd studentIdcard={this.props.studentIdcard} />
           </div>
         </div>
       </div>

@@ -20,6 +20,7 @@
     "react-arrow": "^2.0.2",
     "react-bootstrap": "^0.32.1",
     "react-c3js": "^0.1.20",
+    "react-circular-progressbar": "^1.0.0",
     "react-ckeditor-component": "^1.0.7",
     "react-dom": "^16.3.2",
     "react-fade-in": "^0.1.6",

@@ -5,7 +5,7 @@ import FakeData from '../../../../Resources/FakeData'
 export const storeGraduationCourse = createAction('STORE_GRADUATION_COURSE')
 export const filterinput = createAction('FILTER_INPUT')
 export const storeImage = createAction('STORE_IMAGE')
-export const storeProfessorMentor = createAction('STORE_PROFESSOR_MENTOR')
+export const updateCourse = createAction('UPDATE_COURSE')
 
 export const fetchGraduationCourse = (page = 1) => dispatch => {
   axios.get('/students/graduate/revised').then(res => {
@@ -16,9 +16,9 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
   })
 }
 
-export const storeProfessorsImage = (url, tname) => dispatch => {
-  let object = {url, tname}
-  dispatch(storeImage(object))
+export const changeCourse = (from, end, course) => dispatch => {
+  let object = {from, end, course}
+  dispatch(updateCourse(object))
 }
 
 export const filterInput = value => dispatch => {

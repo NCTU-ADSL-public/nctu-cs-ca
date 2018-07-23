@@ -106,22 +106,6 @@ class SendProjectAgree extends React.Component {
       emails.push(this.state.input[i].email)
     }
 
-    for(let i=0;i<participants.length;i++){
-      axios.post('/students/applyValid', {
-        id:participants[i]
-      })
-        .then(res => {
-          if(!res.data.status){
-            alert('因某些原因導致 ' + participants[i] + ' 同學 無法申請，如該學生如有審核中的專題或當學年已有專題將不能申請。')
-            return
-          }
-        })
-        .catch(err => {
-          //window.location.replace("/logout ");
-          console.log(err)
-        })
-    }
-
     if(_this.state.projectNumber === ''){
       alert('請填寫專題一或二')
       return
@@ -146,7 +130,7 @@ class SendProjectAgree extends React.Component {
             _this.handleClose()
           }
           else{
-            alert('申請失敗，請重新送出，如有審核中的專題將不能申請。')
+            alert('申請失敗，請重新送出，如有成員中有審核中的專題將不能申請。')
           }
         })
         .catch(err => {
