@@ -2,14 +2,14 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
 import TextField from 'material-ui/TextField'
 import axios from 'axios'
 import Email from 'material-ui/svg-icons/communication/email'
 import CKEditor from 'react-ckeditor-component'
 
 const buttonStyle = {
-  marginTop:'4',
-  width:'140px',
+  marginTop:'4'
   //float: 'right'
 }
 
@@ -105,7 +105,10 @@ export default class DialogButton extends React.Component {
 
     return (
       <span>
-        <RaisedButton label="Send Mail!" style={buttonStyle} labelStyle={bodyStyle} onClick={this.handleOpen} icon={<Email/>}/>
+        <FloatingActionButton onClick={this.handleOpen} backgroundColor='#454545' mini={(window.innerWidth<768)}>
+          <Email/>
+        </FloatingActionButton>
+        {/* <RaisedButton label="SEND MAIL!" style={buttonStyle} labelStyle={bodyStyle} icon={<Email/>}/> */}
         <Dialog
           title={
             <div>

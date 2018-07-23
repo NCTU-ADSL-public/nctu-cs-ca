@@ -4,16 +4,14 @@ import axios from 'axios'
 import List from './Search/List'
 
 import FakeData from '../../../Resources/FakeData'
-
-import {Card,CardHeader,CardText,Avatar,Table,TableBody,TableHeader,TableRow,TableRowColumn} from 'material-ui'
+import {Grid, Row, Col} from 'react-bootstrap'
+import {Dialog,Card,CardHeader,CardText,Avatar,Table,TableBody,TableHeader,TableRow,TableRowColumn} from 'material-ui'
 import { MuiThemeProvider } from 'material-ui/styles';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
+import { ResponsiveContainer,LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
 import DialogButton from '../../../Components/mail/DialogButton'
 
 const styles = {
-  content: {
-    width: '50%',
-    display: 'inline-block',
+  layout: {
     padding: '2%',
     marginBottom: '40px',
     verticalAlign: 'top'
@@ -78,7 +76,9 @@ const InfoCard = (props)=>(
         </CardHeader>
         <CardText>
         <div className='text-center h5 mb-2'>各學年度平均總成績</div>
-        <LineChart width={500} height={300} data={props.selected.avg}
+        <div>
+        <ResponsiveContainer width={(window.innerWidth<768)? window.innerWidth*0.6 : window.innerWidth*0.4} aspect={2}>
+        <LineChart  data={props.selected.avg}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
           <XAxis dataKey="semester"/>
           <YAxis domain={[0, 100]}/>
@@ -86,6 +86,8 @@ const InfoCard = (props)=>(
           <Tooltip/>
           <Line type="monotone" dataKey="avg" stroke="#8884d8" activeDot={{r: 8}}/>
         </LineChart>
+        </ResponsiveContainer>
+        </div>
         </CardText>         
         <CardText>
           <Table>
@@ -138,7 +140,8 @@ export default class index extends React.Component {
       },
 
       initItem: FakeData.StudentList,
-      chooseInfo: 0
+      chooseInfo: null,
+      dialogOpen: false
     }
   }
 
@@ -193,44 +196,38 @@ export default class index extends React.Component {
   }
 
   render () {
-    // const showCourse = (
-    //   <div style={styles.course.main}>
-    //     <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem}
-    //       - {this.state.item.cos_cname}</div>
-    //     <div style={styles.course.score}>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
-    //                                                       score={ this.state.scoreDetail.member === '-'
-    //                                                         ? '-'
-    //                                                         : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
-    //       </div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
-    //     </div>
-    //     <div style={styles.course.box}><GaugeChart member={this.state.scoreDetail.member}
-    //                                                passed={this.state.scoreDetail.passed}/></div>
-    //     <div style={styles.course.box}><ScoreChart detail={this.state.scoreChartDetail}/></div>
-    //   </div>
-    // );
-
-    const showDefault = (
-      <div style={styles.course.main}>
-        <div style={styles.course.title}>(此功能尚在測試階段)</div>
-      </div>
-    )
 
     return (
-        <div>
-          <div style={styles.content}>
-            <List items={this.state.initItem} parentFunction={this.searchCallback} choose={(v)=>{this.setState({chooseInfo:v})}}/>
-          </div>
-          {/*{ this.state.item.unique_id ? showCourse : showDefault }*/}
-          <div style={styles.content}>
-            <InfoCard selected={this.state.initItem[this.state.chooseInfo]}/>
-          </div>
-        </div>
+        <Grid fluid={true}>
+          <Row>
+            <Col lg={6} md={6} sm={6} style={styles.layout}>
+              <List items={this.state.initItem} parentFunction={this.searchCallback} choose={(v)=>{this.setState({chooseInfo:v,dialogOpen:(window.innerWidth<768)})}}/>
+            </Col>
+            {/* for smaller screen */}
+            <MuiThemeProvider>
+              <Dialog
+                modal={false}
+                open={this.state.dialogOpen}
+                onRequestClose={()=>this.setState({dialogOpen:false})}
+                autoScrollBodyContent={true}
+              >
+              <InfoCard selected={this.state.initItem[this.state.chooseInfo]}/>
+              </Dialog>
+            </MuiThemeProvider>
+            {/* for larger screen */}
+            <Col lg={6} md={6} sm={6} xsHidden style={styles.layout}>
+              {this.state.chooseInfo !== null ? 
+                <InfoCard selected={this.state.initItem[this.state.chooseInfo]}/>
+                : 
+                <MuiThemeProvider>
+                  <Card>
+                    <CardText style={{textAlign:'center',fontSize:'1.2em',minHeight:500,color:'rgb(144,144,144)'}}>請點選左方欄位以檢視學生成績</CardText>
+                  </Card>
+                </MuiThemeProvider>
+              }
+            </Col>
+          </Row>
+        </Grid>
     )
   }
 }

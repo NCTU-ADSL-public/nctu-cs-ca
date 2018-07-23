@@ -8,6 +8,10 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 
+import {TextField} from 'material-ui'
+
+import './Table.css'
+
 const styles = {
   tabColumn0: {
     cursor: 'pointer',
@@ -22,17 +26,19 @@ const styles = {
   header: {
     cursor: 'pointer',
     fontSize: '1.2em',
+    transition: '.5s'
   },
   headerB: {
     cursor: 'pointer',
-    fontSize: '1.5em',
+    fontSize: '1.2em',
     fontWeight: 700,
     color: '#35916e',
+    transition: '.5s'
   },
   table: {
     fontFamily: 'Noto Sans CJK TC',
     color: '#434343',
-    tableLayout: 'auto',
+    tableLayout: 'auto'
   },
   colorGreen: {
     cursor: 'pointer',
@@ -44,13 +50,15 @@ const styles = {
   },
   colorRed: {
     cursor: 'pointer',
-    color: '#c61234',
+    backgroundColor: 'red',
+    color: '#fff'
   },
 }
 
 export default class ListTable extends Component {
 
   constructor (props) {
+    let NewItemList = []
     super(props)
     this.state = {
       fixedHeader: false,
@@ -78,15 +86,14 @@ export default class ListTable extends Component {
   componentDidUpdate (NextProp, NextState) {
     if (NextProp.items !== this.props.items) {
       this.orderList(this.state.orderBy)
-      if(this.state.itemList.length !== 0) this.handleRowClick(0)
+      //if(this.state.itemList.length !== 0) this.handleRowClick(0)
     }
   }
 
   orderList (orderBy) {
-    let NewItemList = []
 
     if (this.props.items) {
-      NewItemList = [].concat(this.props.items)
+      this.NewItemList = [].concat(this.props.items)
         .sort((a, b) => {
           if (orderBy === 'name')
             return a.sname.localeCompare(b.sname, 'zh-Hans-CN')
@@ -95,23 +102,23 @@ export default class ListTable extends Component {
         })
     }
 
-    let itemListRows = NewItemList
+    let itemListRows = this.NewItemList
       .map((row, i) =>
-        <TableRow key={i} onMouseEnter={()=>{this.props.choose(row.id)}} style={row.failed && styles.colorRed}>
+        <TableRow key={i} style={row.failed && styles.colorRed}>
           <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
           <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
         </TableRow>
       )
 
     this.setState({
-      itemList: NewItemList,
+      itemList: this.NewItemList,
       itemListRows,
       orderBy,
     })
   }
 
-  handleRowClick = (rowIndex) => {
-    this.props.parentFunction(this.state.itemList[rowIndex])
+  handleRowClick = (row) => {
+    this.props.choose(this.NewItemList[row].id)
   }
 
   render () {
@@ -129,6 +136,15 @@ export default class ListTable extends Component {
             adjustForCheckbox={this.state.showCheckboxes}
             enableSelectAll={this.state.enableSelectAll}
           >
+            <TableRow>
+              <TableHeaderColumn colSpan="2">
+              <TextField
+                hintText="請輸入學號或姓名已進行篩選"
+                onChange={this.props.filter}
+                style={{width:'80%'}}
+              />
+              </TableHeaderColumn>
+            </TableRow>
             <TableRow>
               <TableHeaderColumn>
                 <div style={this.state.orderBy === 'sid' ? styles.headerB : styles.header}

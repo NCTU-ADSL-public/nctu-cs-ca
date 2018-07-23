@@ -46,9 +46,9 @@ export default class StudentList extends React.Component {
     this.setState({items: updatedList})
   }
 
-  searchCallback = (item) => {
-    if (item.cos_code !== undefined) this.props.parentFunction(item)
-  }
+  // searchCallback = (item) => {
+  //   if (item.cos_code !== undefined) this.props.parentFunction(item)
+  // }
 
   render () {
     return (
@@ -57,21 +57,10 @@ export default class StudentList extends React.Component {
                  placeholder="搜尋 學號/ 姓名"
                  onChange={this.filterList}
           /> */}
-          <div style={{textAlign:'center'}}>
-            <MuiThemeProvider>
-              <TextField
-                hintText="請輸入學號或姓名"
-                floatingLabelText="搜尋學號或姓名"
-                onChange={this.filterList}
-                style={{width:'80%'}}
-              />
-            </MuiThemeProvider>
-          </div>
-          
           <MuiThemeProvider>
             <Table items={this.state.items}
-                  parentFunction={this.searchCallback}
                   choose={this.props.choose}
+                  filter={this.filterList}
             />
           </MuiThemeProvider>
       </div>

@@ -75,7 +75,7 @@ class Head extends Component {
         document.getElementById('page'))
     } else if (index === 3) {
       ReactDOM.render(
-        <Col xsHidden smHidden>
+        <Col>
           <a>
             <FadeIn>
               <FamilyItem tid={this.props.idCard.id} />
@@ -125,7 +125,7 @@ class Head extends Component {
             onTouchTaps={onTouchTaps}
           />
           <Col xs={12} mdHidden lgHidden>
-            { this.state.selectedIndex === 5
+            { this.state.selectedIndex === 3 || this.state.selectedIndex === 5
               ? ''
               : <div className='alert alert-danger'>
                 行動版網頁尚會跑版，可用電腦登入打開網頁以享有更佳的視覺效果，謝謝
