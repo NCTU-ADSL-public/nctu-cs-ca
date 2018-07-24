@@ -1,5 +1,4 @@
 import React from 'react'
-import { Grid, Row, Col, Image, Glyphicon, Button } from 'react-bootstrap'
 
 import GroupList from './GroupList'
 import GroupApply from './GroupApply'
@@ -14,6 +13,8 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Show from './Show'
 import SwipeableViews from 'react-swipeable-views'
+
+
 
 class Group extends React.Component {
   constructor (props) {
@@ -57,14 +58,18 @@ class Group extends React.Component {
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
+          inkBarStyle={{backgroundColor: '#5a484e'}}
         >
-          <Tab label={`專題列表`} value='1'>
+          <Tab label={`專題列表`} value='1'
+               style={{backgroundColor: '#9da4a5'}} >
             <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
           </Tab>
-          <Tab label={`專題申請`} value='2'>
+          <Tab label={`專題申請`} value='2'
+               style={{backgroundColor: '#9da4a5'}} >
             <GroupApply idCard={this.props.idCard} />
           </Tab>
-          <Tab label={`各組專題影片`} value='3'>
+          <Tab label={`各組專題影片`} value='3'
+               style={{backgroundColor: '#9da4a5'}} >
             <GroupVedio idCard={this.props.idCard} />
           </Tab>
         </Tabs>
