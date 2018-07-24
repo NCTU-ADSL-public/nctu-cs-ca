@@ -67,7 +67,7 @@ class Head extends Component {
     this.setState({isLoading:false})
     this.select(0)
     setTimeout(function () {
-      _this.select(1)
+      _this.select(0)
     }, 100)
     // setTimeout(function () {
     //   if(_this.state.studentIdcard.sname === '資料錯誤')window.location.reload('/')
