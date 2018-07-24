@@ -5,12 +5,11 @@ import GroupList from './GroupList'
 import GroupApply from './GroupApply'
 import GroupVedio from './GroupVedio'
 
+import {Tabs, Tab} from 'material-ui/Tabs';
+
 // for tabs
-import 'rc-tabs/assets/index.css'
-import '../../../Components/ca-rc-tabs.css'
-import Tabs, { TabPane } from 'rc-tabs'
-import TabContent from 'rc-tabs/lib/SwipeableTabContent'
-import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar'
+// import 'rc-tabs/assets/index.css'
+// import '../../../Components/ca-rc-tabs.css'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Show from './Show'
@@ -22,7 +21,7 @@ class Group extends React.Component {
     this.handleChangeIndex = this.handleChangeIndex.bind(this)
     this.handleGroupClick = this.handleGroupClick.bind(this)
     this.state = {
-      index: 0,
+      value: '1',
       item:
         { research_title: '５５５',
           participants: [
@@ -33,10 +32,13 @@ class Group extends React.Component {
           ],
           year: '106'
         },
-      activeKey: '1',
-      start: 0
     }
   }
+  handleChange = (value) => {
+    this.setState({
+      value: value,
+    });
+  };
   handleChangeIndex (index) {
     this.setState({
       index
@@ -48,39 +50,34 @@ class Group extends React.Component {
       index: 1
     })
   }
-  onChange = (activeKey) => {
-    this.setState({
-      activeKey,
-    });
-  };
   render () {
     return (
       <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} >
-      <Tabs
-        renderTabBar={() => <ScrollableInkTabBar onTabClick={this.onTabClick}/>}
-        renderTabContent={() => <TabContent />}
-        activeKey={this.state.activeKey}
-        onChange={this.onChange}
-      >
-        <TabPane tab={`專題列表`} key='1'>
-          <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
-        </TabPane>
-        <TabPane tab={`專題申請`} key='2' >
-          <GroupApply idCard={this.props.idCard} />
-        </TabPane>
-        <TabPane tab={`各組專題影片`} key='3'>
-          <GroupVedio idCard={this.props.idCard} />
-        </TabPane>
-      </Tabs>
-      <div>
-      <MuiThemeProvider>
-          <Show
-            onclick={this.handleChangeIndex}
-            show={this.state.item}
-            idCard={this.props.idCard}
-          />
-      </MuiThemeProvider>
-      </div>
+        <MuiThemeProvider>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+        >
+          <Tab label={`專題列表`} value='1'>
+            <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
+          </Tab>
+          <Tab label={`專題申請`} value='2'>
+            <GroupApply idCard={this.props.idCard} />
+          </Tab>
+          <Tab label={`各組專題影片`} value='3'>
+            <GroupVedio idCard={this.props.idCard} />
+          </Tab>
+        </Tabs>
+        </MuiThemeProvider>
+        <div>
+        <MuiThemeProvider>
+            <Show
+              onclick={this.handleChangeIndex}
+              show={this.state.item}
+              idCard={this.props.idCard}
+            />
+        </MuiThemeProvider>
+        </div>
       </SwipeableViews>
     )
   }
