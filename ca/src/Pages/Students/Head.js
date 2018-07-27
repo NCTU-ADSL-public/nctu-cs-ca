@@ -213,7 +213,7 @@ class Head extends Component {
         //</FadeIn>
         <FadeIn>
           <Provider store={store}>
-            <Mentor studentIdcard={this.state.studentIdcard}/>
+            <Mentor studentIdcard={this.props.studentIdcard}/>
           </Provider>
         </FadeIn>
       )
