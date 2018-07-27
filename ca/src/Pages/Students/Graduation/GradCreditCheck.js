@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import scrollToComponent from 'react-scroll-to-component'
 import { ToastContainer, toast } from 'react-toastify';
-import Snow from 'react-snow-effect'
 import IconButton from 'material-ui/IconButton';
 import ActionGrade from 'material-ui/svg-icons/image/assistant';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
