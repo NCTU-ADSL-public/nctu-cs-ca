@@ -8,6 +8,10 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 
+import {TextField} from 'material-ui'
+
+import './Table.css'
+
 const styles = {
   tabColumn0: {
     cursor: 'pointer',
@@ -22,41 +26,42 @@ const styles = {
   header: {
     cursor: 'pointer',
     fontSize: '1.2em',
+    transition: '.5s'
   },
   headerB: {
     cursor: 'pointer',
-    fontSize: '1.5em',
+    fontSize: '1.2em',
     fontWeight: 700,
     color: '#35916e',
+    transition: '.5s'
   },
   table: {
     fontFamily: 'Noto Sans CJK TC',
     color: '#434343',
-    tableLayout: 'auto',
+    tableLayout: 'auto'
   },
-  colorGreen: {
+  colorBlue: {
     cursor: 'pointer',
-    color: '#418166',
-  },
-  colorBrown: {
-    cursor: 'pointer',
-    color: '#816039',
+    color: '#fff',
+    backgroundColor: '#3949AB'
   },
   colorRed: {
     cursor: 'pointer',
-    color: '#c61234',
+    backgroundColor: '#F50057',
+    color: '#fff'
   },
 }
 
 export default class ListTable extends Component {
 
   constructor (props) {
+    let NewItemList = []
     super(props)
     this.state = {
       fixedHeader: false,
       fixedFooter: true,
-      stripedRows: true,
-      showRowHover: true,
+      stripedRows: false,
+      showRowHover: false,
       selectable: false,
       multiSelectable: false,
       enableSelectAll: false,
@@ -68,59 +73,68 @@ export default class ListTable extends Component {
       itemList: [],
       orderBy: 'sid',
     }
-
+    this.orderList = this.orderList.bind(this)
   }
 
   componentWillMount () {
     this.orderList(this.state.orderBy)
   }
 
+  // for filter
   componentDidUpdate (NextProp, NextState) {
     if (NextProp.items !== this.props.items) {
       this.orderList(this.state.orderBy)
-      if(this.state.itemList.length !== 0) this.handleRowClick(0)
     }
   }
 
   orderList (orderBy) {
-    let NewItemList = []
-
     if (this.props.items) {
-      NewItemList = [].concat(this.props.items)
+      this.NewItemList = [].concat(this.props.items.map((v,i)=>({...v,id:i})))
         .sort((a, b) => {
-          if (orderBy === 'name')
-            return a.sname.localeCompare(b.sname, 'zh-Hans-CN')
-          else if (orderBy === 'sid')
-            return a.student_id.localeCompare(b.student_id, 'zh-Hans-CN')
+          if (orderBy === 'name'){
+            if(a.failed === true){
+              if(b.failed === true)
+                return a.sname.localeCompare(b.sname, 'zh-Hant-TW')
+              else
+                return -1
+            }
+            else{
+              if(b.failed === true)
+                return 1
+              else
+                return a.sname.localeCompare(b.sname, 'zh-Hant-TW')
+            }
+          }  
+          else if (orderBy === 'sid'){
+            if(a.failed === true){
+              if(b.failed === true)
+                return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
+              else
+                return -1
+            }
+            else{
+              if(b.failed === true)
+                return 1
+              else
+                return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
+            }
+          }
         })
     }
 
-    let itemListRows = NewItemList
-      .map((row, i) =>
-        <TableRow key={i}>
-          <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
-          <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
-        </TableRow>
-      )
-
     this.setState({
-      itemList: NewItemList,
-      itemListRows,
-      orderBy,
+      itemList: this.NewItemList,
+      orderBy
     })
   }
 
-  handleRowClick = (rowIndex) => {
-    this.props.parentFunction(this.state.itemList[rowIndex])
+  handleRowClick = (row) => {
+    this.props.choose(this.NewItemList[row].id)
   }
 
   render () {
     return (
-
-      <div>
-
         <Table
-          height={this.state.height}
           fixedHeader={this.state.fixedHeader}
           fixedFooter={this.state.fixedFooter}
           selectable={this.state.selectable}
@@ -134,13 +148,22 @@ export default class ListTable extends Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn tooltip="學號">
+              <TableHeaderColumn colSpan="2">
+              <TextField
+                hintText="請輸入學號或姓名已進行篩選"
+                onChange={this.props.filter}
+                style={{width:'80%'}}
+              />
+              </TableHeaderColumn>
+            </TableRow>
+            <TableRow>
+              <TableHeaderColumn>
                 <div style={this.state.orderBy === 'sid' ? styles.headerB : styles.header}
                      onClick={() => this.orderList('sid')}>
                   學號{this.state.orderBy === 'sid' ? '↓' : ''}
                 </div>
               </TableHeaderColumn>
-              <TableHeaderColumn tooltip="學生姓名">
+              <TableHeaderColumn>
                 <div style={this.state.orderBy === 'name' ? styles.headerB : styles.header}
                      onClick={() => this.orderList('name')}>
                   學生姓名{this.state.orderBy === 'name' ? '↓' : ''}
@@ -154,12 +177,16 @@ export default class ListTable extends Component {
             showRowHover={this.state.showRowHover}
             stripedRows={this.state.stripedRows}
           >
-            {this.state.itemListRows}
+            {this.state.itemList
+              .map((row, i) =>
+                <TableRow key={i} style={row.failed ? styles.colorRed : styles.colorBlue}>
+                  <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
+                  <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
+                </TableRow>
+              )
+            }
           </TableBody>
         </Table>
-
-
-      </div>
     )
   }
 

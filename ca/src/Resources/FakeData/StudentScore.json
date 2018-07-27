@@ -1,0 +1,68 @@
+[
+  {
+      "semester":"106上",
+      "failed":false,
+      "avg":51,
+      "score":[
+        {
+          "cn": "線性代數",
+          "en": "Linear Algebra",
+          "score": 40
+        },
+        {
+          "cn": "計算機概論與程式設計",
+          "en": "Introduction to Computers and Programming",
+          "score": 84
+        },
+        {
+          "cn": "資料結構",
+          "en": "Data Structures",
+          "score": 95
+        }
+      ]
+  },
+  {
+      "semester":"106下",
+      "failed":true,
+      "avg":40,
+      "score":[
+        {
+          "cn": "線性代數",
+          "en": "Linear Algebra",
+          "score": 20
+        },
+        {
+          "cn": "計算機概論與程式設計",
+          "en": "Introduction to Computers and Programming",
+          "score": 30
+        },
+        {
+          "cn": "資料結構",
+          "en": "Data Structures",
+          "score": 40
+        }
+      ]
+  },
+  {
+      "semester":"107上",
+      "failed":false,
+      "avg":60,
+      "score":[
+        {
+          "cn": "線性代數",
+          "en": "Linear Algebra",
+          "score": 98
+        },
+        {
+          "cn": "計算機概論與程式設計",
+          "en": "Introduction to Computers and Programming",
+          "score": 84
+        },
+        {
+          "cn": "資料結構",
+          "en": "Data Structures",
+          "score": 95
+        }
+      ]
+  }
+  ]
