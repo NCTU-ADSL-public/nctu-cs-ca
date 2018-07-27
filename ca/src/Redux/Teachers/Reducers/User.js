@@ -5,7 +5,8 @@ const initalState = {
   idCard: {
     name: '資料錯誤',
     status: '',
-    id: ''
+    id: '001',
+    mail:'test@gmail.com'
   }
 }
 

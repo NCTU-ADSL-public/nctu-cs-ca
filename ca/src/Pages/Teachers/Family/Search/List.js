@@ -7,23 +7,18 @@ import Table from './Table'
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import {TextField} from 'material-ui'
-
 export default class StudentList extends React.Component {
 
   constructor (props) {
     super(props)
 
     this.state = {
-      initItems: this.props.items,
-      items: [],
-
+      items: []
     }
-
     this.filterList = this.filterList.bind(this)
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.setState({items: this.props.items})
   }
 
@@ -35,35 +30,23 @@ export default class StudentList extends React.Component {
 
   filterList (event) {
     let updatedList = this.props.items
-    updatedList = updatedList.filter((item) => {
-      return (
-        (item.student_id.toLowerCase().search(
-          event.target.value.toLowerCase()) !== -1) ||
-        (item.sname.toLowerCase().search(
-          event.target.value.toLowerCase()) !== -1)
-      )
-    })
+    updatedList = updatedList.filter((item) =>(
+      (item.student_id.toLowerCase().search(
+        event.target.value.toLowerCase()) !== -1) ||
+      (item.sname.toLowerCase().search(
+        event.target.value.toLowerCase()) !== -1)
+    ))
     this.setState({items: updatedList})
   }
 
-  // searchCallback = (item) => {
-  //   if (item.cos_code !== undefined) this.props.parentFunction(item)
-  // }
-
   render () {
     return (
-      <div>
-          {/* <input type="text"
-                 placeholder="搜尋 學號/ 姓名"
-                 onChange={this.filterList}
-          /> */}
-          <MuiThemeProvider>
-            <Table items={this.state.items}
-                  choose={this.props.choose}
-                  filter={this.filterList}
-            />
-          </MuiThemeProvider>
-      </div>
+      <MuiThemeProvider>
+        <Table items={this.state.items}
+              choose={this.props.choose}
+              filter={this.filterList}
+        />
+      </MuiThemeProvider>
     )
   }
 

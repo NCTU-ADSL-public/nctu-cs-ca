@@ -15,9 +15,11 @@ const buttonStyle = {
 
 
 const contentStyle = {
+  maxWidth:'none',
   width:'80%',
-  maxWidth: 'none',
-  height: '150vh'
+  position:'absolute',
+  top:0,
+  left:'10%'
 }
 
 const bodyStyle = {
@@ -31,7 +33,7 @@ const titleStyle = {
 };
 
 // component format 
-// <DialogButton
+// <MailButton
 //  sender={} receiver={} sender_email={} receiver_email={}
 // />
 
@@ -105,7 +107,7 @@ export default class DialogButton extends React.Component {
 
     return (
       <span>
-        <FloatingActionButton onClick={this.handleOpen} backgroundColor='#454545' mini={(window.innerWidth<768)}>
+        <FloatingActionButton className={this.props.failed?'animated infinite tada':''} onClick={this.handleOpen} backgroundColor={this.props.failed?'#F50057':'#3949AB'} mini={(window.innerWidth<768)}>
           <Email/>
         </FloatingActionButton>
         {/* <RaisedButton label="SEND MAIL!" style={buttonStyle} labelStyle={bodyStyle} icon={<Email/>}/> */}

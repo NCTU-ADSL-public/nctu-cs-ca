@@ -41,7 +41,7 @@ class Head extends Component {
   }
 
   componentDidMount () {
-    this.select(2)
+    this.select(0)
   }
 
   select (index) {
@@ -78,7 +78,7 @@ class Head extends Component {
         <Col>
           <a>
             <FadeIn>
-              <FamilyItem tid={this.props.idCard.id} />
+              <FamilyItem tname={this.props.idCard.name} tid={this.props.idCard.id} tmail={this.props.idCard.mail} />
             </FadeIn>
           </a>
         </Col>,
