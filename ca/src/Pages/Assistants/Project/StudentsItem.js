@@ -37,8 +37,8 @@ const styles = {
 const filterData = {
   projectStatus: [
     {
-      title: '未申請教授',
-      color: red400
+      title: '已申請教授',
+      color: green400
     },
     {
       title: '待教授審核',
@@ -46,8 +46,8 @@ const filterData = {
 
     },
     {
-      title: '已申請教授',
-      color: green400
+      title: '未申請教授',
+      color: red400
     }
   ]
 }

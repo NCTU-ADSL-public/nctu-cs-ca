@@ -19,7 +19,7 @@ const styles = {
 }
 
 const project_status_color = ['green', 'Gold', 'red']
-const project_status_cn    = ['已找到教授', '待教授審核', '未申請教授']
+const project_status_cn    = ['已申請教授', '待教授審核', '未申請教授']
 
 class StudentsTable extends React.Component {
 
