@@ -66,7 +66,7 @@ class StudentsItem extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/students').then( res => {
+    axios.get('/assistants/project/StudentResearchList').then( res => {
       this.setState({
         students: res.data
       })
