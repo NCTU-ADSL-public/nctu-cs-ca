@@ -59,7 +59,8 @@ class StudentsItem extends React.Component {
     this.state = {
       students: [],
       project_status_filter: [true, true, true],
-      program_filter: [true, true, true, true, true, true]
+      program_filter: [true, true, true, true, true, true],
+      input: ''
     }
   }
 
@@ -87,6 +88,12 @@ class StudentsItem extends React.Component {
     })
   }
 
+  handleTextField = (event) => {
+    this.setState({
+      input: event.target.value
+    })
+  }
+
   mapProgramStringToNumber = (program) => {
     switch (program) {
       case '資工A':
@@ -105,10 +112,15 @@ class StudentsItem extends React.Component {
   }
 
   filter = (students) => {
-    const { project_status_filter, program_filter } = this.state
+    const { project_status_filter, program_filter, input } = this.state
     const filtered_students = students.filter( (student) => (
       project_status_filter[student.project.status] &&
-      program_filter[this.mapProgramStringToNumber(student.student.program)]
+      program_filter[this.mapProgramStringToNumber(student.student.program)] &&
+      (
+        input === '' ||
+        student.student.id.toLowerCase().search(input) !== -1 ||
+        student.student.name.toLowerCase().search(input) !== -1
+      )
     ))
     return filtered_students
   }
@@ -121,9 +133,10 @@ class StudentsItem extends React.Component {
           <div className='col-md-9 col-lg-9 hidden-xs' >
             <Paper style = { styles.paper } zDepth={3}>
               <TextField
-                hintText          = "學號/姓名/組別"
+                hintText          = "學號 / 姓名"
                 floatingLabelText = "搜尋欄位"
                 style             = { styles.searchTextField }
+                onChange          = { this.handleTextField }
               />
               <StudentsTable students = { this.filter(students) }/>
             </Paper>
