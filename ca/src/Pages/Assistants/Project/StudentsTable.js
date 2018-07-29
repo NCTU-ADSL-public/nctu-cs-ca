@@ -8,7 +8,6 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import axios from 'axios'
 
 const styles = {
   tableHeaderColumn: {
@@ -19,29 +18,13 @@ const styles = {
   },
 }
 
-const project_status_color = ['green', 'yellow', 'red', 'gray']
-const project_status_cn    = ['已找到教授', '待教授審核', '未申請教授', '無資工專題']
+const project_status_color = ['green', 'Gold', 'red']
+const project_status_cn    = ['已找到教授', '待教授審核', '未申請教授']
 
 class StudentsTable extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      students: []
-    }
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:3001/students').then( res => {
-      this.setState({
-        students: res.data
-      })
-    })
-  }
-
   render() {
-    const { students } = this.state
-    console.log(students)
+    const { students } = this.props
     return (
       <Table
         height = '60vh'
@@ -62,12 +45,12 @@ class StudentsTable extends React.Component {
           displayRowCheckbox = { false }
           showRowHover = { true }
         >
-          { students.map( (student, index) => (
+          { students.map( (item, index) => (
             <TableRow key = { index }>
-              <TableRowColumn style = { styles.tableRowColumn } >{ student.student_id }</TableRowColumn>
-              <TableRowColumn style = { styles.tableRowColumn } >{ student.sname }</TableRowColumn>
-              <TableRowColumn style = { styles.tableRowColumn } >{ student.program }</TableRowColumn>
-              <TableRowColumn style = {{ ...styles.tableRowColumn, color: project_status_color[student.project_status] }} >{ project_status_cn[student.project_status] }</TableRowColumn>
+              <TableRowColumn style = { styles.tableRowColumn } >{ item.student.id }</TableRowColumn>
+              <TableRowColumn style = { styles.tableRowColumn } >{ item.student.name }</TableRowColumn>
+              <TableRowColumn style = { styles.tableRowColumn } >{ item.student.program }</TableRowColumn>
+              <TableRowColumn style = {{ ...styles.tableRowColumn, color: project_status_color[item.project.status] }} >{ project_status_cn[item.project.status] }</TableRowColumn>
             </TableRow>
           ))}
         </TableBody>

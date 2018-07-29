@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
@@ -44,8 +45,8 @@ export default class index extends React.Component {
 
   render() {
     return (
-      <div>
-        <MuiThemeProvider>
+      <MuiThemeProvider>
+        <div>
           <Tabs
             onChange = { this.handleChange }
             value = { this.state.slideIndex }
@@ -66,8 +67,8 @@ export default class index extends React.Component {
               slide n°2
             </div>
           </SwipeableViews>
-        </MuiThemeProvider>
-      </div>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
