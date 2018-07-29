@@ -1,50 +1,74 @@
+
 import React from 'react';
+import { Tabs, Tab } from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-//for tabs
-import 'rc-tabs/assets/index.css'
-import '../../../Components/ca-rc-tabs.css'
-import Tabs, { TabPane } from 'rc-tabs'
-import TabContent from 'rc-tabs/lib/SwipeableTabContent'
-import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar'
+import StudentsItem from './StudentsItem'
 
-import TeacherList from './TeacherList'
-import StudentList from './StudentList'
+const styles = {
+  tab: {
+    background: '#F5F5F5',
+    color: '#7B7B7B',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    transition: 'color 0.3s, font-size 0.3s, width 0.5s',
+  },
+  tabs: {
+    width: '80%',
+    margin: 'auto',
+    marginTop: '15px',
+    marginButton: '15px'
+  },
+  selected: {
+    width: '80%',
+    color: 'rgb(0, 188, 212)',
+    fontSize: '25px',
+    transition: 'color 0.3s, font-size 0.3s, width 0.5s',
+  }
+};
 
-class Project extends React.Component {
+export default class index extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: '1'
+      slideIndex: 0,
     };
   }
 
-  onChange = (activeKey) => {
+  handleChange = (value) => {
     this.setState({
-      activeKey,
+      slideIndex: value,
     });
   };
 
   render() {
     return (
-      <div>
-        <Tabs
-          renderTabBar={() => <ScrollableInkTabBar onTabClick={this.onTabClick}/>}
-          renderTabContent={() => <TabContent/>}
-          activeKey={this.state.activeKey}
-          onChange={this.onChange}
-        >
-          <TabPane tab={`教授狀況`} key='1'>
-
-            <TeacherList />
-          </TabPane>
-          <TabPane tab={`學生狀況`} key='2'>
-            <StudentList />
-          </TabPane>
-        </Tabs>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <Tabs
+            onChange = { this.handleChange }
+            value = { this.state.slideIndex }
+            inkBarStyle = {{ background: 'rgb(0, 188, 212)', left: `${ 38.5 * this.state.slideIndex }%`, width: '61.5%' }}
+            style = { styles.tabs }
+          >
+            <Tab style = {{ ...styles.tab, ...(this.state.slideIndex === 0 && styles.selected) }} label = "學生狀況" value = { 0 } />
+            <Tab style = {{ ...styles.tab, ...(this.state.slideIndex === 1 && styles.selected) }} label = "教授狀況" value = { 1 } />
+          </Tabs>
+          <SwipeableViews
+            index = { this.state.slideIndex }
+            onChangeIndex = { this.handleChange }
+          >
+            <div>
+              <StudentsItem />
+            </div>
+            <div style = { styles.slide }>
+              slide n°2
+            </div>
+          </SwipeableViews>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
-
-export default Project

@@ -12,4 +12,8 @@ const initalState = {
 
 export default handleActions({
   updateUserInfo: (state,action)=>({...state,idCard: action.payload})
+<<<<<<< HEAD
 },initalState)
+=======
+},initalState)
+>>>>>>> assistants_project
