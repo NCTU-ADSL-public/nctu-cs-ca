@@ -118,8 +118,8 @@ class StudentsItem extends React.Component {
       program_filter[this.mapProgramStringToNumber(student.student.program)] &&
       (
         input === '' ||
-        student.student.id.toLowerCase().search(input) !== -1 ||
-        student.student.name.toLowerCase().search(input) !== -1
+        student.student.id.toLowerCase().search(input.toLowerCase()) !== -1 ||
+        student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
       )
     ))
     return filtered_students
