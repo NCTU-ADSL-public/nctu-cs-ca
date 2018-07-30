@@ -4,7 +4,7 @@ import ProfessorList from './ProfessorList'
 import FilterSelect from './FilterSelect'
 import FilterButton from './FilterButtonSelect'
 import { connect } from 'react-redux'
-import { fetchProfessors } from './Actions'
+import { fetchProfessors, changepage } from '../../../Redux/Students/Actions/Professor/index'
 
 class Index extends React.Component {
   constructor (props) {
@@ -25,8 +25,13 @@ class Index extends React.Component {
             <FilterButton />
           </div>
           <div className='col-md-3 col-lg-3' />
-          <div className='col-md-9 col-lg-9'>
+          <div className='col-md-9 col-lg-9' style={{marginBottom: '100px'}}>
             <ProfessorList studentIdcard={this.props.studentIdcard} />
+            <div className='btn-group' role='group' aria-label='Basic example'>
+              <button type='button' className='btn btn-secondary' onClick={()=>this.props.change_page(1)}>1</button>
+              <button type='button' className='btn btn-secondary' onClick={()=>this.props.change_page(2)}>2</button>
+              <button type='button' className='btn btn-secondary' onClick={()=>this.props.change_page(3)}>3</button>
+            </div>
           </div>
         </div>
       </div>
@@ -35,10 +40,10 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  done: state.all.status === 'DONE'
 })
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProfessors())
+  fetch_data: () => dispatch(fetchProfessors()),
+  change_page: (page) => dispatch(changepage(page))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

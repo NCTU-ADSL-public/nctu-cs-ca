@@ -10,12 +10,13 @@ import CloseIcon from '@material-ui/icons/Close'
 import Slide from '@material-ui/core/Slide'
 import Tooltip from '@material-ui/core/Tooltip'
 import List from '@material-ui/icons/List'
-import CKEditor from 'react-ckeditor-component'
-import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
+import DialogActions from '@material-ui/core/DialogActions'
+import FakeData from './FakeData'
+import Card from './Card'
 import axios from 'axios/index'
 
 const styles = {
@@ -31,11 +32,10 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class ReviewProject extends React.Component {
+class Index extends React.Component {
   state = {
     open: false,
-    ckeditorContent:'',
-    title:''
+    data: FakeData
   }
 
   handleClickOpen = () => {
@@ -46,43 +46,17 @@ class ReviewProject extends React.Component {
     this.setState({ open: false });
   }
 
-  onChange = (event) => {
-    this.setState({
-      ckeditorContent: event.editor.getData()
-    })
-  }
+  componentDidMount () {
 
-  handleTitleChange = (event) => {
-    this.setState({
-      title: event.target.value
-    })
-  }
-
-  handleSend = () => {
-    if(this.state.title === ''){
-      window.alert('主旨請勿留白！')
-      return
-    }
-    let r = window.confirm('確定寄出？')
-    if(!r)return
-    let _this = this
-    let dt = new Date();
-    let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
-    axios.post('/students/mail/sendtoteacher', {
-      title:_this.state.title,
-      content:_this.state.ckeditorContent,
-      time:time,
-      sender_email:_this.props.studentIdcard.email,
-      receiver_email:_this.props.profile.email,
-      teacher:_this.props.profile.tname,
-      name: _this.props.studentIdcard.sname,
-      id: _this.props.studentIdcard.student_id,
+    axios.post('/students/project/ResearchInfoOfPro', {
+      teacher_id: this.props.profile.teacher_id
     })
       .then(res => {
-        this.handleClose()
+        this.setState({
+          data: res.data
+        })
       })
       .catch(err => {
-        window.alert('寄送失敗！請檢查連線並再送出去一次')
         console.log(err)
       })
   }
@@ -122,40 +96,32 @@ class ReviewProject extends React.Component {
                 <CloseIcon />
               </IconButton>
               <Typography variant="title" color="inherit" className={classes.flex}>
-                寄信（信件將會寄送至教授交大信箱）
+                查看教授專題
               </Typography>
             </Toolbar>
           </AppBar>
-          <div className='container'>
-            <TextField
-              id="full-width"
-              label="主旨"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              placeholder="請勿留白"
-              fullWidth
-              margin="normal"
-              className='write-email-title'
-              onChange={this.handleTitleChange}
-              value={this.state.title}
-            />
-            <div style={{height:'20px'}}></div>
-            <CKEditor activeClass='p10' content={this.state.ckeditorContent} events={{'change': this.onChange}} />
-            <div className='pull-right'>
-              <Button variant='contained' color='primary' onClick={this.handleSend}>
-                寄出！
-              </Button>
-            </div>
+          <div className='container d-flex flex-md-column'>
+            {
+              this.state.data.groups.map(t=>
+                <Card data={t} profile={this.props.profile}/>)
+            }
           </div>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleClose} color="primary">
+              Subscribe
+            </Button>
+          </DialogActions>
         </Dialog>
       </div>
     )
   }
 }
 
-ReviewProject.propTypes = {
+Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(ReviewProject)
+export default withStyles(styles)(Index)

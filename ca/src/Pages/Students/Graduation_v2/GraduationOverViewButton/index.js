@@ -8,7 +8,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import Button from '@material-ui/core/Button'
 import CircularProgressbar from 'react-circular-progressbar'
 import { connect } from 'react-redux'
-import { fetchProfessors } from '../../Mentor/Actions'
+import { fetchProfessors } from '../../../../Redux/Students/Actions/Professor/index'
 import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({

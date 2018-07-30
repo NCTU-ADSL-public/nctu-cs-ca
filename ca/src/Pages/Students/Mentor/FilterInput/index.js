@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.css'
-import {filterInput} from '../Actions'
+import {filterInput} from '../../../../Redux/Students/Actions/Professor/index'
 import { connect } from 'react-redux'
 
 const styles = {

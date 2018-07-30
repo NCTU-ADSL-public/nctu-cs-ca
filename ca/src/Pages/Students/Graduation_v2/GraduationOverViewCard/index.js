@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Card from './Card'
 import { connect } from 'react-redux'
-import { fetchProfessors } from '../../Mentor/Actions'
+import { fetchProfessors } from '../../../../Redux/Students/Actions/Professor/index'
 
 const styles = {
   root: {

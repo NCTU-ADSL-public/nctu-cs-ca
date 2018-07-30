@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import FakeData from '../../../../Resources/FakeData'
+import FakeData from '../../../../Resources/FakeData/index'
 
 export const fetchProfessorsStart = createAction('FETCH_PROFESSORS_START')
 export const fetchProfessorsDone = createAction('FETCH_PROFESSORS_DONE')
@@ -8,6 +8,7 @@ export const storeProfessors = createAction('STORE_PROFESSORS')
 export const filterinput = createAction('FILTER_INPUT')
 export const storeImage = createAction('STORE_IMAGE')
 export const storeProfessorMentor = createAction('STORE_PROFESSOR_MENTOR')
+export const changePage = createAction('CHANGE_PAGE')
 
 export const fetchProfessors = (page = 1) => dispatch => {
   dispatch(fetchProfessorsStart)
@@ -40,4 +41,8 @@ export const storeProfessorsImage = (url, tname) => dispatch => {
 
 export const filterInput = value => dispatch => {
   dispatch(filterinput(value))
+}
+
+export const changepage = value => dispatch => {
+  dispatch(changePage(value))
 }

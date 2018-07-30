@@ -2,7 +2,7 @@ import React from 'react'
 import GraduationOverViewButton from './GraduationOverViewButton'
 import GraduationOverViewCard from './GraduationOverViewCard'
 import { connect } from 'react-redux'
-import { fetchProfessors } from '../Mentor/Actions'
+import { fetchProfessors } from '../../../Redux/Students/Actions/Professor/index'
 
 class Index extends React.Component {
   constructor (props) {

@@ -1,4 +1,4 @@
-import {handleActions } from 'redux-actions'
+import { handleActions } from 'redux-actions'
 
 const initalState = {
   type: 'student', // for Navbar
@@ -6,11 +6,11 @@ const initalState = {
     sname: '資料錯誤',
     student_id: '0000000',
     program: '網多',
-    grade: "大三",
-    email: 'hihi@gmail.com',
+    grade: '大三',
+    email: 'hihi@gmail.com'
   }
 }
 
 export default handleActions({
-  updateUserInfo: (state,action)=>({...state,studentIdcard: action.payload})
-},initalState)
+  updateUserInfo: (state, action) => ({...state, studentIdcard: action.payload})
+}, initalState)

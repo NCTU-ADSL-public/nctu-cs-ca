@@ -4,7 +4,7 @@ import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import WriteEmail from './WriteEmail'
 import SendProjectAgree from './SendProjectAgree'
-import ReviewProject from './ReviewProject'
+import ReviewProject from './ReviewProject/index'
 
 
 const ITEM_HEIGHT = 48;

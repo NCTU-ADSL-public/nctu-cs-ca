@@ -17,7 +17,7 @@ import SendProjectAgree from './SendProjectAgree'
 import ReviewProject from './ReviewProject'
 import './index.css'
 import firebase from 'firebase'
-import { storeProfessorsImage } from '../../Actions'
+import { storeProfessorsImage } from '../../../../../Redux/Students/Actions/Professor/index'
 import { connect } from 'react-redux'
 import LazyLoad from 'react-lazy-load'
 
@@ -187,7 +187,7 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  isMentor: state.all.mentor === ownProps.profile.tname
+  isMentor: state.Student.Professor.mentor === ownProps.profile.tname
 })
 const mapDispatchToProps = (dispatch, ownProps) => ({
   store_image: (url) => dispatch(storeProfessorsImage(url, ownProps.profile.tname))

@@ -17,18 +17,16 @@ import thunk from 'redux-thunk'
 
 import Navbar from '../../Components/Navbar'
 import Loading from '../../Components/Loading'
-import professorStore from './Mentor/Reducers'
 import graduationStore from './Graduation_v2/Reducers'
 
 import defaultData from '../../Resources/FakeData'
 import { createStore, applyMiddleware } from 'redux'
-import { fetchProfessors } from './Mentor/Actions'
+import { fetchProfessors } from '../../Redux/Students/Actions/Professor/index'
 import { fetchGraduationCourse } from './Graduation_v2/Actions'
 
 import {connect} from 'react-redux'
 import {UpdateUserInfo} from '../../Redux/Students/Actions/User'
 
-let store = createStore(professorStore, applyMiddleware(thunk))
 let store_graduation = createStore(graduationStore, applyMiddleware(thunk))
 
 let graduationItems = defaultData.GraduationItems
@@ -45,7 +43,7 @@ class Head extends Component {
   constructor (props) {
     super(props)
     this.res = this.res.bind(this)
-    store.dispatch(fetchProfessors())
+    this.props.FetchProfessorInfo()
     store_graduation.dispatch(fetchGraduationCourse())
   }
 
@@ -212,9 +210,7 @@ class Head extends Component {
         //  <CreditItem studentIdcard={this.state.studentIdcard}/>
         //</FadeIn>
         <FadeIn>
-          <Provider store={store}>
-            <Mentor studentIdcard={this.props.studentIdcard}/>
-          </Provider>
+          <Mentor studentIdcard={this.props.studentIdcard}/>
         </FadeIn>
       )
     }
@@ -318,7 +314,8 @@ const mapState = (state)=>({
 })
 
 const mapDispatch = (dispatch)=>({
-  UpdateUserInfo: (payload) => dispatch(UpdateUserInfo(payload))
+  UpdateUserInfo: (payload) => dispatch(UpdateUserInfo(payload)),
+  FetchProfessorInfo: () => dispatch(fetchProfessors())
 })
 
 export default connect(mapState, mapDispatch)(Head)
