@@ -4,6 +4,7 @@ import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import WriteEmail from './WriteEmail'
 import SendProjectAgree from './SendProjectAgree'
+import ReviewProject from './ReviewProject'
 
 
 const ITEM_HEIGHT = 48;
@@ -48,6 +49,7 @@ class LongMenu extends React.Component {
         >
           <WriteEmail rwd  profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
           <SendProjectAgree rwd  profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+          <ReviewProject rwd  profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
         </Menu>
       </div>
     )

@@ -14,6 +14,7 @@ import classnames from 'classnames'
 import RwdIconButton from './RwdIconButton'
 import WriteEmail from './WriteEmail'
 import SendProjectAgree from './SendProjectAgree'
+import ReviewProject from './ReviewProject'
 import './index.css'
 import firebase from 'firebase'
 import { storeProfessorsImage } from '../../Actions'
@@ -52,7 +53,7 @@ const styles = theme => ({
   }
 })
 
-class ProfessorOverviewCard extends React.Component {
+class Index extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -124,6 +125,9 @@ class ProfessorOverviewCard extends React.Component {
                   <div className='col-md-1 col-lg-1 icon-button_'>
                     <SendProjectAgree profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
                   </div>
+                  <div className='col-md-1 col-lg-1 icon-button_'>
+                    <ReviewProject profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+                  </div>
                   <div className='col-md-1 col-lg-1  icon-button_'>
                     <IconButton
                       className={classnames(classes.expand, {
@@ -178,7 +182,7 @@ class ProfessorOverviewCard extends React.Component {
   }
 }
 
-ProfessorOverviewCard.propTypes = {
+Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
@@ -189,4 +193,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   store_image: (url) => dispatch(storeProfessorsImage(url, ownProps.profile.tname))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ProfessorOverviewCard))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

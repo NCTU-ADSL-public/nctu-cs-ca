@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfessorOverviewCard from './Components/ProfessorOverviewCard'
+import ProfessorOverviewCard from './ProfessorOverviewCard'
 import { connect } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
