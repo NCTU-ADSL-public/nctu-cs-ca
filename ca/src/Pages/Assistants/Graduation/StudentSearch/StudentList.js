@@ -214,5 +214,3 @@ export default class StudentList extends React.Component {
 
 
 }
-
-

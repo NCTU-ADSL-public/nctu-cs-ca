@@ -4,12 +4,18 @@ import axios from 'axios'
 import List from './Search/List'
 
 import FakeData from '../../../Resources/FakeData'
+import {Grid, Row, Col} from 'react-bootstrap'
+import {Dialog,Card,CardHeader,CardText,Avatar,Table,TableBody,TableHeader,TableRow,TableRowColumn} from 'material-ui'
+import {Tabs, Tab} from 'material-ui/Tabs';
+import { MuiThemeProvider } from 'material-ui/styles';
+import { ResponsiveContainer,LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
+import MailButton from '../../../Components/mail/MailButton'
 
 const styles = {
-  container: {},
-  list: {
-    width: '50%',
-    display: 'inline-block'
+  layout: {
+    padding: '2%',
+    marginBottom: '40px',
+    verticalAlign: 'top'
   },
   course: {
     main: {
@@ -51,41 +57,122 @@ const styles = {
     padding: '3px 0 0 0px',
   }
 }
+const InfoCard = (props)=>(
+  <MuiThemeProvider>
+      <Card style={props.selected.failed ? {backgroundColor:'#fff',border:'2px solid #F50057'}:{}}>
+        <CardHeader
+          avatar={
+            <Avatar style={props.selected.failed ? {backgroundColor:'#F50057',color:'#fff'}:{backgroundColor:'#3949AB',color:'#fff'}}>
+            {props.selected.sname[0]}
+            </Avatar>
+          }
+          title={props.selected.sname}
+          subtitle={`${props.selected.program} / ${props.selected.student_id}`}
+        >
+        <span style={{position:'absolute',right:20}}>
+          <MailButton
+            sender={props.sender}  
+            sender_email={props.sender_email} 
+            receiver={props.selected.sname}
+            receiver_email={props.selected.email}
+            failed={props.selected.failed}
+          />
+        </span>
+        </CardHeader>
+        <CardText>
+        <div className='text-center h5 mb-2'>各學年度平均總成績</div>
+        <div>
+        <ResponsiveContainer width={(window.innerWidth<768)? window.innerWidth*0.6 : window.innerWidth*0.4} aspect={2}>
+        <LineChart  data={props.selected.score}
+            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+          <XAxis dataKey="semester"/>
+          <YAxis domain={[0, 100]}/>
+          <CartesianGrid strokeDasharray="3 3"/>
+          <Tooltip/>
+          <Line type="monotone" dataKey="avg" stroke={`${props.selected.failed?'#F50057':'#8884d8'}`} activeDot={{r: 8}}/>
+        </LineChart>
+        </ResponsiveContainer>
+        </div>
+        </CardText>         
+        <CardText>
+          <Tabs>
+            {
+              props.selected.score.map(
+                (v,i)=>(
+                  <Tab key={i} label={v.semester} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#9FA8DA'}}>
+                    <Table>
+                      {/* <TableHeader displaySelectAll={false}>
+                        <TableRow>
+                          <TableRowColumn>科目</TableRowColumn>
+                          <TableRowColumn>成績</TableRowColumn>
+                        </TableRow>
+                      </TableHeader> */}
+                      <TableBody displayRowCheckbox={false} >
+                        {v.score.map((v,i)=>(
+                          <TableRow key={i} style={v.score<60 ? {color:'red'}:{}}>
+                            <TableRowColumn>{v.cn}</TableRowColumn>
+                            <TableRowColumn>{v.score}</TableRowColumn>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </Tab>
+                )
+              )
+            }
+          </Tabs>
+          
+        </CardText>
+      </Card>
+    </MuiThemeProvider>
+)
 
-export default class index extends React.Component {
-
+class Index extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      //for passing Course id selected by List
-      item: {
-        id: '',
-        sem: '',
-        cos_cname: '(無資料)',
-        unique_id: '',
-        avg: '-',
-        Pavg: '-',
-      },
-
-      scoreDetail: {
-        avg: '-',
-        Pavg: '-',
-        member: '-',
-        passed: '-',
-        max: '-',
-      },
-
-      scoreChartDetail: {
-        passed: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        failed: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      },
-
       initItem: FakeData.StudentList,
+      chooseInfo: null,
+      dialogOpen: false // for 行動版
+    }
+    this.fetchData = this.fetchData.bind(this)
+    this.choose = this.choose.bind(this)
+  }
+
+  choose(v){
+    if(! ('score' in this.state.initItem[v])){
+      let tmp = this.state.initItem
+      tmp[v].score = FakeData.StudentScore
+      /*
+      axios.get('/professors/family/score', {
+        id: this.state.initItem[v].student_id,
+      }).then(res => {
+        tmp[v].score = res
+        this.setState({
+          chooseInfo:v,
+          initItem: tmp,
+          dialogOpen:(window.innerWidth<768)
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+      */
+      this.setState({
+        chooseInfo:v,
+        initItem: tmp,
+        dialogOpen:(window.innerWidth<768)
+      })
+    }
+    else{
+      this.setState({
+        chooseInfo:v,
+        dialogOpen:(window.innerWidth<768)
+      })
     }
   }
 
   fetchData(){
-    axios.get('/professors/students/list', {
+    axios.get('/professors/family/list', {
       id: this.props.tid,
     }).then(res => {
       this.setState({initItem: res.data})
@@ -100,88 +187,54 @@ export default class index extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if(this.props.tid !== nextProps.tid){
-      this.fetchData();
+      this.fetchData()
     }
-  }
-
-  searchCallback = (item) => {
-    this.setState({item})
-
-    axios.post('/professors/courseInfo/score', {
-      cos_code: item.cos_code,
-      unique_id: item.unique_id,
-    }).then(res => {
-      this.setState({scoreDetail: res.data[0]})
-    }).catch(err => {
-      console.log(err)
-    })
-
-    axios.post('/professors/courseInfo/scoreInterval', {
-      cos_code: item.cos_code,
-      unique_id: item.unique_id,
-    }).then(res => {
-      this.ChartData(res.data)
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
-  ChartData = (data) => {
-    let scoreChartDetail = {
-      passed: [0, 0, 0, 0, 0, 0, data[7], data[8], data[9], data[10]],
-      failed: [data[1], data[2], data[3], data[4], data[5], data[6], 0, 0, 0, 0],
-    }
-    this.setState({ scoreChartDetail });
   }
 
   render () {
-    // const showCourse = (
-    //   <div style={styles.course.main}>
-    //     <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem}
-    //       - {this.state.item.cos_cname}</div>
-    //     <div style={styles.course.score}>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/></div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
-    //                                                       score={ this.state.scoreDetail.member === '-'
-    //                                                         ? '-'
-    //                                                         : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
-    //       </div>
-    //       <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
-    //     </div>
-    //     <div style={styles.course.box}><GaugeChart member={this.state.scoreDetail.member}
-    //                                                passed={this.state.scoreDetail.passed}/></div>
-    //     <div style={styles.course.box}><ScoreChart detail={this.state.scoreChartDetail}/></div>
-    //   </div>
-    // );
-
-    const showDefault = (
-      <div style={styles.course.main}>
-        <div style={styles.course.title}>(此功能尚在測試階段)</div>
-      </div>
-    );
 
     return (
-      <div style={styles.container}>
-
-        <div style={styles.list}>
-          <List items={this.state.initItem} parentFunction={this.searchCallback}/>
-        </div>
-
-        {/*{ this.state.item.unique_id ? showCourse : showDefault }*/}
-        { showDefault }
-
-      </div>
+        <Grid fluid={true}>
+          <Row>
+            <Col lg={6} md={6} sm={6} style={styles.layout}>
+              <List items={this.state.initItem} choose={this.choose}/>
+            </Col>
+            {/* for smaller screen */}
+            <MuiThemeProvider>
+              <Dialog
+                modal={false}
+                open={this.state.dialogOpen}
+                onRequestClose={()=>this.setState({dialogOpen:false})}
+                autoScrollBodyContent={true}
+                contentStyle={{maxWidth:'none',width:'90%',position:'absolute',top:0,left:'5%'}}
+              >
+              <InfoCard 
+                selected={this.state.initItem[this.state.chooseInfo]}
+                sender={this.props.tname}
+                sender_email={this.props.tmail}
+              />
+              </Dialog>
+            </MuiThemeProvider>
+            {/* for larger screen */}
+            <Col lg={6} md={6} sm={6} xsHidden style={styles.layout}>
+              {this.state.chooseInfo !== null ? 
+                <InfoCard 
+                  selected={this.state.initItem[this.state.chooseInfo]}
+                  sender={this.props.tname}
+                  sender_email={this.props.tmail}
+                />
+                : 
+                <MuiThemeProvider>
+                  <Card>
+                    <CardText style={{textAlign:'center',fontSize:'1.2em',minHeight:500,color:'rgb(144,144,144)'}}>請點選左方欄位以檢視學生成績</CardText>
+                  </Card>
+                </MuiThemeProvider>
+              }
+            </Col>
+          </Row>
+        </Grid>
     )
   }
 }
 
-const ShowScore = (props) => (
-  <div>
-    <div>{props.title}</div>
-    <div style={styles.score}>{props.score}</div>
-  </div>
-)
-
+export default Index

@@ -11,6 +11,8 @@ import ProjectItem from './Project/index'
 import Mail from '../../Components/mail'
 
 import Navbar from '../../Components/Navbar'
+import {connect} from 'react-redux'
+import {UpdateUserInfo} from '../../Redux/Assistants/Actions/User'
 
 class Head extends React.Component {
 
@@ -18,12 +20,10 @@ class Head extends React.Component {
 
         super(props)
         axios.get('/assistants/profile').then(studentData => {
-            this.setState({
-                idCard: {
-                    name: studentData.data[0].aname,
-                    prog: studentData.data[0].assistant_id,
-                    grad: studentData.data[0].status
-                }
+            this.props.UpdateUserInfo({
+                name: studentData.data[0].aname,
+                prog: studentData.data[0].assistant_id,
+                grad: studentData.data[0].status
             })
         }).catch(err => {
             console.log(err)
@@ -31,12 +31,6 @@ class Head extends React.Component {
 
         this.state = {
             selectedIndex: 0,
-            idCard: {
-                name: '小翠',
-                prog: '助理',
-                grad: '',
-                id: 'T1234'
-            }
         }
     }
 
@@ -57,7 +51,7 @@ class Head extends React.Component {
             ReactDOM.render(
                 <div>
                     <FadeIn>
-                        <GraduationItem idCard={this.state.idCard} />
+                        <GraduationItem idCard={this.props.idCard} />
                     </FadeIn>
                 </div>,
                 document.getElementById('page'))
@@ -74,7 +68,7 @@ class Head extends React.Component {
             <div>
               <FadeIn>
                 <MuiThemeProvider>
-                  <Mail type='assistant' id={this.state.idCard.id} />
+                  <Mail type='assistant' id={this.props.idCard.id} />
                 </MuiThemeProvider>
               </FadeIn>
             </div>,
@@ -97,8 +91,8 @@ class Head extends React.Component {
         <Grid id='Head' fluid={true}>
           <Row>
             <Navbar type='assistant'
-                    name={this.state.idCard.name}
-                    subname={this.state.idCard.prog + this.state.idCard.grad}
+                    name={this.props.idCard.name}
+                    subname={this.props.idCard.prog + this.props.idCard.grad}
                     selectedIndex={this.state.selectedIndex}
                     onTouchTaps={onTouchTaps}
             />
@@ -115,4 +109,12 @@ class Head extends React.Component {
     }
 }
 
-export default Head
+const mapState = (state)=>({
+    idCard: state.Assistant.User.idCard
+})
+
+const mapDispatch = (dispatch)=>({
+    UpdateUserInfo: (payload) => dispatch(UpdateUserInfo(payload))
+})
+
+export default connect(mapState, mapDispatch)(Head)

@@ -76,5 +76,6 @@
 
     .logout-box {
         padding: 6px 12px 6px 0px;
+        min-width: 233px;
     }
 }

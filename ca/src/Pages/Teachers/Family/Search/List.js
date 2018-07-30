@@ -1,18 +1,11 @@
 import React from 'react'
-import './List.css'
+// import './List.css'
 
 //for table
 import Table from './Table'
 
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-
-const styles = {
-  filter: {
-    padding: '50px 4% 0 8%',
-  },
-}
 
 export default class StudentList extends React.Component {
 
@@ -20,15 +13,12 @@ export default class StudentList extends React.Component {
     super(props)
 
     this.state = {
-      initItems: this.props.items,
-      items: [],
-
+      items: []
     }
-
     this.filterList = this.filterList.bind(this)
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.setState({items: this.props.items})
   }
 
@@ -40,38 +30,23 @@ export default class StudentList extends React.Component {
 
   filterList (event) {
     let updatedList = this.props.items
-    updatedList = updatedList.filter((item) => {
-      return (
-        (item.student_id.toLowerCase().search(
-          event.target.value.toLowerCase()) !== -1) ||
-        (item.sname.toLowerCase().search(
-          event.target.value.toLowerCase()) !== -1)
-      )
-    })
+    updatedList = updatedList.filter((item) =>(
+      (item.student_id.toLowerCase().search(
+        event.target.value.toLowerCase()) !== -1) ||
+      (item.sname.toLowerCase().search(
+        event.target.value.toLowerCase()) !== -1)
+    ))
     this.setState({items: updatedList})
-  }
-
-  searchCallback = (item) => {
-    if (item.cos_code !== undefined) this.props.parentFunction(item)
   }
 
   render () {
     return (
-      <div style={styles.filter}>
-
-        <div className="filter-list">
-          <input type="text"
-                 placeholder="搜尋 學號/ 姓名"
-                 onChange={this.filterList}
-          />
-        </div>
-
-        <MuiThemeProvider>
-          <Table items={this.state.items}
-                       parentFunction={this.searchCallback}
-          />
-        </MuiThemeProvider>
-      </div>
+      <MuiThemeProvider>
+        <Table items={this.state.items}
+              choose={this.props.choose}
+              filter={this.filterList}
+        />
+      </MuiThemeProvider>
     )
   }
 

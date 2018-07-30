@@ -7,6 +7,7 @@ import StudentList from './StudentList.json'
 import MailList from './MailList.json'
 import ProjectNum from './ProjectNum.json'
 import StudentProject from './StudentProject.json'
+import StudentScore from './StudentScore.json'
 
 export default {
   GraduationItems,
@@ -17,5 +18,6 @@ export default {
   StudentList,
   MailList,
   ProjectNum,
-  StudentProject
+  StudentProject,
+  StudentScore
 }

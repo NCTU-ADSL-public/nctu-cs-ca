@@ -1,0 +1,7 @@
+a:focus, a:hover{
+    text-decoration: none !important;
+}
+
+tbody tr:hover{
+    opacity: 0.8;
+}
