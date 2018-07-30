@@ -147,7 +147,7 @@ class StudentsItem extends React.Component {
               <h3>專題狀況</h3>
               <hr />
               {filterData.projectStatus.map((item, index) => (
-                <div>
+                <div key = { index } >
                   <Chip
                     onClick         = { () => this.toggleProjectStatusFilter(index) }
                     backgroundColor = { project_status_filter[index] ? item.color : null }
@@ -165,11 +165,11 @@ class StudentsItem extends React.Component {
               <hr />
               {
                 [0, 2, 4].map( (beginNumber) => (
-                  <div>
+                  <div key = { beginNumber }>
                     <div className = 'row'>
                       {
                         [0, 1].map( (diffNumber) => (
-                          <div className='col-md-6 col-lg-6 hidden-xs' >
+                          <div key = { diffNumber } className='col-md-6 col-lg-6 hidden-xs' >
                             <Chip
                               onClick         = { () => this.toggleProgramFilter(beginNumber + diffNumber) }
                               backgroundColor = { program_filter[beginNumber + diffNumber] ? blue300 : null }
