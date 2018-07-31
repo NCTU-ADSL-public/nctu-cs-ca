@@ -1,6 +1,7 @@
 import React from 'react'
 import Paper from 'material-ui/Paper';
 import TeachersTable from './TeachersTable'
+import TextField from 'material-ui/TextField';
 import axios from 'axios'
 
 const styles = {
@@ -12,6 +13,12 @@ const styles = {
     background: '#FFFFFF',
     padding: '20px',
     height: '80vh'
+  },
+  searchTextField: {
+    width: '90%',
+    marginLeft: '30px',
+    fontSize: '20px',
+    marginButton: '20px'
   },
 }
 
@@ -53,6 +60,12 @@ class TeachersItem extends React.Component {
         <div className = 'row' style={{marginBottom: '50px', marginTop: '20px'}}>
           <div className = 'col-md-9 col-lg-9 hidden-xs' >
             <Paper style = { styles.paper } zDepth = { 3 } >
+              <TextField
+                hintText          = "學號 / 姓名"
+                floatingLabelText = "搜尋欄位"
+                style             = { styles.searchTextField }
+                onChange          = { this.handleTextField }
+              />
               <TeachersTable teachers = { teachers } />
             </Paper>
           </div>

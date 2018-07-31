@@ -35,10 +35,10 @@ class StudentsTable extends React.Component {
           adjustForCheckbox = { false }
         >
           <TableRow>
-            <TableHeaderColumn tooltip = "依學號排序" style = { styles.tableHeaderColumn } >學號</TableHeaderColumn>
-            <TableHeaderColumn tooltip = "依姓名排序" style = { styles.tableHeaderColumn } >姓名</TableHeaderColumn>
-            <TableHeaderColumn tooltip = "依組別排序" style = { styles.tableHeaderColumn } >組別</TableHeaderColumn>
-            <TableHeaderColumn tooltip = "依專題狀況排序" style = { styles.tableHeaderColumn } >專題狀況</TableHeaderColumn>
+            <TableHeaderColumn style = { styles.tableHeaderColumn } >學號</TableHeaderColumn>
+            <TableHeaderColumn style = { styles.tableHeaderColumn } >姓名</TableHeaderColumn>
+            <TableHeaderColumn style = { styles.tableHeaderColumn } >組別</TableHeaderColumn>
+            <TableHeaderColumn style = { styles.tableHeaderColumn } >專題狀況</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody
