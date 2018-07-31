@@ -48,6 +48,9 @@ const styles = theme => ({
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
+  },
+  tooltip: {
+    fontSize: '12px'
   }
 })
 
@@ -219,12 +222,12 @@ class SendProjectAgree extends React.Component {
             </ListItemIcon>
             <ListItemText inset primary={`寄送專題申請！`} />
           </MenuItem>
-          : <Tooltip title='寄送專題申請！' placement='top'>
+          : <Tooltip title='寄送專題申請！' placement='top' classes={{tooltip:classes.tooltip}}>
             <IconButton
               onClick={this.handleClickOpen}
               aria-expanded={this.state.expanded}
               aria-label='Show more'
-              disabled={this.props.profile.scount>limitcount}
+              disabled={this.props.profile.scount>=limitcount}
             >
               <Face />
             </IconButton>
@@ -244,7 +247,7 @@ class SendProjectAgree extends React.Component {
           </DialogTitle>
           <DialogContent className='dialog-content-height'>
             <Input
-              placeholder='主題'
+              placeholder='主題(可填寫尚未決定)'
               fullWidth
               value={this.state.title}
               startAdornment={

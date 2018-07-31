@@ -24,6 +24,9 @@ const styles = {
   },
   flex: {
     flex: 1
+  },
+  tooltip: {
+    fontSize: '12px'
   }
 }
 
@@ -100,7 +103,7 @@ class FullScreenDialog extends React.Component {
             <ListItemText classes={{ primary: classes.primary }} inset primary="Send Email!" />
           </MenuItem>
           :
-          <Tooltip title='Send email to professor!' placement='top' classes={classes.tooltip}>
+          <Tooltip title='Send email to professor!' placement='top' classes={{tooltip: classes.tooltip}}>
             <IconButton
               onClick={this.handleClickOpen}
               aria-expanded={this.state.expanded}

@@ -25,6 +25,9 @@ const styles = {
   },
   flex: {
     flex: 1
+  },
+  tooltip: {
+    fontSize: '12px'
   }
 }
 
@@ -71,10 +74,10 @@ class Index extends React.Component {
             <ListItemIcon className={classes.icon}>
               <List />
             </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary="Send Email!" />
+            <ListItemText classes={{ primary: classes.primary }} inset primary="查看教授過去專題" />
           </MenuItem>
           :
-          <Tooltip title='Send email to professor!' placement='top' classes={classes.tooltip}>
+          <Tooltip title='查看教授過去專題' placement='top' classes={{tooltip: classes.tooltip}}>
             <IconButton
               onClick={this.handleClickOpen}
               aria-expanded={this.state.expanded}

@@ -15,10 +15,12 @@ const styles = theme => ({
     display: 'flex'
   },
   formControl: {
-    margin: theme.spacing.unit * 3
+    margin: theme.spacing.unit * 3,
+    fontSize: '20px'
   },
   formControlLabel: {
-    fontSize: 20
+    fontSize: '15px',
+    color: '#616161'
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
@@ -57,6 +59,7 @@ class CheckboxesGroup extends React.Component {
             </FormLabel>
             <FormGroup>
               <FormControlLabel
+                classes={{label:classes.formControlLabel}}
                 control={
                   <Checkbox
                     checked={this.state.人工智慧}
@@ -68,6 +71,7 @@ class CheckboxesGroup extends React.Component {
                 label="人工智慧"
               />
               <FormControlLabel
+                classes={{label:classes.formControlLabel}}
                 control={
                   <Checkbox
                     checked={this.state.網路}
@@ -79,6 +83,7 @@ class CheckboxesGroup extends React.Component {
                 label="網路"
               />
               <FormControlLabel
+                classes={{label:classes.formControlLabel}}
                 control={
                   <Checkbox
                     checked={this.state.電腦視覺}
@@ -90,6 +95,7 @@ class CheckboxesGroup extends React.Component {
                 label="電腦視覺"
               />
               <FormControlLabel
+                classes={{label:classes.formControlLabel}}
                 control={
                   <Checkbox
                     checked={this.state.電腦視覺}
@@ -101,6 +107,7 @@ class CheckboxesGroup extends React.Component {
                 label="遊戲"
               />
               <FormControlLabel
+                classes={{label:classes.formControlLabel}}
                 control={
                   <Checkbox
                     checked={this.state.電腦視覺}
@@ -112,6 +119,7 @@ class CheckboxesGroup extends React.Component {
                 label="電腦視覺"
               />
               <FormControlLabel
+                classes={{label:classes.formControlLabel}}
                 control={
                   <Checkbox
                     checked={this.state.電腦視覺}
@@ -123,6 +131,7 @@ class CheckboxesGroup extends React.Component {
                 label="電腦視覺"
               />
               <FormControlLabel
+                classes={{label:classes.formControlLabel}}
                 control={
                   <Checkbox
                     checked={this.state.電腦視覺}
@@ -146,9 +155,9 @@ class CheckboxesGroup extends React.Component {
               value={this.state.scount}
               onChange={this.handleScountChange}
             >
-              <FormControlLabel value="0人" control={<Radio />} label="0人" />
-              <FormControlLabel value="3人" control={<Radio />} label="3人" />
-              <FormControlLabel value="5人" control={<Radio />} label="5人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value="0人" control={<Radio />} label="0人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value="3人" control={<Radio />} label="3人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value="5人" control={<Radio />} label="5人" />
             </RadioGroup>
           </FormControl>
         </div>

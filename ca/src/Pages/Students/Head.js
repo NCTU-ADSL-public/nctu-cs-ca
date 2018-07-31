@@ -244,11 +244,6 @@ class Head extends Component {
         <div>
           <Col >
             <div id="page">
-              <Loading size={300}
-                       left={600}
-                       top={200}
-                       isLoading={this.state.isLoading}
-              />
               {this.getpageitem()}
             </div>
           </Col>
