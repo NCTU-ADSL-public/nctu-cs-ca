@@ -151,13 +151,11 @@ class StudentsItem extends React.Component {
                 style             = { styles.searchTextField }
                 onChange          = { this.handleTextField }
               />
-              <hr />
               <StudentsTable students = { this.filter(students) }/>
             </Paper>
           </div>
           <div className='col-md-3 col-lg-3 hidden-xs' >
             <Paper style = { styles.paper } zDepth={3}>
-              <hr />
               <h3>學期</h3>
               <hr />
               <DropDownMenu
