@@ -121,17 +121,19 @@ class StudentsItem extends React.Component {
       program_filter[this.mapProgramStringToNumber(student.student.program)] &&
       (
         input === '' ||
-        student.student.id.toLowerCase().search(input) !== -1 ||
-        student.student.name.toLowerCase().search(input) !== -1
+        student.student.id.toLowerCase().search(input.toLowerCase()) !== -1 ||
+        student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
       )
     ))
     return filtered_students
   }
+
   handleSemestor = (event, index, value) => {
     this.setState({
       semestor: value
     })
   }
+  
   handleAcademicYear = (event, index, value) => {
     this.setState({
       academic_year: value
@@ -156,6 +158,7 @@ class StudentsItem extends React.Component {
           </div>
           <div className='col-md-3 col-lg-3 hidden-xs' >
             <Paper style = { styles.paper } zDepth={3}>
+              <hr />
               <h3>學期</h3>
               <hr />
               <DropDownMenu
@@ -193,7 +196,6 @@ class StudentsItem extends React.Component {
                   <br />
                 </div>
               ))}
-              <br />
               <hr />
               <h3>組別</h3>
               <hr />
