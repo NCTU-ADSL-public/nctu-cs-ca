@@ -1,41 +1,27 @@
 import './style.css'
 import img from './1.jpg'
 import React from 'react'
-import Divider from '@material-ui/core/Divider'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 
-const styles = {
-  largeIcon: {
-    width: 40,
-    height: 40,
-    zIndex: 100
+const styles = theme => ({
+  card: {
+    maxWidth: 400
   },
-  large: {
-    width: 100,
-    height: 100,
-    padding: 30
+  media: {
+    height: 0,
+    paddingTop: '56.25%' // 16:9
   },
-  chip: {
-    margin: 5
-  },
-  chipWrapper: {
-    padding: 5,
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-}
+})
 
-export default class Show extends React.Component {
+class Show extends React.Component {
   render () {
+    const { classes } = this.props
     return (
-      <div>
-        <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
-          <img src={this.props.image !== undefined ? this.props.image : img} className='img-responsive' alt='Cinque Terre' />
-        </div>
-        <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+      <div style={{fontSize: '15px'}}>
+        <div className='col-xs-12 col-sm-12 col-md-5 col-lg-5'>
           <div className='row'>
-            <div className='col-7'>
-              {/* <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file === '' ? this.props.show.file : this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p> */}
-            </div>
+            團隊報告: <p><a href={this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p>
           </div>
           <br />
           <div className='divide-horizontal '>
@@ -43,9 +29,19 @@ export default class Show extends React.Component {
               <p >專題簡介</p>
             </div>
           </div>
-          <section dangerouslySetInnerHTML={{__html: this.props.show.intro}} />
+          <section dangerouslySetInnerHTML={{__html: this.props.show.intro}} style={{height: '500px'}} />
+        </div>
+        <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6' style={{height: '100px'}} />
+        <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6' style={{position: 'absolute', right: '0'}}>
+          <img src={this.props.image !== undefined ? this.props.image : img} alt='Cinque Terre' className='show-img' />
         </div>
       </div>
     )
   }
 }
+
+Show.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(Show)

@@ -62,7 +62,7 @@ class RecipeReviewCard extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = { expanded: false, image: '' }
+    this.state = { expanded: false, image: '', file: '' }
   }
 
   componentDidMount () {
@@ -79,11 +79,22 @@ class RecipeReviewCard extends React.Component {
         image: NoImage
       })
     })
+    directory = this.props.data.year + '/' + this.props.profile.tname + '/' + this.props.data.research_title + '/file/file.pdf'
+    pathReference = storageRef.child(directory)
+    pathReference.getDownloadURL().then(url => {
+      this.setState({
+        file: url
+      })
+    }
+    ).catch(error => {
+      this.setState({
+        file: ''
+      })
+    })
   }
 
   render () {
     const { classes } = this.props
-    console.log(this.props.profile)
 
     return (
       <div className='col-md-4 col-lg-4' style={{marginTop: '10px'}}>
@@ -91,11 +102,11 @@ class RecipeReviewCard extends React.Component {
           <CardHeader
             avatar={
               <Avatar aria-label='Recipe' className={classes.avatar}>
-                R
+                {this.props.data.research_title[0]}
               </Avatar>
             }
             title={this.props.data.research_title}
-            subheader={this.props.data.year}
+            subheader={'年度：' + this.props.data.year}
           />
           <CardMedia
             className={classes.media}
@@ -104,7 +115,7 @@ class RecipeReviewCard extends React.Component {
           />
           <CardActions className={classes.actions} disableActionSpacing>
             <div className={classes.expand}>
-              <ProjectDia show={this.props.data} image={this.state.image} />
+              <ProjectDia show={this.props.data} image={this.state.image} file={this.state.file} />
             </div>
           </CardActions>
           <Collapse in={this.state.expanded} timeout='auto' unmountOnExit>

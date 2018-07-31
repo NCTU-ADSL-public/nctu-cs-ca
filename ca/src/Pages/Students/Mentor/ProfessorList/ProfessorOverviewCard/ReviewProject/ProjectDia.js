@@ -37,7 +37,7 @@ class ProjectDia extends React.Component {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               <div className='container'>
-                <Show show={this.props.show} image={this.props.image} />
+                <Show show={this.props.show} image={this.props.image} file={this.props.file} />
               </div>
             </DialogContentText>
           </DialogContent>
