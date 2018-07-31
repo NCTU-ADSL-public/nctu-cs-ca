@@ -3,6 +3,8 @@ import Paper from 'material-ui/Paper';
 import StudentsTable from './StudentsTable'
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 import { blue300, yellow300, red300, green300 } from 'material-ui/styles/colors';
 
@@ -30,21 +32,20 @@ const styles = {
   },
   chipText: {
     margin: '0 auto',
+  },
+  dropDownMenu: {
+    width: '50%'
   }
 }
 
 const filterData = {
-  projectStatus: [
-    {
+  projectStatus: [{
       title: '已申請教授',
       color: green300
-    },
-    {
+    },{
       title: '待教授審核',
       color: yellow300
-
-    },
-    {
+    },{
       title: '未申請教授',
       color: red300
     }
@@ -60,7 +61,9 @@ class StudentsItem extends React.Component {
       students: [],
       project_status_filter: [true, true, true],
       program_filter: [true, true, true, true, true, true],
-      input: ''
+      input: '',
+      academic_year: 106,
+      semestor: 1
     }
   }
 
@@ -124,6 +127,16 @@ class StudentsItem extends React.Component {
     ))
     return filtered_students
   }
+  handleSemestor = (event, index, value) => {
+    this.setState({
+      semestor: value
+    })
+  }
+  handleAcademicYear = (event, index, value) => {
+    this.setState({
+      academic_year: value
+    })
+  }
 
   render() {
     const { students, project_status_filter, program_filter } = this.state
@@ -138,16 +151,39 @@ class StudentsItem extends React.Component {
                 style             = { styles.searchTextField }
                 onChange          = { this.handleTextField }
               />
+              <hr />
               <StudentsTable students = { this.filter(students) }/>
             </Paper>
           </div>
           <div className='col-md-3 col-lg-3 hidden-xs' >
             <Paper style = { styles.paper } zDepth={3}>
               <hr />
+              <h3>學期</h3>
+              <hr />
+              <DropDownMenu
+                value={this.state.academic_year}
+                onChange={this.handleAcademicYear}
+                style={styles.dropDownMenu}
+                autoWidth={false}
+              >
+                <MenuItem value = { 106 } primaryText = "106" />
+                <MenuItem value = { 107 } primaryText = "107" />
+                <MenuItem value = { 108 } primaryText = "108" />
+              </DropDownMenu>
+              <DropDownMenu
+                value={this.state.semestor }
+                onChange={this.handleSemestor}
+                style={styles.dropDownMenu}
+                autoWidth={false}
+              >
+                <MenuItem value = { 1 } primaryText = "上學期" />
+                <MenuItem value = { 2 } primaryText = "下學期" />
+              </DropDownMenu>
+              <hr />
               <h3>專題狀況</h3>
               <hr />
               {filterData.projectStatus.map((item, index) => (
-                <div>
+                <div key = { index } >
                   <Chip
                     onClick         = { () => this.toggleProjectStatusFilter(index) }
                     backgroundColor = { project_status_filter[index] ? item.color : null }
@@ -165,11 +201,11 @@ class StudentsItem extends React.Component {
               <hr />
               {
                 [0, 2, 4].map( (beginNumber) => (
-                  <div>
+                  <div key = { beginNumber }>
                     <div className = 'row'>
                       {
                         [0, 1].map( (diffNumber) => (
-                          <div className='col-md-6 col-lg-6 hidden-xs' >
+                          <div key = { diffNumber } className='col-md-6 col-lg-6 hidden-xs' >
                             <Chip
                               onClick         = { () => this.toggleProgramFilter(beginNumber + diffNumber) }
                               backgroundColor = { program_filter[beginNumber + diffNumber] ? blue300 : null }
