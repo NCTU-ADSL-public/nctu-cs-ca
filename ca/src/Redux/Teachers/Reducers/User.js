@@ -6,10 +6,10 @@ const initalState = {
     name: '資料錯誤',
     status: '',
     id: '001',
-    mail:'test@gmail.com'
+    mail: 'test@gmail.com'
   }
 }
 
 export default handleActions({
-  updateUserInfo: (state,action)=>({...state,idCard: action.payload})
-},initalState)
+  UPDATE_USER_INFO: (state, action) => ({...state, idCard: action.payload})
+}, initalState)

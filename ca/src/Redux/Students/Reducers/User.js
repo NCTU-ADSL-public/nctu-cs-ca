@@ -4,7 +4,7 @@ const initalState = {
   type: 'student', // for Navbar
   studentIdcard: {
     sname: '資料錯誤',
-    student_id: '0000000',
+    student_id: '00099000',
     program: '網多',
     grade: '大三',
     email: 'hihi@gmail.com'
@@ -12,5 +12,5 @@ const initalState = {
 }
 
 export default handleActions({
-  updateUserInfo: (state, action) => ({...state, studentIdcard: action.payload})
+  UPDATE_USER_INFO: (state, action) => ({...state, studentIdcard: {...action.payload}})
 }, initalState)

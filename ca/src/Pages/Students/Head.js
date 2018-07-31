@@ -25,7 +25,7 @@ import { fetchProfessors } from '../../Redux/Students/Actions/Professor/index'
 import { fetchGraduationCourse } from './Graduation_v2/Actions'
 
 import {connect} from 'react-redux'
-import {UpdateUserInfo} from '../../Redux/Students/Actions/User'
+import {fetchUser} from '../../Redux/Students/Actions/User'
 
 let store_graduation = createStore(graduationStore, applyMiddleware(thunk))
 
@@ -44,6 +44,7 @@ class Head extends Component {
     super(props)
     this.res = this.res.bind(this)
     this.props.FetchProfessorInfo()
+    this.props.FetchUser()
     store_graduation.dispatch(fetchGraduationCourse())
   }
 
@@ -78,39 +79,6 @@ class Head extends Component {
     })
     axios.get('/students/graduate/revised').then(studentData => {
       revise = studentData.data
-
-    }).catch(err => {
-      console.log(err)
-    })
-
-    axios.get('/students/profile').then(studentData => {
-      studentData.data[0].grade = '大' + studentData.data[0].grade
-      this.props.UpdateUserInfo({
-        ...studentData.data[0]
-      })
-
-      axios.post('/students/applyState', {
-        id:studentData.data[0].student_id
-      })
-        .then(res => {
-          _this.setState({
-            project_status_data:res.data.filter(t => t.agree !== '1'),
-          })
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      axios.post('/students/projectPage', {
-        id:studentData.data[0].student_id
-      })
-        .then(res => {
-          _this.setState({
-            project_data:res.data,
-          })
-        })
-        .catch(err => {
-          console.log(err)
-        })
 
     }).catch(err => {
       console.log(err)
@@ -309,7 +277,7 @@ const mapState = (state)=>({
 })
 
 const mapDispatch = (dispatch)=>({
-  UpdateUserInfo: (payload) => dispatch(UpdateUserInfo(payload)),
+  FetchUser: () => dispatch(fetchUser()),
   FetchProfessorInfo: () => dispatch(fetchProfessors())
 })
 
