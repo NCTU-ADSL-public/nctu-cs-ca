@@ -22,12 +22,12 @@ class Show extends React.Component {
         <div className=' hidden-md hidden-lg'>
           <img src={this.props.image !== undefined ? this.props.image : img} alt='Cinque Terre' className='img-responsive' />
         </div>
-        <div className='col-xs-12 col-sm-12 col-md-5 col-lg-5'>
+        <div className='col-xs-12 col-sm-12 col-md-5 col-lg-5' style={{marginTop: '5px'}}>
           <div className='row'>
-            團隊報告: <p><a href={this.props.file} style={{cursor: 'pointer', marginTop:'5px'}}>點這裡</a></p>
+            團隊報告: <p><a href={this.props.file} style={{cursor: 'pointer', marginTop: '5px'}}>點這裡</a></p>
           </div>
           <br />
-          <div className='divide-horizontal '>
+          <div className='divide-horizontal row'>
             <div className='divide-horizontal-span'>
               <p >專題簡介</p>
             </div>

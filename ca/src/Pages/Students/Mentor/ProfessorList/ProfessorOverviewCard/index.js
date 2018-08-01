@@ -100,7 +100,7 @@ class Index extends React.Component {
           <div>
             <div className='row'>
               <div className='hidden-xs hidden-sm col-md-3 col-lg-3'>
-                {this.state.loading ? <CircularProgress /> : <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />}
+                {this.state.loading ? <CircularProgress size={100} className='d-flex justify-content-center' /> : <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />}
               </div>
               <div className='visible-xs visible-sm col-xs-2 col-sm-1'>
                 {this.state.loading ? <CircularProgress /> : <Avatar alt='picture' src={this.state.photo === '' ? pic : this.state.photo} className={classes.avatar} />}

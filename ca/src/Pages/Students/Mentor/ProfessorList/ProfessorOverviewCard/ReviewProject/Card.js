@@ -67,7 +67,6 @@ class RecipeReviewCard extends React.Component {
 
   componentDidMount () {
     let directory = this.props.data.year + '/' + this.props.profile.tname + '/' + this.props.data.research_title + '/image/image.jpg'
-    console.log(directory)
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       this.setState({

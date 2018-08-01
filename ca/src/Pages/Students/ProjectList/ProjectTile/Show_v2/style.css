@@ -1,0 +1,41 @@
+
+.event-title{
+	position: relative;
+	top: -50px;
+	padding: 10px 30px;
+	background-color: rgba(239,239,239,0.9);
+	font-weight: bold;
+	font-size: large;
+}
+
+
+.banner-wrapper{
+	max-height: 555px;
+	overflow: hidden;
+}
+.event-info-wrapper{
+	margin-top: -25px;
+	margin-bottom: 75px;
+	padding: 50px 30px 30px 30px;
+}
+.info-box{
+	display: inline-block;
+	border-radius: 10px;
+	border: 2px solid #d1d1e0;
+	padding: 15px 10px;
+	margin-left: 5px;
+}
+.divide-horizontal {
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #d2d2d2;
+	line-height: 0.1em;
+	margin: 10px 0 20px;
+}
+
+.show-img {
+	max-width:550px;
+	height:inherit;
+	/*width:expression(document.body.clientWidth&gt;550?"550px""auto");!*若圖片大於550px就調整*!*/
+	overflow:hidden;      /*超過不顯示*/
+}
