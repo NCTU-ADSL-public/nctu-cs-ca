@@ -39,44 +39,45 @@ class Head extends React.Component {
     }
 
     select (index) {
-        if (index === 0) {
-            ReactDOM.render(
-                <div>
-                    <FadeIn>
-                        <HomeItem />
-                    </FadeIn>
-                </div>,
-                document.getElementById('page'))
-        } else if (index === 1) {
-            ReactDOM.render(
-                <div>
-                    <FadeIn>
-                        <GraduationItem idCard={this.props.idCard} />
-                    </FadeIn>
-                </div>,
-                document.getElementById('page'))
-        } else if (index === 2) {
-          ReactDOM.render(
-            <div>
-              <FadeIn>
-                <ProjectItem />
-              </FadeIn>
-            </div>,
-            document.getElementById('page'))
-        } else if (index === 4) {
-          ReactDOM.render(
-            <div>
-              <FadeIn>
-                <MuiThemeProvider>
-                  <Mail type='assistant' id={this.props.idCard.id} />
-                </MuiThemeProvider>
-              </FadeIn>
-            </div>,
-            document.getElementById('page')
-          )
-        }
-
         this.setState({selectedIndex: index})
+    }
+
+    getPage = index => {
+      if (index === 0) {
+        return (
+          <div>
+              <FadeIn>
+                  <HomeItem />
+              </FadeIn>
+          </div>
+        )
+      } else if (index === 1) {
+        return (
+          <div>
+              <FadeIn>
+                  <GraduationItem idCard={this.props.idCard} />
+              </FadeIn>
+          </div>
+        )
+      } else if (index === 2) {
+        return (
+          <div>
+            <FadeIn>
+              <ProjectItem />
+            </FadeIn>
+          </div>
+        )
+      } else if (index === 4) {
+        return (
+          <div>
+            <FadeIn>
+              <MuiThemeProvider>
+                <Mail type='assistant' id={this.props.idCard.id} />
+              </MuiThemeProvider>
+            </FadeIn>
+          </div>
+        )
+      }
     }
 
     render () {
@@ -97,7 +98,7 @@ class Head extends React.Component {
                     onTouchTaps={onTouchTaps}
             />
             <Col xsHidden smHidden>
-              <div id='page' />
+              { this.getPage(this.state.selectedIndex) }
             </Col>
             {/* For mobile, tablet user */}
             <Col xs={12} mdHidden lgHidden>
