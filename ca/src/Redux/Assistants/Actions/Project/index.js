@@ -9,7 +9,7 @@ export const set_academic_year = createAction('SET_ACADEMIC_YEAR')
 export const set_semestor = createAction('SET_SEMESTOR')
 
 export const fetchStudents = () => dispatch => {
-  axios.get('http://localhost:3001/students').then( res => {
+  axios.get('/assistants/project/StudentResearchList').then( res => {
     dispatch(store_students(res.data))
   }).catch( err => {
     console.log(err)
