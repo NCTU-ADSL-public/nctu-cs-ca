@@ -129,7 +129,7 @@ class Index extends React.Component {
   }
 
   getImage = () => {
-    if(this.props.data.agree === '1'){
+    if(this.props.data.agree === '1' || this.props.data.agree === undefined){
       if(this.props.data.photo === '')return img
       return this.props.data.photo
     }
@@ -156,7 +156,7 @@ class Index extends React.Component {
           : <img className='img-responsive' src={ this.getImage() } /> }
           </GridTile>
         <Dialog
-          fullScreen={this.props.data.agree === '1'}
+          fullScreen={this.props.data.agree === '1' || this.props.data.agree === undefined}
           open={this.state.open}
           onClose={this.handleClose}
           TransitionComponent={Transition}
@@ -169,12 +169,12 @@ class Index extends React.Component {
               <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
                 {this.props.data.research_title}
               </Typography>
-              <Button style={{fontSize: '12px'}} color="inherit" onClick={this.props.data.agree === '1'?this.handleClose:()=>this.deleteData(this.props.data)}>
-                {this.props.data.agree === '1'?'編輯':this.props.data.agree === '2'?'收回':'刪除'}
+              <Button style={{fontSize: '12px'}} color="inherit" onClick={(this.props.data.agree === '1'|| this.props.data.agree === undefined)?this.handleClose:()=>this.deleteData(this.props.data)}>
+                {(this.props.data.agree === '1'|| this.props.data.agree === undefined)?'編輯':this.props.data.agree === '2'?'收回':'刪除'}
               </Button>
             </Toolbar>
           </AppBar>
-          {this.props.data.agree === '1'
+          {(this.props.data.agree === '1'|| this.props.data.agree === undefined)
             ? <Show file={this.props.data.file} image={this.props.data.image} show={this.props.data} />
             : this.getString(this.props.data.agree)}
 
