@@ -1,80 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
-import AppBar from '@material-ui/core/AppBar';
+import React from 'react'
+
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
+import SwipeableViews from 'react-swipeable-views';
 
-function TabContainer({ children, dir }) {
-  return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
-      {children}
-    </Typography>
-  );
-}
+import StudentItem from './Student/StudentItem'
 
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired,
-};
 
-const styles = theme => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: '100%'
-  },
-});
+class index extends React.Component {
 
-class FullWidthTabs extends React.Component {
-  state = {
-    value: 0,
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
-  handleChangeIndex = index => {
-    this.setState({ value: index });
-  };
+  constructor() {
+    super();
+    this.state = {
+      tabs_index: 0
+    }
+  }
 
   render() {
-    const { classes, theme } = this.props;
+
+    const { classes } = this.props
+    const { tabs_index } = this.state
 
     return (
-      <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            fullWidth
-          >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
-          </Tabs>
-        </AppBar>
-        <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={this.state.value}
-          onChangeIndex={this.handleChangeIndex}
+      <div>
+        <Tabs
+          style = {{
+            marginTop: '20px'
+          }}
+          onChange = { (event, value) => this.setState({ tabs_index: value }) }
+          value = { tabs_index }
+          centered fullWidth
         >
-          <TabContainer dir={theme.direction}>Item One</TabContainer>
-          <TabContainer dir={theme.direction}>Item Two</TabContainer>
-          <TabContainer dir={theme.direction}>Item Three</TabContainer>
+          <Tab label = { <span style = {{ fontSize: '20px', fontWeight: 'bold' }} >學生狀況</span> } />
+          <Tab label = { <span style = {{ fontSize: '20px', fontWeight: 'bold' }} >教授狀況</span> } />
+          <Tab label = { <span style = {{ fontSize: '20px', fontWeight: 'bold' }} >專題成積</span> } />
+        </Tabs>
+        <SwipeableViews
+          index = { tabs_index }
+          onChangeIndex = { index => this.setState({ tabs_index: index })}
+        >
+          <StudentItem />
+          <h3>Teacher</h3>
+          <h3>Score</h3>
         </SwipeableViews>
       </div>
-    );
+    )
   }
 }
 
-FullWidthTabs.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles, { withTheme: true })(FullWidthTabs);
+export default index;

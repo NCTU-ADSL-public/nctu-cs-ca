@@ -35,7 +35,7 @@ export default class index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      slideIndex: 2,
+      slideIndex: 0,
     };
   }
 

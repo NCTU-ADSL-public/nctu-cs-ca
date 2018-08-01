@@ -1,4 +1,8 @@
 import React from 'react'
+import { fetchStudents } from '../../../../Redux/Assistants/Actions/Project/index'
+
+import { connect } from 'react-redux'
+
 import {
   Table,
   TableBody,
@@ -23,6 +27,43 @@ const project_status_cn    = ['已申請教授', '待教授審核', '未申請�
 
 class StudentsTable extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.props.fetch_students()
+  }
+
+  mapProgramStringToNumber = (program) => {
+    switch (program) {
+      case '資工A':
+        return 0
+      case '資工B':
+        return 1
+      case '網多':
+        return 2
+      case '資電':
+        return 3
+      case '電資學士班':
+        return 4
+      default:
+        return 5
+    }
+  }
+
+  filter = (students) => {
+    const { project_status_filter, program_filter, input } = this.props
+    return (
+      students.filter( student => (
+        project_status_filter[student.project.status] &&
+        program_filter[this.mapProgramStringToNumber(student.student.program)] &&
+        (
+          input === '' ||
+          student.student.id.toLowerCase().search(input.toLowerCase()) !== -1 ||
+          student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+        )
+      ))
+    )
+  }
+
   render() {
     const { students } = this.props
     return (
@@ -45,7 +86,7 @@ class StudentsTable extends React.Component {
           displayRowCheckbox = { false }
           showRowHover = { true }
         >
-          { students.map( (item, index) => (
+          { this.filter(students).map( (item, index) => (
             <TableRow key = { index }>
               <TableRowColumn style = { styles.tableRowColumn } >{ item.student.id }</TableRowColumn>
               <TableRowColumn style = { styles.tableRowColumn } >{ item.student.name }</TableRowColumn>
@@ -59,4 +100,15 @@ class StudentsTable extends React.Component {
   }
 }
 
-export default StudentsTable
+const mapStateToProps = (state) => ({
+  students: state.Assistant.Project.students,
+  project_status_filter: state.Assistant.Project.project_status_filter,
+  program_filter: state.Assistant.Project.program_filter,
+  input: state.Assistant.Project.input
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fetch_students: () => dispatch(fetchStudents())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentsTable)
