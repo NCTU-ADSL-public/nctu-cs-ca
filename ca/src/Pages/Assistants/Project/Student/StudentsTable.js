@@ -1,7 +1,9 @@
 import React from 'react'
-import { fetchStudents } from '../../../../Redux/Assistants/Actions/Project/index'
 
+import { fetchStudents, toGivenPage } from '../../../../Redux/Assistants/Actions/Project/index'
 import { connect } from 'react-redux'
+
+import FontIcon from 'material-ui/FontIcon';
 
 import {
   Table,
@@ -20,6 +22,23 @@ const styles = {
   tableRowColumn: {
     fontSize: '18px'
   },
+  paginationIcon: {
+    fontSize: '40px',
+    color: '#808080',
+    display: 'inline-flex',
+    verticalAlign: 'middle',
+  },
+  paginationIcon: {
+    fontSize: '40px',
+    display: 'inline-flex',
+    verticalAlign: 'middle',
+  },
+  paginationText: {
+    display: 'inline-flex',
+    verticalAlign: 'middle',
+    fontSize: '20px',
+    color: '#808080'
+  }
 }
 
 const project_status_color = ['green', 'Gold', 'red']
@@ -50,52 +69,112 @@ class StudentsTable extends React.Component {
   }
 
   filter = (students) => {
-    const { project_status_filter, program_filter, input } = this.props
+    const {
+      project_status_filter,
+      program_filter,
+      input,
+    } = this.props
     return (
-      students.filter( student => (
-        project_status_filter[student.project.status] &&
-        program_filter[this.mapProgramStringToNumber(student.student.program)] &&
-        (
-          input === '' ||
-          student.student.id.toLowerCase().search(input.toLowerCase()) !== -1 ||
-          student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
-        )
+      students.filter( (student) => (
+            input === ''
+        ||  student.student.id.toLowerCase().search(input.toLowerCase()) !== -1
+        ||  student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+      )).filter( (student) => (
+            !(
+                  project_status_filter[0]
+              ||  project_status_filter[1]
+              ||  project_status_filter[2]
+            )
+        ||  project_status_filter[student.project.status]
+      )).filter( (student) => (
+          !(
+               program_filter[0] || program_filter[1] || program_filter[2]
+            || program_filter[3] || program_filter[4] || program_filter[5]
+          )
+        ||  program_filter[this.mapProgramStringToNumber(student.student.program)]
       ))
     )
   }
 
   render() {
-    const { students } = this.props
+    const {
+      students,
+      page,
+      to_given_page
+    } = this.props
     return (
-      <Table
-        height = '60vh'
-        selectable = { false }
-      >
-        <TableHeader
-          displaySelectAll = { false }
-          adjustForCheckbox = { false }
+      <div>
+        <Table
+          height = '55vh'
+          selectable = { false }
         >
-          <TableRow>
-            <TableHeaderColumn style = { styles.tableHeaderColumn } >學號</TableHeaderColumn>
-            <TableHeaderColumn style = { styles.tableHeaderColumn } >姓名</TableHeaderColumn>
-            <TableHeaderColumn style = { styles.tableHeaderColumn } >組別</TableHeaderColumn>
-            <TableHeaderColumn style = { styles.tableHeaderColumn } >專題狀況</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody
-          displayRowCheckbox = { false }
-          showRowHover = { true }
-        >
-          { this.filter(students).map( (item, index) => (
-            <TableRow key = { index }>
-              <TableRowColumn style = { styles.tableRowColumn } >{ item.student.id }</TableRowColumn>
-              <TableRowColumn style = { styles.tableRowColumn } >{ item.student.name }</TableRowColumn>
-              <TableRowColumn style = { styles.tableRowColumn } >{ item.student.program }</TableRowColumn>
-              <TableRowColumn style = {{ ...styles.tableRowColumn, color: project_status_color[item.project.status] }} >{ project_status_cn[item.project.status] }</TableRowColumn>
+          <TableHeader
+            displaySelectAll = { false }
+            adjustForCheckbox = { false }
+          >
+            <TableRow>
+              <TableHeaderColumn style = { styles.tableHeaderColumn } >學號</TableHeaderColumn>
+              <TableHeaderColumn style = { styles.tableHeaderColumn } >姓名</TableHeaderColumn>
+              <TableHeaderColumn style = { styles.tableHeaderColumn } >組別</TableHeaderColumn>
+              <TableHeaderColumn style = { styles.tableHeaderColumn } >專題狀況</TableHeaderColumn>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody
+            displayRowCheckbox = { false }
+            showRowHover = { true }
+          >
+            { this.filter(students)
+                .slice(page * 10, (page + 1) * 10)
+                .map( (item, index) => (
+                  <TableRow key = { index }>
+                    <TableRowColumn style = { styles.tableRowColumn } >{ item.student.id }</TableRowColumn>
+                    <TableRowColumn style = { styles.tableRowColumn } >{ item.student.name }</TableRowColumn>
+                    <TableRowColumn style = { styles.tableRowColumn } >{ item.student.program }</TableRowColumn>
+                    <TableRowColumn style = {{ ...styles.tableRowColumn, color: project_status_color[item.project.status] }} >{ project_status_cn[item.project.status] }</TableRowColumn>
+                  </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <div style = {{ margin: '20px', textAlign: 'center' }} >
+          <FontIcon
+            className = "material-icons"
+            color = '#808080'
+            hoverColor = '#000000'
+            onClick = { () => to_given_page(0) }
+            style = { styles.paginationIcon }
+          >
+            first_page
+          </FontIcon>
+          <FontIcon
+            className = "material-icons"
+            color = '#808080'
+            hoverColor = '#000000'
+            onClick = { () => page !== 0 && to_given_page(page - 1) }
+            style = { styles.paginationIcon }
+          >
+            chevron_left
+          </FontIcon>
+          <span style = { styles.paginationText }>{ page + 1 }/{ Math.max(Math.ceil(this.filter(students).length / 10), 1) }</span>
+          <FontIcon
+            className = "material-icons"
+            color = '#808080'
+            hoverColor = '#000000'
+            onClick = { () => page !== Math.max(Math.ceil(this.filter(students).length / 10), 1) - 1 && to_given_page(page + 1) }
+            style = { styles.paginationIcon }
+          >
+            chevron_right
+          </FontIcon>
+          <FontIcon
+            className = "material-icons"
+            color = '#808080'
+            hoverColor = '#000000'
+            onClick = { () => to_given_page(Math.max(Math.ceil(this.filter(students).length / 10), 1) - 1) }
+            style = { styles.paginationIcon }
+          >
+            last_page
+          </FontIcon>
+        </div>
+      </div>
     )
   }
 }
@@ -104,11 +183,13 @@ const mapStateToProps = (state) => ({
   students: state.Assistant.Project.students,
   project_status_filter: state.Assistant.Project.project_status_filter,
   program_filter: state.Assistant.Project.program_filter,
-  input: state.Assistant.Project.input
+  input: state.Assistant.Project.input,
+  page: state.Assistant.Project.page
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_students: () => dispatch(fetchStudents())
+  fetch_students: () => dispatch(fetchStudents()),
+  to_given_page: (value) => dispatch(toGivenPage(value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentsTable)

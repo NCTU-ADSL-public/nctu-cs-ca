@@ -2,11 +2,13 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
   students: [],
-  project_status_filter: [true, true, true],
-  program_filter: [true, true, true, true, true, true],
+  project_status_filter: [false, false, false],
+  program_filter: [false, false, false, false, false, false],
   input: '',
   academic_year: 106,
-  semestor: 1
+  semestor: 1,
+  page: 0,
+  number_per_page: 10
 }
 
 export default handleActions({
@@ -29,5 +31,11 @@ export default handleActions({
   }),
   SET_SEMESTOR: (state, action) => ({ ...state,
     semestor: action.payload
+  }),
+  SET_NUMBER_PER_PAGE: (state, action) => ({ ...state,
+    number_per_page: action.payload
+  }),
+  TO_GIVEN_PAGE: (state, action) => ({ ...state,
+    page: action.payload
   })
 }, initialState)
