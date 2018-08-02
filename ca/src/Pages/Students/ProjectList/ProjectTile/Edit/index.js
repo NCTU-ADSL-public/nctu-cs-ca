@@ -1,11 +1,11 @@
-/* eslint-disable handle-callback-err */
-
 import React from 'react'
 import { LabeledInput } from './FormUtils/index'
 import CKEditor from 'react-ckeditor-component'
 import firebase from 'firebase'
 import './style.css'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { updateProject, storeProjectsImage, storeProjectsFile } from '../../../../../Redux/Students/Actions/ProjectList'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
@@ -38,6 +38,7 @@ class Edit extends React.Component {
       image: 'no',
       file: 'no'
     }
+    console.log(this.props.studentProfile)
   }
 
   onChange (event) {
@@ -49,56 +50,58 @@ class Edit extends React.Component {
   handleSubmit (event) {
     let _this = this
     event.preventDefault()
-    if (_this.refs.title.value !== '') {
-      event.preventDefault()
-      axios.post('/students/editProject', {
-        student_id: _this.props.studentProfile.student_id,
-        tname: _this.props.project.tname,
-        semester: _this.props.project.semester,
-        first_second: _this.props.project.first_second,
-        research_title: _this.props.project.research_title,
-        new_title: _this.refs.title.value,
-        new_intro: _this.state.ckeditorContent
-      }).then(res => {
-      }).catch(err => {
-        console.log(err)
+    axios.post('/students/editProject', {
+      student_id: _this.props.studentProfile.student_id,
+      tname: _this.props.project.tname,
+      semester: _this.props.project.semester,
+      first_second: _this.props.project.first_second,
+      research_title: _this.props.project.research_title,
+      new_intro: _this.state.ckeditorContent
+    }).then(res => {
+      this.props.update_project(_this.state.ckeditorContent, _this.props.project.research_title, _this.props.project.semester)
+      this.props.onClose()
+    }).catch(err => {
+      // this.props.update_project(_this.state.ckeditorContent, _this.props.project.research_title, _this.props.project.semester)
+      window.alert('儲存失敗，請檢察網路連線')
+      // this.props.onClose()
+      console.log(err)
+    })
+
+    if (this.state.image !== 'no') {
+      let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/'
+      storageRef.child(directory).delete().then(function () {
+      }).catch(function (error) {
+          // Uh-oh, an error occurred!
       })
 
-      if (this.state.image !== 'no') {
-        let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/'
-        storageRef.child(directory).delete().then(function () {
-        }).catch(function (error) {
-          // Uh-oh, an error occurred!
+      let file = this.state.image
+      let uploadTask = storageRef.child(directory + 'image.jpg').put(file)
+      uploadTask.on('state_changed', function (snapshot) {
+      }, function (error) {
+        console.log(error)
+      }, function () {
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          _this.props.store_projects_image(downloadURL, _this.props.project.research_title, _this.props.project.semester)
         })
+      })
+    }
+    if (this.state.file !== 'no') {
+      let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/'
+      storageRef.child(directory).delete().then(function () {
+      }).catch(function (error) {
+      })
 
-        let file = this.state.image
-        let uploadTask = storageRef.child(directory + 'image.jpg').put(file)
-        uploadTask.on('state_changed', function (snapshot) {
-        }, function (error) {
-          console.log(error)
-        }, function () {
-          if (_this.state.file === 'no') {
-            _this.props.onclick()
-          }
+      let file = this.state.file
+      let uploadTask = storageRef.child(directory + 'file.pdf').put(file)
+      uploadTask.on('state_changed', function (snapshot) {
+      }, function (error) {
+        console.log(error)
+      }, function () {
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          _this.props.store_projects_file(downloadURL, _this.props.project.research_title, _this.props.project.semester)
         })
-      }
-      if (this.state.file !== 'no') {
-        let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/'
-        storageRef.child(directory).delete().then(function () {
-        }).catch(function (error) {
-        })
-
-        let file = this.state.file
-        let uploadTask = storageRef.child(directory + 'file.pdf').put(file)
-        uploadTask.on('state_changed', function (snapshot) {
-        }, function (error) {
-          console.log(error)
-        }, function () {
-          _this.props.onclick()
-        })
-      } else if ((_this.state.image === 'no')) {
-        _this.props.onclick()
-      }
+      })
+    } else if ((_this.state.image === 'no')) {
     }
   }
 
@@ -119,13 +122,9 @@ class Edit extends React.Component {
 
   render () {
     return (
-      <div className='container bg-white'>
-        <div className='row'>
-          <div className='col-md-12 offset-1'>
-            <h1 className='title offset-1' >
-              編輯專題主頁
-            </h1>
-            <div className='divide-horizontal' />
+      <div>
+        <div >
+          <div className='col-xs-12 col-sm-12 col-md-12' style={{marginTop: '10px'}}>
             <form>
               <LabeledInput label='圖片'>
                 <div className='upload-btn-wrapper'>
@@ -149,17 +148,17 @@ class Edit extends React.Component {
               </LabeledInput>
               <LabeledInput label='主題'>
                 <div className='input-group'>
-                  <input ref='title' className='form-control' placeholder='必填' type='text' value={this.state.title } required />
+                  <input ref='title' className='form-control' placeholder='必填' type='text' value={this.state.title} required />
                     (如需更改題目請聯絡教授以更改)
                 </div>
               </LabeledInput>
               <LabeledInput label='簡介'>
-                <div >
+                <div className='col-md-12'>
                   <CKEditor style={{height: '50vh'}} activeClass='p10' content={this.state.ckeditorContent} events={{'change': this.onChange}} />
                 </div>
               </LabeledInput>
-              <div className='col-12 text-right'>
-                <button type='submit' className='btn btn-success btn-large' onClick={this.handleSubmit}>送出</button>
+              <div className='justify-content-center pull-right'>
+                <button type='submit' style={{margin: '2px', backgroundColor: '#795548', borderColor: '#795548'}} className='btn btn-success btn-large' onClick={this.handleSubmit}>儲存</button>
               </div>
             </form>
           </div>
@@ -169,5 +168,14 @@ class Edit extends React.Component {
   }
 }
 
-// export default Edit
-export default Edit
+const mapStateToProps = (state, ownProps) => ({
+  studentProfile: state.Student.User.studentIdcard
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  update_project: (intro) => dispatch(updateProject(intro, ownProps.project.research_title, ownProps.project.semester)),
+  store_projects_image: (image) => dispatch(storeProjectsImage(image, ownProps.project.research_title, ownProps.project.semester)),
+  store_projects_file: (file) => dispatch(storeProjectsFile(file, ownProps.project.research_title, ownProps.project.semester))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Edit)

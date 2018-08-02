@@ -4,6 +4,7 @@ import axios from 'axios'
 export const storeProjects = createAction('STORE_PROJECTS')
 export const storeProjectImage = createAction('STORE_PROJECT_IMAGE')
 export const storeProjectFile = createAction('STORE_PROJECT_FILE')
+export const updateproject = createAction('UPDATE_PROJECT')
 
 let FakeData = [
   {'student_id': '0416008',
@@ -44,6 +45,10 @@ export const fetchProjects = (page = 1) => dispatch => {
       console.log(error)
       dispatch(storeProjects(FakeData))
     })
+}
+export const updateProject = (intro, researchTitle, semester) => dispatch => {
+  let object = {intro, researchTitle, semester}
+  dispatch(updateproject(object))
 }
 
 export const storeProjectsImage = (url, researchTitle, semester) => dispatch => {
