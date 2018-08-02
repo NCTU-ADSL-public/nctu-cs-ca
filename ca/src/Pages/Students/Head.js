@@ -25,7 +25,7 @@ import { fetchProfessors } from '../../Redux/Students/Actions/Professor/index'
 import { fetchGraduationCourse } from './Graduation_v2/Actions'
 
 import {connect} from 'react-redux'
-import {fetchUser} from '../../Redux/Students/Actions/User'
+import {fetchUser, ChangeFooterColor} from '../../Redux/Students/Actions/User'
 
 let store_graduation = createStore(graduationStore, applyMiddleware(thunk))
 
@@ -135,6 +135,7 @@ class Head extends Component {
   getpageitem = () => {
 
     if (this.state.selectedIndex === 0) {
+      this.props.ChangeFooterColor('#6C6C6C')
       return(
         <FadeIn>
           <HomeItem parentFunction={this.picButtonCallback}/>
@@ -142,6 +143,7 @@ class Head extends Component {
       )
     }
     else if (this.state.selectedIndex === 1) {
+      this.props.ChangeFooterColor('#34855e')
       return(
         <a>
           <FadeIn>
@@ -160,6 +162,7 @@ class Head extends Component {
       )
     }
     else if (this.state.selectedIndex === 2) {
+      this.props.ChangeFooterColor('#34855e')
       return(
         <div>
           <FadeIn>
@@ -173,6 +176,7 @@ class Head extends Component {
       )
     }
     else if (this.state.selectedIndex === 3) {
+      this.props.ChangeFooterColor('#01579B')
       return(
         //<FadeIn>
         //  <CreditItem studentIdcard={this.state.studentIdcard}/>
@@ -183,6 +187,7 @@ class Head extends Component {
       )
     }
     else if (this.state.selectedIndex === 4) {
+      this.props.ChangeFooterColor('#34855e')
       return(
         <FadeIn>
           <MuiThemeProvider>
@@ -192,6 +197,7 @@ class Head extends Component {
       )
     }
     else if (this.state.selectedIndex === 5) {
+      this.props.ChangeFooterColor('#5D4037')
       return(
         <FadeIn>
           <MuiThemeProvider>
@@ -278,7 +284,8 @@ const mapState = (state)=>({
 
 const mapDispatch = (dispatch)=>({
   FetchUser: () => dispatch(fetchUser()),
-  FetchProfessorInfo: () => dispatch(fetchProfessors())
+  FetchProfessorInfo: () => dispatch(fetchProfessors()),
+  ChangeFooterColor: (color) => dispatch(ChangeFooterColor(color))
 })
 
 export default connect(mapState, mapDispatch)(Head)

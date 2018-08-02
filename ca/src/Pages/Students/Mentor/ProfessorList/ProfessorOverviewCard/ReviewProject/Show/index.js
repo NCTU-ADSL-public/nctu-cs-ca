@@ -11,7 +11,7 @@ const styles = theme => ({
   media: {
     height: 0,
     paddingTop: '56.25%' // 16:9
-  },
+  }
 })
 
 class Show extends React.Component {
@@ -24,7 +24,7 @@ class Show extends React.Component {
         </div>
         <div className='col-xs-12 col-sm-12 col-md-5 col-lg-5' style={{marginTop: '5px'}}>
           <div className='row'>
-            團隊報告: <p><a href={this.props.file} style={{cursor: 'pointer', marginTop: '5px'}}>點這裡</a></p>
+            <p><i className='glyphicon glyphicon-file' /> 團隊報告: {this.props.file === '' ? '無' : <a target='_blank' rel='noopener noreferrer' href={this.props.file} style={{cursor: 'pointer', marginTop: '5px'}}>點這裡</a>}</p>
           </div>
           <br />
           <div className='divide-horizontal row'>

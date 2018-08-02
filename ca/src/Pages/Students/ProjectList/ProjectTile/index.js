@@ -19,6 +19,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { connect } from 'react-redux'
 import { storeProjectsImage, storeProjectsFile } from '../../../../Redux/Students/Actions/ProjectList'
 import axios from 'axios/index'
+import Edit from './Edit/Edit'
 
 let config = {
   apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
@@ -47,7 +48,8 @@ const styles = {
   },
   titleStyle: {
     paddingTop: '1',
-    color: '#c7b5ef'
+    color: '#fff',
+    align: 'center'
   }
 }
 
@@ -114,16 +116,16 @@ class Index extends React.Component {
   }
 
   getString = (status) => {
-    if(status === '2'){
+    if(status === '3'){
       return (
         <div className='container' style={{marginTop: '10px', height: '300px'}}>
-          如要收回申請請點選左上方收回鍵，欲收回前請先告知隊友！
+          很遺憾您的專題申請已被拒絕，知會隊友後請按左上角刪除已撤銷表單資料，謝謝！
         </div>
       )
     }
     return (
       <div className='container' style={{marginTop: '10px', height: '300px'}}>
-        很遺憾您的專題申請已被拒絕，知會隊友後請按左上角刪除已撤銷表單資料，謝謝！
+        如要收回申請請點選左上方收回鍵，欲收回前請先告知隊友！
       </div>
     )
   }
@@ -133,22 +135,23 @@ class Index extends React.Component {
       if(this.props.data.photo === '')return img
       return this.props.data.photo
     }
-    if(this.props.data.agree === '2')return img2
     if(this.props.data.agree === '3')return img3
+    return img2
   }
 
   render() {
-    const { classes, rwd } = this.props;
+    const { classes, rwd } = this.props
     return (
       <div>
+        <div className='col-xs-1' />
         <GridTile
           cols={1}
           rows={1}
           title={this.props.data.research_title}
           titleStyle={styles.titleStyle}
-          titleBackground='linear-gradient(to top, rgba(0,0,0,0.7) 70%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
-          style={{height: rwd?'180px':'270px', width: rwd?'320px':'480px', cursor: 'pointer', animationDuration: '1.5s', animationIterationCount: '1'}}
-          className={`col-xs-12 col-sm-12 col-md-6 ${this.props.data.agree === '1'?'':'animated bounce'}`}
+          titleBackground='linear-gradient(to top, rgba(62,39,35,0.7) 70%,rgba(62,39,35,0.3) 80%,rgba(62,39,35,0) 100%)'
+          style={{height: rwd?'162px':'270px', width: rwd?'288px':'480px', cursor: 'pointer', animationDuration: '1.5s', animationIterationCount: '1'}}
+          className={`col-xs-10 col-sm-10 col-md-6 ${(this.props.data.agree === '1'|| this.props.data.agree === undefined)?'':'animated bounceIn'}`}
           onClick={this.handleClickOpen}
         >
           {this.props.data.photo === undefined
@@ -169,9 +172,11 @@ class Index extends React.Component {
               <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
                 {this.props.data.research_title}
               </Typography>
-              <Button style={{fontSize: '12px'}} color="inherit" onClick={(this.props.data.agree === '1'|| this.props.data.agree === undefined)?this.handleClose:()=>this.deleteData(this.props.data)}>
-                {(this.props.data.agree === '1'|| this.props.data.agree === undefined)?'編輯':this.props.data.agree === '2'?'收回':'刪除'}
-              </Button>
+              {(this.props.data.agree === '1'|| this.props.data.agree === undefined)
+                ?<Edit project={this.props.data}/>
+                :<Button style={{fontSize: '12px'}} color="inherit" onClick={(this.props.data.agree === '1'|| this.props.data.agree === undefined)?this.handleClose:()=>this.deleteData(this.props.data)}>
+                  {this.props.data.agree === '3'?'刪除':'收回'}
+                </Button>}
             </Toolbar>
           </AppBar>
           {(this.props.data.agree === '1'|| this.props.data.agree === undefined)
@@ -179,6 +184,7 @@ class Index extends React.Component {
             : this.getString(this.props.data.agree)}
 
         </Dialog>
+        <div className='col-xs-1' />
       </div>
     )
   }

@@ -10,16 +10,14 @@ const styles = {
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginBottom: '50px',
+    textAlign: 'center'
   },
   gridList: {
     width: 1000,
     opacity: 1,
     overflowY: 'auto'
-  },
-  titleStyle: {
-    paddingTop: '1',
-    color: '#c7b5ef'
   }
 }
 
@@ -41,7 +39,7 @@ class index extends React.Component {
     let id = 0
     return (
       <div className='container'>
-        <div className='col-xs-12 col-sm-12 col-md-12'>
+        <div>
           <div className='divide-horizontal-list '>
             <div className='divide-horizontal-span-list' ref='top'>
               <p >專題列表</p>
@@ -54,7 +52,7 @@ class index extends React.Component {
           ))}
             </GridList>
           </div>
-          <div style={styles.root} className='visible-xs visible-sm '>
+          <div style={styles.root} className='visible-xs visible-sm'>
             <GridList cols={1} cellHeight={'270px'} padding={1}>
               {this.props.data.map((tile) => (
                 <ProjectTile data={tile} key={id++} rwd />

@@ -11,11 +11,14 @@ footer {
   	padding: 8px 0px 8px 0px;
 	font-size: 8px;
 	color: #FCFCFC;
-    background-color:#6C6C6C;
     text-align:center;
     font-family: 'Noto Sans CJK TC';
+    transition: background-color 0.5s ease;
   	font-weight:  400;
     margin-top: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
 }
 
 #id{
