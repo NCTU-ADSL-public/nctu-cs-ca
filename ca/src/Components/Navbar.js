@@ -8,6 +8,7 @@ import defalt from '../Resources/defalt.jpg';
 import NavButton from './NavButton'
 import axios from 'axios'
 import Notifications from 'material-ui/svg-icons/social/notifications'
+import { connect } from 'react-redux'
 
 const style = {
   BrandBox: {
@@ -17,6 +18,7 @@ const style = {
     marginTop: 12,
     marginLeft: 7,
     verticalAlign: 'top',
+    transition: 'background-color 0.5s ease'
   },
   BrandName: {
     fontFamily: 'Noto Sans CJK TC',
@@ -145,40 +147,45 @@ class _Navbar extends React.Component {
         <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
       ]
     }
-    return (
-      <Navbar staticTop fixedTop fluid expanded={this.state.expanded} onToggle={this.onToggleCollapse}>
-        <Navbar.Header>
-            <div style={style.BrandBox}>
-              <span style={style.BrandName}>交大資工線上助理</span>
-              <span style={style.BrandSubName} className='hidden-xs hidden-sm'>NCTU Curriculum Assistant</span>
-            </div>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            {navItems[this.props.type]}
-          </Nav>
+    return <Navbar staticTop fixedTop fluid expanded={this.state.expanded} onToggle={this.onToggleCollapse}>
+      <Navbar.Header>
+        <div style={{...style.BrandBox, borderLeft: `6px solid ${this.props.color}`}}>
+          <span style={style.BrandName}>交大資工線上助理</span>
+          <span style={style.BrandSubName} className='hidden-xs hidden-sm'>NCTU Curriculum Assistant</span>
+        </div>
+        <Navbar.Toggle/>
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav>
+          {navItems[this.props.type]}
+        </Nav>
 
-          <Nav pullRight>
-            <NavItem className='logout-box'>
-              <ButtonToolbar>
-                {this.dropButton()}
-                <MuiThemeProvider>
-                  <RaisedButton backgroundColor = "#DDDDDD"
-                                style={{marginLeft:'12px'}}
-                                labelStyle={style.LogoutButtonLabel}
-                                label="登出"
-                                onClick={() => {window.location = '/logout'}}
-                  />
-                </MuiThemeProvider>
-              </ButtonToolbar>
-            </NavItem>
-          </Nav>
+        <Nav pullRight>
+          <NavItem className='logout-box'>
+            <ButtonToolbar>
+              {this.dropButton()}
+              <MuiThemeProvider>
+                <RaisedButton backgroundColor="#DDDDDD"
+                              style={{marginLeft: '12px'}}
+                              labelStyle={style.LogoutButtonLabel}
+                              label="登出"
+                              onClick={() => {window.location = '/logout'}}
+                />
+              </MuiThemeProvider>
+            </ButtonToolbar>
+          </NavItem>
+        </Nav>
 
-        </Navbar.Collapse>
-      </Navbar>
-    )
+      </Navbar.Collapse>
+    </Navbar>
   }
 }
 
-export default _Navbar
+const mapState = (state) => ({
+  color: state.Student.User.FooterColor
+})
+
+const mapDispatch = (dispatch) => ({
+})
+
+export default connect(mapState, mapDispatch)(_Navbar)

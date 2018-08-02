@@ -38,7 +38,6 @@ class Edit extends React.Component {
       image: 'no',
       file: 'no'
     }
-    console.log(this.props.studentProfile)
   }
 
   onChange (event) {
@@ -56,6 +55,7 @@ class Edit extends React.Component {
       semester: _this.props.project.semester,
       first_second: _this.props.project.first_second,
       research_title: _this.props.project.research_title,
+      new_title: _this.props.project.research_title,
       new_intro: _this.state.ckeditorContent
     }).then(res => {
       this.props.update_project(_this.state.ckeditorContent, _this.props.project.research_title, _this.props.project.semester)
@@ -101,7 +101,6 @@ class Edit extends React.Component {
           _this.props.store_projects_file(downloadURL, _this.props.project.research_title, _this.props.project.semester)
         })
       })
-    } else if ((_this.state.image === 'no')) {
     }
   }
 

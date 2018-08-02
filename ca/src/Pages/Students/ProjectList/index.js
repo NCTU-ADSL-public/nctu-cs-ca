@@ -11,7 +11,8 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    marginBottom: '50px'
+    marginBottom: '50px',
+    textAlign: 'center'
   },
   gridList: {
     width: 1000,
@@ -51,7 +52,7 @@ class index extends React.Component {
           ))}
             </GridList>
           </div>
-          <div style={styles.root} className='visible-xs visible-sm '>
+          <div style={styles.root} className='visible-xs visible-sm'>
             <GridList cols={1} cellHeight={'270px'} padding={1}>
               {this.props.data.map((tile) => (
                 <ProjectTile data={tile} key={id++} rwd />

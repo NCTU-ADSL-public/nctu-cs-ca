@@ -48,7 +48,8 @@ const styles = {
   },
   titleStyle: {
     paddingTop: '1',
-    color: '#fff'
+    color: '#fff',
+    align: 'center'
   }
 }
 
@@ -142,6 +143,7 @@ class Index extends React.Component {
     const { classes, rwd } = this.props
     return (
       <div>
+        <div className='col-xs-1' />
         <GridTile
           cols={1}
           rows={1}
@@ -149,7 +151,7 @@ class Index extends React.Component {
           titleStyle={styles.titleStyle}
           titleBackground='linear-gradient(to top, rgba(62,39,35,0.7) 70%,rgba(62,39,35,0.3) 80%,rgba(62,39,35,0) 100%)'
           style={{height: rwd?'162px':'270px', width: rwd?'288px':'480px', cursor: 'pointer', animationDuration: '1.5s', animationIterationCount: '1'}}
-          className={`col-xs-12 col-sm-12 col-md-6 ${(this.props.data.agree === '1'|| this.props.data.agree === undefined)?'':'animated bounceIn'}`}
+          className={`col-xs-10 col-sm-10 col-md-6 ${(this.props.data.agree === '1'|| this.props.data.agree === undefined)?'':'animated bounceIn'}`}
           onClick={this.handleClickOpen}
         >
           {this.props.data.photo === undefined
@@ -182,6 +184,7 @@ class Index extends React.Component {
             : this.getString(this.props.data.agree)}
 
         </Dialog>
+        <div className='col-xs-1' />
       </div>
     )
   }

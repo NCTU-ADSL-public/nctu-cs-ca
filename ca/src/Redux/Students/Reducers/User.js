@@ -8,9 +8,14 @@ const initalState = {
     program: '網多',
     grade: '大三',
     email: 'hihi@gmail.com'
-  }
+  },
+  FooterColor: '#6C6C6C'
 }
 
 export default handleActions({
-  UPDATE_USER_INFO: (state, action) => ({...state, studentIdcard: {...action.payload}})
+  UPDATE_USER_INFO: (state, action) => ({...state, studentIdcard: {...action.payload}}),
+  CHANGE_FOOTER_COLOR: (state, action) => {
+    console.log(action.payload)
+    return ({...state, FooterColor: action.payload})
+  }
 }, initalState)
