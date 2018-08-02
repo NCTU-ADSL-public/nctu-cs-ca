@@ -3,8 +3,9 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import StudentsItem from './StudentsItem'
-import TeachersItem from './TeachersItem'
+import StudentsItem from './Student/StudentsItem'
+import TeachersItem from './Teacher/TeachersItem'
+import ScoreItem from './Score/ScoreItem'
 
 const styles = {
   tab: {
@@ -34,7 +35,7 @@ export default class index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      slideIndex: 1,
+      slideIndex: 0,
     };
   }
 
@@ -69,7 +70,7 @@ export default class index extends React.Component {
               <TeachersItem />
             </div>
             <div>
-              <h1>成績匯出</h1>
+              <ScoreItem />
             </div>
           </SwipeableViews>
         </div>

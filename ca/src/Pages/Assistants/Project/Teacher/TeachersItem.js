@@ -58,7 +58,7 @@ class TeachersItem extends React.Component {
     return (
       <div style = { styles.wrapper } >
         <div className = 'row' style={{marginBottom: '50px', marginTop: '20px'}}>
-          <div className = 'col-md-9 col-lg-9 hidden-xs' >
+          <div className = 'col-md-8 col-lg-8 hidden-xs' >
             <Paper style = { styles.paper } zDepth = { 3 } >
               <TextField
                 hintText          = "學號 / 姓名"
@@ -69,7 +69,7 @@ class TeachersItem extends React.Component {
               <TeachersTable teachers = { teachers } />
             </Paper>
           </div>
-          <div className = 'col-md-3 col-lg-3 hidden-xs' >
+          <div className = 'col-md-4 col-lg-4 hidden-xs' >
             <Paper style = { styles.paper } zDepth = { 3 } >
             </Paper>
           </div>
