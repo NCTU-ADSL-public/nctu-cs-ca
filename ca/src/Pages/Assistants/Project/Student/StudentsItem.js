@@ -108,6 +108,7 @@ class StudentsItem extends React.Component {
       program_filter,
       semestor,
       academic_year,
+      input,
       toggle_project_status_filter,
       toggle_program_filter,
       set_input,
@@ -123,6 +124,7 @@ class StudentsItem extends React.Component {
               <TextField
                 hintText          = "學號 / 姓名"
                 floatingLabelText = "搜尋欄位"
+                value             = { input }
                 style             = { styles.searchTextField }
                 onChange          = { (event) => set_input(event.target.value) }
               />
@@ -205,7 +207,8 @@ const mapStateToProps = (state) => ({
   project_status_filter: state.Assistant.Project.project_status_filter,
   program_filter       : state.Assistant.Project.program_filter,
   semestor             : state.Assistant.Project.semestor,
-  academic_year        : state.Assistant.Project.academic_year
+  academic_year        : state.Assistant.Project.academic_year,
+  input                : state.Assistant.Project.input
 })
 
 const mapDispatchToProps = (dispatch) => ({
