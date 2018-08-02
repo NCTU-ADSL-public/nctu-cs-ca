@@ -103,20 +103,12 @@ class Index extends React.Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          <div className='container d-flex flex-md-column'>
+          <div className='container'>
             {
               this.state.data.groups.map(t=>
                 <Card data={t} profile={this.props.profile}/>)
             }
           </div>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Subscribe
-            </Button>
-          </DialogActions>
         </Dialog>
       </div>
     )
