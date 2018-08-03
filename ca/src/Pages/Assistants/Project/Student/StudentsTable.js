@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { fetchStudents, toGivenPage } from '../../../../Redux/Assistants/Actions/Project/index'
+import {
+  fetchStudents,
+  toGivenPage,
+  setSortBy,
+  toggleDesend
+} from '../../../../Redux/Assistants/Actions/Project/Student/index'
 import { connect } from 'react-redux'
 
 import FontIcon from 'material-ui/FontIcon';
@@ -16,17 +21,8 @@ import {
 } from 'material-ui/Table';
 
 const styles = {
-  tableHeaderColumn: {
-    fontSize: '25px'
-  },
   tableRowColumn: {
     fontSize: '18px'
-  },
-  paginationIcon: {
-    fontSize: '40px',
-    color: '#808080',
-    display: 'inline-flex',
-    verticalAlign: 'middle',
   },
   paginationIcon: {
     fontSize: '40px',
@@ -38,6 +34,15 @@ const styles = {
     verticalAlign: 'middle',
     fontSize: '20px',
     color: '#808080'
+  },
+  sortSelected: {
+    color: 'rgb(0, 188, 212)',
+    fontSize: '27px',
+    transition: 'color 0.3s, font-size 0.3s',
+  },
+  sortNotSelected: {
+    fontSize: '25px',
+    transition: 'color 0.3s, font-size 0.3s'
   }
 }
 
@@ -93,7 +98,11 @@ class StudentsTable extends React.Component {
     const {
       students,
       page,
-      to_given_page
+      to_given_page,
+      desend,
+      sort_by,
+      toggle_desend,
+      set_sort_by
     } = this.props
     return (
       <div>
@@ -106,10 +115,38 @@ class StudentsTable extends React.Component {
             adjustForCheckbox = { false }
           >
             <TableRow>
-              <TableHeaderColumn style = { styles.tableHeaderColumn } >學號</TableHeaderColumn>
-              <TableHeaderColumn style = { styles.tableHeaderColumn } >姓名</TableHeaderColumn>
-              <TableHeaderColumn style = { styles.tableHeaderColumn } >組別</TableHeaderColumn>
-              <TableHeaderColumn style = { styles.tableHeaderColumn } >專題狀況</TableHeaderColumn>
+              <TableHeaderColumn >
+                <div
+                  onClick = { () => sort_by === 'id' ? toggle_desend() : set_sort_by('id') }
+                  style = { sort_by === 'id' ? styles.sortSelected : styles.sortNotSelected }
+                >
+                  學號 {sort_by === 'id' && ( desend ? '↓' : '↑') }
+                </div>
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                <div
+                  onClick = { () => sort_by === 'name' ? toggle_desend() : set_sort_by('name') }
+                  style = { sort_by === 'name' ? styles.sortSelected : styles.sortNotSelected }
+                >
+                  姓名 {sort_by === 'name' && ( desend ? '↓' : '↑') }
+                </div>
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                <div
+                  onClick = { () => sort_by === 'program' ? toggle_desend() : set_sort_by('program') }
+                  style = { sort_by === 'program' ? styles.sortSelected : styles.sortNotSelected }
+                >
+                  組別 {sort_by === 'program' && ( desend ? '↓' : '↑') }
+                </div>
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                <div
+                  onClick = { () => sort_by === 'project_status' ? toggle_desend() : set_sort_by('project_status') }
+                  style = { sort_by === 'project_status' ? styles.sortSelected : styles.sortNotSelected }
+                >
+                  專題狀況 {sort_by === 'project_status' && ( desend ? '↓' : '↑') }
+                </div>
+              </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -117,6 +154,17 @@ class StudentsTable extends React.Component {
             showRowHover = { true }
           >
             { this.filter(students)
+                .sort( (a, b) => {
+                  if (sort_by === 'id') {
+                    return (parseInt(a.student.id) - parseInt(b.student.id)) * (desend ? 1 : -1)
+                  } else if (sort_by === 'name') {
+                    return a.student.name.localeCompare(b.student.name, 'zh-Hans-CN') * (desend ? -1 : 1)
+                  } else if (sort_by === 'program') {
+                    return a.student.program.localeCompare(b.student.program, 'zh-Hans-CN') * (desend ? -1 : 1)
+                  } else if (sort_by === 'project_status') {
+                    return (a.project.status - b.project.status) * (desend ? -1 : 1)
+                  }
+                })
                 .slice(page * 10, (page + 1) * 10)
                 .map( (item, index) => (
                   <TableRow key = { index }>
@@ -173,16 +221,20 @@ class StudentsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  students: state.Assistant.Project.students,
-  project_status_filter: state.Assistant.Project.project_status_filter,
-  program_filter: state.Assistant.Project.program_filter,
-  input: state.Assistant.Project.input,
-  page: state.Assistant.Project.page
+  students              : state.Assistant.Project.Student.students,
+  project_status_filter : state.Assistant.Project.Student.project_status_filter,
+  program_filter        : state.Assistant.Project.Student.program_filter,
+  input                 : state.Assistant.Project.Student.input,
+  page                  : state.Assistant.Project.Student.page,
+  sort_by               : state.Assistant.Project.Student.sort_by,
+  desend                : state.Assistant.Project.Student.desend
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetch_students: () => dispatch(fetchStudents()),
-  to_given_page: (value) => dispatch(toGivenPage(value))
+  to_given_page: (value) => dispatch(toGivenPage(value)),
+  toggle_desend: () => dispatch(toggleDesend()),
+  set_sort_by: (value) => dispatch(setSortBy(value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentsTable)
