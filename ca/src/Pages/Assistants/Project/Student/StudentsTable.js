@@ -76,22 +76,15 @@ class StudentsTable extends React.Component {
     } = this.props
     return (
       students.filter( (student) => (
-            input === ''
-        ||  student.student.id.toLowerCase().search(input.toLowerCase()) !== -1
-        ||  student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+        input === ''
+        || student.student.id.toLowerCase().search(input.toLowerCase()) !== -1
+        || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
       )).filter( (student) => (
-            !(
-                  project_status_filter[0]
-              ||  project_status_filter[1]
-              ||  project_status_filter[2]
-            )
-        ||  project_status_filter[student.project.status]
+        !project_status_filter.reduce( (all_false, project_status) => all_false || project_status, false)
+        || project_status_filter[student.project.status]
       )).filter( (student) => (
-          !(
-               program_filter[0] || program_filter[1] || program_filter[2]
-            || program_filter[3] || program_filter[4] || program_filter[5]
-          )
-        ||  program_filter[this.mapProgramStringToNumber(student.student.program)]
+        !program_filter.reduce( (all_false, program) => all_false || program, false)
+        || program_filter[this.mapProgramStringToNumber(student.student.program)]
       ))
     )
   }

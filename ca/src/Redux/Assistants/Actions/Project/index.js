@@ -19,17 +19,17 @@ export const fetchStudents = () => dispatch => {
 
 export const toggleProjectStatusFilter = index => dispatch => {
   dispatch(toggle_project_status_filter(index))
-  dispatch(toGivenPage(0))
+  dispatch(to_given_page(0))
 }
 
 export const toggleProgramFilter = index => dispatch => {
   dispatch(toggle_program_filter(index))
-  dispatch(toGivenPage(0))
+  dispatch(to_given_page(0))
 }
 
 export const setInput = input => dispatch => {
   dispatch(set_input(input))
-  dispatch(toGivenPage(0))
+  dispatch(to_given_page(0))
 }
 
 export const setAcademicYear = value => dispatch => {
