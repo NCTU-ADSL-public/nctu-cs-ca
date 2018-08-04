@@ -188,11 +188,13 @@ class ScoreTable extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  desend: state.Assistant.Project.Score.desend,
-  sort_by: state.Assistant.Project.Score.sort_by,
-  page: state.Assistant.Project.Score.page,
-  scores: state.Assistant.Project.Score.scores,
-  first_second: state.Assistant.Project.Score.first_second
+  desend        : state.Assistant.Project.Score.desend,
+  sort_by       : state.Assistant.Project.Score.sort_by,
+  page          : state.Assistant.Project.Score.page,
+  scores        : state.Assistant.Project.Score.scores,
+  first_second  : state.Assistant.Project.Score.first_second,
+  academic_year : state.Assistant.Project.Score.academic_year,
+  semestor      : state.Assistant.Project.Score.semestor
 })
 
 const mapDispatchToProps = (dispatch) => ({
