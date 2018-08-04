@@ -18,7 +18,8 @@ export const downloadCsv = post_item => dispatch => {
 
 export const fetchScore = post_item => dispatch => {
   axios.post('/assistants/ResearchGradeList', post_item).then( res => {
-    dispatch(store_score(res.data))
+    console.log(res)
+    // dispatch(store_score(res.data))
   }).catch( err => {
     console.log(err)
   })
