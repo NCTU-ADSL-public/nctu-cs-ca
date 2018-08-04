@@ -9,7 +9,6 @@ import {
 import { connect } from 'react-redux'
 
 import FontIcon from 'material-ui/FontIcon';
-import Dialog from 'material-ui/Dialog';
 
 import {
   Table,

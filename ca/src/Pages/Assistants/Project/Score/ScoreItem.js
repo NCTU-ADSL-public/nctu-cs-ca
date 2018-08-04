@@ -5,7 +5,8 @@ import {
   setSemestor,
   setAcademicYear,
   setFirstSecond,
-  downloadCsv
+  downloadCsv,
+  fetchScore
 } from '../../../../Redux/Assistants/Actions/Project/Score/index'
 
 import Paper from 'material-ui/Paper';
@@ -53,7 +54,8 @@ class ScoreItem extends React.Component {
       set_semestor,
       set_academic_year,
       set_first_second,
-      download_csv
+      download_csv,
+      fetch_score
     } = this.props
 
     return (
@@ -66,12 +68,12 @@ class ScoreItem extends React.Component {
           </div>
           <div className='col-md-3 col-lg-3 hidden-xs' >
             <Paper style = { styles.paper } zDepth={3}>
-              <hr />
+              <br />
               <h3>學期</h3>
               <hr />
               <DropDownMenu
                 value = { academic_year }
-                onChange = { (event, index, value) => set_academic_year(value) }
+                onChange = { (event, index, value) => { set_academic_year(value); fetch_score({semestor: `${academic_year}-${semestor}`, first_second }); } }
                 style = { styles.dropDownMenu }
                 autoWidth = { false }
               >
@@ -81,7 +83,7 @@ class ScoreItem extends React.Component {
               </DropDownMenu>
               <DropDownMenu
                 value = { semestor }
-                onChange = { (event, index, value) => set_semestor(value) }
+                onChange = { (event, index, value) => { set_semestor(value); fetch_score({semestor: `${academic_year}-${semestor}`, first_second }); } }
                 style = { styles.dropDownMenu }
                 autoWidth = { false }
               >
@@ -90,21 +92,22 @@ class ScoreItem extends React.Component {
               </DropDownMenu>
               <hr />
               <h3>資工專題</h3>
-              <hr />
+              <br />
               <RadioButtonGroup defaultSelected = { first_second } >
                 <RadioButton
                   value = {1}
                   label = "資工專題(一)"
                   style = {styles.radioButton}
-                  onClick = { () => set_first_second(1) }
+                  onClick = { () => { set_first_second(1); fetch_score({semestor: `${academic_year}-${semestor}`, first_second }); } }
                 />
                 <RadioButton
                   value = {2}
                   label = "資工專題(二)"
                   style = {styles.radioButton}
-                  onClick = { () => set_first_second(2) }
+                  onClick = { () => { set_first_second(2); fetch_score({semestor: `${academic_year}-${semestor}`, first_second }); } }
                 />
               </RadioButtonGroup>
+              <br />
               <RaisedButton
                 backgroundColor = '#ccc'
                 fullWidth = {true}
@@ -129,7 +132,8 @@ const mapDispatchToProps = (dispatch) => ({
   set_semestor: (value) => dispatch(setSemestor(value)),
   set_academic_year: (value) => dispatch(setAcademicYear(value)),
   set_first_second: (value) => dispatch(setFirstSecond(value)),
-  download_csv: (post_item) => dispatch(downloadCsv(post_item))
+  download_csv: (post_item) => dispatch(downloadCsv(post_item)),
+  fetch_score: (post_item) => dispatch(fetchScore(post_item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScoreItem)
