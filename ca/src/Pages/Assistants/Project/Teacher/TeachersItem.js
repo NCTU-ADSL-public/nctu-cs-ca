@@ -31,7 +31,7 @@ const styles = {
     marginButton: '20px'
   },
   dropDownMenu: {
-    width: '100%'
+    width: '100%',
   }
 }
 
@@ -63,7 +63,7 @@ class TeachersItem extends React.Component {
                     value             = { input }
                   />
                 </div>
-                <div className = 'col-md-2 col-lg-2 hidden-xs' >
+                <div className = 'col-md-2 col-lg-2 hidden-xs' style = {{ marginTop: '17px' }} >
                   <DropDownMenu
                     value     = { academic_year }
                     onChange  = { (event, index, value) => set_academic_year(value) }
@@ -75,7 +75,7 @@ class TeachersItem extends React.Component {
                     <MenuItem value = { 108 } primaryText = "108" />
                   </DropDownMenu>
                 </div>
-                <div className = 'col-md-2 col-lg-2 hidden-xs' >
+                <div className = 'col-md-2 col-lg-2 hidden-xs' style = {{ marginTop: '17px'}} >
                   <DropDownMenu
                     value     = { semestor }
                     onChange  = { (event, index, value) => set_semestor(value) }

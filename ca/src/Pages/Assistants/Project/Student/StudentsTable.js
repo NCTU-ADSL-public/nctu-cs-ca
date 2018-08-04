@@ -9,6 +9,7 @@ import {
 import { connect } from 'react-redux'
 
 import FontIcon from 'material-ui/FontIcon';
+import Dialog from 'material-ui/Dialog';
 
 import {
   Table,
@@ -54,6 +55,9 @@ class StudentsTable extends React.Component {
   constructor(props) {
     super(props);
     this.props.fetch_students()
+    this.state = {
+      open: false
+    }
   }
 
   mapProgramStringToNumber = (program) => {
