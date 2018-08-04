@@ -48,8 +48,10 @@ export const toGivenPage = (value) => dispatch => {
 
 export const toggleDesend = () => dispatch => {
   dispatch(toggle_desend())
+  dispatch(to_given_page(0))
 }
 
 export const setSortBy = (value) => dispatch => {
   dispatch(set_sort_by(value))
+  dispatch(to_given_page(0))
 }
