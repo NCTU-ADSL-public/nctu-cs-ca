@@ -6,6 +6,7 @@ import TeacherHead from './Pages/Teachers/Head'
 import Head from './Pages/Students/Head'
 import AssistantHead from './Pages/Assistants/Head'
 import StudentDetail from './Pages/Assistants/Graduation/StudentDetail'
+import StudentList from './Pages/Assistants/Family/StudentList'
 import Footer from './Components/Footer'
 
 injectTapEventPlugin()
@@ -26,6 +27,7 @@ const Router = () => (
         <Route exact path='/teachers/head' component={TeacherHead} />
         <Route exact path='/assistants/head' component={AssistantHead} />
         <Route exact path='/assistants/head/s/:sid' component={StudentDetail} />
+        <Route exact path='/assistants/family/:tid' component={StudentList} />
       </Switch>
       <Route path='/' component={Footer} />
       <div id='printArea' />

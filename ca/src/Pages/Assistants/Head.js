@@ -11,6 +11,7 @@ import ProjectItem from './Project/index'
 import Mail from '../../Components/mail'
 
 import Navbar from '../../Components/Navbar'
+import Family from './Family'
 import {connect} from 'react-redux'
 import {UpdateUserInfo} from '../../Redux/Assistants/Actions/User'
 
@@ -67,6 +68,14 @@ class Head extends React.Component {
             </FadeIn>
           </div>
         )
+      } else if (index === 3) {
+        return (
+          <div>
+            <FadeIn>
+              <Family />
+            </FadeIn>
+          </div>
+        )
       } else if (index === 4) {
         return (
           <div>
@@ -97,13 +106,13 @@ class Head extends React.Component {
                     selectedIndex={this.state.selectedIndex}
                     onTouchTaps={onTouchTaps}
             />
-            <Col xsHidden smHidden>
+            <Col >
               { this.getPage(this.state.selectedIndex) }
             </Col>
             {/* For mobile, tablet user */}
-            <Col xs={12} mdHidden lgHidden>
+            {/*<Col xs={12} mdHidden lgHidden>
               <h2>行動版功能目前測試中，造成不便敬請見諒。</h2>
-            </Col>
+            </Col>*/}
           </Row>
         </Grid>
       )
