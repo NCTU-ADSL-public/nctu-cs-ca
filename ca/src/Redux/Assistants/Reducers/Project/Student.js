@@ -8,11 +8,14 @@ const initialState = {
   academic_year: 106,
   semestor: 1,
   page: 0,
-  number_per_page: 10
+  sort_by: 'id',
+  desend: true
 }
 
 export default handleActions({
-  STORE_STUDENTS: (state, action) => ({ ...state, students: action.payload }),
+  STORE_STUDENTS: (state, action) => ({ ...state,
+    students: action.payload
+  }),
   TOGGLE_PROJECT_STATUS_FILTER: (state, action) => ({ ...state,
     project_status_filter: state.project_status_filter.map( (item, index) => {
         return action.payload === index ? !item : item
@@ -23,19 +26,26 @@ export default handleActions({
       return action.payload === index ? !item : item
     })
   }),
-  SET_INPUT: (state, action) => ({ ...state,
+  STUDENT_SET_INPUT: (state, action) => ({ ...state,
     input: action.payload
   }),
-  SET_ACADEMIC_YEAR: (state, action) => ({ ...state,
+  STUDENT_SET_ACADEMIC_YEAR: (state, action) => ({ ...state,
     academic_year: action.payload
   }),
-  SET_SEMESTOR: (state, action) => ({ ...state,
+  STUDENT_SET_SEMESTOR: (state, action) => ({ ...state,
     semestor: action.payload
   }),
-  SET_NUMBER_PER_PAGE: (state, action) => ({ ...state,
+  STUDENT_SET_NUMBER_PER_PAGE: (state, action) => ({ ...state,
     number_per_page: action.payload
   }),
-  TO_GIVEN_PAGE: (state, action) => ({ ...state,
+  STUDENT_TO_GIVEN_PAGE: (state, action) => ({ ...state,
     page: action.payload
+  }),
+  STUDENT_TOGGLE_DESEND: (state) => ({ ...state,
+    desend: !state.desend
+  }),
+  STUDENT_SET_SORT_BY: (state, action) => ({ ...state,
+    sort_by: action.payload,
+    desend: true
   })
 }, initialState)

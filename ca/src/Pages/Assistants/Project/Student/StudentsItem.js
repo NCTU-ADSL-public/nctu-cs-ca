@@ -6,7 +6,7 @@ import {
   setInput,
   setSemestor,
   setAcademicYear
-} from '../../../../Redux/Assistants/Actions/Project/index'
+} from '../../../../Redux/Assistants/Actions/Project/Student/index'
 import { connect } from 'react-redux'
 
 import Paper from 'material-ui/Paper';
@@ -204,11 +204,11 @@ class StudentsItem extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  project_status_filter: state.Assistant.Project.project_status_filter,
-  program_filter       : state.Assistant.Project.program_filter,
-  semestor             : state.Assistant.Project.semestor,
-  academic_year        : state.Assistant.Project.academic_year,
-  input                : state.Assistant.Project.input
+  project_status_filter: state.Assistant.Project.Student.project_status_filter,
+  program_filter       : state.Assistant.Project.Student.program_filter,
+  semestor             : state.Assistant.Project.Student.semestor,
+  academic_year        : state.Assistant.Project.Student.academic_year,
+  input                : state.Assistant.Project.Student.input
 })
 
 const mapDispatchToProps = (dispatch) => ({
