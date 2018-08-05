@@ -104,7 +104,7 @@ class ScoreTable extends React.Component {
                   onClick = { () => sort_by === 'name' ? toggle_desend() : set_sort_by('name') }
                   style = { sort_by === 'name' ? styles.sortSelected : styles.sortNotSelected }
                 >
-                  姓名 {sort_by === 'name' && ( desend ? '↓' : '↑') }
+                  學生姓名 {sort_by === 'name' && ( desend ? '↓' : '↑') }
                 </div>
               </TableHeaderColumn>
               <TableHeaderColumn>
@@ -112,7 +112,7 @@ class ScoreTable extends React.Component {
                   onClick = { () => sort_by === 'professor' ? toggle_desend() : set_sort_by('professor') }
                   style = { sort_by === 'professor' ? styles.sortSelected : styles.sortNotSelected }
                 >
-                  教授 {sort_by === 'professor' && ( desend ? '↓' : '↑') }
+                  教授姓名 {sort_by === 'professor' && ( desend ? '↓' : '↑') }
                 </div>
               </TableHeaderColumn>
               <TableHeaderColumn>

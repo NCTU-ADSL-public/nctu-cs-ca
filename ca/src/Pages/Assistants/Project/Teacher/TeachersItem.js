@@ -56,7 +56,7 @@ class TeachersItem extends React.Component {
               <div className = 'row'>
                 <div className = 'col-md-8 col-lg-8 hidden-xs' >
                   <TextField
-                    hintText          = "學號 / 姓名"
+                    hintText          = "姓名"
                     floatingLabelText = "搜尋欄位"
                     style             = { styles.searchTextField }
                     onChange          = { (event) => set_input(event.target.value) }

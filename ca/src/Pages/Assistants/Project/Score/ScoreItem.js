@@ -75,7 +75,7 @@ class ScoreItem extends React.Component {
           <div className='col-md-9 col-lg-9 hidden-xs' >
             <Paper style = { styles.paper } zDepth={3}>
               <TextField
-                hintText          = "學號 / 姓名"
+                hintText          = "學號 / 學生姓名 / 教授姓名"
                 floatingLabelText = "搜尋欄位"
                 value             = { input }
                 style             = { styles.searchTextField }
