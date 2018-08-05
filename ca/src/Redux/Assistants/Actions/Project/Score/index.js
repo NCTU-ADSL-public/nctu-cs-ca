@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 
-export const set_semestor = createAction('SCORE_SET_SEMESTOR')
+export const set_semester = createAction('SCORE_SET_semester')
 export const set_academic_year = createAction('SCORE_SET_ACADEMIC_YEAR')
 export const set_first_second = createAction('SCORE_SET_FIRST_SECOND')
 export const download_csv = createAction('SCORE_DOWNLOAD_CSV')
@@ -16,17 +16,16 @@ export const downloadCsv = post_item => dispatch => {
   })
 }
 
-export const fetchScore = post_item => dispatch => {
-  axios.post('/assistants/ResearchGradeList', post_item).then( res => {
-    console.log(res)
-    // dispatch(store_score(res.data))
+export const fetchScore = req => dispatch => {
+  axios.post('/assistants/ResearchGradeList', req).then( res => {
+    dispatch(store_score(res.data))
   }).catch( err => {
     console.log(err)
   })
 }
 
-export const setSemestor = value => dispatch => {
-  dispatch(set_semestor(value))
+export const setSemester = value => dispatch => {
+  dispatch(set_semester(value))
 }
 
 export const setAcademicYear = value => dispatch => {

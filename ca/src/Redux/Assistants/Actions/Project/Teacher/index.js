@@ -6,7 +6,7 @@ export const set_input = createAction('TEACHER_SET_INPUT')
 export const to_given_page = createAction('TEACHER_TO_GIVEN_PAGE')
 export const set_sort_by = createAction('TEACHER_SET_SORT_BY')
 export const toggle_desend = createAction('TEACHER_TOGGLE_DESEND')
-export const set_semestor = createAction('TEACHER_SET_SEMESTOR')
+export const set_semester = createAction('TEACHER_SET_SEMESTER')
 export const set_academic_year = createAction('TEACHER_SET_ACADEMIC_YEAR')
 
 export const fetchTeachers = () => dispatch => {
@@ -36,8 +36,8 @@ export const toggleDesend = () => dispatch => {
   dispatch(to_given_page(0))
 }
 
-export const setSemestor = (value) => dispatch => {
-  dispatch(set_semestor(value))
+export const setSemester = (value) => dispatch => {
+  dispatch(set_semester(value))
 }
 
 export const setAcademicYear = (value) => dispatch => {
