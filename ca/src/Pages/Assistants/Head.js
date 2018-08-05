@@ -19,8 +19,10 @@ class Head extends React.Component {
         }).catch(err => {
             console.log(err)
         })
+        this.state = {
+            index: 0
+        }
     }
-
     render () {
       const router = [
         '/assistants/head',
@@ -44,6 +46,7 @@ class Head extends React.Component {
                     name={this.props.idCard.name}
                     subname={this.props.idCard.prog + this.props.idCard.grad}
                     onTouchTaps={onTouchTaps}
+                    selectedIndex={this.state.index}
             />
             </Col>
           </Row>

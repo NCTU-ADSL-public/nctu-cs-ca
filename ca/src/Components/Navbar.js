@@ -55,7 +55,7 @@ class _Navbar extends React.Component {
     super(props)
 
     this.state = {
-      selectedButtonIndex: null,
+      selectedButtonIndex: 0,
       onClicks: props.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index)),
     }
   }

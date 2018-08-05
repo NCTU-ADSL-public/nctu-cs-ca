@@ -109,7 +109,11 @@ class StudentList extends React.Component{
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.studentList.map((student,index) => {
+              {this.state.studentList
+              .sort((a,b)=>
+              (a.failed === true)? -1 : 1
+              )
+              .map((student,index) => {
                 return (
                   <TableRow key={student.student_id} onClick={()=>this.handleOpen(index)} className={classes.table}>
                     <TableCell numeric padding='none'>

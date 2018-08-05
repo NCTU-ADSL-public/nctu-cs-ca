@@ -150,7 +150,7 @@ export default class ListTable extends Component {
             <TableRow>
               <TableHeaderColumn colSpan="2">
               <TextField
-                hintText="請輸入學號或姓名已進行篩選"
+                hintText="請輸入學號或姓名以進行篩選"
                 onChange={this.props.filter}
                 style={{width:'80%'}}
               />
