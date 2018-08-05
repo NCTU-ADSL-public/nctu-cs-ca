@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 
-export const set_semester = createAction('SCORE_SET_semester')
+export const set_semester = createAction('SCORE_SET_SEMESTER')
 export const set_academic_year = createAction('SCORE_SET_ACADEMIC_YEAR')
 export const set_first_second = createAction('SCORE_SET_FIRST_SECOND')
 export const download_csv = createAction('SCORE_DOWNLOAD_CSV')
@@ -10,9 +10,15 @@ export const set_sort_by = createAction('SCORE_SET_SORT_BY')
 export const to_given_page = createAction('SCORE_TO_GIVEN_PAGE')
 export const store_score = createAction('STORE_SCORE')
 
-export const downloadCsv = post_item => dispatch => {
-  axios.post('/assistants/ResearchGradeDownload', post_item).then( res => {
-    console.log(res)
+export const downloadCsv = req => dispatch => {
+  console.log(req)
+  axios.post('/assistants/ResearchGradeDownload', req).then( res => {
+    let a = document.createElement("a")
+    a.href = "data.attachment/csv" + res.data
+    a.target = "_Blank"
+    a.download = "project_score.csv"
+    document.body.appendChild(a)
+    a.click()
   })
 }
 
