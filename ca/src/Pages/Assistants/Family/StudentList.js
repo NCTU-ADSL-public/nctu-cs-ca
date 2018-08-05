@@ -61,7 +61,7 @@ class StudentList extends React.Component{
     axios.post('/assistants/advisee/StudentList', {
       teacher_id: `T${this.props.match.params.tid}`
     }).then(res=>{
-      this.setState({studentList:res})
+      this.setState({studentList:res.data})
     }).catch(err => {
       console.log(err)
     })
@@ -72,7 +72,7 @@ class StudentList extends React.Component{
       axios.post('/StudentGradeList', {
         student_id: this.state.studentList[r].student_id
       }).then(res => {
-        tmp[r].score = res
+        tmp[r].score = res.data
         this.setState({
           chooseInfo:r,
           studentList: tmp,

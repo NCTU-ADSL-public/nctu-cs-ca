@@ -97,7 +97,7 @@ const InfoCard = (props)=>(
         <CardText>
           <Tabs>
             {
-              props.selected.score.map(
+              props.selected.score && props.selected.score.map(
                 (v,i)=>(
                   <Tab key={i} label={v.semester} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#9FA8DA'}}>
                     <Table>
@@ -146,7 +146,7 @@ class Index extends React.Component {
       axios.post('/StudentGradeList', {
         student_id: this.state.initItem[v].student_id
       }).then(res => {
-        tmp[v].score = res
+        tmp[v].score = res.data
         this.setState({
           chooseInfo:v,
           initItem: tmp,

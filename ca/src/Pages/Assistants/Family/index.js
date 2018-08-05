@@ -30,7 +30,7 @@ class Family extends React.Component{
   }
   componentDidMount(){
     axios.get('/assistants/advisee/TeacherList').then(res =>{
-      this.setState({teacherList: res})
+      this.setState({teacherList: res.data})
     }).catch(err => {
       console.log(err)
     })
@@ -43,8 +43,8 @@ class Family extends React.Component{
             (a.failed_students > b.failed_students)? -1 : 1
             ).map((teacher,index)=>(
             teacher.failed_students > 0 ?
-            <Link to={`/assistants/family/${teacher.id.substr(1)}`}>
-              <Badge className={classes.button} color="secondary" badgeContent={teacher.failed_students} key={index}>
+            <Link to={`/assistants/family/${teacher.id.substr(1)}`} key={index}>
+              <Badge className={classes.button} color="secondary" badgeContent={teacher.failed_students} >
                 <Button variant="contained" size="large">
                   <span><i className={`fa fa-graduation-cap ${classes.icon}`}></i></span>
                   {teacher.name}
@@ -52,7 +52,7 @@ class Family extends React.Component{
               </Badge>
             </Link>
             :
-            <Link to={`/assistants/family/${teacher.id.substr(1)}`}>
+            <Link to={`/assistants/family/${teacher.id.substr(1)}`} key={index}>
               <Button className={classes.button} variant="contained" size="large">
                 <span><i className={`fa fa-graduation-cap ${classes.icon}`}></i></span>
                 {teacher.name}
