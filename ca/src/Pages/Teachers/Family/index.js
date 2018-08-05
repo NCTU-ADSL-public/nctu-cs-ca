@@ -129,7 +129,7 @@ const InfoCard = (props)=>(
 
 class Index extends React.Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       initItem: FakeData.StudentList,
       chooseInfo: null,
@@ -143,9 +143,8 @@ class Index extends React.Component {
     if(! ('score' in this.state.initItem[v])){
       let tmp = this.state.initItem
       tmp[v].score = FakeData.StudentScore
-      /*
-      axios.get('/professors/family/score', {
-        id: this.state.initItem[v].student_id,
+      axios.post('/StudentGradeList', {
+        student_id: this.state.initItem[v].student_id
       }).then(res => {
         tmp[v].score = res
         this.setState({
@@ -155,12 +154,6 @@ class Index extends React.Component {
         })
       }).catch(err => {
         console.log(err)
-      })
-      */
-      this.setState({
-        chooseInfo:v,
-        initItem: tmp,
-        dialogOpen:(window.innerWidth<768)
       })
     }
     else{

@@ -1,16 +1,9 @@
 import React from 'react'
-import index from '../../Resources/DSC03961.png'
+import img from '../../Resources/DSC03961.png'
+import Frame from '../../Components/Frame'
 
-const img = index
-
-class Home extends React.Component {
-  render () {
-    return (
-      <div >
-        <img src={img} width='100%' style={{margin: '-150px 0 0 0'}} alt='' />
-      </div>
-    )
-  }
-}
+const Home = () =>(
+    <img src={img} width='100%' style={{margin: '-150px 0 0 0'}} alt='' />
+)
 
 export default Home

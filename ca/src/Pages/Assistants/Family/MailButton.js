@@ -6,7 +6,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions
+  DialogActions,
+  Zoom
 } from '@material-ui/core'
 
 import axios from 'axios'
@@ -32,6 +33,10 @@ const styles = () =>({
   }
 })
 
+const Transition = (props) =>(
+  <Zoom direction="in" {...props} />
+)
+
 // component format 
 // <MailButton
 //  sender={} receiver={} sender_email={} receiver_email={}
@@ -43,7 +48,7 @@ class MailButton extends React.Component {
     this.state = {
       open: false,
       value: 'Property Value',
-      titlevalue: 'Property Value',
+      titlevalue: '',
       ckeditorContent:''
     }
     this.handleOpen = this.handleOpen.bind(this)
@@ -56,7 +61,7 @@ class MailButton extends React.Component {
     this.setState({open: true});
   }
   handleClose(){
-    this.setState({open: false});
+    this.setState({ckeditorContent:'',open: false});
   }
   handleChangetitle(event){
     this.setState({
@@ -65,7 +70,7 @@ class MailButton extends React.Component {
   }
   handleSend(){
     let _this = this
-    let dt = new Date();
+    let dt = new Date()
     let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
     axios.post(this.props.postURL, {
       title:_this.state.titlevalue,
@@ -80,7 +85,6 @@ class MailButton extends React.Component {
 
       })
       .catch(err => {
-        //window.location.replace("/logout ");
         console.log(err)
       })
     this.handleClose()
@@ -101,12 +105,14 @@ class MailButton extends React.Component {
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          scroll='paper'
+          TransitionComponent={Transition}
           fullScreen
         >
           <DialogTitle>
+
             <Input
               placeholder="主旨"
+              value={this.state.titlevalue}
               onChange={this.handleChangetitle}
               fullWidth={true}
             />

@@ -8,8 +8,13 @@ import {
   TableHead, 
   TableRow, 
   Dialog, 
-  DialogContent
+  DialogContent,
+  Slide,
+  Button
 } from '@material-ui/core'
+import NavigationIcon from '@material-ui/icons/Navigation'
+import Frame from '../../../Components/Frame'
+import { Link } from 'react-router-dom'
 import InfoCard from './InfoCard'
 import FakeData from '../../../Resources/FakeData'
 import axios from 'axios'
@@ -18,7 +23,7 @@ import {connect} from 'react-redux'
 const styles = () => ({
   container:{
     width: '80%',
-    margin: '25px auto'
+    margin: '35px auto'
   },
   table:{
     cursor: 'pointer'
@@ -30,8 +35,16 @@ const styles = () => ({
     fontSize: 14,
     color: '#f50057',
     marginRight: 4
+  },
+  NavBtn:{
+    top:10,
+    left:10
   }
 })
+
+const Transition = (props) =>(
+  <Slide direction="up" {...props} />
+)
 
 class StudentList extends React.Component{
   constructor(props){
@@ -45,7 +58,7 @@ class StudentList extends React.Component{
     this.handleClose = this.handleClose.bind(this)
   }
   componentDidMount(){
-    axios.post('assistants/advisee/StudentList', {
+    axios.post('/assistants/advisee/StudentList', {
       teacher_id: `T${this.props.match.params.tid}`
     }).then(res=>{
       this.setState({studentList:res})
@@ -56,25 +69,17 @@ class StudentList extends React.Component{
   handleOpen(r){
     if(! ('score' in this.state.studentList[r])){
       let tmp = this.state.studentList
-      tmp[r].score = FakeData.StudentScore
-      /*
-      axios.get('/professors/family/score', {
-        id: this.state.initItem[v].student_id,
+      axios.post('/StudentGradeList', {
+        student_id: this.state.studentList[r].student_id
       }).then(res => {
-        tmp[v].score = res
+        tmp[r].score = res
         this.setState({
-          chooseInfo:v,
-          initItem: tmp,
-          dialogOpen:(window.innerWidth<768)
+          chooseInfo:r,
+          studentList: tmp,
+          cardShow: true
         })
       }).catch(err => {
         console.log(err)
-      })
-      */
-      this.setState({
-        chooseInfo:r,
-        studentList: tmp,
-        cardShow: true
       })
     }
     else{
@@ -87,7 +92,13 @@ class StudentList extends React.Component{
   render(){
     const {classes} = this.props
     return(
-      <React.Fragment>
+      <Frame>
+        <Link to='/assistants/family'>
+          <Button variant="extendedFab" color="primary" className={classes.NavBtn} >
+            <NavigationIcon className={classes.extendedIcon} />
+            回老師列表
+          </Button>
+        </Link>
         <Paper className={classes.container}>
           <Table className={classes.table}>
             <TableHead>
@@ -119,6 +130,7 @@ class StudentList extends React.Component{
         <Dialog
           open={this.state.cardShow}
           onClose={this.handleClose}
+          TransitionComponent={Transition}
           scroll='paper'
           fullWidth={true}
         >
@@ -130,7 +142,7 @@ class StudentList extends React.Component{
             />
           </DialogContent>
         </Dialog>
-      </React.Fragment>
+      </Frame>
     )
   }
 }

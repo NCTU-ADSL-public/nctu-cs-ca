@@ -5,7 +5,6 @@ import {
   TableBody, 
   TableCell, 
   TableRow, 
-  Card,
   CardHeader,
   CardContent,
   Avatar,
@@ -56,7 +55,7 @@ class InfoCard extends React.Component{
   render(){
     const {classes} = this.props
     return(
-      <Card className={classes.container}>
+      <div className={classes.container}>
         <MailButton
                     sender={this.props.sender} 
                     sender_email={this.props.sender_email} 
@@ -106,7 +105,7 @@ class InfoCard extends React.Component{
             </TableBody>
           </Table>
         </CardContent>
-      </Card>
+      </div>
     )
   }
 }
