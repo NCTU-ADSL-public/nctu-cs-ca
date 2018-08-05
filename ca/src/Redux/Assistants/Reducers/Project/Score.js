@@ -7,7 +7,8 @@ const initialState = {
   semester: 2,
   sort_by: 'id',
   desend: true,
-  page: 0
+  page: 0,
+  input: ''
 }
 
 export default handleActions({
@@ -32,5 +33,8 @@ export default handleActions({
   }),
   STORE_SCORE: (state, action) => ({ ...state,
     scores: action.payload
+  }),
+  SCORE_SET_INPUT: (state, action) => ({ ...state,
+    input: action.payload
   })
 }, initialState)

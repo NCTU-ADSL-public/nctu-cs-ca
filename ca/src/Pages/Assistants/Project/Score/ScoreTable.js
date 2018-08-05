@@ -3,7 +3,7 @@ import {
   setSortBy,
   toggleDesend,
   toGivenPage,
-  fetchScore
+  fetchScore,
 } from '../../../../Redux/Assistants/Actions/Project/Score/index'
 import { connect } from 'react-redux'
 
@@ -56,7 +56,15 @@ class ScoreTable extends React.Component {
   }
 
   filter = (scores) => {
-    return scores
+    const {
+      input
+    } = this.props
+    return scores.filter( (score) => (
+      input === ''
+      || score.student.id.toLowerCase().search(input.toLowerCase()) !== -1
+      || score.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+      || score.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
+    ))
   }
 
   render() {
@@ -65,6 +73,7 @@ class ScoreTable extends React.Component {
       sort_by,
       desend,
       page,
+      input,
       set_sort_by,
       toggle_desend,
       scores,
@@ -72,7 +81,7 @@ class ScoreTable extends React.Component {
     } = this.props
 
     return (
-      <div style = {{ marginTop: '40px'}}>
+      <div>
         <Table
           height = '55vh'
           selectable = { false }
@@ -194,7 +203,8 @@ const mapStateToProps = (state) => ({
   scores        : state.Assistant.Project.Score.scores,
   first_second  : state.Assistant.Project.Score.first_second,
   academic_year : state.Assistant.Project.Score.academic_year,
-  semester      : state.Assistant.Project.Score.semester
+  semester      : state.Assistant.Project.Score.semester,
+  input      : state.Assistant.Project.Score.input
 })
 
 const mapDispatchToProps = (dispatch) => ({
