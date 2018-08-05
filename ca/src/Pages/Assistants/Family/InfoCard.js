@@ -87,7 +87,7 @@ class InfoCard extends React.Component{
         </ResponsiveContainer>
           <Tabs value={this.state.Index} onChange={this.changeIndex}>
             {
-              this.props.selected.score.map(
+              this.props.selected.score && this.props.selected.score.map(
                 (v,i)=>(
                   <Tab key={i} value={i} label={v.semester} />
                 )
