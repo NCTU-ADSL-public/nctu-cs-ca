@@ -54,6 +54,7 @@ class InfoCard extends React.Component{
   }
   render(){
     const {classes} = this.props
+    const semester = ['','上','下','暑']
     return(
       <div className={classes.container}>
         <MailButton
@@ -85,11 +86,15 @@ class InfoCard extends React.Component{
             <Line type="monotone" dataKey="avg" stroke={`${this.props.selected.failed?'#F50057':'#8884d8'}`} activeDot={{r: 8}}/>
           </LineChart>
         </ResponsiveContainer>
-          <Tabs value={this.state.Index} onChange={this.changeIndex}>
+          <Tabs 
+            value={this.state.Index} 
+            onChange={this.changeIndex}
+            scrollable
+            scrollButtons="on">
             {
               this.props.selected.score && this.props.selected.score.map(
                 (v,i)=>(
-                  <Tab key={i} value={i} label={v.semester} />
+                  <Tab key={i} value={i} label={`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]}`} />
                 )
               )
             }

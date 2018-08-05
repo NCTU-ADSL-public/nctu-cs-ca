@@ -40,7 +40,7 @@ class Family extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      teacherList: FakeData.TeacherList,
+      teacherList: [],
       filter:'',
       toggle:true
     }

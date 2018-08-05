@@ -57,6 +57,7 @@ const styles = {
     padding: '3px 0 0 0px',
   }
 }
+const semester = ['','上','下','暑']
 const InfoCard = (props)=>(
   <MuiThemeProvider>
       <Card style={props.selected.failed ? {backgroundColor:'#fff',border:'2px solid #F50057'}:{}}>
@@ -99,7 +100,7 @@ const InfoCard = (props)=>(
             {
               props.selected.score && props.selected.score.map(
                 (v,i)=>(
-                  <Tab key={i} label={v.semester} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#87cdff'}}>
+                  <Tab key={i} label={`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]}`} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#87cdff'}}>
                     <Table>
                       {/* <TableHeader displaySelectAll={false}>
                         <TableRow>
@@ -131,8 +132,7 @@ class Index extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      initItem: FakeData.StudentList.map((v,i)=>({...v,id:i})),
-      update:[],
+      initItem: [],
       chooseInfo: null,
       dialogOpen: false // for 行動版
     }
@@ -145,12 +145,12 @@ class Index extends React.Component {
   choose(v){
     if(! ('score' in this.state.initItem[v])){
       let tmp = this.state.initItem
-      tmp[v].score = FakeData.StudentScore
-      this.setState({
-        chooseInfo:v,
-        initItem: tmp,
-        dialogOpen:(window.innerWidth<768)
-      })
+      // tmp[v].score = FakeData.StudentScore
+      // this.setState({
+      //   chooseInfo:v,
+      //   initItem: tmp,
+      //   dialogOpen:(window.innerWidth<768)
+      // })
       axios.post('/StudentGradeList', {
         student_id: this.state.initItem[v].student_id
       }).then(res => {

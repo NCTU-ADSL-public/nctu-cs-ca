@@ -88,12 +88,6 @@ class StudentList extends React.Component{
   handleOpen(r){
     if(! ('score' in this.state.studentList[r])){
       let tmp = this.state.studentList
-      tmp[r].score = FakeData.StudentScore
-      this.setState({
-        chooseInfo:r,
-        studentList: tmp,
-        cardShow: true
-      })
       axios.post('/StudentGradeList', {
         student_id: this.state.studentList[r].student_id
       }).then(res => {
