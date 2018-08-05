@@ -11,14 +11,13 @@ export const to_given_page = createAction('SCORE_TO_GIVEN_PAGE')
 export const store_score = createAction('STORE_SCORE')
 
 export const downloadCsv = req => dispatch => {
-  console.log(req)
   axios.post('/assistants/ResearchGradeDownload', req).then( res => {
-    let a = document.createElement("a")
-    a.href = "data.attachment/csv" + res.data
-    a.target = "_Blank"
-    a.download = "project_score.csv"
-    document.body.appendChild(a)
-    a.click()
+    const blob = new Blob([res.data], {type: "text/plain"})
+    const link = document.createElement("a")
+    link.href = URL.createObjectURL(blob)
+    link.download = "filename.csv" // 这里填保存成的文件名
+    link.click()
+    URL.revokeObjectURL(link.href)
   })
 }
 
