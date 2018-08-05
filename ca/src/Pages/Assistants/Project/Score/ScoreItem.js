@@ -73,7 +73,13 @@ class ScoreItem extends React.Component {
               <hr />
               <DropDownMenu
                 value = { academic_year }
-                onChange = { (event, index, value) => { set_academic_year(value); fetch_score({semester: `${value}-${semester}`, first_second }); } }
+                onChange = { (event, index, value) => {
+                  set_academic_year(value);
+                  fetch_score({
+                    semester: `${value}-${semester}`,
+                    first_second
+                  });
+                }}
                 style = { styles.dropDownMenu }
                 autoWidth = { false }
               >
@@ -84,11 +90,11 @@ class ScoreItem extends React.Component {
               <DropDownMenu
                 value = { semester }
                 onChange = { (event, index, value) => {
-                  set_semester(value)
+                  set_semester(value);
                   fetch_score({
                     semester: `${academic_year}-${value}`,
                     first_second
-                  })
+                  });
                 }}
                 style = { styles.dropDownMenu }
                 autoWidth = { false }
