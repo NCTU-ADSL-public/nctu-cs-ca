@@ -89,7 +89,7 @@ export default class ListTable extends Component {
 
   orderList (orderBy) {
     if (this.props.items) {
-      this.NewItemList = [].concat(this.props.items.map((v,i)=>({...v,id:i})))
+      this.NewItemList = [].concat(this.props.items)
         .sort((a, b) => {
           if (orderBy === 'name'){
             if(a.failed === true){

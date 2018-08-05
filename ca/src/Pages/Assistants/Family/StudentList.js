@@ -50,7 +50,7 @@ class StudentList extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      studentList: FakeData.StudentList,
+      studentList: [],
       chooseInfo: null,
       cardShow: false
     }
@@ -61,7 +61,26 @@ class StudentList extends React.Component{
     axios.post('/assistants/advisee/StudentList', {
       teacher_id: `T${this.props.match.params.tid}`
     }).then(res=>{
-      this.setState({studentList:res.data})
+      this.setState({
+        studentList:res.data.sort((a,b)=>{
+          if(a.failed){
+            if(b.failed){
+              return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
+            }
+            else{
+              return -1
+            }
+          }
+          else{
+            if(b.failed){
+              return 1
+            }
+            else{
+              return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
+            }
+          }
+        })
+      })
     }).catch(err => {
       console.log(err)
     })
@@ -69,6 +88,12 @@ class StudentList extends React.Component{
   handleOpen(r){
     if(! ('score' in this.state.studentList[r])){
       let tmp = this.state.studentList
+      tmp[r].score = FakeData.StudentScore
+      this.setState({
+        chooseInfo:r,
+        studentList: tmp,
+        cardShow: true
+      })
       axios.post('/StudentGradeList', {
         student_id: this.state.studentList[r].student_id
       }).then(res => {
@@ -110,9 +135,6 @@ class StudentList extends React.Component{
             </TableHead>
             <TableBody>
               {this.state.studentList
-              .sort((a,b)=>
-              (a.failed === true)? -1 : 1
-              )
               .map((student,index) => {
                 return (
                   <TableRow key={student.student_id} onClick={()=>this.handleOpen(index)} className={classes.table}>

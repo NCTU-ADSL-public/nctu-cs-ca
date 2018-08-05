@@ -98,8 +98,8 @@ class InfoCard extends React.Component{
             <TableBody >
               {this.props.selected.score && this.props.selected.score[this.state.Index].score.map((v,i)=>(
                 <TableRow key={i}>
-                  <TableCell className={v.score < 60 ? classes.failed:''}>{v.cn}</TableCell>
-                  <TableCell className={v.score < 60 ? classes.failed:''}>{v.score}</TableCell>
+                  <TableCell className={v.pass ? '':classes.failed}>{v.cn}</TableCell>
+                  <TableCell className={v.pass ? '':classes.failed}>{v.score===null?(v.pass?'通過':'不通過'):v.score}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
