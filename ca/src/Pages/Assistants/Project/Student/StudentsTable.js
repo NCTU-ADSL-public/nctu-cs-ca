@@ -82,8 +82,7 @@ class StudentsTable extends React.Component {
       program_filter,
       input,
     } = this.props
-    return (
-      students.filter( (student) => (
+    return students.filter( (student) => (
         input === ''
         || student.student.id.toLowerCase().search(input.toLowerCase()) !== -1
         || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
@@ -94,7 +93,6 @@ class StudentsTable extends React.Component {
         !program_filter.reduce( (all_false, program) => all_false || program, false)
         || program_filter[this.mapProgramStringToNumber(student.student.program)]
       ))
-    )
   }
 
   render() {

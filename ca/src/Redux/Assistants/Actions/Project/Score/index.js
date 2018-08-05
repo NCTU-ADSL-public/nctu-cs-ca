@@ -9,16 +9,17 @@ export const toggle_desend = createAction('SCORE_TOGGLE_DESEND')
 export const set_sort_by = createAction('SCORE_SET_SORT_BY')
 export const to_given_page = createAction('SCORE_TO_GIVEN_PAGE')
 export const store_score = createAction('STORE_SCORE')
+export const set_input = createAction('SCORE_SET_INPUT')
 
 export const downloadCsv = req => dispatch => {
-  console.log(req)
   axios.post('/assistants/ResearchGradeDownload', req).then( res => {
-    let a = document.createElement("a")
-    a.href = "data.attachment/csv" + res.data
-    a.target = "_Blank"
-    a.download = "project_score.csv"
-    document.body.appendChild(a)
-    a.click()
+    const blob = new Blob([res.data], {type: "text/plain"})
+    const link = document.createElement("a")
+    link.href = URL.createObjectURL(blob)
+    const filename = req.semester.substring(0, 3) + `學年度` + (req.semester[4] === "1" ? `上` : `下`) + `學期 資工專題(` + ( req.first_second === 1 ? `一` : `二` ) + `)`
+    link.download = `${filename}.csv` // 这里填保存成的文件名
+    link.click()
+    URL.revokeObjectURL(link.href)
   })
 }
 
@@ -54,4 +55,8 @@ export const setSortBy = (value) => dispatch => {
 
 export const toGivenPage = (value) => dispatch => {
   dispatch(to_given_page(value))
+}
+
+export const setInput = (value) => dispatch => {
+  dispatch(set_input(value))
 }
