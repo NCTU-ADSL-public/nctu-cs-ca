@@ -83,7 +83,13 @@ class ScoreItem extends React.Component {
               </DropDownMenu>
               <DropDownMenu
                 value = { semestor }
-                onChange = { (event, index, value) => { set_semestor(value); fetch_score({semestor: `${academic_year}-${value}`, first_second }); } }
+                onChange = { (event, index, value) => {
+                  set_semestor(value)
+                  fetch_score({
+                    semestor: `${academic_year}-${value}`,
+                    first_second
+                  })
+                }}
                 style = { styles.dropDownMenu }
                 autoWidth = { false }
               >
@@ -93,18 +99,25 @@ class ScoreItem extends React.Component {
               <hr />
               <h3>資工專題</h3>
               <br />
-              <RadioButtonGroup defaultSelected = { first_second } >
+              <RadioButtonGroup
+                defaultSelected = { first_second }
+                onChange = { (event, value) => {
+                  set_first_second(value)
+                  fetch_score({
+                    semestor:  `${academic_year}-${semestor}`,
+                    first_second: value
+                  })
+                }}
+              >
                 <RadioButton
                   value = {1}
                   label = "資工專題(一)"
                   style = {styles.radioButton}
-                  onClick = { () => { set_first_second(1); fetch_score({semestor: `${academic_year}-${semestor}`, first_second: 1 }); } }
                 />
                 <RadioButton
                   value = {2}
                   label = "資工專題(二)"
                   style = {styles.radioButton}
-                  onClick = { () => { set_first_second(2); fetch_score({semestor: `${academic_year}-${semestor}`, first_second: 2 }); } }
                 />
               </RadioButtonGroup>
               <br />
