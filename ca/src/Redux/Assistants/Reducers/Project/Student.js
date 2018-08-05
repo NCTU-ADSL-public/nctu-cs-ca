@@ -6,7 +6,7 @@ const initialState = {
   program_filter: [false, false, false, false, false, false],
   input: '',
   academic_year: 106,
-  semestor: 1,
+  semester: 1,
   page: 0,
   sort_by: 'id',
   desend: true
@@ -32,8 +32,8 @@ export default handleActions({
   STUDENT_SET_ACADEMIC_YEAR: (state, action) => ({ ...state,
     academic_year: action.payload
   }),
-  STUDENT_SET_SEMESTOR: (state, action) => ({ ...state,
-    semestor: action.payload
+  STUDENT_SET_SEMESTER: (state, action) => ({ ...state,
+    semester: action.payload
   }),
   STUDENT_SET_NUMBER_PER_PAGE: (state, action) => ({ ...state,
     number_per_page: action.payload

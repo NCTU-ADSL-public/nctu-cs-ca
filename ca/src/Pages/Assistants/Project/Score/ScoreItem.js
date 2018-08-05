@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {
-  setSemestor,
+  setSemester,
   setAcademicYear,
   setFirstSecond,
   downloadCsv,
@@ -48,10 +48,10 @@ class ScoreItem extends React.Component {
   render() {
 
     const {
-      semestor,
+      semester,
       academic_year,
       first_second,
-      set_semestor,
+      set_semester,
       set_academic_year,
       set_first_second,
       download_csv,
@@ -73,7 +73,7 @@ class ScoreItem extends React.Component {
               <hr />
               <DropDownMenu
                 value = { academic_year }
-                onChange = { (event, index, value) => { set_academic_year(value); fetch_score({semestor: `${value}-${semestor}`, first_second }); } }
+                onChange = { (event, index, value) => { set_academic_year(value); fetch_score({semester: `${value}-${semester}`, first_second }); } }
                 style = { styles.dropDownMenu }
                 autoWidth = { false }
               >
@@ -82,11 +82,11 @@ class ScoreItem extends React.Component {
                 <MenuItem value = { 108 } primaryText = "108" />
               </DropDownMenu>
               <DropDownMenu
-                value = { semestor }
+                value = { semester }
                 onChange = { (event, index, value) => {
-                  set_semestor(value)
+                  set_semester(value)
                   fetch_score({
-                    semestor: `${academic_year}-${value}`,
+                    semester: `${academic_year}-${value}`,
                     first_second
                   })
                 }}
@@ -104,7 +104,7 @@ class ScoreItem extends React.Component {
                 onChange = { (event, value) => {
                   set_first_second(value)
                   fetch_score({
-                    semestor:  `${academic_year}-${semestor}`,
+                    semester:  `${academic_year}-${semester}`,
                     first_second: value
                   })
                 }}
@@ -125,7 +125,7 @@ class ScoreItem extends React.Component {
                 backgroundColor = '#ccc'
                 fullWidth = {true}
                 icon = {<FontIcon className="material-icons" >cloud_download</FontIcon>}
-                onClick = { () => download_csv({semestor: `${academic_year}-${semestor}`, first_second }) }
+                onClick = { () => download_csv({semester: `${academic_year}-${semester}`, first_second }) }
               />
             </Paper>
           </div>
@@ -136,13 +136,13 @@ class ScoreItem extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  semestor: state.Assistant.Project.Score.semestor,
+  semester: state.Assistant.Project.Score.semester,
   academic_year: state.Assistant.Project.Score.academic_year,
   first_second: state.Assistant.Project.Score.first_second
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  set_semestor: (value) => dispatch(setSemestor(value)),
+  set_semester: (value) => dispatch(setSemester(value)),
   set_academic_year: (value) => dispatch(setAcademicYear(value)),
   set_first_second: (value) => dispatch(setFirstSecond(value)),
   download_csv: (post_item) => dispatch(downloadCsv(post_item)),

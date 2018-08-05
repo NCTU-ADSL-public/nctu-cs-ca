@@ -50,7 +50,7 @@ class ScoreTable extends React.Component {
   constructor(props) {
     super(props)
     this.props.fetch_score({
-      semestor: `${this.props.academic_year}-${this.props.semestor}`,
+      semester: `${this.props.academic_year}-${this.props.semester}`,
       first_second: this.props.first_second
     })
   }
@@ -194,7 +194,7 @@ const mapStateToProps = (state) => ({
   scores        : state.Assistant.Project.Score.scores,
   first_second  : state.Assistant.Project.Score.first_second,
   academic_year : state.Assistant.Project.Score.academic_year,
-  semestor      : state.Assistant.Project.Score.semestor
+  semester      : state.Assistant.Project.Score.semester
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,7 +6,7 @@ export const toggle_project_status_filter  = createAction('TOGGLE_PROJECT_STATUS
 export const toggle_program_filter  = createAction('TOGGLE_PROGRAM_FILTER')
 export const set_input = createAction('STUDENT_SET_INPUT')
 export const set_academic_year = createAction('STUDENT_SET_ACADEMIC_YEAR')
-export const set_semestor = createAction('STUDENT_SET_SEMESTOR')
+export const set_semester = createAction('STUDENT_SET_SEMESTER')
 export const to_given_page = createAction('STUDENT_TO_GIVEN_PAGE')
 export const toggle_desend = createAction('STUDENT_TOGGLE_DESEND')
 export const set_sort_by = createAction('STUDENT_SET_SORT_BY')
@@ -38,8 +38,8 @@ export const setAcademicYear = value => dispatch => {
   dispatch(set_academic_year(value))
 }
 
-export const setSemestor = value => dispatch => {
-  dispatch(set_semestor(value))
+export const setSemester = value => dispatch => {
+  dispatch(set_semester(value))
 }
 
 export const toGivenPage = (value) => dispatch => {
