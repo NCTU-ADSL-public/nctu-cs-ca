@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   setInput,
-  setSemestor,
+  setSemester,
   setAcademicYear
 } from '../../../../Redux/Assistants/Actions/Project/Teacher/index'
 import { connect } from 'react-redux'
@@ -43,8 +43,8 @@ class TeachersItem extends React.Component {
       set_input,
       input,
       academic_year,
-      semestor,
-      set_semestor,
+      semester,
+      set_semester,
       set_academic_year
     } = this.props
 
@@ -56,7 +56,7 @@ class TeachersItem extends React.Component {
               <div className = 'row'>
                 <div className = 'col-md-8 col-lg-8 hidden-xs' >
                   <TextField
-                    hintText          = "學號 / 姓名"
+                    hintText          = "姓名"
                     floatingLabelText = "搜尋欄位"
                     style             = { styles.searchTextField }
                     onChange          = { (event) => set_input(event.target.value) }
@@ -77,8 +77,8 @@ class TeachersItem extends React.Component {
                 </div>
                 <div className = 'col-md-2 col-lg-2 hidden-xs' style = {{ marginTop: '17px'}} >
                   <DropDownMenu
-                    value     = { semestor }
-                    onChange  = { (event, index, value) => set_semestor(value) }
+                    value     = { semester }
+                    onChange  = { (event, index, value) => set_semester(value) }
                     style     = { styles.dropDownMenu }
                     autoWidth = { false }
                   >
@@ -100,12 +100,12 @@ class TeachersItem extends React.Component {
 const mapStateToProps = (state) => ({
   input         : state.Assistant.Project.Teacher.input,
   academic_year : state.Assistant.Project.Teacher.academic_year,
-  semestor      : state.Assistant.Project.Teacher.semestor
+  semester      : state.Assistant.Project.Teacher.semester
 })
 
 const mapDispatchToProps = (dispatch) => ({
   set_input: (value) => dispatch(setInput(value)),
-  set_semestor: (value) => dispatch(setSemestor(value)),
+  set_semester: (value) => dispatch(setSemester(value)),
   set_academic_year: (value) => dispatch(setAcademicYear(value))
 })
 

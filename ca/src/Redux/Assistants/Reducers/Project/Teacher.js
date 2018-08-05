@@ -4,7 +4,7 @@ const initialState = {
   teachers: [],
   input: '',
   academic_year: 106,
-  semestor: 1,
+  semester: 1,
   page: 0,
   number_per_page: 10,
   sort_by: 'name',
@@ -32,8 +32,8 @@ export default handleActions({
   TEACHER_TOGGLE_DESEND: (state) => ({ ...state,
     desend: !state.desend
   }),
-  TEACHER_SET_SEMESTOR: (state, action) => ({ ...state,
-    semestor: action.payload
+  TEACHER_SET_SEMESTER: (state, action) => ({ ...state,
+    semester: action.payload
   }),
   TEACHER_SET_ACADEMIC_YEAR: (state, action) => ({ ...state,
     academic_year: action.payload

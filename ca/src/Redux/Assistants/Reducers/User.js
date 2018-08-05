@@ -6,7 +6,8 @@ const initalState = {
     name: '小翠',
     prog: '助理',
     grad: '',
-    id: 'T1234'
+    id: 'T1234',
+    email: 'xxx@gmail.com'
   }
 }
 

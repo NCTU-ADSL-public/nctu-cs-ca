@@ -4,15 +4,16 @@ const initialState = {
   scores: [],
   first_second: 1,
   academic_year: 106,
-  semestor: 2,
+  semester: 2,
   sort_by: 'id',
   desend: true,
-  page: 0
+  page: 0,
+  input: ''
 }
 
 export default handleActions({
-  SCORE_SET_SEMESTOR: (state, action) => ({ ...state,
-    semestor: action.payload
+  SCORE_SET_SEMESTER: (state, action) => ({ ...state,
+    semester: action.payload
   }),
   SCORE_SET_ACADEMIC_YEAR: (state, action) => ({ ...state,
     academic_year: action.payload
@@ -32,5 +33,8 @@ export default handleActions({
   }),
   STORE_SCORE: (state, action) => ({ ...state,
     scores: action.payload
+  }),
+  SCORE_SET_INPUT: (state, action) => ({ ...state,
+    input: action.payload
   })
 }, initialState)

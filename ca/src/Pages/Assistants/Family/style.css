@@ -1,0 +1,9 @@
+.text-field label{
+    font-size: 16px!important; 
+    font-weight: 200;
+    font-size: 16px;
+}
+
+.text-field input{
+    font-size: 16px!important; 
+}

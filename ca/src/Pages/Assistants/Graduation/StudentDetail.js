@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Frame from '../../../Components/Frame'
 import StudentGrad from '../../Students/Graduation/GradCreditCheck'
 
 import Loading from '../../../Components/Loading';
@@ -117,7 +118,7 @@ export default class index extends React.Component {
             )
         } else {
             return (
-                <div id='Head'>
+                <Frame>
                     <StudentGrad
                         studentProfile={this.state.student_profile}
                         items={this.state.GraduationItems}
@@ -128,7 +129,7 @@ export default class index extends React.Component {
                         assistant={1}
                         graduationCheckEnglishTest={this.state.graduationCheckEnglishTest}
                     />
-                </div>
+                </Frame>
             )
         }
     }
