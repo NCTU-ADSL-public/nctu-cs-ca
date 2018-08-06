@@ -59,4 +59,5 @@ export const toGivenPage = (value) => dispatch => {
 
 export const setInput = (value) => dispatch => {
   dispatch(set_input(value))
+  dispatch(to_given_page(0))
 }
