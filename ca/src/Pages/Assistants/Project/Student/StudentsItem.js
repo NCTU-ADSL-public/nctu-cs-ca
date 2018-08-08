@@ -4,9 +4,9 @@ import {
   toggleProgramFilter,
   toggleProjectStatusFilter,
   setInput,
-  setSemestor,
+  setSemester,
   setAcademicYear
-} from '../../../../Redux/Assistants/Actions/Project/index'
+} from '../../../../Redux/Assistants/Actions/Project/Student/index'
 import { connect } from 'react-redux'
 
 import Paper from 'material-ui/Paper';
@@ -69,7 +69,7 @@ class StudentsItem extends React.Component {
     super(props);
     this.state = {
       academic_year: 106,
-      semestor: 1
+      semester: 1
     }
   }
 
@@ -90,9 +90,9 @@ class StudentsItem extends React.Component {
     }
   }
 
-  handleSemestor = (event, index, value) => {
+  handleSemester = (event, index, value) => {
     this.setState({
-      semestor: value
+      semester: value
     })
   }
 
@@ -106,13 +106,14 @@ class StudentsItem extends React.Component {
     const {
       project_status_filter,
       program_filter,
-      semestor,
+      semester,
       academic_year,
+      input,
       toggle_project_status_filter,
       toggle_program_filter,
       set_input,
       set_academic_year,
-      set_semestor
+      set_semester
     } = this.props
 
     return (
@@ -123,6 +124,7 @@ class StudentsItem extends React.Component {
               <TextField
                 hintText          = "學號 / 姓名"
                 floatingLabelText = "搜尋欄位"
+                value             = { input }
                 style             = { styles.searchTextField }
                 onChange          = { (event) => set_input(event.target.value) }
               />
@@ -144,8 +146,8 @@ class StudentsItem extends React.Component {
                 <MenuItem value = { 108 } primaryText = "108" />
               </DropDownMenu>
               <DropDownMenu
-                value     = { semestor }
-                onChange  = { (event, index, value) => set_semestor(value) }
+                value     = { semester }
+                onChange  = { (event, index, value) => set_semester(value) }
                 style     = { styles.dropDownMenu }
                 autoWidth = { false }
               >
@@ -202,10 +204,11 @@ class StudentsItem extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  project_status_filter: state.Assistant.Project.project_status_filter,
-  program_filter       : state.Assistant.Project.program_filter,
-  semestor             : state.Assistant.Project.semestor,
-  academic_year        : state.Assistant.Project.academic_year
+  project_status_filter: state.Assistant.Project.Student.project_status_filter,
+  program_filter       : state.Assistant.Project.Student.program_filter,
+  semester             : state.Assistant.Project.Student.semester,
+  academic_year        : state.Assistant.Project.Student.academic_year,
+  input                : state.Assistant.Project.Student.input
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -213,7 +216,7 @@ const mapDispatchToProps = (dispatch) => ({
   toggle_program_filter       : (index) => dispatch(toggleProgramFilter(index)),
   set_input                   : (input) => dispatch(setInput(input)),
   set_academic_year           : (value) => dispatch(setAcademicYear(value)),
-  set_semestor                : (value) => dispatch(setSemestor(value))
+  set_semester                : (value) => dispatch(setSemester(value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentsItem)

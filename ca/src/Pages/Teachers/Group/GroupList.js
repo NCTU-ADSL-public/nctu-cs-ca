@@ -11,6 +11,9 @@ import ScoreDialog from './ScoreDialog'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
+import {Card, CardText} from 'material-ui/Card';
+import Popover from 'material-ui/Popover';
+import RaisedButton from 'material-ui/RaisedButton';
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
@@ -34,14 +37,14 @@ const styles = {
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#666666',
+    color: '#e5e5e5',
     margin: '32px 0 0 70px',
     float: 'left'
   },
   subTitle: {
     fontSize: '1.2em',
     fontWeight: '4300',
-    color: '#737373',
+    color: '#bfbfbf',
     margin: '55px 0 0 70px',
     float: 'left'
   },
@@ -94,8 +97,9 @@ class GroupList extends React.Component {
       index: 0,
       groupListlength: 99,
       total_number: 0,
+      chipOpen: false,
       groupList: [
-        { research_title: '資料錯誤',
+        { research_title: 'epth estimation from Single image',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -112,18 +116,18 @@ class GroupList extends React.Component {
               detail: '資工系 網多組3 '
             },
             { student_id: '0399777',
-              sname: '李小霖',
+              sname: '李柏林',
               detail: '資工系 網多組3 ',
               score: ''
             },
             { student_id: '0391234',
-              sname: '李毛毛',
+              sname: '李二毛',
               detail: '資工系 網多組3 '
             }
           ],
           year: '106'
         },
-        { research_title: '資料錯誤',
+        { research_title: '虛擬貨幣交易機器人',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -132,7 +136,7 @@ class GroupList extends React.Component {
           ],
           year: '106'
         },
-        { research_title: '資料錯誤',
+        { research_title: 'IOT智慧家庭監控應用',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -141,7 +145,7 @@ class GroupList extends React.Component {
           ],
           year: '106'
         },
-        { research_title: '資料錯誤',
+        { research_title: 'Android 系統記憶體管理改進',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
@@ -157,7 +161,7 @@ class GroupList extends React.Component {
     console.log(this.props.idCard.name)
     let _this = this
     this.setState({
-      groupList: []
+    //  groupList: []
     })
     axios.get('/professors/students/projects', {
       // name: '彭文志'
@@ -246,6 +250,22 @@ class GroupList extends React.Component {
     ))
   }
 
+  handleChip = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      chipOpen: true,
+      anchorEl: event.currentTarget,
+    });
+    console.log('MAJAJA')
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      chipOpen: false,
+    });
+  };
   render () {
     const tn = this.state.total_number
     return (
@@ -260,11 +280,11 @@ class GroupList extends React.Component {
             </Col>
           </Row>
           <Row style={styles.groups}>
-            <Loading
-              size={100}
-              left={40}
-              top={100}
-              isLoading={this.state.loading} />
+            {/*<Loading*/}
+              {/*size={100}*/}
+              {/*left={40}*/}
+              {/*top={100}*/}
+              {/*isLoading={this.state.loading} />*/}
             {this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
@@ -277,9 +297,13 @@ class GroupList extends React.Component {
                   idCard={this.props.idCard}
                   groupClick={this.props.handleGroupClick}
                   parentFunction={this.triggerUpdate}
+                  chipOpen={this.state.chipOpen}
+                  anchorEl={this.state.anchorEl}
+                  handleChip={ this.handleChip }
+                  handleRequestClose={ this.handleRequestClose }
                 />
               ))
-              : '(無專題生資料)'
+              : '(無專題生資料!)'
             }
           </Row>
         </div>
@@ -325,10 +349,51 @@ const GroupButton = (props) => (
           <MuiThemeProvider>
             <div style={styles.chipWrapper}>
               {props.participants.map((item, i) => (
-                <Chip style={styles.chip} key={i} >
-                  <Avatar src={defaultPic} /> {item.student_id} {item.sname}
-                  <span style={{color: 'red'}}>  {item.score}</span>
-                </Chip>
+                <div>
+
+                  <Chip style={styles.chip}
+                        key={i}
+                        onClick={props.handleChip} >
+                    <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                    <span style={{color: 'red'}}>  {item.score}</span>
+                  </Chip>
+
+
+                  <Popover
+                    open={props.chipOpen}
+                    anchorEl={props.anchorEl}
+                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                    onRequestClose={props.handleRequestClose}
+                  >
+                    <Card>
+                      <CardText>
+                        { Math.random()>0.5 ?
+                          <div>
+                            <b>這個人很厲害。　　</b>      <br />
+                            資料庫系統概論 90          <br />
+                            機器學習 87                <br />
+                            基礎程式檢定 99            <br />
+                            密碼學概論 95              <br />
+                            人工智慧 89                <br />
+                            ...
+                          </div>
+                          :
+                          <div>
+                            <b>這個人我覺得還好。</b>      <br />
+                            資料庫系統概論 78          <br />
+                            機器學習 60                <br />
+                            基礎程式檢定 未通過            <br />
+                            密碼學概論 61           <br />
+                            人工智慧 90                <br />
+                            ...
+                          </div>
+                        }
+                      </CardText>
+                    </Card>
+                  </Popover>
+
+                </div>
               ))}
             </div>
           </MuiThemeProvider>

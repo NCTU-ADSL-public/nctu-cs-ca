@@ -2,7 +2,7 @@ body {
     font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', Verdana, Arial, 'Microsoft YaHei' !important;
     font-size:14px;
     font-weight:300;
-    text-shadow:#999 0.001em 0.001em 0.005em !important;
+    /*text-shadow:#999 0.001em 0.001em 0.005em !important;*/
 
     background: #F5F5F5;
     margin: 0;

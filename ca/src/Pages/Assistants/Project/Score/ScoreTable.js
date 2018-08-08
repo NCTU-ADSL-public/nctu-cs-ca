@@ -1,11 +1,10 @@
 import React from 'react'
-
 import {
-  fetchStudents,
-  toGivenPage,
   setSortBy,
-  toggleDesend
-} from '../../../../Redux/Assistants/Actions/Project/Student/index'
+  toggleDesend,
+  toGivenPage,
+  fetchScore,
+} from '../../../../Redux/Assistants/Actions/Project/Score/index'
 import { connect } from 'react-redux'
 
 import FontIcon from 'material-ui/FontIcon';
@@ -46,65 +45,41 @@ const styles = {
   }
 }
 
-const project_status_color = ['green', 'Gold', 'red']
-const project_status_cn    = ['已申請教授', '待教授審核', '未申請教授']
-
-class StudentsTable extends React.Component {
+class ScoreTable extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.props.fetch_students()
-    this.state = {
-      open: false
-    }
+    super(props)
+    this.props.fetch_score({
+      semester: `${this.props.academic_year}-${this.props.semester}`,
+      first_second: this.props.first_second
+    })
   }
 
-  mapProgramStringToNumber = (program) => {
-    switch (program) {
-      case '資工A':
-        return 0
-      case '資工B':
-        return 1
-      case '網多':
-        return 2
-      case '資電':
-        return 3
-      case '電資學士班':
-        return 4
-      default:
-        return 5
-    }
-  }
-
-  filter = (students) => {
+  filter = (scores) => {
     const {
-      project_status_filter,
-      program_filter,
-      input,
+      input
     } = this.props
-    return students.filter( (student) => (
-        input === ''
-        || student.student.id.toLowerCase().search(input.toLowerCase()) !== -1
-        || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
-      )).filter( (student) => (
-        !project_status_filter.reduce( (all_false, project_status) => all_false || project_status, false)
-        || project_status_filter[student.project.status]
-      )).filter( (student) => (
-        !program_filter.reduce( (all_false, program) => all_false || program, false)
-        || program_filter[this.mapProgramStringToNumber(student.student.program)]
-      ))
+    return scores.filter( (score) => (
+      input === ''
+      || score.student.id.toLowerCase().search(input.toLowerCase()) !== -1
+      || score.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+      || score.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
+    ))
   }
 
   render() {
+
     const {
-      students,
-      page,
-      to_given_page,
-      desend,
       sort_by,
+      desend,
+      page,
+      input,
+      set_sort_by,
       toggle_desend,
-      set_sort_by
+      scores,
+      to_given_page
     } = this.props
+
     return (
       <div>
         <Table
@@ -129,23 +104,23 @@ class StudentsTable extends React.Component {
                   onClick = { () => sort_by === 'name' ? toggle_desend() : set_sort_by('name') }
                   style = { sort_by === 'name' ? styles.sortSelected : styles.sortNotSelected }
                 >
-                  姓名 {sort_by === 'name' && ( desend ? '↓' : '↑') }
+                  學生姓名 {sort_by === 'name' && ( desend ? '↓' : '↑') }
                 </div>
               </TableHeaderColumn>
               <TableHeaderColumn>
                 <div
-                  onClick = { () => sort_by === 'program' ? toggle_desend() : set_sort_by('program') }
-                  style = { sort_by === 'program' ? styles.sortSelected : styles.sortNotSelected }
+                  onClick = { () => sort_by === 'professor' ? toggle_desend() : set_sort_by('professor') }
+                  style = { sort_by === 'professor' ? styles.sortSelected : styles.sortNotSelected }
                 >
-                  組別 {sort_by === 'program' && ( desend ? '↓' : '↑') }
+                  教授姓名 {sort_by === 'professor' && ( desend ? '↓' : '↑') }
                 </div>
               </TableHeaderColumn>
               <TableHeaderColumn>
                 <div
-                  onClick = { () => sort_by === 'project_status' ? toggle_desend() : set_sort_by('project_status') }
-                  style = { sort_by === 'project_status' ? styles.sortSelected : styles.sortNotSelected }
+                  onClick = { () => sort_by === 'score' ? toggle_desend() : set_sort_by('score') }
+                  style = { sort_by === 'score' ? styles.sortSelected : styles.sortNotSelected }
                 >
-                  專題狀況 {sort_by === 'project_status' && ( desend ? '↓' : '↑') }
+                  成績 {sort_by === 'score' && ( desend ? '↓' : '↑') }
                 </div>
               </TableHeaderColumn>
             </TableRow>
@@ -154,16 +129,16 @@ class StudentsTable extends React.Component {
             displayRowCheckbox = { false }
             showRowHover = { true }
           >
-            { this.filter(students)
+            { this.filter(scores)
                 .sort( (a, b) => {
                   if (sort_by === 'id') {
                     return (parseInt(a.student.id) - parseInt(b.student.id)) * (desend ? 1 : -1)
                   } else if (sort_by === 'name') {
                     return a.student.name.localeCompare(b.student.name, 'zh-Hans-CN') * (desend ? -1 : 1)
-                  } else if (sort_by === 'program') {
-                    return a.student.program.localeCompare(b.student.program, 'zh-Hans-CN') * (desend ? -1 : 1)
-                  } else if (sort_by === 'project_status') {
-                    return (a.project.status - b.project.status) * (desend ? -1 : 1)
+                  } else if (sort_by === 'professor') {
+                    return a.professor_name.localeCompare(b.professor_name, 'zh-Hans-CN') * (desend ? -1 : 1)
+                  } else if (sort_by === 'score') {
+                    return ( a.student.score - b.student.score ) * (desend ? -1 : 1)
                   }
                 })
                 .slice(page * 10, (page + 1) * 10)
@@ -171,8 +146,8 @@ class StudentsTable extends React.Component {
                   <TableRow key = { index }>
                     <TableRowColumn style = { styles.tableRowColumn } >{ item.student.id }</TableRowColumn>
                     <TableRowColumn style = { styles.tableRowColumn } >{ item.student.name }</TableRowColumn>
-                    <TableRowColumn style = { styles.tableRowColumn } >{ item.student.program }</TableRowColumn>
-                    <TableRowColumn style = {{ ...styles.tableRowColumn, color: project_status_color[item.project.status] }} >{ project_status_cn[item.project.status] }</TableRowColumn>
+                    <TableRowColumn style = { styles.tableRowColumn } >{ item.professor_name }</TableRowColumn>
+                    <TableRowColumn style = { styles.tableRowColumn } >{ item.student.score !== null ? item.student.score : '尚未評分' }</TableRowColumn>
                   </TableRow>
             ))}
           </TableBody>
@@ -196,12 +171,12 @@ class StudentsTable extends React.Component {
           >
             chevron_left
           </FontIcon>
-          <span style = { styles.paginationText }>{ page + 1 }/{ Math.max(Math.ceil(this.filter(students).length / 10), 1) }</span>
+          <span style = { styles.paginationText }>{ page + 1 }/{ Math.max(Math.ceil(this.filter(scores).length / 10), 1) }</span>
           <FontIcon
             className = "material-icons"
             color = '#808080'
             hoverColor = '#000000'
-            onClick = { () => page !== Math.max(Math.ceil(this.filter(students).length / 10), 1) - 1 && to_given_page(page + 1) }
+            onClick = { () => page !== Math.max(Math.ceil(this.filter(scores).length / 10), 1) - 1 && to_given_page(page + 1) }
             style = { styles.paginationIcon }
           >
             chevron_right
@@ -210,7 +185,7 @@ class StudentsTable extends React.Component {
             className = "material-icons"
             color = '#808080'
             hoverColor = '#000000'
-            onClick = { () => to_given_page(Math.max(Math.ceil(this.filter(students).length / 10), 1) - 1) }
+            onClick = { () => to_given_page(Math.max(Math.ceil(this.filter(scores).length / 10), 1) - 1) }
             style = { styles.paginationIcon }
           >
             last_page
@@ -222,20 +197,21 @@ class StudentsTable extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  students              : state.Assistant.Project.Student.students,
-  project_status_filter : state.Assistant.Project.Student.project_status_filter,
-  program_filter        : state.Assistant.Project.Student.program_filter,
-  input                 : state.Assistant.Project.Student.input,
-  page                  : state.Assistant.Project.Student.page,
-  sort_by               : state.Assistant.Project.Student.sort_by,
-  desend                : state.Assistant.Project.Student.desend
+  desend        : state.Assistant.Project.Score.desend,
+  sort_by       : state.Assistant.Project.Score.sort_by,
+  page          : state.Assistant.Project.Score.page,
+  scores        : state.Assistant.Project.Score.scores,
+  first_second  : state.Assistant.Project.Score.first_second,
+  academic_year : state.Assistant.Project.Score.academic_year,
+  semester      : state.Assistant.Project.Score.semester,
+  input      : state.Assistant.Project.Score.input
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_students: () => dispatch(fetchStudents()),
-  to_given_page: (value) => dispatch(toGivenPage(value)),
+  set_sort_by: (value) => dispatch(setSortBy(value)),
   toggle_desend: () => dispatch(toggleDesend()),
-  set_sort_by: (value) => dispatch(setSortBy(value))
+  to_given_page: (value) => dispatch(toGivenPage(value)),
+  fetch_score: (post_item) => dispatch(fetchScore(post_item))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentsTable)
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreTable)

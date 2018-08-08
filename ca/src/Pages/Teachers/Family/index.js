@@ -57,6 +57,7 @@ const styles = {
     padding: '3px 0 0 0px',
   }
 }
+const semester = ['','上','下','暑']
 const InfoCard = (props)=>(
   <MuiThemeProvider>
       <Card style={props.selected.failed ? {backgroundColor:'#fff',border:'2px solid #F50057'}:{}}>
@@ -97,9 +98,9 @@ const InfoCard = (props)=>(
         <CardText>
           <Tabs>
             {
-              props.selected.score.map(
+              props.selected.score && props.selected.score.map(
                 (v,i)=>(
-                  <Tab key={i} label={v.semester} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#9FA8DA'}}>
+                  <Tab key={i} label={`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]}`} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#87cdff'}}>
                     <Table>
                       {/* <TableHeader displaySelectAll={false}>
                         <TableRow>
@@ -109,9 +110,9 @@ const InfoCard = (props)=>(
                       </TableHeader> */}
                       <TableBody displayRowCheckbox={false} >
                         {v.score.map((v,i)=>(
-                          <TableRow key={i} style={v.score<60 ? {color:'red'}:{}}>
+                          <TableRow key={i} style={!v.pass ? {color:'red'}:{}}>
                             <TableRowColumn>{v.cn}</TableRowColumn>
-                            <TableRowColumn>{v.score}</TableRowColumn>
+                            <TableRowColumn>{v.score===null?(v.pass?'通過':'不通過'):v.score}</TableRowColumn>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -129,25 +130,31 @@ const InfoCard = (props)=>(
 
 class Index extends React.Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
-      initItem: FakeData.StudentList,
+      initItem: [],
       chooseInfo: null,
       dialogOpen: false // for 行動版
     }
     this.fetchData = this.fetchData.bind(this)
     this.choose = this.choose.bind(this)
   }
-
+  // handleChange(){
+  //   this.setState
+  // }
   choose(v){
     if(! ('score' in this.state.initItem[v])){
       let tmp = this.state.initItem
-      tmp[v].score = FakeData.StudentScore
-      /*
-      axios.get('/professors/family/score', {
-        id: this.state.initItem[v].student_id,
+      // tmp[v].score = FakeData.StudentScore
+      // this.setState({
+      //   chooseInfo:v,
+      //   initItem: tmp,
+      //   dialogOpen:(window.innerWidth<768)
+      // })
+      axios.post('/StudentGradeList', {
+        student_id: this.state.initItem[v].student_id
       }).then(res => {
-        tmp[v].score = res
+        tmp[v].score = res.data
         this.setState({
           chooseInfo:v,
           initItem: tmp,
@@ -155,12 +162,6 @@ class Index extends React.Component {
         })
       }).catch(err => {
         console.log(err)
-      })
-      */
-      this.setState({
-        chooseInfo:v,
-        initItem: tmp,
-        dialogOpen:(window.innerWidth<768)
       })
     }
     else{
@@ -172,10 +173,10 @@ class Index extends React.Component {
   }
 
   fetchData(){
-    axios.get('/professors/family/list', {
+    axios.get('/professors/students/list', {
       id: this.props.tid,
     }).then(res => {
-      this.setState({initItem: res.data})
+      this.setState({initItem: res.data.map((v,i)=>({...v,id:i}))})
     }).catch(err => {
       console.log(err)
     })

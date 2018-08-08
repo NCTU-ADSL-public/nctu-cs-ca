@@ -16,22 +16,22 @@ const styles = {
   noticeTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#bf6468',
+    color: '#e5e5e5',
     margin: '32px 0 0 50px',
     float: 'left'
   },
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#666666',
-    margin: '32px 0 0 50px',
+    color: '#e5e5e5',
+    margin: '32px 0 0 70px',
     float: 'left'
   },
   subTitle: {
     fontSize: '1.2em',
     fontWeight: '4300',
-    color: '#737373',
-    margin: '55px 0 0 50px',
+    color: '#bfbfbf',
+    margin: '55px 0 0 70px',
     float: 'left'
   },
   groups: {

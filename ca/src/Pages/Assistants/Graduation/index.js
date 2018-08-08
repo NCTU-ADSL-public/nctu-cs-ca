@@ -12,7 +12,9 @@ import StudentInform from './StudentInform/StudentSelList';
 
 import FakeData from '../../../Resources/FakeData'
 
-export default class index extends React.Component {
+import { connect } from 'react-redux'
+
+class index extends React.Component {
 
     constructor(props) {
         super(props);
@@ -67,3 +69,9 @@ export default class index extends React.Component {
         );
     }
 }
+
+const mapState = (state)=>({
+    idCard: state.Assistant.User.idCard
+})
+
+export default connect(mapState)(index)

@@ -55,7 +55,7 @@ class _Navbar extends React.Component {
     super(props)
 
     this.state = {
-      selectedButtonIndex: null,
+      selectedButtonIndex: 0,
       onClicks: props.onTouchTaps.map((callback,index) => this.wrapCallback(callback,index)),
     }
   }
@@ -139,6 +139,7 @@ class _Navbar extends React.Component {
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
         <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
         <NavButton key={2} label='學生專題' icon='fa fa-users' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
+        <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
       ],
       'teacher': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
