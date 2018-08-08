@@ -271,12 +271,6 @@ class Map extends React.Component {
             </SelectField>
           </MuiThemeProvider>
         </div>
-        <div>
-          <div className="green" style={{backgroundColor: '#616161'}}></div>
-          <div className="text">已通過</div>
-          <div className="red" style={{backgroundColor: '#a42926'}}></div>
-          <div className="text">未通過</div>
-        </div>
       </div>
       <Provider store={store}>
         <div className='Map-title-text'>

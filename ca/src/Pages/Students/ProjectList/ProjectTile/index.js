@@ -154,7 +154,7 @@ class Index extends React.Component {
           className={`col-xs-10 col-sm-10 col-md-6 ${(this.props.data.agree === '1'|| this.props.data.agree === undefined)?'':'animated bounceIn'}`}
           onClick={this.handleClickOpen}
         >
-          {this.props.data.photo === undefined
+          {(this.props.data.photo === undefined || this.props.data.photo === 'loading')
           ? <CircularProgress className={classes.progress}/>
           : <img className='img-responsive' src={ this.getImage() } /> }
           </GridTile>

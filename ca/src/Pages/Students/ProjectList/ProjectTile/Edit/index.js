@@ -75,12 +75,15 @@ class Edit extends React.Component {
       })
 
       let file = this.state.image
+
       let uploadTask = storageRef.child(directory + 'image.jpg').put(file)
       uploadTask.on('state_changed', function (snapshot) {
+        _this.props.store_projects_image('loading', _this.props.project.research_title, _this.props.project.semester)
       }, function (error) {
         console.log(error)
       }, function () {
         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          console.log(downloadURL)
           _this.props.store_projects_image(downloadURL, _this.props.project.research_title, _this.props.project.semester)
         })
       })
@@ -94,6 +97,7 @@ class Edit extends React.Component {
       let file = this.state.file
       let uploadTask = storageRef.child(directory + 'file.pdf').put(file)
       uploadTask.on('state_changed', function (snapshot) {
+        _this.props.store_projects_file('loading', _this.props.project.research_title, _this.props.project.semester)
       }, function (error) {
         console.log(error)
       }, function () {

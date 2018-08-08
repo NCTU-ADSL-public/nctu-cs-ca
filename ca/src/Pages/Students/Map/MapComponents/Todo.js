@@ -382,7 +382,7 @@ class Todo extends React.Component {
                 >
 
 
-                    {(this.props.cosCame.match("化學")||this.props.cosCame.match("生物")||this.props.cosCame.match("物理")||this.props.cosCame.match("微積分"))?'暫無簡介':this.state.isDone?this.getinfo():<Loading size={300}
+                    {/*{(this.props.cosCame.match("化學")||this.props.cosCame.match("生物")||this.props.cosCame.match("物理")||this.props.cosCame.match("微積分"))?'暫無簡介':this.state.isDone?this.getinfo():<Loading size={300}*/}
                                                                                                                                                                                                         left={400}
                                                                                                                                                                                                         top={20}
                                                                                                                                                                                                         isLoading={true}/>}

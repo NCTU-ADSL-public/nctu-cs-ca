@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import HomeItem from './Home/Home.js'
 import MapItem from './Map/MapComponents/Map.js'
+import Map from './Map_v2'
 import GradCreditCheckPage from './Graduation_v2'
 import CreditItem from './Credit/Credit.js'
 import Mail from '../../Components/mail'
@@ -16,7 +17,6 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
 import Navbar from '../../Components/Navbar'
-import Loading from '../../Components/Loading'
 import graduationStore from './Graduation_v2/Reducers'
 
 import defaultData from '../../Resources/FakeData'
@@ -26,6 +26,7 @@ import { fetchGraduationCourse } from './Graduation_v2/Actions'
 
 import {connect} from 'react-redux'
 import {fetchUser, ChangeFooterColor} from '../../Redux/Students/Actions/User'
+import {fetchCourse, fetchCoursePass} from '../../Redux/Students/Actions/Map'
 
 let store_graduation = createStore(graduationStore, applyMiddleware(thunk))
 
@@ -44,6 +45,8 @@ class Head extends Component {
     super(props)
     this.res = this.res.bind(this)
     this.props.FetchProfessorInfo()
+    this.props.FetchCourse()
+    this.props.FetchCoursePass()
     this.props.FetchUser()
     store_graduation.dispatch(fetchGraduationCourse())
   }
@@ -162,19 +165,20 @@ class Head extends Component {
       )
     }
     else if (this.state.selectedIndex === 2) {
-      this.props.ChangeFooterColor('#34855e')
+      this.props.ChangeFooterColor('#5f9191')
       return(
         <div>
           <FadeIn>
-            <MapItem
-              studentPasdata={StudentCosPas}
-              data={MapCourseData}
-              studentId={this.props.studentIdcard.program}
-              studentsGrad={this.props.studentIdcard.grade}/>
+            <Map/>
           </FadeIn>
         </div>
       )
     }
+
+    // studentPasdata={StudentCosPas}
+    // data={MapCourseData}
+    // studentId={this.props.studentIdcard.program}
+    // studentsGrad={this.props.studentIdcard.grade}
     else if (this.state.selectedIndex === 3) {
       this.props.ChangeFooterColor('#01579B')
       return(
@@ -285,6 +289,8 @@ const mapState = (state)=>({
 const mapDispatch = (dispatch)=>({
   FetchUser: () => dispatch(fetchUser()),
   FetchProfessorInfo: () => dispatch(fetchProfessors()),
+  FetchCourse: () => dispatch(fetchCourse()),
+  FetchCoursePass: () => dispatch(fetchCoursePass()),
   ChangeFooterColor: (color) => dispatch(ChangeFooterColor(color))
 })
 
