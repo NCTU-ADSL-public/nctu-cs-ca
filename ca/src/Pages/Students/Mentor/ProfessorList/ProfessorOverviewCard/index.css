@@ -15,12 +15,12 @@
     color: #575757;
 }
 .pic{
-    width: 80%;
+    width: 90%;
     overflow: hidden;
-    height: 200px;
+    height: 140px;
 }
 .group-btn{
-    margin: 30px 0 30px 0;
+    margin: 30px 0 5px  0;
     padding: 20px;
     background: #ececec;
     border-radius: 6px;
@@ -40,6 +40,7 @@
 }
 .icon-button-rwd{
     position: absolute;
+    width: inherit;
     top: 0;
     right: 0;
 }

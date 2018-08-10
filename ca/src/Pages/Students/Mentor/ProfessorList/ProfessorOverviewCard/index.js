@@ -95,18 +95,18 @@ class Index extends React.Component {
   render () {
     const { classes } = this.props
     return (
-      <div className='group-btn'>
-        <LazyLoad>
+      <div className='group-btn' >
+        <div>
           <div>
             <div className='row'>
-              <div className='hidden-xs hidden-sm col-md-3 col-lg-3'>
-                {this.state.loading ? <CircularProgress className='pic' /> : <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />}
+              <div className='hidden-xs hidden-sm col-md-2 col-lg-2'>
+                {this.state.loading ? '' : <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />}
               </div>
               <div className='visible-xs visible-sm col-xs-2 col-sm-1'>
                 {this.state.loading ? <CircularProgress /> : <Avatar alt='picture' src={this.state.photo === '' ? pic : this.state.photo} className={classes.avatar} />}
               </div>
               <div className='row'>
-                <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+                <div className='col-xs-8 col-sm-8 col-md-7 col-lg-7'>
                   {this.props.isMentor
                     ? <Badge color='primary' badgeContent={'導師'} className={classes.margin}>
                       <div className='group-title'>{this.props.profile.tname}</div>
@@ -118,34 +118,34 @@ class Index extends React.Component {
                     <div className='group-year' >Email：{this.props.profile.email}</div>
                   </div>
                 </div>
-                <div className='hidden-xs hidden-sm icon-button'>
-                  <div className='col-md-1 col-lg-1 icon-button_'>
-                    <WriteEmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-                  </div>
-                  <div className='col-md-1 col-lg-1 icon-button_'>
-                    <SendProjectAgree profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-                  </div>
-                  <div className='col-md-1 col-lg-1 icon-button_'>
-                    <ReviewProject profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-                  </div>
-                  <div className='col-md-1 col-lg-1  icon-button_'>
-                    <IconButton
-                      className={classnames(classes.expand, {
-                        [classes.expandOpen]: this.state.expanded
-                      })}
-                      onClick={this.handleExpandClick}
-                      aria-expanded={this.state.expanded}
-                      aria-label='Show more'
-                >
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  </div>
-                </div>
+                {/*<div className='hidden-xs hidden-sm icon-button'>*/}
+                  {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
+                    {/*<WriteEmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
+                  {/*</div>*/}
+                  {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
+                    {/*<SendProjectAgree profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
+                  {/*</div>*/}
+                  {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
+                    {/*<ReviewProject profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
+                  {/*</div>*/}
+                  {/*<div className='col-md-1 col-lg-1  icon-button_'>*/}
+                    {/*<IconButton*/}
+                      {/*className={classnames(classes.expand, {*/}
+                        {/*[classes.expandOpen]: this.state.expanded*/}
+                      {/*})}*/}
+                      {/*onClick={this.handleExpandClick}*/}
+                      {/*aria-expanded={this.state.expanded}*/}
+                      {/*aria-label='Show more'*/}
+                {/*>*/}
+                      {/*<ExpandMoreIcon />*/}
+                    {/*</IconButton>*/}
+                  {/*</div>*/}
+                {/*</div>*/}
               </div>
             </div>
             <div className='row'>
-              <div className='visible-xs visible-sm'>
-                <div className='col-xs-9 col-sm-9' style={{marginTop: '10px'}}>
+              <div className=''>
+                <div className='col-xs-9 col-sm-9 visible-xs visible-sm' style={{marginTop: '10px'}}>
                   <div className='group-year-rwd' >專題人數：{this.props.profile.scount}{this.props.profile.scount > 6 ? <font color='#a52a2a' >（名額已滿）</font> : ''}</div>
                   <div className='group-year-rwd' >研究領域：{this.props.profile.expertise}</div>
                   <div className='group-year-rwd' >Email：{this.props.profile.email}</div>
@@ -176,7 +176,7 @@ class Index extends React.Component {
               </div>
             </Collapse>
           </div>
-        </LazyLoad>
+        </div>
       </div>
     )
   }

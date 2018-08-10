@@ -27,11 +27,6 @@ class Index extends React.Component {
           <div className='col-md-3 col-lg-3' />
           <div className='col-md-9 col-lg-9' style={{marginBottom: '100px'}}>
             <ProfessorList studentIdcard={this.props.studentIdcard} />
-            <div className='btn-group' role='group' aria-label='Basic example'>
-              <button type='button' className='btn btn-secondary' onClick={()=>this.props.change_page(1)}>1</button>
-              <button type='button' className='btn btn-secondary' onClick={()=>this.props.change_page(2)}>2</button>
-              <button type='button' className='btn btn-secondary' onClick={()=>this.props.change_page(3)}>3</button>
-            </div>
           </div>
         </div>
       </div>
@@ -40,9 +35,11 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  studentIdcard: state.Student.User.studentIdcard
 })
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors()),
+  FetchProfessorInfo: () => dispatch(fetchProfessors()),
   change_page: (page) => dispatch(changepage(page))
 })
 

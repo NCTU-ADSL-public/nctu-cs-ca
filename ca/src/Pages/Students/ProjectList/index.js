@@ -66,7 +66,8 @@ class index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.Student.ProjectList.data
+  data: state.Student.ProjectList.data,
+  studentProfile: state.Student.User.studentIdcard
 })
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProjects())

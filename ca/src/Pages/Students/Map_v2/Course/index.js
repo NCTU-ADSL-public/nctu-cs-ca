@@ -141,7 +141,10 @@ class App extends React.Component{
                   <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
                     <Tab eventKey={1} title="大一">
                       <div className={'grades'  + this.state.grad1.grad} id="grade-1">
-                        <div className="grade-num"><div>大一({this.state.year})</div></div>
+                        <div className='row grade-num '>
+                          <div className="col-xs-6 col-sm-6"><div>大一上({this.state.year})</div></div>
+                          <div className="col-xs-6 col-sm-6"><div>大一下({this.state.year})</div></div>
+                        </div>
                         <div className="session">
                           <div  className={this.state.grad1.upSession}>
                             <VisibleTodoList v={this.state.v} grad="1" sem="1"/>
@@ -154,7 +157,10 @@ class App extends React.Component{
                     </Tab>
                     <Tab eventKey={2} title="大二">
                       <div className={'grades'  + this.state.grad2.grad} id="grade-2">
-                        <div className="grade-num"><div>大二({this.state.year+1})</div></div>
+                        <div className='row grade-num '>
+                          <div className="col-xs-6 col-sm-6"><div>大二上({this.state.year+1})</div></div>
+                          <div className="col-xs-6 col-sm-6"><div>大二下({this.state.year+1})</div></div>
+                        </div>
                         <div className="session">
                           <div className={this.state.grad2.upSession}>
                             <VisibleTodoList v={this.state.v} grad="2" sem="1"/>
@@ -169,7 +175,10 @@ class App extends React.Component{
                     </Tab>
                     <Tab eventKey={3} title="大三">
                       <div className={'grades'  + this.state.grad3.grad} id="grade-3">
-                        <div className="grade-num"><div>大三({this.state.year+2})</div></div>
+                        <div className='row grade-num'>
+                          <div className="col-xs-6 col-sm-6"><div>大三上({this.state.year+2})</div></div>
+                          <div className="col-xs-6 col-sm-6"><div>大三下({this.state.year+2})</div></div>
+                        </div>
                         <div className="session">
                           <div className={this.state.grad3.upSession}>
                             <VisibleTodoList v={this.state.v} grad="3" sem="1"/>
@@ -182,7 +191,10 @@ class App extends React.Component{
                     </Tab>
                     <Tab eventKey={4} title="大四">
                       <div className={'grades'  + this.state.grad4.grad} id="grade-4">
-                        <div className="grade-num"><div>大四({this.state.year+3})</div></div>
+                        <div className='row grade-num'>
+                          <div className=" col-xs-6 col-sm-6"><div>大四上({this.state.year+3})</div></div>
+                          <div className=" col-xs-6 col-sm-6"><div>大四下({this.state.year+3})</div></div>
+                        </div>
                         <div className="session">
                           <div className={this.state.grad4.upSession}>
                             <VisibleTodoList v={this.state.v} grad="4" sem="1"/>

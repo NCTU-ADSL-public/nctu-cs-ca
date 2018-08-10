@@ -27,6 +27,7 @@ import { fetchGraduationCourse } from './Graduation_v2/Actions'
 import {connect} from 'react-redux'
 import {fetchUser, ChangeFooterColor} from '../../Redux/Students/Actions/User'
 import {fetchCourse, fetchCoursePass} from '../../Redux/Students/Actions/Map'
+import { withRouter } from 'react-router-dom'
 
 let store_graduation = createStore(graduationStore, applyMiddleware(thunk))
 
@@ -186,7 +187,7 @@ class Head extends Component {
         //  <CreditItem studentIdcard={this.state.studentIdcard}/>
         //</FadeIn>
         <FadeIn>
-          <Mentor studentIdcard={this.props.studentIdcard}/>
+          <Mentor />
         </FadeIn>
       )
     }
@@ -195,7 +196,7 @@ class Head extends Component {
       return(
         <FadeIn>
           <MuiThemeProvider>
-            <Mail type='student' id={this.props.studentIdcard.student_id}/>
+            <ProjectList />
           </MuiThemeProvider>
         </FadeIn>
       )
@@ -203,11 +204,11 @@ class Head extends Component {
     else if (this.state.selectedIndex === 5) {
       this.props.ChangeFooterColor('#5D4037')
       return(
-        <FadeIn>
+          <FadeIn>
           <MuiThemeProvider>
-            <ProjectList project_status={this.state.project_status_data} project={this.state.project_data} studentProfile={this.props.studentIdcard}/>
+          <Mail type='student' id={this.props.studentIdcard.student_id}/>
           </MuiThemeProvider>
-        </FadeIn>
+          </FadeIn>
       )
     }
   }
@@ -249,6 +250,13 @@ class Head extends Component {
 // onTouchTap={() => this.select(3)}
 // />
   render () {
+    const router = [
+      '/assistants/head',
+      '/assistants/grad',
+      '/assistants/project',
+      '/assistants/family',
+      '/assistants/mail'
+    ]
     const onTouchTaps = [
       () => this.select(0),
       () => this.select(1),
@@ -294,4 +302,4 @@ const mapDispatch = (dispatch)=>({
   ChangeFooterColor: (color) => dispatch(ChangeFooterColor(color))
 })
 
-export default connect(mapState, mapDispatch)(Head)
+export default connect(mapState, mapDispatch)(withRouter(Head))

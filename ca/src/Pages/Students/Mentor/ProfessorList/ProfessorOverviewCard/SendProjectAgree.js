@@ -30,12 +30,13 @@ import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import Grow from '@material-ui/core/Grow'
 import axios from 'axios/index'
+import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 
 function Transition (props) {
   return <Slide direction='up' {...props} />
 }
 
-const limitcount = 10
+const limitcount = 7
 
 const styles = theme => ({
   root: {
@@ -74,6 +75,7 @@ class SendProjectAgree extends React.Component {
     this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this)
     this.handleremovemenber = this.handleremovemenber.bind(this)
     this.handleTitleChange = this.handleTitleChange.bind(this)
+    this.handleSend = this.handleSend.bind(this)
   }
 
 
@@ -202,7 +204,6 @@ class SendProjectAgree extends React.Component {
   }
 
   handleinputChange = (event, str, index) => {
-    event.preventDefault()
     let newinput = [...this.state.input]
     newinput[index][str] = event.target.value
     this.setState({ input: newinput })
@@ -211,7 +212,7 @@ class SendProjectAgree extends React.Component {
   render () {
     const { expanded } = this.state
     const { input } = this.state
-    const { classes } = this.props
+    const { classes, fullScreen } = this.props
     return (
       <div>
         {this.props.rwd
@@ -241,6 +242,7 @@ class SendProjectAgree extends React.Component {
           aria-labelledby='alert-dialog-slide-title'
           aria-describedby='alert-dialog-slide-description'
           fullWidth
+          fullScreen={fullScreen}
         >
           <DialogTitle id='alert-dialog-slide-title'>
             {'專題申請'}
@@ -424,4 +426,4 @@ function TransitionUp (props) {
   return <Slide {...props} direction='up' />
 }
 
-export default withStyles(styles)(SendProjectAgree)
+export default withStyles(styles)(withMobileDialog()(SendProjectAgree))
