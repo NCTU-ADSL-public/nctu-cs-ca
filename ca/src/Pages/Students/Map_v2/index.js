@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import './index.css'
 import Course from './Course'
 import { connect } from 'react-redux'
-import { fetchCoursePass, fetchCourse } from '../../../Redux/Students/Actions/Map'
+import { fetchCoursePass, fetchCourse, ShowCourseCondition } from '../../../Redux/Students/Actions/Map'
 
 function TabContainer({ children, dir }) {
   return (
@@ -36,6 +36,7 @@ class index extends React.Component {
     this.state = {
       value: 0,
     }
+    props.ShowCourseCondition()
   }
 
 
@@ -51,14 +52,22 @@ class index extends React.Component {
     const { classes, theme } = this.props
 
     return (
-      <div className='Map-Row row'>
-        <Course studentPasdata={this.props.CoursePass} data={this.props.CourseMap}
-             studentsGrad={this.props.studentIdcard.grade}/>
-        <div>
-          <div className="green" style={{backgroundColor: '#616161'}}/>
+      <div>
+        <div className='hidden-xs hidden-sm' style={{ padding: '4% 5% 0 5%'}}>
+          <div className="red" style={{backgroundColor: '#616161'}}/>
           <div className="text">已通過</div>
           <div className="red" style={{backgroundColor: '#a42926'}}/>
           <div className="text">未通過</div>
+        </div>
+        <div className='Map-Row'>
+          {/*<div className='visible-xs visible-sm' style={{width: '100%'}}>*/}
+            {/*<div className="green" style={{backgroundColor: '#616161'}}/>*/}
+            {/*<div className="text">已通過</div>*/}
+            {/*<div className="red" style={{backgroundColor: '#a42926'}}/>*/}
+            {/*<div className="text">未通過</div>*/}
+          {/*</div>*/}
+          <Course studentPasdata={this.props.CoursePass} data={this.props.CourseMap}
+               studentsGrad={this.props.studentIdcard.grade}/>
         </div>
       </div>
     )
@@ -77,8 +86,7 @@ const mapStateToProps = (state) => ({
   CourseMap: state.Student.Map.CourseMap,
 })
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data_course: () => dispatch(fetchCoursePass()),
-  fetch_data_coursepass: () => dispatch(fetchCourse())
+  ShowCourseCondition: () => dispatch(ShowCourseCondition())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(index))

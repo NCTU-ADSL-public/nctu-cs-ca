@@ -1,5 +1,5 @@
 import React from 'react'
-import './Map.css';
+// import './Map.css';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Dialog from 'material-ui/Dialog';

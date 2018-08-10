@@ -1,6 +1,6 @@
 import React from 'react'
 import Todo from './Todo'
-import './Map.css'
+// import './Map.css'
 
 const TodoList = ({ todos, onTodoClick }) => (
   <div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Map.css'
+//import './Map.css'
 
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'

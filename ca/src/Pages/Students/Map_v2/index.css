@@ -42,7 +42,7 @@ h3{
 
 
 .Map-Row{
-    padding: 5% 7% 0 7%;
+    padding: 2% 5% 0 5%;
     background: #F5F5F5;
     height: 600px;
 }
@@ -59,8 +59,6 @@ h3{
 .mods{
     float: left;
     margin: 2% 0 0 1%;
-
-    height: 500px;
     width: 15%;
 }
 
@@ -140,7 +138,6 @@ h3{
     overflow: auto;
     border-radius: 2px;
     transition: all 2s ease;
-    background-color: #616161;
     width:100px;
 }
 .course-btn:hover{
@@ -228,15 +225,10 @@ h3{
         float: left;
     }
 
-
-    .Map-Row{
-        height: 1000px;
-    }
-
     .grades{
         margin-bottom: 10px;
+        height: inherit;
         width: 100%;
-        height: 750px;
     }
 
     .grade-num{
@@ -246,29 +238,29 @@ h3{
     }
 
     .session {
-        height: 92%;
+        height: 100%;
     }
 
     .course-group-1{
-        height: 22%;
+        height: inherit;
     }
     .course-group-2{
-        height: 42%;
+        height: inherit;
     }
     .course-group-3{
-        height: 20%;
+        height: inherit;
     }
 
     .course{
         padding: 5px;
         height: 54px;
+
     }
 
     .course-btn{
         height: 100%;
         overflow: hidden;
     }
-
 
     .mods{
         width: 100%;

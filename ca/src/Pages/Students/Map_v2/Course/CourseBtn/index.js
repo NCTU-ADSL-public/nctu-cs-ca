@@ -337,12 +337,11 @@ class Todo extends React.Component {
     return(
       <div className="course"
            style={{
-             transition: 'all .2s',
-             opacity: !this.props.completed ? "1" : "0.2",
+             transition: 'all .2s'
            }}>
         <MuiThemeProvider>
           <FlatButton className="course-btn"
-                      backgroundColor={"#616161"}
+                      backgroundColor={this.props.completed?"#616161":"#911a1a"}
                       hoverColor={"#338d68"}
                       fullWidth={true}
                       labelStyle={{
@@ -356,7 +355,6 @@ class Todo extends React.Component {
                         fontFamily: 'Noto Sans CJK TC',
                       }}
                       style={{
-                        background: this.props.pre_flag ? "#FF2D2D":"",
                         paddingRight: 0,
                         borderRadius:'5px'
                       }}
