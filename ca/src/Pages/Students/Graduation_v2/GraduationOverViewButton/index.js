@@ -9,7 +9,9 @@ import Button from '@material-ui/core/Button'
 import CircularProgressbar from 'react-circular-progressbar'
 import { connect } from 'react-redux'
 import { fetchProfessors } from '../../../../Redux/Students/Actions/Professor/index'
-import Divider from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider'
+import RwdIconBtn from './Component/RwdIconButton'
+import PrintBtn from './Component/PrintBtn'
 
 const styles = theme => ({
   progress: {
@@ -23,7 +25,8 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit * 2,
-    background: '#34855e'
+    background: '#7c7c7c',
+    color : '#ffffff',
   },
   icon: {
     marginRight: theme.spacing.unit
@@ -58,7 +61,7 @@ class Index extends React.Component {
           <div className='col-xs-6 col-sm-8 col-md-10 col-lg-10' onClick={this.handleClickOpen}>
             <CircularProgressbar
               percentage={70}
-              text={`畢業${overview.total}/${overview.total_require}`}
+              text={`畢業 ${overview.total}/${overview.total_require}`}
               initialAnimation
               styles={{
                 path: { stroke: '#34855e'},
@@ -66,25 +69,19 @@ class Index extends React.Component {
               }}
           />
           </div>
-          <div className='col-xs-3 col-sm-3 visible-xs visible-sm' />
+          <div className='col-xs-3 col-sm-3 col-md-1  col-lg-1' />
+          <div className='col-xs-3 col-sm-3 visible-xs visible-sm' >
+            <RwdIconBtn />
+          </div>
         </div>
         <Divider style={{marginBottom:'20px', marginTop:'20px'}}/>
-         {/*<div className='col-md-6 col-lg-6'>*/}
-         {/*<Button variant='contained' color='primary' className={classes.button} size='large' fullWidth>*/}
-         {/*<PrintIcon className={classes.icon} />*/}
-         {/*列印*/}
-         {/*</Button>*/}
-         {/*</div>*/}
-         {/*<div className='col-md-6 col-lg-6'>*/}
-         {/*<Button variant='contained' color='primary' className={classes.button} size='large' fullWidth>*/}
-         {/*<EditIcon className={classes.icon} />*/}
-         {/*編輯課程*/}
-         {/*</Button>*/}
-         {/*</div>*/}
-         {/*<Button variant='contained' color='primary' className={classes.button} size='large' fullWidth>*/}
-         {/*<AssignmentIcon className={classes.icon} />*/}
-         {/*傳送畢業預審給助理*/}
-         {/*</Button>*/}
+         <div className='hidden-sm hidden-xs'>
+           <PrintBtn />
+           <Button variant='contained' color='default' className={classes.button} size='large' fullWidth>
+           <AssignmentIcon className={classes.icon} />
+             畢業預審資訊
+           </Button>
+         </div>
       </div>
     )
   }
@@ -94,7 +91,7 @@ Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
-  overview: state.all.overview
+  overview: state.Student.Graduation.overview
 })
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors())

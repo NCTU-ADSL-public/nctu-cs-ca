@@ -3,6 +3,7 @@ import { handleActions } from 'redux-actions'
 const initialState = {
   CourseMap: [],
   CoursePass: [],
+  CoursePrint: [],
   status: 'IDLE'
 }
 

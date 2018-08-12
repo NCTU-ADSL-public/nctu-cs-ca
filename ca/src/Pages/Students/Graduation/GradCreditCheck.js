@@ -14,7 +14,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 import 'animate.css'
-import './Graduation.css'
 import App from './Trello/List'
 import DialogWaring from './Trello/warning'
 import ScrollToTopBtn from '../../../Components/ScrollToTopBtn';

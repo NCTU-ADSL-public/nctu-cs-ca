@@ -2,13 +2,17 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
   data: [],
-  filter_select: 'ALL',
-  filter_string: '',
+  printdata: [],
+  check: false,
+  englishCheck: false,
   status: 'IDLE',
   overview: {}
 }
 
 export default handleActions({
+  SHOW_GRAD_PRINT: (state, action) => ({ ...state, printdata: action.payload }),
+  SHOW_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
+  SHOW_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
   STORE_GRADUATION_COURSE: (state, action) => {
     let newdata = action.payload
     let newoverview = {...newdata[newdata.length - 1]}

@@ -62,3 +62,64 @@ footer {
     dominant-baseline: middle;
     text-anchor: middle;
 }
+
+
+.red{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #d93a64;
+    float: left;
+}
+
+.green{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #3aa276;
+    float: left;
+}
+
+.gray{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: gray;
+    float: left;
+}
+
+.yellow{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #a29149;
+    float: left;
+}
+
+.purple{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #6A94A2;
+    float: left;
+}
+
+.blue{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    background-color: #9e48d9;
+    float: left;
+}
+
+.text{
+    color: #7B7B7B;
+    float: left;
+    opacity: 0.8;
+    font-family: 'Noto Sans CJK TC';
+}
+
+.fixed {
+    position: fixed;
+    z-index: 100;
+}

@@ -156,9 +156,8 @@ class Edit extends React.Component {
                 </div>
               </LabeledInput>
               <LabeledInput label='簡介'>
-                <div className='col-md-12'>
                   <CKEditor style={{height: '50vh'}} activeClass='p10' content={this.state.ckeditorContent} events={{'change': this.onChange}} />
-                </div>
+
               </LabeledInput>
               <div className='justify-content-center pull-right'>
                 <button type='submit' style={{margin: '2px', backgroundColor: '#795548', borderColor: '#795548'}} className='btn btn-success btn-large' onClick={this.handleSubmit}>儲存</button>

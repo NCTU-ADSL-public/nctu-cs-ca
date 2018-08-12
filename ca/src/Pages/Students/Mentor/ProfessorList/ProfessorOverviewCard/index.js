@@ -95,7 +95,7 @@ class Index extends React.Component {
   render () {
     const { classes } = this.props
     return (
-      <div className='group-btn' >
+      <div className='group-btn-student' >
         <div>
           <div>
             <div className='row'>
@@ -119,27 +119,27 @@ class Index extends React.Component {
                   </div>
                 </div>
                 {/*<div className='hidden-xs hidden-sm icon-button'>*/}
-                  {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
-                    {/*<WriteEmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
-                  {/*</div>*/}
-                  {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
-                    {/*<SendProjectAgree profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
-                  {/*</div>*/}
-                  {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
-                    {/*<ReviewProject profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
-                  {/*</div>*/}
-                  {/*<div className='col-md-1 col-lg-1  icon-button_'>*/}
-                    {/*<IconButton*/}
-                      {/*className={classnames(classes.expand, {*/}
-                        {/*[classes.expandOpen]: this.state.expanded*/}
-                      {/*})}*/}
-                      {/*onClick={this.handleExpandClick}*/}
-                      {/*aria-expanded={this.state.expanded}*/}
-                      {/*aria-label='Show more'*/}
+                {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
+                {/*<WriteEmail profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
+                {/*</div>*/}
+                {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
+                {/*<SendProjectAgree profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
+                {/*</div>*/}
+                {/*<div className='col-md-1 col-lg-1 icon-button_'>*/}
+                {/*<ReviewProject profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
+                {/*</div>*/}
+                {/*<div className='col-md-1 col-lg-1  icon-button_'>*/}
+                {/*<IconButton*/}
+                {/*className={classnames(classes.expand, {*/}
+                {/*[classes.expandOpen]: this.state.expanded*/}
+                {/*})}*/}
+                {/*onClick={this.handleExpandClick}*/}
+                {/*aria-expanded={this.state.expanded}*/}
+                {/*aria-label='Show more'*/}
                 {/*>*/}
-                      {/*<ExpandMoreIcon />*/}
-                    {/*</IconButton>*/}
-                  {/*</div>*/}
+                {/*<ExpandMoreIcon />*/}
+                {/*</IconButton>*/}
+                {/*</div>*/}
                 {/*</div>*/}
               </div>
             </div>
@@ -159,7 +159,7 @@ class Index extends React.Component {
                     onClick={this.handleExpandClick}
                     aria-expanded={this.state.expanded}
                     aria-label='Show more'
-              >
+                  >
                     <ExpandMoreIcon />
                   </IconButton>
                 </div>
@@ -169,7 +169,7 @@ class Index extends React.Component {
               <div className='container'>
                 <div className='row' style={{marginTop: '5px'}}>
                   <Divider />
-              經歷：<br />
+                  經歷：<br />
                   {this.props.profile.info === '' ? '尚無資料' : this.props.profile.info}
                   <div style={{height: '50px'}} />
                 </div>

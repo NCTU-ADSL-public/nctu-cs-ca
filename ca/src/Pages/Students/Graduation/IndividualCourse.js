@@ -1,7 +1,6 @@
 import React from 'react';
 import AnimatedProgress from '../../../Components/AnimatedProgress'
 import CourseList from './CourseList'
-import './Graduation.css'
 
 export default class IndividualCourse extends React.Component {
     state={

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import { connect } from 'react-redux'
-import { changeCourse } from '../../../Actions'
+import { changeCourse } from '../../../../../../Redux/Students/Actions/Graduation'
 
 const style = {
     Button: {
@@ -130,7 +130,7 @@ PopoverButton.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.all.overview
+  overview: state.Student.Graduation.overview
 })
 const mapDispatchToProps = (dispatch) => ({
   changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))

@@ -3,7 +3,6 @@ import axios from 'axios'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import scrollToComponent from "react-scroll-to-component";
 
-import './Graduation.css'
 import CircularProgress from '../../../Components/CircularProgress'
 import App from './Trello/List'
 import IndividualCourse from './IndividualCourse'
@@ -196,9 +195,7 @@ class CreditOverview extends React.Component {
                     </MuiThemeProvider>
                 </div>
                 </div>
-            );
-
-
+            )
     }
 }
 

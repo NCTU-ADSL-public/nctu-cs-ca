@@ -50,7 +50,7 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.all.overview
+  overview: state.Student.Graduation.overview
 })
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors())

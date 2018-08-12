@@ -1,0 +1,32 @@
+#printArea {
+    display: none;
+}
+
+
+@media print {
+
+    /* Set body padding to header and footer */
+    body{
+        background: #fff !important;
+        padding: 40px 0;;
+    }
+    .showArea,
+    footer {
+        display: none;
+    }
+    #printArea {
+        background: #fff;
+        padding: 5px;
+        height: auto;
+        width: 100%;
+        display: block;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+        position: absolute;
+        left: 0;
+        top: 0;
+        text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+    }
+
+}

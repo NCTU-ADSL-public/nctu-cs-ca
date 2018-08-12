@@ -138,6 +138,9 @@ class App extends React.Component{
             return(
                 <div>
                   <div className="visible-xs visible-sm">
+                    <div className="mods">
+                      <Button />
+                    </div>
                   <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
                     <Tab eventKey={1} title="大一">
                       <div className={'grades'  + this.state.grad1.grad} id="grade-1">
@@ -262,9 +265,9 @@ class App extends React.Component{
                     </div>
 
                 </div>
-                <div className="mods">
-                  <Button />
-                </div>
+                  <div className="mods hidden-xs hidden-sm">
+                    <Button />
+                  </div>
                 {/*<div className="mods"><Button studentPasdata={this.props.studentPasdata} data={this.props.data}/></div>*/}
             </div>
         )

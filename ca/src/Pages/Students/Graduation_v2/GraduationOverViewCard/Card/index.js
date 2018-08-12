@@ -62,6 +62,7 @@ function Transition(props) {
 class Index extends React.Component {
   state = {
     open: false,
+    expanded: true
   }
 
   handleClickOpen = () => {
@@ -70,6 +71,9 @@ class Index extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  }
+  handleChange = () => {
+    this.setState({ expanded: !this.state.expanded });
   }
   render () {
     const { classes, rwd } = this.props
@@ -113,7 +117,7 @@ class Index extends React.Component {
     return (
       <div className={classes.container}>
         <div className='row'>
-          <ExpansionPanel>
+          <ExpansionPanel expanded={this.state.expanded} onChange={this.handleChange}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginTop: '10px'}}>
                 <LinearProgress classes={{barColorPrimary:classes.progress}} variant='determinate' value={this.props.value > 100 ? 100 : this.props.value} color={this.props.value >= 100 ? 'primary' : 'secondary'} />
@@ -145,7 +149,7 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  data: state.all.data.filter(t => t.title === ownProps.title)[0]
+  data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0]
 })
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors())
