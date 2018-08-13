@@ -258,7 +258,7 @@ class SendProjectAgree extends React.Component {
             <AppBar className={classes.appBar} >
             <Toolbar >
               <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
-                編輯專題主頁
+                寄送專題申請
               </Typography>
               <Button style={{fontSize: '12px'}} color="inherit" onClick={this.handleClose} className='pull-right'>
                 取消
@@ -428,9 +428,6 @@ class SendProjectAgree extends React.Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color='primary'>
-              取消
-            </Button>
             <Button onClick={this.handleSend} className={classes.appBar} color='primary'>
               送出
             </Button>

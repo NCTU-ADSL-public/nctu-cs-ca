@@ -111,19 +111,6 @@ class _Navbar extends React.Component {
     )
   }
 
-  getstr (agree) {
-    switch (agree){
-      case '1':
-        return ''
-      case '2':
-        return '(審核中)'
-      case '3':
-        return '(已被拒絕，點按以刪除資料)'
-      case '0':
-        return '(教授尚未查看，點按以刪除資料)'
-    }
-  }
-
   render() {
     const {onClicks,selectedButtonIndex} = this.state
     const navItems = {

@@ -90,7 +90,7 @@ export default class TableExampleComplex extends Component {
     enableSelectAll: false,
     deselectOnClickaway: true,
     showCheckboxes: false,
-    height: '300px',
+    height: '100%',
     tableData:tableData
   };
 

@@ -14,7 +14,6 @@ const Index = ({ colCourse, onTodoClick }) => (
 )
 
 const getcolCourse = (data, grad, sem) => {
-  console.log(data.filter(t => (t.grade === grad && t.semester === sem)))
   return data.filter(t => (t.grade === grad && t.semester === sem))
 }
 

@@ -2,19 +2,15 @@ import React from 'react'
 import GraduationOverViewButton from './GraduationOverViewButton'
 import GraduationOverViewCard from './GraduationOverViewCard'
 import { connect } from 'react-redux'
-import { fetchProfessors } from '../../../Redux/Students/Actions/Professor/index'
 import PrintForm from './GraduationOverViewButton/Component/PrintBtn/PrintForm'
 import './index.css'
 
 class Index extends React.Component {
-  constructor (props) {
-    super(props)
-  }
   render () {
     return (
       <div className='container'>
         <div className='row showArea' style={{marginBottom: '50px'}}>
-          <div className='col-md-3 col-lg-3 hidden-xs hidden-sm fixed' style={{left: '30px', top: '80px'}}>
+          <div className='col-md-3 col-lg-3 hidden-xs hidden-sm fixed' style={{left: '40px', top: '80px'}}>
             <GraduationOverViewButton />
           </div>
           <div className='col-md-3 col-lg-3 hidden-xs' style={{height: '100%'}} />
@@ -44,7 +40,6 @@ const mapStateToProps = (state) => ({
   done: state.Student.Graduation.status === 'DONE'
 })
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProfessors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

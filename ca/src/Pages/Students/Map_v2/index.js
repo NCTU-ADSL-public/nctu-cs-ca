@@ -86,7 +86,7 @@ const mapStateToProps = (state) => ({
   CourseMap: state.Student.Map.CourseMap,
 })
 const mapDispatchToProps = (dispatch) => ({
-  ShowCourseCondition: () => dispatch(ShowCourseCondition())
+  ShowCourseCondition: () => dispatch(ShowCourseCondition()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(index))

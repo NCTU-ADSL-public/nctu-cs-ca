@@ -10,6 +10,7 @@ const initialState = {
 }
 
 export default handleActions({
+  FETCH_DONE: (state) => ({ ...state, status: 'DONE' }),
   SHOW_GRAD_PRINT: (state, action) => ({ ...state, printdata: action.payload }),
   SHOW_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
   SHOW_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
@@ -17,12 +18,12 @@ export default handleActions({
     let newdata = action.payload
     let newoverview = {...newdata[newdata.length - 1]}
     newdata.length = newdata.length - 1
-    console.log(newoverview)
     console.log(newdata)
     return {
       ...state,
       data: [...newdata],
-      overview: {...newoverview}
+      overview: {...newoverview},
+      status: 'DONE'
     }
   },
   UPDATE_COURSE: (state, action) => {
@@ -33,7 +34,6 @@ export default handleActions({
     let indexCourse = newdata[indexFrom].course.findIndex(x => { return x.cn === indexRef.course })
     let swap = {...newdata[indexFrom].course[indexCourse]}
     newdata[indexEnd].course = [...newdata[indexEnd].course, {...swap}]
-    console.log(newdata[indexEnd].course)
     newdata[indexFrom].course.splice(indexCourse, 1)
     return {
       ...state,

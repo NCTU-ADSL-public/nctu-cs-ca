@@ -2,7 +2,6 @@ import React from 'react'
 import ProfessorOverviewCard from './ProfessorOverviewCard'
 import { connect } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Pager from './Components/Pager'
 
 class ProfessorsList extends React.Component {
   render () {

@@ -78,7 +78,7 @@ class PopoverButton extends React.Component {
     };
 
     render(){
-      const {label, flash, backgroundColor, children, classes} = this.props
+      const {label, flash, backgroundColor, children, classes, rwd} = this.props
       const { anchorEl } = this.state
 
         return(
@@ -94,7 +94,7 @@ class PopoverButton extends React.Component {
                             labelStyle={style.ButtonLabel}
                             hoverColor={"#80b0d9"}
                             backgroundColor={backgroundColor ? backgroundColor : '#616161'}
-                            style={style.Button}
+                            style={{...style.Button, width:rwd?'150px':'200px'}}
                             label={label}
                             onClick={this.handleClick}
                         />

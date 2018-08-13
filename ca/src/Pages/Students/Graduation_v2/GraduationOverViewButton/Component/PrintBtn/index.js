@@ -13,7 +13,7 @@ import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit * 2,
+    margin: '20px 0 20px 0',
     background: '#7c7c7c',
     color: '#ffffff'
   },
@@ -31,7 +31,7 @@ class Index extends React.Component {
     return true
   }
   render () {
-    const { classes, rwd, fullScreen} = this.props
+    const { classes, rwd } = this.props
     if (rwd) {
       return (
         <MenuItem className={classes.menuItem} onClick={() => this.printGradTable('1' + this.props.studentIdcard.student_id[0] + this.props.studentIdcard.student_id[1] + '103學年度畢業預審表-' + this.props.studentIdcard.student_id)}>

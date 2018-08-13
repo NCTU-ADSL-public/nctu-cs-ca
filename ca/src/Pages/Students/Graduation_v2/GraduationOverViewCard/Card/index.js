@@ -17,8 +17,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Grow from '@material-ui/core/Grow'
-import Chip from '@material-ui/core/Chip'
 import Avatar from '@material-ui/core/Avatar'
+import AnimatedProgress from '../../../../../Components/AnimatedProgress'
 import Drawer from '@material-ui/core/Drawer'
 
 
@@ -42,6 +42,7 @@ const styles = theme => ({
   },
   appBar: {
     position: 'relative',
+    backgroundColor: '#7c7c7c'
   },
   flex: {
     flex: 1,
@@ -80,16 +81,11 @@ class Index extends React.Component {
     if(rwd){
       return(
         <div>
-          <div className='col-xs-6 col-sm-6'>
-            <Chip
-              avatar={<Avatar>{this.props.title[0]}</Avatar>}
-              label={this.props.title}
-              className={classes.chip}
-              onClick={this.handleClickOpen}
-            />
+          <div className='col-xs-6 col-sm-6 well'>
+            <div style={{fontSize: '0.8em'}} className="showcourseoverview" onClick={this.handleClickOpen}>{this.props.title}&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.complete}</font>/{this.props.require}&nbsp;學分<br/><AnimatedProgress value={this.props.value}/></div>
           </div>
           <Drawer
-            anchor="top"
+            anchor="right"
             open={this.state.open}
             onClose={this.handleClose}
             TransitionComponent={Transition}
@@ -100,15 +96,12 @@ class Index extends React.Component {
                   <CloseIcon />
                 </IconButton>
                 <Typography variant="title" color="inherit" className={classes.flex}>
-                  Sound
+                  {this.props.title}
                 </Typography>
-                <Button color="inherit" onClick={this.handleClose}>
-                  save
-                </Button>
               </Toolbar>
             </AppBar>
-            <div style={{}}>
-            {this.props.title === '英文授課' ? '' : <CourseList items={this.props.data.course} />}
+            <div style={{padding: '15px'}}>
+            {this.props.title === '英文授課' ? '' : <CourseList items={this.props.data.course} rwd/>}
             </div>
           </Drawer>
         </div>
@@ -119,19 +112,13 @@ class Index extends React.Component {
         <div className='row'>
           <ExpansionPanel expanded={this.state.expanded} onChange={this.handleChange}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginTop: '10px'}}>
+              <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginTop: '20px'}}>
                 <LinearProgress classes={{barColorPrimary:classes.progress}} variant='determinate' value={this.props.value > 100 ? 100 : this.props.value} color={this.props.value >= 100 ? 'primary' : 'secondary'} />
               </div>
               <div className='col-md-5 col-lg-5' style={{marginLeft: '20px'}}>
                 <div className={rwd ? classes.textRwd : classes.text}>
-                  {this.props.title}（{this.props.isMen ? '門' : '學分'}）&nbsp;&nbsp;&nbsp;
+                  {this.props.title}&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.complete}</font>/{this.props.require}&nbsp;（{this.props.isMen ? '門' : '學分'}）&nbsp;&nbsp;&nbsp;
                 </div>
-              </div>
-              <div className='col-md-1 col-lg-1'>
-                <font color='#228b22' className={rwd ? classes.textRwd : classes.text}>{this.props.complete}</font>
-              </div>
-              <div className='col-md-2 col-lg-2'>
-                <div className={classes.littletext}>/{this.props.require}</div>
               </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -149,7 +136,8 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0]
+  data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
+  overview: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0]
 })
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors())

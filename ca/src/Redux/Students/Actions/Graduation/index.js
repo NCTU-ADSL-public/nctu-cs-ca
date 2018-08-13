@@ -4,11 +4,11 @@ import FakeData from '../../../../Resources/FakeData'
 
 export const storeGraduationCourse = createAction('STORE_GRADUATION_COURSE')
 export const filterinput = createAction('FILTER_INPUT')
-export const storeImage = createAction('STORE_IMAGE')
 export const storeGradPrint = createAction('SHOW_GRAD_PRINT')
 export const storeGradCheck = createAction('SHOW_GRAD_CHECK')
 export const storeGradEnglishTestCheck = createAction('SHOW_GRAD_ENGLISH_TEST_CHECK')
 export const updateCourse = createAction('UPDATE_COURSE')
+export const fetchDone = createAction('FETCH_DONE')
 
 export const fetchGraduationCourse = (page = 1) => dispatch => {
   axios.get('/students/graduate/revised').then(res => {
@@ -17,7 +17,6 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
     dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
     console.log(err)
   })
-
   axios.get('/students/graduate/print').then(res => {
     dispatch(storeGradPrint(res.data))
   }).catch(err => {
@@ -35,6 +34,7 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
   }).catch(err => {
     console.log(err)
   })
+
 }
 
 export const changeCourse = (from, end, course) => dispatch => {

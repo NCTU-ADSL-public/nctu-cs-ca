@@ -9,6 +9,7 @@ import { fetchProfessors, changepage } from '../../../Redux/Students/Actions/Pro
 class Index extends React.Component {
   constructor (props) {
     super(props)
+    props.FetchProfessorInfo()
   }
   render () {
     return (

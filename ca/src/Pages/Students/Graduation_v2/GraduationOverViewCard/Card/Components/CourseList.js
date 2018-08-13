@@ -2,7 +2,7 @@ import React from 'react'
 import PopoverButton from './PopoverButton'
 
 const CourseList = (props) => {
-  const { items, selection} = props
+  const { items, selection, rwd} = props
   const phyCourseNames = ['物理(一)', '物理(二)', '物理(一)榮譽班', '物理(二)榮譽班']
 
   const decideBtnFlash = (completed) => {
@@ -31,12 +31,13 @@ const CourseList = (props) => {
   return (
     <div >
       {items.map((item, key) =>
-        <div className='col-md-4 col-lg-4'>
+        <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
           <PopoverButton
             key={id++}
             label={phyCourseNames.includes(item.cn) ? `${item.cn}  ${item.realCredit}學分` : item.cn}
             backgroundColor={decideBtnBgColor(item.complete, item.reason)}
             flash={decideBtnFlash(item.complete)}
+            rwd={rwd}
                 >
             <div>{item.cn}</div>
             <div>分數:&nbsp;{(item.score === -1) ? '-' : item.score}</div>

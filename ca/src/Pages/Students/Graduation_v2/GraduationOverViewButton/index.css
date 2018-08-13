@@ -5,3 +5,15 @@
     margin: 50px;
     font-size: 20px;
 }
+.overview{
+    clear: both;
+}
+.overview-course{
+    font-size: 0.8em;
+    color: #7c7c7c;
+}
+.showcourseoverview{
+    color: #7c7c7c;
+    font-weight: 400;
+    margin: 5px 0 5px 0;
+}
