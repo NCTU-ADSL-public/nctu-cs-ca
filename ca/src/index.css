@@ -123,3 +123,7 @@ footer {
     position: fixed;
     z-index: 100;
 }
+
+input {
+    font-size: 16px!important;
+}
