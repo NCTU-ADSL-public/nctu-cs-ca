@@ -47,6 +47,9 @@ const styles = theme => ({
     margin: '10px',
     fontSize: '20px',
   },
+  tooltip: {
+    fontSize: '20px'
+  }
 });
 
 class index extends React.Component {
@@ -270,7 +273,7 @@ class index extends React.Component {
           {this.filter(teachers)
           .slice((page - 1) * 8, (page) * 8)
           .map( (teacher, index) => (
-            <ExpansionPanel key = { index } style = {{ margin: '10px auto'}}>
+            <ExpansionPanel key = { index } style = {{ margin: '10px auto'}} >
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="display2" className={classes.heading} style = {{ width: '100px' }} >{teacher.professor_name}</Typography>
                 <LinearProgress variant="determinate"
@@ -289,7 +292,11 @@ class index extends React.Component {
                           <h4>{ this.idToStr(index) } <span style = {{ fontSize: '20px' }}>{students.length}人</span></h4>
                           {
                             students.map( (student) => (
-                              <Tooltip title="Add" placement="top">
+                              <Tooltip
+                                title={ Math.round(Math.random() * 100).toString() + "分" }
+                                classes={{ tooltip: classes.tooltip }}
+                                placement="top"
+                              >
                                 <Chip label={ student.id + " " + student.name } className = { classes.chip } />
                               </Tooltip>
                             ))
@@ -309,9 +316,7 @@ class index extends React.Component {
                           <h4>{ this.idToStr(index) }</h4>
                           {
                             students.map( (student) => (
-                              <Tooltip title="Add" placement="top">
-                                <Chip label={ student.id + " " + student.name } className={classes.chip} />
-                              </Tooltip>
+                              <Chip label={ student.id + " " + student.name } className={classes.chip} />
                             ))
                           }
                         </div>
