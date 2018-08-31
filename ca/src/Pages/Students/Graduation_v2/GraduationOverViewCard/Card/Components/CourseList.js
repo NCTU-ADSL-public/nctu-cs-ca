@@ -29,9 +29,9 @@ const CourseList = (props) => {
   }
   let id = 0
   return (
-    <div >
+    <div style={{width: '100%'}}>
       {items.map((item, key) =>
-        <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+        <div className='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
           <PopoverButton
             key={id++}
             label={phyCourseNames.includes(item.cn) ? `${item.cn}  ${item.realCredit}學分` : item.cn}

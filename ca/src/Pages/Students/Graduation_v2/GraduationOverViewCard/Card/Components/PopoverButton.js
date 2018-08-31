@@ -94,7 +94,7 @@ class PopoverButton extends React.Component {
                             labelStyle={style.ButtonLabel}
                             hoverColor={"#80b0d9"}
                             backgroundColor={backgroundColor ? backgroundColor : '#616161'}
-                            style={{...style.Button, width:rwd?'150px':'200px'}}
+                            style={{...style.Button, width:rwd?'150px':'150px'}}
                             label={label}
                             onClick={this.handleClick}
                         />

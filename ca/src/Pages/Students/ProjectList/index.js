@@ -29,7 +29,6 @@ class index extends React.Component {
 
   render () {
     let id = 0
-    this.props.fetch_data()
     return (
       <div className='container'>
         <div>

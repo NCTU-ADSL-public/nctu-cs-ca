@@ -9,6 +9,8 @@ import { withStyles } from '@material-ui/core/styles'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Checkbox from '@material-ui/core/Checkbox'
 import PropTypes from 'prop-types'
+import Slider from 'material-ui/Slider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const styles = theme => ({
   root: {
@@ -34,7 +36,7 @@ class CheckboxesGroup extends React.Component {
       人工智慧: false,
       網路: false,
       電腦視覺: false,
-      scount: '0人'
+      scount: 5
     }
   }
 
@@ -50,6 +52,23 @@ class CheckboxesGroup extends React.Component {
     const { classes } = this.props
     return (
       <div>
+
+        <div className='row'>
+          <FormControl component="fieldset" required className={classes.formControl}>
+            <FormLabel component="legend">專題已收人數（以上）</FormLabel>
+            <RadioGroup
+              aria-label="gender"
+              name="gender1"
+              className={classes.group}
+              value={this.state.scount}
+              onChange={this.handleScountChange}
+            >
+              <FormControlLabel classes={{label:classes.formControlLabel}} value={0} control={<Radio />} label="0人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value={3} control={<Radio />} label="3人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value={5} control={<Radio />} label="5人" />
+            </RadioGroup>
+          </FormControl>
+        </div>
         <div className='row'>
           <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend">
@@ -143,22 +162,6 @@ class CheckboxesGroup extends React.Component {
                 label="電腦視覺"
               />
             </FormGroup>
-          </FormControl>
-        </div>
-        <div className='row'>
-          <FormControl component="fieldset" required className={classes.formControl}>
-            <FormLabel component="legend">專題已收人數（以上）</FormLabel>
-            <RadioGroup
-              aria-label="gender"
-              name="gender1"
-              className={classes.group}
-              value={this.state.scount}
-              onChange={this.handleScountChange}
-            >
-              <FormControlLabel classes={{label:classes.formControlLabel}} value="0人" control={<Radio />} label="0人" />
-              <FormControlLabel classes={{label:classes.formControlLabel}} value="3人" control={<Radio />} label="3人" />
-              <FormControlLabel classes={{label:classes.formControlLabel}} value="5人" control={<Radio />} label="5人" />
-            </RadioGroup>
           </FormControl>
         </div>
       </div>

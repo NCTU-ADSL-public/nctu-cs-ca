@@ -298,7 +298,7 @@ class SendProjectAgree extends React.Component {
               {this.state.menberNumber.map(t =>
                 <Grow in  key={t}>
                 <div className='row'>
-                  <div className='col-sm-3 col-md-3 col-lg-3'>
+                  <div className='col-sm-3 col-md-4 col-lg-4'>
                   <Input
                     placeholder='學號'
                     className='project-member-input'
@@ -312,7 +312,7 @@ class SendProjectAgree extends React.Component {
                     onChange={(event)=>this.handleinputChange(event, 'id', t-1)}
                   />
                   </div>
-                  <div className='col-sm-3 col-md-3 col-lg-3'>
+                  <div className='col-sm-3 col-md-4 col-lg-4'>
                   <Input
                     placeholder='電話'
                     className='project-member-input'
@@ -325,7 +325,7 @@ class SendProjectAgree extends React.Component {
                     onChange={(event)=>this.handleinputChange(event, 'phone', t-1)}
                   />
                   </div>
-                  <div className='col-sm-6 col-md-6 col-lg-6'>
+                  <div className='col-sm-6 col-md-4 col-lg-4'>
                   <Input
                     placeholder='Email'
                     className='project-member-input'

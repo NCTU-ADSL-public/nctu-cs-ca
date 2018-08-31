@@ -15,7 +15,7 @@
     color: #575757;
 }
 .pic{
-    width: 90%;
+    width: 100%;
     overflow: hidden;
     height: 140px;
 }
@@ -50,7 +50,8 @@
     right: 0;
 }
 .project-member-input{
-    margin: 20px 5px 0 5px;
+    margin: 20px 2px 0 1px;
+    width: 100%;
 }
 .project-member-input-select{
     margin-bottom: 10px;

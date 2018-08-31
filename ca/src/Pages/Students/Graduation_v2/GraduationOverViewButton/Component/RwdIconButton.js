@@ -46,7 +46,6 @@ class LongMenu extends React.Component {
           }}
         >
           <PrintBtn rwd/>
-          <InfoBtn rwd/>
         </Menu>
       </div>
     )
