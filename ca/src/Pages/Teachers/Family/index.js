@@ -132,7 +132,7 @@ class Index extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      initItem: [],
+      initItem: FakeData.StudentList.map((v,i)=>({...v,id:i})),
       chooseInfo: null,
       dialogOpen: false // for 行動版
     }
@@ -145,36 +145,35 @@ class Index extends React.Component {
   choose(v){
     if(! ('score' in this.state.initItem[v])){
       let tmp = this.state.initItem
-      // tmp[v].score = FakeData.StudentScore
-      // this.setState({
-      //   chooseInfo:v,
-      //   initItem: tmp,
-      //   dialogOpen:(window.innerWidth<768)
-      // })
-      axios.post('/StudentGradeList', {
-        student_id: this.state.initItem[v].student_id
-      }).then(res => {
-        tmp[v].score = res.data
-        this.setState({
-          chooseInfo:v,
-          initItem: tmp,
-          dialogOpen:(window.innerWidth<768)
-        })
-      }).catch(err => {
-        console.log(err)
-      })
-    }
-    else{
+      tmp[v].score = FakeData.StudentScore
       this.setState({
         chooseInfo:v,
+        initItem: tmp,
         dialogOpen:(window.innerWidth<768)
+      })
+      // axios.post('/StudentGradeList', {
+      //   student_id: this.state.initItem[v].student_id
+      // }).then(res => {
+      //   tmp[v].score = res.data
+      //   this.setState({
+      //     chooseInfo:v,
+      //     initItem: tmp,
+      //     dialogOpen:(window.innerWidth<768)
+      //   })
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+    }else{
+      this.setState({
+        chooseInfo: v,
+        dialogOpen: (window.innerWidth<768)
       })
     }
   }
 
-  fetchData(){
+  fetchData () {
     axios.get('/professors/students/list', {
-      id: this.props.tid,
+      id: this.props.tid
     }).then(res => {
       this.setState({initItem: res.data.map((v,i)=>({...v,id:i}))})
     }).catch(err => {
@@ -182,12 +181,12 @@ class Index extends React.Component {
     })
   }
 
-  componentWillMount(){
-    this.fetchData();
+  componentWillMount () {
+    this.fetchData()
   }
 
-  componentWillReceiveProps(nextProps){
-    if(this.props.tid !== nextProps.tid){
+  componentWillReceiveProps (nextProps) {
+    if(this.props.tid !== nextProps.tid) {
       this.fetchData()
     }
   }
@@ -198,33 +197,33 @@ class Index extends React.Component {
         <Grid fluid={true}>
           <Row>
             <Col lg={6} md={6} sm={6} style={styles.layout}>
-              <List items={this.state.initItem} choose={this.choose}/>
+              <List items={this.state.initItem} choose={this.choose} />
             </Col>
             {/* for smaller screen */}
             <MuiThemeProvider>
               <Dialog
                 modal={false}
                 open={this.state.dialogOpen}
-                onRequestClose={()=>this.setState({dialogOpen:false})}
-                autoScrollBodyContent={true}
-                contentStyle={{maxWidth:'none',width:'90%',position:'absolute',top:0,left:'5%'}}
+                onRequestClose={() => this.setState({dialogOpen: false})}
+                autoScrollBodyContent
+                contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
               >
-              <InfoCard 
-                selected={this.state.initItem[this.state.chooseInfo]}
-                sender={this.props.tname}
-                sender_email={this.props.tmail}
-              />
-              </Dialog>
-            </MuiThemeProvider>
-            {/* for larger screen */}
-            <Col lg={6} md={6} sm={6} xsHidden style={styles.layout}>
-              {this.state.chooseInfo !== null ? 
-                <InfoCard 
+                <InfoCard
                   selected={this.state.initItem[this.state.chooseInfo]}
                   sender={this.props.tname}
                   sender_email={this.props.tmail}
                 />
-                : 
+              </Dialog>
+            </MuiThemeProvider>
+            {/* for larger screen */}
+            <Col lg={6} md={6} sm={6} xsHidden style={styles.layout}>
+              {this.state.chooseInfo !== null ?
+                <InfoCard
+                  selected={this.state.initItem[this.state.chooseInfo]}
+                  sender={this.props.tname}
+                  sender_email={this.props.tmail}
+                />
+                :
                 <MuiThemeProvider>
                   <Card>
                     <CardText style={{textAlign:'center',fontSize:'1.2em',minHeight:500,color:'rgb(144,144,144)'}}>請點選左方欄位以檢視學生成績</CardText>

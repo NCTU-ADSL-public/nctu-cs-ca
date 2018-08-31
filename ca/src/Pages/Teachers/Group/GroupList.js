@@ -4,6 +4,7 @@ import { Grid, Row, Col, Image, Glyphicon, Button } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 import firebase from 'firebase'
+import InfoCard from '../Shared/InfoCard'
 
 import Loading from '../../../Components/Loading'
 import ChangeTitleDialog from './ChangeTitleDialog'
@@ -11,11 +12,15 @@ import ScoreDialog from './ScoreDialog'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
-import {Card, CardText} from 'material-ui/Card';
-import Popover from 'material-ui/Popover';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardText } from 'material-ui/Card'
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+import FakeData from '../../../Resources/FakeData'
+import { Dialog, CardHeader, Table, TableBody, TableHeader, TableRow, TableRowColumn } from 'material-ui'
+import { Tabs, Tab } from 'material-ui/Tabs'
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
+import MailButton from '../../../Components/mail/MailButton'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
@@ -88,6 +93,18 @@ const styles = {
     height: 50
   }
 }
+const initItem = [
+  {
+    'student_id': '0316000',
+    'sname': '幹你的吳泓寬',
+    'program': '網多',
+    'graduate': '0',
+    'graduate_submit': '0',
+    'email': 'student@gmail.com',
+    'failed': true,
+    'score': FakeData.StudentScore,
+  },
+]
 
 class GroupList extends React.Component {
   constructor (props) {
@@ -99,69 +116,95 @@ class GroupList extends React.Component {
       total_number: 0,
       chipOpen: false,
       groupList: [
-        { research_title: 'epth estimation from Single image',
+        {
+          research_title: 'epth estimation from Single image',
           participants: [
-            { student_id: '0399999',
+            {
+              student_id: '0399999',
               sname: '陳罐頭',
               detail: '資工系 網多組3 ',
-              score:''
+              score: ''
             },
-            { student_id: '0399777',
+            {
+              student_id: '0399777',
               sname: '李小霖',
               detail: '資工系 網多組3 ',
               score: ''
             },
-            { student_id: '0391234',
+            {
+              student_id: '0391234',
               sname: '李毛毛',
               detail: '資工系 網多組3 '
             },
-            { student_id: '0399777',
+            {
+              student_id: '0399777',
               sname: '李柏林',
               detail: '資工系 網多組3 ',
               score: ''
             },
-            { student_id: '0391234',
+            {
+              student_id: '0391234',
               sname: '李二毛',
               detail: '資工系 網多組3 '
             }
           ],
           year: '106'
         },
-        { research_title: '虛擬貨幣交易機器人',
+        {
+          research_title: '虛擬貨幣交易機器人',
           participants: [
-            { student_id: '0399999',
+            {
+              student_id: '0399999',
               sname: '陳罐頭',
               detail: '資工系 網多組3 '
             }
           ],
           year: '106'
         },
-        { research_title: 'IOT智慧家庭監控應用',
+        {
+          research_title: 'IOT智慧家庭監控應用',
           participants: [
-            { student_id: '0399999',
+            {
+              student_id: '0399999',
               sname: '陳罐頭',
               detail: '資工系 網多組3 '
             }
           ],
           year: '106'
         },
-        { research_title: 'Android 系統記憶體管理改進',
+        {
+          research_title: 'Android 系統記憶體管理改進',
           participants: [
-            { student_id: '0399999',
+            {
+              student_id: '0399999',
               sname: '陳罐頭',
               detail: '資工系 網多組3 '
             }
           ],
           year: '106'
         }
-      ]
+      ],
+
+      initItem: [
+        {
+          'student_id': '0316000',
+          'sname': '幹你的吳泓寬',
+          'program': '網多',
+          'graduate': '0',
+          'graduate_submit': '0',
+          'email': 'student@gmail.com',
+          'failed': true,
+          'score': FakeData.StudentScore,
+        },
+      ],
     }
   }
+
   fetchData () {
     console.log(this.props.idCard.name)
     let _this = this
     this.setState({
-    //  groupList: []
+      //  groupList: []
     })
     axios.get('/professors/students/projects', {
       // name: '彭文志'
@@ -223,9 +266,28 @@ class GroupList extends React.Component {
       console.log(err)
     })
   }
+
+  handleSelected (sid) {
+    console.log('MAJAJA FUCK' + sid)
+    let tmp = initItem
+    tmp[0].score = FakeData.StudentScore
+    // NOT SURE IF THE URL BELOW IS CORRECT
+    axios.post('/professors/students/StudentGradeList', {
+      student_id: sid
+    }).then(res => {
+      tmp[0].score = res.data
+      this.triggerUpdate()
+      return tmp
+    }).catch(err => {
+      console.log(err)
+    })
+    return tmp
+  }
+
   componentDidMount () {
     this.fetchData()
   }
+
   async componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
       console.log(nextProps)
@@ -236,7 +298,7 @@ class GroupList extends React.Component {
     }
   }
 
-  delay(t){
+  delay (t) {
     return new Promise((res, rej) => {
       setTimeout(() => (res(1)), t)
     })
@@ -250,22 +312,22 @@ class GroupList extends React.Component {
     ))
   }
 
-  handleChip = (event) => {
+  handleChip = (e) => {
     // This prevents ghost click.
-    event.preventDefault();
-
+    e.preventDefault()
     this.setState({
       chipOpen: true,
-      anchorEl: event.currentTarget,
-    });
-    console.log('MAJAJA')
-  };
+      anchorEl: e.currentTarget,
+    })
+
+  }
 
   handleRequestClose = () => {
     this.setState({
       chipOpen: false,
-    });
-  };
+    })
+  }
+
   render () {
     const tn = this.state.total_number
     return (
@@ -273,18 +335,18 @@ class GroupList extends React.Component {
         <div>
           <Row>
             <Col xs={12} md={4} lg={4}>
-              <div style={styles.mainTitle}> 學生專題列表 </div>
+              <div style={styles.mainTitle}> 學生專題列表</div>
             </Col>
             <Col xs={12} md={8} lg={8}>
-              <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人 </div>
+              <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人</div>
             </Col>
           </Row>
           <Row style={styles.groups}>
             {/*<Loading*/}
-              {/*size={100}*/}
-              {/*left={40}*/}
-              {/*top={100}*/}
-              {/*isLoading={this.state.loading} />*/}
+            {/*size={100}*/}
+            {/*left={40}*/}
+            {/*top={100}*/}
+            {/*isLoading={this.state.loading} />*/}
             {this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
@@ -299,8 +361,10 @@ class GroupList extends React.Component {
                   parentFunction={this.triggerUpdate}
                   chipOpen={this.state.chipOpen}
                   anchorEl={this.state.anchorEl}
-                  handleChip={ this.handleChip }
-                  handleRequestClose={ this.handleRequestClose }
+                  handleChip={this.handleChip}
+                  handleRequestClose={this.handleRequestClose}
+                  initItem={this.state.initItem}
+                  handleSelected={this.handleSelected}
                 />
               ))
               : '(無專題生資料!)'
@@ -311,13 +375,14 @@ class GroupList extends React.Component {
     )
   }
 }
+
 export default GroupList
 
 const GroupButton = (props) => (
   <Grid style={styles.groupBtn}>
     <Row>
       <Col xs={3} md={3} lg={3}>
-        <Image style={styles.pic} src={props.item.image === undefined ? pic : props.item.image} circle />
+        <Image style={styles.pic} src={props.item.image === undefined ? pic : props.item.image} circle/>
       </Col>
       <Col xs={9} md={9} lg={9}>
         <div style={styles.groupYear}>年度 : {props.year}</div>
@@ -353,52 +418,33 @@ const GroupButton = (props) => (
 
                   <Chip style={styles.chip}
                         key={i}
-                        onClick={props.handleChip} >
-                    <Avatar src={defaultPic} /> {item.student_id} {item.sname}
+                        onClick={props.handleChip}>
+                    <Avatar src={defaultPic}/> {item.student_id} {item.sname}
                     <span style={{color: 'red'}}>  {item.score}</span>
                   </Chip>
 
-
-                  <Popover
-                    open={props.chipOpen}
-                    anchorEl={props.anchorEl}
-                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                    onRequestClose={props.handleRequestClose}
-                  >
-                    <Card>
-                      <CardText>
-                        { Math.random()>0.5 ?
-                          <div>
-                            <b>這個人很厲害。　　</b>      <br />
-                            資料庫系統概論 90          <br />
-                            機器學習 87                <br />
-                            基礎程式檢定 99            <br />
-                            密碼學概論 95              <br />
-                            人工智慧 89                <br />
-                            ...
-                          </div>
-                          :
-                          <div>
-                            <b>這個人我覺得還好。</b>      <br />
-                            資料庫系統概論 78          <br />
-                            機器學習 60                <br />
-                            基礎程式檢定 未通過            <br />
-                            密碼學概論 61           <br />
-                            人工智慧 90                <br />
-                            ...
-                          </div>
-                        }
-                      </CardText>
-                    </Card>
-                  </Popover>
+                  <MuiThemeProvider>
+                    <Dialog
+                      modal={false}
+                      open={props.chipOpen}
+                      onRequestClose={() => props.handleRequestClose()}
+                      autoScrollBodyContent
+                      contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
+                    >
+                      <InfoCard
+                        selected={props.handleSelected(item.student_id)}
+                        sender={1}
+                        sender_email={1}
+                      />
+                    </Dialog>
+                  </MuiThemeProvider>
 
                 </div>
               ))}
             </div>
           </MuiThemeProvider>
         </div>
-        <div> <Button bsStyle='link' onClick={()=>props.groupClick(props.item)}>Learn more...</Button> </div>
+        <div><Button bsStyle='link' onClick={() => props.groupClick(props.item)}>Learn more...</Button></div>
       </Col>
     </Row>
   </Grid>
