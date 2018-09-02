@@ -3,7 +3,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import PrintBtn from './PrintBtn'
-import InfoBtn from './InfoBtn/index'
+import CourseChangeBtn from './CourseChangeBtn'
 
 const ITEM_HEIGHT = 48;
 
@@ -46,6 +46,7 @@ class LongMenu extends React.Component {
           }}
         >
           <PrintBtn rwd/>
+          <CourseChangeBtn />
         </Menu>
       </div>
     )

@@ -1,0 +1,21 @@
+.App {
+    text-align: center;
+}
+
+.App-Header {
+    background-color: #535353;
+    height: 50px;
+    padding: 10px 0 0 0;
+    color: white;
+    font-family: "Noto Sans CJK TC";
+}
+
+.App-Intro {
+    background-color:#8596a0;
+    margin: 0;
+}
+
+@keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

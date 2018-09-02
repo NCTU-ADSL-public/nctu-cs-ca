@@ -43,10 +43,7 @@ class ProjectDia extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
-              Disagree
-            </Button>
-            <Button onClick={this.handleClose} color="primary" autoFocus>
-              Agree
+              EXIT
             </Button>
           </DialogActions>
         </Dialog>

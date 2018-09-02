@@ -80,7 +80,7 @@ class Index extends React.Component {
           <div className='col-xs-3 col-sm-3 visible-xs visible-sm' />
           <div className='col-xs-6 col-sm-8 col-md-2 col-lg-2' onClick={this.handleClickOpen}>
             <CircularProgressbar
-              percentage={70}
+              percentage={100*overview.total/overview.total_require}
               text={`畢業 ${overview.total}/${overview.total_require}`}
               initialAnimation
               styles={{

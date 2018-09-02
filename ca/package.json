@@ -38,7 +38,7 @@
     "react-toastify": "^3.4.3",
     "react-toasts": "^1.2.3",
     "react-transition-group": "^2.4.0",
-    "react-trello": "^1.32.2",
+    "react-trello": "^1.33.0",
     "recharts": "^1.1.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.6.1",
