@@ -43,6 +43,7 @@ class Head extends Component {
   constructor (props) {
     super(props)
     this.res = this.res.bind(this)
+    this.props.FetchUser()
     this.props.FetchProfessorInfo()
     this.props.FetchCourse()
     this.props.FetchCoursePass()

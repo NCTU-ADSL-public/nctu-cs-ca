@@ -12,14 +12,11 @@ import pic from '../../../../../Resources/defalt.jpg'
 import { withStyles } from '@material-ui/core/styles'
 import classnames from 'classnames'
 import RwdIconButton from './RwdIconButton'
-import WriteEmail from './WriteEmail'
-import SendProjectAgree from './SendProjectAgree'
-import ReviewProject from './ReviewProject'
+import EmailIcon from '@material-ui/icons/Email'
 import './index.css'
 import firebase from 'firebase'
 import { storeProfessorsImage } from '../../../../../Redux/Students/Actions/Professor/index'
 import { connect } from 'react-redux'
-import LazyLoad from 'react-lazy-load'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',

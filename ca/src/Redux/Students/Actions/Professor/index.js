@@ -9,6 +9,7 @@ export const filterinput = createAction('FILTER_INPUT')
 export const storeImage = createAction('STORE_IMAGE')
 export const storeProfessorMentor = createAction('STORE_PROFESSOR_MENTOR')
 export const changePage = createAction('CHANGE_PAGE')
+export const storeResearchStatus = createAction('STORE_RESEARCH_STATUS')
 
 export const fetchProfessors = (page = 1) => dispatch => {
   dispatch(fetchProfessorsStart)
@@ -31,6 +32,13 @@ export const fetchProfessors = (page = 1) => dispatch => {
       console.log(error)
       dispatch(storeProfessorMentor([{'tname': '張立平'}]))
       dispatch(fetchProfessorsDone())
+    })
+  axios.get('/students/project/ShowStudentResearchStatus')
+    .then(res => {
+      dispatch(storeResearchStatus(res.data[0].status))
+    })
+    .catch(error => {
+      console.log(error)
     })
 }
 
