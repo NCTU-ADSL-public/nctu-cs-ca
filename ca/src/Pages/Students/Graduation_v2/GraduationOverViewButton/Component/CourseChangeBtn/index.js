@@ -66,7 +66,7 @@ class AlertDialog extends React.Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           maxWidth={false}
-          fullScreen={fullScreen}
+          fullWidth={fullScreen}
         >
           <AppBar className={classes.appBar} >
             <Toolbar >

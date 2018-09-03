@@ -68,9 +68,10 @@ class Index extends React.Component {
   }
 
   handleImageDounLoad () {
-    let directory = this.props.profile.path
+    let directory = 'professors/' + this.props.profile.teacher_id
     if (this.props.profile.path === '') {
-      directory = 'professors/T555.jpg'
+      this.props.store_image('')
+      return
     }
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
@@ -80,7 +81,6 @@ class Index extends React.Component {
         photo: url
       })
     }).catch(error => {
-      console.log(error)
       this.setState({
         loading: false,
         photo: ''

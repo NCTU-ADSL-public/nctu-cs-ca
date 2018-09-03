@@ -299,7 +299,7 @@ class SendProjectAgree extends React.Component {
               }
               onChange={this.handleTitleChange}
             />
-            <div className='hidden-xs'>
+            <div className='hidden-xs' style={{marginTop: '20px'}}>
               {this.state.menberNumber.map(t =>
                 <Grow in  key={t}>
                 <div className='row'>
@@ -347,7 +347,7 @@ class SendProjectAgree extends React.Component {
                 </Grow>
               )}
             </div>
-            <div className='visible-xs '>
+            <div className='visible-xs ' style={{marginTop: '20px'}}>
               {this.state.menberNumber.map(t =>
                 <Grow in>
                 <ExpansionPanel  expanded={expanded === `成員 ${t}`} onChange={this.handlepanelChange(`成員 ${t}`)} key={t}>
