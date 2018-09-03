@@ -145,24 +145,24 @@ class Index extends React.Component {
   choose(v){
     if(! ('score' in this.state.initItem[v])){
       let tmp = this.state.initItem
-      tmp[v].score = FakeData.StudentScore
-      this.setState({
-        chooseInfo:v,
-        initItem: tmp,
-        dialogOpen:(window.innerWidth<768)
-      })
-      // axios.post('/StudentGradeList', {
-      //   student_id: this.state.initItem[v].student_id
-      // }).then(res => {
-      //   tmp[v].score = res.data
-      //   this.setState({
-      //     chooseInfo:v,
-      //     initItem: tmp,
-      //     dialogOpen:(window.innerWidth<768)
-      //   })
-      // }).catch(err => {
-      //   console.log(err)
+      // tmp[v].score = FakeData.StudentScore
+      // this.setState({
+      //   chooseInfo:v,
+      //   initItem: tmp,
+      //   dialogOpen:(window.innerWidth<768)
       // })
+      axios.post('/StudentGradeList', {
+        student_id: this.state.initItem[v].student_id
+      }).then(res => {
+        tmp[v].score = res.data
+        this.setState({
+          chooseInfo:v,
+          initItem: tmp,
+          dialogOpen:(window.innerWidth<768)
+        })
+      }).catch(err => {
+        console.log(err)
+      })
     }else{
       this.setState({
         chooseInfo: v,
