@@ -92,7 +92,7 @@ export default class TableExampleComplex extends Component {
     deselectOnClickaway: true,
     showCheckboxes: false,
     height: '100%',
-    tableData:tableData
+    tableData:[]
   };
 
   componentWillMount () {

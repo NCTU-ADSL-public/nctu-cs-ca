@@ -14,6 +14,7 @@ import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import Loading from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles/index'
 
 let searchCourse=[]
@@ -25,7 +26,8 @@ const styles = {
   },
   progress: {
     position: 'relative',
-    color: '#5D4037',
+    margin: '5px',
+    color: 'gray',
   },
   flex: {
     flex: 1,
@@ -365,7 +367,7 @@ class Todo extends React.Component {
             </AppBar>
           </DialogTitle>
           <DialogContent>
-            {(this.props.cos_cname.match("化學")||this.props.cos_cname.match("生物")||this.props.cos_cname.match("物理")||this.props.cos_cname.match("微積分"))?'暫無簡介':this.state.isDone?this.getinfo():this.getinfo()}
+            {(this.props.cos_cname.match("化學")||this.props.cos_cname.match("生物")||this.props.cos_cname.match("物理")||this.props.cos_cname.match("微積分"))?'暫無簡介':this.state.isDone?this.getinfo():<Loading className={classes.progress}/> }
           </DialogContent>
         </Dialog>
       </div>
