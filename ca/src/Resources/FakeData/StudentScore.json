@@ -1,1 +1,508 @@
-[{"semester":"103-1","failed":false,"avg":87,"score":[{"cn":"微積分Ａ（一）","en":"Calculus (I)","score":85,"pass":true},{"cn":"物理(一)","en":"Physics (I)","score":77,"pass":true},{"cn":"導師時間","en":"Mentor's Hours","score":null,"pass":true},{"cn":"競技程式設計(一)","en":"Competitive Programming (I)","score":95,"pass":true},{"cn":"計算機概論與程式設計","en":"Introduction to Computers and Programming","score":95,"pass":true},{"cn":"線性代數","en":"Linear Algebra","score":94,"pass":true},{"cn":"心理學概論","en":"Int to Psychology","score":87,"pass":true},{"cn":"當代世界:環境危機與生態永續","en":"Contemporary World: Environmental Crisis & Ecologi","score":83,"pass":true},{"cn":"藝文賞析教育","en":"Arts Appreciation Education","score":null,"pass":true},{"cn":"大一英文（一）","en":"Freshman English (I)","score":85,"pass":true},{"cn":"大一體育","en":"Physical Education","score":76,"pass":true}]},{"semester":"103-2","failed":false,"avg":85,"score":[{"cn":"微積分Ａ（二）","en":"Calculus (II)","score":85,"pass":true},{"cn":"物理(二)","en":"Physics (II)","score":79,"pass":true},{"cn":"導師時間","en":"Mentor's Hours","score":null,"pass":true},{"cn":"競技程式設計(二)","en":"Competitive Programming (II)","score":69,"pass":true},{"cn":"數位電路設計","en":"Digital Circuit Design","score":88,"pass":true},{"cn":"物件導向程式設計(英文授課)","en":"Object-Oriented Programming","score":99,"pass":true},{"cn":"服務學習(一)","en":"Service Learning I","score":null,"pass":true},{"cn":"基礎程式設計","en":"Basic Programming","score":95,"pass":true},{"cn":"基礎程式設計","en":"Basic Programming","score":95,"pass":true},{"cn":"離散數學","en":"Discrete Mathematics","score":100,"pass":true},{"cn":"台灣史","en":"The Taiwan History","score":84,"pass":true},{"cn":"藝文賞析教育","en":"Arts Appreciation Education","score":null,"pass":true},{"cn":"大一英文（二）","en":"Freshman English (II)","score":80,"pass":true},{"cn":"大一體育","en":"Physical Education","score":85,"pass":true}]},{"semester":"104-1","failed":false,"avg":91,"score":[{"cn":"服務學習(二)","en":"Service Learning II","score":null,"pass":true},{"cn":"電路與電子學(一)","en":"Electrical Circuits and Electronics (I)  ","score":null,"pass":false},{"cn":"機率","en":"Probability ","score":99,"pass":true},{"cn":"數位電路實驗","en":"Digital Circuit Lab.","score":86,"pass":true},{"cn":"資料結構","en":"Data Structures","score":97,"pass":true},{"cn":"作業系統概論","en":"Introduction to Operating Systems","score":92,"pass":true},{"cn":"計算機網路概論","en":"Intro. to Computer Networks","score":94,"pass":true},{"cn":"微分方程","en":"Differential Equations","score":99,"pass":true},{"cn":"教學實務","en":"Teaching Technique Practice","score":null,"pass":true},{"cn":"音樂概論","en":"Introduction to Music","score":83,"pass":true},{"cn":"海洋環境與生態保育-MOOCs","en":"The Marine Environment and Ecological Conservation","score":82,"pass":true},{"cn":"進階英文閱讀與寫作","en":"Advanced English Reading and Writing","score":81,"pass":true},{"cn":"體育－網球甲Ａ","en":"Physical Education","score":85,"pass":true}]},{"semester":"104-2","failed":false,"avg":95,"score":[{"cn":"資料庫系統概論","en":"Introduction to Database Systems  ","score":92,"pass":true},{"cn":"網路通訊原理","en":"Principles of communications networks ","score":97,"pass":true},{"cn":"基礎程式設計","en":"Basic Programming","score":95,"pass":true},{"cn":"計算機組織(英文授課)","en":"Computer Organization","score":99,"pass":true},{"cn":"正規語言概論","en":"Introduction to Formal Language","score":100,"pass":true},{"cn":"演算法概論","en":"Introduction to Algorithms","score":90,"pass":true},{"cn":"訊號與系統","en":"Signals and Systems","score":100,"pass":true},{"cn":"經典通識教育講座","en":"Contemporary Civilization","score":89,"pass":true},{"cn":"體育－網球乙Ｂ","en":"Physical Education","score":76,"pass":true}]},{"semester":"105-1","failed":false,"avg":83,"score":[{"cn":"網路程式設計概論","en":"Intro. to Network Programming","score":99,"pass":true},{"cn":"計算機圖學概論","en":"Introduction to Computer Graphics","score":94,"pass":true},{"cn":"編譯器設計概論","en":"Intro. to Compiler Design","score":99,"pass":true},{"cn":"微處理機系統實驗","en":"Microprocessor System Lab.","score":90,"pass":true},{"cn":"資訊工程專題(一)(英文授課)","en":"Computer Science and Engineering Projects (I)","score":85,"pass":true},{"cn":"教學實務","en":"Teaching Technique Practice","score":null,"pass":true},{"cn":"日本現勢","en":"Japan Today","score":90,"pass":true},{"cn":"紀錄片製作概論","en":"Introduction of Documentary Directing","score":null,"pass":true},{"cn":"進階英文閱讀與討論","en":"Advanced English Reading and Discussion","score":81,"pass":true},{"cn":"日文(一)","en":"Japanese(I)","score":90,"pass":true},{"cn":"體育－羽球甲A","en":"Physcial Education","score":82,"pass":true}]},{"semester":"105-2","failed":false,"avg":92,"score":[{"cn":"科技創業與營運(英文授課)","en":"Technology Entrepreneurship","score":88,"pass":true},{"cn":"密碼學概論","en":"Introduction to Cryptography","score":97,"pass":true},{"cn":"機器學習概論","en":"Introduction to Machine Learning","score":93,"pass":true},{"cn":"人工智慧概論","en":"Intro. to Artificial Intelligence","score":98,"pass":true},{"cn":"資訊工程專題(二)(英文授課)","en":"Computer Science and Engineering Projects (II)","score":85,"pass":true},{"cn":"教學實務","en":"Teaching Technique Practice","score":null,"pass":true},{"cn":"無線網路","en":"Wireless Networks","score":96,"pass":true},{"cn":"伊斯蘭文明","en":"Introduction to Islamic Civilization","score":82,"pass":true},{"cn":"日文(二)","en":"Japanese(II)","score":98,"pass":true}]},{"semester":"106-1","failed":false,"avg":92,"score":[{"cn":"平行程式設計","en":"Parallel Programming","score":94,"pass":true},{"cn":"教學實務","en":"Teaching Technique Practice","score":100,"pass":true},{"cn":"網路安全(英文授課)","en":"Network Security","score":97,"pass":true},{"cn":"資料探勘","en":"Data Mining","score":89,"pass":true},{"cn":"全民國防教育軍事訓練課程－國防政策","en":"All-out Defense Education Military Training-Nation","score":90,"pass":true},{"cn":"急救理論與技術","en":"Firstaid Theory and Technique","score":85,"pass":true},{"cn":"日文(三)","en":"Japanese(III)","score":96,"pass":true},{"cn":"體育－高爾夫球甲","en":"Physical Education","score":84,"pass":true}]}]
+[
+    {
+       "semester":"103-1",
+       "failed":false,
+       "avg":87,
+       "credit":21,
+       "score":[
+          {
+             "cn":"微積分Ａ（一）",
+             "en":"Calculus (I)",
+             "score":85,
+             "pass":true
+          },
+          {
+             "cn":"物理(一)",
+             "en":"Physics (I)",
+             "score":77,
+             "pass":true
+          },
+          {
+             "cn":"導師時間",
+             "en":"Mentor's Hours",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"競技程式設計(一)",
+             "en":"Competitive Programming (I)",
+             "score":95,
+             "pass":true
+          },
+          {
+             "cn":"計算機概論與程式設計",
+             "en":"Introduction to Computers and Programming",
+             "score":95,
+             "pass":true
+          },
+          {
+             "cn":"線性代數",
+             "en":"Linear Algebra",
+             "score":94,
+             "pass":true
+          },
+          {
+             "cn":"心理學概論",
+             "en":"Int to Psychology",
+             "score":87,
+             "pass":true
+          },
+          {
+             "cn":"當代世界:環境危機與生態永續",
+             "en":"Contemporary World: Environmental Crisis & Ecologi",
+             "score":83,
+             "pass":true
+          },
+          {
+             "cn":"藝文賞析教育",
+             "en":"Arts Appreciation Education",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"大一英文（一）",
+             "en":"Freshman English (I)",
+             "score":85,
+             "pass":true
+          },
+          {
+             "cn":"大一體育",
+             "en":"Physical Education",
+             "score":76,
+             "pass":true
+          }
+       ]
+    },
+    {
+       "semester":"103-2",
+       "failed":false,
+       "avg":85,
+       "credit":19,
+       "score":[
+          {
+             "cn":"微積分Ａ（二）",
+             "en":"Calculus (II)",
+             "score":85,
+             "pass":true
+          },
+          {
+             "cn":"物理(二)",
+             "en":"Physics (II)",
+             "score":79,
+             "pass":true
+          },
+          {
+             "cn":"導師時間",
+             "en":"Mentor's Hours",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"競技程式設計(二)",
+             "en":"Competitive Programming (II)",
+             "score":69,
+             "pass":true
+          },
+          {
+             "cn":"數位電路設計",
+             "en":"Digital Circuit Design",
+             "score":88,
+             "pass":true
+          },
+          {
+             "cn":"物件導向程式設計(英文授課)",
+             "en":"Object-Oriented Programming",
+             "score":99,
+             "pass":true
+          },
+          {
+             "cn":"服務學習(一)",
+             "en":"Service Learning I",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"基礎程式設計",
+             "en":"Basic Programming",
+             "score":95,
+             "pass":true
+          },
+          {
+             "cn":"基礎程式設計",
+             "en":"Basic Programming",
+             "score":95,
+             "pass":true
+          },
+          {
+             "cn":"離散數學",
+             "en":"Discrete Mathematics",
+             "score":100,
+             "pass":true
+          },
+          {
+             "cn":"台灣史",
+             "en":"The Taiwan History",
+             "score":84,
+             "pass":true
+          },
+          {
+             "cn":"藝文賞析教育",
+             "en":"Arts Appreciation Education",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"大一英文（二）",
+             "en":"Freshman English (II)",
+             "score":80,
+             "pass":true
+          },
+          {
+             "cn":"大一體育",
+             "en":"Physical Education",
+             "score":85,
+             "pass":true
+          }
+       ]
+    },
+    {
+       "semester":"104-1",
+       "failed":false,
+       "avg":91,
+       "credit":18,
+       "score":[
+          {
+             "cn":"服務學習(二)",
+             "en":"Service Learning II",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"電路與電子學(一)",
+             "en":"Electrical Circuits and Electronics (I)  ",
+             "score":null,
+             "pass":false
+          },
+          {
+             "cn":"機率",
+             "en":"Probability ",
+             "score":99,
+             "pass":true
+          },
+          {
+             "cn":"數位電路實驗",
+             "en":"Digital Circuit Lab.",
+             "score":86,
+             "pass":true
+          },
+          {
+             "cn":"資料結構",
+             "en":"Data Structures",
+             "score":97,
+             "pass":true
+          },
+          {
+             "cn":"作業系統概論",
+             "en":"Introduction to Operating Systems",
+             "score":92,
+             "pass":true
+          },
+          {
+             "cn":"計算機網路概論",
+             "en":"Intro. to Computer Networks",
+             "score":94,
+             "pass":true
+          },
+          {
+             "cn":"微分方程",
+             "en":"Differential Equations",
+             "score":99,
+             "pass":true
+          },
+          {
+             "cn":"教學實務",
+             "en":"Teaching Technique Practice",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"音樂概論",
+             "en":"Introduction to Music",
+             "score":83,
+             "pass":true
+          },
+          {
+             "cn":"海洋環境與生態保育-MOOCs",
+             "en":"The Marine Environment and Ecological Conservation",
+             "score":82,
+             "pass":true
+          },
+          {
+             "cn":"進階英文閱讀與寫作",
+             "en":"Advanced English Reading and Writing",
+             "score":81,
+             "pass":true
+          },
+          {
+             "cn":"體育－網球甲Ａ",
+             "en":"Physical Education",
+             "score":85,
+             "pass":true
+          }
+       ]
+    },
+    {
+       "semester":"104-2",
+       "failed":true,
+       "avg":40,
+       "credit":15,
+       "score":[
+          {
+             "cn":"資料庫系統概論",
+             "en":"Introduction to Database Systems  ",
+             "score":92,
+             "pass":true
+          },
+          {
+             "cn":"網路通訊原理",
+             "en":"Principles of communications networks ",
+             "score":97,
+             "pass":true
+          },
+          {
+             "cn":"基礎程式設計",
+             "en":"Basic Programming",
+             "score":95,
+             "pass":true
+          },
+          {
+             "cn":"計算機組織(英文授課)",
+             "en":"Computer Organization",
+             "score":99,
+             "pass":true
+          },
+          {
+             "cn":"正規語言概論",
+             "en":"Introduction to Formal Language",
+             "score":100,
+             "pass":true
+          },
+          {
+             "cn":"演算法概論",
+             "en":"Introduction to Algorithms",
+             "score":90,
+             "pass":true
+          },
+          {
+             "cn":"訊號與系統",
+             "en":"Signals and Systems",
+             "score":100,
+             "pass":true
+          },
+          {
+             "cn":"經典通識教育講座",
+             "en":"Contemporary Civilization",
+             "score":89,
+             "pass":true
+          },
+          {
+             "cn":"體育－網球乙Ｂ",
+             "en":"Physical Education",
+             "score":76,
+             "pass":true
+          }
+       ]
+    },
+    {
+       "semester":"105-1",
+       "failed":false,
+       "avg":83,
+       "credit":13,
+       "score":[
+          {
+             "cn":"網路程式設計概論",
+             "en":"Intro. to Network Programming",
+             "score":99,
+             "pass":true
+          },
+          {
+             "cn":"計算機圖學概論",
+             "en":"Introduction to Computer Graphics",
+             "score":94,
+             "pass":true
+          },
+          {
+             "cn":"編譯器設計概論",
+             "en":"Intro. to Compiler Design",
+             "score":99,
+             "pass":true
+          },
+          {
+             "cn":"微處理機系統實驗",
+             "en":"Microprocessor System Lab.",
+             "score":90,
+             "pass":true
+          },
+          {
+             "cn":"資訊工程專題(一)(英文授課)",
+             "en":"Computer Science and Engineering Projects (I)",
+             "score":85,
+             "pass":true
+          },
+          {
+             "cn":"教學實務",
+             "en":"Teaching Technique Practice",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"日本現勢",
+             "en":"Japan Today",
+             "score":90,
+             "pass":true
+          },
+          {
+             "cn":"紀錄片製作概論",
+             "en":"Introduction of Documentary Directing",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"進階英文閱讀與討論",
+             "en":"Advanced English Reading and Discussion",
+             "score":81,
+             "pass":true
+          },
+          {
+             "cn":"日文(一)",
+             "en":"Japanese(I)",
+             "score":90,
+             "pass":true
+          },
+          {
+             "cn":"體育－羽球甲A",
+             "en":"Physcial Education",
+             "score":82,
+             "pass":true
+          }
+       ]
+    },
+    {
+       "semester":"105-2",
+       "failed":false,
+       "avg":92,
+       "credit":25,
+       "score":[
+          {
+             "cn":"科技創業與營運(英文授課)",
+             "en":"Technology Entrepreneurship",
+             "score":88,
+             "pass":true
+          },
+          {
+             "cn":"密碼學概論",
+             "en":"Introduction to Cryptography",
+             "score":97,
+             "pass":true
+          },
+          {
+             "cn":"機器學習概論",
+             "en":"Introduction to Machine Learning",
+             "score":93,
+             "pass":true
+          },
+          {
+             "cn":"人工智慧概論",
+             "en":"Intro. to Artificial Intelligence",
+             "score":98,
+             "pass":true
+          },
+          {
+             "cn":"資訊工程專題(二)(英文授課)",
+             "en":"Computer Science and Engineering Projects (II)",
+             "score":85,
+             "pass":true
+          },
+          {
+             "cn":"教學實務",
+             "en":"Teaching Technique Practice",
+             "score":null,
+             "pass":true
+          },
+          {
+             "cn":"無線網路",
+             "en":"Wireless Networks",
+             "score":96,
+             "pass":true
+          },
+          {
+             "cn":"伊斯蘭文明",
+             "en":"Introduction to Islamic Civilization",
+             "score":82,
+             "pass":true
+          },
+          {
+             "cn":"日文(二)",
+             "en":"Japanese(II)",
+             "score":98,
+             "pass":true
+          }
+       ]
+    },
+    {
+       "semester":"106-1",
+       "failed":false,
+       "avg":92,
+       "credit":22,
+       "score":[
+          {
+             "cn":"平行程式設計",
+             "en":"Parallel Programming",
+             "score":94,
+             "pass":true
+          },
+          {
+             "cn":"教學實務",
+             "en":"Teaching Technique Practice",
+             "score":100,
+             "pass":true
+          },
+          {
+             "cn":"網路安全(英文授課)",
+             "en":"Network Security",
+             "score":97,
+             "pass":true
+          },
+          {
+             "cn":"資料探勘",
+             "en":"Data Mining",
+             "score":89,
+             "pass":true
+          },
+          {
+             "cn":"全民國防教育軍事訓練課程－國防政策",
+             "en":"All-out Defense Education Military Training-Nation",
+             "score":90,
+             "pass":true
+          },
+          {
+             "cn":"急救理論與技術",
+             "en":"Firstaid Theory and Technique",
+             "score":85,
+             "pass":true
+          },
+          {
+             "cn":"日文(三)",
+             "en":"Japanese(III)",
+             "score":96,
+             "pass":true
+          },
+          {
+             "cn":"體育－高爾夫球甲",
+             "en":"Physical Education",
+             "score":84,
+             "pass":true
+          }
+       ]
+    }
+ ]
