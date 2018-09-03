@@ -21,10 +21,16 @@ class ProfessorsList extends React.Component {
   }
 }
 
-const getVisibleProfessors = (data, mentor, filterInput, page) => {
+const getVisibleProfessors = (data, mentor, filterInput, page, projectNumber) => {
+  console.log(data)
   if (data.length === 0) return []
   // filter
-  let updatedList = data.filter((item) => {
+  let number = projectNumber === '0' ? 0 : projectNumber === '3' ? 3 : 5
+  let _data = data.filter(t=>
+    Number(t.scount) >= number
+  )
+
+  let updatedList = _data.filter((item) => {
     return (
       (item.tname.toLowerCase().search(
         filterInput.toLowerCase()) !== -1)
@@ -55,7 +61,7 @@ const getVisibleProfessors = (data, mentor, filterInput, page) => {
 
 const mapStateToProps = (state) => {
   return {
-    professors: getVisibleProfessors(state.Student.Professor.data, state.Student.Professor.mentor, state.Student.Professor.filter_string, state.Student.Professor.page),
+    professors: getVisibleProfessors(state.Student.Professor.data, state.Student.Professor.mentor, state.Student.Professor.filter_string, state.Student.Professor.page, state.Student.Professor.project_number),
     done: state.Student.Professor.status === 'DONE'
   }
 }

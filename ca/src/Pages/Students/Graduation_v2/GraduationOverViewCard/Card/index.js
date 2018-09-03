@@ -10,13 +10,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { connect } from 'react-redux'
 import { fetchProfessors } from '../../../../../Redux/Students/Actions/Professor/index'
 import CourseList from './Components/CourseList'
+import GeneralCourseList from './Components/GeneralCourseList'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Grow from '@material-ui/core/Grow'
 import AnimatedProgress from '../../../../../Components/AnimatedProgress'
-import Drawer from '@material-ui/core/Drawer'
+import Dialog from '@material-ui/core/Dialog'
 
 
 const styles = theme => ({
@@ -75,13 +76,14 @@ class Index extends React.Component {
   }
   render () {
     const { classes, rwd } = this.props
+    if(this.props.data === undefined)return ''
     if(rwd){
       return(
         <div>
           <div className='col-xs-6 col-sm-6 well'>
             <div style={{fontSize: '0.8em'}} className="showcourseoverview" onClick={this.handleClickOpen}>{this.props.title}&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.complete}</font>/{this.props.require}&nbsp;學分<br/><AnimatedProgress value={this.props.value}/></div>
           </div>
-          <Drawer
+          <Dialog
             anchor="right"
             open={this.state.open}
             onClose={this.handleClose}
@@ -98,9 +100,9 @@ class Index extends React.Component {
               </Toolbar>
             </AppBar>
             <div style={{padding: '15px'}}>
-            {this.props.title === '英文授課' ? '' : <CourseList items={this.props.data.course} rwd/>}
+              {this.props.title === '通識' ? <GeneralCourseList courses={this.props.data.course} rwd /> : <CourseList items={this.props.data.course} rwd/>}
             </div>
-          </Drawer>
+          </Dialog>
         </div>
       )
     }
@@ -119,7 +121,7 @@ class Index extends React.Component {
               </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              {this.props.title === '英文授課' ? '' : <CourseList items={this.props.data.course} />}
+              {this.props.title === '通識' ? <GeneralCourseList courses={this.props.data.course}/> : <CourseList items={this.props.data.course} />}
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </div>

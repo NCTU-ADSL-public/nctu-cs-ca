@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import axios from 'axios'
+import Button from '../../DoBtn'
 import {
   Table,
   TableBody,
@@ -113,6 +114,10 @@ export default class TableExampleComplex extends Component {
   render() {
     return (
       <div style={fontStyle}>
+        <Button rwd />
+        <div className='jumbotron' style={{color: 'gray', padding: '5px', textAlign: 'center'}}>
+          依據您過去修課，我們為您推薦以下課程。
+        </div>
         <MuiThemeProvider>
           <Table
             height={this.state.height}

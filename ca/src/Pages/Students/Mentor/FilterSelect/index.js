@@ -11,6 +11,8 @@ import Checkbox from '@material-ui/core/Checkbox'
 import PropTypes from 'prop-types'
 import Slider from 'material-ui/Slider'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { changeProjectNumber } from '../../../../Redux/Students/Actions/Professor'
+import { connect } from 'react-redux'
 
 const styles = theme => ({
   root: {
@@ -36,7 +38,7 @@ class CheckboxesGroup extends React.Component {
       人工智慧: false,
       網路: false,
       電腦視覺: false,
-      scount: 5
+      scount: '0'
     }
   }
 
@@ -45,6 +47,7 @@ class CheckboxesGroup extends React.Component {
   }
 
   handleScountChange = event => {
+    this.props.changeProjectNumber(event.target.value)
     this.setState({ scount: event.target.value });
   };
 
@@ -63,106 +66,106 @@ class CheckboxesGroup extends React.Component {
               value={this.state.scount}
               onChange={this.handleScountChange}
             >
-              <FormControlLabel classes={{label:classes.formControlLabel}} value={0} control={<Radio />} label="0人" />
-              <FormControlLabel classes={{label:classes.formControlLabel}} value={3} control={<Radio />} label="3人" />
-              <FormControlLabel classes={{label:classes.formControlLabel}} value={5} control={<Radio />} label="5人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value={'0'} control={<Radio />} label="0人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value={'3'} control={<Radio />} label="3人" />
+              <FormControlLabel classes={{label:classes.formControlLabel}} value={'5'} control={<Radio />} label="5人" />
             </RadioGroup>
           </FormControl>
         </div>
         <div className='row'>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">
-              <div  style={{marginTop: '30px'}}>
-                研究領域
-              </div>
-            </FormLabel>
-            <FormGroup>
-              <FormControlLabel
-                classes={{label:classes.formControlLabel}}
-                control={
-                  <Checkbox
-                    checked={this.state.人工智慧}
-                    color='default'
-                    onChange={this.handleChange('人工智慧')}
-                    value="人工智慧"
-                  />
-                }
-                label="人工智慧"
-              />
-              <FormControlLabel
-                classes={{label:classes.formControlLabel}}
-                control={
-                  <Checkbox
-                    checked={this.state.網路}
-                    color='default'
-                    onChange={this.handleChange('網路')}
-                    value="網路"
-                  />
-                }
-                label="網路"
-              />
-              <FormControlLabel
-                classes={{label:classes.formControlLabel}}
-                control={
-                  <Checkbox
-                    checked={this.state.電腦視覺}
-                    color='default'
-                    onChange={this.handleChange('電腦視覺')}
-                    value="電腦視覺"
-                  />
-                }
-                label="電腦視覺"
-              />
-              <FormControlLabel
-                classes={{label:classes.formControlLabel}}
-                control={
-                  <Checkbox
-                    checked={this.state.電腦視覺}
-                    color='default'
-                    onChange={this.handleChange('電腦視覺')}
-                    value="電腦視覺"
-                  />
-                }
-                label="遊戲"
-              />
-              <FormControlLabel
-                classes={{label:classes.formControlLabel}}
-                control={
-                  <Checkbox
-                    checked={this.state.電腦視覺}
-                    color='default'
-                    onChange={this.handleChange('電腦視覺')}
-                    value="電腦視覺"
-                  />
-                }
-                label="電腦視覺"
-              />
-              <FormControlLabel
-                classes={{label:classes.formControlLabel}}
-                control={
-                  <Checkbox
-                    checked={this.state.電腦視覺}
-                    color='default'
-                    onChange={this.handleChange('電腦視覺')}
-                    value="電腦視覺"
-                  />
-                }
-                label="電腦視覺"
-              />
-              <FormControlLabel
-                classes={{label:classes.formControlLabel}}
-                control={
-                  <Checkbox
-                    checked={this.state.電腦視覺}
-                    color='default'
-                    onChange={this.handleChange('電腦視覺')}
-                    value="電腦視覺"
-                  />
-                }
-                label="電腦視覺"
-              />
-            </FormGroup>
-          </FormControl>
+          {/*<FormControl component="fieldset" className={classes.formControl}>*/}
+            {/*<FormLabel component="legend">*/}
+              {/*<div  style={{marginTop: '30px'}}>*/}
+                {/*研究領域*/}
+              {/*</div>*/}
+            {/*</FormLabel>*/}
+            {/*<FormGroup>*/}
+              {/*<FormControlLabel*/}
+                {/*classes={{label:classes.formControlLabel}}*/}
+                {/*control={*/}
+                  {/*<Checkbox*/}
+                    {/*checked={this.state.人工智慧}*/}
+                    {/*color='default'*/}
+                    {/*onChange={this.handleChange('人工智慧')}*/}
+                    {/*value="人工智慧"*/}
+                  {/*/>*/}
+                {/*}*/}
+                {/*label="人工智慧"*/}
+              {/*/>*/}
+              {/*<FormControlLabel*/}
+                {/*classes={{label:classes.formControlLabel}}*/}
+                {/*control={*/}
+                  {/*<Checkbox*/}
+                    {/*checked={this.state.網路}*/}
+                    {/*color='default'*/}
+                    {/*onChange={this.handleChange('網路')}*/}
+                    {/*value="網路"*/}
+                  {/*/>*/}
+                {/*}*/}
+                {/*label="網路"*/}
+              {/*/>*/}
+              {/*<FormControlLabel*/}
+                {/*classes={{label:classes.formControlLabel}}*/}
+                {/*control={*/}
+                  {/*<Checkbox*/}
+                    {/*checked={this.state.電腦視覺}*/}
+                    {/*color='default'*/}
+                    {/*onChange={this.handleChange('電腦視覺')}*/}
+                    {/*value="電腦視覺"*/}
+                  {/*/>*/}
+                {/*}*/}
+                {/*label="電腦視覺"*/}
+              {/*/>*/}
+              {/*<FormControlLabel*/}
+                {/*classes={{label:classes.formControlLabel}}*/}
+                {/*control={*/}
+                  {/*<Checkbox*/}
+                    {/*checked={this.state.電腦視覺}*/}
+                    {/*color='default'*/}
+                    {/*onChange={this.handleChange('電腦視覺')}*/}
+                    {/*value="電腦視覺"*/}
+                  {/*/>*/}
+                {/*}*/}
+                {/*label="遊戲"*/}
+              {/*/>*/}
+              {/*<FormControlLabel*/}
+                {/*classes={{label:classes.formControlLabel}}*/}
+                {/*control={*/}
+                  {/*<Checkbox*/}
+                    {/*checked={this.state.電腦視覺}*/}
+                    {/*color='default'*/}
+                    {/*onChange={this.handleChange('電腦視覺')}*/}
+                    {/*value="電腦視覺"*/}
+                  {/*/>*/}
+                {/*}*/}
+                {/*label="電腦視覺"*/}
+              {/*/>*/}
+              {/*<FormControlLabel*/}
+                {/*classes={{label:classes.formControlLabel}}*/}
+                {/*control={*/}
+                  {/*<Checkbox*/}
+                    {/*checked={this.state.電腦視覺}*/}
+                    {/*color='default'*/}
+                    {/*onChange={this.handleChange('電腦視覺')}*/}
+                    {/*value="電腦視覺"*/}
+                  {/*/>*/}
+                {/*}*/}
+                {/*label="電腦視覺"*/}
+              {/*/>*/}
+              {/*<FormControlLabel*/}
+                {/*classes={{label:classes.formControlLabel}}*/}
+                {/*control={*/}
+                  {/*<Checkbox*/}
+                    {/*checked={this.state.電腦視覺}*/}
+                    {/*color='default'*/}
+                    {/*onChange={this.handleChange('電腦視覺')}*/}
+                    {/*value="電腦視覺"*/}
+                  {/*/>*/}
+                {/*}*/}
+                {/*label="電腦視覺"*/}
+              {/*/>*/}
+            {/*</FormGroup>*/}
+          {/*</FormControl>*/}
         </div>
       </div>
     )
@@ -172,5 +175,11 @@ class CheckboxesGroup extends React.Component {
 CheckboxesGroup.propTypes = {
   classes: PropTypes.object.isRequired,
 }
+const mapStateToProps = (state) => ({
+  studentIdcard: state.Student.User.studentIdcard
+})
+const mapDispatchToProps = (dispatch) => ({
+  changeProjectNumber: (value) => dispatch(changeProjectNumber(value))
+})
 
-export default withStyles(styles)(CheckboxesGroup)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CheckboxesGroup))

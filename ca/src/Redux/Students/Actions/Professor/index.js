@@ -10,6 +10,7 @@ export const storeImage = createAction('STORE_IMAGE')
 export const storeProfessorMentor = createAction('STORE_PROFESSOR_MENTOR')
 export const changePage = createAction('CHANGE_PAGE')
 export const storeResearchStatus = createAction('STORE_RESEARCH_STATUS')
+export const ChangeProjectNumber = createAction('CHANGE_PROJECT_NUMBER')
 
 export const fetchProfessors = (page = 1) => dispatch => {
   dispatch(fetchProfessorsStart)
@@ -49,6 +50,10 @@ export const storeProfessorsImage = (url, tname) => dispatch => {
 
 export const filterInput = value => dispatch => {
   dispatch(filterinput(value))
+}
+
+export const changeProjectNumber = value => dispatch => {
+  dispatch(ChangeProjectNumber(value))
 }
 
 export const changepage = value => dispatch => {

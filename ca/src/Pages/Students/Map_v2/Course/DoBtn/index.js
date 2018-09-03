@@ -10,6 +10,8 @@ import SugCourse from './SugCourse'
 import SugCourseRwd from './SugCourse/others'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import { withStyles } from '@material-ui/core/styles/index'
+import { connect } from 'react-redux'
+import { ShowCourseOrSug } from '../../../../../Redux/Students/Actions/Map'
 
 const styles = theme => ({
   appBar: {
@@ -48,11 +50,11 @@ class AlertDialog extends React.Component {
   };
 
   render() {
-    const { fullScreen, classes } = this.props
+    const { rwddisplay, rwd, fullScreen, classes } = this.props
     return (
       <div style={{margin: '5px 0 5px 0'}}>
-        <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={this.handleClickOpen}>
-          推薦選課
+        <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={rwd?this.props.ShowCourseOrSug:this.handleClickOpen}>
+          {rwd?rwddisplay==='map'?'課程地圖':'推薦選課':'推薦選課'}
         </Button>
         <Dialog
           open={this.state.open}
@@ -64,7 +66,7 @@ class AlertDialog extends React.Component {
           <AppBar className={classes.appBar} >
             <Toolbar >
               <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
-                推薦選課
+                推薦選課(依據您過去修課，我們為您推薦以下課程)
               </Typography>
               <Button style={{fontSize: '12px'}} color="inherit" onClick={this.handleClose}>
                 離開
@@ -78,4 +80,11 @@ class AlertDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(withMobileDialog()(AlertDialog))
+const mapStateToProps = (state) => ({
+  rwddisplay: state.Student.Map.rwddisplay
+})
+const mapDispatchToProps = (dispatch) => ({
+  ShowCourseOrSug: () => dispatch(ShowCourseOrSug()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withMobileDialog()(AlertDialog)))

@@ -374,7 +374,7 @@ class SendProjectAgree extends React.Component {
                     <div className='row'>
                       <Input
                         placeholder='電話'
-                        className='project-member-input-rwd'
+                        className='project-member-input-rwd '
                         fullWidth
                         startAdornment={
                           <InputAdornment position='start'>

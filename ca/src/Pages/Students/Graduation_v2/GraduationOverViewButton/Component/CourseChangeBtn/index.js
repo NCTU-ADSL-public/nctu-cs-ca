@@ -58,7 +58,7 @@ class AlertDialog extends React.Component {
           <ListItemIcon className={classes.icon}>
             <DashboardIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary='列印預審文件' />
+          <ListItemText classes={{ primary: classes.primary }} inset primary='課程排序' />
         </MenuItem>
         <Dialog
           open={this.state.open}

@@ -4,12 +4,16 @@ const initialState = {
   CourseMap: [],
   CoursePass: [],
   CoursePrint: [],
-  status: 'IDLE'
+  status: 'IDLE',
+  rwddisplay: 'map'
 }
 
 export default handleActions({
   STORE_COURSE_PASS: (state, action) => ({ ...state, CoursePass: action.payload }),
   STORE_COURSE: (state, action) => ({ ...state, CourseMap: action.payload }),
+  SHOW_COURSE_OR_SUG: (state, action) => {
+    if (state.rwddisplay === 'map') { return ({ ...state, rwddisplay: 'sug' }) } else { return ({ ...state, rwddisplay: 'map' }) }
+  },
   SHOW_COURSE_CONDITION: (state) => {
     let newCourseMap = [...state.CourseMap]
     if (newCourseMap[0].completed !== undefined) {

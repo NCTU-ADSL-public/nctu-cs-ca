@@ -61,6 +61,8 @@
 }
 .project-member-input-rwd{
     margin: 10px 15px 0 15px;
+    zoom: 110%;
+    width: 100%;
 }
 .dialog-content-height{
     height: 600px;

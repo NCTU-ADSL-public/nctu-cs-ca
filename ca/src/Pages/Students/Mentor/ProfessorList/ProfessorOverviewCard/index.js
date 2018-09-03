@@ -68,7 +68,7 @@ class Index extends React.Component {
   }
 
   handleImageDounLoad () {
-    let directory = 'professors/' + this.props.profile.teacher_id
+    let directory = 'professor/' + this.props.profile.teacher_id + '.jpg'
     if (this.props.profile.path === '') {
       this.props.store_image('')
       return
