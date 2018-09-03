@@ -1,7 +1,8 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  data: []
+  data: [],
+  status: '4'
 }
 
 export default handleActions({

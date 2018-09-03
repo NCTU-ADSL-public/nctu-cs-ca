@@ -43,6 +43,7 @@ class Head extends Component {
   constructor (props) {
     super(props)
     this.res = this.res.bind(this)
+    this.props.FetchUser()
     this.props.FetchProfessorInfo()
     this.props.FetchCourse()
     this.props.FetchCoursePass()
@@ -112,7 +113,7 @@ class Head extends Component {
       )
     }
     else if (this.state.selectedIndex === 1) {
-      this.props.ChangeFooterColor('#34855e')
+      this.props.ChangeFooterColor('#254c33')
       return(
         <a>
           <FadeIn>

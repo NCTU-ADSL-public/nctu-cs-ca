@@ -12,14 +12,11 @@ import pic from '../../../../../Resources/defalt.jpg'
 import { withStyles } from '@material-ui/core/styles'
 import classnames from 'classnames'
 import RwdIconButton from './RwdIconButton'
-import WriteEmail from './WriteEmail'
-import SendProjectAgree from './SendProjectAgree'
-import ReviewProject from './ReviewProject'
+import EmailIcon from '@material-ui/icons/Email'
 import './index.css'
 import firebase from 'firebase'
 import { storeProfessorsImage } from '../../../../../Redux/Students/Actions/Professor/index'
 import { connect } from 'react-redux'
-import LazyLoad from 'react-lazy-load'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
@@ -71,9 +68,10 @@ class Index extends React.Component {
   }
 
   handleImageDounLoad () {
-    let directory = this.props.profile.path
+    let directory = 'professors/' + this.props.profile.teacher_id
     if (this.props.profile.path === '') {
-      directory = 'professors/T555.jpg'
+      this.props.store_image('')
+      return
     }
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
@@ -83,7 +81,6 @@ class Index extends React.Component {
         photo: url
       })
     }).catch(error => {
-      console.log(error)
       this.setState({
         loading: false,
         photo: ''

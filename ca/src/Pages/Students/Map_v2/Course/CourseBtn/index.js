@@ -1,33 +1,40 @@
 import React from 'react'
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Dialog from 'material-ui/Dialog';
 import axios from 'axios';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Button from '@material-ui/core/Button'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Dialog from '@material-ui/core/Dialog'
+import withMobileDialog from '@material-ui/core/withMobileDialog/index'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles/index'
 
 let searchCourse=[]
 
-const customContentStyle = {
-  maxWidth: 'none',
-  maxHeight: 'none',
-};
-const customteacherContentStyle = {
-  width: '100%',
-  maxWidth: 'none',
-  maxHeight: 'none',
-};
-
-const bodyStyle = {
-  fontFamily: 'Noto Sans CJK TC',
-  color:'#454545'
-};
-const titleStyle = {
-  fontFamily: 'Noto Sans CJK TC',
-  color:'#565656'
-};
+const styles = {
+  appBar: {
+    position: 'relative',
+    background: '#5f9191',
+  },
+  progress: {
+    position: 'relative',
+    color: '#5D4037',
+  },
+  flex: {
+    flex: 1,
+  },
+  titleStyle: {
+    paddingTop: '1',
+    color: '#c7b5ef'
+  }
+}
 
 const fontStyle={
   verticalAlign: "default",
@@ -227,15 +234,9 @@ class Todo extends React.Component {
     this.setState({open: false})
   }
 
-  handleChipClick = (name) => {
-    this.setState({opendia2: true, searchteachername:name});
-  }
-
   handleChange = (event, index, value)  => {
     this.setState({value:value-1});
   }
-
-  handleDia2Close = () => this.setState({opendia2:false})
 
   getMenuItem = () => {
     let items = []
@@ -255,13 +256,12 @@ class Todo extends React.Component {
 
   getinfo = () => {
     return (
-      <div>
+      <div style={{marginTop: '20px'}}>
         <div style={{float:'left',}}>授課教授:&nbsp;&nbsp;&nbsp;
           {this.state.searchCourse[this.state.value].teacher.split(" ").map(name=>
 
             <MuiThemeProvider>
               <Chip
-                onClick={()=>this.handleChipClick(name)}
                 labelStyle={fontStyle}
                 style={{
                   margin: 4,
@@ -310,35 +310,14 @@ class Todo extends React.Component {
   }
 
   render(){
-    const actions = [
-      <FlatButton
-        label="Exit"
-        primary={true}
-        style={{
-          fontFamily: 'Noto Sans CJK TC',
-          color: '#7B7B7B'
-        }}
-        keyboardFocused={true}
-        onClick={this.handleClose}
-      />,
-    ];
-    const actions2 = [
-      <FlatButton
-        label="Exit"
-        primary={true}
-        style={{
-          fontFamily: 'Noto Sans CJK TC',
-          color: '#7B7B7B'
-        }}
-        keyboardFocused={true}
-        onClick={this.handleDia2Close}
-      />,
-    ];
+    const { fullScreen, classes } = this.props
     return(
       <div className="course"
            style={{
              transition: 'all .2s'
            }}>
+
+        {/*<Button onClick={this.handleOpen} style={{fontSize: '12px'}} color="inherit">編輯</Button>*/}
         <MuiThemeProvider>
           <FlatButton className="course-btn"
                       backgroundColor={this.props.completed?"#616161":"#911a1a"}
@@ -362,38 +341,37 @@ class Todo extends React.Component {
                       onClick={this.handleOpen}
           />
         </MuiThemeProvider>
-        <MuiThemeProvider>
-          <Dialog
-            title={this.props.cosCame}
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            contentStyle={customContentStyle}
-            bodyStyle={bodyStyle}
-            titleStyle={titleStyle}
-            onRequestClose={this.handleClose}
-          >
-            {(this.props.cos_cname.match("化學")||this.props.cos_cname.match("生物")||this.props.cos_cname.match("物理")||this.props.cos_cname.match("微積分"))?'暫無簡介':this.state.isDone?this.getinfo():''}
-            <MuiThemeProvider>
-              <Dialog
-                // title={this.state.searchteachername}
-                actions={actions2}
-                open={this.state.opendia2}
-                onRequestClose={this.handleDia2Close}
-                contentStyle={customteacherContentStyle}
-                bodyStyle={bodyStyle}
-                titleStyle={titleStyle}
-                autoScrollBodyContent={true}
-              >
-                {/*<TeacherProfile name={this.state.searchteachername}/>*/}
-              </Dialog>
-            </MuiThemeProvider>
-          </Dialog>
-        </MuiThemeProvider>
+
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          fullScreen={fullScreen}
+          maxWidth={'md'}
+          fullWidth
+        >
+          <DialogTitle id="alert-dialog-title" style={{background: '#5f9191', padding: '0'}}>
+
+            <AppBar className={classes.appBar} >
+              <Toolbar >
+                <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
+                  {this.props.cos_cname}
+                </Typography>
+                <Button style={{fontSize: '12px'}} color="inherit" onClick={this.handleClose}>
+                  EXIT
+                </Button>
+              </Toolbar>
+            </AppBar>
+          </DialogTitle>
+          <DialogContent>
+            {(this.props.cos_cname.match("化學")||this.props.cos_cname.match("生物")||this.props.cos_cname.match("物理")||this.props.cos_cname.match("微積分"))?'暫無簡介':this.state.isDone?this.getinfo():this.getinfo()}
+          </DialogContent>
+        </Dialog>
       </div>
 
     )
   }
 }
 
-export default Todo
+export default withStyles(styles)(withMobileDialog()(Todo))

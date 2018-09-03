@@ -5,6 +5,7 @@ const initialState = {
   filter_select: 'ALL',
   filter_string: '',
   status: 'IDLE',
+  research_status: '4',
   mentor: '',
   page: 1
 }
@@ -15,6 +16,7 @@ export default handleActions({
   STORE_PROFESSORS: (state, action) => ({ ...state, data: action.payload }),
   FILTER_INPUT: (state, action) => ({ ...state, filter_string: action.payload }),
   CHANGE_PAGE: (state, action) => ({ ...state, page: action.payload }),
+  STORE_RESEARCH_STATUS: (state, action) => ({...state, research_status: action.payload}),
   STORE_PROFESSOR_MENTOR: (state, action) => ({ ...state, mentor: action.payload[0].tname }),
   STORE_IMAGE: (state, action) => {
     let newdata = state.data

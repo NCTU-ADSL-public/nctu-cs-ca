@@ -151,7 +151,26 @@ class _Navbar extends React.Component {
         <Nav pullRight>
           <NavItem className='logout-box'>
             <ButtonToolbar>
-              {this.dropButton()}
+              {/*{this.dropButton()}*/}
+
+              <div className="idcard" /*onClick={onClicks[4]}*/>
+                {/*<MuiThemeProvider>*/}
+                {/*<Notifications color = {'#c40000'} className='red-spot animated swing' style={{animationDuration:'2s', animationIterationCount:10000,}}/>*/}
+                {/*</MuiThemeProvider>*/}
+                <img id="idcard-photo" src={defalt} alt=""/>
+                <div style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  marginLeft: 9,
+                }}>
+                  <div id="idcard-top">
+                    {this.props.name}
+                  </div>
+                  <div id="idcard-buttom">
+                    {this.props.subname}
+                  </div>
+                </div>
+              </div>
               <MuiThemeProvider>
                 <RaisedButton backgroundColor="#DDDDDD"
                               style={{marginLeft: '12px'}}

@@ -34,6 +34,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Grow from '@material-ui/core/Grow'
 import axios from 'axios/index'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
+import { connect } from 'react-redux'
 
 function Transition (props) {
   return <Slide direction='up' {...props} />
@@ -121,8 +122,9 @@ class SendProjectAgree extends React.Component {
       emails.push(this.state.input[i].email)
     }
 
-    if(_this.state.projectNumber === ''){
-      alert('請填寫專題一或二')
+    let str = this.props.researchStatus
+    if(str !== '1' || str !== '2'){
+      alert(this.getString())
       return
     }
     let r = window.confirm('確定送出表單嗎?')
@@ -219,6 +221,25 @@ class SendProjectAgree extends React.Component {
     this.setState({ input: newinput })
   }
 
+  getString = () => {
+    let str = this.props.researchStatus
+    if(str === '1'){
+      return '專題一'
+    }
+    if(str === '2'){
+      return '專題二'
+    }
+    if(str === '3'){
+      return '基礎程式設計成績待審核'
+    }
+    if(str === '4'){
+      return '重複提交(當學期只能有一個專題/專題申請表)'
+    }
+    if(str === '5'){
+      return '已修過專1專2'
+    }
+  }
+
   render () {
     const { expanded } = this.state
     const { input } = this.state
@@ -278,27 +299,11 @@ class SendProjectAgree extends React.Component {
               }
               onChange={this.handleTitleChange}
             />
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">專題幾？</InputLabel>
-              <Select
-                native
-                value={this.state.projectNumber}
-                onChange={this.handleProjectNumChange('projectNumber')}
-                inputProps={{
-                  name: '專題幾？',
-                  id: 'age-native-simple',
-                }}
-              >
-                <option value="" />
-                <option value={1}>專題一</option>
-                <option value={2}>專題二</option>
-              </Select>
-            </FormControl>
-            <div className='hidden-xs'>
+            <div className='hidden-xs' style={{marginTop: '20px'}}>
               {this.state.menberNumber.map(t =>
                 <Grow in  key={t}>
                 <div className='row'>
-                  <div className='col-sm-3 col-md-3 col-lg-3'>
+                  <div className='col-sm-3 col-md-4 col-lg-4'>
                   <Input
                     placeholder='學號'
                     className='project-member-input'
@@ -312,7 +317,7 @@ class SendProjectAgree extends React.Component {
                     onChange={(event)=>this.handleinputChange(event, 'id', t-1)}
                   />
                   </div>
-                  <div className='col-sm-3 col-md-3 col-lg-3'>
+                  <div className='col-sm-3 col-md-4 col-lg-4'>
                   <Input
                     placeholder='電話'
                     className='project-member-input'
@@ -325,7 +330,7 @@ class SendProjectAgree extends React.Component {
                     onChange={(event)=>this.handleinputChange(event, 'phone', t-1)}
                   />
                   </div>
-                  <div className='col-sm-6 col-md-6 col-lg-6'>
+                  <div className='col-sm-6 col-md-4 col-lg-4'>
                   <Input
                     placeholder='Email'
                     className='project-member-input'
@@ -342,7 +347,7 @@ class SendProjectAgree extends React.Component {
                 </Grow>
               )}
             </div>
-            <div className='visible-xs '>
+            <div className='visible-xs ' style={{marginTop: '20px'}}>
               {this.state.menberNumber.map(t =>
                 <Grow in>
                 <ExpansionPanel  expanded={expanded === `成員 ${t}`} onChange={this.handlepanelChange(`成員 ${t}`)} key={t}>
@@ -442,4 +447,10 @@ function TransitionUp (props) {
   return <Slide {...props} direction='up' />
 }
 
-export default withStyles(styles)(withMobileDialog()(SendProjectAgree))
+const mapStateToProps = (state) => {
+  return {
+    researchStatus: state.Student.Professor.research_status
+  }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(withMobileDialog()(SendProjectAgree)))

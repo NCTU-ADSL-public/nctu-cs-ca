@@ -1,20 +1,22 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import RaisedButton from 'material-ui/RaisedButton'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import SugCourse from './SugCourse'
-import SugCourseRwd from './SugCourse/others'
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import { withStyles } from '@material-ui/core/styles/index'
+import Trello from './Trello'
+import DashboardIcon from '@material-ui/icons/Dashboard'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const styles = theme => ({
   appBar: {
     position: 'relative',
-    background: '#5f9191',
+    background: '#3db586',
   },
   progress: {
     position: 'relative',
@@ -51,27 +53,34 @@ class AlertDialog extends React.Component {
     const { fullScreen, classes } = this.props
     return (
       <div style={{margin: '5px 0 5px 0'}}>
-        <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={this.handleClickOpen}>
-          推薦選課
-        </Button>
+
+        <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
+          <ListItemIcon className={classes.icon}>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText classes={{ primary: classes.primary }} inset primary='列印預審文件' />
+        </MenuItem>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
           maxWidth={false}
+          fullWidth={fullScreen}
         >
           <AppBar className={classes.appBar} >
             <Toolbar >
               <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
-                推薦選課
+                課程排序
               </Typography>
               <Button style={{fontSize: '12px'}} color="inherit" onClick={this.handleClose}>
                 離開
               </Button>
             </Toolbar>
           </AppBar>
-          {fullScreen?<SugCourseRwd/>:<SugCourse />}
+          <MuiThemeProvider>
+          <Trello />
+          </MuiThemeProvider>
         </Dialog>
       </div>
     )
