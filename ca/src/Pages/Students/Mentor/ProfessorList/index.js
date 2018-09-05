@@ -22,7 +22,6 @@ class ProfessorsList extends React.Component {
 }
 
 const getVisibleProfessors = (data, mentor, filterInput, page, projectNumber) => {
-  console.log(data)
   if (data.length === 0) return []
   // filter
   let number = projectNumber === '0' ? 0 : projectNumber === '3' ? 3 : 5

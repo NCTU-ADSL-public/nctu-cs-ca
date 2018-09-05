@@ -40,7 +40,7 @@ function Transition (props) {
   return <Slide direction='up' {...props} />
 }
 
-const limitcount = 7
+const limitcount = 10
 
 const styles = theme => ({
   root: {
@@ -123,7 +123,7 @@ class SendProjectAgree extends React.Component {
     }
 
     let str = this.props.researchStatus
-    if(str !== '1' || str !== '2'){
+    if(str !== '1' && str !== '2'){
       alert(this.getString())
       return
     }
@@ -135,7 +135,7 @@ class SendProjectAgree extends React.Component {
         semester:semester,
         student_num:participants.length,
         tname:_this.props.profile.tname,
-        first_second :_this.state.projectNumber,
+        first_second :str,
         research_title:_this.state.title,
         participants:participants,
         phones: phones,

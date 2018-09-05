@@ -148,7 +148,7 @@ class App extends React.Component{
           <div>
             <Button rwd/>
             <div className='jumbotron' style={{color: 'gray', padding: '5px', textAlign: 'center', marginBottom: '5px'}}>
-              個學期建議修課課程。
+              各學期建議修課課程。
             </div>
             <Tabs defaultActiveKey={_grade} id="uncontrolled-tab-example">
               <Tab eventKey={1} title="大一">

@@ -116,7 +116,7 @@ export default class TableExampleComplex extends Component {
       <div style={fontStyle}>
         <Button rwd />
         <div className='jumbotron' style={{color: 'gray', padding: '5px', textAlign: 'center'}}>
-          依據您過去修課，我們為您推薦以下課程。
+          依據您的修課紀錄，為您推薦以下課程。
         </div>
         <MuiThemeProvider>
           <Table

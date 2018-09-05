@@ -54,8 +54,8 @@ class AlertDialog extends React.Component {
     return (
       <div style={{margin: '5px 0 5px 0'}}>
 
-        <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
-          <ListItemIcon className={classes.icon}>
+        <MenuItem className={classes.menuItem} onClick={this.handleClickOpen} disabled>
+          <ListItemIcon className={classes.icon} >
             <DashboardIcon />
           </ListItemIcon>
           <ListItemText classes={{ primary: classes.primary }} inset primary='課程排序' />

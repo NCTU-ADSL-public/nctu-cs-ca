@@ -5,7 +5,7 @@ const initialState = {
   filter_select: 'ALL',
   filter_string: '',
   status: 'IDLE',
-  research_status: '4',
+  research_status: '1',
   mentor: '',
   project_number: '0',
   page: 1
