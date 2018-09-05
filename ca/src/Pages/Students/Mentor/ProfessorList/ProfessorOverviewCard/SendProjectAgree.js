@@ -123,7 +123,7 @@ class SendProjectAgree extends React.Component {
     }
 
     let str = this.props.researchStatus
-    if(str !== '1' || str !== '2'){
+    if(str !== '1' && str !== '2'){
       alert(this.getString())
       return
     }
