@@ -6,8 +6,7 @@ import {Navbar,Nav,NavItem,DropdownButton,MenuItem,ButtonToolbar } from 'react-b
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
 import NavButton from './NavButton'
-import axios from 'axios'
-import Notifications from 'material-ui/svg-icons/social/notifications'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const style = {
@@ -123,10 +122,10 @@ class _Navbar extends React.Component {
         <NavButton key={4} label='專題' icon='glyphicon glyphicon-file' onClick={onClicks[4]} selected={selectedButtonIndex === 4}/>,
       ],
       'assistant': [
-        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
-        <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
-        <NavButton key={2} label='學生專題' icon='fa fa-users' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
-        <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
+        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname === this.props.router[0]}/>,
+        <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={this.props.router && this.props.location.pathname === this.props.router[1]}/>,
+        <NavButton key={2} label='學生專題' icon='fa fa-users' onClick={onClicks[2]} selected={this.props.router && this.props.location.pathname === this.props.router[2]}/>,
+        <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={this.props.router && this.props.location.pathname === this.props.router[3]}/>,
       ],
       'teacher': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
@@ -195,4 +194,4 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
 })
 
-export default connect(mapState, mapDispatch)(_Navbar)
+export default connect(mapState, mapDispatch)(withRouter(_Navbar))

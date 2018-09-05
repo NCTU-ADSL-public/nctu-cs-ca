@@ -59,7 +59,7 @@ class StudentList extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      studentList: FakeData.StudentList,
+      studentList: [/*FakeData.StudentList*/],
       chooseInfo: null,
       cardShow: false
     }
