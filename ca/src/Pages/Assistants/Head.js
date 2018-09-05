@@ -24,10 +24,10 @@ class Head extends React.Component {
   }
   render () {
     const router = [
-      '/assistants/head/',
-      '/assistants/grad/',
-      '/assistants/project/',
-      '/assistants/family/',
+      '/assistants/head',
+      '/assistants/grad',
+      '/assistants/project',
+      '/assistants/family',
       '/assistants/mail'
     ]
     const onTouchTaps = [
