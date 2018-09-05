@@ -135,7 +135,7 @@ class SendProjectAgree extends React.Component {
         semester:semester,
         student_num:participants.length,
         tname:_this.props.profile.tname,
-        first_second :_this.state.projectNumber,
+        first_second :str,
         research_title:_this.state.title,
         participants:participants,
         phones: phones,
