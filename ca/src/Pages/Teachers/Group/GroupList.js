@@ -113,7 +113,7 @@ class GroupList extends React.Component {
       loading: true,
       index: 0,
       total_number: 0,
-      chipOpen: false,
+      chipOpen: new Array(10).fill(false),
       groupList: [
         {
           research_title: 'epth estimation from Single image',
@@ -291,19 +291,15 @@ class GroupList extends React.Component {
     ))
   }
 
-  handleChip = (e) => {
-    // This prevents ghost click.
-    e.preventDefault()
-    this.setState({
-      chipOpen: true,
-      anchorEl: e.currentTarget,
-    })
-
+  handleChip = (i) => {
+    let chipOpen = this.state.chipOpen
+    chipOpen[i] = true
+    this.setState({chipOpen})
   }
 
   handleRequestClose = () => {
     this.setState({
-      chipOpen: false,
+      chipOpen: new Array(10).fill(false),
     })
   }
 
@@ -390,20 +386,22 @@ const GroupButton = (props) => (
 
                   <Chip style={styles.chip}
                         key={i}
-                        onClick={props.handleChip}>
+                        onClick={() => props.handleChip(i)}>
                     <Avatar src={defaultPic}/> {p.student_id} {p.sname}
                     <span style={{color: 'red'}}>  {p.score}</span>
                   </Chip>
 
                   <MuiThemeProvider>
                     <Dialog
+                      key={i}
                       modal={false}
-                      open={props.chipOpen}
+                      open={props.chipOpen[i]}
                       onRequestClose={() => props.handleRequestClose()}
                       autoScrollBodyContent
                       contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
                     >
                       <InfoCard
+                        key={i}
                         student={p}
                         sender={1}
                         sender_email={1}
