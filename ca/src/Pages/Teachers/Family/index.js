@@ -142,8 +142,8 @@ class Index extends React.Component {
   // handleChange(){
   //   this.setState
   // }
-  choose(v){
-    if(! ('score' in this.state.initItem[v])){
+  choose (v) {
+    if (!('score' in this.state.initItem[v])) {
       let tmp = this.state.initItem
       // tmp[v].score = FakeData.StudentScore
       // this.setState({
@@ -156,17 +156,17 @@ class Index extends React.Component {
       }).then(res => {
         tmp[v].score = res.data
         this.setState({
-          chooseInfo:v,
+          chooseInfo: v,
           initItem: tmp,
-          dialogOpen:(window.innerWidth<768) && res.data!==[]
+          dialogOpen: (window.innerWidth < 768) && res.data !== []
         })
       }).catch(err => {
         console.log(err)
       })
-    }else{
+    } else {
       this.setState({
         chooseInfo: v,
-        dialogOpen: (window.innerWidth<768) && res.data!==[]
+        dialogOpen: (window.innerWidth < 768)
       })
     }
   }
