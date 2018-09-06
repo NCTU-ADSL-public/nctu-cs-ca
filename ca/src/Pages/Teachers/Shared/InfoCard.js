@@ -65,9 +65,7 @@ class InfoCard extends React.Component {
       console.log('--> res = ')
       console.log(res)
       scoreData.score = res.data
-      this.triggerUpdate()
       this.setState({scoreData})
-      console.log('set SCORE DATA')
     }).catch(err => {
       console.log(err)
     })
