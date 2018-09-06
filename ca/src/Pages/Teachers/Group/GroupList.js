@@ -42,7 +42,7 @@ const styles = {
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#e5e5e5',
+    color: '#6e8086',
     margin: '32px 0 0 70px',
     float: 'left'
   },
@@ -329,6 +329,7 @@ class GroupList extends React.Component {
             {this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
+                  key={i}
                   item={item}
                   idCard={this.props.idCard}
                   groupClick={this.props.handleGroupClick}
@@ -385,7 +386,7 @@ const GroupButton = (props) => (
           <MuiThemeProvider>
             <div style={styles.chipWrapper}>
               {props.item.participants.map((p, i) => (
-                <div>
+                <div key={i}>
 
                   <Chip style={styles.chip}
                         key={i}
