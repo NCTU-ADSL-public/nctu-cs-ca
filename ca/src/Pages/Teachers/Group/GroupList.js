@@ -268,11 +268,11 @@ class GroupList extends React.Component {
   }
 
   handleSelected (sid) {
-    console.log('MAJAJA FUCK' + sid)
+    console.log('MAJAMI' + sid)
     let tmp = initItem
     tmp[0].score = FakeData.StudentScore
     // NOT SURE IF THE URL BELOW IS CORRECT
-    axios.post('/professors/students/StudentGradeList', {
+    axios.post('/StudentGradeList', {
       student_id: sid
     }).then(res => {
       tmp[0].score = res.data
