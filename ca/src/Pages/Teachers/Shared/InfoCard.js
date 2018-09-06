@@ -57,7 +57,7 @@ class InfoCard extends React.Component {
 
   handleSelected (sid) {
     console.log('HANDLE SELECTED ' + sid)
-    let scoreData = initScoreData
+    let scoreData = this.state.scoreData
     scoreData.score = FakeData.StudentScore
     axios.post('/StudentGradeList', {
       student_id: sid
