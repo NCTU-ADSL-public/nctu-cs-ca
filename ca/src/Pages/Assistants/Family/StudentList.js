@@ -110,7 +110,7 @@ class StudentList extends React.Component{
         this.setState({
           chooseInfo:r,
           studentList: tmp,
-          cardShow: true
+          cardShow: res.data !== []
         })
       }).catch(err => {
         console.log(err)

@@ -158,7 +158,7 @@ class Index extends React.Component {
         this.setState({
           chooseInfo:v,
           initItem: tmp,
-          dialogOpen:(window.innerWidth<768)
+          dialogOpen:(window.innerWidth<768) && res.data!==[]
         })
       }).catch(err => {
         console.log(err)
@@ -166,7 +166,7 @@ class Index extends React.Component {
     }else{
       this.setState({
         chooseInfo: v,
-        dialogOpen: (window.innerWidth<768)
+        dialogOpen: (window.innerWidth<768) && res.data!==[]
       })
     }
   }
