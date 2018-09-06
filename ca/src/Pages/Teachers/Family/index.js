@@ -172,7 +172,7 @@ class Index extends React.Component {
   }
 
   fetchData () {
-    axios.get('/professors/students/list', {
+    axios.get('/professors/students/StudentList', {
       id: this.props.tid
     }).then(res => {
       this.setState({initItem: res.data.map((v,i)=>({...v,id:i}))})
