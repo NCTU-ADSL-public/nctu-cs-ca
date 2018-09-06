@@ -113,7 +113,7 @@ class GroupList extends React.Component {
       loading: true,
       index: 0,
       total_number: 0,
-      chipOpen: new Array(10).fill(false),
+      chipOpen: new Map(),
       groupList: [
         {
           research_title: 'epth estimation from Single image',
@@ -293,13 +293,13 @@ class GroupList extends React.Component {
 
   handleChip = (i) => {
     let chipOpen = this.state.chipOpen
-    chipOpen[i] = true
+    chipOpen.set(i, true)
     this.setState({chipOpen})
   }
 
   handleRequestClose = () => {
     this.setState({
-      chipOpen: new Array(10).fill(false),
+      chipOpen: new Map(),
     })
   }
 
@@ -386,7 +386,7 @@ const GroupButton = (props) => (
 
                   <Chip style={styles.chip}
                         key={i}
-                        onClick={() => props.handleChip(i)}>
+                        onClick={() => props.handleChip(props.key + p.student_id)}>
                     <Avatar src={defaultPic}/> {p.student_id} {p.sname}
                     <span style={{color: 'red'}}>  {p.score}</span>
                   </Chip>
@@ -395,7 +395,7 @@ const GroupButton = (props) => (
                     <Dialog
                       key={i}
                       modal={false}
-                      open={props.chipOpen[i]}
+                      open={props.chipOpen.get(props.key + p.student_id)}
                       onRequestClose={() => props.handleRequestClose()}
                       autoScrollBodyContent
                       contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
