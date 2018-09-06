@@ -60,10 +60,10 @@ const styles = {
 const semester = ['','上','下','暑']
 const InfoCard = (props)=>(
   <MuiThemeProvider>
-      <Card style={props.selected.failed ? {backgroundColor:'#fff',border:'2px solid #F50057'}:{}}>
+      <Card style={props.selected.recent_failed ? {backgroundColor:'#fff',border:'2px solid #F50057'}:{}}>
         <CardHeader
           avatar={
-            <Avatar style={props.selected.failed ? {backgroundColor:'#F50057',color:'#fff'}:{backgroundColor:'#3949AB',color:'#fff'}}>
+            <Avatar style={props.selected.recent_failed ? {backgroundColor:'#F50057',color:'#fff'}:{backgroundColor:'#3949AB',color:'#fff'}}>
             {props.selected.sname[0]}
             </Avatar>
           }
@@ -76,7 +76,7 @@ const InfoCard = (props)=>(
             sender_email={props.sender_email} 
             receiver={props.selected.sname}
             receiver_email={props.selected.email}
-            failed={props.selected.failed}
+            failed={props.selected.recent_failed}
           />
         </span>
         </CardHeader>
@@ -90,7 +90,7 @@ const InfoCard = (props)=>(
           <YAxis domain={[0, 100]}/>
           <CartesianGrid strokeDasharray="3 3"/>
           <Tooltip/>
-          <Line type="monotone" dataKey="avg" stroke={`${props.selected.failed?'#F50057':'#8884d8'}`} activeDot={{r: 8}}/>
+          <Line type="monotone" dataKey="avg" stroke={`${props.selected.recent_failed?'#F50057':'#8884d8'}`} activeDot={{r: 8}}/>
         </LineChart>
         </ResponsiveContainer>
         </div>
@@ -132,7 +132,7 @@ class Index extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      initItem: FakeData.StudentList.map((v,i)=>({...v,id:i})),
+      initItem: [/*FakeData.StudentList.map((v,i)=>({...v,id:i}))*/],
       chooseInfo: null,
       dialogOpen: false // for 行動版
     }

@@ -92,28 +92,28 @@ export default class ListTable extends Component {
       this.NewItemList = [].concat(this.props.items)
         .sort((a, b) => {
           if (orderBy === 'name'){
-            if(a.failed === true){
-              if(b.failed === true)
+            if(a.recent_failed === true){
+              if(b.recent_failed === true)
                 return a.sname.localeCompare(b.sname, 'zh-Hant-TW')
               else
                 return -1
             }
             else{
-              if(b.failed === true)
+              if(b.recent_failed === true)
                 return 1
               else
                 return a.sname.localeCompare(b.sname, 'zh-Hant-TW')
             }
           }  
           else if (orderBy === 'sid'){
-            if(a.failed === true){
-              if(b.failed === true)
+            if(a.recent_failed === true){
+              if(b.recent_failed === true)
                 return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
               else
                 return -1
             }
             else{
-              if(b.failed === true)
+              if(b.recent_failed === true)
                 return 1
               else
                 return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
@@ -179,7 +179,7 @@ export default class ListTable extends Component {
           >
             {this.state.itemList
               .map((row, i) =>
-                <TableRow key={i} style={row.failed ? styles.colorRed : styles.colorBlue}>
+                <TableRow key={i} style={row.recent_failed ? styles.colorRed : styles.colorBlue}>
                   <TableRowColumn style={styles.tabColumn0}>{row.student_id}</TableRowColumn>
                   <TableRowColumn style={styles.tabColumn0}>{row.sname}</TableRowColumn>
                 </TableRow>
