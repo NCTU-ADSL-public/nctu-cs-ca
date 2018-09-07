@@ -42,7 +42,7 @@ const styles = {
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#e5e5e5',
+    color: '#6e8086',
     margin: '32px 0 0 70px',
     float: 'left'
   },
@@ -96,7 +96,7 @@ const styles = {
 const initItem = [
   {
     'student_id': '0316000',
-    'sname': '幹你的吳泓寬',
+    'sname': '吳泓寬',
     'program': '網多',
     'graduate': '0',
     'graduate_submit': '0',
@@ -112,9 +112,8 @@ class GroupList extends React.Component {
     this.state = {
       loading: true,
       index: 0,
-      groupListlength: 99,
       total_number: 0,
-      chipOpen: false,
+      chipOpen: new Map(),
       groupList: [
         {
           research_title: 'epth estimation from Single image',
@@ -188,7 +187,7 @@ class GroupList extends React.Component {
       initItem: [
         {
           'student_id': '0316000',
-          'sname': '幹你的吳泓寬',
+          'sname': '吳泓寬',
           'program': '網多',
           'graduate': '0',
           'graduate_submit': '0',
@@ -201,7 +200,7 @@ class GroupList extends React.Component {
   }
 
   fetchData () {
-    console.log(this.props.idCard.name)
+    console.log('idCard: ' + this.props.idCard.name)
     let _this = this
     this.setState({
       //  groupList: []
@@ -211,8 +210,6 @@ class GroupList extends React.Component {
       // name: this.props.idCard.name
       id: this.props.idCard.id
     }).then(res => {
-      console.log('PROJECT DATA!')
-      console.log(res.data)
       this.setState({
         total_number: res.data.total_number,
         groupList: []
@@ -267,30 +264,12 @@ class GroupList extends React.Component {
     })
   }
 
-  handleSelected (sid) {
-    console.log('MAJAJA FUCK' + sid)
-    let tmp = initItem
-    tmp[0].score = FakeData.StudentScore
-    // NOT SURE IF THE URL BELOW IS CORRECT
-    axios.post('/professors/students/StudentGradeList', {
-      student_id: sid
-    }).then(res => {
-      tmp[0].score = res.data
-      this.triggerUpdate()
-      return tmp
-    }).catch(err => {
-      console.log(err)
-    })
-    return tmp
-  }
-
   componentDidMount () {
     this.fetchData()
   }
 
   async componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
-      console.log(nextProps)
       await this.setState({
         groupList: []
       })
@@ -312,19 +291,15 @@ class GroupList extends React.Component {
     ))
   }
 
-  handleChip = (e) => {
-    // This prevents ghost click.
-    e.preventDefault()
-    this.setState({
-      chipOpen: true,
-      anchorEl: e.currentTarget,
-    })
-
+  handleChip = (i) => {
+    let chipOpen = this.state.chipOpen
+    chipOpen.set(i, true)
+    this.setState({chipOpen})
   }
 
   handleRequestClose = () => {
     this.setState({
-      chipOpen: false,
+      chipOpen: new Map(),
     })
   }
 
@@ -350,21 +325,14 @@ class GroupList extends React.Component {
             {this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
-                  key={item.research_title}
-                  title={item.research_title}
-                  participants={item.participants}
-                  year={item.year}
-                  firstSecond={item.first_second}
+                  key={i}
                   item={item}
                   idCard={this.props.idCard}
                   groupClick={this.props.handleGroupClick}
                   parentFunction={this.triggerUpdate}
                   chipOpen={this.state.chipOpen}
-                  anchorEl={this.state.anchorEl}
                   handleChip={this.handleChip}
                   handleRequestClose={this.handleRequestClose}
-                  initItem={this.state.initItem}
-                  handleSelected={this.handleSelected}
                 />
               ))
               : '(無專題生資料!)'
@@ -385,54 +353,56 @@ const GroupButton = (props) => (
         <Image style={styles.pic} src={props.item.image === undefined ? pic : props.item.image} circle/>
       </Col>
       <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>年度 : {props.year}</div>
+        <div style={styles.groupYear}>年度 : {props.item.year}</div>
         <div style={styles.block}>
           <div style={styles.groupModify}>
             <ChangeTitleDialog
-              title={props.title}
-              firstSecond={props.firstSecond}
-              year={props.year}
+              title={props.item.research_title}
+              firstSecond={props.item.firstSecond}
+              year={props.item.year}
               idCard={props.idCard}
               parentFunction={props.parentFunction}
             />
           </div>
           <div style={styles.groupModify}>
             <ScoreDialog
-              title={props.title}
-              participants={props.participants}
-              firstSecond={props.firstSecond}
+              title={props.item.research_title}
+              participants={props.item.participants}
+              firstSecond={props.item.firstSecond}
               idCard={props.idCard}
-              year={props.year}
+              year={props.item.year}
               parentFunction={props.parentFunction}
             />
           </div>
         </div>
         <div>
-          <div style={styles.groupTitle}>{props.title}</div>
+          <div style={styles.groupTitle}>{props.item.research_title}</div>
         </div>
         <div>
           <MuiThemeProvider>
             <div style={styles.chipWrapper}>
-              {props.participants.map((item, i) => (
-                <div>
+              {props.item.participants.map((p, i) => (
+                <div key={i}>
 
                   <Chip style={styles.chip}
                         key={i}
-                        onClick={props.handleChip}>
-                    <Avatar src={defaultPic}/> {item.student_id} {item.sname}
-                    <span style={{color: 'red'}}>  {item.score}</span>
+                        onClick={() => props.handleChip(props.key + p.student_id)}>
+                    <Avatar src={defaultPic}/> {p.student_id} {p.sname}
+                    <span style={{color: 'red'}}>  {p.score}</span>
                   </Chip>
 
                   <MuiThemeProvider>
                     <Dialog
+                      key={i}
                       modal={false}
-                      open={props.chipOpen}
+                      open={props.chipOpen.get(props.key + p.student_id)}
                       onRequestClose={() => props.handleRequestClose()}
                       autoScrollBodyContent
                       contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
                     >
                       <InfoCard
-                        selected={props.handleSelected(item.student_id)}
+                        key={i}
+                        student={p}
                         sender={1}
                         sender_email={1}
                       />

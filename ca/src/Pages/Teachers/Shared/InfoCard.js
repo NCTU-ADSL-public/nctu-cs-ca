@@ -1,41 +1,103 @@
 import React from 'react'
+import axios from 'axios'
 // mui
 import Avatar from 'material-ui/Avatar'
 import {Card, CardText} from 'material-ui/Card'
-// for multiTheme
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
 import {CardHeader, Table, TableBody, TableRow, TableRowColumn} from 'material-ui'
 import {Tabs, Tab} from 'material-ui/Tabs'
+// for multiTheme
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+// others
 import {ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
 import MailButton from '../../../Components/mail/MailButton'
+
+import FakeData from '../../../Resources/FakeData'
 
 const semester = ['', '上', '下', '暑']
 
 class InfoCard extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      scoreData: {
+        student_id: '0316000',
+        sname: '吳泓寬',
+        program: '網多',
+        graduate: '0',
+        graduate_submit: '0',
+        email: 'student@gmail.com',
+        failed: true,
+        score: FakeData.StudentScore
+      }
+    }
+  }
+
+  fetchStudentProfile () {
+    const s = this.props.student
+    let scoreData = this.state.scoreData
+    scoreData.student_id = s.student_id
+    scoreData.sname = s.sname
+    scoreData.program = s.detail
+    axios.post('/professors/students/StudentInfo', {
+      student_id: s.student_id
+    }).then(res => {
+      console.log('student Info', res.data)
+      const r = res.data
+      scoreData.sname = r.sname
+      scoreData.email = r.email
+      this.setState({scoreData})
+    }).catch(err => {
+      console.log(err)
+    })
+    this.setState({scoreData})
+  }
+
+  componentDidMount () {
+    const s = this.props.student
+    this.handleSelected(s.student_id)
+    this.fetchStudentProfile()
+    console.log('SCORE DATA: ', this.state.scoreData)
+  }
+
+  handleSelected (sid) {
+    console.log('HANDLE SELECTED ' + sid)
+    let scoreData = this.state.scoreData
+    scoreData.score = FakeData.StudentScore
+    axios.post('/StudentGradeList', {
+      student_id: sid
+    }).then(res => {
+      console.log('--> res = ')
+      console.log(res)
+      scoreData.score = res.data
+      this.setState({scoreData})
+    }).catch(err => {
+      console.log(err)
+    })
+    this.setState({scoreData})
+  }
   render () {
     return (
       <MuiThemeProvider>
-        <Card style={this.props.selected.failed && {backgroundColor: '#fff', border: '2px solid #F50057'}}>
+        <Card style={this.state.scoreData.failed && {backgroundColor: '#fff', border: '2px solid #F50057'}}>
           <CardHeader
             avatar={
               <Avatar style={
-                this.props.selected.failed
+                this.state.scoreData.failed
                   ? {backgroundColor: '#F50057', color: '#fff'}
                   : {backgroundColor: '#3949AB', color: '#fff'}
               }>
-                {this.props.selected.sname[0]}
+                {this.state.scoreData.sname[0]}
               </Avatar>
             }
-            title={this.props.selected.sname}
-            subtitle={`${this.props.selected.program} / ${this.props.selected.student_id}`}>
+            title={this.state.scoreData.sname}
+            subtitle={`${this.state.scoreData.program} / ${this.state.scoreData.student_id}`}>
             <span style={{position: 'absolute', right: 20}}>
               <MailButton
                 sender={this.props.sender}
                 sender_email={this.props.sender_email}
-                receiver={this.props.selected.sname}
-                receiver_email={this.props.selected.email}
-                failed={this.props.selected.failed}
+                receiver={this.state.scoreData.sname}
+                receiver_email={this.state.scoreData.email}
+                failed={this.state.scoreData.failed}
               />
             </span>
           </CardHeader>
@@ -46,7 +108,7 @@ class InfoCard extends React.Component {
                 width={(window.innerWidth < 768) ? window.innerWidth * 0.6 : window.innerWidth * 0.4}
                 aspect={2}>
                 <LineChart
-                  data={this.props.selected.score}
+                  data={this.state.scoreData.score}
                   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                   <XAxis dataKey='semester' />
                   <YAxis domain={[0, 100]} />
@@ -55,7 +117,7 @@ class InfoCard extends React.Component {
                   <Line
                     type='monotone'
                     dataKey='avg'
-                    stroke={`${this.props.selected.failed ? '#F50057' : '#8884d8'}`}
+                    stroke={`${this.state.scoreData.failed ? '#F50057' : '#8884d8'}`}
                     activeDot={{r: 8}}
                   />
                 </LineChart>
@@ -65,7 +127,7 @@ class InfoCard extends React.Component {
           <CardText>
             <Tabs>
               {
-                this.props.selected.score && this.props.selected.score.map(
+                this.state.scoreData.score && this.state.scoreData.score.map(
                   (v, i) => (
                     <Tab
                       key={i}

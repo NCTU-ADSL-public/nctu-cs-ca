@@ -17,7 +17,7 @@ const styles = {
   mainTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#e5e5e5',
+    color: '#6e8086',
     margin: '32px 0 0 70px',
     float: 'left'
   },
@@ -103,12 +103,9 @@ const styles = {
 
 class GroupVedio extends React.Component {
   componentWillMount () {
-    console.log(Vedios)
+    // console.log(Vedios)
   }
   render () {
-    Vedios.map((item, i) => (
-      console.log(item)
-    ))
     return (
       <Grid style={{minHeight: 500}}>
         <Row>

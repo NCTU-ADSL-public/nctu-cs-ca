@@ -20,6 +20,7 @@ import ListIcon from '@material-ui/icons/List'
 import ViewIcon from '@material-ui/icons/ViewComfy'
 import axios from 'axios'
 import FakeData from '../../../Resources/FakeData'
+import AvRepeat from 'material-ui/SvgIcon';
 
 const styles = () => ({
   container:{
@@ -77,6 +78,12 @@ const styles = () => ({
     fontWeight: 400,
     textAlign: 'center',
     color:'#F50057'
+  },
+  btncontainer:{
+    width: '100%',
+    margin:'10px auto',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(5,5fr)'
   }
 })
 
@@ -84,7 +91,7 @@ class Family extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      teacherList: FakeData.TeacherList,
+      teacherList: [/*FakeData.TeacherList*/],
       filter:'',
       toggle:true,
       display:0
@@ -101,7 +108,7 @@ class Family extends React.Component{
     const {classes} = this.props
     const Wrapper = (props)=>(
       this.state.display === 1 ?
-      <div className={classes.content}>
+      <div className={classes.btncontainer}>
         {props.children}
       </div>
       :
@@ -158,20 +165,20 @@ class Family extends React.Component{
                   this.state.filter.trim().toLowerCase()) !== -1)
               ))
               .sort((a,b)=>
-                (a.failed_students > b.failed_students)? -1 : 1
+                (a.recent_failed > b.recent_failed)? -1 : 1
                 )
               .map((teacher,index)=>(
-                teacher.failed_students > 0 ?
+                teacher.recent_failed > 0 ?
                     <TableRow className={classes.row} key={index} onClick={()=>this.props.history.push(`/assistants/family/${teacher.id.substr(1)}`)}>
                       <TableCell className={classes.font2}>{teacher.name}</TableCell>
-                      <TableCell className={classes.font2}>{/*recent_failed*/}</TableCell>
+                      <TableCell className={classes.font2}>{teacher.recent_failed}</TableCell>
                       <TableCell className={classes.font2}>{teacher.failed_students}</TableCell>
                     </TableRow>
                   :
                   this.state.toggle &&
                     <TableRow className={classes.row} key={index} onClick={()=>this.props.history.push(`/assistants/family/${teacher.id.substr(1)}`)}>
                       <TableCell className={classes.font}>{teacher.name}</TableCell>
-                      <TableCell className={classes.font}>{/*recent_failed*/}</TableCell>
+                      <TableCell className={classes.font}>{teacher.recent_failed}</TableCell>
                       <TableCell className={classes.font}>{teacher.failed_students}</TableCell>
                     </TableRow>
               )):
@@ -181,12 +188,12 @@ class Family extends React.Component{
                   this.state.filter.trim().toLowerCase()) !== -1)
               ))
               .sort((a,b)=>
-                (a.failed_students > b.failed_students)? -1 : 1
+                (a.recent_failed > b.recent_failed)? -1 : 1
                 )
                 .map((teacher,index)=>{
-                  return teacher.failed_students > 0 ?
+                  return teacher.recent_failed > 0 ?
                     <Link to={`/assistants/family/${teacher.id.substr(1)}`} key={index}>
-                      <Badge className={classes.button} color="secondary" badgeContent={teacher.failed_students} >
+                      <Badge className={classes.button} color="secondary" badgeContent={teacher.recent_failed} >
                         <Button variant="contained" size="large">
                           <span><i className={`fa fa-graduation-cap ${classes.icon}`}></i></span>
                           <span className={classes.buttonText}>{teacher.name}</span>

@@ -58,7 +58,7 @@ class Group extends React.Component {
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
-          inkBarStyle={{backgroundColor: '#bbebe2'}}
+          inkBarStyle={{backgroundColor: '#10616b'}}
         >
           <Tab label={`專題列表`} value='1'
                style={{backgroundColor: '#9da4a5'}} >

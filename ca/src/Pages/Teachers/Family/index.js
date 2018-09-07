@@ -60,10 +60,10 @@ const styles = {
 const semester = ['','上','下','暑']
 const InfoCard = (props)=>(
   <MuiThemeProvider>
-      <Card style={props.selected.failed ? {backgroundColor:'#fff',border:'2px solid #F50057'}:{}}>
+      <Card style={props.selected.recent_failed ? {backgroundColor:'#fff',border:'2px solid #F50057'}:{}}>
         <CardHeader
           avatar={
-            <Avatar style={props.selected.failed ? {backgroundColor:'#F50057',color:'#fff'}:{backgroundColor:'#3949AB',color:'#fff'}}>
+            <Avatar style={props.selected.recent_failed ? {backgroundColor:'#F50057',color:'#fff'}:{backgroundColor:'#3949AB',color:'#fff'}}>
             {props.selected.sname[0]}
             </Avatar>
           }
@@ -76,7 +76,7 @@ const InfoCard = (props)=>(
             sender_email={props.sender_email} 
             receiver={props.selected.sname}
             receiver_email={props.selected.email}
-            failed={props.selected.failed}
+            failed={props.selected.recent_failed}
           />
         </span>
         </CardHeader>
@@ -90,7 +90,7 @@ const InfoCard = (props)=>(
           <YAxis domain={[0, 100]}/>
           <CartesianGrid strokeDasharray="3 3"/>
           <Tooltip/>
-          <Line type="monotone" dataKey="avg" stroke={`${props.selected.failed?'#F50057':'#8884d8'}`} activeDot={{r: 8}}/>
+          <Line type="monotone" dataKey="avg" stroke={`${props.selected.recent_failed?'#F50057':'#8884d8'}`} activeDot={{r: 8}}/>
         </LineChart>
         </ResponsiveContainer>
         </div>
@@ -132,7 +132,7 @@ class Index extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      initItem: FakeData.StudentList.map((v,i)=>({...v,id:i})),
+      initItem: [/*FakeData.StudentList.map((v,i)=>({...v,id:i}))*/],
       chooseInfo: null,
       dialogOpen: false // for 行動版
     }
@@ -142,8 +142,8 @@ class Index extends React.Component {
   // handleChange(){
   //   this.setState
   // }
-  choose(v){
-    if(! ('score' in this.state.initItem[v])){
+  choose (v) {
+    if (!('score' in this.state.initItem[v])) {
       let tmp = this.state.initItem
       // tmp[v].score = FakeData.StudentScore
       // this.setState({
@@ -156,23 +156,23 @@ class Index extends React.Component {
       }).then(res => {
         tmp[v].score = res.data
         this.setState({
-          chooseInfo:v,
+          chooseInfo: v,
           initItem: tmp,
-          dialogOpen:(window.innerWidth<768)
+          dialogOpen: (window.innerWidth < 768) && res.data !== []
         })
       }).catch(err => {
         console.log(err)
       })
-    }else{
+    } else {
       this.setState({
         chooseInfo: v,
-        dialogOpen: (window.innerWidth<768)
+        dialogOpen: (window.innerWidth < 768)
       })
     }
   }
 
   fetchData () {
-    axios.get('/professors/students/list', {
+    axios.get('/professors/students/StudentList', {
       id: this.props.tid
     }).then(res => {
       this.setState({initItem: res.data.map((v,i)=>({...v,id:i}))})

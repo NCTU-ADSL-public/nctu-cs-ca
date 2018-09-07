@@ -46,6 +46,7 @@ class Head extends React.Component {
               subname={this.props.idCard.prog + this.props.idCard.grad}
               onTouchTaps={onTouchTaps}
               selectedIndex={this.state.index}
+              router={router}
             />
           </Col>
         </Row>
