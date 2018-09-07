@@ -1,7 +1,348 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  students: []
+  students: [
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
+    {
+        "student": {
+            "id": "0410006",
+            "name": "陳鼎元",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 1,
+            "title": "Texas Poker AI",
+            "professor_name": "吳毅成"
+        }
+    },
+    {
+        "student": {
+            "id": "0410007",
+            "name": "吳億凡",
+            "program": "電資學士班"
+        },
+        "project": {
+            "status": 2,
+        }
+    },
+  ]
 }
 
 export default handleActions({

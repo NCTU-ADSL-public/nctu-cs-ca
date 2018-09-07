@@ -5,7 +5,6 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
 
@@ -29,26 +28,26 @@ class StudentList extends React.Component {
     return (
       students.map( ( student ) => {
         return (
-          <div style = {{ margin: '15px auto' }}>
+          <div style = {{ margin: '15px auto', fontFamily: 'Noto Sans CJK TC' }}>
             <ExpansionPanel>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <div style = {{ width: '100%', display: 'flex' }}>
-                  <Typography style = {{ flex: 0.2, textAlign: 'center', color: 'black' }} variant="display2" >{ student.student.id }</Typography>
-                  <Typography style = {{ flex: 0.2, textAlign: 'center', color: 'black' }} variant="display2" >{ student.student.name }</Typography>
-                  <Typography style = {{ flex: 0.3, textAlign: 'center', color: 'black' }} variant="display2" >{ student.student.program }</Typography>
-                  <Typography style = {{ flex: 0.3, textAlign: 'center', color: PROJECT_STATUS_COLOR[student.project.status] }} variant="display1" >{ PROJECT_STATUS[student.project.status] }</Typography>
+                  <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} variant="display1" >{ student.student.id }</div>
+                  <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} variant="display1" >{ student.student.name }</div>
+                  <div style = {{ fontSize: 20, flex: 0.3, textAlign: 'center', color: 'black' }} variant="display1" >{ student.student.program }</div>
+                  <div style = {{ fontSize: 20, flex: 0.3, textAlign: 'center', color: PROJECT_STATUS_COLOR[student.project.status] }} variant="subheading" >{ PROJECT_STATUS[student.project.status] }</div>
                 </div>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 {
                   student.project.status != 2 ?
                   <div style = {{ width: '100%', display: 'flex' }} >
-                    <Typography style = {{ flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.title}</Typography>
-                    <Typography style = {{ flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.professor_name}</Typography>
+                    <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.title}</div>
+                    <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.professor_name}</div>
                   </div>
                   :
                   <div style = {{ width: '100%', display: 'flex' }} >
-                    <Typography style = {{ flex: 1, textAlign: 'center' }} variant="display1" >尚未申請專題</Typography>
+                    <div style = {{ fontSize: 17, flex: 1, textAlign: 'center' }} variant="display1" >尚未申請專題</div>
                   </div>
                 }
               </ExpansionPanelDetails>
