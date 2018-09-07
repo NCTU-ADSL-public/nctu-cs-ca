@@ -98,6 +98,8 @@ class index extends React.Component {
                   (event) => {
                     this.setState({ grade: event.target.value })
                     fetch_students({ grade })
+                    console.log("Students Data")
+                    console.log(students)
                   }
                 }
               >
