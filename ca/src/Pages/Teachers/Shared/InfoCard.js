@@ -32,30 +32,30 @@ class InfoCard extends React.Component {
     }
   }
 
-  fetchStudentProfile (sid) {
+  fetchStudentProfile () {
+    const s = this.props.student
+    let scoreData = this.state.scoreData
+    scoreData.student_id = s.student_id
+    scoreData.sname = s.sname
+    scoreData.program = s.detail
     axios.post('/professors/students/StudentInfo', {
-      student_id: sid
+      student_id: s.student_id
     }).then(res => {
       console.log('student Info', res.data)
-      let s = res.data
-      let scoreData = this.state.scoreData
-      scoreData.sname = s.sname
-      scoreData.email = s.email
+      const r = res.data
+      scoreData.sname = r.sname
+      scoreData.email = r.email
       this.setState({scoreData})
     }).catch(err => {
       console.log(err)
     })
+    this.setState({scoreData})
   }
 
   componentDidMount () {
     const s = this.props.student
     this.handleSelected(s.student_id)
-
-    let scoreData = this.state.scoreData
-    scoreData.student_id = s.student_id
-    scoreData.sname = s.sname
-    scoreData.program = s.detail
-    this.setState({scoreData})
+    this.fetchStudentProfile()
     console.log('SCORE DATA: ', this.state.scoreData)
   }
 
