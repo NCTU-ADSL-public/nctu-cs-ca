@@ -38,16 +38,19 @@ class index extends React.Component {
     this.state = {
       grade: 4,
       input: "",
-      students: [],
       page: 0,
       number_per_page: 10
     }
   }
 
+  compomentDidMount() {
+    this.props.fetch_students({ grade: this.state.grade })
+  }
+
   render() {
 
-    const { classes, fetch_students } = this.props
-    const { input, students, page, number_per_page, grade } = this.state
+    const { classes, fetch_students, students } = this.props
+    const { input, page, number_per_page, grade } = this.state
 
     return (
       <div className = { classes.root } >
@@ -91,9 +94,11 @@ class index extends React.Component {
                 }
                 value = { this.state.grade }
                 style = {{ fontSize: '15px' }}
-                onChange={ (event) => {
-                  this.setState({ grade: event.target.value }) },
-                  fetch_students({ grade })
+                onChange={
+                  (event) => {
+                    this.setState({ grade: event.target.value })
+                    fetch_students({ grade })
+                  }
                 }
               >
                 {[...Array(9)].map((x, i) => <MenuItem value = { i + 1 } style = {{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
@@ -108,7 +113,7 @@ class index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-
+  students: state.Assistant.Project.Student.students
 })
 
 const mapDispatchToProps = (dispatch) => ({
