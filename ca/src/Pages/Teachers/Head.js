@@ -14,8 +14,9 @@ import Mail from '../../Components/mail'
 
 import Navbar from '../../Components/Navbar'
 
+// Redux
 import {connect} from 'react-redux'
-import {UpdateUserInfo} from '../../Redux/Students/Actions/User'
+import {fetchUser} from '../../Redux/Teachers/Actions/User'
 
 class Head extends Component {
   constructor (props) {
@@ -26,18 +27,16 @@ class Head extends Component {
   }
 
   componentWillMount () {
-    let _this = this
-
-    axios.get('/professors/profile').then(res => {
-      this.props.UpdateUserInfo({
-        name: res.data[0].tname,
-        status: res.data[0].status,
-        id: res.data[0].teacher_id
-      })
-      this.select(2)
-    }).catch(err => {
-      console.log(err)
-    })
+    // axios.get('/professors/profile').then(res => {
+    //   this.props.UpdateUserInfo({
+    //     name: res.data[0].tname,
+    //     status: res.data[0].status,
+    //     id: res.data[0].teacher_id
+    //   })
+    //   this.select(2)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
   }
 
   componentDidMount () {
@@ -141,12 +140,12 @@ class Head extends Component {
   }
 }
 
-const mapState = (state)=>({
+const mapState = (state) => ({
   idCard: state.Teacher.User.idCard
 })
 
-const mapDispatch = (dispatch)=>({
-  UpdateUserInfo: (payload) => dispatch(UpdateUserInfo(payload))
+const mapDispatch = (dispatch) => ({
+  FetchUser: () => dispatch(fetchUser())
 })
 
 export default connect(mapState, mapDispatch)(Head)
