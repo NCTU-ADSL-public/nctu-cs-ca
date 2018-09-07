@@ -33,18 +33,15 @@ const styles = theme => ({
 
 class index extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      grade: 4,
+      grade: "04",
       input: "",
       page: 0,
       number_per_page: 10
     }
-  }
-
-  compomentDidMount() {
-    this.props.fetch_students({ grade: this.state.grade })
+    props.fetch_students({ grade: this.state.grade })
   }
 
   render() {
@@ -97,13 +94,15 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     this.setState({ grade: event.target.value })
-                    fetch_students({ grade })
+                    fetch_students({ grade: event.target.value })
                     console.log("Students Data")
                     console.log(students)
+                    console.log("POST_Item")
+                    console.log({ grade: event.target.value })
                   }
                 }
               >
-                {[...Array(9)].map((x, i) => <MenuItem value = { i + 1 } style = {{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
+                {[...Array(9)].map((x, i) => <MenuItem value = { "0" + (i + 1) } style = {{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
               </Select>
             </FormControl>
           </div>
