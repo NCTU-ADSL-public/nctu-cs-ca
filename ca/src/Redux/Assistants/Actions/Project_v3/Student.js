@@ -8,7 +8,7 @@ export const fetchStudents = (post_item) => dispatch => {
     console.log("Fetching")
     console.log("POST_Item")
     console.log(post_item)
-    console.loe("RES DATA")
+    console.log("RES DATA")
     console.log(res.data)
     dispatch(store_students(res.data))
   }).catch( err => {
