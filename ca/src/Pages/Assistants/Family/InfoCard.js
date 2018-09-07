@@ -68,12 +68,12 @@ class InfoCard extends React.Component{
                     sender_email={this.props.sender_email} 
                     receiver={this.props.selected.sname}
                     receiver_email={this.props.selected.email}
-                    failed={this.props.selected.failed}
-                    warning = {this.props.selected.failed}
+                    failed={this.props.selected.recent_failed}
+                    warning = {this.props.selected.recent_failed}
         />
         <CardHeader
           avatar={
-            <Avatar className={this.props.selected.failed ? classes.avatar_f:classes.avatar_p}>
+            <Avatar className={this.props.selected.recent_failed ? classes.avatar_f:classes.avatar_p}>
             <span className={classes.font}>{this.props.selected.sname[0]}</span>
             </Avatar>
           }
@@ -92,7 +92,7 @@ class InfoCard extends React.Component{
             <Line 
               type="monotone"
               dataKey="avg" 
-              stroke={`${this.props.selected.failed?'#F50057':'#8884d8'}`} 
+              stroke={`${this.props.selected.recent_failed?'#F50057':'#8884d8'}`} 
               activeDot={{r: 8}}
             />
           </LineChart>
@@ -106,7 +106,7 @@ class InfoCard extends React.Component{
             {
               this.props.selected.score && this.props.selected.score.map(
                 (v,i)=>(
-                  <Tab key={i} value={i} style={{fontSize:16}} label={<span className={v.failed?classes.failed:classes.font}>{`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]} (${v.credit})`}</span>} className={classes.font} />
+                  <Tab key={i} value={i} style={{fontSize:16}} label={<span className={v.recent_failed?classes.failed:classes.font}>{`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]} (${v.credit})`}</span>} className={classes.font} />
                 )
               )
             }

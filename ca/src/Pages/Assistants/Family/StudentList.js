@@ -72,8 +72,8 @@ class StudentList extends React.Component{
     }).then(res=>{
       this.setState({
         studentList:res.data.sort((a,b)=>{
-          if(a.failed){
-            if(b.failed){
+          if(a.recent_failed){
+            if(b.recent_failed){
               return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
             }
             else{
@@ -81,7 +81,7 @@ class StudentList extends React.Component{
             }
           }
           else{
-            if(b.failed){
+            if(b.recent_failed){
               return 1
             }
             else{
@@ -110,7 +110,7 @@ class StudentList extends React.Component{
         this.setState({
           chooseInfo:r,
           studentList: tmp,
-          cardShow: true
+          cardShow: res.data !== []
         })
       }).catch(err => {
         console.log(err)
@@ -148,7 +148,7 @@ class StudentList extends React.Component{
                 return (
                   <TableRow key={student.student_id} onClick={()=>this.handleOpen(index)} className={classes.table}>
                     <TableCell numeric padding='none'>
-                      {student.failed && <span><i className={`fa fa-exclamation-triangle ${classes.icon}`}/></span>}
+                      {student.recent_failed && <span><i className={`fa fa-exclamation-triangle ${classes.icon}`}/></span>}
                     </TableCell>
                     <TableCell className={classes.font}>
                       {student.student_id}

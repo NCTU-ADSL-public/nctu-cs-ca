@@ -16,7 +16,7 @@ const styles = {
   noticeTitle: {
     fontSize: '2.8em',
     fontWeight: '500',
-    color: '#e5e5e5',
+    color: '#ae777c',
     margin: '32px 0 0 50px',
     float: 'left'
   },
