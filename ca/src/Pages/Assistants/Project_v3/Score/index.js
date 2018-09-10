@@ -61,13 +61,13 @@ class index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grade: "04",
+      semester: '106-2',
       input: "",
       page: 0,
       number_per_page: 10,
       first_second: "1"
     }
-    props.fetch_scores({ grade: this.state.grade })
+    props.fetch_scores({ semester: this.state.semester, first_second: this.state.first_second })
   }
 
   filter = (scores) => {
@@ -76,6 +76,7 @@ class index extends React.Component {
       scores.filter( (student) => input === ''
                           || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
                           || student.student.id.search(input) !== -1
+                          || student.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
       )
     )
   }
@@ -83,7 +84,7 @@ class index extends React.Component {
   render() {
 
     const { classes, fetch_scores, scores, download_csv } = this.props
-    const { input, page, number_per_page, grade, max_page, first_second } = this.state
+    const { input, page, number_per_page, semester, max_page, first_second } = this.state
 
     return (
       <div className = { classes.root } >
@@ -96,7 +97,7 @@ class index extends React.Component {
                   focused: classes.cssFocused,
                 }}
               >
-                搜尋學生 姓名 / 學號
+                搜尋 姓名 / 學號
               </InputLabel>
               <Input
                 classes={{
@@ -115,7 +116,7 @@ class index extends React.Component {
                   focused: classes.cssFocused,
                 }}
               >
-                系級
+                學年度
               </InputLabel>
               <Select
                 input = {
@@ -125,16 +126,19 @@ class index extends React.Component {
                     }}
                   />
                 }
-                value = { this.state.grade }
+                value = { semester }
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_scores({ first_second: this.state.first_second, grade: event.target.value })
-                    this.setState({ grade: event.target.value, page: 0 })
+                    fetch_scores({ first_second, semester: event.target.value })
+                    this.setState({ semester: event.target.value, page: 0 })
                   }
                 }
               >
-                {[...Array(9)].map((x, i) => <MenuItem value = { "0" + (i + 1) } style = {{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
+              <MenuItem value = { "106-1" } style = {{ fontSize: '20px' }} >106上學期</MenuItem>
+              <MenuItem value = { "106-2" } style = {{ fontSize: '20px' }} >106下學期</MenuItem>
+              <MenuItem value = { "107-1" } style = {{ fontSize: '20px' }} >107上學期</MenuItem>
+              <MenuItem value = { "107-2" } style = {{ fontSize: '20px' }} >107下學期</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -160,7 +164,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_scores({ first_second: event.target.value, grade: this.state.grade })
+                    fetch_scores({ first_second: event.target.value, semester })
                     this.setState({ first_second: event.target.value, page: 0 })
                   }
                 }
@@ -171,7 +175,7 @@ class index extends React.Component {
             </FormControl>
           </div>
           <div className = 'col-md-2 col-lg-2 col-xs-12' >
-            <Button variant="contained" className={classes.button} onClick = { () => download_csv({ grade, first_second})}>
+            <Button variant="contained" className={classes.button} onClick = { () => download_csv({ semester, first_second})}>
               <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
             </Button>
           </div>

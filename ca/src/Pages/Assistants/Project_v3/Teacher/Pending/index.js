@@ -114,22 +114,28 @@ class index extends React.Component {
                   <ExpansionPanelDetails>
                   {
                     teacher.pending.projects.length !== 0 ?
-                    teacher.pending.projects.map( project => {
-                      return (
-                        <div>
-                          <div style = {{ fontSize: 15, color: 'black' }} >{ project.title }</div>
-                          {
-                            project.students.map( student => (
-                              <Chip label = { student.id + " " + student.name } className = { classes.chip } />
-                            ))
-                          }
-                        </div>
-                      )
-                    })
-                    :
-                    <div style = {{ width: '100%', display: 'flex', justifyContent: "center", }}>
-                      <div style = {{ fontSize: 20 }} >尚未有專題</div>
-                    </div>
+                      <div style = {{ display: 'block' }}>
+                      {
+                        teacher.pending.projects.map( project => {
+                          return (
+                            <div style = {{ marginBottom: '10px' }} >
+                              <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
+                              <br />
+                              {
+                                project.students.map( student => (
+                                  <Chip label = { student.id + " " + student.name } className = { classes.chip } />
+                                ))
+                              }
+                              <hr />
+                            </div>
+                          )
+                        })
+                      }
+                      </div>
+                      :
+                      <div style = {{ width: '100%', display: 'flex', justifyContent: "center"}}>
+                        <div style = {{ fontSize: 18, color: grey[500] }} >尚未有申請的專題</div>
+                      </div>
                   }
                   </ExpansionPanelDetails>
                 </ExpansionPanel>

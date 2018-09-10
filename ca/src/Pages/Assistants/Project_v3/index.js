@@ -31,7 +31,7 @@ class index extends React.Component {
   constructor() {
     super()
     this.state = {
-      tabIndex: 2
+      tabIndex: 0
     }
   }
 
