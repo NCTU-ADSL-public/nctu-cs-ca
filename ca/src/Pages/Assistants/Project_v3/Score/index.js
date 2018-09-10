@@ -61,13 +61,13 @@ class index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      semester: '106-1',
+      semester: '106-2',
       input: "",
       page: 0,
       number_per_page: 10,
       first_second: "1"
     }
-    props.fetch_scores({ grade: this.state.grade })
+    props.fetch_scores({ semester: this.state.semester, first_second: this.state.first_second })
   }
 
   filter = (scores) => {
