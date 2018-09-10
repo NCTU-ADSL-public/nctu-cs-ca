@@ -12,7 +12,7 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import LastPage from '@material-ui/icons/LastPage';
-import { fetchScores } from '../../../../Redux/Assistants/Actions/Project_v3/Score'
+import { fetchScores, downloadCsv } from '../../../../Redux/Assistants/Actions/Project_v3/Score'
 import grey from '@material-ui/core/colors/grey';
 import Button from '@material-ui/core/Button';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
@@ -82,8 +82,8 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, fetch_scores, scores } = this.props
-    const { input, page, number_per_page, grade, max_page } = this.state
+    const { classes, fetch_scores, scores, download_csv } = this.props
+    const { input, page, number_per_page, grade, max_page, first_second } = this.state
 
     return (
       <div className = { classes.root } >
@@ -129,6 +129,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
+                    fetch_scores({ first_second: this.state.first_second, grade: event.target.value })
                     this.setState({ grade: event.target.value, page: 0 })
                   }
                 }
@@ -159,6 +160,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
+                    fetch_scores({ first_second: event.target.value, grade: this.state.grade })
                     this.setState({ first_second: event.target.value, page: 0 })
                   }
                 }
@@ -169,7 +171,7 @@ class index extends React.Component {
             </FormControl>
           </div>
           <div className = 'col-md-2 col-lg-2 col-xs-12' >
-            <Button variant="contained" className={classes.button}>
+            <Button variant="contained" className={classes.button} onClick = { () => download_csv({ grade, first_second})}>
               <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
             </Button>
           </div>
@@ -204,7 +206,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_scores: (post_item) => dispatch(fetchScores(post_item))
+  fetch_scores: (post_item) => dispatch(fetchScores(post_item)),
+  download_csv: (post_item) => dispatch(downloadCsv(post_item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))
