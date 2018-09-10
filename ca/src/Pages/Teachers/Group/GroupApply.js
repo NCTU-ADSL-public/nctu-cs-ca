@@ -287,7 +287,7 @@ const ApplyButton = (props) => {
             participants={props.item.participants}
             firstSecond={props.item.first_second}
             year={props.item.year}
-            name={props.idCard.name}
+            name={props.idCard.tname}
             parentFunction={props.parentFunction}
           />
         </Col>
