@@ -16,7 +16,7 @@ import Navbar from '../../Components/Navbar'
 
 // Redux
 import {connect} from 'react-redux'
-import {fetchUser} from '../../Redux/Teachers/Actions/User'
+import {fetchUser, UpdateUserInfo} from '../../Redux/Teachers/Actions/User'
 
 class Head extends Component {
   constructor (props) {
@@ -27,16 +27,16 @@ class Head extends Component {
   }
 
   componentWillMount () {
-    // axios.get('/professors/profile').then(res => {
-    //   this.props.UpdateUserInfo({
-    //     name: res.data[0].tname,
-    //     status: res.data[0].status,
-    //     id: res.data[0].teacher_id
-    //   })
-    //   this.select(2)
-    // }).catch(err => {
-    //   console.log(err)
-    // })
+    axios.get('/professors/profile').then(res => {
+      this.props.UpdateUserInfo({
+        name: res.data[0].tname,
+        status: res.data[0].status,
+        id: res.data[0].teacher_id
+      })
+      this.select(2)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   componentDidMount () {
@@ -118,8 +118,8 @@ class Head extends Component {
       <Grid id='Head' fluid>
         <Row style={{background: '#F5F5F5'}}>
           <Navbar type='teacher'
-            name={this.props.idCard.name}
-            subname={this.props.idCard.id}
+            name={this.props.idCard.tname}
+            subname={this.props.idCard.teacher_id}
             selectedIndex={this.state.selectedIndex}
             onTouchTaps={onTouchTaps}
           />
@@ -145,7 +145,8 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  FetchUser: () => dispatch(fetchUser())
+  FetchUser: () => dispatch(fetchUser()),
+  UpdateUserInfo: (t) => dispatch(UpdateUserInfo(t))
 })
 
 export default connect(mapState, mapDispatch)(Head)
