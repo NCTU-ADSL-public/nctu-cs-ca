@@ -255,7 +255,7 @@ class Head extends Component {
                   id={this.props.studentIdcard.student_id}
                   subname={subname}
                   selectedIndex={ this.state.selectedIndex}
-                  onTouchTaps={subname.match('資工')===null && subname.match('資電')===null && subname.match('網多')===null?onTouchTapsOthers:onTouchTaps}
+                  onTouchTaps={this.props.studentIdcard.status === 'c'?onTouchTapsOthers:onTouchTaps}
                   onTouchProjectTaps={this.selectProject}
           />
             {this.getpage()}

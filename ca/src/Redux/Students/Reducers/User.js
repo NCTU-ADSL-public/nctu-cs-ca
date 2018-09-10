@@ -7,7 +7,8 @@ const initalState = {
     student_id: '00099000',
     program: '數學',
     grade: '大三',
-    email: 'hihi@gmail.com'
+    email: 'hihi@gmail.com',
+    status: 'w'
   },
   FooterColor: '#6C6C6C'
 }
