@@ -146,7 +146,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   FetchUser: () => dispatch(fetchUser()),
-  UpdateUserInfo: () => dispatch(UpdateUserInfo())
+  UpdateUserInfo: (t) => dispatch(UpdateUserInfo(t))
 })
 
 export default connect(mapState, mapDispatch)(Head)
