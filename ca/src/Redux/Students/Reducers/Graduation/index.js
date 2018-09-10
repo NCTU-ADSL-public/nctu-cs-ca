@@ -18,7 +18,6 @@ export default handleActions({
     let newdata = action.payload
     let newoverview = {...newdata[newdata.length - 1]}
     newdata.length = newdata.length - 1
-    console.log(newdata)
     return {
       ...state,
       data: [...newdata],
