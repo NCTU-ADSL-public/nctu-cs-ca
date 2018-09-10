@@ -16,7 +16,7 @@ import Navbar from '../../Components/Navbar'
 
 // Redux
 import {connect} from 'react-redux'
-import {fetchUser} from '../../Redux/Teachers/Actions/User'
+import {fetchUser, UpdateUserInfo} from '../../Redux/Teachers/Actions/User'
 
 class Head extends Component {
   constructor (props) {
@@ -24,20 +24,19 @@ class Head extends Component {
     this.state = {
       selectedIndex: 0,
     }
-    this.props.FetchUser()
   }
 
   componentWillMount () {
-    // axios.get('/professors/profile').then(res => {
-    //   this.props.UpdateUserInfo({
-    //     name: res.data[0].tname,
-    //     status: res.data[0].status,
-    //     id: res.data[0].teacher_id
-    //   })
-    //   this.select(2)
-    // }).catch(err => {
-    //   console.log(err)
-    // })
+    axios.get('/professors/profile').then(res => {
+      this.props.UpdateUserInfo({
+        name: res.data[0].tname,
+        status: res.data[0].status,
+        id: res.data[0].teacher_id
+      })
+      this.select(2)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   componentDidMount () {
@@ -146,7 +145,8 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  FetchUser: () => dispatch(fetchUser())
+  FetchUser: () => dispatch(fetchUser()),
+  UpdateUserInfo: () => dispatch(UpdateUserInfo())
 })
 
 export default connect(mapState, mapDispatch)(Head)
