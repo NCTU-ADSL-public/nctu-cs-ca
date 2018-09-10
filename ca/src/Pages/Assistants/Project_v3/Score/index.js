@@ -26,7 +26,7 @@ const styles = theme => ({
     marginBottom: '60px'
   },
   cssLabel: {
-    fontSize: 18,
+    fontSize: 15,
     '&$cssFocused': {
       color: 'rgb(0, 188, 212)'
     },
@@ -76,6 +76,7 @@ class index extends React.Component {
       scores.filter( (student) => input === ''
                           || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
                           || student.student.id.search(input) !== -1
+                          || student.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
       )
     )
   }
@@ -96,7 +97,7 @@ class index extends React.Component {
                   focused: classes.cssFocused,
                 }}
               >
-                搜尋學生 姓名 / 學號
+                搜尋學生 姓名 / 學號 或 教授 姓名
               </InputLabel>
               <Input
                 classes={{
