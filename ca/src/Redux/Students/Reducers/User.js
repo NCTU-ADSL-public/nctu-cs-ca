@@ -16,7 +16,6 @@ const initalState = {
 export default handleActions({
   UPDATE_USER_INFO: (state, action) => ({...state, studentIdcard: {...action.payload}}),
   CHANGE_FOOTER_COLOR: (state, action) => {
-    console.log(action.payload)
     return ({...state, FooterColor: action.payload})
   }
 }, initalState)
