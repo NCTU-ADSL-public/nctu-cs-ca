@@ -7,7 +7,7 @@ const initialState = {
     name: '資料錯誤(教授)',
     status: '',
     id: '001',
-    mail: 'test@gmail.com'
+    email: 'test@gmail.com'
   }
 }
 

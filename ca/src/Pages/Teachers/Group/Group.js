@@ -61,15 +61,15 @@ class Group extends React.Component {
           inkBarStyle={{backgroundColor: '#10616b'}}
         >
           <Tab label={`專題列表`} value='1'
-               style={{backgroundColor: '#9da4a5'}} >
+               style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >
             <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
           </Tab>
           <Tab label={`專題申請`} value='2'
-               style={{backgroundColor: '#9da4a5'}} >
+               style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >
             <GroupApply idCard={this.props.idCard} />
           </Tab>
           <Tab label={`各組專題影片`} value='3'
-               style={{backgroundColor: '#9da4a5'}} >
+               style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >
             <GroupVedio idCard={this.props.idCard} />
           </Tab>
         </Tabs>
