@@ -17,6 +17,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { fetchTeachers } from '../../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
 const styles = theme => ({
   chip: {
@@ -74,7 +75,7 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, teachers, professor_name } = this.props
+    const { classes, teachers, professor_name, fetch_teachers } = this.props
     const { expanded, page, number_per_page, input, grade } = this.state
 
     return (
@@ -121,6 +122,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
+                    fetch_teachers({ grade: event.target.value })
                     this.setState({ grade: event.target.value, page: 0 })
                   }
                 }
@@ -195,7 +197,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+  fetch_teachers: (post_item) => dispatch(fetchTeachers(post_item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))
