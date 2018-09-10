@@ -24,6 +24,7 @@ class Head extends Component {
     this.state = {
       selectedIndex: 0,
     }
+    props.FetchUser()
   }
 
   componentWillMount () {
@@ -118,8 +119,8 @@ class Head extends Component {
       <Grid id='Head' fluid>
         <Row style={{background: '#F5F5F5'}}>
           <Navbar type='teacher'
-            name={this.props.idCard.name}
-            subname={this.props.idCard.id}
+            name={this.props.idCard.tname}
+            subname={this.props.idCard.teacher_id}
             selectedIndex={this.state.selectedIndex}
             onTouchTaps={onTouchTaps}
           />

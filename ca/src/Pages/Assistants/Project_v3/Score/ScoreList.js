@@ -12,7 +12,7 @@ const styles = theme => ({
 const PROJECT_STATUS = ['已申請專題', '專題審核中', '未申請專題']
 const PROJECT_STATUS_COLOR = ['green', 'orange', 'red']
 
-class StudentList extends React.Component {
+class ScoreList extends React.Component {
 
   constructor(props) {
     super(props)
@@ -23,32 +23,31 @@ class StudentList extends React.Component {
 
   render() {
 
-    const { students, classes } = this.props
+    const { scores, classes } = this.props
     const { expanded } = this.state
 
     return (
-      students.map( ( student, index ) => {
+      scores.map( ( score, index ) => {
         return (
           <div style = {{ margin: '5px auto', fontFamily: 'Noto Sans CJK TC' }}>
             <ExpansionPanel expanded = { expanded === index } onChange = { () => this.setState({ expanded: expanded === index ? null : index }) } >
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <div style = {{ width: '100%', display: 'flex' }}>
-                  <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ student.student.id }</div>
-                  <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ student.student.name }</div>
-                  <div style = {{ fontSize: 20, flex: 0.3, textAlign: 'center', color: 'black' }} >{ student.student.program }</div>
-                  <div style = {{ fontSize: 20, flex: 0.3, textAlign: 'center', color: PROJECT_STATUS_COLOR[student.project.status] }} variant="subheading" >{ PROJECT_STATUS[student.project.status] }</div>
+                  <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ score.student.id }</div>
+                  <div style = {{ fontSize: 20, flex: 0.3, textAlign: 'center', color: 'black' }} >{ score.student.name }</div>
+                  <div style = {{ fontSize: 20, flex: 0.3, textAlign: 'center', color: 'black' }} >{ score.professor_name }</div>
+                  <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ score.student.score ? score.student.score : "尚未評分" }</div>
                 </div>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 {
-                  student.project.status != 2 ?
+                  score.student.comment ?
                   <div style = {{ width: '100%', display: 'flex' }} >
-                    <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.title}</div>
-                    <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.professor_name}</div>
+                    <div style = {{ fontSize: 17, flex: 1, textAlign: 'center' }} variant="display1" >{score.student.comment}</div>
                   </div>
                   :
                   <div style = {{ width: '100%', display: 'flex' }} >
-                    <div style = {{ fontSize: 17, flex: 1, textAlign: 'center' }} variant="display1" >尚未申請專題</div>
+                    <div style = {{ fontSize: 17, flex: 1, textAlign: 'center' }} variant="display1" >無評論</div>
                   </div>
                 }
               </ExpansionPanelDetails>
@@ -68,4 +67,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StudentList))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ScoreList))
