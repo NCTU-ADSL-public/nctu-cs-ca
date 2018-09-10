@@ -16,39 +16,28 @@ import Navbar from '../../Components/Navbar'
 
 // Redux
 import {connect} from 'react-redux'
-import {fetchUser, UpdateUserInfo} from '../../Redux/Teachers/Actions/User'
+import {fetchUser} from '../../Redux/Teachers/Actions/User'
 
 class Head extends Component {
   constructor (props) {
     super(props)
     this.state = {
       selectedIndex: 0,
-      idCard: {
-        name: '資料錯誤',
-        status: 'teacher',
-        id: '0000'
-      }
     }
+    props.FetchUser()
   }
 
   componentWillMount () {
-    axios.get('/professors/profile').then(res => {
-      this.props.UpdateUserInfo({
-        tname: res.data[0].tname,
-        status: res.data[0].status,
-        teacher_id: res.data[0].teacher_id
-      })
-      this.setState({
-        idCard: {
-          name: res.data[0].tname,
-          status: res.data[0].status,
-          id: res.data[0].teacher_id
-        }
-      })
-      this.select(2)
-    }).catch(err => {
-      console.log(err)
-    })
+    // axios.get('/professors/profile').then(res => {
+    //   this.props.UpdateUserInfo({
+    //     name: res.data[0].tname,
+    //     status: res.data[0].status,
+    //     id: res.data[0].teacher_id
+    //   })
+    //   this.select(2)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
   }
 
   componentDidMount () {
@@ -71,7 +60,7 @@ class Head extends Component {
         <Col xsHidden smHidden>
           <div>
             <FadeIn>
-              <CourseItem tid={this.state.idCard.id} />
+              <CourseItem tid={this.props.idCard.id} />
             </FadeIn>
           </div>
         </Col>,
@@ -80,7 +69,7 @@ class Head extends Component {
       ReactDOM.render(
         <Col>
           <FadeIn>
-            <GroupItem idCard={this.state.idCard} />
+            <GroupItem idCard={this.props.idCard} />
           </FadeIn>
         </Col>,
         document.getElementById('page'))
@@ -89,7 +78,7 @@ class Head extends Component {
         <Col>
           <a>
             <FadeIn>
-              <FamilyItem tname={this.state.idCard.name} tid={this.state.idCard.id} tmail={this.state.idCard.mail} />
+              <FamilyItem tname={this.props.idCard.name} tid={this.props.idCard.id} tmail={this.props.idCard.mail} />
             </FadeIn>
           </a>
         </Col>,
@@ -100,7 +89,7 @@ class Head extends Component {
           <a>
             <FadeIn>
               <MuiThemeProvider>
-                <Mail type='professor' id={this.state.idCard.id} />
+                <Mail type='professor' id={this.props.idCard.id} />
               </MuiThemeProvider>
             </FadeIn>
           </a>
@@ -109,7 +98,7 @@ class Head extends Component {
     } else if (index === 5) {
       ReactDOM.render(
         <FadeIn>
-          <ProfileItem idCard={this.state.idCard} />
+          <ProfileItem idCard={this.props.idCard} />
         </FadeIn>,
         document.getElementById('page'))
     }
@@ -130,8 +119,8 @@ class Head extends Component {
       <Grid id='Head' fluid>
         <Row style={{background: '#F5F5F5'}}>
           <Navbar type='teacher'
-            name={this.state.idCard.tname}
-            subname={this.state.idCard.teacher_id}
+            name={this.props.idCard.tname}
+            subname={this.props.idCard.teacher_id}
             selectedIndex={this.state.selectedIndex}
             onTouchTaps={onTouchTaps}
           />
@@ -157,8 +146,7 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  FetchUser: () => dispatch(fetchUser()),
-  UpdateUserInfo: (t) => dispatch(UpdateUserInfo(t))
+  FetchUser: () => dispatch(fetchUser())
 })
 
 export default connect(mapState, mapDispatch)(Head)
