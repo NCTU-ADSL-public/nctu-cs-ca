@@ -134,6 +134,35 @@ class SendProjectAgree extends React.Component {
             return
           }
           stateString.push(res.data[i].status)
+          let r = window.confirm('確定送出表單嗎?')
+          let Today = new Date()
+          let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
+          if(r){
+            axios.post('/students/project_apply', {
+              semester:semester,
+              student_num:participants.length,
+              tname:_this.props.profile.tname,
+              first_second :stateString,
+              research_title:_this.state.title,
+              participants:participants,
+              phones: phones,
+              email: emails,
+            })
+              .then(res => {
+                if(res.data.signal === 1){
+                  alert('申請成功，等候教授回覆')
+                  _this.handleClose()
+                }
+                else{
+                  alert('申請失敗，請重新送出，如有成員中有審核中的專題將不能申請。')
+                }
+              })
+              .catch(err => {
+                //window.location.replace("/logout ");
+                alert('送出失敗，請檢查連線是否穩定。')
+                console.log(err)
+              })
+          }
         }
       })
       .catch(err => {
@@ -142,36 +171,6 @@ class SendProjectAgree extends React.Component {
       })
 
 
-    let r = window.confirm('確定送出表單嗎?')
-    let Today = new Date()
-    let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
-    if(r){
-      if(stateString.length === 0)alert('送出失敗，請檢查連線是否穩定。')
-      axios.post('/students/project_apply', {
-        semester:semester,
-        student_num:participants.length,
-        tname:_this.props.profile.tname,
-        first_second :stateString,
-        research_title:_this.state.title,
-        participants:participants,
-        phones: phones,
-        email: emails,
-      })
-        .then(res => {
-          if(res.data.signal === 1){
-            alert('申請成功，等候教授回覆')
-            _this.handleClose()
-          }
-          else{
-            alert('申請失敗，請重新送出，如有成員中有審核中的專題將不能申請。')
-          }
-        })
-        .catch(err => {
-          //window.location.replace("/logout ");
-          alert('送出失敗，請檢查連線是否穩定。')
-          console.log(err)
-        })
-    }
   }
 
   handleaddmenber () {
