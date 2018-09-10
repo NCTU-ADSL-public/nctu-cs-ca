@@ -24,6 +24,7 @@ class Head extends Component {
     this.state = {
       selectedIndex: 0,
     }
+    props.FetchUser()
   }
 
   componentWillMount () {
