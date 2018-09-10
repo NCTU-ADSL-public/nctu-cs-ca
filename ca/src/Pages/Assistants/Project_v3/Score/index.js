@@ -26,7 +26,7 @@ const styles = theme => ({
     marginBottom: '60px'
   },
   cssLabel: {
-    fontSize: 15,
+    fontSize: 18,
     '&$cssFocused': {
       color: 'rgb(0, 188, 212)'
     },
@@ -97,7 +97,7 @@ class index extends React.Component {
                   focused: classes.cssFocused,
                 }}
               >
-                搜尋學生 姓名 / 學號 或 教授 姓名
+                搜尋 姓名 / 學號
               </InputLabel>
               <Input
                 classes={{

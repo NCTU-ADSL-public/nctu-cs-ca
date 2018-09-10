@@ -149,9 +149,10 @@ class index extends React.Component {
                     </div>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
-                    <div style = {{ display: 'block' }}>
-                      {
-                        teacher.accepted.projects.length !== 0 ?
+                    {
+                      teacher.accepted.projects.length !== 0 ?
+                        <div style = {{ display: 'block' }}>
+                        {
                           teacher.accepted.projects.map( project => {
                             return (
                               <div style = {{ marginBottom: '10px' }} >
@@ -166,12 +167,13 @@ class index extends React.Component {
                               </div>
                             )
                           })
-                          :
-                          <div style = {{ width: '100%', display: 'flex', justifyContent: "center", fontWeight: 'bold' }}>
-                            <div style = {{ fontSize: 20 }} >尚未有專題</div>
-                          </div>
-                      }
-                    </div>
+                        }
+                        </div>
+                        :
+                        <div style = {{ width: '100%', display: 'flex', justifyContent: "center" }}>
+                          <div style = {{ fontSize: 18, color: grey[500] }} >尚無接受專題</div>
+                        </div>
+                    }
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </div>
