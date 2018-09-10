@@ -16,7 +16,7 @@ import Navbar from '../../Components/Navbar'
 
 // Redux
 import {connect} from 'react-redux'
-import {fetchUser, UpdateUserInfo} from '../../Redux/Teachers/Actions/User'
+import {fetchUser} from '../../Redux/Teachers/Actions/User'
 
 class Head extends Component {
   constructor (props) {
@@ -24,19 +24,20 @@ class Head extends Component {
     this.state = {
       selectedIndex: 0,
     }
+    this.props.FetchUser()
   }
 
   componentWillMount () {
-    axios.get('/professors/profile').then(res => {
-      this.props.UpdateUserInfo({
-        name: res.data[0].tname,
-        status: res.data[0].status,
-        id: res.data[0].teacher_id
-      })
-      this.select(2)
-    }).catch(err => {
-      console.log(err)
-    })
+    // axios.get('/professors/profile').then(res => {
+    //   this.props.UpdateUserInfo({
+    //     name: res.data[0].tname,
+    //     status: res.data[0].status,
+    //     id: res.data[0].teacher_id
+    //   })
+    //   this.select(2)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
   }
 
   componentDidMount () {
@@ -124,7 +125,7 @@ class Head extends Component {
             onTouchTaps={onTouchTaps}
           />
           <Col xs={12} mdHidden lgHidden>
-            { this.state.selectedIndex === 3 || this.state.selectedIndex === 5
+            { this.state.selectedIndex === 2 || this.state.selectedIndex === 3 || this.state.selectedIndex === 5
               ? ''
               : <div className='alert alert-danger'>
                 行動版網頁尚會跑版，可用電腦登入打開網頁以享有更佳的視覺效果，謝謝
@@ -145,8 +146,7 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  FetchUser: () => dispatch(fetchUser()),
-  UpdateUserInfo: (t) => dispatch(UpdateUserInfo(t))
+  FetchUser: () => dispatch(fetchUser())
 })
 
 export default connect(mapState, mapDispatch)(Head)

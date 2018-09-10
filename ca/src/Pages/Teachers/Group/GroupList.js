@@ -22,6 +22,9 @@ import { Tabs, Tab } from 'material-ui/Tabs'
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 import MailButton from '../../../Components/mail/MailButton'
 
+// css
+import './GroupList.css'
+
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
   authDomain: 'nctu-csca.firebaseapp.com',
@@ -37,7 +40,7 @@ if (!firebase.apps.length) {
   auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
 }
 let storageRef = firebase.storage().ref()
-
+/*
 const styles = {
   mainTitle: {
     fontSize: '2.8em',
@@ -61,10 +64,12 @@ const styles = {
     padding: 20,
     background: '#ececec',
     borderRadius: '6px',
-    border: '1px #dfdfdf solid'
+    border: '1px #dfdfdf solid',
+    boxShadow: 'rgba(51, 51, 102, 0.3) 2px 1px 20px -2px'
   },
   pic: {
-    width: '80%'
+    width: '200px',
+    height: '200px'
   },
   groupYear: {
     fontSize: '1.2em',
@@ -93,6 +98,7 @@ const styles = {
     height: 50
   }
 }
+*/
 const initItem = [
   {
     'student_id': '0316000',
@@ -132,18 +138,18 @@ class GroupList extends React.Component {
             },
             {
               student_id: '0391234',
-              sname: '李毛毛',
+              sname: '郭梁兒',
               detail: '資工系 網多組3 '
             },
             {
-              student_id: '0399777',
-              sname: '李柏林',
+              student_id: '0399666',
+              sname: '耿平',
               detail: '資工系 網多組3 ',
               score: ''
             },
             {
-              student_id: '0391234',
-              sname: '李二毛',
+              student_id: '0391555',
+              sname: '余阿杰',
               detail: '資工系 網多組3 '
             }
           ],
@@ -153,8 +159,8 @@ class GroupList extends React.Component {
           research_title: '虛擬貨幣交易機器人',
           participants: [
             {
-              student_id: '0399999',
-              sname: '陳罐頭',
+              student_id: '0399998',
+              sname: '陳干頭',
               detail: '資工系 網多組3 '
             }
           ],
@@ -164,19 +170,19 @@ class GroupList extends React.Component {
           research_title: 'IOT智慧家庭監控應用',
           participants: [
             {
-              student_id: '0399999',
-              sname: '陳罐頭',
+              student_id: '0399997',
+              sname: '陳平頭',
               detail: '資工系 網多組3 '
             }
           ],
           year: '106'
         },
         {
-          research_title: 'Android 系統記憶體管理改進',
+          research_title: 'Android 系統記乾憶體管理改進',
           participants: [
             {
-              student_id: '0399999',
-              sname: '陳罐頭',
+              student_id: '0399987',
+              sname: '陳頭',
               detail: '資工系 網多組3 '
             }
           ],
@@ -310,13 +316,13 @@ class GroupList extends React.Component {
         <div>
           <Row>
             <Col xs={12} md={4} lg={4}>
-              <div style={styles.mainTitle}> 學生專題列表</div>
+              <div className='mainTitle'> 學生專題列表</div>
             </Col>
             <Col xs={12} md={8} lg={8}>
-              <div style={styles.subTitle}> 本年度已收專題學生: {tn} 人</div>
+              <div className='subTitle'> 本年度已收專題學生: {tn} 人</div>
             </Col>
           </Row>
-          <Row style={styles.groups}>
+          <Row className='groups'>
             {/*<Loading*/}
             {/*size={100}*/}
             {/*left={40}*/}
@@ -347,15 +353,15 @@ class GroupList extends React.Component {
 export default GroupList
 
 const GroupButton = (props) => (
-  <Grid style={styles.groupBtn}>
+  <Grid className='groupBtn'>
     <Row>
-      <Col xs={3} md={3} lg={3}>
-        <Image style={styles.pic} src={props.item.image === undefined ? pic : props.item.image} circle/>
+      <Col xsHidden md={3} lg={3}>
+        <Image className='group-pic' src={props.item.image === undefined ? pic : props.item.image} circle/>
       </Col>
-      <Col xs={9} md={9} lg={9}>
-        <div style={styles.groupYear}>年度 : {props.item.year}</div>
-        <div style={styles.block}>
-          <div style={styles.groupModify}>
+      <Col xs={12} md={9} lg={9}>
+        <div className='groupYear'>年度 : {props.item.year}</div>
+        <div className='block'>
+          <div className='groupModify'>
             <ChangeTitleDialog
               title={props.item.research_title}
               firstSecond={props.item.firstSecond}
@@ -364,7 +370,7 @@ const GroupButton = (props) => (
               parentFunction={props.parentFunction}
             />
           </div>
-          <div style={styles.groupModify}>
+          <div className='groupModify'>
             <ScoreDialog
               title={props.item.research_title}
               participants={props.item.participants}
@@ -376,15 +382,15 @@ const GroupButton = (props) => (
           </div>
         </div>
         <div>
-          <div style={styles.groupTitle}>{props.item.research_title}</div>
+          <div className='groupTitle'>{props.item.research_title}</div>
         </div>
         <div>
           <MuiThemeProvider>
-            <div style={styles.chipWrapper}>
+            <div className='chipWrapper'>
               {props.item.participants.map((p, i) => (
                 <div key={i}>
 
-                  <Chip style={styles.chip}
+                  <Chip className='group-chip'
                         key={i}
                         onClick={() => props.handleChip(props.key + p.student_id)}>
                     <Avatar src={defaultPic}/> {p.student_id} {p.sname}
@@ -403,8 +409,8 @@ const GroupButton = (props) => (
                       <InfoCard
                         key={i}
                         student={p}
-                        sender={1}
-                        sender_email={1}
+                        sender={props.idCard.name}
+                        sender_email={props.idCard.email}
                       />
                     </Dialog>
                   </MuiThemeProvider>

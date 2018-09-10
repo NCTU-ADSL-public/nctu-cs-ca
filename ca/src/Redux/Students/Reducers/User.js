@@ -5,9 +5,10 @@ const initalState = {
   studentIdcard: {
     sname: '資料錯誤',
     student_id: '00099000',
-    program: '網多',
+    program: '數學',
     grade: '大三',
-    email: 'hihi@gmail.com'
+    email: 'hihi@gmail.com',
+    status: 'w'
   },
   FooterColor: '#6C6C6C'
 }
