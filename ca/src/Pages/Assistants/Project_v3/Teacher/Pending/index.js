@@ -114,22 +114,24 @@ class index extends React.Component {
                   <ExpansionPanelDetails>
                   {
                     teacher.pending.projects.length !== 0 ?
-                    teacher.pending.projects.map( project => {
-                      return (
-                        <div>
-                          <div style = {{ fontSize: 15, color: 'black' }} >{ project.title }</div>
-                          {
-                            project.students.map( student => (
-                              <Chip label = { student.id + " " + student.name } className = { classes.chip } />
-                            ))
-                          }
-                        </div>
-                      )
-                    })
-                    :
-                    <div style = {{ width: '100%', display: 'flex', justifyContent: "center", }}>
-                      <div style = {{ fontSize: 20 }} >尚未有專題</div>
-                    </div>
+                      teacher.pending.projects.map( project => {
+                        return (
+                          <div style = {{ width: '100%' }}>
+                            <div style = {{ fontSize: 15, color: 'black', flex: 1 }} >{ project.title }</div>
+                            <br />
+                            {
+                              project.students.map( student => (
+                                <Chip label = { student.id + " " + student.name } className = { classes.chip } />
+                              ))
+                            }
+                            <br />
+                          </div>
+                        )
+                      })
+                      :
+                      <div style = {{ width: '100%', display: 'flex', justifyContent: "center", }}>
+                        <div style = {{ fontSize: 20 }} >尚未有申請的專題</div>
+                      </div>
                   }
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
