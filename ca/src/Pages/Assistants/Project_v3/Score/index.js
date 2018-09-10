@@ -163,7 +163,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_scores({ first_second: event.target.value, grade: this.state.grade })
+                    fetch_scores({ first_second: event.target.value, semester })
                     this.setState({ first_second: event.target.value, page: 0 })
                   }
                 }

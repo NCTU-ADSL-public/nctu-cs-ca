@@ -149,27 +149,29 @@ class index extends React.Component {
                     </div>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
-                  {
-                    teacher.accepted.projects.length !== 0 ?
-                      teacher.accepted.projects.map( project => {
-                        return (
-                          <div style = {{ width: '100%' }}>
-                            <div style = {{ fontSize: 15, color: 'black', flex: 1 }} >{ project.title }</div>
-                            <br />
-                            {
-                              project.students.map( student => (
-                                <Chip label = { student.id + " " + student.name } className = { classes.chip } />
-                              ))
-                            }
-                            <br />
+                    <div style = {{ display: 'block' }}>
+                      {
+                        teacher.accepted.projects.length !== 0 ?
+                          teacher.accepted.projects.map( project => {
+                            return (
+                              <div style = {{ marginBottom: '10px' }} >
+                                <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
+                                <br />
+                                {
+                                  project.students.map( student => (
+                                    <Chip label = { student.id + " " + student.name } className = { classes.chip } />
+                                  ))
+                                }
+                                <hr />
+                              </div>
+                            )
+                          })
+                          :
+                          <div style = {{ width: '100%', display: 'flex', justifyContent: "center", fontWeight: 'bold' }}>
+                            <div style = {{ fontSize: 20 }} >尚未有專題</div>
                           </div>
-                        )
-                      })
-                      :
-                      <div style = {{ width: '100%', display: 'flex', justifyContent: "center", }}>
-                        <div style = {{ fontSize: 20 }} >尚未有專題</div>
-                      </div>
-                  }
+                      }
+                    </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </div>

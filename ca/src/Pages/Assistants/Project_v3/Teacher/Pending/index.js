@@ -116,20 +116,20 @@ class index extends React.Component {
                     teacher.pending.projects.length !== 0 ?
                       teacher.pending.projects.map( project => {
                         return (
-                          <div style = {{ width: '100%' }}>
-                            <div style = {{ fontSize: 15, color: 'black', flex: 1 }} >{ project.title }</div>
+                          <div style = {{ marginBottom: '10px' }} >
+                            <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
                             <br />
                             {
                               project.students.map( student => (
                                 <Chip label = { student.id + " " + student.name } className = { classes.chip } />
                               ))
                             }
-                            <br />
+                            <hr />
                           </div>
                         )
                       })
                       :
-                      <div style = {{ width: '100%', display: 'flex', justifyContent: "center", }}>
+                      <div style = {{ width: '100%', display: 'flex', justifyContent: "center", fontWeight: 'bold' }}>
                         <div style = {{ fontSize: 20 }} >尚未有申請的專題</div>
                       </div>
                   }
