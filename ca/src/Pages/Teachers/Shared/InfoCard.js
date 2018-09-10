@@ -15,17 +15,6 @@ import FakeData from '../../../Resources/FakeData'
 
 const semester = ['', '上', '下', '暑']
 
-const initScoreData = {
-  student_id: '0316000',
-  sname: '吳泓寬',
-  program: '網多',
-  graduate: '0',
-  graduate_submit: '0',
-  email: 'student@gmail.com',
-  failed: true,
-  score: FakeData.StudentScore
-}
-
 class InfoCard extends React.Component {
   constructor (props) {
     super(props)
@@ -43,15 +32,30 @@ class InfoCard extends React.Component {
     }
   }
 
-  componentDidMount () {
+  fetchStudentProfile () {
     const s = this.props.student
-    this.handleSelected(s.student_id)
-
     let scoreData = this.state.scoreData
     scoreData.student_id = s.student_id
     scoreData.sname = s.sname
     scoreData.program = s.detail
+    axios.post('/professors/students/StudentInfo', {
+      student_id: s.student_id
+    }).then(res => {
+      console.log('student Info', res.data)
+      const r = res.data
+      scoreData.sname = r.sname
+      scoreData.email = r.email
+      this.setState({scoreData})
+    }).catch(err => {
+      console.log(err)
+    })
     this.setState({scoreData})
+  }
+
+  componentDidMount () {
+    const s = this.props.student
+    this.handleSelected(s.student_id)
+    this.fetchStudentProfile()
     console.log('SCORE DATA: ', this.state.scoreData)
   }
 

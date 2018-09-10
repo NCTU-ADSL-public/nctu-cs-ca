@@ -122,20 +122,36 @@ class SendProjectAgree extends React.Component {
       emails.push(this.state.input[i].email)
     }
 
-    let str = this.props.researchStatus
-    if(str !== '1' && str !== '2'){
-      alert(this.getString())
-      return
-    }
+
+    let stateString = []
+    axios.post('/students/project/ShowStudentResearchStatus', {
+      participants:this.state.participants
+    })
+      .then(res => {
+        for(let i = 0; i<res.data.length; i++){
+          if(res.data[i] !== '1' && res.data[i] !== '2'){
+            alert(res.data[i].student_id + " 因 " + this.getString(res.data[i].status) + " 申請失敗")
+            return
+          }
+          stateString.push(res.data[i].status)
+        }
+      })
+      .catch(err => {
+        alert('送出失敗，請檢查連線是否穩定。')
+        console.log(err)
+      })
+
+
     let r = window.confirm('確定送出表單嗎?')
     let Today = new Date()
     let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
     if(r){
+      if(stateString.length === 0)alert('送出失敗，請檢查連線是否穩定。')
       axios.post('/students/project_apply', {
         semester:semester,
         student_num:participants.length,
         tname:_this.props.profile.tname,
-        first_second :str,
+        first_second :stateString,
         research_title:_this.state.title,
         participants:participants,
         phones: phones,
@@ -221,8 +237,7 @@ class SendProjectAgree extends React.Component {
     this.setState({ input: newinput })
   }
 
-  getString = () => {
-    let str = this.props.researchStatus
+  getString = (str) => {
     if(str === '1'){
       return '專題一'
     }

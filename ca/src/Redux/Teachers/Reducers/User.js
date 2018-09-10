@@ -1,9 +1,10 @@
-import {handleActions } from 'redux-actions'
+import { handleActions } from 'redux-actions'
 
-const initalState = {
+// INITIALIZATIONS FOR REDUCERS, WHICH IS GOING TO TAKE ACTIONS
+const initialState = {
   type: 'teacher', // for Navbar
   idCard: {
-    name: '資料錯誤',
+    name: '資料錯誤(教授)',
     status: '',
     id: '001',
     mail: 'test@gmail.com'
@@ -12,4 +13,4 @@ const initalState = {
 
 export default handleActions({
   UPDATE_USER_INFO: (state, action) => ({...state, idCard: action.payload})
-}, initalState)
+}, initialState)
