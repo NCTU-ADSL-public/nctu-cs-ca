@@ -129,7 +129,7 @@ class SendProjectAgree extends React.Component {
     })
       .then(res => {
         for(let i = 0; i<res.data.length; i++){
-          if(res.data[i] !== '1' && res.data[i] !== '2'){
+          if(res.data[i].status !== '1' && res.data[i].status !== '2'){
             alert(res.data[i].student_id + " 因 " + this.getString(res.data[i].status) + " 申請失敗")
             return
           }
