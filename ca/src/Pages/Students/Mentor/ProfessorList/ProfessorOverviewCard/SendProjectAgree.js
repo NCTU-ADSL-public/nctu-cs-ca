@@ -125,7 +125,7 @@ class SendProjectAgree extends React.Component {
 
     let stateString = []
     axios.post('/students/project/ShowStudentResearchStatus', {
-      participants:this.state.participants
+      participants:participants
     })
       .then(res => {
         for(let i = 0; i<res.data.length; i++){
