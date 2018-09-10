@@ -13,7 +13,7 @@ const initialState = {
 
 export default handleActions({
   UPDATE_USER_INFO: (state, action) => {
-    console.log({...state, idCard: {...action.payload}})
+    console.log('UPDATE_USER_INFO ACTION: ', {...state, idCard: {...action.payload}})
     return ({...state, idCard: {...action.payload}})
   }
 }, initialState)

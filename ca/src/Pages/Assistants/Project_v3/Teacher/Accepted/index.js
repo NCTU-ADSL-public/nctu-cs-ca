@@ -60,7 +60,8 @@ class index extends React.Component {
       page: 0,
       number_per_page: 10,
       input: '',
-      grade: "04"
+      grade: "04",
+      semester: "106-2"
     }
   }
 
@@ -76,12 +77,12 @@ class index extends React.Component {
   render() {
 
     const { classes, teachers, professor_name, fetch_teachers } = this.props
-    const { expanded, page, number_per_page, input, grade } = this.state
+    const { expanded, page, number_per_page, input, grade, semester } = this.state
 
     return (
       <div style = {{ marginBottom: '60px' }} >
         <div className = 'row' >
-          <div className = 'col-md-6 col-lg-6 col-xs-12' >
+          <div className = 'col-md-4 col-lg-4 col-xs-12' >
             <FormControl style = {{ width: '100%', marginBottom: '10px' }}>
               <InputLabel
                 FormLabelClasses={{
@@ -100,7 +101,41 @@ class index extends React.Component {
               />
             </FormControl>
           </div>
-          <div className = 'col-md-6 col-lg-6 col-xs-12' >
+          <div className = 'col-md-4 col-lg-4 col-xs-12' >
+            <FormControl style = {{ width: '100%' }}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.cssLabel,
+                  focused: classes.cssFocused,
+                }}
+              >
+                學期
+              </InputLabel>
+              <Select
+                input = {
+                  <Input
+                    classes={{
+                      underline: classes.cssUnderline,
+                    }}
+                  />
+                }
+                value = { this.state.semester }
+                style = {{ fontSize: '15px' }}
+                onChange={
+                  (event) => {
+                    fetch_teachers({ semester: event.target.value, grade })
+                    this.setState({ semester: event.target.value, page: 0 })
+                  }
+                }
+              >
+                <MenuItem value = { "106-1" } style = {{ fontSize: '20px' }} >106上學期</MenuItem>
+                <MenuItem value = { "106-2" } style = {{ fontSize: '20px' }} >106下學期</MenuItem>
+                <MenuItem value = { "107-1" } style = {{ fontSize: '20px' }} >107上學期</MenuItem>
+                <MenuItem value = { "107-2" } style = {{ fontSize: '20px' }} >107下學期</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div className = 'col-md-4 col-lg-4 col-xs-12' >
             <FormControl style = {{ width: '100%' }}>
               <InputLabel
                 FormLabelClasses={{
@@ -122,7 +157,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_teachers({ grade: event.target.value })
+                    fetch_teachers({ grade: event.target.value, semester })
                     this.setState({ grade: event.target.value, page: 0 })
                   }
                 }

@@ -37,9 +37,8 @@ class index extends React.Component {
     super(props);
     this.state = {
       tabIndex: 0,
-      grade: "04",
     }
-    props.fetch_teachers({ grade: this.state.grade })
+    props.fetch_teachers({ grade: "04", semester: "106-2" })
   }
 
   render() {
