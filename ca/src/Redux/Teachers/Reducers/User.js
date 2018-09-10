@@ -4,9 +4,9 @@ import { handleActions } from 'redux-actions'
 const initialState = {
   type: 'teacher', // for Navbar
   idCard: {
-    name: '資料錯誤(教授)',
+    tname: '資料錯誤(教授)',
     status: '',
-    id: '001',
+    teacher_id: '001',
     mail: 'test@gmail.com'
   }
 }
