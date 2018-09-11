@@ -50,7 +50,7 @@ class Index extends React.Component {
     this.setState({ open: false })
   }
   render () {
-    const { classes, englishCheck, overview} = this.props
+    const { check, englishCheck, overview} = this.props
     return (
       <div>
         <div style={{marginTop: '10px'}}>
@@ -70,7 +70,7 @@ class Index extends React.Component {
               </div>
               <div>
                 畢業預審是否已送交助理審核：
-                {englishCheck?"已送審":"未送審"}
+                {check?"已送審":"未送審"}
               </div>
             </div>
             <div className='pull-right col-md-1'>
@@ -118,7 +118,8 @@ Index.propTypes = {
 }
 const mapStateToProps = (state) => ({
   overview: state.Student.Graduation.overview,
-  englishCheck: state.Student.Graduation.englishCheck
+  englishCheck: state.Student.Graduation.englishCheck,
+  check: state.Student.Graduation.check
 })
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors())
