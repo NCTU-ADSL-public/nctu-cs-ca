@@ -136,7 +136,7 @@ class SendProjectAgree extends React.Component {
           stateString.push(res.data[i].status)
         }
 
-        let r = window.confirm('確定送出表單嗎?')
+        let r = window.confirm('注意！如果您確定送出表單將代表您加簽 專題（一）課程，確定要送出表單嗎?')
         let Today = new Date()
         let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
         if(r){
@@ -144,6 +144,8 @@ class SendProjectAgree extends React.Component {
             semester:semester,
             student_num:participants.length,
             tname:_this.props.profile.tname,
+            teacher_id:_this.props.profile.teacher_id,
+            teacher_email:_this.props.profile.eamil,
             first_second :stateString,
             research_title:_this.state.title,
             participants:participants,
