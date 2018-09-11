@@ -54,7 +54,7 @@ class AlertDialog extends React.Component {
     return (
       <div style={{margin: '5px 0 5px 0'}}>
 
-        <MenuItem className={classes.menuItem} onClick={this.handleClickOpen} disabled>
+        <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
           <ListItemIcon className={classes.icon} >
             <DashboardIcon />
           </ListItemIcon>
