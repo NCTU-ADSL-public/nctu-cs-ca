@@ -128,6 +128,7 @@ class index extends React.Component {
                   }
                 }
               >
+                <MenuItem value = { "all" } style = {{ fontSize: '20px' }} >全部學期</MenuItem>
                 <MenuItem value = { "106-1" } style = {{ fontSize: '20px' }} >106上學期</MenuItem>
                 <MenuItem value = { "106-2" } style = {{ fontSize: '20px' }} >106下學期</MenuItem>
                 <MenuItem value = { "107-1" } style = {{ fontSize: '20px' }} >107上學期</MenuItem>
