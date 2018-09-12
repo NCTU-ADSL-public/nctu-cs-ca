@@ -66,7 +66,7 @@ class Index extends React.Component {
             <div className='col-md-11'>
               <div>
                 是否已考過英檢：
-                {(englishCheck==="3" || englishCheck==="4" )?"已考過英檢":(englishCheck==="0")?"未考過英檢":(englishCheck==="2")?"英文已換修":"英文已抵免"}
+                {(englishCheck==="3" || englishCheck==="4" )?"已考過英檢":(englishCheck==="0" || englishCheck===null)?"未考過英檢":(englishCheck==="2")?"已通過英檢免試申請":"通過外語榮譽學分（可免修英文）"}
               </div>
               <div>
                 畢業預審是否已送交助理審核：
