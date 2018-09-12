@@ -95,7 +95,7 @@ class InfoCard extends React.Component {
               <MailButton
                 sender={this.props.sender}
                 sender_email={this.props.sender_email}
-                receiver={this.state.scoreData.sname}
+                receiver={this.state.scoreData.student_id}
                 receiver_email={this.state.scoreData.email}
                 failed={this.state.scoreData.failed}
               />

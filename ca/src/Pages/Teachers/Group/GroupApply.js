@@ -12,7 +12,6 @@ import Chip from 'material-ui/Chip'
 import { Dialog } from 'material-ui'
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
 const styles = {
   noticeTitle: {
     fontSize: '2.8em',
@@ -121,9 +120,9 @@ class GroupApply extends React.Component {
               sname: '耿平',
               detail: '資工系 網多組3 '
             },
-            { student_id: '0399777',
-              sname: '李小霖',
-              detail: '資工系 網多組3 '
+            { student_id: '0416014',
+              sname: '王立洋',
+              detail: '資工系 資工組'
             },
             { student_id: '0391444',
               sname: '俞阿杰',
@@ -133,12 +132,12 @@ class GroupApply extends React.Component {
           year: '',
           first_second: ''
         },
-        { research_title: '資料錯誤',
-          status: '1',
+        { research_title: '我的專題',
+          status: 0,
           participants: [
-            { student_id: '0399998',
-              sname: '陳干頭',
-              detail: '資工系 網多組3 '
+            { student_id: '0416014',
+              sname: '王立洋',
+              detail: '資工系 資工組'
             }
           ],
           year: ''
@@ -168,7 +167,7 @@ class GroupApply extends React.Component {
   }
 
   fetchData () {
-    axios.get('/professors/students/applyList', {
+/*    axios.get('/professors/students/applyList', {
       // name: '彭文志'
       // name: this.props.idCard.name
       id: this.props.idCard.id
@@ -192,7 +191,7 @@ class GroupApply extends React.Component {
       })
     }).catch(err => {
       console.log(err)
-    })
+    })*/
   }
 
   componentDidMount () {
@@ -282,6 +281,7 @@ const ApplyButton = (props) => {
       <Row style={{marginBottom: '10px'}}>
         <Col xs={12} md={12} lg={12}>
           <ReplyDialog
+            idCard={props.idCard}
             status={props.item.status}
             title={props.item.research_title}
             participants={props.item.participants}
