@@ -31,7 +31,7 @@ const CourseList = (props) => {
   return (
     <div style={{width: '100%'}}>
       {items.map((item, key) =>
-        <div className='col-xs-6 col-sm-6 col-md-2 col-lg-2'>
+        <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2'>
           <PopoverButton
             key={id++}
             label={phyCourseNames.includes(item.cn) ? `${item.cn}  ${item.realCredit}學分` : item.cn}
@@ -40,7 +40,7 @@ const CourseList = (props) => {
             rwd={rwd}
                 >
             <div>{item.cn}</div>
-            <div>分數:&nbsp;{(item.score === -1) ? '-' : item.score}</div>
+            <div>分數:&nbsp;{(item.score === null) ? '-' : item.score}</div>
             <div>等級:&nbsp;{(item.grade === '0') ? '-' : item.grade}</div>
             <div>英文授課:&nbsp;{(item.english) ? '是' : '否'}</div>
             <div>實得學分:&nbsp;{item.realCredit}</div>
