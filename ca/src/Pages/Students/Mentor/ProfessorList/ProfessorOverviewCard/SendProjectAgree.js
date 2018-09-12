@@ -40,7 +40,7 @@ function Transition (props) {
   return <Slide direction='up' {...props} />
 }
 
-const limitcount = 7
+const limitcount = 10
 
 const styles = theme => ({
   root: {
