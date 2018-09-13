@@ -63,14 +63,13 @@ export default class DialogButton extends React.Component {
     let _this = this
     let dt = new Date();
     let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
-    axios.post(this.props.postURL, {
+    axios.post('/mail/sendmail', {
       title:_this.state.titlevalue,
-      content:_this.state.ckeditorContent,
-      time:time,
+      sender_id:_this.props.sender,
       sender_email:_this.props.sender_email,
+      receiver_id:_this.props.receiver,
       receiver_email:_this.props.receiver_email,
-      sender:_this.props.sender,
-      receiver: _this.props.receiver
+      content:_this.state.ckeditorContent
     })
       .then(res => {
 

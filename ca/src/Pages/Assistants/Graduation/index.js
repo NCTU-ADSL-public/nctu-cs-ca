@@ -21,7 +21,7 @@ class index extends React.Component {
         super(props);
 
         this.state = {
-            activeKey: "3",
+            activeKey: "1",
             start: 0,
             initStudents: FakeData.StudentList,
             loading: true,
@@ -64,9 +64,9 @@ class index extends React.Component {
                             idCard={this.props.idCard}
                         />
                     </TabPane>
-                    <TabPane tab={`預審規則`} key="3">
+                    {/* <TabPane tab={`預審規則`} key="3">
                         <GraduationRule />
-                    </TabPane>
+                    </TabPane> */}
                 </Tabs>
             </div>
         );

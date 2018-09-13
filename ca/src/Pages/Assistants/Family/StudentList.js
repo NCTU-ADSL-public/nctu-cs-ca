@@ -172,7 +172,7 @@ class StudentList extends React.Component{
           <DialogContent>
             <InfoCard 
               selected={this.state.studentList[this.state.chooseInfo]}
-              sender={this.props.idCard.name}
+              sender={this.props.idCard.id}
               sender_email={this.props.idCard.email}
             />
           </DialogContent>

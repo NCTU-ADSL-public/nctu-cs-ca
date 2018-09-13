@@ -72,9 +72,9 @@ const InfoCard = (props)=>(
         >
         <span style={{position:'absolute',right:20}}>
           <MailButton
-            sender={props.sender}  
-            sender_email={props.sender_email} 
-            receiver={props.selected.sname}
+            sender={props.tid}  
+            sender_email={props.tmail} 
+            receiver={props.selected.student_id}
             receiver_email={props.selected.email}
             failed={props.selected.recent_failed}
           />

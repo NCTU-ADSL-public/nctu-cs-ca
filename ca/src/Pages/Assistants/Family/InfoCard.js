@@ -64,9 +64,9 @@ class InfoCard extends React.Component{
     return(
       <div className={classes.container}>
         <MailButton
-                    sender={this.props.sender} 
+                    sender={this.props.sender}
                     sender_email={this.props.sender_email} 
-                    receiver={this.props.selected.sname}
+                    receiver={this.props.selected.student_id}
                     receiver_email={this.props.selected.email}
                     failed={this.props.selected.recent_failed}
                     warning = {this.props.selected.recent_failed}
