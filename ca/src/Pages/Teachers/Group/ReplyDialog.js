@@ -125,13 +125,12 @@ export default class ReplyDialog extends React.Component {
   }
 
   handleClose = (status) => {
-    let students = this.props.participants.map(async (item) => {
-      let tmpMail = await this.fetchStudentEmailById (item.student_id)
-      return {
-        student_id: item.student_id,
-        mail: tmpMail
+    let students = this.props.participants.map( p => (
+      {
+        student_id: p.student_id,
+        mail: p.email
       }
-    })
+    ))
     console.log(students)
     this.setState({open: false})
     axios.post('/professors/students/ApplyFormSetAgree', {
@@ -147,14 +146,6 @@ export default class ReplyDialog extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-
-    if (status === 1) {
-      // ACCEPT
-      this.sendEmailToStudents(students, true)
-    }else if(status === 3) {
-      // DECLINE
-      this.sendEmailToStudents(students, false)
-    }
 
 
     // trigger update
