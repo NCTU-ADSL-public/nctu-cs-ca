@@ -96,7 +96,7 @@ export default class ReplyDialog extends React.Component {
     })
   }
 
-  sendEmailToStudents (ss, acc) {
+/*  sendEmailToStudents (ss, acc) {
     ss.forEach(async s => {
       console.log('YOMAJA')
       let sEmail
@@ -118,16 +118,20 @@ export default class ReplyDialog extends React.Component {
         console.log(err)
       })
     })
-  }
+  }*/
 
   handleOpen = () => {
     this.setState({open: true})
   }
 
   handleClose = (status) => {
-    let students = this.props.participants.map((item)=>(
-      {'student_id': item.student_id}
-    ))
+    let students = this.props.participants.map(async (item) => {
+      let tmpMail = await this.fetchStudentEmailById (item.student_id)
+      return {
+        student_id: item.student_id,
+        mail: tmpMail
+      }
+    })
     console.log(students)
     this.setState({open: false})
     axios.post('/professors/students/ApplyFormSetAgree', {
