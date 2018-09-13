@@ -101,9 +101,9 @@ class GroupApply extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      total_number: 0,
+      cs_number: 0,
       chipOpen: new Map(),
-      // applyList: []
+      // applyList: [],
       applyList: [
         { research_title: '資料錯誤',
           status: 0,
@@ -182,7 +182,7 @@ class GroupApply extends React.Component {
       id: this.props.idCard.id
     }).then(res => {
       this.setState({
-        total_number: res.data.total_number,
+        cs_number: res.data.cs_number,
       })
     }).catch(err => {
       console.log(err)
@@ -229,7 +229,7 @@ class GroupApply extends React.Component {
   }
 
   render () {
-    const tn = this.state.total_number
+    const csNum = this.state.cs_number
     return (
       <Grid style={{minHeight: 500}}>
         <Row>
@@ -238,7 +238,7 @@ class GroupApply extends React.Component {
           </Col>
           <Col xs={12} md={8} lg={8}>
             <div style={styles.subTitle}>
-              尚可接受專題生數量: {tn <= 7 ? 7 - tn + '人' : '(已超收學生)'}
+              尚可接受專題生數量: {csNum <= 7 ? 7 - csNum + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }
             </div>
           </Col>
         </Row>
@@ -282,7 +282,6 @@ const ApplyButton = (props) => {
             participants={props.item.participants}
             firstSecond={props.item.first_second}
             year={props.item.year}
-            name={props.idCard.tname}
             parentFunction={props.parentFunction}
           />
         </Col>
