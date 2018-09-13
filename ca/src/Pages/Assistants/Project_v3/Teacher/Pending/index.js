@@ -17,6 +17,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
+
+const STATE_COLOR = [ red['A100'], blue[300] ]
 
 const styles = theme => ({
   chip: {
@@ -105,38 +109,40 @@ class index extends React.Component {
                     <div style = {{ width: '100%', display: 'flex' }}>
                       <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ teacher.professor_name }</div>
                       <LinearProgress variant="determinate"
-                        value={teacher.pending.projects.reduce( (pending_number, project) => pending_number + project.students.length, 0) / 10 * 100 }
+                        value={teacher.pending.projects.reduce( (pending_number, project) => pending_number + project.students.length, 0) / 7 * 100 }
                         style = {{ flex: 0.6, margin: '10px auto' }}
                       />
                       <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black'  }}>{ teacher.pending.projects.reduce( (pending_number, project) => pending_number + project.students.length, 0) } 人</div>
                     </div>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
-                  {
-                    teacher.pending.projects.length !== 0 ?
-                      <div style = {{ display: 'block' }}>
-                      {
-                        teacher.pending.projects.map( project => {
-                          return (
-                            <div style = {{ marginBottom: '10px' }} >
-                              <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
-                              <br />
-                              {
-                                project.students.map( student => (
-                                  <Chip label = { student.id + " " + student.name } className = { classes.chip } />
-                                ))
-                              }
-                              <hr />
-                            </div>
-                          )
-                        })
-                      }
-                      </div>
-                      :
-                      <div style = {{ width: '100%', display: 'flex', justifyContent: "center"}}>
-                        <div style = {{ fontSize: 18, color: grey[500] }} >尚未有申請的專題</div>
-                      </div>
-                  }
+                    <div style = {{ width: '100%' }}>
+                    {
+                      teacher.pending.projects.length !== 0 ?
+                        <div style = {{ display: 'block' }}>
+                        {
+                          teacher.pending.projects.map( project => {
+                            return (
+                              <div style = {{ marginBottom: '40px' }} >
+                                <hr />
+                                <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
+                                <br />
+                                {
+                                  project.students.map( student => (
+                                    <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: STATE_COLOR[(student.state === "0" ? 0 : 1)] }} />
+                                  ))
+                                }
+                              </div>
+                            )
+                          })
+                        }
+                        </div>
+                        :
+                        <div style = {{ width: '100%', display: 'flex', justifyContent: "center"}}>
+                          <div style = {{ fontSize: 18, color: grey[500] }} >尚未有申請的專題</div>
+                        </div>
+                    }
+                    </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </div>

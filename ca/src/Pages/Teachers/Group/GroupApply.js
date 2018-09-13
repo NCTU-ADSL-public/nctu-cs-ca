@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import { Grid, Row, Col, Image } from 'react-bootstrap'
-import pic from '../../../Resources/BeautifalGalaxy.jpg'
+import { Grid, Row, Col } from 'react-bootstrap'
+
 import defaultPic from '../../../Resources/defalt.jpg'
 import ReplyDialog from './ReplyDialog'
 import InfoCard from '../Shared/InfoCard'
@@ -31,7 +31,14 @@ const styles = {
     fontSize: '1.2em',
     fontWeight: '4300',
     color: '#bfbfbf',
-    margin: '55px 0 0 70px',
+    margin: '55px 0 0 37px',
+    float: 'left'
+  },
+  subHintTitle: {
+    fontSize: '1.2em',
+    fontWeight: '4300',
+    color: '#bfbfbf',
+    margin: '25px 0px 0px 37px',
     float: 'left'
   },
   groups: {
@@ -101,66 +108,93 @@ class GroupApply extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      total_number: 0,
+      cs_number: 0,
       chipOpen: new Map(),
-      // applyList: []
+      // applyList: [],
       applyList: [
         { research_title: '資料錯誤',
           status: 0,
+          year: '107-1',
+          first_second: '2',
           participants: [
             { student_id: '0399999',
               sname: '陳罐頭',
-              detail: '資工系 網多組3 '
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 1,
             },
             { student_id: '0391234',
               sname: '郭梁兒',
-              detail: '資工系 網多組3 '
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 1,
             },
             { student_id: '0391666',
               sname: '耿平',
-              detail: '資工系 網多組3 '
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 0,
             },
             { student_id: '0416014',
               sname: '王立洋',
-              detail: '資工系 資工組'
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 1,
             },
             { student_id: '0391444',
               sname: '俞阿杰',
-              detail: '資工系 網多組3 '
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 0,
             }
-          ],
-          year: '',
-          first_second: ''
+          ]
         },
         { research_title: '我的專題',
           status: 0,
+          year: '107-1',
+          first_second: '2',
           participants: [
             { student_id: '0416014',
               sname: '王立洋',
-              detail: '資工系 資工組'
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 1,
             }
-          ],
-          year: ''
+          ]
         },
         { research_title: '資料錯誤',
           status: '2',
+          year: '107-1',
+          first_second: '2',
           participants: [
             { student_id: '0399997',
               sname: '陳乾頭',
-              detail: '資工系 網多組3 '
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 0,
             }
-          ],
-          year: ''
+          ]
         },
         { research_title: '資料錯誤',
           status: '3',
+          year: '107-1',
+          first_second: '2',
           participants: [
             { student_id: '0399987',
               sname: '陳憨頭',
-              detail: '資工系 網多組3 '
+              email: 'danny021406@gmail.com',
+              phone: '',
+              first_second: '2',
+              student_status: 1,
             }
-          ],
-          year: ''
+          ]
         }
       ]
     }
@@ -168,8 +202,6 @@ class GroupApply extends React.Component {
 
   fetchData () {
     axios.get('/professors/students/applyList', {
-      // name: '彭文志'
-      // name: this.props.idCard.name
       id: this.props.idCard.id
     }).then(res => {
       console.log(res.data)
@@ -180,18 +212,15 @@ class GroupApply extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-    /*
-        axios.get('/professors/students/projects', {
-          // name: '彭文志'
-          // name: this.props.idCard.name
-          id: this.props.idCard.id
-        }).then(res => {
-          this.setState({
-            total_number: res.data.total_number,
-          })
-        }).catch(err => {
-          console.log(err)
-        })*/
+    axios.get('/professors/students/projects', {
+      id: this.props.idCard.id
+    }).then(res => {
+      this.setState({
+        cs_number: res.data.cs_number,
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   componentDidMount () {
@@ -234,18 +263,28 @@ class GroupApply extends React.Component {
   }
 
   render () {
-    const tn = this.state.total_number
+    const csNum = this.state.cs_number
     return (
       <Grid style={{minHeight: 500}}>
         <Row>
+
           <Col xs={12} md={4} lg={4}>
             <div style={styles.noticeTitle} onClick={() => this.fetchData()}> 學生專題申請 </div>
           </Col>
-          <Col xs={12} md={8} lg={8}>
+
+          <Col xs={12} md={4} lg={4}>
             <div style={styles.subTitle}>
-              尚可接受專題生數量: {tn <= 7 ? 7 - tn + '人' : '(已超收學生)'}
+              尚可接受專題生數量: {csNum <= 7 ? 7 - csNum + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }
             </div>
           </Col>
+
+          <Col xs={12} md={4} lg={4}>
+            <div style={styles.subHintTitle}>
+              <StudentStatusHint status={1}/>
+              <StudentStatusHint status={0}/>
+            </div>
+          </Col>
+
         </Row>
         <Row style={styles.groups}>
           {/*<Loading*/}
@@ -275,6 +314,15 @@ class GroupApply extends React.Component {
 }
 export default GroupApply
 
+const StudentStatusHint = (props) => (
+  <MuiThemeProvider>
+      <Chip style={styles.chip }
+            backgroundColor={ props.status === 1 ? '#BDD8CC' : '#FFCD80' }>
+        <Avatar src={defaultPic}/> { props.status === 1 ? '本系生' : '外系生' }
+      </Chip>
+  </MuiThemeProvider>
+)
+
 const ApplyButton = (props) => {
   return (
     <Grid style={styles.groupBtn}>
@@ -287,7 +335,6 @@ const ApplyButton = (props) => {
             participants={props.item.participants}
             firstSecond={props.item.first_second}
             year={props.item.year}
-            name={props.idCard.tname}
             parentFunction={props.parentFunction}
           />
         </Col>
@@ -301,7 +348,8 @@ const ApplyButton = (props) => {
                 {props.item.participants.map((p, i) => (
                   <div key={i}>
 
-                    <Chip style={styles.chip}
+                    <Chip style={styles.chip }
+                          backgroundColor={ p.student_status === 1 ? '#BDD8CC' : '#FFCD80' }
                           key={i}
                           onClick={() => props.handleChip(props.key + p.student_id)}>
                       <Avatar src={defaultPic}/> {p.student_id} {p.sname}

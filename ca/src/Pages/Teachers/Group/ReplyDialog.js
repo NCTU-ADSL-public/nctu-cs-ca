@@ -96,7 +96,7 @@ export default class ReplyDialog extends React.Component {
     })
   }
 
-  sendEmailToStudents (ss, acc) {
+/*  sendEmailToStudents (ss, acc) {
     ss.forEach(async s => {
       console.log('YOMAJA')
       let sEmail
@@ -118,21 +118,25 @@ export default class ReplyDialog extends React.Component {
         console.log(err)
       })
     })
-  }
+  }*/
 
   handleOpen = () => {
     this.setState({open: true})
   }
 
   handleClose = (status) => {
-    let students = this.props.participants.map((item)=>(
-      {'student_id': item.student_id}
+    let students = this.props.participants.map( p => (
+      {
+        student_id: p.student_id,
+        mail: p.email
+      }
     ))
     console.log(students)
     this.setState({open: false})
     axios.post('/professors/students/ApplyFormSetAgree', {
       research_title: this.props.title,
-      tname: this.props.name,
+      tname: this.props.idCard.tname,
+      mail: this.props.idCard.mail,
       agree: status,
       student: students,
       first_second: this.props.firstSecond,
@@ -142,14 +146,6 @@ export default class ReplyDialog extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-
-    if (status === 1) {
-      // ACCEPT
-      this.sendEmailToStudents(students, true)
-    }else if(status === 3) {
-      // DECLINE
-      this.sendEmailToStudents(students, false)
-    }
 
 
     // trigger update
