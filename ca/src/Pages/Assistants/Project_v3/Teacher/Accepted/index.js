@@ -24,7 +24,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import { fetchTeachers } from '../../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
-const FIRST_SECOND_COLOR = [ red['A100'], blue[300] ]
+const STATE_COLOR = [ red['A100'], blue[300] ]
 
 const styles = theme => ({
   chip: {
@@ -220,7 +220,7 @@ class index extends React.Component {
                                 {
                                   project.students.map( student => (
                                     <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
-                                      <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: FIRST_SECOND_COLOR[(student.first_second === "2" ? 0 : 1)] }} />
+                                      <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: STATE_COLOR[(student.status === "0" ? 0 : 1)] }} />
                                     </Tooltip>
                                   ))
                                 }

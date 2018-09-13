@@ -74,7 +74,8 @@ const initialState = {
                             "name": "趙偉捷",
                             "program": "電資學士班3",
                             "first_second": "1",
-                            "semester": "107-2"
+                            "semester": "107-2",
+                            "status": "0"
                         },
                         {
                             "id": "0416002",
