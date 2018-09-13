@@ -215,7 +215,7 @@ class index extends React.Component {
                             return (
                               <div style = {{ marginBottom: '40px' }} >
                                 <hr />
-                                <Badge badgeContent = { project.semester.substr(0, 3) + (project.semester[4] === "1" ? "上" : "下") }
+                                <Badge badgeContent = { project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下") }
                                   classes = {{
                                     badge: classes.badge
                                   }}
