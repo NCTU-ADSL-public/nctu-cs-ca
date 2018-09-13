@@ -5,6 +5,7 @@ import './style.css'
 import { connect } from 'react-redux'
 import { fetchProjects } from '../../../Redux/Students/Actions/ProjectList'
 import ProjectTile from './ProjectTile'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const styles = {
   root: {
@@ -30,7 +31,7 @@ class index extends React.Component {
   render () {
     let id = 0
     return (
-      <div className='container'>
+      <MuiThemeProvider className='container'>
         <div>
           <div className='divide-horizontal-list '>
             <div className='divide-horizontal-span-list' ref='top'>
@@ -52,7 +53,7 @@ class index extends React.Component {
             </GridList>
           </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
