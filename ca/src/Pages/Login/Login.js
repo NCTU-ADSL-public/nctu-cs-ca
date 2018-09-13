@@ -13,30 +13,12 @@ import {grey50} from "material-ui/styles/colors";
 
 class Login extends React.Component {
 
-    getLoginstatus(){
-        let _this = this;
-        return axios.get('/user/state').then(loginStatus => {
-            // loginStatus.status HTTP response code (e.g., 200, 401)
-            //loginStatus.data  object parsed from HTTP response body
-            //loginStatus.headers  HTTP presonse headers
-            _this.loginStatusHandler(loginStatus.data.state);
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-
-    loginStatusHandler(index){
-        this.setState({
-             LoginMessage_state:index,
-        })
-    }
 
     state = {
         LoginMessage_state:"0",
     };
 
     componentWillMount(){
-        this.getLoginstatus();
         let keys = document.cookie.match(/[^ =;]+(?=\=)/g);
         if(keys) {
           for(let i = keys.length; i--;)

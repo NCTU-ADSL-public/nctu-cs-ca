@@ -7,13 +7,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import purple from '@material-ui/core/colors/purple';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import StudentList from './StudentList'
+import ScoreList from './ScoreList'
 import FirstPage from '@material-ui/icons/FirstPage';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import LastPage from '@material-ui/icons/LastPage';
-import { fetchStudents } from '../../../../Redux/Assistants/Actions/Project_v3/Student'
+import { fetchScores, downloadCsv } from '../../../../Redux/Assistants/Actions/Project_v3/Score'
 import grey from '@material-ui/core/colors/grey';
+import Button from '@material-ui/core/Button';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 
 
 const styles = theme => ({
@@ -24,7 +26,7 @@ const styles = theme => ({
     marginBottom: '60px'
   },
   cssLabel: {
-    fontSize: 20,
+    fontSize: 18,
     '&$cssFocused': {
       color: 'rgb(0, 188, 212)'
     },
@@ -47,6 +49,10 @@ const styles = theme => ({
     transition: 'color 0.3s',
     marginRight: '10px',
     marginLeft: '10px'
+  },
+  button: {
+    width: '100%',
+    fontSize: '15px'
   }
 })
 
@@ -55,33 +61,35 @@ class index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grade: "04",
+      semester: '106-2',
       input: "",
       page: 0,
-      number_per_page: 10
+      number_per_page: 10,
+      first_second: "1"
     }
-    props.fetch_students({ grade: this.state.grade })
+    props.fetch_scores({ semester: this.state.semester, first_second: this.state.first_second })
   }
 
-  filter = (students) => {
+  filter = (scores) => {
     const { input } = this.state
     return (
-      students.filter( (student) => input === ''
+      scores.filter( (student) => input === ''
                           || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
                           || student.student.id.search(input) !== -1
+                          || student.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
       )
     )
   }
 
   render() {
 
-    const { classes, fetch_students, students } = this.props
-    const { input, page, number_per_page, grade, max_page } = this.state
+    const { classes, fetch_scores, scores, download_csv } = this.props
+    const { input, page, number_per_page, semester, max_page, first_second } = this.state
 
     return (
       <div className = { classes.root } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
-          <div className = 'col-md-6 col-lg-6 col-xs-12' >
+          <div className = 'col-md-4 col-lg-4 col-xs-12' >
             <FormControl style = {{ width: '100%' }}>
               <InputLabel
                 FormLabelClasses={{
@@ -89,7 +97,7 @@ class index extends React.Component {
                   focused: classes.cssFocused,
                 }}
               >
-                搜尋學生 姓名 / 學號
+                搜尋 姓名 / 學號
               </InputLabel>
               <Input
                 classes={{
@@ -100,7 +108,7 @@ class index extends React.Component {
               />
             </FormControl>
           </div>
-          <div className = 'col-md-6 col-lg-6 col-xs-12' >
+          <div className = 'col-md-3 col-lg-3 col-xs-12' >
             <FormControl style = {{ width: '100%' }}>
               <InputLabel
                 FormLabelClasses={{
@@ -108,7 +116,7 @@ class index extends React.Component {
                   focused: classes.cssFocused,
                 }}
               >
-                系級
+                學年度
               </InputLabel>
               <Select
                 input = {
@@ -118,28 +126,64 @@ class index extends React.Component {
                     }}
                   />
                 }
-                value = { this.state.grade }
+                value = { semester }
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_students({ grade: event.target.value })
-                    this.setState({ grade: event.target.value, page: 0 })
-                    console.log("Students Data")
-                    console.log(students)
-                    console.log("POST_Item")
-                    console.log({ grade: event.target.value })
+                    fetch_scores({ first_second, semester: event.target.value })
+                    this.setState({ semester: event.target.value, page: 0 })
                   }
                 }
               >
-                {[...Array(9)].map((x, i) => <MenuItem value = { "0" + (i + 1) } style = {{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
+              <MenuItem value = { "106-1" } style = {{ fontSize: '20px' }} >106上學期</MenuItem>
+              <MenuItem value = { "106-2" } style = {{ fontSize: '20px' }} >106下學期</MenuItem>
+              <MenuItem value = { "107-1" } style = {{ fontSize: '20px' }} >107上學期</MenuItem>
+              <MenuItem value = { "107-2" } style = {{ fontSize: '20px' }} >107下學期</MenuItem>
               </Select>
             </FormControl>
           </div>
+          <div className = 'col-md-3 col-lg-3 col-xs-12' >
+            <FormControl style = {{ width: '100%' }}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.cssLabel,
+                  focused: classes.cssFocused,
+                }}
+              >
+                資工專題
+              </InputLabel>
+              <Select
+                input = {
+                  <Input
+                    classes={{
+                      underline: classes.cssUnderline,
+                    }}
+                  />
+                }
+                value = { this.state.first_second }
+                style = {{ fontSize: '15px' }}
+                onChange={
+                  (event) => {
+                    fetch_scores({ first_second: event.target.value, semester })
+                    this.setState({ first_second: event.target.value, page: 0 })
+                  }
+                }
+              >
+                <MenuItem value = { "1" } style = {{ fontSize: '20px' }} >資工專題(一)</MenuItem>
+                <MenuItem value = { "2" } style = {{ fontSize: '20px' }} >資工專題(二)</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div className = 'col-md-2 col-lg-2 col-xs-12' >
+            <Button variant="contained" className={classes.button} onClick = { () => download_csv({ semester, first_second})}>
+              <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
+            </Button>
+          </div>
         </div>
         <div style = {{ minHeight: '570px' }} >
-          <StudentList
-            students = {
-              this.filter(students).slice(number_per_page * page, number_per_page * (page + 1) )
+          <ScoreList
+            scores = {
+              this.filter(scores).slice(number_per_page * page, number_per_page * (page + 1) )
             }
           />
         </div>
@@ -152,9 +196,9 @@ class index extends React.Component {
             fontSize: '20px',
             marginRight: '20px',
             marginLeft: '20px'
-          }}>{page + 1} / { Math.max(1, Math.ceil(this.filter(students).length / number_per_page)) }</span>
-          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.min(Math.ceil(this.filter(students).length / number_per_page) - 1, page + 1) }) } />
-          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.ceil(this.filter(students).length / number_per_page) - 1 }) } />
+          }}>{page + 1} / { Math.max(1, Math.ceil(this.filter(scores).length / number_per_page)) }</span>
+          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.min(Math.ceil(this.filter(scores).length / number_per_page) - 1, page + 1) }) } />
+          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.ceil(this.filter(scores).length / number_per_page) - 1 }) } />
         </div>
       </div>
     )
@@ -162,11 +206,12 @@ class index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  students: state.Assistant.Project.Student.students
+  scores: state.Assistant.Project.Score.scores
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_students: (post_item) => dispatch(fetchStudents(post_item))
+  fetch_scores: (post_item) => dispatch(fetchScores(post_item)),
+  download_csv: (post_item) => dispatch(downloadCsv(post_item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))

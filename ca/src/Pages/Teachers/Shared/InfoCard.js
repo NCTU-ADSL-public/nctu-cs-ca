@@ -37,7 +37,6 @@ class InfoCard extends React.Component {
     let scoreData = this.state.scoreData
     scoreData.student_id = s.student_id
     scoreData.sname = s.sname
-    scoreData.program = s.detail
     axios.post('/professors/students/StudentInfo', {
       student_id: s.student_id
     }).then(res => {
@@ -45,6 +44,7 @@ class InfoCard extends React.Component {
       const r = res.data
       scoreData.sname = r.sname
       scoreData.email = r.email
+      scoreData.program = r.program
       this.setState({scoreData})
     }).catch(err => {
       console.log(err)
@@ -95,7 +95,7 @@ class InfoCard extends React.Component {
               <MailButton
                 sender={this.props.sender}
                 sender_email={this.props.sender_email}
-                receiver={this.state.scoreData.sname}
+                receiver={this.state.scoreData.student_id}
                 receiver_email={this.state.scoreData.email}
                 failed={this.state.scoreData.failed}
               />

@@ -34,13 +34,6 @@ export const fetchProfessors = (page = 1) => dispatch => {
       dispatch(storeProfessorMentor([{'tname': '張立平'}]))
       dispatch(fetchProfessorsDone())
     })
-  axios.get('/students/project/ShowStudentResearchStatus')
-    .then(res => {
-      dispatch(storeResearchStatus(res.data[0].status))
-    })
-    .catch(error => {
-      console.log(error)
-    })
 }
 
 export const storeProfessorsImage = (url, tname) => dispatch => {

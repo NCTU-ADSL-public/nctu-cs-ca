@@ -24,6 +24,7 @@ class Head extends Component {
     this.state = {
       selectedIndex: 0,
     }
+    this.props.FetchUser()
   }
 
   componentWillMount () {
@@ -118,13 +119,13 @@ class Head extends Component {
       <Grid id='Head' fluid>
         <Row style={{background: '#F5F5F5'}}>
           <Navbar type='teacher'
-            name={this.props.idCard.name}
-            subname={this.props.idCard.id}
+            name={this.props.idCard.tname}
+            subname={this.props.idCard.teacher_id}
             selectedIndex={this.state.selectedIndex}
             onTouchTaps={onTouchTaps}
           />
           <Col xs={12} mdHidden lgHidden>
-            { this.state.selectedIndex === 3 || this.state.selectedIndex === 5
+            { this.state.selectedIndex === 2 || this.state.selectedIndex === 3 || this.state.selectedIndex === 5
               ? ''
               : <div className='alert alert-danger'>
                 行動版網頁尚會跑版，可用電腦登入打開網頁以享有更佳的視覺效果，謝謝

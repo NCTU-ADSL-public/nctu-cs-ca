@@ -342,6 +342,18 @@ const initialState = {
             "status": 2,
         }
     },
+    {
+      "student": {
+          "id": "0410004",
+          "name": "吳琮勝",
+          "program": "電資學士班"
+      },
+      "project": {
+          "status": 0,
+          "title": "應用Q-Learning 於遊戲AI",
+          "professor_name": "黃世強"
+      }
+    },
   ]
 }
 

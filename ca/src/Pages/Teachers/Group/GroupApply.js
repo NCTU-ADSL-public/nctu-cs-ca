@@ -4,14 +4,14 @@ import { Grid, Row, Col, Image } from 'react-bootstrap'
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 import ReplyDialog from './ReplyDialog'
-
+import InfoCard from '../Shared/InfoCard'
 import Loading from '../../../Components/Loading'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
+import { Dialog } from 'material-ui'
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
 const styles = {
   noticeTitle: {
     fontSize: '2.8em',
@@ -42,7 +42,8 @@ const styles = {
     padding: 20,
     background: '#ececec',
     borderRadius: '6px',
-    border: '1px #dfdfdf solid'
+    border: '1px #dfdfdf solid',
+    boxShadow: 'rgba(51, 51, 102, 0.3) 2px 4px 15px -2px'
   },
   pic: {
     width: '80%'
@@ -101,8 +102,9 @@ class GroupApply extends React.Component {
     this.state = {
       loading: true,
       total_number: 0,
-      applyList: []
-      /*applyList: [
+      chipOpen: new Map(),
+      // applyList: []
+      applyList: [
         { research_title: '資料錯誤',
           status: 0,
           participants: [
@@ -110,23 +112,32 @@ class GroupApply extends React.Component {
               sname: '陳罐頭',
               detail: '資工系 網多組3 '
             },
-            { student_id: '0399777',
-              sname: '李小霖',
+            { student_id: '0391234',
+              sname: '郭梁兒',
               detail: '資工系 網多組3 '
             },
-            { student_id: '0391234',
-              sname: '李毛毛',
+            { student_id: '0391666',
+              sname: '耿平',
+              detail: '資工系 網多組3 '
+            },
+            { student_id: '0416014',
+              sname: '王立洋',
+              detail: '資工系 資工組'
+            },
+            { student_id: '0391444',
+              sname: '俞阿杰',
               detail: '資工系 網多組3 '
             }
           ],
-          year: ''
+          year: '',
+          first_second: ''
         },
-        { research_title: '資料錯誤',
-          status: '1',
+        { research_title: '我的專題',
+          status: 0,
           participants: [
-            { student_id: '0399999',
-              sname: '陳罐頭',
-              detail: '資工系 網多組3 '
+            { student_id: '0416014',
+              sname: '王立洋',
+              detail: '資工系 資工組'
             }
           ],
           year: ''
@@ -134,8 +145,8 @@ class GroupApply extends React.Component {
         { research_title: '資料錯誤',
           status: '2',
           participants: [
-            { student_id: '0399999',
-              sname: '陳罐頭',
+            { student_id: '0399997',
+              sname: '陳乾頭',
               detail: '資工系 網多組3 '
             }
           ],
@@ -144,16 +155,17 @@ class GroupApply extends React.Component {
         { research_title: '資料錯誤',
           status: '3',
           participants: [
-            { student_id: '0399999',
-              sname: '陳罐頭',
+            { student_id: '0399987',
+              sname: '陳憨頭',
               detail: '資工系 網多組3 '
             }
           ],
           year: ''
         }
-      ]*/
+      ]
     }
   }
+
   fetchData () {
     axios.get('/professors/students/applyList', {
       // name: '彭文志'
@@ -168,33 +180,37 @@ class GroupApply extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-
-    axios.get('/professors/students/projects', {
-      // name: '彭文志'
-      // name: this.props.idCard.name
-      id: this.props.idCard.id
-    }).then(res => {
-      this.setState({
-        total_number: res.data.total_number,
-      })
-    }).catch(err => {
-      console.log(err)
-    })
+    /*
+        axios.get('/professors/students/projects', {
+          // name: '彭文志'
+          // name: this.props.idCard.name
+          id: this.props.idCard.id
+        }).then(res => {
+          this.setState({
+            total_number: res.data.total_number,
+          })
+        }).catch(err => {
+          console.log(err)
+        })*/
   }
+
   componentDidMount () {
     this.fetchData()
   }
+
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
       console.log(nextProps)
       this.fetchData()
     }
   }
+
   delay(t){
     return new Promise((res, rej) => {
       setTimeout(() => (res(1)), t)
     })
   }
+
   triggerUpdate = () => {
     this.fetchData()
     this.delay(1000).then((v) => (
@@ -203,6 +219,20 @@ class GroupApply extends React.Component {
       console.log('trigger update error' + e)
     ))
   }
+
+  // FOR CHIP
+  handleChip = (i) => {
+    let chipOpen = this.state.chipOpen
+    chipOpen.set(i, true)
+    this.setState({chipOpen})
+  }
+
+  handleRequestClose = () => {
+    this.setState({
+      chipOpen: new Map(),
+    })
+  }
+
   render () {
     const tn = this.state.total_number
     return (
@@ -218,23 +248,22 @@ class GroupApply extends React.Component {
           </Col>
         </Row>
         <Row style={styles.groups}>
-          <Loading
-            size={100}
-            left={40}
-            top={100}
-            isLoading={this.state.loading} />
+          {/*<Loading*/}
+            {/*size={100}*/}
+            {/*left={40}*/}
+            {/*top={100}*/}
+            {/*isLoading={this.state.loading} />*/}
           {this.state.applyList.length !== 0
             ?
               this.state.applyList.map((item, i) => (
                 <ApplyButton
                   key={i}
-                  title={item.research_title}
-                  participants={item.participants}
-                  name={this.props.idCard.name}
-                  status={item.status}
+                  item={item}
+                  idCard={this.props.idCard}
                   parentFunction={this.triggerUpdate}
-                  firstSecond={item.first_second}
-                  year={item.year}
+                  chipOpen={this.state.chipOpen}
+                  handleChip={this.handleChip}
+                  handleRequestClose={this.handleRequestClose}
                 />
               ))
             : '(目前尚無專題申請)'
@@ -252,26 +281,52 @@ const ApplyButton = (props) => {
       <Row style={{marginBottom: '10px'}}>
         <Col xs={12} md={12} lg={12}>
           <ReplyDialog
-            status={props.status}
-            title={props.title}
-            name={props.name}
-            participants={props.participants}
+            idCard={props.idCard}
+            status={props.item.status}
+            title={props.item.research_title}
+            participants={props.item.participants}
+            firstSecond={props.item.first_second}
+            year={props.item.year}
+            name={props.idCard.tname}
             parentFunction={props.parentFunction}
-            firstSecond={props.firstSecond}
-            year={props.year}
           />
         </Col>
       </Row>
       <Row>
         <Col xs={12} md={12} lg={12}>
-          <div style={styles.groupTitle}>{props.title}</div>
+          <div style={styles.groupTitle}>{props.item.research_title}</div>
           <div>
             <MuiThemeProvider>
               <div style={styles.chipWrapper}>
-                {props.participants.map((item, i) => (
-                  <Chip style={styles.chip} key={i}>
-                    <Avatar src={defaultPic} /> {item.student_id} {item.sname}
-                  </Chip>
+                {props.item.participants.map((p, i) => (
+                  <div key={i}>
+
+                    <Chip style={styles.chip}
+                          key={i}
+                          onClick={() => props.handleChip(props.key + p.student_id)}>
+                      <Avatar src={defaultPic}/> {p.student_id} {p.sname}
+                      <span style={{color: 'red'}}>  {p.score}</span>
+                    </Chip>
+
+                    <MuiThemeProvider>
+                      <Dialog
+                        key={i}
+                        modal={false}
+                        open={props.chipOpen.get(props.key + p.student_id)}
+                        onRequestClose={() => props.handleRequestClose()}
+                        autoScrollBodyContent
+                        contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
+                      >
+                        <InfoCard
+                          key={i}
+                          student={p}
+                          sender={props.idCard.name}
+                          sender_email={props.idCard.email}
+                        />
+                      </Dialog>
+                    </MuiThemeProvider>
+
+                  </div>
                 ))}
               </div>
             </MuiThemeProvider>

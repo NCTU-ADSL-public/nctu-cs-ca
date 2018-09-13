@@ -40,7 +40,7 @@ function Transition (props) {
   return <Slide direction='up' {...props} />
 }
 
-const limitcount = 10
+const limitcount = 7
 
 const styles = theme => ({
   root: {
@@ -122,40 +122,58 @@ class SendProjectAgree extends React.Component {
       emails.push(this.state.input[i].email)
     }
 
-    let str = this.props.researchStatus
-    if(str !== '1' && str !== '2'){
-      alert(this.getString())
-      return
-    }
-    let r = window.confirm('確定送出表單嗎?')
-    let Today = new Date()
-    let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
-    if(r){
-      axios.post('/students/project_apply', {
-        semester:semester,
-        student_num:participants.length,
-        tname:_this.props.profile.tname,
-        first_second :str,
-        research_title:_this.state.title,
-        participants:participants,
-        phones: phones,
-        email: emails,
+
+    let stateString = []
+    axios.post('/students/project/ShowStudentResearchStatus', {
+      participants:participants
+    })
+      .then(res => {
+        for(let i = 0; i<res.data.length; i++){
+          if(res.data[i].status !== '1' && res.data[i].status !== '2' && res.data[i].status !== '3'){
+            alert(res.data[i].student_id + " 因 " + this.getString(res.data[i].status) + " 申請失敗")
+            return
+          }
+          stateString.push(res.data[i].status)
+        }
+
+        let r = window.confirm('注意！如果您確定送出表單且教授也同意了，將代表您加簽 專題（一）課程，確定要送出表單嗎?')
+        let Today = new Date()
+        let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
+        if(r){
+          axios.post('/students/project_apply', {
+            semester:semester,
+            student_num:participants.length,
+            tname:_this.props.profile.tname,
+            teacher_id:_this.props.profile.teacher_id,
+            teacher_email:_this.props.profile.email,
+            first_second :stateString,
+            research_title:_this.state.title,
+            participants:participants,
+            phones: phones,
+            email: emails,
+          })
+            .then(res => {
+              if(res.data.signal === 1){
+                alert('申請成功，等候教授回覆')
+                _this.handleClose()
+              }
+              else{
+                alert('申請失敗，請重新送出，如有成員中有審核中的專題將不能申請。')
+              }
+            })
+            .catch(err => {
+              //window.location.replace("/logout ");
+              alert('送出失敗，請檢查連線是否穩定。')
+              console.log(err)
+            })
+        }
       })
-        .then(res => {
-          if(res.data.signal === 1){
-            alert('申請成功，等候教授回覆')
-            _this.handleClose()
-          }
-          else{
-            alert('申請失敗，請重新送出，如有成員中有審核中的專題將不能申請。')
-          }
-        })
-        .catch(err => {
-          //window.location.replace("/logout ");
-          alert('送出失敗，請檢查連線是否穩定。')
-          console.log(err)
-        })
-    }
+      .catch(err => {
+        alert('送出失敗，請檢查連線是否穩定。')
+        console.log(err)
+      })
+
+
   }
 
   handleaddmenber () {
@@ -221,8 +239,7 @@ class SendProjectAgree extends React.Component {
     this.setState({ input: newinput })
   }
 
-  getString = () => {
-    let str = this.props.researchStatus
+  getString = (str) => {
     if(str === '1'){
       return '專題一'
     }

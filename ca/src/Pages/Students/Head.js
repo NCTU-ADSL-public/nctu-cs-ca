@@ -215,11 +215,11 @@ class Head extends Component {
 // />
   render () {
     const router = [
-      '/assistants/head',
-      '/assistants/grad',
-      '/assistants/project',
-      '/assistants/family',
-      '/assistants/mail'
+      '/students/head',
+      '/students/head/grad',
+      '/students/head/map',
+      '/students/head/professor',
+      '/students/head/project'
     ]
     const onTouchTaps = [
       () => this.select(0),
@@ -233,7 +233,31 @@ class Head extends Component {
       () => this.select(8),
       () => this.select(9),
     ]
-
+    const onTouchTapsrouter = [
+      () => this.props.history.push(router[0]),
+      () => this.props.history.push(router[1]),
+      () => this.props.history.push(router[2]),
+      () => this.props.history.push(router[3]),
+      () => this.props.history.push(router[4]),
+      () => this.select(5),
+      () => this.select(6),
+      () => this.select(7),
+      () => this.select(8),
+      () => this.select(9),
+    ]
+    const onTouchTapsOthers = [
+      () => this.select(0),
+      ()=>alert('非資工系學生無此功能'),
+      ()=>alert('非資工系學生無此功能'),
+      () => this.select(3),
+      () => this.select(4),
+      () => this.select(5),
+      () => this.select(6),
+      () => this.select(7),
+      () => this.select(8),
+      () => this.select(9),
+    ]
+    const subname = this.props.studentIdcard.program + this.props.studentIdcard.grade
     return (
       <Grid id="Head" fluid={true}>
         <Row>
@@ -241,9 +265,9 @@ class Head extends Component {
                   version={this.props.studentIdcard.grad}
                   name={this.props.studentIdcard.sname}
                   id={this.props.studentIdcard.student_id}
-                  subname={this.props.studentIdcard.program + this.props.studentIdcard.grade}
+                  subname={subname}
                   selectedIndex={ this.state.selectedIndex}
-                  onTouchTaps={onTouchTaps}
+                  onTouchTaps={this.props.studentIdcard.status === 'c'?onTouchTapsOthers:onTouchTaps}
                   onTouchProjectTaps={this.selectProject}
           />
             {this.getpage()}

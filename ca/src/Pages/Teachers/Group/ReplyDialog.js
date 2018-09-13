@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import Snackbar from 'material-ui/Snackbar'
 import Dialog from 'material-ui/Dialog'
@@ -85,6 +85,41 @@ export default class ReplyDialog extends React.Component {
     }
   }
 
+  fetchStudentEmailById (s) {
+    axios.post('/professors/students/StudentInfo', {
+      student_id: s.student_id
+    }).then(res => {
+      return res.data.email
+    }).catch(err => {
+      console.log(err)
+      return false
+    })
+  }
+
+  sendEmailToStudents (ss, acc) {
+    ss.forEach(async s => {
+      console.log('YOMAJA')
+      let sEmail
+      sEmail = await this.fetchStudentEmailById (s)
+      let log = {
+        title: '【專題】資工專題申請回覆',
+        sender_id: this.props.idCard.teacher_id,
+        sender_email: this.props.idCard.mail,
+        receiver_id: s.student_id,
+        receiver_email: sEmail,
+        content: this.props.idCard.tname + ' 教授 對於您申請專題的回覆是: ' + (acc ? '『接受』。' : '『婉拒』。' )
+      }
+
+      console.log(log)
+
+      axios.post('/mail/sendmail', log).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    })
+  }
+
   handleOpen = () => {
     this.setState({open: true})
   }
@@ -107,6 +142,17 @@ export default class ReplyDialog extends React.Component {
     }).catch(err => {
       console.log(err)
     })
+
+    if (status === 1) {
+      // ACCEPT
+      this.sendEmailToStudents(students, true)
+    }else if(status === 3) {
+      // DECLINE
+      this.sendEmailToStudents(students, false)
+    }
+
+
+    // trigger update
     this.props.parentFunction()
   }
   render () {
@@ -115,10 +161,6 @@ export default class ReplyDialog extends React.Component {
         label='接受'
         primary
         onClick={ () => this.handleClose(1) }
-      />,
-      <FlatButton
-        label='考慮中'
-        onClick={ () => this.handleClose(2) }
       />,
       <FlatButton
         label='拒絕'

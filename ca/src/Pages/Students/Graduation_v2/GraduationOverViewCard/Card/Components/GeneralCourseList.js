@@ -48,7 +48,7 @@ class GeneralCourseList extends React.Component {
 
     return <div>
       {generalCourseTypes.map((type,key) => (
-        <div className='col-xs-6 col-sm-6 col-md-2 col-lg-2'>
+        <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2'>
           <PopoverButton
             key={key}
             label={type.name}

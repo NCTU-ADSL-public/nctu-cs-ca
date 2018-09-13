@@ -10,7 +10,7 @@ class Index extends React.Component {
     return (
       <div className='container'>
         <div className='row showArea' style={{marginBottom: '50px'}}>
-          <div className='col-md-12 col-lg-12 hidden-xs hidden-sm' style={{marginTop: '30px'}}>
+          <div className='col-md-12 col-lg-12 hidden-xs' style={{marginTop: '30px'}}>
             <GraduationOverViewButton />
           </div>
           <div className='col-md-3 col-lg-3 hidden-xs' style={{height: '100%'}} />

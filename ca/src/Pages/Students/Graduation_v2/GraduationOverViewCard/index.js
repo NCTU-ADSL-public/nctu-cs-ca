@@ -51,7 +51,7 @@ class Index extends React.Component {
         <Card title='其他選修' rwd={rwd} complete={this.props.overview.other} require={this.props.overview.other_require} value={Number(this.props.overview.other) / Number(this.props.overview.other_require) * 100} />
         <Card title='外語' rwd={rwd} complete={this.props.overview.language} require={this.props.overview.language_require} value={Number(this.props.overview.language) / Number(this.props.overview.language_require) * 100} />
         <Card title='體育' rwd={rwd} complete={this.props.overview.pe} require={this.props.overview.pe_require} value={Number(this.props.overview.pe) / Number(this.props.overview.pe_require) * 100} isMen/>
-        <Card title='藝文賞析' rwd={rwd} complete={this.props.overview.art} require={this.props.overview.tart_require} value={Number(this.props.overview.art) / Number(this.props.overview.art_require) * 100} isMen/>
+        <Card title='藝文賞析' rwd={rwd} complete={this.props.overview.art} require={this.props.overview.art_require} value={Number(this.props.overview.art) / Number(this.props.overview.art_require) * 100} isMen/>
         <Card title='服務學習' rwd={rwd} complete={this.props.overview.service} require={this.props.overview.service_require} value={Number(this.props.overview.service) / Number(this.props.overview.service_require) * 100} isMen/>
         <Card title='英文授課' rwd={rwd} complete={this.props.overview.english} require={this.props.overview.english_require} value={Number(this.props.overview.english) / Number(this.props.overview.english_require) * 100} isMen/>
         <Card title='通識' rwd={rwd} complete={this.props.overview.general} require={this.props.overview.general_require} value={Number(this.props.overview.general) / Number(this.props.overview.general_require) * 100} />
