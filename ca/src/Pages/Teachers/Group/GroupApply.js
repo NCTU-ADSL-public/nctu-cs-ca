@@ -168,8 +168,6 @@ class GroupApply extends React.Component {
 
   fetchData () {
     axios.get('/professors/students/applyList', {
-      // name: '彭文志'
-      // name: this.props.idCard.name
       id: this.props.idCard.id
     }).then(res => {
       console.log(res.data)
@@ -180,18 +178,15 @@ class GroupApply extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-    /*
-        axios.get('/professors/students/projects', {
-          // name: '彭文志'
-          // name: this.props.idCard.name
-          id: this.props.idCard.id
-        }).then(res => {
-          this.setState({
-            total_number: res.data.total_number,
-          })
-        }).catch(err => {
-          console.log(err)
-        })*/
+    axios.get('/professors/students/projects', {
+      id: this.props.idCard.id
+    }).then(res => {
+      this.setState({
+        total_number: res.data.total_number,
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   componentDidMount () {

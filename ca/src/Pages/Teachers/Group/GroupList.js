@@ -1,30 +1,29 @@
 import React from 'react'
 import axios from 'axios'
-import { Grid, Row, Col, Image, Glyphicon, Button } from 'react-bootstrap'
+
+import { Grid, Row, Col, Image, Button } from 'react-bootstrap'
+// resource
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 import firebase from 'firebase'
-import InfoCard from '../Shared/InfoCard'
+import FakeData from '../../../Resources/FakeData'
 
+// component
+import InfoCard from '../Shared/InfoCard'
 import Loading from '../../../Components/Loading'
 import ChangeTitleDialog from './ChangeTitleDialog'
 import ScoreDialog from './ScoreDialog'
+
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
-import { Card, CardText } from 'material-ui/Card'
-// for multiTheme
+import { Dialog } from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
-import FakeData from '../../../Resources/FakeData'
-import { Dialog, CardHeader, Table, TableBody, TableHeader, TableRow, TableRowColumn } from 'material-ui'
-import { Tabs, Tab } from 'material-ui/Tabs'
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
-import MailButton from '../../../Components/mail/MailButton'
 
 // css
 import './GroupList.css'
 
+// FIRE BASE
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
   authDomain: 'nctu-csca.firebaseapp.com',
@@ -99,18 +98,6 @@ const styles = {
   }
 }
 */
-const initItem = [
-  {
-    'student_id': '0316000',
-    'sname': '吳泓寬',
-    'program': '網多',
-    'graduate': '0',
-    'graduate_submit': '0',
-    'email': 'student@gmail.com',
-    'failed': true,
-    'score': FakeData.StudentScore,
-  },
-]
 
 class GroupList extends React.Component {
   constructor (props) {
@@ -189,7 +176,6 @@ class GroupList extends React.Component {
           year: '106'
         }
       ],
-
       initItem: [
         {
           'student_id': '0316000',
@@ -202,33 +188,39 @@ class GroupList extends React.Component {
           'score': FakeData.StudentScore,
         },
       ],
+      sem: this.getSemester()
     }
   }
 
+  getSemester () {
+    let Today = new Date()
+    return ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
+  }
+
   fetchData () {
-    console.log('idCard: ' + this.props.idCard.name)
+    console.log('idCard: ' + this.props.idCard.tname)
+    console.log('sem: ' + this.state.sem)
     let _this = this
-    this.setState({
-      //  groupList: []
-    })
     axios.get('/professors/students/projects', {
-      // name: '彭文志'
-      // name: this.props.idCard.name
-      id: this.props.idCard.id
+      id: this.props.idCard.id,
+      sem: this.state.sem
     }).then(res => {
       this.setState({
         total_number: res.data.total_number,
         groupList: []
         // groupList: res.data.groups
       })
+
+      // year research_title
       let data = res.data.groups
       let dataList = []
-      for (let i = 0; i < data.length; i++) {
-        let directory = data[i].year + '/' + this.props.idCard.name + '/' + data[i].research_title + '/image/image.jpg'
+      console.log(data)
+      data.forEach( item => {
+        let directory = item.year + '/' + this.props.idCard.name + '/' + item.research_title + '/image/image.jpg'
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
-          let data_ = {...data[i], image: url}
-          directory = data[i].year + '/' + _this.props.idCard.name + '/' + data[i].research_title + '/file/file.pdf'
+          let data_ = {...item, image: url}
+          directory = item.year + '/' + _this.props.idCard.name + '/' + item.research_title + '/file/file.pdf'
           pathReference = storageRef.child(directory)
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
@@ -246,8 +238,8 @@ class GroupList extends React.Component {
           })
         }).catch(error => {
           console.log(error)
-          let data_ = {...data[i]}
-          directory = data[i].year + '/' + _this.props.idCard.name + '/' + data[i].research_title + '/file/file.pdf'
+          let data_ = {...item}
+          directory = item.year + '/' + _this.props.idCard.name + '/' + item.research_title + '/file/file.pdf'
           pathReference = storageRef.child(directory)
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
@@ -264,7 +256,11 @@ class GroupList extends React.Component {
             })
           })
         })
-      }
+      })
+
+      console.log('DATA:', data)
+      console.log('DATA LIST:', dataList)
+
     }).catch(err => {
       console.log(err)
     })

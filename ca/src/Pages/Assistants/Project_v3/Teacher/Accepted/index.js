@@ -11,13 +11,20 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import LastPage from '@material-ui/icons/LastPage';
 import grey from '@material-ui/core/colors/grey';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Badge from '@material-ui/core/Badge';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import { fetchTeachers } from '../../../../../Redux/Assistants/Actions/Project_v3/Teacher'
+
+const FIRST_SECOND_COLOR = [ red['A100'], blue[300] ]
 
 const styles = theme => ({
   chip: {
@@ -48,6 +55,20 @@ const styles = theme => ({
     '&:after': {
       borderBottomColor: 'rgb(0, 188, 212)'
     },
+  },
+  badge: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    minHeight: '35px',
+    minWidth: '80px',
+    background: grey[300],
+    left: -5,
+    top: -40,
+    padding: '8px',
+    border: '4px solid white'
+  },
+  tooltip: {
+    fontSize: 20
   }
 })
 
@@ -178,28 +199,37 @@ class index extends React.Component {
                     <div style = {{ width: '100%', display: 'flex' }}>
                       <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ teacher.professor_name }</div>
                       <LinearProgress variant="determinate"
-                        value={teacher.accepted.projects.reduce( (accepted_number, project) => accepted_number + project.students.length, 0) / 10 * 100 }
+                        value={teacher.accepted.projects.reduce( (accepted_number, project) => accepted_number + project.students.length, 0) / 7 * 100 }
                         style = {{ flex: 0.6, margin: '10px auto' }}
                       />
                       <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black'  }} >{ teacher.accepted.projects.reduce( (accepted_number, project) => accepted_number + project.students.length, 0) } 人</div>
                     </div>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
+                    <div style = {{ width: '100%' }}>
                     {
                       teacher.accepted.projects.length !== 0 ?
                         <div style = {{ display: 'block' }}>
                         {
                           teacher.accepted.projects.map( project => {
                             return (
-                              <div style = {{ marginBottom: '10px' }} >
-                                <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
+                              <div style = {{ marginBottom: '40px' }} >
+                                <hr />
+                                <Badge badgeContent = { project.semester.substr(0, 3) + (project.semester[4] === "1" ? "上" : "下") }
+                                  classes = {{
+                                    badge: classes.badge
+                                  }}
+                                >
+                                  <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
+                                </Badge>
                                 <br />
                                 {
                                   project.students.map( student => (
-                                    <Chip label = { student.id + " " + student.name } className = { classes.chip } />
+                                    <Tooltip title = { student.first_second === "1" ? "專題一" : "專題二" } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                      <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: FIRST_SECOND_COLOR[(student.first_second === "2" ? 0 : 1)] }} />
+                                    </Tooltip>
                                   ))
                                 }
-                                <hr />
                               </div>
                             )
                           })
@@ -210,6 +240,7 @@ class index extends React.Component {
                           <div style = {{ fontSize: 18, color: grey[500] }} >尚無接受專題</div>
                         </div>
                     }
+                    </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </div>

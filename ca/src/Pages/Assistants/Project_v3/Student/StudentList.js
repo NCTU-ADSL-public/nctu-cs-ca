@@ -9,8 +9,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const styles = theme => ({
 
 })
-const PROJECT_STATUS = ['已申請專題', '專題審核中', '未申請專題']
-const PROJECT_STATUS_COLOR = ['green', 'orange', 'red']
+const PROJECT_STATUS = ['已申請專題(新)', '既有的專題', '專題審核中', '尚未申請']
+const PROJECT_STATUS_COLOR = ['green', 'blue', 'orange', 'red']
 
 class StudentList extends React.Component {
 
@@ -41,7 +41,7 @@ class StudentList extends React.Component {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 {
-                  student.project.status != 2 ?
+                  student.project.status != 3 ?
                   <div style = {{ width: '100%', display: 'flex' }} >
                     <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.title}</div>
                     <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.professor_name}</div>
