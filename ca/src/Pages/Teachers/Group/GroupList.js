@@ -105,7 +105,8 @@ class GroupList extends React.Component {
     this.state = {
       loading: true,
       index: 0,
-      total_number: 0,
+      cs_number: 0,
+      other_number: 0,
       chipOpen: new Map(),
       groupList: [
         {
@@ -206,7 +207,8 @@ class GroupList extends React.Component {
       sem: this.state.sem
     }).then(res => {
       this.setState({
-        total_number: res.data.total_number,
+        cs_number: res.data.cs_number,
+        other_number: res.data.other_number,
         groupList: []
         // groupList: res.data.groups
       })
@@ -306,16 +308,22 @@ class GroupList extends React.Component {
   }
 
   render () {
-    const tn = this.state.total_number
+    const csNum = this.state.cs_number
+    const otherNum = this.state.other_number
+
     return (
       <Grid style={{minHeight: 500}}>
         <div>
           <Row>
             <Col xs={12} md={4} lg={4}>
-              <div className='mainTitle'> 學生專題列表</div>
+              <div className='mainTitle'>學生專題列表 </div>
             </Col>
             <Col xs={12} md={8} lg={8}>
-              <div className='subTitle'> 本年度已收專題學生: {tn} 人</div>
+              <div className='subTitle'>
+                <b>{this.state.sem} 學期</b> 已收
+                &nbsp;&nbsp;<span style={{color: 'red', fontWeight: 'bold'}}>本系學生: {csNum}人</span>
+                &nbsp;&nbsp; / &nbsp;&nbsp; 外系學生: {otherNum}人
+              </div>
             </Col>
           </Row>
           <Row className='groups'>
