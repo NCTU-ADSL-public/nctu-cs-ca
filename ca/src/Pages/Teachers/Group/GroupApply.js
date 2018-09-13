@@ -167,9 +167,7 @@ class GroupApply extends React.Component {
   }
 
   fetchData () {
-/*    axios.get('/professors/students/applyList', {
-      // name: '彭文志'
-      // name: this.props.idCard.name
+    axios.get('/professors/students/applyList', {
       id: this.props.idCard.id
     }).then(res => {
       console.log(res.data)
@@ -182,8 +180,6 @@ class GroupApply extends React.Component {
     })
 
     axios.get('/professors/students/projects', {
-      // name: '彭文志'
-      // name: this.props.idCard.name
       id: this.props.idCard.id
     }).then(res => {
       this.setState({
@@ -191,7 +187,7 @@ class GroupApply extends React.Component {
       })
     }).catch(err => {
       console.log(err)
-    })*/
+    })
   }
 
   componentDidMount () {
