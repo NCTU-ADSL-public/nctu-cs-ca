@@ -137,7 +137,7 @@ export default class ReplyDialog extends React.Component {
     axios.post('/professors/students/ApplyFormSetAgree', {
       research_title: this.props.title,
       tname: this.props.idCard.tname,
-      email: this.props.idCard.mail,
+      mail: this.props.idCard.mail,
       agree: status,
       student: students,
       first_second: this.props.firstSecond,
