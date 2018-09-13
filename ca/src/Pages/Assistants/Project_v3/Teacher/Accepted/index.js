@@ -68,7 +68,7 @@ const styles = theme => ({
     border: '4px solid white'
   },
   tooltip: {
-    fontSize: 20
+    fontSize: 15
   }
 })
 
@@ -199,10 +199,10 @@ class index extends React.Component {
                     <div style = {{ width: '100%', display: 'flex' }}>
                       <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ teacher.professor_name }</div>
                       <LinearProgress variant="determinate"
-                        value={teacher.accepted.projects.reduce( (accepted_number, project) => accepted_number + project.students.length, 0) / 7 * 100 }
+                        value = { teacher.gradeCnt / 7 * 100 }
                         style = {{ flex: 0.6, margin: '10px auto' }}
                       />
-                      <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black'  }} >{ teacher.accepted.projects.reduce( (accepted_number, project) => accepted_number + project.students.length, 0) } 人</div>
+                      <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black'  }} >{ teacher.gradeCnt } 人</div>
                     </div>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
@@ -215,17 +215,11 @@ class index extends React.Component {
                             return (
                               <div style = {{ marginBottom: '40px' }} >
                                 <hr />
-                                <Badge badgeContent = { project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下") }
-                                  classes = {{
-                                    badge: classes.badge
-                                  }}
-                                >
-                                  <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
-                                </Badge>
+                                <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
                                 <br />
                                 {
                                   project.students.map( student => (
-                                    <Tooltip title = { student.first_second === "1" ? "專題一" : "專題二" } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                    <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
                                       <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: FIRST_SECOND_COLOR[(student.first_second === "2" ? 0 : 1)] }} />
                                     </Tooltip>
                                   ))

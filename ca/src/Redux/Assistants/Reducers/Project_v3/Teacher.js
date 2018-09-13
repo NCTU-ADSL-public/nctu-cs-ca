@@ -4,6 +4,7 @@ const initialState = {
   teachers: [
     {
         "professor_name": "黃俊龍",
+        "gradeCnt": 5,
         "accepted": {
             "projects": [
                 {
@@ -52,6 +53,7 @@ const initialState = {
     },
     {
         "professor_name": "黃國源",
+        "gradeCnt": 5,
         "accepted": {
             "projects": []
         },
@@ -61,6 +63,7 @@ const initialState = {
     },
     {
         "professor_name": "黃俊穎",
+        "gradeCnt": 6,
         "accepted": {
             "projects": [
                 {
