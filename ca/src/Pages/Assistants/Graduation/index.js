@@ -9,6 +9,7 @@ import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 //
 import StudentList from './StudentSearch/StudentList';
 import StudentInform from './StudentInform/StudentSelList';
+import GraduationRule from './GraduationRule'
 
 import FakeData from '../../../Resources/FakeData'
 
@@ -20,7 +21,7 @@ class index extends React.Component {
         super(props);
 
         this.state = {
-            activeKey: '1',
+            activeKey: "3",
             start: 0,
             initStudents: FakeData.StudentList,
             loading: true,
@@ -39,9 +40,9 @@ class index extends React.Component {
         });
     }
 
-    onChange = (activeKey) => {
+    onChange = (key) => {
         this.setState({
-            activeKey,
+            activeKey:key
         });
     };
 
@@ -55,7 +56,6 @@ class index extends React.Component {
                     onChange={this.onChange}
                 >
                     <TabPane tab={`學生清單`} key="1">
-
                         <StudentList students={this.state.initStudents}/>
                     </TabPane>
                     <TabPane tab={`預審通知`} key="2">
@@ -63,6 +63,9 @@ class index extends React.Component {
                             students={this.state.initStudents}
                             idCard={this.props.idCard}
                         />
+                    </TabPane>
+                    <TabPane tab={`預審規則`} key="3">
+                        <GraduationRule />
                     </TabPane>
                 </Tabs>
             </div>

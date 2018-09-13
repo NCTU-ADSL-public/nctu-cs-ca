@@ -215,11 +215,11 @@ class Head extends Component {
 // />
   render () {
     const router = [
-      '/assistants/head',
-      '/assistants/grad',
-      '/assistants/project',
-      '/assistants/family',
-      '/assistants/mail'
+      '/students/head',
+      '/students/head/grad',
+      '/students/head/map',
+      '/students/head/professor',
+      '/students/head/project'
     ]
     const onTouchTaps = [
       () => this.select(0),
@@ -227,6 +227,18 @@ class Head extends Component {
       () => this.select(2),
       () => this.select(3),
       () => this.select(4),
+      () => this.select(5),
+      () => this.select(6),
+      () => this.select(7),
+      () => this.select(8),
+      () => this.select(9),
+    ]
+    const onTouchTapsrouter = [
+      () => this.props.history.push(router[0]),
+      () => this.props.history.push(router[1]),
+      () => this.props.history.push(router[2]),
+      () => this.props.history.push(router[3]),
+      () => this.props.history.push(router[4]),
       () => this.select(5),
       () => this.select(6),
       () => this.select(7),

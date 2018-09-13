@@ -119,7 +119,7 @@ class Index extends React.Component {
     if(status === '3'){
       return (
         <div className='container' style={{marginTop: '10px', height: '300px'}}>
-          很遺憾您的專題申請已被拒絕，知會隊友後請按左上角刪除已撤銷表單資料，謝謝！
+          很遺憾您的專題申請已被拒絕，知會隊友後請按右上角刪除已撤銷表單資料，謝謝！
         </div>
       )
     }

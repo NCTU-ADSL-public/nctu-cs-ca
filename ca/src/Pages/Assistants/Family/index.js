@@ -20,7 +20,6 @@ import ListIcon from '@material-ui/icons/List'
 import ViewIcon from '@material-ui/icons/ViewComfy'
 import axios from 'axios'
 import FakeData from '../../../Resources/FakeData'
-import AvRepeat from 'material-ui/SvgIcon';
 
 const styles = () => ({
   container:{
