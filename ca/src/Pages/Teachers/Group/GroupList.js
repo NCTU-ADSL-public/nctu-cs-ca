@@ -188,8 +188,8 @@ class GroupList extends React.Component {
           'score': FakeData.StudentScore,
         },
       ],
+      sem: this.getSemester()
     }
-    sem = this.getSemester()
   }
 
   getSemester () {
@@ -199,11 +199,11 @@ class GroupList extends React.Component {
 
   fetchData () {
     console.log('idCard: ' + this.props.idCard.tname)
-    console.log('sem: ' + sem)
+    console.log('sem: ' + this.state.sem)
     let _this = this
     axios.get('/professors/students/projects', {
       id: this.props.idCard.id,
-      sem: sem
+      sem: this.state.sem
     }).then(res => {
       this.setState({
         total_number: res.data.total_number,
