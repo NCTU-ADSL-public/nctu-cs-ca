@@ -17,6 +17,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
+
+const STATE_COLOR = [ red['A100'], blue[300] ]
 
 const styles = theme => ({
   chip: {
@@ -125,7 +129,7 @@ class index extends React.Component {
                                 <br />
                                 {
                                   project.students.map( student => (
-                                    <Chip label = { student.id + " " + student.name } className = { classes.chip } />
+                                    <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: STATE_COLOR[(student.state === "0" ? 0 : 1)] }} />
                                   ))
                                 }
                               </div>

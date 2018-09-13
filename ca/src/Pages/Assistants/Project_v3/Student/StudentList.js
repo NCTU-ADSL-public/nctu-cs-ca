@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const styles = theme => ({
 
 })
-const PROJECT_STATUS = ['已申請專題(新)', '既有的專題', '專題審核中', '尚未申請']
+const PROJECT_STATUS = ['已申請專題(新)', '已申請專題(舊)', '專題審核中', '尚未申請']
 const PROJECT_STATUS_COLOR = ['green', 'blue', 'orange', 'red']
 
 class StudentList extends React.Component {
