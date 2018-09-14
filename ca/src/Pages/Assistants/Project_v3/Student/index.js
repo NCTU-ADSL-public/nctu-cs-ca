@@ -8,13 +8,20 @@ import purple from '@material-ui/core/colors/purple';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import StudentList from './StudentList'
+import FilterList from '@material-ui/icons/FilterList';
 import FirstPage from '@material-ui/icons/FirstPage';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import LastPage from '@material-ui/icons/LastPage';
 import { fetchStudents } from '../../../../Redux/Assistants/Actions/Project_v3/Student'
 import grey from '@material-ui/core/colors/grey';
-
+import green from '@material-ui/core/colors/green';
+import blue from '@material-ui/core/colors/blue';
+import orange from '@material-ui/core/colors/orange';
+import red from '@material-ui/core/colors/red';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
   root: {
@@ -47,8 +54,14 @@ const styles = theme => ({
     transition: 'color 0.3s',
     marginRight: '10px',
     marginLeft: '10px'
+  },
+  chip: {
+    margin: '10px',
+    fontSize: '15px',
   }
 })
+
+const FILTER_STATUS_COLOR = [green[300], blue[300], orange[300], red[400]]
 
 class index extends React.Component {
 
@@ -58,31 +71,56 @@ class index extends React.Component {
       grade: "04",
       input: "",
       page: 0,
-      number_per_page: 10
+      number_per_page: 10,
+      open_filter: false,
+      filter_status: [false, false, false, false]
     }
     props.fetch_students({ grade: this.state.grade })
   }
 
   filter = (students) => {
-    const { input } = this.state
+    const { input, filter_status } = this.state
     return (
-      students.filter( (student) => input === ''
-                          || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
-                          || student.student.id.search(input) !== -1
+      students.filter( (student) =>
+        (    input === ''
+          || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+          || student.student.id.search(input) !== -1
+        )
+        &&
+        (
+            /*teacher.pending.projects.reduce( (pending_number, project) => pending_number + project.students.length, 0)*/
+             !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
+          || filter_status[student.project.status]
+        )
       )
     )
+  }
+
+  toggleFilter = target => {
+    this.setState({ filter_status: this.state.filter_status.map((value, index) => target === index ? !value : value ) })
   }
 
   render() {
 
     const { classes, fetch_students, students } = this.props
-    const { input, page, number_per_page, grade, max_page } = this.state
+    const { input, page, number_per_page, grade, max_page, open_filter, filter_status } = this.state
 
     return (
       <div className = { classes.root } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
-          <div className = 'col-md-6 col-lg-6 col-xs-12' >
-            <FormControl style = {{ width: '100%' }}>
+          <div className = 'col-md-6 col-lg-6 col-xs-12' style = {{ display: 'flex' }} >
+            <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
+            <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
+              <DialogTitle><div style = {{ fontSize: '25px' }} >專題申請狀況</div></DialogTitle>
+              <div style = {{ display: 'flex' }}>
+              {
+                ['已申請專題(新)', '已申請專題(舊)', '專題審核中', '尚未申請'].map( (title, index) => (
+                  <Chip label = { title } className = { classes.chip } onClick = { () => this.toggleFilter(index) } style = {{ background: filter_status[index] ? FILTER_STATUS_COLOR[index] : null }} />
+                ))
+              }
+              </div>
+            </Dialog>
+            <FormControl style = {{ width: '100%', flex: 1 }} >
               <InputLabel
                 FormLabelClasses={{
                   root: classes.cssLabel,
