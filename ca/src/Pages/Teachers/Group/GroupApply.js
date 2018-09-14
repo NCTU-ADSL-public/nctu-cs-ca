@@ -215,7 +215,7 @@ class GroupApply extends React.Component {
     let Today = new Date()
     let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
     axios.get('/professors/students/projects', {
-      semester: semester
+      sem: semester
     }).then(res => {
       this.setState({
         cs_number: res.data.cs_number,
