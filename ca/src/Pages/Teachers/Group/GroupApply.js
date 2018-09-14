@@ -277,7 +277,7 @@ class GroupApply extends React.Component {
 
           <Col xs={12} md={4} lg={4}>
             <div style={styles.subTitle}>
-              尚可接受專題生數量: {csNum <= 7 ? 7 - csNum + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }
+              {/*尚可接受專題生數量: {csNum <= 7 ? 7 - csNum + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }*/}
             </div>
           </Col>
 

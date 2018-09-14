@@ -320,9 +320,10 @@ class GroupList extends React.Component {
             </Col>
             <Col xs={12} md={8} lg={8}>
               <div className='subTitle'>
-                <b>{this.state.sem} 學期</b> 已收
-                &nbsp;&nbsp;<span style={{color: 'red', fontWeight: 'bold'}}>本系學生: {csNum}人</span>
-                &nbsp;&nbsp; / &nbsp;&nbsp; 外系學生: {otherNum}人
+                <b>{this.state.sem} 學期</b>
+                {/*已收*/}
+                {/*&nbsp;&nbsp;<span style={{color: 'red', fontWeight: 'bold'}}>本系學生: {csNum}人</span>*/}
+                {/*&nbsp;&nbsp; / &nbsp;&nbsp; 外系學生: {otherNum}人*/}
               </div>
             </Col>
           </Row>
