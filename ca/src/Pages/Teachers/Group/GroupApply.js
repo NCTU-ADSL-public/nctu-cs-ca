@@ -212,7 +212,7 @@ class GroupApply extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-    axios.get('/professors/students/projects', {
+    axios.post('/professors/students/projects', {
       id: this.props.idCard.id
     }).then(res => {
       this.setState({
