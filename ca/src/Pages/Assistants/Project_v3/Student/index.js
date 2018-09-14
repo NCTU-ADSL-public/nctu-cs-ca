@@ -88,7 +88,6 @@ class index extends React.Component {
         )
         &&
         (
-            /*teacher.pending.projects.reduce( (pending_number, project) => pending_number + project.students.length, 0)*/
              !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
           || filter_status[student.project.status]
         )
@@ -97,7 +96,7 @@ class index extends React.Component {
   }
 
   toggleFilter = target => {
-    this.setState({ filter_status: this.state.filter_status.map((value, index) => target === index ? !value : value ) })
+    this.setState({ filter_status: this.state.filter_status.map((value, index) => target === index ? !value : value ), page: 0 })
   }
 
   render() {
@@ -114,7 +113,7 @@ class index extends React.Component {
               <DialogTitle><div style = {{ fontSize: '25px' }} >專題申請狀況</div></DialogTitle>
               <div style = {{ display: 'flex' }}>
               {
-                ['已申請專題(新)', '已申請專題(舊)', '專題審核中', '尚未申請'].map( (title, index) => (
+                ['已申請專題(新)', '已申請專題(舊)', '專題審核中', '未申請專題'].map( (title, index) => (
                   <Chip label = { title } className = { classes.chip } onClick = { () => this.toggleFilter(index) } style = {{ background: filter_status[index] ? FILTER_STATUS_COLOR[index] : null }} />
                 ))
               }
