@@ -133,6 +133,11 @@ class SendProjectAgree extends React.Component {
             alert(res.data[i].student_id + " 因 " + this.getString(res.data[i].status) + " 申請失敗")
             return
           }
+          if(res.data[i].status === '2'){
+            let r = window.confirm('注意!如果您確定送出表單且教授也同意了，' + res.data[i].student_id + '同學將會修改專題二（意同於更改專題）請按確定以繼續')
+            if(!r)return
+          }
+
           stateString.push(res.data[i].status)
         }
 
@@ -269,7 +274,7 @@ class SendProjectAgree extends React.Component {
             <ListItemIcon>
               <Face />
             </ListItemIcon>
-            <ListItemText inset primary={`寄送專題申請！`} />
+            <ListItemText inset primary={`專題申請/專題變更`} />
           </MenuItem>
           : <Tooltip title='寄送專題申請！' placement='top' classes={{tooltip:classes.tooltip}}>
             <IconButton
