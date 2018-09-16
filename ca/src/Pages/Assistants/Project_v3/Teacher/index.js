@@ -101,11 +101,9 @@ class index extends React.Component {
       semester: "all",
       filter_status: [false, false, false],
       open_filter: false,
-      teachers: []
     }
     const { semester, grade } = this.state
     props.fetch_teachers({semester, grade})
-    this.setState({ teachers: props.teachers })
   }
 
   filter = (teachers) => {
@@ -136,15 +134,13 @@ class index extends React.Component {
       console.log(data)
       this.props.set_add_status(data.post_item)
       const { semester, grade } = this.state
-      this.props.fetch_teachers({ semester, grade })
-      this.setState({ teachers: this.props.teachers })
     }
   }
 
   render() {
 
-    const { classes, professor_name, fetch_teachers } = this.props
-    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status, teachers } = this.state
+    const { classes, professor_name, fetch_teachers, teachers } = this.props
+    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status } = this.state
 
     return (
       <div style = {{ marginBottom: '60px', width: '60%', margin: '0 auto', marginTop: '20px' }} >
@@ -202,7 +198,7 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     fetch_teachers({ semester: event.target.value, grade })
-                    this.setState({ semester: event.target.value, page: 0, teachers: this.props.teachers })
+                    this.setState({ semester: event.target.value, page: 0 })
                   }
                 }
               >
@@ -237,7 +233,7 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     fetch_teachers({ grade: event.target.value, semester })
-                    this.setState({ grade: event.target.value, page: 0, teachers: this.props.teachers })
+                    this.setState({ grade: event.target.value, page: 0 })
                   }
                 }
               >
@@ -315,21 +311,21 @@ class index extends React.Component {
                         teacher.pending.projects.map( project => {
                           return (
                             <div style = {{ marginBottom: '40px' }} >
-                            <hr />
-                            <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
-                            <br />
-                            {
-                              project.students.map( student => (
-                                <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") } placement="top" classes = {{ tooltip: classes.tooltip }} >
-                                  <Chip
-                                    label = { student.id + " " + student.name }
-                                    className = { classes.chip }
-                                    style = {{ background: yellow[300] }}
-                                    avatar={<Avatar style = {{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
-                                  />
-                                </Tooltip>
-                              ))
-                            }
+                              <hr />
+                              <div style = {{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{ project.title }</div>
+                              <br />
+                              {
+                                project.students.map( student => (
+                                  <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                    <Chip
+                                      label = { student.id + " " + student.name }
+                                      className = { classes.chip }
+                                      style = {{ background: yellow[300] }}
+                                      avatar={<Avatar style = {{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                    />
+                                  </Tooltip>
+                                ))
+                              }
                             </div>
                           )
                         })
@@ -337,7 +333,7 @@ class index extends React.Component {
                       </div>
                       :
                       <div style = {{ width: '100%', display: 'flex', justifyContent: "center"}}>
-                      <div style = {{ fontSize: 18, color: grey[500] }} >尚未有申請的專題</div>
+                        <div style = {{ fontSize: 18, color: grey[500] }} >尚未有申請的專題</div>
                       </div>
                     }
                     </div>

@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions'
 import axios from 'axios'
 
 export const store_teachers = createAction('STORE_TEACHERS')
+export const update_add_status = createAction('UPDATE_ADD_STATUS')
 
 export const fetchTeachers = (post_item) => dispatch => {
   axios.post('/assistants/project/ProResearchList', post_item).then( res => {
@@ -26,4 +27,7 @@ export const setAddStatus = (post_item) => dispatch => {
   }).catch( err => {
     console.log(err)
   })
+}
+export const updateAddStatus = (id) => dispatch => {
+  dispatch(update_add_status)
 }
