@@ -180,7 +180,7 @@ class index extends React.Component {
             }
           />
         </div>
-        <div style = {{ textAlign: 'center', marginTop: '10px' }} >
+        <div style = {{ textAlign: 'center', marginTop: '10px', marginBottom: '50px' }} >
           <FirstPage className = { classes.icon } onClick = { () => this.setState({ page: 0 }) } />
           <ChevronLeft className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, page - 1) }) } />
           <span style = {{

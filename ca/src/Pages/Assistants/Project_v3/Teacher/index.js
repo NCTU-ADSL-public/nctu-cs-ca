@@ -34,7 +34,7 @@ import { fetchTeachers, setAddStatus } from '../../../../Redux/Assistants/Action
 
 const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
 const STATUS_COLOR_L = [ red[100], green[200] ]
-const FILTER_STATUS_COLOR = [red['A100'], green[300], yellow[300]]
+const FILTER_STATUS_COLOR = [ green[300], red['A100'], yellow[300] ]
 const STUDENT_STATUS_CN = ['外', '本']
 
 const styles = theme => ({
@@ -149,7 +149,7 @@ class index extends React.Component {
               <DialogTitle><div style = {{ fontSize: '25px' }} >專題申請狀況</div></DialogTitle>
               <div style = {{ display: 'flex' }}>
               {
-                ['沒有新專題', '有新增專題', '有審核中專題'].map( (title, index) => (
+                ['無新專題申請', '待助理加簽', '待教授審核'].map( (title, index) => (
                   <Chip label = { title } className = { classes.chip } onClick = { () => this.toggleFilter(index) } style = {{ background: filter_status[index] ? FILTER_STATUS_COLOR[index] : null }} />
                 ))
               }
@@ -341,7 +341,7 @@ class index extends React.Component {
             )
           })}
         </div>
-        <div style = {{ textAlign: 'center', marginTop: '10px' }} >
+        <div style = {{ textAlign: 'center', marginTop: '10px', marginBottom: '50px' }} >
           <FirstPage className = { classes.icon } onClick = { () => this.setState({ page: 0 }) } />
           <ChevronLeft className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, page - 1) }) } />
           <span style = {{
