@@ -17,7 +17,7 @@ export const fetchTeachers = (post_item) => dispatch => {
 }
 
 export const setAddStatus = (post_item) => dispatch => {
-  axios.post('assistants/SetAddStatus', post_item).then( res => {
+  axios.post('/assistants/SetAddStatus', post_item).then( res => {
     console.log('setAddStatus');
     console.log('POST_Item')
     console.log(post_item)
