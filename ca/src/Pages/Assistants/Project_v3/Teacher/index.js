@@ -16,9 +16,9 @@ import red from '@material-ui/core/colors/red';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
+import FilterList from '@material-ui/icons/FilterList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import AccessTime from '@material-ui/icons/AccessTime';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -30,6 +30,7 @@ import Dialog from '@material-ui/core/Dialog';
 import { fetchTeachers } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
 const STATE_COLOR = [ red['A100'], blue[300] ]
+const FILTER_STATUS_COLOR = [red['A100'], green[300], yellow[300]]
 
 const styles = theme => ({
   chip: {
@@ -93,20 +94,24 @@ class index extends React.Component {
       input: '',
       grade: "04",
       semester: "106-2",
-      onlyPending: false
+      filter_status: [false, false, false],
+      open_filter: false
     }
+    const { semester, grade } = this.state
+    this.props.fetch_teachers({semester, grade})
   }
 
   filter = (teachers) => {
-    const { input, onlyPending } = this.state
+    const { input, filter_status } = this.state
     return (
       teachers.filter( (teacher) =>
         (   input === ''
          || teacher.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
         )
         &&
-        (   !onlyPending
-         || teacher.professor_status === "1"
+        (
+            !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
+         || filter_status[parseInt(teacher.professor_status)]
         )
       )
     )
@@ -119,15 +124,23 @@ class index extends React.Component {
   render() {
 
     const { classes, teachers, professor_name, fetch_teachers } = this.props
-    const { expanded, page, number_per_page, input, grade, semester, onlyPending } = this.state
+    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status } = this.state
 
     return (
       <div style = {{ marginBottom: '60px', width: '60%', margin: '0 auto', marginTop: '20px' }} >
         <div className = 'row' >
           <div className = 'col-md-4 col-lg-4 col-xs-12' style = {{ display: 'flex' }} >
-            <tooltip title = { onlyPending ? '顯示全部' : '僅顯示專題審核'} placement="top" classes = {{ tooltip: classes.tooltip }} >
-              <AccessTime className = { onlyPending ? classes.iconWithColor : classes.icon } onClick = { () => this.setState({ onlyPending: !onlyPending }) } />
-            </tooltip>
+            <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
+            <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
+              <DialogTitle><div style = {{ fontSize: '25px' }} >專題申請狀況</div></DialogTitle>
+              <div style = {{ display: 'flex' }}>
+              {
+                ['沒有新專題', '有新增專題', '有審核中專題'].map( (title, index) => (
+                  <Chip label = { title } className = { classes.chip } onClick = { () => this.toggleFilter(index) } style = {{ background: filter_status[index] ? FILTER_STATUS_COLOR[index] : null }} />
+                ))
+              }
+              </div>
+            </Dialog>
             <FormControl style = {{ width: '100%', marginBottom: '10px', flex: 1 }}>
               <InputLabel
                 FormLabelClasses={{
@@ -302,8 +315,8 @@ class index extends React.Component {
             marginRight: '20px',
             marginLeft: '20px'
           }}>{page + 1} / { Math.max(1, Math.ceil(this.filter(teachers).length / number_per_page)) }</span>
-          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.min(Math.ceil(this.filter(teachers).length / number_per_page) - 1, page + 1) }) } />
-          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.ceil(this.filter(teachers).length / number_per_page) - 1 }) } />
+          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.min(Math.ceil(this.filter(teachers).length / number_per_page) - 1, page + 1)) }) } />
+          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.ceil(this.filter(teachers).length / number_per_page) - 1 )} )} />
         </div>
       </div>
     )

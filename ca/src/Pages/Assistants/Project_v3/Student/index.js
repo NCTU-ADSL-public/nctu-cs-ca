@@ -190,8 +190,8 @@ class index extends React.Component {
             marginRight: '20px',
             marginLeft: '20px'
           }}>{page + 1} / { Math.max(1, Math.ceil(this.filter(students).length / number_per_page)) }</span>
-          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.min(Math.ceil(this.filter(students).length / number_per_page) - 1, page + 1) }) } />
-          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.ceil(this.filter(students).length / number_per_page) - 1 }) } />
+          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.min(Math.ceil(this.filter(students).length / number_per_page) - 1, page + 1)) }) } />
+          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.ceil(this.filter(students).length / number_per_page) - 1) }) } />
         </div>
       </div>
     )
