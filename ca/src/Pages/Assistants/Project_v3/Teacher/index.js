@@ -26,11 +26,19 @@ import yellow from '@material-ui/core/colors/yellow';
 import green from '@material-ui/core/colors/green';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
+import Avatar from '@material-ui/core/Avatar';
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
+import Add from '@material-ui/icons/Add';
+
+
 
 import { fetchTeachers } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
-const STATE_COLOR = [ red['A100'], blue[300] ]
+const STATUS_COLOR = [ red['A100'], blue[300] ]
+const STATUS_COLOR_L = [ red[100], blue[200] ]
 const FILTER_STATUS_COLOR = [red['A100'], green[300], yellow[300]]
+const STUDENT_STATUS_CN = ['外', '本']
 
 const styles = theme => ({
   chip: {
@@ -119,6 +127,10 @@ class index extends React.Component {
 
   toggleFilter = target => {
     this.setState({ filter_status: this.state.filter_status.map((value, index) => target === index ? !value : value ), page: 0 })
+  }
+
+  handleDelete = data => {
+
   }
 
   render() {
@@ -258,7 +270,14 @@ class index extends React.Component {
                                 {
                                   project.students.map( student => (
                                     <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
-                                      <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: STATE_COLOR[(student.status === "0" ? 0 : 1)] }} />
+                                      <Chip
+                                        label = { student.id + " " + student.name }
+                                        className = { classes.chip }
+                                        style = {{ background: STATUS_COLOR[parseInt(student.status)] }}
+                                        deleteIcon={<DoneIcon />}
+                                        onDelete={this.handleDelete}
+                                        avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                      />
                                     </Tooltip>
                                   ))
                                 }
@@ -285,7 +304,16 @@ class index extends React.Component {
                             <br />
                             {
                               project.students.map( student => (
-                                <Chip label = { student.id + " " + student.name } className = { classes.chip } style = {{ background: STATE_COLOR[(student.state === "0" ? 0 : 1)] }} />
+                                <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                  <Chip
+                                    label = { student.id + " " + student.name }
+                                    className = { classes.chip }
+                                    style = {{ background: STATUS_COLOR[parseInt(student.status)] }}
+                                    deleteIcon={student.add_status === "0" ?  <Add /> : <DoneIcon />}
+                                    onDelete={this.handleDelete}
+                                    avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                  />
+                                </Tooltip>
                               ))
                             }
                             </div>
