@@ -133,8 +133,9 @@ class index extends React.Component {
       console.log("data")
       console.log(data)
       this.props.set_add_status(data.post_item)
+      const { semester, grade } = this.state
+      this.props.fetch_teachers({ semester, grade })
     }
-
   }
 
   render() {
