@@ -30,10 +30,7 @@ import Avatar from '@material-ui/core/Avatar';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 import Add from '@material-ui/icons/Add';
-
-
-
-import { fetchTeachers } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
+import { fetchTeachers, setAddStatus } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
 const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
 const STATUS_COLOR_L = [ red[100], green[200] ]
@@ -130,8 +127,11 @@ class index extends React.Component {
   }
 
   handleDelete = data => {
-    console.log("data")
-    console.log(data)
+    if (data.status === "0") {
+      console.log("data")
+      console.log(data)
+      this.props.set_add_status(data.post_item)
+    }
 
   }
 
@@ -278,11 +278,14 @@ class index extends React.Component {
                                         style = {{ background: ADD_STATUS_COLOR[parseInt(student.add_status)] }}
                                         deleteIcon={student.add_status === "0" ? <Add style = {{ fontSize: 30 }} /> : <DoneIcon style = {{ fontSize: 30 }} />}
                                         onDelete={() => this.handleDelete({
-                                          student_id: student.id,
-                                          research_title: project.title,
-                                          semester: student.semester,
-                                          first_second: student.first_second
-                                        })}
+                                          status: student.add_status,
+                                          post_item: {
+                                            student_id: student.id,
+                                            research_title: project.title,
+                                            semester: student.semester,
+                                            first_second: student.first_second
+                                          }}
+                                        )}
                                         avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
                                       />
                                     </Tooltip>
@@ -361,7 +364,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_teachers: (post_item) => dispatch(fetchTeachers(post_item))
+  fetch_teachers: (post_item) => dispatch(fetchTeachers(post_item)),
+  set_add_status: (post_item) => dispatch(setAddStatus(post_item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))
