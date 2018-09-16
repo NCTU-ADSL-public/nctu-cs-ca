@@ -24,10 +24,10 @@ export const setAddStatus = (post_item) => dispatch => {
     console.log(post_item)
     console.log("RES DATA")
     console.log(res.data)
+    if (res.data.signal === 1) {
+      dispatch(update_add_status(post_item.student_id))
+    }
   }).catch( err => {
     console.log(err)
   })
-}
-export const updateAddStatus = (id) => dispatch => {
-  dispatch(update_add_status)
 }

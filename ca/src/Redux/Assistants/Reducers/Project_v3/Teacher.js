@@ -62,7 +62,7 @@ const initialState = {
                         "name": "李佩琪",
                         "program": "資工系資工組3B",
                         "semester": "107-1",
-                        "add_status":"1",
+                        "add_status":"0",
                         "first_second": "2",
                         "status": "1"
                     }
@@ -90,26 +90,22 @@ const initialState = {
 }
 
 export default handleActions({
-  STORE_TEACHERS: (state, action) => {
-    const teachers = action.payload
+  STORE_TEACHERS: (state, action) => ({ ...state,
+    teachers: action.payload
+  }),
+  UPDATE_ADD_STATUS: (state, action) => {
+    const newTeachers = state.teachers.map( teacher => (
+      teacher.accepted.projects.map( project => (
+        project.students.map( student => ({...student,
+            add_status: student.id === action.payload ? "1" : student.add_status
+          })
+        )
+      ))
+    ))
+    console.log("NEWTEACHERS")
+    console.log(newTeachers)
     return ({ ...state,
-      teachers: teachers.map( (teacher, id1) => {
-        return ({ ...teachers,
-          index: id1,
-          accepted: { ...teacher.accepted,
-            projects: teacher.accepted.projects.map( (project, id2) => {
-              return ({ ...project,
-                index: id2,
-                students: project.students.map( (student, id3) => {
-                  return ({ ...student,
-                    index: id3
-                  })
-                })
-              })
-            })
-          }
-        })
-      })
+      teachers: newTeachers
     })
   }
 }, initialState)
