@@ -35,8 +35,8 @@ import Add from '@material-ui/icons/Add';
 
 import { fetchTeachers } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
-const STATUS_COLOR = [ red['A100'], blue[300] ]
-const STATUS_COLOR_L = [ red[100], blue[200] ]
+const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
+const STATUS_COLOR_L = [ red[100], green[200] ]
 const FILTER_STATUS_COLOR = [red['A100'], green[300], yellow[300]]
 const STUDENT_STATUS_CN = ['外', '本']
 
@@ -130,6 +130,8 @@ class index extends React.Component {
   }
 
   handleDelete = data => {
+    console.log("data")
+    console.log(data)
 
   }
 
@@ -273,10 +275,15 @@ class index extends React.Component {
                                       <Chip
                                         label = { student.id + " " + student.name }
                                         className = { classes.chip }
-                                        style = {{ background: STATUS_COLOR[parseInt(student.status)] }}
-                                        deleteIcon={<DoneIcon />}
-                                        onDelete={this.handleDelete}
-                                        avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                        style = {{ background: ADD_STATUS_COLOR[parseInt(student.add_status)] }}
+                                        deleteIcon={student.add_status === "0" ? <Add style = {{ fontSize: 30 }} /> : <DoneIcon style = {{ fontSize: 30 }} />}
+                                        onDelete={() => this.handleDelete({
+                                          student_id: student.id,
+                                          research_title: project.title,
+                                          semester: student.semester,
+                                          first_second: student.first_second
+                                        })}
+                                        avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
                                       />
                                     </Tooltip>
                                   ))
@@ -308,10 +315,8 @@ class index extends React.Component {
                                   <Chip
                                     label = { student.id + " " + student.name }
                                     className = { classes.chip }
-                                    style = {{ background: STATUS_COLOR[parseInt(student.status)] }}
-                                    deleteIcon={student.add_status === "0" ?  <Add /> : <DoneIcon />}
-                                    onDelete={this.handleDelete}
-                                    avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                    style = {{ background: yellow[300] }}
+                                    avatar={<Avatar style = {{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
                                   />
                                 </Tooltip>
                               ))

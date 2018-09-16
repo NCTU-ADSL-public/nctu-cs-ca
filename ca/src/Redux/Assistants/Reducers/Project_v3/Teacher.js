@@ -39,7 +39,7 @@ const initialState = {
                         "name": "劉昱劭",
                         "program": "資工系網多組3",
                         "semester": "106-2",
-                        "add_status":"1",
+                        "add_status":"0",
                         "first_second": "2",
                         "status": "1"
                     }
