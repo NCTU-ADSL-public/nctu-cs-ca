@@ -100,10 +100,12 @@ class index extends React.Component {
       grade: "04",
       semester: "all",
       filter_status: [false, false, false],
-      open_filter: false
+      open_filter: false,
+      teachers: []
     }
     const { semester, grade } = this.state
-    this.props.fetch_teachers({semester, grade})
+    props.fetch_teachers({semester, grade})
+    this.setState({ teachers: props.teachers })
   }
 
   filter = (teachers) => {
@@ -135,13 +137,14 @@ class index extends React.Component {
       this.props.set_add_status(data.post_item)
       const { semester, grade } = this.state
       this.props.fetch_teachers({ semester, grade })
+      this.setState({ teachers: this.props.teachers })
     }
   }
 
   render() {
 
-    const { classes, teachers, professor_name, fetch_teachers } = this.props
-    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status } = this.state
+    const { classes, professor_name, fetch_teachers } = this.props
+    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status, teachers } = this.state
 
     return (
       <div style = {{ marginBottom: '60px', width: '60%', margin: '0 auto', marginTop: '20px' }} >
@@ -199,7 +202,7 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     fetch_teachers({ semester: event.target.value, grade })
-                    this.setState({ semester: event.target.value, page: 0 })
+                    this.setState({ semester: event.target.value, page: 0, teachers: this.props.teachers })
                   }
                 }
               >
@@ -234,7 +237,7 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     fetch_teachers({ grade: event.target.value, semester })
-                    this.setState({ grade: event.target.value, page: 0 })
+                    this.setState({ grade: event.target.value, page: 0, teachers: this.props.teachers })
                   }
                 }
               >
