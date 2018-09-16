@@ -98,7 +98,7 @@ class index extends React.Component {
       number_per_page: 10,
       input: '',
       grade: "04",
-      semester: "106-2",
+      semester: "all",
       filter_status: [false, false, false],
       open_filter: false
     }
@@ -116,7 +116,9 @@ class index extends React.Component {
         &&
         (
             !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-         || filter_status[parseInt(teacher.professor_status)]
+         || (filter_status[0] && (teacher.accept_status  === 0 && teacher.pending_status === 0))
+         || (filter_status[1] && (teacher.accept_status  === 1))
+         || (filter_status[2] && (teacher.pending_status === 1))
         )
       )
     )
