@@ -132,7 +132,12 @@ class index extends React.Component {
     if (data.status === "0") {
       console.log("data")
       console.log(data)
-      this.props.set_add_status(data.post_item)
+      if (window.confirm(
+        "加簽對象:\n" +
+        "學號: " + data.post_item.student_id
+      )){
+        this.props.set_add_status(data.post_item)
+      }
     }
   }
 
