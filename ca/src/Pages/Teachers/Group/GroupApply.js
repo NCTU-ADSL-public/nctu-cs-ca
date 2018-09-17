@@ -275,18 +275,18 @@ class GroupApply extends React.Component {
             <div style={styles.noticeTitle} onClick={() => this.fetchData()}> 學生專題申請 </div>
           </Col>
 
-          {/*<Col xs={12} md={4} lg={4}>*/}
-            {/*<div style={styles.subTitle}>*/}
-              {/*尚可接受專題生數量: {csNum <= 7 ? 7 - csNum + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }*/}
-            {/*</div>*/}
-          {/*</Col>*/}
+          <Col xs={12} md={4} lg={4}>
+            <div style={styles.subTitle}>
+              尚可接受專題生數量: {csNum <= 7 ? 7 - csNum + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }
+            </div>
+          </Col>
 
-          {/*<Col xs={12} md={4} lg={4}>*/}
-            {/*<div style={styles.subHintTitle}>*/}
-              {/*<StudentStatusHint status={1}/>*/}
-              {/*<StudentStatusHint status={0}/>*/}
-            {/*</div>*/}
-          {/*</Col>*/}
+          <Col xs={12} md={4} lg={4}>
+            <div style={styles.subHintTitle}>
+              <StudentStatusHint status={1}/>
+              <StudentStatusHint status={0}/>
+            </div>
+          </Col>
 
         </Row>
         <Row style={styles.groups}>
@@ -352,8 +352,7 @@ const ApplyButton = (props) => {
                   <div key={i}>
 
                     <Chip style={styles.chip }
-                          // backgroundColor={ p.student_status === 1 ? '#BDD8CC' : '#FFCD80' }
-                          backgroundColor={ 1 ? '#BDD8CC' : '#FFCD80' }
+                          backgroundColor={ p.student_status === 1 ? '#BDD8CC' : '#FFCD80' }
                           key={i}
                           onClick={() => props.handleChip(props.key + p.student_id)}>
                       <Avatar src={defaultPic}/> {p.student_id} {p.sname}
