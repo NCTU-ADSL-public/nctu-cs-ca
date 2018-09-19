@@ -65,7 +65,8 @@ class index extends React.Component {
       input: "",
       page: 0,
       number_per_page: 10,
-      first_second: "1"
+      first_second: "1",
+      panel_open: [...Array(10)].map( (x) => true)
     }
     props.fetch_scores({ semester: this.state.semester, first_second: this.state.first_second })
   }
@@ -73,10 +74,11 @@ class index extends React.Component {
   filter = (scores) => {
     const { input } = this.state
     return (
-      scores.filter( (student) => input === ''
-                          || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
-                          || student.student.id.search(input) !== -1
-                          || student.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
+      scores.filter( (student) =>
+         input === ''
+      || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+      || student.student.id.search(input) !== -1
+      || student.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
       )
     )
   }

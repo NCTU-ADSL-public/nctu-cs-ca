@@ -34,7 +34,7 @@ import { fetchTeachers, setAddStatus } from '../../../../Redux/Assistants/Action
 
 const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
 const STATUS_COLOR_L = [ red[100], green[200] ]
-const FILTER_STATUS_COLOR = [ green[300], red['A100'], yellow[300] ]
+const FILTER_STATUS_COLOR = [ red['A100'], yellow[300] ]
 const STUDENT_STATUS_CN = ['外', '本']
 
 const styles = theme => ({
@@ -97,10 +97,11 @@ class index extends React.Component {
       page: 0,
       number_per_page: 10,
       input: '',
-      grade: "04",
+      grade: "all",
       semester: "all",
-      filter_status: [false, false, false],
+      filter_status: [false, false],
       open_filter: false,
+      panel_open: [...Array(10)].map( (x) => true)
     }
     const { semester, grade } = this.state
     props.fetch_teachers({semester, grade})
@@ -155,7 +156,7 @@ class index extends React.Component {
               <DialogTitle><div style = {{ fontSize: '25px' }} >專題申請狀況</div></DialogTitle>
               <div style = {{ display: 'flex' }}>
               {
-                ['無新專題申請', '待助理加簽', '待教授審核'].map( (title, index) => (
+                ['待助理加簽', '待教授審核'].map( (title, index) => (
                   <Chip label = { title } className = { classes.chip } onClick = { () => this.toggleFilter(index) } style = {{ background: filter_status[index] ? FILTER_STATUS_COLOR[index] : null }} />
                 ))
               }
@@ -236,11 +237,12 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_teachers({ grade: event.target.value, semester })
+                    fetch_teachers({ grade: event.target.value === "all" ? "" : event.target.value, semester })
                     this.setState({ grade: event.target.value, page: 0 })
                   }
                 }
               >
+                <MenuItem value = { "all" } style = {{ fontSize: '20px' }} >全部年級</MenuItem>
                 {[...Array(9)].map((x, i) => <MenuItem value = { "0" + (i + 1) } style = {{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
               </Select>
             </FormControl>

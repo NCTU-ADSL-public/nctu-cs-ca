@@ -73,7 +73,8 @@ class index extends React.Component {
       page: 0,
       number_per_page: 10,
       open_filter: false,
-      filter_status: [false, false, false, false]
+      filter_status: [false, false, false, false],
+      panel_open: [...Array(10)].map( (x) => true)
     }
     props.fetch_students({ grade: this.state.grade })
   }
