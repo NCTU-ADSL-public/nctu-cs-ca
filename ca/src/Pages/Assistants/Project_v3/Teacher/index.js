@@ -117,9 +117,8 @@ class index extends React.Component {
         &&
         (
             !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-         || (filter_status[0] && (teacher.accept_status  === 0 && teacher.pending_status === 0))
-         || (filter_status[1] && (teacher.accept_status  === 1))
-         || (filter_status[2] && (teacher.pending_status === 1))
+         || (filter_status[0] && (teacher.accept_status  === 1))
+         || (filter_status[1] && (teacher.pending_status === 1))
         )
       )
     )
