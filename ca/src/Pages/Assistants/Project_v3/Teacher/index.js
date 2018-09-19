@@ -104,7 +104,7 @@ class index extends React.Component {
       panel_open: [...Array(10)].map( (x) => true)
     }
     const { semester, grade } = this.state
-    props.fetch_teachers({semester, grade})
+    props.fetch_teachers({semester, grade: grade === "all" ? "" : grade})
   }
 
   filter = (teachers) => {
