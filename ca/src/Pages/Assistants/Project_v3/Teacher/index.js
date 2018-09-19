@@ -145,7 +145,7 @@ class index extends React.Component {
   render() {
 
     const { classes, professor_name, fetch_teachers, teachers } = this.props
-    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status } = this.state
+    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status, panel_open } = this.state
 
     return (
       <div style = {{ marginBottom: '60px', width: '60%', margin: '0 auto', marginTop: '20px' }} >
@@ -253,7 +253,7 @@ class index extends React.Component {
           .map( ( teacher, index ) => {
             return (
               <div style = {{ margin: '5px auto', width: '100%' }}>
-                <ExpansionPanel expanded = { expanded === index } onChange = { () => this.setState({ expanded: expanded === index ? null : index }) } >
+                <ExpansionPanel expanded = { panel_open[index] } onChange = { () => this.setState({ panel_open: panel_open.map( (val, i) => i === index ? !val : val) }) } >
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} classes = {{ root: teacher.professor_status === "1" ? classes.expansionPanelSummaryRootPending : classes.expansionPanelSummaryRoot }} >
                     <div style = {{ width: '100%', display: 'flex' }} >
                       <div style = {{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{ teacher.professor_name }</div>
