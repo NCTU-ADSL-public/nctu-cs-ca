@@ -104,7 +104,7 @@ class index extends React.Component {
       panel_open: [...Array(10)].map( (x) => true)
     }
     const { semester, grade } = this.state
-    props.fetch_teachers({semester, grade: grade === "all" ? "" : grade})
+    props.fetch_teachers({semester, grade })
   }
 
   filter = (teachers) => {
@@ -237,7 +237,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_teachers({ grade: event.target.value === "all" ? "" : event.target.value, semester })
+                    fetch_teachers({ grade: event.target.value, semester })
                     this.setState({ grade: event.target.value, page: 0 })
                   }
                 }
