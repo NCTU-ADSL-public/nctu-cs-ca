@@ -17,7 +17,7 @@ class StudentList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      panel_open: [...Array(10).map( val => true) ]
+      panel_open: [...Array(10)].map( val => true)
     }
   }
 
