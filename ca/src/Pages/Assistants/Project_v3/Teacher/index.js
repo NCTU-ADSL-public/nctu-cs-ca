@@ -30,6 +30,7 @@ import Avatar from '@material-ui/core/Avatar';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 import Add from '@material-ui/icons/Add';
+import Warning from '@material-ui/icons/Warning';
 import { fetchTeachers, setAddStatus } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
 const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
@@ -88,7 +89,7 @@ const styles = theme => ({
   }
 })
 
-const PROJECT_FIRST_SECOND_CN = [ '', '專題一', '專題二', '尚未通過基礎程式設計' ]
+const PROJECT_FIRST_SECOND_CN = [ '', '專題一', '專題二', '需確認是否過基礎程式設計' ]
 
 class index extends React.Component {
 
@@ -286,7 +287,7 @@ class index extends React.Component {
                                         label = { student.id + " " + student.name }
                                         className = { classes.chip }
                                         style = {{ background: ADD_STATUS_COLOR[parseInt(student.add_status)] }}
-                                        deleteIcon={student.add_status === "0" ? <Add style = {{ fontSize: 30 }} /> : <DoneIcon style = {{ fontSize: 30 }} />}
+                                        deleteIcon={student.add_status === "0" ? student.first_second === "3" ? <Warning style = {{ fontSize: 30 }}/> : <Add style = {{ fontSize: 30 }} /> : <DoneIcon style = {{ fontSize: 30 }} />}
                                         onDelete={() => this.handleDelete({
                                           status: student.add_status,
                                           post_item: {
@@ -308,10 +309,10 @@ class index extends React.Component {
                         </div>
                         :
                         <div style = {{ width: '100%', display: 'flex', justifyContent: "center" }}>
-                          <div style = {{ fontSize: 18, color: grey[500] }} >尚無接受專題</div>
+                          <div style = {{ fontSize: 18, color: grey[500] }} >尚未有接受的專題</div>
                         </div>
                     }
-                    <div style = {{ fontWeight: 'bold', fontSize: '30px' }}>審核列表</div>
+                    <div style = {{ fontWeight: 'bold', fontSize: '20px' }}>審核列表</div>
                     {
                       teacher.pending.projects.length !== 0 ?
                       <div style = {{ display: 'block' }}>
@@ -324,7 +325,7 @@ class index extends React.Component {
                               <br />
                               {
                                 project.students.map( student => (
-                                  <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                  <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second)] } placement="top" classes = {{ tooltip: classes.tooltip }} >
                                     <Chip
                                       label = { student.id + " " + student.name }
                                       className = { classes.chip }
