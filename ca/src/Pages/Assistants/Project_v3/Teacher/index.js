@@ -281,7 +281,7 @@ class index extends React.Component {
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
                   <div style = {{ width: '100%' }}>
-                    <div style = {{ fontWeight: 'bold', fontSize: '30px' }}>接受列表</div>
+                    <div style = {{ fontWeight: 'bold', fontSize: '25px' }}>接受列表</div>
                     {
                       teacher.accepted.projects.length !== 0 ?
                         <div style = {{ display: 'block' }}>
@@ -324,7 +324,7 @@ class index extends React.Component {
                           <div style = {{ fontSize: 18, color: grey[500] }} >尚未有接受的專題</div>
                         </div>
                     }
-                    <div style = {{ fontWeight: 'bold', fontSize: '20px' }}>審核列表</div>
+                    <div style = {{ fontWeight: 'bold', fontSize: '25px' }}>審核列表</div>
                     {
                       teacher.pending.projects.length !== 0 ?
                       <div style = {{ display: 'block' }}>
