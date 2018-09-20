@@ -88,6 +88,8 @@ const styles = theme => ({
   }
 })
 
+const PROJECT_FIRST_SECOND_CN = [ '', '專題一', '專題二', '尚未通過基礎程式設計' ]
+
 class index extends React.Component {
 
   constructor(props) {
@@ -279,7 +281,7 @@ class index extends React.Component {
                                 <br />
                                 {
                                   project.students.map( student => (
-                                    <Tooltip title = { (student.first_second === "1" ? "專題一" : "專題二") + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                    <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second)] + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
                                       <Chip
                                         label = { student.id + " " + student.name }
                                         className = { classes.chip }
