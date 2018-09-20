@@ -31,12 +31,14 @@ import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 import Add from '@material-ui/icons/Add';
 import Warning from '@material-ui/icons/Warning';
+import Button from '@material-ui/core/Button';
 import { fetchTeachers, setAddStatus } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
 const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
 const STATUS_COLOR_L = [ red[100], green[200] ]
 const FILTER_STATUS_COLOR = [ red['A100'], yellow[300] ]
 const STUDENT_STATUS_CN = ['外', '本']
+const PROJECT_FIRST_SECOND_CN = [ '', '專題一', '專題二', '需確認是否過基礎程式設計' ]
 
 const styles = theme => ({
   chip: {
@@ -86,10 +88,17 @@ const styles = theme => ({
   },
   expansionPanelSummaryRootPending: {
     background: yellow[100]
+  },
+  buttonCancel: {
+    fontSize: 20,
+    color: 'grey'
+  },
+  buttonSubmit: {
+    fontSize: 20,
+    color: 'blue'
   }
 })
 
-const PROJECT_FIRST_SECOND_CN = [ '', '專題一', '專題二', '需確認是否過基礎程式設計' ]
 
 class index extends React.Component {
 
@@ -104,7 +113,14 @@ class index extends React.Component {
       semester: "all",
       filter_status: [false, false],
       open_filter: false,
-      panel_open: [...Array(10)].map( (x) => true)
+      panel_open: [...Array(10)].map( (x) => true),
+      submit_page_open: false,
+      submit_student_object: {
+        student_id: '',
+        research_title: '',
+        semester: '',
+        first_second: '',
+      }
     }
     const { semester, grade } = this.state
     props.fetch_teachers({semester, grade })
@@ -133,22 +149,18 @@ class index extends React.Component {
   }
 
   handleDelete = data => {
+    const { submit_page_open, submit_student_object } = this.state
     if (data.status === "0") {
-      console.log("data")
-      console.log(data)
-      if (window.confirm(
-        "加簽對象:\n" +
-        "學號: " + data.post_item.student_id
-      )){
-        this.props.set_add_status(data.post_item)
-      }
+      this.setState({ submit_page_open: true, submit_student_object: data.post_item })
+      console.log(data.post_item)
+      console.log(submit_student_object)
     }
   }
 
   render() {
 
-    const { classes, professor_name, fetch_teachers, teachers } = this.props
-    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status, panel_open } = this.state
+    const { classes, professor_name, fetch_teachers, teachers, set_add_status } = this.props
+    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status, panel_open, submit_page_open, submit_student_object } = this.state
 
     return (
       <div style = {{ marginBottom: '60px', width: '60%', margin: '0 auto', marginTop: '20px' }} >
@@ -365,6 +377,22 @@ class index extends React.Component {
           <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.min(Math.ceil(this.filter(teachers).length / number_per_page) - 1, page + 1)) }) } />
           <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.ceil(this.filter(teachers).length / number_per_page) - 1 )} )} />
         </div>
+        <Dialog onClose = { () => this.setState({ submit_page_open: false })} open = { submit_page_open } >
+          <DialogTitle><div style = {{ fontSize: '25px' }} >加簽確認</div></DialogTitle>
+          <div style = {{ padding: '20px', fontSize: '15px' }} >
+            <div>學號 : { submit_student_object.student_id }</div>
+            <div>專題名稱 : { submit_student_object.research_title }</div>
+            { submit_student_object.first_second === "3" && <div style = {{ color: 'red', fontWeight: 'bold' }} >請確認是否通過基礎程式設計</div>}
+          </div>
+          <div style = {{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button onClick = { () => this.setState({ submit_page_open: false }) } className = { classes.buttonCancel } >
+              取消
+            </Button>
+            <Button onClick = { () => { this.setState({ submit_page_open: false }), set_add_status(submit_student_object)} } className = { classes.buttonSubmit } >
+              確認
+            </Button>
+          </div>
+        </Dialog>
       </div>
     )
   }
