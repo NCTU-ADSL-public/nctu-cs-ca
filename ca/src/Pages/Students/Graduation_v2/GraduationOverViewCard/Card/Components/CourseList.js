@@ -1,5 +1,6 @@
 import React from 'react'
 import PopoverButton from './PopoverButton'
+import MoveGroupButton from './MoveGroupButton'
 
 const CourseList = (props) => {
   const { items, selection, rwd} = props
@@ -51,7 +52,15 @@ const CourseList = (props) => {
             {(item.reason === 'english') ? <div>此為抵免英文檢定考試的課程。</div> : <div />}
             {(item.reason === 'now') ? <div>當期課程。</div> : <div />}
             {(item.reason === 'now' && item.complete) ? <div>已修過這堂課，目前正重複修課中。</div> : <div />}
-          </PopoverButton>
+
+            {/* An option for student to move a course to other group */}
+            <MoveGroupButton
+              key={id}
+              label={'移動課程'}
+              backgroundColor={item.reason}
+              rwd={rwd} />
+
+          </PopoverButton >
         </div>
             )}
     </div>
