@@ -32,7 +32,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import Add from '@material-ui/icons/Add';
 import Warning from '@material-ui/icons/Warning';
 import Button from '@material-ui/core/Button';
-import { fetchTeachers, setAddStatus } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
+import { fetchTeachers, setAddStatus, setFirstSecond, deteleResearch } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
 const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
 const STATUS_COLOR_L = [ red[100], green[200] ]
@@ -96,6 +96,10 @@ const styles = theme => ({
   buttonSubmit: {
     fontSize: 20,
     color: 'blue'
+  },
+  buttonRemove: {
+    fontSize: 20,
+    color: 'red'
   }
 })
 
@@ -159,8 +163,20 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, professor_name, fetch_teachers, teachers, set_add_status } = this.props
-    const { expanded, page, number_per_page, input, grade, semester, open_filter, filter_status, panel_open, submit_page_open, submit_student_object } = this.state
+    const { classes, professor_name, fetch_teachers, teachers, set_add_status, set_first_second, delete_research } = this.props
+    const {
+      expanded,
+      page,
+      number_per_page,
+      input,
+      grade,
+      semester,
+      open_filter,
+      filter_status,
+      panel_open,
+      submit_page_open,
+      submit_student_object
+    } = this.state
 
     return (
       <div style = {{ marginBottom: '60px', width: '60%', margin: '0 auto', marginTop: '20px' }} >
@@ -388,8 +404,19 @@ class index extends React.Component {
             <Button onClick = { () => this.setState({ submit_page_open: false }) } className = { classes.buttonCancel } >
               取消
             </Button>
-            <Button onClick = { () => { this.setState({ submit_page_open: false }), set_add_status(submit_student_object)} } className = { classes.buttonSubmit } >
-              確認
+            {
+              submit_student_object.first_second === "3" &&
+                <Button onClick = { () => { this.setState({ submit_page_open: false }), delete_research(submit_student_object) } } className = { classes.buttonRemove } >
+                  未通過並移除
+                </Button>
+            }
+            <Button onClick = { () => {
+              this.setState({ submit_page_open: false })
+              set_add_status(submit_student_object)
+              if (submit_student_object.first_second === "3")
+                set_first_second(submit_student_object)
+            }} className = { classes.buttonSubmit } >
+              確認並加選
             </Button>
           </div>
         </Dialog>
@@ -404,7 +431,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetch_teachers: (post_item) => dispatch(fetchTeachers(post_item)),
-  set_add_status: (post_item) => dispatch(setAddStatus(post_item))
+  set_add_status: (post_item) => dispatch(setAddStatus(post_item)),
+  set_first_second: (post_item) => dispatch(setFirstSecond(post_item)),
+  delete_research: (post_item) => dispatch(deteleResearch(post_item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))
