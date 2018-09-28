@@ -6,10 +6,15 @@ const Link = ({ active, children, onClick }) => {
   if (active) {
     return (
       <MuiThemeProvider>
-        <RaisedButton label={children} backgroundColor='#D3D3D3' labelColor='#778899' labelStyle={{
-          fontFamily: 'Noto Sans CJK TC',
-          fontWeight: 'bold'
-        }} fullWidth
+        <RaisedButton
+          label={children}
+          backgroundColor='#D3D3D3'
+          labelColor='#778899'
+          labelStyle={{
+            fontFamily: 'Noto Sans CJK TC',
+            fontWeight: 'bold'
+          }}
+          fullWidth
           disabled />
       </MuiThemeProvider>
     )
@@ -17,14 +22,20 @@ const Link = ({ active, children, onClick }) => {
 
   return (
     <MuiThemeProvider>
-      <RaisedButton label={children} backgroundColor='#D3D3D3' labelColor='#778899' labelStyle={{
-        fontFamily: 'Noto Sans CJK TC',
-        fontWeight: 'bold'
-      }} fullWidth
+      <RaisedButton
+        label={children}
+        backgroundColor='#D3D3D3'
+        labelColor='#778899'
+        labelStyle={{
+          fontFamily: 'Noto Sans CJK TC',
+          fontWeight: 'bold'
+        }}
+        fullWidth
         onTouchTap={e => {
           e.preventDefault()
           onClick()
-        }} />
+        }}
+      />
     </MuiThemeProvider>
   )
 }
