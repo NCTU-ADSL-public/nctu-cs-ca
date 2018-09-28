@@ -6,43 +6,47 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Show from './Show'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 class ProjectDia extends React.Component {
-  state = {
-    open: false,
+  constructor (props) {
+    super(props)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.state = {
+      open: false
+    }
   }
 
-  handleClickOpen = () => {
+  handleClickOpen () {
     this.setState({ open: true })
   }
 
-  handleClose = () => {
+  handleClose () {
     this.setState({ open: false })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Button onClick={this.handleClickOpen}>Learn more...</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
           fullWidth='true'
           maxWidth={false}
         >
-          <DialogTitle id="alert-dialog-title">{this.props.show.research_title}</DialogTitle>
+          <DialogTitle id='alert-dialog-title'>{this.props.show.research_title}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText id='alert-dialog-description'>
               <div className='container'>
                 <Show show={this.props.show} image={this.props.image} file={this.props.file} />
               </div>
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color='primary'>
               EXIT
             </Button>
           </DialogActions>

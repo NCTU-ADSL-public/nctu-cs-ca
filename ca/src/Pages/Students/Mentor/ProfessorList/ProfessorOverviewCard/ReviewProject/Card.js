@@ -70,6 +70,7 @@ class RecipeReviewCard extends React.Component {
       })
     }
     ).catch(error => {
+      console.log(error)
       this.setState({
         image: NoImage
       })
@@ -82,6 +83,7 @@ class RecipeReviewCard extends React.Component {
       })
     }
     ).catch(error => {
+      console.log(error)
       this.setState({
         file: ''
       })
@@ -92,7 +94,7 @@ class RecipeReviewCard extends React.Component {
     const { classes } = this.props
 
     return (
-      <div className='col-xs-12 col-md-4 col-lg-4' style={{marginTop: '10px'}}>
+      <div className='col-xs-12 col-md-4 col-lg-4' style={{ marginTop: '10px' }}>
         <Card className={classes.card}>
           <CardHeader
             avatar={

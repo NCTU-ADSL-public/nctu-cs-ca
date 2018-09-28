@@ -87,10 +87,13 @@ class SendProjectAgree extends React.Component {
     this.handleremovemenber = this.handleremovemenber.bind(this)
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleSend = this.handleSend.bind(this)
+    this.handlepanelChange = this.handlepanelChange.bind(this)
+    this.handleinputChange = this.handleinputChange.bind(this)
+    this.getString = this.getString.bind(this)
   }
 
 
-  handleSend = () => {
+  handleSend () {
     let _this = this
     let phones = []
     let emails = []
@@ -234,17 +237,13 @@ class SendProjectAgree extends React.Component {
     })
   }
 
-  handleProjectNumChange = name => event => {
-    this.setState({ [name]: event.target.value })
-  }
-
-  handleinputChange = (event, str, index) => {
+  handleinputChange (event, str, index) {
     let newinput = [...this.state.input]
     newinput[index][str] = event.target.value
     this.setState({ input: newinput })
   }
 
-  getString = (str) => {
+  getString (str) {
     if(str === '1'){
       return '專題一'
     }

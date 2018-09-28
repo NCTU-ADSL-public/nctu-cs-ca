@@ -22,32 +22,38 @@ const styles = {
   }
 }
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
+function Transition (props) {
+  return <Slide direction='up' {...props} />
 }
 
 class FullScreenDialog extends React.Component {
-  state = {
-    open: false,
-    ckeditorContent:''
+  constructor (props) {
+    super(props)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.state = {
+      open: false,
+      ckeditorContent: ''
+    }
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickOpen () {
+    this.setState({ open: true })
   }
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClose () {
+    this.setState({ open: false })
   }
 
-  onChange = (event) => {
+  onChange (event) {
     this.setState({
       ckeditorContent: event.editor.getData()
     })
   }
 
-  render() {
-    const { classes } = this.props;
+  render () {
+    const { classes } = this.props
     return (
       <div>
 
@@ -63,10 +69,10 @@ class FullScreenDialog extends React.Component {
         >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+              <IconButton color='inherit' onClick={this.handleClose} aria-label='Close'>
                 <CloseIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" className={classes.flex}>
+              <Typography variant='title' color='inherit' className={classes.flex}>
                 篩選項目
               </Typography>
             </Toolbar>
