@@ -1,28 +1,9 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Slide from '@material-ui/core/Slide'
-import Assignment from '@material-ui/icons/Assignment'
-import MenuItem from '@material-ui/core/MenuItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import { connect } from 'react-redux'
 import { fetchProfessors } from '../../../../../../Redux/Students/Actions/Professor'
 import AnimatedProgress from '../../../../../../Components/AnimatedProgress'
-
-function Transition (props) {
-  return <Slide direction='up' {...props} />
-}
-
-const limitcount = 7
 
 const styles = theme => ({
   root: {
@@ -56,50 +37,49 @@ const styles = theme => ({
 })
 
 class Index extends React.Component {
-
-  state={
-    open: false
+  constructor (props) {
+    super(props)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClickOpen.bind(this)
+    this.state = {
+      open: false
+    }
   }
 
-  handleClickOpen = () => {
+  handleClickOpen () {
     this.setState({ open: true })
   }
 
-  handleClose = () => {
+  handleClose () {
     this.setState({ open: false })
   }
 
   render () {
-    const { classes, fullScreen } = this.props
     return (
       <div>
-        <div className="overview hidden-xs">
-          <div className="overview-course col-sm-3 col-md-3" >
-            <div className="showcourseoverview">共同必修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.compulsory}</font>/{this.props.overview.compulse_require}&nbsp;學分<br/><AnimatedProgress value={this.props.overview.compulsory/this.props.overview.compulse_require*100}/></div>
-            <div className="showcourseoverview">服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.service}</font>/{this.props.overview.service_require}&nbsp;門<br/><AnimatedProgress value={this.props.overview.service/this.props.overview.service_require*100}/></div>
-            <div className="showcourseoverview">英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.english}</font>/{this.props.overview.english_require}&nbsp;門<br/><AnimatedProgress value={this.props.overview.english/this.props.overview.english_require*100}/></div>
+        <div className='overview hidden-xs'>
+          <div className='overview-course col-sm-3 col-md-3' >
+            <div className='showcourseoverview'>共同必修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.compulsory}</font>/{this.props.overview.compulse_require}&nbsp;學分<br /><AnimatedProgress value={this.props.overview.compulsory / this.props.overview.compulse_require * 100} /></div>
+            <div className='showcourseoverview'>服務學習&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.service}</font>/{this.props.overview.service_require}&nbsp;門<br /><AnimatedProgress value={this.props.overview.service / this.props.overview.service_require * 100} /></div>
+            <div className='showcourseoverview'>英文授課&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.english}</font>/{this.props.overview.english_require}&nbsp;門<br /><AnimatedProgress value={this.props.overview.english / this.props.overview.english_require * 100} /></div>
           </div>
-          <div className="overview-course col-sm-3 col-md-3" >
-            <div className="showcourseoverview">藝文賞析&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.art}</font>/{this.props.overview.art_require}&nbsp;門<br/><AnimatedProgress value={this.props.overview.art/this.props.overview.art_require*100}/></div>
-            <div className="showcourseoverview">通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;識&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.general}</font>/{this.props.overview.general_require}&nbsp;學分<br/><AnimatedProgress value={this.props.overview.general/this.props.overview.general_require*100}/></div>
-            <div className="showcourseoverview">抵免研究所課程<font size={5} color='#338d68'>&nbsp;{this.props.overview.graduate}</font>&nbsp;學分<br/></div>
+          <div className='overview-course col-sm-3 col-md-3' >
+            <div className='showcourseoverview'>藝文賞析&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.art}</font>/{this.props.overview.art_require}&nbsp;門<br /><AnimatedProgress value={this.props.overview.art / this.props.overview.art_require * 100} /></div>
+            <div className='showcourseoverview'>通&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;識&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.general}</font>/{this.props.overview.general_require}&nbsp;學分<br /><AnimatedProgress value={this.props.overview.general / this.props.overview.general_require * 100} /></div>
+            <div className='showcourseoverview'>抵免研究所課程<font size={5} color='#338d68'>&nbsp;{this.props.overview.graduate}</font>&nbsp;學分<br /></div>
           </div>
-          <div className="overview-course col-sm-3 col-md-3" >
-            <div className="showcourseoverview">外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;語&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.language}</font>/{this.props.overview.language_require}&nbsp;學分<br/><AnimatedProgress value={this.props.overview.language/this.props.overview.language_require*100}/></div>
-            <div className="showcourseoverview">專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.pro}</font>/{this.props.overview.pro_require}&nbsp;學分<br/><AnimatedProgress value={this.props.overview.pro/this.props.overview.pro_require*100}/></div>
-            </div>
-          <div className="overview-course col-sm-3 col-md-3" >
-            <div className="showcourseoverview">體&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;育&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.pe}</font>/{this.props.overview.pe_require}&nbsp;門<br/><AnimatedProgress value={this.props.overview.pe/this.props.overview.pe_require*100}/></div>
-            <div className="showcourseoverview">其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.other}</font>/{this.props.overview.other_require}&nbsp;學分<br/><AnimatedProgress value={this.props.overview.other/this.props.overview.other_require*100}/></div>
+          <div className='overview-course col-sm-3 col-md-3' >
+            <div className='showcourseoverview'>外&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;語&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.language}</font>/{this.props.overview.language_require}&nbsp;學分<br /><AnimatedProgress value={this.props.overview.language / this.props.overview.language_require * 100} /></div>
+            <div className='showcourseoverview'>專業選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.pro}</font>/{this.props.overview.pro_require}&nbsp;學分<br /><AnimatedProgress value={this.props.overview.pro / this.props.overview.pro_require * 100} /></div>
+          </div>
+          <div className='overview-course col-sm-3 col-md-3' >
+            <div className='showcourseoverview'>體&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;育&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.pe}</font>/{this.props.overview.pe_require}&nbsp;門<br /><AnimatedProgress value={this.props.overview.pe / this.props.overview.pe_require * 100} /></div>
+            <div className='showcourseoverview'>其他選修&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.overview.other}</font>/{this.props.overview.other_require}&nbsp;學分<br /><AnimatedProgress value={this.props.overview.other / this.props.overview.other_require * 100} /></div>
           </div>
         </div>
       </div>
     )
   }
-}
-
-function TransitionUp (props) {
-  return <Slide {...props} direction='up' />
 }
 
 const mapStateToProps = (state) => ({

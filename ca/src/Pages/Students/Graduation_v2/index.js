@@ -9,19 +9,19 @@ class Index extends React.Component {
   render () {
     return (
       <div className='container'>
-        <div className='row showArea' style={{marginBottom: '50px'}}>
-          <div className='col-md-12 col-lg-12 hidden-xs' style={{marginTop: '30px'}}>
+        <div className='row showArea' style={{ marginBottom: '50px' }}>
+          <div className='col-md-12 col-lg-12 hidden-xs' style={{ marginTop: '30px' }}>
             <GraduationOverViewButton />
           </div>
-          <div className='col-md-3 col-lg-3 hidden-xs' style={{height: '100%'}} />
+          <div className='col-md-3 col-lg-3 hidden-xs' style={{ height: '100%' }} />
           <div className='col-xs-12 col-sm-12 visible-xs' >
             <GraduationOverViewButton rwd />
           </div>
           <div className='col-md-1 col-lg-1' />
-          <div className=' col-md-12 col-lg-12 pull-left hidden-xs' style={{marginTop: '20px'}}>
+          <div className=' col-md-12 col-lg-12 pull-left hidden-xs' style={{ marginTop: '20px' }}>
             <GraduationOverViewCard studentIdcard={this.props.studentIdcard} />
           </div>
-          <div className=' col-xs-12 visible-xs' style={{marginTop: '20px'}}>
+          <div className=' col-xs-12 visible-xs' style={{ marginTop: '20px' }}>
             <GraduationOverViewCard rwd studentIdcard={this.props.studentIdcard} />
           </div>
         </div>
@@ -39,6 +39,7 @@ const mapStateToProps = (state) => ({
   englishCheck: state.Student.Graduation.englishCheck,
   done: state.Student.Graduation.status === 'DONE'
 })
+
 const mapDispatchToProps = (dispatch) => ({
 })
 
