@@ -1,29 +1,34 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {
   Table,
   TableBody,
   TableHeader,
   TableHeaderColumn,
   TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+  TableRowColumn
+} from 'material-ui/Table'
 
 export default class TableExampleControlled extends Component {
-  state = {
-    selected: [1],
-  };
+  constructor (props) {
+    super(props)
+    this.isSelected = this.isSelected.bind(this)
+    this.handleRowSelection = this.handleRowSelection.bind(this)
+    this.state = {
+      selected: [1]
+    }
+  }
 
-  isSelected = (index) => {
-    return this.state.selected.indexOf(index) !== -1;
-  };
+  isSelected (index) {
+    return this.state.selected.indexOf(index) !== -1
+  }
 
-  handleRowSelection = (selectedRows) => {
+  handleRowSelection (selectedRows) {
     this.setState({
-      selected: selectedRows,
-    });
-  };
+      selected: selectedRows
+    })
+  }
 
-  render() {
+  render () {
     return (
       <Table onRowSelection={this.handleRowSelection}>
         <TableHeader>
@@ -43,6 +48,6 @@ export default class TableExampleControlled extends Component {
           </TableRow>
         </TableBody>
       </Table>
-    );
+    )
   }
 }

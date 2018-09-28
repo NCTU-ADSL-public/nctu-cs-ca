@@ -1,34 +1,36 @@
 import React, {Component} from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
-import axios from 'axios'
 
 let items = []
 
+/*
 const bodyStyle = {
   fontFamily: 'Noto Sans CJK TC',
-  color:'#454545'
-};
-const titleStyle = {
-  fontFamily: 'Noto Sans CJK TC',
-  color:'#565656'
-};
-
-const fontStyle={
-  verticalAlign: "default",
-  fontSize: "1em",
-  fontWeight: "300",
-  letterSpacing: "1px",
-  fontFamily: 'Noto Sans CJK TC',
+  color: '#454545'
 }
 
-const fontlabelStyle={
-  verticalAlign: "default",
-  fontSize: "1em",
-  fontWeight: "300",
-  letterSpacing: "1px",
+const titleStyle = {
   fontFamily: 'Noto Sans CJK TC',
-  color:'#a42926'
+  color: '#565656'
+}
+*/
+
+const fontStyle = {
+  verticalAlign: 'default',
+  fontSize: '1em',
+  fontWeight: '300',
+  letterSpacing: '1px',
+  fontFamily: 'Noto Sans CJK TC'
+}
+
+const fontlabelStyle = {
+  verticalAlign: 'default',
+  fontSize: '1em',
+  fontWeight: '300',
+  letterSpacing: '1px',
+  fontFamily: 'Noto Sans CJK TC',
+  color: '#a42926'
 }
 // failcourse:[
 //   {
@@ -64,46 +66,45 @@ const fontlabelStyle={
 // ]
 
 export default class SelectCourseField extends Component {
-  state = {
-    valueFailure: 1,
-  };
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.getGradeStm = this.getGradeStm.bind(this)
+    this.state = { valueFailure: 1 }
+  }
 
   componentWillMount () {
-
-    for (let i = 0; i < this.props.failcourse.length; i++ ) {
-      items.push(<MenuItem value={i} key={i} primaryText={this.props.failcourse[i].cn} />);
+    for (let i = 0; i < this.props.failcourse.length; i++) {
+      items.push(<MenuItem value={i} key={i} primaryText={this.props.failcourse[i].cn} />)
     }
-
   }
 
-  handleChange = (event, index, value) => {
-    this.setState({valueFailure:value});
+  handleChange (event, index, value) {
+    this.setState({ valueFailure: value })
   }
 
-  getGradeStm = () => {
-    if(this.props.failcourse[this.state.valueFailure].score!==null){
-      return(
-        <font color={"#a42926"}>因成績得分 {this.props.failcourse[this.state.valueFailure].score} 分未通過</font>
+  getGradeStm () {
+    if (this.props.failcourse[this.state.valueFailure].score !== null) {
+      return (
+        <font color={'#a42926'}>因成績得分 {this.props.failcourse[this.state.valueFailure].score} 分未通過</font>
       )
-    }
-    else if(this.props.failcourse[this.state.valueFailure].grade!==null){
-      return(
-        <font color={"#a42926"}>因等級評分 ${this.props.failcourse[this.state.valueFailure].grade} 未通過</font>
+    } else if (this.props.failcourse[this.state.valueFailure].grade !== null) {
+      return (
+        <font color={'#a42926'}>因等級評分 {this.props.failcourse[this.state.valueFailure].grade} 未通過</font>
       )
-    }
-    else{
-      return <font color={"#a42926"}>未通過</font>
+    } else {
+      return <font color={'#a42926'}>未通過</font>
     }
   }
 
-  render() {
+  render () {
     return (
       <div>
-        學生於&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.valueFailure].year}</font>&nbsp;學年度&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.valueFailure].semester===1?"上":"下"}</font>&nbsp;學期，修習本系&nbsp;<font color={"#a42926"}>{this.props.failcourse[this.state.valueFailure].teacher}</font>&nbsp;老師所授之課程&nbsp;
+        學生於&nbsp;<font color={'#a42926'}>{this.props.failcourse[this.state.valueFailure].year}</font>&nbsp;學年度&nbsp;<font color={'#a42926'}>{this.props.failcourse[this.state.valueFailure].semester === 1 ? '上' : '下'}</font>&nbsp;學期，修習本系&nbsp;<font color={'#a42926'}>{this.props.failcourse[this.state.valueFailure].teacher}</font>&nbsp;老師所授之課程&nbsp;
         <SelectField
           value={this.state.valueFailure}
           onChange={this.handleChange}
-          autoWidth={true}
+          autoWidth
           maxHeight={200}
           labelStyle={fontlabelStyle}
           menuStyle={fontlabelStyle}
@@ -116,6 +117,6 @@ export default class SelectCourseField extends Component {
         &nbsp;&nbsp;，{this.getGradeStm()}，故需重修此必修課。
 
       </div>
-    );
+    )
   }
 }

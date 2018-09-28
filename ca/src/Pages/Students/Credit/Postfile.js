@@ -16,7 +16,7 @@ class Main extends React.Component {
   handleUploadImage (ev) {
     ev.preventDefault()
 
-    let formData = new FormData()    //formdata object
+    let formData = new FormData() // formdata object
 
     formData.append('file', this.uploadInput.files[0])
 
@@ -26,10 +26,10 @@ class Main extends React.Component {
 
     axios.post('./file', formData, config)
       .then(response => {
-        console.log(response);
+        console.log(response)
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
       })
 
     // const data = new FormData()
@@ -47,11 +47,11 @@ class Main extends React.Component {
   render () {
     return (
       <form onSubmit={this.handleUploadImage}>
-        <input ref={(ref) => { this.uploadInput = ref }} type="file" />
+        <input ref={(ref) => { this.uploadInput = ref }} type='file' />
         <br />
-        {/*<div>*/}
-          {/*<button>Upload</button>*/}
-        {/*</div>*/}
+        {/* <div> */}
+        {/* <button>Upload</button> */}
+        {/* </div> */}
       </form>
     )
   }
