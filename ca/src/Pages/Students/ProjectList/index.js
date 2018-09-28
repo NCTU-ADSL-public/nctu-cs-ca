@@ -1,6 +1,5 @@
 import React from 'react'
-import {GridList} from 'material-ui/GridList'
-import axios from 'axios'
+import { GridList } from 'material-ui/GridList'
 import './style.css'
 import { connect } from 'react-redux'
 import { fetchProjects } from '../../../Redux/Students/Actions/ProjectList'
@@ -25,7 +24,7 @@ const styles = {
 class index extends React.Component {
   constructor (props) {
     super(props)
-    props.fetch_data()
+    this.props.fetch_data()
   }
 
   render () {
@@ -42,14 +41,14 @@ class index extends React.Component {
             <GridList style={styles.gridList} cols={2} cellHeight={'270px'} padding={1}>
               {this.props.data.map((tile) => (
                 <ProjectTile data={tile} key={id++} />
-          ))}
+              ))}
             </GridList>
           </div>
           <div style={styles.root} className='visible-xs visible-sm'>
             <GridList cols={1} cellHeight={'270px'} padding={1}>
               {this.props.data.map((tile) => (
                 <ProjectTile data={tile} key={id++} rwd />
-          ))}
+              ))}
             </GridList>
           </div>
         </div>

@@ -5,8 +5,11 @@ import { Image } from 'react-bootstrap'
 import Vedios from './Vedio.json'
 
 export default class Show extends React.Component {
-  state={
-    link : Vedios.filter(t => t.title === this.props.show.research_title && t.link !== undefined && t.link !== '')[0]
+  constructor (props) {
+    super(props)
+    this.state = {
+      link: Vedios.filter(t => t.title === this.props.show.research_title && t.link !== undefined && t.link !== '')[0]
+    }
   }
   render () {
     return (
@@ -27,7 +30,7 @@ export default class Show extends React.Component {
           <div className='event-info-wrapper bg-white'>
             <div className='row'>
               <div className='col-7'>
-                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file === '' ? this.props.show.file : this.props.file} style={{cursor: 'pointer'}}>點這裡</a></p>
+                <p><i className='glyphicon glyphicon-file' /> 團隊報告: <a href={this.props.file === '' ? this.props.show.file : this.props.file} style={{ cursor: 'pointer' }}>點這裡</a></p>
                 <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.tname}</p>
                 <p><i className='glyphicon glyphicon-pencil' /> 年度: {this.props.show.semester}</p>
                 <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
@@ -47,7 +50,7 @@ export default class Show extends React.Component {
                 <p >專題簡介</p>
               </div>
             </div>
-            <section dangerouslySetInnerHTML={{__html: this.props.show.intro}} />
+            <section dangerouslySetInnerHTML={{ __html: this.props.show.intro }} />
             <div className='pull-right'>
               <button className='btn btn-primary nav-button' onClick={this.props.onclick}>
                 編輯
