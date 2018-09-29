@@ -55,10 +55,9 @@ class GeneralCourseList extends React.Component {
     })
 
     return <div>
-      {generalCourseTypes.map((type, key) => (
-        <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2'>
+      {generalCourseTypes.map((type, index) => (
+        <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2' key={index}>
           <PopoverButton
-            key={key}
             label={type.name}
             backgroundColor={this.decideBtnBgColor(type.courses)}
             flash={(type.length === 0)}

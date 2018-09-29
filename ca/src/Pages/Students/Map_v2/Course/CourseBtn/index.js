@@ -262,9 +262,9 @@ class Todo extends React.Component {
     return (
       <div style={{ marginTop: '20px' }}>
         <div style={{ float: 'left' }}>授課教授:&nbsp;&nbsp;&nbsp;
-          {this.state.searchCourse[this.state.value].teacher.split(' ').map(name =>
+          {this.state.searchCourse[this.state.value].teacher.split(' ').map((name, index) =>
 
-            <MuiThemeProvider>
+            <MuiThemeProvider key={index}>
               <Chip
                 labelStyle={fontStyle}
                 style={{

@@ -46,68 +46,72 @@ class PrintForm extends React.Component {
 
     return (
       <table className='default-text default-table' style={{ width: '100%' }}>
-        <colgroup>
-          <col className='col0' />
-          <col className='col1' />
-          <col className='col2' />
-          <col className='col3' />
-          <col className='col4' />
-          <col className='col5' />
-          <col className='col6' />
-          <col className='col7' />
-          <col className='col8' />
-          <col className='col9' />
-          <col className='col10' />
-          <col className='col11' />
-          <col className='col12' />
-        </colgroup>
+        <tbody>
+          <colgroup>
+            <col className='col0' />
+            <col className='col1' />
+            <col className='col2' />
+            <col className='col3' />
+            <col className='col4' />
+            <col className='col5' />
+            <col className='col6' />
+            <col className='col7' />
+            <col className='col8' />
+            <col className='col9' />
+            <col className='col10' />
+            <col className='col11' />
+            <col className='col12' />
+          </colgroup>
 
-        <tr className='borderLess'>
-          <td colSpan='13' style={{ fontSize: '16pt', fontWeight: 'bold', height: '1.5em', color: '#0000FF' }}>
-            103學年度--{programName}
-          </td>
-        </tr>
-        <tr className='borderLess left-text'>
-          <td colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '2.5em' }}>
-            <div width='100%'>
-              <div className='personal-info'>班別：{programName}</div>
-              <div className='personal-info'>學號：{this.props.profile.student_id}</div>
-              <div className='personal-info'>姓名：{this.props.profile.sname}</div><br />
-              <div className='personal-info'>聯絡電話：</div>
-              <div className='personal-info'>E-mail：</div>
-            </div>
-          </td>
-        </tr>
+          <tr className='borderLess'>
+            <td colSpan='13' style={{ fontSize: '16pt', fontWeight: 'bold', height: '1.5em', color: '#0000FF' }}>
+              103學年度--{programName}
+            </td>
+          </tr>
+          <tr className='borderLess left-text'>
+            <td colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '2.5em' }}>
+              <div width='100%'>
+                <div className='personal-info'>班別：{programName}</div>
+                <div className='personal-info'>學號：{this.props.profile.student_id}</div>
+                <div className='personal-info'>姓名：{this.props.profile.sname}</div><br />
+                <div className='personal-info'>聯絡電話：</div>
+                <div className='personal-info'>E-mail：</div>
+              </div>
+            </td>
+          </tr>
 
-        <tr>
-          <td className='bg-green left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
-            <span>一、本系專業科目（請填</span>
-            <span style={{ color: '#FF0000' }}>分數</span>
-            <span>及實得學分數）</span>
-            <span style={{ fontSize: '6pt' }}>請在備註欄註明『英文授課』：畢業前須通過1門本系開授或認可之英文授課專業課程</span>
-          </td>
-        </tr>
-        {depCat.map(category =>
-          <GradCategory
-            subjects={category.course}
-            name={category.title}
-          />
-        )}
+          <tr>
+            <td className='bg-green left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
+              <span>一、本系專業科目（請填</span>
+              <span style={{ color: '#FF0000' }}>分數</span>
+              <span>及實得學分數）</span>
+              <span style={{ fontSize: '6pt' }}>請在備註欄註明『英文授課』：畢業前須通過1門本系開授或認可之英文授課專業課程</span>
+            </td>
+          </tr>
+          {depCat.map((category, index) =>
+            <GradCategory
+              key={index}
+              subjects={category.course}
+              name={category.title}
+            />
+          )}
 
-        <tr>
-          <td className='bg-yellow left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
-            <span>二、校訂共同科目 (請填</span>
-            <span style={{ color: '#FF0000' }}>分數</span>
-            <span>及實得學分數）</span>
-          </td>
-        </tr>
-        {generalCat.map(category =>
-          <GradCategory
-            subjects={category.course}
-            name={category.title}
-            graduationCheckEnglishTest={this.props.graduationCheckEnglishTest}
-          />
-        )}
+          <tr>
+            <td className='bg-yellow left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
+              <span>二、校訂共同科目 (請填</span>
+              <span style={{ color: '#FF0000' }}>分數</span>
+              <span>及實得學分數）</span>
+            </td>
+          </tr>
+          {generalCat.map((category, index) =>
+            <GradCategory
+              key={index}
+              subjects={category.course}
+              name={category.title}
+              graduationCheckEnglishTest={this.props.graduationCheckEnglishTest}
+            />
+          )}
+        </tbody>
       </table>
     )
   }

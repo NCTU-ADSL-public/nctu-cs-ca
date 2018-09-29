@@ -63,47 +63,57 @@ class PrintForm extends React.Component {
           <col className='col12' />
         </colgroup>
 
-        <tr className='borderLess'>
-          <td colSpan='13' style={{ fontSize: '16pt', fontWeight: 'bold', height: '1.5em', color: '#0000FF' }}>
-            103學年度--{programName}
-          </td>
-        </tr>
-        <tr className='borderLess left-text'>
-          <td colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '2.5em' }}>
-            <div width='100%'>
-              <div className='personal-info'>班別：{programName}</div>
-              <div className='personal-info'>學號：{this.props.profile.student_id}</div>
-              <div className='personal-info'>姓名：{this.props.profile.sname}</div><br />
-              <div className='personal-info'>聯絡電話：</div>
-              <div className='personal-info'>E-mail：</div>
-            </div>
-          </td>
-        </tr>
+        <tbody>
+          <tr className='borderLess'>
+            <td colSpan='13' style={{ fontSize: '16pt', fontWeight: 'bold', height: '1.5em', color: '#0000FF' }}>
+              103學年度--{programName}
+            </td>
+          </tr>
+          <tr className='borderLess left-text'>
+            <td colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '2.5em' }}>
+              <div width='100%'>
+                <div className='personal-info'>班別：{programName}</div>
+                <div className='personal-info'>學號：{this.props.profile.student_id}</div>
+                <div className='personal-info'>姓名：{this.props.profile.sname}</div><br />
+                <div className='personal-info'>聯絡電話：</div>
+                <div className='personal-info'>E-mail：</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
 
-        <tr>
-          <td className='bg-green left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
-            <span>一、本系專業科目（請填</span>
-            <span style={{ color: '#FF0000' }}>分數</span>
-            <span>及實得學分數）</span>
-            <span style={{ fontSize: '6pt' }}>請在備註欄註明『英文授課』：畢業前須通過1門本系開授或認可之英文授課專業課程</span>
-          </td>
-        </tr>
-        {depCat.map(category =>
+        <tbody>
+          <tr>
+            <td className='bg-green left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
+              <span>一、本系專業科目（請填</span>
+              <span style={{ color: '#FF0000' }}>分數</span>
+              <span>及實得學分數）</span>
+              <span style={{ fontSize: '6pt' }}>請在備註欄註明『英文授課』：畢業前須通過1門本系開授或認可之英文授課專業課程</span>
+            </td>
+          </tr>
+        </tbody>
+
+        {depCat.map((category, index) =>
           <GradCategory
+            key={index}
             subjects={category.course}
             name={category.title}
           />
         )}
 
-        <tr>
-          <td className='bg-yellow left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
-            <span>二、校訂共同科目 (請填</span>
-            <span style={{ color: '#FF0000' }}>分數</span>
-            <span>及實得學分數）</span>
-          </td>
-        </tr>
-        {generalCat.map(category =>
+        <tbody>
+          <tr>
+            <td className='bg-yellow left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
+              <span>二、校訂共同科目 (請填</span>
+              <span style={{ color: '#FF0000' }}>分數</span>
+              <span>及實得學分數）</span>
+            </td>
+          </tr>
+        </tbody>
+        
+        {generalCat.map((category, index) =>
           <GradCategory
+            key={index}
             subjects={category.course}
             name={category.title}
             graduationCheckEnglishTest={this.props.graduationCheckEnglishTest}

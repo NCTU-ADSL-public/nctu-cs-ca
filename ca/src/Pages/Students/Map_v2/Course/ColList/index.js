@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 
 const Index = ({ colCourse, onTodoClick }) => (
   <div>
-    {colCourse.map(todo =>
+    {colCourse.map((todo, index) =>
       <Course
-        key={todo.id}
+        key={index}
         {...todo}
       />
     )}

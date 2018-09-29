@@ -45,10 +45,6 @@ class Index extends React.Component {
   }
 }
 
-Index.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
 const mapStateToProps = (state) => ({
   overview: state.Student.Graduation.overview,
   done: state.Student.Graduation.status === 'DONE'

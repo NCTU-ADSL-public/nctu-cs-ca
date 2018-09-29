@@ -66,9 +66,9 @@ class GradCategory extends React.Component {
           <td className='title-text'>備註</td>
         </tr>
 
-        {this.state.subjects.map(subject =>
+        {this.state.subjects.map((subject, index) =>
           <GradSubject
-            key={subject.name}
+            key={index}
             name={subject.cn + ' ' + subject.en + ((subject.english === true) ? ' [英語授課]' : '')}
             credit={subject.originalCredit}
             realCredit={subject.realCredit}

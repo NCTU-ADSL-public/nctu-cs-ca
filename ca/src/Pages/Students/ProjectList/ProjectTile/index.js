@@ -60,16 +60,17 @@ function Transition (props) {
 class Index extends React.Component {
   constructor (props) {
     super(props)
-    this.fetchImage()
-    this.state = {
-      open: false
-    }
     this.fetchImage = this.fetchImage.bind(this)
     this.deleteData = this.deleteData.bind(this)
     this.handleClickOpen = this.handleClickOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.getString = this.getString.bind(this)
     this.getImage = this.getImage.bind(this)
+    
+    this.fetchImage()
+    this.state = {
+      open: false
+    }
   }
 
   fetchImage () {
