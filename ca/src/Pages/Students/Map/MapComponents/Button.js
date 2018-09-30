@@ -6,66 +6,68 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import SugCourseTable from './ButtonExtension/SugCourseTable'
 
-
 const customContentStyle = {
   maxWidth: 'none',
-  maxHeight: 'none',
-};
-
-const bodyStyle = {
-  fontFamily: 'Noto Sans CJK TC',
-};
-const titleStyle = {
-  fontFamily: 'Noto Sans CJK TC',
-  color:'#565656'
-};
-
-const fontStyle={
-  verticalAlign: "default",
-  fontSize: "1em",
-  fontWeight: "300",
-  letterSpacing: "1px",
-  fontFamily: 'Noto Sans CJK TC',
+  maxHeight: 'none'
 }
 
+const bodyStyle = {
+  fontFamily: 'Noto Sans CJK TC'
+}
+const titleStyle = {
+  fontFamily: 'Noto Sans CJK TC',
+  color: '#565656'
+}
+
+/* const fontStyle = {
+  verticalAlign: 'default',
+  fontSize: '1em',
+  fontWeight: '300',
+  letterSpacing: '1px',
+  fontFamily: 'Noto Sans CJK TC'
+} */
 
 class Footer extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.state = {
+      open: false
+    }
+  }
 
-  state = {
-    open: false,
+  handleOpen () {
+    this.setState({ open: true })
   };
 
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-
-  handleClose = () => {
-    this.setState({open: false});
+  handleClose () {
+    this.setState({ open: false })
   };
 
   render () {
     const actions = [
       <FlatButton
-        label="Exit"
-        primary={true}
+        label='Exit'
+        primary
         style={{
           fontFamily: 'Noto Sans CJK TC',
           color: '#7B7B7B'
         }}
-        keyboardFocused={true}
+        keyboardFocused
         onClick={this.handleClose}
-      />,
-    ];
+      />
+    ]
     return (
       <div>
         <FilterLink filter='SHOW_ALL' studentPasdata={this.props.studentPasdata} data={this.props.data}>
                     全覽
-                </FilterLink>
+        </FilterLink>
         <br />
         <br />
         <FilterLink filter='SHOW_COMPLETED' studentPasdata={this.props.studentPasdata} data={this.props.data}>
                     已修
-                </FilterLink>
+        </FilterLink>
         <br />
         <br />
         <FilterLink filter='SHOW_ACTIVE' studentPasdata={this.props.studentPasdata} data={this.props.data}>
@@ -74,18 +76,24 @@ class Footer extends React.Component {
         <br />
         <br />
         <MuiThemeProvider>
-          <RaisedButton label={"建議修課"} backgroundColor='#D3D3D3' labelColor='#778899' labelStyle={{
-            fontFamily: 'Noto Sans CJK TC',
-            fontWeight: 'bold'
-          }} fullWidth
+          <RaisedButton
+            label={'建議修課'}
+            backgroundColor='#D3D3D3'
+            labelColor='#778899'
+            labelStyle={{
+              fontFamily: 'Noto Sans CJK TC',
+              fontWeight: 'bold'
+            }}
+            fullWidth
             onTouchTap={e => {
               e.preventDefault()
               this.handleOpen()
-            }} />
+            }}
+          />
         </MuiThemeProvider>
         <MuiThemeProvider>
           <Dialog
-            title="根據您目前的修課紀錄，我們為您推薦了以下課程。(僅供參考)"
+            title='根據您目前的修課紀錄，我們為您推薦了以下課程。(僅供參考)'
             actions={actions}
             modal={false}
             open={this.state.open}
@@ -94,7 +102,7 @@ class Footer extends React.Component {
             bodyStyle={bodyStyle}
             titleStyle={titleStyle}
           >
-            <SugCourseTable/>
+            <SugCourseTable />
           </Dialog>
         </MuiThemeProvider>
       </div>

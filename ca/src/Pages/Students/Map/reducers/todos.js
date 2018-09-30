@@ -31,8 +31,6 @@ const todo = (state = {}, action) => {
           active: false
         })
       }
-      else {
-      }
 
     case 'SET_PASCOS':
       if (state.cosCame === action.cosCame || state.cosCame + '(英文授課)' === action.cosCame) {
@@ -73,8 +71,7 @@ const todo = (state = {}, action) => {
           })
         }
         return state
-      }
-      else {
+      } else {
         return state
       }
     case 'HANDLE_DATA':
@@ -113,20 +110,20 @@ const todos = (state = [], action) => {
       ]
     case 'SET_PASCOS':
       return state.map(t =>
-                todo(t, action)
-            )
+        todo(t, action)
+      )
     case 'SET_ALL':
       return state.map(t =>
-                todo(t, action)
-            )
+        todo(t, action)
+      )
     case 'SET_NOPASCOS':
       return state.map(t =>
-                todo(t, action)
-            )
+        todo(t, action)
+      )
     case 'HANDLE_DATA':
       return state.map(t =>
-                todo(t, action)
-            )
+        todo(t, action)
+      )
 
     case 'REVISE_EDGE_INFO':
       return state.map(t =>

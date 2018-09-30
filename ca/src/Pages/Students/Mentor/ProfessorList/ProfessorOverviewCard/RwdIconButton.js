@@ -6,54 +6,58 @@ import WriteEmail from './WriteEmail'
 import SendProjectAgree from './SendProjectAgree'
 import ReviewProject from './ReviewProject/index'
 
-
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 48
 
 class LongMenu extends React.Component {
-  state = {
-    anchorEl: null,
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.state = {
+      anchorEl: null
+    }
   }
 
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+  handleClick (event) {
+    this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleClose () {
+    this.setState({ anchorEl: null })
   }
 
-  render() {
-    const { anchorEl } = this.state;
+  render () {
+    const { anchorEl } = this.state
 
     return (
       <div>
         <IconButton
-          aria-label="More"
+          aria-label='More'
           aria-owns={anchorEl ? 'long-menu' : null}
-          aria-haspopup="true"
+          aria-haspopup='true'
           onClick={this.handleClick}
         >
           <MoreVertIcon />
         </IconButton>
         <Menu
-          id="long-menu"
+          id='long-menu'
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
           PaperProps={{
             style: {
               maxHeight: ITEM_HEIGHT * 4.5,
-              width: 200,
-            },
+              width: 200
+            }
           }}
         >
-          <WriteEmail rwd  profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-          <SendProjectAgree rwd  profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
-          <ReviewProject rwd  profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+          <WriteEmail rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+          <SendProjectAgree rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+          <ReviewProject rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
         </Menu>
       </div>
     )
   }
 }
 
-export default LongMenu;
+export default LongMenu

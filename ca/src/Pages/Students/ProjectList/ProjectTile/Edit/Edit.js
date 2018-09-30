@@ -15,14 +15,14 @@ import { withStyles } from '@material-ui/core/styles/index'
 const styles = {
   appBar: {
     position: 'relative',
-    background: '#795548',
+    background: '#795548'
   },
   progress: {
     position: 'relative',
-    color: '#5D4037',
+    color: '#5D4037'
   },
   flex: {
-    flex: 1,
+    flex: 1
   },
   titleStyle: {
     paddingTop: '1',
@@ -31,40 +31,45 @@ const styles = {
 }
 
 class AlertDialog extends React.Component {
-  state = {
-    open: false,
+  constructor (props) {
+    super(props)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.state = {
+      open: false
+    }
   }
 
-  handleClickOpen = () => {
+  handleClickOpen () {
     this.setState({ open: true })
   }
 
-  handleClose = () => {
+  handleClose () {
     this.setState({ open: false })
   }
 
-  render() {
+  render () {
     const { fullScreen, classes } = this.props
     return (
       <div>
-        <Button onClick={this.handleClickOpen} style={{fontSize: '12px'}} color="inherit">編輯</Button>
+        <Button onClick={this.handleClickOpen} style={{ fontSize: '12px' }} color='inherit'>編輯</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
           fullScreen={fullScreen}
           maxWidth={false}
           fullWidth
         >
-          <DialogTitle id="alert-dialog-title" style={{background: '#5D4037', padding: '0'}}>
+          <DialogTitle id='alert-dialog-title' style={{ background: '#5D4037', padding: '0' }}>
 
             <AppBar className={classes.appBar} >
               <Toolbar >
-                <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
+                <Typography variant='title' color='inherit' className={classes.flex} style={{ fontSize: '15px' }} >
                   編輯專題主頁
                 </Typography>
-                <Button style={{fontSize: '12px'}} color="inherit" onClick={this.handleClose}>
+                <Button style={{ fontSize: '12px' }} color='inherit' onClick={this.handleClose}>
                   取消
                 </Button>
               </Toolbar>

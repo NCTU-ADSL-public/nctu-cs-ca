@@ -71,7 +71,7 @@ class Edit extends React.Component {
       let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/image/'
       storageRef.child(directory).delete().then(function () {
       }).catch(function (error) {
-          // Uh-oh, an error occurred!
+        console.log(error)
       })
 
       let file = this.state.image
@@ -92,6 +92,7 @@ class Edit extends React.Component {
       let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/'
       storageRef.child(directory).delete().then(function () {
       }).catch(function (error) {
+        console.log(error)
       })
 
       let file = this.state.file
@@ -127,11 +128,11 @@ class Edit extends React.Component {
     return (
       <div>
         <div >
-          <div className='col-xs-12 col-sm-12 col-md-12' style={{marginTop: '10px'}}>
+          <div className='col-xs-12 col-sm-12 col-md-12' style={{ marginTop: '10px' }}>
             <form>
               <LabeledInput label='圖片'>
                 <div className='upload-btn-wrapper'>
-                  <button className='btn' style={{cursor: 'pointer'}}> 上傳圖片</button>
+                  <button className='btn' style={{ cursor: 'pointer' }}> 上傳圖片</button>
                   <input accept='image/*' type='file' hidden onChange={(e) => this.handleImageChange(e.target.files[0])} />
                   {this.state.image === 'no' ? '' : this.state.image.name}
                   <div className='text-center clickable upload-picture' >
@@ -141,7 +142,7 @@ class Edit extends React.Component {
               </LabeledInput>
               <LabeledInput label='報告'>
                 <div className='upload-btn-wrapper'>
-                  <button accept='application/pdf' className='btn' style={{cursor: 'pointer'}}> 上傳報告</button>
+                  <button accept='application/pdf' className='btn' style={{ cursor: 'pointer' }}> 上傳報告</button>
                   <input type='file' hidden onChange={(e) => this.handleFileChange(e.target.files[0])} />
                   {this.state.file === 'no' ? '' : this.state.file.name}
                   <div className='text-center clickable upload-picture' >
@@ -156,11 +157,11 @@ class Edit extends React.Component {
                 </div>
               </LabeledInput>
               <LabeledInput label='簡介'>
-                  <CKEditor style={{height: '50vh'}} activeClass='p10' content={this.state.ckeditorContent} events={{'change': this.onChange}} />
+                <CKEditor style={{ height: '50vh' }} activeClass='p10' content={this.state.ckeditorContent} events={{ 'change': this.onChange }} />
 
               </LabeledInput>
               <div className='justify-content-center pull-right'>
-                <button type='submit' style={{margin: '2px', backgroundColor: '#795548', borderColor: '#795548'}} className='btn btn-success btn-large' onClick={this.handleSubmit}>儲存</button>
+                <button type='submit' style={{ margin: '2px', backgroundColor: '#795548', borderColor: '#795548' }} className='btn btn-success btn-large' onClick={this.handleSubmit}>儲存</button>
               </div>
             </form>
           </div>

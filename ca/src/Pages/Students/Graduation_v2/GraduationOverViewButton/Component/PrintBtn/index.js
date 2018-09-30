@@ -6,9 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { connect } from 'react-redux'
-import ReactDOM from 'react-dom'
 import PrintIcon from '@material-ui/icons/Print'
-import PrintForm from './PrintForm'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 
 const styles = theme => ({
@@ -30,6 +28,7 @@ class Index extends React.Component {
     document.title = original
     return true
   }
+
   render () {
     const { classes, rwd } = this.props
     if (rwd) {
@@ -56,11 +55,13 @@ class Index extends React.Component {
 Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
+
 const mapStateToProps = (state) => ({
   printdata: state.Student.Graduation.printdata,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck
 })
+
 const mapDispatchToProps = (dispatch) => ({
 })
 

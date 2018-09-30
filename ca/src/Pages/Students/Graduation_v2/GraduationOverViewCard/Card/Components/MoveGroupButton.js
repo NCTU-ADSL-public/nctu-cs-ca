@@ -1,10 +1,12 @@
 import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Popover from '@material-ui/core/Popover'
+// MUI
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+
 import '../../../../../../../node_modules/animate.css/animate.css'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { changeCourse } from '../../../../../../Redux/Students/Actions/Graduation'
 
@@ -46,10 +48,14 @@ const styles = theme => ({
   typography: {
     margin: theme.spacing.unit * 2,
     width: '300px'
+  },
+  root: {
+    fontFamily: 'Noto Sans CJK TC',
+    letterSpacing: 1
   }
 })
 
-class PopoverButton extends React.Component {
+class MoveGroupButton extends React.Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -73,52 +79,40 @@ class PopoverButton extends React.Component {
   }
 
   render () {
-    const { label, flash, backgroundColor, children, classes, rwd } = this.props
+    const { label, classes } = this.props
     const { anchorEl } = this.state
 
     return (
       <div style={style.Popover}>
-        <div className={flash ? 'animated flash' : ''}
-          // onClick={this.handleClick}
-          style={style.ButtonBox}
-          ref='target'
-        >
-          <MuiThemeProvider>
-            <FlatButton
-              className='grad-btn'
-              labelStyle={style.ButtonLabel}
-              hoverColor={'#80b0d9'}
-              backgroundColor={backgroundColor || '#616161'}
-              style={{ ...style.Button, width: rwd ? '100px' : '150px' }}
-              label={label}
-              onClick={this.handleClick}
-            />
-          </MuiThemeProvider>
-        </div>
 
-        <Popover
-          open={Boolean(anchorEl)}
-          anchorEl={anchorEl}
-          onClose={this.handleClose}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left'
-          }}
-          transformOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left'
-          }}
+        <Button
+          variant='outlined'
+          labelStyle={style.ButtonLabel}
+          onClick={this.handleClick}
+          className={classes.root}
         >
-          <div className={classes.typography}>
-            {children}
-          </div>
-        </Popover>
+          {label}
+        </Button>
+
+        <Menu
+          id='simple-menu'
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+          className={classes.root}
+        >
+          <MenuItem onClick={this.handleClose} className={classes.root} >專業選修</MenuItem>
+          <MenuItem onClick={this.handleClose} className={classes.root} >其他選修</MenuItem>
+          <MenuItem onClick={this.handleClose} className={classes.root} >外語</MenuItem>
+
+        </Menu>
+
       </div>
     )
   }
 }
 
-PopoverButton.propTypes = {
+MoveGroupButton.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
@@ -130,4 +124,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PopoverButton))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MoveGroupButton))

@@ -25,44 +25,48 @@ const styles = {
   }
 }
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
+function Transition (props) {
+  return <Slide direction='up' {...props} />
 }
 
 class FullScreenDialog extends React.Component {
-  state = {
-    open: false,
-    ckeditorContent:''
+  constructor (props) {
+    super(props)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.state = {
+      open: false,
+      ckeditorContent: ''
+    }
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickOpen () {
+    this.setState({ open: true })
   }
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClose () {
+    this.setState({ open: false })
   }
 
-  onChange = (event) => {
+  onChange (event) {
     this.setState({
       ckeditorContent: event.editor.getData()
     })
   }
 
-  render() {
-    const { classes } = this.props;
+  render () {
+    const { classes } = this.props
     return (
       <div>
         {this.props.rwd
-          ?
-          <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
+          ? <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
             <ListItemIcon className={classes.icon}>
               <Email />
             </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary="Send Email!" />
+            <ListItemText classes={{ primary: classes.primary }} inset primary='Send Email!' />
           </MenuItem>
-          :
-          <Tooltip title='Send email to professor!' placement='top' classes={classes.tooltip}>
+          : <Tooltip title='Send email to professor!' placement='top' classes={classes.tooltip}>
             <IconButton
               onClick={this.handleClickOpen}
               aria-expanded={this.state.expanded}
@@ -80,27 +84,27 @@ class FullScreenDialog extends React.Component {
         >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+              <IconButton color='inherit' onClick={this.handleClose} aria-label='Close'>
                 <CloseIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" className={classes.flex}>
+              <Typography variant='title' color='inherit' className={classes.flex}>
                 寄信
               </Typography>
             </Toolbar>
           </AppBar>
           <div className='container'>
             <TextField
-              id="full-width"
-              label="主旨"
+              id='full-width'
+              label='主旨'
               InputLabelProps={{
-                shrink: true,
+                shrink: true
               }}
-              placeholder="請勿留白"
+              placeholder='請勿留白'
               fullWidth
-              margin="normal"
+              margin='normal'
               className='write-email-title'
             />
-            <CKEditor activeClass='p10' content={this.state.ckeditorContent} events={{'change': this.onChange}} />
+            <CKEditor activeClass='p10' content={this.state.ckeditorContent} events={{ 'change': this.onChange }} />
           </div>
         </Dialog>
       </div>

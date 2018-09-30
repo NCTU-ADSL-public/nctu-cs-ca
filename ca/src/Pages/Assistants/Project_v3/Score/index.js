@@ -65,7 +65,8 @@ class index extends React.Component {
       input: "",
       page: 0,
       number_per_page: 10,
-      first_second: "1"
+      first_second: "1",
+      panel_open: [...Array(10)].map( (x) => true)
     }
     props.fetch_scores({ semester: this.state.semester, first_second: this.state.first_second })
   }
@@ -73,10 +74,11 @@ class index extends React.Component {
   filter = (scores) => {
     const { input } = this.state
     return (
-      scores.filter( (student) => input === ''
-                          || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
-                          || student.student.id.search(input) !== -1
-                          || student.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
+      scores.filter( (student) =>
+         input === ''
+      || student.student.name.toLowerCase().search(input.toLowerCase()) !== -1
+      || student.student.id.search(input) !== -1
+      || student.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
       )
     )
   }
@@ -187,7 +189,7 @@ class index extends React.Component {
             }
           />
         </div>
-        <div style = {{ textAlign: 'center', marginTop: '10px' }} >
+        <div style = {{ textAlign: 'center', marginTop: '10px', marginBottom: '50px' }} >
           <FirstPage className = { classes.icon } onClick = { () => this.setState({ page: 0 }) } />
           <ChevronLeft className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, page - 1) }) } />
           <span style = {{
@@ -197,8 +199,8 @@ class index extends React.Component {
             marginRight: '20px',
             marginLeft: '20px'
           }}>{page + 1} / { Math.max(1, Math.ceil(this.filter(scores).length / number_per_page)) }</span>
-          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.min(Math.ceil(this.filter(scores).length / number_per_page) - 1, page + 1) }) } />
-          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.ceil(this.filter(scores).length / number_per_page) - 1 }) } />
+          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.min(Math.ceil(this.filter(scores).length / number_per_page) - 1, page + 1)) }) } />
+          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.ceil(this.filter(scores).length / number_per_page) - 1) }) } />
         </div>
       </div>
     )
