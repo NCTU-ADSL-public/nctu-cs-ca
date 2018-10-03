@@ -1,0 +1,30 @@
+[
+    {
+      "title": "必修",
+      "credit": 58
+    },
+    {
+      "title": "專業選修",
+      "credit": 32
+    },
+    {
+      "title": "其他選修",
+      "credit": 12
+    },
+    {
+      "title": "外語",
+      "credit": 8
+    },
+    {
+      "title": "體育",
+      "cos": 6
+    },
+    {
+      "title": "藝文賞析",
+      "cos": 2
+    },
+    {
+      "title": "通識",
+      "credit": 20 
+    }
+]

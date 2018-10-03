@@ -20,16 +20,21 @@ import {
   TextField,
   InputAdornment,
   Select,
-  Popover
+  Popover,
+  Table,
+  TableBody, 
+  TableCell, 
+  TableRow, 
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import SaveIcon from '@material-ui/icons/Done'
+import RecoverIcon from '@material-ui/icons/History'
 import TransIcon from '@material-ui/icons/ExitToApp'
 import FakeData from '../../../../Resources/FakeData'
 
 const styles = ()=>({
   root: {
-    margin: '50px auto',
+    margin: '0 auto',
+    marginBottom: 50,
     width: '90%'
   },
   title: {
@@ -50,48 +55,23 @@ const styles = ()=>({
     marginRight: 10
   },
   button:{
-    marginLeft: 20
+    marginLeft: 20,
+    position: 'absolute',
+    right: 25,
+    top: 32,
   },
   input : {
-    fontSize: 16
-  }
+    fontSize: 17
+  },
+  filter : {
+    position: 'relative',
+    marginLeft: '3%'
+  },
+  font:{
+    fontSize:16,
+    fontWeight:400
+  },
 })
-
-const FilterRule = [
-  {
-    title: '共同必修',
-    dep: ['17','C1'],
-    type: '必修',
-    credit: 58
-  },
-  {
-    title: '專業選修',
-    dep: ['17','10','55'],
-    type: '選修',
-    credit: 32
-  },
-  {
-    title: '其他選修',
-    dep: !['17','10','55'],
-    type: '選修',
-    credit: 12
-  },
-  {
-    title: '外語',
-    type: '外語',
-    credit: 8
-  },
-  {
-    title: '體育',
-    dep: ['U9'],
-    cos: 6
-  },
-  {
-    title: '藝文賞析',
-    dep: ['U3'],
-    cos: 2
-  }
-]
 
 const RuleCard = withStyles(styles)((props)=>{
   const {classes} = props
@@ -101,7 +81,7 @@ const RuleCard = withStyles(styles)((props)=>{
         title={props.credit?<span className={classes.title}>{props.title} {props.credit} 學分</span>:<span className={classes.title}>{props.title} {props.cos} 門</span>}
         action={
               <IconButton>
-                <SaveIcon/>
+                <RecoverIcon/>
               </IconButton>
             }
       />
@@ -127,16 +107,16 @@ const grade = [
 ]
 const group = [
   {
-    label: '資電'
+    label: '資電',
+    value: 0
   },
   {
-    label: '資A'
+    label: '資工',
+    value: 1
   },
   {
-    label: '資B'
-  },
-  {
-    label: '網多'
+    label: '網多',
+    value: 2
   },
 ]
 class GraduationRule extends React.Component{
@@ -144,10 +124,13 @@ class GraduationRule extends React.Component{
     super(props)
     this.state = {
       grade: '08',
-      group: '資電',
-      anchorEl: null, // for menu
-      rule : FakeData.GraduationRule,
-      open : false,
+      group: 0,
+      //anchorEl: null, // for menu
+      allCourse : FakeData.AllCourse,
+      rule : FakeData.AllType,
+      open : false, //for dialog
+      form: false,
+      courses: [],
       moveTo: '',
       pop: false
     }
@@ -182,14 +165,19 @@ class GraduationRule extends React.Component{
     const {classes} = this.props
     return(
       <div className={classes.root}>
+        <div className={classes.filter}>
         <span className={classes.select}>
           <TextField
             select
-            label="系級"
+            label={<span className={classes.input}>系級</span>}
             value={this.state.grade}
             onChange={this.handleSelect('grade')}
             margin="normal"
-            className={classes.input}
+            InputProps={{
+            classes: {
+              input: classes.input,
+            },
+            }}
           >
             {grade.map(option => (
               <MenuItem key={option.label} value={option.label}>
@@ -198,25 +186,33 @@ class GraduationRule extends React.Component{
             ))}
           </TextField>
         </span>
-        <span>
+        <span className={classes.select}>
           <TextField
             select
-            label="組別"
+            label={<span className={classes.input}>組別</span>}
             value={this.state.group}
             onChange={this.handleSelect('group')}
             margin="normal"
-            className={classes.input}
+            InputProps={{
+            classes: {
+              input: classes.input,
+            },
+            }}
           >
             {group.map(option => (
-              <MenuItem key={option.label} value={option.label}>
+              <MenuItem key={option.label} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
         </span>
-        
+        <Button variant="outlined" color="primary" className={classes.button}
+        onClick={()=>this.setState({form:true})}>
+          新增課程
+        </Button>
+        </div>
         {
-          FilterRule.map(
+          this.state.rule.map(
             (group,index)=>(
               <RuleCard title={group.title} credit={group.credit} cos={group.cos} key={index}>
                 <ExpansionPanel>
@@ -228,19 +224,21 @@ class GraduationRule extends React.Component{
                   <ExpansionPanelDetails>
                     <div>
                       {
-                        this.state.rule
-                        .filter(course=>(!group.dep || group.dep.includes(course.dep_id)) && (!group.type || course.cos_type === group.type))
+                        this.state.allCourse
+                        .filter(course=> 
+                        (course.rule===[] && course.type.includes(group.title)) || //三組規則一樣
+                        (course.rule[this.state.group]===group.title)//三組規則不一樣
+                        )
                         .sort((a,b)=>a.cos_cname.localeCompare(b.cos_cname, 'zh-Hant-TW'))
                         .map((course,index)=>
                         <React.Fragment>
                         <Chip
-                          label={course.cos_cname +' / '+ course.teacher}
+                          label={course.title}
                           key={index}
-                          //onClick={handleClick}
+                          onClick={()=>this.setState({open:true,courses:[...course.courses]})}
                           onDelete={this.handleOpen}
                           deleteIcon={<TransIcon/>}
                           className={classes.chip}
-                          //deleteIcon={<DoneIcon />}
                         /> 
                         </React.Fragment>
                         )
@@ -266,7 +264,7 @@ class GraduationRule extends React.Component{
                       endAdornment={<InputAdornment position="end">門</InputAdornment>}
                     />
                     }
-                    <Button variant="outlined" color="primary" onClick={this.handlePop} className={classes.button} 
+                    {/* <Button variant="outlined" color="primary" onClick={this.handlePop} className={classes.button} 
                       buttonRef={node => {
                         this.anchor = node
                       }}
@@ -294,41 +292,97 @@ class GraduationRule extends React.Component{
                             margin="normal"
                           />
                       </DialogContent>
-                    </Popover>
+                    </Popover> */}
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </RuleCard>
             )
           )
         }
-        {/* <Dialog
+        <Dialog
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={()=>this.setState({open:false})}
+          fullWidth
+          maxWidth='md'
         >
-          <DialogTitle>{"將此課程移至"}</DialogTitle>
+          <DialogTitle className={classes.font}>{"可抵免的課程"}</DialogTitle>
           <DialogContent>
-           
+          <Table>
+            <TableBody >
+              {this.state.courses.map((v,i)=>(
+                <TableRow key={i}>
+                <TableCell className={classes.font}>{v.code}</TableCell>
+                  <TableCell className={classes.font}>{v.name}</TableCell>
+                  <TableCell className={classes.font}>{v.teacher}</TableCell>
+                </TableRow>
+              ))}
+              <TableCell className={classes.font}>
+                <Input
+                  placeholder="永久課號"
+                />
+              </TableCell>
+              <TableCell className={classes.font}>
+                <Input
+                  placeholder="課程名稱"
+                />
+              </TableCell>
+              <TableCell className={classes.font}>
+                <Input
+                  placeholder="授課老師"
+                />
+              </TableCell>
+            </TableBody>
+          </Table>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={()=>this.setState({open:false})} color="primary">
               取消
             </Button>
-            <Button onClick={this.handleClose} color="primary" autoFocus>
+            <Button onClick={()=>{}} color="primary" autoFocus>
+              新增可抵免課程
+            </Button>
+          </DialogActions>
+        </Dialog>
+        {/* form dialog */}
+        <Dialog
+          open={this.state.form}
+          onClose={()=>this.setState({form:false})}
+          fullWidth
+          maxWidth='md'
+        >
+        <DialogTitle className={classes.font}>{"新增課程"}</DialogTitle>
+          <DialogContent>
+            
+            <Input
+              placeholder="永久課號"
+            />
+            <Input
+              placeholder="課程名稱"
+            />
+            <Input
+              placeholder="授課老師"
+            />
+
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={()=>this.setState({form:false})} color="primary">
+              取消
+            </Button>
+            <Button onClick={()=>{}} color="primary" autoFocus>
               確認
             </Button>
           </DialogActions>
-        </Dialog> */}
+        </Dialog>
         <Menu
           anchorEl={this.state.anchorEl}
           open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem onClick={this.handleClose}>必修</MenuItem>
-          <MenuItem onClick={this.handleClose}>專業選修</MenuItem>
-          <MenuItem onClick={this.handleClose}>其他選修</MenuItem>
-          <MenuItem onClick={this.handleClose}>外語</MenuItem>
-          <MenuItem onClick={this.handleClose}>體育</MenuItem>
-          <MenuItem onClick={this.handleClose}>藝文賞析</MenuItem>
+          {this.state.rule.map((type,i)=>
+            <MenuItem key={i} onClick={this.handleClose}>
+              {type.title}
+            </MenuItem>
+          )}
         </Menu>
       </div>
     )

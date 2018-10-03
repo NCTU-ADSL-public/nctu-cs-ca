@@ -9,7 +9,8 @@ import ProjectNum from './ProjectNum.json'
 import StudentProject from './StudentProject.json'
 import StudentScore from './StudentScore.json'
 import TeacherList from './TeacherList.json'
-import GraduationRule from './GraduationRule.json'
+import AllCourse from './AllCourse.json'
+import AllType from './AllType.json'
 
 export default {
   GraduationItems,
@@ -23,5 +24,6 @@ export default {
   StudentProject,
   StudentScore,
   TeacherList,
-  GraduationRule
+  AllCourse,
+  AllType
 }
