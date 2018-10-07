@@ -1,13 +1,13 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import { 
+import {
   Paper,
   Table,
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableRow, 
-  Dialog, 
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Dialog,
   DialogContent,
   Slide,
   Button
@@ -170,7 +170,7 @@ class StudentList extends React.Component{
           fullWidth={true}
         >
           <DialogContent>
-            <InfoCard 
+            <InfoCard
               selected={this.state.studentList[this.state.chooseInfo]}
               sender={this.props.idCard.id}
               sender_email={this.props.idCard.email}

@@ -1,80 +1,91 @@
-import React from 'react';
-import { Tabs, Tab } from 'material-ui/Tabs';
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux'
+
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import StudentsItem from './Student/StudentsItem'
-import TeachersItem from './Teacher/TeachersItem'
-import ScoreItem from './Score/ScoreItem'
+import Student from './Student'
 
-const styles = {
-  tab: {
-    width: '30%',
-    background: '#F5F5F5',
-    color: '#7B7B7B',
-    fontSize: '20px',
-    fontWeight: 'bold',
-    transition: 'color 0.3s, font-size 0.3s, width 0.3s',
+const styles = theme => ({
+  tabRoot: {
+    minWidth: '33%',
+    minHeight: '60px'
   },
-  tabs: {
-    width: '80%',
-    margin: 'auto',
-    marginTop: '15px',
-    marginButton: '15px'
+  tabsIndicator: {
+    backgroundColor: 'rgb(0, 188, 212)'
   },
-  selected: {
-    width: '40%',
+  tabRoot: {
+    minWidth: '33%',
+    minHeight: '60px'
+  },
+  tabLabel: {
+    fontSize: 25
+  },
+  tabSelected: {
     color: 'rgb(0, 188, 212)',
-    fontSize: '25px',
-    transition: 'color 0.3s, font-size 0.3s, width 0.3s',
+    transition: 'color 0.3s'
   }
-};
+})
 
-export default class index extends React.Component {
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+})
+
+class index extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      slideIndex: 0,
-    };
+      tab_index: 0
+    }
   }
-
-  handleChange = (value) => {
-    this.setState({
-      slideIndex: value,
-    });
-  };
 
   render() {
+
+    const { classes } = this.props
+    const { tab_index } = this.state
+
     return (
-      <MuiThemeProvider>
-        <div>
-          <Tabs
-            onChange = { this.handleChange }
-            value = { this.state.slideIndex }
-            inkBarStyle = {{ background: 'rgb(0, 188, 212)', left: `${ 30 * this.state.slideIndex }%`, width: '40%' }}
-            style = { styles.tabs }
-          >
-            <Tab style = {{ ...styles.tab, ...(this.state.slideIndex === 0 && styles.selected) }} label = "學生狀況" value = { 0 } />
-            <Tab style = {{ ...styles.tab, ...(this.state.slideIndex === 1 && styles.selected) }} label = "教授狀況" value = { 1 } />
-            <Tab style = {{ ...styles.tab, ...(this.state.slideIndex === 2 && styles.selected) }} label = "成績匯出" value = { 2 } />
-          </Tabs>
-          <SwipeableViews
-            index = { this.state.slideIndex }
-            onChangeIndex = { this.handleChange }
-          >
-            <div>
-              <StudentsItem />
-            </div>
-            <div>
-              <TeachersItem />
-            </div>
-            <div>
-              <ScoreItem />
-            </div>
-          </SwipeableViews>
-        </div>
-      </MuiThemeProvider>
-    );
+      <div>
+        <Tabs
+          value = { tab_index }
+          onChange = {
+            (event, value) => this.setState({ tab_index: value })
+          }
+          centered
+          classes = {{
+            root: classes.tabsRoot,
+            indicator: classes.tabsIndicator
+          }}
+        >
+          {["學生狀況", "教授狀況", "成績查詢"].map( (title, _) =>
+            <Tab
+              key = { _ }
+              label = { title }
+              classes = {{
+                root: classes.tabRoot,
+                label: classes.tabLabel,
+                selected: classes.tabSelected
+              }}
+            />
+          )}
+        </Tabs>
+        <SwipeableViews
+          index = { tab_index }
+        >
+          <div><Student /></div>
+          <div>Hello23</div>
+          <div>Hello123</div>
+        </SwipeableViews>
+      </div>
+    )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))
