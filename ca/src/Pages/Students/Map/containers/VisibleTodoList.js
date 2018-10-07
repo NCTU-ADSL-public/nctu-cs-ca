@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-import { handleCoursedata } from '../actions'
-import { setThisbutton } from '../actions'
+import { handleCoursedata, setThisbutton } from '../actions'
 import TodoList from '../MapComponents/TodoList'
 
 const getVisibleTodos = (todos, filter, grad, sem) => {
@@ -32,9 +31,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const VisibleTodoList = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TodoList)
-
-export default VisibleTodoList
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

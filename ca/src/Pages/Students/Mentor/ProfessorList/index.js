@@ -11,7 +11,7 @@ class ProfessorsList extends React.Component {
         <div>
           {this.props.professors.map(profile =>
             <ProfessorOverviewCard profile={profile} key={id++} studentIdcard={this.props.studentIdcard} />
-        )}
+          )}
         </div>
       )
     }
@@ -25,7 +25,7 @@ const getVisibleProfessors = (data, mentor, filterInput, page, projectNumber) =>
   if (data.length === 0) return []
   // filter
   let number = projectNumber === '0' ? 0 : projectNumber === '3' ? 3 : 5
-  let _data = data.filter(t=>
+  let _data = data.filter(t =>
     Number(t.scount) >= number
   )
 
@@ -48,9 +48,9 @@ const getVisibleProfessors = (data, mentor, filterInput, page, projectNumber) =>
     updatedList.slice(idx * onePage, (idx + 1) * onePage)
     return updatedList
   }
-  let object = {...updatedList[index]}
-  updatedList[index] = {...updatedList[0]}
-  updatedList[0] = {...object}
+  let object = { ...updatedList[index] }
+  updatedList[index] = { ...updatedList[0] }
+  updatedList[0] = { ...object }
 
   // handle page
   updatedList.slice(idx * onePage, (idx + 1) * onePage)

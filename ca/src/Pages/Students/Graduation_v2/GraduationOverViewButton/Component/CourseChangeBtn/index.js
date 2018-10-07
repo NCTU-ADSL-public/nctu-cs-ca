@@ -1,9 +1,9 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -16,19 +16,19 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 const styles = theme => ({
   appBar: {
     position: 'relative',
-    background: '#3db586',
+    background: '#3db586'
   },
   progress: {
     position: 'relative',
-    color: '#5D4037',
+    color: '#5D4037'
   },
   button: {
     background: '#7c7c7c',
-    color : '#ffffff',
+    color: '#ffffff',
     fontSize: '0.8em'
   },
   flex: {
-    flex: 1,
+    flex: 1
   },
   titleStyle: {
     paddingTop: '1',
@@ -37,22 +37,27 @@ const styles = theme => ({
 })
 
 class AlertDialog extends React.Component {
-  state = {
-    open: false,
-  };
+  constructor (props) {
+    super(props)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.state = {
+      open: false
+    }
+  }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  handleClickOpen () {
+    this.setState({ open: true })
+  }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  handleClose () {
+    this.setState({ open: false })
+  }
 
-  render() {
+  render () {
     const { fullScreen, classes } = this.props
     return (
-      <div style={{margin: '5px 0 5px 0'}}>
+      <div style={{ margin: '5px 0 5px 0' }}>
 
         <MenuItem className={classes.menuItem} onClick={this.handleClickOpen} disabled>
           <ListItemIcon className={classes.icon} >
@@ -63,23 +68,23 @@ class AlertDialog extends React.Component {
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
           maxWidth={false}
           fullWidth={fullScreen}
         >
           <AppBar className={classes.appBar} >
             <Toolbar >
-              <Typography variant="title" color="inherit" className={classes.flex} style={{fontSize: '15px'}} >
+              <Typography variant='title' color='inherit' className={classes.flex} style={{ fontSize: '15px' }} >
                 課程排序
               </Typography>
-              <Button style={{fontSize: '12px'}} color="inherit" onClick={this.handleClose}>
+              <Button style={{ fontSize: '12px' }} color='inherit' onClick={this.handleClose}>
                 離開
               </Button>
             </Toolbar>
           </AppBar>
           <MuiThemeProvider>
-          <Trello />
+            <Trello />
           </MuiThemeProvider>
         </Dialog>
       </div>

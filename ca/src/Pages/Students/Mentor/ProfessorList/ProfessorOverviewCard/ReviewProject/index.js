@@ -13,8 +13,6 @@ import List from '@material-ui/icons/List'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Button from '@material-ui/core/Button'
-import DialogActions from '@material-ui/core/DialogActions'
 import FakeData from './FakeData'
 import Card from './Card'
 import axios from 'axios/index'
@@ -31,26 +29,30 @@ const styles = {
   }
 }
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
+function Transition (props) {
+  return <Slide direction='up' {...props} />
 }
 
 class Index extends React.Component {
-  state = {
-    open: false,
-    data: FakeData
+  constructor (props) {
+    super(props)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.state = {
+      open: false,
+      data: FakeData
+    }
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickOpen () {
+    this.setState({ open: true })
   }
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClose () {
+    this.setState({ open: false })
   }
 
   componentDidMount () {
-
     axios.post('/students/project/ResearchInfoOfPro', {
       teacher_id: this.props.profile.teacher_id
     })
@@ -64,20 +66,18 @@ class Index extends React.Component {
       })
   }
 
-  render() {
-    const { classes } = this.props;
+  render () {
+    const { classes } = this.props
     return (
       <div>
         {this.props.rwd
-          ?
-          <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
+          ? <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
             <ListItemIcon className={classes.icon}>
               <List />
             </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary="查看教授過去專題" />
+            <ListItemText classes={{ primary: classes.primary }} inset primary='查看教授過去專題' />
           </MenuItem>
-          :
-          <Tooltip title='查看教授過去專題' placement='top' classes={{tooltip: classes.tooltip}}>
+          : <Tooltip title='查看教授過去專題' placement='top' classes={{ tooltip: classes.tooltip }}>
             <IconButton
               onClick={this.handleClickOpen}
               aria-expanded={this.state.expanded}
@@ -95,18 +95,18 @@ class Index extends React.Component {
         >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+              <IconButton color='inherit' onClick={this.handleClose} aria-label='Close'>
                 <CloseIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" className={classes.flex}>
+              <Typography variant='title' color='inherit' className={classes.flex}>
                 查看教授專題
               </Typography>
             </Toolbar>
           </AppBar>
           <div className='container'>
             {
-              this.state.data.groups.map(t=>
-                <Card data={t} profile={this.props.profile}/>)
+              this.state.data.groups.map(t =>
+                <Card data={t} profile={this.props.profile} />)
             }
           </div>
         </Dialog>
