@@ -127,14 +127,14 @@ class GeneralNewCourseList extends React.Component {
             color={progressValue.core >= 100 ? 'primary' : 'secondary'}
           />
         </div>
-        <div className='col-md-8 col-lg-8' style={{ marginLeft: '20px' }}>
+        <div className='col-sm-12 col-md-8 col-lg-8' style={{ marginLeft: '20px' }}>
           <div className={rwd ? classes.textRwd : classes.text}>
             核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
           </div>
         </div>
 
-        <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
-          {this.generalCourseTypes.filter(type => type.dimension.slice(0, 2) === '核心').map((type, index) => (
+        <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
+          {this.generalCourseTypes.filter(type => type.dimension.slice(0, 2) === '核心' && !(type.dimension === '核心-自然' && type.courses.length === 0)).map((type, index) => (
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2' key={index}>
               <PopoverButton
                 label={type.name}
@@ -178,13 +178,13 @@ class GeneralNewCourseList extends React.Component {
             color={progressValue.basic >= 100 ? 'primary' : 'secondary'}
           />
         </div>
-        <div className='col-md-8 col-lg-8' style={{ marginLeft: '20px', marginTop: '20px' }}>
+        <div className='col-sm-12 col-md-8 col-lg-8' style={{ marginLeft: '20px', marginTop: '20px' }}>
           <div className={rwd ? classes.textRwd : classes.text}>
             校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
           </div>
         </div>
 
-        <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
+        <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes.find(type => type.dimension === '校基本').courses.map((item, index) => (
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2 pl-0' key={index}>
               <PopoverButton
@@ -226,7 +226,7 @@ class GeneralNewCourseList extends React.Component {
             color={progressValue.cross >= 100 ? 'primary' : 'secondary'}
           />
         </div>
-        <div className='col-md-8 col-lg-8' style={{ marginLeft: '20px', marginTop: '20px' }}>
+        <div className='col-sm-12 col-md-8 col-lg-8' style={{ marginLeft: '20px', marginTop: '20px' }}>
           <div className={rwd ? classes.textRwd : classes.text}>
             跨院&nbsp;&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)&nbsp;&nbsp;&nbsp;
           </div>
