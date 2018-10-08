@@ -125,7 +125,7 @@ class Verify extends React.Component{
   }
   componentDidMount(){
     axios.get('/assistants/ShowUserOffsetApplyForm').then(res =>{
-      this.setState({formList: res.data})
+      this.setState({formList: res.data.map((e,i)=>({...e,id:i}))})
     }).catch(err => {
       console.log(err)
     })
