@@ -119,7 +119,7 @@ class Verify extends React.Component{
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
-    this.handleReset = this.handleDisagree.bind(this)
+    this.handleReset = this.handleReset.bind(this)
     this.snackbarOpen = this.snackbarOpen.bind(this)
     this.snackbarClose = this.snackbarClose.bind(this)
   }
