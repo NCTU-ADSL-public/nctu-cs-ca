@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { fetchProfessors } from '../../../../../Redux/Students/Actions/Professor/index'
 import CourseList from './Components/CourseList'
 import GeneralCourseList from './Components/GeneralCourseList'
+import GeneralNewCourseList from './Components/GeneralNewCourseList'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -107,7 +108,11 @@ class Index extends React.Component {
               </Toolbar>
             </AppBar>
             <div style={{ padding: '15px' }}>
-              {this.props.title === '通識' ? <GeneralCourseList courses={this.props.data.course} rwd /> : <CourseList items={this.props.data.course} rwd />}
+              {this.props.title === '通識(舊制)'
+                ? <GeneralCourseList courses={this.props.data.course} rwd />
+                : this.props.title === '通識(新制)'
+                  ? <GeneralNewCourseList courses={this.props.data.course} overview={this.props.overview} rwd />
+                  : <CourseList items={this.props.data.course} rwd />}
             </div>
           </Dialog>
         </div>
@@ -128,7 +133,11 @@ class Index extends React.Component {
               </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              {this.props.title === '通識' ? <GeneralCourseList courses={this.props.data.course} /> : <CourseList items={this.props.data.course} />}
+              {this.props.title === '通識(舊制)'
+                ? <GeneralCourseList courses={this.props.data.course} />
+                : this.props.title === '通識(新制)'
+                  ? <GeneralNewCourseList courses={this.props.data.course} overview={this.props.overview} />
+                  : <CourseList items={this.props.data.course} />}
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </div>

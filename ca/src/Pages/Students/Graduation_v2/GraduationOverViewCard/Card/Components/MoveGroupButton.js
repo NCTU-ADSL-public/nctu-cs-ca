@@ -87,7 +87,6 @@ class MoveGroupButton extends React.Component {
 
         <Button
           variant='outlined'
-          labelStyle={style.ButtonLabel}
           onClick={this.handleClick}
           className={classes.root}
         >

@@ -6,6 +6,8 @@ import {
   ExpansionPanelSummary,
   ExpansionPanelActions,
   Button,
+  IconButton,
+  Snackbar,
   Table,
   TableHead,
   TableBody, 
@@ -13,6 +15,8 @@ import {
   TableRow, 
   Tooltip
 } from '@material-ui/core'
+import axios from 'axios'
+import CloseIcon from '@material-ui/icons/Close'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import FakeData from '../../../Resources/FakeData'
 
@@ -42,6 +46,12 @@ const styles = ()=>({
     textAlign: 'center'
   },
   font2:{
+    fontSize:14,
+    fontWeight:400,
+    textAlign: 'center'
+  },
+  font3:{
+    color: '#777',
     fontSize:14,
     fontWeight:400,
     textAlign: 'center'
@@ -103,20 +113,99 @@ class Verify extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      formList: FakeData.FormList.map((e,i)=>({...e,id:i}))
+      formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      open: false,
+      message: 0
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
+    this.handleReset = this.handleReset.bind(this)
+    this.snackbarOpen = this.snackbarOpen.bind(this)
+    this.snackbarClose = this.snackbarClose.bind(this)
+  }
+  componentDidMount(){
+    axios.get('/assistants/ShowUserOffsetApplyForm').then(res =>{
+      this.setState({formList: res.data.map((e,i)=>({...e,id:i}))})
+    }).catch(err => {
+      console.log(err)
+    })
   }
   handleAgree(id){
+    // let updatedList = this.state.formList
+    // updatedList[id].agreeByA = 1
+    // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    updatedList[id].agreeByA = 1
-    this.setState({formList:updatedList})
+    let {year,semester,sid,nameA,codeA,nameB,codeB,type} = this.state.formList[id]
+    axios.post('/assistants/AddToOffset', {
+      year: year,
+      semester : semester,
+      sid: sid,
+      nameA: nameA,
+      codeA: codeA,
+      nameB: nameB,
+      codeB: codeB,
+      type: type,
+      offset_type: 1
+    }).then(res => {
+      updatedList[id].agreeByA = 1
+      this.setState({formList:updatedList,open:true,message:0})
+    }).catch(err => {
+      this.setState({open:true,message:1})
+    })
   }
   handleDisagree(id){
+    // let updatedList = this.state.formList
+    // updatedList[id].agreeByA = 2
+    // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    updatedList[id].agreeByA = 2
-    this.setState({formList:updatedList})
+    let {year,semester,sid,nameA,codeA,nameB,codeB,type} = this.state.formList[id]
+    console.log(year,semester)
+    axios.post('/assistants/AddToOffset', {
+      year: year,
+      semester : semester,
+      sid: sid,
+      nameA: nameA,
+      codeA: codeA,
+      nameB: nameB,
+      codeB: codeB,
+      type: type,
+      offset_type: 2
+    }).then(res => {
+      updatedList[id].agreeByA = 2
+      this.setState({formList:updatedList,open:true,message:0})
+    }).catch(err => {
+      this.setState({open:true,message:1})
+    })
+  }
+  handleReset(id){
+    // let updatedList = this.state.formList
+    // updatedList[id].agreeByA = 0
+    // this.setState({formList:updatedList})
+    let updatedList = this.state.formList
+    let {year,semester,sid,nameA,codeA,nameB,codeB,type} = this.state.formList[id]
+    console.log(year,semester)
+    axios.post('/assistants/AddToOffset', {
+      year: year,
+      semester : semester,
+      sid: sid,
+      nameA: nameA,
+      codeA: codeA,
+      nameB: nameB,
+      codeB: codeB,
+      type: type,
+      offset_type: 0
+    }).then(res => {
+      updatedList[id].agreeByA = 0
+      this.setState({formList:updatedList,open:true,message:0})
+    }).catch(err => {
+      this.setState({open:true,message:1})
+    })
+  }
+  snackbarOpen(){
+    this.setState({open:true})
+  }
+  snackbarClose(){
+    this.setState({open:false})
   }
   render(){
     const {classes} = this.props
@@ -165,6 +254,7 @@ class Verify extends React.Component{
                       <TableRow>
                           <TableCell className={classes.font}>學號</TableCell>
                           <TableCell className={classes.font}>姓名</TableCell>
+                          <TableCell className={classes.font}>電話</TableCell>
                           <TableCell className={classes.font}>已修習課程</TableCell>
                           <TableCell className={classes.font}>開課系所</TableCell>
                           <TableCell className={classes.font}>預抵免課程</TableCell>
@@ -175,6 +265,7 @@ class Verify extends React.Component{
                         <TableRow>
                           <TableCell className={classes.font}>{apply.sid}</TableCell>
                           <TableCell className={classes.font}>{apply.name}</TableCell>
+                          <TableCell className={classes.font}>{apply.phone}</TableCell>
                           <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
                           <TableCell className={classes.font}>{apply.department}</TableCell>
                           <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>
@@ -184,6 +275,9 @@ class Verify extends React.Component{
                     </Table>
                   </ExpansionPanelDetails>
                   <ExpansionPanelActions>
+                    <Button onClick={()=>this.handleReset(apply.id)}>
+                      <span className={classes.font3}>重置</span>
+                    </Button>
                     <Button onClick={()=>this.handleDisagree(apply.id)}>
                       <span className={classes.font2}>不同意</span>
                     </Button>
@@ -195,6 +289,25 @@ class Verify extends React.Component{
             )
           )
         }
+        {/* snackBar */}
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={this.state.open}
+          autoHideDuration={5000}
+          onClose={this.snackbarClose}
+          message={<span className={classes.font2}>{['修改成功！','傳送失敗，請再次嘗試'][this.state.message]}</span>}
+          action={[
+            <IconButton
+            color="inherit"
+              onClick={this.snackbarClose}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
       </div>
     )
   }

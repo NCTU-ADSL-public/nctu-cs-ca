@@ -18,6 +18,8 @@ import ScoreDialog from './ScoreDialog'
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 import { Dialog } from 'material-ui'
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 // css
@@ -189,7 +191,7 @@ class GroupList extends React.Component {
           'score': FakeData.StudentScore,
         },
       ],
-      sem: this.getSemester()
+      semVal: this.getSemester(),
     }
   }
 
@@ -198,13 +200,13 @@ class GroupList extends React.Component {
     return ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
   }
 
-  fetchData () {
+  fetchData (sem) {
     console.log('idCard: ' + this.props.idCard.tname)
-    console.log('sem: ' + this.state.sem)
+    console.log('sem: ' + sem)
     let _this = this
     axios.post('/professors/students/projects', {
       teacherId: this.props.idCard.teacher_id,
-      sem: this.state.sem
+      sem: sem
     }).then(res => {
       this.setState({
         cs_number: res.data.cs_number,
@@ -269,7 +271,7 @@ class GroupList extends React.Component {
   }
 
   componentDidMount () {
-    this.fetchData()
+    this.fetchData(this.state.semVal)
   }
 
   async componentWillReceiveProps (nextProps) {
@@ -289,7 +291,7 @@ class GroupList extends React.Component {
 
   triggerUpdate = () => {
     this.delay(1000).then((v) => (
-      this.fetchData()
+      this.fetchData(this.state.semVal)
     )).catch((e) => (
       console.log('trigger update error' + e)
     ))
@@ -307,6 +309,11 @@ class GroupList extends React.Component {
     })
   }
 
+  handleDropDownChange = (event, index, semVal) => {
+    this.setState({semVal})
+    this.fetchData(semVal)
+  }
+
   render () {
     const csNum = this.state.cs_number
     const otherNum = this.state.other_number
@@ -320,10 +327,29 @@ class GroupList extends React.Component {
             </Col>
             <Col xs={12} md={8} lg={8}>
               <div className='subTitle'>
-                <b>{this.state.sem} 學期</b>
-                已收
-                &nbsp;&nbsp;<span style={{color: 'red', fontWeight: 'bold'}}>本系學生: {csNum}人</span>
-                &nbsp;&nbsp; / &nbsp;&nbsp; 外系學生: {otherNum}人
+                <div className='subTitle-item'> <b>選擇學期: </b> </div>
+                <div className='subTitle-item subTitle-item-mui'>
+                  <MuiThemeProvider>
+                    <DropDownMenu
+                      value={this.state.semVal}
+                      onChange={this.handleDropDownChange}
+                      style={{'width': 200, 'font-family': 'Noto Sans CJK TC', 'font-weight': 'bold'}}
+                      autoWidth={false}
+                    >
+                      <MenuItem value={'107-1'} primaryText='107-1' />
+                      <MenuItem value={'106-2'} primaryText='106-2' />
+                      <MenuItem value={'106-1'} primaryText='106-1' />
+                      <MenuItem value={'105-2'} primaryText='105-2' />
+                      <MenuItem value={'105-1'} primaryText='105-1' />
+                    </DropDownMenu>
+                  </MuiThemeProvider>
+                </div>
+                <div className='subTitle-item'>
+                  <b>{this.state.semVal} 學期</b>
+                  已收
+                  &nbsp;&nbsp;<span style={{color: 'red', fontWeight: 'bold'}}>本系學生: {csNum}人</span>
+                  &nbsp;&nbsp; / &nbsp;&nbsp; 外系學生: {otherNum}人
+                </div>
               </div>
             </Col>
           </Row>

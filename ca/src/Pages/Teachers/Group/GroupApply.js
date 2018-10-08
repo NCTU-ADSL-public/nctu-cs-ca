@@ -344,7 +344,10 @@ const ApplyButton = (props) => {
       </Row>
       <Row>
         <Col xs={12} md={12} lg={12}>
-          <div style={styles.groupTitle}>{props.item.research_title}</div>
+          <div style={styles.groupTitle}>
+            <span className='apply-btn-year'>{props.item.year}</span>
+            {props.item.research_title}
+          </div>
           <div>
             <MuiThemeProvider>
               <div style={styles.chipWrapper}>
