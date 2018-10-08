@@ -105,7 +105,7 @@ class GroupList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: true,
+      loading: false,
       index: 0,
       cs_number: 0,
       other_number: 0,
@@ -201,6 +201,7 @@ class GroupList extends React.Component {
   }
 
   fetchData (sem) {
+    this.setState({loading: false})
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
     let _this = this
@@ -229,7 +230,7 @@ class GroupList extends React.Component {
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
             _this.setState({
-              loading: false,
+             loading: false,
               groupList: [..._this.state.groupList, {...data_, file: url}]
             })
           }).catch(error => {
@@ -333,19 +334,15 @@ class GroupList extends React.Component {
                     <DropDownMenu
                       value={this.state.semVal}
                       onChange={this.handleDropDownChange}
-                      style={{'width': 200, 'font-family': 'Noto Sans CJK TC', 'font-weight': 'bold'}}
+                      style={{width: 150, fontFamily: 'Noto Sans CJK TC', fontWeight: 'bold'}}
                       autoWidth={false}
                     >
                       <MenuItem value={'107-1'} primaryText='107-1' />
                       <MenuItem value={'106-2'} primaryText='106-2' />
-                      <MenuItem value={'106-1'} primaryText='106-1' />
-                      <MenuItem value={'105-2'} primaryText='105-2' />
-                      <MenuItem value={'105-1'} primaryText='105-1' />
                     </DropDownMenu>
                   </MuiThemeProvider>
                 </div>
                 <div className='subTitle-item'>
-                  <b>{this.state.semVal} 學期</b>
                   已收
                   &nbsp;&nbsp;<span style={{color: 'red', fontWeight: 'bold'}}>本系學生: {csNum}人</span>
                   &nbsp;&nbsp; / &nbsp;&nbsp; 外系學生: {otherNum}人
@@ -354,15 +351,16 @@ class GroupList extends React.Component {
             </Col>
           </Row>
           <Row className='groups'>
-            {/*<Loading*/}
-            {/*size={100}*/}
-            {/*left={40}*/}
-            {/*top={100}*/}
-            {/*isLoading={this.state.loading} />*/}
+            <Loading
+            size={100}
+            left={40}
+            top={100}
+            isLoading={this.state.loading} />
             {this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
                   key={i}
+                  keyId={i}
                   item={item}
                   idCard={this.props.idCard}
                   groupClick={this.props.handleGroupClick}
@@ -384,7 +382,7 @@ class GroupList extends React.Component {
 export default GroupList
 
 const GroupButton = (props) => (
-  <Grid className='groupBtn'>
+  <Grid className='groupBtn' key={props.keyId}>
     <Row>
       <Col xsHidden md={3} lg={3}>
         <Image className='group-pic' src={props.item.image === undefined ? pic : props.item.image} circle/>
@@ -432,7 +430,7 @@ const GroupButton = (props) => (
                     <Dialog
                       key={i}
                       modal={false}
-                      open={props.chipOpen.get(props.key + p.student_id)}
+                      open={props.chipOpen.size === 0 ? false : props.chipOpen.get(props.key + p.student_id)}
                       onRequestClose={() => props.handleRequestClose()}
                       autoScrollBodyContent
                       contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}

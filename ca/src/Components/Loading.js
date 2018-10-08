@@ -9,7 +9,7 @@ const Loading = (props) => (
       left={props.left}
       top={props.top}
       loadingColor={'#00AEAE'}
-      status={props.isLoading ? 'loading' : 'hid'}
+      status={props.isLoading ? 'loading' : 'hide'}
       style={{
         display: props.isLoading ? 'inline-block' : 'none',
         position: 'relative'
