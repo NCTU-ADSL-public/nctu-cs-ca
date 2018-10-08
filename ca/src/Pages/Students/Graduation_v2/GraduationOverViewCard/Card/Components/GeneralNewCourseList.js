@@ -118,19 +118,19 @@ class GeneralNewCourseList extends React.Component {
     }
 
     return (
-      <div>
-        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginTop: '20px' }}>
+      <div style={{ marginLeft: '40px' }}>
+        <div className='col-sm-12 col-md-3 col-lg-3' style={{ marginLeft: '20px' }}>
+          <div className={rwd ? classes.textRwd : classes.text} style={{ fontSize: '18px' }}>
+            核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginLeft: '-30px', marginTop: '20px' }}>
           <LinearProgress
             classes={{ barColorPrimary: classes.progress }}
             variant='determinate'
             value={progressValue.core > 100 ? 100 : progressValue.core}
             color={progressValue.core >= 100 ? 'primary' : 'secondary'}
           />
-        </div>
-        <div className='col-sm-12 col-md-8 col-lg-8' style={{ marginLeft: '20px' }}>
-          <div className={rwd ? classes.textRwd : classes.text}>
-            核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
-          </div>
         </div>
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
@@ -170,19 +170,19 @@ class GeneralNewCourseList extends React.Component {
           ))}
         </div>
 
-        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginTop: '40px' }}>
+        <div className='col-sm-12 col-md-3 col-lg-3' style={{ marginLeft: '20px', marginTop: '20px' }}>
+          <div className={rwd ? classes.textRwd : classes.text} style={{ fontSize: '18px' }}>
+            校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginLeft: '-30px', marginTop: '40px' }}>
           <LinearProgress
             classes={{ barColorPrimary: classes.progress }}
             variant='determinate'
             value={progressValue.basic > 100 ? 100 : progressValue.basic}
             color={progressValue.basic >= 100 ? 'primary' : 'secondary'}
           />
-        </div>
-        <div className='col-sm-12 col-md-8 col-lg-8' style={{ marginLeft: '20px', marginTop: '20px' }}>
-          <div className={rwd ? classes.textRwd : classes.text}>
-            校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
-          </div>
-        </div>
+        </div>  
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes.find(type => type.dimension === '校基本').courses.map((item, index) => (
@@ -218,18 +218,18 @@ class GeneralNewCourseList extends React.Component {
           ))}
         </div>
 
-        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginTop: '40px' }}>
+        <div className='col-sm-12 col-md-3 col-lg-3' style={{ marginLeft: '20px', marginTop: '20px' }}>
+          <div className={rwd ? classes.textRwd : classes.text} style={{ fontSize: '18px' }}>
+            跨院&nbsp;&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)&nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginLeft: '-30px', marginTop: '40px' }}>
           <LinearProgress
             classes={{ barColorPrimary: classes.progress }}
             variant='determinate'
             value={progressValue.cross > 100 ? 100 : progressValue.cross}
             color={progressValue.cross >= 100 ? 'primary' : 'secondary'}
           />
-        </div>
-        <div className='col-sm-12 col-md-8 col-lg-8' style={{ marginLeft: '20px', marginTop: '20px' }}>
-          <div className={rwd ? classes.textRwd : classes.text}>
-            跨院&nbsp;&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)&nbsp;&nbsp;&nbsp;
-          </div>
         </div>
 
         <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
@@ -265,7 +265,6 @@ class GeneralNewCourseList extends React.Component {
             </div>
           ))}
         </div>
-
       </div>
     )
   }
