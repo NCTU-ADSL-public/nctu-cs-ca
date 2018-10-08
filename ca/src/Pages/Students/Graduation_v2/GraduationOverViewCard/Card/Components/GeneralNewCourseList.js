@@ -39,33 +39,7 @@ const styles = theme => ({
   }
 })
 
-let generalCourseTypes = [
-  {
-    name: '人文',
-    dimension: '核心-人文',
-    courses: []
-  },
-  {
-    name: '社會',
-    dimension: '核心-社會',
-    courses: []
-  },
-  {
-    name: '自然',
-    dimension: '核心-自然',
-    courses: []
-  },
-  {
-    name: '校基本',
-    dimension: '校基本',
-    courses: []
-  },
-  {
-    name: '跨院',
-    dimension: '跨院',
-    courses: []
-  }
-]
+
 
 class GeneralNewCourseList extends React.Component {
   constructor (props) {
@@ -73,6 +47,39 @@ class GeneralNewCourseList extends React.Component {
     this.decideCoreBtnBgColor = this.decideCoreBtnBgColor.bind(this)
     this.decideBtnFlash = this.decideBtnFlash.bind(this)
     this.decideBtnBgColor = this.decideBtnBgColor.bind(this)
+
+    this.generalCourseTypes = [
+      {
+        name: '人文',
+        dimension: '核心-人文',
+        courses: []
+      },
+      {
+        name: '社會',
+        dimension: '核心-社會',
+        courses: []
+      },
+      {
+        name: '自然',
+        dimension: '核心-自然',
+        courses: []
+      },
+      {
+        name: '校基本',
+        dimension: '校基本',
+        courses: []
+      },
+      {
+        name: '跨院',
+        dimension: '跨院',
+        courses: []
+      }
+    ]
+
+    this.props.courses.forEach(course => {
+      let type = this.generalCourseTypes.find(type => course.dimension === type.dimension)
+      if (type) type.courses.push(course)
+    })
   }
 
   decideCoreBtnBgColor (courses) {
@@ -103,17 +110,12 @@ class GeneralNewCourseList extends React.Component {
   }
 
   render () {
-    const { courses, overview, classes, rwd } = this.props
+    const { overview, classes, rwd } = this.props
     const progressValue = {
       core: Number(overview.credit.core) / Number(overview.require.core) * 100,
       basic: Number(overview.credit.basic) / Number(overview.require.basic) * 100,
       cross: Number(overview.credit.cross) / Number(overview.require.cross) * 100
     }
-
-    courses.forEach(course => {
-      let type = generalCourseTypes.find(type => course.dimension === type.dimension)
-      if (type) type.courses.push(course)
-    })
 
     return (
       <div>
@@ -132,7 +134,7 @@ class GeneralNewCourseList extends React.Component {
         </div>
 
         <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
-          {generalCourseTypes.filter(type => type.dimension.slice(0, 2) === '核心').map((type, index) => (
+          {this.generalCourseTypes.filter(type => type.dimension.slice(0, 2) === '核心').map((type, index) => (
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2' key={index}>
               <PopoverButton
                 label={type.name}
@@ -183,7 +185,7 @@ class GeneralNewCourseList extends React.Component {
         </div>
 
         <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
-          {generalCourseTypes.find(type => type.dimension === '校基本').courses.map((item, index) => (
+          {this.generalCourseTypes.find(type => type.dimension === '校基本').courses.map((item, index) => (
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2 pl-0' key={index}>
               <PopoverButton
                 label={item.cn}
@@ -231,7 +233,7 @@ class GeneralNewCourseList extends React.Component {
         </div>
 
         <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
-          {generalCourseTypes.find(type => type.dimension === '跨院').courses.map((item, index) => (
+          {this.generalCourseTypes.find(type => type.dimension === '跨院').courses.map((item, index) => (
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2 pl-0' key={index}>
               <PopoverButton
                 label={item.cn}
