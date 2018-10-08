@@ -7,8 +7,9 @@ import TeacherHead from './Pages/Teachers/Head'
 import Head from './Pages/Students/Head'
 import AssistantHead from './Pages/Assistants/Head'
 import AssistantHome from './Pages/Assistants/Home'
-import AssistantGrad from './Pages/Assistants/Graduation'
+import AssistantGrad from './Pages/Assistants/Graduation_v2'
 import AssistantProject from './Pages/Assistants/Project_v3'
+import AssistantVerify from './Pages/Assistants/Verify'
 import AssistantMail from './Pages/Assistants/Mail'
 import StudentDetail from './Pages/Assistants/Graduation/StudentDetail'
 import StudentList from './Pages/Assistants/Family/StudentList'
@@ -43,6 +44,7 @@ const Router = () => (
         <Route exact path='/assistants/project' render={() => <Frame><AssistantProject /></Frame>} />
         <Route exact path='/assistants/family' render={() => <Frame><TeacherList /></Frame>} />
         <Route exact path='/assistants/family/:tid' component={StudentList} />
+        <Route exact path='/assistants/verify' component={AssistantVerify} />
         <Route exact path='/assistants/mail' render={() => <Frame><AssistantMail /></Frame>} />
         <Route exact path='/assistants/head/s/:sid' component={StudentDetail} />
 

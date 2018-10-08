@@ -14,6 +14,25 @@
     float: left;
 }
 
+.subTitle-item {
+    float: left;
+}
+
+.subTitle-item-mui {
+    position: relative;
+    top: -18px;
+}
+
+.apply-btn-year {
+    font-size: 19px;
+    font-weight: bolder;
+    padding: 4px 8px;
+    margin: 10px;
+    border-radius: 10px;
+    background: rgb(234, 176, 189);
+    color: #fff6f2;
+}
+
 .groups {
     margin: 0 0 60px 0;
 }
