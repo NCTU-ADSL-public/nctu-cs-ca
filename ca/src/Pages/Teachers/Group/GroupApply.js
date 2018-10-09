@@ -300,6 +300,7 @@ class GroupApply extends React.Component {
               this.state.applyList.map((item, i) => (
                 <ApplyButton
                   key={i}
+                  keyId={i}
                   item={item}
                   idCard={this.props.idCard}
                   parentFunction={this.triggerUpdate}
@@ -328,7 +329,7 @@ const StudentStatusHint = (props) => (
 
 const ApplyButton = (props) => {
   return (
-    <Grid style={styles.groupBtn}>
+    <Grid style={styles.groupBtn} key={props.keyId}>
       <Row style={{marginBottom: '10px'}}>
         <Col xs={12} md={12} lg={12}>
           <ReplyDialog
@@ -366,7 +367,7 @@ const ApplyButton = (props) => {
                       <Dialog
                         key={i}
                         modal={false}
-                        open={props.chipOpen.get(props.key + p.student_id)}
+                        open={props.chipOpen.size === 0 ? false : props.chipOpen.get(props.key + p.student_id)}
                         onRequestClose={() => props.handleRequestClose()}
                         autoScrollBodyContent
                         contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
