@@ -41,7 +41,7 @@ const styles = theme => ({
     marginTop: '20px',
     marginBottom: '20px',
     fontSize: '20px',
-    padding: '10px'
+    padding: '20px'
   },
   icon: {
     fontSize: '40px',
@@ -108,7 +108,9 @@ class index extends React.Component {
     return (
       <div className = { classes.container } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
-          <div className = 'col-md-6 col-lg-6 col-xs-12' style = {{ display: 'flex' }} >
+          <div className = 'col-md-2 col-lg-2'>
+          </div>
+          <div className = 'col-md-8 col-lg-8 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
             <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
               <DialogTitle><div style = {{ fontSize: '30px' }} >畢業預審狀況</div></DialogTitle>

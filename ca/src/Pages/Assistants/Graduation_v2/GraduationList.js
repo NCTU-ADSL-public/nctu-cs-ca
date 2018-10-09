@@ -60,7 +60,7 @@ class index extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      studentsPerPage: 10,
+      studentsPerPage: 8,
       page: 0
     }
   }
