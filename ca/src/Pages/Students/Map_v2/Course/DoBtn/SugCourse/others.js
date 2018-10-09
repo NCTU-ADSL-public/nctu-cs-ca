@@ -10,6 +10,7 @@ import {
   TableRow,
   TableRowColumn
 } from 'material-ui/Table'
+import './style.css'
 
 const fontStyle = {
   verticalAlign: 'default',
@@ -28,7 +29,7 @@ const TableRowStyle = {
   color: '#454545'
 }
 
-/* const tableData = [
+const tableData = [
   {
     cos_cname: '資料庫系統概論',
     teacher: '彭文志',
@@ -71,7 +72,7 @@ const TableRowStyle = {
     cos_time: '2EF',
     cos_code: 'DCP129'
   }
-] */
+]
 
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
@@ -91,7 +92,7 @@ export default class TableExampleComplex extends Component {
       deselectOnClickaway: true,
       showCheckboxes: false,
       height: '100%',
-      tableData: []
+      tableData: tableData
     }
   }
 
@@ -133,6 +134,7 @@ export default class TableExampleComplex extends Component {
               <TableRow>
                 <TableHeaderColumn tooltip='按推薦優先順序排列課程'>順序</TableHeaderColumn>
                 <TableHeaderColumn tooltip='課程名稱'>課程</TableHeaderColumn>
+                <TableHeaderColumn>此推薦是否對你有幫助</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody
@@ -146,6 +148,13 @@ export default class TableExampleComplex extends Component {
                   style={TableRowStyle}>
                   <TableRowColumn>{index + 1}</TableRowColumn>
                   <TableRowColumn>{row.cos_cname}</TableRowColumn>
+                  <TableRowColumn className="rating">
+                    <i className="fa fa-star star"/>
+                    <i className="fa fa-star star"/>
+                    <i className="fa fa-star star"/>
+                    <i className="fa fa-star star"/>
+                    <i className="fa fa-star star"/>
+                  </TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>
