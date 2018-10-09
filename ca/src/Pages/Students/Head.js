@@ -11,6 +11,7 @@ import GradCreditCheckPage from './Graduation_v2'
 import Mail from '../../Components/mail'
 import ProjectList from './ProjectList'
 import Mentor from './Mentor'
+import Credit from './Credit'
 
 import Navbar from '../../Components/Navbar'
 
@@ -147,7 +148,7 @@ class Head extends Component {
       return (
         <FadeIn>
           <MuiThemeProvider>
-            <ProjectList />
+            <Credit />
           </MuiThemeProvider>
         </FadeIn>
       )
