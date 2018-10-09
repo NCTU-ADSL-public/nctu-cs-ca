@@ -17,6 +17,10 @@ import grey from '@material-ui/core/colors/grey';
 import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red';
+import FirstPage from '@material-ui/icons/FirstPage';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import LastPage from '@material-ui/icons/LastPage';
 
 const styles = theme => ({
   container: {
@@ -73,7 +77,9 @@ class index extends React.Component {
     this.state = {
       filter_status: [false, false, false],
       input: '',
-      open_filter: false
+      open_filter: false,
+      page: 0,
+      studentsPerPage: 8
     }
   }
 
@@ -101,7 +107,7 @@ class index extends React.Component {
   render() {
 
     const { classes, students } = this.props
-    const { filter_status, open_filter, input } = this.state
+    const { filter_status, open_filter, input, page, studentsPerPage } = this.state
 
 
 
@@ -169,7 +175,25 @@ class index extends React.Component {
             </FormControl>
           </div>
         </div>
-        <GraduationList students = { this.filter(students) }/>
+        <GraduationList students = {
+          this.filter(students)
+              .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
+         }
+         page
+        />
+        <div style = {{ textAlign: 'center', marginTop: '10px', marginBottom: '50px' }} >
+          <FirstPage className = { classes.icon } onClick = { () => this.setState({ page: 0 }) } />
+          <ChevronLeft className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, page - 1) }) } />
+          <span style = {{
+            display: 'inline-flex',
+            verticalAlign: 'middle',
+            fontSize: '20px',
+            marginRight: '20px',
+            marginLeft: '20px'
+          }}>{page + 1} / { Math.max(1, Math.ceil(this.filter(students).length / studentsPerPage)) }</span>
+          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.min(Math.ceil(this.filter(students).length / studentsPerPage) - 1, page + 1)) }) } />
+          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.ceil(this.filter(students).length / studentsPerPage) - 1) }) } />
+        </div>
       </div>
     )
   }

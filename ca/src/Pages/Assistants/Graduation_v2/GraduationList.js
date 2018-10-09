@@ -11,11 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgressbar from 'react-circular-progressbar'
-import TablePagination from '@material-ui/core/TablePagination';
-import FirstPage from '@material-ui/icons/FirstPage';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import LastPage from '@material-ui/icons/LastPage';
+import TablePagination from '@material-ui/core/TablePagination'
 import grey from '@material-ui/core/colors/grey';
 import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue';
@@ -75,9 +71,9 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, students } = this.props
-    const { studentsPerPage, page } = this.state
-    const emptyRows = studentsPerPage - Math.min(studentsPerPage, students.length - page * studentsPerPage);
+    const { classes, students, page } = this.props
+    const { studentsPerPage } = this.state
+    const emptyRows = studentsPerPage - Math.min(studentsPerPage, students.length);
 
     return (
       <div>
@@ -94,7 +90,6 @@ class index extends React.Component {
           <TableBody>
             {
               students
-              .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
               .map ( student => (
                 <TableRow onClick={()=>console.log("Hello")}>
                   <TableCell className={classes.font}>{student.id}</TableCell>
@@ -126,19 +121,6 @@ class index extends React.Component {
             )}
           </TableBody>
         </Table>
-        <div style = {{ textAlign: 'center', marginTop: '10px', marginBottom: '50px' }} >
-          <FirstPage className = { classes.icon } onClick = { () => this.setState({ page: 0 }) } />
-          <ChevronLeft className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, page - 1) }) } />
-          <span style = {{
-            display: 'inline-flex',
-            verticalAlign: 'middle',
-            fontSize: '20px',
-            marginRight: '20px',
-            marginLeft: '20px'
-          }}>{page + 1} / { Math.max(1, Math.ceil(students.length / studentsPerPage)) }</span>
-          <ChevronRight className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.min(Math.ceil(students.length / studentsPerPage) - 1, page + 1)) }) } />
-          <LastPage className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, Math.ceil(students.length / studentsPerPage) - 1) }) } />
-        </div>
       </div>
     )
   }
