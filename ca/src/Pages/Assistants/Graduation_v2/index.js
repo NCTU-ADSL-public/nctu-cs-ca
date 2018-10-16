@@ -3,12 +3,15 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 
 import GraduationList from './GraduationList'
+import GraduationListPanel from './GraduationListPanel'
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FilterList from '@material-ui/icons/FilterList';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import Done from '@material-ui/icons/Done';
 import Clear from '@material-ui/icons/Clear';
 import QueryBuilder from '@material-ui/icons/QueryBuilder';
@@ -79,7 +82,8 @@ class index extends React.Component {
       input: '',
       open_filter: false,
       page: 0,
-      studentsPerPage: 8
+      studentsPerPage: 8,
+      grade: 4
     }
   }
 
@@ -107,7 +111,7 @@ class index extends React.Component {
   render() {
 
     const { classes, students } = this.props
-    const { filter_status, open_filter, input, page, studentsPerPage } = this.state
+    const { filter_status, open_filter, input, page, studentsPerPage, grade } = this.state
 
 
 
@@ -116,7 +120,7 @@ class index extends React.Component {
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
           <div className = 'col-md-2 col-lg-2'>
           </div>
-          <div className = 'col-md-8 col-lg-8 col-xs-12' style = {{ display: 'flex' }} >
+          <div className = 'col-md-5 col-lg-5 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
             <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
               <DialogTitle><div style = {{ fontSize: '30px' }} >畢業預審狀況</div></DialogTitle>
@@ -174,13 +178,56 @@ class index extends React.Component {
               />
             </FormControl>
           </div>
+          <div className = 'col-md-3 col-lg-3 col-xs-12' style = {{ display: 'flex' }} >
+            <FormControl style = {{ width: '100%' }}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.cssLabel,
+                  focused: classes.cssFocused,
+                }}
+              >
+                學期
+              </InputLabel>
+              <Select
+                input = {
+                  <Input
+                    classes={{
+                      underline: classes.cssUnderline,
+                    }}
+                  />
+                }
+                value = { grade }
+                style = {{ fontSize: '15px' }}
+                onChange={
+                  (event) => {
+                    console.log("API!!!!!")
+                    this.setState({ grade: event.target.value, page: 0 })
+                  }
+                }
+              >
+                <MenuItem value = { 1 } style = {{ fontSize: '20px' }} >一年級</MenuItem>
+                <MenuItem value = { 2 } style = {{ fontSize: '20px' }} >二年級</MenuItem>
+                <MenuItem value = { 3 } style = {{ fontSize: '20px' }} >三年級</MenuItem>
+                <MenuItem value = { 4 } style = {{ fontSize: '20px' }} >四年級</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
         </div>
+        {/*
         <GraduationList students = {
           this.filter(students)
               .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
          }
          page
         />
+        */}
+        {
+          <GraduationListPanel students = {
+            this.filter(students)
+                .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
+              }
+           />
+        }
         <div style = {{ textAlign: 'center', marginTop: '10px', marginBottom: '50px' }} >
           <FirstPage className = { classes.icon } onClick = { () => this.setState({ page: 0 }) } />
           <ChevronLeft className = { classes.icon } onClick = { () => this.setState({ page: Math.max(0, page - 1) }) } />
