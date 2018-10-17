@@ -10,7 +10,8 @@ export const fetchGraduateList = (post_item) => dispatch => {
     console.log(post_item)
     console.log("RES DATA")
     console.log(res.data)
-    res.data.map( (student, index) => dispatch(fetchDetail( { student_id: student.student_id } )))
+    // res.data.map( (student, index) => dispatch(fetchDetail( { student_id: student.student_id } )))
+    dispatch(fetchDetail( { student_id: res.data[0].student_id }  ))
   }).catch( err => {
     console.log(err)
     console.log("POST_Item")
