@@ -24,6 +24,7 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import LastPage from '@material-ui/icons/LastPage';
+import { fetchGraduateList } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
 
 const styles = theme => ({
   container: {
@@ -70,7 +71,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+  fetch_graduate_list: (post_item) => dispatch(fetchGraduateList(post_item))
 })
 
 class index extends React.Component {
@@ -85,6 +86,8 @@ class index extends React.Component {
       studentsPerPage: 8,
       grade: 4
     }
+    props.fetch_graduate_list( {grade: this.state.grade} )
+    console.log(props.students)
   }
 
   filter = (students) => {

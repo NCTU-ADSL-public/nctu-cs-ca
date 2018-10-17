@@ -10,10 +10,26 @@ import CircularProgressbar from 'react-circular-progressbar'
 import Done from '@material-ui/icons/Done';
 import Clear from '@material-ui/icons/Clear';
 import QueryBuilder from '@material-ui/icons/QueryBuilder';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import red from '@material-ui/core/colors/red';
 
 const styles = theme => ({
   card: {
     marginTop: '10px'
+  },
+  tabRoot: {
+    background: '#34855e',
+    color: 'white',
+    margin: '0 1px',
+  },
+  tabLabel: {
+    fontSize: 15
+  },
+  border: {
+    margin: '5px',
+    border: '1px solid grey',
+    borderRadius: '5px'
   }
 })
 
@@ -41,15 +57,16 @@ class ListPanel extends React.Component {
 
     return (
       <Card className={classes.card}>
-        <CardContent>
-          <div style={{ width: "120px" }}>
-            <div style = {{ fontSize: '35px', fontWeight: 'bold' }}>{ student.name }</div>
-            <div style = {{ fontSize: '18px', marginBottom: '10px'}}>{ student.id + ' / ' + student.program }</div>
+        <CardContent style = {{ display: 'flex' }}>
+          <div style={{ width: '15%', display: 'block' }}>
+            <div style = {{ fontSize: '30px', fontWeight: 'bold' }}>{ student.name }</div>
+            <div style = {{ fontSize: '15px', marginBottom: '10px' }}>{ student.id + ' / ' + student.program }</div>
             <CircularProgressbar
               percentage={100 * student.total / 128}
               text={student.total}
               initialAnimation
               styles={{
+                root: { maxWidth: '120px' },
                 path: { stroke: '#34855e' },
                 text: { fill: '#34855e', fontSize: '25px', fontWeight: 'bold' }
               }}
@@ -57,21 +74,157 @@ class ListPanel extends React.Component {
             <div>
             {
               parseInt(student.status) === 0 && <span>
-                <Clear style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                <Clear style = {{ fontSize: '25px', verticalAlign: 'middle', marginRight: '5px' }} />
                 <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '25px', fontWeight: 'bold' }} >未符合</div>
               </span>
               ||
               parseInt(student.status) === 1 && <span>
-                <QueryBuilder style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                <QueryBuilder style = {{ fontSize: '25px', verticalAlign: 'middle', marginRight: '5px' }} />
                 <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '25px', fontWeight: 'bold' }} >將符合</div>
               </span>
               ||
               parseInt(student.status) === 2 && <span>
-                <Done style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                <Done style = {{ fontSize: '25px', verticalAlign: 'middle', marginRight: '5px' }} />
                 <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '25px', fontWeight: 'bold' }} >已符合</div>
               </span>
             }
+            </div>
+          </div>
+          <div style = {{ width: '80%', paddingLeft: '20px' }}>
+            <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
+              <div style = {{ fontSize: '23px', float: 'left', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>必修</div>
+              <div className = 'col-md-11 col-lg-11 col-xs-11'>
+                <Tabs
+                  scrollable
+                  scrollButtons = "auto"
+                  style = {{ width: '100%' }}
+                >
+                  <Tab label="資訊工程專題(一)" classes = {{
+                    root: classes.tabRoot,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected
+                  }} />
+                  <Tab label="物件導向程式設計與資料結構" classes = {{
+                    root: classes.tabRoot,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected
+                  }} />
+                  <Tab label="Item Three" classes = {{
+                    root: classes.tabRoot,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected
+                  }} />
+                  <Tab label="Item Four" classes = {{
+                    root: classes.tabRoot,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected
+                  }} />
+                  <Tab label="Item Five" classes = {{
+                    root: classes.tabRoot,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected
+                  }} />
+                  <Tab label="Item Six" classes = {{
+                    root: classes.tabRoot,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected
+                  }} />
+                  <Tab label="Item Seven" classes = {{
+                    root: classes.tabRoot,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected
+                  }} />
+                </Tabs>
+              </div>
+            </div>
+            <hr />
+            <div style = {{ width: '100%' }}>
+              <div className = 'row'>
+                <div className = 'col-md-4 col-lg-4 col-xs-4' style = {{ marginTop: '20px' }}>
+                  <div className = 'row' style = {{ marginTop: '10px' }} >
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      專業選修
+                    </div>
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      其他選修
+                    </div>
+                  </div>
+                  <div className = 'row' style = {{ marginTop: '10px' }} >
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      {"體　　育"}
+                    </div>
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      服務學習
+                    </div>
+                  </div>
+                  <div className = 'row' style = {{ marginTop: '10px' }} >
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      藝文護照
+                    </div>
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      導師時間
+                    </div>
+                  </div>
+                </div>
+                <div className = 'col-md-5 col-lg-5 col-xs-5'
+                  style = {{
+                    margin: '5px',
+                    border: '1px solid #dddddd',
+                    borderRadius: '5px'
+                  }}
+                >
+                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識</div>
+                  <div className = 'row'>
+                    <div className = 'col-md-4 col-lg-4 col-xs-4'>
+                      <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }} >新制</div>
+                      <hr style = {{ margin: '1px' }}/>
+                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"核　心"}</div>
+                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"跨　院"}</div>
+                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"校基本"}</div>
+                    </div>
+                    <div className = 'col-md-8 col-lg-8 col-xs-8'>
+                      <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制</div>
+                      <hr style = {{ margin: '1px' }}/>
+                      <div className = 'row' style = {{ marginLeft: '1px' }}>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          當代
+                        </div>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          文化
+                        </div>
+                      </div>
+                      <div className = 'row' style = {{ marginLeft: '1px' }}>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          歷史
+                        </div>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          公民
+                        </div>
+                      </div>
+                      <div className = 'row' style = {{ marginLeft: '1px' }}>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          群己
+                        </div>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          自然
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className = 'col-md-2 col-lg-2 col-xs-2'
+                  style = {{
+                    margin: '5px',
+                    border: '1px solid #dddddd',
+                    borderRadius: '5px'
+                  }}
+                >
+                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語</div>
+                  <div className = 'row' style = {{ fontSize: '18px', padding: '17px' }} >基礎</div>
+                  <div className = 'row' style = {{ fontSize: '18px', padding: '17px' }} >進階</div>
+                </div>
 
+              </div>
             </div>
           </div>
         </CardContent>

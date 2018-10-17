@@ -1,7 +1,8 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  students: [{
+  students: [
+  {
       "id": "0416001",
       "name": "吳允英",
       "program": "資A",
@@ -83,5 +84,12 @@ const initialState = {
   ]
 }
 export default handleActions({
-
+  STORE_GRADUATE_DETAIL: (state, action) => ({ ...state,
+    students: state.students.map( (student, index) => index !== action.payload.index ? student : {...student,
+      detail: action.payload.data
+    })
+  }),
+  STORE_GRADUATE_LIST: (state, action) => ({ ...state,
+    students: action.payload
+  })
 }, initialState)
