@@ -84,7 +84,7 @@ class index extends React.Component {
       open_filter: false,
       page: 0,
       studentsPerPage: 8,
-      grade: 4
+      grade: '一'
     }
     props.fetch_graduate_list( {grade: this.state.grade} )
     console.log(props.students)
@@ -113,7 +113,7 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, students } = this.props
+    const { classes, students, fetch_graduate_list } = this.props
     const { filter_status, open_filter, input, page, studentsPerPage, grade } = this.state
 
 
@@ -203,7 +203,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    console.log("API!!!!!")
+                    fetch_graduate_list( {grade: event.target.value} )
                     this.setState({ grade: event.target.value, page: 0 })
                   }
                 }
