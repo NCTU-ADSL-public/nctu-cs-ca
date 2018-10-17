@@ -12,7 +12,7 @@ export const fetchGraduateList = (post_item) => dispatch => {
     console.log("RES DATA")
     console.log(res.data)
     dispatch(store_graduate_list(res.data))
-    res.data.map( (student, index) => fetchDetail( { id: student.id }, index) )
+    res.data.map( (student, index) => dispatch(fetchDetail( { id: student.id }, index) ))
   }).catch( err => {
     console.log(err)
   })
