@@ -806,7 +806,7 @@
         "semester": 1,
         "move": false,
         "type": "通識",
-        "dimension": "校基本"
+        "dimension": "校基本素養"
       },
       {
         "cn": "數位內容設計與展演",
@@ -823,7 +823,7 @@
         "semester": 2,
         "move": false,
         "type": "通識",
-        "dimension": "校基本"
+        "dimension": "校基本素養"
       },
       {
         "cn": "文學經典:詩經",
@@ -857,7 +857,7 @@
         "semester": 1,
         "move": false,
         "type": "通識",
-        "dimension": "校基本"
+        "dimension": "校基本素養"
       }
     ]
   },
