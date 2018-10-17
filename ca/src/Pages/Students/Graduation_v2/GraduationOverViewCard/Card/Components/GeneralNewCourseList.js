@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import PopoverButton from './PopoverButton'
 import MoveGroupButton from './MoveGroupButton'
 
@@ -39,8 +38,6 @@ const styles = theme => ({
   }
 })
 
-
-
 class GeneralNewCourseList extends React.Component {
   constructor (props) {
     super(props)
@@ -66,12 +63,12 @@ class GeneralNewCourseList extends React.Component {
       },
       {
         name: '校基本',
-        dimension: '校基本',
+        dimension: '校基本素養',
         courses: []
       },
       {
         name: '跨院',
-        dimension: '跨院',
+        dimension: '跨院基本素',
         courses: []
       }
     ]
@@ -111,11 +108,6 @@ class GeneralNewCourseList extends React.Component {
 
   render () {
     const { overview, classes, rwd } = this.props
-    const progressValue = {
-      core: Number(overview.credit.core) / Number(overview.require.core) * 100,
-      basic: Number(overview.credit.basic) / Number(overview.require.basic) * 100,
-      cross: Number(overview.credit.cross) / Number(overview.require.cross) * 100
-    }
 
     return (
       <div style={{ marginLeft: '40px' }}>
@@ -123,14 +115,6 @@ class GeneralNewCourseList extends React.Component {
           <div className={rwd ? classes.textRwd : classes.text} style={{ fontSize: '18px' }}>
             核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
           </div>
-        </div>
-        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginLeft: '-30px', marginTop: '20px' }}>
-          <LinearProgress
-            classes={{ barColorPrimary: classes.progress }}
-            variant='determinate'
-            value={progressValue.core > 100 ? 100 : progressValue.core}
-            color={progressValue.core >= 100 ? 'primary' : 'secondary'}
-          />
         </div>
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
@@ -175,17 +159,9 @@ class GeneralNewCourseList extends React.Component {
             校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
           </div>
         </div>
-        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginLeft: '-30px', marginTop: '40px' }}>
-          <LinearProgress
-            classes={{ barColorPrimary: classes.progress }}
-            variant='determinate'
-            value={progressValue.basic > 100 ? 100 : progressValue.basic}
-            color={progressValue.basic >= 100 ? 'primary' : 'secondary'}
-          />
-        </div>  
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
-          {this.generalCourseTypes.find(type => type.dimension === '校基本').courses.map((item, index) => (
+          {this.generalCourseTypes.find(type => type.dimension === '校基本素養').courses.map((item, index) => (
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2 pl-0' key={index}>
               <PopoverButton
                 label={item.cn}
@@ -223,17 +199,9 @@ class GeneralNewCourseList extends React.Component {
             跨院&nbsp;&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)&nbsp;&nbsp;&nbsp;
           </div>
         </div>
-        <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginLeft: '-30px', marginTop: '40px' }}>
-          <LinearProgress
-            classes={{ barColorPrimary: classes.progress }}
-            variant='determinate'
-            value={progressValue.cross > 100 ? 100 : progressValue.cross}
-            color={progressValue.cross >= 100 ? 'primary' : 'secondary'}
-          />
-        </div>
 
         <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
-          {this.generalCourseTypes.find(type => type.dimension === '跨院').courses.map((item, index) => (
+          {this.generalCourseTypes.find(type => type.dimension === '跨院基本素').courses.map((item, index) => (
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2 pl-0' key={index}>
               <PopoverButton
                 label={item.cn}
