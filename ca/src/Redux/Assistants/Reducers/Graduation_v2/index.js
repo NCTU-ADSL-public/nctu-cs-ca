@@ -85,11 +85,6 @@ const initialState = {
 }
 export default handleActions({
   STORE_GRADUATE_DETAIL: (state, action) => ({ ...state,
-    students: state.students.map( (student, index) => index !== action.payload.index ? student : {...student,
-      detail: action.payload.data
-    })
-  }),
-  STORE_GRADUATE_LIST: (state, action) => ({ ...state,
-    students: action.payload
+    students: [...state.students, action.payload]
   })
 }, initialState)
