@@ -101,7 +101,7 @@ class index extends React.Component {
         &&
         (
              !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-          || filter_status[parseInt(student.status)]
+          || filter_status[parseInt(student.detail.status)]
         )
       )
     )

@@ -130,26 +130,26 @@ class ListPanel extends React.Component {
                 <div className = 'col-md-4 col-lg-4 col-xs-4' style = {{ marginTop: '25px' }}>
                   <div className = 'row' style = {{ marginTop: '10px' }} >
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      專業選修{ student.detail.pro === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.pro</span> }
+                      專業選修{ student.detail.pro === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.pro}</span> }
                     </div>
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      其他選修{ student.detail.other === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.other</span> }
-                    </div>
-                  </div>
-                  <div className = 'row' style = {{ marginTop: '10px' }} >
-                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      {"體　　育"}{ student.detail.pe === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.pe</span> }
-                    </div>
-                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      服務學習{ student.detail.service === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.service</span> }
+                      其他選修{ student.detail.other === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.other}</span> }
                     </div>
                   </div>
                   <div className = 'row' style = {{ marginTop: '10px' }} >
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      藝文護照{ student.detail.art === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.art</span> }
+                      {"體　　育"}{ student.detail.pe === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.pe}</span> }
                     </div>
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      導師時間{ student.detail.mentor === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.mentor</span> }
+                      服務學習{ student.detail.service === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.service}</span> }
+                    </div>
+                  </div>
+                  <div className = 'row' style = {{ marginTop: '10px' }} >
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      藝文護照{ student.detail.art === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.art}</span> }
+                    </div>
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      導師時間{ student.detail.mentor === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.mentor}</span> }
                     </div>
                   </div>
                 </div>
@@ -165,35 +165,35 @@ class ListPanel extends React.Component {
                     <div className = 'col-md-5 col-lg-5 col-xs-5'>
                       <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }} >新制<span className = { classes.error } >4</span></div>
                       <hr style = {{ margin: '1px' }}/>
-                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"核　心"}{ student.detail.general.new.core === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.new.core</span> }</div>
-                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"跨　院"}{ student.detail.general.new.cross === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.new.cross</span> }</div>
-                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"校基本"}{ student.detail.general.new.basic === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.new.basic</span> }</div>
+                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"核　心"}{ student.detail.general.new.core === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.core}</span> }</div>
+                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"跨　院"}{ student.detail.general.new.cross === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.cross}</span> }</div>
+                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"校基本"}{ student.detail.general.new.basic === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.basic}</span> }</div>
                     </div>
                     <div className = 'col-md-7 col-lg-7 col-xs-7'>
                       <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制<span className = { classes.error } >6</span></div>
                       <hr style = {{ margin: '1px' }}/>
                       <div className = 'row' style = {{ marginLeft: '1px' }}>
                         <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          當代{ student.detail.general.old.contemp === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.old.contemp</span> }
+                          當代{ student.detail.general.old.contemp === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.contemp}</span> }
                         </div>
                         <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          文化{ student.detail.general.old.culture === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.old.culture</span> }
-                        </div>
-                      </div>
-                      <div className = 'row' style = {{ marginLeft: '1px' }}>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          歷史{ student.detail.general.old.history === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.old.history</span> }
-                        </div>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          公民{ student.detail.general.old.citizen === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.old.citizen</span> }
+                          文化{ student.detail.general.old.culture === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.culture}</span> }
                         </div>
                       </div>
                       <div className = 'row' style = {{ marginLeft: '1px' }}>
                         <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          群己{ student.detail.general.old.group === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.old.group</span> }
+                          歷史{ student.detail.general.old.history === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.history}</span> }
                         </div>
                         <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          自然{ student.detail.general.old.science === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.general.old.science</span> }
+                          公民{ student.detail.general.old.citizen === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.citizen}</span> }
+                        </div>
+                      </div>
+                      <div className = 'row' style = {{ marginLeft: '1px' }}>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          群己{ student.detail.general.old.group === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.group}</span> }
+                        </div>
+                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                          自然{ student.detail.general.old.science === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.science}</span> }
                         </div>
                       </div>
                     </div>
@@ -207,8 +207,8 @@ class ListPanel extends React.Component {
                   }}
                 >
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語</div>
-                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >基礎{ student.detail.lang.basic === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.lang.basic</span> }</div>
-                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >進階{ student.detail.lang.advanced === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >student.detail.lang.advanced</span> }</div>
+                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >基礎{ student.detail.lang.basic === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.basic}</span> }</div>
+                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >進階{ student.detail.lang.advanced === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.advanced}</span> }</div>
                 </div>
 
               </div>
