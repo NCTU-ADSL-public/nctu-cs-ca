@@ -3,38 +3,12 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import PopoverButton from './PopoverButton'
 import MoveGroupButton from './MoveGroupButton'
+import './GeneralNewCourseList.css'
 
 const styles = theme => ({
   container: {
-    margin: '1%',
-    fontFamily: 'Noto Sans CJK TC'
-  },
-  text: {
-    fontSize: '20px'
-  },
-  textRwd: {
-    fontSize: '10px'
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
-  },
-  littletext: {
-    fontSize: '15px'
-  },
-  appBar: {
-    position: 'relative',
-    backgroundColor: '#7c7c7c'
-  },
-  flex: {
-    flex: 1
-  },
-  chip: {
-    margin: '5px',
-    fontSize: '18px'
-  },
-  progress: {
-    backgroundColor: '#00a152'
+    marginLeft: '25px',
+    borderLeft: '15px solid #EAEAEA'
   }
 })
 
@@ -107,15 +81,16 @@ class GeneralNewCourseList extends React.Component {
   }
 
   render () {
-    const { overview, classes, rwd } = this.props
+    const { classes, overview, rwd } = this.props
 
     return (
-      <div style={{ marginLeft: '40px' }}>
-        <div className='col-sm-12 col-md-3 col-lg-3' style={{ marginLeft: '20px' }}>
-          <div className={rwd ? classes.textRwd : classes.text} style={{ fontSize: '18px' }}>
-            核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
+      <div className={classes.container}>
+        <div className='col-sm-4 col-md-3 col-lg-3 ' style={{ marginLeft: '20px', paddingRight: '40px' }}>
+          <div className='general-course-dimension' style={{ fontSize: '18px' }}>
+            核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp; (學分)
           </div>
         </div>
+        <div className='col-sm-1 col-md-1 col-lg-1 general-left-arrow' style={{ marginLeft: '-40px' }} />
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes.filter(type => type.dimension.slice(0, 2) === '核心' && !(type.dimension === '核心-自然' && type.courses.length === 0)).map((type, index) => (
@@ -154,11 +129,12 @@ class GeneralNewCourseList extends React.Component {
           ))}
         </div>
 
-        <div className='col-sm-12 col-md-3 col-lg-3' style={{ marginLeft: '20px', marginTop: '20px' }}>
-          <div className={rwd ? classes.textRwd : classes.text} style={{ fontSize: '18px' }}>
-            校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp; (學分) &nbsp;&nbsp;&nbsp;
+        <div className='col-sm-4 col-md-3 col-lg-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
+          <div className='general-course-dimension' style={{ fontSize: '18px' }}>
+            校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp; (學分)
           </div>
         </div>
+        <div className='col-sm-1 col-md-1 col-lg-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes.find(type => type.dimension === '校基本素養').courses.map((item, index) => (
@@ -194,11 +170,12 @@ class GeneralNewCourseList extends React.Component {
           ))}
         </div>
 
-        <div className='col-sm-12 col-md-3 col-lg-3' style={{ marginLeft: '20px', marginTop: '20px' }}>
-          <div className={rwd ? classes.textRwd : classes.text} style={{ fontSize: '18px' }}>
-            跨院&nbsp;&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)&nbsp;&nbsp;&nbsp;
+        <div className='col-sm-4 col-md-3 col-lg-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
+          <div className='general-course-dimension' style={{ fontSize: '18px' }}>
+            跨院&nbsp;&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)
           </div>
         </div>
+        <div className='col-sm-1 col-md-1 col-lg-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
 
         <div className='col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes.find(type => type.dimension === '跨院基本素').courses.map((item, index) => (
