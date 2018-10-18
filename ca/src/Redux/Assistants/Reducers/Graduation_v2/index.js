@@ -44,7 +44,7 @@ const initialState = {
 }
 export default handleActions({
   STORE_GRADUATE_DETAIL: (state, action) => ({ ...state,
-    students: action.payload
+    students: [...state.students, action.payload]
   }),
   CLEAR_STUDENTS: (state, action) => ({ ...state,
     students: []
