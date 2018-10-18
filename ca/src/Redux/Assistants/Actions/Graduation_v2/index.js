@@ -20,7 +20,11 @@ export const fetchGraduateList = (post_item) => dispatch => {
 }
 
 export const fetchDetail = student_id => dispatch => {
-  axios.get('/assistants/graduate/glist' + '?student_id=' + student_id).then( res => {
+  axios.get('/assistants/graduate/glist', {
+    params: {
+      student_id: student_id
+    }
+  }).then( res => {
     console.log("Fetching")
     console.log("GET_id")
     console.log(student_id)
