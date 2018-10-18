@@ -31,6 +31,7 @@ export const fetchDetail = student_id => dispatch => {
     dispatch(store_graduate_detail(res.data))
   }).catch( err => {
     console.log(err)
-    console.log("POST_Item")
+    console.log("GET_id")
+    console.log(student_id)
   })
 }
