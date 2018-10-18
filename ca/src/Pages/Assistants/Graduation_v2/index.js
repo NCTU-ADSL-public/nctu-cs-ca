@@ -87,6 +87,7 @@ class index extends React.Component {
       grade: '二'
     }
     props.fetch_graduate_list( {grade: this.state.grade} )
+    console.log("PROPS_STUDENTS")
     console.log(props.students)
   }
 
