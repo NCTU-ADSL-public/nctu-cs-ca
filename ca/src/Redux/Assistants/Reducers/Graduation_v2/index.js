@@ -9,7 +9,7 @@ const initialState = {
       "detail": {
           "total": 116,
           "status": 0,
-          "compulse":["計算機組織", "資工專題(二)"],
+          "compulse":[],
           "pro": 3,
           "other": 2,
           "general": {

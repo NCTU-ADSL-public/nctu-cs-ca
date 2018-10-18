@@ -107,6 +107,10 @@ class ListPanel extends React.Component {
             <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
               <div style = {{ fontSize: '23px', float: 'left', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>必修</div>
               <div className = 'col-md-11 col-lg-11 col-xs-11'>
+              {
+                student.detail.compulse.length === 0 ?
+                <Done className = { classes.ok } style = {{ fontSize: '30px', marginTop: '12px' }} />
+                :
                 <Tabs
                   scrollable
                   scrollButtons = "auto"
@@ -122,6 +126,7 @@ class ListPanel extends React.Component {
                   ))
                 }
                 </Tabs>
+              }
               </div>
             </div>
             <hr />
