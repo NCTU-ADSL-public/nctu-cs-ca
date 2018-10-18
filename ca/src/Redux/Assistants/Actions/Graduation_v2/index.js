@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions'
 import axios from 'axios'
 
 export const store_graduate_detail = createAction('STORE_GRADUATE_DETAIL')
+export const clear_students = createAction('CLEAR_STUDENTS')
 
 export const fetchGraduateList = (post_item) => dispatch => {
   axios.post('/assistants/graduate/gradeStudent', post_item).then( res => {
@@ -10,6 +11,7 @@ export const fetchGraduateList = (post_item) => dispatch => {
     console.log(post_item)
     console.log("RES DATA")
     console.log(res.data)
+    dispatch(clear_students())
     setTimeout(() => {
       res.data.slice(0, 5).map( student => dispatch(fetchDetail(student.student_id)))
     }, 1000)
