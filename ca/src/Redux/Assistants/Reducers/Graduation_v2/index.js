@@ -15,24 +15,24 @@ const initialState = {
           "general": {
               "old": {
                   "total": 0,
-                  "contemp": 0,
-                  "culture": 0,
-                  "history": 0,
-                  "citizen": 0,
-                  "group": 0,
-                  "science": 0,
+                  "contemp": 4,
+                  "culture": 4,
+                  "history": 4,
+                  "citizen": 4,
+                  "group": 4,
+                  "science": 4,
               },
               "new": {
                   "total": 0,
                   "core": 0,
                   "basic": 0,
-                  "cross": 0
+                  "cross": 3
               }
           },
           "lang": {
               "status": 0,
-              "basic": 0,
-              "advanced": 0
+              "basic_credit": 0,
+              "advanced_course": 0
           },
           "pe": 0,
           "service": 0,

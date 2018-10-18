@@ -38,7 +38,7 @@ const styles = theme => ({
     fontWeight: 'bold'
   },
   ok: {
-    fontSize: '15px',
+    fontSize: '20px',
     marginLeft: '15px',
     fontWeight: 'bold',
     color: 'green',
