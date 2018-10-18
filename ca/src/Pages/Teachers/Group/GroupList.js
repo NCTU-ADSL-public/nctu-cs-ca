@@ -221,11 +221,11 @@ class GroupList extends React.Component {
       let dataList = []
       console.log(data)
       data.forEach( item => {
-        let directory = item.year + '/' + this.props.idCard.name + '/' + item.research_title + '/image/image.jpg'
+        let directory = item.year + '/' + this.props.idCard.tname + '/' + item.research_title + '/image/image.jpg'
         let pathReference = storageRef.child(directory)
         pathReference.getDownloadURL().then(url => {
           let data_ = {...item, image: url}
-          directory = item.year + '/' + _this.props.idCard.name + '/' + item.research_title + '/file/file.pdf'
+          directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
           pathReference = storageRef.child(directory)
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
@@ -244,7 +244,7 @@ class GroupList extends React.Component {
         }).catch(error => {
           console.log(error)
           let data_ = {...item}
-          directory = item.year + '/' + _this.props.idCard.name + '/' + item.research_title + '/file/file.pdf'
+          directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
           pathReference = storageRef.child(directory)
           pathReference.getDownloadURL().then(url => {
             dataList.push({...data_, file: url})
@@ -393,7 +393,7 @@ const GroupButton = (props) => (
           <div className='groupModify'>
             <ChangeTitleDialog
               title={props.item.research_title}
-              firstSecond={props.item.firstSecond}
+              firstSecond={props.item.first_second}
               year={props.item.year}
               idCard={props.idCard}
               parentFunction={props.parentFunction}
@@ -403,7 +403,7 @@ const GroupButton = (props) => (
             <ScoreDialog
               title={props.item.research_title}
               participants={props.item.participants}
-              firstSecond={props.item.firstSecond}
+              firstSecond={props.item.first_second}
               idCard={props.idCard}
               year={props.item.year}
               parentFunction={props.parentFunction}
@@ -438,7 +438,7 @@ const GroupButton = (props) => (
                       <InfoCard
                         key={i}
                         student={p}
-                        sender={props.idCard.name}
+                        sender={props.idCard.tname}
                         sender_email={props.idCard.email}
                       />
                     </Dialog>

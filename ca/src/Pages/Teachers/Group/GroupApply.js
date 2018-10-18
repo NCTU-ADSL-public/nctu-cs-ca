@@ -375,7 +375,7 @@ const ApplyButton = (props) => {
                         <InfoCard
                           key={i}
                           student={p}
-                          sender={props.idCard.name}
+                          sender={props.idCard.tname}
                           sender_email={props.idCard.email}
                         />
                       </Dialog>

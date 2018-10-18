@@ -78,7 +78,7 @@ class Head extends Component {
         <Col>
           <a>
             <FadeIn>
-              <FamilyItem tname={this.props.idCard.name} tid={this.props.idCard.id} tmail={this.props.idCard.mail} />
+              <FamilyItem tname={this.props.idCard.tname} tid={this.props.idCard.id} tmail={this.props.idCard.mail} />
             </FadeIn>
           </a>
         </Col>,
