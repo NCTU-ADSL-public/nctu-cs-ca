@@ -11,7 +11,7 @@ export const fetchGraduateList = (post_item) => dispatch => {
     console.log("RES DATA")
     console.log(res.data)
     setTimeout(() => {
-      res.data.slice(0, 2).map( student => dispatch(fetchDetail(student.student_id)))
+      res.data.slice(0, 5).map( student => dispatch(fetchDetail(student.student_id)))
     }, 1000)
   }).catch( err => {
     console.log(err)
