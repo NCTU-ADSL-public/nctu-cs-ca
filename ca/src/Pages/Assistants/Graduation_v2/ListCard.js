@@ -207,8 +207,8 @@ class ListPanel extends React.Component {
                   }}
                 >
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語</div>
-                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >基礎{ student.detail.lang.basic === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.basic}</span> }</div>
-                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >進階{ student.detail.lang.advanced === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.advanced}</span> }</div>
+                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >基礎{ student.detail.lang.basic_credit === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.basic_credit}</span> }</div>
+                  <div className = 'row' style = {{ fontSize: '18px', padding: '19px' }} >進階{ student.detail.lang.advanced_course === 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.advanced_course}</span> }</div>
                 </div>
 
               </div>
