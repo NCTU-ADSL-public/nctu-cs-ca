@@ -10,7 +10,7 @@ export const fetchGraduateList = (post_item) => dispatch => {
     console.log(post_item)
     console.log("RES DATA")
     console.log(res.data)
-    res.data.map( student => dispatch(fetchDetail(student.student_id)))
+    res.data.slice(0, 8).map( student => dispatch(fetchDetail(student.student_id)))
   }).catch( err => {
     console.log(err)
     console.log("POST_Item")
