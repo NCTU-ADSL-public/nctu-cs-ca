@@ -227,7 +227,7 @@ class index extends React.Component {
         */}
         {
           <GraduationListPanel students = {
-            this.filter(students).sort()
+            this.filter(students).sort( (a, b) => a.id - b.id )
                 .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
               }
            />
