@@ -33,7 +33,7 @@ class Index extends React.Component {
     const { classes, rwd } = this.props
     if (rwd) {
       return (
-        <MenuItem className={classes.menuItem} onClick={() => this.printGradTable('1' + this.props.studentIdcard.student_id[0] + this.props.studentIdcard.student_id[1] + '103學年度畢業預審表-' + this.props.studentIdcard.student_id)}>
+        <MenuItem className={classes.menuItem} onClick={() => this.printGradTable('104學年度畢業預審表-' + this.props.studentIdcard.student_id)}>
           <ListItemIcon className={classes.icon}>
             <PrintIcon />
           </ListItemIcon>
@@ -43,7 +43,7 @@ class Index extends React.Component {
     }
     return (
       <div>
-        <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={() => this.printGradTable('1' + this.props.studentIdcard.student_id[0] + this.props.studentIdcard.student_id[1] + '103學年度畢業預審表-' + this.props.studentIdcard.student_id)}>
+        <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={() => this.printGradTable('104學年度畢業預審表-' + this.props.studentIdcard.student_id)}>
           <PrintIcon className={classes.icon} />
           列印預審文件
         </Button>

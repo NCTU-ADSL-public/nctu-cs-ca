@@ -4,7 +4,7 @@ const initalState = {
   type: 'student', // for Navbar
   studentIdcard: {
     sname: '資料錯誤',
-    student_id: '00099000',
+    student_id: '0416000',
     program: '數學',
     grade: '大三',
     email: 'hihi@gmail.com',
