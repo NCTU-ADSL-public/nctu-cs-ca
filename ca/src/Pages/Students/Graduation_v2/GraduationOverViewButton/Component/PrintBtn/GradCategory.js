@@ -15,7 +15,11 @@ class GradCategory extends React.Component {
     let subjects = this.state.subjects
     for (let i = 0; i < subjects.length; i++) {
       // comment
-      if (this.state.name === '通識') { subjects[i].comment = subjects[i].dimension + '向度 ' } else { subjects[i].comment = '' }
+      if (this.state.name.slice(0, 2) === '通識') { 
+        subjects[i].comment = subjects[i].dimension + ' '
+      } else { 
+        subjects[i].comment = '' 
+      }
 
       // 抵免
       if (subjects[i].reason === 'notCS') {

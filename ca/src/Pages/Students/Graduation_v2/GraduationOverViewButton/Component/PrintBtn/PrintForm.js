@@ -12,13 +12,14 @@ class PrintForm extends React.Component {
   }
 
   render () {
-    let generalCatTitle = ['外語', '通識', '體育', '服務學習', '藝文賞析']
+    console.log(this.props.courseCategoryArray)
+    let generalCatTitle = ['外語', '通識(舊制)', '通識(新制)', '體育', '服務學習', '藝文賞析']
     let depCat = []
     let generalCat = []
     this.props.courseCategoryArray.forEach((item, i) => {
       if (generalCatTitle.indexOf(item.title) !== -1) {
         // Sort general course by 向度
-        if (item.title === '通識') {
+        if (item.title.slice(0, 2) === '通識') {
           item.course.sort(function (a, b) {
             if (a.dimension < b.dimension) return -1
             if (a.dimension > b.dimension) return 1
@@ -66,7 +67,7 @@ class PrintForm extends React.Component {
         <tbody>
           <tr className='borderLess'>
             <td colSpan='13' style={{ fontSize: '16pt', fontWeight: 'bold', height: '1.5em', color: '#0000FF' }}>
-              103學年度--{programName}
+              104學年度--{programName}
             </td>
           </tr>
           <tr className='borderLess left-text'>
