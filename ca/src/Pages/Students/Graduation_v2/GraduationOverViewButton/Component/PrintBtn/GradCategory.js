@@ -73,20 +73,19 @@ class GradCategory extends React.Component {
         {this.state.subjects.map((subject, index) =>
           <GradSubject
             key={index}
-            name={subject.cn + ' ' + subject.en + ((subject.english === true) ? ' [英語授課]' : '')}
+            name={subject.cn + ' ' + subject.en}
             credit={subject.originalCredit}
             realCredit={subject.realCredit}
             score={subject.score}
             semester={subject.semester}
             year={subject.year}
-            comment={subject.comment}
+            comment={subject.comment + ((subject.english === true) ? ' 英文授課' : '')}
           />
         )}
         {this.state.name === '外語' &&
         <tr>
           <td className='bg-orange left-text' colSpan='12'>
-            <span>★英檢：&nbsp;&nbsp;通過({geptShow[0]})&nbsp;&nbsp;&nbsp;未通過({geptShow[1]})&nbsp;&nbsp;&nbsp;已抵免({geptShow[2]})&nbsp;&nbsp;&nbsp;英文換修({geptShow[3]})</span><br />
-            <span style={{ fontSize: '8pt', fontWeight: 'bold', color: '#0000FF' }}>未通過者請勾選 (  )加修並通過「英文進階課程」4學分  (  )於畢業前自行報名並通過所列任ㄧ英文能力檢定考試與標準</span>
+            <span style={{ fontSize: '8pt', fontWeight: 'bold', color: '#0000FF' }}>★英檢未通過者需加修並通過「英文進階課程」4學分或於畢業前自行報名並通過所列任ㄧ英文能力檢定考試與標準</span>
           </td>
         </tr>
         }

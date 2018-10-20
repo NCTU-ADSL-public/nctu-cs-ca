@@ -6,11 +6,25 @@ import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import CheckIcon from '@material-ui/icons/CheckBox'
+import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import PrintForm from '../PrintBtn/PrintForm'
 
 const styles = theme => ({
+  appBar: {
+    position: 'relative',
+    background: '#3db586'
+  },
+  flex: {
+    flex: 1
+  },
   button: {
     margin: '20px 0 20px 0',
     background: '#7c7c7c',
@@ -59,12 +73,26 @@ class Index extends React.Component {
           onClose={this.handleClose}
           aria-labelledby='alert-dialog-title'
           aria-describedby='alert-dialog-description'
+          maxWidth='md'
         >
-          <PrintForm
-            profile={this.props.studentIdcard}
-            graduationCheckEnglishTest={this.props.englishCheck}
-            courseCategoryArray={this.props.reviewData}
-          />
+          <AppBar className={classes.appBar}>
+            <Toolbar >
+              <Typography variant='title' color='inherit' className={classes.flex} style={{ fontSize: '15px' }} >
+                確認審查資料
+              </Typography>
+              <IconButton color='inherit' onClick={this.handleClose} aria-label='Close'>
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <br />
+          <DialogContent>
+            <PrintForm
+              profile={this.props.studentIdcard}
+              graduationCheckEnglishTest={this.props.englishCheck}
+              courseCategoryArray={this.props.reviewData}
+            />
+          </DialogContent>
         </Dialog>
       </div>
     )
