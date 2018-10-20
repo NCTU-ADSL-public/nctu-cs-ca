@@ -2,6 +2,7 @@ import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import SendReviewBtn from './SendReviewBtn'
 import PrintBtn from './PrintBtn'
 import CourseChangeBtn from './CourseChangeBtn'
 
@@ -50,6 +51,7 @@ class LongMenu extends React.Component {
             }
           }}
         >
+          <SendReviewBtn />
           <PrintBtn rwd />
           <CourseChangeBtn />
         </Menu>
