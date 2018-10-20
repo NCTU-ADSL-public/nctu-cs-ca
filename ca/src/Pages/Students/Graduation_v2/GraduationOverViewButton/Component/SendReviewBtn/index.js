@@ -76,7 +76,7 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  reviewData: state.Student.Graduation.printdata,
+  reviewData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck
 })
