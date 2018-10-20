@@ -31,6 +31,13 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
 
 }
 
+export const reviewSubmit = (payload) => dispatch => {
+  axios.post('/students/graduate/check', payload).then(() => {
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
 export const changeCourse = (from, end, course) => dispatch => {
   let object = {from, end, course}
   dispatch(updateCourse(object))
