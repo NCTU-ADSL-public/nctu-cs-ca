@@ -28,7 +28,7 @@ import { fetchGraduateList } from '../../../Redux/Assistants/Actions/Graduation_
 
 const styles = theme => ({
   container: {
-    width: '80%',
+    width: '90%',
     margin: '0 auto',
     marginBottom: '30px'
   },
