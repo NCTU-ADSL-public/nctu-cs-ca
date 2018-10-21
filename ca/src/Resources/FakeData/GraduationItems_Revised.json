@@ -621,7 +621,7 @@
   },
   {
     "title": "通識(舊制)",
-    "credit": 13,
+    "credit": 16,
     "require": 20,
     "course": [
       {
@@ -725,16 +725,33 @@
         "move": false,
         "type": "通識",
         "dimension": "公民"
+      },
+      {
+        "cn": "管理學",
+        "en": "",
+        "score": 85,
+        "reason": "CS",
+        "complete": true,
+        "grade": "A",
+        "code": "IMS5326",
+        "realCredit": 3,
+        "originalCredit": 3,
+        "english": false,
+        "year": 3,
+        "semester": 1,
+        "move": false,
+        "type": "通識",
+        "dimension": "公民"
       }
     ]
   },
   {
     "title": "通識(新制)",
     "credit": {
-      "total": 13,
+      "total": 16,
       "core": 6,
       "basic": 7,
-      "cross": 0
+      "cross": 3
     },
     "require": {
       "total": 22,
@@ -844,6 +861,23 @@
         "move": false,
         "type": "通識",
         "dimension": "校基本素養"
+      },
+      {
+        "cn": "管理學",
+        "en": "",
+        "score": 85,
+        "reason": "CS",
+        "complete": true,
+        "grade": "A",
+        "code": "IMS5326",
+        "realCredit": 3,
+        "originalCredit": 3,
+        "english": false,
+        "year": 3,
+        "semester": 1,
+        "move": false,
+        "type": "通識",
+        "dimension": "跨院基本素"
       }
     ]
   },
@@ -1014,7 +1048,7 @@
     ]
   },
   {
-    "total": 98,
+    "total": 101,
     "total_require": 128,
     "compulsory": 58,
     "compulse_require": 58,
@@ -1028,9 +1062,9 @@
     "english_require": 1,
     "other": 2,
     "other_require": 12,
-    "general": 13,
+    "general": 16,
     "general_require": 20,
-    "general_new": 13,
+    "general_new": 16,
     "general_new_require": 22,
     "pe": 5,
     "pe_require": 6,

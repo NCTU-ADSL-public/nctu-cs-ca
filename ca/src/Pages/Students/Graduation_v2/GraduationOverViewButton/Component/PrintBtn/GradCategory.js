@@ -17,6 +17,9 @@ class GradCategory extends React.Component {
       // comment
       if (this.state.name.slice(0, 2) === '通識') { 
         subjects[i].comment = subjects[i].dimension + ' '
+        if (subjects[i].comment.slice(0, 2) === '跨院') {
+          subjects[i].comment = '跨院基本素養'
+        }
       } else { 
         subjects[i].comment = '' 
       }
