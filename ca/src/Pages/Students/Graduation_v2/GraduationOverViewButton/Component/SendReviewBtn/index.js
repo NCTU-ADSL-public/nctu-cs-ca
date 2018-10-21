@@ -124,6 +124,7 @@ class Index extends React.Component {
               <label style={{ marginRight: '10px' }}>請選擇採用的通識制度</label>
               <Select
                 native
+                disabled={this.props.check !== 0}
                 className={classes.select}
                 value={this.state.generalCourse.type}
                 onChange={this.handleChange}
@@ -133,6 +134,7 @@ class Index extends React.Component {
               </Select>
               <br />
               <Button 
+                disabled={this.props.check !== 0}
                 variant='contained' 
                 color='primary' 
                 className={classes.button}
@@ -155,7 +157,8 @@ Index.propTypes = {
 const mapStateToProps = (state) => ({
   reviewData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
-  englishCheck: state.Student.Graduation.englishCheck
+  englishCheck: state.Student.Graduation.englishCheck,
+  check: state.Student.Graduation.check
 })
 
 const mapDispatchToProps = (dispatch) => ({
