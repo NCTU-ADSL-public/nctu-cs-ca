@@ -26,7 +26,11 @@ class Index extends React.Component {
           </div>
         </div>
         <div id='printArea'>
-          <PrintForm profile={this.props.studentIdcard} graduationCheckEnglishTest={this.props.englishCheck} courseCategoryArray={this.props.printdata} />
+          <PrintForm
+            profile={this.props.studentIdcard}
+            graduationCheckEnglishTest={this.props.englishCheck}
+            courseCategoryArray={this.props.printData}
+          />
         </div>
       </div>
     )
@@ -34,7 +38,7 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  printdata: state.Student.Graduation.printdata,
+  printData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck,
   done: state.Student.Graduation.status === 'DONE'

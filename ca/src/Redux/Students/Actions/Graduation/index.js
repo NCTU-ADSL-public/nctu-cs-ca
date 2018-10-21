@@ -17,12 +17,6 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
     dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
     console.log(err)
   })
-  axios.get('/students/graduate/print').then(res => {
-    dispatch(storeGradPrint(res.data))
-  }).catch(err => {
-    dispatch(storeGradPrint(FakeData.PrintData))
-    console.log(err)
-  })
 
   axios.get('/students/graduate/check').then(res => {
     dispatch(storeGradCheck(res.data.check.state))
@@ -35,6 +29,13 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
     console.log(err)
   })
 
+}
+
+export const reviewSubmit = (payload) => dispatch => {
+  axios.post('/students/graduate/check', payload).then(() => {
+  }).catch(err => {
+    console.log(err)
+  })
 }
 
 export const changeCourse = (from, end, course) => dispatch => {

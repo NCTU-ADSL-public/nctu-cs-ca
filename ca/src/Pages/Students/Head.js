@@ -28,7 +28,6 @@ let graduationItems = defaultData.GraduationItems
 let revise = defaultData.GraduationItems_Revised
 // let studentCos = defaultData.Course
 // let studentPas = defaultData.CoursePass
-let printData = defaultData.PrintData
 
 // let MapCourseData
 // let StudentCosPas
@@ -51,7 +50,6 @@ class Head extends Component {
 
     this.state = {
       selectedIndex: 0,
-      print_courseCategoryArray: printData,
       isLoading: true,
       projectName: '',
       project_status_data: [{ 'student_id': '0416008', 'sname': '王冠升', 'research_title': '0416008', 'tname': '彭文志', 'agree': '2', 'first_second': '1', 'phone': 'sds', 'email': 'danny021406.cs04@nctu.edu.tw' }],
@@ -113,13 +111,7 @@ class Head extends Component {
       return (
         <a>
           <FadeIn>
-            <GradCreditCheckPage
-              items={graduationItems}
-              result={graduationItems[11]}
-              revise={revise}
-              reviseresult={revise[11]}
-              studentProfile={this.props.studentIdcard}
-              courseCategoryArray={this.state.print_courseCategoryArray} />
+            <GradCreditCheckPage />
           </FadeIn>
         </a>
 
@@ -264,7 +256,8 @@ class Head extends Component {
 }
 
 const mapState = (state) => ({
-  studentIdcard: state.Student.User.studentIdcard
+  studentIdcard: state.Student.User.studentIdcard,
+  printData: state.Student.Graduation.data
 })
 
 const mapDispatch = (dispatch) => ({
