@@ -169,9 +169,9 @@ class ListPanel extends React.Component {
                 >
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識{
                     Math.min(student.detail.general.new.total, student.detail.general.old.total) <= 0 ?
-                    <Done className = { classes.ok } />
+                    <Done className = { classes.ok } style = {{ fontSize: '20px' }} />
                     :
-                    <span className = { classes.error } >{ Math.min(student.detail.general.new.total, student.detail.general.old.total) }</span>
+                    <span className = { classes.error } style = {{ fontSize: '20px' }}>{ Math.min(student.detail.general.new.total, student.detail.general.old.total) }</span>
                   }</div>
                   <div className = 'row'>
                     <div className = 'col-md-5 col-lg-5 col-xs-5'>
@@ -228,7 +228,12 @@ class ListPanel extends React.Component {
                     borderRadius: '5px'
                   }}
                 >
-                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語</div>
+                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語{
+                    student.detail.lang.total <= 0 ?
+                    <Done className = { classes.ok } style = {{ fontSize: '20px' }} />
+                    :
+                    <span className = { classes.error } style = {{ fontSize: '20px' }} >{ student.detail.lang.total }</span>
+                  }</div>
                   <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >基礎{ student.detail.lang.basic_credit <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.basic_credit}</span> }</div>
                   <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >進階{
                     (student.detail.lang.status === 0 ? student.detail.lang.advanced_course : student.detail.lang.advanced_credit)

@@ -14,7 +14,7 @@ const initialState = {
           "other": 2,
           "general": {
               "old": {
-                  "total": 0,
+                  "total": 12,
                   "contemp": 4,
                   "culture": 4,
                   "history": 4,
@@ -23,13 +23,14 @@ const initialState = {
                   "science": 4,
               },
               "new": {
-                  "total": 0,
+                  "total": 12,
                   "core": 0,
                   "basic": 0,
                   "cross": 3
               }
           },
           "lang": {
+            "total" : 12,
               "status": 0,
               "basic_credit": 0,
               "advanced_course": 0
