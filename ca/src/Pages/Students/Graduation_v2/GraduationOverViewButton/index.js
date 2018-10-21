@@ -56,6 +56,7 @@ class Index extends React.Component {
 
   render () {
     const { check, englishCheck, overview } = this.props
+    console.log(check)
     let checkStatus
     switch (check) {
       case 0:
