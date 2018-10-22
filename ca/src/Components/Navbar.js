@@ -5,17 +5,18 @@ import {Navbar,Nav,NavItem,DropdownButton,MenuItem,ButtonToolbar } from 'react-b
 
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
+import dinoIcon from '../Resources/dinoIcon.png'
 import NavButton from './NavButton'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const style = {
   BrandBox: {
-    borderLeft: '6px solid #00AEAE',
     height: 28,
     display: 'inline-block',
     marginTop: 12,
     marginLeft: 7,
+    marginRight: 25,
     verticalAlign: 'top',
     transition: 'background-color 0.5s ease'
   },
@@ -137,9 +138,11 @@ class _Navbar extends React.Component {
     }
     return <Navbar staticTop fixedTop fluid expanded={this.state.expanded} onToggle={this.onToggleCollapse}>
       <Navbar.Header>
-        <div style={{...style.BrandBox, borderLeft: `6px solid ${this.props.color}`}}>
-          <span style={style.BrandName}>交大資工線上助理</span>
-          <span style={style.BrandSubName} className='hidden-xs hidden-sm'>NCTU Curriculum Assistant</span>
+        {/*<div style={{...style.BrandBox, borderLeft: `6px solid ${this.props.color}`}}>*/}
+        <div style={{...style.BrandBox}}>
+          <img src={dinoIcon} style={{height: 35}} />
+          {/*<span style={style.BrandName}>交大資工線上助理</span>*/}
+          {/*<span style={style.BrandSubName} className='hidden-xs hidden-sm'>NCTU Curriculum Assistant</span>*/}
         </div>
         <Navbar.Toggle/>
       </Navbar.Header>
