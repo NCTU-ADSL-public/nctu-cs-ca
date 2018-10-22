@@ -43,6 +43,10 @@ const styles = theme => ({
     fontWeight: 'bold',
     color: 'green',
     verticalAlign: 'middle',
+  },
+  button: {
+    fontSize: '15px',
+    marginTop: '10px'
   }
 })
 
@@ -88,22 +92,24 @@ class ListPanel extends React.Component {
             {
               parseInt(student.detail.status) === 0 && <span>
                 <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >未符合</div>
+                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >未符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 1 && <span>
                 <QueryBuilder style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >將符合</div>
+                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >將符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 2 && <span>
                 <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >已符合</div>
+                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >已符合</div>
               </span>
             }
-            /
-            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >已送審</span>
+            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / 已送審</span>
             </div>
+            <Button variant="contained" className = { classes.button } >
+              編輯預審狀態
+            </Button>
           </div>
           <div style = {{ width: '85%', paddingLeft: '20px' }}>
             <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
