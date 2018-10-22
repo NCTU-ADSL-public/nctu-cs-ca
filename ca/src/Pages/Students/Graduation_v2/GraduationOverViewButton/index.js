@@ -56,6 +56,25 @@ class Index extends React.Component {
 
   render () {
     const { check, englishCheck, overview } = this.props
+    console.log(check)
+    let checkStatus
+    switch (check) {
+      case 0:
+        checkStatus = '未送審'
+        break
+      case 1:
+        checkStatus = '審核中'
+        break
+      case 2:
+        checkStatus = '審核通過'
+        break
+      case 3:
+        checkStatus = '審核不通過'
+        break
+      default:
+        break
+    }
+
     return (
       <div>
         <div style={{ marginTop: '10px' }}>
@@ -75,7 +94,7 @@ class Index extends React.Component {
               </div>
               <div>
                 畢業預審是否已送交助理審核：
-                {check ? '已送審' : '未送審'}
+                <span style={{ color: '#FF0000' }}>{checkStatus}</span>
               </div>
             </div>
             <div className='pull-right col-sm-1 col-md-1'>

@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions'
 const initialState = {
   data: [],
   printdata: [],
-  check: false,
+  check: 0,
   englishCheck: false,
   status: 'IDLE',
   overview: {}
