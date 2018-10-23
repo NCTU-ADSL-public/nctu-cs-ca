@@ -79,7 +79,8 @@ class index extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      filter_status: [false, false, false],
+      grad_filter_status: [false, false, false],
+      veri_filter_status: [false, false, false, false],
       input: '',
       open_filter: false,
       page: 0,
@@ -92,7 +93,7 @@ class index extends React.Component {
   }
 
   filter = (students) => {
-    const { input, filter_status } = this.state
+    const { input, grad_filter_status, veri_filter_status } = this.state
     return (
       students.filter( (student) =>
         (    input === ''
@@ -101,21 +102,26 @@ class index extends React.Component {
         )
         &&
         (
-             !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-          || filter_status[parseInt(student.detail.status)]
+             !grad_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
+          || grad_filter_status[parseInt(student.detail.status)]
+        )
+        &&
+        (
+             !veri_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
+          || grad_filter_status[parseInt(student.graduate_status)]
         )
       )
     )
   }
 
   toggleFilter = target => {
-    this.setState({ filter_status: this.state.filter_status.map((value, index) => target === index ? !value : value ), page: 0 })
+    this.setState({ grad_filter_status: this.state.grad_filter_status.map((value, index) => target === index ? !value : value ), page: 0 })
   }
 
   render() {
 
     const { classes, students, fetch_graduate_list } = this.props
-    const { filter_status, open_filter, input, page, studentsPerPage, grade } = this.state
+    const { grad_filter_status, open_filter, input, page, studentsPerPage, grade } = this.state
 
 
 
@@ -138,7 +144,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleFilter(0) }
-                  style = {{ background: filter_status[0] ? red[300] : null }}
+                  style = {{ background: grad_filter_status[0] ? red[300] : null }}
                 />
                 <Chip
                   label = {
@@ -149,7 +155,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleFilter(1) }
-                  style = {{ background: filter_status[1] ? blue[300] : null }}
+                  style = {{ background: grad_filter_status[1] ? blue[300] : null }}
                 />
                 <Chip
                   label = {
@@ -160,7 +166,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleFilter(2) }
-                  style = {{ background: filter_status[2] ? green[300] : null }}
+                  style = {{ background: grad_filter_status[2] ? green[300] : null }}
                 />
               </div>
               <DialogTitle><div style = {{ fontSize: '30px' }} >預審狀況</div></DialogTitle>
@@ -174,7 +180,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleFilter(0) }
-                  style = {{ background: filter_status[0] ? red[300] : null }}
+                  style = {{ background: grad_filter_status[0] ? red[300] : null }}
                 />
                 <Chip
                   label = {
@@ -185,7 +191,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleFilter(1) }
-                  style = {{ background: filter_status[1] ? blue[300] : null }}
+                  style = {{ background: grad_filter_status[1] ? blue[300] : null }}
                 />
                 <Chip
                   label = {
@@ -196,7 +202,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleFilter(2) }
-                  style = {{ background: filter_status[2] ? green[300] : null }}
+                  style = {{ background: grad_filter_status[2] ? green[300] : null }}
                 />
               </div>
             </Dialog>
