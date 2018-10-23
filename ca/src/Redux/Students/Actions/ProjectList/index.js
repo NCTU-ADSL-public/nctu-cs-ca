@@ -7,7 +7,8 @@ export const storeProjectFile = createAction('STORE_PROJECT_FILE')
 export const updateproject = createAction('UPDATE_PROJECT')
 
 let FakeData = [
-  {'student_id': '0416008',
+  {
+    'student_id': '0416008',
     'semester': '106-2',
     'sname': '王冠升',
     'research_title': '虛擬貨幣交易機器人',
@@ -15,8 +16,10 @@ let FakeData = [
     'agree': '1',
     'first_second': '1',
     'phone': 'sds',
-    'email': 'danny021406.cs04@nctu.edu.tw'},
-  {'student_id': '0416008',
+    'email': 'danny021406.cs04@nctu.edu.tw'
+  },
+  {
+    'student_id': '0416008',
     'sname': '王冠升',
     'research_title': '0416008',
     'semester': '106-2',
@@ -24,8 +27,10 @@ let FakeData = [
     'agree': '2',
     'first_second': '1',
     'phone': 'sds',
-    'email': 'danny021406.cs04@nctu.edu.tw'},
-  {'student_id': '0416008',
+    'email': 'danny021406.cs04@nctu.edu.tw'
+  },
+  {
+    'student_id': '0416008',
     'sname': '王冠升',
     'research_title': '04160ff08',
     'semester': '106-2',
@@ -33,7 +38,8 @@ let FakeData = [
     'agree': '3',
     'first_second': '1',
     'phone': 'sds',
-    'email': 'danny021406.cs04@nctu.edu.tw'}
+    'email': 'danny021406.cs04@nctu.edu.tw'
+  }
 ]
 
 export const fetchProjects = (page = 1) => dispatch => {
@@ -47,16 +53,16 @@ export const fetchProjects = (page = 1) => dispatch => {
     })
 }
 export const updateProject = (intro, researchTitle, semester) => dispatch => {
-  let object = {intro, researchTitle, semester}
+  let object = { intro, researchTitle, semester }
   dispatch(updateproject(object))
 }
 
 export const storeProjectsImage = (url, researchTitle, semester) => dispatch => {
-  let object = {url, researchTitle, semester}
+  let object = { url, researchTitle, semester }
   dispatch(storeProjectImage(object))
 }
 
 export const storeProjectsFile = (url, researchTitle, semester) => dispatch => {
-  let object = {url, researchTitle, semester}
+  let object = { url, researchTitle, semester }
   dispatch(storeProjectFile(object))
 }

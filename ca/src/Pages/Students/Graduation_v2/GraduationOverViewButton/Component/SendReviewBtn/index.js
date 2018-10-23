@@ -14,9 +14,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import PrintForm from '../PrintBtn/PrintForm'
 import { reviewSubmit } from '../../../../../../Redux/Students/Actions/Graduation/'
@@ -119,11 +117,11 @@ class Index extends React.Component {
               graduationCheckEnglishTest={this.props.englishCheck}
               courseCategoryArray={this.props.reviewData}
             />
-            <form className='text-center' style={{ marginTop: '30px', fontSize: '20px' }}>                           
+            <form className='text-center' style={{ marginTop: '30px', fontSize: '20px' }}>
               <label style={{ marginRight: '10px' }}>請選擇採用的通識制度</label>
               <Select
                 native
-                disabled={this.props.check !== 0}
+                disabled={this.props.reviewCheck !== 0}
                 className={classes.select}
                 value={this.state.generalCourse.type}
                 onChange={this.handleChange}
@@ -132,10 +130,10 @@ class Index extends React.Component {
                 <option value={1}>新制</option>
               </Select>
               <br />
-              <Button 
-                disabled={this.props.check !== 0}
-                variant='contained' 
-                color='primary' 
+              <Button
+                disabled={this.props.reviewCheck !== 0}
+                variant='contained'
+                color='primary'
                 className={classes.button}
                 onClick={this.handleSubmit}
               >
@@ -157,7 +155,7 @@ const mapStateToProps = (state) => ({
   reviewData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck,
-  check: state.Student.Graduation.check
+  reviewCheck: state.Student.Graduation.check
 })
 
 const mapDispatchToProps = (dispatch) => ({

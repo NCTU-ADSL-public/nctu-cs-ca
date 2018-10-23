@@ -1,9 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import CircularProgressbar from 'react-circular-progressbar'
 import { connect } from 'react-redux'
-import { fetchProfessors } from '../../../../Redux/Students/Actions/Professor/index'
 import Divider from '@material-ui/core/Divider'
 import RwdIconButton from './Component/RwdIconButton'
 import InfoBtn from './Component/InfoBtn'
@@ -74,6 +72,7 @@ class Index extends React.Component {
       default:
         break
     }
+    console.log(checkStatus)
 
     return (
       <div>
@@ -145,7 +144,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProfessors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
