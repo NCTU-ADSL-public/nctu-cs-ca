@@ -94,6 +94,7 @@ class Index extends React.Component {
           <ListItemText classes={{ primary: classes.primary }} inset primary='送出預審' />
         </MenuItem>
         <Dialog
+          fullScreen={this.props.fullScreen}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby='alert-dialog-title'
@@ -148,7 +149,8 @@ class Index extends React.Component {
 }
 
 Index.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  fullScreen: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({
