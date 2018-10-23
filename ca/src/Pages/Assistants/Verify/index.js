@@ -284,7 +284,7 @@ class Verify extends React.Component{
             </IconButton>
           </Tooltip>
           <Tooltip title={'等待主任同意'} placement='right'>
-            <IconButton className={classes.sideIcon} 
+            <IconButton className={classes.sideIcon}
               onClick={()=>this.setState({index:1,select:[],selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))})}
               color={(this.state.index === 1)?'primary':'default'}
             >
