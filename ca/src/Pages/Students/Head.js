@@ -140,7 +140,7 @@ class Head extends Component {
       return (
         <FadeIn>
           <MuiThemeProvider>
-            <Credit />
+            <ProjectList />
           </MuiThemeProvider>
         </FadeIn>
       )
@@ -192,13 +192,13 @@ class Head extends Component {
   // onTouchTap={() => this.select(3)}
   // />
   render () {
-    /* const router = [
+    const router = [
       '/students/head',
-      '/students/head/grad',
-      '/students/head/map',
-      '/students/head/professor',
-      '/students/head/project'
-    ] */
+      '/students/grad',
+      '/students/map',
+      '/students/professor',
+      '/students/project'
+    ]
     const onTouchTaps = [
       () => this.select(0),
       () => this.select(1),
@@ -211,7 +211,7 @@ class Head extends Component {
       () => this.select(8),
       () => this.select(9)
     ]
-    /* const onTouchTapsrouter = [
+    const onTouchTapsrouter = [
       () => this.props.history.push(router[0]),
       () => this.props.history.push(router[1]),
       () => this.props.history.push(router[2]),
@@ -222,7 +222,7 @@ class Head extends Component {
       () => this.select(7),
       () => this.select(8),
       () => this.select(9)
-    ] */
+    ]
     const onTouchTapsOthers = [
       () => this.select(0),
       () => window.alert('非資工系學生無此功能'),
@@ -245,10 +245,9 @@ class Head extends Component {
             id={this.props.studentIdcard.student_id}
             subname={subname}
             selectedIndex={this.state.selectedIndex}
-            onTouchTaps={this.props.studentIdcard.status === 'c' ? onTouchTapsOthers : onTouchTaps}
+            onTouchTaps={this.props.studentIdcard.status === 'c' ? onTouchTapsOthers : onTouchTapsrouter}
             onTouchProjectTaps={this.selectProject}
           />
-          {this.getpage()}
         </Row>
       </Grid>
     )
