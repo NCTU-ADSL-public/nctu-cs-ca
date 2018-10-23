@@ -215,7 +215,7 @@ class index extends React.Component {
                 <Chip
                   label = {
                     <span>
-                      <Done style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <Clear style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
                       <div style = {{ display: 'inline', verticalAlign: 'middle' }} >未通過</div>
                     </span>
                   }
