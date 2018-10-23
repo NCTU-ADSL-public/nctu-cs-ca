@@ -13,7 +13,8 @@ import {
   TableBody, 
   TableCell, 
   TableRow, 
-  Tooltip
+  Tooltip,
+  Chip
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
@@ -275,38 +276,42 @@ class Verify extends React.Component{
     return(
       <div className={classes.root}>
         <div className={classes.side}>
-          <Tooltip title={'申請中'} placement='right'>
+          { this.state.formList.filter(e => e.status===0).length > 0 &&
+          (<Tooltip title={'申請中'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={()=>this.setState({index:0,select:[],selectAll:this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id))})}
               color={(this.state.index === 0)?'primary':'default'}
             >
               <ApplyIcon/>
             </IconButton>
-          </Tooltip>
-          <Tooltip title={'等待主任同意'} placement='right'>
+          </Tooltip>)}
+          { this.state.formList.filter(e => e.status===1).length > 0 &&
+          (<Tooltip title={'等待主任同意'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={()=>this.setState({index:1,select:[],selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))})}
               color={(this.state.index === 1)?'primary':'default'}
             >
               <WaitIcon/>
             </IconButton>
-          </Tooltip>
-          <Tooltip title={'成功抵免'} placement='right'>
+          </Tooltip>)}
+          { this.state.formList.filter(e => e.status===2).length > 0 &&
+          (<Tooltip title={'成功抵免'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={()=>this.setState({index:2,select:[],selectAll:this.state.formList.filter(e => e.status === 2).every(e => this.state.select.includes(e.id))})}
               color={(this.state.index === 2)?'primary':'default'}
             >
               <OKIcon/>
             </IconButton>
-          </Tooltip>
-          <Tooltip title={'已退回'} placement='right'>
+          </Tooltip>)}
+          { this.state.formList.filter(e => e.status===3).length > 0 &&
+          (<Tooltip title={'已退回'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={()=>this.setState({index:3,select:[],selectAll:this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id))})}
               color={(this.state.index === 3)?'primary':'default'}
             >
               <TrashIcon/>
             </IconButton>
-          </Tooltip>
+          </Tooltip>)}
         </div>
         {
         [0,3].includes(this.state.index) &&
@@ -367,13 +372,14 @@ class Verify extends React.Component{
                 <ExpansionPanel key={index} defaultExpanded className={this.state.select.includes(apply.id) ? classes.selected: ''}>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <span className={classes.subtitle}>
-                      <span className={classes.action}>
+                      {[0,3].includes(this.state.index) && 
+                      (<span className={classes.action}>
                         <svg height="22" width="22" style={{verticalAlign:'text-top'}} onClick={(e)=>this.handleSelect(e,apply.id)}>
                           <Tooltip title={this.state.select.includes(apply.id)?`點擊已取消勾選`:`點擊以選取此抵免單`} placement='top'>
                             <circle cx="11" cy="11" r="11" fill={this.state.select.includes(apply.id) ? '#3f51b5':'#ccc'} /> 
                           </Tooltip>
                         </svg> 
-                      </span>
+                      </span>)}
                       {`${apply.year}${semester[apply.semester-1]}`}
                       <span>
                       <Tooltip title={
@@ -399,6 +405,14 @@ class Verify extends React.Component{
                         </Button>
                       </Tooltip>
                       </span>   
+                      <Chip 
+                      style={apply.previous ? {background:'#28a745',color:'#fff',fontSize: 14,fontWeight: 400}
+                      :{background:'#6c757d',color:'#fff',fontSize: 14,fontWeight: 400}}
+                      label={ 
+                        apply.previous ? 
+                        <span onClick={(e)=>e.stopPropagation()}>以前已同意過此抵免規則</span>
+                        :<span onClick={(e)=>e.stopPropagation()}>以前未有過此抵免規則</span>
+                      }/>
                     </span>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
