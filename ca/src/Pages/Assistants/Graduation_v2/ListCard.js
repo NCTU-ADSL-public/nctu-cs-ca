@@ -60,6 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const GRAD_STATUS_CN = ['未符合', '將符合', '已符合']
+const VERIFY_STATUS_CN = ['未送審', '審核中', '已通過', '未通過']
 
 class ListPanel extends React.Component {
 
@@ -95,34 +96,35 @@ class ListPanel extends React.Component {
             {
               parseInt(student.detail.status) === 0 && <span>
                 <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >未符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 1 && <span>
                 <QueryBuilder style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >將符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 2 && <span>
                 <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >已符合</div>
               </span>
             }
-            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / 已送審</span>
+            <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.detail.status] }</div>
+            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / { VERIFY_STATUS_CN[student.graduate_status] }</span>
             </div>
             <Button variant="contained" className = { classes.button } onClick = { () => this.setState({ edit_panel_open: true }) }>
               編輯預審狀態
             </Button>
             <Dialog onClose = { () => this.setState({ edit_panel_open: false })} open = { edit_panel_open } >
               <DialogTitle><div style = {{ fontSize: '20px' }} >畢業審核</div></DialogTitle>
-              <div style = {{ padding: '0 20px' }}>
+              <div style = {{ padding: '10px 20px' }}>
                 <hr style = {{ margin: '1px' }}/>
-                總學分: { student.detail.total }
-                <br />
-                {"通　識"}: { student.detail.general.old.total }
-                等等等 等待補完
+                <div>畢業狀態: { GRAD_STATUS_CN[student.detail.status] }</div>
+                <div>預審狀況: { VERIFY_STATUS_CN[student.graduate_status] }</div>
               </div>
-              <DialogTitle><div style = {{ fontSize: '20px' }} >英撿審核</div></DialogTitle>
+
+              { student.graduate_status === 1 && <div style = {{ display: 'flex' }} >
+                <Button className={classes.button}>通過</Button>
+                <Button className={classes.button}>未通過</Button>
+                <Button className={classes.button}>取消</Button>
+              </div> }
             </Dialog>
           </div>
           <div style = {{ width: '85%', paddingLeft: '20px' }}>

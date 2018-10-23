@@ -6,6 +6,7 @@ const initialState = {
       'id': '0416001',
       'name': '王大名',
       'program': '資A',
+      'graduate_status': 1,
       'detail': {
         'total': 116,
         'status': 0,
