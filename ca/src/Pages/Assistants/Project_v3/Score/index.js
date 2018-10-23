@@ -16,6 +16,7 @@ import { fetchScores, downloadCsv } from '../../../../Redux/Assistants/Actions/P
 import grey from '@material-ui/core/colors/grey';
 import Button from '@material-ui/core/Button';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import { CSVLink, CSVDownload } from "react-csv";
 
 
 const styles = theme => ({
@@ -69,6 +70,7 @@ class index extends React.Component {
       panel_open: [...Array(10)].map( (x) => true)
     }
     props.fetch_scores({ semester: this.state.semester, first_second: this.state.first_second })
+    props.download_csv({ semester: this.state.semester, first_second: this.state.first_second })
   }
 
   filter = (scores) => {
@@ -177,8 +179,11 @@ class index extends React.Component {
             </FormControl>
           </div>
           <div className = 'col-md-2 col-lg-2 col-xs-12' >
-            <Button variant="contained" className={classes.button} onClick = { () => download_csv({ semester, first_second})}>
+            <Button variant="contained" className={classes.button}
+                    // onClick = { () => download_csv({ semester, first_second})}
+            >
               <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
+              <CSVLink data={this.props.csvData}>Download me</CSVLink>;
             </Button>
           </div>
         </div>
@@ -208,7 +213,8 @@ class index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  scores: state.Assistant.Project.Score.scores
+  scores: state.Assistant.Project.Score.scores,
+  csvData: state.Assistant.Project.Score.csvData
 })
 
 const mapDispatchToProps = (dispatch) => ({
