@@ -70,6 +70,7 @@ class index extends React.Component {
       panel_open: [...Array(10)].map( (x) => true)
     }
     props.fetch_scores({ semester: this.state.semester, first_second: this.state.first_second })
+    props.download_csv({ semester: this.state.semester, first_second: this.state.first_second })
   }
 
   filter = (scores) => {
