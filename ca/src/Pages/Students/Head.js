@@ -247,6 +247,7 @@ class Head extends Component {
             selectedIndex={this.state.selectedIndex}
             onTouchTaps={this.props.studentIdcard.status === 'c' ? onTouchTapsOthers : onTouchTapsrouter}
             onTouchProjectTaps={this.selectProject}
+            router={router}
           />
         </Row>
       </Grid>

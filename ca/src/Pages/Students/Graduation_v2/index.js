@@ -4,20 +4,11 @@ import GraduationOverViewCard from './GraduationOverViewCard'
 import { connect } from 'react-redux'
 import PrintForm from './GraduationOverViewButton/Component/PrintBtn/PrintForm'
 import './index.css'
-import { CSVLink, CSVDownload } from 'react-csv'
-
-const csvData = [
-  ['firstname', 'lastname', 'email'],
-  ['Ahmed', 'Tomi', 'ah@smthing.co.com'],
-  ['Raed', 'Labes', 'rl@smthing.co.com'],
-  ['Yezzi', 'Min l3b', 'ymin@cocococo.com']
-]
 
 class Index extends React.Component {
   render () {
     return (
       <div className='container'>
-        <CSVLink data={csvData}>Download me</CSVLink>
         <div className='row showArea' style={{ marginBottom: '50px' }}>
           <div className='col-md-12 col-lg-12 hidden-xs' style={{ marginTop: '30px' }}>
             <GraduationOverViewButton />
