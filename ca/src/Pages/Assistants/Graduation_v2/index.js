@@ -127,7 +127,43 @@ class index extends React.Component {
           <div className = 'col-md-5 col-lg-5 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
             <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
-              <DialogTitle><div style = {{ fontSize: '30px' }} >畢業預審狀況</div></DialogTitle>
+              <DialogTitle><div style = {{ fontSize: '30px' }} >畢業狀況</div></DialogTitle>
+              <div style = {{ display: 'flex' }}>
+                <Chip
+                  label = {
+                    <span>
+                      <Clear style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >未達標</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleFilter(0) }
+                  style = {{ background: filter_status[0] ? red[300] : null }}
+                />
+                <Chip
+                  label = {
+                    <span>
+                      <QueryBuilder style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >將達標</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleFilter(1) }
+                  style = {{ background: filter_status[1] ? blue[300] : null }}
+                />
+                <Chip
+                  label = {
+                    <span>
+                      <Done style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >已達標</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleFilter(2) }
+                  style = {{ background: filter_status[2] ? green[300] : null }}
+                />
+              </div>
+              <DialogTitle><div style = {{ fontSize: '30px' }} >預審狀況</div></DialogTitle>
               <div style = {{ display: 'flex' }}>
                 <Chip
                   label = {
