@@ -49,6 +49,21 @@ const styles = theme => ({
   button: {
     fontSize: '15px',
     marginTop: '10px'
+  },
+  buttonCC: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'grey',
+  },
+  buttonNG: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'red',
+  },
+  buttonOK: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'blue',
   }
 })
 
@@ -120,10 +135,11 @@ class ListPanel extends React.Component {
                 <div>預審狀況: { VERIFY_STATUS_CN[student.graduate_status] }</div>
               </div>
 
-              { student.graduate_status === 1 && <div style = {{ display: 'flex' }} >
-                <Button className={classes.button}>通過</Button>
-                <Button className={classes.button}>未通過</Button>
-                <Button className={classes.button}>取消</Button>
+              { student.graduate_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
+                <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
+                <div style = {{ flex: 1 }} />
+                <Button className = { classes.buttonNG }>未通過</Button>
+                <Button className = { classes.buttonOK }>通過</Button>
               </div> }
             </Dialog>
           </div>
