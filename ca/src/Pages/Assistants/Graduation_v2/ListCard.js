@@ -13,6 +13,8 @@ import Done from '@material-ui/icons/Done';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import red from '@material-ui/core/colors/red';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = theme => ({
   card: {
@@ -64,13 +66,14 @@ class ListPanel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      edit_panel_open: false
     }
   }
 
   render() {
 
     const { classes, student } = this.props
+    const { edit_panel_open } = this.state
 
     return (
       <Card className={classes.card}>
@@ -107,9 +110,20 @@ class ListPanel extends React.Component {
             }
             <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / 已送審</span>
             </div>
-            <Button variant="contained" className = { classes.button } >
+            <Button variant="contained" className = { classes.button } onClick = { () => this.setState({ edit_panel_open: true }) }>
               編輯預審狀態
             </Button>
+            <Dialog onClose = { () => this.setState({ edit_panel_open: false })} open = { edit_panel_open } >
+              <DialogTitle><div style = {{ fontSize: '20px' }} >畢業審核</div></DialogTitle>
+              <div style = {{ padding: '0 20px' }}>
+                <hr style = {{ margin: '1px' }}/>
+                總學分: { student.detail.total }
+                <br />
+                {"通　識"}: { student.detail.general.old.total }
+                等等等 等待補完
+              </div>
+              <DialogTitle><div style = {{ fontSize: '20px' }} >英撿審核</div></DialogTitle>
+            </Dialog>
           </div>
           <div style = {{ width: '85%', paddingLeft: '20px' }}>
             <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
@@ -248,7 +262,6 @@ class ListPanel extends React.Component {
                      }</span>
                   }</div>
                 </div>
-
               </div>
             </div>
           </div>
