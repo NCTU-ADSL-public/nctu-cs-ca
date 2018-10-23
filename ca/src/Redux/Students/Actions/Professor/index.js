@@ -1,6 +1,5 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import FakeData from '../../../../Resources/FakeData/index'
 
 export const fetchProfessorsStart = createAction('FETCH_PROFESSORS_START')
 export const fetchProfessorsDone = createAction('FETCH_PROFESSORS_DONE')
@@ -21,7 +20,7 @@ export const fetchProfessors = (page = 1) => dispatch => {
     })
     .catch(error => {
       console.log(error)
-      //dispatch(storeProfessors(FakeData.ProjectNum))
+      // dispatch(storeProfessors(FakeData.ProjectNum))
       dispatch(fetchProfessorsDone())
     })
   axios.get('/students/mentorInfo')
@@ -31,13 +30,13 @@ export const fetchProfessors = (page = 1) => dispatch => {
     })
     .catch(error => {
       console.log(error)
-      //dispatch(storeProfessorMentor([{'tname': '張立平'}]))
+      // dispatch(storeProfessorMentor([{'tname': '張立平'}]))
       dispatch(fetchProfessorsDone())
     })
 }
 
 export const storeProfessorsImage = (url, tname) => dispatch => {
-  let object = {url, tname}
+  let object = { url, tname }
   dispatch(storeImage(object))
 }
 

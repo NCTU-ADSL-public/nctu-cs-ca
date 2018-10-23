@@ -40,7 +40,7 @@ export const reviewSubmit = (payload) => dispatch => {
 }
 
 export const changeCourse = (from, end, course) => dispatch => {
-  let object = {from, end, course}
+  let object = { from, end, course }
   dispatch(updateCourse(object))
 }
 

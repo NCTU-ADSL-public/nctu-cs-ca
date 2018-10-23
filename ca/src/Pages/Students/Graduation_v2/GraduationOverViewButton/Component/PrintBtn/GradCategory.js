@@ -15,13 +15,13 @@ class GradCategory extends React.Component {
     let subjects = this.state.subjects
     for (let i = 0; i < subjects.length; i++) {
       // comment
-      if (this.state.name.slice(0, 2) === '通識') { 
+      if (this.state.name.slice(0, 2) === '通識') {
         subjects[i].comment = subjects[i].dimension + ' '
         if (subjects[i].comment.slice(0, 2) === '跨院') {
           subjects[i].comment = '跨院基本素養'
         }
-      } else { 
-        subjects[i].comment = '' 
+      } else {
+        subjects[i].comment = ''
       }
 
       // 抵免
@@ -51,9 +51,6 @@ class GradCategory extends React.Component {
         this.state.subjects[i].originalCredit += '　'
       }
     }
-
-    let gept = this.props.graduationCheckEnglishTest
-    let geptShow = [(gept === '3' || gept === '4') ? 'V' : ' ', (gept === '0') ? 'V' : ' ', (gept === '1') ? 'V' : ' ', (gept === '2') ? 'V' : ' ']
 
     return (
       <tbody>
