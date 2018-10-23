@@ -23,16 +23,17 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
   }).catch(err => {
     console.log(err)
   })
+
   axios.get('/students/graduate/english').then(res => {
     dispatch(storeGradEnglishTestCheck(res.data.check.state))
   }).catch(err => {
     console.log(err)
   })
-
 }
 
 export const reviewSubmit = (payload) => dispatch => {
-  axios.post('/students/graduate/check', payload).then(() => {
+  axios.post('/students/graduate/check', payload).then(res => {
+    dispatch(storeGradCheck(res.data.check.state))
   }).catch(err => {
     console.log(err)
   })
