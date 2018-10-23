@@ -75,12 +75,14 @@ class Index extends React.Component {
   }
 
   handleSubmit () {
-    this.props.reviewSubmit({
-      general_course: {
-        type: this.state.generalCourse.type
-      }
-    })
-    this.handleClose()
+    if (window.confirm('確定送出預審嗎?')) {
+      this.props.reviewSubmit({
+        general_course: {
+          type: this.state.generalCourse.type
+        }
+      })
+      this.handleClose()
+    }
   }
 
   render () {

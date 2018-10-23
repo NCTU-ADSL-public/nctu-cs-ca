@@ -62,7 +62,7 @@ export default handleActions({
     )
   }),
   SET_GRADUATE_STATE: (state, action) => ({ ...state,
-    student: state.students.map( student => student.id !== action.payload.student_id ?
+    students: state.students.map( student => student.id !== action.payload.student_id ?
       student
       :
       { ...student,

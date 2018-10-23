@@ -85,11 +85,21 @@ class index extends React.Component {
     )
   }
 
+  fuck = () => {
+    let data = this.props.csvData
+    if(this.props.csvData[0][0] !== '老師')
+      return ''
+    return <CSVLink
+      data={data}>
+      {this.props.csvData[0][0]}
+    </CSVLink>
+  }
+
   render() {
 
-    const { classes, fetch_scores, scores, download_csv } = this.props
+    const { classes, fetch_scores, scores, download_csv, csvData } = this.props
     const { input, page, number_per_page, semester, max_page, first_second } = this.state
-
+    console.log(csvData)
     return (
       <div className = { classes.root } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
@@ -183,7 +193,7 @@ class index extends React.Component {
                     // onClick = { () => download_csv({ semester, first_second})}
             >
               <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
-              <CSVLink data={this.props.csvData}>Download me</CSVLink>;
+              {this.fuck()}
             </Button>
           </div>
         </div>
