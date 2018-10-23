@@ -54,7 +54,6 @@ class Index extends React.Component {
 
   render () {
     const { check, englishCheck, overview } = this.props
-    console.log(check)
     let checkStatus
     switch (check) {
       case 0:
@@ -70,9 +69,9 @@ class Index extends React.Component {
         checkStatus = '審核不通過'
         break
       default:
+        checkStatus = '錯誤'
         break
     }
-    console.log(checkStatus)
 
     return (
       <div>
