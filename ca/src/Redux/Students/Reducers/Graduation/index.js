@@ -16,12 +16,12 @@ export default handleActions({
   SHOW_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
   STORE_GRADUATION_COURSE: (state, action) => {
     let newdata = action.payload
-    let newoverview = {...newdata[newdata.length - 1]}
+    let newoverview = { ...newdata[newdata.length - 1] }
     newdata.length = newdata.length - 1
     return {
       ...state,
       data: [...newdata],
-      overview: {...newoverview},
+      overview: { ...newoverview },
       status: 'DONE'
     }
   },
@@ -31,8 +31,8 @@ export default handleActions({
     let indexFrom = newdata.findIndex(x => { return x.title === indexRef.from })
     let indexEnd = newdata.findIndex(x => { return x.title === indexRef.end })
     let indexCourse = newdata[indexFrom].course.findIndex(x => { return x.cn === indexRef.course })
-    let swap = {...newdata[indexFrom].course[indexCourse]}
-    newdata[indexEnd].course = [...newdata[indexEnd].course, {...swap}]
+    let swap = { ...newdata[indexFrom].course[indexCourse] }
+    newdata[indexEnd].course = [...newdata[indexEnd].course, { ...swap }]
     newdata[indexFrom].course.splice(indexCourse, 1)
     return {
       ...state,

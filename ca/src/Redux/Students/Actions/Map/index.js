@@ -14,8 +14,8 @@ export const fetchCourse = (page = 1) => dispatch => {
     dispatch(storeCourse(defaultData.Course))
     console.log(err)
   })
-
 }
+
 export const fetchCoursePass = (page = 1) => dispatch => {
   axios.get('/students/coursePass').then(res => {
     dispatch(storeCoursePass(res.data))
@@ -24,6 +24,7 @@ export const fetchCoursePass = (page = 1) => dispatch => {
     console.log(err)
   })
 }
+
 export const showCourseOrSug = (page = 1) => dispatch => {
   dispatch(ShowCourseOrSug())
 }
