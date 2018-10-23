@@ -79,12 +79,13 @@ class index extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      filter_status: [false, false, false],
+      grad_filter_status: [false, false, false],
+      veri_filter_status: [false, false, false, false],
       input: '',
       open_filter: false,
       page: 0,
-      studentsPerPage: 8,
-      grade: '二'
+      studentsPerPage: 4,
+      grade: '四'
     }
     props.fetch_graduate_list( {grade: this.state.grade} )
     console.log("PROPS_STUDENTS")
@@ -92,7 +93,7 @@ class index extends React.Component {
   }
 
   filter = (students) => {
-    const { input, filter_status } = this.state
+    const { input, grad_filter_status, veri_filter_status } = this.state
     return (
       students.filter( (student) =>
         (    input === ''
@@ -101,21 +102,30 @@ class index extends React.Component {
         )
         &&
         (
-             !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-          || filter_status[parseInt(student.detail.status)]
+             !grad_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
+          || grad_filter_status[parseInt(student.detail.status)]
+        )
+        &&
+        (
+             !veri_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
+          || veri_filter_status[parseInt(student.graduate_status)]
         )
       )
     )
   }
 
-  toggleFilter = target => {
-    this.setState({ filter_status: this.state.filter_status.map((value, index) => target === index ? !value : value ), page: 0 })
+  toggleGradFilter = target => {
+    this.setState({ grad_filter_status: this.state.grad_filter_status.map((value, index) => target === index ? !value : value ), page: 0 })
+  }
+
+  toggleVeriFilter = target => {
+    this.setState({ veri_filter_status: this.state.veri_filter_status.map((value, index) => target === index ? !value : value), page: 0 })
   }
 
   render() {
 
     const { classes, students, fetch_graduate_list } = this.props
-    const { filter_status, open_filter, input, page, studentsPerPage, grade } = this.state
+    const { grad_filter_status, open_filter, input, page, studentsPerPage, grade, veri_filter_status } = this.state
 
 
 
@@ -127,7 +137,7 @@ class index extends React.Component {
           <div className = 'col-md-5 col-lg-5 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
             <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
-              <DialogTitle><div style = {{ fontSize: '30px' }} >畢業預審狀況</div></DialogTitle>
+              <DialogTitle><div style = {{ fontSize: '30px' }} >畢業狀況</div></DialogTitle>
               <div style = {{ display: 'flex' }}>
                 <Chip
                   label = {
@@ -137,8 +147,8 @@ class index extends React.Component {
                     </span>
                   }
                   className = { classes.chip }
-                  onClick = { () => this.toggleFilter(0) }
-                  style = {{ background: filter_status[0] ? red[300] : null }}
+                  onClick = { () => this.toggleGradFilter(0) }
+                  style = {{ background: grad_filter_status[0] ? red[300] : null }}
                 />
                 <Chip
                   label = {
@@ -148,8 +158,8 @@ class index extends React.Component {
                     </span>
                   }
                   className = { classes.chip }
-                  onClick = { () => this.toggleFilter(1) }
-                  style = {{ background: filter_status[1] ? blue[300] : null }}
+                  onClick = { () => this.toggleGradFilter(1) }
+                  style = {{ background: grad_filter_status[1] ? blue[300] : null }}
                 />
                 <Chip
                   label = {
@@ -159,8 +169,59 @@ class index extends React.Component {
                     </span>
                   }
                   className = { classes.chip }
-                  onClick = { () => this.toggleFilter(2) }
-                  style = {{ background: filter_status[2] ? green[300] : null }}
+                  onClick = { () => this.toggleGradFilter(2) }
+                  style = {{ background: grad_filter_status[2] ? green[300] : null }}
+                />
+              </div>
+              <DialogTitle><div style = {{ fontSize: '30px' }} >預審狀況</div></DialogTitle>
+              <div style = {{ display: 'flex' }}>
+                <div style = {{ flex: 0.5 }} />
+                <Chip
+                  label = {
+                    <span>
+                      <Clear style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >未審核</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleVeriFilter(0) }
+                  style = {{ background: veri_filter_status[0] ? red[300] : null }}
+                />
+                <Chip
+                  label = {
+                    <span>
+                      <QueryBuilder style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >審核中</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleVeriFilter(1) }
+                  style = {{ background: veri_filter_status[1] ? blue[300] : null }}
+                />
+              </div>
+              <div style = {{ display: 'flex' }}>
+                <div style = {{ flex: 0.5 }} />
+                <Chip
+                  label = {
+                    <span>
+                      <Done style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >已通過</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleVeriFilter(2) }
+                  style = {{ background: veri_filter_status[2] ? green[300] : null }}
+                />
+                <Chip
+                  label = {
+                    <span>
+                      <Clear style = {{ fontSize: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >未通過</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleVeriFilter(3) }
+                  style = {{ background: veri_filter_status[3] ? red[300] : null }}
                 />
               </div>
             </Dialog>

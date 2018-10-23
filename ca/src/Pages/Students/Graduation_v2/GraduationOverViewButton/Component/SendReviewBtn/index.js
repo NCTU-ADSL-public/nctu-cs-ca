@@ -14,9 +14,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import PrintForm from '../PrintBtn/PrintForm'
 import { reviewSubmit } from '../../../../../../Redux/Students/Actions/Graduation/'
@@ -77,12 +75,14 @@ class Index extends React.Component {
   }
 
   handleSubmit () {
-    this.props.reviewSubmit({
-      general_course: {
-        type: this.state.generalCourse.type
-      }
-    })
-    this.handleClose()
+    if (window.confirm('確定送出預審嗎?')) {
+      this.props.reviewSubmit({
+        general_course: {
+          type: this.state.generalCourse.type
+        }
+      })
+      this.handleClose()
+    }
   }
 
   render () {
@@ -96,6 +96,7 @@ class Index extends React.Component {
           <ListItemText classes={{ primary: classes.primary }} inset primary='送出預審' />
         </MenuItem>
         <Dialog
+          fullScreen={this.props.fullScreen}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby='alert-dialog-title'
@@ -119,11 +120,11 @@ class Index extends React.Component {
               graduationCheckEnglishTest={this.props.englishCheck}
               courseCategoryArray={this.props.reviewData}
             />
-            <form className='text-center' style={{ marginTop: '30px', fontSize: '20px' }}>                           
+            <form className='text-center' style={{ marginTop: '30px', fontSize: '20px' }}>
               <label style={{ marginRight: '10px' }}>請選擇採用的通識制度</label>
               <Select
                 native
-                disabled={this.props.check !== 0}
+                disabled={this.props.reviewCheck !== 0}
                 className={classes.select}
                 value={this.state.generalCourse.type}
                 onChange={this.handleChange}
@@ -132,10 +133,10 @@ class Index extends React.Component {
                 <option value={1}>新制</option>
               </Select>
               <br />
-              <Button 
-                disabled={this.props.check !== 0}
-                variant='contained' 
-                color='primary' 
+              <Button
+                disabled={this.props.reviewCheck !== 0}
+                variant='contained'
+                color='primary'
                 className={classes.button}
                 onClick={this.handleSubmit}
               >
@@ -150,14 +151,15 @@ class Index extends React.Component {
 }
 
 Index.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  fullScreen: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({
   reviewData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck,
-  check: state.Student.Graduation.check
+  reviewCheck: state.Student.Graduation.check
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,6 +6,7 @@ const initialState = {
       'id': '0416001',
       'name': '王大名',
       'program': '資A',
+      'graduate_status': 1,
       'detail': {
         'total': 116,
         'status': 0,
@@ -13,6 +14,7 @@ const initialState = {
         'pro': 3,
         'other': 2,
         'general': {
+          'status': 0,
           'old': {
             'total': 12,
             'contemp': 4,
@@ -49,5 +51,23 @@ export default handleActions({
   }),
   CLEAR_STUDENTS: (state, action) => ({ ...state,
     students: []
+  }),
+  STORE_GRADUATE_STATE: (state, action) => ({ ...state,
+    students: state.students.map( student => student.id !== action.payload.student_id ?
+      student
+      :
+      { ...student,
+        graduate_status: action.payload.data.check.state
+      }
+    )
+  }),
+  SET_GRADUATE_STATE: (state, action) => ({ ...state,
+    students: state.students.map( student => student.id !== action.payload.student_id ?
+      student
+      :
+      { ...student,
+        graduate_status: action.payload.graduate_submit
+      }
+    )
   })
 }, initialState)

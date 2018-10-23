@@ -37,7 +37,7 @@ class GeneralCourseList extends React.Component {
         courses: []
       }
     ]
-    
+
     this.props.courses.forEach(course => {
       let type = this.generalCourseTypes.find(type => course.dimension === type.dimension)
       if (type) type.courses.push(course)
@@ -45,9 +45,15 @@ class GeneralCourseList extends React.Component {
   }
 
   decideBtnBgColor (courses) {
-    if (courses.length === 0) { return '#D95467' } 
-    else if (courses.length === 1 && courses[0].reason === 'now') { return '#AB6BD9' } 
-    else { return '#3cab7d' }
+    if (courses.length === 0) {
+      return '#D95467'
+    }
+    else if (courses.length === 1 && courses[0].reason === 'now') {
+      return '#AB6BD9'
+    }
+    else {
+      return '#3cab7d'
+    }
   }
 
   render () {

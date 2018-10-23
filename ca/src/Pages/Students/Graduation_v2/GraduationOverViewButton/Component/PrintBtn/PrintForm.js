@@ -102,7 +102,7 @@ class PrintForm extends React.Component {
             </td>
           </tr>
         </tbody>
-        
+
         {generalCat.map((category, index) =>
           <GradCategory
             key={index}
