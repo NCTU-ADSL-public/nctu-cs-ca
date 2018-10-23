@@ -45,7 +45,7 @@ export const fetchDetail = student_id => dispatch => {
 }
 
 export const fetchGraudateState = student_id => dispatch => {
-  axios.get('/students/graduate/check', {
+  axios.get('/assistants/graduate/check', {
     params: {
       student_id: student_id
     }
