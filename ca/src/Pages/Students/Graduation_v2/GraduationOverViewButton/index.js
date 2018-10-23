@@ -72,6 +72,7 @@ class Index extends React.Component {
       default:
         break
     }
+    console.log(checkStatus)
 
     return (
       <div>

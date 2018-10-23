@@ -4,6 +4,7 @@ import axios from 'axios'
 export const store_graduate_detail = createAction('STORE_GRADUATE_DETAIL')
 export const clear_students = createAction('CLEAR_STUDENTS')
 export const store_graduate_state = createAction('STORE_GRADUATE_STATE')
+export const set_graduate_state = createAction('SET_GRADUATE_STATE')
 
 export const fetchGraduateList = (post_item) => dispatch => {
   axios.post('/assistants/graduate/gradeStudent', post_item).then( res => {
@@ -44,7 +45,7 @@ export const fetchDetail = student_id => dispatch => {
 }
 
 export const fetchGraudateState = student_id => dispatch => {
-  axios.get('/students/graduate/check', {
+  axios.get('/assistants/graduate/check', {
     params: {
       student_id: student_id
     }
@@ -59,5 +60,20 @@ export const fetchGraudateState = student_id => dispatch => {
     console.log(err)
     console.log("GET_id")
     console.log(student_id)
+  })
+}
+
+export const setGradutateState = post_item => dispatch => {
+  axios.post('/assistants/graduate/check', post_item).then( res => {
+    console.log("Fetching")
+    console.log("POST_Item")
+    console.log(post_item)
+    console.log("RES DATA")
+    console.log(res.data)
+    dispatch(set_graduate_state(post_item))
+  }).catch( err => {
+      console.log(err)
+      console.log("POST_Item")
+      console.log(post_item)
   })
 }

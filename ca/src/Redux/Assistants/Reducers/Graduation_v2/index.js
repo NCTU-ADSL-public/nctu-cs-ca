@@ -14,6 +14,7 @@ const initialState = {
         'pro': 3,
         'other': 2,
         'general': {
+          'status': 0,
           'old': {
             'total': 12,
             'contemp': 4,
@@ -57,6 +58,15 @@ export default handleActions({
       :
       { ...student,
         graduate_status: action.payload.data.check.state
+      }
+    )
+  }),
+  SET_GRADUATE_STATE: (state, action) => ({ ...state,
+    student: state.students.map( student => student.id !== action.payload.student_id ?
+      student
+      :
+      { ...student,
+        graduate_status: action.payload.graduate_submit
       }
     )
   })
