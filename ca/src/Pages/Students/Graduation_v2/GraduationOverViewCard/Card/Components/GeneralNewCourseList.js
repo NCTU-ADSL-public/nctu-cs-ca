@@ -122,13 +122,13 @@ class GeneralNewCourseList extends React.Component {
     const { classes, overview, rwd, selection } = this.props
 
     return (
-      <div className={classes.container}>
-        <div className='col-sm-4 col-md-3' style={{ marginLeft: '20px', paddingRight: '40px' }}>
+      <div className={rwd ? '' : classes.container}>
+        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginLeft: '20px', paddingRight: '40px' }}>
           <div className='general-course-dimension' style={{ fontSize: '18px' }}>
             核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp;(學分)
           </div>
         </div>
-        <div className='col-sm-1 general-left-arrow' style={{ marginLeft: '-40px' }} />
+        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginLeft: '-40px' }} />
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes
@@ -170,12 +170,12 @@ class GeneralNewCourseList extends React.Component {
           }
         </div>
 
-        <div className='col-sm-4 col-md-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
+        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
           <div className='general-course-dimension' style={{ fontSize: '18px' }}>
             校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp;(學分)
           </div>
         </div>
-        <div className='col-sm-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
+        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
 
         <div className='col-sm-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes
@@ -186,12 +186,12 @@ class GeneralNewCourseList extends React.Component {
           }
         </div>
 
-        <div className='col-sm-4 col-md-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
+        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
           <div className='general-course-dimension' style={{ fontSize: '18px' }}>
             跨院&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)
           </div>
         </div>
-        <div className='col-sm-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
+        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
 
         <div className='col-sm-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes
