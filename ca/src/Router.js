@@ -31,11 +31,11 @@ const Router = () => (
       <Switch>
         <Route exact path='/' component={Login} />
         {/* students route */}
-        {/*<Route exact path='/students/head/' render={() => <StudentHome />} />*/}
-        <Route exact path='/students/head/grad' render={() => <StudentGrad />} />
-        <Route exact path='/students/head/map' render={() => <StudentMap />} />
-        <Route exact path='/students/head/professor' render={() => <StudentProfessor />} />
-        <Route exact path='/students/head/project' render={() => <StudentProject />} />
+        <Route exact path='/students/head/' render={() => <StudentHome />} />
+        <Route exact path='/students/grad' render={() => <StudentGrad />} />
+        <Route exact path='/students/map' render={() => <StudentMap />} />
+        <Route exact path='/students/professor' render={() => <StudentProfessor />} />
+        <Route exact path='/students/project' render={() => <StudentProject />} />
 
         <Route exact path='/teachers/head' component={TeacherHead} />
 

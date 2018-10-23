@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 import User from './User'
 import Professor from './Professor'
 import ProjectList from './ProjectList'

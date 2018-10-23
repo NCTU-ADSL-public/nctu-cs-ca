@@ -13,6 +13,8 @@ import Done from '@material-ui/icons/Done';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import red from '@material-ui/core/colors/red';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = theme => ({
   card: {
@@ -47,6 +49,21 @@ const styles = theme => ({
   button: {
     fontSize: '15px',
     marginTop: '10px'
+  },
+  buttonCC: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'grey',
+  },
+  buttonNG: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'red',
+  },
+  buttonOK: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'blue',
   }
 })
 
@@ -58,19 +75,21 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const GRAD_STATUS_CN = ['未符合', '將符合', '已符合']
+const VERIFY_STATUS_CN = ['未送審', '審核中', '已通過', '未通過']
 
 class ListPanel extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-
+      edit_panel_open: false
     }
   }
 
   render() {
 
     const { classes, student } = this.props
+    const { edit_panel_open } = this.state
 
     return (
       <Card className={classes.card}>
@@ -92,24 +111,37 @@ class ListPanel extends React.Component {
             {
               parseInt(student.detail.status) === 0 && <span>
                 <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >未符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 1 && <span>
                 <QueryBuilder style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >將符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 2 && <span>
                 <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >已符合</div>
               </span>
             }
-            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / 已送審</span>
+            <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.detail.status] }</div>
+            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / { VERIFY_STATUS_CN[student.graduate_status] }</span>
             </div>
-            <Button variant="contained" className = { classes.button } >
+            <Button variant="contained" className = { classes.button } onClick = { () => this.setState({ edit_panel_open: true }) }>
               編輯預審狀態
             </Button>
+            <Dialog onClose = { () => this.setState({ edit_panel_open: false })} open = { edit_panel_open } >
+              <DialogTitle><div style = {{ fontSize: '20px' }} >畢業審核</div></DialogTitle>
+              <div style = {{ padding: '10px 20px' }}>
+                <hr style = {{ margin: '1px' }}/>
+                <div>畢業狀態: { GRAD_STATUS_CN[student.detail.status] }</div>
+                <div>預審狀況: { VERIFY_STATUS_CN[student.graduate_status] }</div>
+              </div>
+
+              { student.graduate_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
+                <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
+                <div style = {{ flex: 1 }} />
+                <Button className = { classes.buttonNG }>未通過</Button>
+                <Button className = { classes.buttonOK }>通過</Button>
+              </div> }
+            </Dialog>
           </div>
           <div style = {{ width: '85%', paddingLeft: '20px' }}>
             <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
@@ -248,7 +280,6 @@ class ListPanel extends React.Component {
                      }</span>
                   }</div>
                 </div>
-
               </div>
             </div>
           </div>

@@ -32,6 +32,7 @@ class Index extends React.Component {
             courseCategoryArray={this.props.printData}
           />
         </div>
+
       </div>
     )
   }
