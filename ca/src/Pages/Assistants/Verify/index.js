@@ -142,7 +142,9 @@ class Verify extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+// for test 
+// formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      formList:[],
       open: false,
       message: 0,
       index: 0,
@@ -276,42 +278,57 @@ class Verify extends React.Component{
     return(
       <div className={classes.root}>
         <div className={classes.side}>
-          { this.state.formList.filter(e => e.status===0).length > 0 &&
-          (<Tooltip title={'申請中'} placement='right'>
+          {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
+          <Tooltip title={'申請中'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:0,select:[],selectAll:this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:0,select:[],
+                selectAll:this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id)) && this.state.formList.filter(e => e.status === 0).length > 0
+              })}
               color={(this.state.index === 0)?'primary':'default'}
             >
               <ApplyIcon/>
             </IconButton>
-          </Tooltip>)}
-          { this.state.formList.filter(e => e.status===1).length > 0 &&
-          (<Tooltip title={'等待主任同意'} placement='right'>
+          </Tooltip>
+          {/* this.state.formList.filter(e => e.status===1).length > 0 && */}
+          <Tooltip title={'等待主任同意'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:1,select:[],selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:1,
+                select:[],
+                selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 1).length > 0
+              })}
               color={(this.state.index === 1)?'primary':'default'}
             >
               <WaitIcon/>
             </IconButton>
-          </Tooltip>)}
-          { this.state.formList.filter(e => e.status===2).length > 0 &&
-          (<Tooltip title={'成功抵免'} placement='right'>
+          </Tooltip>
+          {/* { this.state.formList.filter(e => e.status===2).length > 0 && */}
+          <Tooltip title={'成功抵免'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:2,select:[],selectAll:this.state.formList.filter(e => e.status === 2).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:2,
+                select:[],
+                selectAll:this.state.formList.filter(e => e.status === 2).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 2).length > 0
+                })}
               color={(this.state.index === 2)?'primary':'default'}
             >
               <OKIcon/>
             </IconButton>
-          </Tooltip>)}
-          { this.state.formList.filter(e => e.status===3).length > 0 &&
-          (<Tooltip title={'已退回'} placement='right'>
+          </Tooltip>
+          {/* { this.state.formList.filter(e => e.status===3).length > 0 && */}
+          <Tooltip title={'已退回'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:3,select:[],selectAll:this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:3,
+                select:[],
+                selectAll:this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 3).length > 0
+                })}
               color={(this.state.index === 3)?'primary':'default'}
             >
               <TrashIcon/>
             </IconButton>
-          </Tooltip>)}
+          </Tooltip>
         </div>
         {
         [0,1,3].includes(this.state.index) &&
@@ -374,6 +391,7 @@ class Verify extends React.Component{
         }
         <div className={classes.Panels}>
         {
+          this.state.formList.filter(apply => apply.status === this.state.index).length > 0 ?
           this.state.formList
           .filter(
             apply => apply.status === this.state.index
@@ -483,7 +501,8 @@ class Verify extends React.Component{
                   </ExpansionPanelActions>
                 </ExpansionPanel>
             )
-          )
+          ):
+          <div>目前尚無資料</div>
         }
         </div>
         {/* snackBar */}
