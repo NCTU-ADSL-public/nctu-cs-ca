@@ -314,7 +314,7 @@ class Verify extends React.Component{
           </Tooltip>)}
         </div>
         {
-        [0,3].includes(this.state.index) &&
+        [0,1,3].includes(this.state.index) &&
         <div className={classes.options}>
           <Tooltip title={this.state.selectAll ? '取消全選':'全選'} placement='top'>
             <IconButton className={classes.sideIcon}
@@ -325,8 +325,8 @@ class Verify extends React.Component{
           </Tooltip>
           
           {(this.state.select.length !== 0 || this.state.selectAll === true) && (
-            this.state.index === 0 ?
-            <React.Fragment>
+            this.state.index === 0 &&
+            (<React.Fragment>
               <Tooltip title={'退回已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
                 onClick={this.handleWithdraw}
@@ -341,9 +341,20 @@ class Verify extends React.Component{
                   <Send/>
                 </IconButton>
               </Tooltip>
-            </React.Fragment>
-            :
-          <React.Fragment>
+            </React.Fragment>)
+            || this.state.index === 1 && 
+              (
+              <React.Fragment>
+              <Tooltip title={'重置已選取抵免單'} placement='top'>
+                <IconButton className={classes.sideIcon}
+                onClick={this.handleAllReset}
+                >
+                  <Reset/>
+                </IconButton>
+              </Tooltip>
+            </React.Fragment>)
+            || this.state.index === 3 &&(
+              <React.Fragment>
               <Tooltip title={'重置已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
                 onClick={this.handleAllReset}
@@ -358,7 +369,7 @@ class Verify extends React.Component{
                 </IconButton>
               </Tooltip>
             </React.Fragment>)
-          }
+          )}
         </div>
         }
         <div className={classes.Panels}>
@@ -372,7 +383,7 @@ class Verify extends React.Component{
                 <ExpansionPanel key={index} defaultExpanded className={this.state.select.includes(apply.id) ? classes.selected: ''}>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <span className={classes.subtitle}>
-                      {[0,3].includes(this.state.index) && 
+                      {[0,1,3].includes(this.state.index) && 
                       (<span className={classes.action}>
                         <svg height="22" width="22" style={{verticalAlign:'text-top'}} onClick={(e)=>this.handleSelect(e,apply.id)}>
                           <Tooltip title={this.state.select.includes(apply.id)?`點擊已取消勾選`:`點擊以選取此抵免單`} placement='top'>
@@ -451,6 +462,13 @@ class Verify extends React.Component{
                         <span className={classes.font2}>同意抵免</span>
                       </Button>
                     </React.Fragment>
+                    )}
+                    {this.state.index === 2 && (
+                      <React.Fragment>
+                        <Button onClick={()=>this.handleReset(apply.id)}>
+                          <span className={classes.font2}>重置</span>
+                        </Button>
+                      </React.Fragment>
                     )}
                     {this.state.index === 3 && (
                     <React.Fragment>
