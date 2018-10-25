@@ -10,7 +10,7 @@ import './Login.css'
 import PopoverExampleAnimation from './popover'
 import { grey50 } from 'material-ui/styles/colors'
 
-import dinoIcon from '../../Resources/dinoIcon.png'
+import dinoIcon from '../../Resources/dinodino_login.png'
 
 class Login extends React.Component {
 
@@ -40,11 +40,11 @@ class Login extends React.Component {
         <Grid>
           <FadeIn>
             <Row>
-              <Col xs={11} xsOffset={1} sm={12} smOffset={0}>
+              <Col xs={12} xsOffset={0} sm={12} smOffset={0}>
                 <div className="Login-header" ref="tip">
                   {/*<div id="eng-title">NCTU Curriculum Assistant</div>*/}
                   {/*<div id="ch-title">交大資工線上助理</div>*/}
-                  <img src={dinoIcon} style={{height: 135}}/>
+                  <img id="dino-img" src={dinoIcon}/>
                 </div>
               </Col>
             </Row>
