@@ -57,8 +57,8 @@ const CourseList = (props) => {
             {/* An option for student to move a course to other group */}
             <MoveGroupButton
               key={id}
+              item={item}
               label={'移動課程'}
-              backgroundColor={item.reason}
               rwd={rwd}
             />
           </PopoverButton>

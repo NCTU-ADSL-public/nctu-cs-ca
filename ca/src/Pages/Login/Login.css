@@ -88,9 +88,14 @@
 .Login-header {
     margin-top: 30vh;
     color: #7B7B7B;
-    padding-left: 35px;
-    border-left: 17px solid #00AEAE;
-    height: 100px;
+    /* padding-left: 35px; */
+    /* border-left: 17px solid #00AEAE; */
+    height: 120px;
+    display: flex;
+    justify-content: center;
+}
+#dino-img {
+ height: 220px;
 }
 .Login-buttons {
     margin-top: 110px;
@@ -127,9 +132,14 @@
 
 @media (max-width: 767px) {
     .Login-header {
-        padding-left: 17px;
-        border-left: 12px solid #00AEAE;
-        height: 50px;
+        height: 0;
+        margin-top: 30vh;
+        color: #7B7B7B;
+        display: flex;
+        justify-content: center;
+    }
+    #dino-img {
+        height: 86px;
     }
     .Login-buttons {
         margin-top: 30vh;

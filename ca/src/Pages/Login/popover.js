@@ -37,7 +37,7 @@ export default class PopoverExampleAnimation extends React.Component {
                 <RaisedButton
                     onClick={this.handleTouchTap}
                     label="公告"
-                    backgroundColor = {"#ae5164"}
+                    backgroundColor = {"#C5C5C5"}
                     labelColor = {grey50}
                     style={{width: '100%'}}
                 />

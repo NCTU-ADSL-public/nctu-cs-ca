@@ -13,7 +13,8 @@ import {
   TableBody, 
   TableCell, 
   TableRow, 
-  Tooltip
+  Tooltip,
+  Chip
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
@@ -141,7 +142,9 @@ class Verify extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+// for test 
+// formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      formList:[],
       open: false,
       message: 0,
       index: 0,
@@ -275,33 +278,52 @@ class Verify extends React.Component{
     return(
       <div className={classes.root}>
         <div className={classes.side}>
+          {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
           <Tooltip title={'申請中'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:0,select:[],selectAll:this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:0,select:[],
+                selectAll:this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id)) && this.state.formList.filter(e => e.status === 0).length > 0
+              })}
               color={(this.state.index === 0)?'primary':'default'}
             >
               <ApplyIcon/>
             </IconButton>
           </Tooltip>
+          {/* this.state.formList.filter(e => e.status===1).length > 0 && */}
           <Tooltip title={'等待主任同意'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:1,select:[],selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:1,
+                select:[],
+                selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 1).length > 0
+              })}
               color={(this.state.index === 1)?'primary':'default'}
             >
               <WaitIcon/>
             </IconButton>
           </Tooltip>
+          {/* { this.state.formList.filter(e => e.status===2).length > 0 && */}
           <Tooltip title={'成功抵免'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:2,select:[],selectAll:this.state.formList.filter(e => e.status === 2).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:2,
+                select:[],
+                selectAll:this.state.formList.filter(e => e.status === 2).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 2).length > 0
+                })}
               color={(this.state.index === 2)?'primary':'default'}
             >
               <OKIcon/>
             </IconButton>
           </Tooltip>
+          {/* { this.state.formList.filter(e => e.status===3).length > 0 && */}
           <Tooltip title={'已退回'} placement='right'>
             <IconButton className={classes.sideIcon}
-              onClick={()=>this.setState({index:3,select:[],selectAll:this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id))})}
+              onClick={()=>this.setState({
+                index:3,
+                select:[],
+                selectAll:this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 3).length > 0
+                })}
               color={(this.state.index === 3)?'primary':'default'}
             >
               <TrashIcon/>
@@ -309,7 +331,7 @@ class Verify extends React.Component{
           </Tooltip>
         </div>
         {
-        [0,3].includes(this.state.index) &&
+        [0,1,3].includes(this.state.index) &&
         <div className={classes.options}>
           <Tooltip title={this.state.selectAll ? '取消全選':'全選'} placement='top'>
             <IconButton className={classes.sideIcon}
@@ -320,8 +342,8 @@ class Verify extends React.Component{
           </Tooltip>
           
           {(this.state.select.length !== 0 || this.state.selectAll === true) && (
-            this.state.index === 0 ?
-            <React.Fragment>
+            this.state.index === 0 &&
+            (<React.Fragment>
               <Tooltip title={'退回已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
                 onClick={this.handleWithdraw}
@@ -336,9 +358,20 @@ class Verify extends React.Component{
                   <Send/>
                 </IconButton>
               </Tooltip>
-            </React.Fragment>
-            :
-          <React.Fragment>
+            </React.Fragment>)
+            || this.state.index === 1 && 
+              (
+              <React.Fragment>
+              <Tooltip title={'重置已選取抵免單'} placement='top'>
+                <IconButton className={classes.sideIcon}
+                onClick={this.handleAllReset}
+                >
+                  <Reset/>
+                </IconButton>
+              </Tooltip>
+            </React.Fragment>)
+            || this.state.index === 3 &&(
+              <React.Fragment>
               <Tooltip title={'重置已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
                 onClick={this.handleAllReset}
@@ -353,11 +386,12 @@ class Verify extends React.Component{
                 </IconButton>
               </Tooltip>
             </React.Fragment>)
-          }
+          )}
         </div>
         }
         <div className={classes.Panels}>
         {
+          this.state.formList.filter(apply => apply.status === this.state.index).length > 0 ?
           this.state.formList
           .filter(
             apply => apply.status === this.state.index
@@ -367,13 +401,14 @@ class Verify extends React.Component{
                 <ExpansionPanel key={index} defaultExpanded className={this.state.select.includes(apply.id) ? classes.selected: ''}>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <span className={classes.subtitle}>
-                      <span className={classes.action}>
+                      {[0,1,3].includes(this.state.index) && 
+                      (<span className={classes.action}>
                         <svg height="22" width="22" style={{verticalAlign:'text-top'}} onClick={(e)=>this.handleSelect(e,apply.id)}>
                           <Tooltip title={this.state.select.includes(apply.id)?`點擊已取消勾選`:`點擊以選取此抵免單`} placement='top'>
                             <circle cx="11" cy="11" r="11" fill={this.state.select.includes(apply.id) ? '#3f51b5':'#ccc'} /> 
                           </Tooltip>
                         </svg> 
-                      </span>
+                      </span>)}
                       {`${apply.year}${semester[apply.semester-1]}`}
                       <span>
                       <Tooltip title={
@@ -399,6 +434,14 @@ class Verify extends React.Component{
                         </Button>
                       </Tooltip>
                       </span>   
+                      <Chip 
+                      style={apply.previous ? {background:'#28a745',color:'#fff',fontSize: 14,fontWeight: 400}
+                      :{background:'#6c757d',color:'#fff',fontSize: 14,fontWeight: 400}}
+                      label={ 
+                        apply.previous ? 
+                        <span onClick={(e)=>e.stopPropagation()}>以前已同意過此抵免規則</span>
+                        :<span onClick={(e)=>e.stopPropagation()}>以前未有過此抵免規則</span>
+                      }/>
                     </span>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
@@ -438,6 +481,13 @@ class Verify extends React.Component{
                       </Button>
                     </React.Fragment>
                     )}
+                    {this.state.index === 2 && (
+                      <React.Fragment>
+                        <Button onClick={()=>this.handleReset(apply.id)}>
+                          <span className={classes.font2}>重置</span>
+                        </Button>
+                      </React.Fragment>
+                    )}
                     {this.state.index === 3 && (
                     <React.Fragment>
                     <Button onClick={()=>this.handleReset(apply.id)}>
@@ -451,7 +501,8 @@ class Verify extends React.Component{
                   </ExpansionPanelActions>
                 </ExpansionPanel>
             )
-          )
+          ):
+          <div>目前尚無資料</div>
         }
         </div>
         {/* snackBar */}
