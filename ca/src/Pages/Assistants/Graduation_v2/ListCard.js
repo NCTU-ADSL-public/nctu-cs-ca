@@ -13,6 +13,9 @@ import Done from '@material-ui/icons/Done';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import red from '@material-ui/core/colors/red';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { setGradutateState } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
 
 const styles = theme => ({
   card: {
@@ -43,6 +46,25 @@ const styles = theme => ({
     fontWeight: 'bold',
     color: 'green',
     verticalAlign: 'middle',
+  },
+  button: {
+    fontSize: '15px',
+    marginTop: '10px'
+  },
+  buttonCC: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'grey',
+  },
+  buttonNG: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'red',
+  },
+  buttonOK: {
+    fontSize: '15px',
+    margin: '5px',
+    color: 'blue',
   }
 })
 
@@ -50,23 +72,25 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+  set_graduate_state: post_item => dispatch(setGradutateState(post_item))
 })
 
 const GRAD_STATUS_CN = ['未符合', '將符合', '已符合']
+const VERIFY_STATUS_CN = ['未送審', '審核中', '已通過', '未通過']
 
 class ListPanel extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-
+      edit_panel_open: false
     }
   }
 
   render() {
 
-    const { classes, student } = this.props
+    const { classes, student, set_graduate_state } = this.props
+    const { edit_panel_open } = this.state
 
     return (
       <Card className={classes.card}>
@@ -88,22 +112,47 @@ class ListPanel extends React.Component {
             {
               parseInt(student.detail.status) === 0 && <span>
                 <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >未符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 1 && <span>
                 <QueryBuilder style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >將符合</div>
               </span>
               ||
               parseInt(student.detail.status) === 2 && <span>
                 <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-                <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >已符合</div>
               </span>
             }
-            /
-            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '20px', fontWeight: 'bold' }} >已送審</span>
+            <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.detail.status] }</div>
+            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / { VERIFY_STATUS_CN[student.graduate_status] }</span>
             </div>
+            <Button variant="contained" className = { classes.button } onClick = { () => this.setState({ edit_panel_open: true }) }>
+              編輯預審狀態
+            </Button>
+            <Dialog onClose = { () => this.setState({ edit_panel_open: false })} open = { edit_panel_open } >
+              <DialogTitle><div style = {{ fontSize: '20px' }} >畢業審核</div></DialogTitle>
+              <div style = {{ padding: '10px 20px' }}>
+                <hr style = {{ margin: '1px' }}/>
+                <div>畢業狀態: { GRAD_STATUS_CN[student.detail.status] }</div>
+                <div>預審狀況: { VERIFY_STATUS_CN[student.graduate_status] }</div>
+              </div>
+
+              { student.graduate_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
+                <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
+                <div style = {{ flex: 1 }} />
+                <Button className = { classes.buttonNG } onClick = {
+                  () => {
+                    this.setState({ edit_panel_open: false }),
+                    set_graduate_state({ student_id: student.id, graduate_submit: 3 })
+                  }
+                }>未通過</Button>
+                <Button className = { classes.buttonOK } onClick = {
+                  () => {
+                    this.setState({ edit_panel_open: false }),
+                    set_graduate_state({ student_id: student.id, graduate_submit: 2 })
+                  }
+                }>通過</Button>
+              </div> }
+            </Dialog>
           </div>
           <div style = {{ width: '85%', paddingLeft: '20px' }}>
             <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
@@ -134,6 +183,7 @@ class ListPanel extends React.Component {
             <hr />
             <div style = {{ width: '100%' }}>
               <div className = 'row'>
+                <div className = 'col-md-1 col-lg-1 col-xs-1' style = {{ marginTop: '25px' }} />
                 <div className = 'col-md-4 col-lg-4 col-xs-4' style = {{ marginTop: '25px' }}>
                   <div className = 'row' style = {{ marginTop: '10px' }} >
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
@@ -160,7 +210,7 @@ class ListPanel extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className = 'col-md-5 col-lg-5 col-xs-5'
+                <div className = 'col-md-3 col-lg-3 col-xs-3'
                   style = {{
                     margin: '5px',
                     border: '1px solid #dddddd',
@@ -174,51 +224,55 @@ class ListPanel extends React.Component {
                     <span className = { classes.error } style = {{ fontSize: '20px' }}>{ Math.min(student.detail.general.new.total, student.detail.general.old.total) }</span>
                   }</div>
                   <div className = 'row'>
-                    <div className = 'col-md-5 col-lg-5 col-xs-5'>
-                      <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }} >新制{
-                        student.detail.general.new.total <= 0 ?
-                        <Done className = { classes.ok } style = {{ marginLeft: '22px' }} />
-                        :
-                        <span className = { classes.error } style = {{ marginLeft: '22px' }} >{ student.detail.general.new.total }</span>
-                      }</div>
-                      <hr style = {{ margin: '1px' }}/>
-                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"核　心"}{ student.detail.general.new.core <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.core}</span> }</div>
-                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"跨　院"}{ student.detail.general.new.cross <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.cross}</span> }</div>
-                      <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"校基本"}{ student.detail.general.new.basic <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.basic}</span> }</div>
-                    </div>
-                    <div className = 'col-md-7 col-lg-7 col-xs-7'>
-                      <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
-                        student.detail.general.old.total <= 0 ?
-                        <Done className = { classes.ok } />
-                        :
-                        <span className = { classes.error } >{ student.detail.general.old.total }</span>
-                      }</div>
-                      <hr style = {{ margin: '1px' }}/>
-                      <div className = 'row' style = {{ marginLeft: '1px' }}>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          當代{ student.detail.general.old.contemp <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.contemp}</span> }
+                    {
+                      student.detail.general.status === 0 ?
+                      <div className = 'col-md-12 col-lg-12 col-xs-12'>
+                        <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
+                          student.detail.general.old.total <= 0 ?
+                          <Done className = { classes.ok } />
+                          :
+                          <span className = { classes.error } >{ student.detail.general.old.total }</span>
+                        }</div>
+                        <hr style = {{ margin: '1px' }}/>
+                        <div className = 'row' style = {{ marginLeft: '1px' }}>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            當代{ student.detail.general.old.contemp <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.contemp}</span> }
+                          </div>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            文化{ student.detail.general.old.culture <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.culture}</span> }
+                          </div>
                         </div>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          文化{ student.detail.general.old.culture <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.culture}</span> }
+                        <div className = 'row' style = {{ marginLeft: '1px' }}>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            歷史{ student.detail.general.old.history <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.history}</span> }
+                          </div>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            公民{ student.detail.general.old.citizen <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.citizen}</span> }
+                          </div>
                         </div>
-                      </div>
-                      <div className = 'row' style = {{ marginLeft: '1px' }}>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          歷史{ student.detail.general.old.history <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.history}</span> }
-                        </div>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          公民{ student.detail.general.old.citizen <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.citizen}</span> }
-                        </div>
-                      </div>
-                      <div className = 'row' style = {{ marginLeft: '1px' }}>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          群己{ student.detail.general.old.group <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.group}</span> }
-                        </div>
-                        <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                          自然{ student.detail.general.old.science <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.science}</span> }
+                        <div className = 'row' style = {{ marginLeft: '1px' }}>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            群己{ student.detail.general.old.group <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.group}</span> }
+                          </div>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            自然{ student.detail.general.old.science <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.science}</span> }
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      :
+                      <div className = 'col-md-12 col-lg-12 col-xs-12'>
+                        <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }} >新制{
+                          student.detail.general.new.total <= 0 ?
+                          <Done className = { classes.ok } style = {{ marginLeft: '22px' }} />
+                          :
+                          <span className = { classes.error } style = {{ marginLeft: '22px' }} >{ student.detail.general.new.total }</span>
+                        }</div>
+                        <hr style = {{ margin: '1px' }}/>
+                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"核　心"}{ student.detail.general.new.core <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.core}</span> }</div>
+                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"跨　院"}{ student.detail.general.new.cross <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.cross}</span> }</div>
+                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"校基本"}{ student.detail.general.new.basic <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.basic}</span> }</div>
+                      </div>
+                    }
                   </div>
                 </div>
                 <div className = 'col-md-2 col-lg-2 col-xs-2'
@@ -242,7 +296,6 @@ class ListPanel extends React.Component {
                      }</span>
                   }</div>
                 </div>
-
               </div>
             </div>
           </div>
