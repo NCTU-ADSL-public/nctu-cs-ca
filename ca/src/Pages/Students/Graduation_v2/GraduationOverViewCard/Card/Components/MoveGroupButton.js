@@ -1,14 +1,17 @@
 import React from 'react'
+import axios from 'axios'
 // MUI
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import '../../../../../../../node_modules/animate.css/animate.css'
-import PropTypes from 'prop-types'
+// REDUX
 import { connect } from 'react-redux'
 import { changeCourse } from '../../../../../../Redux/Students/Actions/Graduation'
+
+import '../../../../../../../node_modules/animate.css/animate.css'
+import PropTypes from 'prop-types'
 
 const style = {
   Button: {
@@ -64,6 +67,25 @@ class MoveGroupButton extends React.Component {
       isOpened: false,
       anchorEl: null
     }
+    this.fetchTarget()
+  }
+
+  fetchTarget () {
+    console.log('============ MoveGroupButton ==============')
+    console.log(this.props.item)
+    console.log(this.props.studentIdcard)
+    console.log('===========================================')
+
+    axios.post('/students/graduate/legalTargetGroup', {
+      cn: this.props.item.cn, // 中文課名
+      code: this.props.item.code, // 課號
+      type: this.props.item.type,
+      studentId: this.props.studentIdcard.student_id,
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   handleClick (event) {
@@ -116,7 +138,8 @@ MoveGroupButton.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview
+  overview: state.Student.Graduation.overview,
+  studentIdcard: state.Student.User.studentIdcard
 })
 
 const mapDispatchToProps = (dispatch) => ({
