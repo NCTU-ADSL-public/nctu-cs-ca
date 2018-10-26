@@ -65,7 +65,8 @@ class MoveGroupButton extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.state = {
       isOpened: false,
-      anchorEl: null
+      anchorEl: null,
+      targets: [{title: '...'}]
     }
     this.fetchTarget()
   }
@@ -82,7 +83,7 @@ class MoveGroupButton extends React.Component {
       type: this.props.item.type,
       studentId: this.props.studentIdcard.student_id,
     }).then(res => {
-      console.log(res)
+      this.setState({targets: res.data})
     }).catch(err => {
       console.log(err)
     })
@@ -102,7 +103,7 @@ class MoveGroupButton extends React.Component {
 
   render () {
     const { label, classes } = this.props
-    const { anchorEl } = this.state
+    const { anchorEl, targets } = this.state
 
     return (
       <div style={style.Popover}>
@@ -122,9 +123,9 @@ class MoveGroupButton extends React.Component {
           onClose={this.handleClose}
           className={classes.root}
         >
-          <MenuItem onClick={this.handleClose} className={classes.root} >專業選修</MenuItem>
-          <MenuItem onClick={this.handleClose} className={classes.root} >其他選修</MenuItem>
-          <MenuItem onClick={this.handleClose} className={classes.root} >外語</MenuItem>
+          {targets.map(item => (
+            <MenuItem onClick={this.handleClose} className={classes.root} >{item.title}</MenuItem>
+          ))}
 
         </Menu>
 
