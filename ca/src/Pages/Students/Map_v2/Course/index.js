@@ -133,7 +133,6 @@ class App extends React.Component {
   getRwd () {
     let { rwddisplay, grade } = this.props
     let _this = this
-    setTimeout(function () { _this.props.ShowCourseCondition() }, 100)
 
     let _grade
     if (grade === '大一') _grade = 1

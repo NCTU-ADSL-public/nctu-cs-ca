@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography'
 import './index.css'
 import Course from './Course'
 import { connect } from 'react-redux'
-import { ShowCourseCondition, fetchCoursePass, fetchCourse } from '../../../Redux/Students/Actions/Map'
 
 function TabContainer ({ children, dir }) {
   return (
@@ -34,8 +33,6 @@ class index extends React.Component {
     this.state = {
       value: 0
     }
-    this.props.fetchCoursePass()
-    this.props.fetchCourse()
   }
 
   handleChange (event, value) {
@@ -81,8 +78,6 @@ const mapStateToProps = (state) => ({
   CourseMap: state.Student.Map.CourseMap
 })
 const mapDispatchToProps = (dispatch) => ({
-  fetchCoursePass: () => dispatch(fetchCoursePass()),
-  fetchCourse: () => dispatch(fetchCourse()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(index))
