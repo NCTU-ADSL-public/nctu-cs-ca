@@ -44,8 +44,6 @@ class Head extends Component {
 
     this.props.FetchUser()
     this.props.FetchProfessorInfo()
-    this.props.FetchCourse()
-    this.props.FetchCoursePass()
     this.props.fetchGraduationCourse()
 
     this.state = {
@@ -263,8 +261,6 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   FetchUser: () => dispatch(fetchUser()),
   FetchProfessorInfo: () => dispatch(fetchProfessors()),
-  FetchCourse: () => dispatch(fetchCourse()),
-  FetchCoursePass: () => dispatch(fetchCoursePass()),
   fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
   ChangeFooterColor: (color) => dispatch(ChangeFooterColor(color))
 })

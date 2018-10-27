@@ -8,6 +8,7 @@ export const storeGradPrint = createAction('SHOW_GRAD_PRINT')
 export const storeGradCheck = createAction('SHOW_GRAD_CHECK')
 export const storeGradEnglishTestCheck = createAction('SHOW_GRAD_ENGLISH_TEST_CHECK')
 export const updateCourse = createAction('UPDATE_COURSE')
+export const fetchStart = createAction('FETCH_START')
 export const fetchDone = createAction('FETCH_DONE')
 
 export const fetchGraduationCourse = (page = 1) => dispatch => {
@@ -25,6 +26,41 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
   })
 
   axios.get('/students/graduate/english').then(res => {
+    dispatch(storeGradEnglishTestCheck(res.data.check.state))
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
+export const fetchGraduationCourseAssistantVersion = (id) => dispatch => {
+  dispatch(fetchStart())
+  axios.get('/assistants/graduate/revised', {
+    params: {
+      student_id: id
+    }
+  }).then(res => {
+    dispatch(storeGraduationCourse(res.data))
+    dispatch(fetchDone())
+  }).catch(err => {
+    dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
+    console.log(err)
+  })
+
+  axios.get('/assistants/graduate/check', {
+    params: {
+      student_id: id
+    }
+  }).then(res => {
+    dispatch(storeGradCheck(res.data.check.state))
+  }).catch(err => {
+    console.log(err)
+  })
+
+  axios.get('/assistants/graduate/english', {
+    params: {
+      student_id: id
+    }
+  }).then(res => {
     dispatch(storeGradEnglishTestCheck(res.data.check.state))
   }).catch(err => {
     console.log(err)

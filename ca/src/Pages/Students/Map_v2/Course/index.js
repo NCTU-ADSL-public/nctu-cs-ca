@@ -4,6 +4,7 @@ import Button from './DoBtn'
 import { Tabs, Tab } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import RwdSugCourse from './DoBtn/SugCourse/others'
+import { ShowCourseCondition } from '../../../../Redux/Students/Actions/Map'
 
 class App extends React.Component {
   constructor (props) {
@@ -63,9 +64,7 @@ class App extends React.Component {
           }
         })
       }
-    } 
-
-    else if (this.props.studentsGrad === '大二') {
+    } else if (this.props.studentsGrad === '大二') {
       this.setState({
         year: year - 1
       })
@@ -86,9 +85,7 @@ class App extends React.Component {
           }
         })
       }
-    } 
-
-    else if (this.props.studentsGrad === '大三') {
+    } else if (this.props.studentsGrad === '大三') {
       this.setState({
         year: year - 2
       })
@@ -109,9 +106,7 @@ class App extends React.Component {
           }
         })
       }
-    } 
-
-    else if (this.props.studentsGrad === '大四') {
+    } else if (this.props.studentsGrad === '大四') {
       this.setState({
         year: year - 3
       })
@@ -137,6 +132,9 @@ class App extends React.Component {
 
   getRwd () {
     let { rwddisplay, grade } = this.props
+    let _this = this
+    setTimeout(function () { _this.props.ShowCourseCondition() }, 100)
+
     let _grade
     if (grade === '大一') _grade = 1
     if (grade === '大二') _grade = 2
@@ -313,6 +311,7 @@ const mapStateToProps = (state) => ({
   grade: state.Student.User.studentIdcard.grade
 })
 const mapDispatchToProps = (dispatch) => ({
+  ShowCourseCondition: () => dispatch(ShowCourseCondition())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
