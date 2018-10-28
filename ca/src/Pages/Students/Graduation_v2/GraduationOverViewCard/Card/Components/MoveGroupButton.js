@@ -123,8 +123,14 @@ class MoveGroupButton extends React.Component {
           onClose={this.handleClose}
           className={classes.root}
         >
-          {targets.map(item => (
-            <MenuItem onClick={this.handleClose} className={classes.root} >{item.title}</MenuItem>
+          {targets.map((item, index) => (
+            <MenuItem
+              key={index}
+              onClick={this.handleClose}
+              className={classes.root}
+            >
+              {item.title}
+            </MenuItem>
           ))}
 
         </Menu>

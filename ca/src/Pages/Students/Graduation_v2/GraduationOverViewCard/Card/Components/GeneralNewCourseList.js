@@ -75,6 +75,7 @@ const CoursePopover = props => {
           label={'移動課程'}
           backgroundColor={item.reason}
           rwd={rwd}
+          item={item}
         />
       </PopoverButton>
     </div>
