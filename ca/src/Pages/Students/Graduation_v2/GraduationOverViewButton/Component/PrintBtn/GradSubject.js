@@ -5,6 +5,8 @@ class GradSubject extends React.Component {
   render () {
     let realscore = [null, null, null, null, null, null, null, null]
     realscore[this.props.year * 2 + this.props.semester - 3] = this.props.score
+    console.log(this.props.score)
+    console.log(realscore)
     return (
       <tr className={(this.props.name === ' ') ? 'bigger-row' : ''}>
         <td className='left-text'>{this.props.name}</td>

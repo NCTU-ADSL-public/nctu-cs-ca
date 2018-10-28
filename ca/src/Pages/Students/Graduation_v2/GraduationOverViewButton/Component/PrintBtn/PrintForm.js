@@ -10,7 +10,6 @@ class PrintForm extends React.Component {
   }
 
   render () {
-    console.log(this.props.courseCategoryArray)
     let generalCatTitle = ['外語', '通識(舊制)', '通識(新制)', '體育', '服務學習', '藝文賞析']
     let depCat = []
     let generalCat = []
