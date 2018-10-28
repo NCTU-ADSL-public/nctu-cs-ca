@@ -4,6 +4,7 @@ import GraduationOverViewCard from './GraduationOverViewCard'
 import { connect } from 'react-redux'
 import PrintForm from './GraduationOverViewButton/Component/PrintBtn/PrintForm'
 import './index.css'
+import { fetchGraduationCourse } from '../../../Redux/Students/Actions/Graduation'
 
 class Index extends React.Component {
   render () {
@@ -46,6 +47,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

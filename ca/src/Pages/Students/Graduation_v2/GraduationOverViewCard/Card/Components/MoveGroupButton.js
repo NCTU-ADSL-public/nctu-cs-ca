@@ -1,14 +1,17 @@
 import React from 'react'
+import axios from 'axios'
 // MUI
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import '../../../../../../../node_modules/animate.css/animate.css'
-import PropTypes from 'prop-types'
+// REDUX
 import { connect } from 'react-redux'
 import { changeCourse } from '../../../../../../Redux/Students/Actions/Graduation'
+
+import '../../../../../../../node_modules/animate.css/animate.css'
+import PropTypes from 'prop-types'
 
 const style = {
   Button: {
@@ -62,8 +65,28 @@ class MoveGroupButton extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.state = {
       isOpened: false,
-      anchorEl: null
+      anchorEl: null,
+      targets: [{title: '...'}]
     }
+    this.fetchTarget()
+  }
+
+  fetchTarget () {
+    console.log('============ MoveGroupButton ==============')
+    console.log(this.props.item)
+    console.log(this.props.studentIdcard)
+    console.log('===========================================')
+
+    axios.post('/students/graduate/legalTargetGroup', {
+      cn: this.props.item.cn, // 中文課名
+      code: this.props.item.code, // 課號
+      type: this.props.item.type,
+      studentId: this.props.studentIdcard.student_id,
+    }).then(res => {
+      this.setState({targets: res.data})
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   handleClick (event) {
@@ -80,7 +103,7 @@ class MoveGroupButton extends React.Component {
 
   render () {
     const { label, classes } = this.props
-    const { anchorEl } = this.state
+    const { anchorEl, targets } = this.state
 
     return (
       <div style={style.Popover}>
@@ -100,9 +123,9 @@ class MoveGroupButton extends React.Component {
           onClose={this.handleClose}
           className={classes.root}
         >
-          <MenuItem onClick={this.handleClose} className={classes.root} >專業選修</MenuItem>
-          <MenuItem onClick={this.handleClose} className={classes.root} >其他選修</MenuItem>
-          <MenuItem onClick={this.handleClose} className={classes.root} >外語</MenuItem>
+          {targets.map(item => (
+            <MenuItem onClick={this.handleClose} className={classes.root} >{item.title}</MenuItem>
+          ))}
 
         </Menu>
 
@@ -116,7 +139,8 @@ MoveGroupButton.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview
+  overview: state.Student.Graduation.overview,
+  studentIdcard: state.Student.User.studentIdcard
 })
 
 const mapDispatchToProps = (dispatch) => ({

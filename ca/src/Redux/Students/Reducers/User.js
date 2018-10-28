@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 
-const initalState = {
+const initialState = {
   type: 'student', // for Navbar
   studentIdcard: {
     sname: '資料錯誤',
@@ -18,4 +18,4 @@ export default handleActions({
   CHANGE_FOOTER_COLOR: (state, action) => {
     return ({ ...state, FooterColor: action.payload })
   }
-}, initalState)
+}, initialState)

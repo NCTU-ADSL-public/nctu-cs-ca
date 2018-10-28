@@ -11,6 +11,7 @@ const initialState = {
 
 export default handleActions({
   FETCH_DONE: (state) => ({ ...state, status: 'DONE' }),
+  FETCH_START: (state) => ({ ...state, status: 'START' }),
   SHOW_GRAD_PRINT: (state, action) => ({ ...state, printdata: action.payload }),
   SHOW_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
   SHOW_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),

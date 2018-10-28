@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 import { connect } from 'react-redux'
-import { fetchProfessors } from '../../../../Redux/Students/Actions/Professor/index'
+import { changeCourse } from '../../../../Redux/Students/Actions/Graduation/index'
 
 class Index extends React.Component {
   constructor (props) {
@@ -13,7 +13,6 @@ class Index extends React.Component {
 
   render () {
     const { rwd } = this.props
-    
     return (
       <div className={rwd ? 'overview' : ''}>
         <Card title='共同必修' rwd={rwd} complete={this.props.overview.compulsory} require={this.props.overview.compulse_require} value={Number(this.props.overview.compulsory) / Number(this.props.overview.compulse_require) * 100} />
@@ -37,7 +36,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProfessors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
