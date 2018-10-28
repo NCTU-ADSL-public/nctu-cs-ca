@@ -407,6 +407,20 @@
     ]
   },
   {
+    "title": "核心課程",
+    "credit": 0,
+    "require": 0,
+    "selection": true,
+    "course": []
+  },
+  {
+    "title": "副核心與他組核心",
+    "credit": 0,
+    "require": 0,
+    "selection": true,
+    "course": []
+  },
+  {
     "title": "專業選修",
     "credit": 17,
     "require": 27,
