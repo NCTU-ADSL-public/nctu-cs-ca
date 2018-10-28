@@ -29,7 +29,6 @@ const decideBtnBgColor = (completed, reason, selection) => {
 
 const CourseList = (props) => {
   const { items, selection, rwd } = props
-
   let id = 0
   return (
     <div style={{ width: '100%' }}>

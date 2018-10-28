@@ -14,7 +14,6 @@ class PrintForm extends React.Component {
     let depCat = []
     let generalCat = []
     this.props.courseCategoryArray.forEach((item, i) => {
-      console.log(item)
       if (generalCatTitle.indexOf(item.title) !== -1) {
         // Sort general course by 向度
         if (item.title.slice(0, 2) === '通識') {
@@ -60,16 +59,20 @@ class PrintForm extends React.Component {
           <col className='col10' />
           <col className='col11' />
           <col className='col12' />
+          <col className='col13' />
+          <col className='col14' />
+          <col className='col15' />
+          <col className='col16' />
         </colgroup>
 
         <tbody>
           <tr className='borderLess'>
-            <td colSpan='13' style={{ fontSize: '16pt', fontWeight: 'bold', height: '1.5em', color: '#000000' }}>
+            <td colSpan='17' style={{ fontSize: '16pt', fontWeight: 'bold', height: '1.5em', color: '#000000' }}>
               104學年度--{programName}
             </td>
           </tr>
           <tr className='borderLess left-text'>
-            <td colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '2.5em' }}>
+            <td colSpan='17' style={{ fontSize: '10pt', fontWeight: 'bold', height: '2.5em' }}>
               <div width='100%'>
                 <div className='personal-info'>學號：{this.props.profile.student_id}</div>
                 <div className='personal-info'>姓名：{this.props.profile.sname}</div>
@@ -80,7 +83,7 @@ class PrintForm extends React.Component {
 
         <tbody>
           <tr>
-            <td className='bg-green left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
+            <td className='bg-green left-text' colSpan='17' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
               <span>一、本系專業科目(畢業前須通過</span>
               <span style={{ color: '#FF0000' }}>1</span>
               <span>門本系開授或認可之英文授課專業課程)</span>
@@ -98,7 +101,7 @@ class PrintForm extends React.Component {
 
         <tbody>
           <tr>
-            <td className='bg-yellow left-text' colSpan='13' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
+            <td className='bg-yellow left-text' colSpan='17' style={{ fontSize: '10pt', fontWeight: 'bold', height: '24pt' }}>
               <span>二、校訂共同科目</span>
             </td>
           </tr>
