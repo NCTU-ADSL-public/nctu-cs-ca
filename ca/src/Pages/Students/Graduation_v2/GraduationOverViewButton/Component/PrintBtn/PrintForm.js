@@ -14,6 +14,7 @@ class PrintForm extends React.Component {
     let depCat = []
     let generalCat = []
     this.props.courseCategoryArray.forEach((item, i) => {
+      console.log(item)
       if (generalCatTitle.indexOf(item.title) !== -1) {
         // Sort general course by 向度
         if (item.title.slice(0, 2) === '通識') {
