@@ -62,9 +62,9 @@ const styles = theme => ({
     fontSize: '40px',
     display: 'inline-flex',
     verticalAlign: 'middle',
-    color: 'rgb(0, 188, 212)',
+    color: '#68BB66',
     '&:hover': {
-      color: 'rgb(0, 168, 192)',
+      color: '#68BB66',
       transition: 'color 0.5s'
     },
     transition: 'color 0.3s',
@@ -74,13 +74,13 @@ const styles = theme => ({
   cssLabel: {
     fontSize: 15,
     '&$cssFocused': {
-      color: 'rgb(0, 188, 212)'
+      color: '#68BB66'
     },
   },
   cssFocused: {},
   cssUnderline: {
     '&:after': {
-      borderBottomColor: 'rgb(0, 188, 212)'
+      borderBottomColor: '#68BB66'
     },
   },
   tooltip: {
