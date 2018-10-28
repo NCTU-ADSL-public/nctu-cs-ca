@@ -101,22 +101,24 @@ class MoveGroupButton extends React.Component {
     })
     console.log('============ MoveGroupButton switchCourse ==============')
     console.log('target: ' + target)
-    console.log('origin_group: ' + this.props.item.origin_group)
-    console.log('new_group: ' + this.props.item.new_group)
+    console.log('this.props.title: ' + this.props.title)
+    console.log('origin_title: ' + this.props.item.origin_title)
+    console.log('new_title: ' + this.props.item.new_title)
     console.log(this.props.studentIdcard)
 
     axios.post('/students/graduate/switchCourse', {
       cn: this.props.item.cn, // 中文課名
       student_id: this.props.studentIdcard.student_id,
-      origin_group: this.props.item.origin_group,
+      origin_group: this.props.title,
       target_group: target
     }).then(res => {
-      console.log('----- RESPONSE -----')
+      console.log('┌---- RESPONSE ----')
       console.log(res)
-      console.log('===========================================')
+      console.log('└------------------')
     }).catch(err => {
       console.log(err)
     })
+    console.log('===========================================')
   }
 
   render () {

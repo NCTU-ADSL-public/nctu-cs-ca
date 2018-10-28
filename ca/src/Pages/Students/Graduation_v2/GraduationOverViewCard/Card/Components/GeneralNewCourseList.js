@@ -48,7 +48,7 @@ const decideBtnBgColor = (completed, reason, selection) => {
 }
 
 const CoursePopover = props => {
-  const { item, rwd, selection } = props
+  const { item, rwd, selection, title } = props
   return (
     <div className='col-xs-6 col-sm-3 col-md-2'>
       <PopoverButton
@@ -76,6 +76,7 @@ const CoursePopover = props => {
           backgroundColor={item.reason}
           rwd={rwd}
           item={item}
+          title={title}
         />
       </PopoverButton>
     </div>
