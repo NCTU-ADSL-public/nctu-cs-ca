@@ -8,11 +8,13 @@ export const triggerUpdateData = () => dispatch => {
   ['一', '二', '三', '四'].map( title => {
     axios.post('/assistants/graduate/gradeStudent', { grade: title }).then(res => {
       res.data.map( student => {
-        axios.get('/assistants/graduate/glist', {
-          params: {
-            student_id: student.student_id
-          }
-        })
+        setTimeout(function(){
+          axios.get('/assistants/graduate/glist', {
+            params: {
+              student_id: student.student_id
+            }
+          })
+        }, 500);
       })
     })
   })
