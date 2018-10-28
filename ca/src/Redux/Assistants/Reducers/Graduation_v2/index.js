@@ -13,13 +13,14 @@ const initialState = {
     "other": 1,
     "net": 1,
     "media": 1,
-    "submit_type_type": 1,
+    "submit_type": 0,
     "old_total": 1,
     "old_contemp": 1,
     "old_culture": 1,
     "old_history": 1,
     "old_citizen": 1,
     "old_group": 1,
+    "old_science": 1,
     "new_total": 1,
     "new_core_total": 1,
     "new_core_society": 1,
@@ -37,21 +38,6 @@ const initialState = {
   }]
 }
 export default handleActions({
-  STORE_GRADUATE_DETAIL: (state, action) => ({ ...state,
-    students: [...state.students, action.payload]
-  }),
-  CLEAR_STUDENTS: (state, action) => ({ ...state,
-    students: []
-  }),
-  STORE_GRADUATE_STATE: (state, action) => ({ ...state,
-    students: state.students.map( student => student.id !== action.payload.student_id ?
-      student
-      :
-      { ...student,
-        graduate_status: action.payload.data.check.state
-      }
-    )
-  }),
   SET_GRADUATE_STATE: (state, action) => ({ ...state,
     students: state.students.map( student => student.id !== action.payload.student_id ?
       student
@@ -60,5 +46,8 @@ export default handleActions({
         graduate_status: action.payload.graduate_submit
       }
     )
+  }),
+  STORE_STUDENT: (state, action) => ({ ...state,
+    students: action.payload
   })
 }, initialState)

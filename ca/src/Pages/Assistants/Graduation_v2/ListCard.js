@@ -148,10 +148,10 @@ class ListPanel extends React.Component {
               <div style = {{ padding: '10px 20px' }}>
                 <hr style = {{ margin: '1px' }}/>
                 <div>畢業狀態: { GRAD_STATUS_CN[student.graduate_status] }</div>
-                <div>預審狀況: { VERIFY_STATUS_CN[student.graduate_status] }</div>
+                <div>預審狀況: { VERIFY_STATUS_CN[student.submit_status] }</div>
               </div>
 
-              { student.graduate_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
+              { student.submit_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
                 <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
                 <div style = {{ flex: 1 }} />
                 <Button className = { classes.buttonNG } onClick = {
