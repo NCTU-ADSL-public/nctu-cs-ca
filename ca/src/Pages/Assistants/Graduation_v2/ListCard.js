@@ -10,11 +10,13 @@ import CircularProgressbar from 'react-circular-progressbar'
 import Clear from '@material-ui/icons/Clear';
 import QueryBuilder from '@material-ui/icons/QueryBuilder';
 import Done from '@material-ui/icons/Done';
+import OpenInNew from '@material-ui/icons/OpenInNew';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import red from '@material-ui/core/colors/red';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
 import { setGradutateState } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
 
 const styles = theme => ({
@@ -65,6 +67,11 @@ const styles = theme => ({
     fontSize: '15px',
     margin: '5px',
     color: 'blue',
+  },
+  hover: {
+    fontSize: '15px',
+    position: 'relative',
+    right: '-220px'
   }
 })
 
@@ -93,14 +100,22 @@ class ListPanel extends React.Component {
     const { edit_panel_open } = this.state
 
     return (
-      <Card className={classes.card}>
+      <Card className={classes.card} >
         <CardContent style = {{ display: 'flex' }}>
           <div style={{ width: '15%', display: 'block', textAlign: 'center' }}>
-            <div style = {{ fontSize: '30px', fontWeight: 'bold' }}>{ student.name }</div>
-            <div style = {{ fontSize: '15px', marginBottom: '10px' }}>{ student.id + ' / ' + student.program }</div>
+            <div style = {{ fontSize: '30px', fontWeight: 'bold' }} >{ student.sname }
+              <OpenInNew style = {{
+                fontSize: '20px',
+                marginLeft: '5px',
+                fontWeight: 'bold',
+                verticalAlign: 'middle'}}
+                onClick = { () => window.open('/assistants/head/s/' + student.student_id) }
+              />
+            </div>
+            <div style = {{ fontSize: '15px', marginBottom: '10px' }}>{ student.student_id + ' / ' + student.program }</div>
             <CircularProgressbar
-              percentage={100 * student.detail.total / 128}
-              text = { student.detail.total.toString()}
+              percentage={100 * student.total_credit / 128}
+              text = { student.total_credit.toString()}
               initialAnimation
               styles={{
                 root: { maxWidth: '120px' },
@@ -110,20 +125,20 @@ class ListPanel extends React.Component {
             />
             <div>
             {
-              parseInt(student.detail.status) === 0 && <span>
+              parseInt(student.graduate_status) === 0 && <span>
                 <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
               </span>
               ||
-              parseInt(student.detail.status) === 1 && <span>
+              parseInt(student.graduate_status) === 1 && <span>
                 <QueryBuilder style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
               </span>
               ||
-              parseInt(student.detail.status) === 2 && <span>
+              parseInt(student.graduate_status) === 2 && <span>
                 <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
               </span>
             }
-            <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.detail.status] }</div>
-            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / { VERIFY_STATUS_CN[student.graduate_status] }</span>
+            <div style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.graduate_status] }</div>
+            <span style = {{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / { VERIFY_STATUS_CN[student.submit_status] }</span>
             </div>
             <Button variant="contained" className = { classes.button } onClick = { () => this.setState({ edit_panel_open: true }) }>
               編輯預審狀態
@@ -132,11 +147,11 @@ class ListPanel extends React.Component {
               <DialogTitle><div style = {{ fontSize: '20px' }} >畢業審核</div></DialogTitle>
               <div style = {{ padding: '10px 20px' }}>
                 <hr style = {{ margin: '1px' }}/>
-                <div>畢業狀態: { GRAD_STATUS_CN[student.detail.status] }</div>
-                <div>預審狀況: { VERIFY_STATUS_CN[student.graduate_status] }</div>
+                <div>畢業狀態: { GRAD_STATUS_CN[student.graduate_status] }</div>
+                <div>預審狀況: { VERIFY_STATUS_CN[student.submit_status] }</div>
               </div>
 
-              { student.graduate_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
+              { student.submit_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
                 <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
                 <div style = {{ flex: 1 }} />
                 <Button className = { classes.buttonNG } onClick = {
@@ -159,7 +174,7 @@ class ListPanel extends React.Component {
               <div style = {{ fontSize: '23px', float: 'left', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>必修</div>
               <div className = 'col-md-11 col-lg-11 col-xs-11'>
               {
-                student.detail.compulse.length === 0 ?
+                student.compulse.length === 0 ?
                 <Done className = { classes.ok } style = {{ fontSize: '30px', marginTop: '12px' }} />
                 :
                 <Tabs
@@ -168,7 +183,7 @@ class ListPanel extends React.Component {
                   style = {{ width: '100%' }}
                 >
                 {
-                  student.detail.compulse.map( (title) => (
+                  student.compulse.map( (title) => (
                     <Tab label = { title } classes = {{
                       root: classes.tabRoot,
                       label: classes.tabLabel,
@@ -187,26 +202,26 @@ class ListPanel extends React.Component {
                 <div className = 'col-md-4 col-lg-4 col-xs-4' style = {{ marginTop: '25px' }}>
                   <div className = 'row' style = {{ marginTop: '10px' }} >
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      專業選修{ student.detail.pro <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.pro}</span> }
+                      專業選修{ student.pro <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.pro}</span> }
                     </div>
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      其他選修{ student.detail.other <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.other}</span> }
-                    </div>
-                  </div>
-                  <div className = 'row' style = {{ marginTop: '10px' }} >
-                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      {"體　　育"}{ student.detail.pe <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.pe}</span> }
-                    </div>
-                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      服務學習{ student.detail.service <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.service}</span> }
+                      其他選修{ student.other <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.other}</span> }
                     </div>
                   </div>
                   <div className = 'row' style = {{ marginTop: '10px' }} >
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      藝文護照{ student.detail.art <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.art}</span> }
+                      {"體　　育"}{ student.pe <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.pe}</span> }
                     </div>
                     <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
-                      導師時間{ student.detail.mentor <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.mentor}</span> }
+                      服務學習{ student.service <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.service}</span> }
+                    </div>
+                  </div>
+                  <div className = 'row' style = {{ marginTop: '10px' }} >
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      藝文護照{ student.art <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.art}</span> }
+                    </div>
+                    <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '15px', padding: '5px' }}>
+                      導師時間{ student.mentor <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.mentor}</span> }
                     </div>
                   </div>
                 </div>
@@ -217,60 +232,59 @@ class ListPanel extends React.Component {
                     borderRadius: '5px'
                   }}
                 >
-                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識{
-                    Math.min(student.detail.general.new.total, student.detail.general.old.total) <= 0 ?
-                    <Done className = { classes.ok } style = {{ fontSize: '20px' }} />
-                    :
-                    <span className = { classes.error } style = {{ fontSize: '20px' }}>{ Math.min(student.detail.general.new.total, student.detail.general.old.total) }</span>
-                  }</div>
+                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識</div>
                   <div className = 'row'>
                     {
-                      student.detail.general.status === 0 ?
+                      student.submit_type === 0 ?
                       <div className = 'col-md-12 col-lg-12 col-xs-12'>
                         <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
-                          student.detail.general.old.total <= 0 ?
+                          student.old_total <= 0 ?
                           <Done className = { classes.ok } />
                           :
-                          <span className = { classes.error } >{ student.detail.general.old.total }</span>
+                          <span className = { classes.error } >{ student.old_total }</span>
                         }</div>
                         <hr style = {{ margin: '1px' }}/>
                         <div className = 'row' style = {{ marginLeft: '1px' }}>
                           <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                            當代{ student.detail.general.old.contemp <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.contemp}</span> }
+                            當代{ student.old_contemp <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.old_contemp}</span> }
                           </div>
                           <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                            文化{ student.detail.general.old.culture <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.culture}</span> }
-                          </div>
-                        </div>
-                        <div className = 'row' style = {{ marginLeft: '1px' }}>
-                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                            歷史{ student.detail.general.old.history <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.history}</span> }
-                          </div>
-                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                            公民{ student.detail.general.old.citizen <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.citizen}</span> }
+                            文化{ student.old_culture <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.old_culture}</span> }
                           </div>
                         </div>
                         <div className = 'row' style = {{ marginLeft: '1px' }}>
                           <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                            群己{ student.detail.general.old.group <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.group}</span> }
+                            歷史{ student.old_history <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.old_history}</span> }
                           </div>
                           <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
-                            自然{ student.detail.general.old.science <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.old.science}</span> }
+                            公民{ student.old_citizen <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.old_citizen}</span> }
+                          </div>
+                        </div>
+                        <div className = 'row' style = {{ marginLeft: '1px' }}>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            群己{ student.old_group <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.old_group}</span> }
+                          </div>
+                          <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ fontSize: '13px', padding: '5px' }}>
+                            自然{ student.old_science <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.old_science}</span> }
                           </div>
                         </div>
                       </div>
                       :
                       <div className = 'col-md-12 col-lg-12 col-xs-12'>
                         <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }} >新制{
-                          student.detail.general.new.total <= 0 ?
+                          student.new_total <= 0 ?
                           <Done className = { classes.ok } style = {{ marginLeft: '22px' }} />
                           :
-                          <span className = { classes.error } style = {{ marginLeft: '22px' }} >{ student.detail.general.new.total }</span>
+                          <span className = { classes.error } style = {{ marginLeft: '22px' }} >{ student.new_total }</span>
                         }</div>
                         <hr style = {{ margin: '1px' }}/>
-                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"核　心"}{ student.detail.general.new.core <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.core}</span> }</div>
-                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"跨　院"}{ student.detail.general.new.cross <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.cross}</span> }</div>
-                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"校基本"}{ student.detail.general.new.basic <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.general.new.basic}</span> }</div>
+                        <Tooltip title={"人文: " + student.new_core_humanity + "　社會: " + student.new_core_society } placement="left" classes = {{ tooltip: classes.hover }}>
+                          <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >
+                            {"核　心"}{ student.new_core_total <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{ student.new_core_total }</span> }
+                          </div>
+                        </Tooltip>
+                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"跨　院"}{ student.new_cross <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.new_cross}</span> }</div>
+                        <div className = 'row' style = {{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{"校基本"}{ student.new_basic <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.new_basic}</span> }</div>
                       </div>
                     }
                   </div>
@@ -283,18 +297,13 @@ class ListPanel extends React.Component {
                   }}
                 >
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語{
-                    student.detail.lang.total <= 0 ?
+                    student.en_total <= 0 ?
                     <Done className = { classes.ok } style = {{ fontSize: '20px' }} />
                     :
-                    <span className = { classes.error } style = {{ fontSize: '20px' }} >{ student.detail.lang.total }</span>
+                    <span className = { classes.error } style = {{ fontSize: '20px' }} >{ student.en_total }</span>
                   }</div>
-                  <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >基礎{ student.detail.lang.basic_credit <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.detail.lang.basic_credit}</span> }</div>
-                  <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >進階{
-                    (student.detail.lang.status === 0 ? student.detail.lang.advanced_course : student.detail.lang.advanced_credit)
-                     <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{
-                       student.detail.lang.status === 0 ? student.detail.lang.advanced_course : student.detail.lang.advanced_credit
-                     }</span>
-                  }</div>
+                  <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >基礎{ student.en_basic <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.en_basic}</span> }</div>
+                  <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >進階{ student.en_advanced <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.en_advanced}</span> }</div>
                 </div>
               </div>
             </div>

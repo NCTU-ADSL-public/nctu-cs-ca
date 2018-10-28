@@ -24,7 +24,8 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import LastPage from '@material-ui/icons/LastPage';
-import { fetchGraduateList } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
+import { fetchStudent, triggerUpdateData } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   container: {
@@ -32,16 +33,19 @@ const styles = theme => ({
     margin: '0 auto',
     marginBottom: '30px'
   },
+  button: {
+    fontSize: '10px',
+  },
   cssLabel: {
     fontSize: 20,
     '&$cssFocused': {
-      color: 'rgb(0, 188, 212)'
+      color: '#68BB66'
     },
   },
   cssFocused: {},
   cssUnderline: {
     '&:after': {
-      borderBottomColor: 'rgb(0, 188, 212)'
+      borderBottomColor: '#68BB66'
     },
   },
   chip: {
@@ -71,7 +75,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_graduate_list: (post_item) => dispatch(fetchGraduateList(post_item))
+  fetch_students: (grade) => dispatch(fetchStudent(grade)),
+  trigger_update_data: () => dispatch(triggerUpdateData())
 })
 
 class index extends React.Component {
@@ -87,9 +92,7 @@ class index extends React.Component {
       studentsPerPage: 4,
       grade: '四'
     }
-    props.fetch_graduate_list( {grade: this.state.grade} )
-    console.log("PROPS_STUDENTS")
-    console.log(props.students)
+    props.fetch_students( this.state.grade )
   }
 
   filter = (students) => {
@@ -103,12 +106,12 @@ class index extends React.Component {
         &&
         (
              !grad_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-          || grad_filter_status[parseInt(student.detail.status)]
+          || grad_filter_status[parseInt(student.graduate_status)]
         )
         &&
         (
              !veri_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-          || veri_filter_status[parseInt(student.graduate_status)]
+          || veri_filter_status[parseInt(student.submit_status)]
         )
       )
     )
@@ -124,7 +127,7 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, students, fetch_graduate_list } = this.props
+    const { classes, students, fetch_students, trigger_update_data } = this.props
     const { grad_filter_status, open_filter, input, page, studentsPerPage, grade, veri_filter_status } = this.state
 
 
@@ -132,8 +135,12 @@ class index extends React.Component {
     return (
       <div className = { classes.container } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
-          <div className = 'col-md-2 col-lg-2'>
-          </div>
+        <div className = 'col-md-1 col-lg-1'></div>
+        <div className = 'col-md-1 col-lg-1'>
+          <Button variant="contained" className = { classes.button } onClick = { () => trigger_update_data() }>
+            更新db資料
+          </Button>
+        </div>
           <div className = 'col-md-5 col-lg-5 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
             <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
@@ -265,7 +272,7 @@ class index extends React.Component {
                 style = {{ fontSize: '15px' }}
                 onChange={
                   (event) => {
-                    fetch_graduate_list( {grade: event.target.value} )
+                    fetch_students( event.target.value )
                     this.setState({ grade: event.target.value, page: 0 })
                   }
                 }

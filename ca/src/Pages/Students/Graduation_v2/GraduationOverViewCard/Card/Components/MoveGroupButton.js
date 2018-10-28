@@ -95,9 +95,27 @@ class MoveGroupButton extends React.Component {
     })
   }
 
-  handleClose () {
+  handleClose (target) {
     this.setState({
       anchorEl: null
+    })
+    console.log('============ MoveGroupButton switchCourse ==============')
+    console.log('target: ' + target)
+    console.log('origin_group: ' + this.props.item.origin_group)
+    console.log('new_group: ' + this.props.item.new_group)
+    console.log(this.props.studentIdcard)
+
+    axios.post('/students/graduate/switchCourse', {
+      cn: this.props.item.cn, // 中文課名
+      student_id: this.props.studentIdcard.student_id,
+      origin_group: this.props.item.origin_group,
+      target_group: target
+    }).then(res => {
+      console.log('----- RESPONSE -----')
+      console.log(res)
+      console.log('===========================================')
+    }).catch(err => {
+      console.log(err)
     })
   }
 
@@ -123,8 +141,14 @@ class MoveGroupButton extends React.Component {
           onClose={this.handleClose}
           className={classes.root}
         >
-          {targets.map(item => (
-            <MenuItem onClick={this.handleClose} className={classes.root} >{item.title}</MenuItem>
+          {targets.map((item, index) => (
+            <MenuItem
+              key={index}
+              onClick={() => this.handleClose(item.title)}
+              className={classes.root}
+            >
+              {item.title}
+            </MenuItem>
           ))}
 
         </Menu>

@@ -11,7 +11,7 @@ import Score from './Score'
 
 const styles = theme => ({
   tabsIndicator: {
-    backgroundColor: 'rgb(0, 188, 212)'
+    backgroundColor: '#68BB66'
   },
   tabRoot: {
     minWidth: '33%',
@@ -21,7 +21,7 @@ const styles = theme => ({
     fontSize: 25
   },
   tabSelected: {
-    color: 'rgb(0, 188, 212)',
+    color: '#68BB66',
     transition: 'color 0.3s'
   }
 })

@@ -29,13 +29,13 @@ const styles = theme => ({
   cssLabel: {
     fontSize: 18,
     '&$cssFocused': {
-      color: 'rgb(0, 188, 212)'
+      color: '#68BB66'
     },
   },
   cssFocused: {},
   cssUnderline: {
     '&:after': {
-      borderBottomColor: 'rgb(0, 188, 212)'
+      borderBottomColor: '#68BB66'
     },
   },
   icon: {
