@@ -40,10 +40,10 @@ export const fetchGraduationCourseAssistantVersion = (id) => dispatch => {
     }
   }).then(res => {
     dispatch(storeGraduationCourse(res.data))
-    dispatch(fetchDone())
   }).catch(err => {
     dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
     console.log('NOOOOOOOOOOOO')
+    console.log(id)
     console.log(err)
   })
 
