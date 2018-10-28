@@ -42,7 +42,12 @@ class GradCategory extends React.Component {
 
       // score
       if (subjects[i].score === null) {
-        if (subjects.grade === null) { subjects[i].score = (subjects[i].complete === true) ? '通過' : '未過' } else { subjects[i].score = subjects[i].grade }
+        if (subjects[i].grade === null || subjects[i].grade === '0') {
+          subjects[i].score = (subjects[i].complete === true) ? 'P' : 'F'
+        }
+        else {
+          subjects[i].score = subjects[i].grade
+        }
       }
 
       // 未修
@@ -57,12 +62,16 @@ class GradCategory extends React.Component {
         <tr>
           <td className='title-text' rowSpan={this.state.subjects.length + 1 + (this.state.name === '外語')}>{this.state.name}</td>
           <td className='title-text'>科目名稱</td>
+          <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>學前</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>1上</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>1下</td>
+          <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>1暑</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>2上</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>2下</td>
+          <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>2暑</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>3上</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>3下</td>
+          <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>3暑</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>4上</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>4下</td>
           <td style={{ fontSize: '6pt', fontWeight: 'bold' }}>應修<br />學分</td>
@@ -84,7 +93,7 @@ class GradCategory extends React.Component {
         )}
         {this.state.name === '外語' &&
         <tr>
-          <td className='bg-orange left-text' colSpan='12'>
+          <td className='bg-orange left-text' colSpan='17'>
             <span style={{ fontSize: '8pt', fontWeight: 'bold', color: '#0000FF' }}>★英檢未通過者需加修並通過「英文進階課程」4學分或於畢業前自行報名並通過所列任ㄧ英文能力檢定考試與標準</span>
           </td>
         </tr>
