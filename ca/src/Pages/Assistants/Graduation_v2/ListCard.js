@@ -173,7 +173,7 @@ class ListPanel extends React.Component {
           <div style = {{ width: '85%', paddingLeft: '20px' }}>
             <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
               <div style = {{ fontSize: '23px', float: 'left', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>必修</div>
-              <div className = 'col-md-11 col-lg-11 col-xs-11'>
+              <div className = 'col-md-7 col-lg-7 col-xs-7'>
               {
                 student.compulse.length === 0 ?
                 <Done className = { classes.ok } style = {{ fontSize: '30px', marginTop: '12px' }} />
@@ -195,6 +195,15 @@ class ListPanel extends React.Component {
                 </Tabs>
               }
               </div>
+              { student.program === '網多'　&&
+                <div className = 'col-md-4 col-lg-4 col-xs-4' style = {{ display: 'flex' }}>
+                  <div style = {{ fontSize: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>網多專選</div>
+                  <div style = {{ display: 'block', marginLeft: '20px', marginTop: '5px' }}>
+                    <div>{"網　路"}<span>{ student.net <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.net}</span> }</span></div>
+                    <div>多媒體<span>{ student.media <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.media}</span> }</span></div>
+                  </div>
+                </div>
+              }
             </div>
             <hr />
             <div style = {{ width: '100%' }}>
