@@ -1,49 +1,40 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  students: [
-    {
-      'id': '0416001',
-      'name': '王大名',
-      'program': '資A',
-      'graduate_status': 1,
-      'detail': {
-        'total': 116,
-        'status': 0,
-        'compulse': [],
-        'pro': 3,
-        'other': 2,
-        'general': {
-          'status': 0,
-          'old': {
-            'total': 12,
-            'contemp': 4,
-            'culture': 4,
-            'history': 4,
-            'citizen': 4,
-            'group': 4,
-            'science': 4
-          },
-          'new': {
-            'total': 12,
-            'core': 0,
-            'basic': 0,
-            'cross': 3
-          }
-        },
-        'lang': {
-          'total': 12,
-          'status': 0,
-          'basic_credit': 0,
-          'advanced_course': 0
-        },
-        'pe': 0,
-        'service': 0,
-        'art': 0,
-        'mentor': 0
-      }
-    }
-  ]
+  students: [{
+    "student_id": "0416210",
+    "sname": "王大明",
+    "program": "網多",
+    "total_credit": 100,
+    "eng_course": 0,
+    "submit_status": 1,
+    "graduate_status": 0,
+    "pro": 1,
+    "other": 1,
+    "net": 1,
+    "media": 1,
+    "submit_type_type": 1,
+    "old_total": 1,
+    "old_contemp": 1,
+    "old_culture": 1,
+    "old_history": 1,
+    "old_citizen": 1,
+    "old_group": 1,
+    "new_total": 1,
+    "new_core_total": 1,
+    "new_core_society": 1,
+    "new_core_humanity": 1,
+    "new_basic": 1,
+    "new_cross": 1,
+    "en_status": 1,
+    "en_basic": 1,
+    "en_advanced": 1,
+    "pe": 1,
+    "service": 1,
+    "art": 1,
+    "mentor": 1,
+    "compulse": ["計算機", "組織", "電路"]
+  }]
 }
 export default handleActions({
   STORE_GRADUATE_DETAIL: (state, action) => ({ ...state,

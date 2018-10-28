@@ -72,9 +72,9 @@ export const setGradutateState = post_item => dispatch => {
     console.log(res.data)
     dispatch(set_graduate_state(post_item))
   }).catch( err => {
-      console.log(err)
-      console.log("POST_Item")
-      console.log(post_item)
-      dispatch(set_graduate_state(post_item))
+    console.log(err)
+    console.log("POST_Item")
+    console.log(post_item)
+    dispatch(set_graduate_state(post_item))
   })
 }
