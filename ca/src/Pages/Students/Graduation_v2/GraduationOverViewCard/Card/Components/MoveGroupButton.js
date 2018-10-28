@@ -95,7 +95,13 @@ class MoveGroupButton extends React.Component {
     })
   }
 
-  handleClose (target) {
+  handleClose () {
+    this.setState({
+      anchorEl: null
+    })
+  }
+
+  handleItemSelected (target) {
     this.setState({
       anchorEl: null
     })
@@ -146,7 +152,7 @@ class MoveGroupButton extends React.Component {
           {targets.map((item, index) => (
             <MenuItem
               key={index}
-              onClick={() => this.handleClose(item.title)}
+              onClick={() => this.handleItemSelected(item.title)}
               className={classes.root}
             >
               {item.title}
