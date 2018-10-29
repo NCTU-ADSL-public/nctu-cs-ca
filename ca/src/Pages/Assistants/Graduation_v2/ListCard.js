@@ -116,7 +116,7 @@ class ListPanel extends React.Component {
             <div style = {{ fontSize: '15px', marginBottom: '10px' }}>{ student.student_id + ' / ' + student.program }</div>
             <CircularProgressbar
               percentage={100 * student.total_credit / 128}
-              text = { student.total_credit.toString()}
+              text = { student.total_credit ? student.total_credit.toString() : "error" }
               initialAnimation
               styles={{
                 root: { maxWidth: '120px' },

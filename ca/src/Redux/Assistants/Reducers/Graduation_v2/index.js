@@ -5,7 +5,7 @@ const initialState = {
     "student_id": "0416210",
     "sname": "王大明",
     "program": "資電",
-    "total_credit": 100,
+    "total_credit": '',
     "eng_course": 0,
     "submit_status": 1,
     "graduate_status": 0,
