@@ -116,7 +116,7 @@ class ListPanel extends React.Component {
             <div style = {{ fontSize: '15px', marginBottom: '10px' }}>{ student.student_id + ' / ' + student.program }</div>
             <CircularProgressbar
               percentage={100 * student.total_credit / 128}
-              text = { student.total_credit.toString()}
+              text = { student.total_credit ? student.total_credit.toString() : "error" }
               initialAnimation
               styles={{
                 root: { maxWidth: '120px' },
@@ -173,7 +173,7 @@ class ListPanel extends React.Component {
           <div style = {{ width: '85%', paddingLeft: '20px' }}>
             <div className = 'row' style = {{ display: 'flex', marginLeft: '20px' }}>
               <div style = {{ fontSize: '23px', float: 'left', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>必修</div>
-              <div className = 'col-md-11 col-lg-11 col-xs-11'>
+              <div className = 'col-md-7 col-lg-7 col-xs-7'>
               {
                 student.compulse.length === 0 ?
                 <Done className = { classes.ok } style = {{ fontSize: '30px', marginTop: '12px' }} />
@@ -195,6 +195,15 @@ class ListPanel extends React.Component {
                 </Tabs>
               }
               </div>
+              { student.program === '網多'　&&
+                <div className = 'col-md-4 col-lg-4 col-xs-4' style = {{ display: 'flex' }}>
+                  <div style = {{ fontSize: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>網多專選</div>
+                  <div style = {{ display: 'block', marginLeft: '20px', marginTop: '5px' }}>
+                    <div>{"網　路"}<span>{ student.net <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.net}</span> }</span></div>
+                    <div>多媒體<span>{ student.media <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.media}</span> }</span></div>
+                  </div>
+                </div>
+              }
             </div>
             <hr />
             <div style = {{ width: '100%' }}>
@@ -297,12 +306,9 @@ class ListPanel extends React.Component {
                     borderRadius: '5px'
                   }}
                 >
-                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語{
-                    student.en_total <= 0 ?
-                    <Done className = { classes.ok } style = {{ fontSize: '20px' }} />
-                    :
-                    <span className = { classes.error } style = {{ fontSize: '20px' }} >{ student.en_total }</span>
-                  }</div>
+                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語 /
+                    <span style = {{ fontSize: '15px', marginLeft: '5px' }} >畢業門檻</span> {student.en_status !== 0 ? <Done style = {{ fontSize: '15px', color: 'green' }} /> : <Clear style = {{ fontSize: '15px', color: 'red'}} /> }
+                  </div>
                   <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >基礎{ student.en_basic <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.en_basic}</span> }</div>
                   <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >進階{ student.en_advanced <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.en_advanced}</span> }</div>
                 </div>

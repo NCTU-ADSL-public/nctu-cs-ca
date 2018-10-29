@@ -28,7 +28,7 @@ const decideBtnBgColor = (completed, reason, selection) => {
 }
 
 const CourseList = (props) => {
-  const { items, selection, rwd } = props
+  const { items, selection, rwd, title } = props
   let id = 0
   return (
     <div style={{ width: '100%' }}>
@@ -56,6 +56,7 @@ const CourseList = (props) => {
             {/* An option for student to move a course to other group */}
             <MoveGroupButton
               key={id}
+              title={title}
               item={item}
               label={'移動課程'}
               rwd={rwd}
