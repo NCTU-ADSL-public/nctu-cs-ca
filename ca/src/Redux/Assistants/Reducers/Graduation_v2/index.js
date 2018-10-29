@@ -35,7 +35,8 @@ const initialState = {
     "art": 1,
     "mentor": 1,
     "compulse": ["計算機", "組織", "電路"]
-  }]
+  }],
+  students_csv_data: []
 }
 export default handleActions({
   SET_GRADUATE_STATE: (state, action) => ({ ...state,
@@ -49,5 +50,8 @@ export default handleActions({
   }),
   STORE_STUDENT: (state, action) => ({ ...state,
     students: action.payload
+  }),
+  STORE_STUDENT_CSV_DATA: (state, action) => ({ ...state,
+    students_csv_data: action.payload
   })
 }, initialState)

@@ -26,6 +26,8 @@ import ChevronRight from '@material-ui/icons/ChevronRight';
 import LastPage from '@material-ui/icons/LastPage';
 import { fetchStudent, triggerUpdateData } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
 import Button from '@material-ui/core/Button';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+import { CSVLink, CSVDownload } from "react-csv";
 
 const styles = theme => ({
   container: {
@@ -71,7 +73,8 @@ const styles = theme => ({
 })
 
 const mapStateToProps = (state) => ({
-  students: state.Assistant.Graduation.students
+  students: state.Assistant.Graduation.students,
+  students_csv_data: state.Assistant.Graduation.students_csv_data,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -135,12 +138,21 @@ class index extends React.Component {
     return (
       <div className = { classes.container } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
-        <div className = 'col-md-1 col-lg-1'></div>
-        <div className = 'col-md-1 col-lg-1'>
-          <Button variant="contained" className = { classes.button } onClick = { () => trigger_update_data() }>
-            更新db資料
-          </Button>
-        </div>
+          <div className = 'col-md-1 col-lg-1'>
+            <Button variant="contained" className={classes.button} >
+              <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
+              <CSVLink
+                filename={this.state.grade + "年級畢業預審總表.csv"}
+                data={this.props.students_csv_data}>
+                download
+              </CSVLink>
+            </Button>
+          </div>
+          <div className = 'col-md-1 col-lg-1'>
+            <Button variant="contained" className = { classes.button } onClick = { () => trigger_update_data() }>
+              更新db資料
+            </Button>
+          </div>
           <div className = 'col-md-5 col-lg-5 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
             <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
