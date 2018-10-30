@@ -144,7 +144,7 @@ class index extends React.Component {
               <CSVLink
                 filename={this.state.grade + "年級畢業預審總表.csv"}
                 data={this.props.students_csv_data}>
-                download
+                下載
               </CSVLink>
             </Button>
           </div>
