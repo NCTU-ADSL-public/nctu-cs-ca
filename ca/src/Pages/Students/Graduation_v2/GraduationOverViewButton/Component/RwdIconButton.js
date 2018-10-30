@@ -53,7 +53,6 @@ class LongMenu extends React.Component {
         >
           <SendReviewBtn />
           <PrintBtn rwd />
-          <CourseChangeBtn />
         </Menu>
       </div>
     )
