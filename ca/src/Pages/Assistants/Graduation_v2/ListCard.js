@@ -245,7 +245,7 @@ class ListPanel extends React.Component {
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識</div>
                   <div className = 'row'>
                     {
-                      student.submit_type === 0 ?
+                      student.submit_type !== 1 ?
                       <div className = 'col-md-12 col-lg-12 col-xs-12'>
                         <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
                           student.old_total <= 0 ?
