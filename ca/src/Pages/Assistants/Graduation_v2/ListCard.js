@@ -158,13 +158,13 @@ class ListPanel extends React.Component {
                 <Button className = { classes.buttonNG } onClick = {
                   () => {
                     this.setState({ edit_panel_open: false }),
-                    set_graduate_state({ student_id: student.id, graduate_submit: 3 })
+                    set_graduate_state({ student_id: student.student_id, graduate_submit: 3 })
                   }
                 }>未通過</Button>
                 <Button className = { classes.buttonOK } onClick = {
                   () => {
                     this.setState({ edit_panel_open: false }),
-                    set_graduate_state({ student_id: student.id, graduate_submit: 2 })
+                    set_graduate_state({ student_id: student.student_id, graduate_submit: 2 })
                   }
                 }>通過</Button>
               </div> }

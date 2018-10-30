@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 
 import GraduationList from './GraduationList'
-import GraduationListPanel from './GraduationListPanel'
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
@@ -297,16 +296,8 @@ class index extends React.Component {
             </FormControl>
           </div>
         </div>
-        {/*
-        <GraduationList students = {
-          this.filter(students)
-              .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
-         }
-         page
-        />
-        */}
         {
-          <GraduationListPanel students = {
+          <GraduationList students = {
             this.filter(students).sort( (a, b) => a.student_id - b.student_id )
                 .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
               }
