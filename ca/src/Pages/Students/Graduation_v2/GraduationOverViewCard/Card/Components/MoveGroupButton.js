@@ -75,7 +75,7 @@ class MoveGroupButton extends React.Component {
     axios.post('/students/graduate/legalTargetGroup', {
       cn: this.props.item.cn, // 中文課名
       code: this.props.item.code, // 課號
-      type: this.props.item.type,
+      type: this.props.title,
       studentId: this.props.studentIdcard.student_id,
     }).then(res => {
       this.setState({targets: res.data})
@@ -124,7 +124,6 @@ class MoveGroupButton extends React.Component {
         setTimeout(
           () => {
             console.log('----- fetchGraduationCourse! ----')
-            console.log('inter: ' + inter)
             this.props.fetchGraduationCourse()
           }, inter)
         inter *= 2
