@@ -75,7 +75,7 @@ class MoveGroupButton extends React.Component {
     axios.post('/students/graduate/legalTargetGroup', {
       cn: this.props.item.cn, // 中文課名
       code: this.props.item.code, // 課號
-      type: this.props.item.type,
+      type: this.props.title,
       studentId: this.props.studentIdcard.student_id,
     }).then(res => {
       this.setState({targets: res.data})
@@ -99,28 +99,35 @@ class MoveGroupButton extends React.Component {
   }
 
   handleItemSelected (target) {
+    let cn = this.props.item.cn
+    let studentIdcard = this.props.studentIdcard
+    let title = this.props.title
     this.setState({
       anchorEl: null
     })
     console.log('============ MoveGroupButton switchCourse ==============')
     console.log('target: ' + target)
-    console.log('this.props.title: ' + this.props.title)
-    console.log(this.props.studentIdcard)
+    console.log('this.props.title: ' + title)
+    console.log(studentIdcard)
 
     axios.post('/students/graduate/switchCourse', {
-      cn: this.props.item.cn, // 中文課名
-      student_id: this.props.studentIdcard.student_id,
-      origin_group: this.props.title,
+      cn: cn, // 中文課名
+      student_id: studentIdcard.student_id,
+      origin_group: title,
       target_group: target
     }).then(res => {
       console.log('┌---- RESPONSE ----')
       console.log(res)
       console.log('└------------------')
-      setInterval(
-        () => {
-          console.log('----- fetchGraduationCourse! ----')
-          this.props.fetchGraduationCourse()
-        }, 5000)
+      let inter = 250
+      while (inter < 500000) {
+        setTimeout(
+          () => {
+            console.log('----- fetchGraduationCourse! ----')
+            this.props.fetchGraduationCourse()
+          }, inter)
+        inter *= 2
+      }
     }).catch(err => {
       console.log(err)
     })
@@ -128,7 +135,7 @@ class MoveGroupButton extends React.Component {
   }
 
   render () {
-    const { label, classes } = this.props
+    const { label, classes, englishCheck } = this.props
     const { anchorEl, targets } = this.state
 
     return (
@@ -138,6 +145,8 @@ class MoveGroupButton extends React.Component {
           variant='outlined'
           onClick={this.handleClick}
           className={classes.root}
+          // 如果沒過英檢就不能移進階英文
+          disabled={(englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1}
         >
           {label}
         </Button>
