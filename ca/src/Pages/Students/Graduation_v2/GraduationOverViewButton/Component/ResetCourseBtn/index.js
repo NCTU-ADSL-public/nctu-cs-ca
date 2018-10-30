@@ -26,7 +26,7 @@ const styles = theme => ({
 class Index extends React.Component {
   resetCourse () {
     console.log('============ ResetCourseBtn resetCourse ==============')
-    axios.post('/students/graduate/delete', {
+    axios.post('/students/graduate/reset', {
       student_id: this.props.studentIdcard.student_id
     }).then(res => {
       console.log('┌---- RESPONSE ----')
