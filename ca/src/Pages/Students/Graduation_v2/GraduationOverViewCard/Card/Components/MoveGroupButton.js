@@ -120,13 +120,15 @@ class MoveGroupButton extends React.Component {
       console.log(res)
       console.log('└------------------')
       let inter = 250
-      setInterval(
-        () => {
-          console.log('----- fetchGraduationCourse! ----')
-          console.log('inter: ' + inter)
-          this.props.fetchGraduationCourse()
-          inter *= 2
-        }, inter)
+      while (inter < 500000) {
+        setTimeout(
+          () => {
+            console.log('----- fetchGraduationCourse! ----')
+            console.log('inter: ' + inter)
+            this.props.fetchGraduationCourse()
+          }, inter)
+        inter *= 2
+      }
     }).catch(err => {
       console.log(err)
     })
