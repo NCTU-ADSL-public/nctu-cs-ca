@@ -2,7 +2,7 @@ import React from 'react'
 import PopoverButton from './PopoverButton'
 import MoveGroupButton from './MoveGroupButton'
 
-const phyCourseNames = ['物理(一)', '物理(二)', '物理(一)榮譽班', '物理(二)榮譽班']
+const phyCourseNames = ['物理(一)', '物理(二)', '物理(一)榮譽班', '物理(二)榮譽班', '微處理機']
 
 const decideBtnFlash = (completed, selection) => {
   return !(completed | selection)
