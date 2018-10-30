@@ -32,19 +32,19 @@ class Index extends React.Component {
       console.log('┌---- RESPONSE ----')
       console.log(res)
       console.log('└------------------')
-      let inter = 250
-      while (inter < 500000) {
-        setTimeout(
-          () => {
-            console.log('----- fetchGraduationCourse! ----')
-            this.props.fetchGraduationCourse()
-          }, inter)
-        inter *= 2
-      }
     }).catch(err => {
       console.log(err)
     })
     console.log('===========================================')
+    let inter = 250
+    while (inter < 500000) {
+      setTimeout(
+        () => {
+          console.log('----- fetchGraduationCourse! ----')
+          this.props.fetchGraduationCourse()
+        }, inter)
+      inter *= 2
+    }
   }
   render () {
     const { classes } = this.props

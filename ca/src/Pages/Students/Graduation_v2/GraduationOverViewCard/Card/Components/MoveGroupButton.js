@@ -137,6 +137,7 @@ class MoveGroupButton extends React.Component {
   render () {
     const { label, classes, englishCheck } = this.props
     const { anchorEl, targets } = this.state
+    const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'now'
 
     return (
       <div style={style.Popover}>
@@ -146,7 +147,7 @@ class MoveGroupButton extends React.Component {
           onClick={this.handleClick}
           className={classes.root}
           // 如果沒過英檢就不能移進階英文
-          disabled={(englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1}
+          disabled={shouldBeDisabled}
         >
           {label}
         </Button>
