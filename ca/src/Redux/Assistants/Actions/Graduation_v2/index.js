@@ -25,7 +25,7 @@ export const fetchStudent = grade => dispatch => {
   axios.post('/assistants/graduate/studentList', { grade }).then(res => {
     dispatch(store_student(res.data))
   })
-  axios.post('assistants/graduate/graduateListDownload', { grade }).then(res => {
+  axios.post('/assistants/graduate/graduateListDownload', { grade }).then(res => {
     let data = res.data
     let csvArr = []
     console.log(data)
