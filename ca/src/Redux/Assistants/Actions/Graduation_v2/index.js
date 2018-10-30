@@ -67,44 +67,49 @@ export const fetchStudent = grade => dispatch => {
     ])
     for (let i = 0; i < data[0].length; i++) {
       let data_ = data[0][i][0]
+      let compulse = ''
+      for (let j = 0; j < data_.compulse.length; j++) {
+        compulse += data_.compulse[j]
+        compulse += ','
+      }
       csvArr.push([
-        data[i].student_id,
-        data[i].sname,
-        data[i].program,
-        data[i].total_credit,
-        data[i].en_course,
-        data[i].submit_status,
-        data[i].graduate_status,
-        data[i].pro,
-        data[i].other,
-        data[i].net,
-        data[i].media,
-        data[i].submit_type === 1 ? '新制' : data[i].submit_type === 0 ? '舊制' : '',
-        data[i].old_total,
-        data[i].old_contemp,
-        data[i].old_culture,
-        data[i].old_history,
-        data[i].old_citizen,
-        data[i].old_group,
-        data[i].old_science,
-        data[i].new_total,
-        data[i].new_core_total,
-        data[i].new_core_society,
-        data[i].new_core_humanity,
-        data[i].new_basic,
-        data[i].new_cross,
-        data[i].en_status,
-        data[i].en_total,
-        data[i].en_basic,
-        data[i].en_advanced,
-        data[i].pe,
-        data[i].service,
-        data[i].art,
-        data[i].mentor,
-        data[i].compulse
+        data_.student_id,
+        data_.sname,
+        data_.program,
+        data_.total_credit,
+        data_.en_course,
+        data_.submit_status,
+        data_.graduate_status,
+        data_.pro,
+        data_.other,
+        data_.net,
+        data_.media,
+        data_.submit_type === 1 ? '新制' : data[i].submit_type === 0 ? '舊制' : '',
+        data_.old_total,
+        data_.old_contemp,
+        data_.old_culture,
+        data_.old_history,
+        data_.old_citizen,
+        data_.old_group,
+        data_.old_science,
+        data_.new_total,
+        data_.new_core_total,
+        data_.new_core_society,
+        data_.new_core_humanity,
+        data_.new_basic,
+        data_.new_cross,
+        data_.en_status,
+        data_.en_total,
+        data_.en_basic,
+        data_.en_advanced,
+        data_.pe,
+        data_.service,
+        data_.art,
+        data_.mentor,
+        compulse
       ])
     }
-    dispatch(store_student_csv_data(res.data))
+    dispatch(store_student_csv_data(csvArr))
   })
 }
 
