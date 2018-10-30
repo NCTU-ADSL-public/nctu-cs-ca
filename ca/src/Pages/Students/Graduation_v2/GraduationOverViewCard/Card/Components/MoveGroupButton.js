@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 // REDUX
 import { connect } from 'react-redux'
-import { changeCourse } from '../../../../../../Redux/Students/Actions/Graduation'
+import { changeCourse, fetchGraduationCourse } from '../../../../../../Redux/Students/Actions/Graduation'
 
 import '../../../../../../../node_modules/animate.css/animate.css'
 import PropTypes from 'prop-types'
@@ -72,11 +72,6 @@ class MoveGroupButton extends React.Component {
   }
 
   fetchTarget () {
-    console.log('============ MoveGroupButton ==============')
-    console.log(this.props.item)
-    console.log(this.props.studentIdcard)
-    console.log('===========================================')
-
     axios.post('/students/graduate/legalTargetGroup', {
       cn: this.props.item.cn, // 中文課名
       code: this.props.item.code, // 課號
@@ -85,7 +80,9 @@ class MoveGroupButton extends React.Component {
     }).then(res => {
       this.setState({targets: res.data})
     }).catch(err => {
+      console.log('============ MoveGroupButton ==============')
       console.log(err)
+      console.log('===========================================')
     })
   }
 
@@ -108,8 +105,6 @@ class MoveGroupButton extends React.Component {
     console.log('============ MoveGroupButton switchCourse ==============')
     console.log('target: ' + target)
     console.log('this.props.title: ' + this.props.title)
-    console.log('origin_title: ' + this.props.item.origin_title)
-    console.log('new_title: ' + this.props.item.new_title)
     console.log(this.props.studentIdcard)
 
     axios.post('/students/graduate/switchCourse', {
@@ -121,6 +116,11 @@ class MoveGroupButton extends React.Component {
       console.log('┌---- RESPONSE ----')
       console.log(res)
       console.log('└------------------')
+      setInterval(
+        () => {
+          console.log('----- fetchGraduationCourse! ----')
+          this.props.fetchGraduationCourse()
+        }, 5000)
     }).catch(err => {
       console.log(err)
     })
@@ -176,6 +176,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
   changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
 })
 

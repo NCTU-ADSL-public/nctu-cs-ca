@@ -9,20 +9,18 @@ export const triggerUpdateData = () => dispatch => {
   ['一', '二', '三', '四'].map(title => {
     axios.post('/assistants/graduate/gradeStudent', { grade: title }).then(res => {
       res.data.map(student => {
-        setTimeout(function () {
-          axios.get('/assistants/graduate/glist', {
-            params: {
-              student_id: student.student_id
-            }
-          })
-        }, 500)
+        axios.get('/assistants/graduate/graduateList', {
+          params: {
+            student_id: student.student_id
+          }
+        })
       })
     })
   })
 }
 
 export const fetchStudent = grade => dispatch => {
-  axios.post('/assistants/graduate/studentList', { grade }).then(res => {
+  axios.post('/assistants/graduate/graduateStudent', { grade }).then(res => {
     dispatch(store_student(res.data))
   })
   axios.post('/assistants/graduate/graduateListDownload', { grade }).then(res => {
