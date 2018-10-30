@@ -103,8 +103,8 @@ class index extends React.Component {
     return (
       students.filter( (student) =>
         (    input === ''
-          || student.name.toLowerCase().search(input.toLowerCase()) !== -1
-          || student.id.search(input) !== -1
+          || student.sname.toLowerCase().search(input.toLowerCase()) !== -1
+          || student.student_id.search(input) !== -1
         )
         &&
         (
