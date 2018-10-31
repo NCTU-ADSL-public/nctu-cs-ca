@@ -137,7 +137,7 @@ class MoveGroupButton extends React.Component {
   render () {
     const { label, classes, englishCheck } = this.props
     const { anchorEl, targets } = this.state
-    const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'now' || this.props.item.complete === false || this.props.item.reason === 'english'
+    const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'now' || this.props.item.complete === false || this.props.item.reason === 'english' || this.state.targets.length === 0
 
     return (
       <div style={style.Popover}>
