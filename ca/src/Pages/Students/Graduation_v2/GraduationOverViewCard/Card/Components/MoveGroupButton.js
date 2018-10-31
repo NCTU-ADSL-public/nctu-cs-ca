@@ -66,7 +66,7 @@ class MoveGroupButton extends React.Component {
     this.state = {
       isOpened: false,
       anchorEl: null,
-      targets: [{title: '...'}]
+      targets: []
     }
     this.fetchTarget()
   }
@@ -76,7 +76,7 @@ class MoveGroupButton extends React.Component {
       cn: this.props.item.cn, // 中文課名
       code: this.props.item.code, // 課號
       type: this.props.item.type,
-      studentId: this.props.studentIdcard.student_id,
+      studentId: this.props.studentIdcard.student_id
     }).then(res => {
       this.setState({targets: res.data})
     }).catch(err => {
@@ -137,7 +137,7 @@ class MoveGroupButton extends React.Component {
   render () {
     const { label, classes, englishCheck } = this.props
     const { anchorEl, targets } = this.state
-    const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'now' || this.props.item.complete === false
+    const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'now' || this.props.item.complete === false || this.props.item.reason === 'english' || this.state.targets.length === 0
 
     return (
       <div style={style.Popover}>
