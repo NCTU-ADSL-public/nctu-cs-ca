@@ -6,7 +6,7 @@ export const store_student = createAction('STORE_STUDENT')
 export const store_student_csv_data = createAction('STORE_STUDENT_CSV_DATA')
 
 export const triggerUpdateData = () => dispatch => {
-  ['一', '二', '三', '四'].map(title => {
+  ['四'].map(title => {
     axios.post('/assistants/graduate/gradeStudent', { grade: title }).then(res => {
       res.data.map(student => {
         axios.get('/assistants/graduate/graduateList', {
