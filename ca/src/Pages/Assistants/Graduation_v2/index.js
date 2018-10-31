@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 
 import GraduationList from './GraduationList'
-import GraduationListPanel from './GraduationListPanel'
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
@@ -139,6 +138,13 @@ class index extends React.Component {
       <div className = { classes.container } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
           <div className = 'col-md-1 col-lg-1'>
+          {/*
+            <Button variant="contained" className = { classes.button } onClick = { () => trigger_update_data() }>
+              更新db資料
+            </Button>
+          */}
+          </div>
+          <div className = 'col-md-1 col-lg-1'>
             <Button variant="contained" className={classes.button} >
               <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
               <CSVLink
@@ -148,12 +154,7 @@ class index extends React.Component {
               </CSVLink>
             </Button>
           </div>
-          <div className = 'col-md-1 col-lg-1'>
-            <Button variant="contained" className = { classes.button } onClick = { () => trigger_update_data() }>
-              更新db資料
-            </Button>
-          </div>
-          <div className = 'col-md-5 col-lg-5 col-xs-12' style = {{ display: 'flex' }} >
+          <div className = 'col-md-6 col-lg-6 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
             <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
               <DialogTitle><div style = {{ fontSize: '30px' }} >畢業狀況</div></DialogTitle>
@@ -297,16 +298,8 @@ class index extends React.Component {
             </FormControl>
           </div>
         </div>
-        {/*
-        <GraduationList students = {
-          this.filter(students)
-              .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
-         }
-         page
-        />
-        */}
         {
-          <GraduationListPanel students = {
+          <GraduationList students = {
             this.filter(students).sort( (a, b) => a.student_id - b.student_id )
                 .slice(page * studentsPerPage, page * studentsPerPage + studentsPerPage)
               }
