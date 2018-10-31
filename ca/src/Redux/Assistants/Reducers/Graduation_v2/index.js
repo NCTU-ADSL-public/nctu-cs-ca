@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  students: [{
+  students: [/*{
     "student_id": "0416210",
     "sname": "王大明",
     "program": "資電",
@@ -35,7 +35,7 @@ const initialState = {
     "art": 1,
     "mentor": 1,
     "compulse": ["計算機", "組織", "電路"]
-  }],
+  }*/],
   students_csv_data: []
 }
 export default handleActions({
