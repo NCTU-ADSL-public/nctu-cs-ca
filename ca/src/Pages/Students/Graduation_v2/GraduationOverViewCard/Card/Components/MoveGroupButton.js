@@ -149,7 +149,7 @@ class MoveGroupButton extends React.Component {
           // 如果沒過英檢就不能移進階英文
           disabled={shouldBeDisabled}
         >
-          {shouldBeDisabled ? '不能移程此課程' : label}
+          {shouldBeDisabled ? '不能移動此課程' : label}
         </Button>
 
         <Menu
