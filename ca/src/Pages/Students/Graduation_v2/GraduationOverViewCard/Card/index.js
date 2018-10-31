@@ -112,7 +112,7 @@ class Index extends React.Component {
                 ? <GeneralCourseList courses={this.props.data.course} rwd />
                 : this.props.title === '通識(新制)'
                   ? <GeneralNewCourseList courses={this.props.data.course} overview={this.props.overview} rwd />
-                  : <CourseList items={this.props.data.course} rwd />}
+                  : <CourseList items={this.props.data.course} title={this.props.title} rwd />}
             </div>
           </Dialog>
         </div>
