@@ -10,6 +10,12 @@ export const ShowCourseOrSug = createAction('SHOW_COURSE_OR_SUG')
 export const fetchCourse = (page = 1) => dispatch => {
   axios.get('/students/courseMap').then(res => {
     dispatch(storeCourse(res.data))
+    axios.get('/students/coursePass').then(res => {
+      dispatch(storeCoursePass(res.data))
+    }).catch(err => {
+      dispatch(storeCoursePass(defaultData.CoursePass))
+      console.log(err)
+    })
   }).catch(err => {
     dispatch(storeCourse(defaultData.Course))
     console.log(err)
@@ -17,12 +23,7 @@ export const fetchCourse = (page = 1) => dispatch => {
 }
 
 export const fetchCoursePass = (page = 1) => dispatch => {
-  axios.get('/students/coursePass').then(res => {
-    dispatch(storeCoursePass(res.data))
-  }).catch(err => {
-    dispatch(storeCoursePass(defaultData.CoursePass))
-    console.log(err)
-  })
+
 }
 
 export const showCourseOrSug = (page = 1) => dispatch => {
