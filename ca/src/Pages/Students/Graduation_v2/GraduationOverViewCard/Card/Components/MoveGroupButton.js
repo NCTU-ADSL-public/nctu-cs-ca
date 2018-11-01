@@ -146,8 +146,9 @@ class MoveGroupButton extends React.Component {
           variant='outlined'
           onClick={this.handleClick}
           className={classes.root}
-          // 如果沒過英檢就不能移進階英文
+          // 由前端所擋掉的移動
           disabled={shouldBeDisabled}
+          // style={{ display: shouldBeDisabled ? 'none' : '' }}
         >
           {shouldBeDisabled ? '不能移動此課程' : label}
         </Button>

@@ -1,5 +1,6 @@
 import React from 'react'
 import PopoverButton from './PopoverButton'
+import MoveGroupButton from './MoveGroupButton'
 
 class GeneralCourseList extends React.Component {
   constructor (props) {
@@ -57,6 +58,7 @@ class GeneralCourseList extends React.Component {
   }
 
   render () {
+    const { title, rwd } = this.props
     return (
       <div>
         {this.generalCourseTypes.map((type, index) => (
@@ -65,7 +67,7 @@ class GeneralCourseList extends React.Component {
               label={type.name}
               backgroundColor={this.decideBtnBgColor(type.courses)}
               flash={(type.length === 0)}
-              rwd={this.props.rwd}
+              rwd={rwd}
             >
               {type.courses.map((course, key) => {
                 switch (course.reason) {
@@ -86,6 +88,15 @@ class GeneralCourseList extends React.Component {
                     return (
                       <li key={key}>{course.cn}
                         <div style={{ float: 'right', color: 'green' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
+                        <div style={{ margin: '0 0 15px 8px' }}>
+                          {/* An option for student to move a course to other group */}
+                          <MoveGroupButton
+                            key={key}
+                            title={title}
+                            item={course}
+                            label={'移動課程'}
+                          />
+                        </div>
                       </li>
                     )
                 }

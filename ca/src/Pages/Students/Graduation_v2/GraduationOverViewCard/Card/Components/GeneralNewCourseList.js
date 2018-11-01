@@ -121,7 +121,7 @@ class GeneralNewCourseList extends React.Component {
   }
 
   render () {
-    const { classes, overview, rwd, selection } = this.props
+    const { classes, overview, rwd, selection, title } = this.props
 
     return (
       <div className={rwd ? '' : classes.container}>
@@ -162,6 +162,15 @@ class GeneralNewCourseList extends React.Component {
                         return (
                           <li key={key}>{course.cn}
                             <div style={{ float: 'right', color: 'green' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
+                            <div style={{ margin: '0 0 15px 8px' }}>
+                              {/* An option for student to move a course to other group */}
+                              <MoveGroupButton
+                                key={key}
+                                title={title}
+                                item={course}
+                                label={'移動課程'}
+                              />
+                            </div>
                           </li>
                         )
                     }
