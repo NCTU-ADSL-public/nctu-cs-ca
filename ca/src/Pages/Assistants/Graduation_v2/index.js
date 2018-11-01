@@ -69,6 +69,10 @@ const styles = theme => ({
     marginRight: '10px',
     marginLeft: '10px'
   },
+  filter: {
+    minWidth: '400px',
+    padding: '10px'
+  }
 })
 
 const mapStateToProps = (state) => ({
@@ -88,6 +92,7 @@ class index extends React.Component {
     this.state = {
       grad_filter_status: [false, false, false],
       veri_filter_status: [false, false, false, false],
+      program_filter_status: [false, false, false, false, false],
       input: '',
       open_filter: false,
       page: 0,
@@ -97,8 +102,29 @@ class index extends React.Component {
     props.fetch_students( this.state.grade )
   }
 
+  PROGRAM_MAP_INDEX = (program) => {
+    let ret = -1;
+    switch(program) {
+      case '網多':
+        ret = 0;
+        break;
+      case '資電':
+        ret = 1;
+        break;
+      case '資工A':
+        ret = 3;
+        break;
+      case '資工B':
+        ret = 4;
+        break;
+      default:
+        console.log("program_filter_status switch error")
+    }
+    return ret;
+  }
+
   filter = (students) => {
-    const { input, grad_filter_status, veri_filter_status } = this.state
+    const { input, grad_filter_status, veri_filter_status, program_filter_status } = this.state
     return (
       students.filter( (student) =>
         (    input === ''
@@ -115,6 +141,11 @@ class index extends React.Component {
              !veri_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
           || veri_filter_status[parseInt(student.submit_status)]
         )
+        &&
+        (
+             !program_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
+          || program_filter_status[this.PROGRAM_MAP_INDEX(student.program)]
+        )
       )
     )
   }
@@ -127,10 +158,35 @@ class index extends React.Component {
     this.setState({ veri_filter_status: this.state.veri_filter_status.map((value, index) => target === index ? !value : value), page: 0 })
   }
 
+  toggleProgramFilter = target => {
+    let new_program_filter_status = this.state.program_filter_status
+    switch(target) {
+    case 0:
+    case 1:
+    case 3:
+    case 4:
+      new_program_filter_status[target] = !new_program_filter_status[target]
+      break;
+    case 2:
+      new_program_filter_status[2] = !new_program_filter_status[2]
+      new_program_filter_status[3] = new_program_filter_status[2]
+      new_program_filter_status[4] = new_program_filter_status[2]
+      break;
+    default:
+      console.log("program_filter_status switch error")
+    }
+    let xor = new_program_filter_status[3] ^ new_program_filter_status[4]
+    let and = new_program_filter_status[3] && new_program_filter_status[4]
+    if (xor) new_program_filter_status[2] = false
+    else if (and) new_program_filter_status[2] = true
+    else new_program_filter_status[2] = false
+    this.setState({ program_filter_status: new_program_filter_status })
+  }
+
   render() {
 
     const { classes, students, fetch_students, trigger_update_data } = this.props
-    const { grad_filter_status, open_filter, input, page, studentsPerPage, grade, veri_filter_status } = this.state
+    const { grad_filter_status, open_filter, input, page, studentsPerPage, grade, veri_filter_status, program_filter_status } = this.state
 
 
 
@@ -156,8 +212,59 @@ class index extends React.Component {
           </div>
           <div className = 'col-md-6 col-lg-6 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
-            <Dialog onClose = { () => this.setState({ open_filter: false })} open = { open_filter } >
-              <DialogTitle><div style = {{ fontSize: '30px' }} >畢業狀況</div></DialogTitle>
+            <Dialog
+              onClose = { () => this.setState({ open_filter: false })}
+              open = { open_filter }
+              classes = {{
+                paper: classes.filter
+              }}
+            >
+              <DialogTitle><div style = {{ fontSize: '30px' }} >組別</div></DialogTitle>
+              <div><hr style = {{ margin: 3 }}/></div>
+              <div style = {{ display: 'flex', marginTop: '10px' }}>
+                <Chip
+                  label = {
+                    <span>
+                      <div style = {{ display: 'inline', verticalAlign: 'middle' }} >資工</div>
+                    </span>
+                  }
+                  className = { classes.chip }
+                  onClick = { () => this.toggleProgramFilter(2) }
+                  style = {{ background: program_filter_status[2] ? blue[300] : null, flex: 1, marginTop: '3px', marginBottom: '3px' }}
+                />
+              </div>
+              <div style = {{ display: 'flex' }}>
+                {['資A', '資B'].map( (title, index) => (
+                    <Chip
+                      label = {
+                        <span>
+                          <div style = {{ display: 'inline', verticalAlign: 'middle' }} >{title}</div>
+                        </span>
+                      }
+                      className = { classes.chip }
+                      onClick = { () => this.toggleProgramFilter(index + 3) }
+                      style = {{ background: program_filter_status[index + 3] ? blue[300] : null, flex: 0.5, marginTop: '3px', marginBottom: '3px' }}
+                    />
+                  ))
+                }
+              </div>
+              <div style = {{ display: 'flex' }}>
+                {['網多', '資電'].map( (title, index) => (
+                  <Chip
+                    label = {
+                      <span>
+                        <div style = {{ display: 'inline', verticalAlign: 'middle' }} >{title}</div>
+                      </span>
+                    }
+                    className = { classes.chip }
+                    onClick = { () => this.toggleProgramFilter(index) }
+                    style = {{ background: program_filter_status[index] ? blue[300] : null, flex: 0.5, marginTop: '6px', marginBottom: '6px' }}
+                  />
+                  ))
+                }
+              </div>
+              <DialogTitle><div style = {{ fontSize: '30px' }} >畢業狀態</div></DialogTitle>
+              <div><hr style = {{ margin: 3 }}/></div>
               <div style = {{ display: 'flex' }}>
                 <Chip
                   label = {
@@ -168,7 +275,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleGradFilter(0) }
-                  style = {{ background: grad_filter_status[0] ? red[300] : null }}
+                  style = {{ background: grad_filter_status[0] ? red[300] : null, flex: 0.33, marginTop: '6px', marginBottom: '6px' }}
                 />
                 <Chip
                   label = {
@@ -179,7 +286,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleGradFilter(1) }
-                  style = {{ background: grad_filter_status[1] ? blue[300] : null }}
+                  style = {{ background: grad_filter_status[1] ? blue[300] : null, flex: 0.33, marginTop: '6px', marginBottom: '6px' }}
                 />
                 <Chip
                   label = {
@@ -190,12 +297,12 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleGradFilter(2) }
-                  style = {{ background: grad_filter_status[2] ? green[300] : null }}
+                  style = {{ background: grad_filter_status[2] ? green[300] : null, flex: 0.33, marginTop: '6px', marginBottom: '6px' }}
                 />
               </div>
-              <DialogTitle><div style = {{ fontSize: '30px' }} >預審狀況</div></DialogTitle>
+              <DialogTitle><div style = {{ fontSize: '30px' }} >預審狀態</div></DialogTitle>
+              <div><hr style = {{ margin: 3 }}/></div>
               <div style = {{ display: 'flex' }}>
-                <div style = {{ flex: 0.5 }} />
                 <Chip
                   label = {
                     <span>
@@ -205,7 +312,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleVeriFilter(0) }
-                  style = {{ background: veri_filter_status[0] ? red[300] : null }}
+                  style = {{ background: veri_filter_status[0] ? red[300] : null, flex: 0.5, marginTop: '6px', marginBottom: '6px' }}
                 />
                 <Chip
                   label = {
@@ -216,11 +323,10 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleVeriFilter(1) }
-                  style = {{ background: veri_filter_status[1] ? blue[300] : null }}
+                  style = {{ background: veri_filter_status[1] ? blue[300] : null, flex: 0.5, marginTop: '6px', marginBottom: '6px' }}
                 />
               </div>
               <div style = {{ display: 'flex' }}>
-                <div style = {{ flex: 0.5 }} />
                 <Chip
                   label = {
                     <span>
@@ -230,7 +336,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleVeriFilter(2) }
-                  style = {{ background: veri_filter_status[2] ? green[300] : null }}
+                  style = {{ background: veri_filter_status[2] ? green[300] : null, flex: 0.5, marginTop: '6px', marginBottom: '6px' }}
                 />
                 <Chip
                   label = {
@@ -241,7 +347,7 @@ class index extends React.Component {
                   }
                   className = { classes.chip }
                   onClick = { () => this.toggleVeriFilter(3) }
-                  style = {{ background: veri_filter_status[3] ? red[300] : null }}
+                  style = {{ background: veri_filter_status[3] ? red[300] : null, flex: 0.5, marginTop: '6px', marginBottom: '6px' }}
                 />
               </div>
             </Dialog>
