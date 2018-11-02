@@ -171,6 +171,42 @@ class GeneralNewCourseList extends React.Component {
     })
   }
 
+  componentDidUpdate (NextProp, NextState) {
+    if (NextProp.courses !== this.props.courses) {
+      console.log('------------- GeneralNEWCourseList updates -------------------')
+      this.generalCourseTypes = [
+        {
+          name: '人文',
+          dimension: '核心-人文',
+          courses: []
+        },
+        {
+          name: '社會',
+          dimension: '核心-社會',
+          courses: []
+        },
+        {
+          name: '自然',
+          dimension: '核心-自然',
+          courses: []
+        },
+        {
+          name: '校基本',
+          dimension: '校基本素養',
+          courses: []
+        },
+        {
+          name: '跨院',
+          dimension: '跨院基本素', // api return five words
+          courses: []
+        }
+      ]
+      NextProp.courses.forEach(course => {
+        let type = this.generalCourseTypes.find(type => course.dimension === type.dimension)
+        if (type) type.courses.push(course)
+      })
+    }
+  }
   render () {
     const { classes, overview, rwd, selection, title } = this.props
 
