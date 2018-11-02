@@ -2,43 +2,44 @@ import React from 'react'
 import PopoverButton from './PopoverButton'
 import MoveGroupButton from './MoveGroupButton'
 
+const generalCourseTypesOrigin = [
+  {
+    name: '當代',
+    dimension: '通識',
+    courses: []
+  },
+  {
+    name: '公民',
+    dimension: '公民',
+    courses: []
+  },
+  {
+    name: '群己',
+    dimension: '群己',
+    courses: []
+  },
+  {
+    name: '文化',
+    dimension: '文化',
+    courses: []
+  },
+  {
+    name: '歷史',
+    dimension: '歷史',
+    courses: []
+  },
+  {
+    name: '自然',
+    dimension: '自然',
+    courses: []
+  }
+]
+
 class GeneralCourseList extends React.Component {
   constructor (props) {
     super(props)
     this.decideBtnBgColor = this.decideBtnBgColor.bind(this)
     this.generalCourseTypes = [
-      {
-        name: '當代',
-        dimension: '通識',
-        courses: []
-      },
-      {
-        name: '公民',
-        dimension: '公民',
-        courses: []
-      },
-      {
-        name: '群己',
-        dimension: '群己',
-        courses: []
-      },
-      {
-        name: '文化',
-        dimension: '文化',
-        courses: []
-      },
-      {
-        name: '歷史',
-        dimension: '歷史',
-        courses: []
-      },
-      {
-        name: '自然',
-        dimension: '自然',
-        courses: []
-      }
-    ]
-    this.generalCourseTypesOrigin = [
       {
         name: '當代',
         dimension: '通識',
@@ -80,7 +81,7 @@ class GeneralCourseList extends React.Component {
   componentDidUpdate (NextProp, NextState) {
     if (NextProp.courses !== this.props.courses) {
       console.log('------------- GeneralCourseList updates -------------------')
-      this.generalCourseTypes = this.generalCourseTypesOrigin
+      this.generalCourseTypes = generalCourseTypesOrigin
       NextProp.courses.forEach(course => {
         let type = this.generalCourseTypes.find(type => course.dimension === type.dimension)
         if (type) type.courses.push(course)
