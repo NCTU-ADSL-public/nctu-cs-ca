@@ -81,7 +81,38 @@ class GeneralCourseList extends React.Component {
   componentDidUpdate (NextProp, NextState) {
     if (NextProp.courses !== this.props.courses) {
       console.log('------------- GeneralCourseList updates -------------------')
-      this.generalCourseTypes = generalCourseTypesOrigin
+      this.generalCourseTypes = [
+        {
+          name: '當代',
+          dimension: '通識',
+          courses: []
+        },
+        {
+          name: '公民',
+          dimension: '公民',
+          courses: []
+        },
+        {
+          name: '群己',
+          dimension: '群己',
+          courses: []
+        },
+        {
+          name: '文化',
+          dimension: '文化',
+          courses: []
+        },
+        {
+          name: '歷史',
+          dimension: '歷史',
+          courses: []
+        },
+        {
+          name: '自然',
+          dimension: '自然',
+          courses: []
+        }
+      ]
       NextProp.courses.forEach(course => {
         let type = this.generalCourseTypes.find(type => course.dimension === type.dimension)
         if (type) type.courses.push(course)
