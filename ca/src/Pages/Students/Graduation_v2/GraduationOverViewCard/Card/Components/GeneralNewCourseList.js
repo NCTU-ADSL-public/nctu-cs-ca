@@ -9,6 +9,10 @@ const styles = theme => ({
   container: {
     marginLeft: '25px',
     borderLeft: '15px solid #EAEAEA'
+  },
+  fontCredit: {
+    color: '#338d68',
+    fontSize: '24px'
   }
 })
 
@@ -45,6 +49,53 @@ const decideBtnBgColor = (completed, reason, selection) => {
         ? '#ab6bd9'
         : '#d95467'
   return color
+}
+
+const GeneralCoursePopover = props => {
+  const { rwd, type, title } = props
+  return (
+    <div className='col-xs-6 col-sm-3 col-md-2'>
+      <PopoverButton
+        label={type.name}
+        backgroundColor={decideCoreBtnBgColor(type.courses)}
+        flash={(type.length === 0)}
+        rwd={rwd}
+      >
+        {type.courses.map((course, key) => {
+          switch (course.reason) {
+            case 'now':
+              return (
+                <li key={key}>{course.cn}
+                  <div style={{ float: 'right', color: '#9e48d9' }}>&nbsp;&nbsp;&nbsp;(當期課程)</div>
+                </li>
+              )
+            case 'free1':
+            case 'free2':
+              return (
+                <li key={key}>{course.cn} (抵免課程)
+                  <div style={{ float: 'right', color: '#6A94A2' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
+                </li>
+              )
+            default:
+              return (
+                <li key={key}>{course.cn}
+                  <div style={{ float: 'right', color: 'green' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
+                  <div style={{ margin: '0 0 15px 8px' }}>
+                    {/* An option for student to move a course to other group */}
+                    <MoveGroupButton
+                      key={key}
+                      title={title}
+                      item={course}
+                      label={'移動課程'}
+                    />
+                  </div>
+                </li>
+              )
+          }
+        })}
+      </PopoverButton>
+    </div>
+  )
 }
 
 const CoursePopover = props => {
@@ -125,90 +176,56 @@ class GeneralNewCourseList extends React.Component {
 
     return (
       <div className={rwd ? '' : classes.container}>
-        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginLeft: '20px', paddingRight: '40px' }}>
-          <div className='general-course-dimension' style={{ fontSize: '18px' }}>
-            核心&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.core}</font>/{overview.require.core}&nbsp;(學分)
+        <div className='hidden-xs col-sm-4 col-md-3' style={{ paddingLeft: '0px', paddingRight: '60px' }}>
+          <div className='general-course-dimension'>
+            核心&nbsp;&nbsp;
+            <font className={classes.fontCredit}>{overview.credit.core}</font>
+            /{overview.require.core}&nbsp;(學分)
           </div>
         </div>
-        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginLeft: '-40px' }} />
+        <div className='hidden-xs col-sm-1 general-left-arrow' />
 
         <div className='col-sm-12 col-md-12 col-lg-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes
             .filter(type => type.dimension.slice(0, 2) === '核心' && !(type.dimension === '核心-自然' && type.courses.length === 0))
             .map((type, index) => (
-              <div className='col-xs-6 col-sm-3 col-md-2' key={index}>
-                <PopoverButton
-                  label={type.name}
-                  backgroundColor={decideCoreBtnBgColor(type.courses)}
-                  flash={(type.length === 0)}
-                  rwd={this.props.rwd}
-                >
-                  {type.courses.map((course, key) => {
-                    switch (course.reason) {
-                      case 'now':
-                        return (
-                          <li key={key}>{course.cn}
-                            <div style={{ float: 'right', color: '#9e48d9' }}>&nbsp;&nbsp;&nbsp;(當期課程)</div>
-                          </li>
-                        )
-                      case 'free1':
-                      case 'free2':
-                        return (
-                          <li key={key}>{course.cn} (抵免課程)
-                            <div style={{ float: 'right', color: '#6A94A2' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
-                          </li>
-                        )
-                      default:
-                        return (
-                          <li key={key}>{course.cn}
-                            <div style={{ float: 'right', color: 'green' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
-                            <div style={{ margin: '0 0 15px 8px' }}>
-                              {/* An option for student to move a course to other group */}
-                              <MoveGroupButton
-                                key={key}
-                                title={title}
-                                item={course}
-                                label={'移動課程'}
-                              />
-                            </div>
-                          </li>
-                        )
-                    }
-                  })}
-                </PopoverButton>
-              </div>
+              <GeneralCoursePopover key={index} type={type} title={title} />
             ))
           }
         </div>
 
-        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
-          <div className='general-course-dimension' style={{ fontSize: '18px' }}>
-            校基本&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.basic}</font>/{overview.require.basic}&nbsp;(學分)
+        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginTop: '20px', paddingLeft: '0px', paddingRight: '60px' }}>
+          <div className='general-course-dimension'>
+            校基本&nbsp;
+            <font className={classes.fontCredit}>{overview.credit.basic}</font>
+            /{overview.require.basic}&nbsp;(學分)
           </div>
         </div>
-        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
+        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginTop: '20px' }} />
 
         <div className='col-sm-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes
             .find(type => type.dimension === '校基本素養').courses
             .map((item, index) => (
-              <CoursePopover key={index} item={item} rwd={rwd} selection={selection} />
+              <CoursePopover key={index} item={item} rwd={rwd} selection={selection} title={title} />
             ))
           }
         </div>
 
-        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginLeft: '20px', marginTop: '20px', paddingRight: '40px' }}>
-          <div className='general-course-dimension' style={{ fontSize: '18px' }}>
-            跨院&nbsp;&nbsp;<font size={5} color='#338d68'>{overview.credit.cross}</font>/{overview.require.cross}&nbsp;(學分)
+        <div className='hidden-xs col-sm-4 col-md-3' style={{ marginTop: '20px', paddingLeft: '0px', paddingRight: '60px' }}>
+          <div className='general-course-dimension'>
+            跨院&nbsp;&nbsp;
+            <font className={classes.fontCredit}>{overview.credit.cross}</font>
+            /{overview.require.cross}&nbsp;(學分)
           </div>
         </div>
-        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginLeft: '-40px', marginTop: '20px' }} />
+        <div className='hidden-xs col-sm-1 general-left-arrow' style={{ marginTop: '20px' }} />
 
         <div className='col-sm-12' style={{ marginTop: '20px', paddingLeft: '0px' }}>
           {this.generalCourseTypes
             .find(type => type.dimension === '跨院基本素').courses
             .map((item, index) => (
-              <CoursePopover key={index} item={item} rwd={rwd} selection={selection} />
+              <CoursePopover key={index} item={item} rwd={rwd} selection={selection} title={title} />
             ))
           }
         </div>
