@@ -121,7 +121,7 @@ class MoveGroupButton extends React.Component {
       console.log('└------------------')
       let inter = 250
       // Magic update
-      while (inter < 3000000) {
+      while (inter < 500000) {
         setTimeout(
           () => {
             console.log('----- fetchGraduationCourse! ----')
@@ -133,7 +133,7 @@ class MoveGroupButton extends React.Component {
         () => {
           console.log('----- POST students/graduate/graduateChange/graduateList ----')
           this.extraPostGradChange()
-        }, 500000)
+        }, 100000)
     }).catch(err => {
       console.log(err)
     })
