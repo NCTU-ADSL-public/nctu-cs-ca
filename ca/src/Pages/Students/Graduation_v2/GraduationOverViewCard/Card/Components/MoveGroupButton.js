@@ -120,7 +120,8 @@ class MoveGroupButton extends React.Component {
       console.log(res)
       console.log('└------------------')
       let inter = 250
-      while (inter < 500000) {
+      // Magic update
+      while (inter < 100000) {
         setTimeout(
           () => {
             console.log('----- fetchGraduationCourse! ----')
@@ -128,10 +129,22 @@ class MoveGroupButton extends React.Component {
           }, inter)
         inter *= 2
       }
+      setTimeout(
+        () => {
+          console.log('----- POST students/graduate/graduateChange/graduateList ----')
+          this.extraPostGradChange()
+        }, 10000)
     }).catch(err => {
       console.log(err)
     })
     console.log('===========================================')
+  }
+
+  extraPostGradChange () {
+    let studentIdcard = this.props.studentIdcard
+    axios.post('/students/graduate/graduateChange/graduateList', {
+      student_id: studentIdcard.student_id
+    })
   }
 
   render () {
@@ -146,8 +159,9 @@ class MoveGroupButton extends React.Component {
           variant='outlined'
           onClick={this.handleClick}
           className={classes.root}
-          // 如果沒過英檢就不能移進階英文
+          // 由前端所擋掉的移動
           disabled={shouldBeDisabled}
+          // style={{ display: shouldBeDisabled ? 'none' : '' }}
         >
           {shouldBeDisabled ? '不能移動此課程' : label}
         </Button>

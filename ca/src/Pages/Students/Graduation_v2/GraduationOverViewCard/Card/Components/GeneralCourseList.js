@@ -1,5 +1,6 @@
 import React from 'react'
 import PopoverButton from './PopoverButton'
+import MoveGroupButton from './MoveGroupButton'
 
 class GeneralCourseList extends React.Component {
   constructor (props) {
@@ -44,6 +45,47 @@ class GeneralCourseList extends React.Component {
     })
   }
 
+  componentDidUpdate (NextProp, NextState) {
+    if (NextProp.courses !== this.props.courses) {
+      console.log('------------- GeneralCourseList updates -------------------')
+      this.generalCourseTypes = [
+        {
+          name: '當代',
+          dimension: '通識',
+          courses: []
+        },
+        {
+          name: '公民',
+          dimension: '公民',
+          courses: []
+        },
+        {
+          name: '群己',
+          dimension: '群己',
+          courses: []
+        },
+        {
+          name: '文化',
+          dimension: '文化',
+          courses: []
+        },
+        {
+          name: '歷史',
+          dimension: '歷史',
+          courses: []
+        },
+        {
+          name: '自然',
+          dimension: '自然',
+          courses: []
+        }
+      ]
+      NextProp.courses.forEach(course => {
+        let type = this.generalCourseTypes.find(type => course.dimension === type.dimension)
+        if (type) type.courses.push(course)
+      })
+    }
+  }
   decideBtnBgColor (courses) {
     if (courses.length === 0) {
       return '#D95467'
@@ -57,6 +99,7 @@ class GeneralCourseList extends React.Component {
   }
 
   render () {
+    const { title, rwd } = this.props
     return (
       <div>
         {this.generalCourseTypes.map((type, index) => (
@@ -65,7 +108,7 @@ class GeneralCourseList extends React.Component {
               label={type.name}
               backgroundColor={this.decideBtnBgColor(type.courses)}
               flash={(type.length === 0)}
-              rwd={this.props.rwd}
+              rwd={rwd}
             >
               {type.courses.map((course, key) => {
                 switch (course.reason) {
@@ -86,6 +129,15 @@ class GeneralCourseList extends React.Component {
                     return (
                       <li key={key}>{course.cn}
                         <div style={{ float: 'right', color: 'green' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
+                        <div style={{ margin: '0 0 15px 8px' }}>
+                          {/* An option for student to move a course to other group */}
+                          <MoveGroupButton
+                            key={key}
+                            title={title}
+                            item={course}
+                            label={'移動課程'}
+                          />
+                        </div>
                       </li>
                     )
                 }
