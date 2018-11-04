@@ -123,6 +123,22 @@ class index extends React.Component {
     return ret;
   }
 
+  DownLoadBtn = () => {
+    const { classes, students_csv_data } = this.props
+    if(students_csv_data.length < 1)
+      return ''
+    return(
+      <CSVLink
+        filename={this.state.grade + "年級畢業預審總表.csv"}
+        data={students_csv_data}>
+        <Button variant="contained" className={classes.button} >
+          <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
+          下載
+        </Button>
+      </CSVLink>
+    )
+  }
+
   filter = (students) => {
     const { input, grad_filter_status, veri_filter_status, program_filter_status } = this.state
     return (
@@ -189,7 +205,6 @@ class index extends React.Component {
     const { grad_filter_status, open_filter, input, page, studentsPerPage, grade, veri_filter_status, program_filter_status } = this.state
 
 
-
     return (
       <div className = { classes.container } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
@@ -201,14 +216,7 @@ class index extends React.Component {
           }
           </div>
           <div className = 'col-md-1 col-lg-1'>
-            <Button variant="contained" className={classes.button} >
-              <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
-              <CSVLink
-                filename={this.state.grade + "年級畢業預審總表.csv"}
-                data={this.props.students_csv_data}>
-                下載
-              </CSVLink>
-            </Button>
+            {this.DownLoadBtn()}
           </div>
           <div className = 'col-md-6 col-lg-6 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
