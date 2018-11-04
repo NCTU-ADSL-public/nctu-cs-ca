@@ -78,6 +78,7 @@ const styles = theme => ({
 const mapStateToProps = (state) => ({
   students: state.Assistant.Graduation.students,
   students_csv_data: state.Assistant.Graduation.students_csv_data,
+  status: state.Assistant.Graduation.status,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -124,8 +125,8 @@ class index extends React.Component {
   }
 
   DownLoadBtn = () => {
-    const { classes, students_csv_data } = this.props
-    if(students_csv_data.length < 1)
+    const { classes, students_csv_data, status } = this.props
+    if(status === 'start')
       return ''
     return(
       <CSVLink

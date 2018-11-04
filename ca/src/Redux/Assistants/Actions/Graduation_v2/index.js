@@ -5,6 +5,7 @@ import axios from 'axios'
 export const set_graduate_state = createAction('SET_GRADUATE_STATE')
 export const store_student = createAction('STORE_STUDENT')
 export const store_student_csv_data = createAction('STORE_STUDENT_CSV_DATA')
+export const fetach_start = createAction('FETCH_START')
 
 export const triggerUpdateData = () => dispatch => {
   ['四'].map(title => {
@@ -21,6 +22,7 @@ export const triggerUpdateData = () => dispatch => {
 }
 
 export const fetchStudent = grade => dispatch => {
+  dispatch(fetach_start())
   axios.post('/assistants/graduate/graduateStudent', { grade }).then(res => {
     dispatch(store_student(res.data))
   })
@@ -76,14 +78,14 @@ export const fetchStudent = grade => dispatch => {
         data_.sname,
         data_.program,
         data_.total_credit,
-        data_.en_course,
-        data_.submit_status,
-        data_.graduate_status,
+        data_.en_course === '1' ? '有' : data[i].submit_type === '0' ? '沒有' : '',
+        data_.submit_status === '0' ? '未送審' : data[i].submit_type === '1' ? '審核中' : data[i].submit_type === '2' ? '已通過' : data[i].submit_type === '3' ? '未通過' : '',
+        data_.graduate_status === '0' ? '未符合' : data[i].submit_type === '1' ? '將符合' : data[i].submit_type === '2' ? '已符合' : '',
         data_.pro,
         data_.other,
         data_.net,
         data_.media,
-        data_.submit_type === 1 ? '新制' : data[i].submit_type === 0 ? '舊制' : '',
+        data_.submit_type === '1' ? '新制' : data[i].submit_type === '0' ? '舊制' : '',
         data_.old_total,
         data_.old_contemp,
         data_.old_culture,
@@ -97,7 +99,7 @@ export const fetchStudent = grade => dispatch => {
         data_.new_core_humanity,
         data_.new_basic,
         data_.new_cross,
-        data_.en_status,
+        data_.en_status === '0' ? '未通過' : data[i].submit_type === '1' ? '通過' : '',
         data_.en_total,
         data_.en_basic,
         data_.en_advanced,
