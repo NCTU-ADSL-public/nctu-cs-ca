@@ -215,7 +215,7 @@ class GeneralNewCourseList extends React.Component {
         <div className='hidden-xs col-sm-4 col-md-3' style={{ paddingLeft: '0px', paddingRight: '60px' }}>
           <div className='general-course-dimension'>
             核心&nbsp;&nbsp;
-            <font className={classes.fontCredit}>{overview.credit.core}</font>
+            <font className={classes.fontCredit}>{overview.credit === null ? 0 : overview.credit.core}</font>
             /{overview.require.core}&nbsp;(學分)
           </div>
         </div>
@@ -233,7 +233,7 @@ class GeneralNewCourseList extends React.Component {
         <div className='hidden-xs col-sm-4 col-md-3' style={{ marginTop: '20px', paddingLeft: '0px', paddingRight: '60px' }}>
           <div className='general-course-dimension'>
             校基本&nbsp;
-            <font className={classes.fontCredit}>{overview.credit.basic}</font>
+            <font className={classes.fontCredit}>{overview.credit === null ? 0 : overview.credit.basic}</font>
             /{overview.require.basic}&nbsp;(學分)
           </div>
         </div>
@@ -251,7 +251,7 @@ class GeneralNewCourseList extends React.Component {
         <div className='hidden-xs col-sm-4 col-md-3' style={{ marginTop: '20px', paddingLeft: '0px', paddingRight: '60px' }}>
           <div className='general-course-dimension'>
             跨院&nbsp;&nbsp;
-            <font className={classes.fontCredit}>{overview.credit.cross}</font>
+            <font className={classes.fontCredit}>{overview.credit === null ? 0 : overview.credit.cross}</font>
             /{overview.require.cross}&nbsp;(學分)
           </div>
         </div>
