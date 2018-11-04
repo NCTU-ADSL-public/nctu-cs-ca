@@ -126,7 +126,7 @@ class index extends React.Component {
 
   DownLoadBtn = () => {
     const { classes, students_csv_data, status } = this.props
-    if(status === 'start')
+    if(status === 'start' || students_csv_data.length<1)
       return ''
     return(
       <CSVLink
