@@ -64,7 +64,7 @@ export const fetchStudent = grade => dispatch => {
       '必修缺課'
     ])
     for (let i = 0; i < data[0].length; i++) {
-      let data_ = data[0][i][0]
+      let data_ = data[0][i]
       let compulse = ''
       for (let j = 0; j < data_.compulse.length; j++) {
         compulse += data_.compulse[j]
