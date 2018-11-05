@@ -29,7 +29,6 @@ export const fetchStudent = grade => dispatch => {
   axios.post('/assistants/graduate/graduateListDownload', { grade }).then(res => {
     let data = res.data
     let csvArr = []
-    console.log(data)
     csvArr.push([
       '學號',
       '姓名',
@@ -66,9 +65,11 @@ export const fetchStudent = grade => dispatch => {
       '導師時間',
       '必修缺課'
     ])
-    for (let i = 0; i < data[0].length; i++) {
-      let data_ = data[0][i]
+    for (let i = 0; i < data.length; i++) {
+      let data_ = data[i][0]
       let compulse = ''
+      console.log(data_)
+      if(data_ === undefined) continue
       for (let j = 0; j < data_.compulse.length; j++) {
         compulse += data_.compulse[j]
         compulse += ','
@@ -109,6 +110,7 @@ export const fetchStudent = grade => dispatch => {
         data_.mentor,
         compulse
       ])
+      //console.log(csvArr[i])
     }
     dispatch(store_student_csv_data(csvArr))
   })
