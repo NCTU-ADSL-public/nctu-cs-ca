@@ -85,7 +85,7 @@ export const fetchStudent = grade => dispatch => {
         data_.other,
         data_.net,
         data_.media,
-        data_.submit_type === '1' ? '新制' : data[i].submit_type === '0' ? '舊制' : '',
+        data_.submit_type === '1' ? '新制' : data_.submit_type === '0' ? '舊制' : '',
         data_.old_total,
         data_.old_contemp,
         data_.old_culture,
