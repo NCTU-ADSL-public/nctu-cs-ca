@@ -152,7 +152,7 @@ class ListPanel extends React.Component {
                 <div>預審狀況: { VERIFY_STATUS_CN[student.submit_status] }</div>
               </div>
 
-              { student.submit_status === 1 && <div style = {{ display: 'flex', width: '400px' }} >
+              { parseInt(student.submit_status) === 1 && <div style = {{ display: 'flex', width: '400px' }} >
                 <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
                 <div style = {{ flex: 1 }} />
                 <Button className = { classes.buttonNG } onClick = {
@@ -245,7 +245,7 @@ class ListPanel extends React.Component {
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識</div>
                   <div className = 'row'>
                     {
-                      student.submit_type !== 1 ?
+                      parseInt(student.submit_type) !== 1 ?
                       <div className = 'col-md-12 col-lg-12 col-xs-12'>
                         <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
                           student.old_total <= 0 ?
@@ -307,7 +307,7 @@ class ListPanel extends React.Component {
                   }}
                 >
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語 /
-                    <span style = {{ fontSize: '15px', marginLeft: '5px' }} >畢業門檻</span> {student.en_status !== 0 ? <Done style = {{ fontSize: '15px', color: 'green' }} /> : <Clear style = {{ fontSize: '15px', color: 'red'}} /> }
+                    <span style = {{ fontSize: '15px', marginLeft: '5px' }} >畢業門檻</span> {parseInt(student.en_status) !== 0 ? <Done style = {{ fontSize: '15px', color: 'green' }} /> : <Clear style = {{ fontSize: '15px', color: 'red'}} /> }
                   </div>
                   <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >基礎{ student.en_basic <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.en_basic}</span> }</div>
                   <div className = 'row' style = {{ fontSize: '16px', padding: '20px' }} >進階{ student.en_advanced <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.error } >{student.en_advanced}</span> }</div>
