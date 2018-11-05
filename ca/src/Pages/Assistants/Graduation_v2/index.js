@@ -210,11 +210,11 @@ class index extends React.Component {
       <div className = { classes.container } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>
           <div className = 'col-md-1 col-lg-1'>
-          {/*
+          {
             <Button variant="contained" className = { classes.button } onClick = { () => trigger_update_data() }>
               更新db資料
             </Button>
-          */}
+          }
           </div>
           <div className = 'col-md-1 col-lg-1'>
             {this.DownLoadBtn()}
