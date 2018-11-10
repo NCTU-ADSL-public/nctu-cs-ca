@@ -33,6 +33,8 @@ class Index extends React.Component {
             assis={this.props.assis}
             graduationCheckEnglishTest={this.props.englishCheck}
             courseCategoryArray={this.props.printData}
+            reviewCheck={this.props.reviewCheck}
+            generalCourseSelect={this.props.generalCourseSelect}
           />
         </div>
 
@@ -47,7 +49,9 @@ const mapStateToProps = (state) => ({
   englishCheck: state.Student.Graduation.englishCheck,
   done: state.Student.Graduation.status === 'DONE',
   idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis
+  assis: state.Student.Graduation.assis,
+  reviewCheck: state.Student.Graduation.check,
+  generalCourseSelect: state.Student.Graduation.generalCourseSelect
 })
 
 const mapDispatchToProps = (dispatch) => ({
