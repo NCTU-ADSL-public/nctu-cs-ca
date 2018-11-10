@@ -9,7 +9,7 @@ export const storeGradCheck = createAction('SHOW_GRAD_CHECK')
 export const storeGradEnglishTestCheck = createAction('SHOW_GRAD_ENGLISH_TEST_CHECK')
 export const updateCourse = createAction('UPDATE_COURSE')
 export const fetchStart = createAction('FETCH_START')
-export const fetchDone = createAction('FETCH_DONE')
+export const storeStudentInfo = createAction('STORE_STUDENT_INFO')
 
 export const fetchGraduationCourse = (page = 1) => dispatch => {
   axios.get('/students/graduate/revised').then(res => {
@@ -32,7 +32,7 @@ export const fetchGraduationCourse = (page = 1) => dispatch => {
   })
 }
 
-export const fetchGraduationCourseAssistantVersion = (id) => dispatch => {
+export const fetchGraduationCourseAssistantVersion = (id, sname, program) => dispatch => {
   dispatch(fetchStart())
   axios.get('/assistants/graduate/revised', {
     params: {
@@ -66,6 +66,8 @@ export const fetchGraduationCourseAssistantVersion = (id) => dispatch => {
   }).catch(err => {
     console.log(err)
   })
+  console.log({id, sname, program})
+  dispatch(storeStudentInfo({id, sname, program}))
 }
 
 export const reviewSubmit = (payload) => dispatch => {
