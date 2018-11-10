@@ -76,7 +76,7 @@ class GradCategory extends React.Component {
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>3暑</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>4上</td>
           <td style={{ fontSize: '8pt', fontWeight: 'bold' }}>4下</td>
-          <td style={{ fontSize: '6pt', fontWeight: 'bold' }}>應修<br />學分</td>
+          <td style={{ fontSize: '6pt', fontWeight: 'bold' }}>課程<br />學分</td>
           <td style={{ fontSize: '6pt', fontWeight: 'bold' }}>實得<br />學分</td>
           <td className='title-text'>備註</td>
         </tr>
