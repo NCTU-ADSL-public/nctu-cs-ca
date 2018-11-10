@@ -71,8 +71,7 @@ class _Navbar extends React.Component {
   }
 
   dropButton = () => {
-    const {onClicks,selectedButtonIndex} = this.state
-    let id = 10
+    const { onClicks } = this.state
     return(
       <DropdownButton
         bsStyle={{
@@ -140,7 +139,7 @@ class _Navbar extends React.Component {
       <Navbar.Header>
         {/*<div style={{...style.BrandBox, borderLeft: `6px solid ${this.props.color}`}}>*/}
         <div style={{...style.BrandBox}}>
-          <img src={dinoIcon} style={{height: 35}} />
+          <img src={dinoIcon} style={{height: 35}} alt='' />
           {/*<span style={style.BrandName}>交大資工線上助理</span>*/}
           {/*<span style={style.BrandSubName} className='hidden-xs hidden-sm'>NCTU Curriculum Assistant</span>*/}
         </div>

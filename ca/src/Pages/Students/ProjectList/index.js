@@ -28,7 +28,6 @@ class index extends React.Component {
   }
 
   render () {
-    let id = 0
     return (
       <MuiThemeProvider className='container'>
         <div>

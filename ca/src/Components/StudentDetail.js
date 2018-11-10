@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import Frame from './Frame'
 import StudentGrad from '../Pages/Students/Graduation_v2/index'
 
@@ -16,19 +15,14 @@ class StudentDetail extends React.Component {
   }
 
   render () {
-
-    return (
-      <Frame>
-        <StudentGrad />
-      </Frame>
-    )
     if (this.props.done) {
       return (
-        <Loading size={100}
+        <Loading 
+          size={100}
           left={100}
           top={100}
           isLoading
-                />
+        />
       )
     } else {
       return (

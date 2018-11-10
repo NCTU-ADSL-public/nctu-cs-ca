@@ -59,8 +59,11 @@ class index extends React.Component {
           {/* <div className="red" style={{backgroundColor: '#a42926'}}/> */}
           {/* <div className="text">未通過</div> */}
           {/* </div> */}
-          <Course studentPasdata={this.props.CoursePass} data={this.props.CourseMap}
-            studentsGrad={this.props.studentIdcard.grade} />
+          <Course
+            studentPasdata={this.props.CoursePass}
+            data={this.props.CourseMap}
+            studentsGrad={this.props.studentIdcard.grade}
+          />
         </div>
       </div>
     )
