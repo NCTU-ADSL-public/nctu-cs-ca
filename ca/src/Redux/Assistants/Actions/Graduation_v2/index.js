@@ -165,58 +165,58 @@ const parseCsv = (data) => {
       conditionIndex++
     }
     if (data_.submit_type === '0') {
-      if (parseInt(data_.old_total) !== 0) {
-        condition += (conditionIndex + '. 舊制通識缺' + parseInt(data_.old_total) + ' 學分\n')
+      if (parseInt(data_.old_total, 10) !== 0) {
+        condition += (conditionIndex + '. 舊制通識缺' + parseInt(data_.old_total, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.old_contemp) !== 0) {
-        condition += (conditionIndex + '. 通識當代向度缺' + parseInt(data_.old_contemp) + ' 學分\n')
+      if (parseInt(data_.old_contemp, 10) !== 0) {
+        condition += (conditionIndex + '. 通識當代向度缺' + parseInt(data_.old_contemp, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.old_culture) !== 0) {
-        condition += (conditionIndex + '. 通識文化向度缺' + parseInt(data_.old_culture) + ' 學分\n')
+      if (parseInt(data_.old_culture, 10) !== 0) {
+        condition += (conditionIndex + '. 通識文化向度缺' + parseInt(data_.old_culture, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.old_history) !== 0) {
-        condition += (conditionIndex + '. 通識歷史向度缺' + parseInt(data_.old_history) + ' 學分\n')
+      if (parseInt(data_.old_history, 10) !== 0) {
+        condition += (conditionIndex + '. 通識歷史向度缺' + parseInt(data_.old_history, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.old_citizen) !== 0) {
-        condition += (conditionIndex + '. 通識公民向度缺' + parseInt(data_.old_citizen) + ' 學分\n')
+      if (parseInt(data_.old_citizen, 10) !== 0) {
+        condition += (conditionIndex + '. 通識公民向度缺' + parseInt(data_.old_citizen, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.old_group) !== 0) {
-        condition += (conditionIndex + '. 通識群己向度缺' + parseInt(data_.old_group) + ' 學分\n')
+      if (parseInt(data_.old_group, 10) !== 0) {
+        condition += (conditionIndex + '. 通識群己向度缺' + parseInt(data_.old_group, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.old_science) !== 0) {
-        condition += (conditionIndex + '. 通識自然向度缺' + parseInt(data_.old_science) + ' 學分\n')
+      if (parseInt(data_.old_science, 10) !== 0) {
+        condition += (conditionIndex + '. 通識自然向度缺' + parseInt(data_.old_science, 10) + ' 學分\n')
         conditionIndex++
       }
     } else if (data_.submit_type === '1') {
-      if (parseInt(data_.new_total) !== 0) {
-        condition += (conditionIndex + '. 新制通識缺' + parseInt(data_.new_total) + ' 學分\n')
+      if (parseInt(data_.new_total, 10) !== 0) {
+        condition += (conditionIndex + '. 新制通識缺' + parseInt(data_.new_total, 10) + ' 學分\n')
         conditionIndex++
       }
 
-      if (parseInt(data_.new_core_total) !== 0) {
-        condition += (conditionIndex + '. 通識核心向度缺' + parseInt(data_.new_core_total) + ' 學分\n')
+      if (parseInt(data_.new_core_total, 10) !== 0) {
+        condition += (conditionIndex + '. 通識核心向度缺' + parseInt(data_.new_core_total, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.new_core_society) !== 0) {
-        condition += (conditionIndex + '. 通識核心社會向度缺' + parseInt(data_.new_core_society) + ' 學分\n')
+      if (parseInt(data_.new_core_society, 10) !== 0) {
+        condition += (conditionIndex + '. 通識核心社會向度缺' + parseInt(data_.new_core_society, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.new_core_humanity) !== 0) {
-        condition += (conditionIndex + '. 通識核心人文向度缺' + parseInt(data_.new_core_humanity) + ' 學分\n')
+      if (parseInt(data_.new_core_humanity, 10) !== 0) {
+        condition += (conditionIndex + '. 通識核心人文向度缺' + parseInt(data_.new_core_humanity, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.new_basic) !== 0) {
-        condition += (conditionIndex + '. 通識校基本素養向度缺' + parseInt(data_.new_basic) + ' 學分\n')
+      if (parseInt(data_.new_basic, 10) !== 0) {
+        condition += (conditionIndex + '. 通識校基本素養向度缺' + parseInt(data_.new_basic, 10) + ' 學分\n')
         conditionIndex++
       }
-      if (parseInt(data_.new_cross) !== 0) {
-        condition += (conditionIndex + '. 通識跨院向度缺' + parseInt(data_.new_cross) + ' 學分\n')
+      if (parseInt(data_.new_cross, 10) !== 0) {
+        condition += (conditionIndex + '. 通識跨院向度缺' + parseInt(data_.new_cross, 10) + ' 學分\n')
         conditionIndex++
       }
     }
@@ -224,20 +224,20 @@ const parseCsv = (data) => {
       condition += (conditionIndex + '. 未通過英語測驗\n')
       conditionIndex++
     }
-    if (parseInt(data_.pe) !== 0) {
-      condition += (conditionIndex + '. 體育缺' + parseInt(data_.pe) + ' 門\n')
+    if (parseInt(data_.pe, 10) !== 0) {
+      condition += (conditionIndex + '. 體育缺' + parseInt(data_.pe, 10) + ' 門\n')
       conditionIndex++
     }
-    if (parseInt(data_.service) !== 0) {
-      condition += (conditionIndex + '. 服務學習缺' + parseInt(data_.service) + ' 門\n')
+    if (parseInt(data_.service, 10) !== 0) {
+      condition += (conditionIndex + '. 服務學習缺' + parseInt(data_.service, 10) + ' 門\n')
       conditionIndex++
     }
-    if (parseInt(data_.art) !== 0) {
-      condition += (conditionIndex + '. 藝文賞析缺' + parseInt(data_.art) + ' 門\n')
+    if (parseInt(data_.art, 10) !== 0) {
+      condition += (conditionIndex + '. 藝文賞析缺' + parseInt(data_.art, 10) + ' 門\n')
       conditionIndex++
     }
-    if (parseInt(data_.mentor) !== 0) {
-      condition += (conditionIndex + '. 導師時間缺' + parseInt(data_.mentor) + ' 門')
+    if (parseInt(data_.mentor, 10) !== 0) {
+      condition += (conditionIndex + '. 導師時間缺' + parseInt(data_.mentor, 10) + ' 門')
       conditionIndex++
     }
     csvArr.push([

@@ -151,12 +151,12 @@ class index extends React.Component {
         &&
         (
              !grad_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-          || grad_filter_status[parseInt(student.graduate_status)]
+          || grad_filter_status[parseInt(student.graduate_status, 10)]
         )
         &&
         (
              !veri_filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
-          || veri_filter_status[parseInt(student.submit_status)]
+          || veri_filter_status[parseInt(student.submit_status, 10)]
         )
         &&
         (
@@ -373,7 +373,12 @@ class index extends React.Component {
                 classes={{
                   underline: classes.cssUnderline,
                 }}
-                onChange = { (event) => { this.setState({ input: event.target.value, page: 0 }), console.log(students) }  }
+                onChange = {
+                  (event) => {
+                    this.setState({ input: event.target.value, page: 0 })
+                    console.log(students)
+                  }
+                }
                 value = { input }
               />
             </FormControl>

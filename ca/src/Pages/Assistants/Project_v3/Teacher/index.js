@@ -307,11 +307,11 @@ class index extends React.Component {
                                 <br />
                                 {
                                   project.students.map( student => (
-                                    <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second)] + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                    <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)] + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
                                       <Chip
                                         label = { student.id + " " + student.name }
                                         className = { classes.chip }
-                                        style = {{ background: ADD_STATUS_COLOR[parseInt(student.add_status)] }}
+                                        style = {{ background: ADD_STATUS_COLOR[parseInt(student.add_status, 10)] }}
                                         deleteIcon={student.add_status === "0" ? student.first_second === "3" ? <Warning style = {{ fontSize: 30 }}/> : <Add style = {{ fontSize: 30 }} /> : <DoneIcon style = {{ fontSize: 30 }} />}
                                         onDelete={() => this.handleDelete({
                                           status: student.add_status,
@@ -322,7 +322,7 @@ class index extends React.Component {
                                             first_second: student.first_second
                                           }}
                                         )}
-                                        avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                        avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status, 10)] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
                                       />
                                     </Tooltip>
                                   ))
@@ -350,12 +350,12 @@ class index extends React.Component {
                               <br />
                               {
                                 project.students.map( student => (
-                                  <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second)] } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                  <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)] } placement="top" classes = {{ tooltip: classes.tooltip }} >
                                     <Chip
                                       label = { student.id + " " + student.name }
                                       className = { classes.chip }
                                       style = {{ background: yellow[300] }}
-                                      avatar={<Avatar style = {{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                      avatar={<Avatar style = {{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
                                     />
                                   </Tooltip>
                                 ))
@@ -403,9 +403,12 @@ class index extends React.Component {
             </Button>
             {
               submit_student_object.first_second === "3" &&
-                <Button onClick = { () => { this.setState({ submit_page_open: false }), delete_research(submit_student_object) } } className = { classes.buttonRemove } >
-                  未通過並移除
-                </Button>
+                <Button className = { classes.buttonRemove } onClick = {
+                  () => { 
+                    this.setState({ submit_page_open: false })
+                    delete_research(submit_student_object)
+                  } 
+                }>未通過並移除</Button>
             }
             <Button onClick = { () => {
               this.setState({ submit_page_open: false })
