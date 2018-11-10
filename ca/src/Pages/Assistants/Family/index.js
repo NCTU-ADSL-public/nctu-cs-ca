@@ -19,7 +19,7 @@ import FaceIcon from '@material-ui/icons/Face'
 import ListIcon from '@material-ui/icons/List'
 import ViewIcon from '@material-ui/icons/ViewComfy'
 import axios from 'axios'
-import FakeData from '../../../Resources/FakeData'
+// import FakeData from '../../../Resources/FakeData'
 
 const styles = () => ({
   container:{

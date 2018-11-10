@@ -1,32 +1,32 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 
 import GraduationList from './GraduationList'
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import Chip from '@material-ui/core/Chip';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FilterList from '@material-ui/icons/FilterList';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Done from '@material-ui/icons/Done';
-import Clear from '@material-ui/icons/Clear';
-import QueryBuilder from '@material-ui/icons/QueryBuilder';
-import FormControl from '@material-ui/core/FormControl';
-import grey from '@material-ui/core/colors/grey';
-import green from '@material-ui/core/colors/green';
-import blue from '@material-ui/core/colors/blue';
-import red from '@material-ui/core/colors/red';
-import FirstPage from '@material-ui/icons/FirstPage';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import LastPage from '@material-ui/icons/LastPage';
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Dialog from '@material-ui/core/Dialog'
+import Chip from '@material-ui/core/Chip'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import FilterList from '@material-ui/icons/FilterList'
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
+import Done from '@material-ui/icons/Done'
+import Clear from '@material-ui/icons/Clear'
+import QueryBuilder from '@material-ui/icons/QueryBuilder'
+import FormControl from '@material-ui/core/FormControl'
+import grey from '@material-ui/core/colors/grey'
+import green from '@material-ui/core/colors/green'
+import blue from '@material-ui/core/colors/blue'
+import red from '@material-ui/core/colors/red'
+import FirstPage from '@material-ui/icons/FirstPage'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
+import LastPage from '@material-ui/icons/LastPage'
 import { fetchStudent, triggerUpdateData } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
-import Button from '@material-ui/core/Button';
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import { CSVLink, CSVDownload } from "react-csv";
+import Button from '@material-ui/core/Button'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
+import { CSVLink, CSVDownload } from "react-csv"
 
 const styles = theme => ({
   container: {

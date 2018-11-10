@@ -1,22 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import purple from '@material-ui/core/colors/purple';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import { withStyles } from '@material-ui/core/styles'
+import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
 import ScoreList from './ScoreList'
-import FirstPage from '@material-ui/icons/FirstPage';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import LastPage from '@material-ui/icons/LastPage';
+import FirstPage from '@material-ui/icons/FirstPage'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
+import LastPage from '@material-ui/icons/LastPage'
 import { fetchScores, downloadCsv } from '../../../../Redux/Assistants/Actions/Project_v3/Score'
-import grey from '@material-ui/core/colors/grey';
-import Button from '@material-ui/core/Button';
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import { CSVLink, CSVDownload } from "react-csv";
+import grey from '@material-ui/core/colors/grey'
+import Button from '@material-ui/core/Button'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
+import { CSVLink } from "react-csv"
 
 
 const styles = theme => ({
@@ -98,7 +97,7 @@ class index extends React.Component {
   render() {
 
     const { classes, fetch_scores, scores, download_csv, csvData } = this.props
-    const { input, page, number_per_page, semester, max_page, first_second } = this.state
+    const { input, page, number_per_page, semester, first_second } = this.state
     console.log(csvData)
     return (
       <div className = { classes.root } >

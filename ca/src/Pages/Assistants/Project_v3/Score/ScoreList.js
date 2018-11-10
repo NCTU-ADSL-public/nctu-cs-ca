@@ -9,8 +9,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const styles = theme => ({
 
 })
-const PROJECT_STATUS = ['已申請專題', '專題審核中', '未申請專題']
-const PROJECT_STATUS_COLOR = ['green', 'orange', 'red']
+// const PROJECT_STATUS = ['已申請專題', '專題審核中', '未申請專題']
+// const PROJECT_STATUS_COLOR = ['green', 'orange', 'red']
 
 class ScoreList extends React.Component {
 
@@ -23,7 +23,7 @@ class ScoreList extends React.Component {
 
   render() {
 
-    const { scores, classes } = this.props
+    const { scores } = this.props
     const { panel_open } = this.state
 
     return (

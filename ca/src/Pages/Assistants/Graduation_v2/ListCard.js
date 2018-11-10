@@ -1,22 +1,19 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
 import CircularProgressbar from 'react-circular-progressbar'
-import Clear from '@material-ui/icons/Clear';
-import QueryBuilder from '@material-ui/icons/QueryBuilder';
-import Done from '@material-ui/icons/Done';
-import OpenInNew from '@material-ui/icons/OpenInNew';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import red from '@material-ui/core/colors/red';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Tooltip from '@material-ui/core/Tooltip';
+import Clear from '@material-ui/icons/Clear'
+import QueryBuilder from '@material-ui/icons/QueryBuilder'
+import Done from '@material-ui/icons/Done'
+import OpenInNew from '@material-ui/icons/OpenInNew'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Tooltip from '@material-ui/core/Tooltip'
 import { setGradutateState } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
 
 const styles = theme => ({

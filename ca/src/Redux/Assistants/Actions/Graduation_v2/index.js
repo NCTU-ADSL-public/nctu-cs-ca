@@ -1,5 +1,4 @@
 import { createAction } from 'redux-actions'
-import data_json from './Json'
 import axios from 'axios'
 
 export const set_graduate_state = createAction('SET_GRADUATE_STATE')
@@ -8,9 +7,9 @@ export const store_student_csv_data = createAction('STORE_STUDENT_CSV_DATA')
 export const fetach_start = createAction('FETCH_START')
 
 export const triggerUpdateData = () => dispatch => {
-  ['四'].map(title => {
+  ['四'].forEach(title => {
     axios.post('/assistants/graduate/gradeStudent', { grade: title }).then(res => {
-      res.data.map(student => {
+      res.data.forEach(student => {
         axios.get('/assistants/graduate/graduateList', {
           params: {
             student_id: student.student_id
