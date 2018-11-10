@@ -161,7 +161,7 @@ class Index extends React.Component {
         >
           {(this.props.data.photo === undefined || this.props.data.photo === 'loading')
             ? <CircularProgress className={classes.progress} />
-            : <img className='img-responsive' src={this.getImage()} /> }
+            : <img className='img-responsive' src={this.getImage()} alt='' /> }
         </GridTile>
         <Dialog
           fullScreen={this.props.data.agree === '1' || this.props.data.agree === undefined}

@@ -9,10 +9,10 @@ class Mentor extends React.Component {
   render () {
     return (
       <div >
-        <img style={{ cursor: 'pointer' }} src={img0} className='image' />
-        <img style={{ cursor: 'pointer' }} src={img1} className='image' />
-        <img style={{ cursor: 'pointer' }} src={img2} className='image' />
-        <img src={img3} className='image' />
+        <img style={{ cursor: 'pointer' }} alt='' src={img0} className='image' />
+        <img style={{ cursor: 'pointer' }} alt='' src={img1} className='image' />
+        <img style={{ cursor: 'pointer' }} alt='' src={img2} className='image' />
+        <img alt='' src={img3} className='image' />
       </div>
     )
   }
