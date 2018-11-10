@@ -86,6 +86,9 @@ class Index extends React.Component {
           </div>
           <div className='visible-sm visible-md visible-lg col-sm-12 col-md-12 well' style={{ marginTop: '5px', clear: 'both', color: 'gray' }}>
             <div className='col-sm-11 col-md-11'>
+              {this.props.assis ? <div style={{color: '#6e0000'}}>
+                {this.props.idCard.sname}&nbsp;&nbsp;&nbsp;&nbsp;{this.props.idCard.program}&nbsp;&nbsp;&nbsp;&nbsp;{this.props.idCard.id}
+              </div> : ''}
               <div>
                 是否已考過英檢：
                 {(englishCheck === '3' || englishCheck === '4') ? '已考過英檢' : (englishCheck === '0' || englishCheck === null) ? '未考過英檢' : (englishCheck === '2') ? '已通過英檢免試申請' : '通過外語榮譽學分（可免修英文）'}
@@ -139,7 +142,9 @@ class Index extends React.Component {
 const mapStateToProps = (state) => ({
   overview: state.Student.Graduation.overview,
   englishCheck: state.Student.Graduation.englishCheck,
-  check: state.Student.Graduation.check
+  check: state.Student.Graduation.check,
+  idCard: state.Student.Graduation.idCardForassistans,
+  assis: state.Student.Graduation.assis
 })
 
 const mapDispatchToProps = (dispatch) => ({

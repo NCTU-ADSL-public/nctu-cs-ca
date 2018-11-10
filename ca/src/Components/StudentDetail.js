@@ -11,12 +11,10 @@ import { connect } from 'react-redux'
 class StudentDetail extends React.Component {
   constructor (props) {
     super(props)
-    console.log(this.props.match.params.sid)
-    props.fetchGraduationCourseAssistantVersion(this.props.match.params.sid)
+    props.fetchGraduationCourseAssistantVersion(this.props.match.params.sid, this.props.match.params.sname, this.props.match.params.program)
   }
 
   render () {
-
     return (
       <Frame>
         <StudentGrad />
@@ -44,7 +42,7 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  fetchGraduationCourseAssistantVersion: (id) => dispatch(fetchGraduationCourseAssistantVersion(id))
+  fetchGraduationCourseAssistantVersion: (id, sname, program) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program))
 })
 
 export default connect(mapState, mapDispatch)(StudentDetail)

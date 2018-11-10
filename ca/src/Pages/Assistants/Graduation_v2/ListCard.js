@@ -110,7 +110,7 @@ class ListPanel extends React.Component {
                 fontWeight: 'bold',
                 cursor: 'pointer',
                 verticalAlign: 'middle'}}
-                onClick = { () => window.open('/assistants/head/s/' + student.student_id) }
+                onClick = { () => window.open('/assistants/head/s/' + student.student_id + '/' + student.sname + '/' + student.program + student.grade) }
               />
             </div>
             <div style = {{ fontSize: '15px', marginBottom: '10px' }}>{ student.student_id + ' / ' + student.program }</div>

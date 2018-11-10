@@ -6,13 +6,16 @@ const initialState = {
   check: 0,
   englishCheck: false,
   status: 'IDLE',
-  overview: {}
+  overview: {},
+  idCardForassistans: {},
+  assis: false
 }
 
 export default handleActions({
   FETCH_DONE: (state) => ({ ...state, status: 'DONE' }),
   FETCH_START: (state) => ({ ...state, status: 'START' }),
   SHOW_GRAD_PRINT: (state, action) => ({ ...state, printdata: action.payload }),
+  STORE_STUDENT_INFO: (state, action) => ({ ...state, idCardForassistans: action.payload , assis: true}),
   SHOW_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
   SHOW_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
   STORE_GRADUATION_COURSE: (state, action) => {
