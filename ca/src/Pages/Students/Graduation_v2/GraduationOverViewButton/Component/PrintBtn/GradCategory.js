@@ -30,7 +30,7 @@ class GradCategory extends React.Component {
         subjects[i].comment += '當期課程'
         subjects[i].score = '　'
       } else if (subjects[i].reason === 'english') {
-        subjects[i].comment += '加修(抵免英檢)'
+        subjects[i].comment += '加修(英檢未通過)'
       }
 
       if (subjects[i].score === -1) { subjects[i].score = '' }
