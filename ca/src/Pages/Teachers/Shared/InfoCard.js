@@ -131,7 +131,7 @@ class InfoCard extends React.Component {
                   (v, i) => (
                     <Tab
                       key={i}
-                      label={`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]}`}
+                      label={`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1], 10)]}`}
                       buttonStyle={
                         v.failed
                           ? {backgroundColor: '#fd93b5'}

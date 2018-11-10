@@ -5,7 +5,6 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import defaultPic from '../../../Resources/defalt.jpg'
 import ReplyDialog from './ReplyDialog'
 import InfoCard from '../Shared/InfoCard'
-import Loading from '../../../Components/Loading'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
