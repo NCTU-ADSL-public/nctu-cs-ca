@@ -42,7 +42,7 @@ class App extends React.Component {
     let month = (Today.getMonth() + 1)
     let year = Today.getFullYear() - 1911
     let _this = this
-    setTimeout(function () { _this.setState({ v: 'v' }) }, 1000)
+    _this.setState({ v: 'v' })
     if (this.props.studentsGrad === '大一') {
       this.setState({
         year: year
