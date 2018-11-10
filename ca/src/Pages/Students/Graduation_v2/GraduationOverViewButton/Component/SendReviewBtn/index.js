@@ -87,7 +87,6 @@ class Index extends React.Component {
 
   render () {
     const { classes } = this.props
-    console.log(this.props.reviewData)
     return (
       <div>
         <MenuItem className={classes.menuItem} onClick={this.handleOpen}>
