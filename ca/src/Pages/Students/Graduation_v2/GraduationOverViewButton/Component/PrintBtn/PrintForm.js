@@ -24,7 +24,9 @@ class PrintForm extends React.Component {
           })
         }
         generalCat.push(item)
-      } else { depCat.push(item) }
+      } else if (item.require !== 0) { 
+        depCat.push(item) 
+      }
     })
 
     let programName = ''
