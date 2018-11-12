@@ -22,11 +22,6 @@ class Index extends React.Component {
         <Card title='藝文賞析' rwd={rwd} complete={this.props.overview.art} require={this.props.overview.art_require} value={Number(this.props.overview.art) / Number(this.props.overview.art_require) * 100} isMen />
         <Card title='服務學習' rwd={rwd} complete={this.props.overview.service} require={this.props.overview.service_require} value={Number(this.props.overview.service) / Number(this.props.overview.service_require) * 100} isMen />
         <Card title='英文授課' rwd={rwd} complete={this.props.overview.english} require={this.props.overview.english_require} value={Number(this.props.overview.english) / Number(this.props.overview.english_require) * 100} isMen />
-<<<<<<< HEAD
-        <Card title='通識(舊制)' rwd={rwd} complete={this.props.overview.general} require={this.props.overview.general_require} value={Number(this.props.overview.general) / Number(this.props.overview.general_require) * 100} />
-        <Card title='通識(新制)' rwd={rwd} complete={this.props.overview.general_new} require={this.props.overview.general_new_require} value={Number(this.props.overview.general_new) / Number(this.props.overview.general_new_require) * 100} />
-        <Card title='抵免研究所課程' rwd={rwd} complete={this.props.overview.graduate} require={this.props.overview.graduate} value={100} />
-=======
         { this.props.reviewCheck === 0 || this.props.generalCourseSelect === 0
           ? <Card title='通識(舊制)' rwd={rwd} complete={this.props.overview.general} require={this.props.overview.general_require} value={Number(this.props.overview.general) / Number(this.props.overview.general_require) * 100} />
           : ''
@@ -35,7 +30,7 @@ class Index extends React.Component {
           ? <Card title='通識(新制)' rwd={rwd} complete={this.props.overview.general_new} require={this.props.overview.general_new_require} value={Number(this.props.overview.general_new) / Number(this.props.overview.general_new_require) * 100} />
           : ''
         }
->>>>>>> 7be29eae045461c853189fefa4a8b14a2c3e132b
+        <Card title='抵免研究所課程' rwd={rwd} complete={this.props.overview.graduate} require={this.props.overview.graduate} value={100} />
       </div>
     )
   }
