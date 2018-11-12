@@ -13,6 +13,8 @@ class GradCategory extends React.Component {
         if (subjects[i].comment.slice(0, 2) === '跨院') {
           subjects[i].comment = '跨院基本素養'
         }
+      } else if (name === '其他選修' && subjects[i].type === '軍訓') {
+        subjects[i].comment = '此課程不採計為畢業預審學分'
       } else {
         subjects[i].comment = ''
       }
