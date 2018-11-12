@@ -164,7 +164,7 @@ class Index extends React.Component {
                 </div>
               </div>
               { this.props.title === '共同必修' 
-                ? <div className='col-md-3' style={{ marginLeft: '-7%' }}/*hidden={this.props.studentIdcard.program.slice(0, 2) === '網多'}*/>
+                ? <div className='col-md-3' style={{ marginLeft: '-7%' }} hidden={this.props.studentIdcard.program.slice(0, 2) !== '網多'} >
                   <Button
                     variant='outlined'
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
