@@ -11,10 +11,6 @@ import Done from '@material-ui/icons/Done'
 import OpenInNew from '@material-ui/icons/OpenInNew'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-<<<<<<< HEAD
-import red from '@material-ui/core/colors/red'
-=======
->>>>>>> 7be29eae045461c853189fefa4a8b14a2c3e132b
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -124,17 +120,6 @@ class ListPanel extends React.Component {
               }}
             />
             <div>
-<<<<<<< HEAD
-              {
-              parseInt(student.graduate_status) === 0 && <span>
-                <Clear style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-              </span> ||
-              parseInt(student.graduate_status) === 1 && <span>
-                <QueryBuilder style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-              </span> ||
-              parseInt(student.graduate_status) === 2 && <span>
-                <Done style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-=======
             {
               parseInt(student.graduate_status, 10) === 0 && <span>
                 <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
@@ -146,7 +131,6 @@ class ListPanel extends React.Component {
               ||
               parseInt(student.graduate_status, 10) === 2 && <span>
                 <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
->>>>>>> 7be29eae045461c853189fefa4a8b14a2c3e132b
               </span>
             }
               <div style={{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.graduate_status] }</div>
@@ -162,18 +146,10 @@ class ListPanel extends React.Component {
                 <div>畢業狀態: { GRAD_STATUS_CN[student.graduate_status] }</div>
                 <div>預審狀況: { VERIFY_STATUS_CN[student.submit_status] }</div>
               </div>
-
-<<<<<<< HEAD
-              { parseInt(student.submit_status) === 1 && <div style={{ display: 'flex', width: '400px' }} >
-                <Button className={classes.buttonCC} onClick={() => this.setState({ edit_panel_open: false })}>取消</Button>
-                <div style={{ flex: 1 }} />
-                <Button className={classes.buttonNG} onClick={
-=======
               { parseInt(student.submit_status, 10) === 1 && <div style = {{ display: 'flex', width: '400px' }} >
                 <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
                 <div style = {{ flex: 1 }} />
                 <Button className = { classes.buttonNG } onClick = {
->>>>>>> 7be29eae045461c853189fefa4a8b14a2c3e132b
                   () => {
                     this.setState({ edit_panel_open: false })
                     set_graduate_state({ student_id: student.student_id, graduate_submit: 3 })
@@ -262,14 +238,6 @@ class ListPanel extends React.Component {
                   <div className='row' style={{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識</div>
                   <div className='row'>
                     {
-<<<<<<< HEAD
-                      parseInt(student.submit_type) !== 1
-                      ? <div className='col-md-12 col-lg-12 col-xs-12'>
-                        <div className='row' style={{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
-                          student.old_total <= 0
-                          ? <Done className={classes.ok} />
-                          : <span className={classes.error} >{ student.old_total }</span>
-=======
                       parseInt(student.submit_type, 10) !== 1 ?
                       <div className = 'col-md-12 col-lg-12 col-xs-12'>
                         <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
@@ -277,7 +245,6 @@ class ListPanel extends React.Component {
                           <Done className = { classes.ok } />
                           :
                           <span className = { classes.error } >{ student.old_total }</span>
->>>>>>> 7be29eae045461c853189fefa4a8b14a2c3e132b
                         }</div>
                         <hr style={{ margin: '1px' }} />
                         <div className='row' style={{ marginLeft: '1px' }}>
@@ -330,13 +297,8 @@ class ListPanel extends React.Component {
                     borderRadius: '5px'
                   }}
                 >
-<<<<<<< HEAD
-                  <div className='row' style={{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語 /
-                    <span style={{ fontSize: '15px', marginLeft: '5px' }} >畢業門檻</span> {parseInt(student.en_status) !== 0 ? <Done style={{ fontSize: '15px', color: 'green' }} /> : <Clear style={{ fontSize: '15px', color: 'red'}} /> }
-=======
                   <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語 /
                     <span style = {{ fontSize: '15px', marginLeft: '5px' }} >畢業門檻</span> {parseInt(student.en_status, 10) !== 0 ? <Done style = {{ fontSize: '15px', color: 'green' }} /> : <Clear style = {{ fontSize: '15px', color: 'red'}} /> }
->>>>>>> 7be29eae045461c853189fefa4a8b14a2c3e132b
                   </div>
                   <div className='row' style={{ fontSize: '16px', padding: '20px' }} >基礎{ student.en_basic <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.en_basic}</span> }</div>
                   <div className='row' style={{ fontSize: '16px', padding: '20px' }} >進階{ student.en_advanced <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.en_advanced}</span> }</div>
