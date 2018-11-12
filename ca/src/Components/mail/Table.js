@@ -4,7 +4,6 @@ import axios from 'axios'
 import {
   Table,
   TableBody,
-  TableFooter,
   TableHeader,
   TableHeaderColumn,
   TableRow,

@@ -4,6 +4,7 @@ const initialState = {
   data: [],
   printdata: [],
   check: 0,
+  generalCourseSelect: 0,
   englishCheck: false,
   status: 'IDLE',
   overview: {},
@@ -14,18 +15,19 @@ const initialState = {
 export default handleActions({
   FETCH_DONE: (state) => ({ ...state, status: 'DONE' }),
   FETCH_START: (state) => ({ ...state, status: 'START' }),
-  SHOW_GRAD_PRINT: (state, action) => ({ ...state, printdata: action.payload }),
+  STORE_GRAD_PRINT: (state, action) => ({ ...state, printdata: action.payload }),
   STORE_STUDENT_INFO: (state, action) => ({ ...state, idCardForassistans: action.payload , assis: true}),
-  SHOW_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
-  SHOW_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
+  STORE_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
+  STORE_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
+  STORE_GRAD_GENERAL_COURSE_SELECT: (state, action) => ({ ...state, generalCourseSelect: action.payload }),
   STORE_GRADUATION_COURSE: (state, action) => {
-    let newdata = action.payload
+    let newdata = [ ...action.payload ]
     let newoverview = { ...newdata[newdata.length - 1] }
     newdata.length = newdata.length - 1
     return {
       ...state,
-      data: [...newdata],
-      overview: { ...newoverview },
+      data: newdata,
+      overview: newoverview,
       status: 'DONE'
     }
   },

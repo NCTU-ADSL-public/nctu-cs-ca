@@ -1,9 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import Snackbar from 'material-ui/Snackbar'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
 
 // for bootstrap 3
 import {Button} from 'react-bootstrap'

@@ -1,37 +1,34 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
-import FirstPage from '@material-ui/icons/FirstPage';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import LastPage from '@material-ui/icons/LastPage';
-import grey from '@material-ui/core/colors/grey';
-import blue from '@material-ui/core/colors/blue';
-import red from '@material-ui/core/colors/red';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FilterList from '@material-ui/icons/FilterList';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Badge from '@material-ui/core/Badge';
-import Tooltip from '@material-ui/core/Tooltip';
-import yellow from '@material-ui/core/colors/yellow';
-import green from '@material-ui/core/colors/green';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import Avatar from '@material-ui/core/Avatar';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
-import Add from '@material-ui/icons/Add';
-import Warning from '@material-ui/icons/Warning';
-import Button from '@material-ui/core/Button';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Chip from '@material-ui/core/Chip'
+import FirstPage from '@material-ui/icons/FirstPage'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
+import LastPage from '@material-ui/icons/LastPage'
+import grey from '@material-ui/core/colors/grey'
+import red from '@material-ui/core/colors/red'
+import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import FilterList from '@material-ui/icons/FilterList'
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Tooltip from '@material-ui/core/Tooltip'
+import yellow from '@material-ui/core/colors/yellow'
+import green from '@material-ui/core/colors/green'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Dialog from '@material-ui/core/Dialog'
+import Avatar from '@material-ui/core/Avatar'
+import DoneIcon from '@material-ui/icons/Done'
+import Add from '@material-ui/icons/Add'
+import Warning from '@material-ui/icons/Warning'
+import Button from '@material-ui/core/Button'
 import { fetchTeachers, setAddStatus, setFirstSecond, deteleResearch } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
 
 const ADD_STATUS_COLOR = [ red['A100'], green[300] ]
@@ -310,11 +307,11 @@ class index extends React.Component {
                                 <br />
                                 {
                                   project.students.map( student => (
-                                    <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second)] + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                    <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)] + " " +  project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")  } placement="top" classes = {{ tooltip: classes.tooltip }} >
                                       <Chip
                                         label = { student.id + " " + student.name }
                                         className = { classes.chip }
-                                        style = {{ background: ADD_STATUS_COLOR[parseInt(student.add_status)] }}
+                                        style = {{ background: ADD_STATUS_COLOR[parseInt(student.add_status, 10)] }}
                                         deleteIcon={student.add_status === "0" ? student.first_second === "3" ? <Warning style = {{ fontSize: 30 }}/> : <Add style = {{ fontSize: 30 }} /> : <DoneIcon style = {{ fontSize: 30 }} />}
                                         onDelete={() => this.handleDelete({
                                           status: student.add_status,
@@ -325,7 +322,7 @@ class index extends React.Component {
                                             first_second: student.first_second
                                           }}
                                         )}
-                                        avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status)] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                        avatar={<Avatar style = {{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status, 10)] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
                                       />
                                     </Tooltip>
                                   ))
@@ -353,12 +350,12 @@ class index extends React.Component {
                               <br />
                               {
                                 project.students.map( student => (
-                                  <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second)] } placement="top" classes = {{ tooltip: classes.tooltip }} >
+                                  <Tooltip title = { PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)] } placement="top" classes = {{ tooltip: classes.tooltip }} >
                                     <Chip
                                       label = { student.id + " " + student.name }
                                       className = { classes.chip }
                                       style = {{ background: yellow[300] }}
-                                      avatar={<Avatar style = {{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status)]}</Avatar>}
+                                      avatar={<Avatar style = {{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
                                     />
                                   </Tooltip>
                                 ))
@@ -406,9 +403,12 @@ class index extends React.Component {
             </Button>
             {
               submit_student_object.first_second === "3" &&
-                <Button onClick = { () => { this.setState({ submit_page_open: false }), delete_research(submit_student_object) } } className = { classes.buttonRemove } >
-                  未通過並移除
-                </Button>
+                <Button className = { classes.buttonRemove } onClick = {
+                  () => { 
+                    this.setState({ submit_page_open: false })
+                    delete_research(submit_student_object)
+                  } 
+                }>未通過並移除</Button>
             }
             <Button onClick = { () => {
               this.setState({ submit_page_open: false })

@@ -6,7 +6,6 @@ import CourseTable from './CourseTable'
 
 //for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 const styles = {
   filter: {

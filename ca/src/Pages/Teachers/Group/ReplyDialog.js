@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import axios from 'axios'
-import Snackbar from 'material-ui/Snackbar'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
 
 // for bootstrap 3
 import {Button} from 'react-bootstrap'
 
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import TextField from 'material-ui/TextField'
 
-const styles = {
+/* const styles = {
   labelStyle: {
     fontFamily: 'Noto Sans CJK TC',
     color: '#434343',
@@ -74,7 +71,7 @@ const styles = {
       color: '#3c8a63'
     }
   }
-}
+} */
 
 export default class ReplyDialog extends React.Component {
 

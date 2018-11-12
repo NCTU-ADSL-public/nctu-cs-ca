@@ -1,27 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import purple from '@material-ui/core/colors/purple';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import { withStyles } from '@material-ui/core/styles'
+import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
 import StudentList from './StudentList'
-import FilterList from '@material-ui/icons/FilterList';
-import FirstPage from '@material-ui/icons/FirstPage';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import LastPage from '@material-ui/icons/LastPage';
+import FilterList from '@material-ui/icons/FilterList'
+import FirstPage from '@material-ui/icons/FirstPage'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
+import LastPage from '@material-ui/icons/LastPage'
 import { fetchStudents } from '../../../../Redux/Assistants/Actions/Project_v3/Student'
-import grey from '@material-ui/core/colors/grey';
-import green from '@material-ui/core/colors/green';
-import blue from '@material-ui/core/colors/blue';
-import orange from '@material-ui/core/colors/orange';
-import red from '@material-ui/core/colors/red';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import Chip from '@material-ui/core/Chip';
+import grey from '@material-ui/core/colors/grey'
+import green from '@material-ui/core/colors/green'
+import blue from '@material-ui/core/colors/blue'
+import orange from '@material-ui/core/colors/orange'
+import red from '@material-ui/core/colors/red'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Dialog from '@material-ui/core/Dialog'
+import Chip from '@material-ui/core/Chip'
 
 const styles = theme => ({
   root: {
@@ -103,7 +102,7 @@ class index extends React.Component {
   render() {
 
     const { classes, fetch_students, students } = this.props
-    const { input, page, number_per_page, grade, max_page, open_filter, filter_status } = this.state
+    const { input, page, number_per_page, grade, open_filter, filter_status } = this.state
 
     return (
       <div className = { classes.root } >

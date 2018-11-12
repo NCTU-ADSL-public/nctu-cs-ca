@@ -23,7 +23,7 @@ class StudentList extends React.Component {
 
   render() {
 
-    const { students, classes } = this.props
+    const { students } = this.props
     const { panel_open } = this.state
 
     return (
@@ -41,7 +41,7 @@ class StudentList extends React.Component {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 {
-                  student.project.status != 3 ?
+                  student.project.status !== 3 ?
                   <div style = {{ width: '100%', display: 'flex' }} >
                     <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.title}</div>
                     <div style = {{ fontSize: 17, flex: 0.5, textAlign: 'center' }} variant="display1" >{student.project.professor_name}</div>

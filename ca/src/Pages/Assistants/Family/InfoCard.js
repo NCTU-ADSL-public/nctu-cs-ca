@@ -88,7 +88,7 @@ class InfoCard extends React.Component{
             <XAxis dataKey="semester"/>
             <YAxis domain={[0, 100]}/>
             <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip labelFormatter={(name)=>`${name.split('-')[0]}${semester[parseInt(name.split('-')[1])]}`}/>
+            <Tooltip labelFormatter={(name)=>`${name.split('-')[0]}${semester[parseInt(name.split('-')[1], 10)]}`}/>
             <Line 
               type="monotone"
               dataKey="avg" 
@@ -106,7 +106,7 @@ class InfoCard extends React.Component{
             {
               this.props.selected.score && this.props.selected.score.map(
                 (v,i)=>(
-                  <Tab key={i} value={i} style={{fontSize:16}} label={<span className={v.recent_failed?classes.failed:classes.font}>{`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]} (${v.credit})`}</span>} className={classes.font} />
+                  <Tab key={i} value={i} style={{fontSize:16}} label={<span className={v.recent_failed?classes.failed:classes.font}>{`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1], 10)]} (${v.credit})`}</span>} className={classes.font} />
                 )
               )
             }

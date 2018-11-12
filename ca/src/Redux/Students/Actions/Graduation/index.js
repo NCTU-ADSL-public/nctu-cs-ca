@@ -4,15 +4,15 @@ import FakeData from '../../../../Resources/FakeData'
 
 export const storeGraduationCourse = createAction('STORE_GRADUATION_COURSE')
 export const filterinput = createAction('FILTER_INPUT')
-export const storeGradPrint = createAction('SHOW_GRAD_PRINT')
-export const storeGradCheck = createAction('SHOW_GRAD_CHECK')
-export const storeGradEnglishTestCheck = createAction('SHOW_GRAD_ENGLISH_TEST_CHECK')
+export const storeGradPrint = createAction('STORE_GRAD_PRINT')
+export const storeGradCheck = createAction('STORE_GRAD_CHECK')
+export const storeGradEnglishTestCheck = createAction('STORE_GRAD_ENGLISH_TEST_CHECK')
 export const updateCourse = createAction('UPDATE_COURSE')
 export const fetchStart = createAction('FETCH_START')
 export const storeStudentInfo = createAction('STORE_STUDENT_INFO')
 
-export const fetchGraduationCourse = (page = 1) => dispatch => {
-  axios.get('/students/graduate/revised').then(res => {
+export const fetchGraduationCourse = (payload = { professional_field: 0 }) => dispatch => { 
+  axios.post('/students/graduate/revised', payload).then(res => {
     dispatch(storeGraduationCourse(res.data))
   }).catch(err => {
     dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))

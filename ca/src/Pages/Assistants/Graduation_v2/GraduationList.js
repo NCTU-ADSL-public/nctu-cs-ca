@@ -16,9 +16,18 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class GraduationListPanel extends React.Component {
+<<<<<<< HEAD
   render () {
     const { students } = this.props
     return students.map(student => <ListCard student={student} />)
+=======
+
+
+  render() {
+
+    const { students } = this.props
+    return students.map( student => <ListCard student = { student } />)
+>>>>>>> 7be29eae045461c853189fefa4a8b14a2c3e132b
   }
 }
 

@@ -87,7 +87,6 @@ class Index extends React.Component {
 
   render () {
     const { classes } = this.props
-    console.log(this.props.reviewData)
     return (
       <div>
         <MenuItem className={classes.menuItem} onClick={this.handleOpen}>
@@ -122,6 +121,8 @@ class Index extends React.Component {
               idCard={this.props.idCard}
               graduationCheckEnglishTest={this.props.englishCheck}
               courseCategoryArray={this.props.reviewData}
+              reviewCheck={this.props.reviewCheck}
+              generalCourseSelect={this.props.generalCourseSelect}
             />
             <form className='text-center' style={{ marginTop: '30px', fontSize: '20px' }}>
               <label style={{ marginRight: '10px' }}>請選擇採用的通識制度</label>
@@ -129,7 +130,7 @@ class Index extends React.Component {
                 native
                 disabled={this.props.reviewCheck !== 0}
                 className={classes.select}
-                value={this.state.generalCourse.type}
+                value={this.props.reviewCheck === 0 ? this.state.generalCourse.type : this.props.generalCourseSelect}
                 onChange={this.handleChange}
               >
                 <option value={0}>舊制</option>
@@ -162,9 +163,10 @@ const mapStateToProps = (state) => ({
   reviewData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck,
-  reviewCheck: state.Student.Graduation.check,
   idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis
+  assis: state.Student.Graduation.assis,
+  reviewCheck: state.Student.Graduation.check,
+  generalCourseSelect: state.Student.Graduation.generalCourseSelect
 })
 
 const mapDispatchToProps = (dispatch) => ({

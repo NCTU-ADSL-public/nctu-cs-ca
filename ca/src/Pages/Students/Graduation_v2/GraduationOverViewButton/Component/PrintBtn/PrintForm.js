@@ -4,11 +4,6 @@ import './GradTable.css'
 import GradCategory from './GradCategory'
 
 class PrintForm extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
-
   render () {
     let generalCatTitle = ['外語', '通識(舊制)', '通識(新制)', '體育', '服務學習', '藝文賞析']
     let depCat = []
@@ -22,9 +17,26 @@ class PrintForm extends React.Component {
             if (a.dimension > b.dimension) return 1
             return 0
           })
+
+          if (this.props.reviewCheck === 0) {
+            generalCat.push(item)
+          }
+          else {
+            if (this.props.generalCourseSelect === 0 && item.title === '通識(舊制)') {
+              generalCat.push(item)
+            }
+            if (this.props.generalCourseSelect === 1 && item.title === '通識(新制)') {
+              generalCat.push(item)
+            }
+          }
         }
-        generalCat.push(item)
-      } else { depCat.push(item) }
+        else {
+          generalCat.push(item)
+        }
+      }
+      else if (item.require !== 0) {
+        depCat.push(item) 
+      }
     })
 
     let programName = ''

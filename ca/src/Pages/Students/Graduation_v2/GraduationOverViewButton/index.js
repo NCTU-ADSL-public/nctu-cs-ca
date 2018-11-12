@@ -63,10 +63,7 @@ class Index extends React.Component {
         checkStatus = '審核中'
         break
       case 2:
-        checkStatus = '審核通過'
-        break
-      case 3:
-        checkStatus = '審核不通過'
+        checkStatus = '審核完畢'
         break
       default:
         checkStatus = '錯誤'

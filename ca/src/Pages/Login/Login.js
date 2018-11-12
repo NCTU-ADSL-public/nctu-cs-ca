@@ -1,6 +1,5 @@
 import React from 'react'
 import FadeIn from 'react-fade-in'
-import axios from 'axios'
 import { Grid, Col, Row } from 'react-bootstrap'
 import { ToastContainer, ToastStore } from 'react-toasts'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -44,7 +43,7 @@ class Login extends React.Component {
                 <div className="Login-header" ref="tip">
                   {/*<div id="eng-title">NCTU Curriculum Assistant</div>*/}
                   {/*<div id="ch-title">交大資工線上助理</div>*/}
-                  <img id="dino-img" src={dinoIcon}/>
+                  <img id="dino-img" src={dinoIcon} alt='' />
                 </div>
               </Col>
             </Row>

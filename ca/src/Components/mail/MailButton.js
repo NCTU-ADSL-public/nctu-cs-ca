@@ -1,18 +1,11 @@
 import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import TextField from 'material-ui/TextField'
 import axios from 'axios'
 import Email from 'material-ui/svg-icons/communication/email'
 import CKEditor from 'react-ckeditor-component'
-
-const buttonStyle = {
-  marginTop:'4'
-  //float: 'right'
-}
-
 
 const contentStyle = {
   maxWidth:'none',
@@ -61,8 +54,6 @@ export default class DialogButton extends React.Component {
 
   handleSend = () => {
     let _this = this
-    let dt = new Date();
-    let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
     axios.post('/mail/sendmail', {
       title:_this.state.titlevalue,
       sender_id:_this.props.sender,
@@ -109,7 +100,6 @@ export default class DialogButton extends React.Component {
         <FloatingActionButton className={this.props.failed?'animated infinite tada':''} onClick={this.handleOpen} backgroundColor={this.props.failed?'#F50057':'#3949AB'} mini={(window.innerWidth<768)}>
           <Email/>
         </FloatingActionButton>
-        {/* <RaisedButton label="SEND MAIL!" style={buttonStyle} labelStyle={bodyStyle} icon={<Email/>}/> */}
         <Dialog
           title={
             <div>

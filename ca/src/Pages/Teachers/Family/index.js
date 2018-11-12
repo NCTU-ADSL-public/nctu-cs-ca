@@ -3,10 +3,9 @@ import React from 'react'
 import axios from 'axios'
 import List from './Search/List'
 
-import FakeData from '../../../Resources/FakeData'
 import {Grid, Row, Col} from 'react-bootstrap'
-import {Dialog,Card,CardHeader,CardText,Avatar,Table,TableBody,TableHeader,TableRow,TableRowColumn} from 'material-ui'
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { Dialog, Card, CardHeader, CardText, Avatar, Table, TableBody, TableRow, TableRowColumn } from 'material-ui'
+import { Tabs, Tab } from 'material-ui/Tabs';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { ResponsiveContainer,LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
 import MailButton from '../../../Components/mail/MailButton'
@@ -100,7 +99,7 @@ const InfoCard = (props)=>(
             {
               props.selected.score && props.selected.score.map(
                 (v,i)=>(
-                  <Tab key={i} label={`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1])]}`} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#87cdff'}}>
+                  <Tab key={i} label={`${v.semester.split('-')[0]}${semester[parseInt(v.semester.split('-')[1], 10)]}`} buttonStyle={v.failed?{backgroundColor:'#fd93b5'}:{backgroundColor:'#87cdff'}}>
                     <Table>
                       {/* <TableHeader displaySelectAll={false}>
                         <TableRow>

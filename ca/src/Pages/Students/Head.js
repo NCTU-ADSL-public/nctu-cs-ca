@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid, Row } from 'react-bootstrap'
 
 import Navbar from '../../Components/Navbar'
 
-import defaultData from '../../Resources/FakeData'
 import { fetchProfessors } from '../../Redux/Students/Actions/Professor/index'
 
 import { connect } from 'react-redux'
-import { fetchUser, ChangeFooterColor } from '../../Redux/Students/Actions/User'
-import { fetchCourse, fetchCoursePass, ShowCourseCondition } from '../../Redux/Students/Actions/Map'
+import { fetchUser } from '../../Redux/Students/Actions/User'
+import { fetchCourse, fetchCoursePass } from '../../Redux/Students/Actions/Map'
 import { fetchGraduationCourse } from '../../Redux/Students/Actions/Graduation'
 import { withRouter } from 'react-router-dom'
 
@@ -30,18 +29,6 @@ class Head extends Component {
       '/students/map',
       '/students/professor',
       '/students/project'
-    ]
-    const onTouchTaps = [
-      () => this.select(0),
-      () => this.select(1),
-      () => this.select(2),
-      () => this.select(3),
-      () => this.select(4),
-      () => this.select(5),
-      () => this.select(6),
-      () => this.select(7),
-      () => this.select(8),
-      () => this.select(9)
     ]
     const onTouchTapsrouter = [
       () => this.props.history.push(router[0]),
