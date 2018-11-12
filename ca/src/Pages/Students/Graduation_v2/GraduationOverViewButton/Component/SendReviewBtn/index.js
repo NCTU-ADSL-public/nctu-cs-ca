@@ -118,6 +118,8 @@ class Index extends React.Component {
           <DialogContent>
             <PrintForm
               profile={this.props.studentIdcard}
+              assis={this.props.assis}
+              idCard={this.props.idCard}
               graduationCheckEnglishTest={this.props.englishCheck}
               courseCategoryArray={this.props.reviewData}
             />
@@ -160,7 +162,9 @@ const mapStateToProps = (state) => ({
   reviewData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck,
-  reviewCheck: state.Student.Graduation.check
+  reviewCheck: state.Student.Graduation.check,
+  idCard: state.Student.Graduation.idCardForassistans,
+  assis: state.Student.Graduation.assis
 })
 
 const mapDispatchToProps = (dispatch) => ({

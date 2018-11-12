@@ -51,7 +51,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
+  fetchGraduationCourse: () => dispatch(fetchGraduationCourse())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

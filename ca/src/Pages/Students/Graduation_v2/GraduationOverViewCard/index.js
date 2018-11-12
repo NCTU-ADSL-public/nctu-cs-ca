@@ -25,6 +25,7 @@ class Index extends React.Component {
         <Card title='英文授課' rwd={rwd} complete={this.props.overview.english} require={this.props.overview.english_require} value={Number(this.props.overview.english) / Number(this.props.overview.english_require) * 100} isMen />
         <Card title='通識(舊制)' rwd={rwd} complete={this.props.overview.general} require={this.props.overview.general_require} value={Number(this.props.overview.general) / Number(this.props.overview.general_require) * 100} />
         <Card title='通識(新制)' rwd={rwd} complete={this.props.overview.general_new} require={this.props.overview.general_new_require} value={Number(this.props.overview.general_new) / Number(this.props.overview.general_new_require) * 100} />
+        <Card title='抵免研究所課程' rwd={rwd} complete={this.props.overview.graduate} require={this.props.overview.graduate} value={100} />
       </div>
     )
   }
