@@ -21,13 +21,13 @@ export default handleActions({
   STORE_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
   STORE_GRAD_GENERAL_COURSE_SELECT: (state, action) => ({ ...state, generalCourseSelect: action.payload }),
   STORE_GRADUATION_COURSE: (state, action) => {
-    let newdata = action.payload
+    let newdata = [ ...action.payload ]
     let newoverview = { ...newdata[newdata.length - 1] }
     newdata.length = newdata.length - 1
     return {
       ...state,
-      data: [...newdata],
-      overview: { ...newoverview },
+      data: newdata,
+      overview: newoverview,
       status: 'DONE'
     }
   },
