@@ -55,7 +55,6 @@ const styles = {
 export default class ListTable extends Component {
 
   constructor (props) {
-    let NewItemList = []
     super(props)
     this.state = {
       fixedHeader: false,
@@ -119,6 +118,8 @@ export default class ListTable extends Component {
                 return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
             }
           }
+          else
+            return -1
         })
     }
 

@@ -630,6 +630,22 @@
         "semester": 2,
         "move": false,
         "type": "外語"
+      },
+      {
+        "cn": "進階英文聽力與討論",
+        "en": "Advanced English Listening and Discussion",
+        "score": 83,
+        "reason": "english",
+        "complete": true,
+        "grade": "A-",
+        "code": "DFR4104",
+        "realCredit": 2,
+        "originalCredit": 2,
+        "english": false,
+        "year": 2,
+        "semester": 2,
+        "move": false,
+        "type": "外語"
       }
     ]
   },

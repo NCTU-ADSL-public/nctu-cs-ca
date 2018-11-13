@@ -70,8 +70,6 @@ class MailButton extends React.Component {
   }
   handleSend(){
     let _this = this
-    let dt = new Date()
-    //let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
     axios.post('/mail/sendmail', {
       title:_this.state.titlevalue,
       sender_id:_this.props.sender,

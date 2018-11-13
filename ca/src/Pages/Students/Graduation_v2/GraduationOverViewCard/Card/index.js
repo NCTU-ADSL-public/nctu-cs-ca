@@ -19,6 +19,10 @@ import CloseIcon from '@material-ui/icons/Close'
 import Grow from '@material-ui/core/Grow'
 import AnimatedProgress from '../../../../../Components/AnimatedProgress'
 import Dialog from '@material-ui/core/Dialog'
+import Button from '@material-ui/core/Button'
+import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu'
+import { fetchGraduationCourse } from '../../../../../Redux/Students/Actions/Graduation'
 
 const styles = theme => ({
   container: {
@@ -51,6 +55,10 @@ const styles = theme => ({
   },
   progress: {
     backgroundColor: '#00a152'
+  },
+  root: {
+    fontFamily: 'Noto Sans CJK TC',
+    letterSpacing: 1
   }
 })
 
@@ -64,9 +72,13 @@ class Index extends React.Component {
     this.handleClickOpen = this.handleClickOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.professionalMenuOpen = this.professionalMenuOpen.bind(this)
+    this.professionalMenuClose = this.professionalMenuClose.bind(this)
+    this.professionalMenuSelect = this.professionalMenuSelect.bind(this)
     this.state = {
       open: false,
-      expanded: true
+      expanded: true,
+      anchorEl: null
     }
   }
 
@@ -80,6 +92,26 @@ class Index extends React.Component {
 
   handleChange () {
     this.setState({ expanded: !this.state.expanded })
+  }
+
+  professionalMenuOpen (event) {
+    event.stopPropagation()
+    this.setState({
+      anchorEl: event.currentTarget
+    })
+  }
+
+  professionalMenuClose (event) {
+    event.stopPropagation()
+    this.setState({
+      anchorEl: null
+    })
+  }
+
+  professionalMenuSelect (field, event) {
+    event.stopPropagation()
+    this.props.fetchGraduationCourse({ professional_field: field })
+    console.log(field)
   }
 
   render () {
@@ -123,14 +155,41 @@ class Index extends React.Component {
         <div className='row'>
           <ExpansionPanel expanded={this.state.expanded} onChange={this.handleChange}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <div className='hidden-xs hidden-sm col-md-3 col-lg-3' style={{ marginTop: '20px' }}>
+              <div className='hidden-xs hidden-sm col-md-3' style={{ marginTop: '20px' }}>
                 <LinearProgress classes={{ barColorPrimary: classes.progress }} variant='determinate' value={this.props.value > 100 ? 100 : this.props.value} color={this.props.value >= 100 ? 'primary' : 'secondary'} />
               </div>
-              <div className='col-md-5 col-lg-5' style={{ marginLeft: '20px' }}>
+              <div className='col-md-4' style={{ marginLeft: '10px' }}>
                 <div className={rwd ? classes.textRwd : classes.text}>
-                  {this.props.title}&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.complete}</font>/{this.props.require}&nbsp;（{this.props.isMen ? '門' : '學分'}）&nbsp;&nbsp;&nbsp;
+                  {this.props.title}&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.complete}</font>/{this.props.require}&nbsp;（{this.props.isMen ? '門' : '學分'}）
                 </div>
               </div>
+              { this.props.title === '共同必修' 
+                ? <div className='col-md-3' style={{ marginLeft: '-7%' }} hidden={this.props.studentIdcard.program.slice(0, 2) !== '網多'} >
+                  <Button
+                    variant='outlined'
+                    aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                    aria-haspopup='true'
+                    onClick={this.professionalMenuOpen}
+                  >
+                    網多組專業選擇
+                  </Button>
+                  <Menu
+                    id='simple-menu'
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.professionalMenuClose}
+                    className={classes.root}
+                  >
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
+                      網路領域
+                    </MenuItem>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
+                      多媒體領域
+                    </MenuItem>
+                  </Menu>
+                </div>
+                : <div />
+              }
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               {this.props.title === '通識(舊制)'
@@ -152,11 +211,13 @@ Index.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
-  overview: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0]
+  overview: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
+  studentIdcard: state.Student.User.studentIdcard
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProfessors())
+  fetch_data: () => dispatch(fetchProfessors()),
+  fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

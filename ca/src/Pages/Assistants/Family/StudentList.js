@@ -16,7 +16,7 @@ import NavigationIcon from '@material-ui/icons/Navigation'
 import Frame from '../../../Components/Frame'
 import { Link } from 'react-router-dom'
 import InfoCard from './InfoCard'
-import FakeData from '../../../Resources/FakeData'
+// import FakeData from '../../../Resources/FakeData'
 import axios from 'axios'
 import {connect} from 'react-redux'
 

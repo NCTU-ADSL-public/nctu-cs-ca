@@ -29,8 +29,12 @@ class Index extends React.Component {
         <div id='printArea'>
           <PrintForm
             profile={this.props.studentIdcard}
+            idCard={this.props.idCard}
+            assis={this.props.assis}
             graduationCheckEnglishTest={this.props.englishCheck}
             courseCategoryArray={this.props.printData}
+            reviewCheck={this.props.reviewCheck}
+            generalCourseSelect={this.props.generalCourseSelect}
           />
         </div>
 
@@ -43,11 +47,15 @@ const mapStateToProps = (state) => ({
   printData: state.Student.Graduation.data,
   studentIdcard: state.Student.User.studentIdcard,
   englishCheck: state.Student.Graduation.englishCheck,
-  done: state.Student.Graduation.status === 'DONE'
+  done: state.Student.Graduation.status === 'DONE',
+  idCard: state.Student.Graduation.idCardForassistans,
+  assis: state.Student.Graduation.assis,
+  reviewCheck: state.Student.Graduation.check,
+  generalCourseSelect: state.Student.Graduation.generalCourseSelect
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
+  fetchGraduationCourse: () => dispatch(fetchGraduationCourse())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

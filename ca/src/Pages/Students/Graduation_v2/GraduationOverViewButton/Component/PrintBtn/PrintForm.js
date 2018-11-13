@@ -4,11 +4,6 @@ import './GradTable.css'
 import GradCategory from './GradCategory'
 
 class PrintForm extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
-
   render () {
     let generalCatTitle = ['外語', '通識(舊制)', '通識(新制)', '體育', '服務學習', '藝文賞析']
     let depCat = []
@@ -22,25 +17,58 @@ class PrintForm extends React.Component {
             if (a.dimension > b.dimension) return 1
             return 0
           })
+
+          if (this.props.reviewCheck === 0) {
+            generalCat.push(item)
+          }
+          else {
+            if (this.props.generalCourseSelect === 0 && item.title === '通識(舊制)') {
+              generalCat.push(item)
+            }
+            if (this.props.generalCourseSelect === 1 && item.title === '通識(新制)') {
+              generalCat.push(item)
+            }
+          }
         }
-        generalCat.push(item)
-      } else { depCat.push(item) }
+        else {
+          generalCat.push(item)
+        }
+      }
+      else if (item.require !== 0) {
+        depCat.push(item) 
+      }
     })
 
     let programName = ''
-    switch (this.props.profile.program) {
-      case '資工A':
-      case '資工B':
-        programName = '資訊工程組'
-        break
-      case '網多':
-        programName = '網路與多媒體工程組'
-        break
-      case '資電':
-        programName = '資電工程組'
-        break
-      default:
-        break
+    if (this.props.assis) {
+      switch (this.props.idCard.program) {
+        case '資工':
+          programName = '資訊工程組'
+          break
+        case '網多':
+          programName = '網路與多媒體工程組'
+          break
+        case '資電':
+          programName = '資電工程組'
+          break
+        default:
+          break
+      }
+    } else {
+      switch (this.props.profile.program) {
+        case '資工A':
+        case '資工B':
+          programName = '資訊工程組'
+          break
+        case '網多':
+          programName = '網路與多媒體工程組'
+          break
+        case '資電':
+          programName = '資電工程組'
+          break
+        default:
+          break
+      }
     }
 
     return (
@@ -73,10 +101,15 @@ class PrintForm extends React.Component {
           </tr>
           <tr className='borderLess left-text'>
             <td colSpan='17' style={{ fontSize: '10pt', fontWeight: 'bold', height: '2.5em' }}>
-              <div width='100%'>
-                <div className='personal-info'>學號：{this.props.profile.student_id}</div>
-                <div className='personal-info'>姓名：{this.props.profile.sname}</div>
-              </div>
+              {this.props.assis
+                ? <div width='100%'>
+                  <div className='personal-info'>學號：{this.props.idCard.id}</div>
+                  <div className='personal-info'>姓名：{this.props.idCard.sname}</div>
+                </div>
+                : <div width='100%'>
+                  <div className='personal-info'>學號：{this.props.profile.student_id}</div>
+                  <div className='personal-info'>姓名：{this.props.profile.sname}</div>
+                </div>}
             </td>
           </tr>
         </tbody>

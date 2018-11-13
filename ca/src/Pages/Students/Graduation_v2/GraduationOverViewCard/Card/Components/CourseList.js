@@ -35,7 +35,7 @@ const CourseList = (props) => {
       {items.map((item, index) =>
         <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2' key={index}>
           <PopoverButton
-            label={phyCourseNames.includes(item.cn) ? `${item.cn}  ${item.realCredit}學分` : item.cn}
+            label={(phyCourseNames.includes(item.cn) && item.realCredit > 0) ? `${item.cn}  ${item.realCredit}學分` : item.cn}
             backgroundColor={decideBtnBgColor(item.complete, item.reason, selection)}
             flash={decideBtnFlash(item.complete, selection)}
             rwd={rwd}

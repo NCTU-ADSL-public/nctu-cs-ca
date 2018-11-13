@@ -46,7 +46,7 @@ const Router = () => (
         <Route exact path='/assistants/family/:tid' component={StudentList} />
         <Route exact path='/assistants/verify' component={AssistantVerify} />
         <Route exact path='/assistants/mail' render={() => <Frame><AssistantMail /></Frame>} />
-        <Route exact path='/assistants/head/s/:sid' component={StudentDetail} />
+        <Route path='/assistants/head/s/:sid/:sname/:program' component={StudentDetail} />
 
       </Switch>
       <Route path='/' component={Footer} />

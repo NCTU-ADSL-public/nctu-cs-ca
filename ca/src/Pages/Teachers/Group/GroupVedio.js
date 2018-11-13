@@ -1,17 +1,8 @@
 import React from 'react'
-import axios from 'axios'
-import { Grid, Row, Col, Image } from 'react-bootstrap'
-import pic from '../../../Resources/BeautifalGalaxy.jpg'
-import defaultPic from '../../../Resources/defalt.jpg'
-
-import ScoreDialog from './ScoreDialog'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 // mui
-import Avatar from 'material-ui/Avatar'
-import Chip from 'material-ui/Chip'
 import Vedios from './Vedio.json'
-// for multiTheme
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const styles = {
   mainTitle: {

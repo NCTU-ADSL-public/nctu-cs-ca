@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavItem,Glyphicon} from 'react-bootstrap'
+import { NavItem } from 'react-bootstrap'
 
 const style = {
   Icon: {

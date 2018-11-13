@@ -102,6 +102,8 @@ export default class CourseTable extends Component {
             return a.cos_cname.localeCompare(b.cos_cname, 'zh-Hans-CN')
           else if (orderBy === 'sem')
             return a.unique_id.localeCompare(b.unique_id, 'zh-Hans-CN')
+          else 
+            return -1
         })
     }
 

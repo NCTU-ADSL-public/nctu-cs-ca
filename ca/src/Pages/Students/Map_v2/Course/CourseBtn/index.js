@@ -205,7 +205,7 @@ class Todo extends React.Component {
         this.setState({ coursedata: res.data, isDone: true })
         let id = 0
         let searchCourse = []
-        res.data.map(data => {
+        res.data.forEach(data => {
           for (let i = 0; i < data.time.length; i++) {
             id++
             searchCourse.push({
@@ -219,8 +219,7 @@ class Todo extends React.Component {
               info: '敬請期待'
             })
           }
-        }
-        )
+        })
 
         _this.setState({
           searchCourse: searchCourse,
