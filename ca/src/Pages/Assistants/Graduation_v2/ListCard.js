@@ -39,6 +39,12 @@ const styles = theme => ({
     marginLeft: '20px',
     fontWeight: 'bold'
   },
+  net_media_error: {
+      fontSize: '13px',
+      color: 'red',
+      marginLeft: '20px',
+      fontWeight: 'bold'
+  },
   ok: {
     fontSize: '20px',
     marginLeft: '15px',
@@ -80,7 +86,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const GRAD_STATUS_CN = ['未符合', '將符合', '已符合']
-const VERIFY_STATUS_CN = ['未送審', '審核中', '已通過', '未通過']
+const VERIFY_STATUS_CN = ['未送審', '審核中', '已審畢', '未審畢']
 
 class ListPanel extends React.Component {
   constructor (props) {
@@ -154,19 +160,20 @@ class ListPanel extends React.Component {
                     this.setState({ edit_panel_open: false })
                     set_graduate_state({ student_id: student.student_id, graduate_submit: 3 })
                   }
-                }>未通過</Button>
-                <Button className={classes.buttonOK} onClick={
+                }>未審畢</Button>
+                <Button className = { classes.buttonOK } onClick = {
                   () => {
                     this.setState({ edit_panel_open: false })
                     set_graduate_state({ student_id: student.student_id, graduate_submit: 2 })
                   }
-                }>通過</Button>
+                }>審畢</Button>
               </div> }
             </Dialog>
           </div>
           <div style={{ width: '85%', paddingLeft: '20px' }}>
             <div className='row' style={{ display: 'flex', marginLeft: '20px' }}>
               <div style={{ fontSize: '23px', float: 'left', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>必修</div>
+              { student.program !== '網多' &&
               <div className='col-md-7 col-lg-7 col-xs-7'>
                 {
                 student.compulse.length === 0
@@ -184,16 +191,46 @@ class ListPanel extends React.Component {
                       selected: classes.tabSelected
                     }} />
                   ))
-                }
+                  }
                 </Tabs>
+                }
+                </div>
               }
-              </div>
+              {
+                student.program === '網多' &&
+                <div className = 'col-md-5 col-lg-5 col-xs-5'>
+                {
+                  student.compulse.length === 0 ?
+                  <Done className = { classes.ok } style = {{ fontSize: '30px', marginTop: '12px' }} />
+                  :
+                  <Tabs
+                    scrollable
+                    scrollButtons = "auto"
+                    style = {{ width: '100%' }}
+                  >
+                  {
+                    student.compulse.map( (title) => (
+                      <Tab label = { title } classes = {{
+                        root: classes.tabRoot,
+                        label: classes.tabLabel,
+                        selected: classes.tabSelected
+                      }} />
+                    ))
+                  }
+                  </Tabs>
+                }
+                </div>
+              }
               { student.program === '網多'　&&
-                <div className='col-md-4 col-lg-4 col-xs-4' style={{ display: 'flex' }}>
-                  <div style={{ fontSize: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>網多專選</div>
-                  <div style={{ display: 'block', marginLeft: '20px', marginTop: '5px' }}>
-                    <div>{'網　路'}<span>{ student.net <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.net}</span> }</span></div>
-                    <div>多媒體<span>{ student.media <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.media}</span> }</span></div>
+                <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ display: 'flex' }}>
+                  <div style = {{ fontSize: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>網多專選</div>
+                  <div style = {{ display: 'block', marginLeft: '20px', marginTop: '5px' }}>
+                    <div>{"網　路"}<span>{ student.net.length <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.net_media_error } >{
+                      student.net.reduce( (res, str) => res += str + ", ", "")
+                    }</span> }</span></div>
+                    <div>多媒體<span>{ student.media.length <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.net_media_error } >{
+                      student.media.reduce( (res, str) => res += str + ", ", "")
+                    }</span> }</span></div>
                   </div>
                 </div>
               }
@@ -290,8 +327,8 @@ class ListPanel extends React.Component {
                     }
                   </div>
                 </div>
-                <div className='col-md-2 col-lg-2 col-xs-2'
-                  style={{
+                <div className = 'col-md-3 col-lg-3 col-xs-3'
+                  style = {{
                     margin: '5px',
                     border: '1px solid #dddddd',
                     borderRadius: '5px'
