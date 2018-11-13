@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>交大資工線上助理|NCTU CS CA</title>
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+    .title{
+        position: absolute;
+        left: 50%;
+        top: 5%;
+        transform: translateX(-50%);
+        font-size: 1.7rem;
+        font-weight: 200;
+        color: #777;
+        text-align: center;
+        line-height: 2.1;
+        z-index: 1080;
+    }
+    .image{
+        width: 50%;
+        max-width: 500px;
+        min-width: 300px;
+        position: absolute;
+        left: 50%;
+        top: 55%;
+        transform: translate(-50%, -50%);
+    }
+    .footer{
+        background-color: #555;
+        width: 100%;
+        position: absolute;
+        bottom:0;
+        text-align: center;
+        color: white;
+        height: 23px;
+        line-height: 23px;
+        font-size: 10px;
+    }
+    a{  
+        position: relative;
+        text-decoration: none;
+        color: rgb(104, 187, 102);
+        cursor: pointer;
+    }
+    a::after{
+        content: "";
+        display: block;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width:0;
+        background: rgb(104, 187, 102);
+        transition: .2s;
+    }
+    a:hover::after {
+        left: 0;
+        width:100%;
+    }
+</style>
+<body>
+    <h2 class="title">目前網站出現問題 dino正在修復中...<br/>如有問題請直接
+        <a href="https://www.facebook.com/dinodino.nctucs">
+            私訊粉專
+        </a>
+    </h2>
+    <img src="./50x.png" alt="50x error" class="image">
+    <footer class="footer">Copyright @2018 NCTUCS 交通大學資訊工程學系</footer>
+</body>
+</html>
