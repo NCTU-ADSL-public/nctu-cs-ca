@@ -76,7 +76,7 @@ class MoveGroupButton extends React.Component {
       cn: this.props.item.cn, // 中文課名
       code: this.props.item.code, // 課號
       type: this.props.item.type,
-      studentId: this.props.studentIdcard.student_id
+      studentId: this.props.assis ? this.props.idCard.sid : this.props.studentIdcard.student_id
     }).then(res => {
       this.setState({targets: res.data})
     }).catch(err => {
@@ -112,7 +112,7 @@ class MoveGroupButton extends React.Component {
 
     axios.post('/students/graduate/switchCourse', {
       cn: cn, // 中文課名
-      student_id: studentIdcard.student_id,
+      student_id: this.props.assis ? this.props.idCard.sid : studentIdcard.student_id,
       origin_group: title,
       target_group: target
     }).then(res => {
@@ -143,7 +143,7 @@ class MoveGroupButton extends React.Component {
   extraPostGradChange () {
     let studentIdcard = this.props.studentIdcard
     axios.post('/students/graduate/graduateChange/graduateList', {
-      student_id: studentIdcard.student_id
+      student_id: this.props.assis ? this.props.idCard.sid : studentIdcard.student_id
     })
   }
 
@@ -196,7 +196,9 @@ MoveGroupButton.propTypes = {
 
 const mapStateToProps = (state) => ({
   overview: state.Student.Graduation.overview,
-  studentIdcard: state.Student.User.studentIdcard
+  studentIdcard: state.Student.User.studentIdcard,
+  idCard: state.Student.Graduation.idCardForassistans,
+  assis: state.Student.Graduation.assis
 })
 
 const mapDispatchToProps = (dispatch) => ({
