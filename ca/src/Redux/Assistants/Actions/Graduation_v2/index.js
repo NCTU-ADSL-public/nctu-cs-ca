@@ -114,7 +114,7 @@ export const fetchStudent = grade => dispatch => {
     // }
     dispatch(store_student_csv_data(parseCsv(res.data)))
   })
-  dispatch(store_student_csv_data(parseCsv(data_json)))
+  // dispatch(store_student_csv_data(parseCsv(data_json)))
 }
 
 export const setGradutateState = post_item => dispatch => {
