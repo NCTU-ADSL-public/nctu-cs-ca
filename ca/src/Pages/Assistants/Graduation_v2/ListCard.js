@@ -37,16 +37,23 @@ const styles = theme => ({
     fontSize: '15px',
     color: 'red',
     marginLeft: '20px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
-  net_media_error: {
-      fontSize: '13px',
-      color: 'red',
-      marginLeft: '20px',
-      fontWeight: 'bold'
+  error_net_media: {
+    fontSize: '15px',
+    color: 'red',
+    marginLeft: '15px',
+    fontWeight: 'bold',
   },
   ok: {
     fontSize: '20px',
+    marginLeft: '15px',
+    fontWeight: 'bold',
+    color: 'green',
+    verticalAlign: 'middle'
+  },
+  ok_net_media: {
+    fontSize: '13px',
     marginLeft: '15px',
     fontWeight: 'bold',
     color: 'green',
@@ -174,7 +181,7 @@ class ListPanel extends React.Component {
             <div className='row' style={{ display: 'flex', marginLeft: '20px' }}>
               <div style={{ fontSize: '23px', float: 'left', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>必修</div>
               { student.program !== '網多' &&
-              <div className='col-md-7 col-lg-7 col-xs-7'>
+              <div className='col-md-11 col-lg-11 col-xs-11'>
                 {
                 student.compulse.length === 0
                 ? <Done className={classes.ok} style={{ fontSize: '30px', marginTop: '12px' }} />
@@ -225,10 +232,10 @@ class ListPanel extends React.Component {
                 <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ display: 'flex' }}>
                   <div style = {{ fontSize: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>網多專選</div>
                   <div style = {{ display: 'block', marginLeft: '20px', marginTop: '5px' }}>
-                    <div>{"網　路"}<span>{ student.net.length <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.net_media_error } >{
+                    <div>{"網　路"}<span>{ student.net.length <= 0 ? <Clear className = { classes.error_net_media } /> : <span className = { classes.ok_net_media } >{
                       student.net.reduce( (res, str) => res += str + ", ", "")
                     }</span> }</span></div>
-                    <div>多媒體<span>{ student.media.length <= 0 ? <Done className = { classes.ok } /> : <span className = { classes.net_media_error } >{
+                    <div>多媒體<span>{ student.media.length <= 0 ? <Clear className = { classes.error_net_media } /> : <span className = { classes.ok_net_media } >{
                       student.media.reduce( (res, str) => res += str + ", ", "")
                     }</span> }</span></div>
                   </div>
