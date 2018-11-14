@@ -54,13 +54,13 @@ const CourseList = (props) => {
             {(item.reason === 'now' && item.complete) ? <div>已修過這堂課，目前正重複修課中。</div> : <div />}
 
             {/* An option for student to move a course to other group */}
-            <MoveGroupButton
+            {this.props.assis ? '' : <MoveGroupButton
               key={id}
               title={title}
               item={item}
               label={'移動課程'}
               rwd={rwd}
-            />
+            />}
           </PopoverButton>
         </div>
       )}

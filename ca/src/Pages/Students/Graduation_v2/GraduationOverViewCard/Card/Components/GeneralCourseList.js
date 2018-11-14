@@ -89,11 +89,9 @@ class GeneralCourseList extends React.Component {
   decideBtnBgColor (courses) {
     if (courses.length === 0) {
       return '#D95467'
-    }
-    else if (courses.length === 1 && courses[0].reason === 'now') {
+    } else if (courses.length === 1 && courses[0].reason === 'now') {
       return '#AB6BD9'
-    }
-    else {
+    } else {
       return '#3cab7d'
     }
   }
@@ -131,12 +129,12 @@ class GeneralCourseList extends React.Component {
                         <div style={{ float: 'right', color: 'green' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
                         <div style={{ margin: '0 0 15px 8px' }}>
                           {/* An option for student to move a course to other group */}
-                          <MoveGroupButton
+                          {this.props.assis ? '' : <MoveGroupButton
                             key={key}
                             title={title}
                             item={course}
                             label={'移動課程'}
-                          />
+                          />}
                         </div>
                       </li>
                     )

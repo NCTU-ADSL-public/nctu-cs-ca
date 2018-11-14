@@ -198,10 +198,10 @@ class Index extends React.Component {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               {this.props.title === '通識(舊制)'
-                ? <GeneralCourseList courses={this.props.data.course} title={this.props.title} />
+                ? <GeneralCourseList assis={this.props.assis} courses={this.props.data.course} title={this.props.title} />
                 : this.props.title === '通識(新制)'
-                  ? <GeneralNewCourseList courses={this.props.data.course} overview={this.props.overview} title={this.props.title} />
-                  : <CourseList items={this.props.data.course} title={this.props.title} />}
+                  ? <GeneralNewCourseList assis={this.props.assis} courses={this.props.data.course} overview={this.props.overview} title={this.props.title} />
+                  : <CourseList assis={this.props.assis} items={this.props.data.course} title={this.props.title} />}
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </div>
