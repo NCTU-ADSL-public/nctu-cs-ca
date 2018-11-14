@@ -22,7 +22,10 @@ import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
-import { fetchGraduationCourse } from '../../../../../Redux/Students/Actions/Graduation'
+import {
+  fetchGraduationCourse,
+  fetchGraduationCourseAssistantVersion
+} from '../../../../../Redux/Students/Actions/Graduation'
 
 const styles = theme => ({
   container: {
@@ -110,7 +113,9 @@ class Index extends React.Component {
 
   professionalMenuSelect (field, event) {
     event.stopPropagation()
-    this.props.fetchGraduationCourse({ professional_field: field })
+    if (this.props.assis) {
+      this.props.fetchGraduationCourseAssistantVersion(this.props.idCard.sid, this.props.idCard.sname, this.props.idCard.program, field)
+    } else { this.props.fetchGraduationCourse({ professional_field: field }) }
     console.log(field)
   }
 
@@ -164,7 +169,7 @@ class Index extends React.Component {
                 </div>
               </div>
               { this.props.title === '共同必修'
-                ? <div className='col-md-3' style={{ marginLeft: '-7%' }} hidden={this.props.assis?this.props.idCard.program.slice(0, 2) !== '網多':this.props.studentIdcard.program.slice(0, 2) !== '網多'} >
+                ? <div className='col-md-3' style={{ marginLeft: '-7%' }} hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'} >
                   <Button
                     variant='outlined'
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
@@ -219,7 +224,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors()),
-  fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload))
+  fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload)),
+  fetchGraduationCourseAssistantVersion: (id, sname, program) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

@@ -247,7 +247,7 @@ const parseCsv = (data) => {
       data_.program,
       data_.submit_status === '0' ? '未送審' : data_.submit_status === '1' ? '審核中' : data_.submit_status === '2' ? '已通過' : data_.submit_status === '3' ? '未通過' : '',
       data_.graduate_status === '0' ? '未符合' : data_.graduate_status === '1' ? '將符合' : data_.graduate_status === '2' ? '已符合' : '',
-      'hehe',
+      compulse,
       condition
     ])
     // console.log(csvArr[i])
