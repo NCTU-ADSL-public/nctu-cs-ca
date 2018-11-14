@@ -28,7 +28,7 @@ const decideBtnBgColor = (completed, reason, selection) => {
 }
 
 const CourseList = (props) => {
-  const { items, selection, rwd, title } = this.props
+  const { items, selection, rwd, title } = props
   let id = 0
   return (
     <div style={{ width: '100%' }}>
@@ -54,7 +54,7 @@ const CourseList = (props) => {
             {(item.reason === 'now' && item.complete) ? <div>已修過這堂課，目前正重複修課中。</div> : <div />}
 
             {/* An option for student to move a course to other group */}
-            { this.assis ? '' : <MoveGroupButton
+            { props.assis ? '' : <MoveGroupButton
               key={id}
               title={title}
               item={item}
