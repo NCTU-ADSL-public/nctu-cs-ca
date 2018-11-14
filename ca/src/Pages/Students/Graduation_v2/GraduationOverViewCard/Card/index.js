@@ -114,7 +114,7 @@ class Index extends React.Component {
   professionalMenuSelect (field, event) {
     event.stopPropagation()
     if (this.props.assis) {
-      this.props.fetchGraduationCourseAssistantVersion(this.props.idCard.sid, this.props.idCard.sname, this.props.idCard.program, field)
+      this.props.fetchGraduationCourseAssistantVersion(this.props.idCard.id, this.props.idCard.sname, this.props.idCard.program, field)
     } else { this.props.fetchGraduationCourse({ professional_field: field }) }
     console.log(field)
   }
