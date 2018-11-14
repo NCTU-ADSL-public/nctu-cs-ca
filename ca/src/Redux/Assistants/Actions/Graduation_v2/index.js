@@ -155,7 +155,7 @@ const parseCsv = (data) => {
     }
     if (compulse !== '') {
       compulse = compulse.substring(0, compulse.length - 1)
-      condition += (conditionIndex + '. 共同必修缺' + compulse)
+      condition += (conditionIndex + '. 共同必修缺' + compulse + '\r\n')
       conditionIndex++
     }
     if (data_.pro !== '0') {
