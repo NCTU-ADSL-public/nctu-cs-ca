@@ -112,7 +112,7 @@ class MoveGroupButton extends React.Component {
 
     axios.post('/students/graduate/switchCourse', {
       cn: cn, // 中文課名
-      student_id: this.props.assis ? this.props.idCard.sid : studentIdcard.student_id,
+      student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id,
       origin_group: title,
       target_group: target
     }).then(res => {
@@ -143,7 +143,7 @@ class MoveGroupButton extends React.Component {
   extraPostGradChange () {
     let studentIdcard = this.props.studentIdcard
     axios.post('/students/graduate/graduateChange/graduateList', {
-      student_id: this.props.assis ? this.props.idCard.sid : studentIdcard.student_id
+      student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id
     })
   }
 
