@@ -197,7 +197,7 @@ class index extends React.Component {
     if (xor) new_program_filter_status[2] = false
     else if (and) new_program_filter_status[2] = true
     else new_program_filter_status[2] = false
-    this.setState({ program_filter_status: new_program_filter_status })
+    this.setState({ program_filter_status: new_program_filter_status, page: 0 })
   }
 
   render() {
