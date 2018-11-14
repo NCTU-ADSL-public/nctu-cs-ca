@@ -32,11 +32,13 @@ export const fetchGraduationCourse = (payload = { professional_field: 0 }) => di
   })
 }
 
-export const fetchGraduationCourseAssistantVersion = (id, sname, program) => dispatch => {
+export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild) => dispatch => {
   dispatch(fetchStart())
+  console.log(sname)
   axios.get('/assistants/graduate/revised', {
     params: {
-      student_id: id
+      student_id: id,
+      professional_field: feild
     }
   }).then(res => {
     dispatch(storeGraduationCourse(res.data))

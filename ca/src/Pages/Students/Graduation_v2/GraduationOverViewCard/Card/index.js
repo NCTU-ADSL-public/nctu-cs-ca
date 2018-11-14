@@ -22,7 +22,10 @@ import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
-import { fetchGraduationCourse } from '../../../../../Redux/Students/Actions/Graduation'
+import {
+  fetchGraduationCourse,
+  fetchGraduationCourseAssistantVersion
+} from '../../../../../Redux/Students/Actions/Graduation'
 
 const styles = theme => ({
   container: {
@@ -110,7 +113,9 @@ class Index extends React.Component {
 
   professionalMenuSelect (field, event) {
     event.stopPropagation()
-    this.props.fetchGraduationCourse({ professional_field: field })
+    if (this.props.assis) {
+      this.props.fetchGraduationCourseAssistantVersion(this.props.idCard.id, this.props.idCard.sname, this.props.idCard.program, field)
+    } else { this.props.fetchGraduationCourse({ professional_field: field }) }
     console.log(field)
   }
 
@@ -163,8 +168,8 @@ class Index extends React.Component {
                   {this.props.title}&nbsp;&nbsp;<font size={5} color='#338d68'>{this.props.complete}</font>/{this.props.require}&nbsp;（{this.props.isMen ? '門' : '學分'}）
                 </div>
               </div>
-              { this.props.title === '共同必修' 
-                ? <div className='col-md-3' style={{ marginLeft: '-7%' }} hidden={this.props.studentIdcard.program.slice(0, 2) !== '網多'} >
+              { this.props.title === '共同必修'
+                ? <div className='col-md-3' style={{ marginLeft: '-7%' }} hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'} >
                   <Button
                     variant='outlined'
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
@@ -193,10 +198,10 @@ class Index extends React.Component {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               {this.props.title === '通識(舊制)'
-                ? <GeneralCourseList courses={this.props.data.course} title={this.props.title}/>
+                ? <GeneralCourseList assis={this.props.assis} courses={this.props.data.course} title={this.props.title} />
                 : this.props.title === '通識(新制)'
-                  ? <GeneralNewCourseList courses={this.props.data.course} overview={this.props.overview} title={this.props.title} />
-                  : <CourseList items={this.props.data.course} title={this.props.title}/>}
+                  ? <GeneralNewCourseList assis={this.props.assis} courses={this.props.data.course} overview={this.props.overview} title={this.props.title} />
+                  : <CourseList assis={this.props.assis} items={this.props.data.course} title={this.props.title} />}
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </div>
@@ -212,12 +217,15 @@ Index.propTypes = {
 const mapStateToProps = (state, ownProps) => ({
   data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
   overview: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
-  studentIdcard: state.Student.User.studentIdcard
+  studentIdcard: state.Student.User.studentIdcard,
+  idCard: state.Student.Graduation.idCardForassistans,
+  assis: state.Student.Graduation.assis
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetch_data: () => dispatch(fetchProfessors()),
-  fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload))
+  fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload)),
+  fetchGraduationCourseAssistantVersion: (id, sname, program, feild) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program, feild))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

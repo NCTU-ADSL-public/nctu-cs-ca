@@ -123,7 +123,8 @@ PopoverButton.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview
+  overview: state.Student.Graduation.overview,
+  assis: state.Student.Graduation.assis
 })
 
 const mapDispatchToProps = (dispatch) => ({

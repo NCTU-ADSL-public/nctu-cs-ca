@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 class StudentDetail extends React.Component {
   constructor (props) {
     super(props)
-    props.fetchGraduationCourseAssistantVersion(this.props.match.params.sid, this.props.match.params.sname, this.props.match.params.program)
+    props.fetchGraduationCourseAssistantVersion(this.props.match.params.sid, this.props.match.params.sname, this.props.match.params.program, 0)
   }
 
   render () {
@@ -24,7 +24,7 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  fetchGraduationCourseAssistantVersion: (id, sname, program) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program))
+  fetchGraduationCourseAssistantVersion: (id, sname, program, feild) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program, feild))
 })
 
 export default connect(mapState, mapDispatch)(StudentDetail)
