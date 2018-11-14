@@ -24,7 +24,7 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  fetchGraduationCourseAssistantVersion: (id, sname, program) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program))
+  fetchGraduationCourseAssistantVersion: (id, sname, program, feild) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program, feild))
 })
 
 export default connect(mapState, mapDispatch)(StudentDetail)
