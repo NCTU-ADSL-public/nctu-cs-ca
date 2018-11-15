@@ -24,7 +24,7 @@ export default class AnimatedProgress extends React.Component {
   }
 
   progress (completed) {
-    this.setState({completed: Math.min(completed, this.props.value)})
+    if (!isNaN(this.props.value)) this.setState({completed: Math.min(completed, this.props.value)})
     if (completed < this.props.value) {
       const diff = 1 * 10
       this.timer = setTimeout(() => this.progress(completed + diff), 200)

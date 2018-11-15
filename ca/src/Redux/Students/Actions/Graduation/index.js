@@ -12,7 +12,7 @@ export const updateCourse = createAction('UPDATE_COURSE')
 export const fetchStart = createAction('FETCH_START')
 export const storeStudentInfo = createAction('STORE_STUDENT_INFO')
 
-export const fetchGraduationCourse = (payload = { professional_field: 0 }) => dispatch => { 
+const fetchCourseOnly = (payload) => dispatch => {
   axios.post('/students/graduate/revised', payload).then(res => {
     dispatch(storeGraduationCourse(res.data))
     dispatch(storeProfessionalField(payload.professional_field))
@@ -20,10 +20,18 @@ export const fetchGraduationCourse = (payload = { professional_field: 0 }) => di
     dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
     console.log(err)
   })
+}
 
+export const fetchGraduationCourse = (payload = { professional_field: 0 }) => dispatch => {
   axios.get('/students/graduate/check').then(res => {
+    let newPayload = { ...payload, check: res.data.check }
+    dispatch(fetchCourseOnly(newPayload))
+
     dispatch(storeGradCheck(res.data.check.state))
   }).catch(err => {
+    let newPayload = { ...payload, check: { state: 0 } }
+    dispatch(fetchCourseOnly(newPayload))
+
     console.log(err)
   })
 
