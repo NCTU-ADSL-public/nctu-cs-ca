@@ -79,13 +79,15 @@ class Index extends React.Component {
       this.props.reviewSubmit({
         general_course: {
           type: this.state.generalCourse.type
-        }
+        },
+        professional_field: this.props.professionalField
       })
       this.handleClose()
     }
   }
 
   render () {
+    console.log(this.props.professionalField)
     const { classes } = this.props
     return (
       <div>
@@ -166,7 +168,8 @@ const mapStateToProps = (state) => ({
   idCard: state.Student.Graduation.idCardForassistans,
   assis: state.Student.Graduation.assis,
   reviewCheck: state.Student.Graduation.check,
-  generalCourseSelect: state.Student.Graduation.generalCourseSelect
+  generalCourseSelect: state.Student.Graduation.generalCourseSelect,
+  professionalField: state.Student.Graduation.professional_field
 })
 
 const mapDispatchToProps = (dispatch) => ({

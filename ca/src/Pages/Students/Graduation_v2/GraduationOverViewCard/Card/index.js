@@ -175,6 +175,7 @@ class Index extends React.Component {
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
                     aria-haspopup='true'
                     onClick={this.professionalMenuOpen}
+                    disabled={this.props.reviewCheck !== 0}
                   >
                     網多組專業選擇
                   </Button>
@@ -219,7 +220,8 @@ const mapStateToProps = (state, ownProps) => ({
   overview: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
   studentIdcard: state.Student.User.studentIdcard,
   idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis
+  assis: state.Student.Graduation.assis,
+  reviewCheck: state.Student.Graduation.check
 })
 
 const mapDispatchToProps = (dispatch) => ({

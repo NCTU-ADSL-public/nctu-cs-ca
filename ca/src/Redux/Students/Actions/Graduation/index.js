@@ -3,6 +3,7 @@ import axios from 'axios'
 import FakeData from '../../../../Resources/FakeData'
 
 export const storeGraduationCourse = createAction('STORE_GRADUATION_COURSE')
+export const storeProfessionalField = createAction('STORE_PROFESSIONALFIELD')
 export const filterinput = createAction('FILTER_INPUT')
 export const storeGradPrint = createAction('STORE_GRAD_PRINT')
 export const storeGradCheck = createAction('STORE_GRAD_CHECK')
@@ -14,6 +15,7 @@ export const storeStudentInfo = createAction('STORE_STUDENT_INFO')
 export const fetchGraduationCourse = (payload = { professional_field: 0 }) => dispatch => { 
   axios.post('/students/graduate/revised', payload).then(res => {
     dispatch(storeGraduationCourse(res.data))
+    dispatch(storeProfessionalField(payload.professional_field))
   }).catch(err => {
     dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
     console.log(err)

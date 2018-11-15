@@ -5,6 +5,7 @@ const initialState = {
   printdata: [],
   check: 0,
   generalCourseSelect: 0,
+  professional_field: 0,
   englishCheck: false,
   status: 'IDLE',
   overview: {},
@@ -20,6 +21,7 @@ export default handleActions({
   STORE_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
   STORE_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
   STORE_GRAD_GENERAL_COURSE_SELECT: (state, action) => ({ ...state, generalCourseSelect: action.payload }),
+  STORE_PROFESSIONAL_FIELD: (state, action) => ({ ...state, professional_field: action.payload }),
   STORE_GRADUATION_COURSE: (state, action) => {
     let newdata = [ ...action.payload ]
     let newoverview = { ...newdata[newdata.length - 1] }
