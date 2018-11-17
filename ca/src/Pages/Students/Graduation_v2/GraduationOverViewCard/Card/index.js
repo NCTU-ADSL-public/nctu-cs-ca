@@ -8,7 +8,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { connect } from 'react-redux'
-import { fetchProfessors } from '../../../../../Redux/Students/Actions/Professor/index'
 import CourseList from './Components/CourseList'
 import GeneralCourseList from './Components/GeneralCourseList'
 import GeneralNewCourseList from './Components/GeneralNewCourseList'
@@ -169,31 +168,35 @@ class Index extends React.Component {
                 </div>
               </div>
               { this.props.title === '共同必修'
-                ? <div className='col-md-3' style={{ marginLeft: '-7%' }} hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'} >
-                  <Button
-                    variant='outlined'
-                    aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
-                    aria-haspopup='true'
-                    onClick={this.professionalMenuOpen}
-                    disabled={this.props.reviewCheck !== 0}
+                ? <div
+                    className='col-md-3'
+                    style={{ marginLeft: '-7%' }}
+                    hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'}
                   >
-                    網多組專業選擇
-                  </Button>
-                  <Menu
-                    id='simple-menu'
-                    anchorEl={this.state.anchorEl}
-                    open={Boolean(this.state.anchorEl)}
-                    onClose={this.professionalMenuClose}
-                    className={classes.root}
-                  >
-                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
-                      網路領域
-                    </MenuItem>
-                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
-                      多媒體領域
-                    </MenuItem>
-                  </Menu>
-                </div>
+                    <Button
+                      variant='outlined'
+                      aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                      aria-haspopup='true'
+                      onClick={this.professionalMenuOpen}
+                      disabled={this.props.reviewCheck !== 0}
+                    >
+                      網多組專業選擇
+                    </Button>
+                    <Menu
+                      id='simple-menu'
+                      anchorEl={this.state.anchorEl}
+                      open={Boolean(this.state.anchorEl)}
+                      onClose={this.professionalMenuClose}
+                      className={classes.root}
+                    >
+                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
+                        網路領域
+                      </MenuItem>
+                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
+                        多媒體領域
+                      </MenuItem>
+                    </Menu>
+                  </div>
                 : <div />
               }
             </ExpansionPanelSummary>
@@ -225,7 +228,6 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProfessors()),
   fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload)),
   fetchGraduationCourseAssistantVersion: (id, sname, program, feild) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program, feild))
 })

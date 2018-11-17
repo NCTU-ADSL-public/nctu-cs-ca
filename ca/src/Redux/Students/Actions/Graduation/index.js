@@ -22,9 +22,13 @@ const fetchCourseOnly = (payload) => dispatch => {
   })
 }
 
-export const fetchGraduationCourse = (payload = { professional_field: 0 }) => dispatch => {
+export const fetchGraduationCourse = (payload = null) => dispatch => {
   axios.get('/students/graduate/check').then(res => {
-    let newPayload = { ...payload, check: res.data.check }
+    let newPayload
+    if (res.data.check.state !== 0 || payload === null)
+      newPayload = { professional_field: res.data.professional_field }
+    else
+      newPayload = { ...payload }
     dispatch(fetchCourseOnly(newPayload))
 
     dispatch(storeGradCheck(res.data.check.state))
