@@ -2,7 +2,6 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
   data: [],
-  printdata: [],
   check: 0,
   generalCourseSelect: 0,
   professional_field: 0,
@@ -16,7 +15,6 @@ const initialState = {
 export default handleActions({
   FETCH_DONE: (state) => ({ ...state, status: 'DONE' }),
   FETCH_START: (state) => ({ ...state, status: 'START' }),
-  STORE_GRAD_PRINT: (state, action) => ({ ...state, printdata: action.payload }),
   STORE_STUDENT_INFO: (state, action) => ({ ...state, idCardForassistans: action.payload , assis: true}),
   STORE_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
   STORE_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),

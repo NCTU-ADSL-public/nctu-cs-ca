@@ -3,10 +3,10 @@ import axios from 'axios'
 import FakeData from '../../../../Resources/FakeData'
 
 export const storeGraduationCourse = createAction('STORE_GRADUATION_COURSE')
-export const storeProfessionalField = createAction('STORE_PROFESSIONALFIELD')
-export const filterinput = createAction('FILTER_INPUT')
-export const storeGradPrint = createAction('STORE_GRAD_PRINT')
+export const storeProfessionalField = createAction('STORE_PROFESSIONAL_FIELD')
+export const storeGeneralCourseSelect = createAction('STORE_GRAD_GENERAL_COURSE_SELECT')
 export const storeGradCheck = createAction('STORE_GRAD_CHECK')
+export const filterinput = createAction('FILTER_INPUT')
 export const storeGradEnglishTestCheck = createAction('STORE_GRAD_ENGLISH_TEST_CHECK')
 export const updateCourse = createAction('UPDATE_COURSE')
 export const fetchStart = createAction('FETCH_START')
@@ -28,6 +28,7 @@ export const fetchGraduationCourse = (payload = { professional_field: 0 }) => di
     dispatch(fetchCourseOnly(newPayload))
 
     dispatch(storeGradCheck(res.data.check.state))
+    dispatch(storeGeneralCourseSelect(res.data.general_course.type))
   }).catch(err => {
     let newPayload = { ...payload, check: { state: 0 } }
     dispatch(fetchCourseOnly(newPayload))
