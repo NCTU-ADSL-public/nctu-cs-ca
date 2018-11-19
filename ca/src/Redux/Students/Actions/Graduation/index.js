@@ -46,31 +46,24 @@ export const fetchGraduationCourse = (payload = null) => dispatch => {
 
 export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild) => dispatch => {
   dispatch(fetchStart())
+  axios.get('/assistants/graduate/revised', {
+    params: {
+      student_id: id,
+      professional_field: 2
+    }
+  }).then(res => {
+    dispatch(storeGraduationCourse(res.data))
+  }).catch(err => {
+    dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
+  })
 
   axios.get('/assistants/graduate/check', {
     params: {
       student_id: id
     }
   }).then(res => {
-    let newPayload
-    if (res.data.check.state !== 0 || feild === null) {
-      newPayload = { professional_field: res.data.professional_field }
-    } else {
-      newPayload = { ...feild }
-    }
     dispatch(storeGradCheck(res.data.check.state))
     dispatch(storeGeneralCourseSelect(res.data.general_course.type))
-
-    axios.get('/assistants/graduate/revised', {
-      params: {
-        student_id: id,
-        professional_field: newPayload.professional_field
-      }
-    }).then(res => {
-      dispatch(storeGraduationCourse(res.data))
-    }).catch(err => {
-      dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
-    })
   }).catch(err => {
     console.log(err)
   })
