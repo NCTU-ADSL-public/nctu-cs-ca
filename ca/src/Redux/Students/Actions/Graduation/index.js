@@ -84,6 +84,7 @@ export const reviewSubmit = (payload) => dispatch => {
   axios.post('/students/graduate/check', payload).then(res => {
     dispatch(storeGradCheck(res.data.check.state))
     dispatch(storeGeneralCourseSelect(res.data.general_course.type))
+    console.log(res.data.general_course)
   }).catch(err => {
     console.log(err)
   })

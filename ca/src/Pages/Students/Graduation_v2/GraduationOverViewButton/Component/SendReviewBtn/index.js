@@ -87,7 +87,6 @@ class Index extends React.Component {
   }
 
   render () {
-    console.log(this.props.professionalField)
     const { classes } = this.props
     return (
       <div>
