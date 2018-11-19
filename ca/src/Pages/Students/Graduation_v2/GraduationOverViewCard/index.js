@@ -12,8 +12,6 @@ class Index extends React.Component {
 
   render () {
     const { rwd } = this.props
-    console.log('check: ', this.props.reviewCheck)
-    console.log('select: ', this.props.generalCourseSelect)
     return (
       <div className={rwd ? 'overview' : ''}>
         <Card title='共同必修' rwd={rwd} complete={this.props.overview.compulsory} require={this.props.overview.compulse_require} value={Number(this.props.overview.compulsory) / Number(this.props.overview.compulse_require) * 100} />
