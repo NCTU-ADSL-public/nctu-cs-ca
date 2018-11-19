@@ -169,34 +169,34 @@ class Index extends React.Component {
               </div>
               { this.props.title === '共同必修'
                 ? <div
-                    className='col-md-3'
-                    style={{ marginLeft: '-7%' }}
-                    hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'}
+                  className='col-md-3'
+                  style={{ marginLeft: '-7%' }}
+                  hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'}
                   >
-                    <Button
-                      variant='outlined'
-                      aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
-                      aria-haspopup='true'
-                      onClick={this.professionalMenuOpen}
-                      disabled={this.props.reviewCheck !== 0}
+                  <Button
+                    variant='outlined'
+                    aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                    aria-haspopup='true'
+                    onClick={this.professionalMenuOpen}
+                    disabled={this.props.reviewCheck !== 0}
                     >
                       網多組專業選擇
                     </Button>
-                    <Menu
-                      id='simple-menu'
-                      anchorEl={this.state.anchorEl}
-                      open={Boolean(this.state.anchorEl)}
-                      onClose={this.professionalMenuClose}
-                      className={classes.root}
+                  <Menu
+                    id='simple-menu'
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.professionalMenuClose}
+                    className={classes.root}
                     >
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
                         網路領域
                       </MenuItem>
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
                         多媒體領域
                       </MenuItem>
-                    </Menu>
-                  </div>
+                  </Menu>
+                </div>
                 : <div />
               }
             </ExpansionPanelSummary>
