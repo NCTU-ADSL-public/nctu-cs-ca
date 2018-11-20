@@ -83,6 +83,7 @@ export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild)
 export const reviewSubmit = (payload) => dispatch => {
   axios.post('/students/graduate/check', payload).then(res => {
     dispatch(storeGradCheck(res.data.check.state))
+    dispatch(storeGeneralCourseSelect(res.data.general_course.type))
   }).catch(err => {
     console.log(err)
   })

@@ -180,7 +180,11 @@ class Index extends React.Component {
                     onClick={this.professionalMenuOpen}
                     disabled={this.props.reviewCheck !== 0}
                     >
-                      網多組專業選擇
+                      { 
+                        !isNaN(this.props.professionalField)
+                        ? this.props.professionalField === 0 ? '網路領域' : '多媒體領域'
+                        : '網多組專業選擇'
+                      }
                     </Button>
                   <Menu
                     id='simple-menu'
@@ -224,7 +228,8 @@ const mapStateToProps = (state, ownProps) => ({
   studentIdcard: state.Student.User.studentIdcard,
   idCard: state.Student.Graduation.idCardForassistans,
   assis: state.Student.Graduation.assis,
-  reviewCheck: state.Student.Graduation.check
+  reviewCheck: state.Student.Graduation.check,
+  professionalField: state.Student.Graduation.professional_field
 })
 
 const mapDispatchToProps = (dispatch) => ({
