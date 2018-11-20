@@ -86,11 +86,11 @@ class index extends React.Component {
 
   fuck = () => {
     let data = this.props.csvData
-    if(this.props.csvData[0][0] !== '老師')
+    if(this.props.csvData[0][0] !== '專題名稱')
       return ''
     return <CSVLink
       data={data}>
-      {this.props.csvData[0][0]}
+      下載
     </CSVLink>
   }
 
@@ -144,6 +144,7 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     fetch_scores({ first_second, semester: event.target.value })
+                    download_csv({ first_second, semester: event.target.value })
                     this.setState({ semester: event.target.value, page: 0 })
                   }
                 }
@@ -178,6 +179,7 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     fetch_scores({ first_second: event.target.value, semester })
+                    download_csv({ first_second: event.target.value, semester })
                     this.setState({ first_second: event.target.value, page: 0 })
                   }
                 }
