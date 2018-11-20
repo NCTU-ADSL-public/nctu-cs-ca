@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export const store_scores = createAction('STORE_SCORES')
 export const storeScoreCsvData = createAction('STORE_SCORE_CSV_DATA')
+export const storeScoreCsvDataStart = createAction('STORE_SCORE_CSV_DATA_START')
 
 export const fetchScores = (post_item) => dispatch => {
   axios.post('/assistants/ResearchGradeList', post_item).then(res => {
@@ -23,6 +24,7 @@ export const downloadCsv = req => dispatch => {
   // for (let i = 0; i < data.length; i++) {
   //   csvArr.push([data[i].tname, data[i].sname, data[i].student_id, data[i].score, data[i].comment])
   // }
+  dispatch(storeScoreCsvDataStart())
   axios.post('/assistants/ResearchGradeDownload', req).then(res => {
     let data = res.data
     let csvArr = []

@@ -86,7 +86,7 @@ class index extends React.Component {
 
   fuck = () => {
     let data = this.props.csvData
-    if(this.props.csvData[0][0] !== '專題名稱')
+    if(this.props.start)
       return ''
     return <CSVLink
       data={data}>
@@ -225,7 +225,9 @@ class index extends React.Component {
 
 const mapStateToProps = (state) => ({
   scores: state.Assistant.Project.Score.scores,
-  csvData: state.Assistant.Project.Score.csvData
+  csvData: state.Assistant.Project.Score.csvData,
+  start: state.Assistant.Project.Score.start,
+
 })
 
 const mapDispatchToProps = (dispatch) => ({

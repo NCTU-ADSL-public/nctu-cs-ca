@@ -7,7 +7,8 @@ const initialState = {
     ['Ahmed', 'Tomi', 'ah@smthing.co.com'],
     ['Raed', 'Labes', 'rl@smthing.co.com'],
     ['Yezzi', 'Min l3b', 'ymin@cocococo.com']
-  ]
+  ],
+  start: true
 }
 export default handleActions({
   STORE_SCORES: (state, action) => ({ ...state,
@@ -15,7 +16,13 @@ export default handleActions({
   }),
   STORE_SCORE_CSV_DATA: (state, action) => {
     return ({ ...state,
-      csvData: action.payload
+      csvData: action.payload,
+      start: false
+    })
+  },
+  STORE_SCORE_CSV_DATA_START: (state, action) => {
+    return ({ ...state,
+      start: true
     })
   }
 }, initialState)
