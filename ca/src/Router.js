@@ -21,6 +21,8 @@ import StudentProject from './Pages/Students/ProjectList'
 import StudentProfessor from './Pages/Students/Mentor'
 import Footer from './Components/Footer'
 
+import AutoLogout from './Components/AutoLogout'
+
 injectTapEventPlugin()
 
 const Router = () => (
@@ -55,4 +57,4 @@ const Router = () => (
   </BrowserRouter>
 )
 
-export default Router
+export default AutoLogout(Router)

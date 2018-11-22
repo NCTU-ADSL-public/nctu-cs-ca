@@ -102,7 +102,7 @@ class index extends React.Component {
   render() {
 
     const { classes, fetch_students, students } = this.props
-    const { input, page, number_per_page, grade, open_filter, filter_status } = this.state
+    const { input, page, number_per_page, open_filter, filter_status } = this.state
 
     return (
       <div className = { classes.root } >

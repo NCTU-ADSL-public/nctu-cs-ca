@@ -134,17 +134,17 @@ class ListPanel extends React.Component {
             />
             <div>
             {
-              parseInt(student.graduate_status, 10) === 0 && <span>
+              (parseInt(student.graduate_status, 10) === 0 && <span>
                 <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-              </span>
+              </span>)
               ||
-              parseInt(student.graduate_status, 10) === 1 && <span>
+              (parseInt(student.graduate_status, 10) === 1 && <span>
                 <QueryBuilder style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-              </span>
+              </span>)
               ||
-              parseInt(student.graduate_status, 10) === 2 && <span>
+              (parseInt(student.graduate_status, 10) === 2 && <span>
                 <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-              </span>
+              </span>)
             }
               <div style={{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.graduate_status] }</div>
               <span style={{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / { VERIFY_STATUS_CN[student.submit_status] }</span>

@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import data_json from './Json'
+//import data_json from './Json'
 
 export const set_graduate_state = createAction('SET_GRADUATE_STATE')
 export const store_student = createAction('STORE_STUDENT')

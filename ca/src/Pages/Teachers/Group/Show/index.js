@@ -94,7 +94,7 @@ export default class Show extends React.Component {
               </div>
             </div>
             {this.state.link !== undefined
-              ? <iframe src={this.state.link.link} width='640' height='480' />
+              ? <iframe src={this.state.link.link} width='640' height='480' title='show' />
               : ''}
             <div className='divide-horizontal '>
               <div className='divide-horizontal-span'>

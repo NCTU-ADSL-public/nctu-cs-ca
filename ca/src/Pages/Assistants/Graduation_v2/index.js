@@ -26,7 +26,7 @@ import LastPage from '@material-ui/icons/LastPage'
 import { fetchStudent, triggerUpdateData } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
 import Button from '@material-ui/core/Button'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
-import { CSVLink, CSVDownload } from "react-csv"
+import { CSVLink/*,CSVDownload*/ } from "react-csv"
 
 const styles = theme => ({
   container: {

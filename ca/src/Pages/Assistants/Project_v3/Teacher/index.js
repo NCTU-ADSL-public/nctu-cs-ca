@@ -138,8 +138,8 @@ class index extends React.Component {
         (
             !filter_status.reduce( (haveTrue, value) => haveTrue || value, false)
          ||
-            (!filter_status[0] || (teacher.accept_status  === 1))
-         && (!filter_status[1] || (teacher.pending_status === 1))
+            ((!filter_status[0] || (teacher.accept_status  === 1))
+         && (!filter_status[1] || (teacher.pending_status === 1)))
         )
       )
     )
@@ -150,7 +150,7 @@ class index extends React.Component {
   }
 
   handleDelete = data => {
-    const { submit_page_open, submit_student_object } = this.state
+    const { /*submit_page_open,*/ submit_student_object } = this.state
     if (data.status === "0") {
       this.setState({ submit_page_open: true, submit_student_object: data.post_item })
       console.log(data.post_item)
@@ -160,9 +160,9 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, professor_name, fetch_teachers, teachers, set_add_status, set_first_second, delete_research } = this.props
+    const { classes, /*professor_name,*/ fetch_teachers, teachers, set_add_status, set_first_second, delete_research } = this.props
     const {
-      expanded,
+      /*expanded,*/
       page,
       number_per_page,
       input,

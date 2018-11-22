@@ -126,7 +126,7 @@ const GroupButton = (props) => (
   <Grid style={styles.groupBtn}>
     <Row>
       <Col xs={7} md={7} lg={7}>
-        <iframe src={props.item.link} width='600' height='360' />
+        <iframe src={props.item.link} width='600' height='360' title="group" />
       </Col>
       <Col xs={5} md={5} lg={5}>
         <div style={styles.groupYear}>主題 : {props.item.title}</div>

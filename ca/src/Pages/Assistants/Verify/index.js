@@ -342,7 +342,7 @@ class Verify extends React.Component{
           </Tooltip>
           
           {(this.state.select.length !== 0 || this.state.selectAll === true) && (
-            this.state.index === 0 &&
+            (this.state.index === 0 &&
             (<React.Fragment>
               <Tooltip title={'退回已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
@@ -358,8 +358,8 @@ class Verify extends React.Component{
                   <Send/>
                 </IconButton>
               </Tooltip>
-            </React.Fragment>)
-            || this.state.index === 1 && 
+            </React.Fragment>))
+            || (this.state.index === 1 && 
               (
               <React.Fragment>
               <Tooltip title={'重置已選取抵免單'} placement='top'>
@@ -369,8 +369,8 @@ class Verify extends React.Component{
                   <Reset/>
                 </IconButton>
               </Tooltip>
-            </React.Fragment>)
-            || this.state.index === 3 &&(
+            </React.Fragment>))
+            || (this.state.index === 3 &&(
               <React.Fragment>
               <Tooltip title={'重置已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
@@ -385,7 +385,7 @@ class Verify extends React.Component{
                   <TrashIcon/>
                 </IconButton>
               </Tooltip>
-            </React.Fragment>)
+            </React.Fragment>))
           )}
         </div>
         }
