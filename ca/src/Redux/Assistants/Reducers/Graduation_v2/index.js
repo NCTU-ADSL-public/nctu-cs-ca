@@ -34,7 +34,8 @@ const initialState = {
     "service": 1,
     "art": 1,
     "mentor": 1,
-    "compulse": ["計算機", "組織", "電路"]
+    "compulse": ["計算機", "組織", "電路"],
+    "current": ["當學期課程"]
   },{
     "student_id": "0416210",
     "sname": "王大明",
@@ -68,7 +69,8 @@ const initialState = {
     "service": 1,
     "art": 1,
     "mentor": 1,
-    "compulse": ["計算機", "組織", "電路", "test"]
+    "compulse": ["計算機", "組織", "電路", "test"],
+    "current": ["當學期課程"]
   }*/],
   students_csv_data: [],
   status: ''
