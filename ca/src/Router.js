@@ -19,6 +19,7 @@ import StudentGrad from './Pages/Students/Graduation_v2'
 import StudentMap from './Pages/Students/Map_v2'
 import StudentProject from './Pages/Students/ProjectList'
 import StudentProfessor from './Pages/Students/Mentor'
+import StudentCredit from './Pages/Students/Credit'
 import Footer from './Components/Footer'
 
 import AutoLogout from './Components/AutoLogout'
@@ -38,6 +39,7 @@ const Router = () => (
         <Route exact path='/students/map' render={() => <StudentMap />} />
         <Route exact path='/students/professor' render={() => <StudentProfessor />} />
         <Route exact path='/students/project' render={() => <StudentProject />} />
+        <Route exact path='/students/credit' render={() => <StudentCredit />} />
 
         <Route exact path='/teachers/head' component={TeacherHead} />
 
