@@ -147,7 +147,7 @@ class TextForm extends React.Component {
         {/* <br /> */}
         現因 :<br />
         <TextField
-          hintText='某某理由'
+          hintText=''
           floatingLabelText='理由請詳填'
           value={this.props.reason}
           onChange={(event) => this.props.courseCreditChange('reason', event.target.value)}
@@ -157,14 +157,14 @@ class TextForm extends React.Component {
         /><br />之理由，無法修習本系所開課程，擬修
         <br />
         <TextField
-          hintText='某某'
+          hintText=''
           style={{ width: '100px' }}
           value={this.props.department}
           onChange={(event) => this.props.courseCreditChange('department', event.target.value)}
         />
         &nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
-          hintText='某某'
+          hintText=''
           style={{ width: '100px' }}
           value={this.props.teacher}
           onChange={(event) => this.props.courseCreditChange('teacher', event.target.value)}
@@ -179,7 +179,7 @@ class TextForm extends React.Component {
         />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
-          hintText='某某'
+          hintText=''
           style={{ width: '200px' }}
           value={this.props.course_name}
           onChange={(event) => this.props.courseCreditChange('course_name', event.target.value)}
@@ -205,7 +205,7 @@ class TextForm extends React.Component {
         />&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
-          hintText='某某'
+          hintText=''
           style={{ width: '200px' }}
           value={this.props.course_name_old}
           onChange={(event) => this.props.courseCreditChange('course_name_old', event.target.value)}
@@ -213,9 +213,9 @@ class TextForm extends React.Component {
         課
         <br />
         <br />
-        註：1.課程內容需與本系課
-        程一致。2. 須檢附用書書名及課程綱要）
-        <br />
+        註：<br />
+        1. 課程內容需與本系課程一致。<br />
+        2. 須檢附用書書名及課程綱要。<br />
         <br />
         <Postfile />
         <br />
