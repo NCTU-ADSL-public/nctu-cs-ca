@@ -192,7 +192,7 @@ class Verify extends React.Component{
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid,nameA,codeA} = this.state.formList[id]
-    axios.post('/assistants/AddToOffset', {
+    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses:[
         {
           sid: sid,
@@ -214,7 +214,7 @@ class Verify extends React.Component{
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {year,semester,sid,nameA,codeA} = this.state.formList[id]
-    axios.post('/assistants/AddToOffset', {
+    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses:[
         {
           sid: sid,
@@ -236,7 +236,7 @@ class Verify extends React.Component{
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid,nameA,codeA} = this.state.formList[id]
-    axios.post('/assistants/AddToOffset', {
+    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses:[
         {
           sid: sid,
@@ -270,7 +270,7 @@ class Verify extends React.Component{
   }
   handleWithdraw(){
     let updatedList = this.state.formList
-    axios.post('/assistants/AddToOffset', {
+    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses:this.state.select.map(
         e => {
           updatedList[e].status = 3
@@ -291,7 +291,7 @@ class Verify extends React.Component{
   }
   handleSend(){
     let updatedList = this.state.formList
-    axios.post('/assistants/AddToOffset', {
+    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses:this.state.select.map(
         e => {
           updatedList[e].status = 1
@@ -311,7 +311,7 @@ class Verify extends React.Component{
   }
   handleAllReset(){
     let updatedList = this.state.formList
-    axios.post('/assistants/AddToOffset', {
+    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses:this.state.select.map(
         e => {
           updatedList[e].status = 0
