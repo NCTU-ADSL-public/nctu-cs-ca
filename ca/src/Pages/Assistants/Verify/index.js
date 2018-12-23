@@ -23,11 +23,12 @@ import OKIcon from '@material-ui/icons/Done'
 import WaitIcon from '@material-ui/icons/AccessTime'
 import TrashIcon from '@material-ui/icons/Delete'
 import CheckNone from '@material-ui/icons/CheckBoxOutlineBlank'
+import FilterIcon from '@material-ui/icons/FilterList'
 import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import FakeData from '../../../Resources/FakeData'
+//import FakeData from '../../../Resources/FakeData'
 
 const styles = ()=>({
   root: {
@@ -60,8 +61,8 @@ const styles = ()=>({
     textAlign: 'center'
   },
   font3:{
-    color: '#777',
-    fontSize:14,
+    color: 'rgba(0, 0, 0, 0.54)',
+    fontSize:16,
     fontWeight:400,
     textAlign: 'center'
   },
@@ -70,6 +71,11 @@ const styles = ()=>({
     fontSize:14,
     fontWeight:400,
     textAlign: 'center'
+  },
+  font5:{
+    fontSize:16,
+    fontWeight:400,
+    //textAlign: 'center'
   },
   to:{
     display: 'inline-block',
@@ -87,7 +93,10 @@ const styles = ()=>({
     left: 5,
     width: 50
   },
-  sideIcon:{
+  sideIcon2:{
+    position: 'absolute',
+    top: 60,
+    left: 'calc(100vw - 130px)'
   },
   Panels:{
     width: 'calc(100vw - 80px)',
@@ -143,13 +152,14 @@ class Verify extends React.Component{
     super(props)
     this.state = {
 // for test 
-// formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+//formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
       formList:[],
       open: false,
       message: 0,
       index: 0,
       select:[],
-      selectAll: false
+      selectAll: false,
+      isRecord: false
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
@@ -176,9 +186,13 @@ class Verify extends React.Component{
     let updatedList = this.state.formList
     let {sid,nameA,codeA} = this.state.formList[id]
     axios.post('/assistants/AddToOffset', {
-      sid: sid,
-      cosname: nameA,
-      coscode: codeA,
+      courses:[
+        {
+          sid: sid,
+          cosname: nameA,
+          coscode: codeA,
+        }
+      ],
       status: 1
     }).then(res => {
       updatedList[id].status = 1
@@ -193,11 +207,14 @@ class Verify extends React.Component{
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {year,semester,sid,nameA,codeA} = this.state.formList[id]
-    console.log(year,semester)
     axios.post('/assistants/AddToOffset', {
-      sid: sid,
-      cosname: nameA,
-      coscode: codeA,
+      courses:[
+        {
+          sid: sid,
+          cosname: nameA,
+          coscode: codeA,
+        }
+      ],
       status: 3
     }).then(res => {
       updatedList[id].status = 3
@@ -213,9 +230,13 @@ class Verify extends React.Component{
     let updatedList = this.state.formList
     let {sid,nameA,codeA} = this.state.formList[id]
     axios.post('/assistants/AddToOffset', {
-      sid: sid,
-      cosname: nameA,
-      coscode: codeA,
+      courses:[
+        {
+          sid: sid,
+          cosname: nameA,
+          coscode: codeA,
+        }
+      ],
       status: 0
     }).then(res => {
       updatedList[id].status = 0
@@ -233,7 +254,6 @@ class Verify extends React.Component{
     else{
       updatedArray.push(id)
       let isAll = this.state.formList.filter(e => e.status === this.state.index).every(e => this.state.select.includes(e.id))
-      console.log(isAll)
       this.setState({
         select: updatedArray,
         selectAll: isAll
@@ -242,24 +262,70 @@ class Verify extends React.Component{
     e.stopPropagation()
   }
   handleWithdraw(){
-    this.state.select.forEach(
-      e=>this.handleDisagree(e)
-    )
+    let updatedList = this.state.formList
+    axios.post('/assistants/AddToOffset', {
+      courses:this.state.select.map(
+        e => {
+          updatedList[e].status = 3
+          return ({
+            sid: this.state.formList[e].sid,
+            cosname: this.state.formList[e].nameA,
+            coscode: this.state.formList[e].codeA
+          })
+        }
+      ),
+      status: 3
+    }).then(res => {
+      console.log(res)
+      this.setState({formList:updatedList,open:true,message:0})
+    }).catch(err => {
+      this.setState({open:true,message:1}) 
+    })
   }
   handleSend(){
-    this.state.select.forEach(
-      e => this.handleAgree(e)
-    )
+    let updatedList = this.state.formList
+    axios.post('/assistants/AddToOffset', {
+      courses:this.state.select.map(
+        e => {
+          updatedList[e].status = 1
+          return ({
+            sid: this.state.formList[e].sid,
+            cosname: this.state.formList[e].nameA,
+            coscode: this.state.formList[e].codeA
+          })
+        }
+      ),
+      status: 1
+    }).then(res => {
+      this.setState({formList:updatedList,open:true,message:0})
+    }).catch(err => {
+      this.setState({open:true,message:1}) 
+    })
   }
   handleAllReset(){
-    this.state.select.forEach(
-      e=>this.handleReset(e)
-    )
+    let updatedList = this.state.formList
+    axios.post('/assistants/AddToOffset', {
+      courses:this.state.select.map(
+        e => {
+          updatedList[e].status = 0
+          return ({
+            sid: this.state.formList[e].sid,
+            cosname: this.state.formList[e].nameA,
+            coscode: this.state.formList[e].codeA
+          })
+        }
+      ),
+      status: 0
+    }).then(res => {
+      this.setState({formList:updatedList,open:true,message:0})
+    }).catch(err => {
+      this.setState({open:true,message:1}) 
+    })
   }
   selectAll(){
     let updatedArray  = this.state.select
     if(!this.state.selectAll){
-      updatedArray = this.state.formList.filter(e => e.status === this.state.index).map(e => e.id)
+      updatedArray = this.state.formList.filter(e => ((e.status === this.state.index) && (!this.state.isRecord || e.previous))).map(e => e.id)
       this.setState({select: updatedArray,selectAll:true})
     }
     else{
@@ -275,6 +341,7 @@ class Verify extends React.Component{
   render(){
     const {classes} = this.props
     const semester = ['上','下','暑']
+    const type = [[0],[1,5],[2],[3,4]]
     return(
       <div className={classes.root}>
         <div className={classes.side}>
@@ -340,7 +407,6 @@ class Verify extends React.Component{
               {this.state.selectAll?<Check/>:<CheckNone/>}
             </IconButton>
           </Tooltip>
-          
           {(this.state.select.length !== 0 || this.state.selectAll === true) && (
             (this.state.index === 0 &&
             (<React.Fragment>
@@ -387,14 +453,22 @@ class Verify extends React.Component{
               </Tooltip>
             </React.Fragment>))
           )}
+          <Tooltip title={this.state.isRecord ? '取消選取':'選取曾有過抵免紀錄的抵免單'} placement='top'>
+            <IconButton className={classes.sideIcon2}
+              onClick={()=>this.setState({selectAll: false, select:[],isRecord: !this.state.isRecord})}
+              color={(this.state.isRecord)?'primary':'default'}
+            >
+              <FilterIcon/>
+            </IconButton>
+          </Tooltip>
         </div>
         }
         <div className={classes.Panels}>
         {
-          this.state.formList.filter(apply => apply.status === this.state.index).length > 0 ?
+          this.state.formList.filter(apply => apply.status === this.state.index && (!this.state.isRecord || apply.previous)).length > 0 ?
           this.state.formList
           .filter(
-            apply => apply.status === this.state.index
+            apply => type[this.state.index].includes(apply.status) && (!this.state.isRecord || apply.previous)
           )
           .map(
             (apply,index)=>(
@@ -442,6 +516,11 @@ class Verify extends React.Component{
                         <span onClick={(e)=>e.stopPropagation()}>以前已同意過此抵免規則</span>
                         :<span onClick={(e)=>e.stopPropagation()}>以前未有過此抵免規則</span>
                       }/>
+                      {apply.status === 5 && <Chip 
+                      style={{background:'#dc3545',color:'#fff',fontSize: 14,fontWeight: 400,marginLeft:5}}
+                      label={
+                        <span onClick={(e)=>e.stopPropagation()}>特殊案例需交由原授課教授審核</span>
+                      }/>}
                     </span>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
@@ -454,10 +533,9 @@ class Verify extends React.Component{
                           <TableCell className={classes.font}>已修習課程</TableCell>
                           <TableCell className={classes.font}>開課系所</TableCell>
                           <TableCell className={classes.font}>預抵免課程</TableCell>
-                          <TableCell className={classes.font}>申請原因</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody >
+                      <TableBody >    
                         <TableRow>
                           <TableCell className={classes.font}>{apply.sid}</TableCell>
                           <TableCell className={classes.font}>{apply.name}</TableCell>
@@ -465,7 +543,12 @@ class Verify extends React.Component{
                           <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
                           <TableCell className={classes.font}>{apply.department}</TableCell>
                           <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>
-                          <TableCell className={classes.font}>{apply.reason}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                        <TableCell className={classes.font3}>日期</TableCell>
+                        <TableCell className={classes.font5} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
+                        <TableCell className={classes.font3}>申請原因</TableCell>
+                        <TableCell className={classes.font5} colSpan={3} >{apply.reason}</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
