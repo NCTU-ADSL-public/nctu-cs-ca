@@ -118,6 +118,13 @@ const styles = ()=>({
     left: 0,
     position: 'fixed',
     //borderBottom: '1px solid rgba(0, 0, 0, 0.34)'
+  },
+  state:{
+    position: 'fixed',
+    left: 6,
+    bottom:6,
+    color: '#eee',
+    zIndex: 1080
   }
 })
 
@@ -344,6 +351,7 @@ class Verify extends React.Component{
     const type = [[0],[1,5],[2],[3,4]]
     return(
       <div className={classes.root}>
+        <span className={classes.state}>{`目前顯示：${['尚未處理','等待中','已通過','已退回'][this.state.index]}${this.state.isRecord?'且曾有審核通過紀錄':''}的抵免單`}</span>
         <div className={classes.side}>
           {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
           <Tooltip title={'申請中'} placement='right'>
@@ -453,6 +461,7 @@ class Verify extends React.Component{
               </Tooltip>
             </React.Fragment>))
           )}
+          
           <Tooltip title={this.state.isRecord ? '取消選取':'選取曾有過抵免紀錄的抵免單'} placement='top'>
             <IconButton className={classes.sideIcon2}
               onClick={()=>this.setState({selectAll: false, select:[],isRecord: !this.state.isRecord})}
