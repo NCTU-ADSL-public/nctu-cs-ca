@@ -104,7 +104,6 @@ class HorizontalLinearStepper extends React.Component {
   render () {
     const { finished, stepIndex } = this.state
     const contentStyle = { margin: '0 16px' }
-    console.log(this.state.selectFormIndex)
 
     return (
       <div style={{ width: '100%', maxWidth: 1500, margin: 'auto' }}>
@@ -134,7 +133,7 @@ class HorizontalLinearStepper extends React.Component {
             </p>
           ) : (
             <div>
-              <p>{this.getStepContent(stepIndex)}</p>
+              <div>{this.getStepContent(stepIndex)}</div>
               <div style={{ marginTop: 12 }}>
                 <RaisedButton
                   label={stepIndex === 2 ? '送出!' : '下一步'}

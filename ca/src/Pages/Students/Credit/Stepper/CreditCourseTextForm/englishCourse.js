@@ -110,6 +110,7 @@ class TextForm extends React.Component {
           <div className='col-md-5'>
             申請人聯絡電話：
             <TextField
+              id='phone'
               value={this.props.phone}
               type='number'
               onChange={(event) => this.props.courseCreditChange('phone', event.target.value)}
@@ -146,6 +147,7 @@ class TextForm extends React.Component {
         {/* <br /> */}
         現因 :<br />
         <TextField
+          id='reason'
           hintText=''
           floatingLabelText='理由請詳填'
           value={this.props.reason}
@@ -156,6 +158,7 @@ class TextForm extends React.Component {
         /><br />之理由，無法修習本系所開課程，擬修
         <br />
         <TextField
+          id='department'
           hintText=''
           style={{ width: '100px' }}
           value={this.props.department}
@@ -163,6 +166,7 @@ class TextForm extends React.Component {
         />
         &nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
+          id='teacher'
           hintText=''
           style={{ width: '100px' }}
           value={this.props.teacher}
@@ -170,6 +174,7 @@ class TextForm extends React.Component {
         />&nbsp;
         老師&nbsp;&nbsp;&nbsp;&nbsp;所授之 &nbsp;&nbsp;課號：
         <TextField
+          id='course_code'
           hintText='DCPXX'
           floatingLabelText='請填寫永久課號'
           style={{ width: '150px' }}
@@ -178,6 +183,7 @@ class TextForm extends React.Component {
         />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
+          id='course_name'
           hintText=''
           style={{ width: '200px' }}
           value={this.props.course_name}
@@ -186,6 +192,7 @@ class TextForm extends React.Component {
         課
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
+          id='credit'
           hintText=''
           style={{ width: '50px' }}
           value={this.props.credit}
