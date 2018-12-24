@@ -25,11 +25,6 @@ const styles = theme => ({
     color: 'white',
     margin: '0 1px'
   },
-  tabRoot: {
-    background: '#34855e',
-    color: 'white',
-    margin: '0 1px'
-  },
   tabRootCurrent: {
     background: 'purple',
     color: 'white',

@@ -4,7 +4,6 @@ import Postfile from './Postfile'
 import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'
 import { courseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
-import SelectType from './SlectType'
 
 let items = []
 

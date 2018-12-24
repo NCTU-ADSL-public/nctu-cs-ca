@@ -76,25 +76,20 @@ class HorizontalLinearStepper extends React.Component {
     switch (stepIndex) {
       case 0:
         return (<FormSelectTable selectCreditForm={this.selectCreditForm} />)
-        break
       case 1: {
         switch (this.state.selectFormIndex) {
           case 0:
             return (<TextForm />)
-            break
           case 1:
             return (<TextForm />)
-            break
           case 2:
             return (<EnglishCourseForm />)
-            break
           default:
-            break
+            return ''
         }
       }   
       case 2:
         return (<CreditCourseTextFormConfirm />)
-        break
       default:
         return 'You\'re a long way from home sonny jim!'
     }
@@ -128,7 +123,7 @@ class HorizontalLinearStepper extends React.Component {
           {finished ? (
             <p>
               <a
-                href='#'
+                href='/'
                 onClick={(event) => {
                   event.preventDefault()
                   this.setState({ stepIndex: 0, finished: false })

@@ -213,7 +213,7 @@ class Verify extends React.Component{
     // updatedList[id].agreeByA = 2
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {year,semester,sid,nameA,codeA} = this.state.formList[id]
+    let {sid,nameA,codeA} = this.state.formList[id]
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses:[
         {

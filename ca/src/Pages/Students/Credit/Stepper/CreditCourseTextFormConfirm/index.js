@@ -1,29 +1,28 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
 import Postfile from './Postfile'
-import SelectField from 'material-ui/SelectField'
+// import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'
 import { courseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
 
 let items = []
 
-const fontStyle = {
-  verticalAlign: 'default',
-  fontSize: '1em',
-  fontWeight: '300',
-  letterSpacing: '1px',
-  fontFamily: 'Noto Sans CJK TC'
-}
+// const fontStyle = {
+//   verticalAlign: 'default',
+//   fontSize: '1em',
+//   fontWeight: '300',
+//   letterSpacing: '1px',
+//   fontFamily: 'Noto Sans CJK TC'
+// }
 
-const fontlabelStyle = {
-  verticalAlign: 'default',
-  fontSize: '1em',
-  fontWeight: '300',
-  letterSpacing: '1px',
-  fontFamily: 'Noto Sans CJK TC',
-  color: '#a42926'
-}
+// const fontlabelStyle = {
+//   verticalAlign: 'default',
+//   fontSize: '1em',
+//   fontWeight: '300',
+//   letterSpacing: '1px',
+//   fontFamily: 'Noto Sans CJK TC',
+//   color: '#a42926'
+// }
 
 // studentIdcard: {
 //   sname: '資料錯誤',
