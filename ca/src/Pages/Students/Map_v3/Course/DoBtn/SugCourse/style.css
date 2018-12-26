@@ -1,0 +1,16 @@
+
+.rating{
+    display:flex;
+    flex-direction:row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.star{
+font-size: 1.4em;
+color:#ccc;
+}
+  
+.star:hover ~ .star,.star:hover{
+color:#ffc831;
+}
