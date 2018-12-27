@@ -98,31 +98,32 @@ class TextForm extends React.Component {
   render () {
     return (
       <div>
-         班別:&nbsp;&nbsp;
-         {this.props.studentIdcard.program}&nbsp;
-         學號:&nbsp;&nbsp;
-         {this.props.studentIdcard.student_id}
-         &nbsp;&nbsp;&nbsp;&nbsp;申請人 &nbsp;&nbsp;&nbsp;
-         {this.props.studentIdcard.sname}
-        <br />
-        <br />
-        <br />
-        <div className='row'>
-          <div className='col-md-5'>
-            申請人聯絡電話：
-            <TextField
-              id='phone'
-              value={this.props.phone}
-              type='number'
-              onChange={(event) => this.props.courseCreditChange('phone', event.target.value)}
-              hintText='09XXXXXXXX'
-            />&nbsp;
-          </div>
-          <div className='col-md-5'>
-            申請日期：&nbsp;{this.getTime()}
-          </div>
+        <div style={{ marginBottom: '10px' }}>
+          班別:&nbsp;&nbsp;
+          {this.props.studentIdcard.program}
         </div>
-        <br />
+        <div style={{ marginBottom: '10px' }}>
+          學號:&nbsp;&nbsp;
+          {this.props.studentIdcard.student_id}
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          申請人:&nbsp;&nbsp;
+          {this.props.studentIdcard.sname}
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          申請日期：&nbsp;
+          {this.getTime()}
+        </div>
+        <div>
+          聯絡電話：
+          <TextField
+            id='phone'
+            hintText=''
+            style={{ width: '150px' }}
+            value={this.props.phone}
+            onChange={(event) => this.props.courseCreditChange('phone', event.target.value)}
+          />
+        </div>
         <br />
         {/* 事宜： */}
         {/* <br /> */}
