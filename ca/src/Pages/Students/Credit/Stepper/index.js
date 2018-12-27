@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import FormSelectTable from './FormSelectTable'
 import TextForm from './CreditCourseTextForm/normalCourse'
+import WaiveForm from './CreditCourseTextForm/waiveCourse'
 import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
 import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import axios from 'axios'
@@ -81,13 +82,13 @@ class HorizontalLinearStepper extends React.Component {
           case 0:
             return (<TextForm />)
           case 1:
-            return (<TextForm />)
+            return (<WaiveForm />)
           case 2:
             return (<EnglishCourseForm />)
           default:
             return ''
         }
-      }   
+      }
       case 2:
         return (<CreditCourseTextFormConfirm />)
       default:

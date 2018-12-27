@@ -45,7 +45,7 @@ export default class TableExampleControlled extends Component {
             <TableRowColumn>必修課程未通過外系抵免</TableRowColumn>
           </TableRow>
           <TableRow selected={this.isSelected(1)}>
-            <TableRowColumn>轉系生抵免</TableRowColumn>
+            <TableRowColumn>抵免學分申請表</TableRowColumn>
           </TableRow>
           <TableRow selected={this.isSelected(2)}>
             <TableRowColumn>外系英文授課抵免</TableRowColumn>
