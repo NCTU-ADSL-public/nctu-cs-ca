@@ -11,6 +11,8 @@ import Chip from 'material-ui/Chip'
 import { Dialog } from 'material-ui'
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles/index'
 const styles = {
   noticeTitle: {
     fontSize: '2.8em',
@@ -109,93 +111,93 @@ class GroupApply extends React.Component {
       loading: true,
       cs_number: 0,
       chipOpen: new Map(),
-      // applyList: [],
-      applyList: [
-        { research_title: '資料錯誤',
-          status: 0,
-          year: '107-1',
-          first_second: '2',
-          participants: [
-            { student_id: '0399999',
-              sname: '陳罐頭',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 1,
-            },
-            { student_id: '0391234',
-              sname: '郭梁兒',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 1,
-            },
-            { student_id: '0391666',
-              sname: '耿平',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 0,
-            },
-            { student_id: '0416014',
-              sname: '王立洋',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 1,
-            },
-            { student_id: '0391444',
-              sname: '俞阿杰',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 0,
-            }
-          ]
-        },
-        { research_title: '我的專題',
-          status: 0,
-          year: '107-1',
-          first_second: '2',
-          participants: [
-            { student_id: '0416014',
-              sname: '王立洋',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 1,
-            }
-          ]
-        },
-        { research_title: '資料錯誤',
-          status: '2',
-          year: '107-1',
-          first_second: '2',
-          participants: [
-            { student_id: '0399997',
-              sname: '陳乾頭',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 0,
-            }
-          ]
-        },
-        { research_title: '資料錯誤',
-          status: '3',
-          year: '107-1',
-          first_second: '2',
-          participants: [
-            { student_id: '0399987',
-              sname: '陳憨頭',
-              email: 'danny021406@gmail.com',
-              phone: '',
-              first_second: '2',
-              student_status: 1,
-            }
-          ]
-        }
-      ]
+      applyList: [],
+      // applyList: [
+      //   { research_title: '資料錯誤',
+      //     status: 0,
+      //     year: '107-1',
+      //     first_second: '2',
+      //     participants: [
+      //       { student_id: '0399999',
+      //         sname: '陳罐頭',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 1,
+      //       },
+      //       { student_id: '0391234',
+      //         sname: '郭梁兒',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 1,
+      //       },
+      //       { student_id: '0391666',
+      //         sname: '耿平',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 0,
+      //       },
+      //       { student_id: '0416014',
+      //         sname: '王立洋',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 1,
+      //       },
+      //       { student_id: '0391444',
+      //         sname: '俞阿杰',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 0,
+      //       }
+      //     ]
+      //   },
+      //   { research_title: '我的專題',
+      //     status: 0,
+      //     year: '107-1',
+      //     first_second: '2',
+      //     participants: [
+      //       { student_id: '0416014',
+      //         sname: '王立洋',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 1,
+      //       }
+      //     ]
+      //   },
+      //   { research_title: '資料錯誤',
+      //     status: '2',
+      //     year: '107-1',
+      //     first_second: '2',
+      //     participants: [
+      //       { student_id: '0399997',
+      //         sname: '陳乾頭',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 0,
+      //       }
+      //     ]
+      //   },
+      //   { research_title: '資料錯誤',
+      //     status: '3',
+      //     year: '107-1',
+      //     first_second: '2',
+      //     participants: [
+      //       { student_id: '0399987',
+      //         sname: '陳憨頭',
+      //         email: 'danny021406@gmail.com',
+      //         phone: '',
+      //         first_second: '2',
+      //         student_status: 1,
+      //       }
+      //     ]
+      //   }
+      // ]
     }
   }
 
@@ -315,7 +317,6 @@ class GroupApply extends React.Component {
     )
   }
 }
-export default GroupApply
 
 const StudentStatusHint = (props) => (
   <MuiThemeProvider>
@@ -390,3 +391,12 @@ const ApplyButton = (props) => {
     </Grid>
   )
 }
+
+
+const mapStateToProps = (state) => ({
+  idCard: state.Teacher.User.idCard,
+})
+const mapDispatchToProps = (dispatch) => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(GroupApply))

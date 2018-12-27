@@ -76,12 +76,10 @@ class Index extends React.Component {
   fetchImage () {
     if (this.props.data.image !== undefined && this.props.data.file !== undefined) return
     let directory = this.props.data.semester + '/' + this.props.data.tname + '/' + this.props.data.research_title + '/image/image.jpg'
-    console.log(directory)
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
       this.props.store_image(url)
     }).catch(error => {
-      console.log(error)
       this.props.store_image('')
     })
     directory = this.props.data.semester + '/' + this.props.data.tname + '/' + this.props.data.research_title + '/file/file.pdf'
@@ -89,7 +87,6 @@ class Index extends React.Component {
     pathReference.getDownloadURL().then(url => {
       this.props.store_file(url)
     }).catch(error => {
-      console.log(error)
       this.props.store_file('')
     })
   }

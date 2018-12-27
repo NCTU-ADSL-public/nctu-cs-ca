@@ -5,7 +5,7 @@ import {Navbar,Nav,NavItem,DropdownButton,MenuItem,ButtonToolbar } from 'react-b
 
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
-import dinoIcon from '../Resources/dinoIcon.png'
+import dinoIcon from '../Resources/dinoIcon_snow.gif'
 import NavButton from './NavButton'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -111,7 +111,7 @@ class _Navbar extends React.Component {
   }
 
   render() {
-    const {onClicks,selectedButtonIndex} = this.state
+    const {onClicks} = this.state
     const navItems = {
       'student': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname.match(this.props.router[0]) !== null }/>,
@@ -124,17 +124,17 @@ class _Navbar extends React.Component {
       'assistant': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname.match(this.props.router[0]) !== null }/>,
         <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={this.props.router && this.props.location.pathname.match(this.props.router[1]) !== null}/>,
-        <NavButton key={2} label='學生專題' icon='fa fa-users' onClick={onClicks[2]} selected={this.props.router && this.props.location.pathname.match(this.props.router[2]) !== null}/>,
+        <NavButton key={1} label='學生專題' icon='fa fa-users' onClick={onClicks[1]} selected={this.props.router && this.props.location.pathname.match(this.props.router[1]) !== null}/>,
         <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={this.props.router && this.props.location.pathname.match(this.props.router[3]) !== null}/>,
         <NavButton key={4} label='審核' icon='fa fa-list-alt' onClick={onClicks[4]} selected={this.props.router && this.props.location.pathname.match(this.props.router[4]) !== null}/>,
       ],
       'teacher': [
-        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={selectedButtonIndex === 0}/>,
-        <NavButton key={1} label='教授課程' icon='fa fa-pie-chart' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
-        <NavButton key={2} label='專題' icon='fa fa-users' onClick={onClicks[2]} selected={selectedButtonIndex === 2}/>,
-        <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
+        <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname.match(this.props.router[0]) !== null}/>,
+        <NavButton key={1} label='專題' icon='fa fa-users' onClick={onClicks[1]} selected={this.props.router && this.props.location.pathname.match(this.props.router[1]) !== null}/>,
       ]
     }
+    // <NavButton key={1} label='教授課程' icon='fa fa-pie-chart' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
+    // <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={selectedButtonIndex === 3}/>,
     return <Navbar staticTop fixedTop fluid expanded={this.state.expanded} onToggle={this.onToggleCollapse}>
       <Navbar.Header>
         {/*<div style={{...style.BrandBox, borderLeft: `6px solid ${this.props.color}`}}>*/}

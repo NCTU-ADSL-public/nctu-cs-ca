@@ -1,0 +1,269 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+#font_adjust{
+    background: #F5F5F5;
+    height: auto;
+    width: auto;
+}
+
+.Map-title-text{
+    background: #F5F5F5;
+    padding: 35px 6% 0 6%;
+    color: #7B7B7B;
+    font-size: 1.5em;
+    zoom: 80%;
+}
+
+.selectFieldStyle{
+    position: fixed;
+    top: 200px;
+    right: 100px;
+    z-index: 100;
+}
+
+#lessons-title{
+    font-size: 2.3em;
+    font-weight: 500;
+    margin: 0;
+    float: left;
+}
+
+#lessons-little-title{
+    margin: 1.3% 0 0 20px;
+    font-size: 1.7em;
+    float: left;
+}
+
+h3{
+    font-size: 1.5em;
+    margin: 0;
+}
+
+
+.Map-Row{
+    padding: 2% 5% 0 5%;
+    background: #F5F5F5;
+    height: 600px;
+}
+
+.grades{
+    float: left;
+    margin: 5px 5px 0 5px;
+
+    border: 0.5px solid #e3e3e3;
+    height: 490px;
+    width: 80%;
+}
+
+.mods{
+    float: left;
+    margin: 2% 0 0 1%;
+    width: 15%;
+}
+
+.grade{
+    float: left;
+    background: #AFEEEE;
+    height: 100%;
+    width: 25%;
+}
+
+.grade-cur .grade-num{
+    color: #fcfffa;
+    background-color: #e8a840;
+    opacity: 1;
+}
+.grade-cur .session{
+    opacity: 1;
+}
+
+#grade-2, #grade-4{
+    background: #F0FFFF;
+}
+
+
+.grade-num{
+    padding: 3px 3px 3px 10px;
+
+    height: 40px;
+    background: #FFF;
+    opacity: 0.5;
+    color: #222;
+}
+
+.session{
+    height: 464px;
+    width: 100%;
+    opacity: 1;
+}
+
+.up-session{
+    float: left;
+    height: 100%;
+    width: 50%;
+    background: #AFEEEE;
+}
+.down-session{
+    float: left;
+    height: 100%;
+    width: 50%;
+    background: #96dcdc;
+}
+
+
+.course-group{
+    height: 30%;
+}
+
+.course-group-1{
+    height: 22%;
+}
+.course-group-2{
+    height: 42%;
+}
+.course-group-3{
+    height: 20%;
+}
+
+.course{
+    padding: 8px 8px 4px 8px;
+}
+
+.course:hover{
+    border-radius: 2px;
+}
+
+.course-btn{
+    overflow: auto;
+    border-radius: 2px;
+    transition: all 2s ease;
+    width:100px;
+}
+.course-btn:hover{
+    width: 200px;
+    z-index: 1000;
+}
+
+.course-btn-map{
+    overflow: visible;
+    border-radius: 5px;
+    width:120px;
+    opacity: 1;
+}
+.course-btn-map:hover{
+    width:200px;
+}
+
+
+.session-cur{
+    background: #fbe099;
+}
+
+.session-cur .course-group .course .course-btn{
+    background: #e8a840;
+    color: #f2fff8;
+    font-weight: 300;
+}
+
+.hover-info {
+    position: absolute;
+    z-index: 100;
+    width: 500px;
+    height: 100px;
+    background: #DDD;
+    opacity: 0.7;
+    padding: 5px 7px 5px 7px;
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.btn-default{
+    background: #222;
+}
+.btn-green{
+    background: #5ed6ae;
+    color: #222;
+}
+.btn-orange{
+    background: #ffff61;
+    color: #222;
+}
+.btn-red{
+    background: #f56161;
+}
+.zoom {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+}
+
+.zoom_in {
+    margin-right: 10px;
+}
+
+
+@media only screen and (max-width: 500px) {
+
+    .Map-title-text{
+        margin: 0 5% 6% 5%;
+        padding: 60px 10px 3px 10px;
+        color: #7B7B7B;
+        font-size: 1.5em;
+    }
+
+    #lessons-title{
+        font-size: 1.7em;
+        font-weight: 500;
+        margin: 0;
+        float: left;
+    }
+
+    #lessons-little-title{
+        margin: 4% 0 0 20px;
+        font-size: 1.1em;
+        float: left;
+    }
+
+    .grades{
+        margin-bottom: 10px;
+        height: inherit;
+        width: 100%;
+    }
+
+    .grade-num{
+        margin: inherit;
+        padding: 3px 0px 3px 0px;
+        height: 7.5%;
+        text-align: center;
+    }
+
+    .session {
+        height: 100%;
+    }
+
+    .course-group-1{
+        height: inherit;
+    }
+    .course-group-2{
+        height: inherit;
+    }
+    .course-group-3{
+        height: inherit;
+    }
+
+    .course{
+        padding: 5px;
+        height: 54px;
+
+    }
+
+    .course-btn{
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .mods{
+        width: 100%;
+    }
+
+}

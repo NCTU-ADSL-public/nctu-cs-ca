@@ -24,6 +24,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 // css
 import './GroupList.css'
+import { connect } from 'react-redux'
 
 // FIRE BASE
 let config = {
@@ -110,75 +111,76 @@ class GroupList extends React.Component {
       cs_number: 0,
       other_number: 0,
       chipOpen: new Map(),
-      groupList: [
-        {
-          research_title: 'epth estimation from Single image',
-          participants: [
-            {
-              student_id: '0399999',
-              sname: '陳罐頭',
-              detail: '資工系 網多組3 ',
-              score: ''
-            },
-            {
-              student_id: '0399777',
-              sname: '李小霖',
-              detail: '資工系 網多組3 ',
-              score: ''
-            },
-            {
-              student_id: '0391234',
-              sname: '郭梁兒',
-              detail: '資工系 網多組3 '
-            },
-            {
-              student_id: '0399666',
-              sname: '耿平',
-              detail: '資工系 網多組3 ',
-              score: ''
-            },
-            {
-              student_id: '0391555',
-              sname: '余阿杰',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        },
-        {
-          research_title: '虛擬貨幣交易機器人',
-          participants: [
-            {
-              student_id: '0399998',
-              sname: '陳干頭',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        },
-        {
-          research_title: 'IOT智慧家庭監控應用',
-          participants: [
-            {
-              student_id: '0399997',
-              sname: '陳平頭',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        },
-        {
-          research_title: 'Android 系統記乾憶體管理改進',
-          participants: [
-            {
-              student_id: '0399987',
-              sname: '陳頭',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        }
-      ],
+      groupList: [],
+      // groupList: [
+      //   {
+      //     research_title: 'epth estimation from Single image',
+      //     // participants: [
+      //     //   {
+      //     //     student_id: '0399999',
+      //     //     sname: '陳罐頭',
+      //     //     detail: '資工系 網多組3 ',
+      //     //     score: ''
+      //     //   },
+      //     //   {
+      //     //     student_id: '0399777',
+      //     //     sname: '李小霖',
+      //     //     detail: '資工系 網多組3 ',
+      //     //     score: ''
+      //     //   },
+      //     //   {
+      //     //     student_id: '0391234',
+      //     //     sname: '郭梁兒',
+      //     //     detail: '資工系 網多組3 '
+      //     //   },
+      //     //   {
+      //     //     student_id: '0399666',
+      //     //     sname: '耿平',
+      //     //     detail: '資工系 網多組3 ',
+      //     //     score: ''
+      //     //   },
+      //     //   {
+      //     //     student_id: '0391555',
+      //     //     sname: '余阿杰',
+      //     //     detail: '資工系 網多組3 '
+      //     //   }
+      //     // ],
+      //     year: '106'
+      //   },
+      //   {
+      //     research_title: '虛擬貨幣交易機器人',
+      //     participants: [
+      //       {
+      //         student_id: '0399998',
+      //         sname: '陳干頭',
+      //         detail: '資工系 網多組3 '
+      //       }
+      //     ],
+      //     year: '106'
+      //   },
+      //   {
+      //     research_title: 'IOT智慧家庭監控應用',
+      //     participants: [
+      //       {
+      //         student_id: '0399997',
+      //         sname: '陳平頭',
+      //         detail: '資工系 網多組3 '
+      //       }
+      //     ],
+      //     year: '106'
+      //   },
+      //   {
+      //     research_title: 'Android 系統記乾憶體管理改進',
+      //     participants: [
+      //       {
+      //         student_id: '0399987',
+      //         sname: '陳頭',
+      //         detail: '資工系 網多組3 '
+      //       }
+      //     ],
+      //     year: '106'
+      //   }
+      // ],
       initItem: [
         {
           'student_id': '0316000',
@@ -379,8 +381,6 @@ class GroupList extends React.Component {
   }
 }
 
-export default GroupList
-
 const GroupButton = (props) => (
   <Grid className='groupBtn' key={props.keyId}>
     <Row>
@@ -454,3 +454,11 @@ const GroupButton = (props) => (
     </Row>
   </Grid>
 )
+
+const mapStateToProps = (state) => ({
+  idCard: state.Teacher.User.idCard,
+})
+const mapDispatchToProps = (dispatch) => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

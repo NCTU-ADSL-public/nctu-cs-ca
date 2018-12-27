@@ -32,7 +32,7 @@ class SelectCourseField extends Component {
 
   handleChange (event, index, value) {
     this.setState({ value: value })
-    this.props.courseCreditChange('course_type', event.target.value === 0 ? '必修' : '選修')
+    this.props.courseCreditChange({ course_type: event.target.value === 0 ? '必修' : '選修' })
   }
 
   render () {
@@ -61,8 +61,8 @@ class SelectCourseField extends Component {
 const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
-  courseCreditChange: (type, value) => {
-    dispatch(courseCreditChange(type, value))
+  courseCreditChange: (payload) => {
+    dispatch(courseCreditChange(payload))
   }
 })
 

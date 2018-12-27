@@ -9,7 +9,7 @@ import './Home.css'
 class Mentor extends React.Component {
   render () {
     return (
-      <div >
+      <div style={{ marginTop: 'calc( -7vh )' }}>
         <Link to='/students/grad'>
           <img alt='' src={img2} className='image' />
         </Link>
