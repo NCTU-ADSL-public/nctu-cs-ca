@@ -1,5 +1,5 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
+import TextField from '@material-ui/core/TextField'
 import Postfile from './Postfile'
 import { connect } from 'react-redux'
 
@@ -39,7 +39,7 @@ class EnglishCourseFormConfirm extends React.Component {
             id='phone'
             style={{ width: '150px' }}
             defaultValue={this.props.phone}
-            disabled
+            InputProps={{ readOnly: true }}
           />
         </div>
         <br />
@@ -53,8 +53,8 @@ class EnglishCourseFormConfirm extends React.Component {
           <TextField
             id='reason'
             defaultValue={this.props.reason}
-            disabled
-            multiLine
+            InputProps={{ readOnly: true }}
+            multiline
             fullWidth
             rows={1}
           />
@@ -64,14 +64,14 @@ class EnglishCourseFormConfirm extends React.Component {
           id='department'
           style={{ width: '100px' }}
           defaultValue={this.props.department}
-          disabled
+          InputProps={{ readOnly: true }}
         />
         &nbsp;系&nbsp;&nbsp;&nbsp;
         <TextField
           id='teacher'
           style={{ width: '100px' }}
           defaultValue={this.props.teacher}
-          disabled
+          InputProps={{ readOnly: true }}
         />
         &nbsp;老師所授之
         <div className='row'>
@@ -81,7 +81,7 @@ class EnglishCourseFormConfirm extends React.Component {
               id='course_code'
               style={{ width: '150px' }}
               defaultValue={this.props.course_code}
-              disabled
+              InputProps={{ readOnly: true }}
             />
           </div>
           <div className='col-lg-3 col-md-4 col-12'>
@@ -90,7 +90,7 @@ class EnglishCourseFormConfirm extends React.Component {
               id='course_name'
               style={{ width: '180px' }}
               defaultValue={this.props.course_name}
-              disabled
+              InputProps={{ readOnly: true }}
             />
           </div>
         </div>
@@ -109,14 +109,14 @@ class EnglishCourseFormConfirm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  year: state.Student.Credit.courseCreditChange.year,
-  semester: state.Student.Credit.courseCreditChange.semester,
-  department: state.Student.Credit.courseCreditChange.department,  // 原課程的depart
-  teacher: state.Student.Credit.courseCreditChange.teacher,      // 原課程teacher
-  course_name: state.Student.Credit.courseCreditChange.course_name,
-  course_code: state.Student.Credit.courseCreditChange.course_code,
-  reason: state.Student.Credit.courseCreditChange.reason,
-  phone: state.Student.Credit.courseCreditChange.phone
+  year: state.Student.Credit.englishCourse.year,
+  semester: state.Student.Credit.englishCourse.semester,
+  department: state.Student.Credit.englishCourse.department,  // 原課程的depart
+  teacher: state.Student.Credit.englishCourse.teacher,      // 原課程teacher
+  course_name: state.Student.Credit.englishCourse.course_name,
+  course_code: state.Student.Credit.englishCourse.course_code,
+  reason: state.Student.Credit.englishCourse.reason,
+  phone: state.Student.Credit.englishCourse.phone
 })
 
 const mapDispatchToProps = (dispatch) => ({

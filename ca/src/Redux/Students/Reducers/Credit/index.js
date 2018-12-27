@@ -17,14 +17,14 @@ const initialState = {
     reason: ''
   },
   englishCourse: {
-    year: '',   
-    semester: '',
+    apply_year: '',   
+    apply_semester: '',
     phone: '',
-    department: '', // 原課程的depart
-    teacher: '', // 原課程teacher
-    course_name: '',
+    reason: '',
+    department: '',
+    teacher: '',
     course_code: '',
-    reason: ''
+    course_name: ''
   }
 }
 
@@ -33,6 +33,13 @@ export default handleActions({
     ...state,
     courseCreditChange: {
       ...state.courseCreditChange,
+      ...action.payload
+    }
+  }),
+  ENGLISH_COURSE_CREDIT_CHANGE: (state, action) => ({
+    ...state,
+    englishCourse: {
+      ...state.englishCourse,
       ...action.payload
     }
   })
