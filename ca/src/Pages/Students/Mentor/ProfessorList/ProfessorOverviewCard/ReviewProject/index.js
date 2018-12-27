@@ -106,7 +106,7 @@ class Index extends React.Component {
           <div className='container'>
             {
               this.state.data.map(t =>
-                <Card data={t} profile={this.props.profile} />)
+                <Card data={t} profile={this.props.profile} key={t.research_title} />)
             }
           </div>
         </Dialog>
