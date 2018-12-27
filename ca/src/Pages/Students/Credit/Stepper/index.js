@@ -51,7 +51,15 @@ class HorizontalLinearStepper extends React.Component {
           break
       }
     }
-  }
+
+      if(this.state.selectFormIndex === -1) {
+        alert('請選擇表單')
+        this.setState({
+          stepIndex: stepIndex,
+          finished: stepIndex >= 2
+        })
+      }
+    }
 
   handlePrev () {
     const {stepIndex} = this.state
