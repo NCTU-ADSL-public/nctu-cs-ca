@@ -106,14 +106,6 @@ class Head extends Component {
   }
 
   render () {
-    const onTouchTaps = [
-      () => this.select(0),
-      () => this.select(1),
-      () => this.select(2),
-      () => this.select(3),
-      () => this.select(4),
-      () => this.select(5)
-    ]
     const router = [
       '/teachers/head',
       '/teachers/group',

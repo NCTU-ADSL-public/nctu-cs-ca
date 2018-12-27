@@ -2,7 +2,6 @@ import React from 'react'
 
 import GroupList from './GroupList'
 import GroupApply from './GroupApply'
-import GroupVedio from './GroupVedio'
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 

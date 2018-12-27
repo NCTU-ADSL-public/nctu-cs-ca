@@ -47,17 +47,17 @@ class index extends React.Component {
     return (
       <div style={{ marginTop: 'calc( -7vh )' }}>
         <div className='hidden-xs hidden-sm'
-             style={{
-               padding: '0',
-               background: '#313131',
-               height: '100vh',
-             }}>
+          style={{
+            padding: '0',
+            background: '#313131',
+            height: '100vh'
+          }}>
           <img src={img0} className='image'
-               style={{
-                 maxWidth: '80vw',
-                 width: 'auto',
-                 paddingTop: '51px',
-               }} />
+            style={{
+              maxWidth: '80vw',
+              width: 'auto',
+              paddingTop: '51px'
+            }} />
         </div>
       </div>
     )

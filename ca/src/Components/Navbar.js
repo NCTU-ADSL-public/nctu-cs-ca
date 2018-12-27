@@ -111,7 +111,7 @@ class _Navbar extends React.Component {
   }
 
   render() {
-    const {onClicks,selectedButtonIndex} = this.state
+    const {onClicks} = this.state
     const navItems = {
       'student': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname.match(this.props.router[0]) !== null }/>,

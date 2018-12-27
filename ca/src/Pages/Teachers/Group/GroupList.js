@@ -25,7 +25,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 // css
 import './GroupList.css'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles/index'
 
 // FIRE BASE
 let config = {
