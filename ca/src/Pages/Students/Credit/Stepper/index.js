@@ -8,8 +8,9 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import FormSelectTable from './FormSelectTable'
 import TextForm from './CreditCourseTextForm/normalCourse'
-import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
+import EnglishCourseForm from './CreditCourseTextForm/englishCourseForm'
 import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
+import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { courseCreditChange } from '../../../../Redux/Students/Actions/Credit'
@@ -88,8 +89,18 @@ class HorizontalLinearStepper extends React.Component {
             return ''
         }
       }   
-      case 2:
-        return (<CreditCourseTextFormConfirm />)
+      case 2: {
+        switch (this.state.selectFormIndex) {
+          case 0:
+            return (<CreditCourseTextFormConfirm />)
+          case 1:
+            return (<CreditCourseTextFormConfirm />)
+          case 2:
+            return (<EnglishCourseFormConfirm />)
+          default:
+            return ''
+        }
+      }
       default:
         return 'You\'re a long way from home sonny jim!'
     }

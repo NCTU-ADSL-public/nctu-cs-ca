@@ -15,6 +15,16 @@ const initialState = {
     course_type: '必修',
     credit: '', // 可能需要(新課程的credit)
     reason: ''
+  },
+  englishCourse: {
+    year: '',   
+    semester: '',
+    phone: '',
+    department: '', // 原課程的depart
+    teacher: '', // 原課程teacher
+    course_name: '',
+    course_code: '',
+    reason: ''
   }
 }
 
@@ -23,7 +33,7 @@ export default handleActions({
     ...state,
     courseCreditChange: {
       ...state.courseCreditChange,
-      [action.payload.type]: action.payload.value
+      ...action.payload
     }
   })
 }, initialState)
