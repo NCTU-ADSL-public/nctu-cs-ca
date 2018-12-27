@@ -5,7 +5,7 @@ import {Navbar,Nav,NavItem,DropdownButton,MenuItem,ButtonToolbar } from 'react-b
 
 import './Navbar.css'
 import defalt from '../Resources/defalt.jpg';
-import dinoIcon from '../Resources/dinoIcon.png'
+import dinoIcon from '../Resources/dinoIcon_snow.gif'
 import NavButton from './NavButton'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
