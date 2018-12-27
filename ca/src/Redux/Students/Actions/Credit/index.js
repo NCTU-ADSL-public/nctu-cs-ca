@@ -1,9 +1,18 @@
 
 import { createAction } from 'redux-actions'
+import axios from 'axios'
 
-export const CourseCreditChange = createAction('COURSE_CREDIT_CHANGE')
+export const courseCreditChange = createAction('COURSE_CREDIT_CHANGE')
+export const englishCourseCreditChange = createAction('ENGLISH_COURSE_CREDIT_CHANGE')
 
-export const courseCreditChange = (type, value) => dispatch => {
-  let object = { type: type, value: value }
-  dispatch(CourseCreditChange(object))
+export const sendEnglishCourseCredit = (payload) => dispatch => {
+  axios.post('/students/createEnglishOffsetApplyForm', payload)
+    .then(res => {
+      alert('送出成功')
+    })
+    .catch(err => {
+      // window.location.replace("/logout ");
+      alert('送出失敗，請檢查連線是否穩定。')
+      console.log(err)
+    })
 }

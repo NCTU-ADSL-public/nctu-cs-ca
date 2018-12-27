@@ -8,11 +8,12 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import FormSelectTable from './FormSelectTable'
 import TextForm from './CreditCourseTextForm/normalCourse'
-import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
+import WaiveForm from './CreditCourseTextForm/waiveCourse'
+import EnglishCourseForm from './CreditCourseTextForm/englishCourseForm'
 import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
-import axios from 'axios'
+import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
 import { connect } from 'react-redux'
-import { courseCreditChange } from '../../../../Redux/Students/Actions/Credit'
+import { courseCreditChange, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
 
 class HorizontalLinearStepper extends React.Component {
   constructor (props) {
@@ -39,29 +40,17 @@ class HorizontalLinearStepper extends React.Component {
       let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
       let semester = ((Today.getMonth() + 1) >= 8 ? '1' : '2')
 
-      axios.post('/student/credit/course/form', {
-        studentIdcard: this.props.studentIdcard.student_id,
-        year: year,
-        semester: semester,
-        department: this.props.department,  // 原課程的depart
-        teacher: this.props.teacher,      // 原課程teacher
-        course_name_old: this.props.course_name_old,   // 可能需要
-        course_code_old: this.props.course_code_old,   // 可能需要
-        course_name: this.props.course_name,
-        course_code: this.props.course_code,
-        credit: this.props.credit,          // 可能需要(新課程的credit)
-        reason: this.props.reason,
-        course_type: this.props.course_type,
-        phone: this.props.phone
-      })
-        .then(res => {
-          alert('送出成功')
-        })
-        .catch(err => {
-          // window.location.replace("/logout ");
-          alert('送出失敗，請檢查連線是否穩定。')
-          console.log(err)
-        })
+      switch (this.state.selectFormIndex) {
+        case 0:
+          break
+        case 1:
+          break
+        case 2:
+          this.props.sendEnglishCourseCredit(this.props.englishCourse)
+          break
+        default:
+          break
+      }
     }
 
       if(this.state.selectFormIndex === -1) {
@@ -89,15 +78,25 @@ class HorizontalLinearStepper extends React.Component {
           case 0:
             return (<TextForm />)
           case 1:
-            return (<TextForm />)
+            return (<WaiveForm />)
           case 2:
             return (<EnglishCourseForm />)
           default:
             return ''
         }
       }
-      case 2:
-        return (<CreditCourseTextFormConfirm />)
+      case 2: {
+        switch (this.state.selectFormIndex) {
+          case 0:
+            return (<CreditCourseTextFormConfirm />)
+          case 1:
+            return (<CreditCourseTextFormConfirm />)
+          case 2:
+            return (<EnglishCourseFormConfirm />)
+          default:
+            return ''
+        }
+      }
       default:
         return 'You\'re a long way from home sonny jim!'
     }
@@ -165,25 +164,12 @@ class HorizontalLinearStepper extends React.Component {
 }
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  year: state.Student.Credit.courseCreditChange.year,
-  semester: state.Student.Credit.courseCreditChange.semester,
-  department: state.Student.Credit.courseCreditChange.department,  // 原課程的depart
-  teacher: state.Student.Credit.courseCreditChange.teacher,      // 原課程teacher
-  course_name_old: state.Student.Credit.courseCreditChange.course_name_old,   // 可能需要
-  course_code_old: state.Student.Credit.courseCreditChange.course_code_old,   // 可能需要
-  course_name: state.Student.Credit.courseCreditChange.course_name,
-  course_code: state.Student.Credit.courseCreditChange.course_code,
-  course_type: state.Student.Credit.courseCreditChange.course_type,
-  credit: state.Student.Credit.courseCreditChange.credit,          // 可能需要(新課程的credit)
-  reason: state.Student.Credit.courseCreditChange.reason,
-  phone: state.Student.Credit.courseCreditChange.phone,
-  cos_type: state.Student.Credit.courseCreditChange.cos_type
+  englishCourse: state.Student.Credit.englishCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  courseCreditChange: (type, value) => {
-    dispatch(courseCreditChange(type, value))
-  }
+  courseCreditChange: (payload) => dispatch(courseCreditChange(payload)),
+  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper)
