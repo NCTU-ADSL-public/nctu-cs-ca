@@ -1,10 +1,4 @@
-{
-  "grade02": 0,
-  "grade03": 1,
-  "grade04": 7,
-  "grade05": 0,
-  "total_number": 7,
-  "groups": [
+[
     {
       "research_title": "聊天機器人",
       "participants": [
@@ -86,4 +80,3 @@
       "intro": "\r"
     }
   ]
-}
