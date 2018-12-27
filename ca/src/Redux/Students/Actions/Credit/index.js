@@ -6,6 +6,7 @@ export const courseCreditChange = createAction('COURSE_CREDIT_CHANGE')
 export const englishCourseCreditChange = createAction('ENGLISH_COURSE_CREDIT_CHANGE')
 
 export const sendEnglishCourseCredit = (payload) => dispatch => {
+  console.log(payload)
   axios.post('/students/createEnglishOffsetApplyForm', payload)
     .then(res => {
       alert('送出成功')

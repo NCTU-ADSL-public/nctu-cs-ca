@@ -48,7 +48,7 @@ class EnglishCourseFormConfirm extends React.Component {
           因故無法修習本系所開課程，擬修習外系英文授課專業課程，並申請為本系畢業學分規定之「畢業前須通過1門本系開授或認可之英文授課專業課程」。
         </div>
         <br />
-        <div style={{ marginBottom: '10px' }}>
+        <div style={{ marginBottom: '20px' }}>
           原因：
           <TextField
             id='reason'
@@ -59,22 +59,24 @@ class EnglishCourseFormConfirm extends React.Component {
             rows={1}
           />
         </div>
-        擬修&nbsp;
-        <TextField
-          id='department'
-          style={{ width: '100px' }}
-          defaultValue={this.props.department}
-          InputProps={{ readOnly: true }}
-        />
-        &nbsp;系&nbsp;&nbsp;&nbsp;
-        <TextField
-          id='teacher'
-          style={{ width: '100px' }}
-          defaultValue={this.props.teacher}
-          InputProps={{ readOnly: true }}
-        />
-        &nbsp;老師所授之
-        <div className='row'>
+        <div style={{ marginBottom: '15px' }}>
+          擬修&nbsp;
+          <TextField
+            id='department'
+            style={{ width: '100px' }}
+            defaultValue={this.props.department}
+            InputProps={{ readOnly: true }}
+          />
+          &nbsp;系&nbsp;&nbsp;&nbsp;
+          <TextField
+            id='teacher'
+            style={{ width: '100px' }}
+            defaultValue={this.props.teacher}
+            InputProps={{ readOnly: true }}
+          />
+          &nbsp;老師所授之
+        </div>
+        <div className='row' style={{ marginBottom: '15px' }}>
           <div className='col-lg-3 col-md-4 col-12'>
             課號：
             <TextField
