@@ -22,8 +22,10 @@ import TeacherList from './Pages/Assistants/Family'
 
 import StudentHome from './Pages/Students/Home/Home'
 import StudentGrad from './Pages/Students/Graduation_v2'
+
 import StudentCredit from './Pages/Students/Credit'
-import StudentMap from './Pages/Students/Map_v2'
+//import StudentMap from './Pages/Students/Map_v2'
+import StudentMap from './Pages/Students/Map_v3'
 import StudentProject from './Pages/Students/ProjectList'
 import StudentProfessor from './Pages/Students/Mentor'
 import Footer from './Components/Footer'
