@@ -53,7 +53,7 @@ class Group extends React.Component {
   }
   render () {
     return (
-      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} >
+      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} style={{marginTop: '20px'}}>
         <MuiThemeProvider>
         <Tabs
           value={this.state.value}
@@ -68,10 +68,10 @@ class Group extends React.Component {
                style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >
             <GroupApply idCard={this.props.idCard} />
           </Tab>
-          <Tab label={`各組專題影片`} value='3'
-               style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >
-            <GroupVedio idCard={this.props.idCard} />
-          </Tab>
+          {/*<Tab label={`各組專題影片`} value='3'*/}
+               {/*style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >*/}
+            {/*<GroupVedio idCard={this.props.idCard} />*/}
+          {/*</Tab>*/}
         </Tabs>
         </MuiThemeProvider>
         <div>

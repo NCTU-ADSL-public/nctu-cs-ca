@@ -111,6 +111,7 @@ class TextForm extends React.Component {
           <div className='col-md-5'>
             申請人聯絡電話：
             <TextField
+              id='phone'
               value={this.props.phone}
               type='number'
               onChange={(event) => this.props.courseCreditChange('phone', event.target.value)}
@@ -147,7 +148,8 @@ class TextForm extends React.Component {
         {/* <br /> */}
         現因 :<br />
         <TextField
-          hintText='某某理由'
+          id='reason'
+          hintText=''
           floatingLabelText='理由請詳填'
           value={this.props.reason}
           onChange={(event) => this.props.courseCreditChange('reason', event.target.value)}
@@ -157,20 +159,23 @@ class TextForm extends React.Component {
         /><br />之理由，無法修習本系所開課程，擬修
         <br />
         <TextField
-          hintText='某某'
+          id='department'
+          hintText=''
           style={{ width: '100px' }}
           value={this.props.department}
           onChange={(event) => this.props.courseCreditChange('department', event.target.value)}
         />
         &nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
-          hintText='某某'
+          id='teacher'
+          hintText=''
           style={{ width: '100px' }}
           value={this.props.teacher}
           onChange={(event) => this.props.courseCreditChange('teacher', event.target.value)}
         />&nbsp;
         老師&nbsp;&nbsp;&nbsp;&nbsp;所授之 &nbsp;&nbsp;課號：
         <TextField
+          id='course_code'
           hintText='DCPXX'
           floatingLabelText='請填寫永久課號'
           style={{ width: '150px' }}
@@ -179,7 +184,8 @@ class TextForm extends React.Component {
         />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
-          hintText='某某'
+          id='course_name'
+          hintText=''
           style={{ width: '200px' }}
           value={this.props.course_name}
           onChange={(event) => this.props.courseCreditChange('course_name', event.target.value)}
@@ -187,6 +193,7 @@ class TextForm extends React.Component {
         課
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
+          id='credit'
           hintText=''
           style={{ width: '50px' }}
           value={this.props.credit}
@@ -197,6 +204,7 @@ class TextForm extends React.Component {
         作為系內<SelectType />&nbsp;&nbsp;課程，以抵免系內之
         課號：
         <TextField
+          id='course_code_old'
           hintText='DCPXX'
           style={{ width: '150px' }}
           floatingLabelText='請填寫永久課號'
@@ -205,7 +213,8 @@ class TextForm extends React.Component {
         />&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
-          hintText='某某'
+          id='course_name_old'
+          hintText=''
           style={{ width: '200px' }}
           value={this.props.course_name_old}
           onChange={(event) => this.props.courseCreditChange('course_name_old', event.target.value)}
@@ -213,9 +222,9 @@ class TextForm extends React.Component {
         課
         <br />
         <br />
-        註：1.課程內容需與本系課
-        程一致。2. 須檢附用書書名及課程綱要）
-        <br />
+        註：<br />
+        1. 課程內容需與本系課程一致。<br />
+        2. 須檢附用書書名及課程綱要。<br />
         <br />
         <Postfile />
         <br />

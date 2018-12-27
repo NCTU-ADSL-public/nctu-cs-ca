@@ -7,7 +7,8 @@ import {
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import FormSelectTable from './FormSelectTable'
-import TextForm from './CreditCourseTextForm'
+import TextForm from './CreditCourseTextForm/normalCourse'
+import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
 import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import axios from 'axios'
 import { connect } from 'react-redux'
@@ -19,9 +20,11 @@ class HorizontalLinearStepper extends React.Component {
     this.handleNext = this.handleNext.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
     this.getStepContent = this.getStepContent.bind(this)
+    this.selectCreditForm = this.selectCreditForm.bind(this)
     this.state = {
       finished: false,
-      stepIndex: 0
+      stepIndex: 0,
+      selectFormIndex: -1
     }
   }
 
@@ -72,20 +75,30 @@ class HorizontalLinearStepper extends React.Component {
   getStepContent (stepIndex) {
     switch (stepIndex) {
       case 0:
-        return (
-          <FormSelectTable />
-        )
-      case 1:
-        return (
-          <TextForm />
-        )
+        return (<FormSelectTable selectCreditForm={this.selectCreditForm} />)
+      case 1: {
+        switch (this.state.selectFormIndex) {
+          case 0:
+            return (<TextForm />)
+          case 1:
+            return (<TextForm />)
+          case 2:
+            return (<EnglishCourseForm />)
+          default:
+            return ''
+        }
+      }   
       case 2:
-        return (
-          <CreditCourseTextFormConfirm />
-        )
+        return (<CreditCourseTextFormConfirm />)
       default:
         return 'You\'re a long way from home sonny jim!'
     }
+  }
+
+  selectCreditForm (index) {
+    this.setState({
+      selectFormIndex: index
+    })
   }
 
   render () {
@@ -109,7 +122,7 @@ class HorizontalLinearStepper extends React.Component {
           {finished ? (
             <p>
               <a
-                href='#'
+                href='/'
                 onClick={(event) => {
                   event.preventDefault()
                   this.setState({ stepIndex: 0, finished: false })
@@ -120,7 +133,7 @@ class HorizontalLinearStepper extends React.Component {
             </p>
           ) : (
             <div>
-              <p>{this.getStepContent(stepIndex)}</p>
+              <div>{this.getStepContent(stepIndex)}</div>
               <div style={{ marginTop: 12 }}>
                 <RaisedButton
                   label={stepIndex === 2 ? '送出!' : '下一步'}

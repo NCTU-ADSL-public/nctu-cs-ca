@@ -14,7 +14,7 @@ export default class TableExampleControlled extends Component {
     this.isSelected = this.isSelected.bind(this)
     this.handleRowSelection = this.handleRowSelection.bind(this)
     this.state = {
-      selected: [1]
+      selected: []
     }
   }
 
@@ -26,6 +26,10 @@ export default class TableExampleControlled extends Component {
     this.setState({
       selected: selectedRows
     })
+    if (selectedRows[0] !== undefined) {
+      // due to table lifecycle terminate, selectedRows[0] will become undefined
+      this.props.selectCreditForm(selectedRows[0])
+    }
   }
 
   render () {

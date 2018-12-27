@@ -1,36 +1,12 @@
 import React from 'react'
+import TextField from 'material-ui/TextField'
 import Postfile from './Postfile'
-// import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'
 import { courseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
 
 let items = []
 
-// const fontStyle = {
-//   verticalAlign: 'default',
-//   fontSize: '1em',
-//   fontWeight: '300',
-//   letterSpacing: '1px',
-//   fontFamily: 'Noto Sans CJK TC'
-// }
-
-// const fontlabelStyle = {
-//   verticalAlign: 'default',
-//   fontSize: '1em',
-//   fontWeight: '300',
-//   letterSpacing: '1px',
-//   fontFamily: 'Noto Sans CJK TC',
-//   color: '#a42926'
-// }
-
-// studentIdcard: {
-//   sname: '資料錯誤',
-//     student_id: '0000000',
-//     program: '網多',
-//     grade: "大三",
-//     email: 'hihi@gmail.com',
-// },
 class TextForm extends React.Component {
   constructor (props) {
     super(props)
@@ -121,20 +97,25 @@ class TextForm extends React.Component {
   render () {
     return (
       <div>
-        <font color='#a52a2a'>請確認無誤後送出</font><br />
-        班別:&nbsp;&nbsp;
-        {this.props.studentIdcard.program}&nbsp;
-        學號:&nbsp;&nbsp;
-        {this.props.studentIdcard.student_id}
-        &nbsp;&nbsp;&nbsp;&nbsp;申請人 &nbsp;&nbsp;&nbsp;
-        {this.props.studentIdcard.sname}
+         班別:&nbsp;&nbsp;
+         {this.props.studentIdcard.program}&nbsp;
+         學號:&nbsp;&nbsp;
+         {this.props.studentIdcard.student_id}
+         &nbsp;&nbsp;&nbsp;&nbsp;申請人 &nbsp;&nbsp;&nbsp;
+         {this.props.studentIdcard.sname}
         <br />
         <br />
         <br />
         <div className='row'>
           <div className='col-md-5'>
             申請人聯絡電話：
-            {this.props.phone}&nbsp;
+            <TextField
+              id='phone'
+              value={this.props.phone}
+              type='number'
+              onChange={(event) => this.props.courseCreditChange('phone', event.target.value)}
+              hintText='09XXXXXXXX'
+            />&nbsp;
           </div>
           <div className='col-md-5'>
             申請日期：&nbsp;{this.getTime()}
@@ -165,30 +146,63 @@ class TextForm extends React.Component {
         {/* <br /> */}
         {/* <br /> */}
         現因 :<br />
-        {this.props.reason}<br />之理由，無法修習本系所開課程，擬修
+        <TextField
+          id='reason'
+          hintText=''
+          floatingLabelText='理由請詳填'
+          value={this.props.reason}
+          onChange={(event) => this.props.courseCreditChange('reason', event.target.value)}
+          multiLine
+          fullWidth
+          rows={1}
+        /><br />之理由，無法修習本系所開課程，擬修
         <br />
-        {this.props.department}
+        <TextField
+          id='department'
+          hintText=''
+          style={{ width: '100px' }}
+          value={this.props.department}
+          onChange={(event) => this.props.courseCreditChange('department', event.target.value)}
+        />
         &nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        {this.props.teacher}&nbsp;
+        <TextField
+          id='teacher'
+          hintText=''
+          style={{ width: '100px' }}
+          value={this.props.teacher}
+          onChange={(event) => this.props.courseCreditChange('teacher', event.target.value)}
+        />&nbsp;
         老師&nbsp;&nbsp;&nbsp;&nbsp;所授之 &nbsp;&nbsp;課號：
-        {this.props.course_code}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <TextField
+          id='course_code'
+          hintText='DCPXX'
+          floatingLabelText='請填寫永久課號'
+          style={{ width: '150px' }}
+          value={this.props.course_code}
+          onChange={(event) => this.props.courseCreditChange('course_code', event.target.value)}
+        />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         課名：
-        {this.props.course_name}
-        課&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        {this.props.credit}
+        <TextField
+          id='course_name'
+          hintText=''
+          style={{ width: '200px' }}
+          value={this.props.course_name}
+          onChange={(event) => this.props.courseCreditChange('course_name', event.target.value)}
+        />
+        課
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <TextField
+          id='credit'
+          hintText=''
+          style={{ width: '50px' }}
+          value={this.props.credit}
+          onChange={(event) => this.props.courseCreditChange('credit', event.target.value)}
+        />
         學分
         <br />
-        作為系內{this.props.course_type}&nbsp;&nbsp;課程，以抵免系內之
-        課號：
-        {this.props.course_code_old}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        課名：
-        {this.props.course_name_old}
-        課
         <br />
-        <br />
-        註：1.課程內容需與本系課
-        程一致。2. 須檢附用書書名及課程綱要）
-        <br />
+        註：<br />
+        1. 須檢附用書書名及課程綱要。<br />
         <br />
         <Postfile />
         <br />
@@ -208,7 +222,6 @@ const mapStateToProps = (state) => ({
   course_code_old: state.Student.Credit.courseCreditChange.course_code_old,   // 可能需要
   course_name: state.Student.Credit.courseCreditChange.course_name,
   course_code: state.Student.Credit.courseCreditChange.course_code,
-  course_type: state.Student.Credit.courseCreditChange.course_type,
   credit: state.Student.Credit.courseCreditChange.credit,          // 可能需要(新課程的credit)
   reason: state.Student.Credit.courseCreditChange.reason,
   phone: state.Student.Credit.courseCreditChange.phone

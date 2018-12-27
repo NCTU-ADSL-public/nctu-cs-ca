@@ -40,7 +40,7 @@ class Head extends Component {
   }
 
   componentDidMount () {
-    this.select(0)
+    // this.select(0)
   }
 
   select (index) {
@@ -114,6 +114,22 @@ class Head extends Component {
       () => this.select(4),
       () => this.select(5)
     ]
+    const router = [
+      '/teachers/head',
+      '/teachers/group',
+    ]
+    const onTouchTapsrouter = [
+      () => this.props.history.push(router[0]),
+      () => this.props.history.push(router[1]),
+      () => this.props.history.push(router[2]),
+      () => this.props.history.push(router[3]),
+      () => this.props.history.push(router[4]),
+      () => this.props.history.push(router[5]),
+      () => this.select(6),
+      () => this.select(7),
+      () => this.select(8),
+      () => this.select(9)
+    ]
     return (
       <Grid id='Head' fluid>
         <Row style={{background: '#F5F5F5'}}>
@@ -121,7 +137,8 @@ class Head extends Component {
             name={this.props.idCard.tname}
             subname={this.props.idCard.teacher_id}
             selectedIndex={this.state.selectedIndex}
-            onTouchTaps={onTouchTaps}
+            onTouchTaps={onTouchTapsrouter}
+            router={router}
           />
           <Col xs={12} mdHidden lgHidden>
             { this.state.selectedIndex === 2 || this.state.selectedIndex === 3 || this.state.selectedIndex === 5
@@ -130,9 +147,9 @@ class Head extends Component {
                 行動版網頁尚會跑版，可用電腦登入打開網頁以享有更佳的視覺效果，謝謝
               </div> }
           </Col>
-          <Col xs={12} md={12} style={{padding: 0}}>
-            <div id='page' />
-          </Col>
+          {/*<Col xs={12} md={12} style={{padding: 0}}>*/}
+            {/*<div id='page' />*/}
+          {/*</Col>*/}
           {/* For mobile, tablet user */}
         </Row>
       </Grid>
