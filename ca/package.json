@@ -34,6 +34,7 @@
     "react-scripts": "^1.1.4",
     "react-scroll-to-component": "^1.0.2",
     "react-simple-popover": "^0.2.4",
+    "react-snow-effect": "^1.2.0",
     "react-swipeable-views": "^0.12.15",
     "react-tap-event-plugin": "^3.0.3",
     "react-toastify": "^3.4.3",

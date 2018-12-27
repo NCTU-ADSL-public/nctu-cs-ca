@@ -29,6 +29,7 @@ import StudentMap from './Pages/Students/Map_v3'
 import StudentProject from './Pages/Students/ProjectList'
 import StudentProfessor from './Pages/Students/Mentor'
 import Footer from './Components/Footer'
+import Snow from 'react-snow-effect'
 
 import AutoLogout from './Components/AutoLogout'
 
@@ -37,6 +38,8 @@ injectTapEventPlugin()
 const Router = () => (
   <BrowserRouter>
     <div>
+      <Route path='/' component={Snow} />
+
       <Route path='/assistants' component={AssistantHead} />
       <Route path='/students' component={Head} />
       <Route path='/teachers' component={TeacherHead} />
