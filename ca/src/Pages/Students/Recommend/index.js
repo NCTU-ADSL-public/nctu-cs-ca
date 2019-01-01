@@ -171,7 +171,6 @@ class Recommend extends React.Component {
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
-          animateHeight={true}
         >
         <div dir={theme.direction}>
         <Paper  className={classes.root}>
