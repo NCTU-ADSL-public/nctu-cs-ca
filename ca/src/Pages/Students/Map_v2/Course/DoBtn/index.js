@@ -56,10 +56,11 @@ class AlertDialog extends React.Component {
     const { rwddisplay, rwd, fullScreen, classes } = this.props
     return (
       <div style={{ margin: '5px 0 5px 0' }}>
+        {/*
         <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={rwd ? this.props.ShowCourseOrSug : this.handleClickOpen}>
           {rwd ? rwddisplay === 'map' ? '課程地圖' : '推薦選課' : '推薦選課'}
         </Button>
-        <Dialog
+        {/*<Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby='alert-dialog-title'
@@ -77,7 +78,7 @@ class AlertDialog extends React.Component {
             </Toolbar>
           </AppBar>
           {fullScreen ? <SugCourseRwd /> : <SugCourse />}
-        </Dialog>
+        </Dialog> */}
       </div>
     )
   }

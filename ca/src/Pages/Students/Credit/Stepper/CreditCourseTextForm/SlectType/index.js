@@ -10,7 +10,7 @@ const fontStyle = {
   fontWeight: '300',
   letterSpacing: '1px',
   fontFamily: 'Noto Sans CJK TC',
-  width: '100px',
+  width: '100px'
 }
 
 const fontlabelStyle = {

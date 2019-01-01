@@ -4,7 +4,6 @@ import Postfile from './Postfile'
 import { connect } from 'react-redux'
 
 class EnglishCourseFormConfirm extends React.Component {
-
   getTime () {
     let today = new Date()
     return (
@@ -113,8 +112,8 @@ const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
   year: state.Student.Credit.englishCourse.year,
   semester: state.Student.Credit.englishCourse.semester,
-  department: state.Student.Credit.englishCourse.department,  // 原課程的depart
-  teacher: state.Student.Credit.englishCourse.teacher,      // 原課程teacher
+  department: state.Student.Credit.englishCourse.department, // 原課程的depart
+  teacher: state.Student.Credit.englishCourse.teacher, // 原課程teacher
   course_name: state.Student.Credit.englishCourse.course_name,
   course_code: state.Student.Credit.englishCourse.course_code,
   reason: state.Student.Credit.englishCourse.reason,

@@ -52,7 +52,7 @@ class Todo extends React.Component {
     this.handleChipClick = this.handleChipClick.bind(this)
     this.getMenuItem = this.getMenuItem.bind(this)
     this.getinfo = this.getinfo.bind(this)
-    
+
     this.state = {
       isDone: false,
       open: false,
@@ -266,20 +266,20 @@ class Todo extends React.Component {
         <div style={{ float: 'left' }}>授課教授:&nbsp;&nbsp;&nbsp;
           {this.state.searchCourse[this.state.value].teacher.split(' ').map(name =>
 
-            <MuiThemeProvider>
+          <MuiThemeProvider>
               <Chip
-                onClick={() => this.handleChipClick(name)}
-                labelStyle={fontStyle}
-                style={{
-                  margin: 4,
-                  float: 'right'
-                }}
-              >
-                <Avatar src={this.state.searchCourse[this.state.value].photo === null ? defaultimg : this.state.searchCourse[this.state.value].photo} />
-                {name}
-              </Chip>
+              onClick={() => this.handleChipClick(name)}
+              labelStyle={fontStyle}
+              style={{
+                margin: 4,
+                float: 'right'
+              }}
+            >
+              <Avatar src={this.state.searchCourse[this.state.value].photo === null ? defaultimg : this.state.searchCourse[this.state.value].photo} />
+              {name}
+            </Chip>
             </MuiThemeProvider>
-          )}
+        )}
         </div>
         <br />
         <br />

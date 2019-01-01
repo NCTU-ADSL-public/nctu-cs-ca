@@ -16,7 +16,7 @@ class Mentor extends React.Component {
         <Link to='/students/map'>
           <img alt='' src={img0} className='image' />
         </Link>
-        <img alt='' src={img1} className='image' />       
+        <img alt='' src={img1} className='image' />
         <img alt='' src={img3} className='image' />
       </div>
     )

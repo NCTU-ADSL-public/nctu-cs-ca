@@ -17,7 +17,7 @@ const initialState = {
     reason: ''
   },
   englishCourse: {
-    apply_year: '',   
+    apply_year: '',
     apply_semester: '',
     phone: '',
     reason: '',

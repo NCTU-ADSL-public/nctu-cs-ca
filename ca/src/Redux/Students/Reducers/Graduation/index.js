@@ -15,7 +15,7 @@ const initialState = {
 export default handleActions({
   FETCH_DONE: (state) => ({ ...state, status: 'DONE' }),
   FETCH_START: (state) => ({ ...state, status: 'START' }),
-  STORE_STUDENT_INFO: (state, action) => ({ ...state, idCardForassistans: action.payload , assis: true}),
+  STORE_STUDENT_INFO: (state, action) => ({ ...state, idCardForassistans: action.payload, assis: true}),
   STORE_GRAD_ENGLISH_TEST_CHECK: (state, action) => ({ ...state, englishCheck: action.payload }),
   STORE_GRAD_CHECK: (state, action) => ({ ...state, check: action.payload }),
   STORE_GRAD_GENERAL_COURSE_SELECT: (state, action) => ({ ...state, generalCourseSelect: action.payload }),

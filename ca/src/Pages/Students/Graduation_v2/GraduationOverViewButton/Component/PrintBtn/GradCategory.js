@@ -41,8 +41,7 @@ class GradCategory extends React.Component {
       if (subjects[i].score === null) {
         if (subjects[i].grade === null) {
           subjects[i].score = (subjects[i].complete === true) ? 'P' : 'F'
-        }
-        else {
+        } else {
           subjects[i].score = subjects[i].grade
         }
       }

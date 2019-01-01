@@ -24,8 +24,9 @@ import StudentHome from './Pages/Students/Home/Home'
 import StudentGrad from './Pages/Students/Graduation_v2'
 
 import StudentCredit from './Pages/Students/Credit'
-//import StudentMap from './Pages/Students/Map_v2'
-import StudentMap from './Pages/Students/Map_v3'
+import StudentMap from './Pages/Students/Map_v2'
+// import StudentMap from './Pages/Students/Map_v3'
+import StudentRecommend from './Pages/Students/Recommend'
 import StudentProject from './Pages/Students/ProjectList'
 import StudentProfessor from './Pages/Students/Mentor'
 import Footer from './Components/Footer'
@@ -52,6 +53,7 @@ const Router = () => (
         <Route exact path='/students/professor' render={() => <StudentProfessor />} />
         <Route exact path='/students/project' render={() => <StudentProject />} />
         <Route exact path='/students/credit' render={() => <StudentCredit />} />
+        <Route exact path='/students/recommend' render={() => <StudentRecommend />} />
 
         <Route exact path='/teachers/head' component={TeacherHome} />
         <Route exact path='/teachers/group' component={TeacherGroup} />

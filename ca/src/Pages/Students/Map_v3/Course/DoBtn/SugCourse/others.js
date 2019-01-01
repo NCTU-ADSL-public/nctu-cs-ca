@@ -148,12 +148,12 @@ export default class TableExampleComplex extends Component {
                   style={TableRowStyle}>
                   <TableRowColumn>{index + 1}</TableRowColumn>
                   <TableRowColumn>{row.cos_cname}</TableRowColumn>
-                  <TableRowColumn className="rating">
-                    <i className="fa fa-star star"/>
-                    <i className="fa fa-star star"/>
-                    <i className="fa fa-star star"/>
-                    <i className="fa fa-star star"/>
-                    <i className="fa fa-star star"/>
+                  <TableRowColumn className='rating'>
+                    <i className='fa fa-star star' />
+                    <i className='fa fa-star star' />
+                    <i className='fa fa-star star' />
+                    <i className='fa fa-star star' />
+                    <i className='fa fa-star star' />
                   </TableRowColumn>
                 </TableRow>
               ))}

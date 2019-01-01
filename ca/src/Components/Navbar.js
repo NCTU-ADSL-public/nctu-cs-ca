@@ -117,9 +117,10 @@ class _Navbar extends React.Component {
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname.match(this.props.router[0]) !== null }/>,
         <NavButton key={1} label='畢業預審' icon='fa fa-graduation-cap' onClick={onClicks[1]} selected={this.props.router && this.props.location.pathname.match(this.props.router[1]) !== null}/>,
         <NavButton key={2} label='課程地圖' icon='fa fa-map' onClick={onClicks[2]} selected={this.props.router && this.props.location.pathname.match(this.props.router[2]) !== null}/>,
-        <NavButton key={3} label='教授' icon='fa fa-coffee' onClick={onClicks[3]} selected={this.props.router && this.props.location.pathname.match(this.props.router[3]) !== null}/>,
-        <NavButton key={4} label='專題' icon='glyphicon glyphicon-file' onClick={onClicks[4]} selected={this.props.router && this.props.location.pathname.match(this.props.router[4]) !== null}/>,
-        <NavButton key={5} label='課程抵免' icon='fa fa-users' onClick={onClicks[5]} selected={this.props.router && this.props.location.pathname.match(this.props.router[5]) !== null}/>
+        <NavButton key={3} label='推薦課程' icon='fa fa-users' onClick={onClicks[3]} selected={this.props.router && this.props.location.pathname.match(this.props.router[3]) !== null}/>,
+        <NavButton key={4} label='教授' icon='fa fa-coffee' onClick={onClicks[4]} selected={this.props.router && this.props.location.pathname.match(this.props.router[4]) !== null}/>,
+        <NavButton key={5} label='專題' icon='glyphicon glyphicon-file' onClick={onClicks[5]} selected={this.props.router && this.props.location.pathname.match(this.props.router[5]) !== null}/>,
+        <NavButton key={6} label='課程抵免' icon='fa fa-list-alt' onClick={onClicks[6]} selected={this.props.router && this.props.location.pathname.match(this.props.router[6]) !== null}/>
       ],
       'assistant': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname.match(this.props.router[0]) !== null }/>,

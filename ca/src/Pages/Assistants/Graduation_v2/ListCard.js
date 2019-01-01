@@ -42,13 +42,13 @@ const styles = theme => ({
     fontSize: '15px',
     color: 'red',
     marginLeft: '20px',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   error_net_media: {
     fontSize: '15px',
     color: 'red',
     marginLeft: '15px',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   ok: {
     fontSize: '20px',
@@ -138,19 +138,17 @@ class ListPanel extends React.Component {
               }}
             />
             <div>
-            {
-              (parseInt(student.graduate_status, 10) === 0 && <span>
-                <Clear style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-              </span>)
-              ||
+              {
+                (parseInt(student.graduate_status, 10) === 0 && <span>
+                  <Clear style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
+                </span>) ||
               (parseInt(student.graduate_status, 10) === 1 && <span>
-                <QueryBuilder style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
-              </span>)
-              ||
+                <QueryBuilder style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
+              </span>) ||
               (parseInt(student.graduate_status, 10) === 2 && <span>
-                <Done style = {{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
+                <Done style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '5px' }} />
               </span>)
-            }
+              }
               <div style={{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} >{ GRAD_STATUS_CN[student.graduate_status] }</div>
               <span style={{ display: 'inline', verticalAlign: 'middle', fontSize: '15px', fontWeight: 'bold' }} > / { VERIFY_STATUS_CN[student.submit_status] }</span>
             </div>
@@ -164,16 +162,16 @@ class ListPanel extends React.Component {
                 <div>畢業狀態: { GRAD_STATUS_CN[student.graduate_status] }</div>
                 <div>預審狀況: { VERIFY_STATUS_CN[student.submit_status] }</div>
               </div>
-              { parseInt(student.submit_status, 10) === 1 && <div style = {{ display: 'flex', width: '400px' }} >
-                <Button className = { classes.buttonCC } onClick = { () => this.setState({ edit_panel_open: false })}>取消</Button>
-                <div style = {{ flex: 1 }} />
-                <Button className = { classes.buttonNG } onClick = {
+              { parseInt(student.submit_status, 10) === 1 && <div style={{ display: 'flex', width: '400px' }} >
+                <Button className={classes.buttonCC} onClick={() => this.setState({ edit_panel_open: false })}>取消</Button>
+                <div style={{ flex: 1 }} />
+                <Button className={classes.buttonNG} onClick={
                   () => {
                     this.setState({ edit_panel_open: false })
                     set_graduate_state({ student_id: student.student_id, graduate_submit: 3 })
                   }
                 }>未審畢</Button>
-                <Button className = { classes.buttonOK } onClick = {
+                <Button className={classes.buttonOK} onClick={
                   () => {
                     this.setState({ edit_panel_open: false })
                     set_graduate_state({ student_id: student.student_id, graduate_submit: 2 })
@@ -188,78 +186,77 @@ class ListPanel extends React.Component {
               { student.program !== '網多' &&
               <div className='col-md-11 col-lg-11 col-xs-11'>
                 {
-                student.compulse.length + student.current.length === 0
-                ? <Done className={classes.ok} style={{ fontSize: '30px', marginTop: '12px' }} />
-                : <Tabs
-                  scrollable
-                  scrollButtons='auto'
-                  style={{ width: '100%' }}
-                >
-                  {
-                    student.current.map((title) => (
-                      <Tab label={title} classes={{
-                        root: classes.tabRootCurrent,
-                        label: classes.tabLabel,
-                        selected: classes.tabSelected
-                      }} />
-                    ))
-                  }
-                  {
-                    student.compulse.map((title) => (
-                      <Tab label={title} classes={{
-                        root: classes.tabRoot,
-                        label: classes.tabLabel,
-                        selected: classes.tabSelected
-                      }} />
-                    ))
-                  }
-                </Tabs>
+                  student.compulse.length + student.current.length === 0
+                    ? <Done className={classes.ok} style={{ fontSize: '30px', marginTop: '12px' }} />
+                    : <Tabs
+                      scrollable
+                      scrollButtons='auto'
+                      style={{ width: '100%' }}
+                    >
+                      {
+                        student.current.map((title) => (
+                          <Tab label={title} classes={{
+                            root: classes.tabRootCurrent,
+                            label: classes.tabLabel,
+                            selected: classes.tabSelected
+                          }} />
+                        ))
+                      }
+                      {
+                        student.compulse.map((title) => (
+                          <Tab label={title} classes={{
+                            root: classes.tabRoot,
+                            label: classes.tabLabel,
+                            selected: classes.tabSelected
+                          }} />
+                        ))
+                      }
+                    </Tabs>
                 }
-                </div>
+              </div>
               }
               {
                 student.program === '網多' &&
-                <div className = 'col-md-5 col-lg-5 col-xs-5'>
-                {
-                  student.compulse.length + student.current.length === 0 ?
-                  <Done className = { classes.ok } style = {{ fontSize: '30px', marginTop: '12px' }} />
-                  :
-                  <Tabs
-                    scrollable
-                    scrollButtons = "auto"
-                    style = {{ width: '100%' }}
-                  >
+                <div className='col-md-5 col-lg-5 col-xs-5'>
                   {
-                    student.current.map((title) => (
-                      <Tab label={title} classes={{
-                        root: classes.tabRootCurrent,
-                        label: classes.tabLabel,
-                        selected: classes.tabSelected
-                      }} />
-                    ))
+                    student.compulse.length + student.current.length === 0
+                      ? <Done className={classes.ok} style={{ fontSize: '30px', marginTop: '12px' }} />
+                      : <Tabs
+                        scrollable
+                        scrollButtons='auto'
+                        style={{ width: '100%' }}
+                      >
+                        {
+                          student.current.map((title) => (
+                            <Tab label={title} classes={{
+                              root: classes.tabRootCurrent,
+                              label: classes.tabLabel,
+                              selected: classes.tabSelected
+                            }} />
+                          ))
+                        }
+                        {
+                          student.compulse.map((title) => (
+                            <Tab label={title} classes={{
+                              root: classes.tabRoot,
+                              label: classes.tabLabel,
+                              selected: classes.tabSelected
+                            }} />
+                          ))
+                        }
+                      </Tabs>
                   }
-                  {
-                    student.compulse.map( (title) => (
-                      <Tab label = { title } classes = {{
-                        root: classes.tabRoot,
-                        label: classes.tabLabel,
-                        selected: classes.tabSelected
-                      }} />
-                    ))
-                  }
-                  </Tabs>
-                }
                 </div>
               }
               { student.program === '網多'　&&
-                <div className = 'col-md-6 col-lg-6 col-xs-6' style = {{ display: 'flex' }}>
-                  <div style = {{ fontSize: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>網多專選</div>
-                  <div style = {{ display: 'block', marginLeft: '20px', marginTop: '5px' }}>
-                    <div>{"網　路"}<span>{ student.net.length <= 0 ? <Clear className = { classes.error_net_media } /> : <span className = { classes.ok_net_media } >{
-                      student.net.reduce( (res, str) => res += str + ", ", "")
+                <div className='col-md-6 col-lg-6 col-xs-6' style={{ display: 'flex' }}>
+                  <div style={{ fontSize: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>網多專選</div>
+                  <div style={{ display: 'block', marginLeft: '20px', marginTop: '5px' }}>
+                    <div>{'網　路'}<span>{ student.net.length <= 0 ? <Clear className={classes.error_net_media} /> : <span className={classes.ok_net_media} >{
+                      student.net.reduce((res, str) => res += str + ', ', '')
                     }</span> }</span></div>
-                    <div>多媒體<span>{ student.media.length <= 0 ? <Clear className = { classes.error_net_media } /> : <span className = { classes.ok_net_media } >{
-                      student.media.reduce( (res, str) => res += str + ", ", "")
+                    <div>多媒體<span>{ student.media.length <= 0 ? <Clear className={classes.error_net_media} /> : <span className={classes.ok_net_media} >{
+                      student.media.reduce((res, str) => res += str + ', ', '')
                     }</span> }</span></div>
                   </div>
                 </div>
@@ -305,67 +302,66 @@ class ListPanel extends React.Component {
                   <div className='row' style={{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>通識</div>
                   <div className='row'>
                     {
-                      parseInt(student.submit_type, 10) !== 1 ?
-                      <div className = 'col-md-12 col-lg-12 col-xs-12'>
-                        <div className = 'row' style = {{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
-                          student.old_total <= 0 ?
-                          <Done className = { classes.ok } />
-                          :
-                          <span className = { classes.error } >{ student.old_total }</span>
-                        }</div>
-                        <hr style={{ margin: '1px' }} />
-                        <div className='row' style={{ marginLeft: '1px' }}>
-                          <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
+                      parseInt(student.submit_type, 10) !== 1
+                        ? <div className='col-md-12 col-lg-12 col-xs-12'>
+                          <div className='row' style={{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }}>舊制{
+                            student.old_total <= 0
+                              ? <Done className={classes.ok} />
+                              : <span className={classes.error} >{ student.old_total }</span>
+                          }</div>
+                          <hr style={{ margin: '1px' }} />
+                          <div className='row' style={{ marginLeft: '1px' }}>
+                            <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
                             當代{ student.old_contemp <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.old_contemp}</span> }
-                          </div>
-                          <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
+                            </div>
+                            <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
                             文化{ student.old_culture <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.old_culture}</span> }
+                            </div>
                           </div>
-                        </div>
-                        <div className='row' style={{ marginLeft: '1px' }}>
-                          <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
+                          <div className='row' style={{ marginLeft: '1px' }}>
+                            <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
                             歷史{ student.old_history <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.old_history}</span> }
-                          </div>
-                          <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
+                            </div>
+                            <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
                             公民{ student.old_citizen <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.old_citizen}</span> }
+                            </div>
                           </div>
-                        </div>
-                        <div className='row' style={{ marginLeft: '1px' }}>
-                          <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
+                          <div className='row' style={{ marginLeft: '1px' }}>
+                            <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
                             群己{ student.old_group <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.old_group}</span> }
-                          </div>
-                          <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
+                            </div>
+                            <div className='col-md-6 col-lg-6 col-xs-6' style={{ fontSize: '13px', padding: '5px' }}>
                             自然{ student.old_science <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.old_science}</span> }
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      : <div className='col-md-12 col-lg-12 col-xs-12'>
-                        <div className='row' style={{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }} >新制{
-                          student.new_total <= 0
-                          ? <Done className={classes.ok} style={{ marginLeft: '22px' }} />
-                          : <span className={classes.error} style={{ marginLeft: '22px' }} >{ student.new_total }</span>
-                        }</div>
-                        <hr style={{ margin: '1px' }} />
-                        <Tooltip title={'人文: ' + student.new_core_humanity + '　社會: ' + student.new_core_society} placement='left' classes={{ tooltip: classes.hover }}>
-                          <div className='row' style={{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >
-                            {'核　心'}{ student.new_core_total <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{ student.new_core_total }</span> }
-                          </div>
-                        </Tooltip>
-                        <div className='row' style={{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{'跨　院'}{ student.new_cross <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.new_cross}</span> }</div>
-                        <div className='row' style={{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{'校基本'}{ student.new_basic <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.new_basic}</span> }</div>
-                      </div>
+                        : <div className='col-md-12 col-lg-12 col-xs-12'>
+                          <div className='row' style={{ fontSize: '15px', width: '100%', margin: '0 auto', padding: '5px' }} >新制{
+                            student.new_total <= 0
+                              ? <Done className={classes.ok} style={{ marginLeft: '22px' }} />
+                              : <span className={classes.error} style={{ marginLeft: '22px' }} >{ student.new_total }</span>
+                          }</div>
+                          <hr style={{ margin: '1px' }} />
+                          <Tooltip title={'人文: ' + student.new_core_humanity + '　社會: ' + student.new_core_society} placement='left' classes={{ tooltip: classes.hover }}>
+                            <div className='row' style={{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >
+                              {'核　心'}{ student.new_core_total <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{ student.new_core_total }</span> }
+                            </div>
+                          </Tooltip>
+                          <div className='row' style={{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{'跨　院'}{ student.new_cross <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.new_cross}</span> }</div>
+                          <div className='row' style={{ fontSize: '13px', marginLeft: '1px', padding: '5px' }} >{'校基本'}{ student.new_basic <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.new_basic}</span> }</div>
+                        </div>
                     }
                   </div>
                 </div>
-                <div className = 'col-md-3 col-lg-3 col-xs-3'
-                  style = {{
+                <div className='col-md-3 col-lg-3 col-xs-3'
+                  style={{
                     margin: '5px',
                     border: '1px solid #dddddd',
                     borderRadius: '5px'
                   }}
                 >
-                  <div className = 'row' style = {{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語 /
-                    <span style = {{ fontSize: '15px', marginLeft: '5px' }} >畢業門檻</span> {parseInt(student.en_status, 10) !== 0 ? <Done style = {{ fontSize: '15px', color: 'green' }} /> : <Clear style = {{ fontSize: '15px', color: 'red'}} /> }
+                  <div className='row' style={{ fontSize: '20px', background: '#dddddd', padding: '5px', paddingLeft: '15px' }}>外語 /
+                    <span style={{ fontSize: '15px', marginLeft: '5px' }} >畢業門檻</span> {parseInt(student.en_status, 10) !== 0 ? <Done style={{ fontSize: '15px', color: 'green' }} /> : <Clear style={{ fontSize: '15px', color: 'red'}} /> }
                   </div>
                   <div className='row' style={{ fontSize: '16px', padding: '20px' }} >基礎{ student.en_basic <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.en_basic}</span> }</div>
                   <div className='row' style={{ fontSize: '16px', padding: '20px' }} >進階{ student.en_advanced <= 0 ? <Done className={classes.ok} /> : <span className={classes.error} >{student.en_advanced}</span> }</div>

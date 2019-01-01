@@ -1,10 +1,10 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import SwipeableViews from 'react-swipeable-views';
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import SwipeableViews from 'react-swipeable-views'
 
 import Student from './Student'
 
@@ -38,37 +38,35 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class index extends React.Component {
-
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       tab_index: 0
     }
   }
 
-  render() {
-
+  render () {
     const { classes } = this.props
     const { tab_index } = this.state
 
     return (
       <div>
         <Tabs
-          value = { tab_index }
-          onChange = {
+          value={tab_index}
+          onChange={
             (event, value) => this.setState({ tab_index: value })
           }
           centered
-          classes = {{
+          classes={{
             root: classes.tabsRoot,
             indicator: classes.tabsIndicator
           }}
         >
-          {["學生狀況", "教授狀況", "成績查詢"].map( (title, _) =>
+          {['學生狀況', '教授狀況', '成績查詢'].map((title, _) =>
             <Tab
-              key = { _ }
-              label = { title }
-              classes = {{
+              key={_}
+              label={title}
+              classes={{
                 root: classes.tabRoot,
                 label: classes.tabLabel,
                 selected: classes.tabSelected
@@ -77,7 +75,7 @@ class index extends React.Component {
           )}
         </Tabs>
         <SwipeableViews
-          index = { tab_index }
+          index={tab_index}
         >
           <div><Student /></div>
           <div>Hello23</div>

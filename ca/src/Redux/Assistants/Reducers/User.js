@@ -12,5 +12,5 @@ const initalState = {
 }
 
 export default handleActions({
-  UPDATE_USER_INFO: (state,action)=>({...state,idCard: action.payload})
-},initalState)
+  UPDATE_USER_INFO: (state, action) => ({...state, idCard: action.payload})
+}, initalState)

@@ -49,8 +49,7 @@ class App extends React.Component {
             downSession: 'down-session'
           }
         })
-      } 
-      else {
+      } else {
         this.setState({
           grad1: {
             grad: 'grade grade-cur',
@@ -59,9 +58,7 @@ class App extends React.Component {
           }
         })
       }
-    }
-
-    else if (this.props.studentsGrad === '大二') {
+    } else if (this.props.studentsGrad === '大二') {
       this.setState({
         year: year - 1
       })
@@ -73,8 +70,7 @@ class App extends React.Component {
             downSession: 'down-session'
           }
         })
-      } 
-      else {
+      } else {
         this.setState({
           grad2: {
             grad: 'grade grade-cur',
@@ -83,9 +79,7 @@ class App extends React.Component {
           }
         })
       }
-    } 
-
-    else if (this.props.studentsGrad === '大三') {
+    } else if (this.props.studentsGrad === '大三') {
       this.setState({
         year: year - 2
       })
@@ -97,8 +91,7 @@ class App extends React.Component {
             downSession: 'down-session'
           }
         })
-      } 
-      else {
+      } else {
         this.setState({
           grad3: {
             grad: 'grade grade-cur',
@@ -107,9 +100,7 @@ class App extends React.Component {
           }
         })
       }
-    } 
-
-    else if (this.props.studentsGrad === '大四') {
+    } else if (this.props.studentsGrad === '大四') {
       this.setState({
         year: year - 3
       })
@@ -121,8 +112,7 @@ class App extends React.Component {
             downSession: 'down-session'
           }
         })
-      } 
-      else {
+      } else {
         this.setState({
           grad4: {
             grad: 'grade grade-cur',

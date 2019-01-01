@@ -4,7 +4,6 @@ import {Table} from 'react-bootstrap'
 import './Table.css'
 
 class CATable extends React.Component {
-
   render () {
     return (
       <Table responsive striped bsClass='ca-table table'>

@@ -19,11 +19,9 @@ const styles = theme => ({
 const decideCoreBtnBgColor = (courses) => {
   if (courses.length === 0) {
     return '#D95467'
-  } 
-  else if (courses.length === 1 && courses[0].reason === 'now') {
+  } else if (courses.length === 1 && courses[0].reason === 'now') {
     return '#AB6BD9'
-  } 
-  else {
+  } else {
     return '#3cab7d'
   }
 }

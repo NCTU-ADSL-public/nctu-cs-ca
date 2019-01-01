@@ -32,14 +32,14 @@ export default class AnimatedProgress extends React.Component {
   }
 
   render () {
-      return (
-          <MuiThemeProvider>
-              <LinearProgress
-                  color={(this.state.completed >= 100) ? '#00AEAE' : '#d93a64'}
-                  mode='determinate'
-                  style={this.props.style}
-                  value={this.state.completed} />
-          </MuiThemeProvider>
-      )
+    return (
+      <MuiThemeProvider>
+        <LinearProgress
+          color={(this.state.completed >= 100) ? '#00AEAE' : '#d93a64'}
+          mode='determinate'
+          style={this.props.style}
+          value={this.state.completed} />
+      </MuiThemeProvider>
+    )
   }
 }

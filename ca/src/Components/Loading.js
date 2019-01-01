@@ -14,7 +14,7 @@ const Loading = (props) => (
         display: props.isLoading ? 'inline-block' : 'none',
         position: 'relative'
       }}
-      />
+    />
   </MuiThemeProvider>
 )
 

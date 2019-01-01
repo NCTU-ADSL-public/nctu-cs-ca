@@ -47,7 +47,7 @@ export default class OverCircularProgress extends React.Component {
           style={ThisStyle}
           thickness={7}
           value={this.state.completed}
-                    />
+        />
       </MuiThemeProvider>
     )
   }

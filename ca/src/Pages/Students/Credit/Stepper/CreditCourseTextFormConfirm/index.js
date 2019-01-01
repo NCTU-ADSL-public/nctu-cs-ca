@@ -202,14 +202,14 @@ const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
   year: state.Student.Credit.courseCreditChange.year,
   semester: state.Student.Credit.courseCreditChange.semester,
-  department: state.Student.Credit.courseCreditChange.department,  // 原課程的depart
-  teacher: state.Student.Credit.courseCreditChange.teacher,      // 原課程teacher
-  course_name_old: state.Student.Credit.courseCreditChange.course_name_old,   // 可能需要
-  course_code_old: state.Student.Credit.courseCreditChange.course_code_old,   // 可能需要
+  department: state.Student.Credit.courseCreditChange.department, // 原課程的depart
+  teacher: state.Student.Credit.courseCreditChange.teacher, // 原課程teacher
+  course_name_old: state.Student.Credit.courseCreditChange.course_name_old, // 可能需要
+  course_code_old: state.Student.Credit.courseCreditChange.course_code_old, // 可能需要
   course_name: state.Student.Credit.courseCreditChange.course_name,
   course_code: state.Student.Credit.courseCreditChange.course_code,
   course_type: state.Student.Credit.courseCreditChange.course_type,
-  credit: state.Student.Credit.courseCreditChange.credit,          // 可能需要(新課程的credit)
+  credit: state.Student.Credit.courseCreditChange.credit, // 可能需要(新課程的credit)
   reason: state.Student.Credit.courseCreditChange.reason,
   phone: state.Student.Credit.courseCreditChange.phone
 })

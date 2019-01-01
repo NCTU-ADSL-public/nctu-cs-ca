@@ -172,33 +172,33 @@ class Index extends React.Component {
                   className='col-md-3'
                   style={{ marginLeft: '-7%' }}
                   hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'}
-                  >
+                >
                   <Button
                     variant='outlined'
                     aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
                     aria-haspopup='true'
                     onClick={this.professionalMenuOpen}
                     disabled={this.props.reviewCheck !== 0}
-                    >
-                      { 
-                        !isNaN(this.props.professionalField)
+                  >
+                    {
+                      !isNaN(this.props.professionalField)
                         ? this.props.professionalField === 0 ? '網路領域' : '多媒體領域'
                         : '網多組專業選擇'
-                      }
-                    </Button>
+                    }
+                  </Button>
                   <Menu
                     id='simple-menu'
                     anchorEl={this.state.anchorEl}
                     open={Boolean(this.state.anchorEl)}
                     onClose={this.professionalMenuClose}
                     className={classes.root}
-                    >
+                  >
                     <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
                         網路領域
-                      </MenuItem>
+                    </MenuItem>
                     <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
                         多媒體領域
-                      </MenuItem>
+                    </MenuItem>
                   </Menu>
                 </div>
                 : <div />
