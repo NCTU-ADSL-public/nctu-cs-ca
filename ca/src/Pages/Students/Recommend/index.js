@@ -25,7 +25,8 @@ import InfoIcon from '@material-ui/icons/Info'
 
 const styles = ()=>({
   root0:{
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 40
   },
   root: {
     width: '90%',
@@ -77,9 +78,10 @@ const styles = ()=>({
 
   },
   descript:{
-    position: 'absolute',
+    position: 'fixed',
     bottom: 40,
-    left: 20
+    left: 0,
+    zIndex: 1080
   }
 })
 
@@ -169,6 +171,7 @@ class Recommend extends React.Component {
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
+          animateHeight={true}
         >
         <div dir={theme.direction}>
         <Paper  className={classes.root}>
