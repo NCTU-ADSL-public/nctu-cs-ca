@@ -1,11 +1,11 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import SugCourse from './SugCourse'
-import SugCourseRwd from './SugCourse/others'
+// import Button from '@material-ui/core/Button'
+// import Dialog from '@material-ui/core/Dialog'
+// import AppBar from '@material-ui/core/AppBar'
+// import Toolbar from '@material-ui/core/Toolbar'
+// import Typography from '@material-ui/core/Typography'
+// import SugCourse from './SugCourse'
+// import SugCourseRwd from './SugCourse/others'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import { withStyles } from '@material-ui/core/styles/index'
 import { connect } from 'react-redux'
@@ -53,7 +53,7 @@ class AlertDialog extends React.Component {
   }
 
   render () {
-    const { rwddisplay, rwd, fullScreen, classes } = this.props
+    //const { rwddisplay, rwd, fullScreen, classes } = this.props
     return (
       <div style={{ margin: '5px 0 5px 0' }}>
         {/*

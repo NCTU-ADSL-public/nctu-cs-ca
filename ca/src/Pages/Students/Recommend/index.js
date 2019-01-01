@@ -160,7 +160,7 @@ class Recommend extends React.Component {
             <Tab label={<Badge className={classNames(classes.padding,classes.header)} color="secondary" badgeContent={'新'}>發燒選課</Badge>} />
           </Tabs>
         </AppBar>
-        <Tooltip  title={this.state.value === 0 ? "根據你的修課紀錄推薦這學期的課程":"根據先前學長姐的修課紀錄排列課程的熱門程度"} placement="right">
+        <Tooltip  title={this.state.value === 0 ? "根據你的修課紀錄推薦這學期的課程":"根據先前學長姐的修課紀錄排序熱門課程"} placement="right">
         <IconButton className={classes.descript}>
         <InfoIcon />
         </IconButton>
