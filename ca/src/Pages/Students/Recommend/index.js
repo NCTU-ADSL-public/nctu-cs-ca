@@ -21,7 +21,7 @@ import SwipeableViews from 'react-swipeable-views'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import InfoIcon from '@material-ui/icons/Info'
 
-//import FakeData from '../../../Resources/FakeData'
+import FakeData from '../../../Resources/FakeData'
 
 const styles = ()=>({
   root0:{
@@ -90,10 +90,10 @@ class Recommend extends React.Component {
     super(props)
     this.state = {
       // for testing
-      // data: FakeData.RecommendCos.map(e=>({...e,rating:false})),
-      // data2: FakeData.RecommendHot,
-      data: [],
-      data2:[],
+      data: FakeData.RecommendCos.map(e=>({...e,rating:false})),
+      data2: FakeData.RecommendHot,
+      // data: [],
+      // data2:[],
       value: 0
     }
     this.rating = this.rating.bind(this)
@@ -201,7 +201,7 @@ class Recommend extends React.Component {
               {this.state.data.map((row, index) => (
                 <TableRow key={index} className={classes.row}>
                   <TableCell className={classes.font2}>{index + 1}</TableCell>
-                  <TableCell className={classes.font2}>{row.cos_cname}</TableCell>
+                  <TableCell className={classes.font2}><a href={row.url}>{row.cos_cname}</a></TableCell>
                   <TableCell className={classes.font2}>{row.teacher}</TableCell>
                   <TableCell className={classes.font2}>{row.cos_time}</TableCell>
                   <TableCell className={classes.font2}>{row.cos_code}</TableCell>
@@ -251,7 +251,7 @@ class Recommend extends React.Component {
               {this.state.data2.map((row, index) => (
                 <TableRow key={index} className={classes.row}>
                   <TableCell className={classes.font2}>{index + 1}</TableCell>
-                  <TableCell className={classes.font2}>{row.cos_cname}</TableCell>
+                  <TableCell className={classes.font2}><a href={row.url} target="_blank">{row.cos_cname}</a></TableCell>
                   <TableCell className={classes.font2}>{row.tname}</TableCell>
                   <TableCell className={classes.font2}>{row.cos_time.split('-')[0]}</TableCell>
                   <TableCell className={classes.font2}>{row.cos_credit}</TableCell>
