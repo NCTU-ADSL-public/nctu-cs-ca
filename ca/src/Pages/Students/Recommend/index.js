@@ -21,7 +21,7 @@ import SwipeableViews from 'react-swipeable-views'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import InfoIcon from '@material-ui/icons/Info'
 
-import FakeData from '../../../Resources/FakeData'
+//import FakeData from '../../../Resources/FakeData'
 
 const styles = ()=>({
   root0:{
@@ -88,10 +88,10 @@ class Recommend extends React.Component {
     super(props)
     this.state = {
       // for testing
-      data: FakeData.RecommendCos.map(e=>({...e,rating:false})),
-      data2: FakeData.RecommendHot,
-      // data: [],
-      // data2:[],
+      // data: FakeData.RecommendCos.map(e=>({...e,rating:false})),
+      // data2: FakeData.RecommendHot,
+      data: [],
+      data2:[],
       value: 0
     }
     this.rating = this.rating.bind(this)
