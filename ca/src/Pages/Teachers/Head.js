@@ -21,7 +21,7 @@ class Head extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedIndex: 0,
+      selectedIndex: 0
     }
     this.props.FetchUser()
   }
@@ -141,9 +141,9 @@ class Head extends Component {
                 行動版網頁尚會跑版，可用電腦登入打開網頁以享有更佳的視覺效果，謝謝
               </div> }
           </Col>
-          {/*<Col xs={12} md={12} style={{padding: 0}}>*/}
-            {/*<div id='page' />*/}
-          {/*</Col>*/}
+          {/* <Col xs={12} md={12} style={{padding: 0}}> */}
+          {/* <div id='page' /> */}
+          {/* </Col> */}
           {/* For mobile, tablet user */}
         </Row>
       </Grid>

@@ -35,8 +35,7 @@ class GradCategory extends React.Component {
 
       // score
       if (subjects[i].score === null) {
-        if (subjects.grade === null) { subjects[i].score = (subjects[i].complete === true) ? '通過' : '未過' } 
-        else { subjects[i].score = subjects[i].grade }
+        if (subjects.grade === null) { subjects[i].score = (subjects[i].complete === true) ? '通過' : '未過' } else { subjects[i].score = subjects[i].grade }
       }
 
       // 未修

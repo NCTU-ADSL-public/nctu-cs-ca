@@ -21,70 +21,67 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 
 const styles = () => ({
-  container:{
+  container: {
     width: '80%',
     margin: '35px auto'
   },
-  table:{
+  table: {
     cursor: 'pointer'
   },
-  dialog:{
-    width:'90%'
+  dialog: {
+    width: '90%'
   },
-  icon:{
+  icon: {
     fontSize: 16,
     color: '#f50057',
     marginRight: 4
   },
-  NavBtn:{
-    top:10,
-    left:10,
-    fontSize:15,
-    fontWeight: 300,
+  NavBtn: {
+    top: 10,
+    left: 10,
+    fontSize: 15,
+    fontWeight: 300
   },
-  font:{
-    fontSize:16,
-    fontWeight:400,
+  font: {
+    fontSize: 16,
+    fontWeight: 400
   },
-  header:{
-    fontSize:16
+  header: {
+    fontSize: 16
   }
 })
 
-const Transition = (props) =>(
-  <Slide direction="up" {...props} />
+const Transition = (props) => (
+  <Slide direction='up' {...props} />
 )
 
-class StudentList extends React.Component{
-  constructor(props){
+class StudentList extends React.Component {
+  constructor (props) {
     super(props)
     this.state = {
-      studentList: [/*FakeData.StudentList*/],
+      studentList: [/* FakeData.StudentList */],
       chooseInfo: null,
       cardShow: false
     }
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
-  componentDidMount(){
+  componentDidMount () {
     axios.post('/assistants/advisee/StudentList', {
       teacher_id: `T${this.props.match.params.tid}`
-    }).then(res=>{
+    }).then(res => {
       this.setState({
-        studentList:res.data.sort((a,b)=>{
-          if(a.recent_failed){
-            if(b.recent_failed){
+        studentList: res.data.sort((a, b) => {
+          if (a.recent_failed) {
+            if (b.recent_failed) {
               return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
-            }
-            else{
+            } else {
               return -1
             }
-          }
-          else{
-            if(b.recent_failed){
+          } else {
+            if (b.recent_failed) {
               return 1
-            }
-            else{
+            } else {
               return a.student_id.localeCompare(b.student_id, 'zh-Hant-TW')
             }
           }
@@ -94,41 +91,40 @@ class StudentList extends React.Component{
       console.log(err)
     })
   }
-  handleOpen(r){
-    if(! ('score' in this.state.studentList[r])){
+  handleOpen (r) {
+    if (!('score' in this.state.studentList[r])) {
       let tmp = this.state.studentList
-        // tmp[r].score = FakeData.StudentScore
-        // this.setState({
-        //   chooseInfo:r,
-        //   studentList: tmp,
-        //   cardShow: true
-        // })
+      // tmp[r].score = FakeData.StudentScore
+      // this.setState({
+      //   chooseInfo:r,
+      //   studentList: tmp,
+      //   cardShow: true
+      // })
       axios.post('/StudentGradeList', {
         student_id: this.state.studentList[r].student_id
       }).then(res => {
         tmp[r].score = res.data
         this.setState({
-          chooseInfo:r,
+          chooseInfo: r,
           studentList: tmp,
           cardShow: res.data !== []
         })
       }).catch(err => {
         console.log(err)
       })
-    }
-    else{
-      this.setState({cardShow: true,chooseInfo:r})
+    } else {
+      this.setState({cardShow: true, chooseInfo: r})
     }
   }
-  handleClose(){
+  handleClose () {
     this.setState({cardShow: false})
   }
-  render(){
+  render () {
     const {classes} = this.props
-    return(
+    return (
       <Frame>
         <Link to='/assistants/family'>
-          <Button variant="extendedFab" color="primary" className={classes.NavBtn} >
+          <Button variant='extendedFab' color='primary' className={classes.NavBtn} >
             <NavigationIcon className={classes.extendedIcon} />
             回老師列表
           </Button>
@@ -137,28 +133,28 @@ class StudentList extends React.Component{
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell padding='none'></TableCell>
+                <TableCell padding='none' />
                 <TableCell className={classes.header}>學號</TableCell>
                 <TableCell className={classes.header}>姓名</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {this.state.studentList
-              .map((student,index) => {
-                return (
-                  <TableRow key={student.student_id} onClick={()=>this.handleOpen(index)} className={classes.table}>
-                    <TableCell numeric padding='none'>
-                      {student.recent_failed && <span><i className={`fa fa-exclamation-triangle ${classes.icon}`}/></span>}
-                    </TableCell>
-                    <TableCell className={classes.font}>
-                      {student.student_id}
-                    </TableCell>
-                    <TableCell className={classes.font}>
-                      {student.sname}
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
+                .map((student, index) => {
+                  return (
+                    <TableRow key={student.student_id} onClick={() => this.handleOpen(index)} className={classes.table}>
+                      <TableCell numeric padding='none'>
+                        {student.recent_failed && <span><i className={`fa fa-exclamation-triangle ${classes.icon}`} /></span>}
+                      </TableCell>
+                      <TableCell className={classes.font}>
+                        {student.student_id}
+                      </TableCell>
+                      <TableCell className={classes.font}>
+                        {student.sname}
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
             </TableBody>
           </Table>
         </Paper>
@@ -167,7 +163,7 @@ class StudentList extends React.Component{
           onClose={this.handleClose}
           TransitionComponent={Transition}
           scroll='paper'
-          fullWidth={true}
+          fullWidth
         >
           <DialogContent>
             <InfoCard
@@ -182,7 +178,7 @@ class StudentList extends React.Component{
   }
 }
 
-const mapState = (state)=>({
+const mapState = (state) => ({
   idCard: state.Assistant.User.idCard
 })
 

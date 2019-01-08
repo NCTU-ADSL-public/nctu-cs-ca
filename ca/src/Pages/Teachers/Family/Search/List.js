@@ -1,14 +1,13 @@
 import React from 'react'
 // import './List.css'
 
-//for table
+// for table
 import Table from './Table'
 
-//for multiTheme
+// for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export default class StudentList extends React.Component {
-
   constructor (props) {
     super(props)
 
@@ -30,7 +29,7 @@ export default class StudentList extends React.Component {
 
   filterList (event) {
     let updatedList = this.props.items
-    updatedList = updatedList.filter((item) =>(
+    updatedList = updatedList.filter((item) => (
       (item.student_id.toLowerCase().search(
         event.target.value.toLowerCase()) !== -1) ||
       (item.sname.toLowerCase().search(
@@ -43,11 +42,10 @@ export default class StudentList extends React.Component {
     return (
       <MuiThemeProvider>
         <Table items={this.state.items}
-              choose={this.props.choose}
-              filter={this.filterList}
+          choose={this.props.choose}
+          filter={this.filterList}
         />
       </MuiThemeProvider>
     )
   }
-
 }

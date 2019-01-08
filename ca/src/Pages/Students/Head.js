@@ -19,7 +19,6 @@ class Head extends Component {
     this.props.FetchCourse()
     this.props.FetchCoursePass()
     this.props.fetchGraduationCourse()
-
   }
 
   render () {
@@ -27,9 +26,10 @@ class Head extends Component {
       '/students/head',
       '/students/grad',
       '/students/map',
+      '/students/recommend',
       '/students/professor',
       '/students/project',
-      '/students/credit'
+      // '/students/credit'
     ]
     const onTouchTapsrouter = [
       () => this.props.history.push(router[0]),
@@ -38,6 +38,7 @@ class Head extends Component {
       () => this.props.history.push(router[3]),
       () => this.props.history.push(router[4]),
       () => this.props.history.push(router[5]),
+      // () => this.props.history.push(router[6]),
       () => this.select(6),
       () => this.select(7),
       () => this.select(8),

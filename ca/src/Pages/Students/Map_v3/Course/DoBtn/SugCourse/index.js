@@ -91,7 +91,7 @@ export default class TableExampleComplex extends Component {
       deselectOnClickaway: true,
       showCheckboxes: false,
       height: '300px',
-      tableData: tableData.map(e=>({...e,rating:false}))
+      tableData: tableData.map(e => ({...e, rating: false}))
     }
     this.rating = this.rating.bind(this)
   }
@@ -110,13 +110,13 @@ export default class TableExampleComplex extends Component {
   handleChange (event) {
     this.setState({ height: event.target.value })
   }
-  rating(r,c,e){
+  rating (r, c, e) {
     // r == id ; e== value
-    if(c === 5 && e.target.getAttribute('value')){
+    if (c === 5 && e.target.getAttribute('value')) {
       let update = this.state.tableData
       update[r].rating = true
-      console.log(update[r].cos_code,e.target.getAttribute('value'))
-      this.setState({tableData:update}) 
+      console.log(update[r].cos_code, e.target.getAttribute('value'))
+      this.setState({tableData: update})
     }
   }
   render () {
@@ -160,17 +160,17 @@ export default class TableExampleComplex extends Component {
                   <TableRowColumn>{row.cos_time}</TableRowColumn>
                   <TableRowColumn>{row.cos_code}</TableRowColumn>
                   <TableRowColumn>
-                    {!row.rating ?
-                      (
-                        <span className="rating">
-                          <i className="fa fa-star star" value={5}/>
-                          <i className="fa fa-star star" value={4}/>
-                          <i className="fa fa-star star" value={3}/>
-                          <i className="fa fa-star star" value={2}/>
-                          <i className="fa fa-star star" value={1}/>
-                        </span> 
-                      ):
-                      "感謝您的回饋 > <"
+                    {!row.rating
+                      ? (
+                        <span className='rating'>
+                          <i className='fa fa-star star' value={5} />
+                          <i className='fa fa-star star' value={4} />
+                          <i className='fa fa-star star' value={3} />
+                          <i className='fa fa-star star' value={2} />
+                          <i className='fa fa-star star' value={1} />
+                        </span>
+                      )
+                      : '感謝您的回饋 > <'
                     }
                   </TableRowColumn>
                 </TableRow>

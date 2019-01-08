@@ -77,7 +77,7 @@ class GitnodeItem extends React.Component {
     }
     return ''
   }
-  
+
   render () {
     return (
       <MuiThemeProvider>

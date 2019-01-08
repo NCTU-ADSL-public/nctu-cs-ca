@@ -1,8 +1,8 @@
 import React from 'react'
 
-const AutoLogout = WrappedClass => 
+const AutoLogout = WrappedClass =>
   class extends React.Component {
-    constructor(props){
+    constructor (props) {
       super(props)
       this.events = [
         'load',
@@ -19,33 +19,33 @@ const AutoLogout = WrappedClass =>
       this.clearTimer = this.clearTimer.bind(this)
       this.resetTimer = this.resetTimer.bind(this)
     }
-    componentDidMount(){
-      if(window.location.pathname !== "/" && window.location.pathname !== "/logout"){
+    componentDidMount () {
+      if (window.location.pathname !== '/' && window.location.pathname !== '/logout') {
         this.events.forEach(
           event => window.addEventListener(event, this.resetTimer)
         )
         this.setTimer()
       }
     }
-    setTimer(){
+    setTimer () {
       this.timer = setTimeout(this.logout, this.state.logoutTime)
     }
-    clearTimer(){
+    clearTimer () {
       clearTimeout(this.timer)
     }
-    resetTimer(){
+    resetTimer () {
       this.clearTimer()
       this.setTimer()
     }
 
-    logout(){
+    logout () {
       window.location.assign('/logout')
     }
-    render() {
+    render () {
       return (
         <WrappedClass {...this.props} />
       )
     }
   }
 
-  export default AutoLogout
+export default AutoLogout

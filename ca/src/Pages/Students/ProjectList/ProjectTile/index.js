@@ -66,7 +66,7 @@ class Index extends React.Component {
     this.handleClose = this.handleClose.bind(this)
     this.getString = this.getString.bind(this)
     this.getImage = this.getImage.bind(this)
-    
+
     this.fetchImage()
     this.state = {
       open: false

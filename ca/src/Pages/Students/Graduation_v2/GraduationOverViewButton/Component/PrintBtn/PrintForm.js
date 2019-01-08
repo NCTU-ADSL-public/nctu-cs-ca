@@ -20,8 +20,7 @@ class PrintForm extends React.Component {
 
           if (this.props.reviewCheck === 0) {
             generalCat.push(item)
-          }
-          else {
+          } else {
             if (this.props.generalCourseSelect === 0 && item.title === '通識(舊制)') {
               generalCat.push(item)
             }
@@ -29,13 +28,11 @@ class PrintForm extends React.Component {
               generalCat.push(item)
             }
           }
-        }
-        else {
+        } else {
           generalCat.push(item)
         }
-      }
-      else if (item.require !== 0) {
-        depCat.push(item) 
+      } else if (item.require !== 0) {
+        depCat.push(item)
       }
     })
 

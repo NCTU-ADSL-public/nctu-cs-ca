@@ -32,7 +32,7 @@ export const setAddStatus = (post_item) => dispatch => {
   }).catch(err => {
     console.log(err)
 
-      // dispatch(update_add_status(post_item.student_id))
+    // dispatch(update_add_status(post_item.student_id))
   })
 }
 
@@ -49,7 +49,7 @@ export const setFirstSecond = (post_item) => dispatch => {
   }).catch(err => {
     console.log(err)
 
-      // dispatch(update_first_second(post_item.student_id))
+    // dispatch(update_first_second(post_item.student_id))
   })
 }
 

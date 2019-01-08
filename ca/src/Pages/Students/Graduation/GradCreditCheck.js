@@ -341,8 +341,7 @@ class GradCreditCheck extends React.Component {
                     />
                   </MuiThemeProvider>
                 </ReactHover.Trigger>
-                <ReactHover.Hover type='hover'>
-                </ReactHover.Hover>
+                <ReactHover.Hover type='hover' />
               </ReactHover>
 
               <MuiThemeProvider>

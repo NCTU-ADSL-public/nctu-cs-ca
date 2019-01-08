@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  teachers: [/*{
+  teachers: [/* {
     "professor_name": "易志偉",
     "accept_status":"0",
     "pending_status": "0",
@@ -86,7 +86,7 @@ const initialState = {
             }
         ]
     }
-}*/]
+} */]
 }
 
 export default handleActions({
@@ -94,32 +94,32 @@ export default handleActions({
     teachers: action.payload
   }),
   UPDATE_ADD_STATUS: (state, action) => ({ ...state,
-    teachers: state.teachers.map( teacher => ({ ...teacher,
+    teachers: state.teachers.map(teacher => ({ ...teacher,
       accepted: { ...teacher.accepted,
-        projects: teacher.accepted.projects.map( project => ({ ...project,
-          students: project.students.map( student => ({...student,
-            add_status: student.id === action.payload ? "1" : student.add_status
+        projects: teacher.accepted.projects.map(project => ({ ...project,
+          students: project.students.map(student => ({...student,
+            add_status: student.id === action.payload ? '1' : student.add_status
           }))
         }))
       }
     }))
   }),
   UPDATE_FIRST_SECOND: (state, action) => ({ ...state,
-    teachers: state.teachers.map( teacher => ({ ...teacher,
+    teachers: state.teachers.map(teacher => ({ ...teacher,
       accepted: { ...teacher.accepted,
-        projects: teacher.accepted.projects.map( project => ({ ...project,
-          students: project.students.map( student => ({...student,
-            first_second: student.id === action.payload ? "1" : student.first_second
+        projects: teacher.accepted.projects.map(project => ({ ...project,
+          students: project.students.map(student => ({...student,
+            first_second: student.id === action.payload ? '1' : student.first_second
           }))
         }))
       }
     }))
   }),
   DELETE_RESEARCH: (state, action) => ({ ...state,
-    teachers: state.teachers.map( teacher => ({ ...teacher,
+    teachers: state.teachers.map(teacher => ({ ...teacher,
       accepted: { ...teacher.accepted,
-        projects: teacher.accepted.projects.map( project => ({ ...project,
-          students: project.students.filter( student => student.id !== action.payload )
+        projects: teacher.accepted.projects.map(project => ({ ...project,
+          students: project.students.filter(student => student.id !== action.payload)
         }))
       }
     }))

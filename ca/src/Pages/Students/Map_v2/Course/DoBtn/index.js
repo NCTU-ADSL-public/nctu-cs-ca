@@ -1,11 +1,11 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import SugCourse from './SugCourse'
-import SugCourseRwd from './SugCourse/others'
+// import Button from '@material-ui/core/Button'
+// import Dialog from '@material-ui/core/Dialog'
+// import AppBar from '@material-ui/core/AppBar'
+// import Toolbar from '@material-ui/core/Toolbar'
+// import Typography from '@material-ui/core/Typography'
+// import SugCourse from './SugCourse'
+// import SugCourseRwd from './SugCourse/others'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import { withStyles } from '@material-ui/core/styles/index'
 import { connect } from 'react-redux'
@@ -53,13 +53,14 @@ class AlertDialog extends React.Component {
   }
 
   render () {
-    const { rwddisplay, rwd, fullScreen, classes } = this.props
+    //const { rwddisplay, rwd, fullScreen, classes } = this.props
     return (
       <div style={{ margin: '5px 0 5px 0' }}>
+        {/*
         <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={rwd ? this.props.ShowCourseOrSug : this.handleClickOpen}>
           {rwd ? rwddisplay === 'map' ? '課程地圖' : '推薦選課' : '推薦選課'}
         </Button>
-        <Dialog
+        {/*<Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby='alert-dialog-title'
@@ -77,7 +78,7 @@ class AlertDialog extends React.Component {
             </Toolbar>
           </AppBar>
           {fullScreen ? <SugCourseRwd /> : <SugCourse />}
-        </Dialog>
+        </Dialog> */}
       </div>
     )
   }

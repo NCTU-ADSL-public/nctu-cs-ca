@@ -1,9 +1,9 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import SwipeableViews from 'react-swipeable-views';
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import SwipeableViews from 'react-swipeable-views'
 
 import Student from './Student'
 import Teacher from './Teacher'
@@ -27,48 +27,46 @@ const styles = theme => ({
 })
 
 class index extends React.Component {
-
-  constructor() {
+  constructor () {
     super()
     this.state = {
       tabIndex: 0
     }
   }
 
-  render() {
-
+  render () {
     const { classes } = this.props
 
     return (
       <div>
         <Tabs
-          value = { this.state.tabIndex }
-          onChange = { (event, value) => this.setState({ tabIndex: value }) }
+          value={this.state.tabIndex}
+          onChange={(event, value) => this.setState({ tabIndex: value })}
           centered
-          classes = {{
+          classes={{
             root: classes.tabsRoot,
             indicator: classes.tabsIndicator
           }}
         >
           <Tab
-            label = "學生狀況"
-            classes = {{
+            label='學生狀況'
+            classes={{
               root: classes.tabRoot,
               label: classes.tabLabel,
               selected: classes.tabSelected
             }}
           />
           <Tab
-            label = "教授狀況"
-            classes = {{
+            label='教授狀況'
+            classes={{
               root: classes.tabRoot,
               label: classes.tabLabel,
               selected: classes.tabSelected
             }}
           />
           <Tab
-            label = "成績查詢"
-            classes = {{
+            label='成績查詢'
+            classes={{
               root: classes.tabRoot,
               label: classes.tabLabel,
               selected: classes.tabSelected
@@ -76,7 +74,7 @@ class index extends React.Component {
           />
         </Tabs>
         <SwipeableViews
-          index = { this.state.tabIndex }
+          index={this.state.tabIndex}
         >
           <div><Student /></div>
           <div><Teacher /></div>
