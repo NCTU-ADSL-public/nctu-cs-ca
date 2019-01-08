@@ -24,6 +24,7 @@ import WaitIcon from '@material-ui/icons/AccessTime'
 import TrashIcon from '@material-ui/icons/Delete'
 import CheckNone from '@material-ui/icons/CheckBoxOutlineBlank'
 import FilterIcon from '@material-ui/icons/FilterList'
+import SwitchIcon from '@material-ui/icons/Flag'
 import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
@@ -96,7 +97,7 @@ const styles = ()=>({
   sideIcon2:{
     position: 'absolute',
     top: 60,
-    left: 'calc(100vw - 130px)'
+    left: 'calc(100vw - 180px)'
   },
   Panels:{
     width: 'calc(100vw - 80px)',
@@ -158,7 +159,7 @@ class Verify extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-// for test 
+// for test
       formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
       //formList:[],
       open: false,
@@ -166,7 +167,8 @@ class Verify extends React.Component{
       index: 0,
       select:[],
       selectAll: false,
-      isRecord: false
+      isRecord: false,
+      isEnglish: false
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
@@ -351,14 +353,15 @@ class Verify extends React.Component{
     const type = [[0],[1,5],[2],[3,4]]
     return(
       <div className={classes.root}>
-        <span className={classes.state}>{`目前顯示：${['尚未處理','等待中','已通過','已退回'][this.state.index]}${this.state.isRecord?'且曾有審核通過紀錄':''}的抵免單`}</span>
+        <span className={classes.state}>{`目前顯示：${['尚未處理','等待中','已通過','已退回'][this.state.index]}${this.state.isRecord?'且曾有審核通過紀錄':''}的${this.state.isEnglish ?'英授':'一般'}抵免單`}</span>
         <div className={classes.side}>
           {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
           <Tooltip title={'申請中'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={()=>this.setState({
                 index:0,select:[],
-                selectAll:this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id)) && this.state.formList.filter(e => e.status === 0).length > 0
+                selectAll:this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id)) && this.state.formList.filter(e => e.status === 0).length > 0,
+                isRecord : false
               })}
               color={(this.state.index === 0)?'primary':'default'}
             >
@@ -371,7 +374,8 @@ class Verify extends React.Component{
               onClick={()=>this.setState({
                 index:1,
                 select:[],
-                selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 1).length > 0
+                selectAll:this.state.formList.filter(e => e.status === 1).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 1).length > 0,
+                isRecord : false
               })}
               color={(this.state.index === 1)?'primary':'default'}
             >
@@ -384,7 +388,8 @@ class Verify extends React.Component{
               onClick={()=>this.setState({
                 index:2,
                 select:[],
-                selectAll:this.state.formList.filter(e => e.status === 2).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 2).length > 0
+                selectAll:this.state.formList.filter(e => e.status === 2).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 2).length > 0,
+                isRecord : false
                 })}
               color={(this.state.index === 2)?'primary':'default'}
             >
@@ -397,7 +402,8 @@ class Verify extends React.Component{
               onClick={()=>this.setState({
                 index:3,
                 select:[],
-                selectAll:this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 3).length > 0
+                selectAll:this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id))  && this.state.formList.filter(e => e.status === 3).length > 0,
+                isRecord : false
                 })}
               color={(this.state.index === 3)?'primary':'default'}
             >
@@ -461,23 +467,32 @@ class Verify extends React.Component{
               </Tooltip>
             </React.Fragment>))
           )}
-          
-          <Tooltip title={this.state.isRecord ? '取消選取':'選取曾有過抵免紀錄的抵免單'} placement='top'>
-            <IconButton className={classes.sideIcon2}
-              onClick={()=>this.setState({selectAll: false, select:[],isRecord: !this.state.isRecord})}
-              color={(this.state.isRecord)?'primary':'default'}
-            >
-              <FilterIcon/>
-            </IconButton>
-          </Tooltip>
+          <div className={classes.sideIcon2}>
+            <Tooltip title={this.state.isRecord ? '取消選取':'選取曾有過抵免紀錄的抵免單'} placement='top'>
+              <IconButton
+                onClick={()=>this.setState({selectAll: false, select:[],isRecord: !this.state.isRecord})}
+                color={(this.state.isRecord)?'primary':'default'}
+              >
+                <FilterIcon/>
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={this.state.isEnglish ? '切換為一般抵免':'切換為英授抵免'} placement='top'>
+              <IconButton
+                onClick={()=>this.setState({selectAll: false, select:[],isRecord: false,isEnglish: !this.state.isEnglish})}
+                color={(this.state.isEnglish)?'secondary':'primary'}
+              >
+                <SwitchIcon/>
+              </IconButton>
+            </Tooltip>
+          </div>
         </div>
         }
         <div className={classes.Panels}>
         {
-          this.state.formList.filter(apply => apply.status === this.state.index && (!this.state.isRecord || apply.previous)).length > 0 ?
+          this.state.formList.filter(apply => apply.status === this.state.index && (!this.state.isRecord || apply.previous)&& (this.state.isEnglish === apply.isEnglish)).length > 0 ?
           this.state.formList
           .filter(
-            apply => type[this.state.index].includes(apply.status) && (!this.state.isRecord || apply.previous)
+            apply => type[this.state.index].includes(apply.status) && (!this.state.isRecord || apply.previous) && (this.state.isEnglish === apply.isEnglish)
           )
           .map(
             (apply,index)=>(

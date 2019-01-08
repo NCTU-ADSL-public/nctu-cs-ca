@@ -7,6 +7,8 @@ import Login from './Pages/Login/Login'
 import TeacherHead from './Pages/Teachers/Head'
 import TeacherHome from './Pages/Teachers/Home'
 import TeacherGroup from './Pages/Teachers/Group/Group'
+import TeacherCourse from './Pages/Teachers/Course'
+import TeacherFamily from './Pages/Teachers/Family'
 
 import Head from './Pages/Students/Head'
 import AssistantHead from './Pages/Assistants/Head'
@@ -55,6 +57,8 @@ const Router = () => (
 
         <Route exact path='/teachers/head' component={TeacherHome} />
         <Route exact path='/teachers/group' component={TeacherGroup} />
+        <Route exact path='/teachers/course' component={TeacherCourse} />
+        <Route exact path='/teachers/family' component={TeacherFamily} />
 
         <Route exact path='/assistants/head' render={() => <Frame><AssistantHome /></Frame>} />
         <Route exact path='/assistants/grad' render={() => <Frame><AssistantGrad /></Frame>} />
