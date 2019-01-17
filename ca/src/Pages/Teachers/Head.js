@@ -109,8 +109,8 @@ class Head extends Component {
     const router = [
       '/teachers/head',
       '/teachers/group',
-      '/teachers/family',
-      '/teachers/course'
+      '/teachers/course',
+      '/teachers/family'
     ]
     const onTouchTapsrouter = [
       () => this.props.history.push(router[0]),
