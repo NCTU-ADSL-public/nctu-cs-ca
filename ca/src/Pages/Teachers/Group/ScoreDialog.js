@@ -109,12 +109,16 @@ export default class ScoreDialog extends React.Component {
       this.setState({open: false})
     }else if(status === 1 && this.checkAllText() ){
       this.setState({open: false})
+      console.log('----------------------- /professors/students/setScore ---------------------------')
+
       console.log('tname: ' + this.props.idCard.tname)
       console.log('research_title: ' + this.props.title)
       console.log('first_second: ' + this.props.firstSecond)
+      console.log('students: ' + this.props.participants)
 
       this.props.participants.forEach((item, i) => {
-        console.log('student_id: ' + this.props.participants[i].student_id)
+        console.log('student: ' + item)
+        console.log('student_id: ' + item.student_id)
         console.log('new_score[' + i + ']: ' + this.state.score[i])
         console.log('comment[' + i + ']: ' + this.state.comment[i])
 
@@ -122,7 +126,7 @@ export default class ScoreDialog extends React.Component {
           student_id: item.student_id,
           tname: this.props.idCard.tname,
           research_title: this.props.title,
-          first_second: this.props.firstSecond,
+          first_second: item.firstSecond,
           year: this.props.year,
           new_score: this.state.score[i],
           comment: this.state.comment[i]
