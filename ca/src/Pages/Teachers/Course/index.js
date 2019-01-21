@@ -1,10 +1,10 @@
 import React from 'react'
+import { Grid, Row, Col } from 'react-bootstrap'
 //
 import axios from 'axios'
 import CourseList from './CourseSearch/CourseList'
 import ScoreChart from './ScoreChart'
 import GaugeChart from './GaugeChart'
-
 
 const styles = {
   container: {},
@@ -92,7 +92,7 @@ export default class index extends React.Component {
     ],
   }
 
-  fetchData(){
+  fetchData () {
     axios.get('/professors/courseInfo/courses', {
       id: this.props.tid,
     }).then(res => {
@@ -102,12 +102,12 @@ export default class index extends React.Component {
     })
   }
 
-  componentWillMount(){
+  componentWillMount () {
     this.fetchData()
   }
 
-  componentWillReceiveProps(nextProps){
-    if(this.props.tid !== nextProps.tid){
+  componentWillReceiveProps (nextProps) {
+    if (this.props.tid !== nextProps.tid) {
       this.fetchData()
     }
   }
@@ -169,37 +169,44 @@ export default class index extends React.Component {
       passed: [0, 0, 0, 0, 0, 0, data[7], data[8], data[9], data[10]],
       failed: [data[1], data[2], data[3], data[4], data[5], data[6], 0, 0, 0, 0],
     }
-    this.setState({ scoreChartDetail });
+    this.setState({scoreChartDetail})
   }
 
   render () {
     const showCourse = (
-      <div style={styles.course.main}>
-        <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem}
-          - {this.state.item.cos_cname}</div>
-        <div style={styles.course.score}>
-          <div style={styles.course.scoreItem}><ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/></div>
-          <div style={styles.course.scoreItem}><ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/></div>
-          <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/></div>
-          <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/></div>
-          <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
-                                                          score={ this.state.scoreDetail.member === '-'
-                                                            ? '-'
-                                                            : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
+      <Grid>
+        <Col xsHidden smHidden>
+          <div style={styles.course.main}>
+            <div style={styles.course.title}>[{this.state.item.unique_id}] {this.state.item.sem}
+              - {this.state.item.cos_cname}</div>
+            <div style={styles.course.score}>
+              <div style={styles.course.scoreItem}><ShowScore title={'平均成績'} score={this.state.scoreDetail.avg}/></div>
+              <div style={styles.course.scoreItem}><ShowScore title={'及格平均成績'} score={this.state.scoreDetail.Pavg}/>
+              </div>
+              <div style={styles.course.scoreItem}><ShowScore title={'修課人數'} score={this.state.scoreDetail.member}/>
+              </div>
+              <div style={styles.course.scoreItem}><ShowScore title={'及格人數'} score={this.state.scoreDetail.passed}/>
+              </div>
+              <div style={styles.course.scoreItem}><ShowScore title={'不及格人數'}
+                                                              score={this.state.scoreDetail.member === '-'
+                                                                ? '-'
+                                                                : this.state.scoreDetail.member - this.state.scoreDetail.passed}/>
+              </div>
+              <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
+            </div>
+            <div style={styles.course.box}><GaugeChart member={this.state.scoreDetail.member}
+                                                       passed={this.state.scoreDetail.passed}/></div>
+            <div style={styles.course.box}><ScoreChart detail={this.state.scoreChartDetail}/></div>
           </div>
-          <div style={styles.course.scoreItem}><ShowScore title={'最高分'} score={this.state.scoreDetail.max}/></div>
-        </div>
-        <div style={styles.course.box}><GaugeChart member={this.state.scoreDetail.member}
-                                                   passed={this.state.scoreDetail.passed}/></div>
-        <div style={styles.course.box}><ScoreChart detail={this.state.scoreChartDetail}/></div>
-      </div>
-    );
+        </Col>
+      </Grid>
+    )
 
     const showDefault = (
       <div style={styles.course.main}>
         <div style={styles.course.title}>(此功能尚在測試階段)</div>
       </div>
-    );
+    )
 
     return (
       <div style={styles.container}>
@@ -208,7 +215,7 @@ export default class index extends React.Component {
           <CourseList items={this.state.initItem} parentFunction={this.searchCallback}/>
         </div>
 
-        { this.state.item.unique_id ? showCourse : showDefault }
+        {this.state.item.unique_id ? showCourse : showDefault}
 
       </div>
     )

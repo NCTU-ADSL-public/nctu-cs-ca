@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import FadeIn from 'react-fade-in'
 import { Grid, Row, Col } from 'react-bootstrap'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import HomeItem from './Home.js'
-import CourseItem from './Course/index.js'
-import GroupItem from './Group/Group.js'
-import FamilyItem from './Family/index.js'
-import ProfileItem from './Profile.js'
-import Mail from '../../Components/mail'
 
 import Navbar from '../../Components/Navbar'
 
 // Redux
 import {connect} from 'react-redux'
 import {fetchUser} from '../../Redux/Teachers/Actions/User'
+
+const router = [
+  '/teachers/head',
+  '/teachers/group',
+  '/teachers/course',
+  '/teachers/family'
+]
 
 class Head extends Component {
   constructor (props) {
@@ -43,6 +41,7 @@ class Head extends Component {
     // this.select(0)
   }
 
+  /*
   select (index) {
     if (index === 0) {
       ReactDOM.render(
@@ -66,7 +65,7 @@ class Head extends Component {
         document.getElementById('page'))
     } else if (index === 2) {
       ReactDOM.render(
-        <Col>
+        <Col xsHidden smHidden>
           <FadeIn>
             <GroupItem idCard={this.props.idCard} />
           </FadeIn>
@@ -74,10 +73,12 @@ class Head extends Component {
         document.getElementById('page'))
     } else if (index === 3) {
       ReactDOM.render(
-        <Col>
+        <Col xsHidden smHidden>
           <a>
             <FadeIn>
-              <FamilyItem tname={this.props.idCard.tname} tid={this.props.idCard.id} tmail={this.props.idCard.mail} />
+              <div className='hidden-sm hidden-xs'>
+                <FamilyItem tname={this.props.idCard.tname} tid={this.props.idCard.id} tmail={this.props.idCard.mail} />
+              </div>
             </FadeIn>
           </a>
         </Col>,
@@ -104,25 +105,18 @@ class Head extends Component {
 
     this.setState({selectedIndex: index})
   }
+*/
 
+  select (index) {
+    this.props.history.push(router[index])
+    this.setState({selectedIndex: index})
+  }
   render () {
-    const router = [
-      '/teachers/head',
-      '/teachers/group',
-      '/teachers/course',
-      '/teachers/family'
-    ]
     const onTouchTapsrouter = [
-      () => this.props.history.push(router[0]),
-      () => this.props.history.push(router[1]),
-      () => this.props.history.push(router[2]),
-      () => this.props.history.push(router[3]),
-      () => this.props.history.push(router[4]),
-      () => this.props.history.push(router[5]),
-      () => this.select(6),
-      () => this.select(7),
-      () => this.select(8),
-      () => this.select(9)
+      () => this.select(0),
+      () => this.select(1),
+      () => this.select(2),
+      () => this.select(3)
     ]
     return (
       <Grid id='Head' fluid>
@@ -135,10 +129,10 @@ class Head extends Component {
             router={router}
           />
           <Col xs={12} mdHidden lgHidden>
-            { this.state.selectedIndex === 2 || this.state.selectedIndex === 3 || this.state.selectedIndex === 5
+            { this.state.selectedIndex === 0 || this.state.selectedIndex === 1 || this.state.selectedIndex === 3
               ? ''
-              : <div className='alert alert-danger'>
-                行動版網頁尚會跑版，可用電腦登入打開網頁以享有更佳的視覺效果，謝謝
+              : <div className='alert alert-danger' style={{marginTop: 50}}>
+                行動版網頁尚未完善，請用電腦登入打開網頁以享有更佳的視覺效果，謝謝
               </div> }
           </Col>
           {/* <Col xs={12} md={12} style={{padding: 0}}> */}

@@ -1,3 +1,13 @@
 .image{
     width: 100%;
 }
+
+.home-image-adjust {
+    margin-top: calc( -7vh );
+}
+
+@media (max-width: 480px) {
+    .home-image-adjust {
+        margin-top: 0;
+    }
+}

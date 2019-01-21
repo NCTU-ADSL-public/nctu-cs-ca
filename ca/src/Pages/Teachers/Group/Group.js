@@ -2,6 +2,7 @@ import React from 'react'
 
 import GroupList from './GroupList'
 import GroupApply from './GroupApply'
+import './Group.css'
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 
@@ -13,7 +14,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Show from './Show'
 import SwipeableViews from 'react-swipeable-views'
 
-
+const styles = {
+  tabDefault: {fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#f5f5f5', color:'#666'},
+  tabActive: {fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#f5f5f5', color:'#68bb66'}
+}
 
 class Group extends React.Component {
   constructor (props) {
@@ -52,19 +56,19 @@ class Group extends React.Component {
   }
   render () {
     return (
-      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} style={{marginTop: '20px'}}>
+      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} style={{marginTop: '-8px'}}>
         <MuiThemeProvider>
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
-          inkBarStyle={{backgroundColor: '#10616b'}}
+          inkBarStyle={{backgroundColor: '#68bb66'}}
         >
-          <Tab label={`專題列表`} value='1'
-               style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >
+          <Tab label={`專題列表`} value='1' className='p-box-shadow'
+               style={this.state.value == '1' ? styles.tabActive : styles.tabDefault} >
             <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
           </Tab>
-          <Tab label={`專題申請`} value='2'
-               style={{fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#9da4a5'}} >
+          <Tab label={`專題申請`} value='2' className='p-box-shadow'
+               style={this.state.value == '2' ? styles.tabActive : styles.tabDefault} >
             <GroupApply idCard={this.props.idCard} />
           </Tab>
           {/*<Tab label={`各組專題影片`} value='3'*/}

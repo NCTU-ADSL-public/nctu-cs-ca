@@ -1,0 +1,5 @@
+.p-box-shadow {
+    -moz-box-shadow: 15px 0px 21px -2px rgba(20%,20%,40%,0.5);
+    -webkit-box-shadow: 15px 0px 21px -2px rgba(20%,20%,40%,0.5);
+    box-shadow: 15px 0px 21px -2px rgba(20%,20%,40%,0.5);
+}
