@@ -220,8 +220,10 @@ class GroupList extends React.Component {
 
       // year research_title
       let data = res.data.groups
+      this.setState({groupList: data})
       let dataList = []
       console.log(data)
+      /*
       if(data !== undefined){
         data.forEach( item => {
           let directory = item.year + '/' + this.props.idCard.tname + '/' + item.research_title + '/image/image.jpg'
@@ -268,7 +270,7 @@ class GroupList extends React.Component {
         console.log('DATA:', data)
         console.log('DATA LIST:', dataList)
       }
-
+      */
 
     }).catch(err => {
       console.log(err)
