@@ -132,15 +132,21 @@ export default class ScoreDialog extends React.Component {
           comment: this.state.comment[i]
         }).then(res => {
           // Magic update
-          let inter = 250
-          while (inter < 100000) {
-            setTimeout(
-              () => {
-                console.log('----- fetch /professors/students/projects! ----')
-                this.props.parentFunction()
-              }, inter)
-            inter *= 2
-          }
+          setTimeout(
+            () => {
+              console.log('----- fetch /professors/students/projects! ----')
+              this.props.parentFunction()
+            }, 250)
+          setTimeout(
+            () => {
+              console.log('----- fetch /professors/students/projects! ----')
+              this.props.parentFunction()
+            }, 500)
+          setTimeout(
+            () => {
+              console.log('----- fetch /professors/students/projects! ----')
+              this.props.parentFunction()
+            }, 1000)
         }).catch(err => {
           console.log(err)
         })
