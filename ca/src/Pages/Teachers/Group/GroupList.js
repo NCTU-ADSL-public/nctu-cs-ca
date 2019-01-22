@@ -222,51 +222,53 @@ class GroupList extends React.Component {
       let data = res.data.groups
       let dataList = []
       console.log(data)
-      data.forEach( item => {
-        let directory = item.year + '/' + this.props.idCard.tname + '/' + item.research_title + '/image/image.jpg'
-        let pathReference = storageRef.child(directory)
-        pathReference.getDownloadURL().then(url => {
-          let data_ = {...item, image: url}
-          directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
-          pathReference = storageRef.child(directory)
+      if(data !== undefined){
+        data.forEach( item => {
+          let directory = item.year + '/' + this.props.idCard.tname + '/' + item.research_title + '/image/image.jpg'
+          let pathReference = storageRef.child(directory)
           pathReference.getDownloadURL().then(url => {
-            dataList.push({...data_, file: url})
-            _this.setState({
-             loading: false,
-              groupList: [..._this.state.groupList, {...data_, file: url}]
+            let data_ = {...item, image: url}
+            directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
+            pathReference = storageRef.child(directory)
+            pathReference.getDownloadURL().then(url => {
+              dataList.push({...data_, file: url})
+              _this.setState({
+                loading: false,
+                groupList: [..._this.state.groupList, {...data_, file: url}]
+              })
+            }).catch(error => {
+              console.log(error)
+              dataList.push(data_)
+              _this.setState({
+                loading: false,
+                groupList: [..._this.state.groupList, {...data_, file: url}]
+              })
             })
           }).catch(error => {
             console.log(error)
-            dataList.push(data_)
-            _this.setState({
-              loading: false,
-              groupList: [..._this.state.groupList, {...data_, file: url}]
-            })
-          })
-        }).catch(error => {
-          console.log(error)
-          let data_ = {...item}
-          directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
-          pathReference = storageRef.child(directory)
-          pathReference.getDownloadURL().then(url => {
-            dataList.push({...data_, file: url})
-            _this.setState({
-              loading: false,
-              groupList: [..._this.state.groupList, {...data_, file: url}]
-            })
-          }).catch(error => {
-            console.log(error)
-            dataList.push(data_)
-            _this.setState({
-              loading: false,
-              groupList: [..._this.state.groupList, {...data_}]
+            let data_ = {...item}
+            directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
+            pathReference = storageRef.child(directory)
+            pathReference.getDownloadURL().then(url => {
+              dataList.push({...data_, file: url})
+              _this.setState({
+                loading: false,
+                groupList: [..._this.state.groupList, {...data_, file: url}]
+              })
+            }).catch(error => {
+              console.log(error)
+              dataList.push(data_)
+              _this.setState({
+                loading: false,
+                groupList: [..._this.state.groupList, {...data_}]
+              })
             })
           })
         })
-      })
+        console.log('DATA:', data)
+        console.log('DATA LIST:', dataList)
+      }
 
-      console.log('DATA:', data)
-      console.log('DATA LIST:', dataList)
 
     }).catch(err => {
       console.log(err)
