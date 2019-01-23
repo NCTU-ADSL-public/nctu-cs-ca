@@ -41,7 +41,7 @@ if (!firebase.apps.length) {
   let auth = firebase.auth()
   auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
 }
-let storageRef = firebase.storage().ref()
+// let storageRef = firebase.storage().ref()
 /*
 const styles = {
   mainTitle: {
@@ -206,7 +206,7 @@ class GroupList extends React.Component {
     this.setState({loading: false})
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
-    let _this = this
+    // let _this = this
     axios.post('/professors/students/projects', {
       teacherId: this.props.idCard.teacher_id,
       sem: sem
@@ -221,7 +221,7 @@ class GroupList extends React.Component {
       // year research_title
       let data = res.data.groups
       this.setState({groupList: data})
-      let dataList = []
+      // let dataList = []
       console.log(data)
       /*
       if(data !== undefined){

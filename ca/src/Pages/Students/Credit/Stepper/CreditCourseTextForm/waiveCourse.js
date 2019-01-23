@@ -165,7 +165,7 @@ class WaiveForm extends React.Component {
             }
           />
         </div>
-        <h2 style={{ margin: '40px'}}>{'抵免申請' + '(' + apply_list.length + '門課, 共' + apply_list.reduce((total, apply_obj) => parseInt(total) + parseInt(apply_obj.credit), 0) + '學分)'}</h2>
+        <h2 style={{ margin: '40px' }}>{'抵免申請' + '(' + apply_list.length + '門課, 共' + apply_list.reduce((total, apply_obj) => parseInt(total) + parseInt(apply_obj.credit), 0) + '學分)'}</h2>
         <hr />
         <div>
           <AddIcon
@@ -235,7 +235,6 @@ class WaiveForm extends React.Component {
             select
             label='修課年級'
             className={classes.textField}
-            value={0}
             SelectProps={{
               MenuProps: {
                 className: classes.menu
@@ -348,7 +347,7 @@ class WaiveForm extends React.Component {
                   onClick={
                     () => {
                       this.setState({
-                        apply_list: apply_list.filter((apply_iter) => apply_iter.id != apply_obj.id)
+                        apply_list: apply_list.filter((apply_iter) => apply_iter.id !== apply_obj.id)
                       })
                     }
                   }

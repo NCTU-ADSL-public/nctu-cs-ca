@@ -64,11 +64,11 @@ class Group extends React.Component {
           inkBarStyle={{backgroundColor: '#68bb66'}}
         >
           <Tab label={`專題列表`} value='1' className='p-box-shadow'
-               style={this.state.value == '1' ? styles.tabActive : styles.tabDefault} >
+               style={this.state.value === '1' ? styles.tabActive : styles.tabDefault} >
             <GroupList idCard={this.props.idCard} handleGroupClick={this.handleGroupClick}/>
           </Tab>
           <Tab label={`專題申請`} value='2' className='p-box-shadow'
-               style={this.state.value == '2' ? styles.tabActive : styles.tabDefault} >
+               style={this.state.value === '2' ? styles.tabActive : styles.tabDefault} >
             <GroupApply idCard={this.props.idCard} />
           </Tab>
           {/*<Tab label={`各組專題影片`} value='3'*/}
