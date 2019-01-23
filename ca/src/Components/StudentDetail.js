@@ -1,6 +1,6 @@
 import React from 'react'
 import Frame from './Frame'
-import StudentGrad from '../Pages/Students/Graduation_v2/index'
+import StudentGrad from '../Pages/Students/Graduation'
 
 import { fetchGraduationCourseAssistantVersion } from '../Redux/Students/Actions/Graduation/index'
 import { connect } from 'react-redux'
