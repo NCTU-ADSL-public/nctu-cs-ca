@@ -21,17 +21,7 @@ import { storeProjectsImage, storeProjectsFile } from '../../../../Redux/Student
 import axios from 'axios/index'
 import Edit from './Edit/Edit'
 
-let config = {
-  apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
-  authDomain: 'code-86ba4.firebaseapp.com',
-  databaseURL: 'https://code-86ba4.firebaseio.com',
-  projectId: 'code-86ba4',
-  storageBucket: 'code-86ba4.appspot.com',
-  messagingSenderId: '354539568437'
-}
-if (!firebase.apps.length) {
-  firebase.initializeApp(config)
-}
+
 let storageRef = firebase.storage().ref()
 
 const styles = {
