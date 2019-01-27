@@ -68,8 +68,8 @@ const Router = () => (
         <Route exact path='/students/map' render={() => <StudentMap />} />
         <Route exact path='/students/professor' render={() => <StudentProfessor />} />
         <Route exact path='/students/project' render={() => <StudentProject />} />
-        <Route exact path='/students/credit' render={() => <StudentCredit />} /> }
-        <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} /> }
+        <Route exact path='/students/credit' render={() => <StudentCredit />} />
+        <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} />
         <Route exact path='/students/recommend' render={() => <StudentRecommend />} />
 
         <Route exact path='/teachers/head' component={TeacherHome} />
