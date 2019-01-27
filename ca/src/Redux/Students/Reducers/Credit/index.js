@@ -42,5 +42,9 @@ export default handleActions({
       ...state.englishCourse,
       ...action.payload
     }
+  }),
+  ENGLISH_COURSE_CREDIT_RESET: (state, action) => ({
+    ...state,
+    englishCourse: initialState.englishCourse
   })
 }, initialState)

@@ -4,6 +4,7 @@ import axios from 'axios'
 
 export const courseCreditChange = createAction('COURSE_CREDIT_CHANGE')
 export const englishCourseCreditChange = createAction('ENGLISH_COURSE_CREDIT_CHANGE')
+export const englishCourseCreditReset = createAction('ENGLISH_COURSE_CREDIT_RESET')
 
 export const sendEnglishCourseCredit = (payload) => dispatch => {
   console.log(payload)

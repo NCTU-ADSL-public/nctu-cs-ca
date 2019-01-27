@@ -14,7 +14,7 @@ import EnglishCourseForm from './CreditCourseTextForm/englishCourseForm'
 import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
 import { connect } from 'react-redux'
-import { courseCreditChange, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
+import { courseCreditChange, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
 
 class HorizontalLinearStepper extends React.Component {
@@ -31,37 +31,52 @@ class HorizontalLinearStepper extends React.Component {
     }
   }
 
+  resetForm () {
+    // 回復為初始狀態，並清除每個表單的輸入
+    this.setState({ stepIndex: 0, selectFormIndex: -1, finished: false })
+    this.props.englishCourseCreditReset()
+  }
+
   handleNext () {
-    const { stepIndex } = this.state
+    const { stepIndex, selectFormIndex } = this.state
+
+    if (stepIndex === 0 && selectFormIndex === -1) {
+      window.alert('請選擇表單')
+      return
+    } 
+    else if (stepIndex === 1) {
+      if (selectFormIndex === 2) {
+        const { phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
+        if (!(phone && reason && department && teacher && course_name && course_code)) {
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+      }
+    }
+    else if (stepIndex === 2) {
+      let Today = new Date()
+      let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
+      let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
+
+      if (selectFormIndex === 0) {
+
+      }
+      else if (selectFormIndex === 1) {
+
+      }
+      else if (selectFormIndex === 2) {
+        this.props.sendEnglishCourseCredit({
+          ...this.props.englishCourse,
+          apply_year: year,
+          apply_semester: semester
+        })
+      }
+    }
+
     this.setState({
       stepIndex: stepIndex + 1,
       finished: stepIndex >= 2
     })
-    if (stepIndex === 2) {
-      let Today = new Date()
-      let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
-      let semester = ((Today.getMonth() + 1) >= 8 ? '1' : '2')
-
-      switch (this.state.selectFormIndex) {
-        case 0:
-          break
-        case 1:
-          break
-        case 2:
-          this.props.sendEnglishCourseCredit(this.props.englishCourse)
-          break
-        default:
-          break
-      }
-    }
-
-    if (this.state.selectFormIndex === -1) {
-      window.alert('請選擇表單')
-      this.setState({
-        stepIndex: stepIndex,
-        finished: stepIndex >= 2
-      })
-    }
   }
 
   handlePrev () {
@@ -136,7 +151,7 @@ class HorizontalLinearStepper extends React.Component {
                     href='/'
                     onClick={(event) => {
                       event.preventDefault()
-                      this.setState({ stepIndex: 0, finished: false })
+                      this.resetForm()
                     }}
                   >
                     按此
@@ -175,6 +190,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   courseCreditChange: (payload) => dispatch(courseCreditChange(payload)),
+  englishCourseCreditChange: (payload) => dispatch(englishCourseCreditChange(payload)),
+  englishCourseCreditReset: (payload) => dispatch(englishCourseCreditReset(payload)),
   sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload))
 })
 
