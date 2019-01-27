@@ -89,7 +89,7 @@ class TextForm extends React.Component {
   }
 
   handleChange (event, index, value) {
-    this.setState({valueFailure: value})
+    this.setState({ valueFailure: value })
   }
 
   getTime () {

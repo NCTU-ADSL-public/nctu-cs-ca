@@ -6,6 +6,7 @@ import {
 } from 'material-ui/Stepper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FormSelectTable from './FormSelectTable'
 import TextForm from './CreditCourseTextForm/normalCourse'
 import WaiveForm from './CreditCourseTextForm/waiveCourse'
@@ -14,6 +15,7 @@ import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
 import { connect } from 'react-redux'
 import { courseCreditChange, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
+import './Stepper.css'
 
 class HorizontalLinearStepper extends React.Component {
   constructor (props) {
@@ -54,7 +56,7 @@ class HorizontalLinearStepper extends React.Component {
     }
 
     if (this.state.selectFormIndex === -1) {
-      alert('請選擇表單')
+      window.alert('請選擇表單')
       this.setState({
         stepIndex: stepIndex,
         finished: stepIndex >= 2
@@ -63,7 +65,7 @@ class HorizontalLinearStepper extends React.Component {
   }
 
   handlePrev () {
-    const {stepIndex} = this.state
+    const { stepIndex } = this.state
     if (stepIndex > 0) {
       this.setState({ stepIndex: stepIndex - 1 })
     }
@@ -113,51 +115,55 @@ class HorizontalLinearStepper extends React.Component {
     const contentStyle = { margin: '0 16px' }
 
     return (
-      <div style={{ width: '100%', maxWidth: 1500, margin: 'auto' }}>
-        <Stepper activeStep={stepIndex}>
-          <Step>
-            <StepLabel>選取抵免表單</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>填寫表單</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>確認送出</StepLabel>
-          </Step>
-        </Stepper>
-        <div style={contentStyle}>
-          {finished ? (
-            <p>
-              <a
-                href='/'
-                onClick={(event) => {
-                  event.preventDefault()
-                  this.setState({ stepIndex: 0, finished: false })
-                }}
-              >
-                按此
-              </a> 回到表單首頁
-            </p>
-          ) : (
-            <div>
-              <div>{this.getStepContent(stepIndex)}</div>
-              <div style={{ marginTop: 12 }}>
-                <RaisedButton
-                  label={stepIndex === 2 ? '送出!' : '下一步'}
-                  primary
-                  onClick={this.handleNext}
-                  style={{ marginRight: 12, float: 'right' }}
-                />
-                <FlatButton
-                  label='上一步'
-                  disabled={stepIndex === 0}
-                  onClick={this.handlePrev}
-                  style={{ marginRight: 12, float: 'right' }}
-                />
-              </div>
+      <div className='Credt-title-text'>
+        <MuiThemeProvider>
+          <div style={{ width: '100%', maxWidth: 1500, margin: 'auto' }}>
+            <Stepper activeStep={stepIndex}>
+              <Step>
+                <StepLabel>選取抵免表單</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>填寫表單</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>確認送出</StepLabel>
+              </Step>
+            </Stepper>
+            <div style={contentStyle}>
+              {finished ? (
+                <p>
+                  <a
+                    href='/'
+                    onClick={(event) => {
+                      event.preventDefault()
+                      this.setState({ stepIndex: 0, finished: false })
+                    }}
+                  >
+                    按此
+                  </a> 回到表單首頁
+                </p>
+              ) : (
+                <div>
+                  <div>{this.getStepContent(stepIndex)}</div>
+                  <div style={{ marginTop: 12 }}>
+                    <RaisedButton
+                      label={stepIndex === 2 ? '送出!' : '下一步'}
+                      primary
+                      onClick={this.handleNext}
+                      style={{ marginRight: 12, float: 'right' }}
+                    />
+                    <FlatButton
+                      label='上一步'
+                      disabled={stepIndex === 0}
+                      onClick={this.handlePrev}
+                      style={{ marginRight: 12, float: 'right' }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        </MuiThemeProvider>
       </div>
     )
   }

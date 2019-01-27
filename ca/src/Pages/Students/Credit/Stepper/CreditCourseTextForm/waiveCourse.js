@@ -169,11 +169,11 @@ class WaiveForm extends React.Component {
         <hr />
         <div>
           <AddIcon
-            style={{ marginLeft: '40px', color: 'grey', fontSize: '30px'}}
+            style={{ marginLeft: '40px', color: 'grey', fontSize: '30px' }}
             onClick={
               () => {
                 this.setState({
-                  apply_list: [...apply_list, apply ],
+                  apply_list: [ ...apply_list, apply ],
                   apply: { ...apply,
                     id: apply.id + 1,
                     subject: '',
@@ -203,9 +203,9 @@ class WaiveForm extends React.Component {
             value={apply.subject}
             onChange={
               (event) => {
-                this.setState({ apply: {...apply,
+                this.setState({ apply: { ...apply,
                   subject: event.target.value
-                }})
+                } })
               }
             }
           />
@@ -225,9 +225,9 @@ class WaiveForm extends React.Component {
             value={apply.depart}
             onChange={
               (event) => {
-                this.setState({ apply: {...apply,
+                this.setState({ apply: { ...apply,
                   depart: event.target.value
-                }})
+                } })
               }
             }
           />
@@ -250,9 +250,9 @@ class WaiveForm extends React.Component {
             value={apply.grade}
             onChange={
               (event) => {
-                this.setState({ apply: {...apply,
+                this.setState({ apply: { ...apply,
                   grade: event.target.value
-                }})
+                } })
               }
             }
           >
@@ -281,9 +281,9 @@ class WaiveForm extends React.Component {
             value={apply.first_second}
             onChange={
               (event) => {
-                this.setState({ apply: {...apply,
+                this.setState({ apply: { ...apply,
                   first_second: event.target.value
-                }})
+                } })
               }
             }
           >
@@ -308,9 +308,9 @@ class WaiveForm extends React.Component {
             value={apply.credit}
             onChange={
               (event) => {
-                this.setState({ apply: {...apply,
+                this.setState({ apply: { ...apply,
                   credit: event.target.value
-                }})
+                } })
               }
             }
           />
@@ -331,9 +331,9 @@ class WaiveForm extends React.Component {
             value={apply.score}
             onChange={
               (event) => {
-                this.setState({ apply: {...apply,
+                this.setState({ apply: { ...apply,
                   score: event.target.value
-                }})
+                } })
               }
             }
           />
@@ -343,7 +343,7 @@ class WaiveForm extends React.Component {
             <div>
               <Paper style={{ padding: '20px', margin: '10px 20px' }}>
                 <DeleteIcon
-                  style={{ color: 'grey', fontSize: '30px'}}
+                  style={{ color: 'grey', fontSize: '30px' }}
                   onClick={
                     () => {
                       this.setState({

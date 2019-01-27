@@ -26,6 +26,8 @@ import StudentHome from './Pages/Students/Home/Home'
 import StudentGrad from './Pages/Students/Graduation'
 
 import StudentCredit from './Pages/Students/Credit'
+import StudentCreditApply from './Pages/Students/Credit/Stepper'
+
 import StudentMap from './Pages/Students/Map_v2'
 // import StudentMap from './Pages/Students/Map_v3'
 import StudentRecommend from './Pages/Students/Recommend'
@@ -67,6 +69,7 @@ const Router = () => (
         <Route exact path='/students/professor' render={() => <StudentProfessor />} />
         <Route exact path='/students/project' render={() => <StudentProject />} />
         <Route exact path='/students/credit' render={() => <StudentCredit />} /> }
+        <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} /> }
         <Route exact path='/students/recommend' render={() => <StudentRecommend />} />
 
         <Route exact path='/teachers/head' component={TeacherHome} />

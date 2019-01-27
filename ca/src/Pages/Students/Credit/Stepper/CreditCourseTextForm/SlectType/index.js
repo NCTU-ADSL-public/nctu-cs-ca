@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { courseCreditChange } from '../../../../../../Redux/Students/Actions/Credit'
@@ -37,7 +37,7 @@ class SelectCourseField extends Component {
 
   render () {
     return (
-      <div style={{float: 'left', paddingTop: '25px', width: '100px'}}>
+      <div style={{ float: 'left', paddingTop: '25px', width: '100px' }}>
         <SelectField
           value={this.state.value}
           onChange={this.handleChange}
@@ -48,7 +48,7 @@ class SelectCourseField extends Component {
           selectedMenuItemStyle={fontlabelStyle}
           listStyle={fontStyle}
           menuItemStyle={fontStyle}
-          style={{width: '100px'}}
+          style={{ width: '100px' }}
         >
           <MenuItem value={0} key={0} primaryText={'必修'} />
           <MenuItem value={1} key={1} primaryText={'選修'} />
