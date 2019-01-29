@@ -14,13 +14,20 @@ import {
   TableCell,
   TableRow,
   Tooltip,
-  Chip
+  Chip,
+  Select,
+  MenuItem,
+  //InputLabel,
+  FormControl,
+  Input,
+  Avatar 
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
 import ApplyIcon from '@material-ui/icons/Assignment'
 import OKIcon from '@material-ui/icons/Done'
 import WaitIcon from '@material-ui/icons/AccessTime'
+import FaceIcon from '@material-ui/icons/Face'
 import TrashIcon from '@material-ui/icons/Delete'
 import CheckNone from '@material-ui/icons/CheckBoxOutlineBlank'
 import FilterIcon from '@material-ui/icons/FilterList'
@@ -52,7 +59,7 @@ const styles = () => ({
     fontSize: 17
   },
   font: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 400,
     textAlign: 'center'
   },
@@ -63,7 +70,7 @@ const styles = () => ({
   },
   font3: {
     color: 'rgba(0, 0, 0, 0.54)',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 400,
     textAlign: 'center'
   },
@@ -126,6 +133,14 @@ const styles = () => ({
     bottom: 6,
     color: '#eee',
     zIndex: 1080
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    fontWeight: 'normal',
+    marginRight: '1em'
   }
 })
 
@@ -161,14 +176,18 @@ class Verify extends React.Component {
     this.state = {
 // for test
       formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      teacherList: FakeData.TeacherList,
+// end for test
       //formList:[],
+      //teacherList: []
       open: false,
       message: 0,
       index: 0,
       select: [],
       selectAll: false,
       isRecord: false,
-      isEnglish: false
+      isEnglish: false,
+      transferTo: []
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
@@ -180,14 +199,25 @@ class Verify extends React.Component {
     this.selectAll = this.selectAll.bind(this)
     this.snackbarOpen = this.snackbarOpen.bind(this)
     this.snackbarClose = this.snackbarClose.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount () {
+    // get TeacherList for TransferTo
+    axios.get('/assistants/advisee/TeacherList').then(res => {
+      this.setState({teacherList: res.data.map(t => ({id: t.id,name: t.name}))})
+    })
+    // get all verify items
     axios.get('/assistants/ShowUserOffsetApplyForm').then(res => {
       this.setState({formList: res.data.map((e, i) => ({...e, id: i}))})
     }).catch(err => {
       console.log(err)
     })
   }
+
+  handleChange(event){
+    this.setState({ transferTo : event.target.value})
+  }
+
   handleAgree (id) {
     // let updatedList = this.state.formList
     // updatedList[id].agreeByA = 1
@@ -202,10 +232,11 @@ class Verify extends React.Component {
           coscode: codeA
         }
       ],
-      status: 1
+      status: 1,
+      transferTo: this.state.transferTo
     }).then(res => {
       updatedList[id].status = 1
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0, transferTo:[...[]]})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -224,7 +255,8 @@ class Verify extends React.Component {
           coscode: codeA
         }
       ],
-      status: 3
+      status: 3,
+      transferTo: []
     }).then(res => {
       updatedList[id].status = 3
       this.setState({formList: updatedList, open: true, message: 0})
@@ -246,7 +278,8 @@ class Verify extends React.Component {
           coscode: codeA
         }
       ],
-      status: 0
+      status: 0,
+      transferTo: []
     }).then(res => {
       updatedList[id].status = 0
       this.setState({formList: updatedList, open: true, message: 0})
@@ -282,7 +315,8 @@ class Verify extends React.Component {
           })
         }
       ),
-      status: 3
+      status: 3,
+      transferTo: []
     }).then(res => {
       console.log(res)
       this.setState({formList: updatedList, open: true, message: 0})
@@ -303,7 +337,8 @@ class Verify extends React.Component {
           })
         }
       ),
-      status: 1
+      status: 1,
+      transferTo: this.state.transferTo
     }).then(res => {
       this.setState({formList: updatedList, open: true, message: 0})
     }).catch(err => {
@@ -323,7 +358,8 @@ class Verify extends React.Component {
           })
         }
       ),
-      status: 0
+      status: 0,
+      transferTo: []
     }).then(res => {
       this.setState({formList: updatedList, open: true, message: 0})
     }).catch(err => {
@@ -333,10 +369,10 @@ class Verify extends React.Component {
   selectAll () {
     let updatedArray = this.state.select
     if (!this.state.selectAll) {
-      updatedArray = this.state.formList.filter(e => ((e.status === this.state.index) && (!this.state.isRecord || e.previous))).map(e => e.id)
+      updatedArray = this.state.formList.filter(e => ((e.status === this.state.index) && (e.isEnglish === this.state.isEnglish) && (!this.state.isRecord || e.previous))).map(e => e.id)
       this.setState({select: updatedArray, selectAll: true})
     } else {
-      this.setState({select: [], selectAll: false})
+      this.setState({select: [], selectAll: false, transferTo:[]})
     }
   }
   snackbarOpen () {
@@ -430,12 +466,45 @@ class Verify extends React.Component {
                   <TrashIcon />
                 </IconButton>
               </Tooltip>
+              
+              <FormControl>
+              {/* <InputLabel htmlFor='select-multiple'>審核人</InputLabel> */}
+              <Select
+                multiple
+                value={this.state.transferTo}
+                input={<Input id="select-multiple" />}
+                onChange={this.handleChange}
+                renderValue={selected => (
+                  <div className={classes.chips}>
+                    {selected.map(value => (
+                      <Chip avatar={
+                              <Avatar>
+                                <FaceIcon />
+                              </Avatar>
+                            }
+                            key={value} 
+                            label={this.state.teacherList.filter(e => e.id === value)[0].name} 
+                            className={classes.chip} />
+                    ))}
+                  </div>
+                )}
+              >
+              {
+                this.state.teacherList.map(
+                  t =>  <MenuItem key={t.id} value={t.id}>{t.name}</MenuItem>
+                )
+              }
+              </Select>
+              </FormControl>
               <Tooltip title={'送出已選取抵免單'} placement='top'>
+                <span>
                 <IconButton className={classes.sideIcon}
                   onClick={this.handleSend}
+                  disabled ={this.state.transferTo.length === 0}
                 >
                   <Send />
                 </IconButton>
+                </span>
               </Tooltip>
             </React.Fragment>)) ||
             (this.state.index === 1 &&
@@ -519,26 +588,31 @@ class Verify extends React.Component {
                                 {apply.nameA}
                               </Button>
                             </Tooltip>
-                            <span className={classes.progress}><Arrow /></span>
-                            <Tooltip title={
+                            {
+                              apply.codeB  &&
                               <React.Fragment>
-                                <div>永久課號:&nbsp;{apply.codeB}</div>
-                                <div>學分:&nbsp;{apply.creditB}</div>
+                                <span className={classes.progress}> <Arrow /></span>
+                                <Tooltip title={
+                                  <React.Fragment>
+                                    <div>永久課號:&nbsp;{apply.codeB}</div>
+                                    <div>學分:&nbsp;{apply.creditB}</div>
+                                  </React.Fragment>
+                                } placement='top'>
+                                  <Button color='primary' onClick={(e) => e.stopPropagation()}className={classes.btn}>
+                                    {apply.nameB}
+                                  </Button>
+                                </Tooltip>
                               </React.Fragment>
-                            } placement='top'>
-                              <Button color='primary' onClick={(e) => e.stopPropagation()}className={classes.btn}>
-                                {apply.nameB}
-                              </Button>
-                            </Tooltip>
+                            }
                           </span>
-                          <Chip
+                          {/* <Chip
                             style={apply.previous ? {background: '#28a745', color: '#fff', fontSize: 14, fontWeight: 400}
                               : {background: '#6c757d', color: '#fff', fontSize: 14, fontWeight: 400}}
                             label={
                               apply.previous
                                 ? <span onClick={(e) => e.stopPropagation()}>以前已同意過此抵免規則</span>
                                 : <span onClick={(e) => e.stopPropagation()}>以前未有過此抵免規則</span>
-                            } />
+                            } /> */}
                           {apply.status === 5 && <Chip
                             style={{background: '#dc3545', color: '#fff', fontSize: 14, fontWeight: 400, marginLeft: 5}}
                             label={
@@ -555,7 +629,7 @@ class Verify extends React.Component {
                               <TableCell className={classes.font}>電話</TableCell>
                               <TableCell className={classes.font}>已修習課程</TableCell>
                               <TableCell className={classes.font}>開課系所</TableCell>
-                              <TableCell className={classes.font}>預抵免課程</TableCell>
+                              {apply.codeB &&<TableCell className={classes.font}>預抵免課程</TableCell>}
                             </TableRow>
                           </TableHead>
                           <TableBody >
@@ -565,10 +639,10 @@ class Verify extends React.Component {
                               <TableCell className={classes.font}>{apply.phone}</TableCell>
                               <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
-                              <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>
+                              {apply.codeB && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>}
                             </TableRow>
                             <TableRow>
-                              <TableCell className={classes.font3}>日期</TableCell>
+                              <TableCell className={classes.font3}>申請日期</TableCell>
                               <TableCell className={classes.font5} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
                               <TableCell className={classes.font3}>申請原因</TableCell>
                               <TableCell className={classes.font5} colSpan={3} >{apply.reason}</TableCell>
