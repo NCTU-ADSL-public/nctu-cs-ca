@@ -42,13 +42,13 @@ export default class TableExampleControlled extends Component {
         </TableHeader>
         <TableBody>
           <TableRow selected={this.isSelected(0)}>
-            <TableRowColumn>必修課程未通過外系抵免</TableRowColumn>
+            <TableRowColumn>本系必修課程抵免</TableRowColumn>
           </TableRow>
           <TableRow selected={this.isSelected(1)}>
-            <TableRowColumn>抵免學分申請表</TableRowColumn>
+            <TableRowColumn>學分抵免</TableRowColumn>
           </TableRow>
           <TableRow selected={this.isSelected(2)}>
-            <TableRowColumn>外系英文授課抵免</TableRowColumn>
+            <TableRowColumn>英授專業課程抵免</TableRowColumn>
           </TableRow>
         </TableBody>
       </Table>
