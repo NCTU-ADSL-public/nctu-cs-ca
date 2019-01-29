@@ -36,7 +36,7 @@ import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import FakeData from '../../../Resources/FakeData'
+//import FakeData from '../../../Resources/FakeData'
 
 const styles = () => ({
   root: {
@@ -175,11 +175,11 @@ class Verify extends React.Component {
     super(props)
     this.state = {
 // for test
-      formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
-      teacherList: FakeData.TeacherList,
+      // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      // teacherList: FakeData.TeacherList,
 // end for test
-      //formList:[],
-      //teacherList: []
+      formList:[],
+      teacherList: [],
       open: false,
       message: 0,
       index: 0,
