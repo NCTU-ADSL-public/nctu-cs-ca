@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import {
   Step,
   Stepper,
@@ -84,6 +85,9 @@ class HorizontalLinearStepper extends React.Component {
     if (stepIndex > 0) {
       this.setState({ stepIndex: stepIndex - 1 })
     }
+    else {
+      this.props.history.push('/students/credit')
+    }
   }
 
   getStepContent (stepIndex) {
@@ -168,8 +172,7 @@ class HorizontalLinearStepper extends React.Component {
                       style={{ marginRight: 12, float: 'right' }}
                     />
                     <FlatButton
-                      label='上一步'
-                      disabled={stepIndex === 0}
+                      label={stepIndex === 0 ? '返回' : '上一步'}
                       onClick={this.handlePrev}
                       style={{ marginRight: 12, float: 'right' }}
                     />
@@ -195,4 +198,4 @@ const mapDispatchToProps = (dispatch) => ({
   sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper))
