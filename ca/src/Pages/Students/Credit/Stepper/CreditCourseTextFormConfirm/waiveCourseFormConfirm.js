@@ -100,8 +100,6 @@ class WaiveCourseFormConfirm extends React.Component {
             label='手機'
             margin='normal'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -115,8 +113,6 @@ class WaiveCourseFormConfirm extends React.Component {
             label='原就讀學校'
             margin='normal'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -130,8 +126,6 @@ class WaiveCourseFormConfirm extends React.Component {
             label='原就讀系所科別'
             margin='normal'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -150,8 +144,6 @@ class WaiveCourseFormConfirm extends React.Component {
             label='科目'
             margin='normal'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -163,11 +155,8 @@ class WaiveCourseFormConfirm extends React.Component {
           />
           <TextField
             label='開課系所'
-            defaultValue=''
             margin='normal'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -217,12 +206,9 @@ class WaiveCourseFormConfirm extends React.Component {
           </TextField>
           <TextField
             label='學分'
-            defaultValue=''
             margin='normal'
             type='number'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -234,12 +220,9 @@ class WaiveCourseFormConfirm extends React.Component {
           />
           <TextField
             label='成績'
-            defaultValue=''
             margin='normal'
             type='number'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -256,11 +239,8 @@ class WaiveCourseFormConfirm extends React.Component {
         <div style = {{ margin: '5px' }}>
           <TextField
             label='永久課號'
-            defaultValue=''
             margin='normal'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
@@ -272,11 +252,8 @@ class WaiveCourseFormConfirm extends React.Component {
           />
           <TextField
             label='學分'
-            defaultValue=''
             margin='normal'
             className={classes.textField}
-            InputProps={{
-            }}
             InputLabelProps={{
               classes: {
                 root: classes.label
