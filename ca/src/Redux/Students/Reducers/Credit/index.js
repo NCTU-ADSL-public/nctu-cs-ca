@@ -25,6 +25,23 @@ const initialState = {
     teacher: '',
     course_code: '',
     course_name: ''
+  },
+  waiveCourse: {
+    phone: '',
+    original_school: '',
+    original_department: '',
+    current_school: '',
+    current_department: '',
+    original_graduation_credit: 0,
+
+    apply_year: 0,
+    apply_semester: 0,
+    original_course_name: '',
+    original_course_department: '',
+    original_course_credit: '',
+    original_course_score: '',
+    current_course_code: '',
+    current_course_credit: ''
   }
 }
 
@@ -46,5 +63,16 @@ export default handleActions({
   ENGLISH_COURSE_CREDIT_RESET: (state, action) => ({
     ...state,
     englishCourse: initialState.englishCourse
+  }),
+  WAIVE_COURSE_CHANGE: (state, action) => ({
+    ...state,
+    waiveCourse: {
+      ...state.waiveCourse,
+      ...action.payload
+    }
+  }),
+  WAIVE_COURSE_RESET: (state, action) => ({
+    ...state,
+    waiveCourse: initialState.waiveCourse
   })
 }, initialState)

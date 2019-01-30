@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleChange: (payload) => dispatch(waiveCourseChange(payload))
 })
 
-class WaiveForm extends React.Component {
+class WaiveCourseFormConfirm extends React.Component {
 
   render () {
     const { classes } = this.props
@@ -98,7 +98,6 @@ class WaiveForm extends React.Component {
           />
           <TextField
             label='手機'
-            defaultValue=''
             margin='normal'
             className={classes.textField}
             InputProps={{
@@ -109,12 +108,11 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.phone}
-            onChange={(event) => this.props.handleChange({ phone: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.phone}
           />
           <TextField
             label='原就讀學校'
-            defaultValue=''
             margin='normal'
             className={classes.textField}
             InputProps={{
@@ -125,12 +123,11 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.original_school}
-            onChange={(event) => this.props.handleChange({ original_school: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.original_school}
           />
           <TextField
             label='原就讀系所科別'
-            defaultValue=''
             margin='normal'
             className={classes.textField}
             InputProps={{
@@ -141,8 +138,8 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.original_department}
-            onChange={(event) => this.props.handleChange({ original_department: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.original_department}
           />
         </div>
         <div style={{ height: '50px' }} />
@@ -151,7 +148,6 @@ class WaiveForm extends React.Component {
         <div style = {{ margin: '5px' }}>
           <TextField
             label='科目'
-            defaultValue=''
             margin='normal'
             className={classes.textField}
             InputProps={{
@@ -162,8 +158,8 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.original_course_name}
-            onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.original_course_name}
           />
           <TextField
             label='開課系所'
@@ -178,11 +174,10 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.original_course_department}
-            onChange={(event) => this.props.handleChange({ original_course_department: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.original_course_department}
           />
           <TextField
-            select
             label='修課年級'
             className={classes.textField}
             SelectProps={{
@@ -197,17 +192,11 @@ class WaiveForm extends React.Component {
               shrink: true
             }}
             margin='normal'
-            value={this.props.apply_year}
-            onChange={(event) => this.props.handleChange({ apply_year: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={['', '一', '二', '三', '四'][this.props.apply_year]}
           >
-            <option key={0} value={0}>請選擇修課年級</option>
-            <option key={1} value={1}>一</option>
-            <option key={2} value={2}>二</option>
-            <option key={3} value={3}>三</option>
-            <option key={4} value={4}>四</option>
           </TextField>
           <TextField
-            select
             label='學期'
             className={classes.textField}
             SelectProps={{
@@ -222,12 +211,9 @@ class WaiveForm extends React.Component {
               shrink: true
             }}
             margin='normal'
-            value={this.props.apply_semester}
-            onChange={(event) => this.props.handleChange({ apply_semester: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={['', '上', '下'][this.props.apply_semester]}
           >
-            <option key={0} value={0}>請選擇學期</option>
-            <option key={1} value={1}>上</option>
-            <option key={2} value={2}>下</option>
           </TextField>
           <TextField
             label='學分'
@@ -243,8 +229,8 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.original_course_credit}
-            onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.original_course_credit}
           />
           <TextField
             label='成績'
@@ -260,8 +246,8 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.original_course_score}
-            onChange={(event) => this.props.handleChange({ original_course_score: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.original_course_score}
           />
         </div>
         <div style={{ height: '50px' }} />
@@ -281,8 +267,8 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.current_course_code}
-            onChange={(event) => this.props.handleChange({ current_course_code: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.current_course_code}
           />
           <TextField
             label='學分'
@@ -297,8 +283,8 @@ class WaiveForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.current_course_credit}
-            onChange={(event) => this.props.handleChange({ current_course_credit: event.target.value })}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.current_course_credit}
           />
         </div>
         <div style={{ height: '100px' }} />
@@ -307,4 +293,4 @@ class WaiveForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(WaiveForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(WaiveCourseFormConfirm))

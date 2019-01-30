@@ -14,6 +14,7 @@ import WaiveForm from './CreditCourseTextForm/waiveCourse'
 import EnglishCourseForm from './CreditCourseTextForm/englishCourseForm'
 import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
+import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourseFormConfirm'
 import { connect } from 'react-redux'
 import { courseCreditChange, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
@@ -44,7 +45,7 @@ class HorizontalLinearStepper extends React.Component {
     if (stepIndex === 0 && selectFormIndex === -1) {
       window.alert('請選擇表單')
       return
-    } 
+    }
     else if (stepIndex === 1) {
       if (selectFormIndex === 2) {
         const { phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
@@ -111,7 +112,7 @@ class HorizontalLinearStepper extends React.Component {
           case 0:
             return (<CreditCourseTextFormConfirm />)
           case 1:
-            return (<CreditCourseTextFormConfirm />)
+            return (<WaiveCourseFormConfirm />)
           case 2:
             return (<EnglishCourseFormConfirm />)
           default:
