@@ -5,7 +5,7 @@ import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
-  Typography, 
+  Typography,
   Chip,
   Table,
   TableHead,
@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   subtitle1: {
     fontSize: '1.2em',
-    flexBasis: '10%',
+    flexBasis: '10%'
   },
   subtitle2: {
     fontSize: '1.2em',
@@ -50,8 +50,8 @@ class Index extends React.Component {
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.subtitle1}>107上</Typography>
           <Typography className={classes.subtitle2}>計算機概論</Typography>
-          <Typography className={classes.subtitle2}><div style={{ width: '150px' }}/></Typography>
-          <Typography className={classes.subtitle2}></Typography>
+          <Typography className={classes.subtitle2}><div style={{ width: '150px' }} /></Typography>
+          <Typography className={classes.subtitle2} />
           <Typography style={{ marginLeft: '20px' }}>
             <Chip
               style={{ background: '#28a745', color: '#fff', fontSize: 14, fontWeight: 400 }}

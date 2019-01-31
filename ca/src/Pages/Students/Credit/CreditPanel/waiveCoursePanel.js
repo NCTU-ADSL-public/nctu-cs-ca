@@ -83,8 +83,8 @@ class Index extends React.Component {
           <Typography className={classes.subtitle2}>數位電路設計</Typography>
           <Typography style={{ marginLeft: '20px' }}>
             <Chip
-              style={{ background: '#5599ff', color: '#fff', fontSize: 14, fontWeight: 400 }}
-              label={<span>本系必修課程抵免</span>}
+              style={{ background: '#ffcc22', color: '#fff', fontSize: 14, fontWeight: 400 }}
+              label={<span>學分抵免</span>}
             />
           </Typography>
         </ExpansionPanelSummary>
@@ -94,16 +94,18 @@ class Index extends React.Component {
               <TableRow>
                 <TableCell className={classes.font}>已修習課程</TableCell>
                 <TableCell className={classes.font}>開課系所</TableCell>
+                <TableCell className={classes.font}>原課程學分</TableCell>
                 <TableCell className={classes.font}>預抵免課程</TableCell>
-                <TableCell className={classes.font2}>申請原因</TableCell>
+                <TableCell className={classes.font}>預抵免學分</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
                 <TableCell className={classes.font}>邏輯與設計</TableCell>
-                <TableCell className={classes.font}>電機系</TableCell>
+                <TableCell className={classes.font}>電機系(清華大學)</TableCell>
+                <TableCell className={classes.font}>4</TableCell>
                 <TableCell className={classes.font}>數位電路設計</TableCell>
-                <TableCell className={classes.font}>aasasvfbfdbgdfsaasasvfbfdbgdfsaasasvfbfdbgdfs</TableCell>
+                <TableCell className={classes.font}>3</TableCell>
               </TableRow>
             </TableBody>
           </Table>

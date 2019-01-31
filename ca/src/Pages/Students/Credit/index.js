@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core'
 import NormalCoursePanel from './CreditPanel/normalCoursePanel'
 import EnglishCoursePanel from './CreditPanel/englishCoursePanel'
+import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
 
 const styles = theme => ({
   container: {
@@ -18,16 +19,17 @@ const styles = theme => ({
 class Index extends React.Component {
   render () {
     return (
-      <div className='container'>
+      <div className='container' style={{ marginBottom: '50px' }}>
         <div className='row'>
-          <div className='offset-10 col-2' style={{ marginTop: '20px' }}>
-            <Link to='/students/credit/apply'>
+          <div className='col-md-12' style={{ marginTop: '20px' }}>
+            <Link to='/students/credit/apply' className='pull-right'>
               <Button variant='contained' color='primary'>抵免申請</Button>
             </Link>
           </div>
           <div className='col-md-12' style={{ marginTop: '20px' }}>
             <NormalCoursePanel />
             <EnglishCoursePanel />
+            <WaiveCoursePanel />
           </div>   
         </div>
       </div>
