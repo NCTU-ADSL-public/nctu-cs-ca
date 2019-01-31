@@ -16,11 +16,7 @@ import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
 import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourseFormConfirm'
 import { connect } from 'react-redux'
-<<<<<<< HEAD
-import { courseCreditChange, waiveCourseReset, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
-=======
-import { sendCompulsoryCourse, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
->>>>>>> 51e5f6a20e8e5353cdb4a0e687880ae244f25d12
+import { sendCompulsoryCourse, waiveCourseReset, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
 import firebase from 'firebase'
 
@@ -74,7 +70,7 @@ class HorizontalLinearStepper extends React.Component {
           return
         }
       } else if (selectFormIndex === 2) {
-        const { phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
+        const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
         if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
           return
@@ -252,24 +248,17 @@ class HorizontalLinearStepper extends React.Component {
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
   englishCourse: state.Student.Credit.englishCourse,
-<<<<<<< HEAD
-  waiveCourse: state.Student.Credit.waiveCourse
-=======
+  waiveCourse: state.Student.Credit.waiveCourse,
   courseCreditChange: state.Student.Credit.courseCreditChange
->>>>>>> 51e5f6a20e8e5353cdb4a0e687880ae244f25d12
 })
 
 const mapDispatchToProps = (dispatch) => ({
   //courseCreditChange: (payload) => dispatch(courseCreditChange(payload)),
   englishCourseCreditChange: (payload) => dispatch(englishCourseCreditChange(payload)),
   englishCourseCreditReset: (payload) => dispatch(englishCourseCreditReset(payload)),
-<<<<<<< HEAD
   waiveCourseReset: (payload) => dispatch(waiveCourseReset(payload)),
-  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload))
-=======
   sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload)),
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload))
->>>>>>> 51e5f6a20e8e5353cdb4a0e687880ae244f25d12
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper))
