@@ -72,10 +72,10 @@ class Index extends React.Component {
     return (
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <div className={classes.subtitle1}>107上</div>
+          <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
           <div className={classes.subtitle2}>{data.original_course_name}</div>
           <div className={classes.progress}><Arrow /></div>
-          <div className={classes.subtitle2}>機率</div>
+          <div className={classes.subtitle2}>{data.current_course_name}</div>
           <div style={{ marginLeft: '20px' }}>
             <Chip
               style={{ background: '#ffcc22', color: '#fff', fontSize: 14, fontWeight: 400 }}
@@ -99,7 +99,7 @@ class Index extends React.Component {
                 <TableCell className={classes.font}>{data.original_course_name}</TableCell>
                 <TableCell className={classes.font}>{`${data.original_course_department}(${data.original_school})`}</TableCell>
                 <TableCell className={classes.font}>{data.original_course_credit}</TableCell>
-                <TableCell className={classes.font}>機率</TableCell>
+                <TableCell className={classes.font}>{data.current_course_name}</TableCell>
                 <TableCell className={classes.font}>{data.current_course_credit}</TableCell>
               </TableRow>
             </TableBody>
