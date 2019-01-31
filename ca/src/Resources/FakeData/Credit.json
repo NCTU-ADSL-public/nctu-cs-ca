@@ -1,0 +1,50 @@
+{
+  "waive_course": [
+    {
+      "phone": "0912345678",
+      "original_school": "清華大學",
+      "original_department": "資工系",
+      "current_school": "交通大學",
+      "current_department": "資工系",
+      "original_graduation_credit": 128,
+      "apply_year": "二",
+      "apply_semester": "下",
+      "original_course_name": "機率",
+      "original_course_department": "資工系",
+      "original_course_credit": 3,
+      "original_course_score": 80,
+      "current_course_code": "EC4313",
+      "current_course_credit": 3,
+      "status": 1
+    }
+  ],
+  "compulsory_course": [
+    {
+      "apply_year": 107,
+      "apply_semester": 1,
+      "phone": "0912345678",
+      "reason": "系上課很糞",
+      "department": "電機",
+      "teacher": "高榮鴻",
+      "course_code": "UEE2104",
+      "course_name": "機率(英文班)",
+      "original_course_code": "UEE2104",
+      "original_course_name": "機率(英文班)",
+      "credit": 3,
+      "status": 1
+    }
+  ],
+  "english_course": [
+    {
+      "apply_year": 107,
+      "apply_semester": 1,
+      "phone": "0912345678",
+      "reason": "系上課很糞",
+      "department": "電機",
+      "teacher": "高榮鴻",
+      "course_code": "UEE2104",
+      "course_name": "機率(英文班)",
+      "status": 1
+    }
+  ]
+}

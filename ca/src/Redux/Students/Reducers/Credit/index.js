@@ -42,7 +42,8 @@ const initialState = {
     original_course_score: '',
     current_course_code: '',
     current_course_credit: ''
-  }
+  },
+  creditInfo: {}
 }
 
 export default handleActions({
@@ -74,5 +75,9 @@ export default handleActions({
   WAIVE_COURSE_RESET: (state, action) => ({
     ...state,
     waiveCourse: initialState.waiveCourse
+  }),
+  STORE_CREDIT_INFO: (state, action) => ({
+    ...state,
+    creditInfo: action.payload
   })
 }, initialState)

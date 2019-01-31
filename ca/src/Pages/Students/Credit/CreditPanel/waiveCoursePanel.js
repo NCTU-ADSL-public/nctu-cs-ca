@@ -73,14 +73,14 @@ const Arrow = () => (
 
 class Index extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, data } = this.props
     return (
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.subtitle1}>107上</Typography>
-          <Typography className={classes.subtitle2}>邏輯與設計</Typography>
+          <Typography className={classes.subtitle2}>{data.original_course_name}</Typography>
           <Typography className={classes.progress}><Arrow /></Typography>
-          <Typography className={classes.subtitle2}>數位電路設計</Typography>
+          <Typography className={classes.subtitle2}>機率</Typography>
           <Typography style={{ marginLeft: '20px' }}>
             <Chip
               style={{ background: '#ffcc22', color: '#fff', fontSize: 14, fontWeight: 400 }}
@@ -101,11 +101,11 @@ class Index extends React.Component {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell className={classes.font}>邏輯與設計</TableCell>
-                <TableCell className={classes.font}>電機系(清華大學)</TableCell>
-                <TableCell className={classes.font}>4</TableCell>
-                <TableCell className={classes.font}>數位電路設計</TableCell>
-                <TableCell className={classes.font}>3</TableCell>
+                <TableCell className={classes.font}>{data.original_course_name}</TableCell>
+                <TableCell className={classes.font}>{`${data.original_course_department}(${data.original_school})`}</TableCell>
+                <TableCell className={classes.font}>{data.original_course_credit}</TableCell>
+                <TableCell className={classes.font}>機率</TableCell>
+                <TableCell className={classes.font}>{data.current_course_credit}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
