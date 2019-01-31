@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import input from 'react-bootstrap'
+import firebase from 'firebase'
+import { courseCreditChange, englishCourseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
+import { connect } from 'react-redux'
 
-class Main extends React.Component {
+class Postfile extends React.Component {
   constructor (props) {
     super(props)
 
@@ -10,44 +13,22 @@ class Main extends React.Component {
       imageURL: ''
     }
 
-    this.handleUploadImage = this.handleUploadImage.bind(this)
+    //this.handleUploadImage = this.handleUploadImage.bind(this)
   }
 
-  handleUploadImage (ev) {
-    ev.preventDefault()
-
-    let formData = new FormData() // formdata object
-
-    formData.append('file', this.uploadInput.files[0])
-
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' }
-    }
-
-    axios.post('./file', formData, config)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
-    // const data = new FormData()
-    // data.append('file', this.uploadInput.files[0])
-    // fetch ('http://localhost:8000/upload', {
-    //   method: 'POST',
-    //   body: data
-    // }).then((response) => {
-    //   response.json().then((body) => {
-    //     this.setState({ imageURL: `http://localhost:8000/${body.file}` });
-    //   })
-    // })
+  handleFileChange (e) {
+    console.log(e)
+    this.setState({
+      file: e
+    })
+    this.props.fileChange(e)
   }
 
   render () {
     return (
       <form onSubmit={this.handleUploadImage}>
-        <input ref={(ref) => { this.uploadInput = ref }} type='file' />
+        請合併為一個PDF檔案
+        <input type='file' hidden onChange={(e) => this.handleFileChange(e.target.files[0])} />
         <br />
         {/* <div> */}
         {/* <button>Upload</button> */}
@@ -57,4 +38,13 @@ class Main extends React.Component {
   }
 }
 
-export default Main
+const mapStateToProps = (state) => ({
+  course_file: state.Student.Credit.courseCreditChange.file,
+  english_file: state.Student.Credit.englishCourse.file
+})
+const mapDispatchToProps = (dispatch) => ({
+  handleChange: (payload) => { dispatch(englishCourseCreditChange(payload)) },
+  courseCreditChange: (payload) => { dispatch(courseCreditChange(payload)) }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Postfile)

@@ -28,7 +28,7 @@ class Index extends React.Component {
           <div className='col-md-12' style={{ marginTop: '20px' }}>
             <NormalCoursePanel />
             <EnglishCoursePanel />
-          </div>   
+          </div>
         </div>
       </div>
     )

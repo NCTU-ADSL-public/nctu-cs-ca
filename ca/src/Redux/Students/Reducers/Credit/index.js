@@ -14,7 +14,8 @@ const initialState = {
     course_code: '',
     course_type: '必修',
     credit: '', // 可能需要(新課程的credit)
-    reason: ''
+    reason: '',
+    file: ''
   },
   englishCourse: {
     apply_year: '',
@@ -24,7 +25,8 @@ const initialState = {
     department: '',
     teacher: '',
     course_code: '',
-    course_name: ''
+    course_name: '',
+    file: ''
   },
   waiveCourse: {
     phone: '',

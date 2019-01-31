@@ -32,7 +32,8 @@ class SelectCourseField extends Component {
 
   handleChange (event, index, value) {
     this.setState({ value: value })
-    this.props.courseCreditChange({ course_type: event.target.value === 0 ? '必修' : '選修' })
+    console.log(value)
+    this.props.courseCreditChange({ course_type: value === 0 ? '必修' : '選修' })
   }
 
   render () {
