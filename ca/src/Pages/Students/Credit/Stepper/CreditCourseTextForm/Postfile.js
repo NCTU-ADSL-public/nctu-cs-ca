@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import input from 'react-bootstrap'
 import firebase from 'firebase'
-import { courseCreditChange, englishCourseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
+import { compulsoryCourseChange, englishCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 import { connect } from 'react-redux'
 
 class Postfile extends React.Component {
@@ -43,8 +43,8 @@ const mapStateToProps = (state) => ({
   english_file: state.Student.Credit.englishCourse.file
 })
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => { dispatch(englishCourseCreditChange(payload)) },
-  courseCreditChange: (payload) => { dispatch(courseCreditChange(payload)) }
+  englishCourseChange: (payload) => { dispatch(englishCourseChange(payload)) },
+  compulsoryCourseChange: (payload) => { dispatch(compulsoryCourseChange(payload)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Postfile)

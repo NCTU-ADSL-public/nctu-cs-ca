@@ -2,7 +2,7 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import Postfile from './Postfile'
 import { connect } from 'react-redux'
-import { englishCourseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
+import { englishCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 
 class EnglishCourseForm extends React.Component {
   getTime () {
@@ -106,7 +106,7 @@ class EnglishCourseForm extends React.Component {
         註：<br />
         1. 須檢附用書書名及課程綱要。<br />
         <br />
-        <Postfile fileChange={(file) => this.props.handleChange({file: file})} file={this.props.file} />
+        <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
         <br />
         <br />
       </div>
@@ -128,7 +128,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => { dispatch(englishCourseCreditChange(payload)) }
+  handleChange: (payload) => { dispatch(englishCourseChange(payload)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnglishCourseForm)

@@ -12,11 +12,16 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FormSelectTable from './FormSelectTable'
 import CompulsoryCourseForm from './CreditCourseTextForm/compulsoryCourse'
 import WaiveCourseForm from './CreditCourseTextForm/waiveCourse'
-import EnglishCourseForm from './CreditCourseTextForm/englishCourseForm'
-import CompulsoryCourseFormConfirm from './CreditCourseTextFormConfirm/compulsoryCourseFormConfirm'
-import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
-import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourseFormConfirm'
-import { sendCompulsoryCourse, waiveCourseReset, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
+import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
+import CompulsoryCourseFormConfirm from './CreditCourseTextFormConfirm/compulsoryCourse'
+import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourse'
+import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourse'
+import {
+  sendCompulsoryCourse,
+  sendEnglishCourse,
+  englishCourseReset,
+  waiveCourseReset
+} from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
 import firebase from 'firebase'
 
@@ -38,7 +43,7 @@ class HorizontalLinearStepper extends React.Component {
   resetForm () {
     // 回復為初始狀態，並清除每個表單的輸入
     this.setState({ stepIndex: 0, selectFormIndex: -1, finished: false })
-    this.props.englishCourseCreditReset()
+    this.props.englishCourseReset()
     this.props.waiveCourseReset()
   }
 
@@ -49,6 +54,7 @@ class HorizontalLinearStepper extends React.Component {
       window.alert('請選擇表單')
       return
     }
+
     else if (stepIndex === 1) {
       if (selectFormIndex === 0) {
         const { file, phone, reason, department, credit, course_type, course_code, course_name, course_code_old, course_name_old, teacher } = this.props.compulsoryCourse
@@ -56,8 +62,9 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請確實填寫每個欄位!')
           return
         }
-        this.setState({file: file})
+        this.setState({ file: file })
       }
+
       else if (selectFormIndex === 1) {
         const {
           phone, original_school, original_department,
@@ -78,6 +85,7 @@ class HorizontalLinearStepper extends React.Component {
           return
         }
       }
+
       else if (selectFormIndex === 2) {
         const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
         if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
@@ -85,9 +93,10 @@ class HorizontalLinearStepper extends React.Component {
           return
         }
         console.log(file.name)
-        this.setState({file: file})
+        this.setState({ file: file })
       }
     }
+
     else if (stepIndex === 2) {
       let Today = new Date()
       let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
@@ -101,11 +110,13 @@ class HorizontalLinearStepper extends React.Component {
         })
         this.handleUploadImage()
       }
+
       else if (selectFormIndex === 1) {
 
       }
+
       else if (selectFormIndex === 2) {
-        this.props.sendEnglishCourseCredit({
+        this.props.sendEnglishCourse({
           ...this.props.englishCourse,
           apply_year: year,
           apply_semester: semester
@@ -121,7 +132,6 @@ class HorizontalLinearStepper extends React.Component {
 
   handleUploadImage () {
     let storageRef = firebase.storage().ref()
-    let _this = this
     let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + this.state.file
     storageRef.child(directory).delete().then(function () {
     }).catch(function (error) {
@@ -253,9 +263,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  englishCourseCreditReset: (payload) => dispatch(englishCourseCreditReset(payload)),
+  englishCourseReset: (payload) => dispatch(englishCourseReset(payload)),
   waiveCourseReset: (payload) => dispatch(waiveCourseReset(payload)),
-  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload)),
+  sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload))
 })
 
