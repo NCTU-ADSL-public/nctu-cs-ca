@@ -39,7 +39,7 @@ class Postfile extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  course_file: state.Student.Credit.courseCreditChange.file,
+  course_file: state.Student.Credit.compulsoryCourse.file,
   english_file: state.Student.Credit.englishCourse.file
 })
 const mapDispatchToProps = (dispatch) => ({

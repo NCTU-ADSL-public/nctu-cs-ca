@@ -237,18 +237,18 @@ class TextForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  year: state.Student.Credit.courseCreditChange.year,
-  semester: state.Student.Credit.courseCreditChange.semester,
-  department: state.Student.Credit.courseCreditChange.department, // 原課程的depart
-  teacher: state.Student.Credit.courseCreditChange.teacher, // 原課程teacher
-  course_name_old: state.Student.Credit.courseCreditChange.course_name_old, // 可能需要
-  course_code_old: state.Student.Credit.courseCreditChange.course_code_old, // 可能需要
-  course_name: state.Student.Credit.courseCreditChange.course_name,
-  course_code: state.Student.Credit.courseCreditChange.course_code,
-  credit: state.Student.Credit.courseCreditChange.credit, // 可能需要(新課程的credit)
-  reason: state.Student.Credit.courseCreditChange.reason,
-  phone: state.Student.Credit.courseCreditChange.phone,
-  file: state.Student.Credit.courseCreditChange.file
+  year: state.Student.Credit.compulsoryCourse.year,
+  semester: state.Student.Credit.compulsoryCourse.semester,
+  department: state.Student.Credit.compulsoryCourse.department, // 原課程的depart
+  teacher: state.Student.Credit.compulsoryCourse.teacher, // 原課程teacher
+  course_name_old: state.Student.Credit.compulsoryCourse.course_name_old, // 可能需要
+  course_code_old: state.Student.Credit.compulsoryCourse.course_code_old, // 可能需要
+  course_name: state.Student.Credit.compulsoryCourse.course_name,
+  course_code: state.Student.Credit.compulsoryCourse.course_code,
+  credit: state.Student.Credit.compulsoryCourse.credit, // 可能需要(新課程的credit)
+  reason: state.Student.Credit.compulsoryCourse.reason,
+  phone: state.Student.Credit.compulsoryCourse.phone,
+  file: state.Student.Credit.compulsoryCourse.file
 })
 
 const mapDispatchToProps = (dispatch) => ({
