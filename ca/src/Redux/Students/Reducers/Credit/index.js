@@ -32,7 +32,7 @@ const initialState = {
     original_department: '',
     current_school: '',
     current_department: '',
-    original_graduation_credit: 0,
+    original_graduation_credit: '',
 
     apply_year: 0,
     apply_semester: 0,

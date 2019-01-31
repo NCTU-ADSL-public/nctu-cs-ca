@@ -16,7 +16,7 @@ import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
 import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourseFormConfirm'
 import { connect } from 'react-redux'
-import { courseCreditChange, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
+import { courseCreditChange, waiveCourseReset, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
 
 class HorizontalLinearStepper extends React.Component {
@@ -37,6 +37,7 @@ class HorizontalLinearStepper extends React.Component {
     // 回復為初始狀態，並清除每個表單的輸入
     this.setState({ stepIndex: 0, selectFormIndex: -1, finished: false })
     this.props.englishCourseCreditReset()
+    this.props.waiveCourseReset()
   }
 
   handleNext () {
@@ -47,7 +48,26 @@ class HorizontalLinearStepper extends React.Component {
       return
     }
     else if (stepIndex === 1) {
-      if (selectFormIndex === 2) {
+      if (selectFormIndex === 1) {
+        const {
+          phone, original_school, original_department,
+          original_graduation_credit, apply_year,
+          apply_semester, original_course_name, original_course_department,
+          original_course_credit, original_course_score,
+          current_course_code, current_course_credit
+        } = this.props.waiveCourse
+        if (
+          !(phone && original_school && original_department &&
+          original_graduation_credit && apply_year &&
+          apply_semester && original_course_name && original_course_department &&
+          original_course_credit && original_course_score &&
+          current_course_code && current_course_credit)
+        ) {
+          console.log(this.props.waiveCourse)
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+      } else if (selectFormIndex === 2) {
         const { phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
         if (!(phone && reason && department && teacher && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
@@ -189,13 +209,15 @@ class HorizontalLinearStepper extends React.Component {
 }
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  englishCourse: state.Student.Credit.englishCourse
+  englishCourse: state.Student.Credit.englishCourse,
+  waiveCourse: state.Student.Credit.waiveCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({
   courseCreditChange: (payload) => dispatch(courseCreditChange(payload)),
   englishCourseCreditChange: (payload) => dispatch(englishCourseCreditChange(payload)),
   englishCourseCreditReset: (payload) => dispatch(englishCourseCreditReset(payload)),
+  waiveCourseReset: (payload) => dispatch(waiveCourseReset(payload)),
   sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload))
 })
 
