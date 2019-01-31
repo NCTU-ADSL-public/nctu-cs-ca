@@ -119,6 +119,7 @@ class TextForm extends React.Component {
   }
 
   render () {
+    console.log(this.props.file)
     return (
       <div>
         <font color='#a52a2a'>請確認無誤後送出</font><br />
@@ -190,7 +191,7 @@ class TextForm extends React.Component {
         程一致。2. 須檢附用書書名及課程綱要）
         <br />
         <br />
-        <Postfile />
+        檔案：{this.props.file.name}
         <br />
         <br />
       </div>
@@ -211,7 +212,8 @@ const mapStateToProps = (state) => ({
   course_type: state.Student.Credit.courseCreditChange.course_type,
   credit: state.Student.Credit.courseCreditChange.credit, // 可能需要(新課程的credit)
   reason: state.Student.Credit.courseCreditChange.reason,
-  phone: state.Student.Credit.courseCreditChange.phone
+  phone: state.Student.Credit.courseCreditChange.phone,
+  file: state.Student.Credit.courseCreditChange.file
 })
 
 const mapDispatchToProps = (dispatch) => ({

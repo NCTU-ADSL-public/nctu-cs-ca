@@ -202,7 +202,7 @@ class TextForm extends React.Component {
         />
         學分
         <br />
-        作為系內<SelectType />&nbsp;&nbsp;課程，以抵免系內之
+        作為系內&nbsp;&nbsp;<SelectType />&nbsp;&nbsp;課程，以抵免系內之
         課號：
         <TextField
           id='course_code_old'
@@ -227,7 +227,7 @@ class TextForm extends React.Component {
         1. 課程內容需與本系課程一致。<br />
         2. 須檢附用書書名及課程綱要。<br />
         <br />
-        <Postfile />
+        <Postfile fileChange={(file) => this.props.courseCreditChange({file: file})} file={this.props.file} />
         <br />
         <br />
       </div>
@@ -247,7 +247,8 @@ const mapStateToProps = (state) => ({
   course_code: state.Student.Credit.courseCreditChange.course_code,
   credit: state.Student.Credit.courseCreditChange.credit, // 可能需要(新課程的credit)
   reason: state.Student.Credit.courseCreditChange.reason,
-  phone: state.Student.Credit.courseCreditChange.phone
+  phone: state.Student.Credit.courseCreditChange.phone,
+  file: state.Student.Credit.courseCreditChange.file
 })
 
 const mapDispatchToProps = (dispatch) => ({

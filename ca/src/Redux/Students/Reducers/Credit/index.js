@@ -14,7 +14,8 @@ const initialState = {
     course_code: '',
     course_type: '必修',
     credit: '', // 可能需要(新課程的credit)
-    reason: ''
+    reason: '',
+    file: ''
   },
   englishCourse: {
     apply_year: '',
@@ -24,7 +25,8 @@ const initialState = {
     department: '',
     teacher: '',
     course_code: '',
-    course_name: ''
+    course_name: '',
+    file: ''
   },
   waiveCourse: {
     phone: '',
@@ -42,7 +44,8 @@ const initialState = {
     original_course_score: '',
     current_course_code: '',
     current_course_credit: ''
-  }
+  },
+  creditInfo: {}
 }
 
 export default handleActions({
@@ -74,5 +77,9 @@ export default handleActions({
   WAIVE_COURSE_RESET: (state, action) => ({
     ...state,
     waiveCourse: initialState.waiveCourse
+  }),
+  STORE_CREDIT_INFO: (state, action) => ({
+    ...state,
+    creditInfo: action.payload
   })
 }, initialState)

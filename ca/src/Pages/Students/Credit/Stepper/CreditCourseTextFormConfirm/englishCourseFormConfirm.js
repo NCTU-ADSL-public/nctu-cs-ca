@@ -100,7 +100,7 @@ class EnglishCourseFormConfirm extends React.Component {
         註：<br />
         1.須檢附用書書名及課程綱要。<br />
         <br />
-        <Postfile />
+        檔案：{this.props.file.name}
         <br />
         <br />
       </div>
@@ -117,7 +117,8 @@ const mapStateToProps = (state) => ({
   course_name: state.Student.Credit.englishCourse.course_name,
   course_code: state.Student.Credit.englishCourse.course_code,
   reason: state.Student.Credit.englishCourse.reason,
-  phone: state.Student.Credit.englishCourse.phone
+  phone: state.Student.Credit.englishCourse.phone,
+  file: state.Student.Credit.englishCourse.file,
 })
 
 const mapDispatchToProps = (dispatch) => ({

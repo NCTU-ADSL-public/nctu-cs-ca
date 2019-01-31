@@ -5,7 +5,7 @@ import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
-  Typography, 
+  Typography,
   Chip,
   Table,
   TableHead,
@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   subtitle1: {
     fontSize: '1.2em',
-    flexBasis: '10%',
+    flexBasis: '10%'
   },
   subtitle2: {
     fontSize: '1.2em',
@@ -44,14 +44,14 @@ const styles = theme => ({
 
 class Index extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, data } = this.props
     return (
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.subtitle1}>107上</Typography>
-          <Typography className={classes.subtitle2}>計算機概論</Typography>
-          <Typography className={classes.subtitle2}><div style={{ width: '150px' }}/></Typography>
-          <Typography className={classes.subtitle2}></Typography>
+          <Typography className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</Typography>
+          <Typography className={classes.subtitle2}>{data.course_name}</Typography>
+          <Typography className={classes.subtitle2}><div style={{ width: '150px' }} /></Typography>
+          <Typography className={classes.subtitle2} />
           <Typography style={{ marginLeft: '20px' }}>
             <Chip
               style={{ background: '#28a745', color: '#fff', fontSize: 14, fontWeight: 400 }}
@@ -70,9 +70,9 @@ class Index extends React.Component {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell className={classes.font}>計算機概論</TableCell>
-                <TableCell className={classes.font}>電機系</TableCell>
-                <TableCell className={classes.font}>aasasvfbfdbgdfsaasasvfbfdbgdfsaasasvfbfdbgdfs</TableCell>
+                <TableCell className={classes.font}>{data.course_name}</TableCell>
+                <TableCell className={classes.font}>{data.department}</TableCell>
+                <TableCell className={classes.font}>{data.reason}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

@@ -5,7 +5,7 @@ import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
-  Typography, 
+  Typography,
   Chip,
   Table,
   TableHead,
@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   subtitle1: {
     fontSize: '1.2em',
-    flexBasis: '10%',
+    flexBasis: '10%'
   },
   subtitle2: {
     fontSize: '1.2em',
@@ -67,20 +67,20 @@ const Arrow = () => (
     <circle cx='104' cy='4' r='2' fill='rgb(115,115,115)' />
     <circle cx='110' cy='4' r='2' fill='rgb(110,110,110)' />
     <circle cx='116' cy='4' r='2' fill='rgb(105,105,105)' />
-    <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
+    <polygon points='121,0 121,8 129,4' style={{ fill: 'rgb(100,100,100)' }} />
   </svg>
 )
 
 class Index extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, data } = this.props
     return (
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.subtitle1}>107上</Typography>
-          <Typography className={classes.subtitle2}>邏輯與設計</Typography>
+          <Typography className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</Typography>
+          <Typography className={classes.subtitle2}>{data.original_course_name}</Typography>
           <Typography className={classes.progress}><Arrow /></Typography>
-          <Typography className={classes.subtitle2}>數位電路設計</Typography>
+          <Typography className={classes.subtitle2}>{data.course_name}</Typography>
           <Typography style={{ marginLeft: '20px' }}>
             <Chip
               style={{ background: '#5599ff', color: '#fff', fontSize: 14, fontWeight: 400 }}
@@ -100,10 +100,10 @@ class Index extends React.Component {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell className={classes.font}>邏輯與設計</TableCell>
-                <TableCell className={classes.font}>電機系</TableCell>
-                <TableCell className={classes.font}>數位電路設計</TableCell>
-                <TableCell className={classes.font}>aasasvfbfdbgdfsaasasvfbfdbgdfsaasasvfbfdbgdfs</TableCell>
+                <TableCell className={classes.font}>{data.original_course_name}</TableCell>
+                <TableCell className={classes.font}>{data.department}</TableCell>
+                <TableCell className={classes.font}>{data.course_name}</TableCell>
+                <TableCell className={classes.font}>{data.reason}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
