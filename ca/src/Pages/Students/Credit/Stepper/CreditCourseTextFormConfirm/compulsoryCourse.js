@@ -1,5 +1,4 @@
 import React from 'react'
-import Postfile from './Postfile'
 // import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'

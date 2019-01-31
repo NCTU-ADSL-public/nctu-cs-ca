@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
-import Postfile from './Postfile'
+// import Postfile from './Postfile'
 import { connect } from 'react-redux'
 
 class EnglishCourseFormConfirm extends React.Component {
