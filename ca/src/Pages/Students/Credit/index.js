@@ -52,7 +52,7 @@ class Index extends React.Component {
                 <WaiveCoursePanel key={index} data={{ ...data }} />
               ))
             }
-          </div>   
+          </div>
         </div>
       </div>
     )

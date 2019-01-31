@@ -22,6 +22,19 @@ export const sendEnglishCourseCredit = (payload) => dispatch => {
     })
 }
 
+export const sendCompulsoryCourse = (payload) => dispatch => {
+  console.log(payload)
+  axios.post('/students/credit/compulsoryCourse', payload)
+    .then(res => {
+      alert('送出成功')
+    })
+    .catch(err => {
+      // window.location.replace("/logout ");
+      alert('送出失敗，請檢查連線是否穩定。')
+      console.log(err)
+    })
+}
+
 export const getCreditInfo = () => dispatch => {
   axios.get('/students/credit').then(res => {
     dispatch(storeCreditInfo(res.data))

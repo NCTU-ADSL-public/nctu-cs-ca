@@ -16,8 +16,9 @@ import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
 import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
 import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourseFormConfirm'
 import { connect } from 'react-redux'
-import { courseCreditChange, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
+import { sendCompulsoryCourse, waiveCourseReset, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
+import firebase from 'firebase'
 
 class HorizontalLinearStepper extends React.Component {
   constructor (props) {
@@ -26,6 +27,7 @@ class HorizontalLinearStepper extends React.Component {
     this.handlePrev = this.handlePrev.bind(this)
     this.getStepContent = this.getStepContent.bind(this)
     this.selectCreditForm = this.selectCreditForm.bind(this)
+    this.handleUploadImage = this.handleUploadImage.bind(this)
     this.state = {
       finished: false,
       stepIndex: 0,
@@ -37,6 +39,7 @@ class HorizontalLinearStepper extends React.Component {
     // 回復為初始狀態，並清除每個表單的輸入
     this.setState({ stepIndex: 0, selectFormIndex: -1, finished: false })
     this.props.englishCourseCreditReset()
+    this.props.waiveCourseReset()
   }
 
   handleNext () {
@@ -47,12 +50,41 @@ class HorizontalLinearStepper extends React.Component {
       return
     }
     else if (stepIndex === 1) {
-      if (selectFormIndex === 2) {
-        const { phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
-        if (!(phone && reason && department && teacher && course_name && course_code)) {
+      if (selectFormIndex === 1) {
+        const {
+          phone, original_school, original_department,
+          original_graduation_credit, apply_year,
+          apply_semester, original_course_name, original_course_department,
+          original_course_credit, original_course_score,
+          current_course_code, current_course_credit
+        } = this.props.waiveCourse
+        if (
+          !(phone && original_school && original_department &&
+          original_graduation_credit && apply_year &&
+          apply_semester && original_course_name && original_course_department &&
+          original_course_credit && original_course_score &&
+          current_course_code && current_course_credit)
+        ) {
+          console.log(this.props.waiveCourse)
           window.alert('請確實填寫每個欄位!')
           return
         }
+      } else if (selectFormIndex === 2) {
+        const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
+        if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+        console.log(file.name)
+        this.setState({file: file})
+      }
+      else if (selectFormIndex === 0) {
+        const { file, phone, reason, department, credit, course_type, course_code, course_name, course_code_old, course_name_old, teacher } = this.props.courseCreditChange
+        if (!(file.name && phone && reason && department && credit && course_type && course_code && course_name && course_code_old && course_name_old && teacher)) {
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+        this.setState({file: file})
       }
     }
     else if (stepIndex === 2) {
@@ -61,23 +93,49 @@ class HorizontalLinearStepper extends React.Component {
       let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
 
       if (selectFormIndex === 0) {
-
+        this.props.sendCompulsoryCourse({
+          ...this.props.courseCreditChange,
+          apply_year: year,
+          apply_semester: semester
+        })
+        this.handleUploadImage()
       }
       else if (selectFormIndex === 1) {
 
       }
       else if (selectFormIndex === 2) {
-        this.props.sendEnglishCourseCredit({
-          ...this.props.englishCourse,
-          apply_year: year,
-          apply_semester: semester
-        })
+        if (selectFormIndex === 2) {
+          this.props.sendEnglishCourseCredit({
+            ...this.props.englishCourse,
+            apply_year: year,
+            apply_semester: semester
+          })
+        }
       }
     }
 
     this.setState({
       stepIndex: stepIndex + 1,
       finished: stepIndex >= 2
+    })
+  }
+  handleUploadImage () {
+    let storageRef = firebase.storage().ref()
+    let _this = this
+    let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + this.state.file
+    storageRef.child(directory).delete().then(function () {
+    }).catch(function (error) {
+      console.log(error)
+    })
+
+    let file = this.state.file
+    let uploadTask = storageRef.child(directory).put(file)
+    uploadTask.on('state_changed', function (snapshot) {
+    }, function (error) {
+      console.log(error)
+    }, function () {
+      // uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+      // })
     })
   }
 
@@ -189,14 +247,18 @@ class HorizontalLinearStepper extends React.Component {
 }
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  englishCourse: state.Student.Credit.englishCourse
+  englishCourse: state.Student.Credit.englishCourse,
+  waiveCourse: state.Student.Credit.waiveCourse,
+  courseCreditChange: state.Student.Credit.courseCreditChange
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  courseCreditChange: (payload) => dispatch(courseCreditChange(payload)),
+  //courseCreditChange: (payload) => dispatch(courseCreditChange(payload)),
   englishCourseCreditChange: (payload) => dispatch(englishCourseCreditChange(payload)),
   englishCourseCreditReset: (payload) => dispatch(englishCourseCreditReset(payload)),
-  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload))
+  waiveCourseReset: (payload) => dispatch(waiveCourseReset(payload)),
+  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload)),
+  sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper))

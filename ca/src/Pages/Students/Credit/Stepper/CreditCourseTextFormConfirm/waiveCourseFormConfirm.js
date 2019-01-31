@@ -17,6 +17,11 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 150
   },
+  textFieldLong: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 350
+  },
   menu: {
     width: 150,
     fontSize: '20px'
@@ -135,6 +140,18 @@ class WaiveCourseFormConfirm extends React.Component {
             InputProps={{ readOnly: true }}
             defaultValue={this.props.original_department}
           />
+          <TextField
+            label='原就讀系所科別最低畢業學分'
+            margin='normal'
+            className={classes.textFieldLong}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.original_graduation_credit}/>
         </div>
         <div style={{ height: '50px' }} />
         <h2>原就讀學校科目成績</h2>
