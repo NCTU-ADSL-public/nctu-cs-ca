@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import TextField from '@material-ui/core/TextField'
 import { waiveCourseChange } from '../../../../../Redux/Students/Actions/Credit'
+import Postfile from './Postfile'
 
 const styles = theme => ({
   container: {
@@ -301,7 +302,12 @@ class WaiveForm extends React.Component {
             onChange={(event) => this.props.handleChange({ current_course_credit: event.target.value })}
           />
         </div>
-        <div style={{ height: '100px' }} />
+        <br />
+        註：<br />
+        1. 課程內容需與本系課程一致。<br />
+        2. 須檢附用書書名及課程綱要。<br />
+        <br />
+        <Postfile fileChange={(file) => this.props.handleChange({file: file})} />
       </div>
     )
   }

@@ -3,13 +3,13 @@ import { handleActions } from 'redux-actions'
 const initialState = {
   courseCreditChange: {
     student_id: '', // 可能需要
-    year: '',
+    apply_year: '',
     phone: '',
-    semester: '',
+    apply_semester: '',
     department: '', // 原課程的depart
     teacher: '', // 原課程teacher
-    course_name_old: '', // 可能需要
-    course_code_old: '', // 可能需要
+    original_course_name: '', // 可能需要
+    original_course_code: '', // 可能需要
     course_name: '',
     course_code: '',
     course_type: '必修',
@@ -81,5 +81,8 @@ export default handleActions({
   STORE_CREDIT_INFO: (state, action) => ({
     ...state,
     creditInfo: action.payload
+  }),
+  RESET_CREDIT_INFO: (state, action) => ({
+    ...initialState
   })
 }, initialState)

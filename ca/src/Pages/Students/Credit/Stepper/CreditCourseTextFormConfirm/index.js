@@ -181,9 +181,9 @@ class TextForm extends React.Component {
         <br />
         作為系內{this.props.course_type}&nbsp;&nbsp;課程，以抵免系內之
         課號：
-        {this.props.course_code_old}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {this.props.original_course_code}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         課名：
-        {this.props.course_name_old}
+        {this.props.original_course_name}
         課
         <br />
         <br />
@@ -201,12 +201,12 @@ class TextForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  year: state.Student.Credit.courseCreditChange.year,
-  semester: state.Student.Credit.courseCreditChange.semester,
+  year: state.Student.Credit.courseCreditChange.apply_year,
+  semester: state.Student.Credit.courseCreditChange.apply_semester,
   department: state.Student.Credit.courseCreditChange.department, // 原課程的depart
   teacher: state.Student.Credit.courseCreditChange.teacher, // 原課程teacher
-  course_name_old: state.Student.Credit.courseCreditChange.course_name_old, // 可能需要
-  course_code_old: state.Student.Credit.courseCreditChange.course_code_old, // 可能需要
+  course_name_old: state.Student.Credit.courseCreditChange.original_course_name, // 可能需要
+  course_code_old: state.Student.Credit.courseCreditChange.original_course_code, // 可能需要
   course_name: state.Student.Credit.courseCreditChange.course_name,
   course_code: state.Student.Credit.courseCreditChange.course_code,
   course_type: state.Student.Credit.courseCreditChange.course_type,

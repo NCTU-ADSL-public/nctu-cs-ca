@@ -9,6 +9,7 @@ export const englishCourseCreditReset = createAction('ENGLISH_COURSE_CREDIT_RESE
 export const waiveCourseChange = createAction('WAIVE_COURSE_CHANGE')
 export const waiveCourseReset = createAction('WAIVE_COURSE_RESET')
 export const storeCreditInfo = createAction('STORE_CREDIT_INFO')
+export const resetCreditInfo = createAction('RESET_CREDIT_INFO')
 
 export const sendEnglishCourseCredit = (payload) => dispatch => {
   axios.post('/students/createEnglishOffsetApplyForm', payload)
