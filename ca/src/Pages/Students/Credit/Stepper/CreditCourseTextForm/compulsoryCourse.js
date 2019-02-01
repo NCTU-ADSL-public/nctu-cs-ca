@@ -205,20 +205,20 @@ class TextForm extends React.Component {
         作為系內&nbsp;&nbsp;<SelectType />&nbsp;&nbsp;課程，以抵免系內之
         課號：
         <TextField
-          id='course_code_old'
+          id='original_course_code'
           hintText='DCPXX'
           style={{ width: '150px' }}
           floatingLabelText='請填寫永久課號'
-          value={this.props.course_code_old}
-          onChange={(event) => this.props.compulsoryCourseChange({ course_code_old: event.target.value })}
+          value={this.props.original_course_code}
+          onChange={(event) => this.props.compulsoryCourseChange({ original_course_code: event.target.value })}
         />&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
-          id='course_name_old'
+          id='original_course_name'
           hintText=''
           style={{ width: '200px' }}
-          value={this.props.course_name_old}
-          onChange={(event) => this.props.compulsoryCourseChange({ course_name_old: event.target.value })}
+          value={this.props.original_course_name}
+          onChange={(event) => this.props.compulsoryCourseChange({ original_course_name: event.target.value })}
         />
         課
         <br />
@@ -241,8 +241,8 @@ const mapStateToProps = (state) => ({
   semester: state.Student.Credit.compulsoryCourse.semester,
   department: state.Student.Credit.compulsoryCourse.department, // 原課程的depart
   teacher: state.Student.Credit.compulsoryCourse.teacher, // 原課程teacher
-  course_name_old: state.Student.Credit.compulsoryCourse.course_name_old, // 可能需要
-  course_code_old: state.Student.Credit.compulsoryCourse.course_code_old, // 可能需要
+  original_course_name: state.Student.Credit.compulsoryCourse.original_course_name, // 可能需要
+  original_course_code: state.Student.Credit.compulsoryCourse.original_course_code, // 可能需要
   course_name: state.Student.Credit.compulsoryCourse.course_name,
   course_code: state.Student.Credit.compulsoryCourse.course_code,
   credit: state.Student.Credit.compulsoryCourse.credit, // 可能需要(新課程的credit)

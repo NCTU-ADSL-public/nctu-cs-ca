@@ -5,14 +5,12 @@ import FakeData from '../../../../Resources/FakeData'
 
 export const compulsoryCourseChange = createAction('COMPULSORY_COURSE_CHANGE')
 export const englishCourseChange = createAction('ENGLISH_COURSE_CHANGE')
-export const englishCourseReset = createAction('ENGLISH_COURSE_RESET')
 export const waiveCourseChange = createAction('WAIVE_COURSE_CHANGE')
-export const waiveCourseReset = createAction('WAIVE_COURSE_RESET')
 export const storeCreditInfo = createAction('STORE_CREDIT_INFO')
-export const resetCreditInfo = createAction('RESET_CREDIT_INFO')
+export const resetCourse = createAction('RESET_COURSE')
 
 export const sendEnglishCourse = (payload) => dispatch => {
-  axios.post('/students/createEnglishOffsetApplyForm', payload)
+  axios.post('/students/credit/englishCourse', payload)
     .then(res => { alert('送出成功') })
     .catch(err => {
       alert('送出失敗，請檢查連線是否穩定。')

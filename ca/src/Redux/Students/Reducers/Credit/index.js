@@ -62,10 +62,6 @@ export default handleActions({
       ...action.payload
     }
   }),
-  ENGLISH_COURSE_RESET: (state, action) => ({
-    ...state,
-    englishCourse: initialState.englishCourse
-  }),
   WAIVE_COURSE_CHANGE: (state, action) => ({
     ...state,
     waiveCourse: {
@@ -73,15 +69,14 @@ export default handleActions({
       ...action.payload
     }
   }),
-  WAIVE_COURSE_RESET: (state, action) => ({
-    ...state,
-    waiveCourse: initialState.waiveCourse
-  }),
   STORE_CREDIT_INFO: (state, action) => ({
     ...state,
     creditInfo: action.payload
   }),
-  RESET_CREDIT_INFO: (state, action) => ({
-    ...initialState
+  RESET_COURSE: (state, action) => ({
+    ...state,
+    compulsoryCourse: initialState.compulsoryCourse,
+    englishCourse: initialState.englishCourse,
+    waiveCourse: initialState.waiveCourse
   })
 }, initialState)
