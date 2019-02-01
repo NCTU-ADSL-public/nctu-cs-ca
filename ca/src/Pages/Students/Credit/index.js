@@ -17,6 +17,34 @@ const styles = theme => ({
   },
   btn: {
     fontSize: '14px'
+  },
+  status0: {
+    width: '10px',
+    height: '10px',
+    margin: '15px 7px 5px 7px',
+    backgroundColor: '#ffee99',
+    float: 'left'
+  },
+  status1: {
+    width: '10px',
+    height: '10px',
+    margin: '15px 7px 5px 7px',
+    backgroundColor: '#3aa276',
+    float: 'left'
+  },
+  status2: {
+    width: '10px',
+    height: '10px',
+    margin: '15px 7px 5px 7px',
+    backgroundColor: '#d93a64',
+    float: 'left'
+  },
+  text: {
+    color: '#7B7B7B',
+    float: 'left',
+    opacity: '0.8',
+    fontFamily: 'Noto Sans CJK TC',
+    marginTop: '10px'
   }
 })
 
@@ -34,6 +62,14 @@ class Index extends React.Component {
       <div className='container' style={{ marginBottom: '50px' }}>
         <div className='row'>
           <div className='col-md-12' style={{ marginTop: '20px' }}>
+            <div>
+              <div className={classes.status0} />
+              <div className={classes.text}>審核中</div>
+              <div className={classes.status1} />
+              <div className={classes.text}>審核通過</div>
+              <div className={classes.status2} />
+              <div className={classes.text}>審核不通過</div>
+            </div>
             <Link to='/students/credit/apply' className='pull-right'>
               <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>
             </Link>

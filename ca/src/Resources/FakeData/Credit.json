@@ -19,7 +19,7 @@
       "current_course_name": "機率",
       "current_course_credit": 3,
       "file": "0516000_抵免.pdf",
-      "status": 1
+      "status": 0
     }
   ],
   "compulsory_course": [
@@ -50,7 +50,7 @@
       "course_code": "UEE2104",
       "course_name": "機率(英文班)",
       "file": "0516000_抵免.pdf",
-      "status": 1
+      "status": 2
     }
   ]
 }

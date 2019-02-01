@@ -40,8 +40,23 @@ const styles = theme => ({
 class Index extends React.Component {
   render () {
     const { classes, data } = this.props
+    let color
+    switch (data.status) {
+      case 0:
+        color = '#ffee99'
+        break
+      case 1:
+        color = '#3aa276'
+        break
+      case 2:
+        color = '#d93a64'
+        break
+      default:
+        color = '#ffffff'
+        break
+    }
     return (
-      <ExpansionPanel defaultExpanded>
+      <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}`}}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
           <div className={classes.subtitle2}>{data.course_name}</div>
