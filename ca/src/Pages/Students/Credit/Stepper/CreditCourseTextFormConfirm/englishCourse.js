@@ -1,108 +1,182 @@
+
 import React from 'react'
+import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 // import Postfile from './Postfile'
-import { connect } from 'react-redux'
+
+const styles = theme => ({
+  container: {
+    width: '100%',
+    margin: '0 auto'
+  },
+  label: {
+    fontSize: '20px'
+  },
+  input: {
+    fontSize: '16px'
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 150
+  },
+  textFieldLong: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300
+  }
+})
 
 class EnglishCourseFormConfirm extends React.Component {
-  getTime () {
-    let today = new Date()
-    return (
-      today.getFullYear() + '年' +
-      (today.getMonth() + 1) + '月' +
-      today.getDate() + '日'
-    )
-  }
-
   render () {
+    const { classes } = this.props
     return (
-      <div>
-        <div style={{ marginBottom: '10px' }}>
-          班別:&nbsp;&nbsp;
-          {this.props.studentIdcard.program}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          學號:&nbsp;&nbsp;
-          {this.props.studentIdcard.student_id}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          申請人:&nbsp;&nbsp;
-          {this.props.studentIdcard.sname}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          申請日期：&nbsp;
-          {this.getTime()}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          聯絡電話：&nbsp;
+      <div className={classes.container}>
+        <h2>基本資料</h2>
+        <hr style = {{ margin: '5px' }}/>
+        <div style={{ margin: '5px' }}>
           <TextField
-            id='phone'
-            style={{ width: '150px' }}
+            label='申請人'            
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.studentIdcard.sname}
+          />
+          <TextField
+            label='班別'         
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.studentIdcard.program}
+          />
+          <TextField
+            label='學號'           
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.studentIdcard.student_id}
+          />
+          <TextField
+            label='手機'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
             defaultValue={this.props.phone}
-            InputProps={{ readOnly: true }}
           />
         </div>
-        <br />
-        <div>
-          事宜：<br />
-          因故無法修習本系所開課程，擬修習外系英文授課專業課程，並申請為本系畢業學分規定之「畢業前須通過1門本系開授或認可之英文授課專業課程」。
-        </div>
-        <br />
-        <div style={{ marginBottom: '20px' }}>
-          原因：
+        <div style={{ height: '30px' }} />
+        <h2>課程資訊</h2>
+        <hr style = {{ margin: '5px' }}/>
+        <div style = {{ margin: '5px' }}>
           <TextField
-            id='reason'
-            defaultValue={this.props.reason}
+            label='課程名稱'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
             InputProps={{ readOnly: true }}
-            multiline
-            fullWidth
-            rows={1}
+            defaultValue={this.props.course_name}
           />
-        </div>
-        <div style={{ marginBottom: '15px' }}>
-          擬修&nbsp;
           <TextField
-            id='department'
-            style={{ width: '100px' }}
+            label='永久課號'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.course_code}
+          />
+          <TextField
+            label='開課系所'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
             defaultValue={this.props.department}
-            InputProps={{ readOnly: true }}
           />
-          &nbsp;系&nbsp;&nbsp;&nbsp;
           <TextField
-            id='teacher'
-            style={{ width: '100px' }}
-            defaultValue={this.props.teacher}
+            label='授課老師'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
             InputProps={{ readOnly: true }}
+            defaultValue={this.props.teacher}
+          />    
+        </div>
+        <div style={{ height: '30px' }} />
+        <h2>其他</h2>
+        <hr style = {{ margin: '5px' }}/>
+        <div style = {{ margin: '5px' }}>
+          <TextField
+            label='申請原因'
+            helperText='請詳填'
+            margin='normal'
+            className={classes.textFieldLong}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{
+              classes: {
+                root: classes.input
+              },
+              readOnly: true
+            }}           
+            defaultValue={this.props.reason}
+            multiline
+            rowsMax='4'
           />
-          &nbsp;老師所授之
         </div>
-        <div className='row' style={{ marginBottom: '15px' }}>
-          <div className='col-lg-3 col-md-4 col-12'>
-            課號：
-            <TextField
-              id='course_code'
-              style={{ width: '150px' }}
-              defaultValue={this.props.course_code}
-              InputProps={{ readOnly: true }}
-            />
-          </div>
-          <div className='col-lg-3 col-md-4 col-12'>
-            課名：
-            <TextField
-              id='course_name'
-              style={{ width: '180px' }}
-              defaultValue={this.props.course_name}
-              InputProps={{ readOnly: true }}
-            />
-          </div>
-        </div>
-        <br />
         <br />
         註：<br />
-        1.須檢附用書書名及課程綱要。<br />
+        1. 須檢附用書書名及課程綱要。<br />
         <br />
         檔案：{this.props.file.name}
-        <br />
-        <br />
       </div>
     )
   }
@@ -124,4 +198,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EnglishCourseFormConfirm)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EnglishCourseFormConfirm))

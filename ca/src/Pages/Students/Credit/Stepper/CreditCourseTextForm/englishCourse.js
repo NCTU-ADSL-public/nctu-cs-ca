@@ -1,114 +1,183 @@
+
 import React from 'react'
-import TextField from 'material-ui/TextField'
-import Postfile from './Postfile'
 import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Postfile from './Postfile'
 import { englishCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 
-class EnglishCourseForm extends React.Component {
-  getTime () {
-    let today = new Date()
-    return (
-      today.getFullYear() + '年' +
-      (today.getMonth() + 1) + '月' +
-      today.getDate() + '日'
-    )
+const styles = theme => ({
+  container: {
+    width: '100%',
+    margin: '0 auto'
+  },
+  label: {
+    fontSize: '20px'
+  },
+  input: {
+    fontSize: '16px'
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 150
+  },
+  textFieldLong: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300
   }
+})
 
+class EnglishCourseForm extends React.Component {
   render () {
+    const { classes } = this.props
     return (
-      <div>
-        <div style={{ marginBottom: '10px' }}>
-          班別:&nbsp;&nbsp;
-          {this.props.studentIdcard.program}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          學號:&nbsp;&nbsp;
-          {this.props.studentIdcard.student_id}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          申請人:&nbsp;&nbsp;
-          {this.props.studentIdcard.sname}
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          申請日期：&nbsp;
-          {this.getTime()}
-        </div>
-        <div>
-          聯絡電話：
+      <div className={classes.container}>
+        <h2>基本資料</h2>
+        <hr style = {{ margin: '5px' }}/>
+        <div style={{ margin: '5px' }}>
           <TextField
-            id='phone'
-            hintText=''
-            style={{ width: '150px' }}
+            label='申請人'         
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.studentIdcard.sname}
+          />
+          <TextField
+            label='班別'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.studentIdcard.program}
+          />
+          <TextField
+            label='學號'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{ readOnly: true }}
+            defaultValue={this.props.studentIdcard.student_id}
+          />
+          <TextField
+            label='手機'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
             value={this.props.phone}
             onChange={(event) => this.props.handleChange({ phone: event.target.value })}
           />
         </div>
-        <br />
-        <div>
-          事宜：<br />
-          因故無法修習本系所開課程，擬修習外系英文授課專業課程，並申請為本系畢業學分規定之「畢業前須通過1門本系開授或認可之英文授課專業課程」。
-        </div>
-        <br />
-        <div style={{ marginBottom: '10px' }}>
-          原因：
+        <div style={{ height: '30px' }} />
+        <h2>課程資訊</h2>
+        <hr style = {{ margin: '5px' }}/>
+        <div style = {{ margin: '5px' }}>
           <TextField
-            id='reason'
-            hintText=''
-            floatingLabelText='請詳填'
+            label='課程名稱'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            value={this.props.course_name}
+            onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+          />
+          <TextField
+            label='永久課號'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            value={this.props.course_code}
+            onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+          />
+          <TextField
+            label='開課系所'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            value={this.props.department}
+            onChange={(event) => this.props.handleChange({ department: event.target.value })}
+          />
+          <TextField
+            label='授課老師'
+            margin='normal'
+            className={classes.textField}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            value={this.props.teacher}
+            onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
+          />    
+        </div>
+        <div style={{ height: '30px' }} />
+        <h2>其他</h2>
+        <hr style = {{ margin: '5px' }}/>
+        <div style = {{ margin: '5px' }}>
+          <TextField
+            label='申請原因'
+            helperText='請詳填'
+            margin='normal'
+            className={classes.textFieldLong}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            InputProps={{
+              classes: {
+                root: classes.input
+              }
+            }}           
             value={this.props.reason}
             onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-            multiLine
-            fullWidth
-            rows={1}
+            multiline
+            rowsMax='4'
           />
         </div>
-        擬修&nbsp;
-        <TextField
-          id='department'
-          hintText=''
-          style={{ width: '100px' }}
-          value={this.props.department}
-          onChange={(event) => this.props.handleChange({ department: event.target.value })}
-        />
-        &nbsp;系&nbsp;&nbsp;&nbsp;
-        <TextField
-          id='teacher'
-          hintText=''
-          style={{ width: '100px' }}
-          value={this.props.teacher}
-          onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
-        />
-        &nbsp;老師所授之
-        <div className='row'>
-          <div className='col-lg-3 col-md-4 col-12'>
-            課號：
-            <TextField
-              id='course_code'
-              hintText='請填寫永久課號'
-              style={{ width: '150px' }}
-              value={this.props.course_code}
-              onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
-            />
-          </div>
-          <div className='col-lg-3 col-md-4 col-12'>
-            課名：
-            <TextField
-              id='course_name'
-              hintText=''
-              style={{ width: '180px' }}
-              value={this.props.course_name}
-              onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-            />
-          </div>
-        </div>
-        <br />
         <br />
         註：<br />
         1. 須檢附用書書名及課程綱要。<br />
         <br />
         <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
-        <br />
-        <br />
       </div>
     )
   }
@@ -131,4 +200,4 @@ const mapDispatchToProps = (dispatch) => ({
   handleChange: (payload) => { dispatch(englishCourseChange(payload)) }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EnglishCourseForm)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EnglishCourseForm))

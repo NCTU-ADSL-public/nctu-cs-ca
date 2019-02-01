@@ -125,27 +125,36 @@ class HorizontalLinearStepper extends React.Component {
       let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
 
       if (selectFormIndex === 0) {
-        this.props.sendCompulsoryCourse({
-          ...this.props.compulsoryCourse,
-          file: this.props.compulsoryCourse.name,
-          apply_year: year,
-          apply_semester: semester
-        })
-        this.handleUploadImage()
+        if (window.confirm('確定送出「本系必修課程抵免單」?')) {
+          this.props.sendCompulsoryCourse({
+            ...this.props.compulsoryCourse,
+            file: this.props.compulsoryCourse.name,
+            apply_year: year,
+            apply_semester: semester
+          })
+          this.handleUploadImage()
+        }
+        else return
       }
 
       else if (selectFormIndex === 1) {
-
+        if (window.confirm('確定送出「學分抵免單」?')) {
+          
+        }
+        else return
       }
 
       else if (selectFormIndex === 2) {
-        this.props.sendEnglishCourseCredit({
-          ...this.props.englishCourse,
-          file: this.props.englishCourse.name,
-          apply_year: year,
-          apply_semester: semester
-        })
-        this.handleUploadImage()
+        if (window.confirm('確定送出「英授專業課程抵免單」?')) {
+          this.props.sendEnglishCourseCredit({
+            ...this.props.englishCourse,
+            file: this.props.englishCourse.name,
+            apply_year: year,
+            apply_semester: semester
+          })
+          this.handleUploadImage()
+        }
+        else return
       }
     }
 
@@ -165,13 +174,18 @@ class HorizontalLinearStepper extends React.Component {
 
     let file = this.state.file
     let uploadTask = storageRef.child(directory).put(file)
-    uploadTask.on('state_changed', function (snapshot) {
-    }, function (error) {
-      console.log(error)
-    }, function () {
-      // uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-      // })
-    })
+    uploadTask.on(
+      'state_changed',
+      function (snapshot) {
+      },
+      function (error) {
+        console.log(error)
+      },
+      function () {
+        // uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        // })
+      }
+    )
   }
 
   getStepContent (stepIndex) {
