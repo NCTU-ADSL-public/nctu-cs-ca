@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField'
 import Postfile from './Postfile'
 import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'
-import { courseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
+import { compulsoryCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 import SelectType from './SlectType'
 
 let items = []
@@ -121,7 +121,7 @@ class TextForm extends React.Component {
             hintText=''
             style={{ width: '150px' }}
             value={this.props.phone}
-            onChange={(event) => this.props.courseCreditChange({ phone: event.target.value })}
+            onChange={(event) => this.props.compulsoryCourseChange({ phone: event.target.value })}
           />
         </div>
         <br />
@@ -153,7 +153,7 @@ class TextForm extends React.Component {
           hintText=''
           floatingLabelText='理由請詳填'
           value={this.props.reason}
-          onChange={(event) => this.props.courseCreditChange({ reason: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ reason: event.target.value })}
           multiLine
           fullWidth
           rows={1}
@@ -164,7 +164,7 @@ class TextForm extends React.Component {
           hintText=''
           style={{ width: '100px' }}
           value={this.props.department}
-          onChange={(event) => this.props.courseCreditChange({ department: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ department: event.target.value })}
         />
         &nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
@@ -172,7 +172,7 @@ class TextForm extends React.Component {
           hintText=''
           style={{ width: '100px' }}
           value={this.props.teacher}
-          onChange={(event) => this.props.courseCreditChange({ teacher: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ teacher: event.target.value })}
         />&nbsp;
         老師&nbsp;&nbsp;&nbsp;&nbsp;所授之 &nbsp;&nbsp;課號：
         <TextField
@@ -181,7 +181,7 @@ class TextForm extends React.Component {
           floatingLabelText='請填寫永久課號'
           style={{ width: '150px' }}
           value={this.props.course_code}
-          onChange={(event) => this.props.courseCreditChange({ course_code: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ course_code: event.target.value })}
         />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
@@ -189,7 +189,7 @@ class TextForm extends React.Component {
           hintText=''
           style={{ width: '200px' }}
           value={this.props.course_name}
-          onChange={(event) => this.props.courseCreditChange({ course_name: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ course_name: event.target.value })}
         />
         課
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -198,7 +198,7 @@ class TextForm extends React.Component {
           hintText=''
           style={{ width: '50px' }}
           value={this.props.credit}
-          onChange={(event) => this.props.courseCreditChange({ credit: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ credit: event.target.value })}
         />
         學分
         <br />
@@ -210,7 +210,7 @@ class TextForm extends React.Component {
           style={{ width: '150px' }}
           floatingLabelText='請填寫永久課號'
           value={this.props.course_code_old}
-          onChange={(event) => this.props.courseCreditChange({ course_code_old: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ course_code_old: event.target.value })}
         />&nbsp;&nbsp;&nbsp;
         課名：
         <TextField
@@ -218,7 +218,7 @@ class TextForm extends React.Component {
           hintText=''
           style={{ width: '200px' }}
           value={this.props.course_name_old}
-          onChange={(event) => this.props.courseCreditChange({ course_name_old: event.target.value })}
+          onChange={(event) => this.props.compulsoryCourseChange({ course_name_old: event.target.value })}
         />
         課
         <br />
@@ -227,7 +227,7 @@ class TextForm extends React.Component {
         1. 課程內容需與本系課程一致。<br />
         2. 須檢附用書書名及課程綱要。<br />
         <br />
-        <Postfile fileChange={(file) => this.props.courseCreditChange({file: file})} file={this.props.file} />
+        <Postfile fileChange={(file) => this.props.compulsoryCourseChange({ file: file })} file={this.props.file} />
         <br />
         <br />
       </div>
@@ -237,24 +237,22 @@ class TextForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  year: state.Student.Credit.courseCreditChange.year,
-  semester: state.Student.Credit.courseCreditChange.semester,
-  department: state.Student.Credit.courseCreditChange.department, // 原課程的depart
-  teacher: state.Student.Credit.courseCreditChange.teacher, // 原課程teacher
-  course_name_old: state.Student.Credit.courseCreditChange.course_name_old, // 可能需要
-  course_code_old: state.Student.Credit.courseCreditChange.course_code_old, // 可能需要
-  course_name: state.Student.Credit.courseCreditChange.course_name,
-  course_code: state.Student.Credit.courseCreditChange.course_code,
-  credit: state.Student.Credit.courseCreditChange.credit, // 可能需要(新課程的credit)
-  reason: state.Student.Credit.courseCreditChange.reason,
-  phone: state.Student.Credit.courseCreditChange.phone,
-  file: state.Student.Credit.courseCreditChange.file
+  year: state.Student.Credit.compulsoryCourse.year,
+  semester: state.Student.Credit.compulsoryCourse.semester,
+  department: state.Student.Credit.compulsoryCourse.department, // 原課程的depart
+  teacher: state.Student.Credit.compulsoryCourse.teacher, // 原課程teacher
+  course_name_old: state.Student.Credit.compulsoryCourse.course_name_old, // 可能需要
+  course_code_old: state.Student.Credit.compulsoryCourse.course_code_old, // 可能需要
+  course_name: state.Student.Credit.compulsoryCourse.course_name,
+  course_code: state.Student.Credit.compulsoryCourse.course_code,
+  credit: state.Student.Credit.compulsoryCourse.credit, // 可能需要(新課程的credit)
+  reason: state.Student.Credit.compulsoryCourse.reason,
+  phone: state.Student.Credit.compulsoryCourse.phone,
+  file: state.Student.Credit.compulsoryCourse.file
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  courseCreditChange: (payload) => {
-    dispatch(courseCreditChange(payload))
-  }
+  compulsoryCourseChange: (payload) => { dispatch(compulsoryCourseChange(payload)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TextForm)

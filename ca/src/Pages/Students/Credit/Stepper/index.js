@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
 import {
   Step,
   Stepper,
@@ -9,14 +10,19 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FormSelectTable from './FormSelectTable'
-import TextForm from './CreditCourseTextForm/normalCourse'
-import WaiveForm from './CreditCourseTextForm/waiveCourse'
-import EnglishCourseForm from './CreditCourseTextForm/englishCourseForm'
-import CreditCourseTextFormConfirm from './CreditCourseTextFormConfirm'
-import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourseFormConfirm'
-import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourseFormConfirm'
-import { connect } from 'react-redux'
-import { resetCreditInfo, sendCompulsoryCourse, englishCourseCreditChange, englishCourseCreditReset, sendEnglishCourseCredit } from '../../../../Redux/Students/Actions/Credit'
+import CompulsoryCourseForm from './CreditCourseTextForm/compulsoryCourse'
+import WaiveCourseForm from './CreditCourseTextForm/waiveCourse'
+import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
+import CompulsoryCourseFormConfirm from './CreditCourseTextFormConfirm/compulsoryCourse'
+import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourse'
+import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourse'
+import {
+  sendCompulsoryCourse,
+  resetCreditInfo,
+  sendEnglishCourse,
+  englishCourseReset,
+  waiveCourseReset
+} from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
 import firebase from 'firebase'
 
@@ -38,7 +44,8 @@ class HorizontalLinearStepper extends React.Component {
   resetForm () {
     // 回復為初始狀態，並清除每個表單的輸入
     this.setState({ stepIndex: 0, selectFormIndex: -1, finished: false })
-    this.props.englishCourseCreditReset()
+    this.props.englishCourseReset()
+    this.props.waiveCourseReset()
   }
 
   handleNext () {
@@ -48,25 +55,56 @@ class HorizontalLinearStepper extends React.Component {
       window.alert('請選擇表單')
       return
     }
+
     else if (stepIndex === 1) {
-      if (selectFormIndex === 2) {
+      if (selectFormIndex === 0) {
+        const { file, phone, reason, department, credit, course_type, course_code, course_name, course_code_old, course_name_old, teacher } = this.props.compulsoryCourse
+        if (!(file.name && phone && reason && department && credit && course_type && course_code && course_name && course_code_old && course_name_old && teacher)) {
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+        this.setState({ file: file })
+      }
+      else if (selectFormIndex === 0) {
+        const { file, phone, reason, department, credit, course_type, course_code, course_name, original_course_code, original_course_name, teacher } = this.props.courseCreditChange
+        if (!(file.name && phone && reason && department && credit && course_type && course_code && course_name && original_course_code && original_course_name && teacher)) {
+          console.log(this.props.waiveCourse)
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+      }
+      else if (selectFormIndex === 1) {
+        const {
+          phone, original_school, original_department,
+          original_graduation_credit, apply_year,
+          apply_semester, original_course_name, original_course_department,
+          original_course_credit, original_course_score,
+          current_course_code, current_course_credit
+        } = this.props.waiveCourse
+        if (
+          !(phone && original_school && original_department &&
+          original_graduation_credit && apply_year &&
+          apply_semester && original_course_name && original_course_department &&
+          original_course_credit && original_course_score &&
+          current_course_code && current_course_credit)
+        ) {
+          console.log(this.props.waiveCourse)
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+      }
+
+      else if (selectFormIndex === 2) {
         const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
         if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
           return
         }
         console.log(file.name)
-        this.setState({file: file})
-      }
-      else if (selectFormIndex === 0) {
-        const { file, phone, reason, department, credit, course_type, course_code, course_name, original_course_code, original_course_name, teacher } = this.props.courseCreditChange
-        if (!(file.name && phone && reason && department && credit && course_type && course_code && course_name && original_course_code && original_course_name && teacher)) {
-          window.alert('請確實填寫每個欄位!')
-          return
-        }
-        this.setState({file: file})
+        this.setState({ file: file })
       }
     }
+
     else if (stepIndex === 2) {
       let Today = new Date()
       let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
@@ -81,9 +119,11 @@ class HorizontalLinearStepper extends React.Component {
         })
         this.handleUploadImage()
       }
+
       else if (selectFormIndex === 1) {
 
       }
+
       else if (selectFormIndex === 2) {
         if (selectFormIndex === 2) {
           this.props.sendEnglishCourseCredit({
@@ -102,6 +142,7 @@ class HorizontalLinearStepper extends React.Component {
       finished: stepIndex >= 2
     })
   }
+
   handleUploadImage () {
     let storageRef = firebase.storage().ref()
     let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + this.state.file
@@ -141,9 +182,9 @@ class HorizontalLinearStepper extends React.Component {
       case 1: {
         switch (this.state.selectFormIndex) {
           case 0:
-            return (<TextForm />)
+            return (<CompulsoryCourseForm />)
           case 1:
-            return (<WaiveForm />)
+            return (<WaiveCourseForm />)
           case 2:
             return (<EnglishCourseForm />)
           default:
@@ -153,7 +194,7 @@ class HorizontalLinearStepper extends React.Component {
       case 2: {
         switch (this.state.selectFormIndex) {
           case 0:
-            return (<CreditCourseTextFormConfirm />)
+            return (<CompulsoryCourseFormConfirm />)
           case 1:
             return (<WaiveCourseFormConfirm />)
           case 2:
@@ -233,14 +274,14 @@ class HorizontalLinearStepper extends React.Component {
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
   englishCourse: state.Student.Credit.englishCourse,
-  courseCreditChange: state.Student.Credit.courseCreditChange
+  waiveCourse: state.Student.Credit.waiveCourse,
+  compulsoryCourse: state.Student.Credit.compulsoryCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({
   resetCreditInfo: (payload) => dispatch(resetCreditInfo(payload)),
-  englishCourseCreditChange: (payload) => dispatch(englishCourseCreditChange(payload)),
-  englishCourseCreditReset: (payload) => dispatch(englishCourseCreditReset(payload)),
-  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourseCredit(payload)),
+  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourse(payload)),
+  waiveCourseReset: (payload) => dispatch(waiveCourseReset(payload)),
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload))
 })
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import Postfile from './Postfile'
 // import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { connect } from 'react-redux'
-import { courseCreditChange } from '../../../../../Redux/Students/Actions/Credit'
+import { compulsoryCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 
 let items = []
 
@@ -217,8 +216,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  courseCreditChange: (type, value) => {
-    dispatch(courseCreditChange(type, value))
+  compulsoryCourseChange: (type, value) => {
+    dispatch(compulsoryCourseChange(type, value))
   }
 })
 

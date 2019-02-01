@@ -18,6 +18,11 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 150
   },
+  textFieldLong: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 350
+  },
   menu: {
     width: 150,
     fontSize: '20px'
@@ -144,6 +149,22 @@ class WaiveForm extends React.Component {
             }}
             value={this.props.original_department}
             onChange={(event) => this.props.handleChange({ original_department: event.target.value })}
+          />
+          <TextField
+            label='原就讀系所科別最低畢業學分'
+            defaultValue=''
+            margin='normal'
+            className={classes.textFieldLong}
+            InputProps={{
+            }}
+            InputLabelProps={{
+              classes: {
+                root: classes.label
+              },
+              shrink: true
+            }}
+            value={this.props.original_graduation_credit}
+            onChange={(event) => this.props.handleChange({ original_graduation_credit: event.target.value })}
           />
         </div>
         <div style={{ height: '50px' }} />

@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  courseCreditChange: {
+  compulsoryCourse: {
     student_id: '', // 可能需要
     apply_year: '',
     phone: '',
@@ -34,8 +34,7 @@ const initialState = {
     original_department: '',
     current_school: '',
     current_department: '',
-    original_graduation_credit: 0,
-
+    original_graduation_credit: '',
     apply_year: 0,
     apply_semester: 0,
     original_course_name: '',
@@ -49,21 +48,21 @@ const initialState = {
 }
 
 export default handleActions({
-  COURSE_CREDIT_CHANGE: (state, action) => ({
+  COMPULSORY_COURSE_CHANGE: (state, action) => ({
     ...state,
-    courseCreditChange: {
-      ...state.courseCreditChange,
+    compulsoryCourse: {
+      ...state.compulsoryCourse,
       ...action.payload
     }
   }),
-  ENGLISH_COURSE_CREDIT_CHANGE: (state, action) => ({
+  ENGLISH_COURSE_CHANGE: (state, action) => ({
     ...state,
     englishCourse: {
       ...state.englishCourse,
       ...action.payload
     }
   }),
-  ENGLISH_COURSE_CREDIT_RESET: (state, action) => ({
+  ENGLISH_COURSE_RESET: (state, action) => ({
     ...state,
     englishCourse: initialState.englishCourse
   }),
