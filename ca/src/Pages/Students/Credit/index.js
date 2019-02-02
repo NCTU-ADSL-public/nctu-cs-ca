@@ -22,7 +22,7 @@ const styles = theme => ({
     width: '10px',
     height: '10px',
     margin: '15px 7px 5px 7px',
-    backgroundColor: '#ffee99',
+    backgroundColor: '#f3864a',
     float: 'left'
   },
   status1: {
@@ -61,7 +61,8 @@ class Index extends React.Component {
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
         <div className='row'>
-          <div className='col-md-12' style={{ marginTop: '20px' }}>
+          {/* For PC screen */}
+          <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
             <div>
               <div className={classes.status0} />
               <div className={classes.text}>審核中</div>
@@ -74,7 +75,14 @@ class Index extends React.Component {
               <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>
             </Link>
           </div>
-          <div className='col-md-12' style={{ marginTop: '20px' }}>
+          {/* For mobile screen */}
+          <div className='hidden-sm hidden-md hidden-lg' style={{ margin: '20px 20px 5px 20px ', width: 150}}>
+            <Link to='/students/credit/apply'>
+              <Button className={classes.btn} variant='contained' color='primary' style={{ margin: 'auto', width: '80%'}}>抵免申請</Button>
+            </Link>
+          </div>
+          {/* For PC screen */}
+          <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
             {
               compulsoryCourse &&
               compulsoryCourse.map((data, index) => (
@@ -91,6 +99,42 @@ class Index extends React.Component {
               waiveCourse &&
               waiveCourse.map((data, index) => (
                 <WaiveCoursePanel key={index} data={{ ...data }} />
+              ))
+            }
+            {
+              compulsoryCourse && !compulsoryCourse.length &&
+              englishCourse && !englishCourse.length &&
+              waiveCourse && !waiveCourse.length &&
+              <div className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2' style={{ marginTop: '50px' }}>
+                <h2 className='text-center'>尚無任何抵免申請</h2>
+                <img className={classes.img} src={creditImg} alt='' />
+              </div>
+            }
+          </div>
+          {/* For mobile xs */}
+          <div
+            className='hidden-sm hidden-md hidden-lg'
+            style={{
+              marginTop: '15px',
+              width: '100vw'
+
+            }}>
+            {
+              compulsoryCourse &&
+              compulsoryCourse.map((data, index) => (
+                <CompulsoryCoursePanel key={index} data={{ ...data }} mobile />
+              ))
+            }
+            {
+              englishCourse &&
+              englishCourse.map((data, index) => (
+                <EnglishCoursePanel key={index} data={{ ...data }} mobile />
+              ))
+            }
+            {
+              waiveCourse &&
+              waiveCourse.map((data, index) => (
+                <WaiveCoursePanel key={index} data={{ ...data }} mobile />
               ))
             }
             {
