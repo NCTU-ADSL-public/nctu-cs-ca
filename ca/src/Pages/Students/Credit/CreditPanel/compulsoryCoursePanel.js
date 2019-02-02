@@ -116,7 +116,7 @@ class Index extends React.Component {
               label={<span>{data.original_course_name}</span>}
             />
           </div>
-          <div className={classes.subtitle2}><span class="glyphicon glyphicon-chevron-down"></span></div>
+          <div className={classes.subtitle2}><span className='glyphicon glyphicon-chevron-down'></span></div>
           <div style={{ margin: '5px', display: 'flex', justifyContent: 'center' }}>
             <Chip
               style={{ background: '#d8eadd', color: '#464646', fontSize: 18, fontWeight: 400 }}

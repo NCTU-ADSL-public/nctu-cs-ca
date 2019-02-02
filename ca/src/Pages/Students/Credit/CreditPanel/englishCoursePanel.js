@@ -109,17 +109,17 @@ class Index extends React.Component {
       )
     } else {
       return (
-        <ExpansionPanel defaultExpanded style={{borderLeft: `7px solid ${color}`}}>
+        <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
             <div className={classes.subtitle2}>{data.course_name}</div>
             <div className={classes.subtitle2}>
-              <div style={{width: '150px'}} />
+              <div style={{ width: '150px' }} />
             </div>
             <div className={classes.subtitle2} />
-            <div style={{marginLeft: '20px'}}>
+            <div style={{ marginLeft: '20px' }}>
               <Chip
-                style={{background: '#28a745', color: '#fff', fontSize: 14, fontWeight: 400}}
+                style={{ background: '#28a745', color: '#fff', fontSize: 14, fontWeight: 400 }}
                 label={<span>英授專業課程抵免</span>}
               />
             </div>

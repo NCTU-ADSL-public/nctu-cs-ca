@@ -116,7 +116,7 @@ class Index extends React.Component {
               label={<span>{data.original_course_name}</span>}
             />
           </div>
-          <div className={classes.subtitle2}><span class="glyphicon glyphicon-chevron-down"></span></div>
+          <div className={classes.subtitle2}><span className='glyphicon glyphicon-chevron-down'></span></div>
           <div style={{ margin: '5px', display: 'flex', justifyContent: 'center' }}>
             <Chip
               style={{ background: '#d8eadd', color: '#464646', fontSize: 18, fontWeight: 400 }}
@@ -153,15 +153,15 @@ class Index extends React.Component {
       )
     } else {
       return (
-        <ExpansionPanel defaultExpanded style={{borderLeft: `7px solid ${color}`}}>
+        <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
             <div className={classes.subtitle2}>{data.original_course_name}</div>
             <div className={classes.progress}><Arrow /></div>
             <div className={classes.subtitle2}>{data.current_course_name}</div>
-            <div style={{marginLeft: '20px'}}>
+            <div style={{ marginLeft: '20px' }}>
               <Chip
-                style={{background: '#ffcc22', color: '#fff', fontSize: 14, fontWeight: 400}}
+                style={{ background: '#ffcc22', color: '#fff', fontSize: 14, fontWeight: 400 }}
                 label={<span>學分抵免</span>}
               />
             </div>
