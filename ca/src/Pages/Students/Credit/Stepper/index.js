@@ -283,7 +283,7 @@ class HorizontalLinearStepper extends React.Component {
               ) : (
                 <div>
                   <div>{this.getStepContent(stepIndex)}</div>
-                  <div style={{ marginTop: 12 }}>
+                  <div style={{ marginTop: 12, height: 200 }}>
                     <RaisedButton
                       label={stepIndex === 2 ? '送出!' : '下一步'}
                       primary
