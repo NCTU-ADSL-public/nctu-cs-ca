@@ -6,6 +6,7 @@ import {
   Stepper,
   StepLabel
 } from 'material-ui/Stepper'
+import { Chip } from '@material-ui/core'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -224,22 +225,48 @@ class HorizontalLinearStepper extends React.Component {
   render () {
     const { finished, stepIndex } = this.state
     const contentStyle = { margin: '0 16px' }
+    const styles = {
+      chipActive: { background: '#4cc065', color: '#fafafa', fontSize: 14, fontWeight: 'bold' },
+      chipDefault: { background: '#d8eadd', color: '#828282', fontSize: 14, fontWeight: 400 }
+    }
 
     return (
       <div className='Credt-title-text'>
         <MuiThemeProvider>
           <div style={{ width: '100%', maxWidth: 1500, margin: 'auto' }}>
-            <Stepper activeStep={stepIndex}>
-              <Step>
-                <StepLabel>選取抵免表單</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>填寫表單</StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>確認送出</StepLabel>
-              </Step>
-            </Stepper>
+            {/* For PC screen */}
+            <div className='hidden-xs'>
+              <Stepper activeStep={stepIndex}>
+                <Step>
+                  <StepLabel>選取抵免表單</StepLabel>
+                </Step>
+                <Step>
+                  <StepLabel>填寫表單</StepLabel>
+                </Step>
+                <Step>
+                  <StepLabel>確認送出</StepLabel>
+                </Step>
+              </Stepper>
+            </div>
+            {/* For mobile screen */}
+            <div className='hidden-sm hidden-md hidden-lg'>
+              <div style={{ margin: '5px 3px 20px 3px', display: 'flex', justifyContent: 'center' }}>
+                <Chip
+                  style={ stepIndex === 0 ? styles.chipActive : styles.chipDefault }
+                  label={<span>選取抵免表單</span>}
+                />
+                <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }}></span>
+                <Chip
+                  style={ stepIndex === 1 ? styles.chipActive : styles.chipDefault }
+                  label={<span>填寫表單</span>}
+                />
+                <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }}></span>
+                <Chip
+                  style={ stepIndex === 2 ? styles.chipActive : styles.chipDefault }
+                  label={<span>確認送出</span>}
+                />
+              </div>
+            </div>
             <div style={contentStyle}>
               {finished ? (
                 <p>
