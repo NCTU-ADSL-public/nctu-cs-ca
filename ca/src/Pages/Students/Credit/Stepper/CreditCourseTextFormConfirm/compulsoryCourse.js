@@ -1,6 +1,5 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
-import Postfile from './Postfile'
 import { connect } from 'react-redux'
 import { compulsoryCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 import { withStyles } from '@material-ui/core/styles'
