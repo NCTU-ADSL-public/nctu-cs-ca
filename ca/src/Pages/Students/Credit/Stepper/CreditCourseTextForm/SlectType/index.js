@@ -38,7 +38,7 @@ class SelectCourseField extends Component {
 
   render () {
     return (
-      <div style={{ float: 'left', paddingTop: '25px', width: '100px' }}>
+      <div style={{ float: 'left', paddingTop: '25px', width: '150', marginRight: '10px' }}>
         <SelectField
           value={this.state.value}
           onChange={this.handleChange}
