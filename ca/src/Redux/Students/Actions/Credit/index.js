@@ -9,15 +9,6 @@ export const waiveCourseChange = createAction('WAIVE_COURSE_CHANGE')
 export const storeCreditInfo = createAction('STORE_CREDIT_INFO')
 export const resetCourse = createAction('RESET_COURSE')
 
-export const sendEnglishCourse = (payload) => dispatch => {
-  axios.post('/students/credit/englishCourse', payload)
-    .then(res => { alert('送出成功') })
-    .catch(err => {
-      alert('送出失敗，請檢查連線是否穩定。')
-      console.log(err)
-    })
-}
-
 export const sendCompulsoryCourse = (payload) => dispatch => {
   console.log(payload)
   axios.post('/students/credit/compulsoryCourse', payload)
@@ -28,8 +19,17 @@ export const sendCompulsoryCourse = (payload) => dispatch => {
     })
 }
 
+export const sendEnglishCourse = (payload) => dispatch => {
+  axios.post('/students/credit/englishCourse', payload)
+    .then(res => { alert('送出成功') })
+    .catch(err => {
+      alert('送出失敗，請檢查連線是否穩定。')
+      console.log(err)
+    })
+}
+
 export const getCreditInfo = () => dispatch => {
-  axios.get('/students/credit').then(res => {
+  axios.get('/students/credit/all').then(res => {
     dispatch(storeCreditInfo(res.data))
   }).catch(err => {
     dispatch(storeCreditInfo(FakeData.Credit))
