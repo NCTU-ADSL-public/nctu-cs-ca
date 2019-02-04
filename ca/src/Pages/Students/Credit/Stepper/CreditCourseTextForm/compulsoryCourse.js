@@ -156,7 +156,7 @@ class TextForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.teacher}
+            value={this.props.credit}
             onChange={(event) => this.props.handleChange({ credit: event.target.value })}
           />
         </div><div style={{ height: '30px' }} />
@@ -173,8 +173,8 @@ class TextForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.course_name}
-            onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+            value={this.props.original_course_name}
+            onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
           />
           <TextField
             label='永久課號'
@@ -186,8 +186,8 @@ class TextForm extends React.Component {
               },
               shrink: true
             }}
-            value={this.props.course_code}
-            onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+            value={this.props.original_course_code}
+            onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
           />
           <SlectType />
         </div>
