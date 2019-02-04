@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Postfile from './Postfile'
 import { englishCourseChange } from '../../../../../Redux/Students/Actions/Credit'
-import SlectType from './SlectType'
 
 const styles = theme => ({
   container: {
@@ -92,7 +91,7 @@ class EnglishCourseForm extends React.Component {
           />
         </div>
         <div style={{ height: '30px' }} />
-        <h2>課程資訊(擬修習)</h2>
+        <h2>課程資訊</h2>
         <hr style = {{ margin: '5px' }}/>
         <div style = {{ margin: '5px' }}>
           <TextField
@@ -147,63 +146,6 @@ class EnglishCourseForm extends React.Component {
             value={this.props.teacher}
             onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
           />
-        </div><div style={{ height: '30px' }} />
-        <h2>課程資訊(欲抵免課程)</h2>
-        <hr style = {{ margin: '5px' }}/>
-        <div style = {{ margin: '5px' }}>
-          <TextField
-            label='課程名稱'
-            margin='normal'
-            className={classes.textField}
-            InputLabelProps={{
-              classes: {
-                root: classes.label
-              },
-              shrink: true
-            }}
-            value={this.props.course_name}
-            onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-          />
-          <TextField
-            label='永久課號'
-            margin='normal'
-            className={classes.textField}
-            InputLabelProps={{
-              classes: {
-                root: classes.label
-              },
-              shrink: true
-            }}
-            value={this.props.course_code}
-            onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
-          />
-          <TextField
-            label='開課系所'
-            margin='normal'
-            className={classes.textField}
-            InputLabelProps={{
-              classes: {
-                root: classes.label
-              },
-              shrink: true
-            }}
-            value={this.props.department}
-            onChange={(event) => this.props.handleChange({ department: event.target.value })}
-          />
-          <TextField
-            label='授課老師'
-            margin='normal'
-            className={classes.textField}
-            InputLabelProps={{
-              classes: {
-                root: classes.label
-              },
-              shrink: true
-            }}
-            value={this.props.teacher}
-            onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
-          />
-          <SlectType />
         </div>
         <div style={{ height: '30px' }} />
         <h2>其他</h2>
@@ -251,7 +193,7 @@ const mapStateToProps = (state) => ({
   course_code: state.Student.Credit.englishCourse.course_code,
   reason: state.Student.Credit.englishCourse.reason,
   phone: state.Student.Credit.englishCourse.phone,
-  file: state.Student.Credit.englishCourse.file
+  file: state.Student.Credit.englishCourse.file,
 })
 
 const mapDispatchToProps = (dispatch) => ({
