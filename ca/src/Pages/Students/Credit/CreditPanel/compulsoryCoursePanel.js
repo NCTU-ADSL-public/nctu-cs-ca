@@ -170,6 +170,7 @@ class Index extends React.Component {
                   <TableCell className={classes.font}>開課系所</TableCell>
                   <TableCell className={classes.font}>預抵免課程</TableCell>
                   <TableCell className={classes.font}>申請原因</TableCell>
+                  <TableCell className={classes.font}>檔案</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -178,6 +179,7 @@ class Index extends React.Component {
                   <TableCell className={classes.font}>{data.department}</TableCell>
                   <TableCell className={classes.font}>{data.course_name}</TableCell>
                   <TableCell className={classes.font}>{data.reason}</TableCell>
+                  <TableCell className={classes.font}>{data.file}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>

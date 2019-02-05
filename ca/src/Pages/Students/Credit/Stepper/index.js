@@ -60,12 +60,10 @@ class HorizontalLinearStepper extends React.Component {
     const { stepIndex } = this.state
     if (stepIndex === 2) {
       this.setState({ stepIndex: stepIndex - 1 })
-    }
-    else if (stepIndex === 1) {
+    } else if (stepIndex === 1) {
       this.props.resetCourse()
       this.setState({ stepIndex: stepIndex - 1 })
-    }
-    else if (stepIndex === 0) {
+    } else if (stepIndex === 0) {
       this.props.resetCourse()
       this.props.history.push('/students/credit')
     }
@@ -77,9 +75,7 @@ class HorizontalLinearStepper extends React.Component {
     if (stepIndex === 0 && selectFormIndex === -1) {
       window.alert('請選擇表單')
       return
-    }
-
-    else if (stepIndex === 1) {
+    } else if (stepIndex === 1) {
       if (selectFormIndex === 0) {
         const { file, phone, reason, department, credit, course_type, course_code, course_name, original_course_code, original_course_name, teacher } = this.props.compulsoryCourse
         if (!(file.name && phone && reason && department && credit && course_type && course_code && course_name && original_course_code && original_course_name && teacher)) {
@@ -87,8 +83,7 @@ class HorizontalLinearStepper extends React.Component {
           return
         }
         this.setState({ file: file })
-      }
-      else if (selectFormIndex === 1) {
+      } else if (selectFormIndex === 1) {
         const {
           phone, original_school, original_department,
           original_graduation_credit, apply_year,
@@ -107,9 +102,7 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請確實填寫每個欄位!')
           return
         }
-      }
-
-      else if (selectFormIndex === 2) {
+      } else if (selectFormIndex === 2) {
         const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
         if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
@@ -118,44 +111,19 @@ class HorizontalLinearStepper extends React.Component {
         console.log(file.name)
         this.setState({ file: file })
       }
-    }
-
-    else if (stepIndex === 2) {
-      let Today = new Date()
-      let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
-      let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
-
+    } else if (stepIndex === 2) {
       if (selectFormIndex === 0) {
         if (window.confirm('確定送出「本系必修課程抵免單」?')) {
-          this.props.sendCompulsoryCourse({
-            ...this.props.compulsoryCourse,
-            file: this.props.compulsoryCourse.name,
-            apply_year: year,
-            apply_semester: semester
-          })
-          this.handleUploadImage()
-        }
-        else return
-      }
-
-      else if (selectFormIndex === 1) {
+          this.handleUploadImage(selectFormIndex)
+        } else return
+      } else if (selectFormIndex === 1) {
         if (window.confirm('確定送出「學分抵免單」?')) {
-          
-        }
-        else return
-      }
-
-      else if (selectFormIndex === 2) {
+          this.handleUploadImage(selectFormIndex)
+        } else return
+      } else if (selectFormIndex === 2) {
         if (window.confirm('確定送出「英授專業課程抵免單」?')) {
-          this.props.sendEnglishCourseCredit({
-            ...this.props.englishCourse,
-            file: this.props.englishCourse.name,
-            apply_year: year,
-            apply_semester: semester
-          })
-          this.handleUploadImage()
-        }
-        else return
+          this.handleUploadImage(selectFormIndex)
+        } else return
       }
     }
 
@@ -165,8 +133,12 @@ class HorizontalLinearStepper extends React.Component {
     })
   }
 
-  handleUploadImage () {
+  handleUploadImage (selectFormIndex) {
     let storageRef = firebase.storage().ref()
+    let Today = new Date()
+    let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
+    let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
+    let this_ = this
     let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + this.state.file
     storageRef.child(directory).delete().then(function () {
     }).catch(function (error) {
@@ -183,8 +155,26 @@ class HorizontalLinearStepper extends React.Component {
         console.log(error)
       },
       function () {
-        // uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        // })
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          console.log(downloadURL)
+          if (selectFormIndex === 0) {
+            this.props.sendCompulsoryCourse({
+              ...this.props.compulsoryCourse,
+              file: this.props.compulsoryCourse.name,
+              apply_year: year,
+              apply_semester: semester
+            })
+          } else if (selectFormIndex === 1) {
+
+          } else if (selectFormIndex === 2) {
+            this_.props.sendEnglishCourseCredit({
+              ...this_.props.englishCourse,
+              file: downloadURL,
+              apply_year: year,
+              apply_semester: semester
+            })
+          }
+        })
       }
     )
   }
@@ -252,17 +242,17 @@ class HorizontalLinearStepper extends React.Component {
             <div className='hidden-sm hidden-md hidden-lg'>
               <div style={{ margin: '5px 3px 20px 3px', display: 'flex', justifyContent: 'center' }}>
                 <Chip
-                  style={ stepIndex === 0 ? styles.chipActive : styles.chipDefault }
+                  style={stepIndex === 0 ? styles.chipActive : styles.chipDefault}
                   label={<span>選取抵免表單</span>}
                 />
-                <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }}></span>
+                <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }} />
                 <Chip
-                  style={ stepIndex === 1 ? styles.chipActive : styles.chipDefault }
+                  style={stepIndex === 1 ? styles.chipActive : styles.chipDefault}
                   label={<span>填寫表單</span>}
                 />
-                <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }}></span>
+                <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }} />
                 <Chip
-                  style={ stepIndex === 2 ? styles.chipActive : styles.chipDefault }
+                  style={stepIndex === 2 ? styles.chipActive : styles.chipDefault}
                   label={<span>確認送出</span>}
                 />
               </div>
