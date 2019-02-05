@@ -116,7 +116,7 @@ class Index extends React.Component {
               label={<span>{data.original_course_name}</span>}
             />
           </div>
-          <div className={classes.subtitle2}><span className='glyphicon glyphicon-chevron-down'></span></div>
+          <div className={classes.subtitle2}><span className='glyphicon glyphicon-chevron-down' /></div>
           <div style={{ margin: '5px', display: 'flex', justifyContent: 'center' }}>
             <Chip
               style={{ background: '#d8eadd', color: '#464646', fontSize: 18, fontWeight: 400 }}
@@ -141,6 +141,10 @@ class Index extends React.Component {
                 <TableRow>
                   <TableCell className={classes.headFont}>申請原因</TableCell>
                   <TableCell className={classes.font}>{data.original_course_name}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className={classes.headFont}>檔案</TableCell>
+                  <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -179,7 +183,7 @@ class Index extends React.Component {
                   <TableCell className={classes.font}>{data.department}</TableCell>
                   <TableCell className={classes.font}>{data.course_name}</TableCell>
                   <TableCell className={classes.font}>{data.reason}</TableCell>
-                  <TableCell className={classes.font}>{data.file}</TableCell>
+                  <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
                 </TableRow>
               </TableBody>
             </Table>
