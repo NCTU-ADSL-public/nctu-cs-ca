@@ -35,6 +35,7 @@ class TextForm extends React.Component {
         {/* For PC screen */}
         <div className='hidden-xs'>
           <div className={classes.container}>
+            <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
@@ -50,7 +51,7 @@ class TextForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.sname}
-          />
+              />
               <TextField
                 label='班別'
                 margin='normal'
@@ -63,7 +64,7 @@ class TextForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.program}
-          />
+              />
               <TextField
                 label='學號'
                 margin='normal'
@@ -76,7 +77,7 @@ class TextForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.student_id}
-          />
+              />
               <TextField
                 label='手機'
                 margin='normal'
@@ -88,9 +89,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.phone}
-                onChange={(event) => this.props.handleChange({ phone: event.target.value })}
-          />
+                defaultValue={this.props.phone}
+              />
             </div>
             <div style={{ height: '30px' }} />
             <h2>課程資訊(擬修習)</h2>
@@ -107,9 +107,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.course_name}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-          />
+                defaultValue={this.props.course_name}
+              />
               <TextField
                 label='永久課號'
                 margin='normal'
@@ -121,9 +120,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.course_code}
-                onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
-          />
+                defaultValue={this.props.course_code}
+              />
               <TextField
                 label='開課系所'
                 margin='normal'
@@ -135,9 +133,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.department}
-                onChange={(event) => this.props.handleChange({ department: event.target.value })}
-          />
+                defaultValue={this.props.department}
+              />
               <TextField
                 label='授課老師'
                 margin='normal'
@@ -149,9 +146,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.teacher}
-                onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
-          />
+                defaultValue={this.props.teacher}
+              />
               <TextField
                 label='學分'
                 margin='normal'
@@ -163,9 +159,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.credit}
-                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
-          />
+                defaultValue={this.props.credit}
+              />
             </div><div style={{ height: '30px' }} />
             <h2>課程資訊(欲抵免課程)</h2>
             <hr style={{ margin: '5px' }} />
@@ -181,8 +176,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.course_type}
-          />
+                defaultValue={this.props.course_type}
+              />
               <TextField
                 label='課程名稱'
                 margin='normal'
@@ -194,9 +189,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.original_course_name}
-                onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
-          />
+                defaultValue={this.props.original_course_name}
+              />
               <TextField
                 label='永久課號'
                 margin='normal'
@@ -208,9 +202,8 @@ class TextForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                value={this.props.original_course_code}
-                onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
-          />
+                defaultValue={this.props.original_course_code}
+              />
             </div>
             <div style={{ height: '30px' }} />
             <h2>其他</h2>
@@ -233,246 +226,237 @@ class TextForm extends React.Component {
                   },
                   readOnly: true
                 }}
-                value={this.props.reason}
-                onChange={(event) => this.props.handleChange({ reason: event.target.value })}
+                defaultValue={this.props.reason}
                 multiline
                 rowsMax='4'
-          />
+              />
             </div>
             <br />
-        註：<br />
-        1. 須檢附用書書名及課程綱要。<br />
+            註：<br />
+            1. 須檢附用書書名及課程綱要。<br />
             <br />
-        檔案：{this.props.file.name}
+            檔案：{this.props.file.name}
           </div>
         </div>
         {/* For mobile screen */}
-        <div className='hidden-sm hidden-md hidden-lg'><div className={classes.container}>
-          <h2>基本資料</h2>
-          <hr style={{ margin: '5px' }} />
-          <div style={{ margin: '5px' }}>
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='申請人'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              defaultValue={this.props.studentIdcard.sname}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='班別'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              defaultValue={this.props.studentIdcard.program}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='學號'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              defaultValue={this.props.studentIdcard.student_id}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='手機'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.phone}
-              onChange={(event) => this.props.handleChange({ phone: event.target.value })}
-        />
-          </div>
-          <div style={{ height: '30px' }} />
-          <h2>課程資訊(擬修習)</h2>
-          <hr style={{ margin: '5px' }} />
-          <div style={{ margin: '5px' }}>
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='課程名稱'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.course_name}
-              onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='永久課號'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.course_code}
-              onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='開課系所'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.department}
-              onChange={(event) => this.props.handleChange({ department: event.target.value })}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='授課老師'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.teacher}
-              onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='學分'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.credit}
-              onChange={(event) => this.props.handleChange({ credit: event.target.value })}
-        />
-          </div>
+        <div className='hidden-sm hidden-md hidden-lg'>
+          <div className={classes.container}>
+            <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
+            <h2>基本資料</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='申請人'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.studentIdcard.sname}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='班別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.studentIdcard.program}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='學號'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.studentIdcard.student_id}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='手機'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.phone}
+              />
+            </div>
+            <div style={{ height: '30px' }} />
+            <h2>課程資訊(擬修習)</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_name}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='永久課號'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_code}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='開課系所'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.department}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='授課老師'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.teacher}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='學分'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.credit}
+              />
+            </div>
 
-          <h2>課程資訊(欲抵免課程)</h2>
-          <hr style={{ margin: '5px' }} />
-          <div style={{ margin: '5px' }}>
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='課程名稱'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.original_course_name}
-              onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='永久課號'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.original_course_code}
-              onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
-        />
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='課程類別'
-              margin='normal'
-              className={classes.textField}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{ readOnly: true }}
-              value={this.props.course_type}
-              onChange={(event) => this.props.handleChange({ course_type: event.target.value })}
-        />
-          </div>
-          <div style={{ height: '30px', clear: 'both' }} />
-          <h2>其他</h2>
-          <hr style={{ margin: '5px' }} />
-          <div style={{ margin: '5px' }}>
-            <TextField
-              style={{ width: 'calc( 100% - 24px )' }}
-              label='申請原因'
-              helperText='請詳填'
-              margin='normal'
-              className={classes.textFieldLong}
-              InputLabelProps={{
-                classes: {
-                  root: classes.label
-                },
-                shrink: true
-              }}
-              InputProps={{
-                classes: {
-                  root: classes.input,
+            <h2>課程資訊(欲抵免課程)</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.original_course_name}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='永久課號'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.original_course_code}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='課程類別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_type}
+              />
+            </div>
+            <div style={{ height: '30px', clear: 'both' }} />
+            <h2>其他</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='申請原因'
+                helperText='請詳填'
+                margin='normal'
+                className={classes.textFieldLong}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.input
+                  },
                   readOnly: true
-                }
-              }}
-              value={this.props.reason}
-              onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-              multiline
-              rowsMax='4'
-        />
+                }}
+                defaultValue={this.props.reason}
+                multiline
+                rowsMax='4'
+              />
+            </div>
+            <br />
+            註：<br />
+            1. 須檢附用書書名及課程綱要。<br />
+            <br />
+            檔名：{this.props.file.name}
           </div>
-          <br />
-      註：<br />
-      1. 須檢附用書書名及課程綱要。<br />
-          <br />
-      檔名：{this.props.file.name}
-        </div>
         </div>
       </div>
     )

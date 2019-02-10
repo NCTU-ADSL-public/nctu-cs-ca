@@ -87,15 +87,17 @@ class HorizontalLinearStepper extends React.Component {
         this.setState({ file: file })
       } else if (selectFormIndex === 1) {
         const {
-          phone, original_school, original_department,
+          file, phone, original_school, original_department,
           original_graduation_credit, apply_year,
+          original_course_semestor, original_course_year,
           apply_semester, original_course_name, original_course_department,
           original_course_credit, original_course_score,
-          current_course_code, current_course_credit, file
+          current_course_code, current_course_credit
         } = this.props.waiveCourse
         if (
           !(file.name && phone && original_school && original_department &&
           original_graduation_credit && apply_year &&
+          original_course_semestor && original_course_year &&
           apply_semester && original_course_name && original_course_department &&
           original_course_credit && original_course_score &&
           current_course_code && current_course_credit)

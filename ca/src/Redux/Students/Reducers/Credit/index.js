@@ -2,10 +2,9 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
   compulsoryCourse: {
-    student_id: '', // 可能需要
     apply_year: '',
-    phone: '',
     apply_semester: '',
+    phone: '',
     department: '', // 原課程的depart
     teacher: '', // 原課程teacher
     original_course_name: '', // 可能需要
