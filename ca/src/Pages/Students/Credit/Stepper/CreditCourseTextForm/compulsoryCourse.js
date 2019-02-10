@@ -52,7 +52,7 @@ class TextForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.sname}
-          />
+              />
               <TextField
                 label='班別'
                 margin='normal'
@@ -65,7 +65,7 @@ class TextForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.program}
-          />
+              />
               <TextField
                 label='學號'
                 margin='normal'
@@ -78,7 +78,7 @@ class TextForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.student_id}
-          />
+              />
               <TextField
                 label='手機'
                 margin='normal'
@@ -91,7 +91,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.phone}
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
-          />
+              />
             </div>
             <div style={{ height: '30px' }} />
             <h2>課程資訊(擬修習)</h2>
@@ -109,7 +109,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.course_name}
                 onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-          />
+              />
               <TextField
                 label='永久課號'
                 margin='normal'
@@ -122,7 +122,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.course_code}
                 onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
-          />
+              />
               <TextField
                 label='開課系所'
                 margin='normal'
@@ -135,7 +135,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.department}
                 onChange={(event) => this.props.handleChange({ department: event.target.value })}
-          />
+              />
               <TextField
                 label='授課老師'
                 margin='normal'
@@ -148,7 +148,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
-          />
+              />
               <TextField
                 label='學分'
                 margin='normal'
@@ -161,7 +161,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.credit}
                 onChange={(event) => this.props.handleChange({ credit: event.target.value })}
-          />
+              />
             </div><div style={{ height: '30px' }} />
             <h2>課程資訊(欲抵免課程)</h2>
             <hr style={{ margin: '5px' }} />
@@ -178,7 +178,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.original_course_name}
                 onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
-          />
+              />
               <TextField
                 label='永久課號'
                 margin='normal'
@@ -191,7 +191,7 @@ class TextForm extends React.Component {
                 }}
                 value={this.props.original_course_code}
                 onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
-          />
+              />
               <div>
                 <SlectType />
               </div>
@@ -220,7 +220,7 @@ class TextForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ reason: event.target.value })}
                 multiline
                 rowsMax='4'
-          />
+              />
             </div>
             <br />
         註：<br />
