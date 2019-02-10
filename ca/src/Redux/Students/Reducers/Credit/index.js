@@ -32,17 +32,21 @@ const initialState = {
     phone: '',
     original_school: '',
     original_department: '',
-    current_school: '',
-    current_department: '',
+    current_school: '交通大學',
+    current_department: '資工系',
     original_graduation_credit: '',
-    apply_year: 0,
-    apply_semester: 0,
+    apply_year: 107,
+    apply_semester: 2,
+    original_course_year: 0,
+    original_course_semester: 0,
     original_course_name: '',
     original_course_department: '',
     original_course_credit: '',
     original_course_score: '',
     current_course_code: '',
-    current_course_credit: ''
+    current_course_name: '',
+    current_course_credit: '',
+    file: ''
   },
   creditInfo: {}
 }

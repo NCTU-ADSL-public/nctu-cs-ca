@@ -36,3 +36,12 @@ export const getCreditInfo = () => dispatch => {
     console.log(err)
   })
 }
+
+export const sendWaiveCourse = (payload) => dispatch => {
+  axios.post('/students/credit/waiveCourse', payload)
+    .then(res => { alert('送出成功') })
+    .catch(err => {
+      alert('送出失敗，請檢查連線是否穩定。')
+      console.log(err)
+    })
+}
