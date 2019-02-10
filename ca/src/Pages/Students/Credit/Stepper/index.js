@@ -172,7 +172,7 @@ class HorizontalLinearStepper extends React.Component {
               apply_semester: semester
             })
           } else if (selectFormIndex === 2) {
-            this_.props.sendEnglishCourseCredit({
+            this.props.sendEnglishCourse({
               ...this_.props.englishCourse,
               file: downloadURL,
               apply_year: year,
@@ -309,8 +309,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
-  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourse(payload)),
-  sendWaiveCourseCredit: (payload) => dispatch(sendWaiveCourse(payload)),
+  sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
+  sendWaiveCourse: (payload) => dispatch(sendWaiveCourse(payload)),
   resetCourse: (payload) => dispatch(resetCourse(payload))
 })
 
