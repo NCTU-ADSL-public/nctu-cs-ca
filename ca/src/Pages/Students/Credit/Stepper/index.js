@@ -25,6 +25,7 @@ import {
 } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
 import firebase from 'firebase'
+import CircleProgress from './Components/CircleProgress'
 
 class HorizontalLinearStepper extends React.Component {
   constructor (props) {
@@ -109,7 +110,6 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請確實填寫每個欄位!')
           return
         }
-        console.log(file.name)
         this.setState({ file: file })
       }
     } else if (stepIndex === 2) {
@@ -139,8 +139,10 @@ class HorizontalLinearStepper extends React.Component {
     let Today = new Date()
     let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
     let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
+    let time = Today.getHours() + Today.getMinutes() + Today.getSeconds()
     let this_ = this
-    let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + this.state.file
+    let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + time + '_' + this.state.file.name
+    this.setState({ progressComplete: false })
     storageRef.child(directory).delete().then(function () {
     }).catch(function (error) {
       console.log(error)
@@ -157,22 +159,23 @@ class HorizontalLinearStepper extends React.Component {
       },
       function () {
         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          this_.setState({ progressComplete: true })
           if (selectFormIndex === 0) {
-            this.props.sendCompulsoryCourse({
-              ...this.props.compulsoryCourse,
+            this_.props.sendCompulsoryCourse({
+              ...this_.props.compulsoryCourse,
               file: downloadURL,
               apply_year: year,
               apply_semester: semester
             })
           } else if (selectFormIndex === 1) {
-            this.props.sendWaiveCourse({
-              ...this.props.waiveCourse,
+            this_.props.sendWaiveCourse({
+              ...this_.props.waiveCourse,
               file: downloadURL,
               apply_year: year,
               apply_semester: semester
             })
           } else if (selectFormIndex === 2) {
-            this.props.sendEnglishCourse({
+            this_.props.sendEnglishCourse({
               ...this_.props.englishCourse,
               file: downloadURL,
               apply_year: year,
@@ -265,15 +268,21 @@ class HorizontalLinearStepper extends React.Component {
             <div style={contentStyle}>
               {finished ? (
                 <p>
-                  <a
-                    href='/'
-                    onClick={(event) => {
-                      event.preventDefault()
-                      this.resetForm()
-                    }}
-                  >
-                    按此
-                  </a> 回到表單首頁
+                  {this.state.progressComplete ? <div>檔案上傳完畢</div>
+                    : <div>
+                    檔案上傳中請稍候
+                    <CircleProgress />
+                    </div>
+                  }
+                  {/* <a */}
+                  {/* href='/' */}
+                  {/* onClick={(event) => { */}
+                  {/* event.preventDefault() */}
+                  {/* this.resetForm() */}
+                  {/* }} */}
+                  {/* > */}
+                  {/* 按此 */}
+                  {/* </a> 回到表單首頁 */}
                 </p>
               ) : (
                 <div>
