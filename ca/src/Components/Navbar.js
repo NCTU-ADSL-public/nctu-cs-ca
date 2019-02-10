@@ -134,6 +134,7 @@ class _Navbar extends React.Component {
         <NavButton key={1} label='專題' icon='fa fa-users' onClick={onClicks[1]} selected={this.props.router && this.props.location.pathname.match(this.props.router[1]) !== null}/>,
         <NavButton key={2} label='課程' icon='fa fa-list-alt' onClick={onClicks[2]} selected={this.props.router && this.props.location.pathname.match(this.props.router[2]) !== null}/>,
         <NavButton key={3} label='導生' icon='fa fa-coffee' onClick={onClicks[3]} selected={this.props.router && this.props.location.pathname.match(this.props.router[3]) !== null}/>,
+        <NavButton key={4} label='審核' icon='fa fa-list-alt' onClick={onClicks[4]} selected={this.props.router && this.props.location.pathname.match(this.props.router[4]) !== null}/>
       ]
     }
     // <NavButton key={1} label='教授課程' icon='fa fa-pie-chart' onClick={onClicks[1]} selected={selectedButtonIndex === 1}/>,
