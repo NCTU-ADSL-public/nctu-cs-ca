@@ -1,7 +1,6 @@
 
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import FakeData from '../../../../Resources/FakeData'
 
 export const compulsoryCourseChange = createAction('COMPULSORY_COURSE_CHANGE')
 export const englishCourseChange = createAction('ENGLISH_COURSE_CHANGE')
@@ -28,15 +27,6 @@ export const sendEnglishCourse = (payload) => dispatch => {
     })
 }
 
-export const getCreditInfo = () => dispatch => {
-  axios.get('/students/credit/all').then(res => {
-    dispatch(storeCreditInfo(res.data))
-  }).catch(err => {
-    dispatch(storeCreditInfo(FakeData.Credit))
-    console.log(err)
-  })
-}
-
 export const sendWaiveCourse = (payload) => dispatch => {
   axios.post('/students/credit/waiveCourse', payload)
     .then(res => { alert('送出成功') })
@@ -44,4 +34,12 @@ export const sendWaiveCourse = (payload) => dispatch => {
       alert('送出失敗，請檢查連線是否穩定。')
       console.log(err)
     })
+}
+
+export const getCreditInfo = () => dispatch => {
+  axios.get('/students/credit/all').then(res => {
+    dispatch(storeCreditInfo(res.data))
+  }).catch(err => {
+    console.log(err)
+  })
 }
