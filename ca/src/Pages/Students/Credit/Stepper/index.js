@@ -160,7 +160,7 @@ class HorizontalLinearStepper extends React.Component {
           if (selectFormIndex === 0) {
             this.props.sendCompulsoryCourse({
               ...this.props.compulsoryCourse,
-              file: this.props.compulsoryCourse.name,
+              file: downloadURL,
               apply_year: year,
               apply_semester: semester
             })
