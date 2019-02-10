@@ -12,7 +12,8 @@ const router = [
   '/teachers/head',
   '/teachers/group',
   '/teachers/course',
-  '/teachers/family'
+  '/teachers/family',
+  '/teachers/verify'
 ]
 
 class Head extends Component {
@@ -116,7 +117,8 @@ class Head extends Component {
       () => this.select(0),
       () => this.select(1),
       () => this.select(2),
-      () => this.select(3)
+      () => this.select(3),
+      () => this.select(4)
     ]
     return (
       <Grid id='Head' fluid>

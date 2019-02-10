@@ -15,22 +15,15 @@ import {
   TableRow,
   Tooltip,
   Chip,
-  Select,
-  MenuItem,
-  //InputLabel,
-  FormControl,
-  Input,
-  Avatar 
 } from '@material-ui/core'
+import {connect } from 'react-redux'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
 import ApplyIcon from '@material-ui/icons/Assignment'
 import OKIcon from '@material-ui/icons/Done'
-import WaitIcon from '@material-ui/icons/AccessTime'
-import FaceIcon from '@material-ui/icons/Face'
 import TrashIcon from '@material-ui/icons/Delete'
 import CheckNone from '@material-ui/icons/CheckBoxOutlineBlank'
-import FilterIcon from '@material-ui/icons/FilterList'
+// import FilterIcon from '@material-ui/icons/FilterList'
 import SwitchIcon from '@material-ui/icons/Flag'
 import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
@@ -39,7 +32,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 //import FakeData from '../../../Resources/FakeData'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 
-
+const type = [[0], [1, 5], [2], [3],[4]]
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -185,53 +178,45 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-
+const getListURL  = '/teachers/get'
+const chStURL = '/assistants/ShowUserOffsetApplyForm'
 class Verify extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
 // for test
-      // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
-      // teacherList: FakeData.TeacherList,
+      //formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
 // end for test
       formList:[],
-      teacherList: [],
       open: false,
       message: 0,
-      index: 0,
+      index: 1,
       select: [],
       selectAll: false,
       isRecord: false,
       isEnglish: false,
-      transferTo: []
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
     this.handleReset = this.handleReset.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleSend = this.handleSend.bind(this)
-    this.handleWithdraw = this.handleWithdraw.bind(this)
     this.handleAllReset = this.handleAllReset.bind(this)
     this.selectAll = this.selectAll.bind(this)
     this.snackbarOpen = this.snackbarOpen.bind(this)
     this.snackbarClose = this.snackbarClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount () {
-    // get TeacherList for TransferTo
-    axios.get('/assistants/advisee/TeacherList').then(res => {
-      this.setState({teacherList: res.data.map(t => ({id: t.id,name: t.name}))})
-    })
     // get all verify items
-    axios.get('/assistants/ShowUserOffsetApplyForm').then(res => {
+    axios.get(getListURL,{
+      params: {
+        id: this.props.tid
+      }
+    }).then(res => {
       this.setState({formList: res.data.map((e, i) => ({...e, id: i}))})
     }).catch(err => {
       console.log(err)
     })
-  }
-
-  handleChange(event){
-    this.setState({ transferTo : event.target.value})
   }
 
   handleAgree (id) {
@@ -240,7 +225,7 @@ class Verify extends React.Component {
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid, nameA, codeA} = this.state.formList[id]
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post(chStURL, {
       courses: [
         {
           sid: sid,
@@ -248,11 +233,10 @@ class Verify extends React.Component {
           coscode: codeA
         }
       ],
-      status: 1,
-      transferTo: this.state.transferTo
+      status: 2
     }).then(res => {
-      updatedList[id].status = 1
-      this.setState({formList: updatedList, open: true, message: 0, transferTo:[...[]]})
+      updatedList[id].status = 2
+      this.setState({formList: updatedList, open: true, message: 0})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -263,7 +247,7 @@ class Verify extends React.Component {
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid, nameA, codeA} = this.state.formList[id]
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post(chStURL, {
       courses: [
         {
           sid: sid,
@@ -271,10 +255,9 @@ class Verify extends React.Component {
           coscode: codeA
         }
       ],
-      status: 3,
-      transferTo: []
+      status: 4
     }).then(res => {
-      updatedList[id].status = 3
+      updatedList[id].status = 4
       this.setState({formList: updatedList, open: true, message: 0})
     }).catch(err => {
       this.setState({open: true, message: 1})
@@ -286,7 +269,7 @@ class Verify extends React.Component {
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid, nameA, codeA} = this.state.formList[id]
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post(chStURL, {
       courses: [
         {
           sid: sid,
@@ -294,10 +277,9 @@ class Verify extends React.Component {
           coscode: codeA
         }
       ],
-      status: 0,
-      transferTo: []
+      status: 1
     }).then(res => {
-      updatedList[id].status = 0
+      updatedList[id].status = 1
       this.setState({formList: updatedList, open: true, message: 0})
     }).catch(err => {
       this.setState({open: true, message: 1})
@@ -318,12 +300,12 @@ class Verify extends React.Component {
     }
     e.stopPropagation()
   }
-  handleWithdraw () {
+  handleSend (st) {
     let updatedList = this.state.formList
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post(chStURL, {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 3
+          updatedList[e].status = st
           return ({
             sid: this.state.formList[e].sid,
             cosname: this.state.formList[e].nameA,
@@ -331,18 +313,16 @@ class Verify extends React.Component {
           })
         }
       ),
-      status: 3,
-      transferTo: []
+      status: st
     }).then(res => {
-      console.log(res)
       this.setState({formList: updatedList, open: true, message: 0})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
   }
-  handleSend () {
+  handleAllReset () {
     let updatedList = this.state.formList
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post(chStURL, {
       courses: this.state.select.map(
         e => {
           updatedList[e].status = 1
@@ -353,29 +333,7 @@ class Verify extends React.Component {
           })
         }
       ),
-      status: 1,
-      transferTo: this.state.transferTo
-    }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0})
-    }).catch(err => {
-      this.setState({open: true, message: 1})
-    })
-  }
-  handleAllReset () {
-    let updatedList = this.state.formList
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
-      courses: this.state.select.map(
-        e => {
-          updatedList[e].status = 0
-          return ({
-            sid: this.state.formList[e].sid,
-            cosname: this.state.formList[e].nameA,
-            coscode: this.state.formList[e].codeA
-          })
-        }
-      ),
-      status: 0,
-      transferTo: []
+      status: 1
     }).then(res => {
       this.setState({formList: updatedList, open: true, message: 0})
     }).catch(err => {
@@ -385,10 +343,10 @@ class Verify extends React.Component {
   selectAll () {
     let updatedArray = this.state.select
     if (!this.state.selectAll) {
-      updatedArray = this.state.formList.filter(e => ((e.status === this.state.index) && (e.isEnglish === this.state.isEnglish) && (!this.state.isRecord || e.previous))).map(e => e.id)
+      updatedArray = this.state.formList.filter(e => ((type[this.state.index].includes(e.status)) && (e.isEnglish === this.state.isEnglish) && (!this.state.isRecord || e.previous))).map(e => e.id)
       this.setState({select: updatedArray, selectAll: true})
     } else {
-      this.setState({select: [], selectAll: false, transferTo:[]})
+      this.setState({select: [], selectAll: false})
     }
   }
   snackbarOpen () {
@@ -400,28 +358,14 @@ class Verify extends React.Component {
   render () {
     const {classes} = this.props
     const semester = ['上', '下', '暑']
-    const type = [[0], [1, 5], [2], [3, 4]]
     return (
       <div className={classes.root}>
         <span className={classes.state}>{`目前顯示：${['尚未處理', '等待中', '已通過', '已退回'][this.state.index]}${this.state.isRecord ? '且曾有審核通過紀錄' : ''}的${this.state.isEnglish ? '英授' : '一般'}抵免單`}</span>
         <MuiThemeProvider theme={theme}>
         <div className={classes.side}>
           {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
-          <Tooltip title={'申請中'} placement='right'>
-            <IconButton className={classes.sideIcon}
-              onClick={() => this.setState({
-                index: 0,
-                select: [],
-                selectAll: this.state.formList.filter(e => e.status === 0).every(e => this.state.select.includes(e.id)) && this.state.formList.filter(e => e.status === 0).length > 0,
-                isRecord: false
-              })}
-              color={(this.state.index === 0) ? 'primary' : 'default'}
-            >
-              <ApplyIcon />
-            </IconButton>
-          </Tooltip>
           {/* this.state.formList.filter(e => e.status===1).length > 0 && */}
-          <Tooltip title={'等待主任同意'} placement='right'>
+          <Tooltip title={'申請中'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={() => this.setState({
                 index: 1,
@@ -431,11 +375,11 @@ class Verify extends React.Component {
               })}
               color={(this.state.index === 1) ? 'primary' : 'default'}
             >
-              <WaitIcon />
+              <ApplyIcon />
             </IconButton>
           </Tooltip>
           {/* { this.state.formList.filter(e => e.status===2).length > 0 && */}
-          <Tooltip title={'成功抵免'} placement='right'>
+          <Tooltip title={'已同意'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={() => this.setState({
                 index: 2,
@@ -452,12 +396,12 @@ class Verify extends React.Component {
           <Tooltip title={'已退回'} placement='right'>
             <IconButton className={classes.sideIcon}
               onClick={() => this.setState({
-                index: 3,
+                index: 4,
                 select: [],
                 selectAll: this.state.formList.filter(e => e.status === 3).every(e => this.state.select.includes(e.id)) && this.state.formList.filter(e => e.status === 3).length > 0,
                 isRecord: false
               })}
-              color={(this.state.index === 3) ? 'primary' : 'default'}
+              color={(this.state.index === 4) ? 'primary' : 'default'}
             >
               <TrashIcon />
             </IconButton>
@@ -465,7 +409,7 @@ class Verify extends React.Component {
         </div>
         </MuiThemeProvider>
         {
-          [0, 1, 3].includes(this.state.index) &&
+          [1, 3].includes(this.state.index) &&
           <div className={classes.options}>
             <Tooltip title={this.state.selectAll ? '取消全選' : '全選'} placement='top'>
               <IconButton className={classes.sideIcon}
@@ -475,70 +419,28 @@ class Verify extends React.Component {
               </IconButton>
             </Tooltip>
             {(this.state.select.length !== 0 || this.state.selectAll === true) && (
-              (this.state.index === 0 &&
+              (this.state.index === 1 &&
             (<React.Fragment>
               <Tooltip title={'退回已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
-                  onClick={this.handleWithdraw}
+                  onClick={()=>this.handleSend(4)}
                 >
                   <TrashIcon />
                 </IconButton>
               </Tooltip>
-              
-              <FormControl>
-              {/* <InputLabel htmlFor='select-multiple'>審核人</InputLabel> */}
-              <Select
-                multiple
-                value={this.state.transferTo}
-                input={<Input id="select-multiple" />}
-                onChange={this.handleChange}
-                renderValue={selected => (
-                  <div className={classes.chips}>
-                    {selected.map(value => (
-                      <Chip avatar={
-                              <Avatar>
-                                <FaceIcon />
-                              </Avatar>
-                            }
-                            key={value} 
-                            label={this.state.teacherList.filter(e => e.id === value)[0].name} 
-                            className={classes.chip} />
-                    ))}
-                  </div>
-                )}
-              >
-              {
-                this.state.teacherList.map(
-                  t =>  <MenuItem key={t.id} value={t.id}>{t.name}</MenuItem>
-                )
-              }
-              </Select>
-              </FormControl>
               <MuiThemeProvider theme={theme}>
-              <Tooltip title={'送出已選取抵免單'} placement='top'>
+              <Tooltip title={'同意已選取抵免單'} placement='top'>
                 <span>
                 <IconButton className={classes.sideIcon}
-                  onClick={this.handleSend}
-                  disabled ={this.state.transferTo.length === 0}
+                  onClick={()=>this.handleSend(2)}
                 >
                   <Send />
                 </IconButton>
                 </span>
               </Tooltip>
               </MuiThemeProvider>
-            </React.Fragment>)) ||
-            (this.state.index === 1 &&
-              (
-                <React.Fragment>
-                  <Tooltip title={'重置已選取抵免單'} placement='top'>
-                    <IconButton className={classes.sideIcon}
-                      onClick={this.handleAllReset}
-                    >
-                      <Reset />
-                    </IconButton>
-                  </Tooltip>
-                </React.Fragment>)) ||
-            (this.state.index === 3 && (
+            </React.Fragment>))  ||
+            (this.state.index === 4 && (
               <React.Fragment>
                 <Tooltip title={'重置已選取抵免單'} placement='top'>
                   <IconButton className={classes.sideIcon}
@@ -579,7 +481,7 @@ class Verify extends React.Component {
         }
         <div className={classes.Panels}>
           {
-            this.state.formList.filter(apply => apply.status === this.state.index && (!this.state.isRecord || apply.previous) && (this.state.isEnglish === apply.isEnglish)).length > 0
+            this.state.formList.filter(apply => (apply.status === this.state.index ) && (!this.state.isRecord || apply.previous) && (this.state.isEnglish === apply.isEnglish)).length > 0
               ? this.state.formList
                 .filter(
                   apply => type[this.state.index].includes(apply.status) && (!this.state.isRecord || apply.previous) && (this.state.isEnglish === apply.isEnglish)
@@ -669,12 +571,13 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>申請原因</TableCell>
                               <TableCell className={classes.font5} colSpan={2} >{apply.reason}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>檔案下載</a></TableCell>
+                              
                             </TableRow>
                           </TableBody>
                         </Table>
                       </ExpansionPanelDetails>
                       <ExpansionPanelActions>
-                        {this.state.index === 0 && (
+                        {this.state.index === 1 && (
                           <React.Fragment>
                             <Button onClick={() => this.handleDisagree(apply.id)}>
                               <span className={classes.font2}>不同意</span>
@@ -691,7 +594,7 @@ class Verify extends React.Component {
                             </Button>
                           </React.Fragment>
                         )}
-                        {this.state.index === 3 && (
+                        {this.state.index === 4 && (
                           <React.Fragment>
                             <Button onClick={() => this.handleReset(apply.id)}>
                               <span className={classes.font3}>重置</span>
@@ -732,4 +635,8 @@ class Verify extends React.Component {
   }
 }
 
-export default withStyles(styles)(Verify)
+const mapState = (state) => ({
+  tid: state.Teacher.User.idCard.teacher_id
+})
+
+export default connect(mapState)(withStyles(styles)(Verify))
