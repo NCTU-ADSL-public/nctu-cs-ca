@@ -265,9 +265,9 @@ class HorizontalLinearStepper extends React.Component {
             </div>
             <div style={contentStyle}>
               {finished ? (
-                <p style={{textAlign: 'center'}}>
+                <div style={{textAlign: 'center'}}>
                   {this.state.progressComplete
-                    ? <p>
+                    ? <div>
                       檔案上傳完畢
                       <br />
                       <a
@@ -279,14 +279,14 @@ class HorizontalLinearStepper extends React.Component {
                        >
                        按此
                        </a> 回到表單首頁
-                      </p>
-                    : <p>
+                      </div>
+                    : <div>
                     檔案上傳中請稍候
                     <CircleProgress />
-                    </p>
+                    </div>
                   }
 
-                </p>
+                </div>
               ) : (
                 <div>
                   <div>{this.getStepContent(stepIndex)}</div>
