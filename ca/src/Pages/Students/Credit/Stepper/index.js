@@ -158,21 +158,21 @@ class HorizontalLinearStepper extends React.Component {
       function () {
         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
           if (selectFormIndex === 0) {
-            this.props.sendCompulsoryCourse({
-              ...this.props.compulsoryCourse,
+            this_.props.sendCompulsoryCourse({
+              ...this_.props.compulsoryCourse,
               file: downloadURL,
               apply_year: year,
               apply_semester: semester
             })
           } else if (selectFormIndex === 1) {
-            this.props.sendWaiveCourse({
-              ...this.props.waiveCourse,
+            this_.props.sendWaiveCourse({
+              ...this_.props.waiveCourse,
               file: downloadURL,
               apply_year: year,
               apply_semester: semester
             })
           } else if (selectFormIndex === 2) {
-            this.props.sendEnglishCourse({
+            this_.props.sendEnglishCourse({
               ...this_.props.englishCourse,
               file: downloadURL,
               apply_year: year,
