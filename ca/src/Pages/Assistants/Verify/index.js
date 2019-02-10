@@ -630,6 +630,7 @@ class Verify extends React.Component {
                               <TableCell className={classes.font}>已修習課程</TableCell>
                               <TableCell className={classes.font}>開課系所</TableCell>
                               {apply.codeB &&<TableCell className={classes.font}>預抵免課程</TableCell>}
+                              <TableCell className={classes.font}>檔案</TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody >
@@ -646,6 +647,8 @@ class Verify extends React.Component {
                               <TableCell className={classes.font5} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
                               <TableCell className={classes.font3}>申請原因</TableCell>
                               <TableCell className={classes.font5} colSpan={3} >{apply.reason}</TableCell>
+                              <TableCell className={classes.font3}>檔案</TableCell>
+                              <TableCell className={classes.font5} colSpan={3} ><a target='_blank' rel='noopener noreferrer' href={apply.file}> 下載 </a></TableCell>
                             </TableRow>
                           </TableBody>
                         </Table>

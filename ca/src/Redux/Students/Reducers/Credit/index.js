@@ -1,15 +1,15 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  courseCreditChange: {
+  compulsoryCourse: {
     student_id: '', // 可能需要
-    year: '',
+    apply_year: '',
     phone: '',
-    semester: '',
+    apply_semester: '',
     department: '', // 原課程的depart
     teacher: '', // 原課程teacher
-    course_name_old: '', // 可能需要
-    course_code_old: '', // 可能需要
+    original_course_name: '', // 可能需要
+    original_course_code: '', // 可能需要
     course_name: '',
     course_code: '',
     course_type: '必修',
@@ -35,7 +35,6 @@ const initialState = {
     current_school: '',
     current_department: '',
     original_graduation_credit: '',
-
     apply_year: 0,
     apply_semester: 0,
     original_course_name: '',
@@ -49,23 +48,19 @@ const initialState = {
 }
 
 export default handleActions({
-  COURSE_CREDIT_CHANGE: (state, action) => ({
+  COMPULSORY_COURSE_CHANGE: (state, action) => ({
     ...state,
-    courseCreditChange: {
-      ...state.courseCreditChange,
+    compulsoryCourse: {
+      ...state.compulsoryCourse,
       ...action.payload
     }
   }),
-  ENGLISH_COURSE_CREDIT_CHANGE: (state, action) => ({
+  ENGLISH_COURSE_CHANGE: (state, action) => ({
     ...state,
     englishCourse: {
       ...state.englishCourse,
       ...action.payload
     }
-  }),
-  ENGLISH_COURSE_CREDIT_RESET: (state, action) => ({
-    ...state,
-    englishCourse: initialState.englishCourse
   }),
   WAIVE_COURSE_CHANGE: (state, action) => ({
     ...state,
@@ -74,12 +69,14 @@ export default handleActions({
       ...action.payload
     }
   }),
-  WAIVE_COURSE_RESET: (state, action) => ({
-    ...state,
-    waiveCourse: initialState.waiveCourse
-  }),
   STORE_CREDIT_INFO: (state, action) => ({
     ...state,
     creditInfo: action.payload
+  }),
+  RESET_COURSE: (state, action) => ({
+    ...state,
+    compulsoryCourse: initialState.compulsoryCourse,
+    englishCourse: initialState.englishCourse,
+    waiveCourse: initialState.waiveCourse
   })
 }, initialState)

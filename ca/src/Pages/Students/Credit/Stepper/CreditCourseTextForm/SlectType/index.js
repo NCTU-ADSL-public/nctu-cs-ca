@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
-import { courseCreditChange } from '../../../../../../Redux/Students/Actions/Credit'
+import { compulsoryCourseChange } from '../../../../../../Redux/Students/Actions/Credit'
 import { connect } from 'react-redux'
 
 const fontStyle = {
@@ -33,12 +33,12 @@ class SelectCourseField extends Component {
   handleChange (event, index, value) {
     this.setState({ value: value })
     console.log(value)
-    this.props.courseCreditChange({ course_type: value === 0 ? '必修' : '選修' })
+    this.props.compulsoryCourseChange({ course_type: value === 0 ? '必修' : '選修' })
   }
 
   render () {
     return (
-      <div style={{ float: 'left', paddingTop: '25px', width: '100px' }}>
+      <div style={{ float: 'left', paddingTop: '25px', width: '150', marginRight: '10px' }}>
         <SelectField
           value={this.state.value}
           onChange={this.handleChange}
@@ -62,8 +62,8 @@ class SelectCourseField extends Component {
 const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
-  courseCreditChange: (payload) => {
-    dispatch(courseCreditChange(payload))
+  compulsoryCourseChange: (payload) => {
+    dispatch(compulsoryCourseChange(payload))
   }
 })
 
