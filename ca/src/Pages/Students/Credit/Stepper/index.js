@@ -145,10 +145,6 @@ class HorizontalLinearStepper extends React.Component {
     let this_ = this
     let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + time + '_' + this.state.file.name
     this.setState({ progressComplete: false })
-    storageRef.child(directory).delete().then(function () {
-    }).catch(function (error) {
-      console.log(error)
-    })
 
     let file = this.state.file
     let uploadTask = storageRef.child(directory).put(file)
@@ -269,22 +265,27 @@ class HorizontalLinearStepper extends React.Component {
             </div>
             <div style={contentStyle}>
               {finished ? (
-                <p>
-                  {this.state.progressComplete ? <div>檔案上傳完畢</div>
-                    : <div>
+                <p style={{textAlign: 'center'}}>
+                  {this.state.progressComplete
+                    ? <p>
+                      檔案上傳完畢
+                      <br />
+                      <a
+                        href='/'
+                        onClick={(event) => {
+                          event.preventDefault()
+                          this.resetForm()
+                        }}
+                       >
+                       按此
+                       </a> 回到表單首頁
+                      </p>
+                    : <p>
                     檔案上傳中請稍候
                     <CircleProgress />
-                    </div>
+                    </p>
                   }
-                  {/* <a */}
-                  {/* href='/' */}
-                  {/* onClick={(event) => { */}
-                  {/* event.preventDefault() */}
-                  {/* this.resetForm() */}
-                  {/* }} */}
-                  {/* > */}
-                  {/* 按此 */}
-                  {/* </a> 回到表單首頁 */}
+
                 </p>
               ) : (
                 <div>
