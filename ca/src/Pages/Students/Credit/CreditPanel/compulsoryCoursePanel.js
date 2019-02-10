@@ -113,14 +113,14 @@ class Index extends React.Component {
           <div style={{ margin: '5px', display: 'flex', justifyContent: 'center' }}>
             <Chip
               style={{ background: '#d8eadd', color: '#464646', fontSize: 18, fontWeight: 400 }}
-              label={<span>{data.original_course_name}</span>}
+              label={<span>{data.course_name}</span>}
             />
           </div>
           <div className={classes.subtitle2}><span className='glyphicon glyphicon-chevron-down' /></div>
           <div style={{ margin: '5px', display: 'flex', justifyContent: 'center' }}>
             <Chip
               style={{ background: '#d8eadd', color: '#464646', fontSize: 18, fontWeight: 400 }}
-              label={<span>{data.course_name}</span>}
+              label={<span>{data.original_course_name}</span>}
             />
           </div>
           <ExpansionPanelDetails>
@@ -128,7 +128,7 @@ class Index extends React.Component {
               <TableBody>
                 <TableRow>
                   <TableCell className={classes.headFont}>已修習課程</TableCell>
-                  <TableCell className={classes.font}>{data.original_course_name}</TableCell>
+                  <TableCell className={classes.font}>{data.course_name}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.headFont}>開課系所</TableCell>
@@ -136,11 +136,11 @@ class Index extends React.Component {
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.headFont}>預抵免課程</TableCell>
-                  <TableCell className={classes.font}>{data.reason}</TableCell>
+                  <TableCell className={classes.font}>{data.original_course_name}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.headFont}>申請原因</TableCell>
-                  <TableCell className={classes.font}>{data.original_course_name}</TableCell>
+                  <TableCell className={classes.font}>{data.reason}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.headFont}>檔案</TableCell>
@@ -156,9 +156,9 @@ class Index extends React.Component {
         <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}`}}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
-            <div className={classes.subtitle2}>{data.original_course_name}</div>
-            <div className={classes.progress}><Arrow /></div>
             <div className={classes.subtitle2}>{data.course_name}</div>
+            <div className={classes.progress}><Arrow /></div>
+            <div className={classes.subtitle2}>{data.original_course_name}</div>
             <div style={{ marginLeft: '20px' }}>
               <Chip
                 style={{ background: '#5599ff', color: '#fff', fontSize: 14, fontWeight: 400 }}
@@ -179,9 +179,9 @@ class Index extends React.Component {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell className={classes.font}>{data.original_course_name}</TableCell>
-                  <TableCell className={classes.font}>{data.department}</TableCell>
                   <TableCell className={classes.font}>{data.course_name}</TableCell>
+                  <TableCell className={classes.font}>{data.department}</TableCell>
+                  <TableCell className={classes.font}>{data.original_course_name}</TableCell>
                   <TableCell className={classes.font}>{data.reason}</TableCell>
                   <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
                 </TableRow>

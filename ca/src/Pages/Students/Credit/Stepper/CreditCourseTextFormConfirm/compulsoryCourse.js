@@ -1,7 +1,6 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import { connect } from 'react-redux'
-import { compulsoryCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
@@ -481,7 +480,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => { dispatch(compulsoryCourseChange(payload)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TextForm))

@@ -2,7 +2,6 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import TextField from '@material-ui/core/TextField'
-import { waiveCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {
@@ -50,7 +49,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => dispatch(waiveCourseChange(payload))
 })
 
 class WaiveCourseFormConfirm extends React.Component {

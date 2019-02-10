@@ -5,14 +5,14 @@ const initialState = {
     apply_year: '',
     apply_semester: '',
     phone: '',
-    department: '', // 原課程的depart
-    teacher: '', // 原課程teacher
-    original_course_name: '', // 可能需要
-    original_course_code: '', // 可能需要
+    department: '',
+    teacher: '',
+    original_course_name: '',
+    original_course_code: '',
     course_name: '',
     course_code: '',
     course_type: '必修',
-    credit: '', // 可能需要(新課程的credit)
+    credit: '',
     reason: '',
     file: ''
   },
