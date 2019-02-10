@@ -20,6 +20,7 @@ import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourse'
 import {
   sendCompulsoryCourse,
   sendEnglishCourse,
+  sendWaiveCourse,
   resetCourse
 } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
@@ -89,19 +90,19 @@ class HorizontalLinearStepper extends React.Component {
           original_graduation_credit, apply_year,
           apply_semester, original_course_name, original_course_department,
           original_course_credit, original_course_score,
-          current_course_code, current_course_credit
+          current_course_code, current_course_credit, file
         } = this.props.waiveCourse
         if (
-          !(phone && original_school && original_department &&
+          !(file.name && phone && original_school && original_department &&
           original_graduation_credit && apply_year &&
           apply_semester && original_course_name && original_course_department &&
           original_course_credit && original_course_score &&
           current_course_code && current_course_credit)
         ) {
-          console.log(this.props.waiveCourse)
           window.alert('請確實填寫每個欄位!')
           return
         }
+        this.setState({ file: file })
       } else if (selectFormIndex === 2) {
         const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
         if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
@@ -156,7 +157,6 @@ class HorizontalLinearStepper extends React.Component {
       },
       function () {
         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-          console.log(downloadURL)
           if (selectFormIndex === 0) {
             this.props.sendCompulsoryCourse({
               ...this.props.compulsoryCourse,
@@ -165,9 +165,14 @@ class HorizontalLinearStepper extends React.Component {
               apply_semester: semester
             })
           } else if (selectFormIndex === 1) {
-
+            this.props.sendWaiveCourse({
+              ...this.props.waiveCourse,
+              file: downloadURL,
+              apply_year: year,
+              apply_semester: semester
+            })
           } else if (selectFormIndex === 2) {
-            this_.props.sendEnglishCourseCredit({
+            this.props.sendEnglishCourse({
               ...this_.props.englishCourse,
               file: downloadURL,
               apply_year: year,
@@ -304,7 +309,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
-  sendEnglishCourseCredit: (payload) => dispatch(sendEnglishCourse(payload)),
+  sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
+  sendWaiveCourse: (payload) => dispatch(sendWaiveCourse(payload)),
   resetCourse: (payload) => dispatch(resetCourse(payload))
 })
 

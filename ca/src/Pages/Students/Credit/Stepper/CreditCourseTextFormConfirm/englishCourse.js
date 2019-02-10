@@ -35,6 +35,7 @@ class EnglishCourseFormConfirm extends React.Component {
         { /* For PC screen */ }
         <div className='hidden-xs'>
           <div className={classes.container}>
+            <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
