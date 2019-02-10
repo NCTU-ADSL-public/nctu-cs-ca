@@ -351,6 +351,20 @@ class TextForm extends React.Component {
               value={this.props.teacher}
               onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
             />
+            <TextField
+              style={{ width: 'calc( 100% - 24px )' }}
+              label='學分'
+              margin='normal'
+              className={classes.textField}
+              InputLabelProps={{
+                classes: {
+                  root: classes.label
+                },
+                shrink: true
+              }}
+              value={this.props.credit}
+              onChange={(event) => this.props.handleChange({ credit: event.target.value })}
+            />
           </div>
 
           <h2>課程資訊(欲抵免課程)</h2>
