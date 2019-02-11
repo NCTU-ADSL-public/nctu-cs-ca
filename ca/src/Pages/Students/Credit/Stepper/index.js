@@ -100,10 +100,10 @@ class HorizontalLinearStepper extends React.Component {
         }
         this.setState({ file: file })
       } else if (selectFormIndex === 1) {
-        
+
       } else if (selectFormIndex === 2) {
-        const { file, phone, reason, department, credit, course_type, course_code, course_name, original_course_code, original_course_name, teacher } = this.props.compulsoryCourse
-        if (!(file.name && phone && reason && department && credit && course_type && course_code && course_name && original_course_code && original_course_name && teacher)) {
+        const { file, phone, reason, department, credit, course_code, course_name, original_course_code, original_course_name, teacher } = this.props.compulsoryCourse
+        if (!(file.name && phone && reason && department && credit && course_code && course_name && original_course_code && original_course_name && teacher)) {
           window.alert('請確實填寫每個欄位!')
           return
         }
@@ -172,7 +172,7 @@ class HorizontalLinearStepper extends React.Component {
             })
           } else if (selectFormIndex === 1) {
 
-          } else if (selectFormIndex === 2) {          
+          } else if (selectFormIndex === 2) {
             this_.props.sendCompulsoryCourse({
               ...this_.props.compulsoryCourse,
               file: downloadURL,
@@ -201,7 +201,7 @@ class HorizontalLinearStepper extends React.Component {
           case 0:
             return (<WaiveCourseForm />)
           case 1:
-            return 
+            return
           case 2:
             return (<CompulsoryCourseForm />)
           case 3:
@@ -215,7 +215,7 @@ class HorizontalLinearStepper extends React.Component {
           case 0:
             return (<WaiveCourseFormConfirm />)
           case 1:
-            return 
+            return
           case 2:
             return (<CompulsoryCourseFormConfirm />)
           case 3:
@@ -324,7 +324,7 @@ class HorizontalLinearStepper extends React.Component {
                     <li>繳交「抵免學分申請表」與「原就讀學校歷年成績單或學分證明正本」至系辦。</li>
                     <li>
                       抵免學分辦法請參閱本校
-                      <a 
+                      <a
                         href='https://aadm.nctu.edu.tw/rule/#registra'
                         alt=''
                         target='_blank'
