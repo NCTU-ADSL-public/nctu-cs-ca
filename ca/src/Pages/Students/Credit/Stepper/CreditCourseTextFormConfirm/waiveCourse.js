@@ -52,6 +52,9 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class WaiveCourseFormConfirm extends React.Component {
+  componentDidMount () {
+    window.scrollTo(0, 0)
+  }
 
   render () {
     const { classes } = this.props
