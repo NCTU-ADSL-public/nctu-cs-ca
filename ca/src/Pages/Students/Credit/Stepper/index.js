@@ -161,6 +161,7 @@ class HorizontalLinearStepper extends React.Component {
       },
       function () {
         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          console.log(downloadURL)
           this_.setState({ progressComplete: true })
           if (selectFormIndex === 0) {
             this_.props.sendWaiveCourse({
