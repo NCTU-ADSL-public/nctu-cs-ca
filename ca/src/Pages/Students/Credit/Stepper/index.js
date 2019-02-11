@@ -363,7 +363,7 @@ const mapDispatchToProps = (dispatch) => ({
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
   sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   sendWaiveCourse: (payload) => dispatch(sendWaiveCourse(payload)),
-  resetCourse: (payload) => dispatch(resetCourse(payload))
+  resetCourse: () => dispatch(resetCourse())
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper))

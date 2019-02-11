@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core'
 import CompulsoryCoursePanel from './CreditPanel/compulsoryCoursePanel'
 import EnglishCoursePanel from './CreditPanel/englishCoursePanel'
 import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
-import { getCreditInfo } from '../../../Redux/Students/Actions/Credit'
+import { getCreditInfo, resetCourse } from '../../../Redux/Students/Actions/Credit'
 import creditImg from '../../../Resources/credit_no_upload.png'
 
 const styles = theme => ({
@@ -51,6 +51,7 @@ const styles = theme => ({
 class Index extends React.Component {
   componentDidMount () {
     this.props.getCreditInfo()
+    this.props.resetCourse()
   }
 
   render () {
@@ -162,7 +163,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getCreditInfo: () => dispatch(getCreditInfo())
+  getCreditInfo: () => dispatch(getCreditInfo()),
+  resetCourse: () => dispatch(resetCourse())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
