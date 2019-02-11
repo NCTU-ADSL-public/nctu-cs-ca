@@ -142,7 +142,7 @@ class Index extends React.Component {
               englishCourse && !englishCourse.length &&
               waiveCourse && !waiveCourse.length &&
               <div className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2' style={{ marginTop: '50px' }}>
-                <h2 className='text-center'>尚無任何抵免申請</h2>
+                <h3 className='text-center'>尚無任何抵免申請</h3>
                 <img className={classes.img} src={creditImg} alt='' />
               </div>
             }
