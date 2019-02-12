@@ -178,8 +178,8 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-const getListURL  = '/professor/SetOffsetApplyFormAgreeStatus'
-const chStURL = '/professor/ShowUserOffsetApplyForm'
+const getListURL  = '/professor/ShowUserOffsetApplyForm'
+const chStURL = '/professor/SetOffsetApplyFormAgreeStatus'
 class Verify extends React.Component {
   constructor (props) {
     super(props)
