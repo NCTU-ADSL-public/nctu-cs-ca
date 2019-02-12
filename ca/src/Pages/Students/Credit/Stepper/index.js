@@ -14,13 +14,16 @@ import FormSelectTable from './FormSelectTable'
 import CompulsoryCourseForm from './CreditCourseTextForm/compulsoryCourse'
 import WaiveCourseForm from './CreditCourseTextForm/waiveCourse'
 import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
+import ExemptCourseForm from './CreditCourseTextForm/exemptCourse'
 import CompulsoryCourseFormConfirm from './CreditCourseTextFormConfirm/compulsoryCourse'
 import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourse'
 import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourse'
+import ExemptCourseFormConfirm from './CreditCourseTextFormConfirm/exemptCourse'
 import {
   sendCompulsoryCourse,
   sendEnglishCourse,
   sendWaiveCourse,
+  sendExemptCourse,
   resetCourse
 } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
@@ -89,18 +92,18 @@ class HorizontalLinearStepper extends React.Component {
         const {
           file, phone, original_school, original_department,
           original_graduation_credit, apply_year,
-          original_course_semestor, original_course_year,
+          original_course_semester, original_course_year,
           apply_semester, original_course_name, original_course_department,
           original_course_credit, original_course_score,
-          current_course_code, current_course_credit
+          current_course_code, current_course_credit, current_course_name
         } = this.props.waiveCourse
         if (
           !(file.name && phone && original_school && original_department &&
           original_graduation_credit && apply_year &&
-          original_course_semestor && original_course_year &&
+          original_course_semester && original_course_year &&
           apply_semester && original_course_name && original_course_department &&
           original_course_credit && original_course_score &&
-          current_course_code && current_course_credit)
+          current_course_code && current_course_credit && current_course_name)
         ) {
           window.alert('請確實填寫每個欄位!')
           return
@@ -109,6 +112,25 @@ class HorizontalLinearStepper extends React.Component {
       } else if (selectFormIndex === 2) {
         const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
         if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
+          window.alert('請確實填寫每個欄位!')
+          return
+        }
+        this.setState({ file: file })
+      } else if (selectFormIndex === 3) {
+        const {
+          file, phone, apply_year, apply_semester,
+          original_course_semester, original_course_year,
+          original_course_name, original_course_department,
+          original_course_credit, original_course_score,
+          current_course_code, current_course_credit, current_course_name
+        } = this.props.exemptCourse
+        if (
+          !(file.name && phone && apply_year && apply_semester &&
+            original_course_semester && original_course_year &&
+            original_course_name && original_course_department &&
+            original_course_credit && original_course_score &&
+            current_course_code && current_course_credit && current_course_name)
+        ) {
           window.alert('請確實填寫每個欄位!')
           return
         }
@@ -125,6 +147,10 @@ class HorizontalLinearStepper extends React.Component {
         } else return
       } else if (selectFormIndex === 2) {
         if (window.confirm('確定送出「英授專業課程抵免單」?')) {
+          this.handleUploadImage(selectFormIndex)
+        } else return
+      } else if (selectFormIndex === 3) {
+        if (window.confirm('確定送出「免修課程抵免單」?')) {
           this.handleUploadImage(selectFormIndex)
         } else return
       }
@@ -183,6 +209,13 @@ class HorizontalLinearStepper extends React.Component {
               apply_year: year,
               apply_semester: semester
             })
+          } else if (selectFormIndex === 3) {
+            this_.props.sendExemptCourse({
+              ...this_.props.exemptCourse,
+              file: downloadURL,
+              apply_year: year,
+              apply_semester: semester
+            })
           }
         })
       }
@@ -201,6 +234,8 @@ class HorizontalLinearStepper extends React.Component {
             return (<WaiveCourseForm />)
           case 2:
             return (<EnglishCourseForm />)
+          case 3:
+            return (<ExemptCourseForm />)
           default:
             return ''
         }
@@ -213,6 +248,8 @@ class HorizontalLinearStepper extends React.Component {
             return (<WaiveCourseFormConfirm />)
           case 2:
             return (<EnglishCourseFormConfirm />)
+          case 3:
+            return (<ExemptCourseFormConfirm />)
           default:
             return ''
         }
@@ -315,13 +352,15 @@ const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
   compulsoryCourse: state.Student.Credit.compulsoryCourse,
   englishCourse: state.Student.Credit.englishCourse,
-  waiveCourse: state.Student.Credit.waiveCourse
+  waiveCourse: state.Student.Credit.waiveCourse,
+  exemptCourse: state.Student.Credit.exemptCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
   sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   sendWaiveCourse: (payload) => dispatch(sendWaiveCourse(payload)),
+  sendExemptCourse: (payload) => dispatch(sendExemptCourse(payload)),
   resetCourse: (payload) => dispatch(resetCourse(payload))
 })
 

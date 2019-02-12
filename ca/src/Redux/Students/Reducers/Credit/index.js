@@ -47,6 +47,21 @@ const initialState = {
     current_course_credit: '',
     file: ''
   },
+  exemptCourse: {
+    phone: '',
+    apply_year: 107,
+    apply_semester: 1,
+    original_course_year: 0,
+    original_course_semester: 0,
+    original_course_name: '',
+    original_course_department: '',
+    original_course_credit: '',
+    original_course_score: '',
+    current_course_code: '',
+    current_course_name: '',
+    current_course_credit: '',
+    file: ''
+  },
   creditInfo: {}
 }
 
@@ -72,6 +87,13 @@ export default handleActions({
       ...action.payload
     }
   }),
+  EXEMPT_COURSE_CHANGE: (state, action) => ({
+    ...state,
+    exemptCourse: {
+      ...state.exemptCourse,
+      ...action.payload
+    }
+  }),
   STORE_CREDIT_INFO: (state, action) => ({
     ...state,
     creditInfo: action.payload
@@ -80,6 +102,7 @@ export default handleActions({
     ...state,
     compulsoryCourse: initialState.compulsoryCourse,
     englishCourse: initialState.englishCourse,
-    waiveCourse: initialState.waiveCourse
+    waiveCourse: initialState.waiveCourse,
+    exemptCourse: initialState.exemptCourse
   })
 }, initialState)
