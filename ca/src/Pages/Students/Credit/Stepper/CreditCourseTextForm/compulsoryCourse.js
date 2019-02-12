@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField'
 import Postfile from './Postfile'
 import { connect } from 'react-redux'
 import { compulsoryCourseChange } from '../../../../../Redux/Students/Actions/Credit'
-import SlectType from './SlectType'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({

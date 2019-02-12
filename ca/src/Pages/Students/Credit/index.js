@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
+import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
+import ExemptCoursePanel from './CreditPanel/exemptCoursePanel'
 import CompulsoryCoursePanel from './CreditPanel/compulsoryCoursePanel'
 import EnglishCoursePanel from './CreditPanel/englishCoursePanel'
-import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
 import { getCreditInfo, resetCourse } from '../../../Redux/Students/Actions/Credit'
 import creditImg from '../../../Resources/credit_no_upload.png'
 
@@ -56,9 +57,10 @@ class Index extends React.Component {
 
   render () {
     const { classes } = this.props
+    const waiveCourse = this.props.creditInfo.waive_course
+    const exemptCourse = this.props.creditInfo.exempt_course
     const compulsoryCourse = this.props.creditInfo.compulsory_course
     const englishCourse = this.props.creditInfo.english_course
-    const waiveCourse = this.props.creditInfo.waive_course
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
         <div className='row'>
@@ -85,6 +87,18 @@ class Index extends React.Component {
           {/* For PC screen */}
           <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
             {
+              waiveCourse &&
+              waiveCourse.map((data, index) => (
+                <WaiveCoursePanel key={index} data={{ ...data }} />
+              ))
+            }
+            {
+              exemptCourse &&
+              exemptCourse.map((data, index) => (
+                <ExemptCoursePanel key={index} data={{ ...data }} />
+              ))
+            }
+            {
               compulsoryCourse &&
               compulsoryCourse.map((data, index) => (
                 <CompulsoryCoursePanel key={index} data={{ ...data }} />
@@ -95,17 +109,12 @@ class Index extends React.Component {
               englishCourse.map((data, index) => (
                 <EnglishCoursePanel key={index} data={{ ...data }} />
               ))
-            }
+            }            
             {
-              waiveCourse &&
-              waiveCourse.map((data, index) => (
-                <WaiveCoursePanel key={index} data={{ ...data }} />
-              ))
-            }
-            {
+              waiveCourse && !waiveCourse.length &&
+              exemptCourse && !exemptCourse.length &&
               compulsoryCourse && !compulsoryCourse.length &&
               englishCourse && !englishCourse.length &&
-              waiveCourse && !waiveCourse.length &&
               <div className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2' style={{ marginTop: '50px' }}>
                 <h2 className='text-center'>尚無任何抵免申請</h2>
                 <img className={classes.img} src={creditImg} alt='' />
@@ -121,6 +130,18 @@ class Index extends React.Component {
 
             }}>
             {
+              waiveCourse &&
+              waiveCourse.map((data, index) => (
+                <WaiveCoursePanel key={index} data={{ ...data }} mobile />
+              ))
+            }
+            {
+              exemptCourse &&
+              exemptCourse.map((data, index) => (
+                <ExemptCoursePanel key={index} data={{ ...data }} mobile />
+              ))
+            }
+            {
               compulsoryCourse &&
               compulsoryCourse.map((data, index) => (
                 <CompulsoryCoursePanel key={index} data={{ ...data }} mobile />
@@ -131,17 +152,12 @@ class Index extends React.Component {
               englishCourse.map((data, index) => (
                 <EnglishCoursePanel key={index} data={{ ...data }} mobile />
               ))
-            }
+            }            
             {
-              waiveCourse &&
-              waiveCourse.map((data, index) => (
-                <WaiveCoursePanel key={index} data={{ ...data }} mobile />
-              ))
-            }
-            {
+              waiveCourse && !waiveCourse.length &&
+              exemptCourse && !exemptCourse.length &&
               compulsoryCourse && !compulsoryCourse.length &&
               englishCourse && !englishCourse.length &&
-              waiveCourse && !waiveCourse.length &&
               <div className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2' style={{ marginTop: '50px' }}>
                 <h3 className='text-center'>尚無任何抵免申請</h3>
                 <img className={classes.img} src={creditImg} alt='' />

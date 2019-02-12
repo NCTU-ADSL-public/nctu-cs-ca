@@ -20,10 +20,10 @@ import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCours
 import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourse'
 import ExemptCourseFormConfirm from './CreditCourseTextFormConfirm/exemptCourse'
 import {
-  sendCompulsoryCourse,
-  sendEnglishCourse,
   sendWaiveCourse,
   sendExemptCourse,
+  sendCompulsoryCourse,
+  sendEnglishCourse, 
   resetCourse
 } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
@@ -382,17 +382,17 @@ class HorizontalLinearStepper extends React.Component {
 }
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  compulsoryCourse: state.Student.Credit.compulsoryCourse,
-  englishCourse: state.Student.Credit.englishCourse,
   waiveCourse: state.Student.Credit.waiveCourse,
-  exemptCourse: state.Student.Credit.exemptCourse
+  exemptCourse: state.Student.Credit.exemptCourse,
+  compulsoryCourse: state.Student.Credit.compulsoryCourse,
+  englishCourse: state.Student.Credit.englishCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
-  sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   sendWaiveCourse: (payload) => dispatch(sendWaiveCourse(payload)),
   sendExemptCourse: (payload) => dispatch(sendExemptCourse(payload)),
+  sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
+  sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   resetCourse: () => dispatch(resetCourse())
 })
 

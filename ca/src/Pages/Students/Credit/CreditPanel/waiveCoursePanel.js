@@ -165,7 +165,7 @@ class Index extends React.Component {
             <div className={classes.subtitle2}>{data.current_course_name}</div>
             <div style={{ marginLeft: '20px' }}>
               <Chip
-                style={{ background: '#ffcc22', color: '#fff', fontSize: 14, fontWeight: 400 }}
+                style={{ background: '#5599ff', color: '#fff', fontSize: 14, fontWeight: 400 }}
                 label={<span>學分抵免</span>}
               />
             </div>
@@ -188,7 +188,7 @@ class Index extends React.Component {
                   <TableCell className={classes.font}>{`${data.original_course_department}(${data.original_school})`}</TableCell>
                   <TableCell className={classes.font}>{data.original_course_credit}</TableCell>
                   <TableCell className={classes.font}>{data.current_course_name}</TableCell>
-                  <TableCell className={classes.font}>{data.current_course_credit}</TableCell>
+                  <TableCell className={classes.font}>{data.current_course_}</TableCell>
                   <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
                 </TableRow>
               </TableBody>
