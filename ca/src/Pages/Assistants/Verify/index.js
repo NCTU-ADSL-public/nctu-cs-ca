@@ -609,7 +609,7 @@ class Verify extends React.Component {
                               </Button>
                             </Tooltip>
                             {
-                              apply.codeB  &&
+                              !apply.isEnglish  &&
                               <React.Fragment>
                                 <span className={classes.progress}> <Arrow /></span>
                                 <Tooltip title={
@@ -649,7 +649,7 @@ class Verify extends React.Component {
                               <TableCell className={classes.font}>電話</TableCell>
                               <TableCell className={classes.font}>已修習課程</TableCell>
                               <TableCell className={classes.font}>開課系所</TableCell>
-                              {apply.codeB &&<TableCell className={classes.font}>預抵免課程</TableCell>}
+                              {!apply.isEnglish &&<TableCell className={classes.font}>預抵免課程</TableCell>}
                             </TableRow>
                           </TableHead>
                           <TableBody >
@@ -659,7 +659,7 @@ class Verify extends React.Component {
                               <TableCell className={classes.font}>{apply.phone}</TableCell>
                               <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
-                              {apply.codeB && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>}
+                              {!apply.isEnglish && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>}
                             </TableRow>
                             <TableRow>
                               <TableCell className={classes.font3}>申請日期</TableCell>
