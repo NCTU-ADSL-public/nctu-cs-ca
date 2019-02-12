@@ -151,36 +151,10 @@ class TextForm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.teacher}
               />
-              <TextField
-                label='學分'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.credit}
-              />
             </div><div style={{ height: '30px' }} />
             <h2>課程資訊(欲抵免課程)</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                label='課程類別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_type}
-              />
               <TextField
                 label='課程名稱'
                 margin='normal'
@@ -365,20 +339,6 @@ class TextForm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.teacher}
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='學分'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.credit}
-              />
             </div>
 
             <h2>課程資訊(欲抵免課程)</h2>
@@ -456,13 +416,12 @@ const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
   year: state.Student.Credit.compulsoryCourse.year,
   semester: state.Student.Credit.compulsoryCourse.semester,
-  department: state.Student.Credit.compulsoryCourse.department, // 原課程的depart
-  teacher: state.Student.Credit.compulsoryCourse.teacher, // 原課程teacher
-  original_course_name: state.Student.Credit.compulsoryCourse.original_course_name, // 可能需要
-  original_course_code: state.Student.Credit.compulsoryCourse.original_course_code, // 可能需要
+  department: state.Student.Credit.compulsoryCourse.department,
+  teacher: state.Student.Credit.compulsoryCourse.teacher,
+  original_course_name: state.Student.Credit.compulsoryCourse.original_course_name,
+  original_course_code: state.Student.Credit.compulsoryCourse.original_course_code,
   course_name: state.Student.Credit.compulsoryCourse.course_name,
   course_code: state.Student.Credit.compulsoryCourse.course_code,
-  credit: state.Student.Credit.compulsoryCourse.credit, // 可能需要(新課程的credit)
   reason: state.Student.Credit.compulsoryCourse.reason,
   phone: state.Student.Credit.compulsoryCourse.phone,
   course_type: state.Student.Credit.compulsoryCourse.course_type,
