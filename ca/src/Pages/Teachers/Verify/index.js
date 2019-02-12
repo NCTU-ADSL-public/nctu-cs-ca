@@ -178,8 +178,8 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-const getListURL  = '/teachers/get'
-const chStURL = '/assistants/ShowUserOffsetApplyForm'
+const getListURL  = '/professor/SetOffsetApplyFormAgreeStatus'
+const chStURL = '/professor/ShowUserOffsetApplyForm'
 class Verify extends React.Component {
   constructor (props) {
     super(props)
@@ -208,11 +208,12 @@ class Verify extends React.Component {
   }
   componentDidMount () {
     // get all verify items
-    axios.get(getListURL,{
-      params: {
-        id: this.props.tid
-      }
-    }).then(res => {
+    // {
+    //   params: {
+    //     id: this.props.tid
+    //   }
+    // }
+    axios.get(getListURL).then(res => {
       this.setState({formList: res.data.map((e, i) => ({...e, id: i}))})
     }).catch(err => {
       console.log(err)
