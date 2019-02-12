@@ -30,6 +30,10 @@ const styles = theme => ({
 })
 
 class TextForm extends React.Component {
+  componentDidMount () {
+    window.scrollTo(0, 0)
+  }
+
   render () {
     const { classes } = this.props
     return (
@@ -192,9 +196,6 @@ class TextForm extends React.Component {
                 value={this.props.original_course_code}
                 onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
               />
-              <div>
-                <SlectType />
-              </div>
             </div>
             <div style={{ height: '30px', clear: 'both' }} />
             <h2>其他</h2>
@@ -400,7 +401,6 @@ class TextForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
               />
             </div>
-            <SlectType />
             <div style={{ height: '30px', clear: 'both' }} />
             <h2>其他</h2>
             <hr style={{ margin: '5px' }} />

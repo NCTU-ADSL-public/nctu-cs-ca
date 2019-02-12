@@ -62,7 +62,11 @@ const initialState = {
     current_course_credit: '',
     file: ''
   },
-  creditInfo: {}
+  creditInfo: {
+    "compulsory_course": [],
+    "english_course": [],
+    "waive_course": []
+  }
 }
 
 export default handleActions({

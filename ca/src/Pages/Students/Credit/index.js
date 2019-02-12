@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core'
 import CompulsoryCoursePanel from './CreditPanel/compulsoryCoursePanel'
 import EnglishCoursePanel from './CreditPanel/englishCoursePanel'
 import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
-import { getCreditInfo } from '../../../Redux/Students/Actions/Credit'
+import { getCreditInfo, resetCourse } from '../../../Redux/Students/Actions/Credit'
 import creditImg from '../../../Resources/credit_no_upload.png'
 
 const styles = theme => ({
@@ -51,6 +51,7 @@ const styles = theme => ({
 class Index extends React.Component {
   componentDidMount () {
     this.props.getCreditInfo()
+    this.props.resetCourse()
   }
 
   render () {
@@ -142,7 +143,7 @@ class Index extends React.Component {
               englishCourse && !englishCourse.length &&
               waiveCourse && !waiveCourse.length &&
               <div className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2' style={{ marginTop: '50px' }}>
-                <h2 className='text-center'>尚無任何抵免申請</h2>
+                <h3 className='text-center'>尚無任何抵免申請</h3>
                 <img className={classes.img} src={creditImg} alt='' />
               </div>
             }
@@ -162,7 +163,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getCreditInfo: () => dispatch(getCreditInfo())
+  getCreditInfo: () => dispatch(getCreditInfo()),
+  resetCourse: () => dispatch(resetCourse())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

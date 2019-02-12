@@ -27,6 +27,10 @@ const styles = theme => ({
 })
 
 class TextForm extends React.Component {
+  componentDidMount () {
+    window.scrollTo(0, 0)
+  }
+
   render () {
     const { classes } = this.props
     return (
@@ -407,20 +411,6 @@ class TextForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.original_course_code}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='課程類別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_type}
               />
             </div>
             <div style={{ height: '30px', clear: 'both' }} />
