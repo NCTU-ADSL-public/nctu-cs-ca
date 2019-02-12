@@ -142,7 +142,9 @@ class HorizontalLinearStepper extends React.Component {
           this.handleUploadImage(selectFormIndex)
         } else return
       } else if (selectFormIndex === 1) {
-
+        if (window.confirm('確定送出「課程免修單」?')) {
+          this.handleUploadImage(selectFormIndex)
+        } else return
       } else if (selectFormIndex === 2) {
         if (window.confirm('確定送出「本系必修課程抵免單」?')) {
           this.handleUploadImage(selectFormIndex)
