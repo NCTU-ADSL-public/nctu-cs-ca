@@ -122,8 +122,8 @@ class HorizontalLinearStepper extends React.Component {
         }
         this.setState({ file: file })
       } else if (selectFormIndex === 2) {
-        const { file, phone, reason, department, credit, course_code, course_name, original_course_code, original_course_name, teacher } = this.props.compulsoryCourse
-        if (!(file.name && phone && reason && department && credit && course_code && course_name && original_course_code && original_course_name && teacher)) {
+        const { file, phone, reason, department, course_code, course_name, original_course_code, original_course_name, teacher } = this.props.compulsoryCourse
+        if (!(file.name && phone && reason && department && course_code && course_name && original_course_code && original_course_name && teacher)) {
           window.alert('請確實填寫每個欄位!')
           return
         }

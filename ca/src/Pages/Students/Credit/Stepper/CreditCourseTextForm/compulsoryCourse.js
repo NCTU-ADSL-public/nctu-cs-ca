@@ -152,19 +152,6 @@ class TextForm extends React.Component {
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
-              <TextField
-                label='學分'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.credit}
-                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
-              />
             </div><div style={{ height: '30px' }} />
             <h2>課程資訊(欲抵免課程)</h2>
             <hr style={{ margin: '5px' }} />
@@ -352,20 +339,6 @@ class TextForm extends React.Component {
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='學分'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.credit}
-                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
-              />
             </div>
 
             <h2>課程資訊(欲抵免課程)</h2>
@@ -449,7 +422,6 @@ const mapStateToProps = (state) => ({
   original_course_code: state.Student.Credit.compulsoryCourse.original_course_code,
   course_name: state.Student.Credit.compulsoryCourse.course_name,
   course_code: state.Student.Credit.compulsoryCourse.course_code,
-  credit: state.Student.Credit.compulsoryCourse.credit,
   reason: state.Student.Credit.compulsoryCourse.reason,
   phone: state.Student.Credit.compulsoryCourse.phone,
   file: state.Student.Credit.compulsoryCourse.file

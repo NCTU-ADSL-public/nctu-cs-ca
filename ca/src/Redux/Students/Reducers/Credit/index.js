@@ -46,8 +46,6 @@ const initialState = {
     original_course_code: '',
     course_name: '',
     course_code: '',
-    course_type: '必修',
-    credit: '',
     reason: '',
     file: ''
   },
