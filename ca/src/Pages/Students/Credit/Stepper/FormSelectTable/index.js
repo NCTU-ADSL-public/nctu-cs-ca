@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {
   Table,
   TableBody,
-  TableHeader,
-  TableHeaderColumn,
   TableRow,
   TableRowColumn
 } from 'material-ui/Table'
@@ -35,11 +33,6 @@ export default class TableExampleControlled extends Component {
   render () {
     return (
       <Table onRowSelection={this.handleRowSelection}>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>選擇表單內容</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
         <TableBody>
           <TableRow selected={this.isSelected(0)}>
             <TableRowColumn>學分抵免</TableRowColumn>
@@ -48,10 +41,18 @@ export default class TableExampleControlled extends Component {
             <TableRowColumn>課程免修</TableRowColumn>
           </TableRow>
           <TableRow selected={this.isSelected(2)}>
-            <TableRowColumn>本系必修課程抵免</TableRowColumn>
+            <TableRowColumn>
+              本系必修課程抵免
+              <div className='hidden-xs' style={{ color: 'red', display: 'inline' }}>(請於修習前提出申請)</div>
+              <div className='visible-xs' style={{ color: 'red' }}>(請於修習前提出申請)</div>
+            </TableRowColumn>
           </TableRow>
           <TableRow selected={this.isSelected(3)}>
-            <TableRowColumn>英授專業課程抵免</TableRowColumn>
+            <TableRowColumn>
+              英授專業課程抵免
+              <div className='hidden-xs' style={{ color: 'red', display: 'inline' }}>(請於修習前提出申請)</div>
+              <div className='visible-xs' style={{ color: 'red' }}>(請於修習前提出申請)</div>
+            </TableRowColumn>
           </TableRow>
         </TableBody>
       </Table>

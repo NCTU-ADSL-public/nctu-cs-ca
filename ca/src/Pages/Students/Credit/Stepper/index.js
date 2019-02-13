@@ -272,7 +272,7 @@ class HorizontalLinearStepper extends React.Component {
             <div className='hidden-xs'>
               <Stepper activeStep={stepIndex}>
                 <Step>
-                  <StepLabel>選取抵免表單</StepLabel>
+                  <StepLabel>選擇抵免申請項目</StepLabel>
                 </Step>
                 <Step>
                   <StepLabel>填寫表單</StepLabel>
@@ -287,7 +287,7 @@ class HorizontalLinearStepper extends React.Component {
               <div style={{ margin: '5px 3px 20px 3px', display: 'flex', justifyContent: 'center' }}>
                 <Chip
                   style={stepIndex === 0 ? styles.chipActive : styles.chipDefault}
-                  label={<span>選取抵免表單</span>}
+                  label={<span>選擇抵免申請項目</span>}
                 />
                 <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }} />
                 <Chip
