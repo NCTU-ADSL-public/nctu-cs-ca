@@ -123,7 +123,7 @@ const styles = () => ({
     paddingBottom: 50
   },
   selected: {
-    backgroundColor: '#c2dbff'
+    backgroundColor: '#b2e4a57d'
   },
   options: {
     background: '#f5f5f5',
@@ -225,13 +225,12 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 1
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, nameA, codeA} = this.state.formList[id]
+    let {sid, date} = this.state.formList[id]
     axios.post(chStURL, {
       courses: [
         {
           sid: sid,
-          cosname: nameA,
-          coscode: codeA
+          timestamp: date
         }
       ],
       status: 2
@@ -247,13 +246,12 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 2
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, nameA, codeA} = this.state.formList[id]
+    let {sid, date} = this.state.formList[id]
     axios.post(chStURL, {
       courses: [
         {
           sid: sid,
-          cosname: nameA,
-          coscode: codeA
+          timestamp: date
         }
       ],
       status: 4
@@ -269,13 +267,12 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 0
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, nameA, codeA} = this.state.formList[id]
+    let {sid, date} = this.state.formList[id]
     axios.post(chStURL, {
       courses: [
         {
           sid: sid,
-          cosname: nameA,
-          coscode: codeA
+          timestamp: date
         }
       ],
       status: 1
@@ -309,8 +306,7 @@ class Verify extends React.Component {
           updatedList[e].status = st
           return ({
             sid: this.state.formList[e].sid,
-            cosname: this.state.formList[e].nameA,
-            coscode: this.state.formList[e].codeA
+            timestamp: this.state.formList[e].date
           })
         }
       ),
@@ -329,8 +325,7 @@ class Verify extends React.Component {
           updatedList[e].status = 1
           return ({
             sid: this.state.formList[e].sid,
-            cosname: this.state.formList[e].nameA,
-            coscode: this.state.formList[e].codeA
+            timestamp: this.state.formList[e].date
           })
         }
       ),
@@ -622,14 +617,14 @@ class Verify extends React.Component {
           autoHideDuration={5000}
           onClose={this.snackbarClose}
           message={<span className={classes.font2}>{['修改成功！', '傳送失敗，請再次嘗試'][this.state.message]}</span>}
-          action={[
+          action={
             <IconButton
               color='inherit'
               onClick={this.snackbarClose}
             >
               <CloseIcon />
             </IconButton>
-          ]}
+          }
         />
       </div>
     )

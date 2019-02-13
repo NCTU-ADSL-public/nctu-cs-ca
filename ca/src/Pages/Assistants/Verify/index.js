@@ -128,7 +128,7 @@ const styles = () => ({
     paddingBottom: 50
   },
   selected: {
-    backgroundColor: '#c2dbff'
+    backgroundColor: '#b2e4a57d'
   },
   options: {
     background: '#f5f5f5',
@@ -183,6 +183,7 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
+const type = [[0], [1, 5], [2], [3, 4]]
 
 class Verify extends React.Component {
   constructor (props) {
@@ -237,13 +238,12 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 1
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, nameA, codeA} = this.state.formList[id]
+    let {sid, date} = this.state.formList[id]
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: [
         {
           sid: sid,
-          cosname: nameA,
-          coscode: codeA
+          timestamp: date
         }
       ],
       status: 1,
@@ -260,13 +260,12 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 2
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, nameA, codeA} = this.state.formList[id]
+    let {sid, date} = this.state.formList[id]
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: [
         {
           sid: sid,
-          cosname: nameA,
-          coscode: codeA
+          timestamp: date
         }
       ],
       status: 3,
@@ -283,13 +282,12 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 0
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, nameA, codeA} = this.state.formList[id]
+    let {sid, date} = this.state.formList[id]
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: [
         {
           sid: sid,
-          cosname: nameA,
-          coscode: codeA
+          timestamp: date
         }
       ],
       status: 0,
@@ -324,8 +322,7 @@ class Verify extends React.Component {
           updatedList[e].status = 3
           return ({
             sid: this.state.formList[e].sid,
-            cosname: this.state.formList[e].nameA,
-            coscode: this.state.formList[e].codeA
+            timestamp: this.state.formList[e].date
           })
         }
       ),
@@ -346,8 +343,7 @@ class Verify extends React.Component {
           updatedList[e].status = 1
           return ({
             sid: this.state.formList[e].sid,
-            cosname: this.state.formList[e].nameA,
-            coscode: this.state.formList[e].codeA
+            timestamp: this.state.formList[e].date
           })
         }
       ),
@@ -367,8 +363,7 @@ class Verify extends React.Component {
           updatedList[e].status = 0
           return ({
             sid: this.state.formList[e].sid,
-            cosname: this.state.formList[e].nameA,
-            coscode: this.state.formList[e].codeA
+            timestamp: this.state.formList[e].date
           })
         }
       ),
@@ -383,7 +378,7 @@ class Verify extends React.Component {
   selectAll () {
     let updatedArray = this.state.select
     if (!this.state.selectAll) {
-      updatedArray = this.state.formList.filter(e => ((e.status === this.state.index) && (e.isEnglish === this.state.isEnglish) && (!this.state.isRecord || e.previous))).map(e => e.id)
+      updatedArray = this.state.formList.filter(e => ((type[this.state.index].includes(e.status)) && (e.isEnglish === this.state.isEnglish) && (!this.state.isRecord || e.previous))).map(e => e.id)
       this.setState({select: updatedArray, selectAll: true})
     } else {
       this.setState({select: [], selectAll: false, transferTo:[]})
@@ -398,7 +393,6 @@ class Verify extends React.Component {
   render () {
     const {classes} = this.props
     const semester = ['上', '下', '暑']
-    const type = [[0], [1, 5], [2], [3, 4]]
     return (
       <div className={classes.root}>
         <span className={classes.state}>{`目前顯示：${['尚未處理', '等待中', '已通過', '已退回'][this.state.index]}${this.state.isRecord ? '且曾有審核通過紀錄' : ''}的${this.state.isEnglish ? '英授' : '一般'}抵免單`}</span>
@@ -716,14 +710,14 @@ class Verify extends React.Component {
           autoHideDuration={5000}
           onClose={this.snackbarClose}
           message={<span className={classes.font2}>{['修改成功！', '傳送失敗，請再次嘗試'][this.state.message]}</span>}
-          action={[
+          action={
             <IconButton
               color='inherit'
               onClick={this.snackbarClose}
             >
               <CloseIcon />
             </IconButton>
-          ]}
+          }
         />
       </div>
     )
