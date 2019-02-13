@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleChange: (payload) => dispatch(waiveCourseChange(payload))
 })
 
-class WaiveForm extends React.Component {
+class WaiveCourseForm extends React.Component {
   componentDidMount () {
     window.scrollTo(0, 0)
   }
@@ -690,4 +690,4 @@ class WaiveForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(WaiveForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(WaiveCourseForm))

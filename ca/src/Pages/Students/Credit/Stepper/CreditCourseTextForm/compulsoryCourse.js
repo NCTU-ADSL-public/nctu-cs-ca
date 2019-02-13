@@ -28,7 +28,7 @@ const styles = theme => ({
   }
 })
 
-class TextForm extends React.Component {
+class CompulsoryCourseForm extends React.Component {
   componentDidMount () {
     window.scrollTo(0, 0)
   }
@@ -431,4 +431,4 @@ const mapDispatchToProps = (dispatch) => ({
   handleChange: (payload) => { dispatch(compulsoryCourseChange(payload)) }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TextForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CompulsoryCourseForm))

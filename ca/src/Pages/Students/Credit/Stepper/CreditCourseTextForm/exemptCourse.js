@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleChange: (payload) => dispatch(exemptCourseChange(payload))
 })
 
-class ExemptForm extends React.Component {
+class ExemptCourseForm extends React.Component {
 
   render () {
     const { classes } = this.props
@@ -532,4 +532,4 @@ class ExemptForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ExemptForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ExemptCourseForm))

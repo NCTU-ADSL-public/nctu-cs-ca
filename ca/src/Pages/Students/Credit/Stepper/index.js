@@ -11,14 +11,14 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FormSelectTable from './FormSelectTable'
-import CompulsoryCourseForm from './CreditCourseTextForm/compulsoryCourse'
 import WaiveCourseForm from './CreditCourseTextForm/waiveCourse'
 import ExemptCourseForm from './CreditCourseTextForm/exemptCourse'
+import CompulsoryCourseForm from './CreditCourseTextForm/compulsoryCourse'
 import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
-import CompulsoryCourseFormConfirm from './CreditCourseTextFormConfirm/compulsoryCourse'
-import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourse'
 import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourse'
 import ExemptCourseFormConfirm from './CreditCourseTextFormConfirm/exemptCourse'
+import CompulsoryCourseFormConfirm from './CreditCourseTextFormConfirm/compulsoryCourse'
+import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourse'
 import {
   sendWaiveCourse,
   sendExemptCourse,
