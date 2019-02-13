@@ -14,9 +14,15 @@ const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit
   },
-  text: {
+  text1: {
     fontSize: '18px',
-    fontWeight: 'normal'
+    fontWeight: 'normal',
+    display: 'inline'
+  },
+  text2: {
+    fontSize: '14px',
+    fontWeight: 'normal',
+    marginLeft: '8px'
   }
 })
 
@@ -32,9 +38,6 @@ class Postfile extends React.Component {
 
   handleFileChange (e) {
     console.log(e)
-    this.setState({
-      file: e
-    })
     this.props.fileChange(e)
   }
 
@@ -42,24 +45,47 @@ class Postfile extends React.Component {
     const { classes } = this.props
     return (
       <form onSubmit={this.handleUploadImage}>
-        <label htmlFor='fileInput'>
-          <Button
-            variant='outlined'
-            className={classes.button}
-            onClick={() => this.fileRef.current.click()}
-          >
-            選擇檔案
-            <CloudUploadIcon className={classes.rightIcon} />
-          </Button>
-          <span className={classes.text}>{this.state.file ? this.state.file.name : '請合併為一個PDF檔案再上傳'}</span>
-          <input
-            style={{ display: 'none' }}
-            ref={this.fileRef}
-            type='file'
-            id='fileInput'
-            onChange={(e) => this.handleFileChange(e.target.files[0])}
-          />
-        </label>
+        <div className='hidden-xs'>
+          <label htmlFor='fileInput'>
+            <Button
+              variant='outlined'
+              className={classes.button}
+              onClick={() => this.fileRef.current.click()}
+            >
+              選擇檔案
+              <CloudUploadIcon className={classes.rightIcon} />
+            </Button>
+            <div className={classes.text1}>{this.props.file ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
+            <input
+              style={{ display: 'none' }}
+              ref={this.fileRef}
+              type='file'
+              id='fileInput'
+              onChange={(e) => this.handleFileChange(e.target.files[0])}
+            />
+          </label>
+        </div>
+        <div className='visible-xs'>
+          <label htmlFor='fileInput'>
+            <Button
+              size='small'
+              variant='outlined'
+              className={classes.button}
+              onClick={() => this.fileRef.current.click()}
+            >
+              選擇檔案
+              <CloudUploadIcon className={classes.rightIcon} />
+            </Button>
+            <div className={classes.text2}>{this.props.file ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
+            <input
+              style={{ display: 'none' }}
+              ref={this.fileRef}
+              type='file'
+              id='fileInput'
+              onChange={(e) => this.handleFileChange(e.target.files[0])}
+            />
+          </label>
+        </div>
       </form>
     )
   }

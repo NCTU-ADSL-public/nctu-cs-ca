@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
   waiveCourse: {
+    class: '',
     phone: '',
     original_school: '',
     original_department: '',
@@ -19,6 +20,7 @@ const initialState = {
     current_course_code: '',
     current_course_name: '',
     current_course_credit: '',
+    current_course_type: 0,
     file: ''
   },
   exemptCourse: {

@@ -30,6 +30,7 @@ const styles = theme => ({
 })
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
+  class: state.Student.Credit.waiveCourse.class,
   phone: state.Student.Credit.waiveCourse.phone,
   original_school: state.Student.Credit.waiveCourse.original_school,
   original_department: state.Student.Credit.waiveCourse.original_department,
@@ -45,6 +46,7 @@ const mapStateToProps = (state) => ({
   current_course_code: state.Student.Credit.waiveCourse.current_course_code,
   current_course_name: state.Student.Credit.waiveCourse.current_course_name,
   current_course_credit: state.Student.Credit.waiveCourse.current_course_credit,
+  current_course_type: state.Student.Credit.waiveCourse.current_course_type,
   file: state.Student.Credit.waiveCourse.file
 })
 
@@ -63,9 +65,9 @@ class WaiveCourseFormConfirm extends React.Component {
         {/* For PC screen */}
         <div className='hidden-xs'>
           <div className={classes.container}>
-            <h4 style = {{ color: 'red' }}>確認無誤後送出</h4>
+            <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
             <h2>基本資料</h2>
-            <hr style = {{ margin: '5px' }}/>
+            <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
                 label='申請人'
@@ -81,19 +83,6 @@ class WaiveCourseFormConfirm extends React.Component {
                 defaultValue={this.props.studentIdcard.sname}
               />
               <TextField
-                label='班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.program}
-              />
-              <TextField
                 label='學號'
                 margin='normal'
                 className={classes.textField}
@@ -105,6 +94,19 @@ class WaiveCourseFormConfirm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.student_id}
+              />
+              <TextField
+                label='系所/年級/班別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.class}
               />
               <TextField
                 label='手機'
@@ -119,9 +121,13 @@ class WaiveCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.phone}
               />
+            </div>
+
             <div style={{ height: '50px' }} />
+
             <h2>原就讀學校及科目資料</h2>
-            <hr style = {{ margin: '5px' }}/>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
               <TextField
                 label='原就讀學校'
                 placeholder='非跨校抵免填交通大學'
@@ -164,9 +170,10 @@ class WaiveCourseFormConfirm extends React.Component {
                 defaultValue={this.props.original_graduation_credit}
               />
             </div>
-            <div style = {{ margin: '5px' }}>
+
+            <div style={{ margin: '5px' }}>
               <TextField
-                label='科目'
+                label='科目名稱'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -203,10 +210,9 @@ class WaiveCourseFormConfirm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
-              >
-              </TextField>
+              />
               <TextField
-                label='學期'
+                label='修課學期'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -217,8 +223,7 @@ class WaiveCourseFormConfirm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={['', '上', '下'][this.props.original_course_semester]}
-              >
-              </TextField>
+              />
               <TextField
                 label='學分'
                 margin='normal'
@@ -248,10 +253,12 @@ class WaiveCourseFormConfirm extends React.Component {
                 defaultValue={this.props.original_course_score}
               />
             </div>
+
             <div style={{ height: '50px' }} />
+
             <h2>抵免本校之科目資料</h2>
-            <hr style = {{ margin: '5px' }}/>
-            <div style = {{ margin: '5px' }}>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
               <TextField
                 label='永久課號'
                 margin='normal'
@@ -266,7 +273,7 @@ class WaiveCourseFormConfirm extends React.Component {
                 defaultValue={this.props.current_course_code}
               />
               <TextField
-                label='課名'
+                label='科目名稱'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -291,20 +298,36 @@ class WaiveCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.current_course_credit}
               />
+              <TextField
+                label='選別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={['', '必修', '選修', '通識', '外語', '體育', '大學部修研究所課程'][this.props.current_course_type]}
+              />
             </div>
-            <br />
-            註：<br />
-            1. 課程內容需與本系課程一致。<br />
-            2. 須檢附用書書名及課程綱要。<br />
-            <br />
-            檔案：{this.props.file.name}
+
+            <div style={{ height: '50px' }} />
+
+            <h2>課程綱要或課程資料上傳</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              檔案：{this.props.file.name}
+            </div>
           </div>
         </div>
+
         <div className='hidden-sm hidden-md hidden-lg'>
           <div className={classes.container}>
             <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
             <h2>基本資料</h2>
-            <hr style = {{ margin: '5px' }}/>
+            <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -322,20 +345,6 @@ class WaiveCourseFormConfirm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.program}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
                 label='學號'
                 margin='normal'
                 className={classes.textField}
@@ -347,6 +356,20 @@ class WaiveCourseFormConfirm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.student_id}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='系所/年級/班別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.class}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -362,9 +385,13 @@ class WaiveCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.phone}
               />
+            </div>
+
             <div style={{ height: '50px' }} />
+
             <h2>原就讀學校及科目資料</h2>
-            <hr style = {{ margin: '5px' }}/>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='原就讀學校'
@@ -410,10 +437,11 @@ class WaiveCourseFormConfirm extends React.Component {
                 defaultValue={this.props.original_graduation_credit}
               />
             </div>
-            <div style = {{ margin: '5px' }}>
+
+            <div style={{ margin: '5px' }}>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='科目'
+                label='科目名稱'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -451,12 +479,11 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_year}
-              >
-              </TextField>
+                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+              />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='學期'
+                label='修課學期'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -466,9 +493,8 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_semester}
-              >
-              </TextField>
+                defaultValue={['', '上', '下'][this.props.original_course_semester]}
+              />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='學分'
@@ -500,10 +526,12 @@ class WaiveCourseFormConfirm extends React.Component {
                 defaultValue={this.props.original_course_score}
               />
             </div>
+
             <div style={{ height: '50px' }} />
+
             <h2>抵免本校之科目資料</h2>
-            <hr style = {{ margin: '5px' }}/>
-            <div style = {{ margin: '5px' }}>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='永久課號'
@@ -520,7 +548,7 @@ class WaiveCourseFormConfirm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='課名'
+                label='科目名稱'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -546,13 +574,29 @@ class WaiveCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.current_course_credit}
               />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='選別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={['', '必修', '選修', '通識', '外語', '體育', '大學部修研究所課程'][this.props.current_course_type]}
+              />
             </div>
-            <br />
-            註：<br />
-            1. 課程內容需與本系課程一致。<br />
-            2. 須檢附用書書名及課程綱要。<br />
-            <br />
-            檔案：{this.props.file.name}
+
+            <div style={{ height: '50px' }} />
+
+            <h2>課程綱要或課程資料上傳</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              檔案：{this.props.file.name}
+            </div>
           </div>
         </div>
       </div>
