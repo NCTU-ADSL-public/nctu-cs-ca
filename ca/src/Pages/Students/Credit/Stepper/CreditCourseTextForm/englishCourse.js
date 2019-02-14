@@ -183,7 +183,7 @@ class EnglishCourseForm extends React.Component {
                   value={this.state.value}
                   onChange={this.handleChange}
                 >
-                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '18px'}}>必修課程未過需重修<font color='#8b0000'>(請於檔案上傳部分附上成績單)</font></div>} />
+                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '18px'}}>必修課程未過需重修<font color='red'>(請於檔案上傳部分附上成績單)</font></div>} />
                   <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '18px'}}>其他：
                     <TextField
                       label='原因'
@@ -353,10 +353,10 @@ class EnglishCourseForm extends React.Component {
                   value={this.state.value}
                   onChange={this.handleChange}
                 >
-                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '18px'}}>必修課程未過需重修<font color='#8b0000'>(請於檔案上傳部分附上成績單)</font></div>} />
-                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '18px'}}>其他：
+                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '12px'}}>必修課程未過需重修<font color="red">(請於檔案上傳部分附上成績單)</font></div>} />
+                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '12px'}}>
                     <TextField
-                      label='原因'
+                      label='其他原因'
                       helperText='請詳填'
                       margin='normal'
                       style={{ width: 'calc( 100% - 24px )' }}
