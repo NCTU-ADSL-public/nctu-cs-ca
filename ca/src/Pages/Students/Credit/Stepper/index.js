@@ -23,7 +23,7 @@ import {
   sendWaiveCourse,
   sendExemptCourse,
   sendCompulsoryCourse,
-  sendEnglishCourse, 
+  sendEnglishCourse,
   resetCourse
 } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
@@ -88,15 +88,16 @@ class HorizontalLinearStepper extends React.Component {
           original_course_semester, original_course_year,
           original_course_name, original_course_department,
           original_course_credit, original_course_score,
-          current_course_code, current_course_credit, current_course_name
+          current_course_code, current_course_credit, current_course_name, current_course_type
         } = this.props.waiveCourse
         if (
-          !(file.name && phone && original_school && original_department &&
+          // 因為syntax問題 所以class這樣寫
+          !(file.name && this.props.waiveCourse.class && phone && original_school && original_department &&
           original_graduation_credit &&
           original_course_semester && original_course_year &&
           original_course_name && original_course_department &&
           original_course_credit && original_course_score &&
-          current_course_code && current_course_credit && current_course_name)
+          current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
           return
@@ -108,14 +109,15 @@ class HorizontalLinearStepper extends React.Component {
           original_course_semester, original_course_year,
           original_course_name, original_course_department,
           original_course_credit, original_course_score,
-          current_course_code, current_course_credit, current_course_name
+          current_course_code, current_course_credit, current_course_name, current_course_type
         } = this.props.exemptCourse
         if (
-          !(file.name && phone &&
+          // 因為syntax問題 所以class這樣寫
+          !(file.name && this.props.exemptCourse.class && phone &&
           original_course_semester && original_course_year &&
           original_course_name && original_course_department &&
           original_course_credit && original_course_score &&
-          current_course_code && current_course_credit && current_course_name)
+          current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
           return
@@ -304,42 +306,42 @@ class HorizontalLinearStepper extends React.Component {
             <div style={contentStyle}>
               {
                 finished
-                ? <div style={{ textAlign: 'center' }}>
-                  {
-                    this.state.progressComplete
-                    ? <div>
-                      <a
-                        href='/'
-                        onClick={(event) => {
-                          event.preventDefault()
-                          this.resetForm()
-                        }}
-                      >
+                  ? <div style={{ textAlign: 'center' }}>
+                    {
+                      this.state.progressComplete
+                        ? <div>
+                          <a
+                            href='/'
+                            onClick={(event) => {
+                              event.preventDefault()
+                              this.resetForm()
+                            }}
+                          >
                        按此
-                      </a> 回到表單首頁
-                    </div>
-                    : <div>
+                          </a> 回到表單首頁
+                        </div>
+                        : <div>
                       檔案上傳中請稍候
-                      <CircleProgress />
-                    </div>
-                  }
-                </div>
-                : <div>
-                  <div>{this.getStepContent(stepIndex)}</div>
-                  <div style={{ marginTop: 12, height: 80 }}>
-                    <RaisedButton
-                      label={stepIndex === 2 ? '送出!' : '下一步'}
-                      primary
-                      onClick={this.handleNext}
-                      style={{ marginRight: 12, float: 'right' }}
-                    />
-                    <FlatButton
-                      label={stepIndex === 0 ? '返回' : '上一步'}
-                      onClick={this.handlePrev}
-                      style={{ marginRight: 12, float: 'right' }}
-                    />
+                          <CircleProgress />
+                        </div>
+                    }
                   </div>
-                </div>
+                  : <div>
+                    <div>{this.getStepContent(stepIndex)}</div>
+                    <div style={{ marginTop: 12, height: 80 }}>
+                      <RaisedButton
+                        label={stepIndex === 2 ? '送出!' : '下一步'}
+                        primary
+                        onClick={this.handleNext}
+                        style={{ marginRight: 12, float: 'right' }}
+                      />
+                      <FlatButton
+                        label={stepIndex === 0 ? '返回' : '上一步'}
+                        onClick={this.handlePrev}
+                        style={{ marginRight: 12, float: 'right' }}
+                      />
+                    </div>
+                  </div>
               }
               {
                 stepIndex === 0 &&

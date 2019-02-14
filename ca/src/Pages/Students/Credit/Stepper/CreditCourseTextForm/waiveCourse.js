@@ -118,8 +118,6 @@ class WaiveCourseForm extends React.Component {
                 label='手機'
                 margin='normal'
                 className={classes.textField}
-                InputProps={{
-                }}
                 InputLabelProps={{
                   classes: {
                     root: classes.label
@@ -141,8 +139,6 @@ class WaiveCourseForm extends React.Component {
                 placeholder='非跨校抵免填交通大學'
                 margin='normal'
                 className={classes.textField}
-                InputProps={{
-                }}
                 InputLabelProps={{
                   classes: {
                     root: classes.label
@@ -351,13 +347,13 @@ class WaiveCourseForm extends React.Component {
                 value={this.props.current_course_type}
                 onChange={(event) => this.props.handleChange({ current_course_type: event.target.value })}
               >
-                <MenuItem value={0} style={{ height: '10px' }}>請選擇選別</MenuItem>
-                <MenuItem value={1} style={{ height: '10px' }}>必修</MenuItem>
-                <MenuItem value={2} style={{ height: '10px' }}>選修</MenuItem>
-                <MenuItem value={3} style={{ height: '10px' }}>通識</MenuItem>
-                <MenuItem value={4} style={{ height: '10px' }}>外語</MenuItem>
-                <MenuItem value={5} style={{ height: '10px' }}>體育</MenuItem>
-                <MenuItem value={6} style={{ height: '10px' }}>大學部修研究所課程</MenuItem>
+                <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
+                <MenuItem value={'必修'} style={{ height: '10px' }}>必修</MenuItem>
+                <MenuItem value={'選修'} style={{ height: '10px' }}>選修</MenuItem>
+                <MenuItem value={'通識'} style={{ height: '10px' }}>通識</MenuItem>
+                <MenuItem value={'外語'} style={{ height: '10px' }}>外語</MenuItem>
+                <MenuItem value={'體育'} style={{ height: '10px' }}>體育</MenuItem>
+                <MenuItem value={'大學部修研究所課程'} style={{ height: '10px' }}>大學部修研究所課程</MenuItem>
               </TextField>
             </div>
 
@@ -666,13 +662,13 @@ class WaiveCourseForm extends React.Component {
                 value={this.props.current_course_type}
                 onChange={(event) => this.props.handleChange({ current_course_type: event.target.value })}
               >
-                <MenuItem value={0} style={{ height: '10px' }}>請選擇選別</MenuItem>
-                <MenuItem value={1} style={{ height: '10px' }}>必修</MenuItem>
-                <MenuItem value={2} style={{ height: '10px' }}>選修</MenuItem>
-                <MenuItem value={3} style={{ height: '10px' }}>通識</MenuItem>
-                <MenuItem value={4} style={{ height: '10px' }}>外語</MenuItem>
-                <MenuItem value={5} style={{ height: '10px' }}>體育</MenuItem>
-                <MenuItem value={6} style={{ height: '10px' }}>大學部修研究所課程</MenuItem>
+                <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
+                <MenuItem value={'必修'} style={{ height: '10px' }}>必修</MenuItem>
+                <MenuItem value={'選修'} style={{ height: '10px' }}>選修</MenuItem>
+                <MenuItem value={'通識'} style={{ height: '10px' }}>通識</MenuItem>
+                <MenuItem value={'外語'} style={{ height: '10px' }}>外語</MenuItem>
+                <MenuItem value={'體育'} style={{ height: '10px' }}>體育</MenuItem>
+                <MenuItem value={'大學部修研究所課程'} style={{ height: '10px' }}>大學部修研究所課程</MenuItem>
               </TextField>
             </div>
 

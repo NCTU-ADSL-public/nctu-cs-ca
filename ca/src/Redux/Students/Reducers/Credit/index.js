@@ -20,10 +20,11 @@ const initialState = {
     current_course_code: '',
     current_course_name: '',
     current_course_credit: '',
-    current_course_type: 0,
+    current_course_type: '請選擇選別',
     file: ''
   },
   exemptCourse: {
+    class: '',
     phone: '',
     apply_year: 107,
     apply_semester: 1,
@@ -36,6 +37,7 @@ const initialState = {
     current_course_code: '',
     current_course_name: '',
     current_course_credit: '',
+    current_course_type: '請選擇選別',
     file: ''
   },
   compulsoryCourse: {

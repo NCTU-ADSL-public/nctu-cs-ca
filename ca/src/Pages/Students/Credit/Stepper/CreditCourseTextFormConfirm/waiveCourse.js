@@ -309,7 +309,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '必修', '選修', '通識', '外語', '體育', '大學部修研究所課程'][this.props.current_course_type]}
+                defaultValue={this.props.current_course_type}
               />
             </div>
 
@@ -586,7 +586,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '必修', '選修', '通識', '外語', '體育', '大學部修研究所課程'][this.props.current_course_type]}
+                defaultValue={this.props.current_course_type}
               />
             </div>
 
