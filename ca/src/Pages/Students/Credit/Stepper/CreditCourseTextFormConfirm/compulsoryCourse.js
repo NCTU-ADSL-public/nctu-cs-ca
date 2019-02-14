@@ -96,7 +96,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
               />
             </div>
             <div style={{ height: '30px' }} />
-            <h2>課程資訊(擬修習)</h2>
+            <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
@@ -152,7 +152,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 defaultValue={this.props.teacher}
               />
             </div><div style={{ height: '30px' }} />
-            <h2>課程資訊(欲抵免課程)</h2>
+            <h2>欲抵免之本系課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
@@ -280,7 +280,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
               />
             </div>
             <div style={{ height: '30px' }} />
-            <h2>課程資訊(擬修習)</h2>
+            <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
@@ -341,7 +341,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
               />
             </div>
 
-            <h2>課程資訊(欲抵免課程)</h2>
+            <h2>欲抵免之本系課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField

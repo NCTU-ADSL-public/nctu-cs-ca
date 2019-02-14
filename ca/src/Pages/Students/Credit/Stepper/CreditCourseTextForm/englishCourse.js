@@ -5,6 +5,10 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Postfile from './Postfile'
 import { englishCourseChange } from '../../../../../Redux/Students/Actions/Credit'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
 
 const styles = theme => ({
   container: {
@@ -33,7 +37,19 @@ class EnglishCourseForm extends React.Component {
   componentDidMount () {
     window.scrollTo(0, 0)
   }
-  
+  state = {
+    value: '1',
+  };
+  handleChange = event => {
+    if(event.target.value === '1'){
+      this.props.handleChange({ reason: "必修課程未過需重修" })
+    }
+    else{
+      this.props.handleChange({ reason: "" })
+    }
+    this.setState({ value: event.target.value });
+  }
+
   render () {
     const { classes } = this.props
     return (
@@ -158,27 +174,37 @@ class EnglishCourseForm extends React.Component {
             <h2>其他</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                label='申請原因'
-                helperText='請詳填'
-                margin='normal'
-                className={classes.textFieldLong}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{
-                  classes: {
-                    root: classes.input
-                  }
-                }}
-                value={this.props.reason}
-                onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                multiline
-                rowsMax='4'
-              />
+
+              <FormControl component='fieldset'>
+                <RadioGroup
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '18px'}}>必修課程未過需重修<font color='#8b0000'>(請於檔案上傳部分附上成績單)</font></div>} />
+                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '18px'}}>其他：
+                    <TextField
+                      label='原因'
+                      helperText='請詳填'
+                      margin='normal'
+                      className={classes.textFieldLong}
+                      InputLabelProps={{
+                        classes: {
+                          root: classes.label
+                        },
+                        shrink: true
+                      }}
+                      InputProps={{
+                        classes: {
+                          root: classes.input
+                        }
+                      }}
+                      value={this.state.value === '1' ? '' : this.props.reason}
+                      onChange={(event) => this.props.handleChange({ reason: event.target.value })}
+                      multiline
+                      rowsMax='4'
+                    /></div>} />
+                </RadioGroup>
+              </FormControl>
             </div>
             <br />
             註：<br />
@@ -315,28 +341,38 @@ class EnglishCourseForm extends React.Component {
             <h2>其他</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='申請原因'
-                helperText='請詳填'
-                margin='normal'
-                className={classes.textFieldLong}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{
-                  classes: {
-                    root: classes.input
-                  }
-                }}
-                value={this.props.reason}
-                onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                multiline
-                rowsMax='4'
-              />
+
+              <FormControl component='fieldset'>
+                <RadioGroup
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '18px'}}>必修課程未過需重修<font color='#8b0000'>(請於檔案上傳部分附上成績單)</font></div>} />
+                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '18px'}}>其他：
+                    <TextField
+                      label='原因'
+                      helperText='請詳填'
+                      margin='normal'
+                      style={{ width: 'calc( 100% - 24px )' }}
+                      className={classes.textFieldLong}
+                      InputLabelProps={{
+                        classes: {
+                          root: classes.label
+                        },
+                        shrink: true
+                      }}
+                      InputProps={{
+                        classes: {
+                          root: classes.input
+                        }
+                      }}
+                      value={this.state.value === '1' ? '' : this.props.reason}
+                      onChange={(event) => this.props.handleChange({ reason: event.target.value })}
+                      multiline
+                      rowsMax='4'
+                    /></div>} />
+                </RadioGroup>
+              </FormControl>
             </div>
             <br />
             註：<br />
