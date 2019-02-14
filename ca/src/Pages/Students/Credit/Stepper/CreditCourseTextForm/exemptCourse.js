@@ -62,6 +62,7 @@ class ExemptCourseForm extends React.Component {
         {/* For PC screen */}
         <div className='hidden-xs'>
           <div className={classes.container}>
+            <div style={{ color: 'red', fontSize: '20px' }}>申請多門抵免需額外填寫另一張表單</div>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
@@ -123,9 +124,6 @@ class ExemptCourseForm extends React.Component {
             <div style={{ height: '50px' }} />
 
             <h2>已修習課程資料</h2>
-            <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
-              申請多門抵免需額外填寫另一張表單
-            </div>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
@@ -235,9 +233,6 @@ class ExemptCourseForm extends React.Component {
             <div style={{ height: '50px' }} />
 
             <h2>申請免修課程資料</h2>
-            <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
-              申請多門抵免需額外填寫另一張表單
-            </div>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
@@ -320,8 +315,10 @@ class ExemptCourseForm extends React.Component {
           </div>
         </div>
 
+        {/* For mobile screen */}
         <div className='hidden-sm hidden-md hidden-lg'>
           <div className={classes.container}>
+            <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
@@ -387,9 +384,6 @@ class ExemptCourseForm extends React.Component {
             <div style={{ height: '50px' }} />
 
             <h2>已修習課程資料</h2>
-            <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
-              申請多門抵免需額外填寫另一張表單
-            </div>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
@@ -505,9 +499,6 @@ class ExemptCourseForm extends React.Component {
             <div style={{ height: '50px' }} />
 
             <h2>申請免修課程資料</h2>
-            <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
-              申請多門抵免需額外填寫另一張表單
-            </div>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField

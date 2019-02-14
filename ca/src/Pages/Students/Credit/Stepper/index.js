@@ -317,14 +317,14 @@ class HorizontalLinearStepper extends React.Component {
                               this.resetForm()
                             }}
                           >
-                       按此
+                            按此
                           </a> 回到表單首頁
                           <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
                             若需申請多門課程抵免則繼續填寫表單
                           </div>
                         </div>
                         : <div>
-                      檔案上傳中請稍候
+                          檔案上傳中請稍候
                           <CircleProgress />
                         </div>
                     }

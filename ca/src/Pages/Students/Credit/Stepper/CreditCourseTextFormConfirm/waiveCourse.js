@@ -323,6 +323,7 @@ class WaiveCourseFormConfirm extends React.Component {
           </div>
         </div>
 
+        {/* For mobile screen */}
         <div className='hidden-sm hidden-md hidden-lg'>
           <div className={classes.container}>
             <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
