@@ -115,6 +115,9 @@ class EnglishCourseForm extends React.Component {
             </div>
             <div style={{ height: '30px' }} />
             <h2>課程資訊</h2>
+            <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
+              申請多門抵免需額外填寫另一張表單
+            </div>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
@@ -278,6 +281,9 @@ class EnglishCourseForm extends React.Component {
             </div>
             <div style={{ height: '30px' }} />
             <h2>課程資訊</h2>
+            <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
+              申請多門抵免需額外填寫另一張表單
+            </div>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
