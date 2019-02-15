@@ -516,13 +516,12 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 <RadioGroup
                   value={this.props.reason.type}
                 >
-                  <br />
                   <FormControlLabel
                     disabled
                     value='1'
                     control={<Radio />}
                     label={
-                      <div style={{ fontSize: '16px' }}>
+                      <div style={{ fontSize: '16px', margin: '15px' }}>
                         必修課程需重修，然因
                         <TextField
                           style={{ width: 'calc( 100% - 24px )' }}
@@ -553,13 +552,12 @@ class CompulsoryCourseFormConfirm extends React.Component {
                       </div>
                     }
                   />
-                  <br />
                   <FormControlLabel
                     disabled
                     value='2'
                     control={<Radio />}
                     label={
-                      <div style={{ fontSize: '16px' }}>
+                      <div style={{ fontSize: '16px', margin: '15px' }}>
                         其他原因：
                         <TextField
                           style={{ width: 'calc( 100% - 24px )' }}

@@ -47,6 +47,9 @@ const styles = theme => ({
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
+  },
+  formControlLabelLabel: {
+    marginTop: '10px'
   }
 })
 
@@ -572,12 +575,11 @@ class CompulsoryCourseForm extends React.Component {
                     }
                   })}
                 >
-                <br />
                   <FormControlLabel
                     value='1'
                     control={<Radio />}
                     label={
-                      <div style={{ fontSize: '16px' }}>
+                      <div style={{ fontSize: '16px', margin: '15px' }}>
                         必修課程需重修，然因
                         <TextField
                           style={{ width: 'calc( 100% - 24px )' }}
@@ -614,12 +616,11 @@ class CompulsoryCourseForm extends React.Component {
                       </div>
                     }
                   />
-                  <br />
                   <FormControlLabel
                     value='2'
                     control={<Radio />}
                     label={
-                      <div style={{ fontSize: '16px' }}>
+                      <div style={{ fontSize: '16px', margin: '15px' }}>
                         其他原因：
                         <TextField
                           style={{ width: 'calc( 100% - 24px )' }}
