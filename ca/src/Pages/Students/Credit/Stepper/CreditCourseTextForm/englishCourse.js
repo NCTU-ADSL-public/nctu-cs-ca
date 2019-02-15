@@ -117,6 +117,7 @@ class EnglishCourseForm extends React.Component {
             <div style={{ margin: '5px' }}>
               <TextField
                 label='永久課號'
+                placeholder='例：DCP1183'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -289,6 +290,7 @@ class EnglishCourseForm extends React.Component {
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='永久課號'
+                placeholder='例：DCP1183'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
