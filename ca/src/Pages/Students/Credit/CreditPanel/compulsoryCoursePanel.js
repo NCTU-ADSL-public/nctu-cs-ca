@@ -139,10 +139,6 @@ class Index extends React.Component {
                   <TableCell className={classes.font}>{data.original_course_name}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.headFont}>申請原因</TableCell>
-                  <TableCell className={classes.font}>{data.reason}</TableCell>
-                </TableRow>
-                <TableRow>
                   <TableCell className={classes.headFont}>檔案</TableCell>
                   <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
                 </TableRow>
@@ -173,7 +169,6 @@ class Index extends React.Component {
                   <TableCell className={classes.font}>已修習課程</TableCell>
                   <TableCell className={classes.font}>開課系所</TableCell>
                   <TableCell className={classes.font}>預抵免課程</TableCell>
-                  <TableCell className={classes.font}>申請原因</TableCell>
                   <TableCell className={classes.font}>檔案</TableCell>
                 </TableRow>
               </TableHead>
@@ -182,7 +177,6 @@ class Index extends React.Component {
                   <TableCell className={classes.font}>{data.course_name}</TableCell>
                   <TableCell className={classes.font}>{data.department}</TableCell>
                   <TableCell className={classes.font}>{data.original_course_name}</TableCell>
-                  <TableCell className={classes.font}>{data.reason}</TableCell>
                   <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
                 </TableRow>
               </TableBody>
