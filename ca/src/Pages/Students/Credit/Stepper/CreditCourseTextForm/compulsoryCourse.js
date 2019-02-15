@@ -9,6 +9,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
+import scrollToComponent from 'react-scroll-to-component'
 
 const styles = theme => ({
   container: {

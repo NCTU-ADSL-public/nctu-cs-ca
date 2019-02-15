@@ -29,6 +29,7 @@ import {
 import './Stepper.css'
 import firebase from 'firebase'
 import CircleProgress from './Components/CircleProgress'
+import scrollToComponent from 'react-scroll-to-component'
 
 class HorizontalLinearStepper extends React.Component {
   constructor (props) {
@@ -43,6 +44,10 @@ class HorizontalLinearStepper extends React.Component {
       stepIndex: 0,
       selectFormIndex: -1
     }
+  }
+
+  componentDidMount () {
+    scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000})
   }
 
   resetForm () {
@@ -63,6 +68,7 @@ class HorizontalLinearStepper extends React.Component {
 
   handlePrev () {
     const { stepIndex } = this.state
+    scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000})
     if (stepIndex === 2) {
       this.setState({ stepIndex: stepIndex - 1 })
     } else if (stepIndex === 1) {
@@ -76,6 +82,7 @@ class HorizontalLinearStepper extends React.Component {
 
   handleNext () {
     const { stepIndex, selectFormIndex } = this.state
+    scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000})
 
     if (stepIndex === 0 && selectFormIndex === -1) {
       window.alert('請選擇表單')
@@ -275,7 +282,7 @@ class HorizontalLinearStepper extends React.Component {
     }
 
     return (
-      <div className='Credt-title-text'>
+      <div className='Credt-title-text' ref={(div) => { this.Top = div }}>
         <MuiThemeProvider>
           <div style={{ width: '100%', maxWidth: 1500, margin: 'auto' }}>
             {/* For PC screen */}
@@ -327,7 +334,7 @@ class HorizontalLinearStepper extends React.Component {
                           >
                             按此
                           </a> 回到表單首頁
-                          <div style = {{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
+                          <div style={{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
                             若需申請多門課程抵免則繼續填寫表單
                           </div>
                         </div>
