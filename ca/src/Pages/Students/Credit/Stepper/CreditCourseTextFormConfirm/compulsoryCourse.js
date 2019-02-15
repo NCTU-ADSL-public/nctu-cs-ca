@@ -545,11 +545,14 @@ class CompulsoryCourseFormConfirm extends React.Component {
                           multiline
                           rowsMax='1'
                         />
-                        <br />不可抗拒之理由，需修習外系課程以抵本系必修課程
-                        <font color='red'>(請於檔案上傳部分附上成績單)</font>
+                        <div style = {{ margin: '5px' }}>
+                          不可抗拒之理由，需修習外系課程以抵本系必修課程
+                        </div>
+                        <span style = {{ margin: '5px', color: 'red' }}>(請於檔案上傳部分附上成績單)</span>
                       </div>
                     }
                   />
+                  <br />
                   <FormControlLabel
                     disabled
                     value='2'
