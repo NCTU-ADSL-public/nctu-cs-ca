@@ -5,10 +5,6 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Postfile from './Postfile'
 import { englishCourseChange } from '../../../../../Redux/Students/Actions/Credit'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormControl from '@material-ui/core/FormControl'
 
 const styles = theme => ({
   container: {
@@ -17,6 +13,17 @@ const styles = theme => ({
   },
   label: {
     fontSize: '20px'
+  },
+  labelMb: {
+    fontSize: '18px'
+  },
+  menu: {
+    width: 150,
+    fontSize: '20px'
+  },
+  menuMb: {
+    width: 150,
+    fontSize: '18px'
   },
   input: {
     fontSize: '16px'
@@ -36,18 +43,6 @@ const styles = theme => ({
 class EnglishCourseForm extends React.Component {
   componentDidMount () {
     window.scrollTo(0, 0)
-  }
-  state = {
-    value: '1',
-  };
-  handleChange = event => {
-    if(event.target.value === '1'){
-      this.props.handleChange({ reason: "必修課程未過需重修" })
-    }
-    else{
-      this.props.handleChange({ reason: "" })
-    }
-    this.setState({ value: event.target.value });
   }
 
   render () {
@@ -75,19 +70,6 @@ class EnglishCourseForm extends React.Component {
                 defaultValue={this.props.studentIdcard.sname}
               />
               <TextField
-                label='班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.program}
-              />
-              <TextField
                 label='學號'
                 margin='normal'
                 className={classes.textField}
@@ -99,6 +81,19 @@ class EnglishCourseForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.student_id}
+              />
+              <TextField
+                label='班別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.studentIdcard.program}
               />
               <TextField
                 label='手機'
@@ -114,23 +109,12 @@ class EnglishCourseForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
-            <div style={{ height: '30px' }} />
-            <h2>課程資訊</h2>
+
+            <div style={{ height: '50px' }} />
+
+            <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_name}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-              />
               <TextField
                 label='永久課號'
                 margin='normal'
@@ -143,6 +127,19 @@ class EnglishCourseForm extends React.Component {
                 }}
                 value={this.props.course_code}
                 onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+              />
+              <TextField
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                value={this.props.course_name}
+                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
               />
               <TextField
                 label='開課系所'
@@ -171,49 +168,54 @@ class EnglishCourseForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
             </div>
-            <div style={{ height: '30px' }} />
-            <h2>其他</h2>
+
+            <div style={{ height: '50px' }} />
+
+            <h2>申請原因</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-
-              <FormControl component='fieldset'>
-                <RadioGroup
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                >
-                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '18px'}}>必修課程未過需重修<font color='red'>(請於檔案上傳部分附上成績單)</font></div>} />
-                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '18px'}}>其他：
-                    <TextField
-                      label='原因'
-                      helperText='請詳填'
-                      margin='normal'
-                      className={classes.textFieldLong}
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label
-                        },
-                        shrink: true
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.input
-                        }
-                      }}
-                      value={this.state.value === '1' ? '' : this.props.reason}
-                      onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                      multiline
-                      rowsMax='4'
-                    /></div>} />
-                </RadioGroup>
-              </FormControl>
+              <TextField
+                label=''
+                placeholder='理由詳述'
+                margin='normal'
+                className={classes.textFieldLong}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.input
+                  }
+                }}
+                value={this.props.reason}
+                onChange={(event) => this.props.handleChange({ reason: event.target.value })}
+                multiline
+                rowsMax='1'
+              />
             </div>
-            <br />
-            註：<br />
-            1. 須檢附用書書名及課程綱要。<br />
-            <br />
-            <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+
+            <div style={{ height: '50px' }} />
+
+            <h2>課程綱要或課程資料上傳</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+            </div>
+
+            <div style={{ height: '50px' }} />
+
+            <div style={{ fontSize: '20px' }}>
+              事宜：擬修習外系英文授課專業課程，並申請為本系畢業學分規定之「畢業前須通過1門本系開授或認可之英文授課專業課程」。
+              <br /><br />
+              說明：本系大學部畢業學分規定:畢業前須通過1門本系開授或認可 之英文授課專業課程。(99學年度(含)以後入學者適用)
+              <br /><br />
+            </div>
           </div>
         </div>
+
         {/* For mobile screen */}
         <div className='hidden-sm hidden-md hidden-lg'>
           <div className={classes.container}>
@@ -228,7 +230,7 @@ class EnglishCourseForm extends React.Component {
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -237,26 +239,12 @@ class EnglishCourseForm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.program}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
                 label='學號'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -265,12 +253,26 @@ class EnglishCourseForm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
+                label='班別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.studentIdcard.program}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
                 label='手機'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -278,24 +280,12 @@ class EnglishCourseForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
-            <div style={{ height: '30px' }} />
-            <h2>課程資訊</h2>
+
+            <div style={{ height: '50px' }} />
+
+            <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_name}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-              />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='永久課號'
@@ -303,7 +293,7 @@ class EnglishCourseForm extends React.Component {
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -312,12 +302,26 @@ class EnglishCourseForm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                value={this.props.course_name}
+                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
                 label='開課系所'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -331,7 +335,7 @@ class EnglishCourseForm extends React.Component {
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -339,48 +343,52 @@ class EnglishCourseForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
             </div>
-            <div style={{ height: '30px' }} />
-            <h2>其他</h2>
+
+            <div style={{ height: '50px' }} />
+
+            <h2>申請原因</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-
-              <FormControl component='fieldset'>
-                <RadioGroup
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                >
-                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '12px'}}>必修課程未過需重修<font color="red">(請於檔案上傳部分附上成績單)</font></div>} />
-                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '12px'}}>
-                    <TextField
-                      label='其他原因'
-                      helperText='請詳填'
-                      margin='normal'
-                      style={{ width: 'calc( 100% - 24px )' }}
-                      className={classes.textFieldLong}
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label
-                        },
-                        shrink: true
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.input
-                        }
-                      }}
-                      value={this.state.value === '1' ? '' : this.props.reason}
-                      onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                      multiline
-                      rowsMax='4'
-                    /></div>} />
-                </RadioGroup>
-              </FormControl>
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label=''
+                placeholder='理由詳述'
+                margin='normal'
+                className={classes.textFieldLong}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.input
+                  }
+                }}
+                value={this.props.reason}
+                onChange={(event) => this.props.handleChange({ reason: event.target.value })}
+                multiline
+                rowsMax='1'
+              />
             </div>
-            <br />
-            註：<br />
-            1. 須檢附用書書名及課程綱要。<br />
-            <br />
-            <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+
+            <div style={{ height: '50px' }} />
+
+            <h2>課程綱要或課程資料上傳</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+            </div>
+
+            <div style={{ height: '50px' }} />
+
+            <div style={{ fontSize: '20px' }}>
+              事宜：擬修習外系英文授課專業課程，並申請為本系畢業學分規定之「畢業前須通過1門本系開授或認可之英文授課專業課程」。
+              <br /><br />
+              說明：本系大學部畢業學分規定:畢業前須通過1門本系開授或認可 之英文授課專業課程。(99學年度(含)以後入學者適用)
+              <br /><br />
+            </div>
           </div>
         </div>
       </div>
@@ -392,8 +400,8 @@ const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
   year: state.Student.Credit.englishCourse.year,
   semester: state.Student.Credit.englishCourse.semester,
-  department: state.Student.Credit.englishCourse.department, // 原課程depart
-  teacher: state.Student.Credit.englishCourse.teacher, // 原課程teacher
+  department: state.Student.Credit.englishCourse.department,
+  teacher: state.Student.Credit.englishCourse.teacher,
   course_name: state.Student.Credit.englishCourse.course_name,
   course_code: state.Student.Credit.englishCourse.course_code,
   reason: state.Student.Credit.englishCourse.reason,
