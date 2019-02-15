@@ -48,9 +48,14 @@ const initialState = {
     teacher: '',
     original_course_name: '',
     original_course_code: '',
+    course_year: '',
+    course_semester: 0,
     course_name: '',
     course_code: '',
-    reason: '',
+    reason: {
+      type: '1',
+      content: ''
+    },
     file: ''
   },
   englishCourse: {

@@ -8,6 +8,7 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = theme => ({
   container: {
@@ -17,8 +18,19 @@ const styles = theme => ({
   label: {
     fontSize: '20px'
   },
+  labelMb: {
+    fontSize: '18px'
+  },
   input: {
     fontSize: '16px'
+  },
+  menu: {
+    width: 150,
+    fontSize: '20px'
+  },
+  menuMb: {
+    width: 150,
+    fontSize: '18px'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -42,18 +54,7 @@ class CompulsoryCourseForm extends React.Component {
   componentDidMount () {
     window.scrollTo(0, 0)
   }
-  state = {
-    value: '1',
-  };
-  handleChange = event => {
-    if(event.target.value === '1'){
-      this.props.handleChange({ reason: "必修課程未過需重修" })
-    }
-    else{
-      this.props.handleChange({ reason: "" })
-    }
-    this.setState({ value: event.target.value });
-  }
+
   render () {
     const { classes } = this.props
     return (
@@ -79,19 +80,6 @@ class CompulsoryCourseForm extends React.Component {
                 defaultValue={this.props.studentIdcard.sname}
               />
               <TextField
-                label='班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.program}
-              />
-              <TextField
                 label='學號'
                 margin='normal'
                 className={classes.textField}
@@ -103,6 +91,19 @@ class CompulsoryCourseForm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.student_id}
+              />
+              <TextField
+                label='班別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.studentIdcard.program}
               />
               <TextField
                 label='手機'
@@ -118,10 +119,26 @@ class CompulsoryCourseForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
-            <div style={{ height: '30px' }} />
+
+            <div style={{ height: '50px' }} />
+
             <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
+              <TextField
+                label='永久課號'
+                placeholder='例：DCP1183'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                value={this.props.course_code}
+                onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+              />
               <TextField
                 label='課程名稱'
                 margin='normal'
@@ -134,19 +151,6 @@ class CompulsoryCourseForm extends React.Component {
                 }}
                 value={this.props.course_name}
                 onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-              />
-              <TextField
-                label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_code}
-                onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
               />
               <TextField
                 label='開課系所'
@@ -174,10 +178,64 @@ class CompulsoryCourseForm extends React.Component {
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
-            </div><div style={{ height: '30px' }} />
+              <TextField
+                label='修課學年度'
+                type='number'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                value={this.props.course_year}
+                onChange={(event) => this.props.handleChange({ course_year: event.target.value })}
+              />
+              <TextField
+                select
+                label='修課學期'
+                className={classes.textField}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                margin='normal'
+                value={this.props.course_semester}
+                onChange={(event) => this.props.handleChange({ course_semester: event.target.value })}
+              >
+                <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
+                <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
+                <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
+              </TextField>
+            </div>
+
+            <div style={{ height: '50px' }} />
+
             <h2>欲抵免之本系課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
+              <TextField
+                label='永久課號'
+                placeholder='例：DCP1183'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                value={this.props.original_course_code}
+                onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
+              />
               <TextField
                 label='課程名稱'
                 margin='normal'
@@ -191,68 +249,114 @@ class CompulsoryCourseForm extends React.Component {
                 value={this.props.original_course_name}
                 onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
               />
-              <TextField
-                label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.original_course_code}
-                onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
-              />
             </div>
-            <div style={{ height: '30px', clear: 'both' }} />
+
+            <div style={{ height: '50px', clear: 'both' }} />
+
             <h2>申請原因（請擇一選擇）</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <FormControl component='fieldset'>
                 <RadioGroup
-                  value={this.state.value}
-                  onChange={this.handleChange}
+                  value={this.props.reason.type}
+                  onChange={(event) => this.props.handleChange({
+                    reason: {
+                      type: event.target.value,
+                      content: ''
+                    }
+                  })}
                 >
-                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '18px'}}>必修課程未過需重修<font color="red">(請於檔案上傳部分附上成績單)</font></div>} />
-                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '18px'}}>其他：
-                    <TextField
-                      label='原因'
-                      helperText='請詳填'
-                      margin='normal'
-                      className={classes.textFieldLong}
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label
-                        },
-                        shrink: true
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.input
-                        }
-                      }}
-                      value={this.state.value==='1'?'':this.props.reason}
-                      onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                      multiline
-                      rowsMax='4'
-                    /></div>} />
+                  <FormControlLabel
+                    value='1'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px' }}>
+                        必修課程需重修，然因
+                        <TextField
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            }
+                          }}
+                          disabled={this.props.reason.type === '2'}
+                          value={this.props.reason.type === '1' ? this.props.reason.content : ''}
+                          onChange={(event) => this.props.handleChange({
+                            reason: {
+                              ...this.props.reason,
+                              content: event.target.value
+                            }
+                          })}
+                          multiline
+                          rowsMax='1'
+                        />
+                        <br />不可抗拒之理由，需修習外系課程以抵本系必修課程
+                        <font color='red'>(請於檔案上傳部分附上成績單)</font>
+                      </div>
+                    }
+                  />
+                  <FormControlLabel
+                    value='2'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px' }}>
+                        其他原因：
+                        <TextField
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            }
+                          }}
+                          disabled={this.props.reason.type === '1'}
+                          value={this.props.reason.type === '2' ? this.props.reason.content : ''}
+                          onChange={(event) => this.props.handleChange({
+                            reason: {
+                              ...this.props.reason,
+                              content: event.target.value
+                            }
+                          })}
+                          multiline
+                          rowsMax='1'
+                        />
+                      </div>
+                    }
+                  />
                 </RadioGroup>
               </FormControl>
-
-              <br />
-
             </div>
-            <br />
-            註：<br />
-            1. 須檢附用書書名及課程綱要。<br />
-            <br />
-            <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+
+            <div style={{ height: '50px' }} />
+
+            <h2>課程綱要或課程資料上傳</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+            </div>
           </div>
         </div>
+
         {/* For mobile screen */}
         <div className='hidden-sm hidden-md hidden-lg'>
-          <div className={classes.container}>          
+          <div className={classes.container}>
             <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
@@ -264,7 +368,7 @@ class CompulsoryCourseForm extends React.Component {
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -273,26 +377,12 @@ class CompulsoryCourseForm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.program}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
                 label='學號'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -301,12 +391,26 @@ class CompulsoryCourseForm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
+                label='班別'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.studentIdcard.program}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
                 label='手機'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -314,32 +418,21 @@ class CompulsoryCourseForm extends React.Component {
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
-            <div style={{ height: '30px' }} />
+
+            <div style={{ height: '50px' }} />
+
             <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_name}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
                 label='永久課號'
+                placeholder='例：DCP1183'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -348,12 +441,26 @@ class CompulsoryCourseForm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                value={this.props.course_name}
+                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
                 label='開課系所'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
@@ -367,32 +474,59 @@ class CompulsoryCourseForm extends React.Component {
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
-            </div>
-
-            <h2>欲抵免之本系課程資訊</h2>
-            <hr style={{ margin: '5px' }} />
-            <div style={{ margin: '5px' }}>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='課程名稱'
+                label='修課學年度'
+                type='number'
                 margin='normal'
                 className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                value={this.props.course_year}
+                onChange={(event) => this.props.handleChange({ course_year: event.target.value })}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                select
+                label='修課學期'
+                className={classes.textField}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menuMb
+                  }
+                }}
                 InputLabelProps={{
                   classes: {
                     root: classes.label
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_name}
-                onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
-              />
+                margin='normal'
+                value={this.props.course_semester}
+                onChange={(event) => this.props.handleChange({ course_semester: event.target.value })}
+              >
+                <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
+                <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
+                <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
+              </TextField>
+            </div>
+
+            <div style={{ height: '50px' }} />
+
+            <h2>欲抵免之本系課程資訊</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='永久課號'
@@ -400,55 +534,131 @@ class CompulsoryCourseForm extends React.Component {
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.label
+                    root: classes.labelMb
                   },
                   shrink: true
                 }}
                 value={this.props.original_course_code}
                 onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
               />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                value={this.props.original_course_name}
+                onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
+              />
             </div>
-            <div style={{ height: '30px', clear: 'both' }} />
+
+            <div style={{ height: '50px', clear: 'both' }} />
+
             <h2>申請原因</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <FormControl component='fieldset'>
                 <RadioGroup
-                  value={this.state.value}
-                  onChange={this.handleChange}
+                  value={this.props.reason.type}
+                  onChange={(event) => this.props.handleChange({
+                    reason: {
+                      type: event.target.value,
+                      content: ''
+                    }
+                  })}
                 >
-                  <FormControlLabel value='1' control={<Radio />} label={<div style={{fontSize: '12px'}}>必修課程未過需重修<font color="red">(請於檔案上傳部分附上成績單)</font></div>} />
-                  <FormControlLabel value='2' control={<Radio />} label={<div style={{fontSize: '12px'}}>
-                    <TextField
-                      label='其他原因'
-                      helperText='請詳填'
-                      margin='normal'
-                      style={{ width: 'calc( 100% - 24px )' }}
-                      className={classes.textFieldLong}
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label
-                        },
-                        shrink: true
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.input
-                        }
-                      }}
-                      value={this.state.value==='1'?'':this.props.reason}
-                      onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                      multiline
-                      rowsMax='4'
-                    /></div>} />
+                  <FormControlLabel
+                    value='1'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px' }}>
+                        必修課程需重修，然因
+                        <TextField
+                          style={{ width: 'calc( 100% - 24px )' }}
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            }
+                          }}
+                          disabled={this.props.reason.type === '2'}
+                          value={this.props.reason.type === '1' ? this.props.reason.content : ''}
+                          onChange={(event) => this.props.handleChange({
+                            reason: {
+                              ...this.props.reason,
+                              content: event.target.value
+                            }
+                          })}
+                          multiline
+                          rowsMax='1'
+                        />
+                        不可抗拒之理由，需修習外系課程以抵本系必修課程
+                        <font color='red'>(請於檔案上傳部分附上成績單)</font>
+                      </div>
+                    }
+                  />
+                  <FormControlLabel
+                    value='2'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px' }}>
+                        其他原因：
+                        <TextField
+                          style={{ width: 'calc( 100% - 24px )' }}
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            }
+                          }}
+                          disabled={this.props.reason.type === '1'}
+                          value={this.props.reason.type === '2' ? this.props.reason.content : ''}
+                          onChange={(event) => this.props.handleChange({
+                            reason: {
+                              ...this.props.reason,
+                              content: event.target.value
+                            }
+                          })}
+                          multiline
+                          rowsMax='1'
+                        />
+                      </div>
+                    }
+                  />
                 </RadioGroup>
               </FormControl>
             </div>
-            <br />
-            註：<br />
-            1. 須檢附用書書名及課程綱要。<br />
-            <br />
-            <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+
+            <div style={{ height: '50px' }} />
+
+            <h2>課程綱要或課程資料上傳</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+            </div>
           </div>
         </div>
       </div>
@@ -464,6 +674,8 @@ const mapStateToProps = (state) => ({
   teacher: state.Student.Credit.compulsoryCourse.teacher,
   original_course_name: state.Student.Credit.compulsoryCourse.original_course_name,
   original_course_code: state.Student.Credit.compulsoryCourse.original_course_code,
+  course_year: state.Student.Credit.compulsoryCourse.course_year,
+  course_semester: state.Student.Credit.compulsoryCourse.course_semester,
   course_name: state.Student.Credit.compulsoryCourse.course_name,
   course_code: state.Student.Credit.compulsoryCourse.course_code,
   reason: state.Student.Credit.compulsoryCourse.reason,

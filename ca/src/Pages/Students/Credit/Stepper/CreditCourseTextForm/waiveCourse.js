@@ -15,7 +15,7 @@ const styles = theme => ({
     fontSize: '20px'
   },
   labelMb: {
-    fontSize: 18
+    fontSize: '18px'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -28,7 +28,7 @@ const styles = theme => ({
   },
   menuMb: {
     width: 150,
-    fontSize: 18
+    fontSize: '18px'
   }
 })
 
