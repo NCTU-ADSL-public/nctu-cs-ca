@@ -516,6 +516,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 <RadioGroup
                   value={this.props.reason.type}
                 >
+                  <br />
                   <FormControlLabel
                     disabled
                     value='1'

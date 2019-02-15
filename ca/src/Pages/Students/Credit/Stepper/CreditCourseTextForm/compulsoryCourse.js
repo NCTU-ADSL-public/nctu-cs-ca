@@ -572,6 +572,7 @@ class CompulsoryCourseForm extends React.Component {
                     }
                   })}
                 >
+                <br />
                   <FormControlLabel
                     value='1'
                     control={<Radio />}
