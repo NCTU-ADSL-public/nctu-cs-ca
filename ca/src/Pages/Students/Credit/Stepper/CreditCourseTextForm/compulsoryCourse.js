@@ -47,9 +47,6 @@ const styles = theme => ({
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
-  },
-  formControlLabelLabel: {
-    marginTop: '10px'
   }
 })
 
@@ -270,7 +267,7 @@ class CompulsoryCourseForm extends React.Component {
                   })}
                 >
                   <FormControlLabel
-                    value='1'
+                    value='被當'
                     control={<Radio />}
                     label={
                       <div style={{ fontSize: '16px' }}>
@@ -291,8 +288,8 @@ class CompulsoryCourseForm extends React.Component {
                               root: classes.input
                             }
                           }}
-                          disabled={this.props.reason.type === '2'}
-                          value={this.props.reason.type === '1' ? this.props.reason.content : ''}
+                          disabled={this.props.reason.type === '其他'}
+                          value={this.props.reason.type === '被當' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
                             reason: {
                               ...this.props.reason,
@@ -308,7 +305,7 @@ class CompulsoryCourseForm extends React.Component {
                     }
                   />
                   <FormControlLabel
-                    value='2'
+                    value='其他'
                     control={<Radio />}
                     label={
                       <div style={{ fontSize: '16px' }}>
@@ -329,8 +326,8 @@ class CompulsoryCourseForm extends React.Component {
                               root: classes.input
                             }
                           }}
-                          disabled={this.props.reason.type === '1'}
-                          value={this.props.reason.type === '2' ? this.props.reason.content : ''}
+                          disabled={this.props.reason.type === '被當'}
+                          value={this.props.reason.type === '其他' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
                             reason: {
                               ...this.props.reason,
@@ -576,10 +573,10 @@ class CompulsoryCourseForm extends React.Component {
                   })}
                 >
                   <FormControlLabel
-                    value='1'
+                    value='被當'
                     control={<Radio />}
                     label={
-                      <div style={{ fontSize: '16px', margin: '15px' }}>
+                      <div style={{ fontSize: '16px' }}>
                         必修課程需重修，然因
                         <TextField
                           style={{ width: 'calc( 100% - 24px )' }}
@@ -598,8 +595,8 @@ class CompulsoryCourseForm extends React.Component {
                               root: classes.input
                             }
                           }}
-                          disabled={this.props.reason.type === '2'}
-                          value={this.props.reason.type === '1' ? this.props.reason.content : ''}
+                          disabled={this.props.reason.type === '其他'}
+                          value={this.props.reason.type === '被當' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
                             reason: {
                               ...this.props.reason,
@@ -617,10 +614,10 @@ class CompulsoryCourseForm extends React.Component {
                     }
                   />
                   <FormControlLabel
-                    value='2'
+                    value='其他'
                     control={<Radio />}
                     label={
-                      <div style={{ fontSize: '16px', margin: '15px' }}>
+                      <div style={{ fontSize: '16px' }}>
                         其他原因：
                         <TextField
                           style={{ width: 'calc( 100% - 24px )' }}
@@ -639,8 +636,8 @@ class CompulsoryCourseForm extends React.Component {
                               root: classes.input
                             }
                           }}
-                          disabled={this.props.reason.type === '1'}
-                          value={this.props.reason.type === '2' ? this.props.reason.content : ''}
+                          disabled={this.props.reason.type === '被當'}
+                          value={this.props.reason.type === '其他' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
                             reason: {
                               ...this.props.reason,

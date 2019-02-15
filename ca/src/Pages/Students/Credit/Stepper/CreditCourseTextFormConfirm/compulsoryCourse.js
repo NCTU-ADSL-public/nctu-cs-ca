@@ -240,7 +240,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 >
                   <FormControlLabel
                     disabled
-                    value='1'
+                    value='被當'
                     control={<Radio />}
                     label={
                       <div style={{ fontSize: '16px' }}>
@@ -262,7 +262,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '1' ? this.props.reason.content : ''}
+                          defaultValue={this.props.reason.type === '被當' ? this.props.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />
@@ -273,7 +273,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   />
                   <FormControlLabel
                     disabled
-                    value='2'
+                    value='其他'
                     control={<Radio />}
                     label={
                       <div style={{ fontSize: '16px' }}>
@@ -295,7 +295,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '2' ? this.props.reason.content : ''}
+                          defaultValue={this.props.reason.type === '其他' ? this.props.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />
@@ -518,7 +518,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 >
                   <FormControlLabel
                     disabled
-                    value='1'
+                    value='被當'
                     control={<Radio />}
                     label={
                       <div style={{ fontSize: '16px', margin: '15px' }}>
@@ -541,7 +541,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '1' ? this.props.reason.content : ''}
+                          defaultValue={this.props.reason.type === '被當' ? this.props.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />
@@ -554,7 +554,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   />
                   <FormControlLabel
                     disabled
-                    value='2'
+                    value='其他'
                     control={<Radio />}
                     label={
                       <div style={{ fontSize: '16px', margin: '15px' }}>
@@ -577,7 +577,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '2' ? this.props.reason.content : ''}
+                          defaultValue={this.props.reason.type === '其他' ? this.props.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />

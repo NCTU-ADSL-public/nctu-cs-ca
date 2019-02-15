@@ -53,7 +53,7 @@ const initialState = {
     course_name: '',
     course_code: '',
     reason: {
-      type: '1',
+      type: '被當',
       content: ''
     },
     file: ''
