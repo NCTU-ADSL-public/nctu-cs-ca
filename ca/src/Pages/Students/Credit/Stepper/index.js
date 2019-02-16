@@ -24,6 +24,7 @@ import {
   sendExemptCourse,
   sendCompulsoryCourse,
   sendEnglishCourse,
+  editCredit,
   resetCourse
 } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
@@ -228,33 +229,81 @@ class HorizontalLinearStepper extends React.Component {
           console.log(downloadURL)
           this_.setState({ progressComplete: true })
           if (selectFormIndex === 0) {
-            this_.props.sendWaiveCourse({
-              ...this_.props.waiveCourse,
-              file: downloadURL,
-              apply_year: year,
-              apply_semester: semester
-            })
+            if (this_.props.location.state && this_.props.location.state.edit) {
+              // 編輯
+              this_.props.editCredit({
+                ...this_.props.waiveCourse,
+                credit_type: 1,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            } else {
+              // 新增
+              this_.props.sendWaiveCourse({
+                ...this_.props.waiveCourse,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            }
           } else if (selectFormIndex === 1) {
-            this_.props.sendExemptCourse({
-              ...this_.props.exemptCourse,
-              file: downloadURL,
-              apply_year: year,
-              apply_semester: semester
-            })
+            if (this_.props.location.state && this_.props.location.state.edit) {
+              // 編輯
+              this_.props.editCredit({
+                ...this_.props.exemptCourse,
+                credit_type: 2,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            } else {
+              // 新增
+              this_.props.sendExemptCourse({
+                ...this_.props.exemptCourse,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            }
           } else if (selectFormIndex === 2) {
-            this_.props.sendCompulsoryCourse({
-              ...this_.props.compulsoryCourse,
-              file: downloadURL,
-              apply_year: year,
-              apply_semester: semester
-            })
+            if (this_.props.location.state && this_.props.location.state.edit) {
+              // 編輯
+              this_.props.editCredit({
+                ...this_.props.compulsoryCourse,
+                credit_type: 3,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            } else {
+              // 新增
+              this_.props.sendCompulsoryCourse({
+                ...this_.props.compulsoryCourse,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            }
           } else if (selectFormIndex === 3) {
-            this_.props.sendEnglishCourse({
-              ...this_.props.englishCourse,
-              file: downloadURL,
-              apply_year: year,
-              apply_semester: semester
-            })
+            if (this_.props.location.state && this_.props.location.state.edit) {
+              // 編輯
+              this_.props.editCredit({
+                ...this_.props.englishCourse,
+                credit_type: 4,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            } else {
+              // 新增
+              this_.props.sendEnglishCourse({
+                ...this_.props.englishCourse,
+                file: downloadURL,
+                apply_year: year,
+                apply_semester: semester
+              })
+            }
           }
         })
       }
@@ -438,6 +487,7 @@ const mapDispatchToProps = (dispatch) => ({
   sendExemptCourse: (payload) => dispatch(sendExemptCourse(payload)),
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
   sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
+  editCredit: (payload) => dispatch(editCredit(payload)),
   resetCourse: () => dispatch(resetCourse())
 })
 

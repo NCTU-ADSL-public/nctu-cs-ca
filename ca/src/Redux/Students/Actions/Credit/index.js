@@ -64,6 +64,7 @@ export const deleteCredit = (payload) => dispatch => {
 }
 
 export const editCredit = (payload) => dispatch => {
+  console.log(payload)
   dispatch(setEditStatus({ status: 'fetching' }))
   axios.post('/students/credit/edit', payload)
     .then(res => {
