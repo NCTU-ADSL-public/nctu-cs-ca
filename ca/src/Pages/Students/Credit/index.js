@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
 import ExemptCoursePanel from './CreditPanel/exemptCoursePanel'
 import CompulsoryCoursePanel from './CreditPanel/compulsoryCoursePanel'
@@ -53,13 +56,43 @@ const styles = theme => ({
     opacity: '0.8',
     fontFamily: 'Noto Sans CJK TC',
     marginTop: '10px'
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
   }
 })
 
 class Index extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      filter: {
+        type: -1, // 抵免種類
+        status: -1 // 抵免狀態
+      }
+    }
+  }
+
   componentDidMount () {
     this.props.getCreditInfo()
     this.props.resetCourse()
+  }
+
+  handleFilterChange (name, value) {
+    this.setState({
+      filter: {
+        ...this.state.filter,
+        [name]: value
+      }
+    })
+  }
+
+  checkFilter (type, status) {
+    return (
+      (this.state.filter.type === type || this.state.filter.type === -1) &&
+      (this.state.filter.status === status || this.state.filter.status === -1)
+    )
   }
 
   render () {
@@ -83,42 +116,104 @@ class Index extends React.Component {
               <div className={classes.status3} />
               <div className={classes.text}>退件</div>
             </div>
-            <Link to='/students/credit/apply' className='pull-right'>
-              <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>
-            </Link>
+            <div className='pull-right'>
+              <FormControl className={classes.formControl}>
+                <Select
+                  value={this.state.filter.type}
+                  onChange={(event) => this.handleFilterChange('type', event.target.value)}
+                >
+                  <MenuItem value={-1} style={{ height: '10px' }}>所有抵免種類</MenuItem>
+                  <MenuItem value={0} style={{ height: '10px' }}>學分抵免</MenuItem>
+                  <MenuItem value={1} style={{ height: '10px' }}>課程免修</MenuItem>
+                  <MenuItem value={2} style={{ height: '10px' }}>本系必修課程抵免</MenuItem>
+                  <MenuItem value={3} style={{ height: '10px' }}>英授專業課程抵免</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl className={classes.formControl}>
+                <Select
+                  value={this.state.filter.status}
+                  onChange={(event) => this.handleFilterChange('status', event.target.value)}
+                >
+                  <MenuItem value={-1} style={{ height: '10px' }}>所有狀態</MenuItem>
+                  <MenuItem value={0} style={{ height: '10px' }}>審核中</MenuItem>
+                  <MenuItem value={1} style={{ height: '10px' }}>審核通過</MenuItem>
+                  <MenuItem value={2} style={{ height: '10px' }}>審核不通過</MenuItem>
+                  <MenuItem value={3} style={{ height: '10px' }}>退件</MenuItem>
+                </Select>
+              </FormControl>
+              <Link to='/students/credit/apply'>
+                <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>
+              </Link>
+            </div>
           </div>
+
           {/* For mobile screen */}
-          <div className='hidden-sm hidden-md hidden-lg' style={{ margin: '20px 20px 5px 20px ', width: 150}}>
-            <Link to='/students/credit/apply'>
-              <Button className={classes.btn} variant='contained' color='primary' style={{ margin: 'auto', width: '80%'}}>抵免申請</Button>
-            </Link>
+          <div className='hidden-sm hidden-md hidden-lg' style={{ margin: '20px 20px 5px 20px' }}>
+            <div style={{ width: '150px' }}>
+              <Link to='/students/credit/apply'>
+                <Button className={classes.btn} variant='contained' color='primary' style={{ margin: 'auto', width: '80%' }}>抵免申請</Button>
+              </Link>
+            </div>
+            <FormControl className={classes.formControl}>
+              <Select
+                value={this.state.filter.type}
+                onChange={(event) => this.handleFilterChange('type', event.target.value)}
+              >
+                <MenuItem value={-1} style={{ height: '10px' }}>所有抵免種類</MenuItem>
+                <MenuItem value={0} style={{ height: '10px' }}>學分抵免</MenuItem>
+                <MenuItem value={1} style={{ height: '10px' }}>課程免修</MenuItem>
+                <MenuItem value={2} style={{ height: '10px' }}>本系必修課程抵免</MenuItem>
+                <MenuItem value={3} style={{ height: '10px' }}>英授專業課程抵免</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <Select
+                value={this.state.filter.status}
+                onChange={(event) => this.handleFilterChange('status', event.target.value)}
+              >
+                <MenuItem value={-1} style={{ height: '10px' }}>所有狀態</MenuItem>
+                <MenuItem value={0} style={{ height: '10px' }}>審核中</MenuItem>
+                <MenuItem value={1} style={{ height: '10px' }}>審核通過</MenuItem>
+                <MenuItem value={2} style={{ height: '10px' }}>審核不通過</MenuItem>
+                <MenuItem value={3} style={{ height: '10px' }}>退件</MenuItem>
+              </Select>
+            </FormControl>
           </div>
+
           {/* For PC screen */}
           <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
             {
               waiveCourse &&
-              waiveCourse.map((data, index) => (
-                <WaiveCoursePanel key={index} data={{ ...data }} />
-              ))
+              waiveCourse
+                .filter((data) => this.checkFilter(0, data.status))
+                .map((data, index) => (
+                  <WaiveCoursePanel key={index} data={{ ...data }} />
+                ))
             }
             {
               exemptCourse &&
-              exemptCourse.map((data, index) => (
-                <ExemptCoursePanel key={index} data={{ ...data }} />
-              ))
+              exemptCourse
+                .filter((data) => this.checkFilter(1, data.status))
+                .map((data, index) => (
+                  <ExemptCoursePanel key={index} data={{ ...data }} />
+                ))
             }
             {
               compulsoryCourse &&
-              compulsoryCourse.map((data, index) => (
-                <CompulsoryCoursePanel key={index} data={{ ...data }} />
-              ))
+              compulsoryCourse
+                .filter((data) => this.checkFilter(2, data.status))
+                .map((data, index) => (
+                  <CompulsoryCoursePanel key={index} data={{ ...data }} />
+                ))
             }
             {
               englishCourse &&
-              englishCourse.map((data, index) => (
-                <EnglishCoursePanel key={index} data={{ ...data }} />
-              ))
-            }            
+              englishCourse
+                .filter((data) => this.checkFilter(3, data.status))
+                .map((data, index) => (
+                  <EnglishCoursePanel key={index} data={{ ...data }} />
+                ))
+            }
             {
               waiveCourse && !waiveCourse.length &&
               exemptCourse && !exemptCourse.length &&
@@ -130,6 +225,7 @@ class Index extends React.Component {
               </div>
             }
           </div>
+
           {/* For mobile xs */}
           <div
             className='hidden-sm hidden-md hidden-lg'
@@ -140,28 +236,36 @@ class Index extends React.Component {
             }}>
             {
               waiveCourse &&
-              waiveCourse.map((data, index) => (
-                <WaiveCoursePanel key={index} data={{ ...data }} mobile />
-              ))
+              waiveCourse
+                .filter((data) => this.checkFilter(0, data.status))
+                .map((data, index) => (
+                  <WaiveCoursePanel key={index} data={{ ...data }} mobile />
+                ))
             }
             {
               exemptCourse &&
-              exemptCourse.map((data, index) => (
-                <ExemptCoursePanel key={index} data={{ ...data }} mobile />
-              ))
+              exemptCourse
+                .filter((data) => this.checkFilter(1, data.status))
+                .map((data, index) => (
+                  <ExemptCoursePanel key={index} data={{ ...data }} mobile />
+                ))
             }
             {
               compulsoryCourse &&
-              compulsoryCourse.map((data, index) => (
-                <CompulsoryCoursePanel key={index} data={{ ...data }} mobile />
-              ))
+              compulsoryCourse
+                .filter((data) => this.checkFilter(2, data.status))
+                .map((data, index) => (
+                  <CompulsoryCoursePanel key={index} data={{ ...data }} mobile />
+                ))
             }
             {
               englishCourse &&
-              englishCourse.map((data, index) => (
-                <EnglishCoursePanel key={index} data={{ ...data }} mobile />
-              ))
-            }            
+              englishCourse
+                .filter((data) => this.checkFilter(3, data.status))
+                .map((data, index) => (
+                  <EnglishCoursePanel key={index} data={{ ...data }} mobile />
+                ))
+            }
             {
               waiveCourse && !waiveCourse.length &&
               exemptCourse && !exemptCourse.length &&
