@@ -18,7 +18,8 @@ import {
   MenuItem,
   FormControl,
   Input,
-  Avatar 
+  Avatar,
+  Popover
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
@@ -37,6 +38,8 @@ import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 // import FakeData from '../../../Resources/FakeData'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
+import { CSVLink } from "react-csv"
 
 
 const theme = createMuiTheme({
@@ -122,7 +125,7 @@ const styles = () => ({
   sideIcon2: {
     position: 'absolute',
     top: 60,
-    left: 'calc(100vw - 220px)'
+    left: 'calc(100vw - 260px)'
   },
   Panels: {
     width: 'calc(100vw - 80px)',
@@ -211,7 +214,8 @@ class Verify extends React.Component {
       selectAll: false,
       type: [0,1,2,3],
       transferTo: '',
-      return: ''
+      return: '',
+      anchorEl: null
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
@@ -228,6 +232,7 @@ class Verify extends React.Component {
     this.handleSwitch = this.handleSwitch.bind(this)
     this.handleReason = this.handleReason.bind(this)
     this.handleReturn = this.handleReturn.bind(this)
+    this.downCSV = this.downCSV.bind(this)
   }
   componentDidMount () {
     // get TeacherList for TransferTo
@@ -469,6 +474,91 @@ class Verify extends React.Component {
       this.setState({select: updatedArray, selectAll: true})
     } else {
       this.setState({select: [], selectAll: false, transferTo:''})
+    }
+  }
+  downCSV(i){
+    switch(i) {
+      case 0:
+        return (this.state.formList.filter(e=>(e.type === 0 || e.type === 1))
+        .map(e=>{
+            let date = e.date.split('-'),year,semester
+            if(parseInt(date[1],10) < 8){
+                year = parseInt(date[0],10) - 1912
+                semester = "下學期"
+            }
+            else{
+                year = parseInt(date[0],10) - 1911
+                semester = "上學期"
+            }
+            return({
+                    type: e.type === 0 ? "學分抵免":"課程免修",
+                    sid: e.sid,
+                    name: e.name,
+                    info: e.info,
+                    nameA: e.nameA,
+                    department: e.department,
+                    creditA: e.creditA,
+                    codeB: e.codeB,
+                    nameB: e.nameB,
+                    creditB: e.creditB,
+                    typeB: e.typeB,
+                    year: year,
+                    semester: semester
+                })
+        }))
+      case 1:
+      return this.state.formList.filter(e=>e.type === 2)
+      .map(e=>{
+          let date = e.date.split('-'),year,semester
+          if(parseInt(date[1],10) < 8){
+              year = parseInt(date[0],10) - 1912
+              semester = "下學期"
+          }
+          else{
+              year = parseInt(date[0],10) - 1911
+              semester = "上學期"
+          }
+          return({
+                  type: "本系必修課程抵免",
+                  sid: e.sid,
+                  name: e.name,
+                  info: e.info,
+                  nameA: e.nameA,
+                  department: e.department,
+                  creditA: e.creditA,
+                  codeB: e.codeB,
+                  nameB: e.nameB,
+                  year: year,
+                  semester: semester
+              })
+      })
+      case 2:
+      return this.state.formList.filter(e=>e.type === 3)
+      .map(e=>{
+          let date = e.date.split('-'),year,semester
+          if(parseInt(date[1],10) < 8){
+              year = parseInt(date[0],10) - 1912
+              semester = "下學期"
+          }
+          else{
+              year = parseInt(date[0],10) - 1911
+              semester = "上學期"
+          }
+          return({
+                  type: "英授專業課程抵免",
+                  sid: e.sid,
+                  name: e.name,
+                  info: e.info,
+                  codeA: e.codeA,
+                  nameA: e.nameA,
+                  department: e.department,
+                  teacher: e.teacher,
+                  year: year,
+                  semester: semester
+              })
+      })
+      default:
+        break
     }
   }
   snackbarOpen () {
@@ -749,6 +839,78 @@ class Verify extends React.Component {
                   </Tooltip>
                 )
               }   
+              <Button size="small" onClick={(e)=>this.setState({anchorEl: e.currentTarget})}>
+                <CloudDownloadIcon/>
+              </Button>
+              <Popover
+                open={Boolean(this.state.anchorEl)}
+                anchorEl={this.state.anchorEl}
+                onClose={()=>this.setState({anchorEl: null})}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                  <CSVLink 
+                  filename={"學分抵免與課程免修.csv"}
+                  data={this.downCSV(0)} headers={[
+                    { label: "抵免申請項目", key: "type" },
+                    { label: "學號", key: "sid" },
+                    { label: "申請者", key: "name" },
+                    { label: "系所/年級/班別", key: "info" },
+                    { label: "修課資料|科目名稱", key: "nameA" },
+                    { label: "修課資料|開課系所", key: "department" },
+                    { label: "修課資料|學分數", key: "creditA" },
+                    { label: "抵免科目資料|永久課號", key: "codeB" },
+                    { label: "抵免科目資料|科目名稱", key: "nameB" },
+                    { label: "抵免科目資料|學分", key: "creditB" },
+                    { label: "抵免科目資料|選別", key: "typeB" },
+                    { label: "申請學年度", key: "year" },
+                    { label: "申請學期", key: "semester" }]}>
+                    <MenuItem >
+                    學分抵免與課程免修
+                    </MenuItem>
+                  </CSVLink>
+                  <CSVLink 
+                  filename={"本系必修課程抵免.csv"}
+                  data={this.downCSV(1)} headers={[
+                    { label: "抵免申請項目", key: "type" },
+                    { label: "學號", key: "sid" },
+                    { label: "申請者", key: "name" },
+                    { label: "系所/年級/班別", key: "info" },
+                    { label: "修課資料|課程名稱", key: "nameA" },
+                    { label: "修課資料|開課系所", key: "department" },
+                    { label: "修課資料|學分數", key: "creditA" },
+                    { label: "抵免科目資料|永久課號", key: "codeB" },
+                    { label: "抵免科目資料|課程名稱", key: "nameB" },
+                    { label: "申請學年度", key: "year" },
+                    { label: "申請學期", key: "semester" }]}>
+                    <MenuItem >
+                    本系必修課程抵免
+                    </MenuItem>
+                  </CSVLink>
+                  <CSVLink 
+                  filename={"英授專業課程抵免.csv"}
+                  data={this.downCSV(2)} headers={[
+                    { label: "抵免申請項目", key: "type" },
+                    { label: "學號", key: "sid" },
+                    { label: "申請者", key: "name" },
+                    { label: "系所/年級/班別", key: "info" },
+                    { label: "永久課號", key: "codeA" },
+                    { label: "課程名稱", key: "nameA" },
+                    { label: "開課系所", key: "department" },
+                    { label: "授課老師", key: "teacher" },
+                    { label: "申請學年度", key: "year" },
+                    { label: "申請學期", key: "semester" }]}>
+                    <MenuItem >
+                    英授專業課程抵免
+                    </MenuItem>
+                  </CSVLink>
+              </Popover>
             </div>
           </div>
 
