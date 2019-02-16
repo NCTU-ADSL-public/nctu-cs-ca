@@ -1,16 +1,18 @@
 {
   "waive_course": [
     {
+      "timestamp": "2019-02-13 12:16:51",
+      "class": "資工系資工組大一A班",
       "phone": "0912345678",
       "original_school": "清華大學",
       "original_department": "資工系",
       "current_school": "交通大學",
       "current_department": "資工系",
       "original_graduation_credit": 128,
-      "apply_year": 106,
-      "apply_semester": 2,
-      "original_course_year": "二",
-      "original_course_semester": "下",
+      "apply_year": 107,
+      "apply_semester": 1,
+      "original_course_year": 2,
+      "original_course_semester": 2,
       "original_course_name": "機率",
       "original_course_department": "資工系",
       "original_course_credit": 3,
@@ -18,17 +20,46 @@
       "current_course_code": "EC4313",
       "current_course_name": "機率",
       "current_course_credit": 3,
-      "file": "https://firebasestorage.googleapis.com/v0/b/nctu-csca.appspot.com/o/credit%2F0416000%2F%5Bobject%20File%5D?alt=media&token=a784f690-62a1-4465-8e21-bbe36e9194d1",
-      "status": 0
+      "current_course_type": "必修",
+      "file": "0516xxx_抵免.pdf",
+      "status": 0,
+      "reject_reason": ""
+    },
+    {
+      "timestamp": "2019-02-13 12:16:51",
+      "class": "資工系資工組大一A班",
+      "phone": "0912345678",
+      "original_school": "清華大學",
+      "original_department": "資工系",
+      "current_school": "交通大學",
+      "current_department": "資工系",
+      "original_graduation_credit": 128,
+      "apply_year": 107,
+      "apply_semester": 1,
+      "original_course_year": 2,
+      "original_course_semester": 2,
+      "original_course_name": "機率",
+      "original_course_department": "資工系",
+      "original_course_credit": 3,
+      "original_course_score": 80,
+      "current_course_code": "EC4313",
+      "current_course_name": "機率",
+      "current_course_credit": 3,
+      "current_course_type": "必修",
+      "file": "0516xxx_抵免.pdf",
+      "status": 3,
+      "reject_reason": "上傳檔案不齊全"
     }
   ],
   "exempt_course": [
     {
+      "timestamp": "2019-02-13 12:16:51",
+      "class": "資工系資工組大一A班",
       "phone": "0912345678",
-      "apply_year": 106,
-      "apply_semester": 2,
-      "original_course_year": "二",
-      "original_course_semester": "下",
+      "apply_year": 107,
+      "apply_semester": 1,
+      "original_course_year": 2, 
+      "original_course_semester": 2,
       "original_course_name": "機率",
       "original_course_department": "資工系",
       "original_course_credit": 3,
@@ -36,29 +67,39 @@
       "current_course_code": "EC4313",
       "current_course_name": "機率",
       "current_course_credit": 3,
-      "file": "https://firebasestorage.googleapis.com/v0/b/nctu-csca.appspot.com/o/credit%2F0416000%2F%5Bobject%20File%5D?alt=media&token=a784f690-62a1-4465-8e21-bbe36e9194d1",
-      "status": 1
+      "current_course_type": "必修",
+      "file": "0516xxx_抵免.pdf",
+      "status": 3,
+      "reject_reason": "上傳檔案不齊全"
     }
   ],
   "compulsory_course": [
     {
+      "timestamp": "2019-02-13 12:16:51",
       "apply_year": 107,
       "apply_semester": 1,
       "phone": "0912345678",
-      "reason": "系上課很糞",
+      "reason": {
+        "type": "被當",
+        "content": "系上課很糞"
+      },
       "department": "電機",
       "teacher": "高榮鴻",
+      "course_year": 107,
+      "course_semester": 2,
       "course_code": "UEE2104",
       "course_name": "機率(英文班)",
       "original_course_code": "UEE2104",
       "original_course_name": "機率(英文班)",
       "credit": 3,
-      "file": "https://firebasestorage.googleapis.com/v0/b/nctu-csca.appspot.com/o/credit%2F0416000%2F%5Bobject%20File%5D?alt=media&token=a784f690-62a1-4465-8e21-bbe36e9194d1",
-      "status": 1
+      "file": "0516000_抵免.pdf",
+      "status": 1,
+      "reject_reason": ""
     }
   ],
   "english_course": [
     {
+      "timestamp": "2019-02-13 12:16:51",
       "apply_year": 107,
       "apply_semester": 1,
       "phone": "0912345678",
@@ -67,8 +108,9 @@
       "teacher": "高榮鴻",
       "course_code": "UEE2104",
       "course_name": "機率(英文班)",
-      "file": "https://firebasestorage.googleapis.com/v0/b/nctu-csca.appspot.com/o/credit%2F0416000%2F%5Bobject%20File%5D?alt=media&token=a784f690-62a1-4465-8e21-bbe36e9194d1",
-      "status": 2
+      "file": "0516000_抵免.pdf",
+      "status": 2,
+      "reject_reason": ""
     }
   ]
 }
