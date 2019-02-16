@@ -46,8 +46,10 @@ const initialState = {
     phone: '',
     department: '',
     teacher: '',
+    credit: '',
     original_course_name: '',
     original_course_code: '',
+    original_course_credit: '',
     course_year: '',
     course_semester: 0,
     course_name: '',
@@ -65,6 +67,7 @@ const initialState = {
     reason: '',
     department: '',
     teacher: '',
+    credit: '',
     course_code: '',
     course_name: '',
     file: ''

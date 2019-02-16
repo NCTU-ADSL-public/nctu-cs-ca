@@ -165,6 +165,20 @@ class EnglishCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.teacher}
               />
+              <TextField
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.credit}
+              />
             </div>
 
             <div style={{ height: '50px' }} />
@@ -340,6 +354,21 @@ class EnglishCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.teacher}
               />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.credit}
+              />
             </div>
 
             <div style={{ height: '50px' }} />
@@ -400,6 +429,7 @@ const mapStateToProps = (state) => ({
   semester: state.Student.Credit.englishCourse.semester,
   department: state.Student.Credit.englishCourse.department,
   teacher: state.Student.Credit.englishCourse.teacher,
+  credit: state.Student.Credit.englishCourse.credit,
   course_name: state.Student.Credit.englishCourse.course_name,
   course_code: state.Student.Credit.englishCourse.course_code,
   reason: state.Student.Credit.englishCourse.reason,

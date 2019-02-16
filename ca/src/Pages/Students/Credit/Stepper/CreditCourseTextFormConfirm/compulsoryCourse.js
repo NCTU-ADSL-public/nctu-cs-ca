@@ -169,6 +169,20 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 defaultValue={this.props.teacher}
               />
               <TextField
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.credit}
+              />
+              <TextField
                 label='修課學年度'
                 margin='normal'
                 className={classes.textField}
@@ -226,6 +240,20 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 }}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.original_course_name}
+              />
+              <TextField
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.original_course_credit}
               />
             </div>
 
@@ -444,6 +472,21 @@ class CompulsoryCourseFormConfirm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.credit}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
                 label='修課學年度'
                 margin='normal'
                 className={classes.textField}
@@ -505,6 +548,21 @@ class CompulsoryCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.original_course_name}
               />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.original_course_credit}
+              />
             </div>
 
             <div style={{ height: '50px', clear: 'both' }} />
@@ -545,10 +603,10 @@ class CompulsoryCourseFormConfirm extends React.Component {
                           multiline
                           rowsMax='1'
                         />
-                        <div style = {{ margin: '5px' }}>
+                        <div style={{ margin: '5px' }}>
                           不可抗拒之理由，需修習外系課程以抵本系必修課程
                         </div>
-                        <span style = {{ margin: '5px', color: 'red' }}>(請於檔案上傳部分附上成績單)</span>
+                        <span style={{ margin: '5px', color: 'red' }}>(請於檔案上傳部分附上成績單)</span>
                       </div>
                     }
                   />
@@ -608,8 +666,10 @@ const mapStateToProps = (state) => ({
   semester: state.Student.Credit.compulsoryCourse.semester,
   department: state.Student.Credit.compulsoryCourse.department,
   teacher: state.Student.Credit.compulsoryCourse.teacher,
+  credit: state.Student.Credit.compulsoryCourse.credit,
   original_course_name: state.Student.Credit.compulsoryCourse.original_course_name,
   original_course_code: state.Student.Credit.compulsoryCourse.original_course_code,
+  original_course_credit: state.Student.Credit.compulsoryCourse.original_course_credit,
   course_year: state.Student.Credit.compulsoryCourse.course_year,
   course_semester: state.Student.Credit.compulsoryCourse.course_semester,
   course_name: state.Student.Credit.compulsoryCourse.course_name,

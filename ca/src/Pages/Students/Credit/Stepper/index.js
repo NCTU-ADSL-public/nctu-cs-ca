@@ -141,30 +141,30 @@ class HorizontalLinearStepper extends React.Component {
         this.setState({ file: file })
       } else if (selectFormIndex === 2) {
         const {
-          file, phone, reason, department, teacher,
+          file, phone, reason, department, teacher, credit,
           course_year, course_semester, course_code, course_name,
-          original_course_code, original_course_name
+          original_course_code, original_course_name, original_course_credit
         } = this.props.compulsoryCourse
         if (!course_code.match(foreverCodepattern) || !original_course_code.match(foreverCodepattern) ) {
           window.alert('請填寫”永久課號“!')
           return
         }
         if (
-          !(file.name && phone && reason.content && department && teacher &&
+          !(file.name && phone && reason.content && department && teacher && credit &&
             course_year && course_semester && course_code && course_name &&
-            original_course_code && original_course_name)
+            original_course_code && original_course_name && original_course_credit)
         ) {
           window.alert('請確實填寫每個欄位!')
           return
         }
         this.setState({ file: file })
       } else if (selectFormIndex === 3) {
-        const { file, phone, reason, department, teacher, course_code, course_name } = this.props.englishCourse
+        const { file, phone, reason, department, teacher, credit, course_code, course_name } = this.props.englishCourse
         if (!course_code.match(foreverCodepattern)) {
           window.alert('請填寫”永久課號“!')
           return
         }
-        if (!(file.name && phone && reason && department && teacher && course_name && course_code)) {
+        if (!(file.name && phone && reason && department && teacher && credit && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
           return
         }

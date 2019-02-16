@@ -168,6 +168,20 @@ class EnglishCourseForm extends React.Component {
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
+              <TextField
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                value={this.props.credit}
+                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
+              />
             </div>
 
             <div style={{ height: '50px' }} />
@@ -344,6 +358,21 @@ class EnglishCourseForm extends React.Component {
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                value={this.props.credit}
+                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
+              />
             </div>
 
             <div style={{ height: '50px' }} />
@@ -404,6 +433,7 @@ const mapStateToProps = (state) => ({
   semester: state.Student.Credit.englishCourse.semester,
   department: state.Student.Credit.englishCourse.department,
   teacher: state.Student.Credit.englishCourse.teacher,
+  credit: state.Student.Credit.englishCourse.credit,
   course_name: state.Student.Credit.englishCourse.course_name,
   course_code: state.Student.Credit.englishCourse.course_code,
   reason: state.Student.Credit.englishCourse.reason,
