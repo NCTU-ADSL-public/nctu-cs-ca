@@ -10,6 +10,8 @@ import CompulsoryCoursePanel from './CreditPanel/compulsoryCoursePanel'
 import EnglishCoursePanel from './CreditPanel/englishCoursePanel'
 import { getCreditInfo, resetCourse } from '../../../Redux/Students/Actions/Credit'
 import creditImg from '../../../Resources/credit_no_upload.png'
+import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = theme => ({
   img: {
@@ -53,6 +55,21 @@ const styles = theme => ({
     opacity: '0.8',
     fontFamily: 'Noto Sans CJK TC',
     marginTop: '10px'
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: 2*theme.spacing.unit,
+    marginTop: 0,
+    marginBottom: 0,
+    width: 180
+  },
+  menu: {
+    width: 150,
+    fontSize: '20px'
+  },
+  menuMb: {
+    width: 150,
+    fontSize: '18px'
   }
 })
 
@@ -62,12 +79,22 @@ class Index extends React.Component {
     this.props.resetCourse()
   }
 
+  state={
+    filterType: 0
+  }
+
+  handleFilter = (value) => {
+    this.setState({
+      filterType: value
+    })
+  }
+
   render () {
     const { classes } = this.props
-    const waiveCourse = this.props.creditInfo.waive_course
-    const exemptCourse = this.props.creditInfo.exempt_course
-    const compulsoryCourse = this.props.creditInfo.compulsory_course
-    const englishCourse = this.props.creditInfo.english_course
+    const waiveCourse = this.state.filterType===1 || this.state.filterType===0?this.props.creditInfo.waive_course:[]
+    const exemptCourse = this.state.filterType===2 || this.state.filterType===0?this.props.creditInfo.exempt_course:[]
+    const compulsoryCourse = this.state.filterType===3 || this.state.filterType===0?this.props.creditInfo.compulsory_course:[]
+    const englishCourse = this.state.filterType===4 || this.state.filterType===0?this.props.creditInfo.english_course:[]
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
         <div className='row'>
@@ -83,15 +110,70 @@ class Index extends React.Component {
               <div className={classes.status3} />
               <div className={classes.text}>退件</div>
             </div>
-            <Link to='/students/credit/apply' className='pull-right'>
-              <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>
-            </Link>
+            <div className='pull-right'>
+              <TextField
+                select
+                label='篩選'
+                className={classes.textField}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                margin='normal'
+                value={this.state.filterType}
+                onChange={(event) => this.handleFilter(event.target.value)}
+                variant="outlined"
+            >
+                <MenuItem value={0} style={{ height: '10px' }}>全部</MenuItem>
+                <MenuItem value={1} style={{ height: '10px' }}>學分抵免</MenuItem>
+                <MenuItem value={2} style={{ height: '10px' }}>課程免修</MenuItem>
+                <MenuItem value={3} style={{ height: '10px' }}>本系必修課程抵免</MenuItem>
+                <MenuItem value={4} style={{ height: '10px' }}>英授專業課程抵免</MenuItem>
+              </TextField>
+              <Link to='/students/credit/apply'>
+                <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>
+              </Link>
+            </div>
           </div>
           {/* For mobile screen */}
-          <div className='hidden-sm hidden-md hidden-lg' style={{ margin: '20px 20px 5px 20px ', width: 150}}>
-            <Link to='/students/credit/apply'>
-              <Button className={classes.btn} variant='contained' color='primary' style={{ margin: 'auto', width: '80%'}}>抵免申請</Button>
-            </Link>
+          <div className='hidden-sm hidden-md hidden-lg row' style={{ margin: '20px 20px 5px 20px ', width: 150}}>
+
+              <TextField
+                select
+                label='篩選'
+                className={classes.textField}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                margin='normal'
+                value={this.state.filterType}
+                onChange={(event) => this.handleFilter(event.target.value)}
+                variant="outlined"
+              >
+                <MenuItem value={0} style={{ height: '10px' }}>全部</MenuItem>
+                <MenuItem value={1} style={{ height: '10px' }}>學分抵免</MenuItem>
+                <MenuItem value={2} style={{ height: '10px' }}>課程免修</MenuItem>
+                <MenuItem value={3} style={{ height: '10px' }}>本系必修課程抵免</MenuItem>
+                <MenuItem value={4} style={{ height: '10px' }}>英授專業課程抵免</MenuItem>
+              </TextField>
+              <Link to='/students/credit/apply'>
+                <Button className={classes.btn} variant='contained' color='primary' style={{ margin: 'auto', width: '50%'}}>抵免申請</Button>
+              </Link>
           </div>
           {/* For PC screen */}
           <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
@@ -118,7 +200,7 @@ class Index extends React.Component {
               englishCourse.map((data, index) => (
                 <EnglishCoursePanel key={index} data={{ ...data }} />
               ))
-            }            
+            }
             {
               waiveCourse && !waiveCourse.length &&
               exemptCourse && !exemptCourse.length &&
@@ -161,7 +243,7 @@ class Index extends React.Component {
               englishCourse.map((data, index) => (
                 <EnglishCoursePanel key={index} data={{ ...data }} mobile />
               ))
-            }            
+            }
             {
               waiveCourse && !waiveCourse.length &&
               exemptCourse && !exemptCourse.length &&
