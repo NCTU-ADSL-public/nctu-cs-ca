@@ -569,7 +569,7 @@ class Verify extends React.Component {
   }
   render () {
     const {classes} = this.props
-    const semester = ['上', '下', '暑']
+    // const semester = ['上', '下', '暑']
     return (
       <div className={classes.root}>
         {/* <span className={classes.state}>{`目前顯示：${['申請中', '等待主任同意', '等待授課老師同意', '已同意'][this.state.index]}的${typeName[this.state.type][0]}抵免單`}</span> */}
@@ -934,7 +934,20 @@ class Verify extends React.Component {
                           </Tooltip>
                         </svg>
                       </span>
-                          {`${apply.year}${semester[apply.semester - 1]}`}
+                          {/* {`${apply.year}${semester[apply.semester - 1]}`} */}
+                          <div
+                            style= {{
+                              background: typeName[apply.type][1],
+                              display: 'inline-block',
+                              width: 22,
+                              height: 22,
+                              marginLeft: 8,
+                              marginTop: 11,
+                              color: '#f5f5f5',
+                              textAlign: 'center',
+                              cursor: 'pointer'
+                            }}
+                          >{typeName[apply.type][2]}</div>
                           <span>
                             <Tooltip title={
                               <React.Fragment>
