@@ -77,6 +77,12 @@ const initialState = {
     exempt_course: [],
     compulsory_course: [],
     english_course: []
+  },
+  delete: {
+    status: 'idle'
+  },
+  edit: {
+    status: 'idle'
   }
 }
 
@@ -106,6 +112,13 @@ export default handleActions({
     ...state,
     englishCourse: {
       ...state.englishCourse,
+      ...action.payload
+    }
+  }),
+  SET_DELETE_STATUS: (state, action) => ({
+    ...state,
+    delete: {
+      ...state.delete,
       ...action.payload
     }
   }),

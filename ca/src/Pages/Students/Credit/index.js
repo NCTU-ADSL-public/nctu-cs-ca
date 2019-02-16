@@ -79,6 +79,13 @@ class Index extends React.Component {
     this.props.resetCourse()
   }
 
+  componentDidUpdate (prevProps) {
+    if (this.props.deleteStatus !== prevProps.deleteStatus &&
+        this.props.deleteStatus === 'success') {
+      this.props.getCreditInfo()
+    }
+  }
+
   handleFilterChange (name, value) {
     this.setState({
       filter: {
@@ -288,7 +295,8 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  creditInfo: state.Student.Credit.creditInfo
+  creditInfo: state.Student.Credit.creditInfo,
+  deleteStatus: state.Student.Credit.delete.status
 })
 
 const mapDispatchToProps = (dispatch) => ({
