@@ -298,9 +298,9 @@ class Verify extends React.Component {
       ),
       status: 6
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0, return: ''})
     }).catch(err => {
-      this.setState({open: true, message: 1})
+      this.setState({open: true, message: 1, return: ''})
     })
   }
   handleSwitch(i){
