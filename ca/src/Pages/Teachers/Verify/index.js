@@ -256,7 +256,7 @@ class Verify extends React.Component {
       status: 2,
     }).then(res => {
       console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -277,7 +277,7 @@ class Verify extends React.Component {
       status: 4
     }).then(res => {
       console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -298,9 +298,9 @@ class Verify extends React.Component {
       ),
       status: 6
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, return: ''})
+      this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
     }).catch(err => {
-      this.setState({open: true, message: 1, return: ''})
+      this.setState({open: true, message: 1})
     })
   }
   handleSwitch(i){
