@@ -97,10 +97,10 @@ class Index extends React.Component {
 
   render () {
     const { classes } = this.props
-    const waiveCourse = this.state.filterType===1 || this.state.filterType===0?this.props.creditInfo.waive_course:[]
-    const exemptCourse = this.state.filterType===2 || this.state.filterType===0?this.props.creditInfo.exempt_course:[]
-    const compulsoryCourse = this.state.filterType===3 || this.state.filterType===0?this.props.creditInfo.compulsory_course:[]
-    const englishCourse = this.state.filterType===4 || this.state.filterType===0?this.props.creditInfo.english_course:[]
+    const waiveCourse = this.props.creditInfo.waive_course
+    const exemptCourse = this.props.creditInfo.exempt_course
+    const compulsoryCourse = this.props.creditInfo.compulsory_course
+    const englishCourse = this.props.creditInfo.english_course
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
         <div className='row'>
