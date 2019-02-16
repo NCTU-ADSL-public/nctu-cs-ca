@@ -40,6 +40,13 @@ const styles = theme => ({
     backgroundColor: '#d93a64',
     float: 'left'
   },
+  status3: {
+    width: '10px',
+    height: '10px',
+    margin: '15px 7px 5px 7px',
+    backgroundColor: '#aaaaaa',
+    float: 'left'
+  },
   text: {
     color: '#7B7B7B',
     float: 'left',
@@ -73,6 +80,8 @@ class Index extends React.Component {
               <div className={classes.text}>審核通過</div>
               <div className={classes.status2} />
               <div className={classes.text}>審核不通過</div>
+              <div className={classes.status3} />
+              <div className={classes.text}>退件</div>
             </div>
             <Link to='/students/credit/apply' className='pull-right'>
               <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>

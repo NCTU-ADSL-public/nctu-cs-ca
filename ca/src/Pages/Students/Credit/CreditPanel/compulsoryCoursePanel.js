@@ -43,6 +43,11 @@ const styles = theme => ({
   },
   progress: {
     margin: '0 10px'
+  },
+  rejectFont: {
+    color: 'red',
+    fontSize: '20px',
+    padding: '10px 30px 30px'
   }
 })
 
@@ -89,6 +94,10 @@ class Index extends React.Component {
         color = '#d93a64'
         status = '審核不通過'
         break
+      case 3:
+        color = '#aaaaaa'
+        status = '退件'
+        break
       default:
         color = '#ffffff'
         status = '---'
@@ -96,7 +105,7 @@ class Index extends React.Component {
     }
     if (mobile) {
       return (
-        <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}`}}>
+        <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
           <div style={{
             background: color,
             width: 87,
@@ -142,6 +151,13 @@ class Index extends React.Component {
                   <TableCell className={classes.headFont}>檔案</TableCell>
                   <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
                 </TableRow>
+                {
+                  data.status === 3 &&
+                  <TableRow>
+                    <TableCell className={classes.headFont} style={{ color: 'red' }}>退件原因</TableCell>
+                    <TableCell className={classes.font} style={{ color: 'red' }}>{data.reject_reason}</TableCell>
+                  </TableRow>
+                }
               </TableBody>
             </Table>
           </ExpansionPanelDetails>
@@ -149,7 +165,7 @@ class Index extends React.Component {
       )
     } else {
       return (
-        <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}`}}>
+        <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
             <div className={classes.subtitle2}>{data.course_name}</div>
@@ -182,6 +198,13 @@ class Index extends React.Component {
               </TableBody>
             </Table>
           </ExpansionPanelDetails>
+          {
+            data.status === 3 &&
+            <div className={classes.rejectFont}>
+              <div style={{ display: 'inline' }}>退件原因：</div>
+              <div style={{ display: 'inline' }}>{data.reject_reason}</div>
+            </div>
+          }
         </ExpansionPanel>
       )
     }
