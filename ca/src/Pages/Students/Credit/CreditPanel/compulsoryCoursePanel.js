@@ -13,6 +13,9 @@ import {
   TableRow
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   container: {
@@ -48,6 +51,9 @@ const styles = theme => ({
     color: 'red',
     fontSize: '20px',
     padding: '10px 30px 30px'
+  },
+  button: {
+    margin: '5px'
   }
 })
 
@@ -106,13 +112,18 @@ class Index extends React.Component {
     if (mobile) {
       return (
         <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
-          <div style={{
-            background: color,
-            width: 87,
-            borderRadius: '0 0 2px 0',
-            color: '#fff',
-            textAlign: 'center'
-          }}>{status}</div>
+          <div style = {{display: 'flex'}} >
+            <div style={{
+              background: color,
+              width: 87,
+              borderRadius: '0 0 2px 0',
+              color: '#fff',
+              textAlign: 'center',
+            }}>{status}</div>
+            <div style = {{ flex: 0.98 }} />
+            <Icon style = {{ color: 'grey', fontSize: '30px' }} >edit_icon</Icon>
+            <DeleteIcon style = {{ color: 'grey', fontSize: '30px' }} />
+          </div>
           <div style={{ margin: '20px 0 15px 0', display: 'flex', justifyContent: 'center' }}>
             <Chip
               style={{ background: '#5599ff', color: '#fff', fontSize: 18, fontWeight: 400 }}
@@ -165,47 +176,58 @@ class Index extends React.Component {
       )
     } else {
       return (
-        <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
-            <div className={classes.subtitle2}>{data.course_name}</div>
-            <div className={classes.progress}><Arrow /></div>
-            <div className={classes.subtitle2}>{data.original_course_name}</div>
-            <div style={{ marginLeft: '20px' }}>
-              <Chip
-                style={{ background: '#5599ff', color: '#fff', fontSize: 14, fontWeight: 400 }}
-                label={<span>本系必修課程抵免</span>}
-              />
-            </div>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell className={classes.font}>已修習課程</TableCell>
-                  <TableCell className={classes.font}>開課系所</TableCell>
-                  <TableCell className={classes.font}>預抵免課程</TableCell>
-                  <TableCell className={classes.font}>檔案</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell className={classes.font}>{data.course_name}</TableCell>
-                  <TableCell className={classes.font}>{data.department}</TableCell>
-                  <TableCell className={classes.font}>{data.original_course_name}</TableCell>
-                  <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </ExpansionPanelDetails>
-          {
-            data.status === 3 &&
-            <div className={classes.rejectFont}>
-              <div style={{ display: 'inline' }}>退件原因：</div>
-              <div style={{ display: 'inline' }}>{data.reject_reason}</div>
-            </div>
-          }
-        </ExpansionPanel>
+        <div>
+          <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <div className={classes.subtitle1}>{`${data.apply_year}${data.apply_semester === 1 ? '上' : '下'}`}</div>
+              <div className={classes.subtitle2}>{data.course_name}</div>
+              <div className={classes.progress}><Arrow /></div>
+              <div className={classes.subtitle2}>{data.original_course_name}</div>
+              <div style={{ marginLeft: '20px' }}>
+                <Chip
+                  style={{ background: '#5599ff', color: '#fff', fontSize: 14, fontWeight: 400 }}
+                  label={<span>本系必修課程抵免</span>}
+                />
+              </div>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className={classes.font}>已修習課程</TableCell>
+                    <TableCell className={classes.font}>開課系所</TableCell>
+                    <TableCell className={classes.font}>預抵免課程</TableCell>
+                    <TableCell className={classes.font}>檔案</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className={classes.font}>{data.course_name}</TableCell>
+                    <TableCell className={classes.font}>{data.department}</TableCell>
+                    <TableCell className={classes.font}>{data.original_course_name}</TableCell>
+                    <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </ExpansionPanelDetails>
+            {
+              data.status === 3 &&
+              <div className={classes.rejectFont}>
+                <div style={{ display: 'inline' }}>退件原因：</div>
+                <div style={{ display: 'inline' }}>{data.reject_reason}</div>
+              </div>
+            }
+          </ExpansionPanel>
+          <div style = {{ display: 'flex', position: 'relative', height: '20px', top: '-40px' }}>
+            <div style = {{ flex: 0.92 }} />
+            <Button variant="fab" color="primary" mini aria-label="Edit" className={classes.button}>
+              <Icon>edit_icon</Icon>
+            </Button>
+            <Button variant="fab" color="secondary" mini aria-label="Delete" className={classes.button}>
+              <DeleteIcon />
+            </Button>
+          </div>
+        </div>
       )
     }
   }
