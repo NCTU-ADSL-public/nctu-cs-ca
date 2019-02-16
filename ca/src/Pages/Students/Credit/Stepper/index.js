@@ -59,7 +59,7 @@ class HorizontalLinearStepper extends React.Component {
     scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000 })
   }
 
-  resetForm () {
+  resetFormForNew () {
     // 回復為初始狀態，並清除每個表單的輸入
     this.setState({
       finished: false,
@@ -67,6 +67,11 @@ class HorizontalLinearStepper extends React.Component {
       selectFormIndex: -1
     })
     this.props.resetCourse()
+  }
+
+  resetFormForEdit () {
+    this.props.resetCourse()
+    this.props.history.push('/students/credit')
   }
 
   selectCreditForm (index) {
@@ -398,20 +403,32 @@ class HorizontalLinearStepper extends React.Component {
                   ? <div style={{ textAlign: 'center' }}>
                     {
                       this.state.progressComplete
-                        ? <div>
-                          <a
-                            href='/'
-                            onClick={(event) => {
-                              event.preventDefault()
-                              this.resetForm()
-                            }}
-                          >
-                            按此
-                          </a> 回到表單首頁
-                          <div style={{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
-                            若需申請多門課程抵免則繼續填寫表單
-                          </div>
-                        </div>
+                        ? this.props.location.state && this.props.location.state.edit
+                            ? <div>
+                              <a
+                                href='/'
+                                onClick={(event) => {
+                                  event.preventDefault()
+                                  this.resetFormForEdit()
+                                }}
+                              >
+                                按此
+                              </a> 回到抵免首頁
+                            </div>
+                            : <div>
+                              <a
+                                href='/'
+                                onClick={(event) => {
+                                  event.preventDefault()
+                                  this.resetFormForNew()
+                                }}
+                              >
+                                按此
+                              </a> 回到表單首頁
+                              <div style={{ color: 'red', fontSize: '13px', marginLeft: '10px' }}>
+                                若需申請多門課程抵免則繼續填寫表單
+                              </div>
+                            </div>
                         : <div>
                           檔案上傳中請稍候
                           <CircleProgress />
