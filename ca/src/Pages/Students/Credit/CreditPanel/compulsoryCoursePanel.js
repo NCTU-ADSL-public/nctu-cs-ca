@@ -94,6 +94,7 @@ class Index extends React.Component {
   }
 
   handleDelete () {
+    // 只有被審核中才能刪除
     if (this.props.data.status === 0) {
       if (window.confirm('確定刪除「本系必修課程抵免單」？')) {
         this.props.deleteCredit({
@@ -104,6 +105,7 @@ class Index extends React.Component {
   }
 
   handleEdit () {
+    // 只有被退件才能編輯
     if (this.props.data.status === 3) {
       window.alert('編輯請重新上傳附件檔案')
       this.props.handleChange({
