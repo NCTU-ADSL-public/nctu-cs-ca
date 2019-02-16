@@ -54,10 +54,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class ExemptCourseForm extends React.Component {
-  componentDidMount () {
-    window.scrollTo(0, 0)
-  }
-
   render () {
     const { classes } = this.props
 

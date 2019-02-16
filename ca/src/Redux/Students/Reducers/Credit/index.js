@@ -6,8 +6,6 @@ const initialState = {
     phone: '',
     original_school: '',
     original_department: '',
-    current_school: '交通大學',
-    current_department: '資工系',
     original_graduation_credit: '',
     apply_year: 107,
     apply_semester: 2,
@@ -119,6 +117,13 @@ export default handleActions({
     ...state,
     delete: {
       ...state.delete,
+      ...action.payload
+    }
+  }),
+  SET_EDIT_STATUS: (state, action) => ({
+    ...state,
+    edit: {
+      ...state.edit,
       ...action.payload
     }
   }),

@@ -47,7 +47,15 @@ class HorizontalLinearStepper extends React.Component {
   }
 
   componentDidMount () {
-    scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000})
+    // 判斷是不是按下編輯後跳轉過來的
+    if (this.props.location.state && this.props.location.state.edit) {
+      // 直接跳過選取表單的步驟
+      this.setState({
+        stepIndex: 1,
+        selectFormIndex: this.props.location.state.index
+      })
+    }
+    scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000 })
   }
 
   resetForm () {

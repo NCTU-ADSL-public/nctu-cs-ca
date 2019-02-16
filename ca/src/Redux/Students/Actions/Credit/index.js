@@ -8,6 +8,7 @@ export const englishCourseChange = createAction('ENGLISH_COURSE_CHANGE')
 export const waiveCourseChange = createAction('WAIVE_COURSE_CHANGE')
 export const exemptCourseChange = createAction('EXEMPT_COURSE_CHANGE')
 export const setDeleteStatus = createAction('SET_DELETE_STATUS')
+export const setEditStatus = createAction('SET_EDIT_STATUS')
 export const storeCreditInfo = createAction('STORE_CREDIT_INFO')
 export const resetCourse = createAction('RESET_COURSE')
 
@@ -49,7 +50,6 @@ export const sendEnglishCourse = (payload) => dispatch => {
 }
 
 export const deleteCredit = (payload) => dispatch => {
-  console.log(payload)
   dispatch(setDeleteStatus({ status: 'fetching' }))
   axios.post('/students/credit/delete', payload)
     .then(res => {
@@ -59,6 +59,20 @@ export const deleteCredit = (payload) => dispatch => {
     .catch(err => {
       alert('刪除失敗，請檢查連線是否穩定。')
       dispatch(setDeleteStatus({ status: 'error' }))
+      console.log(err)
+    })
+}
+
+export const editCredit = (payload) => dispatch => {
+  dispatch(setEditStatus({ status: 'fetching' }))
+  axios.post('/students/credit/edit', payload)
+    .then(res => {
+      alert('編輯成功')
+      dispatch(setEditStatus({ status: 'success' }))
+    })
+    .catch(err => {
+      alert('編輯失敗，請檢查連線是否穩定。')
+      dispatch(setEditStatus({ status: 'error' }))
       console.log(err)
     })
 }

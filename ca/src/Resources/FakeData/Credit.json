@@ -69,8 +69,8 @@
       "current_course_credit": 3,
       "current_course_type": "必修",
       "file": "0516xxx_抵免.pdf",
-      "status": 3,
-      "reject_reason": "上傳檔案不齊全"
+      "status": 1,
+      "reject_reason": ""
     }
   ],
   "compulsory_course": [
@@ -85,13 +85,14 @@
       },
       "department": "電機",
       "teacher": "高榮鴻",
+      "credit": 3,
       "course_year": 107,
       "course_semester": 2,
       "course_code": "UEE2104",
       "course_name": "機率(英文班)",
       "original_course_code": "UEE2104",
       "original_course_name": "機率(英文班)",
-      "credit": 3,
+      "original_course_credit": 3,
       "file": "0516000_抵免.pdf",
       "status": 1,
       "reject_reason": ""
@@ -106,6 +107,7 @@
       "reason": "系上課很糞",
       "department": "電機",
       "teacher": "高榮鴻",
+      "credit": 3,
       "course_code": "UEE2104",
       "course_name": "機率(英文班)",
       "file": "0516000_抵免.pdf",

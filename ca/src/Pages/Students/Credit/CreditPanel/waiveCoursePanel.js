@@ -18,7 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { deleteCredit } from '../../../../Redux/Students/Actions/Credit'
+import { waiveCourseChange, deleteCredit } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {
@@ -90,6 +90,7 @@ class Index extends React.Component {
   constructor (props) {
     super(props)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
   }
 
   handleDelete () {
@@ -99,6 +100,22 @@ class Index extends React.Component {
           timestamp: this.props.data.timestamp
         })
       }
+    }
+  }
+
+  handleEdit () {
+    if (this.props.data.status === 3) {
+      window.alert('編輯請重新上傳附件檔案')
+      this.props.handleChange({
+        ...this.props.data
+      })
+      this.props.history.push({
+        pathname: '/students/credit/apply',
+        state: {
+          edit: true,
+          index: 0
+        }
+      })
     }
   }
 
@@ -142,6 +159,7 @@ class Index extends React.Component {
             <div style={{ flex: 0.98 }} />
             <Icon
               style={{ color: 'grey', fontSize: '30px' }}
+              onClick={this.handleEdit}
             >
               edit_icon
             </Icon>
@@ -267,6 +285,8 @@ class Index extends React.Component {
               mini
               aria-label='Edit'
               className={classes.button}
+              onClick={this.handleEdit}
+              disabled={data.status !== 3}
             >
               <Icon>edit_icon</Icon>
             </Button>
@@ -296,6 +316,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  handleChange: (payload) => dispatch(waiveCourseChange(payload)),
   deleteCredit: (payload) => dispatch(deleteCredit(payload))
 })
 
