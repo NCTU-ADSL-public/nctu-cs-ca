@@ -47,6 +47,16 @@ export const sendEnglishCourse = (payload) => dispatch => {
     })
 }
 
+export const deleteCredit = (payload) => dispatch => {
+  console.log(payload)
+  axios.post('/students/credit/delete', payload)
+    .then(res => { alert('刪除成功') })
+    .catch(err => {
+      alert('刪除失敗，請檢查連線是否穩定。')
+      console.log(err)
+    })
+}
+
 export const getCreditInfo = () => dispatch => {
   axios.get('/students/credit/all').then(res => {
     dispatch(storeCreditInfo(res.data))

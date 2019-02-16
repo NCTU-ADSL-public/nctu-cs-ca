@@ -1,4 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import {
@@ -13,9 +15,10 @@ import {
   TableRow
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { deleteCredit } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {
@@ -55,6 +58,21 @@ const styles = theme => ({
 })
 
 class Index extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  handleDelete () {
+    if (this.props.data.status === 0) {
+      if (window.confirm('確定刪除「英授專業課程抵免單」？')) {
+        this.props.deleteCredit({
+          timestamp: this.props.data.timestamp
+        })
+      }
+    }
+  }
+
   render () {
     const { classes, data, mobile } = this.props
     let color, status
@@ -80,21 +98,30 @@ class Index extends React.Component {
         status = '---'
         break
     }
+
     if (mobile) {
       return (
         <ExpansionPanel defaultExpanded style={{ borderLeft: `7px solid ${color}` }}>
-          <div style = {{display: 'flex'}} >
+          <div style={{ display: 'flex' }} >
             <div style={{
               background: color,
               width: 87,
               borderRadius: '0 0 2px 0',
               color: '#fff',
-              textAlign: 'center',
+              textAlign: 'center'
             }}>{status}</div>
-            <div style = {{ flex: 0.98 }} />
-            <Icon style = {{ color: 'grey', fontSize: '30px' }} >edit_icon</Icon>
-            <DeleteIcon style = {{ color: 'grey', fontSize: '30px' }} />
+            <div style={{ flex: 0.98 }} />
+            <Icon
+              style={{ color: 'grey', fontSize: '30px' }}
+            >
+              edit_icon
+            </Icon>
+            <DeleteIcon
+              style={{ color: 'grey', fontSize: '30px' }}
+              onClick={this.handleDelete}
+            />
           </div>
+
           <div style={{ margin: '20px 0 15px 0', display: 'flex', justifyContent: 'center' }}>
             <Chip
               style={{ background: '#5599ff', color: '#fff', fontSize: 18, fontWeight: 400 }}
@@ -107,6 +134,7 @@ class Index extends React.Component {
               label={<span>{data.course_name}</span>}
             />
           </div>
+
           <ExpansionPanelDetails>
             <Table>
               <TableBody>
@@ -178,12 +206,27 @@ class Index extends React.Component {
               </div>
             }
           </ExpansionPanel>
-          <div style = {{ display: 'flex', position: 'relative', height: '20px', top: '-40px' }}>
-            <div style = {{ flex: 0.92 }} />
-            <Button variant="fab" color="primary" mini aria-label="Edit" className={classes.button}>
+
+          <div style={{ display: 'flex', position: 'relative', height: '20px', top: '-40px' }}>
+            <div style={{ flex: 0.92 }} />
+            <Button
+              variant='fab'
+              color='primary'
+              mini
+              aria-label='Edit'
+              className={classes.button}
+            >
               <Icon>edit_icon</Icon>
             </Button>
-            <Button variant="fab" color="secondary" mini aria-label="Delete" className={classes.button}>
+            <Button
+              variant='fab'
+              color='secondary'
+              mini
+              aria-label='Delete'
+              className={classes.button}
+              onClick={this.handleDelete}
+              disabled={data.status !== 0}
+            >
               <DeleteIcon />
             </Button>
           </div>
@@ -197,4 +240,11 @@ Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Index)
+const mapStateToProps = (state) => ({
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  deleteCredit: (payload) => dispatch(deleteCredit(payload))
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index)))
