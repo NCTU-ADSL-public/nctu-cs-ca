@@ -256,13 +256,14 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 1
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, date} = this.state.formList[id]
+    let {sid, date, email} = this.state.formList[id]
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: [
         {
           sid: sid,
           timestamp: date,
-          reason: null
+          reason: null,
+          email: email
         }
       ],
       status: 1,
@@ -279,13 +280,14 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 2
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, date} = this.state.formList[id]
+    let {sid, date, email} = this.state.formList[id]
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: [
         {
           sid: sid,
           timestamp: date,
-          reason: null
+          reason: null,
+          email: email
         }
       ],
       status: 3,
@@ -302,13 +304,14 @@ class Verify extends React.Component {
     // updatedList[id].agreeByA = 0
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
-    let {sid, date} = this.state.formList[id]
+    let {sid, date, email} = this.state.formList[id]
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: [
         {
           sid: sid,
           timestamp: date,
-          reason: null
+          reason: null,
+          email: email
         }
       ],
       status: 0,
@@ -344,7 +347,8 @@ class Verify extends React.Component {
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
-            reason: null
+            reason: null,
+            email: this.state.formList[e].email
           })
         }
       ),
@@ -366,7 +370,8 @@ class Verify extends React.Component {
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
-            reason: null
+            reason: null,
+            email: this.state.formList[e].email
           })
         }
       ),
@@ -388,7 +393,8 @@ class Verify extends React.Component {
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
-            reason: null
+            reason: null,
+            email: this.state.formList[e].email
           })
         }
       ),
@@ -409,7 +415,8 @@ class Verify extends React.Component {
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
-            reason: null
+            reason: null,
+            email: this.state.formList[e].email
           })
         }
       ),
@@ -430,7 +437,8 @@ class Verify extends React.Component {
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
-            reason: this.state.return
+            reason: this.state.return,
+            email: this.state.formList[e].email
           })
         }
       ),
