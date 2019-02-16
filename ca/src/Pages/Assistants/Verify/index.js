@@ -1043,7 +1043,7 @@ class Verify extends React.Component {
                             <TableCell className={classes.font} colSpan={3} >{apply.reason}</TableCell>
                             </TableRow>
                             {
-                              (this.state.index === 4 || apply.reject_reason !== null) && (
+                              ((apply.status === 6) ) && (
                             <TableRow>
                             <TableCell className={classes.font3} >退回原因</TableCell>
                             <TableCell className={classes.font} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-':apply.reject_reason}</TableCell>

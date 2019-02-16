@@ -187,7 +187,7 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-const type = [[0], [1], [5],[2],[6], [3, 4]]
+const type = [[1,5]]
 const typeName = [['學分抵免','#2C3E50','抵'],['課程免修','#E74C3C','免'],['本系必修課程抵免','#8ed875','必'],['英授專業課程抵免','#3498DB','英']]
 
 class Verify extends React.Component {
@@ -454,7 +454,20 @@ class Verify extends React.Component {
                           </Tooltip>
                         </svg>
                       </span>
-                          {`${apply.year}${semester[apply.semester - 1]}`}
+                          {/* {`${apply.year}${semester[apply.semester - 1]}`} */}
+                          <div
+                            style= {{
+                              background: typeName[apply.type][1],
+                              display: 'inline-block',
+                              width: 22,
+                              height: 22,
+                              marginLeft: 8,
+                              marginTop: 11,
+                              color: '#f5f5f5',
+                              textAlign: 'center',
+                              cursor: 'pointer'
+                            }}
+                          >{typeName[apply.type][2]}</div>
                           <span>
                             <Tooltip title={
                               <React.Fragment>
@@ -494,11 +507,11 @@ class Verify extends React.Component {
                                 ? <span onClick={(e) => e.stopPropagation()}>以前已同意過此抵免規則</span>
                                 : <span onClick={(e) => e.stopPropagation()}>以前未有過此抵免規則</span>
                             } /> */}
-                          {apply.status === 5 && <Chip
+                          {/* {apply.status === 5 && <Chip
                             style={{background: '#dc3545', color: '#fff', fontSize: 14, fontWeight: 400, marginLeft: 5}}
                             label={
                               <span onClick={(e) => e.stopPropagation()}>特殊案例需交由原授課教授審核</span>
-                            } />}
+                            } />} */}
                         </span>
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails>
@@ -542,7 +555,7 @@ class Verify extends React.Component {
                             <TableCell className={classes.font} colSpan={3} >{apply.reason}</TableCell>
                             </TableRow>
                             {
-                              (this.state.index === 4 || apply.reject_reason !== null) && (
+                              (apply.status === 6) && (
                             <TableRow>
                             <TableCell className={classes.font3} >退回原因</TableCell>
                             <TableCell className={classes.font} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-':apply.reject_reason}</TableCell>
