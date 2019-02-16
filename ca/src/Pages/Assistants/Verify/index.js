@@ -270,7 +270,7 @@ class Verify extends React.Component {
       transferTo: this.state.transferTo
     }).then(res => {
       updatedList[id].status = 2
-      this.setState({formList: updatedList, open: true, message: 0, transferTo:''})
+      this.setState({formList: updatedList, open: true, message: 0, transferTo:'',select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -294,7 +294,7 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       updatedList[id].status = 3
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -318,7 +318,7 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       updatedList[id].status = 0
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -356,7 +356,7 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -379,7 +379,7 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -401,7 +401,7 @@ class Verify extends React.Component {
       status: 1,
       transferTo: this.state.transferTo
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -423,7 +423,7 @@ class Verify extends React.Component {
       status: 0,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0,select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -445,7 +445,7 @@ class Verify extends React.Component {
       status: 6,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0})
+      this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
