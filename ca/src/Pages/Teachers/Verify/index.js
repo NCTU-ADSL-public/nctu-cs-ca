@@ -13,7 +13,6 @@ import {
   TableCell,
   TableRow,
   Tooltip,
-  Chip,
   Input
 } from '@material-ui/core'
 import axios from 'axios'
@@ -345,7 +344,7 @@ class Verify extends React.Component {
   }
   render () {
     const {classes} = this.props
-    const semester = ['上', '下', '暑']
+    // const semester = ['上', '下', '暑']
     return (
       <div className={classes.root}>
         {/* <span className={classes.state}>{`目前顯示：${['申請中', '等待主任同意', '等待授課老師同意', '已同意'][this.state.index]}的${typeName[this.state.type][0]}抵免單`}</span> */}
