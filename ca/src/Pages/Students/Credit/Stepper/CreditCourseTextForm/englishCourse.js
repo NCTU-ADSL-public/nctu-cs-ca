@@ -94,6 +94,7 @@ class EnglishCourseForm extends React.Component {
               <TextField
                 label='手機'
                 margin='normal'
+                error={this.props.errorsubmitted ? this.props.phone === '' : false}
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
@@ -123,6 +124,7 @@ class EnglishCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_code}
+                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
                 onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
               />
               <TextField
@@ -136,6 +138,7 @@ class EnglishCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_name}
+                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
               />
               <TextField
@@ -149,6 +152,7 @@ class EnglishCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.department}
+                error={this.props.errorsubmitted ? this.props.department === '' : false}
                 onChange={(event) => this.props.handleChange({ department: event.target.value })}
               />
               <TextField
@@ -162,6 +166,7 @@ class EnglishCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.teacher}
+                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
               <TextField
@@ -176,6 +181,7 @@ class EnglishCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.credit}
+                error={this.props.errorsubmitted ? this.props.credit === '' : false}
                 onChange={(event) => this.props.handleChange({ credit: event.target.value })}
               />
             </div>
@@ -202,6 +208,7 @@ class EnglishCourseForm extends React.Component {
                   }
                 }}
                 value={this.props.reason}
+                error={this.props.errorsubmitted ? this.props.reason === '' : false}
                 onChange={(event) => this.props.handleChange({ reason: event.target.value })}
                 multiline
                 rowsMax='1'
@@ -213,7 +220,7 @@ class EnglishCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false} />
             </div>
 
             <div style={{ height: '50px' }} />
@@ -273,6 +280,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.program === '' : false}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.program}
               />
@@ -287,6 +295,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.phone === '' : false}
                 value={this.props.phone}
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
@@ -309,6 +318,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
                 value={this.props.course_code}
                 onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
               />
@@ -323,6 +333,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
                 value={this.props.course_name}
                 onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
               />
@@ -337,6 +348,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.department === '' : false}
                 value={this.props.department}
                 onChange={(event) => this.props.handleChange({ department: event.target.value })}
               />
@@ -351,6 +363,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
                 value={this.props.teacher}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
@@ -366,6 +379,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.credit === '' : false}
                 value={this.props.credit}
                 onChange={(event) => this.props.handleChange({ credit: event.target.value })}
               />
@@ -393,6 +407,7 @@ class EnglishCourseForm extends React.Component {
                     root: classes.input
                   }
                 }}
+                error={this.props.errorsubmitted ? this.props.reason === '' : false}
                 value={this.props.reason}
                 onChange={(event) => this.props.handleChange({ reason: event.target.value })}
                 multiline
@@ -405,7 +420,7 @@ class EnglishCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false} />
             </div>
 
             <div style={{ height: '50px' }} />
@@ -434,7 +449,8 @@ const mapStateToProps = (state) => ({
   course_code: state.Student.Credit.englishCourse.course_code,
   reason: state.Student.Credit.englishCourse.reason,
   phone: state.Student.Credit.englishCourse.phone,
-  file: state.Student.Credit.englishCourse.file
+  file: state.Student.Credit.englishCourse.file,
+  errorsubmitted: state.Student.Credit.errorsubmitted
 })
 
 const mapDispatchToProps = (dispatch) => ({

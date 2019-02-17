@@ -25,7 +25,8 @@ import {
   sendCompulsoryCourse,
   sendEnglishCourse,
   editCredit,
-  resetCourse
+  resetCourse,
+  senderrorSubmit
 } from '../../../../Redux/Students/Actions/Credit'
 import './Stepper.css'
 import firebase from 'firebase'
@@ -87,6 +88,7 @@ class HorizontalLinearStepper extends React.Component {
       this.setState({ stepIndex: stepIndex - 1 })
     } else if (stepIndex === 1) {
       this.props.resetCourse()
+      this.props.senderrorSubmit(false)
       this.setState({ stepIndex: stepIndex - 1 })
     } else if (stepIndex === 0) {
       this.props.resetCourse()
@@ -126,6 +128,7 @@ class HorizontalLinearStepper extends React.Component {
           current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
+          this.props.senderrorSubmit(true)
           return
         }
         this.setState({ file: file })
@@ -150,6 +153,7 @@ class HorizontalLinearStepper extends React.Component {
           current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
+          this.props.senderrorSubmit(true)
           return
         }
         this.setState({ file: file })
@@ -169,6 +173,7 @@ class HorizontalLinearStepper extends React.Component {
             original_course_code && original_course_name && original_course_credit)
         ) {
           window.alert('請確實填寫每個欄位!')
+          this.props.senderrorSubmit(true)
           return
         }
         this.setState({ file: file })
@@ -180,10 +185,12 @@ class HorizontalLinearStepper extends React.Component {
         }
         if (!(file.name && phone && reason && department && teacher && credit && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
+          this.props.senderrorSubmit(true)
           return
         }
         this.setState({ file: file })
       }
+      this.props.senderrorSubmit(false)
     } else if (stepIndex === 2) {
       if (selectFormIndex === 0) {
         if (window.confirm('確定送出「學分抵免單」?')) {
@@ -505,7 +512,8 @@ const mapDispatchToProps = (dispatch) => ({
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
   sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   editCredit: (payload) => dispatch(editCredit(payload)),
-  resetCourse: () => dispatch(resetCourse())
+  resetCourse: () => dispatch(resetCourse()),
+  senderrorSubmit: (payload) => dispatch(senderrorSubmit(payload))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper))

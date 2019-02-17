@@ -11,6 +11,7 @@ export const setDeleteStatus = createAction('SET_DELETE_STATUS')
 export const setEditStatus = createAction('SET_EDIT_STATUS')
 export const storeCreditInfo = createAction('STORE_CREDIT_INFO')
 export const resetCourse = createAction('RESET_COURSE')
+export const errorSubmit = createAction('ERROR_SUBMIT')
 
 export const sendWaiveCourse = (payload) => dispatch => {
   axios.post('/students/credit/waiveCourse', payload)
@@ -85,4 +86,8 @@ export const getCreditInfo = () => dispatch => {
     dispatch(storeCreditInfo(FakeData.Credit))
     console.log(err)
   })
+}
+
+export const senderrorSubmit = (payload) => dispatch => {
+  dispatch(errorSubmit(payload))
 }

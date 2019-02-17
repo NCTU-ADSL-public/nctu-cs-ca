@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
+  errorsubmitted: false,
   waiveCourse: {
     class: '',
     phone: '',
@@ -137,5 +138,9 @@ export default handleActions({
     exemptCourse: initialState.exemptCourse,
     compulsoryCourse: initialState.compulsoryCourse,
     englishCourse: initialState.englishCourse
+  }),
+  ERROR_SUBMIT: (state, action) => ({
+    ...state,
+    errorsubmitted: action.payload
   })
 }, initialState)
