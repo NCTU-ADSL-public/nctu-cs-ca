@@ -104,10 +104,11 @@ class Index extends React.Component {
 
   render () {
     const { classes } = this.props
-    const waiveCourse = this.props.creditInfo.waive_course
-    const exemptCourse = this.props.creditInfo.exempt_course
-    const compulsoryCourse = this.props.creditInfo.compulsory_course
-    const englishCourse = this.props.creditInfo.english_course
+    const waiveCourse = this.props.creditInfo.waive_course.filter((data) => this.checkFilter(0, data.status))
+    const exemptCourse = this.props.creditInfo.exempt_course.filter((data) => this.checkFilter(1, data.status))
+    const compulsoryCourse = this.props.creditInfo.compulsory_course.filter((data) => this.checkFilter(2, data.status))
+    const englishCourse = this.props.creditInfo.english_course.filter((data) => this.checkFilter(3, data.status))
+
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
         <div className='row'>
@@ -149,7 +150,13 @@ class Index extends React.Component {
                 </Select>
               </FormControl>
               <Link to='/students/credit/apply'>
-                <Button className={classes.btn} variant='contained' color='primary'>抵免申請</Button>
+                <Button
+                  className={classes.btn}
+                  variant='contained'
+                  color='primary'
+                >
+                  抵免申請
+                </Button>
               </Link>
             </div>
           </div>
@@ -158,7 +165,14 @@ class Index extends React.Component {
           <div className='hidden-sm hidden-md hidden-lg' style={{ margin: '20px 20px 5px 20px' }}>
             <div style={{ width: '150px' }}>
               <Link to='/students/credit/apply'>
-                <Button className={classes.btn} variant='contained' color='primary' style={{ margin: 'auto', width: '80%' }}>抵免申請</Button>
+                <Button
+                  className={classes.btn}
+                  variant='contained'
+                  color='primary'
+                  style={{ margin: 'auto', width: '80%' }}
+                >
+                  抵免申請
+                </Button>
               </Link>
             </div>
             <FormControl className={classes.formControl}>
@@ -191,35 +205,27 @@ class Index extends React.Component {
           <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
             {
               waiveCourse &&
-              waiveCourse
-                .filter((data) => this.checkFilter(0, data.status))
-                .map((data, index) => (
-                  <WaiveCoursePanel key={index} data={{ ...data }} />
-                ))
+              waiveCourse.map((data, index) => (
+                <WaiveCoursePanel key={index} data={{ ...data }} />
+              ))
             }
             {
               exemptCourse &&
-              exemptCourse
-                .filter((data) => this.checkFilter(1, data.status))
-                .map((data, index) => (
-                  <ExemptCoursePanel key={index} data={{ ...data }} />
-                ))
+              exemptCourse.map((data, index) => (
+                <ExemptCoursePanel key={index} data={{ ...data }} />
+              ))
             }
             {
               compulsoryCourse &&
-              compulsoryCourse
-                .filter((data) => this.checkFilter(2, data.status))
-                .map((data, index) => (
-                  <CompulsoryCoursePanel key={index} data={{ ...data }} />
-                ))
+              compulsoryCourse.map((data, index) => (
+                <CompulsoryCoursePanel key={index} data={{ ...data }} />
+              ))
             }
             {
               englishCourse &&
-              englishCourse
-                .filter((data) => this.checkFilter(3, data.status))
-                .map((data, index) => (
-                  <EnglishCoursePanel key={index} data={{ ...data }} />
-                ))
+              englishCourse.map((data, index) => (
+                <EnglishCoursePanel key={index} data={{ ...data }} />
+              ))
             }
             {
               waiveCourse && !waiveCourse.length &&
@@ -243,35 +249,27 @@ class Index extends React.Component {
             }}>
             {
               waiveCourse &&
-              waiveCourse
-                .filter((data) => this.checkFilter(0, data.status))
-                .map((data, index) => (
-                  <WaiveCoursePanel key={index} data={{ ...data }} mobile />
-                ))
+              waiveCourse.map((data, index) => (
+                <WaiveCoursePanel key={index} data={{ ...data }} mobile />
+              ))
             }
             {
               exemptCourse &&
-              exemptCourse
-                .filter((data) => this.checkFilter(1, data.status))
-                .map((data, index) => (
-                  <ExemptCoursePanel key={index} data={{ ...data }} mobile />
-                ))
+              exemptCourse.map((data, index) => (
+                <ExemptCoursePanel key={index} data={{ ...data }} mobile />
+              ))
             }
             {
               compulsoryCourse &&
-              compulsoryCourse
-                .filter((data) => this.checkFilter(2, data.status))
-                .map((data, index) => (
-                  <CompulsoryCoursePanel key={index} data={{ ...data }} mobile />
-                ))
+              compulsoryCourse.map((data, index) => (
+                <CompulsoryCoursePanel key={index} data={{ ...data }} mobile />
+              ))
             }
             {
               englishCourse &&
-              englishCourse
-                .filter((data) => this.checkFilter(3, data.status))
-                .map((data, index) => (
-                  <EnglishCoursePanel key={index} data={{ ...data }} mobile />
-                ))
+              englishCourse.map((data, index) => (
+                <EnglishCoursePanel key={index} data={{ ...data }} mobile />
+              ))
             }
             {
               waiveCourse && !waiveCourse.length &&

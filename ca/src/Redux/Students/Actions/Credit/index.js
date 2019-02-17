@@ -1,7 +1,7 @@
 
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import FakeData from '../../../../Resources/FakeData'
+// import FakeData from '../../../../Resources/FakeData'
 
 export const compulsoryCourseChange = createAction('COMPULSORY_COURSE_CHANGE')
 export const englishCourseChange = createAction('ENGLISH_COURSE_CHANGE')
@@ -81,7 +81,7 @@ export const getCreditInfo = () => dispatch => {
   axios.get('/students/credit/all').then(res => {
     dispatch(storeCreditInfo(res.data))
   }).catch(err => {
-    dispatch(storeCreditInfo(FakeData.Credit))
+    // dispatch(storeCreditInfo(FakeData.Credit))
     console.log(err)
   })
 }
