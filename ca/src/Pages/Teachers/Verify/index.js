@@ -13,7 +13,8 @@ import {
   TableCell,
   TableRow,
   Tooltip,
-  Input
+  Input,
+  CircularProgress 
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
@@ -158,6 +159,10 @@ const styles = () => ({
   header:{
     backgroundColor: 'rgba(143, 195, 131, 0.23)',
     padding: '2px  0'
+  },
+  loading:{
+    position: 'relative',
+    left: '45%'
   }
 })
 
@@ -203,7 +208,8 @@ class Verify extends React.Component {
       select: [],
       selectAll: false,
       type: [0,1,2,3],
-      return: ''
+      return: '',
+      fetching: true
     }
     this.handleSelect = this.handleSelect.bind(this)
     this.handleWithdraw = this.handleWithdraw.bind(this)
@@ -218,7 +224,7 @@ class Verify extends React.Component {
   componentDidMount () {
     // get all verify items
     axios.get('/professor/ShowUserOffsetApplyForm').then(res => {
-      this.setState({formList: res.data.map((e, i) => ({...e, id: i}))})
+      this.setState({formList: res.data.map((e, i) => ({...e, id: i})), fetching: false})
     }).catch(err => {
       console.log(err)
     })
@@ -287,7 +293,7 @@ class Verify extends React.Component {
     axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 6
+          updatedList[e].status = 0
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -295,7 +301,7 @@ class Verify extends React.Component {
           })
         }
       ),
-      status: 6
+      status: 0
     }).then(res => {
       this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
     }).catch(err => {
@@ -435,7 +441,11 @@ class Verify extends React.Component {
 
         <div className={classes.Panels}>
           {
-            this.state.formList.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
+            this.state.fetching ?
+            (<MuiThemeProvider theme={theme}>
+              <CircularProgress className={classes.loading}/>
+            </MuiThemeProvider>)
+            : (this.state.formList.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
               ? this.state.formList
                 .filter(
                   apply => type[this.state.index].includes(apply.status) && (this.state.type.includes(apply.type))
@@ -597,7 +607,7 @@ class Verify extends React.Component {
                     </ExpansionPanel>
                   )
                 )
-              : <div>目前尚無資料</div>
+              : <div>目前尚無資料</div>)
           }
         </div>
         {/* snackBar */}

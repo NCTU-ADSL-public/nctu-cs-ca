@@ -19,7 +19,8 @@ import {
   FormControl,
   Input,
   Avatar,
-  Popover
+  Popover,
+  CircularProgress 
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
@@ -55,6 +56,10 @@ const styles = () => ({
     margin: '100px auto',
     marginBottom: 50,
     width: '90%'
+  },
+  loading:{
+    position: 'relative',
+    left: '45%'
   },
   subtitle: {
     fontSize: '1.2em'
@@ -215,7 +220,8 @@ class Verify extends React.Component {
       type: [0,1,2,3],
       transferTo: '',
       return: '',
-      anchorEl: null
+      anchorEl: null,
+      fetching: true
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
@@ -241,7 +247,7 @@ class Verify extends React.Component {
     })
     // get all verify items
     axios.get('/assistants/ShowUserOffsetApplyForm').then(res => {
-      this.setState({formList: res.data.map((e, i) => ({...e, id: i}))})
+      this.setState({formList: res.data.map((e, i) => ({...e, id: i})),fetching: false})
     }).catch(err => {
       console.log(err)
     })
@@ -925,7 +931,11 @@ class Verify extends React.Component {
 
         <div className={classes.Panels}>
           {
-            this.state.formList.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
+            this.state.fetching ? 
+            (<MuiThemeProvider theme={theme}>
+              <CircularProgress className={classes.loading}/>
+            </MuiThemeProvider>):
+            (this.state.formList.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
               ? this.state.formList
                 .filter(
                   apply => type[this.state.index].includes(apply.status) && (this.state.type.includes(apply.type))
@@ -1087,7 +1097,7 @@ class Verify extends React.Component {
                     </ExpansionPanel>
                   )
                 )
-              : <div>目前尚無資料</div>
+              : <div>目前尚無資料</div>)
           }
         </div>
         {/* snackBar */}
