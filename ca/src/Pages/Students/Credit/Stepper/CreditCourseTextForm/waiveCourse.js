@@ -378,7 +378,7 @@ class WaiveCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.file ? this.props.current_course_type === '' : false} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false}  file={this.props.file} />
             </div>
           </div>
         </div>
@@ -712,7 +712,7 @@ class WaiveCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false} file={this.props.file} />
             </div>
           </div>
         </div>
