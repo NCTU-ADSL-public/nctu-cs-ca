@@ -1,11 +1,8 @@
 import React from 'react'
 import input from 'react-bootstrap'
-// import firebase from 'firebase'
-import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
-import { compulsoryCourseChange, englishCourseChange, waiveCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   button: {
@@ -29,15 +26,11 @@ const styles = theme => ({
 class Postfile extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      imageURL: ''
-    }
     this.handleFileChange = this.handleFileChange.bind(this)
     this.fileRef = React.createRef()
   }
 
   handleFileChange (e) {
-    console.log(e)
     this.props.fileChange(e)
   }
 
@@ -51,12 +44,12 @@ class Postfile extends React.Component {
               variant='outlined'
               className={classes.button}
               onClick={() => this.fileRef.current.click()}
-              style={{borderColor: this.props.error ? 'red' : 'black'}}
+              style={{ borderColor: this.props.error ? 'red' : 'black' }}
             >
               選擇檔案
               <CloudUploadIcon className={classes.rightIcon} />
             </Button>
-            <div className={classes.text1}>{this.props.file ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
+            <div className={classes.text1}>{this.props.file && this.props.file.name ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
             <input
               style={{ display: 'none' }}
               ref={this.fileRef}
@@ -73,12 +66,12 @@ class Postfile extends React.Component {
               variant='outlined'
               className={classes.button}
               onClick={() => this.fileRef.current.click()}
-              style={{borderColor: this.props.error ? 'red' : 'black'}}
+              style={{ borderColor: this.props.error ? 'red' : 'black' }}
             >
               選擇檔案
               <CloudUploadIcon className={classes.rightIcon} />
             </Button>
-            <div className={classes.text2}>{this.props.file ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
+            <div className={classes.text2}>{this.props.file && this.props.file.name ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
             <input
               style={{ display: 'none' }}
               ref={this.fileRef}
@@ -93,15 +86,4 @@ class Postfile extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  courseFile: state.Student.Credit.compulsoryCourse.file,
-  englishFile: state.Student.Credit.englishCourse.file,
-  waiveFile: state.Student.Credit.waiveCourse.file
-})
-const mapDispatchToProps = (dispatch) => ({
-  englishCourseChange: (payload) => { dispatch(englishCourseChange(payload)) },
-  compulsoryCourseChange: (payload) => { dispatch(compulsoryCourseChange(payload)) },
-  waiveCourseChange: (payload) => { dispatch(waiveCourseChange(payload)) }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Postfile))
+export default withStyles(styles)(Postfile)

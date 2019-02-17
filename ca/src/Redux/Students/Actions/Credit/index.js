@@ -32,7 +32,6 @@ export const sendExemptCourse = (payload) => dispatch => {
 }
 
 export const sendCompulsoryCourse = (payload) => dispatch => {
-  console.log(payload)
   axios.post('/students/credit/compulsoryCourse', payload)
     .then(res => { alert('送出成功') })
     .catch(err => {
@@ -65,7 +64,6 @@ export const deleteCredit = (payload) => dispatch => {
 }
 
 export const editCredit = (payload) => dispatch => {
-  console.log(payload)
   dispatch(setEditStatus({ status: 'fetching' }))
   axios.post('/students/credit/edit', payload)
     .then(res => {
