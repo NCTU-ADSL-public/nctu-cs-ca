@@ -194,6 +194,7 @@ class GroupList extends React.Component {
         },
       ],
       semVal: this.getSemester(),
+      semList: ['107-2'],
     }
   }
 
@@ -279,6 +280,7 @@ class GroupList extends React.Component {
 
   componentDidMount () {
     this.fetchData(this.state.semVal)
+    this.makeSemList()
   }
 
   async componentWillReceiveProps (nextProps) {
@@ -321,6 +323,22 @@ class GroupList extends React.Component {
     this.fetchData(semVal)
   }
 
+  makeSemList = () => {
+    let semList = []
+    let tmp = this.getSemester()
+    semList.push(tmp)
+    while(tmp !== '106-2'){
+      if(tmp[4] === '1'){
+        let yy = parseInt(tmp.substring(0, 3)) - 1
+        tmp = yy.toString() + '-2'
+      }else if(tmp[4] === '2'){
+        tmp = tmp.substring(0, 4) + '1'
+      }else break
+      semList.push(tmp)
+    }
+    this.setState({semList})
+  }
+
   render () {
     const csNum = this.state.cs_number
     const otherNum = this.state.other_number
@@ -343,8 +361,11 @@ class GroupList extends React.Component {
                       style={{width: 150, fontFamily: 'Noto Sans CJK TC', fontWeight: 'bold'}}
                       autoWidth={false}
                     >
-                      <MenuItem value={'107-1'} primaryText='107-1' />
-                      <MenuItem value={'106-2'} primaryText='106-2' />
+                      {
+                        this.state.semList.map( item =>
+                          <MenuItem value={item} primaryText={item} />
+                        )
+                      }
                     </DropDownMenu>
                   </MuiThemeProvider>
                 </div>
