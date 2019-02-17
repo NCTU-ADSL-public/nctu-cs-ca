@@ -89,7 +89,14 @@ class HorizontalLinearStepper extends React.Component {
     } else if (stepIndex === 1) {
       this.props.resetCourse()
       this.props.senderrorSubmit(false)
-      this.setState({ stepIndex: stepIndex - 1 })
+
+      if (this.props.location.state && this.props.location.state.edit) {
+        // 是編輯就跳回抵免首頁
+        this.props.history.push('/students/credit')
+      } else {
+        // 是新增就跳回選取表單種類畫面
+        this.setState({ stepIndex: stepIndex - 1 })
+      }    
     } else if (stepIndex === 0) {
       this.props.resetCourse()
       this.props.history.push('/students/credit')
@@ -452,7 +459,11 @@ class HorizontalLinearStepper extends React.Component {
                         style={{ marginRight: 12, float: 'right' }}
                       />
                       <FlatButton
-                        label={stepIndex === 0 ? '返回' : '上一步'}
+                        label={
+                          (stepIndex === 0) ||
+                          (stepIndex === 1 && this.props.location.state && this.props.location.state.edit)
+                            ? '返回' : '上一步'
+                        }
                         onClick={this.handlePrev}
                         style={{ marginRight: 12, float: 'right' }}
                       />
