@@ -36,7 +36,7 @@ import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import FakeData from '../../../Resources/FakeData'
+//  import FakeData from '../../../Resources/FakeData'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from "react-csv"
@@ -203,7 +203,7 @@ class Verify extends React.Component {
     this.state = {
 // for test
       // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
-      // teacherList: FakeData.TeacherList,
+      // teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
 // end for test
       formList:[],
       teacherList: [],
@@ -237,7 +237,7 @@ class Verify extends React.Component {
   componentDidMount () {
     // get TeacherList for TransferTo
     axios.get('/assistants/advisee/TeacherList').then(res => {
-      this.setState({teacherList: res.data.map(t => ({id: t.id,name: t.name}))})
+      this.setState({teacherList: res.data.sort((a,b)=> b.status - a.status).map(t => ({id: t.id,name: t.name}))})
     })
     // get all verify items
     axios.get('/assistants/ShowUserOffsetApplyForm').then(res => {
@@ -402,7 +402,7 @@ class Verify extends React.Component {
       status: status,
       transferTo: this.state.transferTo
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      this.setState({formList: updatedList, open: true, message: 0,select: [],transferTo:''})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
