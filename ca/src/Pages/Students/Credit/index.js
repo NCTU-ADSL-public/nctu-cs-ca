@@ -77,6 +77,7 @@ class Index extends React.Component {
   componentDidMount () {
     this.props.getCreditInfo()
     this.props.resetCourse()
+    this.props.senderrorSubmit(false)
   }
 
   componentDidUpdate (prevProps) {
