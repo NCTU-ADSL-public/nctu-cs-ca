@@ -237,7 +237,7 @@ class Verify extends React.Component {
   componentDidMount () {
     // get TeacherList for TransferTo
     axios.get('/assistants/advisee/TeacherList').then(res => {
-      this.setState({teacherList: res.data.sort((a,b)=> b.status - a.status).map(t => ({id: t.id,name: t.name}))})
+      this.setState({teacherList: res.data.sort((a,b)=> b.status - a.status).map(t => ({id: t.id,name: t.name, status: t.status}))})
     })
     // get all verify items
     axios.get('/assistants/ShowUserOffsetApplyForm').then(res => {
