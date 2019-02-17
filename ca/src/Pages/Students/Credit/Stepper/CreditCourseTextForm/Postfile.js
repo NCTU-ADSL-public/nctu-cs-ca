@@ -51,6 +51,7 @@ class Postfile extends React.Component {
               variant='outlined'
               className={classes.button}
               onClick={() => this.fileRef.current.click()}
+              style={{borderColor: this.props.error ? 'red' : 'black'}}
             >
               選擇檔案
               <CloudUploadIcon className={classes.rightIcon} />
@@ -72,6 +73,7 @@ class Postfile extends React.Component {
               variant='outlined'
               className={classes.button}
               onClick={() => this.fileRef.current.click()}
+              style={{borderColor: this.props.error ? 'red' : 'black'}}
             >
               選擇檔案
               <CloudUploadIcon className={classes.rightIcon} />
