@@ -96,7 +96,7 @@ class HorizontalLinearStepper extends React.Component {
       } else {
         // 是新增就跳回選取表單種類畫面
         this.setState({ stepIndex: stepIndex - 1 })
-      }    
+      }
     } else if (stepIndex === 0) {
       this.props.resetCourse()
       this.props.history.push('/students/credit')
@@ -179,7 +179,7 @@ class HorizontalLinearStepper extends React.Component {
           this.props.senderrorSubmit(true)
           return
         }
-        if (!course_code.match(foreverCodepattern) || !original_course_code.match(foreverCodepattern) ) {
+        if (!course_code.match(foreverCodepattern) || !original_course_code.match(foreverCodepattern)) {
           window.alert('請填寫”永久課號“!')
           return
         }
@@ -229,7 +229,7 @@ class HorizontalLinearStepper extends React.Component {
     let Today = new Date()
     let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
     let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
-    let time = Today.getHours() + Today.getMinutes() + Today.getSeconds()
+    let time = Today.getFullYear().toString() + Today.getMonth().toString() + Today.getDate().toString() + Today.getHours().toString() + Today.getMinutes().toString() + Today.getSeconds().toString()
     let this_ = this
     let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + time + '_' + this.state.file.name
     this.setState({ progressComplete: false })
