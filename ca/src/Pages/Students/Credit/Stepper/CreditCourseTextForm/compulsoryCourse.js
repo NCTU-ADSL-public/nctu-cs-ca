@@ -99,6 +99,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
+                error={this.props.errorsubmitted ? this.props.studentIdcard.program === '' : false}
                 defaultValue={this.props.studentIdcard.program}
               />
               <TextField
@@ -112,6 +113,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.phone}
+                error={this.props.errorsubmitted ? this.props.phone === '' : false}
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
@@ -133,6 +135,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_code}
+                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
                 onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
               />
               <TextField
@@ -146,6 +149,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_name}
+                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
               />
               <TextField
@@ -158,6 +162,7 @@ class CompulsoryCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.department === '' : false}
                 value={this.props.department}
                 onChange={(event) => this.props.handleChange({ department: event.target.value })}
               />
@@ -172,6 +177,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.teacher}
+                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
               <TextField
@@ -186,6 +192,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.credit}
+                error={this.props.errorsubmitted ? this.props.credit === '' : false}
                 onChange={(event) => this.props.handleChange({ credit: event.target.value })}
               />
               <TextField
@@ -200,6 +207,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_year}
+                error={this.props.errorsubmitted ? this.props.course_year === '' : false}
                 onChange={(event) => this.props.handleChange({ course_year: event.target.value })}
               />
               <TextField
@@ -219,6 +227,7 @@ class CompulsoryCourseForm extends React.Component {
                 }}
                 margin='normal'
                 value={this.props.course_semester}
+                error={this.props.errorsubmitted ? this.props.course_semester === '' : false}
                 onChange={(event) => this.props.handleChange({ course_semester: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
@@ -244,6 +253,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_code}
+                error={this.props.errorsubmitted ? this.props.original_course_code === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
               />
               <TextField
@@ -257,6 +267,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_name}
+                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
               />
               <TextField
@@ -271,6 +282,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_credit}
+                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
               />
             </div>
@@ -313,6 +325,7 @@ class CompulsoryCourseForm extends React.Component {
                             }
                           }}
                           disabled={this.props.reason.type === '其他'}
+                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
                           value={this.props.reason.type === '被當' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
                             reason: {
@@ -350,6 +363,7 @@ class CompulsoryCourseForm extends React.Component {
                               root: classes.input
                             }
                           }}
+                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
                           disabled={this.props.reason.type === '被當'}
                           value={this.props.reason.type === '其他' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
@@ -373,7 +387,7 @@ class CompulsoryCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false} />
             </div>
           </div>
         </div>
@@ -425,6 +439,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
+                error={this.props.errorsubmitted ? this.props.studentIdcard.program === '' : false}
                 defaultValue={this.props.studentIdcard.program}
               />
               <TextField
@@ -439,6 +454,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.phone}
+                error={this.props.errorsubmitted ? this.props.phone === '' : false}
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
@@ -461,6 +477,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_code}
+                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
                 onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
               />
               <TextField
@@ -475,6 +492,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_name}
+                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
               />
               <TextField
@@ -489,6 +507,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.department}
+                error={this.props.errorsubmitted ? this.props.department === '' : false}
                 onChange={(event) => this.props.handleChange({ department: event.target.value })}
               />
               <TextField
@@ -503,6 +522,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.teacher}
+                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
                 onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
               />
               <TextField
@@ -518,6 +538,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.credit}
+                error={this.props.errorsubmitted ? this.props.credit === '' : false}
                 onChange={(event) => this.props.handleChange({ credit: event.target.value })}
               />
               <TextField
@@ -533,6 +554,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_year}
+                error={this.props.errorsubmitted ? this.props.course_year === '' : false}
                 onChange={(event) => this.props.handleChange({ course_year: event.target.value })}
               />
               <TextField
@@ -553,6 +575,7 @@ class CompulsoryCourseForm extends React.Component {
                 }}
                 margin='normal'
                 value={this.props.course_semester}
+                error={this.props.errorsubmitted ? this.props.course_semester === '' : false}
                 onChange={(event) => this.props.handleChange({ course_semester: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
@@ -578,6 +601,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_code}
+                error={this.props.errorsubmitted ? this.props.original_course_code === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
               />
               <TextField
@@ -592,6 +616,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_name}
+                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
               />
               <TextField
@@ -607,6 +632,7 @@ class CompulsoryCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_credit}
+                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
               />
             </div>
@@ -649,6 +675,7 @@ class CompulsoryCourseForm extends React.Component {
                               root: classes.input
                             }
                           }}
+                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
                           disabled={this.props.reason.type === '其他'}
                           value={this.props.reason.type === '被當' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
@@ -690,6 +717,7 @@ class CompulsoryCourseForm extends React.Component {
                               root: classes.input
                             }
                           }}
+                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
                           disabled={this.props.reason.type === '被當'}
                           value={this.props.reason.type === '其他' ? this.props.reason.content : ''}
                           onChange={(event) => this.props.handleChange({
@@ -713,7 +741,7 @@ class CompulsoryCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false} />
             </div>
           </div>
         </div>
@@ -738,7 +766,8 @@ const mapStateToProps = (state) => ({
   course_code: state.Student.Credit.compulsoryCourse.course_code,
   reason: state.Student.Credit.compulsoryCourse.reason,
   phone: state.Student.Credit.compulsoryCourse.phone,
-  file: state.Student.Credit.compulsoryCourse.file
+  file: state.Student.Credit.compulsoryCourse.file,
+  errorsubmitted: state.Student.Credit.errorsubmitted
 })
 
 const mapDispatchToProps = (dispatch) => ({

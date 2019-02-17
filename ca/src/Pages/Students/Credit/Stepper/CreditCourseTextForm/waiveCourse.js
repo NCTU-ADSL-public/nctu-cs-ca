@@ -51,7 +51,8 @@ const mapStateToProps = (state) => ({
   current_course_name: state.Student.Credit.waiveCourse.current_course_name,
   current_course_credit: state.Student.Credit.waiveCourse.current_course_credit,
   current_course_type: state.Student.Credit.waiveCourse.current_course_type,
-  file: state.Student.Credit.waiveCourse.file
+  file: state.Student.Credit.waiveCourse.file,
+  errorsubmitted: state.Student.Credit.errorsubmitted
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -109,6 +110,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.class}
+                error={this.props.errorsubmitted ? this.props.class === '' : false}
                 onChange={(event) => this.props.handleChange({ class: event.target.value })}
               />
               <TextField
@@ -122,6 +124,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.phone}
+                error={this.props.errorsubmitted ? this.props.phone === '' : false}
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
@@ -143,6 +146,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_school}
+                error={this.props.errorsubmitted ? this.props.original_school === '' : false}
                 onChange={(event) => this.props.handleChange({ original_school: event.target.value })}
               />
               <TextField
@@ -156,6 +160,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_department}
+                error={this.props.errorsubmitted ? this.props.original_department === '' : false}
                 onChange={(event) => this.props.handleChange({ original_department: event.target.value })}
               />
               <TextField
@@ -170,6 +175,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_graduation_credit}
+                error={this.props.errorsubmitted ? this.props.original_graduation_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ original_graduation_credit: event.target.value })}
               />
             </div>
@@ -186,6 +192,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_name}
+                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
               />
               <TextField
@@ -199,6 +206,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_department}
+                error={this.props.errorsubmitted ? this.props.original_course_department === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_department: event.target.value })}
               />
               <TextField
@@ -218,6 +226,7 @@ class WaiveCourseForm extends React.Component {
                 }}
                 margin='normal'
                 value={this.props.original_course_year}
+                error={this.props.errorsubmitted ? this.props.original_course_year === 0 : false}
                 onChange={(event) => this.props.handleChange({ original_course_year: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課年級</MenuItem>
@@ -243,6 +252,7 @@ class WaiveCourseForm extends React.Component {
                 }}
                 margin='normal'
                 value={this.props.original_course_semester}
+                error={this.props.errorsubmitted ? this.props.original_course_semester === 0 : false}
                 onChange={(event) => this.props.handleChange({ original_course_semester: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
@@ -261,6 +271,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_credit}
+                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
               />
               <TextField
@@ -275,6 +286,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_score}
+                error={this.props.errorsubmitted ? this.props.original_course_score === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_score: event.target.value })}
               />
             </div>
@@ -296,6 +308,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.current_course_code}
+                error={this.props.errorsubmitted ? this.props.current_course_code === '' : false}
                 onChange={(event) => this.props.handleChange({ current_course_code: event.target.value })}
               />
               <TextField
@@ -309,6 +322,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.current_course_name}
+                error={this.props.errorsubmitted ? this.props.current_course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ current_course_name: event.target.value })}
               />
               <TextField
@@ -323,6 +337,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.current_course_credit}
+                error={this.props.errorsubmitted ? this.props.current_course_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ current_course_credit: event.target.value })}
               />
               <TextField
@@ -342,6 +357,7 @@ class WaiveCourseForm extends React.Component {
                 }}
                 margin='normal'
                 value={this.props.current_course_type}
+                error={this.props.errorsubmitted ? this.props.current_course_type === '請選擇選別' : false}
                 onChange={(event) => this.props.handleChange({ current_course_type: event.target.value })}
               >
                 <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
@@ -359,7 +375,7 @@ class WaiveCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.file ? this.props.current_course_type === '' : false} />
             </div>
           </div>
         </div>
@@ -411,6 +427,7 @@ class WaiveCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.class === '' : false}
                 value={this.props.class}
                 onChange={(event) => this.props.handleChange({ class: event.target.value })}
               />
@@ -426,6 +443,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.phone}
+                error={this.props.errorsubmitted ? this.props.phone === '' : false}
                 onChange={(event) => this.props.handleChange({ phone: event.target.value })}
               />
             </div>
@@ -448,6 +466,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_school}
+                error={this.props.errorsubmitted ? this.props.original_school === '' : false}
                 onChange={(event) => this.props.handleChange({ original_school: event.target.value })}
               />
               <TextField
@@ -461,6 +480,7 @@ class WaiveCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
+                error={this.props.errorsubmitted ? this.props.original_department === '' : false}
                 value={this.props.original_department}
                 onChange={(event) => this.props.handleChange({ original_department: event.target.value })}
               />
@@ -477,6 +497,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_graduation_credit}
+                error={this.props.errorsubmitted ? this.props.original_graduation_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ original_graduation_credit: event.target.value })}
               />
             </div>
@@ -494,6 +515,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_name}
+                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
               />
               <TextField
@@ -508,6 +530,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_department}
+                error={this.props.errorsubmitted ? this.props.original_course_department === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_department: event.target.value })}
               />
               <TextField
@@ -527,6 +550,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 margin='normal'
+                error={this.props.errorsubmitted ? this.props.original_course_year === 0 : false}
                 value={this.props.original_course_year}
                 onChange={(event) => this.props.handleChange({ original_course_year: event.target.value })}
               >
@@ -554,6 +578,7 @@ class WaiveCourseForm extends React.Component {
                 }}
                 margin='normal'
                 value={this.props.original_course_semester}
+                error={this.props.errorsubmitted ? this.props.original_course_semester === 0 : false}
                 onChange={(event) => this.props.handleChange({ original_course_semester: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
@@ -573,6 +598,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_credit}
+                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
               />
               <TextField
@@ -588,6 +614,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.original_course_score}
+                error={this.props.errorsubmitted ? this.props.original_course_score === '' : false}
                 onChange={(event) => this.props.handleChange({ original_course_score: event.target.value })}
               />
             </div>
@@ -610,6 +637,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.current_course_code}
+                error={this.props.errorsubmitted ? this.props.current_course_code === '' : false}
                 onChange={(event) => this.props.handleChange({ current_course_code: event.target.value })}
               />
               <TextField
@@ -624,6 +652,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.current_course_name}
+                error={this.props.errorsubmitted ? this.props.current_course_name === '' : false}
                 onChange={(event) => this.props.handleChange({ current_course_name: event.target.value })}
               />
               <TextField
@@ -639,6 +668,7 @@ class WaiveCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.current_course_credit}
+                error={this.props.errorsubmitted ? this.props.current_course_credit === '' : false}
                 onChange={(event) => this.props.handleChange({ current_course_credit: event.target.value })}
               />
               <TextField
@@ -659,6 +689,7 @@ class WaiveCourseForm extends React.Component {
                 }}
                 margin='normal'
                 value={this.props.current_course_type}
+                error={this.props.errorsubmitted ? this.props.current_course_type === '請選擇選別' : false}
                 onChange={(event) => this.props.handleChange({ current_course_type: event.target.value })}
               >
                 <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
@@ -676,7 +707,7 @@ class WaiveCourseForm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} file={this.props.file} />
+              <Postfile fileChange={(file) => this.props.handleChange({ file: file })} error={this.props.errorsubmitted ? this.props.file === '' : false} />
             </div>
           </div>
         </div>

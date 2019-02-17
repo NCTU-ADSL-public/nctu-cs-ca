@@ -280,7 +280,7 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.program === '' : false}
+                error={this.props.errorsubmitted ? this.props.studentIdcard.program === '' : false}
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.studentIdcard.program}
               />
