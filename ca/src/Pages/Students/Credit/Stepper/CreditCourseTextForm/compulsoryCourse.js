@@ -9,6 +9,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
+import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   container: {
@@ -58,6 +59,8 @@ class CompulsoryCourseForm extends React.Component {
         {/* For PC screen */}
         <div className='hidden-xs'>
           <div className={classes.container}>
+            <h1 style={{color: 'black'}} >本系必修課程抵免單</h1>
+            <Divider />
             <div style={{ color: 'red', fontSize: '20px' }}>申請多門抵免需額外填寫另一張表單</div>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
@@ -395,6 +398,8 @@ class CompulsoryCourseForm extends React.Component {
         {/* For mobile screen */}
         <div className='hidden-sm hidden-md hidden-lg'>
           <div className={classes.container}>
+            <h2 style={{color: 'black', fontSize: '20px'}} >本系必修課程抵免單</h2>
+            <Divider />
             <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />

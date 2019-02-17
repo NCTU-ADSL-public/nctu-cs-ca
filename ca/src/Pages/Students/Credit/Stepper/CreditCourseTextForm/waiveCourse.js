@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { waiveCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 import Postfile from './Postfile'
+import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   container: {
@@ -68,6 +69,8 @@ class WaiveCourseForm extends React.Component {
         {/* For PC screen */}
         <div className='hidden-xs'>
           <div className={classes.container}>
+            <h1 style={{color: 'black'}} >學分抵免單</h1>
+            <Divider />
             <div style={{ color: 'red', fontSize: '20px' }}>申請多門抵免需額外填寫另一張表單</div>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
@@ -383,6 +386,8 @@ class WaiveCourseForm extends React.Component {
         {/* For mobile screen */}
         <div className='hidden-sm hidden-md hidden-lg'>
           <div className={classes.container}>
+            <h2 style={{color: 'black', fontSize: '20px'}} >學分抵免單</h2>
+            <Divider />
             <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
