@@ -266,7 +266,7 @@ class Verify extends React.Component {
           email: email
         }
       ],
-      status: 1,
+      status: 2,
       transferTo: this.state.transferTo
     }).then(res => {
       updatedList[id].status = 2
@@ -386,10 +386,11 @@ class Verify extends React.Component {
   }
   handleSend () {
     let updatedList = this.state.formList
+    let status = this.state.teacherList.filter(e => e.id === this.state.transferTo)[0].status === 1 ? 1:5
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 1
+          updatedList[e].status = status
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -398,7 +399,7 @@ class Verify extends React.Component {
           })
         }
       ),
-      status: 1,
+      status: status,
       transferTo: this.state.transferTo
     }).then(res => {
       this.setState({formList: updatedList, open: true, message: 0,select: []})
