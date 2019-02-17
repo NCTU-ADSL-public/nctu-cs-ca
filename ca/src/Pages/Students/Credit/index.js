@@ -11,7 +11,7 @@ import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
 import ExemptCoursePanel from './CreditPanel/exemptCoursePanel'
 import CompulsoryCoursePanel from './CreditPanel/compulsoryCoursePanel'
 import EnglishCoursePanel from './CreditPanel/englishCoursePanel'
-import { getCreditInfo, resetCourse } from '../../../Redux/Students/Actions/Credit'
+import { getCreditInfo, resetCourse, senderrorSubmit } from '../../../Redux/Students/Actions/Credit'
 import creditImg from '../../../Resources/credit_no_upload.png'
 
 const styles = theme => ({
@@ -154,6 +154,7 @@ class Index extends React.Component {
                   className={classes.btn}
                   variant='contained'
                   color='primary'
+                  onClick={() => this.props.senderrorSubmit(false)}
                 >
                   抵免申請
                 </Button>
@@ -170,6 +171,7 @@ class Index extends React.Component {
                   variant='contained'
                   color='primary'
                   style={{ margin: 'auto', width: '80%' }}
+                  onClick={() => this.props.senderrorSubmit(false)}
                 >
                   抵免申請
                 </Button>
@@ -299,7 +301,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getCreditInfo: () => dispatch(getCreditInfo()),
-  resetCourse: () => dispatch(resetCourse())
+  resetCourse: () => dispatch(resetCourse()),
+  senderrorSubmit: (payload) => dispatch(senderrorSubmit(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
