@@ -188,7 +188,6 @@ class ExemptCourseFormConfirm extends React.Component {
               <TextField
                 label='成績'
                 margin='normal'
-                type='number'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
@@ -416,7 +415,6 @@ class ExemptCourseFormConfirm extends React.Component {
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='成績'
                 margin='normal'
-                type='number'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {

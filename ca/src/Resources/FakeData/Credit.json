@@ -16,7 +16,7 @@
       "original_course_name": "機率",
       "original_course_department": "資工系",
       "original_course_credit": 3,
-      "original_course_score": 80,
+      "original_course_score": "80",
       "current_course_code": "EC4313",
       "current_course_name": "機率",
       "current_course_credit": 3,
@@ -41,7 +41,7 @@
       "original_course_name": "機率",
       "original_course_department": "資工系",
       "original_course_credit": 3,
-      "original_course_score": 80,
+      "original_course_score": "80",
       "current_course_code": "EC4313",
       "current_course_name": "機率",
       "current_course_credit": 3,
@@ -63,14 +63,14 @@
       "original_course_name": "機率",
       "original_course_department": "資工系",
       "original_course_credit": 3,
-      "original_course_score": 80,
+      "original_course_score": "通過",
       "current_course_code": "EC4313",
       "current_course_name": "機率",
       "current_course_credit": 3,
       "current_course_type": "必修",
       "file": "0516xxx_抵免.pdf",
-      "status": 1,
-      "reject_reason": ""
+      "status": 3,
+      "reject_reason": "資料錯誤"
     }
   ],
   "compulsory_course": [
