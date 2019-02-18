@@ -329,7 +329,7 @@ class GroupList extends React.Component {
     semList.push(tmp)
     while(tmp !== '106-2'){
       if(tmp[4] === '1'){
-        let yy = parseInt(tmp.substring(0, 3)) - 1
+        let yy = parseInt(tmp.substring(0, 3), 10) - 1
         tmp = yy.toString() + '-2'
       }else if(tmp[4] === '2'){
         tmp = tmp.substring(0, 4) + '1'
