@@ -192,7 +192,7 @@ const Arrow = () => (
   </svg>
 )
 const type = [[1,5]]
-const typeName = [['學分抵免','#2C3E50','抵'],['課程免修','#E74C3C','免'],['本系必修課程抵免','#8ed875','必'],['英授專業課程抵免','#3498DB','英']]
+const typeName = [['外系抵免','#8ed875','外'],['英授專業課程抵免','#3498DB','英'],['課程免修','#E74C3C','免'],['學分抵免','#2C3E50','抵']]
 
 class Verify extends React.Component {
   constructor (props) {

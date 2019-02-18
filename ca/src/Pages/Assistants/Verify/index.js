@@ -200,7 +200,7 @@ const Arrow = () => (
   </svg>
 )
 const type = [[0], [1], [5],[2],[6], [3, 4]]
-const typeName = [['學分抵免','#2C3E50','抵'],['課程免修','#E74C3C','免'],['本系必修課程抵免','#8ed875','必'],['英授專業課程抵免','#3498DB','英']]
+const typeName = [['外系抵免','#8ed875','外'],['英授專業課程抵免','#3498DB','英'],['課程免修','#E74C3C','免'],['學分抵免','#2C3E50','抵']]
 
 class Verify extends React.Component {
   constructor (props) {
@@ -494,7 +494,7 @@ class Verify extends React.Component {
   downCSV(i){
     switch(i) {
       case 0:
-        return (this.state.formList.filter(e=>(e.type === 0 || e.type === 1))
+        return (this.state.formList.filter(e=>(e.type === 2 || e.type === 3))
         .map(e=>{
             let date = e.date.split('-'),year,semester
             if(parseInt(date[1],10) < 8){
@@ -522,7 +522,7 @@ class Verify extends React.Component {
                 })
         }))
       case 1:
-      return this.state.formList.filter(e=>e.type === 2)
+      return this.state.formList.filter(e=>e.type === 0)
       .map(e=>{
           let date = e.date.split('-'),year,semester
           if(parseInt(date[1],10) < 8){
@@ -548,7 +548,7 @@ class Verify extends React.Component {
               })
       })
       case 2:
-      return this.state.formList.filter(e=>e.type === 3)
+      return this.state.formList.filter(e=>e.type === 1)
       .map(e=>{
           let date = e.date.split('-'),year,semester
           if(parseInt(date[1],10) < 8){
