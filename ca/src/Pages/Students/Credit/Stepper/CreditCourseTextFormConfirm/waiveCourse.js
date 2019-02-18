@@ -236,6 +236,7 @@ class WaiveCourseFormConfirm extends React.Component {
               />
               <TextField
                 label='成績'
+                placeholder='若無分數則填通過與否'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -509,6 +510,7 @@ class WaiveCourseFormConfirm extends React.Component {
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='成績'
+                placeholder='若無分數則填通過與否'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
