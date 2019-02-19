@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import WaiveCoursePanel from './CreditPanel/waiveCoursePanel'
 import ExemptCoursePanel from './CreditPanel/exemptCoursePanel'
@@ -70,7 +71,8 @@ class Index extends React.Component {
       filter: {
         type: -1, // 抵免種類
         status: -1 // 抵免狀態
-      }
+      },
+      showPrintMenu: null
     }
   }
 
@@ -103,12 +105,22 @@ class Index extends React.Component {
     )
   }
 
+  handlePrintBtnClick = (event) => {
+    this.setState({ showPrintMenu: event.currentTarget });
+  }
+
+  handlePrintMenuClose = () => {
+    this.setState({ showPrintMenu: null });
+  }
+
+
   render () {
     const { classes } = this.props
     const waiveCourse = this.props.creditInfo.waive_course.filter((data) => this.checkFilter(0, data.status))
     const exemptCourse = this.props.creditInfo.exempt_course.filter((data) => this.checkFilter(1, data.status))
     const compulsoryCourse = this.props.creditInfo.compulsory_course.filter((data) => this.checkFilter(2, data.status))
     const englishCourse = this.props.creditInfo.english_course.filter((data) => this.checkFilter(3, data.status))
+    const anchorElement = this.state.showPrintMenu
 
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
@@ -161,6 +173,27 @@ class Index extends React.Component {
                 </Button>
               </Link>
             </div>
+          </div>
+          <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
+            <Button
+              className={classes.btn}
+              variant='contained'
+              color='primary'
+              aria-owns={anchorElement ? 'print-menu' : undefined}
+              aria-haspopup="true"
+              onClick={this.handlePrintBtnClick}
+            >
+              列印申請表
+            </Button>
+            <Menu
+              id="print-menu"
+              anchorEl={anchorElement}
+              open={Boolean(anchorElement)}
+              onClose={this.handlePrintMenuClose}
+            >
+              <MenuItem onClick={this.handlePrintMenuClose}>抵免學分申請表</MenuItem>
+              <MenuItem onClick={this.handlePrintMenuClose}>課程免修申請表</MenuItem>
+            </Menu>
           </div>
 
           {/* For mobile screen */}
