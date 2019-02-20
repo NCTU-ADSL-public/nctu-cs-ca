@@ -74,7 +74,9 @@ class Index extends React.Component {
         type: -1, // 抵免種類
         status: -1 // 抵免狀態
       },
-      showPrintMenu: null
+      showPrintMenu: null,
+      printFormNumber: 0,
+      doPrinting: false
     }
   }
 
@@ -88,6 +90,10 @@ class Index extends React.Component {
     if (this.props.deleteStatus !== prevProps.deleteStatus &&
         this.props.deleteStatus === 'success') {
       this.props.getCreditInfo()
+    }
+    if (this.state.doPrinting) {
+      this.setState({doPrinting: false})
+      window.print()
     }
   }
 
@@ -115,6 +121,12 @@ class Index extends React.Component {
     this.setState({ showPrintMenu: null });
   }
 
+  printApplicationTable = (formNumber, fileName) => {
+    if (fileName !== null) { document.title = fileName }
+    this.setState({ printFormNumber: formNumber, doPrinting: true })
+    this.handlePrintMenuClose()
+    return true
+  }
 
   render () {
     const { classes } = this.props
@@ -123,6 +135,7 @@ class Index extends React.Component {
     const compulsoryCourse = this.props.creditInfo.compulsory_course.filter((data) => this.checkFilter(2, data.status))
     const englishCourse = this.props.creditInfo.english_course.filter((data) => this.checkFilter(3, data.status))
     const anchorElement = this.state.showPrintMenu
+    const printFormNumber = this.state.printFormNumber
 
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
@@ -193,8 +206,8 @@ class Index extends React.Component {
               open={Boolean(anchorElement)}
               onClose={this.handlePrintMenuClose}
             >
-              <MenuItem onClick={this.handlePrintMenuClose}>抵免學分申請表</MenuItem>
-              <MenuItem onClick={this.handlePrintMenuClose}>課程免修申請表</MenuItem>
+              <MenuItem onClick={() => {this.printApplicationTable(0, '抵免學分申請表')}}>抵免學分申請表</MenuItem>
+              <MenuItem onClick={() => {this.printApplicationTable(1, '課程免修申請表')}}>課程免修申請表</MenuItem>
             </Menu>
           </div>
 
@@ -322,7 +335,8 @@ class Index extends React.Component {
           </div>
         </div>
         <div id='printArea'>
-          <ExemptCourse/>
+          { printFormNumber === 0 && <WaiveCourse/> }
+          { printFormNumber === 1 && <ExemptCourse/> }
         </div>
       </div>
     )
