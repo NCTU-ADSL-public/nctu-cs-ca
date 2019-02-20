@@ -31,7 +31,7 @@ const styles = {
   subTitle: {
     fontSize: '1.2em',
     fontWeight: '4300',
-    color: '#bfbfbf',
+    color: '#727272',
     margin: '55px 0 0 37px',
     float: 'left'
   },
@@ -109,7 +109,7 @@ class GroupApply extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      cs_number: 0,
+      current_accept: 0,
       chipOpen: new Map(),
       applyList: [],
       // applyList: [
@@ -220,7 +220,7 @@ class GroupApply extends React.Component {
       sem: semester
     }).then(res => {
       this.setState({
-        cs_number: res.data.cs_number,
+        current_accept: res.data.current_accept,
       })
     }).catch(err => {
       console.log(err)
@@ -267,7 +267,7 @@ class GroupApply extends React.Component {
   }
 
   render () {
-    const csNum = this.state.cs_number
+    const acc = this.state.current_accept
     return (
       <Grid style={{minHeight: 500}}>
         <Row>
@@ -277,8 +277,11 @@ class GroupApply extends React.Component {
           </Col>
 
           <Col xs={12} md={4} lg={4}>
+            {/*<div style={styles.subTitle}>*/}
+              {/*尚可接受專題生數量: {acc <= 7 ? 7 - acc + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }*/}
+            {/*</div>*/}
             <div style={styles.subTitle}>
-              尚可接受專題生數量: {csNum <= 7 ? 7 - csNum + '人' : <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }
+              已收本系生: <span style={{color: 'red', fontWeight: 'bold'}}>{acc}</span>/7 人 { acc <= 7 || <span style={{color: 'red', fontWeight: 'bold'}}>(已超收學生)</span> }
             </div>
           </Col>
 
