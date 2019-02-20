@@ -335,8 +335,8 @@ class Index extends React.Component {
           </div>
         </div>
         <div id='printArea'>
-          { printFormNumber === 0 && <WaiveCourse/> }
-          { printFormNumber === 1 && <ExemptCourse/> }
+          { printFormNumber === 0 && this.props.creditInfo.waive_course && this.props.creditInfo.waive_course.length && <WaiveCourse courses={ this.props.creditInfo.waive_course } /> }
+          { printFormNumber === 1 && this.props.creditInfo.exempt_course && this.props.creditInfo.exempt_course.length && <ExemptCourse courses={ this.props.creditInfo.exempt_course } /> }
         </div>
       </div>
     )

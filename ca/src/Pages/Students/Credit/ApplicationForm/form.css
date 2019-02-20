@@ -13,6 +13,10 @@
     content: "　";
 }
 
+.underline::before {
+    content: "　";
+}
+
 .field {
     display: inline-block;
     margin-left: 12pt;
