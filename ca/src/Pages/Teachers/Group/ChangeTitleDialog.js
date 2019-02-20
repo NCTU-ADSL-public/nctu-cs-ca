@@ -93,7 +93,7 @@ export default class ChangeTitleDialog extends React.Component {
 
   handleClose = (status) => {
     if(status !== 1){
-      this.setState({open: false})
+      if( window.confirm('確定要放棄修改? 資料將不會有任何修改!') ) this.setState({open: false})
     }else if(status === 1){
       this.setState({open: false})
       console.log('research_title: ' + this.props.title)

@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import defaultPic from '../../../Resources/defalt.jpg'
 import ReplyDialog from './ReplyDialog'
 import InfoCard from '../Shared/InfoCard'
+import Loading from '../../../Components/Loading'
 // mui
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
@@ -109,6 +110,7 @@ class GroupApply extends React.Component {
     super(props)
     this.state = {
       loading: true,
+      fuck: '系統正在拚命讀取資料中，請你再拿出多一點耐心等候。',
       current_accept: 0,
       chipOpen: new Map(),
       applyList: [],
@@ -219,10 +221,12 @@ class GroupApply extends React.Component {
       teacherId: this.props.idCard.teacher_id,
       sem: semester
     }).then(res => {
+      this.setState({loading: false})
       this.setState({
         current_accept: res.data.current_accept,
       })
     }).catch(err => {
+      this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
       console.log(err)
     })
   }
@@ -294,11 +298,12 @@ class GroupApply extends React.Component {
 
         </Row>
         <Row style={styles.groups}>
-          {/*<Loading*/}
-            {/*size={100}*/}
-            {/*left={40}*/}
-            {/*top={100}*/}
-            {/*isLoading={this.state.loading} />*/}
+          {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.fuck}</div>}
+          <Loading
+            size={100}
+            left={40}
+            top={100}
+            isLoading={this.state.loading} />
           {this.state.applyList.length !== 0
             ?
               this.state.applyList.map((item, i) => (
