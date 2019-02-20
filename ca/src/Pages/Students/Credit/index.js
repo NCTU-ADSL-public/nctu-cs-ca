@@ -14,6 +14,8 @@ import CompulsoryCoursePanel from './CreditPanel/compulsoryCoursePanel'
 import EnglishCoursePanel from './CreditPanel/englishCoursePanel'
 import { getCreditInfo, resetCourse, senderrorSubmit } from '../../../Redux/Students/Actions/Credit'
 import creditImg from '../../../Resources/credit_no_upload.png'
+import WaiveCourse from './ApplicationForm/WaiveCourse'
+import ExemptCourse from './ApplicationForm/ExemptCourse'
 
 const styles = theme => ({
   img: {
@@ -124,7 +126,7 @@ class Index extends React.Component {
 
     return (
       <div className='container' style={{ marginBottom: '50px' }}>
-        <div className='row'>
+        <div className='row showArea'>
           {/* For PC screen */}
           <div className='col-md-12 hidden-xs' style={{ marginTop: '20px' }}>
             <div>
@@ -318,6 +320,9 @@ class Index extends React.Component {
               </div>
             }
           </div>
+        </div>
+        <div id='printArea'>
+          <ExemptCourse/>
         </div>
       </div>
     )
