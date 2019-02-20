@@ -204,7 +204,8 @@ class GroupList extends React.Component {
   }
 
   fetchData (sem) {
-   this.setState({groupList: []})
+    this.setState({loading: true})
+    this.setState({groupList: []})
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
     // let _this = this
@@ -386,7 +387,7 @@ class GroupList extends React.Component {
             left={40}
             top={100}
             isLoading={this.state.loading} />
-            {this.state.groupList.length !== 0
+            {!this.state.loading && this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
                   key={i}
