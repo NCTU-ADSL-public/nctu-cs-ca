@@ -10,7 +10,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles/index'
 import Edit from './index'
-import { updateProject } from '../../../../../Redux/Students/Actions/ProjectList'
 
 const styles = {
   appBar: {

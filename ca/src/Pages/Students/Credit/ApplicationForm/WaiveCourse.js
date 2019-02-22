@@ -71,7 +71,7 @@ class WaiveCourse extends React.Component {
               {
                 waiveCourse &&
                 waiveCourse.map((data, index) => (
-                  <tr style={{ height: '32pt' }}>
+                  <tr style={{ height: '32pt' }} key={index}>
                     <td style={{ width: '17.1pt', textAlign: 'center', fontSize: '10pt' }}>{ index+1 }</td>
                     <td style={{ width: '153.2pt' }}>{data.original_course_name}</td>
                     <td style={{ width: '21.2pt' }}>{data.original_course_year}</td>
