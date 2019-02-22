@@ -21,7 +21,7 @@ class StudentVerify extends React.Component {
       }
     }).then(
       res => {
-        this.setState({data: res.data[this.props.match.params.type].filter(e=> e.timestatmp === this.props.match.params.time)[0]})
+        this.setState({data: res.data[this.props.match.params.type].filter(e=> e.timestamp === this.props.match.params.time)[0]})
       }
     )
   }
