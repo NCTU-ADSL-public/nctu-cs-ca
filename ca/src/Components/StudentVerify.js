@@ -1,5 +1,4 @@
 import React from 'react'
-import Frame from './Frame'
 import axios from 'axios'
 
 import WaiveCoursePanel from '../Pages/Students/Credit/CreditPanel/waiveCoursePanel'
@@ -14,27 +13,27 @@ class StudentVerify extends React.Component {
     this.state = {
       data : {}
     }
-    
   }
   componentDidMount(){
     axios.get('/students/credit/all',{
       params: {
-        id: this.props.sid
+        id: this.props.match.params.sid
       }
     }).then(
       res => {
-        this.setState({data: res.data[this.props.type].filter(e=> e.timestatmp === this.props.time)[0]})
+        this.setState({data: res.data[this.props.match.params.type].filter(e=> e.timestatmp === this.props.match.params.time)[0]})
       }
     )
   }
   render () {
+    const name = ['compulsory_course','english_course','waive_course','exempt_course']
     return (
-      <Frame>
-        {/* {this.props.type === name[0] && <CompulsoryCoursePanel data={}/>}
-        {this.props.type === name[1] && <CompulsoryCoursePanel data={}/>}
-        {this.props.type === name[2] && <CompulsoryCoursePanel data={}/>}
-        {this.props.type === name[3] && <CompulsoryCoursePanel data={}/>} */}
-      </Frame>
+      <div style={{margin: '100px auto',marginBottom: 50,width: '90%'}}>
+        {this.props.match.params.type === name[0] && <CompulsoryCoursePanel data={this.state.data}/>}
+        {this.props.match.params.type === name[1] && <EnglishCoursePanel data={this.state.data}/>}
+        {this.props.match.params.type === name[2] && <WaiveCoursePanel data={this.state.data}/>}
+        {this.props.match.params.type === name[3] && <ExemptCoursePanel data={this.state.data}/>}
+      </div>
     )
   }
 }
