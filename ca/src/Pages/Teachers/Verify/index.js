@@ -191,9 +191,8 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-const type = [[1,5]]
-const typeName = [['外系抵免','#8ed875','外'],['英授專業課程抵免','#3498DB','英'],['課程免修','#E74C3C','免'],['學分抵免','#2C3E50','抵']]
-
+const type = [[0], [1], [5],[2],[6], [3, 4]]
+const typeName = [['本系必修課程抵免','#8ed875','必'],['英授專業課程抵免','#3498DB','英'],['學分抵免','#2C3E50','抵'],['課程免修','#E74C3C','免']]
 class Verify extends React.Component {
   constructor (props) {
     super(props)
@@ -492,7 +491,7 @@ class Verify extends React.Component {
                               </Button>
                             </Tooltip>
                             {
-                              apply.type !== 3  &&
+                              apply.type !== 1  &&
                               <React.Fragment>
                                 <span className={classes.progress}> <Arrow /></span>
                                 <Tooltip title={
@@ -530,16 +529,16 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>學號</TableCell>
                               <TableCell className={classes.font3}>姓名</TableCell>
                               <TableCell className={classes.font3}>電話</TableCell>
-                              
-                              {apply.type !== 3 &&<TableCell className={classes.font3}>預抵免課程</TableCell>}
-                             
+                              <TableCell className={classes.font3}>班別</TableCell>
+                              {/* {apply.type !== 3 &&<TableCell className={classes.font3}>預抵免課程</TableCell>}
+                              */}
                             </TableRow>
                             <TableRow >
                               <TableCell className={classes.font}>{apply.sid}</TableCell>
                               <TableCell className={classes.font}>{apply.name}</TableCell>
                               <TableCell className={classes.font}>{apply.phone}</TableCell>
-                              
-                              {apply.type !== 3 && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>}
+                              <TableCell className={classes.font}>{apply.info}</TableCell>
+                              {/* {apply.type !== 3 && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>} */}
                               
                             </TableRow>
                             <TableRow className={classes.header}>
@@ -551,7 +550,7 @@ class Verify extends React.Component {
                             <TableRow>
                               <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
-                              <TableCell className={classes.font}>{(apply.type === 2 || apply.type === 3) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span>: apply.score}</TableCell>
+                              <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span>: apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
                             </TableRow>
                             <TableRow className={classes.header}>
