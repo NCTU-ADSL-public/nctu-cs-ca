@@ -24,7 +24,7 @@ import Chip from '@material-ui/core/Chip'
 
 const styles = theme => ({
   root: {
-    width: '60%',
+    width: '90%',
     margin: '0 auto',
     marginTop: '20px',
     marginBottom: '60px'
