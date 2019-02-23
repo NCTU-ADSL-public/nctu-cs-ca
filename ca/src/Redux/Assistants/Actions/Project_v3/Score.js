@@ -21,14 +21,9 @@ export const fetchScores = (post_item) => dispatch => {
 
 export const setScores = payload => dispatch => {
   axios.post('/assistants/SetResearchGrade', payload).then( res => {
-    console.log("setScores payload")
-    console.log(payload)
     dispatch(set_scores(payload))
   }).catch( err => {
     console.log(err)
-    console.log("setScores payload")
-    console.log(payload)
-    dispatch(set_scores(payload))
   })
 }
 
