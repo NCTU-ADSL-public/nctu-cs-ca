@@ -159,15 +159,21 @@ export default class ScoreDialog extends React.Component {
   checkAllText = () => {
     let score = this.state.score
     let err = this.state.err
+    let studentNum = this.props.participants.length
     err.forEach(i => {
       err[i] = ( this.isInt100(score[i]) ? '' :'分數必須是0~100之間的整數' )
     })
     this.setState({err})
-    let pass = (
-      this.isInt100(score[0]) &&
-      this.isInt100(score[1]) &&
-      this.isInt100(score[2]) &&
-      this.isInt100(score[3]) )
+    let pass = false
+    for(let i=0; i<studentNum; i++){
+      pass = this.isInt100(score[i])
+      if(!pass) break
+    }
+    // let pass = (
+    //   this.isInt100(score[0]) &&
+    //   this.isInt100(score[1]) &&
+    //   this.isInt100(score[2]) &&
+    //   this.isInt100(score[3]) )
     if (!pass) alert('分數輸入格式錯誤! 請修正後再送出。')
     if(pass){
       for(let i=0; i<this.state.score.length; ++i){
