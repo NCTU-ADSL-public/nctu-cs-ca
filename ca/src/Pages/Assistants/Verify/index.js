@@ -282,6 +282,9 @@ class Verify extends React.Component {
         updatedList[id].status = 2
         this.setState({formList: updatedList, open: true, message: 0, transferTo:'',select: []})
       }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -308,6 +311,9 @@ class Verify extends React.Component {
         updatedList[id].status = 3
         this.setState({formList: updatedList, open: true, message: 0,select: []})
       }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -333,6 +339,9 @@ class Verify extends React.Component {
       if(res.data.signal === 1){
         updatedList[id].status = 0
         this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
       }
     }).catch(err => {
       this.setState({open: true, message: 1})
@@ -373,6 +382,9 @@ class Verify extends React.Component {
       if(res.data.signal === 1){
         this.setState({formList: updatedList, open: true, message: 0,select: []})
       }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -396,6 +408,9 @@ class Verify extends React.Component {
     }).then(res => {
       if(res.data.signal === 1){
         this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
       }
     }).catch(err => {
       this.setState({open: true, message: 1})
@@ -422,6 +437,9 @@ class Verify extends React.Component {
       if(res.data.signal === 1){
         this.setState({formList: updatedList, open: true, message: 0,select: [],transferTo:''})
       }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -446,6 +464,9 @@ class Verify extends React.Component {
       if(res.data.signal === 1){
         this.setState({formList: updatedList, open: true, message: 0,select: []})
       }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -469,6 +490,9 @@ class Verify extends React.Component {
     }).then(res => {
       if(res.data.signal === 1){
         this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
       }
     }).catch(err => {
       this.setState({open: true, message: 1})
@@ -1125,11 +1149,13 @@ class Verify extends React.Component {
                             </TableRow>
                             <TableRow>
                             <TableCell className={classes.font} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
-                            <TableCell className={classes.font} colSpan={3} ><Chip style={{ verticalAlign: 'inherit'}} avatar={
+                            <TableCell className={classes.font} colSpan={3} >
+                              {apply.type === 0 && <Chip style={{ verticalAlign: 'inherit'}} avatar={
                               <Avatar>
                                 <TIcon />
                               </Avatar>
                             }label={apply.reason_type}/>
+                             }
                              &nbsp;&nbsp;{apply.reason}
                             </TableCell>
                             </TableRow>
