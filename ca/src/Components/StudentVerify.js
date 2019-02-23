@@ -15,7 +15,7 @@ class StudentVerify extends React.Component {
     }
   }
   componentDidMount(){
-    axios.get('/students/credit/all',{
+    axios.get('/assistants/credit/all',{
       params: {
         student_id: this.props.match.params.sid
       }

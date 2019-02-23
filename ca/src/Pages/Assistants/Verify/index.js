@@ -33,12 +33,13 @@ import FaceIcon from '@material-ui/icons/Face'
 import TrashIcon from '@material-ui/icons/Delete'
 import CheckNone from '@material-ui/icons/CheckBoxOutlineBlank'
 import ReturnIcon from '@material-ui/icons/Replay'
+import TIcon from '@material-ui/icons/TurnedInNot'
 // import SwitchIcon from '@material-ui/icons/Flag'
 import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import FakeData from '../../../Resources/FakeData'
+import FakeData from '../../../Resources/FakeData'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from "react-csv"
@@ -209,11 +210,11 @@ class Verify extends React.Component {
     super(props)
     this.state = {
 // for test
-      // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
-      // teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
+      formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
 // end for test
-      formList:[],
-      teacherList: [],
+      // formList:[],
+      // teacherList: [],
       open: false,
       message: 0,
       index: 0,
@@ -1110,7 +1111,13 @@ class Verify extends React.Component {
                             </TableRow>
                             <TableRow>
                             <TableCell className={classes.font} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
-                            <TableCell className={classes.font} colSpan={3} >{apply.reason}</TableCell>
+                            <TableCell className={classes.font} colSpan={3} ><Chip style={{ verticalAlign: 'inherit'}} avatar={
+                              <Avatar>
+                                <TIcon />
+                              </Avatar>
+                            }label={apply.reason_type}/>
+                             &nbsp;&nbsp;{apply.reason}
+                            </TableCell>
                             </TableRow>
                             {
                               ((apply.status === 6) || (apply.status === 0 && apply.reject_reason !== null) ) && (
