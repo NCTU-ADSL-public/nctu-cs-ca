@@ -5,6 +5,7 @@ const initialState = {
   waiveCourse: {
     apply_year: 107,
     apply_semester: 2,
+    apply_time: '',
     class: '',
     phone: '',
     original_school: '',
@@ -25,6 +26,7 @@ const initialState = {
   exemptCourse: {
     apply_year: 107,
     apply_semester: 1,
+    apply_time: '',
     class: '',
     phone: '',
     original_course_year: 0,
@@ -42,6 +44,7 @@ const initialState = {
   compulsoryCourse: {
     apply_year: '',
     apply_semester: '',
+    apply_time: '',
     class: '',
     phone: '',
     department: '',
@@ -63,6 +66,7 @@ const initialState = {
   englishCourse: {
     apply_year: '',
     apply_semester: '',
+    apply_time: '',
     class: '',
     phone: '',
     reason: '',

@@ -255,7 +255,8 @@ class HorizontalLinearStepper extends React.Component {
                 credit_type: 1,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             } else {
               // 新增
@@ -263,7 +264,8 @@ class HorizontalLinearStepper extends React.Component {
                 ...this_.props.waiveCourse,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             }
           } else if (selectFormIndex === 1) {
@@ -274,7 +276,8 @@ class HorizontalLinearStepper extends React.Component {
                 credit_type: 2,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             } else {
               // 新增
@@ -282,7 +285,8 @@ class HorizontalLinearStepper extends React.Component {
                 ...this_.props.exemptCourse,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             }
           } else if (selectFormIndex === 2) {
@@ -293,7 +297,8 @@ class HorizontalLinearStepper extends React.Component {
                 credit_type: 3,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             } else {
               // 新增
@@ -301,7 +306,8 @@ class HorizontalLinearStepper extends React.Component {
                 ...this_.props.compulsoryCourse,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             }
           } else if (selectFormIndex === 3) {
@@ -312,7 +318,8 @@ class HorizontalLinearStepper extends React.Component {
                 credit_type: 4,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             } else {
               // 新增
@@ -320,7 +327,8 @@ class HorizontalLinearStepper extends React.Component {
                 ...this_.props.englishCourse,
                 file: downloadURL,
                 apply_year: year,
-                apply_semester: semester
+                apply_semester: semester,
+                apply_time: Today.toLocaleString()
               })
             }
           }
