@@ -85,16 +85,16 @@ export default class ScoreDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      score: ['0','0','0','0', '0'],
-      comment: ['','','','', ''],
-      err: ['','','','', ''],
+      score: ['','','','',''],
+      comment: ['','','','',''],
+      err: ['','','','',''],
     }
   }
 
   handleOpen = () => {
-    let score = ['0','0','0','0', '0']
-    let err =  ['','','','', '']
-    let comment = ['','','','', '']
+    let score = ['', '', '', '', '']
+    let err =  ['', '', '', '', '']
+    let comment = ['', '', '', '', '']
     this.props.participants.forEach((item, i) => {
       if( this.isInt100(item.score) ) score[i] = item.score
     })
@@ -106,7 +106,7 @@ export default class ScoreDialog extends React.Component {
 
   handleClose = (status) => {
     if(status !== 1){
-      this.setState({open: false})
+      if( window.confirm('確定要放棄評分? 輸入的資料將會被清除!') ) this.setState({open: false})
     }else if(status === 1 && this.checkAllText() ){
       this.setState({open: false})
       console.log('----------------------- /professors/students/setScore ---------------------------')
@@ -240,24 +240,28 @@ export default class ScoreDialog extends React.Component {
                 <div key={i}>
                   <MuiThemeProvider >
                     <TextField
-                      floatingLabelText={item.student_id + ' ' + item.sname + ' 的分數'}
+                      floatingLabelStyle={{fontSize: 24, color: '#452b12'}}
+                      floatingLabelText={item.student_id + ' ' + item.sname}
+                      floatingLabelFixed
                       style={styles.text1}
-                      value={this.state.score[i]}
+                      placeholder={'請在此填寫評分'}
                       errorText={this.state.err[i]}
                       onChange={(event) => this.handleChangeScore(event, i)}
 
                     />
                   </MuiThemeProvider>
-                  {(parseFloat(this.state.score[i])>=90)?
+                  { ( this.state.score[i] !== '' && (parseFloat(this.state.score[i]) >= 90 || parseFloat(this.state.score[i]) < 60 ) )?
+                    <div style={{borderLeft: '10px solid #e63e42', paddingLeft: 10, marginLeft: 10, background: '#f2f2f2'}}>
+                    <TextField
+                      floatingLabelStyle={{fontSize: 22, color: '#e63e42'}}
+                      floatingLabelText={'評語 (若評分為【90分以上】或者【低於60】需要填寫填語!)'}
+                      floatingLabelFixed
+                      placeholder={'---------- 請用你的滑鼠在這裡點一下，在此填寫評語給 ' + item.sname + ' ----------'}
+                      style={styles.text3}
 
-                      <TextField
-                        floatingLabelText={'90分以上需要給評語喔!請在此填寫評語給' + item.sname +　'，謝謝！'}
-                        style={styles.text3}
-
-                        floatingLabelStyle={{color : '#6b3f1b', fontSize:'15'}}
-                        value={this.state.comment[i]}
-                        onChange={(event) =>this.handleComment(event, i)}
-                      />:''}
+                      value={this.state.comment[i]}
+                      onChange={(event) =>this.handleComment(event, i)}
+                    /></div> : '' }
                 </div>
               ))}
             </div>

@@ -1,16 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import Edit from './index'
-import { updateProject } from '../../../../../Redux/Students/Actions/ProjectList'
-import { connect } from 'react-redux'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles/index'
+import Edit from './index'
 
 const styles = {
   appBar: {
@@ -52,7 +51,13 @@ class AlertDialog extends React.Component {
     const { fullScreen, classes } = this.props
     return (
       <div>
-        <Button onClick={this.handleClickOpen} style={{ fontSize: '12px' }} color='inherit'>編輯</Button>
+        <Button
+          onClick={this.handleClickOpen}
+          style={{ fontSize: '12px' }}
+          color='inherit'
+        >
+          編輯
+        </Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -63,7 +68,6 @@ class AlertDialog extends React.Component {
           fullWidth
         >
           <DialogTitle id='alert-dialog-title' style={{ background: '#5D4037', padding: '0' }}>
-
             <AppBar className={classes.appBar} >
               <Toolbar >
                 <Typography variant='title' color='inherit' className={classes.flex} style={{ fontSize: '15px' }} >
@@ -88,7 +92,6 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  update_project: (intro) => dispatch(updateProject(intro, ownProps.data.research_title, ownProps.data.semester))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withMobileDialog()(AlertDialog)))

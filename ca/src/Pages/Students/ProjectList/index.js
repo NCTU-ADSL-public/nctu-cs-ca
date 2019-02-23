@@ -1,10 +1,10 @@
 import React from 'react'
-import { GridList } from 'material-ui/GridList'
-import './style.css'
 import { connect } from 'react-redux'
-import { fetchProjects } from '../../../Redux/Students/Actions/ProjectList'
-import ProjectTile from './ProjectTile'
+import { GridList } from 'material-ui/GridList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import ProjectTile from './ProjectTile'
+import { fetchProjects } from '../../../Redux/Students/Actions/ProjectList'
+import './style.css'
 
 const styles = {
   root: {
@@ -21,17 +21,16 @@ const styles = {
   }
 }
 
-class index extends React.Component {
-  constructor (props) {
-    super(props)
-    this.props.fetch_data()
+class Index extends React.Component {
+  componentDidMount () {
+    this.props.fetchData()
   }
 
   render () {
     return (
       <MuiThemeProvider className='container'>
         <div>
-          <div className='divide-horizontal-list '>
+          <div className='divide-horizontal-list'>
             <div className='divide-horizontal-span-list' ref='top'>
               <p >專題列表</p>
             </div>
@@ -57,11 +56,10 @@ class index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.Student.ProjectList.data,
-  studentProfile: state.Student.User.studentIdcard
+  data: state.Student.ProjectList.data
 })
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProjects())
+  fetchData: () => dispatch(fetchProjects())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(index)
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

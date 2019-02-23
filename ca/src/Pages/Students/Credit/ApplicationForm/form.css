@@ -1,0 +1,35 @@
+.course-form td {
+    border: 1pt solid #000;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.underline {
+    border-bottom: 1px solid #000;
+    display: inline-block;
+}
+
+.underline::after {
+    content: "　";
+}
+
+.underline::before {
+    content: "　";
+}
+
+.field {
+    display: inline-block;
+    margin-left: 12pt;
+}
+
+.check-item {
+    margin-left: 8.5pt;
+}
+
+.w-2em {
+    width: 2em;
+}
+
+.w-8em {
+    width: 8em;
+}

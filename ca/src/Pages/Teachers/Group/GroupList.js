@@ -106,81 +106,81 @@ class GroupList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: false,
+      loading: true,
+      fuck: '系統正在拚命讀取資料中，請你再拿出多一點耐心等候。',
       index: 0,
       cs_number: 0,
       other_number: 0,
       chipOpen: new Map(),
-      groupList: [],
-      // groupList: [
-      //   {
-      //     research_title: 'epth estimation from Single image',
-      //     // participants: [
-      //     //   {
-      //     //     student_id: '0399999',
-      //     //     sname: '陳罐頭',
-      //     //     detail: '資工系 網多組3 ',
-      //     //     score: ''
-      //     //   },
-      //     //   {
-      //     //     student_id: '0399777',
-      //     //     sname: '李小霖',
-      //     //     detail: '資工系 網多組3 ',
-      //     //     score: ''
-      //     //   },
-      //     //   {
-      //     //     student_id: '0391234',
-      //     //     sname: '郭梁兒',
-      //     //     detail: '資工系 網多組3 '
-      //     //   },
-      //     //   {
-      //     //     student_id: '0399666',
-      //     //     sname: '耿平',
-      //     //     detail: '資工系 網多組3 ',
-      //     //     score: ''
-      //     //   },
-      //     //   {
-      //     //     student_id: '0391555',
-      //     //     sname: '余阿杰',
-      //     //     detail: '資工系 網多組3 '
-      //     //   }
-      //     // ],
-      //     year: '106'
-      //   },
-      //   {
-      //     research_title: '虛擬貨幣交易機器人',
-      //     participants: [
-      //       {
-      //         student_id: '0399998',
-      //         sname: '陳干頭',
-      //         detail: '資工系 網多組3 '
-      //       }
-      //     ],
-      //     year: '106'
-      //   },
-      //   {
-      //     research_title: 'IOT智慧家庭監控應用',
-      //     participants: [
-      //       {
-      //         student_id: '0399997',
-      //         sname: '陳平頭',
-      //         detail: '資工系 網多組3 '
-      //       }
-      //     ],
-      //     year: '106'
-      //   },
-      //   {
-      //     research_title: 'Android 系統記乾憶體管理改進',
-      //     participants: [
-      //       {
-      //         student_id: '0399987',
-      //         sname: '陳頭',
-      //         detail: '資工系 網多組3 '
-      //       }
-      //     ],
-      //     year: '106'
-      //   }
-      // ],
+      groupList: [
+        {
+          research_title: 'epth estimation from Single image',
+          participants: [
+            {
+              student_id: '0399999',
+              sname: '陳罐頭',
+              detail: '資工系 網多組3 ',
+              score: ''
+            },
+            {
+              student_id: '0399777',
+              sname: '李小霖',
+              detail: '資工系 網多組3 ',
+              score: ''
+            },
+            {
+              student_id: '0391234',
+              sname: '郭梁兒',
+              detail: '資工系 網多組3 '
+            },
+            {
+              student_id: '0399666',
+              sname: '耿平',
+              detail: '資工系 網多組3 ',
+              score: ''
+            },
+            {
+              student_id: '0391555',
+              sname: '余阿杰',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        },
+        {
+          research_title: '虛擬貨幣交易機器人',
+          participants: [
+            {
+              student_id: '0399998',
+              sname: '陳干頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        },
+        {
+          research_title: 'IOT智慧家庭監控應用',
+          participants: [
+            {
+              student_id: '0399997',
+              sname: '陳平頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        },
+        {
+          research_title: 'Android 系統記乾憶體管理改進',
+          participants: [
+            {
+              student_id: '0399987',
+              sname: '陳頭',
+              detail: '資工系 網多組3 '
+            }
+          ],
+          year: '106'
+        }
+      ],
       initItem: [
         {
           'student_id': '0316000',
@@ -204,7 +204,8 @@ class GroupList extends React.Component {
   }
 
   fetchData (sem) {
-    this.setState({loading: false})
+    this.setState({loading: true})
+    this.setState({groupList: []})
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
     // let _this = this
@@ -212,6 +213,7 @@ class GroupList extends React.Component {
       teacherId: this.props.idCard.teacher_id,
       sem: sem
     }).then(res => {
+      this.setState({loading: false})
       this.setState({
         cs_number: res.data.cs_number,
         other_number: res.data.other_number,
@@ -274,6 +276,7 @@ class GroupList extends React.Component {
       */
 
     }).catch(err => {
+      this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
       console.log(err)
     })
   }
@@ -378,12 +381,13 @@ class GroupList extends React.Component {
             </Col>
           </Row>
           <Row className='groups'>
+            {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.fuck}</div>}
             <Loading
             size={100}
             left={40}
             top={100}
             isLoading={this.state.loading} />
-            {this.state.groupList.length !== 0
+            {!this.state.loading && this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
                   key={i}
@@ -397,7 +401,7 @@ class GroupList extends React.Component {
                   handleRequestClose={this.handleRequestClose}
                 />
               ))
-              : '(無專題生資料!)'
+              : ''
             }
           </Row>
         </div>

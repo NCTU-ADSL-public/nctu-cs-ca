@@ -33,4 +33,9 @@
 	margin: 10px 0 20px;
 }
 
-
+.show-img {
+	max-width:550px;
+	height:inherit;
+	/*width:expression(document.body.clientWidth&gt;550?"550px""auto");!*若圖片大於550px就調整*!*/
+	overflow:hidden;      /*超過不顯示*/
+}

@@ -20,6 +20,7 @@ import AssistantVerify from './Pages/Assistants/Verify'
 import AssistantMail from './Pages/Assistants/Mail'
 
 import StudentDetail from './Components/StudentDetail'
+import StudentVerify from './Components/StudentVerify'
 import StudentList from './Pages/Assistants/Family/StudentList'
 import TeacherList from './Pages/Assistants/Family'
 
@@ -87,7 +88,7 @@ const Router = () => (
         <Route exact path='/assistants/verify' component={AssistantVerify} />
         <Route exact path='/assistants/mail' render={() => <Frame><AssistantMail /></Frame>} />
         <Route path='/assistants/head/s/:sid/:sname/:program' component={StudentDetail} />
-
+        <Route path='/assistants/head/c/:sid/:type/:time' component={StudentVerify} />
       </Switch>
       <Route path='/' component={Footer} />
       <div id='printArea' />
