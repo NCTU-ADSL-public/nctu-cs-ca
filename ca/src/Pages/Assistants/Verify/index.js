@@ -39,7 +39,7 @@ import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import FakeData from '../../../Resources/FakeData'
+// import FakeData from '../../../Resources/FakeData'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from "react-csv"
@@ -210,11 +210,11 @@ class Verify extends React.Component {
     super(props)
     this.state = {
 // for test
-      formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
-      teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
+      // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      // teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
 // end for test
-      // formList:[],
-      // teacherList: [],
+      formList:[],
+      teacherList: [],
       open: false,
       message: 0,
       index: 0,
@@ -278,8 +278,10 @@ class Verify extends React.Component {
       status: 2,
       transferTo: this.state.transferTo
     }).then(res => {
-      updatedList[id].status = 2
-      this.setState({formList: updatedList, open: true, message: 0, transferTo:'',select: []})
+      if(res.data.signal === 1){
+        updatedList[id].status = 2
+        this.setState({formList: updatedList, open: true, message: 0, transferTo:'',select: []})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -302,8 +304,10 @@ class Verify extends React.Component {
       status: 3,
       transferTo: ''
     }).then(res => {
-      updatedList[id].status = 3
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        updatedList[id].status = 3
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -326,8 +330,10 @@ class Verify extends React.Component {
       status: 0,
       transferTo: ''
     }).then(res => {
-      updatedList[id].status = 0
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        updatedList[id].status = 0
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -364,8 +370,9 @@ class Verify extends React.Component {
       status: 2,
       transferTo: ''
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -387,8 +394,9 @@ class Verify extends React.Component {
       status: 3,
       transferTo: ''
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -411,7 +419,9 @@ class Verify extends React.Component {
       status: status,
       transferTo: this.state.transferTo
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0,select: [],transferTo:''})
+      if(res.data.signal === 1){
+        this.setState({formList: updatedList, open: true, message: 0,select: [],transferTo:''})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -433,7 +443,9 @@ class Verify extends React.Component {
       status: 0,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -455,7 +467,9 @@ class Verify extends React.Component {
       status: 6,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      if(res.data.signal === 1){
+        this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })

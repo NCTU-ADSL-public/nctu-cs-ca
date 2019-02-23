@@ -13,7 +13,7 @@ const AutoLogout = WrappedClass =>
         'keypress'
       ]
       this.state = {
-        logoutTime: 1000 * 60 * 15 // auto logout after do nothing 15 min
+        logoutTime: 1000 * 60 * 5 // auto logout after do nothing 5 min
       }
       this.setTimer = this.setTimer.bind(this)
       this.clearTimer = this.clearTimer.bind(this)
