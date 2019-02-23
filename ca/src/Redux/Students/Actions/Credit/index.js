@@ -41,6 +41,7 @@ export const sendCompulsoryCourse = (payload) => dispatch => {
 }
 
 export const sendEnglishCourse = (payload) => dispatch => {
+  console.log(payload)
   axios.post('/students/credit/englishCourse', payload)
     .then(res => { alert('送出成功') })
     .catch(err => {
