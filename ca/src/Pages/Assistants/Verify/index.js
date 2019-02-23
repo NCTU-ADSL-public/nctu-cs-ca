@@ -367,7 +367,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 2
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -380,6 +379,9 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       if(res.data.signal === 1){
+        this.state.select.map(
+          e=> updatedList[e].status = 2
+        )
         this.setState({formList: updatedList, open: true, message: 0,select: []})
       }
       else{
@@ -394,7 +396,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 3
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -407,6 +408,9 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       if(res.data.signal === 1){
+        this.state.select.map(
+          e=> updatedList[e].status = 3
+        )
         this.setState({formList: updatedList, open: true, message: 0,select: []})
       }
       else{
@@ -422,7 +426,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = status
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -435,6 +438,9 @@ class Verify extends React.Component {
       transferTo: this.state.transferTo
     }).then(res => {
       if(res.data.signal === 1){
+        this.state.select.map(
+          e=> updatedList[e].status = status
+        )
         this.setState({formList: updatedList, open: true, message: 0,select: [],transferTo:''})
       }
       else{
@@ -449,7 +455,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 0
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -462,6 +467,9 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       if(res.data.signal === 1){
+        this.state.select.map(
+          e=> updatedList[e].status = 0
+        )
         this.setState({formList: updatedList, open: true, message: 0,select: []})
       }
       else{
@@ -476,7 +484,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 6
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -489,6 +496,9 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       if(res.data.signal === 1){
+        this.state.select.map(
+          e=> updatedList[e].status = 6
+        )
         this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
       }
       else{
