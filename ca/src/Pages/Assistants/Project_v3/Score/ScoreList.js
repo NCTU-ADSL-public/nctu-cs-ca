@@ -107,7 +107,7 @@ class ScoreList extends React.Component {
                       <Button color="primary" className={classes.button} onClick = { () => {
                         set_scores({
                           student_id: score.student.id,
-                          tname: score.student.name,
+                          tname: score.professor_name,
                           research_title: score.student.research_title,
                           first_second: first_second,
                           semester: semester,
