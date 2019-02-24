@@ -70,8 +70,8 @@ class StudentVerify extends React.Component {
       </div>
       <div id='printArea'>
           {
-            (this.props.match.params.type === name[2] && <WaiveCourse course={this.state.all}/>) 
-             || (this.props.match.params.type === name[3] && <ExemptCourse course={this.state.all}/>)
+            (this.props.match.params.type === name[2] &&this.state.all.length >0 && <WaiveCourse course={this.state.all}/>) 
+             || (this.props.match.params.type === name[3] &&this.state.all.length >0 && <ExemptCourse course={this.state.all}/>)
           }
         </div>
       </React.Fragment>
