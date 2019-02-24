@@ -52,26 +52,32 @@ class StudentVerify extends React.Component {
     const name = ['compulsory_course','english_course','waive_course','exempt_course']
     return (
       <React.Fragment>
-      <div style={{ marginTop: '70px',textAlign: 'right',paddingRight: '5%'}}>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={this.printApplicationTable}
-          disabled={this.props.match.params.type === name[0] || this.props.match.params.type === name[1]}
-        >
-          列印申請表
-        </Button>
-      </div>
-      <div style={{margin: '50px auto',marginBottom: 50,width: '90%'}}>
-        {this.props.match.params.type === name[0] && <CompulsoryCoursePanel data={this.state.data}/>}
-        {this.props.match.params.type === name[1] && <EnglishCoursePanel data={this.state.data}/>}
-        {this.props.match.params.type === name[2] && <WaiveCoursePanel data={this.state.data}/>}
-        {this.props.match.params.type === name[3] && <ExemptCoursePanel data={this.state.data}/>}
-      </div>
+        {
+          !this.state.doPrinting &&(
+            <React.Fragment>
+            <div style={{ marginTop: '70px',textAlign: 'right',paddingRight: '5%'}}>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={this.printApplicationTable}
+                disabled={this.props.match.params.type === name[0] || this.props.match.params.type === name[1]}
+              >
+                列印申請表
+              </Button>
+            </div>
+            <div style={{margin: '50px auto',marginBottom: 50,width: '90%'}}>
+              {this.props.match.params.type === name[0] && <CompulsoryCoursePanel data={this.state.data}/>}
+              {this.props.match.params.type === name[1] && <EnglishCoursePanel data={this.state.data}/>}
+              {this.props.match.params.type === name[2] && <WaiveCoursePanel data={this.state.data}/>}
+              {this.props.match.params.type === name[3] && <ExemptCoursePanel data={this.state.data}/>}
+            </div>
+            </React.Fragment>
+          )
+        }
       <div id='printArea'>
           {
-            (this.props.match.params.type === name[2] &&this.state.all.length >0 && <WaiveCourse course={this.state.all}/>) 
-             || (this.props.match.params.type === name[3] &&this.state.all.length >0 && <ExemptCourse course={this.state.all}/>)
+            (this.props.match.params.type === name[2] && this.state.all.length > 0 && <WaiveCourse courses={this.state.all}/>) 
+             || (this.props.match.params.type === name[3] && this.state.all.length > 0 && <ExemptCourse courses={this.state.all}/>)
           }
         </div>
       </React.Fragment>
