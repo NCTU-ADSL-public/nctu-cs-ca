@@ -249,7 +249,6 @@ class Verify extends React.Component {
     axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 2
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -259,8 +258,15 @@ class Verify extends React.Component {
       ),
       status: 2,
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        this.state.select.map(
+          e => updatedList[e].status = 2
+        )
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -270,7 +276,6 @@ class Verify extends React.Component {
     axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 4
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -280,8 +285,15 @@ class Verify extends React.Component {
       ),
       status: 4
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        this.state.select.map(
+          e => updatedList[e].status = 4
+        )
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -302,7 +314,15 @@ class Verify extends React.Component {
       ),
       status: 0
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      if(res.data.signal === 1){
+        this.state.select.map(
+          e => updatedList[e].status = 0
+        )
+        this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })

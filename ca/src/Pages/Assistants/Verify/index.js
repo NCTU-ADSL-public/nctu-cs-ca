@@ -39,7 +39,7 @@ import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import FakeData from '../../../Resources/FakeData'
+import FakeData from '../../../Resources/FakeData'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from "react-csv"
@@ -210,11 +210,11 @@ class Verify extends React.Component {
     super(props)
     this.state = {
 // for test
-      // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
-      // teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
+      formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
+      teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
 // end for test
-      formList:[],
-      teacherList: [],
+      // formList:[],
+      // teacherList: [],
       open: false,
       message: 0,
       index: 0,
@@ -1147,7 +1147,7 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>課程綱要</TableCell>
                             </TableRow>
                             <TableRow>
-                              <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
+                              <TableCell className={classes.font}>{`${apply.nameA}${apply.type !== 3 ? `(${apply.codeA})`: ''}`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
                               <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span>: apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
