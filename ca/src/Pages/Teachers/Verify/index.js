@@ -191,7 +191,7 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-const type = [[0], [1], [5],[2],[6], [3, 4]]
+const type = [[1,5], [1], [5],[2],[6], [3, 4]]
 const typeName = [['本系必修課程抵免','#8ed875','必'],['英授專業課程抵免','#3498DB','英'],['學分抵免','#2C3E50','抵'],['課程免修','#E74C3C','免']]
 class Verify extends React.Component {
   constructor (props) {
