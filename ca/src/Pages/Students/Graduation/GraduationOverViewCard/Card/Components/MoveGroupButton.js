@@ -111,7 +111,6 @@ class MoveGroupButton extends React.Component {
     console.log(studentIdcard)
 
     axios.post('/students/graduate/switchCourse', {
-      signal: 1,
       cn: cn, // 中文課名
       student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id,
       origin_group: title,
