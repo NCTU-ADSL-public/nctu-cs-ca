@@ -15,9 +15,9 @@ import {
   TableRow
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Button from '@material-ui/core/Button'
-import Icon from '@material-ui/core/Icon'
-import DeleteIcon from '@material-ui/icons/Delete'
+// import Button from '@material-ui/core/Button'
+// import Icon from '@material-ui/core/Icon'
+// import DeleteIcon from '@material-ui/icons/Delete'
 import { englishCourseChange, deleteCredit } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
@@ -130,6 +130,7 @@ class Index extends React.Component {
               textAlign: 'center'
             }}>{status}</div>
             <div style={{ flex: 0.98 }} />
+            {/*
             <Icon
               style={{ color: 'grey', fontSize: '30px' }}
               onClick={this.handleEdit}
@@ -140,6 +141,7 @@ class Index extends React.Component {
               style={{ color: 'grey', fontSize: '30px' }}
               onClick={this.handleDelete}
             />
+            */}
           </div>
 
           <div style={{ margin: '20px 0 15px 0', display: 'flex', justifyContent: 'center' }}>
@@ -229,6 +231,7 @@ class Index extends React.Component {
 
           <div style={{ display: 'flex', position: 'relative', height: '20px', top: '-40px' }}>
             <div style={{ flex: 0.92 }} />
+            {/*
             <Button
               variant='fab'
               color='primary'
@@ -251,6 +254,7 @@ class Index extends React.Component {
             >
               <DeleteIcon />
             </Button>
+            */}
           </div>
         </div>
       )
