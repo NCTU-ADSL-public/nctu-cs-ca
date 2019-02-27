@@ -4,7 +4,7 @@ import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
-  //ExpansionPanelActions,
+  // ExpansionPanelActions,
   Button,
   IconButton,
   Snackbar,
@@ -20,7 +20,7 @@ import {
   Input,
   Avatar,
   Popover,
-  CircularProgress 
+  CircularProgress
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
@@ -40,8 +40,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 //  import FakeData from '../../../Resources/FakeData'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
-import { CSVLink } from "react-csv"
-
+import { CSVLink } from 'react-csv'
 
 const theme = createMuiTheme({
   palette: {
@@ -57,7 +56,7 @@ const styles = () => ({
     marginBottom: 50,
     width: '90%'
   },
-  loading:{
+  loading: {
     position: 'relative',
     left: '45%'
   },
@@ -90,7 +89,7 @@ const styles = () => ({
     fontSize: 16,
     fontWeight: 400,
     textAlign: 'center',
-    "&:not(:first-child)":{
+    '&:not(:first-child)': {
       borderLeft: 'white solid 1px'
     }
   },
@@ -162,13 +161,13 @@ const styles = () => ({
   },
   chips: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   chip: {
     fontWeight: 'normal',
     marginRight: '1em'
   },
-  header:{
+  header: {
     backgroundColor: 'rgba(143, 195, 131, 0.23)',
     padding: '2px  0'
   }
@@ -199,8 +198,8 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-const type = [[0], [1], [5],[2],[6], [3, 4]]
-const typeName = [['外系抵免','#8ed875','外'],['英授專業課程抵免','#3498DB','英'],['課程免修','#E74C3C','免'],['學分抵免','#2C3E50','抵']]
+const type = [[0], [1], [5], [2], [6], [3, 4]]
+const typeName = [['外系抵免', '#8ed875', '外'], ['英授專業課程抵免', '#3498DB', '英'], ['課程免修', '#E74C3C', '免'], ['學分抵免', '#2C3E50', '抵']]
 
 class Verify extends React.Component {
   constructor (props) {
@@ -210,14 +209,14 @@ class Verify extends React.Component {
       // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
       // teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
 // end for test
-      formList:[],
+      formList: [],
       teacherList: [],
       open: false,
       message: 0,
       index: 0,
       select: [],
       selectAll: false,
-      type: [0,1,2,3],
+      type: [0, 1, 2, 3],
       transferTo: '',
       return: '',
       anchorEl: null,
@@ -243,18 +242,18 @@ class Verify extends React.Component {
   componentDidMount () {
     // get TeacherList for TransferTo
     axios.get('/assistants/advisee/TeacherList').then(res => {
-      this.setState({teacherList: res.data.sort((a,b)=> b.status - a.status).map(t => ({id: t.id,name: t.name, status: t.status}))})
+      this.setState({teacherList: res.data.sort((a, b) => b.status - a.status).map(t => ({id: t.id, name: t.name, status: t.status}))})
     })
     // get all verify items
     axios.get('/assistants/ShowUserOffsetApplyForm').then(res => {
-      this.setState({formList: res.data.map((e, i) => ({...e, id: i})),fetching: false})
+      this.setState({formList: res.data.map((e, i) => ({...e, id: i})), fetching: false})
     }).catch(err => {
       console.log(err)
     })
   }
 
-  handleChange(event){
-    this.setState({ transferTo : event.target.value})
+  handleChange (event) {
+    this.setState({ transferTo: event.target.value})
   }
 
   handleAgree (id) {
@@ -276,7 +275,7 @@ class Verify extends React.Component {
       transferTo: this.state.transferTo
     }).then(res => {
       updatedList[id].status = 2
-      this.setState({formList: updatedList, open: true, message: 0, transferTo:'',select: []})
+      this.setState({formList: updatedList, open: true, message: 0, transferTo: '', select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -300,7 +299,7 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       updatedList[id].status = 3
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      this.setState({formList: updatedList, open: true, message: 0, select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -324,7 +323,7 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       updatedList[id].status = 0
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      this.setState({formList: updatedList, open: true, message: 0, select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -362,7 +361,7 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      this.setState({formList: updatedList, open: true, message: 0, select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -385,14 +384,14 @@ class Verify extends React.Component {
       transferTo: ''
     }).then(res => {
       console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      this.setState({formList: updatedList, open: true, message: 0, select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
   }
   handleSend () {
     let updatedList = this.state.formList
-    let status = this.state.teacherList.filter(e => e.id === this.state.transferTo)[0].status === 1 ? 1:5
+    let status = this.state.teacherList.filter(e => e.id === this.state.transferTo)[0].status === 1 ? 1 : 5
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
@@ -408,7 +407,7 @@ class Verify extends React.Component {
       status: status,
       transferTo: this.state.transferTo
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0,select: [],transferTo:''})
+      this.setState({formList: updatedList, open: true, message: 0, select: [], transferTo: ''})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -430,12 +429,12 @@ class Verify extends React.Component {
       status: 0,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      this.setState({formList: updatedList, open: true, message: 0, select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
   }
-  handleReturn(){
+  handleReturn () {
     let updatedList = this.state.formList
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
@@ -452,125 +451,119 @@ class Verify extends React.Component {
       status: 6,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      this.setState({formList: updatedList, open: true, message: 0, return: '', select: []})
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
   }
-  handleSwitch(i){
-    if(this.state.type.length === 4){
+  handleSwitch (i) {
+    if (this.state.type.length === 4) {
       let tmp = []
       tmp.push(i)
-      this.setState({selectAll: false, select: [],type: tmp})
-    }
-    else if(this.state.type.includes(i)){
-      if(this.state.type.length === 1){
-        this.setState({selectAll: false, select: [],type: [0,1,2,3]})
-      }
-      else{
+      this.setState({selectAll: false, select: [], type: tmp})
+    } else if (this.state.type.includes(i)) {
+      if (this.state.type.length === 1) {
+        this.setState({selectAll: false, select: [], type: [0, 1, 2, 3]})
+      } else {
         let tmp = this.state.type
-        tmp = tmp.filter(e => e!==i)
-        this.setState({selectAll: false, select: [],type: tmp})
-      } 
-    }
-    else{
+        tmp = tmp.filter(e => e !== i)
+        this.setState({selectAll: false, select: [], type: tmp})
+      }
+    } else {
       let tmp = this.state.type
       tmp.push(i)
-      this.setState({selectAll: false, select: [],type: tmp})
+      this.setState({selectAll: false, select: [], type: tmp})
     }
   }
-  handleReason(e){
+  handleReason (e) {
     this.setState({return: e.target.value})
   }
   selectAll () {
     let updatedArray = this.state.select
     if (!this.state.selectAll) {
-      updatedArray = this.state.formList.filter(e => (type[this.state.index].includes(e.status) && this.state.type.includes(e.type)) ).map(e => e.id)
+      updatedArray = this.state.formList.filter(e => (type[this.state.index].includes(e.status) && this.state.type.includes(e.type))).map(e => e.id)
       this.setState({select: updatedArray, selectAll: true})
     } else {
-      this.setState({select: [], selectAll: false, transferTo:''})
+      this.setState({select: [], selectAll: false, transferTo: ''})
     }
   }
-  downCSV(i){
-    switch(i) {
+  downCSV (i) {
+    switch (i) {
       case 0:
-        return (this.state.formList.filter(e=>(e.type === 2 || e.type === 3))
-        .map(e=>{
-            let date = e.date.split('-'),year,semester
-            if(parseInt(date[1],10) < 8){
-                year = parseInt(date[0],10) - 1912
-                semester = "下學期"
-            }
-            else{
-                year = parseInt(date[0],10) - 1911
-                semester = "上學期"
-            }
-            return({
-                    type: e.type === 0 ? "學分抵免":"課程免修",
-                    sid: e.sid,
-                    name: e.name,
-                    info: e.info,
-                    nameA: e.nameA,
-                    department: e.department,
-                    creditA: e.creditA,
-                    codeB: e.codeB,
-                    nameB: e.nameB,
-                    creditB: e.creditB,
-                    typeB: e.typeB,
-                    year: year,
-                    semester: semester
-                })
+        return (this.state.formList.filter(e => (e.type === 2 || e.type === 3))
+        .map(e => {
+          let date = e.date.split('-'), year, semester
+          if (parseInt(date[1], 10) < 8) {
+            year = parseInt(date[0], 10) - 1912
+            semester = '下學期'
+          } else {
+            year = parseInt(date[0], 10) - 1911
+            semester = '上學期'
+          }
+          return ({
+            type: e.type === 0 ? '學分抵免' : '課程免修',
+            sid: e.sid,
+            name: e.name,
+            info: e.info,
+            nameA: e.nameA,
+            department: e.department,
+            creditA: e.creditA,
+            codeB: e.codeB,
+            nameB: e.nameB,
+            creditB: e.creditB,
+            typeB: e.typeB,
+            year: year,
+            semester: semester
+          })
         }))
       case 1:
-      return this.state.formList.filter(e=>e.type === 0)
-      .map(e=>{
-          let date = e.date.split('-'),year,semester
-          if(parseInt(date[1],10) < 8){
-              year = parseInt(date[0],10) - 1912
-              semester = "下學期"
-          }
-          else{
-              year = parseInt(date[0],10) - 1911
-              semester = "上學期"
-          }
-          return({
-                  type: "本系必修課程抵免",
-                  sid: e.sid,
-                  name: e.name,
-                  info: e.info,
-                  nameA: e.nameA,
-                  department: e.department,
-                  creditA: e.creditA,
-                  codeB: e.codeB,
-                  nameB: e.nameB,
-                  year: year,
-                  semester: semester
-              })
+        return this.state.formList.filter(e => e.type === 0)
+      .map(e => {
+        let date = e.date.split('-'), year, semester
+        if (parseInt(date[1], 10) < 8) {
+          year = parseInt(date[0], 10) - 1912
+          semester = '下學期'
+        } else {
+          year = parseInt(date[0], 10) - 1911
+          semester = '上學期'
+        }
+        return ({
+          type: '本系必修課程抵免',
+          sid: e.sid,
+          name: e.name,
+          info: e.info,
+          nameA: e.nameA,
+          department: e.department,
+          creditA: e.creditA,
+          codeB: e.codeB,
+          nameB: e.nameB,
+          year: year,
+          semester: semester
+        })
       })
       case 2:
-      return this.state.formList.filter(e=>e.type === 1)
-      .map(e=>{
-          let date = e.date.split('-'),year,semester
-          if(parseInt(date[1],10) < 8){
-              year = parseInt(date[0],10) - 1912
-              semester = "下學期"
-          }
-          else{
-              year = parseInt(date[0],10) - 1911
-              semester = "上學期"
-          }
-          return({
-                  type: "英授專業課程抵免",
-                  sid: e.sid,
-                  name: e.name,
-                  info: e.info,
-                  codeA: e.codeA,
-                  nameA: e.nameA,
-                  department: e.department,
-                  teacher: e.teacher,
-                  year: year,
-                  semester: semester
-              })
+        return this.state.formList.filter(e => e.type === 1)
+      .map(e => {
+        let date = e.date.split('-'), year, semester
+        if (parseInt(date[1], 10) < 8) {
+          year = parseInt(date[0], 10) - 1912
+          semester = '下學期'
+        } else {
+          year = parseInt(date[0], 10) - 1911
+          semester = '上學期'
+        }
+        return ({
+          type: '英授專業課程抵免',
+          sid: e.sid,
+          name: e.name,
+          info: e.info,
+          codeA: e.codeA,
+          nameA: e.nameA,
+          department: e.department,
+          teacher: e.teacher,
+          year: year,
+          semester: semester
+        })
       })
       default:
         break
@@ -589,107 +582,107 @@ class Verify extends React.Component {
       <div className={classes.root}>
         {/* <span className={classes.state}>{`目前顯示：${['申請中', '等待主任同意', '等待授課老師同意', '已同意'][this.state.index]}的${typeName[this.state.type][0]}抵免單`}</span> */}
         <MuiThemeProvider theme={theme}>
-        <div className={classes.side}>
-          {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
-          <Tooltip title={'申請中'} placement='right'>
-            <IconButton className={classes.sideIcon}
-              onClick={() => this.setState({
-                index: 0,
-                select: [],
-                selectAll: false,
-                isRecord: false
-              })}
-              color={(this.state.index === 0) ? 'primary' : 'default'}
-            >
-              <ApplyIcon />
-            </IconButton>
-          </Tooltip>
-          {/* this.state.formList.filter(e => e.status===1).length > 0 && */}
-          <Tooltip title={'等待主任同意'} placement='right'>
-            <IconButton className={classes.sideIcon}
-              onClick={() => this.setState({
-                index: 1,
-                select: [],
-                selectAll: false,
-                isRecord: false
-              })}
-              color={(this.state.index === 1) ? 'primary' : 'default'}
-            >
-              <WaitIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title={'等待授課老師同意'} placement='right'>
-            <IconButton className={classes.sideIcon}
-              onClick={() => this.setState({
-                index: 2,
-                select: [],
-                selectAll: false,
-                isRecord: false
-              })}
-              color={(this.state.index === 2) ? 'primary' : 'default'}
-            >
-              <AlarmIcon />
-            </IconButton>
-          </Tooltip>
-          {/* { this.state.formList.filter(e => e.status===2).length > 0 && */}
-          <Tooltip title={'已同意'} placement='right'>
-            <IconButton className={classes.sideIcon}
-              onClick={() => this.setState({
-                index: 3,
-                select: [],
-                selectAll: false,
-                isRecord: false
-              })}
-              color={(this.state.index === 3) ? 'primary' : 'default'}
-            >
-              <OKIcon />
-            </IconButton>
-          </Tooltip>
-          {/* { this.state.formList.filter(e => e.status===3).length > 0 && */}
-          <Tooltip title={'已退回'} placement='right'>
-            <IconButton className={classes.sideIcon}
-              onClick={() => this.setState({
-                index: 4,
-                select: [],
-                selectAll: false,
-                isRecord: false
-              })}
-              color={(this.state.index === 4) ? 'primary' : 'default'}
-            >
-              <ReturnIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title={'抵免失敗'} placement='right'>
-            <IconButton className={classes.sideIcon}
-              onClick={() => this.setState({
-                index: 5,
-                select: [],
-                selectAll: false,
-                isRecord: false
-              })}
-              color={(this.state.index === 5) ? 'primary' : 'default'}
-            >
-              <TrashIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
-        </MuiThemeProvider>
-          <div className={classes.options}>
-            <Tooltip title={this.state.selectAll ? '取消全選' : '全選'} placement='top'>
+          <div className={classes.side}>
+            {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
+            <Tooltip title={'申請中'} placement='right'>
               <IconButton className={classes.sideIcon}
-                onClick={this.selectAll}
-              >
-                {this.state.selectAll ? <Check /> : <CheckNone />}
+                onClick={() => this.setState({
+                  index: 0,
+                  select: [],
+                  selectAll: false,
+                  isRecord: false
+                })}
+                color={(this.state.index === 0) ? 'primary' : 'default'}
+            >
+                <ApplyIcon />
               </IconButton>
             </Tooltip>
-            {(this.state.select.length !== 0 || this.state.selectAll === true) && (
+            {/* this.state.formList.filter(e => e.status===1).length > 0 && */}
+            <Tooltip title={'等待主任同意'} placement='right'>
+              <IconButton className={classes.sideIcon}
+                onClick={() => this.setState({
+                  index: 1,
+                  select: [],
+                  selectAll: false,
+                  isRecord: false
+                })}
+                color={(this.state.index === 1) ? 'primary' : 'default'}
+            >
+                <WaitIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={'等待授課老師同意'} placement='right'>
+              <IconButton className={classes.sideIcon}
+                onClick={() => this.setState({
+                  index: 2,
+                  select: [],
+                  selectAll: false,
+                  isRecord: false
+                })}
+                color={(this.state.index === 2) ? 'primary' : 'default'}
+            >
+                <AlarmIcon />
+              </IconButton>
+            </Tooltip>
+            {/* { this.state.formList.filter(e => e.status===2).length > 0 && */}
+            <Tooltip title={'已同意'} placement='right'>
+              <IconButton className={classes.sideIcon}
+                onClick={() => this.setState({
+                  index: 3,
+                  select: [],
+                  selectAll: false,
+                  isRecord: false
+                })}
+                color={(this.state.index === 3) ? 'primary' : 'default'}
+            >
+                <OKIcon />
+              </IconButton>
+            </Tooltip>
+            {/* { this.state.formList.filter(e => e.status===3).length > 0 && */}
+            <Tooltip title={'已退回'} placement='right'>
+              <IconButton className={classes.sideIcon}
+                onClick={() => this.setState({
+                  index: 4,
+                  select: [],
+                  selectAll: false,
+                  isRecord: false
+                })}
+                color={(this.state.index === 4) ? 'primary' : 'default'}
+            >
+                <ReturnIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={'抵免失敗'} placement='right'>
+              <IconButton className={classes.sideIcon}
+                onClick={() => this.setState({
+                  index: 5,
+                  select: [],
+                  selectAll: false,
+                  isRecord: false
+                })}
+                color={(this.state.index === 5) ? 'primary' : 'default'}
+            >
+                <TrashIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </MuiThemeProvider>
+        <div className={classes.options}>
+          <Tooltip title={this.state.selectAll ? '取消全選' : '全選'} placement='top'>
+            <IconButton className={classes.sideIcon}
+              onClick={this.selectAll}
+              >
+              {this.state.selectAll ? <Check /> : <CheckNone />}
+            </IconButton>
+          </Tooltip>
+          {(this.state.select.length !== 0 || this.state.selectAll === true) && (
               (this.state.index === 0 &&
             (<React.Fragment>
               <Tooltip title={'同意已選取抵免單'} placement='top'>
                 <IconButton className={classes.sideIcon}
                   onClick={this.handleOk}
                 >
-                <OKIcon />
+                  <OKIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title={'不同意已選取抵免單'} placement='top'>
@@ -700,57 +693,57 @@ class Verify extends React.Component {
                 </IconButton>
               </Tooltip>
               <Input
-              placeholder="退回原因"
-              value = {this.state.return}
-              onChange = {this.handleReason}
+                placeholder='退回原因'
+                value={this.state.return}
+                onChange={this.handleReason}
               />
               <Tooltip title={'退回已選取抵免單'} placement='top'>
-              <span>
-                <IconButton className={classes.sideIcon}
-                  onClick={this.handleReturn}
-                  disabled={this.state.return === ''}
+                <span>
+                  <IconButton className={classes.sideIcon}
+                    onClick={this.handleReturn}
+                    disabled={this.state.return === ''}
                 >
-                  <ReturnIcon />
-                </IconButton>
+                    <ReturnIcon />
+                  </IconButton>
                 </span>
               </Tooltip>
               <FormControl>
-              {/* <InputLabel htmlFor='select-multiple'>審核人</InputLabel> */}
-              <Select
-                value={this.state.transferTo}
-                input={<Input id="select-multiple" />}
-                onChange={this.handleChange}
-                renderValue={selected => (
-                  <div className={classes.chips}>{
+                {/* <InputLabel htmlFor='select-multiple'>審核人</InputLabel> */}
+                <Select
+                  value={this.state.transferTo}
+                  input={<Input id='select-multiple' />}
+                  onChange={this.handleChange}
+                  renderValue={selected => (
+                    <div className={classes.chips}>{
                       <Chip avatar={
-                              <Avatar>
-                                <FaceIcon />
-                              </Avatar>
+                        <Avatar>
+                          <FaceIcon />
+                        </Avatar>
                             }
-                            label={this.state.teacherList.filter(e => e.id === selected)[0].name} 
-                            className={classes.chip} />
+                        label={this.state.teacherList.filter(e => e.id === selected)[0].name}
+                        className={classes.chip} />
                     }
-                  </div>
+                    </div>
                 )}
               >
-              {
+                  {
                 this.state.teacherList.map(
-                  t =>  <MenuItem key={t.id} value={t.id}>{t.name}</MenuItem>
+                  t => <MenuItem key={t.id} value={t.id}>{t.name}</MenuItem>
                 )
               }
-              </Select>
+                </Select>
               </FormControl>
               <MuiThemeProvider theme={theme}>
-              <Tooltip title={'送出已選取抵免單'} placement='top'>
-                <span>
-                <IconButton className={classes.sideIcon}
-                  onClick={this.handleSend}
-                  disabled ={this.state.transferTo === ''}
+                <Tooltip title={'送出已選取抵免單'} placement='top'>
+                  <span>
+                    <IconButton className={classes.sideIcon}
+                      onClick={this.handleSend}
+                      disabled={this.state.transferTo === ''}
                 >
-                  <Send />
-                </IconButton>
-                </span>
-              </Tooltip>
+                      <Send />
+                    </IconButton>
+                  </span>
+                </Tooltip>
               </MuiThemeProvider>
             </React.Fragment>)) ||
             (this.state.index === 1 &&
@@ -825,8 +818,8 @@ class Verify extends React.Component {
               </React.Fragment>))
               )
             }
-            <div className={classes.sideIcon2}>
-              {/* <Tooltip title={this.state.isRecord ? '取消選取' : '選取曾有過抵免紀錄的抵免單'} placement='top'>
+          <div className={classes.sideIcon2}>
+            {/* <Tooltip title={this.state.isRecord ? '取消選取' : '選取曾有過抵免紀錄的抵免單'} placement='top'>
                 <IconButton
                   onClick={() => this.setState({selectAll: false, select: [], isRecord: !this.state.isRecord})}
                   color={(this.state.isRecord) ? 'primary' : 'default'}
@@ -834,108 +827,108 @@ class Verify extends React.Component {
                   <FilterIcon />
                 </IconButton>
               </Tooltip> */}
-              {
-                typeName.map((e,i)=>
+            {
+                typeName.map((e, i) =>
                   <Tooltip title={e[0]} key={i} placement='top'>
                     <div
-                    onClick={()=>this.handleSwitch(i)}
-                    style= {{
-                      background: (this.state.type.includes(i))? e[1]:'#ccc',
-                      display: 'inline-block',
-                      width: 22,
-                      height: 22,
-                      marginLeft: 8,
-                      marginTop: 11,
-                      color: '#f5f5f5',
-                      textAlign: 'center',
-                      cursor: 'pointer'
-                    }}
+                      onClick={() => this.handleSwitch(i)}
+                      style={{
+                        background: (this.state.type.includes(i)) ? e[1] : '#ccc',
+                        display: 'inline-block',
+                        width: 22,
+                        height: 22,
+                        marginLeft: 8,
+                        marginTop: 11,
+                        color: '#f5f5f5',
+                        textAlign: 'center',
+                        cursor: 'pointer'
+                      }}
                     >{e[2]}</div>
                   </Tooltip>
                 )
-              }   
-              <Button size="small" onClick={(e)=>this.setState({anchorEl: e.currentTarget})}>
-                <CloudDownloadIcon/>
-              </Button>
-              <Popover
-                open={Boolean(this.state.anchorEl)}
-                anchorEl={this.state.anchorEl}
-                onClose={()=>this.setState({anchorEl: null})}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'center',
-                }}
+              }
+            <Button size='small' onClick={(e) => this.setState({anchorEl: e.currentTarget})}>
+              <CloudDownloadIcon />
+            </Button>
+            <Popover
+              open={Boolean(this.state.anchorEl)}
+              anchorEl={this.state.anchorEl}
+              onClose={() => this.setState({anchorEl: null})}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center'
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+              }}
               >
-                  <CSVLink 
-                  filename={"學分抵免與課程免修.csv"}
-                  data={this.downCSV(0)} headers={[
-                    { label: "抵免申請項目", key: "type" },
-                    { label: "學號", key: "sid" },
-                    { label: "申請者", key: "name" },
-                    { label: "系所/年級/班別", key: "info" },
-                    { label: "修課資料|科目名稱", key: "nameA" },
-                    { label: "修課資料|開課系所", key: "department" },
-                    { label: "修課資料|學分數", key: "creditA" },
-                    { label: "抵免科目資料|永久課號", key: "codeB" },
-                    { label: "抵免科目資料|科目名稱", key: "nameB" },
-                    { label: "抵免科目資料|學分", key: "creditB" },
-                    { label: "抵免科目資料|選別", key: "typeB" },
-                    { label: "申請學年度", key: "year" },
-                    { label: "申請學期", key: "semester" }]}>
-                    <MenuItem >
+              <CSVLink
+                filename={'學分抵免與課程免修.csv'}
+                data={this.downCSV(0)} headers={[
+                    { label: '抵免申請項目', key: 'type' },
+                    { label: '學號', key: 'sid' },
+                    { label: '申請者', key: 'name' },
+                    { label: '系所/年級/班別', key: 'info' },
+                    { label: '修課資料|科目名稱', key: 'nameA' },
+                    { label: '修課資料|開課系所', key: 'department' },
+                    { label: '修課資料|學分數', key: 'creditA' },
+                    { label: '抵免科目資料|永久課號', key: 'codeB' },
+                    { label: '抵免科目資料|科目名稱', key: 'nameB' },
+                    { label: '抵免科目資料|學分', key: 'creditB' },
+                    { label: '抵免科目資料|選別', key: 'typeB' },
+                    { label: '申請學年度', key: 'year' },
+                    { label: '申請學期', key: 'semester' }]}>
+                <MenuItem >
                     學分抵免與課程免修
                     </MenuItem>
-                  </CSVLink>
-                  <CSVLink 
-                  filename={"本系必修課程抵免.csv"}
-                  data={this.downCSV(1)} headers={[
-                    { label: "抵免申請項目", key: "type" },
-                    { label: "學號", key: "sid" },
-                    { label: "申請者", key: "name" },
-                    { label: "系所/年級/班別", key: "info" },
-                    { label: "修課資料|課程名稱", key: "nameA" },
-                    { label: "修課資料|開課系所", key: "department" },
-                    { label: "修課資料|學分數", key: "creditA" },
-                    { label: "抵免科目資料|永久課號", key: "codeB" },
-                    { label: "抵免科目資料|課程名稱", key: "nameB" },
-                    { label: "申請學年度", key: "year" },
-                    { label: "申請學期", key: "semester" }]}>
-                    <MenuItem >
+              </CSVLink>
+              <CSVLink
+                filename={'本系必修課程抵免.csv'}
+                data={this.downCSV(1)} headers={[
+                    { label: '抵免申請項目', key: 'type' },
+                    { label: '學號', key: 'sid' },
+                    { label: '申請者', key: 'name' },
+                    { label: '系所/年級/班別', key: 'info' },
+                    { label: '修課資料|課程名稱', key: 'nameA' },
+                    { label: '修課資料|開課系所', key: 'department' },
+                    { label: '修課資料|學分數', key: 'creditA' },
+                    { label: '抵免科目資料|永久課號', key: 'codeB' },
+                    { label: '抵免科目資料|課程名稱', key: 'nameB' },
+                    { label: '申請學年度', key: 'year' },
+                    { label: '申請學期', key: 'semester' }]}>
+                <MenuItem >
                     本系必修課程抵免
                     </MenuItem>
-                  </CSVLink>
-                  <CSVLink 
-                  filename={"英授專業課程抵免.csv"}
-                  data={this.downCSV(2)} headers={[
-                    { label: "抵免申請項目", key: "type" },
-                    { label: "學號", key: "sid" },
-                    { label: "申請者", key: "name" },
-                    { label: "系所/年級/班別", key: "info" },
-                    { label: "永久課號", key: "codeA" },
-                    { label: "課程名稱", key: "nameA" },
-                    { label: "開課系所", key: "department" },
-                    { label: "授課老師", key: "teacher" },
-                    { label: "申請學年度", key: "year" },
-                    { label: "申請學期", key: "semester" }]}>
-                    <MenuItem >
+              </CSVLink>
+              <CSVLink
+                filename={'英授專業課程抵免.csv'}
+                data={this.downCSV(2)} headers={[
+                    { label: '抵免申請項目', key: 'type' },
+                    { label: '學號', key: 'sid' },
+                    { label: '申請者', key: 'name' },
+                    { label: '系所/年級/班別', key: 'info' },
+                    { label: '永久課號', key: 'codeA' },
+                    { label: '課程名稱', key: 'nameA' },
+                    { label: '開課系所', key: 'department' },
+                    { label: '授課老師', key: 'teacher' },
+                    { label: '申請學年度', key: 'year' },
+                    { label: '申請學期', key: 'semester' }]}>
+                <MenuItem >
                     英授專業課程抵免
                     </MenuItem>
-                  </CSVLink>
-              </Popover>
-            </div>
+              </CSVLink>
+            </Popover>
           </div>
+        </div>
 
         <div className={classes.Panels}>
           {
-            this.state.fetching ? 
-            (<MuiThemeProvider theme={theme}>
-              <CircularProgress className={classes.loading}/>
-            </MuiThemeProvider>):
-            (this.state.formList.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
+            this.state.fetching
+            ? (<MuiThemeProvider theme={theme}>
+              <CircularProgress className={classes.loading} />
+            </MuiThemeProvider>)
+            : (this.state.formList.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
               ? this.state.formList
                 .filter(
                   apply => type[this.state.index].includes(apply.status) && (this.state.type.includes(apply.type))
@@ -945,17 +938,17 @@ class Verify extends React.Component {
                     <ExpansionPanel key={index} defaultExpanded className={this.state.select.includes(apply.id) ? classes.selected : ''}>
                       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <span className={classes.subtitle}>
-                          
-                      <span className={classes.action}>
-                        <svg height='22' width='22' style={{verticalAlign: 'text-top'}} onClick={(e) => this.handleSelect(e, apply.id)}>
-                          <Tooltip title={this.state.select.includes(apply.id) ? `點擊已取消勾選` : `點擊以選取此抵免單`} placement='top'>
-                            <circle cx='11' cy='11' r='11' fill={this.state.select.includes(apply.id) ? '#3f51b5' : '#ccc'} />
-                          </Tooltip>
-                        </svg>
-                      </span>
+
+                          <span className={classes.action}>
+                            <svg height='22' width='22' style={{verticalAlign: 'text-top'}} onClick={(e) => this.handleSelect(e, apply.id)}>
+                              <Tooltip title={this.state.select.includes(apply.id) ? `點擊已取消勾選` : `點擊以選取此抵免單`} placement='top'>
+                                <circle cx='11' cy='11' r='11' fill={this.state.select.includes(apply.id) ? '#3f51b5' : '#ccc'} />
+                              </Tooltip>
+                            </svg>
+                          </span>
                           {/* {`${apply.year}${semester[apply.semester - 1]}`} */}
                           <div
-                            style= {{
+                            style={{
                               background: typeName[apply.type][1],
                               display: 'inline-block',
                               width: 22,
@@ -971,7 +964,7 @@ class Verify extends React.Component {
                             <Tooltip title={
                               <React.Fragment>
                                 {
-                                <div>開課學校:&nbsp;{apply.school}</div>}
+                                  <div>開課學校:&nbsp;{apply.school}</div>}
                                 <div>開課系所:&nbsp;{apply.department}</div>
                                 <div>永久課號:&nbsp;{apply.codeA}</div>
                                 <div>學分:&nbsp;{apply.creditA}</div>
@@ -982,7 +975,7 @@ class Verify extends React.Component {
                               </Button>
                             </Tooltip>
                             {
-                              apply.type !== 3  &&
+                              apply.type !== 3 &&
                               <React.Fragment>
                                 <span className={classes.progress}> <Arrow /></span>
                                 <Tooltip title={
@@ -1016,21 +1009,21 @@ class Verify extends React.Component {
                       <ExpansionPanelDetails>
                         <Table>
                           <TableBody >
-                          <TableRow className={classes.header}>
+                            <TableRow className={classes.header}>
                               <TableCell className={classes.font3}>學號</TableCell>
                               <TableCell className={classes.font3}>姓名</TableCell>
                               <TableCell className={classes.font3}>電話</TableCell>
-                              
-                              {apply.type !== 3 &&<TableCell className={classes.font3}>預抵免課程</TableCell>}
-                             
+
+                              {apply.type !== 3 && <TableCell className={classes.font3}>預抵免課程</TableCell>}
+
                             </TableRow>
                             <TableRow >
                               <TableCell className={classes.font}>{apply.sid}</TableCell>
                               <TableCell className={classes.font}>{apply.name}</TableCell>
                               <TableCell className={classes.font}>{apply.phone}</TableCell>
-                              
+
                               {apply.type !== 3 && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>}
-                              
+
                             </TableRow>
                             <TableRow className={classes.header}>
                               <TableCell className={classes.font3}>已(欲)修習課程</TableCell>
@@ -1041,27 +1034,27 @@ class Verify extends React.Component {
                             <TableRow>
                               <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
-                              <TableCell className={classes.font}>{(apply.type === 2 || apply.type === 3) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span>: apply.score}</TableCell>
+                              <TableCell className={classes.font}>{(apply.type === 2 || apply.type === 3) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
                             </TableRow>
                             <TableRow className={classes.header}>
                               <TableCell className={classes.font3}>申請日期</TableCell>
-                              
-                              <TableCell className={classes.font3} colSpan={3}>申請原因</TableCell>    
+
+                              <TableCell className={classes.font3} colSpan={3}>申請原因</TableCell>
                             </TableRow>
                             <TableRow>
-                            <TableCell className={classes.font} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
-                            <TableCell className={classes.font} colSpan={3} >{apply.reason}</TableCell>
+                              <TableCell className={classes.font} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
+                              <TableCell className={classes.font} colSpan={3} >{apply.reason}</TableCell>
                             </TableRow>
                             {
-                              ((apply.status === 6) || (apply.status === 0 && apply.reject_reason !== null) ) && (
-                            <TableRow>
-                            <TableCell className={classes.font3} >退回原因</TableCell>
-                            <TableCell className={classes.font} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-':apply.reject_reason}</TableCell>
-                            </TableRow>
+                              ((apply.status === 6) || (apply.status === 0 && apply.reject_reason !== null)) && (
+                              <TableRow>
+                                <TableCell className={classes.font3} >退回原因</TableCell>
+                                <TableCell className={classes.font} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-' : apply.reject_reason}</TableCell>
+                              </TableRow>
                             )
                             }
-                            
+
                           </TableBody>
                         </Table>
                       </ExpansionPanelDetails>
