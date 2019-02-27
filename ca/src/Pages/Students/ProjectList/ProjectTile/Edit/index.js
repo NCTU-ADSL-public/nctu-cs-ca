@@ -57,10 +57,12 @@ class Edit extends React.Component {
       research_title: _this.props.project.research_title,
       new_title: _this.props.project.research_title,
       new_intro: _this.state.ckeditorContent
-    }).then(res => {
+    })
+    .then(res => {
       this.props.update_project(_this.state.ckeditorContent, _this.props.project.research_title, _this.props.project.semester)
       this.props.onClose()
-    }).catch(err => {
+    })
+    .catch(err => {
       // this.props.update_project(_this.state.ckeditorContent, _this.props.project.research_title, _this.props.project.semester)
       window.alert('儲存失敗，請檢察網路連線')
       // this.props.onClose()
@@ -90,28 +92,33 @@ class Edit extends React.Component {
     }
     if (this.state.file !== 'no') {
       let directory = this.props.project.semester + '/' + this.props.project.tname + '/' + this.props.project.research_title + '/file/'
-      storageRef.child(directory).delete().then(function () {
-      }).catch(function (error) {
-        console.log(error)
-      })
+      storageRef.child(directory).delete()
+        .then(function () {})
+        .catch(function (error) {
+          console.log(error)
+        })
 
       let file = this.state.file
       let uploadTask = storageRef.child(directory + 'file.pdf').put(file)
-      uploadTask.on('state_changed', function (snapshot) {
-        _this.props.store_projects_file('loading', _this.props.project.research_title, _this.props.project.semester)
-      }, function (error) {
-        console.log(error)
-      }, function () {
-        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-          _this.props.store_projects_file(downloadURL, _this.props.project.research_title, _this.props.project.semester)
-        })
-      })
+      uploadTask.on(
+        'state_changed',
+        function (snapshot) {
+          _this.props.store_projects_file('loading', _this.props.project.research_title, _this.props.project.semester)
+        },
+        function (error) {
+          console.log(error)
+        },
+        function () {
+          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            _this.props.store_projects_file(downloadURL, _this.props.project.research_title, _this.props.project.semester)
+          })
+        }
+      )
     }
   }
 
   handleImageChange (e) {
     console.log(e)
-
     this.setState({
       image: e
     })
@@ -126,46 +133,77 @@ class Edit extends React.Component {
 
   render () {
     return (
-      <div>
-        <div >
-          <div className='col-xs-12 col-sm-12 col-md-12' style={{ marginTop: '10px' }}>
-            <form>
-              <LabeledInput label='圖片'>
-                <div className='upload-btn-wrapper'>
-                  <button className='btn' style={{ cursor: 'pointer' }}> 上傳圖片</button>
-                  <input accept='image/*' type='file' hidden onChange={(e) => this.handleImageChange(e.target.files[0])} />
-                  {this.state.image === 'no' ? '' : this.state.image.name}
-                  <div className='text-center clickable upload-picture' >
-                    點選以上傳,建議800x400以達最佳效果(需小於2MB)
-                  </div>
-                </div>
-              </LabeledInput>
-              <LabeledInput label='報告'>
-                <div className='upload-btn-wrapper'>
-                  <button accept='application/pdf' className='btn' style={{ cursor: 'pointer' }}> 上傳報告</button>
-                  <input type='file' hidden onChange={(e) => this.handleFileChange(e.target.files[0])} />
-                  {this.state.file === 'no' ? '' : this.state.file.name}
-                  <div className='text-center clickable upload-picture' >
-                    限上傳PDF檔案
-                  </div>
-                </div>
-              </LabeledInput>
-              <LabeledInput label='主題'>
-                <div className='input-group'>
-                  <input ref='title' className='form-control' placeholder='必填' type='text' value={this.state.title} required />
-                    (如需更改題目請聯絡教授以更改)
-                </div>
-              </LabeledInput>
-              <LabeledInput label='簡介'>
-                <CKEditor style={{ height: '50vh' }} activeClass='p10' content={this.state.ckeditorContent} events={{ 'change': this.onChange }} />
-
-              </LabeledInput>
-              <div className='justify-content-center pull-right'>
-                <button type='submit' style={{ margin: '2px', backgroundColor: '#795548', borderColor: '#795548' }} className='btn btn-success btn-large' onClick={this.handleSubmit}>儲存</button>
+      <div className='col-xs-12 col-sm-12 col-md-12' style={{ marginTop: '10px' }}>
+        <form>
+          <LabeledInput label='圖片'>
+            <div className='upload-btn-wrapper'>
+              <button className='btn' style={{ cursor: 'pointer' }}> 上傳圖片</button>
+              <input
+                accept='image/*'
+                type='file'
+                hidden
+                onChange={(e) => this.handleImageChange(e.target.files[0])}
+              />
+              {this.state.image === 'no' ? '' : this.state.image.name}
+              <div className='text-center clickable upload-picture' >
+                點選以上傳,建議800x400以達最佳效果(需小於2MB)
               </div>
-            </form>
+            </div>
+          </LabeledInput>
+
+          <LabeledInput label='報告'>
+            <div className='upload-btn-wrapper'>
+              <button
+                accept='application/pdf'
+                className='btn'
+                style={{ cursor: 'pointer' }}
+              >
+                上傳報告
+              </button>
+              <input
+                type='file'
+                hidden
+                onChange={(e) => this.handleFileChange(e.target.files[0])}
+              />
+              {this.state.file === 'no' ? '' : this.state.file.name}
+              <div className='text-center clickable upload-picture'>限上傳PDF檔案</div>
+            </div>
+          </LabeledInput>
+
+          <LabeledInput label='主題'>
+            <div className='input-group'>
+              <input
+                ref='title'
+                className='form-control'
+                placeholder='必填'
+                type='text'
+                value={this.state.title}
+                required
+              />
+              (如需更改題目請聯絡教授以更改)
+            </div>
+          </LabeledInput>
+
+          <LabeledInput label='簡介'>
+            <CKEditor
+              style={{ height: '50vh' }}
+              activeClass='p10'
+              content={this.state.ckeditorContent}
+              events={{ 'change': this.onChange }}
+            />
+          </LabeledInput>
+
+          <div className='justify-content-center pull-right'>
+            <button
+              type='submit'
+              style={{ margin: '2px', backgroundColor: '#795548', borderColor: '#795548' }}
+              className='btn btn-success btn-large'
+              onClick={this.handleSubmit}
+            >
+              儲存
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     )
   }

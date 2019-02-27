@@ -176,7 +176,7 @@ class index extends React.Component {
     } = this.state
 
     return (
-      <div style = {{ marginBottom: '60px', width: '60%', margin: '0 auto', marginTop: '20px' }} >
+      <div style = {{ marginBottom: '60px', width: '90%', margin: '0 auto', marginTop: '20px' }} >
         <div className = 'row' >
           <div className = 'col-md-4 col-lg-4 col-xs-12' style = {{ display: 'flex' }} >
             <FilterList className = { classes.icon } onClick = { () => this.setState({ open_filter: true }) } />
@@ -404,10 +404,10 @@ class index extends React.Component {
             {
               submit_student_object.first_second === "3" &&
                 <Button className = { classes.buttonRemove } onClick = {
-                  () => { 
+                  () => {
                     this.setState({ submit_page_open: false })
                     delete_research(submit_student_object)
-                  } 
+                  }
                 }>未通過並移除</Button>
             }
             <Button onClick = { () => {

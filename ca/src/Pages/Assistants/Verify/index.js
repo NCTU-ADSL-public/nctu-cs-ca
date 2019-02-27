@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import {
   ExpansionPanel,
   ExpansionPanelDetails,
@@ -24,6 +24,7 @@ import {
 } from '@material-ui/core'
 import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
+import OpenInNew from '@material-ui/icons/OpenInNew'
 import ApplyIcon from '@material-ui/icons/Assignment'
 import AlarmIcon from '@material-ui/icons/Alarm'
 import OKIcon from '@material-ui/icons/Done'
@@ -32,13 +33,13 @@ import FaceIcon from '@material-ui/icons/Face'
 import TrashIcon from '@material-ui/icons/Delete'
 import CheckNone from '@material-ui/icons/CheckBoxOutlineBlank'
 import ReturnIcon from '@material-ui/icons/Replay'
+import TIcon from '@material-ui/icons/TurnedInNot'
 // import SwitchIcon from '@material-ui/icons/Flag'
 import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-//  import FakeData from '../../../Resources/FakeData'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import FakeData from '../../../Resources/FakeData'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from 'react-csv'
 
@@ -199,18 +200,20 @@ const Arrow = () => (
   </svg>
 )
 const type = [[0], [1], [5], [2], [6], [3, 4]]
-const typeName = [['外系抵免', '#8ed875', '外'], ['英授專業課程抵免', '#3498DB', '英'], ['課程免修', '#E74C3C', '免'], ['學分抵免', '#2C3E50', '抵']]
+const typeName = [['本系必修課程抵免', '#8ed875', '必'], ['英授專業課程抵免', '#3498DB', '英'], ['學分抵免', '#2C3E50', '抵'], ['課程免修', '#E74C3C', '免']]
+const statusName = ['申請中', '等候主管同意', '同意抵免', '抵免失敗', '抵免失敗', '等候老師同意', '退回等學生修改']
+const creditName = ['compulsory_course', 'english_course', 'waive_course', 'exempt_course']
 
 class Verify extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
 // for test
-      // formList: FakeData.FormList.map((e,i)=>({...e,id:i})),
-      // teacherList: FakeData.TeacherList.sort((a,b)=> b.status - a.status),
+      formList: FakeData.FormList.map((e, i) => ({...e, id: i})),
+      teacherList: FakeData.TeacherList.sort((a, b) => b.status - a.status),
 // end for test
-      formList: [],
-      teacherList: [],
+      // formList:[],
+      // teacherList: [],
       open: false,
       message: 0,
       index: 0,
@@ -220,7 +223,7 @@ class Verify extends React.Component {
       transferTo: '',
       return: '',
       anchorEl: null,
-      fetching: true
+      fetching: false
     }
     this.handleAgree = this.handleAgree.bind(this)
     this.handleDisagree = this.handleDisagree.bind(this)
@@ -274,8 +277,12 @@ class Verify extends React.Component {
       status: 2,
       transferTo: this.state.transferTo
     }).then(res => {
-      updatedList[id].status = 2
-      this.setState({formList: updatedList, open: true, message: 0, transferTo: '', select: []})
+      if (res.data.signal === 1) {
+        updatedList[id].status = 2
+        this.setState({formList: updatedList, open: true, message: 0, transferTo: '', select: []})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -298,8 +305,12 @@ class Verify extends React.Component {
       status: 3,
       transferTo: ''
     }).then(res => {
-      updatedList[id].status = 3
-      this.setState({formList: updatedList, open: true, message: 0, select: []})
+      if (res.data.signal === 1) {
+        updatedList[id].status = 3
+        this.setState({formList: updatedList, open: true, message: 0, select: []})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -322,8 +333,12 @@ class Verify extends React.Component {
       status: 0,
       transferTo: ''
     }).then(res => {
-      updatedList[id].status = 0
-      this.setState({formList: updatedList, open: true, message: 0, select: []})
+      if (res.data.signal === 1) {
+        updatedList[id].status = 0
+        this.setState({formList: updatedList, open: true, message: 0, select: []})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -348,7 +363,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 2
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -360,8 +374,14 @@ class Verify extends React.Component {
       status: 2,
       transferTo: ''
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0, select: []})
+      if (res.data.signal === 1) {
+        this.state.select.map(
+          e => updatedList[e].status = 2
+        )
+        this.setState({formList: updatedList, open: true, message: 0, select: []})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -371,7 +391,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 3
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -383,8 +402,14 @@ class Verify extends React.Component {
       status: 3,
       transferTo: ''
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0, select: []})
+      if (res.data.signal === 1) {
+        this.state.select.map(
+          e => updatedList[e].status = 3
+        )
+        this.setState({formList: updatedList, open: true, message: 0, select: []})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -395,7 +420,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = status
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -407,7 +431,14 @@ class Verify extends React.Component {
       status: status,
       transferTo: this.state.transferTo
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, select: [], transferTo: ''})
+      if (res.data.signal === 1) {
+        this.state.select.map(
+          e => updatedList[e].status = status
+        )
+        this.setState({formList: updatedList, open: true, message: 0, select: [], transferTo: ''})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -417,7 +448,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 0
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -429,7 +459,14 @@ class Verify extends React.Component {
       status: 0,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, select: []})
+      if (res.data.signal === 1) {
+        this.state.select.map(
+          e => updatedList[e].status = 0
+        )
+        this.setState({formList: updatedList, open: true, message: 0, select: []})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -439,7 +476,6 @@ class Verify extends React.Component {
     axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 6
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -451,7 +487,14 @@ class Verify extends React.Component {
       status: 6,
       transferTo: ''
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, return: '', select: []})
+      if (res.data.signal === 1) {
+        this.state.select.map(
+          e => updatedList[e].status = 6
+        )
+        this.setState({formList: updatedList, open: true, message: 0, return: '', select: []})
+      } else {
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -489,8 +532,8 @@ class Verify extends React.Component {
   }
   downCSV (i) {
     switch (i) {
-      case 0:
-        return (this.state.formList.filter(e => (e.type === 2 || e.type === 3))
+      case 2:
+        return (this.state.formList.filter(e => (e.type === 2))
         .map(e => {
           let date = e.date.split('-'), year, semester
           if (parseInt(date[1], 10) < 8) {
@@ -501,7 +544,7 @@ class Verify extends React.Component {
             semester = '上學期'
           }
           return ({
-            type: e.type === 0 ? '學分抵免' : '課程免修',
+            type: '學分抵免',
             sid: e.sid,
             name: e.name,
             info: e.info,
@@ -513,10 +556,39 @@ class Verify extends React.Component {
             creditB: e.creditB,
             typeB: e.typeB,
             year: year,
-            semester: semester
+            semester: semester,
+            status: statusName[e.status]
           })
         }))
-      case 1:
+      case 3:
+        return (this.state.formList.filter(e => (e.type === 3))
+        .map(e => {
+          let date = e.date.split('-'), year, semester
+          if (parseInt(date[1], 10) < 8) {
+            year = parseInt(date[0], 10) - 1912
+            semester = '下學期'
+          } else {
+            year = parseInt(date[0], 10) - 1911
+            semester = '上學期'
+          }
+          return ({
+            type: '課程免修',
+            sid: e.sid,
+            name: e.name,
+            info: e.info,
+            nameA: e.nameA,
+            department: e.department,
+            creditA: e.creditA,
+            codeB: e.codeB,
+            nameB: e.nameB,
+            creditB: e.creditB,
+            typeB: e.typeB,
+            year: year,
+            semester: semester,
+            status: statusName[e.status]
+          })
+        }))
+      case 0:
         return this.state.formList.filter(e => e.type === 0)
       .map(e => {
         let date = e.date.split('-'), year, semester
@@ -538,10 +610,11 @@ class Verify extends React.Component {
           codeB: e.codeB,
           nameB: e.nameB,
           year: year,
-          semester: semester
+          semester: semester,
+          status: statusName[e.status]
         })
       })
-      case 2:
+      case 1:
         return this.state.formList.filter(e => e.type === 1)
       .map(e => {
         let date = e.date.split('-'), year, semester
@@ -562,7 +635,8 @@ class Verify extends React.Component {
           department: e.department,
           teacher: e.teacher,
           year: year,
-          semester: semester
+          semester: semester,
+          status: statusName[e.status]
         })
       })
       default:
@@ -864,8 +938,45 @@ class Verify extends React.Component {
               }}
               >
               <CSVLink
-                filename={'學分抵免與課程免修.csv'}
+                filename={'本系必修課程抵免.csv'}
                 data={this.downCSV(0)} headers={[
+                    { label: '抵免申請項目', key: 'type' },
+                    { label: '學號', key: 'sid' },
+                    { label: '申請者', key: 'name' },
+                    { label: '系所/年級/班別', key: 'info' },
+                    { label: '修課資料|課程名稱', key: 'nameA' },
+                    { label: '修課資料|開課系所', key: 'department' },
+                    { label: '修課資料|學分數', key: 'creditA' },
+                    { label: '抵免科目資料|永久課號', key: 'codeB' },
+                    { label: '抵免科目資料|課程名稱', key: 'nameB' },
+                    { label: '申請學年度', key: 'year' },
+                    { label: '申請學期', key: 'semester' },
+                    { label: '申請狀態', key: 'status' }]}>
+                <MenuItem >
+                    本系必修課程抵免
+                    </MenuItem>
+              </CSVLink>
+              <CSVLink
+                filename={'英授專業課程抵免.csv'}
+                data={this.downCSV(1)} headers={[
+                    { label: '抵免申請項目', key: 'type' },
+                    { label: '學號', key: 'sid' },
+                    { label: '申請者', key: 'name' },
+                    { label: '系所/年級/班別', key: 'info' },
+                    { label: '永久課號', key: 'codeA' },
+                    { label: '課程名稱', key: 'nameA' },
+                    { label: '開課系所', key: 'department' },
+                    { label: '授課老師', key: 'teacher' },
+                    { label: '申請學年度', key: 'year' },
+                    { label: '申請學期', key: 'semester' },
+                    { label: '申請狀態', key: 'status' }]}>
+                <MenuItem >
+                    英授專業課程抵免
+                    </MenuItem>
+              </CSVLink>
+              <CSVLink
+                filename={'學分抵免.csv'}
+                data={this.downCSV(2)} headers={[
                     { label: '抵免申請項目', key: 'type' },
                     { label: '學號', key: 'sid' },
                     { label: '申請者', key: 'name' },
@@ -878,44 +989,31 @@ class Verify extends React.Component {
                     { label: '抵免科目資料|學分', key: 'creditB' },
                     { label: '抵免科目資料|選別', key: 'typeB' },
                     { label: '申請學年度', key: 'year' },
-                    { label: '申請學期', key: 'semester' }]}>
+                    { label: '申請學期', key: 'semester' },
+                    { label: '申請狀態', key: 'status' }]}>
                 <MenuItem >
-                    學分抵免與課程免修
+                    學分抵免
                     </MenuItem>
               </CSVLink>
               <CSVLink
-                filename={'本系必修課程抵免.csv'}
-                data={this.downCSV(1)} headers={[
+                filename={'課程免修.csv'}
+                data={this.downCSV(3)} headers={[
                     { label: '抵免申請項目', key: 'type' },
                     { label: '學號', key: 'sid' },
                     { label: '申請者', key: 'name' },
                     { label: '系所/年級/班別', key: 'info' },
-                    { label: '修課資料|課程名稱', key: 'nameA' },
+                    { label: '修課資料|科目名稱', key: 'nameA' },
                     { label: '修課資料|開課系所', key: 'department' },
                     { label: '修課資料|學分數', key: 'creditA' },
                     { label: '抵免科目資料|永久課號', key: 'codeB' },
-                    { label: '抵免科目資料|課程名稱', key: 'nameB' },
+                    { label: '抵免科目資料|科目名稱', key: 'nameB' },
+                    { label: '抵免科目資料|學分', key: 'creditB' },
+                    { label: '抵免科目資料|選別', key: 'typeB' },
                     { label: '申請學年度', key: 'year' },
-                    { label: '申請學期', key: 'semester' }]}>
+                    { label: '申請學期', key: 'semester' },
+                    { label: '申請狀態', key: 'status' }]}>
                 <MenuItem >
-                    本系必修課程抵免
-                    </MenuItem>
-              </CSVLink>
-              <CSVLink
-                filename={'英授專業課程抵免.csv'}
-                data={this.downCSV(2)} headers={[
-                    { label: '抵免申請項目', key: 'type' },
-                    { label: '學號', key: 'sid' },
-                    { label: '申請者', key: 'name' },
-                    { label: '系所/年級/班別', key: 'info' },
-                    { label: '永久課號', key: 'codeA' },
-                    { label: '課程名稱', key: 'nameA' },
-                    { label: '開課系所', key: 'department' },
-                    { label: '授課老師', key: 'teacher' },
-                    { label: '申請學年度', key: 'year' },
-                    { label: '申請學期', key: 'semester' }]}>
-                <MenuItem >
-                    英授專業課程抵免
+                    課程免修
                     </MenuItem>
               </CSVLink>
             </Popover>
@@ -936,6 +1034,7 @@ class Verify extends React.Component {
                 .map(
                   (apply, index) => (
                     <ExpansionPanel key={index} defaultExpanded className={this.state.select.includes(apply.id) ? classes.selected : ''}>
+
                       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <span className={classes.subtitle}>
 
@@ -975,7 +1074,7 @@ class Verify extends React.Component {
                               </Button>
                             </Tooltip>
                             {
-                              apply.type !== 3 &&
+                              apply.type !== 1 &&
                               <React.Fragment>
                                 <span className={classes.progress}> <Arrow /></span>
                                 <Tooltip title={
@@ -1013,16 +1112,16 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>學號</TableCell>
                               <TableCell className={classes.font3}>姓名</TableCell>
                               <TableCell className={classes.font3}>電話</TableCell>
-
-                              {apply.type !== 3 && <TableCell className={classes.font3}>預抵免課程</TableCell>}
+                              <TableCell className={classes.font3}>班別</TableCell>
+                              {/* {apply.type !== 3 &&<TableCell className={classes.font3}>預抵免課程</TableCell>} */}
 
                             </TableRow>
                             <TableRow >
                               <TableCell className={classes.font}>{apply.sid}</TableCell>
                               <TableCell className={classes.font}>{apply.name}</TableCell>
                               <TableCell className={classes.font}>{apply.phone}</TableCell>
-
-                              {apply.type !== 3 && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>}
+                              <TableCell className={classes.font}>{apply.info}</TableCell>
+                              {/* {apply.type !== 3 && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>} */}
 
                             </TableRow>
                             <TableRow className={classes.header}>
@@ -1032,9 +1131,9 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>課程綱要</TableCell>
                             </TableRow>
                             <TableRow>
-                              <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
+                              <TableCell className={classes.font}>{`${apply.nameA}${apply.type !== 3 ? `(${apply.codeA})` : ''}`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
-                              <TableCell className={classes.font}>{(apply.type === 2 || apply.type === 3) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
+                              <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
                             </TableRow>
                             <TableRow className={classes.header}>
@@ -1044,7 +1143,15 @@ class Verify extends React.Component {
                             </TableRow>
                             <TableRow>
                               <TableCell className={classes.font} >{apply.date.split(' ')[0].split('-').join('/')}</TableCell>
-                              <TableCell className={classes.font} colSpan={3} >{apply.reason}</TableCell>
+                              <TableCell className={classes.font} colSpan={3} >
+                                {apply.type === 0 && <Chip style={{ verticalAlign: 'inherit'}} avatar={
+                                  <Avatar>
+                                    <TIcon />
+                                  </Avatar>
+                            }label={apply.reason_type} />
+                             }
+                                {apply.reason}
+                              </TableCell>
                             </TableRow>
                             {
                               ((apply.status === 6) || (apply.status === 0 && apply.reject_reason !== null)) && (
@@ -1058,6 +1165,16 @@ class Verify extends React.Component {
                           </TableBody>
                         </Table>
                       </ExpansionPanelDetails>
+                      <div style={{ position: 'relative', top: -20, fontSize: '30px', fontWeight: 'bold' }} >
+                        <OpenInNew style={{
+                          fontSize: '20px',
+                          marginLeft: '20px',
+                          fontWeight: 'bold',
+                          cursor: 'pointer',
+                          verticalAlign: 'middle'}}
+                          onClick={() => window.open(`/assistants/head/c/${apply.sid}/${creditName[apply.type]}/${apply.date}`)}
+                        />
+                      </div>
                       {/* <ExpansionPanelActions>
                         {this.state.index === 0 && (
                           <React.Fragment>

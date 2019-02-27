@@ -20,6 +20,7 @@ import AssistantVerify from './Pages/Assistants/Verify'
 import AssistantMail from './Pages/Assistants/Mail'
 
 import StudentDetail from './Components/StudentDetail'
+import StudentVerify from './Components/StudentVerify'
 import StudentList from './Pages/Assistants/Family/StudentList'
 import TeacherList from './Pages/Assistants/Family'
 
@@ -27,7 +28,7 @@ import StudentHome from './Pages/Students/Home/Home'
 import StudentGrad from './Pages/Students/Graduation'
 
 import StudentCredit from './Pages/Students/Credit'
-import StudentCreditApply from './Pages/Students/Credit/Stepper'
+// import StudentCreditApply from './Pages/Students/Credit/Stepper'
 
 import StudentMap from './Pages/Students/Map_v2'
 // import StudentMap from './Pages/Students/Map_v3'
@@ -70,7 +71,7 @@ const Router = () => (
         <Route exact path='/students/professor' render={() => <StudentProfessor />} />
         <Route exact path='/students/project' render={() => <StudentProject />} />
         <Route exact path='/students/credit' render={() => <StudentCredit />} />
-        <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} />
+        {/* <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} /> */}
         <Route exact path='/students/recommend' render={() => <StudentRecommend />} />
 
         <Route exact path='/teachers/head' component={TeacherHome} />
@@ -87,7 +88,7 @@ const Router = () => (
         <Route exact path='/assistants/verify' component={AssistantVerify} />
         <Route exact path='/assistants/mail' render={() => <Frame><AssistantMail /></Frame>} />
         <Route path='/assistants/head/s/:sid/:sname/:program' component={StudentDetail} />
-
+        <Route path='/assistants/head/c/:sid/:type/:time' component={StudentVerify} />
       </Switch>
       <Route path='/' component={Footer} />
       <div id='printArea' />

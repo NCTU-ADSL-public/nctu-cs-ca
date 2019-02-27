@@ -191,9 +191,8 @@ const Arrow = () => (
     <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
   </svg>
 )
-const type = [[1,5]]
-const typeName = [['外系抵免','#8ed875','外'],['英授專業課程抵免','#3498DB','英'],['課程免修','#E74C3C','免'],['學分抵免','#2C3E50','抵']]
-
+const type = [[1,5], [1], [5],[2],[6], [3, 4]]
+const typeName = [['本系必修課程抵免','#8ed875','必'],['英授專業課程抵免','#3498DB','英'],['學分抵免','#2C3E50','抵'],['課程免修','#E74C3C','免']]
 class Verify extends React.Component {
   constructor (props) {
     super(props)
@@ -250,7 +249,6 @@ class Verify extends React.Component {
     axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 2
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -260,8 +258,15 @@ class Verify extends React.Component {
       ),
       status: 2,
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        this.state.select.map(
+          e => updatedList[e].status = 2
+        )
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -271,7 +276,6 @@ class Verify extends React.Component {
     axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
       courses: this.state.select.map(
         e => {
-          updatedList[e].status = 4
           return ({
             sid: this.state.formList[e].sid,
             timestamp: this.state.formList[e].date,
@@ -281,8 +285,15 @@ class Verify extends React.Component {
       ),
       status: 4
     }).then(res => {
-      console.log(res)
-      this.setState({formList: updatedList, open: true, message: 0,select: []})
+      if(res.data.signal === 1){
+        this.state.select.map(
+          e => updatedList[e].status = 4
+        )
+        this.setState({formList: updatedList, open: true, message: 0,select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -303,7 +314,15 @@ class Verify extends React.Component {
       ),
       status: 0
     }).then(res => {
-      this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      if(res.data.signal === 1){
+        this.state.select.map(
+          e => updatedList[e].status = 0
+        )
+        this.setState({formList: updatedList, open: true, message: 0, return: '',select: []})
+      }
+      else{
+        this.setState({open: true, message: 1})
+      }
     }).catch(err => {
       this.setState({open: true, message: 1})
     })
@@ -492,7 +511,7 @@ class Verify extends React.Component {
                               </Button>
                             </Tooltip>
                             {
-                              apply.type !== 3  &&
+                              apply.type !== 1  &&
                               <React.Fragment>
                                 <span className={classes.progress}> <Arrow /></span>
                                 <Tooltip title={
@@ -530,16 +549,16 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>學號</TableCell>
                               <TableCell className={classes.font3}>姓名</TableCell>
                               <TableCell className={classes.font3}>電話</TableCell>
-                              
-                              {apply.type !== 3 &&<TableCell className={classes.font3}>預抵免課程</TableCell>}
-                             
+                              <TableCell className={classes.font3}>班別</TableCell>
+                              {/* {apply.type !== 3 &&<TableCell className={classes.font3}>預抵免課程</TableCell>}
+                              */}
                             </TableRow>
                             <TableRow >
                               <TableCell className={classes.font}>{apply.sid}</TableCell>
                               <TableCell className={classes.font}>{apply.name}</TableCell>
                               <TableCell className={classes.font}>{apply.phone}</TableCell>
-                              
-                              {apply.type !== 3 && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>}
+                              <TableCell className={classes.font}>{apply.info}</TableCell>
+                              {/* {apply.type !== 3 && <TableCell className={classes.font}>{`${apply.nameB}(${apply.codeB})`}</TableCell>} */}
                               
                             </TableRow>
                             <TableRow className={classes.header}>
@@ -551,7 +570,7 @@ class Verify extends React.Component {
                             <TableRow>
                               <TableCell className={classes.font}>{`${apply.nameA}(${apply.codeA})`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
-                              <TableCell className={classes.font}>{(apply.type === 2 || apply.type === 3) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span>: apply.score}</TableCell>
+                              <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span>: apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
                             </TableRow>
                             <TableRow className={classes.header}>

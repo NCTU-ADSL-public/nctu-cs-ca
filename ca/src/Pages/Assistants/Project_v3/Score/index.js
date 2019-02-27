@@ -20,7 +20,7 @@ import { CSVLink } from "react-csv"
 
 const styles = theme => ({
   root: {
-    width: '60%',
+    width: '90%',
     margin: '0 auto',
     marginTop: '20px',
     marginBottom: '60px'
@@ -61,7 +61,7 @@ class index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      semester: '106-2',
+      semester: '107-1',
       input: "",
       page: 0,
       number_per_page: 10,
@@ -203,6 +203,8 @@ class index extends React.Component {
             scores = {
               this.filter(scores).slice(number_per_page * page, number_per_page * (page + 1) )
             }
+            semester = { this.state.semester }
+            first_second = { this.state.first_second }
           />
         </div>
         <div style = {{ textAlign: 'center', marginTop: '10px', marginBottom: '50px' }} >

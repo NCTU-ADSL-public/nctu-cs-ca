@@ -3,13 +3,14 @@ import { handleActions } from 'redux-actions'
 const initialState = {
   errorsubmitted: false,
   waiveCourse: {
+    apply_year: 107,
+    apply_semester: 2,
+    apply_time: '',
     class: '',
     phone: '',
     original_school: '',
     original_department: '',
     original_graduation_credit: '',
-    apply_year: 107,
-    apply_semester: 2,
     original_course_year: 0,
     original_course_semester: 0,
     original_course_name: '',
@@ -23,10 +24,11 @@ const initialState = {
     file: ''
   },
   exemptCourse: {
-    class: '',
-    phone: '',
     apply_year: 107,
     apply_semester: 1,
+    apply_time: '',
+    class: '',
+    phone: '',
     original_course_year: 0,
     original_course_semester: 0,
     original_course_name: '',
@@ -42,6 +44,8 @@ const initialState = {
   compulsoryCourse: {
     apply_year: '',
     apply_semester: '',
+    apply_time: '',
+    class: '',
     phone: '',
     department: '',
     teacher: '',
@@ -62,6 +66,8 @@ const initialState = {
   englishCourse: {
     apply_year: '',
     apply_semester: '',
+    apply_time: '',
+    class: '',
     phone: '',
     reason: '',
     department: '',

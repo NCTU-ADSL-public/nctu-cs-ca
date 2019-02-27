@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
-import Show from './Show_v2'
+import Show from './Show'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -11,9 +11,9 @@ import Typography from '@material-ui/core/Typography'
 import CloseIcon from '@material-ui/icons/Close'
 import Grow from '@material-ui/core/Grow'
 import { GridTile } from 'material-ui/GridList'
-import img from '../Imgae/1.jpg'
-import img2 from '../Imgae/2.jpg'
-import img3 from '../Imgae/rejection.jpg'
+import img from '../Image/1.jpg'
+import img2 from '../Image/2.jpg'
+import img3 from '../Image/rejection.jpg'
 import firebase from 'firebase'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { connect } from 'react-redux'
@@ -68,16 +68,16 @@ class Index extends React.Component {
     let directory = this.props.data.semester + '/' + this.props.data.tname + '/' + this.props.data.research_title + '/image/image.jpg'
     let pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
-      this.props.store_image(url)
+      this.props.storeImage(url)
     }).catch(error => {
-      this.props.store_image('')
+      this.props.storeImage('')
     })
     directory = this.props.data.semester + '/' + this.props.data.tname + '/' + this.props.data.research_title + '/file/file.pdf'
     pathReference = storageRef.child(directory)
     pathReference.getDownloadURL().then(url => {
-      this.props.store_file(url)
+      this.props.storeFile(url)
     }).catch(error => {
-      this.props.store_file('')
+      this.props.storeFile('')
     })
   }
 
@@ -190,8 +190,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  store_image: (url) => dispatch(storeProjectsImage(url, ownProps.data.research_title, ownProps.data.semester)),
-  store_file: (url) => dispatch(storeProjectsFile(url, ownProps.data.research_title, ownProps.data.semester))
+  storeImage: (url) => dispatch(storeProjectsImage(url, ownProps.data.research_title, ownProps.data.semester)),
+  storeFile: (url) => dispatch(storeProjectsFile(url, ownProps.data.research_title, ownProps.data.semester))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

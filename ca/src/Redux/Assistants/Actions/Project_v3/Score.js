@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions'
 import axios from 'axios'
 
 export const store_scores = createAction('STORE_SCORES')
+export const set_scores = createAction('SET_SCORES')
 export const storeScoreCsvData = createAction('STORE_SCORE_CSV_DATA')
 export const storeScoreCsvDataStart = createAction('STORE_SCORE_CSV_DATA_START')
 
@@ -14,6 +15,14 @@ export const fetchScores = (post_item) => dispatch => {
     console.log(res.data)
     dispatch(store_scores(res.data))
   }).catch(err => {
+    console.log(err)
+  })
+}
+
+export const setScores = payload => dispatch => {
+  axios.post('/assistants/SetResearchGrade', payload).then( res => {
+    dispatch(set_scores(payload))
+  }).catch( err => {
     console.log(err)
   })
 }

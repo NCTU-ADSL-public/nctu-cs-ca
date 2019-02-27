@@ -36,7 +36,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 150
+    width: 200
   },
   textFieldLong: {
     marginLeft: theme.spacing.unit,
@@ -92,7 +92,8 @@ class CompulsoryCourseForm extends React.Component {
                 defaultValue={this.props.studentIdcard.student_id}
               />
               <TextField
-                label='班別'
+                label='系所/年級/班別'
+                placeholder='例：資工系資工組大一A班'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -101,9 +102,9 @@ class CompulsoryCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                InputProps={{ readOnly: true }}
-                error={this.props.errorsubmitted ? this.props.studentIdcard.program === '' : false}
-                defaultValue={this.props.studentIdcard.program}
+                value={this.props.class}
+                error={this.props.errorsubmitted ? this.props.class === '' : false}
+                onChange={(event) => this.props.handleChange({ class: event.target.value })}
               />
               <TextField
                 label='手機'
@@ -438,18 +439,19 @@ class CompulsoryCourseForm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='班別'
+                label='系所/年級/班別'
+                placeholder='例：資工系資工組大一A班'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
-                    root: classes.labelMb
+                    root: classes.label
                   },
                   shrink: true
                 }}
-                InputProps={{ readOnly: true }}
-                error={this.props.errorsubmitted ? this.props.studentIdcard.program === '' : false}
-                defaultValue={this.props.studentIdcard.program}
+                value={this.props.class}
+                error={this.props.errorsubmitted ? this.props.class === '' : false}
+                onChange={(event) => this.props.handleChange({ class: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -765,6 +767,7 @@ class CompulsoryCourseForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
+  class: state.Student.Credit.compulsoryCourse.class,
   year: state.Student.Credit.compulsoryCourse.year,
   semester: state.Student.Credit.compulsoryCourse.semester,
   department: state.Student.Credit.compulsoryCourse.department,

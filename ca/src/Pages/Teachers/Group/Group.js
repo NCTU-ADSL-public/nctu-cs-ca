@@ -15,8 +15,8 @@ import Show from './Show'
 import SwipeableViews from 'react-swipeable-views'
 
 const styles = {
-  tabDefault: {fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#f5f5f5', color:'#666'},
-  tabActive: {fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#f5f5f5', color:'#68bb66'}
+  tabDefault: {fontSize: 24, fontFamily: 'Noto Sans CJK TC', fontWeight: 'lighter', backgroundColor: '#f5f5f5', color:'#666'},
+  tabActive: {fontSize: 24, fontFamily: 'Noto Sans CJK TC', fontWeight: 'normal', backgroundColor: '#f5f5f5', color:'#68bb66'}
 }
 
 class Group extends React.Component {
@@ -25,7 +25,7 @@ class Group extends React.Component {
     this.handleChangeIndex = this.handleChangeIndex.bind(this)
     this.handleGroupClick = this.handleGroupClick.bind(this)
     this.state = {
-      value: '1',
+      value: '2',
       item:
         { research_title: '５５５',
           participants: [
