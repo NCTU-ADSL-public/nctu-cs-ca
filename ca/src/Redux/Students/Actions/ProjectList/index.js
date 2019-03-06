@@ -52,6 +52,21 @@ export const fetchProjects = (page = 1) => dispatch => {
       dispatch(storeProjects(FakeData))
     })
 }
+export const formDelete = (data) => dispatch => {
+  axios.post('/students/formDelete', {
+    research_title: data.research_title,
+    tname: data.tname,
+    first_second: data.first_second,
+    semester: data.semester
+  })
+    .then(res => {
+      window.location.reload()
+    })
+    .catch(err => {
+      window.confirm('網路連線失敗，請檢查連線後再按一次')
+      console.log(err)
+    })
+}
 export const updateProject = (intro, researchTitle, semester) => dispatch => {
   let object = { intro, researchTitle, semester }
   dispatch(updateproject(object))

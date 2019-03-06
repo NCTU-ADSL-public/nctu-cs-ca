@@ -17,7 +17,7 @@ import img3 from '../Image/rejection.jpg'
 import firebase from 'firebase'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { connect } from 'react-redux'
-import { storeProjectsImage, storeProjectsFile } from '../../../../Redux/Students/Actions/ProjectList'
+import { storeProjectsImage, storeProjectsFile, formDelete } from '../../../../Redux/Students/Actions/ProjectList'
 import axios from 'axios/index'
 import Edit from './Edit/Edit'
 
@@ -83,19 +83,7 @@ class Index extends React.Component {
 
   deleteData (data) {
     if (window.confirm('如已知會過隊友再按確定。')) {
-      axios.post('/students/formDelete', {
-        research_title: data.research_title,
-        tname: data.tname,
-        first_second: data.first_second,
-        semester: data.semester
-      })
-        .then(res => {
-          window.location.reload()
-        })
-        .catch(err => {
-          window.confirm('網路連線失敗，請檢查連線後再按一次')
-          console.log(err)
-        })
+      this.props.formDelete(data)
     }
   }
 
@@ -191,7 +179,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   storeImage: (url) => dispatch(storeProjectsImage(url, ownProps.data.research_title, ownProps.data.semester)),
-  storeFile: (url) => dispatch(storeProjectsFile(url, ownProps.data.research_title, ownProps.data.semester))
+  storeFile: (url) => dispatch(storeProjectsFile(url, ownProps.data.research_title, ownProps.data.semester)),
+  formDelete: (data) => dispatch(formDelete(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
