@@ -187,8 +187,8 @@ class SendProjectAgree extends React.Component {
       this.handleClickOpenSnackbar('專題成員不能超過該教授上限！')
       return
     }
-    else if (newnumber > 3) {
-      this.handleClickOpenSnackbar('專題成員不能超過3位！')
+    else if (newnumber > 4) {
+      this.handleClickOpenSnackbar('專題成員不能超過4位！')
       return
     }
     this.setState({
