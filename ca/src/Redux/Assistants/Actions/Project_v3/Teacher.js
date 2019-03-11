@@ -54,7 +54,7 @@ export const setFirstSecond = (post_item) => dispatch => {
 }
 
 export const deteleResearch = (post_item) => dispatch => {
-  axios.delete('/assistants/DeleteResearch', post_item).then(res => {
+  axios.post('/assistants/DeleteResearch', post_item).then(res => {
     console.log('deleteResearch')
     console.log('post_item')
     console.log(post_item)
