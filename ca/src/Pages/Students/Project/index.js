@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { GridList } from 'material-ui/GridList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ProjectTile from './ProjectTile'
-import { fetchProjects } from '../../../Redux/Students/Actions/ProjectList'
+import { fetchProjects } from '../../../Redux/Students/Actions/Project'
 import './style.css'
 
 const styles = {
@@ -56,7 +56,7 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.Student.ProjectList.data
+  data: state.Student.Project.data
 })
 const mapDispatchToProps = (dispatch) => ({
   fetchData: () => dispatch(fetchProjects())

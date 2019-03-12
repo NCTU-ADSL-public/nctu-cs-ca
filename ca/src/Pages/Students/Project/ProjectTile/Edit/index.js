@@ -5,7 +5,7 @@ import firebase from 'firebase'
 import './style.css'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { updateProject, storeProjectsImage, storeProjectsFile } from '../../../../../Redux/Students/Actions/ProjectList'
+import { updateProject, storeProjectsImage, storeProjectsFile } from '../../../../../Redux/Students/Actions/Project'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',

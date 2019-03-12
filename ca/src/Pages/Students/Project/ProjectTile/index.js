@@ -17,7 +17,7 @@ import img3 from '../Image/rejection.jpg'
 import firebase from 'firebase'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { connect } from 'react-redux'
-import { storeProjectsImage, storeProjectsFile, formDelete } from '../../../../Redux/Students/Actions/ProjectList'
+import { storeProjectsImage, storeProjectsFile, formDelete } from '../../../../Redux/Students/Actions/Project'
 import axios from 'axios/index'
 import Edit from './Edit/Edit'
 
