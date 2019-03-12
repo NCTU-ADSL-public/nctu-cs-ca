@@ -204,7 +204,7 @@ class GroupApply extends React.Component {
   }
 
   fetchData () {
-    axios.get('/professors/students/applyList', {
+    axios.get('/professors/researchApply/list', {
       id: this.props.idCard.id
     }).then(res => {
       console.log(res.data)
@@ -217,7 +217,7 @@ class GroupApply extends React.Component {
     })
     let Today = new Date()
     let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
-    axios.post('/professors/students/projects', {
+    axios.post('/professors/research/list', {
       teacherId: this.props.idCard.teacher_id,
       sem: semester
     }).then(res => {

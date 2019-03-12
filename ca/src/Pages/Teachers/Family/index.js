@@ -150,7 +150,7 @@ class Index extends React.Component {
       //   initItem: tmp,
       //   dialogOpen:(window.innerWidth<768)
       // })
-      axios.post('/StudentGradeList', {
+      axios.post('/professors/advisee/semesterGradeList', {
         student_id: this.state.initItem[v].student_id
       }).then(res => {
         tmp[v].score = res.data
@@ -171,7 +171,7 @@ class Index extends React.Component {
   }
 
   fetchData () {
-    axios.get('/professors/students/StudentList', {
+    axios.get('/professors/advisee/list', {
       id: this.props.tid
     }).then(res => {
       this.setState({initItem: res.data.map((v, i) => ({...v, id: i}))})

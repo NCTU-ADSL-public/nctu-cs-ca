@@ -222,7 +222,7 @@ class Verify extends React.Component {
   }
   componentDidMount () {
     // get all verify items
-    axios.get('/professor/ShowUserOffsetApplyForm').then(res => {
+    axios.get('/professors/offsetApply/formList').then(res => {
       this.setState({formList: res.data.map((e, i) => ({...e, id: i})), fetching: false})
     }).catch(err => {
       console.log(err)
@@ -246,7 +246,7 @@ class Verify extends React.Component {
   }
   handleOk () {
     let updatedList = this.state.formList
-    axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/professors/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           return ({
@@ -273,7 +273,7 @@ class Verify extends React.Component {
   }
   handleWithdraw () {
     let updatedList = this.state.formList
-    axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/professors/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           return ({
@@ -301,7 +301,7 @@ class Verify extends React.Component {
   
   handleReturn(){
     let updatedList = this.state.formList
-    axios.post('/professor/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/professors/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           updatedList[e].status = 0

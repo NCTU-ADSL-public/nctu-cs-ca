@@ -37,7 +37,7 @@ class InfoCard extends React.Component {
     let scoreData = this.state.scoreData
     scoreData.student_id = s.student_id
     scoreData.sname = s.sname
-    axios.post('/professors/students/StudentInfo', {
+    axios.post('/professors/advisee/personalInfo', {
       student_id: s.student_id
     }).then(res => {
       console.log('student Info', res.data)
@@ -63,7 +63,7 @@ class InfoCard extends React.Component {
     console.log('HANDLE SELECTED ' + sid)
     let scoreData = this.state.scoreData
     scoreData.score = FakeData.StudentScore
-    axios.post('/StudentGradeList', {
+    axios.post('/professors/advisee/semesterGradeList', {
       student_id: sid
     }).then(res => {
       console.log('--> res = ')
