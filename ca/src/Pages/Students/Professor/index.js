@@ -1,16 +1,23 @@
+
 import React from 'react'
-import FilterInput from './FilterInput'
-import ProfessorList from './ProfessorList'
-import FilterSelect from './FilterSelect'
 import { connect } from 'react-redux'
-import { fetchProfessors, changepage } from '../../../Redux/Students/Actions/Professor/index'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import FilterInput from './FilterInput'
+import FilterSelect from './FilterSelect'
+import ProfessorOverviewCard from './ProfessorOverviewCard'
+import { fetchProfessors } from '../../../Redux/Students/Actions/Professor'
 
 class Index extends React.Component {
-  constructor (props) {
-    super(props)
-    this.props.FetchProfessorInfo()
+  componentDidMount () {
+    this.props.fetchData()
   }
+
   render () {
+    const { data, mentor, page } = this.props.professors
+    const filterInput = this.props.professors.filter_string
+    const projectNumber = this.props.professors.project_number
+    const professors = filter(data, mentor, filterInput, page, projectNumber)
+
     return (
       <div className='container'>
         <div className='row'>
@@ -26,7 +33,13 @@ class Index extends React.Component {
           </div>
           <div className='col-md-4 col-lg-4' />
           <div className='col-md-8 col-lg-8' style={{ marginBottom: '100px' }}>
-            <ProfessorList studentIdcard={this.props.studentIdcard} />
+            {
+              professors && professors.length
+                ? professors.map((data, index) => (
+                  <ProfessorOverviewCard data={data} key={index} studentIdcard={this.props.studentIdcard} />
+                ))
+                : <CircularProgress />
+            }
           </div>
         </div>
       </div>
@@ -34,13 +47,34 @@ class Index extends React.Component {
   }
 }
 
+const filter = (data, mentor, filterInput, page, projectNumber) => {
+  if (data.length === 0) return []
+  
+  let number = parseInt(projectNumber, 10)
+  let _data = [...data]
+
+  // filter
+  _data = _data.filter(t => (Number(t.scount) >= number))
+  _data = _data.filter(item => (item.tname.search(filterInput) !== -1))
+
+  // search mentor
+  let index = _data.findIndex(item => (item.tname === mentor))
+  if (index === -1) return _data
+
+  // swap mentor to first element
+  let object = { ..._data[index] }
+  _data[index] = { ..._data[0] }
+  _data[0] = { ...object }
+
+  return _data
+}
+
 const mapStateToProps = (state) => ({
-  studentIdcard: state.Student.User.studentIdcard
+  studentIdcard: state.Student.User.studentIdcard,
+  professors: state.Student.Professor
 })
 const mapDispatchToProps = (dispatch) => ({
-  fetch_data: () => dispatch(fetchProfessors()),
-  FetchProfessorInfo: () => dispatch(fetchProfessors()),
-  change_page: (page) => dispatch(changepage(page))
+  fetchData: () => dispatch(fetchProfessors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

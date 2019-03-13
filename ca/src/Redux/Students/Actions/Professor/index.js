@@ -31,7 +31,7 @@ export const fetchProfessors = (page = 1) => dispatch => {
     })
     .catch(error => {
       console.log(error)
-      // dispatch(storeProfessorMentor([{'tname': '張立平'}]))
+      dispatch(storeProfessorMentor([{'tname': '張立平'}]))
       dispatch(fetchProfessorsDone())
     })
 }
