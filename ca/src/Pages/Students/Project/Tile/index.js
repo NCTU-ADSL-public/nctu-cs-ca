@@ -128,10 +128,10 @@ class Tile extends React.Component {
   getString (status) {
     let content = status === '3'
       ? '很遺憾您的專題申請已被拒絕，知會隊友後請按右上角刪除已撤銷表單資料，謝謝！'
-      : '如要收回申請請點選左上方收回鍵，欲收回前請先告知隊友！'
+      : '您的專題申請正在等待審核，如要收回申請請點選左上方收回鍵，欲收回前請先告知隊友！'
 
     return (
-      <div className='container' style={{ marginTop: '10px', height: '300px' }}>
+      <div className='text-center' style={{ margin: '30px', height: '300px', fontSize: '20px' }}>
         { content }
       </div>
     )

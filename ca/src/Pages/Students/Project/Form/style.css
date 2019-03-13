@@ -5,9 +5,9 @@
 	color: #7B7B7B;
 }
 .upload-picture{
-	border: 1px #eeeeee solid;
-	min-height: 50px;
-	width: 100%;
+	border: 3px #00a6ff dotted;
+	border-radius: 0.5rem;
+	padding: 1.5rem;
 }
 
 .upload-btn-wrapper {
