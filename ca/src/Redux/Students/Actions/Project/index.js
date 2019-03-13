@@ -1,10 +1,11 @@
+
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 
 export const storeProjects = createAction('STORE_PROJECTS')
 export const storeProjectImage = createAction('STORE_PROJECT_IMAGE')
 export const storeProjectFile = createAction('STORE_PROJECT_FILE')
-export const updateproject = createAction('UPDATE_PROJECT')
+export const storeProjectIntro = createAction('STORE_PROJECT_INTRO')
 
 let FakeData = [
   {
@@ -44,32 +45,33 @@ let FakeData = [
 
 export const fetchProjects = (page = 1) => dispatch => {
   axios.get('/students/projectPage')
-    .then(res => {
-      dispatch(storeProjects(res.data))
-    })
+    .then(res => dispatch(storeProjects(res.data)))
     .catch(error => {
       console.log(error)
       dispatch(storeProjects(FakeData))
     })
 }
-export const formDelete = (data) => dispatch => {
-  axios.post('/students/formDelete', {
-    research_title: data.research_title,
-    tname: data.tname,
-    first_second: data.first_second,
-    semester: data.semester
-  })
+
+export const deleteProject = (payload) => dispatch => {
+  axios.post('/students/projectDelete', payload)
     .then(res => {
       window.location.reload()
     })
     .catch(err => {
-      window.confirm('網路連線失敗，請檢查連線後再按一次')
+      window.confirm('刪除失敗，請檢察網路連線')
       console.log(err)
     })
 }
-export const updateProject = (intro, researchTitle, semester) => dispatch => {
-  let object = { intro, researchTitle, semester }
-  dispatch(updateproject(object))
+
+export const editProject = (payload) => dispatch => {
+  axios.post('/students/editProject', payload)
+    .then(res => {
+      dispatch(storeProjectsIntro(payload.new_intro, payload.new_title, payload.semester))
+    })
+    .catch(err => {
+      window.alert('儲存失敗，請檢察網路連線')
+      console.log(err)
+    })
 }
 
 export const storeProjectsImage = (url, researchTitle, semester) => dispatch => {
@@ -80,4 +82,9 @@ export const storeProjectsImage = (url, researchTitle, semester) => dispatch => 
 export const storeProjectsFile = (url, researchTitle, semester) => dispatch => {
   let object = { url, researchTitle, semester }
   dispatch(storeProjectFile(object))
+}
+
+export const storeProjectsIntro = (intro, researchTitle, semester) => dispatch => {
+  let object = { intro, researchTitle, semester }
+  dispatch(storeProjectIntro(object))
 }

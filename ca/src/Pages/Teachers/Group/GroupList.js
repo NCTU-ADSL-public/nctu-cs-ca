@@ -209,7 +209,7 @@ class GroupList extends React.Component {
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
     // let _this = this
-    axios.post('/professors/students/projects', {
+    axios.post('/professors/research/list', {
       teacherId: this.props.idCard.teacher_id,
       sem: sem
     }).then(res => {

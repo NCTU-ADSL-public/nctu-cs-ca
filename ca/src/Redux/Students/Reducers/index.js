@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import User from './User'
 import Professor from './Professor'
-import ProjectList from './ProjectList'
+import Project from './Project'
 import Map from './Map'
 import Graduation from './Graduation'
 import Credit from './Credit'
@@ -11,6 +11,6 @@ export default combineReducers({
   Professor,
   Map,
   Graduation,
-  ProjectList,
+  Project,
   Credit
 })

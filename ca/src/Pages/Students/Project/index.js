@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { GridList } from 'material-ui/GridList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import ProjectTile from './ProjectTile'
-import { fetchProjects } from '../../../Redux/Students/Actions/ProjectList'
+import ProjectTile from './Tile'
+import { fetchProjects } from '../../../Redux/Students/Actions/Project'
 import './style.css'
 
 const styles = {
@@ -37,16 +37,20 @@ class Index extends React.Component {
           </div>
           <div style={styles.root} className='hidden-xs hidden-sm'>
             <GridList style={styles.gridList} cols={2} cellHeight={270} padding={1}>
-              {this.props.data.map((tile, index) => (
-                <ProjectTile data={tile} key={index} />
-              ))}
+              {
+                this.props.data.map((tile, index) => (
+                  <ProjectTile data={tile} key={index} />
+                ))
+              }
             </GridList>
           </div>
           <div style={styles.root} className='visible-xs visible-sm'>
             <GridList cols={1} cellHeight={270} padding={1}>
-              {this.props.data.map((tile, index) => (
-                <ProjectTile data={tile} key={index} rwd />
-              ))}
+              {
+                this.props.data.map((tile, index) => (
+                  <ProjectTile data={tile} key={index} rwd />
+                ))
+              }
             </GridList>
           </div>
         </div>
@@ -56,7 +60,7 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.Student.ProjectList.data
+  data: state.Student.Project.data
 })
 const mapDispatchToProps = (dispatch) => ({
   fetchData: () => dispatch(fetchProjects())
