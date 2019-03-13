@@ -1,11 +1,11 @@
 import React from 'react'
-import { LabeledInput } from './FormUtils/index'
+import { LabeledInput } from '../../../../Components/FormUtils'
 import CKEditor from 'react-ckeditor-component'
 import firebase from 'firebase'
 import './style.css'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { updateProject, storeProjectsImage, storeProjectsFile } from '../../../../../Redux/Students/Actions/Project'
+import { updateProject, storeProjectsImage, storeProjectsFile } from '../../../../Redux/Students/Actions/Project'
 
 let config = {
   apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
@@ -24,7 +24,7 @@ if (!firebase.apps.length) {
 }
 let storageRef = firebase.storage().ref()
 
-class Edit extends React.Component {
+class Form extends React.Component {
   constructor (props) {
     super(props)
     this.onChange = this.onChange.bind(this)
@@ -219,4 +219,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   store_projects_file: (file) => dispatch(storeProjectsFile(file, ownProps.project.research_title, ownProps.project.semester))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Edit)
+export default connect(mapStateToProps, mapDispatchToProps)(Form)

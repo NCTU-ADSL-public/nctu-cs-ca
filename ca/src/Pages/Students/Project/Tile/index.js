@@ -13,8 +13,8 @@ import Grow from '@material-ui/core/Grow'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { GridTile } from 'material-ui/GridList'
 import firebase from 'firebase'
-import Show from './Show'
-import Edit from './Edit/Edit'
+import TileContent from '../TileContent'
+import Edit from '../Edit'
 import img from '../Image/1.jpg'
 import img2 from '../Image/2.jpg'
 import img3 from '../Image/rejection.jpg'
@@ -64,7 +64,7 @@ const Transition = (props) => (
   <Grow {...props} />
 )
 
-class Index extends React.Component {
+class Tile extends React.Component {
   constructor (props) {
     super(props)
     this.fetchImage = this.fetchImage.bind(this)
@@ -205,7 +205,7 @@ class Index extends React.Component {
           </AppBar>
           {
             isAgreed
-              ? <Show file={data.file} image={data.image} data={data} />
+              ? <TileContent file={data.file} image={data.image} data={data} />
               : this.getString(data.agree)
           }
         </Dialog>
@@ -215,7 +215,7 @@ class Index extends React.Component {
   }
 }
 
-Index.propTypes = {
+Tile.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
@@ -228,4 +228,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   deleteProject: (payload) => dispatch(deleteProject(payload))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Tile))

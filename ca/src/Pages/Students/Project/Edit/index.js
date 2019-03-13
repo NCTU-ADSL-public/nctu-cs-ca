@@ -9,7 +9,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles/index'
-import Edit from './index'
+import Form from '../Form'
 
 const styles = {
   appBar: {
@@ -29,7 +29,7 @@ const styles = {
   }
 }
 
-class AlertDialog extends React.Component {
+class Edit extends React.Component {
   constructor (props) {
     super(props)
     this.handleClickOpen = this.handleClickOpen.bind(this)
@@ -80,7 +80,7 @@ class AlertDialog extends React.Component {
             </AppBar>
           </DialogTitle>
           <DialogContent>
-            <Edit project={this.props.project} onClose={this.handleClose} />
+            <Form project={this.props.project} onClose={this.handleClose} />
           </DialogContent>
         </Dialog>
       </div>
@@ -94,4 +94,4 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withMobileDialog()(AlertDialog)))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withMobileDialog()(Edit)))

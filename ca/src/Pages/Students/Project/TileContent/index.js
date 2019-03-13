@@ -20,7 +20,7 @@ const styles = theme => ({
   }
 })
 
-class Show extends React.Component {
+class TileContent extends React.Component {
   constructor (props) {
     super(props)
     this.getFile = this.getFile.bind(this)
@@ -82,8 +82,8 @@ class Show extends React.Component {
   }
 }
 
-Show.propTypes = {
+TileContent.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Show)
+export default withStyles(styles)(TileContent)

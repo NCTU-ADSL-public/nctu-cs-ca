@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { GridList } from 'material-ui/GridList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import ProjectTile from './ProjectTile'
+import ProjectTile from './Tile'
 import { fetchProjects } from '../../../Redux/Students/Actions/Project'
 import './style.css'
 
