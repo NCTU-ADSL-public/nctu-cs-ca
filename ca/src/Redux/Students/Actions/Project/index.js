@@ -1,3 +1,4 @@
+
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 
@@ -44,21 +45,15 @@ let FakeData = [
 
 export const fetchProjects = (page = 1) => dispatch => {
   axios.get('/students/projectPage')
-    .then(res => {
-      dispatch(storeProjects(res.data))
-    })
+    .then(res => dispatch(storeProjects(res.data)))
     .catch(error => {
       console.log(error)
       dispatch(storeProjects(FakeData))
     })
 }
-export const formDelete = (data) => dispatch => {
-  axios.post('/students/formDelete', {
-    research_title: data.research_title,
-    tname: data.tname,
-    first_second: data.first_second,
-    semester: data.semester
-  })
+
+export const deleteProject = (payload) => dispatch => {
+  axios.post('/students/projectDelete', payload)
     .then(res => {
       window.location.reload()
     })
@@ -67,6 +62,7 @@ export const formDelete = (data) => dispatch => {
       console.log(err)
     })
 }
+
 export const updateProject = (intro, researchTitle, semester) => dispatch => {
   let object = { intro, researchTitle, semester }
   dispatch(updateproject(object))

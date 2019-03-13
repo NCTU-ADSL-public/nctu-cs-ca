@@ -21,39 +21,61 @@ const styles = theme => ({
 })
 
 class Show extends React.Component {
+  constructor (props) {
+    super(props)
+    this.getFile = this.getFile.bind(this)
+  }
+
+  getFile () {
+    const { file } = this.props.data
+    switch (file) {
+      case '':
+        return '無'
+      case 'loading':
+        return '上傳中...'
+      default:
+        return <a target='_blank' rel='noopener noreferrer' href={file} style={{ cursor: 'pointer' }}>點這裡</a>
+    }
+  }
+
   render () {
-    const { classes } = this.props
+    const { classes, data } = this.props
+    // 太舊的資料是書面申請 所以agree是undefined
+    const isAgreed = (data.agree === '1' || data.agree === undefined)
+    const projectImg = (data.photo !== '' || data.photo === 'loading') ? data.photo : img
     return (
       <div className='container' style={{ fontSize: '15px', marginTop: '20px' }}>
         <div className='hidden-md hidden-lg'>
-          {(this.props.show.photo === undefined || this.props.show.photo === 'loading')
-            ? <CircularProgress className={classes.progress} />
-            : <img src={(this.props.show.photo !== '' || this.props.show.photo === 'loading') ? this.props.show.photo : img} alt='waiting for loading' className='img-responsive' />
+          {
+            isAgreed
+              ? <CircularProgress className={classes.progress} />
+              : <img src={projectImg} alt='waiting for loading' className='img-responsive' />
           }
-          <p><i className='glyphicon glyphicon-file' /> 團隊報告: {this.props.show.file === '' ? '無' : this.props.show.file === 'loading' ? '上傳中...' : <a target='_blank' rel='noopener noreferrer' href={this.props.show.file} style={{ cursor: 'pointer' }}>點這裡</a>}</p>
-          <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.tname}</p>
-          <p><i className='glyphicon glyphicon-pencil' /> 年度: {this.props.show.semester}</p>
-          <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
+          <p><i className='glyphicon glyphicon-file' />團隊報告: { this.getFile() }</p>
+          <p><i className='glyphicon glyphicon-user' />指導教授: { data.tname }</p>
+          <p><i className='glyphicon glyphicon-pencil' />年度: { data.semester }</p>
+          <p><i className='glyphicon glyphicon-bullhorn' />分數: { data.score }</p>
         </div>
         <div className='col-xs-12 col-sm-12 col-md-5 col-lg-5' style={{ marginTop: '5px' }}>
           <br />
           <div className='divide-horizontal row'>
             <div className='divide-horizontal-span'>
-              <p >專題簡介</p>
+              <p>專題簡介</p>
             </div>
           </div>
-          <section dangerouslySetInnerHTML={{ __html: this.props.show.intro }} style={{ minHeight: '500px' }} />
+          <section dangerouslySetInnerHTML={{ __html: data.intro }} style={{ minHeight: '500px' }} />
         </div>
         <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6' style={{ height: '100px' }} />
         <div className='hidden-xs hidden-sm col-md-6 col-lg-6' style={{ position: 'absolute', right: '0' }}>
-          {(this.props.show.photo === undefined || this.props.show.photo === 'loading')
-            ? <CircularProgress className={classes.progress} />
-            : <img src={(this.props.show.photo !== '' || this.props.show.photo === 'loading') ? this.props.show.photo : img} alt='waiting for loading' className='img-responsive' />
+          {
+            isAgreed
+              ? <CircularProgress className={classes.progress} />
+              : <img src={projectImg} alt='waiting for loading' className='img-responsive' />
           }
-          <p><i className='glyphicon glyphicon-file' /> 團隊報告: {this.props.show.file === '' ? '無' : this.props.show.file === 'loading' ? '上傳中...' : <a target='_blank' rel='noopener noreferrer' href={this.props.show.file} style={{ cursor: 'pointer' }}>點這裡</a>}</p>
-          <p><i className='glyphicon glyphicon-user' /> 指導教授: {this.props.show.tname}</p>
-          <p><i className='glyphicon glyphicon-pencil' /> 年度: {this.props.show.semester}</p>
-          <p><i className='glyphicon glyphicon-bullhorn' /> 分數: {this.props.show.score}</p>
+          <p><i className='glyphicon glyphicon-file' />團隊報告: { this.getFile() }</p>
+          <p><i className='glyphicon glyphicon-user' />指導教授: { data.tname }</p>
+          <p><i className='glyphicon glyphicon-pencil' />年度: { data.semester }</p>
+          <p><i className='glyphicon glyphicon-bullhorn' />分數: { data.score }</p>
         </div>
       </div>
     )

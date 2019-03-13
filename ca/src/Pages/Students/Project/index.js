@@ -37,16 +37,20 @@ class Index extends React.Component {
           </div>
           <div style={styles.root} className='hidden-xs hidden-sm'>
             <GridList style={styles.gridList} cols={2} cellHeight={270} padding={1}>
-              {this.props.data.map((tile, index) => (
-                <ProjectTile data={tile} key={index} />
-              ))}
+              {
+                this.props.data.map((tile, index) => (
+                  <ProjectTile data={tile} key={index} />
+                ))
+              }
             </GridList>
           </div>
           <div style={styles.root} className='visible-xs visible-sm'>
             <GridList cols={1} cellHeight={270} padding={1}>
-              {this.props.data.map((tile, index) => (
-                <ProjectTile data={tile} key={index} rwd />
-              ))}
+              {
+                this.props.data.map((tile, index) => (
+                  <ProjectTile data={tile} key={index} rwd />
+                ))
+              }
             </GridList>
           </div>
         </div>
