@@ -102,14 +102,14 @@ class Recommend extends React.Component {
   }
 
   componentWillMount () {
-    axios.get('/students/courses/recommend').then(res => {
+    axios.get('/students/recommend/courseList').then(res => {
       this.setState({
         data: res.data.map(e=>({...e,rating:false}))
       })
     }).catch(err => {
       console.log(err)
     })
-    axios.get('/students/ShowStudentHotCos',{
+    axios.get('/students/recommend/current',{
       student_id: this.props.id
     }).then(res=>{
       this.setState({
@@ -129,7 +129,7 @@ class Recommend extends React.Component {
   rating(e,i){
     let rating = e.target.getAttribute('value')
     if(rating !== null){
-      axios.post('/students/SetRecommendCosStar',{
+      axios.post('/students/recommend/setStar',{
         student_id: this.props.id,
         unique_id: this.state.data[i]['unique_id'],
         star_level: rating

@@ -335,7 +335,7 @@ class index extends React.Component {
                                       <br />
                                       {
                                         project.students.map(student => (
-                                          !filter_project.reduce((haveTrue, value) => haveTrue || value, false) || filter_project[parseInt(student.first_second) - 1] ?
+                                          !filter_project.reduce((haveTrue, value) => haveTrue || value, false) || filter_project[parseInt(student.first_second, 10) - 1] ?
                                             <Tooltip title={PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)] + " " + project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")} placement="top" classes={{ tooltip: classes.tooltip }} >
                                               <Chip
                                                 label={student.id + " " + student.name}
@@ -389,7 +389,7 @@ class index extends React.Component {
                                       <br />
                                       {
                                         project.students.map(student => (
-                                          !filter_project.reduce((haveTrue, value) => haveTrue || value, false) || filter_project[parseInt(student.first_second) - 1] ?
+                                          !filter_project.reduce((haveTrue, value) => haveTrue || value, false) || filter_project[parseInt(student.first_second, 10) - 1] ?
                                             <Tooltip title={PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)]} placement="top" classes={{ tooltip: classes.tooltip }} >
                                               <Chip
                                                 label={student.id + " " + student.name}

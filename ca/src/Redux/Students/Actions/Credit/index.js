@@ -14,50 +14,50 @@ export const resetCourse = createAction('RESET_COURSE')
 export const errorSubmit = createAction('ERROR_SUBMIT')
 
 export const sendWaiveCourse = (payload) => dispatch => {
-  axios.post('/students/credit/waiveCourse', payload)
-    .then(res => { alert('送出成功') })
+  axios.post('/students//offsetApply/createWaive', payload)
+    .then(res => { window.alert('送出成功') })
     .catch(err => {
-      alert('送出失敗，請檢查連線是否穩定。')
+      window.alert('送出失敗，請檢查連線是否穩定。')
       console.log(err)
     })
 }
 
 export const sendExemptCourse = (payload) => dispatch => {
-  axios.post('/students/credit/exemptCourse', payload)
-    .then(res => { alert('送出成功') })
+  axios.post('/students//offsetApply/createExempt', payload)
+    .then(res => { window.alert('送出成功') })
     .catch(err => {
-      alert('送出失敗，請檢查連線是否穩定。')
+      window.alert('送出失敗，請檢查連線是否穩定。')
       console.log(err)
     })
 }
 
 export const sendCompulsoryCourse = (payload) => dispatch => {
-  axios.post('/students/credit/compulsoryCourse', payload)
-    .then(res => { alert('送出成功') })
+  axios.post('/students/offsetApply/createCompulsory', payload)
+    .then(res => { window.alert('送出成功') })
     .catch(err => {
-      alert('送出失敗，請檢查連線是否穩定。')
+      window.alert('送出失敗，請檢查連線是否穩定。')
       console.log(err)
     })
 }
 
 export const sendEnglishCourse = (payload) => dispatch => {
-  axios.post('/students/credit/englishCourse', payload)
-    .then(res => { alert('送出成功') })
+  axios.post('/students/offsetApply/createEnglish', payload)
+    .then(res => { window.alert('送出成功') })
     .catch(err => {
-      alert('送出失敗，請檢查連線是否穩定。')
+      window.alert('送出失敗，請檢查連線是否穩定。')
       console.log(err)
     })
 }
 
 export const deleteCredit = (payload) => dispatch => {
   dispatch(setDeleteStatus({ status: 'fetching' }))
-  axios.post('/students/credit/delete', payload)
+  axios.post('/students//offsetApply/delete', payload)
     .then(res => {
-      alert('刪除成功')
+      window.alert('刪除成功')
       dispatch(setDeleteStatus({ status: 'success' }))
     })
     .catch(err => {
-      alert('刪除失敗，請檢查連線是否穩定。')
+      window.alert('刪除失敗，請檢查連線是否穩定。')
       dispatch(setDeleteStatus({ status: 'error' }))
       console.log(err)
     })
@@ -65,20 +65,20 @@ export const deleteCredit = (payload) => dispatch => {
 
 export const editCredit = (payload) => dispatch => {
   dispatch(setEditStatus({ status: 'fetching' }))
-  axios.post('/students/credit/edit', payload)
+  axios.post('/students//offsetApply/edit', payload)
     .then(res => {
-      alert('編輯成功')
+      window.alert('編輯成功')
       dispatch(setEditStatus({ status: 'success' }))
     })
     .catch(err => {
-      alert('編輯失敗，請檢查連線是否穩定。')
+      window.alert('編輯失敗，請檢查連線是否穩定。')
       dispatch(setEditStatus({ status: 'error' }))
       console.log(err)
     })
 }
 
 export const getCreditInfo = () => dispatch => {
-  axios.get('/students/credit/all').then(res => {
+  axios.get('/students/offsetApply/list').then(res => {
     dispatch(storeCreditInfo(res.data))
   }).catch(err => {
     // dispatch(storeCreditInfo(FakeData.Credit))
