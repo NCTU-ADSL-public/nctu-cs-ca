@@ -6,7 +6,7 @@ const initialState = {
   data: [],
   filter: {
     name: '',
-    scount: 7,
+    scount: 7
   },
   status: FETCHING_STATUS.IDLE,
   status_mail: FETCHING_STATUS.IDLE,

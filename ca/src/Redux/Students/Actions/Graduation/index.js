@@ -55,6 +55,7 @@ export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild)
     dispatch(storeGraduationCourse(res.data))
   }).catch(err => {
     dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
+    console.log(err)
   })
 
   axios.get('/assistants/graduate/check', {
@@ -77,7 +78,7 @@ export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild)
   }).catch(err => {
     console.log(err)
   })
-  dispatch(storeStudentInfo({id, sname, program}))
+  dispatch(storeStudentInfo({ id, sname, program }))
 }
 
 export const reviewSubmit = (payload) => dispatch => {
