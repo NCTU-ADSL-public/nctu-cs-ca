@@ -44,7 +44,7 @@ let FakeData = [
 ]
 
 export const fetchProjects = (page = 1) => dispatch => {
-  axios.get('/students/projectPage')
+  axios.get('/students/research/list')
     .then(res => dispatch(storeProjects(res.data)))
     .catch(error => {
       console.log(error)
@@ -53,7 +53,7 @@ export const fetchProjects = (page = 1) => dispatch => {
 }
 
 export const deleteProject = (payload) => dispatch => {
-  axios.post('/students/projectDelete', payload)
+  axios.post('/students/researchApply/delete', payload)
     .then(res => {
       window.location.reload()
     })
@@ -64,7 +64,7 @@ export const deleteProject = (payload) => dispatch => {
 }
 
 export const editProject = (payload) => dispatch => {
-  axios.post('/students/editProject', payload)
+  axios.post('/students/research/edit', payload)
     .then(res => {
       dispatch(storeProjectsIntro(payload.new_intro, payload.new_title, payload.semester))
     })
