@@ -9,20 +9,10 @@ import CardActions from '@material-ui/core/CardActions'
 import Collapse from '@material-ui/core/Collapse'
 import Avatar from '@material-ui/core/Avatar'
 import red from '@material-ui/core/colors/red'
-import NoImage from './Show/1.jpg'
-import ProjectDia from './ProjectDia'
+import NoImage from './1.jpg'
+import ProjectDetail from './projectDetail'
 import firebase from 'firebase'
-let config = {
-  apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
-  authDomain: 'code-86ba4.firebaseapp.com',
-  databaseURL: 'https://code-86ba4.firebaseio.com',
-  projectId: 'code-86ba4',
-  storageBucket: 'code-86ba4.appspot.com',
-  messagingSenderId: '354539568437'
-}
-if (!firebase.apps.length) {
-  firebase.initializeApp(config)
-}
+
 let storageRef = firebase.storage().ref()
 
 const styles = theme => ({
@@ -54,40 +44,40 @@ const styles = theme => ({
   }
 })
 
-class RecipeReviewCard extends React.Component {
+class ProjectCard extends React.Component {
   constructor (props) {
     super(props)
-
-    this.state = { expanded: false, image: '', file: '' }
+    this.state = {
+      expanded: false,
+      image: NoImage, // 預設空字串會在fetch圖片前有error
+      file: ''
+    }
   }
 
   componentDidMount () {
-    let directory = this.props.data.year + '/' + this.props.profile.tname + '/' + this.props.data.research_title + '/image/image.jpg'
-    let pathReference = storageRef.child(directory)
-    pathReference.getDownloadURL().then(url => {
-      this.setState({
-        image: url
+    let directory = `${this.props.data.year}/${this.props.profile.tname}/${this.props.data.research_title}/image/image.jpg`
+    storageRef
+      .child(directory)
+      .getDownloadURL()
+      .then(url => {
+        this.setState({ image: url })
       })
-    }
-    ).catch(error => {
-      console.log(error)
-      this.setState({
-        image: NoImage
+      .catch(error => {
+        console.log(error)
+        this.setState({ image: NoImage })
       })
-    })
-    directory = this.props.data.year + '/' + this.props.profile.tname + '/' + this.props.data.research_title + '/file/file.pdf'
-    pathReference = storageRef.child(directory)
-    pathReference.getDownloadURL().then(url => {
-      this.setState({
-        file: url
+
+    directory = `${this.props.data.year}/${this.props.profile.tname}/${this.props.data.research_title}/file/file.pdf`
+    storageRef
+      .child(directory)
+      .getDownloadURL()
+      .then(url => {
+        this.setState({ file: url })
       })
-    }
-    ).catch(error => {
-      console.log(error)
-      this.setState({
-        file: ''
+      .catch(error => {
+        console.log(error)
+        this.setState({ file: '' })
       })
-    })
   }
 
   render () {
@@ -112,7 +102,7 @@ class RecipeReviewCard extends React.Component {
           />
           <CardActions className={classes.actions} disableActionSpacing>
             <div className={classes.expand}>
-              <ProjectDia show={this.props.data} image={this.state.image} file={this.state.file} />
+              <ProjectDetail show={this.props.data} image={this.state.image} file={this.state.file} />
             </div>
           </CardActions>
           <Collapse in={this.state.expanded} timeout='auto' unmountOnExit>
@@ -126,8 +116,8 @@ class RecipeReviewCard extends React.Component {
   }
 }
 
-RecipeReviewCard.propTypes = {
+ProjectCard.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(RecipeReviewCard)
+export default withStyles(styles)(ProjectCard)

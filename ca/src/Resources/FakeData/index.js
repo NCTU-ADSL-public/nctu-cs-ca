@@ -14,6 +14,7 @@ import FormList from './FormList.json'
 import RecommendCos from './RecommendCos.json'
 import RecommendHot from './RecommendHot.json'
 import Credit from './Credit.json'
+import ProfessorProject from './ProfessorProject.json'
 
 export default {
   GraduationItems,
@@ -31,5 +32,6 @@ export default {
   FormList,
   RecommendCos,
   RecommendHot,
-  Credit
+  Credit,
+  ProfessorProject
 }

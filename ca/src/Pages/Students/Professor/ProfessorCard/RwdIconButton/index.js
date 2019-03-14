@@ -2,9 +2,9 @@ import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import WriteEmail from './WriteEmail'
-import SendProjectAgree from './SendProjectAgree'
-import ReviewProject from './ReviewProject/index'
+// import WriteEmail from '../WriteEmail'
+import SendProjectAgree from '../SendProjectAgree'
+import ReviewProject from '../ReviewProject/'
 
 const ITEM_HEIGHT = 48
 
@@ -13,9 +13,7 @@ class LongMenu extends React.Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
-    this.state = {
-      anchorEl: null
-    }
+    this.state = { anchorEl: null }
   }
 
   handleClick (event) {
@@ -33,7 +31,7 @@ class LongMenu extends React.Component {
       <div>
         <IconButton
           aria-label='More'
-          aria-owns={anchorEl ? 'long-menu' : null}
+          aria-owns={anchorEl && 'long-menu'}
           aria-haspopup='true'
           onClick={this.handleClick}
         >
@@ -51,7 +49,7 @@ class LongMenu extends React.Component {
             }
           }}
         >
-          <WriteEmail rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+          {/* <WriteEmail rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} /> */}
           <SendProjectAgree rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
           <ReviewProject rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
         </Menu>

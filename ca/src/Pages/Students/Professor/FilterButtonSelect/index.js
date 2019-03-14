@@ -8,13 +8,10 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import CloseIcon from '@material-ui/icons/Close'
 import Slide from '@material-ui/core/Slide'
-import Tooltip from '@material-ui/core/Tooltip'
-import Email from '@material-ui/icons/Email'
-import CKEditor from 'react-ckeditor-component'
-import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+import Button from '@material-ui/core/Button'
+import FilterSelect from '../FilterSelect'
+import Note from '@material-ui/icons/FilterList'
+import './style.css'
 
 const styles = {
   appBar: {
@@ -59,23 +56,11 @@ class FullScreenDialog extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        {this.props.rwd
-          ? <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
-            <ListItemIcon className={classes.icon}>
-              <Email />
-            </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary='Send Email!' />
-          </MenuItem>
-          : <Tooltip title='Send email to professor!' placement='top' classes={classes.tooltip}>
-            <IconButton
-              onClick={this.handleClickOpen}
-              aria-expanded={this.state.expanded}
-              aria-label='Show more'
-            >
-              <Email />
-            </IconButton>
-          </Tooltip>
-        }
+
+        <Button fullWidth variant='contained' color='primary' onClick={this.handleClickOpen} className={classes.button}>
+          <Note color='primary' />
+          &nbsp;篩選項目
+        </Button>
         <Dialog
           fullScreen
           open={this.state.open}
@@ -88,23 +73,12 @@ class FullScreenDialog extends React.Component {
                 <CloseIcon />
               </IconButton>
               <Typography variant='title' color='inherit' className={classes.flex}>
-                寄信
+                篩選項目
               </Typography>
             </Toolbar>
           </AppBar>
-          <div className='container'>
-            <TextField
-              id='full-width'
-              label='主旨'
-              InputLabelProps={{
-                shrink: true
-              }}
-              placeholder='請勿留白'
-              fullWidth
-              margin='normal'
-              className='write-email-title'
-            />
-            <CKEditor activeClass='p10' content={this.state.ckeditorContent} events={{ 'change': this.onChange }} />
+          <div className='rwd-filter-select'>
+            <FilterSelect />
           </div>
         </Dialog>
       </div>

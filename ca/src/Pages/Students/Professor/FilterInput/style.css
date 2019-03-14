@@ -1,6 +1,5 @@
 .professor-list-filter-list {
-    padding: 5px 0 5px 0;
-    max-width: 350px;
+    padding-top: 15px;
     margin: 0;
 }
 
@@ -12,12 +11,4 @@
     height: auto;
     padding-left: 18px;
     width: 98%;
-}
-
-@media screen and (max-width: 992px) {
-   .professor-list-filter-list {
-       padding: 5px 0 5px 0;
-       max-width: 1500px;
-       margin: 0;
-   }
 }

@@ -34,7 +34,7 @@ import StudentMap from './Pages/Students/Map_v2'
 // import StudentMap from './Pages/Students/Map_v3'
 import StudentRecommend from './Pages/Students/Recommend'
 import StudentProject from './Pages/Students/Project'
-import StudentProfessor from './Pages/Students/Mentor'
+import StudentProfessor from './Pages/Students/Professor'
 import Footer from './Components/Footer'
 import Snow from 'react-snow-effect'
 
