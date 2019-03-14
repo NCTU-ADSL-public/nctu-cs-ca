@@ -1,21 +1,22 @@
+
 import React from 'react'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormLabel from '@material-ui/core/FormLabel'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { withStyles } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
-import { changeProjectNumber } from '../../../../Redux/Students/Actions/Professor'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+// import FormControl from '@material-ui/core/FormControl'
+import TextField from '@material-ui/core/TextField'
+// import Select from '@material-ui/core/Select'
+// import MenuItem from '@material-ui/core/MenuItem'
+import { updateFilter } from '../../../../Redux/Students/Actions/Professor'
 
 const styles = theme => ({
   root: {
     display: 'flex'
   },
   formControl: {
-    margin: theme.spacing.unit * 3,
-    fontSize: '20px'
+    marginTop: '24px',
+    fontSize: '20px',
+    minWidth: '120px'
   },
   formControlLabel: {
     fontSize: '15px',
@@ -23,6 +24,14 @@ const styles = theme => ({
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
+  },
+  label: {
+    fontSize: '18px'
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: '200px'
   }
 })
 
@@ -32,8 +41,7 @@ class CheckboxesGroup extends React.Component {
     this.state = {
       人工智慧: false,
       網路: false,
-      電腦視覺: false,
-      scount: '0'
+      電腦視覺: false
     }
   }
 
@@ -50,118 +58,37 @@ class CheckboxesGroup extends React.Component {
     const { classes } = this.props
     return (
       <div>
-
-        <div className='row'>
-          <FormControl component='fieldset' required className={classes.formControl}>
-            <FormLabel component='legend'>專題已收人數（以上）</FormLabel>
-            <RadioGroup
-              aria-label='gender'
-              name='gender1'
-              className={classes.group}
-              value={this.state.scount}
-              onChange={this.handleScountChange}
-            >
-              <FormControlLabel classes={{ label: classes.formControlLabel }} value={'0'} control={<Radio />} label='0人' />
-              <FormControlLabel classes={{ label: classes.formControlLabel }} value={'3'} control={<Radio />} label='3人' />
-              <FormControlLabel classes={{ label: classes.formControlLabel }} value={'5'} control={<Radio />} label='5人' />
-            </RadioGroup>
-          </FormControl>
-        </div>
-        <div className='row'>
-          {/* <FormControl component="fieldset" className={classes.formControl}> */}
-          {/* <FormLabel component="legend"> */}
-          {/* <div  style={{marginTop: '30px'}}> */}
-          {/* 研究領域 */}
-          {/* </div> */}
-          {/* </FormLabel> */}
-          {/* <FormGroup> */}
-          {/* <FormControlLabel */}
-          {/* classes={{label:classes.formControlLabel}} */}
-          {/* control={ */}
-          {/* <Checkbox */}
-          {/* checked={this.state.人工智慧} */}
-          {/* color='default' */}
-          {/* onChange={this.handleChange('人工智慧')} */}
-          {/* value="人工智慧" */}
-          {/* /> */}
-          {/* } */}
-          {/* label="人工智慧" */}
-          {/* /> */}
-          {/* <FormControlLabel */}
-          {/* classes={{label:classes.formControlLabel}} */}
-          {/* control={ */}
-          {/* <Checkbox */}
-          {/* checked={this.state.網路} */}
-          {/* color='default' */}
-          {/* onChange={this.handleChange('網路')} */}
-          {/* value="網路" */}
-          {/* /> */}
-          {/* } */}
-          {/* label="網路" */}
-          {/* /> */}
-          {/* <FormControlLabel */}
-          {/* classes={{label:classes.formControlLabel}} */}
-          {/* control={ */}
-          {/* <Checkbox */}
-          {/* checked={this.state.電腦視覺} */}
-          {/* color='default' */}
-          {/* onChange={this.handleChange('電腦視覺')} */}
-          {/* value="電腦視覺" */}
-          {/* /> */}
-          {/* } */}
-          {/* label="電腦視覺" */}
-          {/* /> */}
-          {/* <FormControlLabel */}
-          {/* classes={{label:classes.formControlLabel}} */}
-          {/* control={ */}
-          {/* <Checkbox */}
-          {/* checked={this.state.電腦視覺} */}
-          {/* color='default' */}
-          {/* onChange={this.handleChange('電腦視覺')} */}
-          {/* value="電腦視覺" */}
-          {/* /> */}
-          {/* } */}
-          {/* label="遊戲" */}
-          {/* /> */}
-          {/* <FormControlLabel */}
-          {/* classes={{label:classes.formControlLabel}} */}
-          {/* control={ */}
-          {/* <Checkbox */}
-          {/* checked={this.state.電腦視覺} */}
-          {/* color='default' */}
-          {/* onChange={this.handleChange('電腦視覺')} */}
-          {/* value="電腦視覺" */}
-          {/* /> */}
-          {/* } */}
-          {/* label="電腦視覺" */}
-          {/* /> */}
-          {/* <FormControlLabel */}
-          {/* classes={{label:classes.formControlLabel}} */}
-          {/* control={ */}
-          {/* <Checkbox */}
-          {/* checked={this.state.電腦視覺} */}
-          {/* color='default' */}
-          {/* onChange={this.handleChange('電腦視覺')} */}
-          {/* value="電腦視覺" */}
-          {/* /> */}
-          {/* } */}
-          {/* label="電腦視覺" */}
-          {/* /> */}
-          {/* <FormControlLabel */}
-          {/* classes={{label:classes.formControlLabel}} */}
-          {/* control={ */}
-          {/* <Checkbox */}
-          {/* checked={this.state.電腦視覺} */}
-          {/* color='default' */}
-          {/* onChange={this.handleChange('電腦視覺')} */}
-          {/* value="電腦視覺" */}
-          {/* /> */}
-          {/* } */}
-          {/* label="電腦視覺" */}
-          {/* /> */}
-          {/* </FormGroup> */}
-          {/* </FormControl> */}
-        </div>
+        <TextField
+          label='專題已收名額(以下)'
+          margin='normal'
+          type='number'
+          className={classes.textField}
+          InputLabelProps={{
+            classes: {
+              root: classes.label
+            },
+            shrink: true
+          }}
+          inputProps={{ max: 7, min: 0 }}
+          value={this.props.scount}
+          onChange={(event) => this.props.onChange(event.target.value)}
+        />
+        {/* <FormControl className={classes.formControl}>
+          <Select
+            value={this.state.scount}
+            onChange={(event) => this.setState({ scount: event.target.value })}
+          >
+            <MenuItem value={'-1'} style={{ height: '10px' }} disabled>專題剩餘名額(以上)</MenuItem>
+            <MenuItem value={'0'} style={{ height: '10px' }}>0人</MenuItem>
+            <MenuItem value={'1'} style={{ height: '10px' }}>1人</MenuItem>
+            <MenuItem value={'2'} style={{ height: '10px' }}>2人</MenuItem>
+            <MenuItem value={'3'} style={{ height: '10px' }}>3人</MenuItem>
+            <MenuItem value={'4'} style={{ height: '10px' }}>4人</MenuItem>
+            <MenuItem value={'5'} style={{ height: '10px' }}>5人</MenuItem>
+            <MenuItem value={'6'} style={{ height: '10px' }}>6人</MenuItem>
+            <MenuItem value={'7'} style={{ height: '10px' }}>7人</MenuItem>
+          </Select>
+        </FormControl> */}
       </div>
     )
   }
@@ -171,10 +98,11 @@ CheckboxesGroup.propTypes = {
   classes: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
-  studentIdcard: state.Student.User.studentIdcard
+  studentIdcard: state.Student.User.studentIdcard,
+  scount: state.Student.Professor.filter.scount
 })
 const mapDispatchToProps = (dispatch) => ({
-  changeProjectNumber: (value) => dispatch(changeProjectNumber(value))
+  onChange: (value) => dispatch(updateFilter({ scount: value }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CheckboxesGroup))

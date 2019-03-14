@@ -1,30 +1,25 @@
+
 import React from 'react'
-import './index.css'
-import { filterInput } from '../../../../Redux/Students/Actions/Professor/index'
 import { connect } from 'react-redux'
+import { updateFilter } from '../../../../Redux/Students/Actions/Professor/index'
+import './style.css'
 
-const styles = {
-  filter: {
-    padding: '30px 0 0 0'
-  }
-}
-
-const Filter = ({ onChange }) => (
-  <div style={styles.filter}>
-    <div className='professor-list-filter-list'>
-      <input type='text'
-        placeholder='搜尋 教授姓名'
-        onChange={(event) => onChange(event.target.value)}
-      />
-    </div>
+const Filter = props => (
+  <div className='professor-list-filter-list'>
+    <input type='text'
+      placeholder='搜尋 教授姓名'
+      value={props.name}
+      onChange={(event) => props.onChange(event.target.value)}
+    />
   </div>
 )
-const mapStateToProps = (state) => ({
 
+const mapStateToProps = (state) => ({
+  name: state.Student.Professor.filter.name
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onChange: (value) => dispatch(filterInput(value))
+  onChange: (value) => dispatch(updateFilter({ name: value }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)

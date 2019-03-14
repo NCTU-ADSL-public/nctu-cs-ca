@@ -1,3 +1,4 @@
+
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 import FakeData from '../../../../Resources/FakeData'
@@ -6,13 +7,10 @@ import { FETCHING_STATUS } from '../../../../Utilities/constant'
 export const setStatus = createAction('SET_STATUS')
 export const setMailStatus = createAction('SET_MAIL_STATUS')
 export const storeProfessors = createAction('STORE_PROFESSORS')
-export const storePastProjects = createAction('STORE_PAST_PROJECTS')
-export const filterinput = createAction('FILTER_INPUT')
-export const storeImage = createAction('STORE_IMAGE')
 export const storeProfessorMentor = createAction('STORE_PROFESSOR_MENTOR')
-export const changePage = createAction('CHANGE_PAGE')
-export const storeResearchStatus = createAction('STORE_RESEARCH_STATUS')
-export const ChangeProjectNumber = createAction('CHANGE_PROJECT_NUMBER')
+export const storePastProjects = createAction('STORE_PAST_PROJECTS')
+export const updateFilter = createAction('UPDATE_FILTER')
+export const storeImage = createAction('STORE_IMAGE')
 
 export const fetchProfessors = (page = 1) => dispatch => {
   dispatch(setStatus(FETCHING_STATUS.FETCHING))
@@ -65,16 +63,4 @@ export const getPastProjects = (payload) => dispatch => {
 export const storeProfessorsImage = (url, tname) => dispatch => {
   let object = { url, tname }
   dispatch(storeImage(object))
-}
-
-export const filterInput = value => dispatch => {
-  dispatch(filterinput(value))
-}
-
-export const changeProjectNumber = value => dispatch => {
-  dispatch(ChangeProjectNumber(value))
-}
-
-export const changepage = value => dispatch => {
-  dispatch(changePage(value))
 }

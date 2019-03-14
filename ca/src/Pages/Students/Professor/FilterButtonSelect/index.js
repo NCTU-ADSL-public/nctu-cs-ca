@@ -11,7 +11,7 @@ import Slide from '@material-ui/core/Slide'
 import Button from '@material-ui/core/Button'
 import FilterSelect from '../FilterSelect'
 import Note from '@material-ui/icons/FilterList'
-import './index.css'
+import './style.css'
 
 const styles = {
   appBar: {

@@ -4,14 +4,13 @@ import { FETCHING_STATUS } from '../../../../Utilities/constant'
 
 const initialState = {
   data: [],
-  filter_select: 'ALL',
-  filter_string: '',
+  filter: {
+    name: '',
+    scount: 7,
+  },
   status: FETCHING_STATUS.IDLE,
   status_mail: FETCHING_STATUS.IDLE,
-  research_status: '1',
   mentor: '',
-  project_number: '0',
-  page: 1,
   past_projects: []
 }
 
@@ -19,12 +18,9 @@ export default handleActions({
   SET_STATUS: (state, action) => ({ ...state, status: action.payload }),
   SET_MAIL_STATUS: (state, action) => ({ ...state, status_mail: action.payload }),
   STORE_PROFESSORS: (state, action) => ({ ...state, data: action.payload }),
-  STORE_PAST_PROJECTS: (state, action) => ({ ...state, past_projects: action.payload }),
-  FILTER_INPUT: (state, action) => ({ ...state, filter_string: action.payload }),
-  CHANGE_PAGE: (state, action) => ({ ...state, page: action.payload }),
-  STORE_RESEARCH_STATUS: (state, action) => ({ ...state, research_status: action.payload }),
   STORE_PROFESSOR_MENTOR: (state, action) => ({ ...state, mentor: action.payload[0].tname }),
-  CHANGE_PROJECT_NUMBER: (state, action) => ({ ...state, project_number: action.payload }),
+  STORE_PAST_PROJECTS: (state, action) => ({ ...state, past_projects: action.payload }),
+  UPDATE_FILTER: (state, action) => ({ ...state, filter: { ...state.filter, ...action.payload } }),
   STORE_IMAGE: (state, action) => {
     let newdata = state.data
     let index = newdata.findIndex(x => { return x.tname === action.payload.tname })

@@ -13,26 +13,22 @@ class Index extends React.Component {
   }
 
   render () {
-    const { data, mentor, page } = this.props.professors
-    const filterInput = this.props.professors.filter_string
-    const projectNumber = this.props.professors.project_number
-    const professors = filter(data, mentor, filterInput, page, projectNumber)
+    const { data, mentor, filter } = this.props.professors
+    const professors = getFiltered(data, mentor, filter)
 
     return (
       <div className='container'>
         <div className='row'>
-          <div className='col-md-4 col-lg-4' style={{ position: 'fixed' }}>
-            <div className='hidden-xs hidden-sm'>
+          <div className='col-12'>
+            <div className='col-lg-5 col-lg-offset-1 col-md-6 col-xs-12'>
               <FilterInput filterinput={this.filterinput} />
+            </div>
+            <div className='col-lg-2 col-md-4 hidden-xs'>
               <FilterSelect />
             </div>
           </div>
-          <div className='col-md-3 col-lg-3 visible-xs visible-sm'>
-            <FilterInput filterinput={this.filterinput} />
-            {/* <FilterButton /> */}
-          </div>
-          <div className='col-md-4 col-lg-4' />
-          <div className='col-md-8 col-lg-8' style={{ marginBottom: '100px' }}>
+          <div className='visible-xs' style={{ marginTop: '80px' }} />
+          <div className='col-lg-10 col-lg-offset-1 col-md-12' style={{ marginBottom: '100px' }}>
             {
               professors && professors.length
                 ? professors.map((data, index) => (
@@ -47,15 +43,14 @@ class Index extends React.Component {
   }
 }
 
-const filter = (data, mentor, filterInput, page, projectNumber) => {
+const getFiltered = (data, mentor, filter) => {
   if (data.length === 0) return []
-  
-  let number = parseInt(projectNumber, 10)
+
   let _data = [...data]
 
   // filter
-  _data = _data.filter(t => (Number(t.scount) >= number))
-  _data = _data.filter(item => (item.tname.search(filterInput) !== -1))
+  _data = _data.filter(t => (Number(t.scount) <= filter.scount))
+  _data = _data.filter(item => (item.tname.search(filter.name) !== -1))
 
   // search mentor
   let index = _data.findIndex(item => (item.tname === mentor))

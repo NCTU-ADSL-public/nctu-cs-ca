@@ -46,12 +46,18 @@ class Index extends React.Component {
     }
     this.handleExpandClick = this.handleExpandClick.bind(this)
     this.handleImageDownload = this.handleImageDownload.bind(this)
+    this._isMounted = false
   }
 
   componentDidMount () {
+    this._isMounted = true
     if (this.props.data.photo === undefined) {
       this.handleImageDownload()
     }
+  }
+
+  componentWillUnmount () {
+    this._isMounted = false
   }
 
   handleExpandClick () {
@@ -59,42 +65,42 @@ class Index extends React.Component {
   }
 
   handleImageDownload () {
+    // 如果component已經unmount，則fetch到圖片後不要call setState，不然會造成錯誤
     let directory = 'professor/' + this.props.data.teacher_id + '.jpg'
     storageRef
       .child(directory)
       .getDownloadURL()
       .then(url => {
         this.props.storeImage(url)
-        this.setState({
-          loading: false,
-          photo: url
-        })
+        if (this._isMounted) {
+          this.setState({ loading: false, photo: url })
+        }
       })
       .catch(error => {
         console.log(error)
-        this.setState({
-          loading: false,
-          photo: ''
-        })
+        if (this._isMounted) {
+          this.setState({ loading: false, photo: '' })
+        }
         this.props.storeImage('')
       })
   }
 
   render () {
     const { classes } = this.props
+    const photo = this.state.photo ? this.state.photo : pic
     return (
       <div className='group-btn-student'>
         <div className='row'>
           <div className='hidden-xs hidden-sm col-md-2 col-lg-2'>
             {
-              this.state.loading || <Image className='pic' src={this.state.photo === '' ? pic : this.state.photo} />
+              this.state.loading || <Image className='pic' src={photo} />
             }
           </div>
           <div className='visible-xs visible-sm col-xs-2 col-sm-1'>
             {
               this.state.loading
                 ? <CircularProgress />
-                : <Avatar alt='picture' src={this.state.photo === '' ? pic : this.state.photo} className={classes.avatar} />
+                : <Avatar alt='picture' src={photo} className={classes.avatar} />
             }
           </div>
 
