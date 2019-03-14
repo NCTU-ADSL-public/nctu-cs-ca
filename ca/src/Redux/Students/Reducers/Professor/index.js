@@ -1,10 +1,13 @@
+
 import { handleActions } from 'redux-actions'
+import { FETCHING_STATUS } from '../../../../Utilities/constant'
 
 const initialState = {
   data: [],
   filter_select: 'ALL',
   filter_string: '',
-  status: 'IDLE',
+  status: FETCHING_STATUS.IDLE,
+  status_mail: FETCHING_STATUS.IDLE,
   research_status: '1',
   mentor: '',
   project_number: '0',
@@ -12,8 +15,8 @@ const initialState = {
 }
 
 export default handleActions({
-  FETCH_PROFESSORS_START: (state) => ({ ...state, status: 'FETCH' }),
-  FETCH_PROFESSORS_DONE: (state) => ({ ...state, status: 'DONE' }),
+  SET_STATUS: (state, action) => ({ ...state, status: action.payload }),
+  SET_MAIL_STATUS: (state, action) => ({ ...state, status_mail: action.payload }),
   STORE_PROFESSORS: (state, action) => ({ ...state, data: action.payload }),
   FILTER_INPUT: (state, action) => ({ ...state, filter_string: action.payload }),
   CHANGE_PAGE: (state, action) => ({ ...state, page: action.payload }),

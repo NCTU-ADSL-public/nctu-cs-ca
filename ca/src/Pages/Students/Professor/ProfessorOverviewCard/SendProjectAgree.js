@@ -72,7 +72,7 @@ class SendProjectAgree extends React.Component {
       openSnackbar: false,
       expanded: null,
       msg: '',
-      title: '',     
+      title: '',
       members: [
         {
           id: this.props.studentIdcard.student_id + '（自己）',
@@ -80,7 +80,7 @@ class SendProjectAgree extends React.Component {
           email: ''
         }
       ],
-      memberNumber: [1],
+      memberNumber: [1]
     }
     this.handleDialogOpen = this.handleDialogOpen.bind(this)
     this.handleDialogClose = this.handleDialogClose.bind(this)
@@ -89,7 +89,7 @@ class SendProjectAgree extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleAddMember = this.handleAddMember.bind(this)
     this.handleRemoveMember = this.handleRemoveMember.bind(this)
-    this.handleTitleChange = this.handleTitleChange.bind(this)  
+    this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handdlePanelChange = this.handdlePanelChange.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.getApplyFailReason = this.getApplyFailReason.bind(this)

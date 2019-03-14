@@ -49,7 +49,7 @@ class LongMenu extends React.Component {
             }
           }}
         >
-          {/*<WriteEmail rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
+          {/* <WriteEmail rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} /> */}
           <SendProjectAgree rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
           <ReviewProject rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
         </Menu>

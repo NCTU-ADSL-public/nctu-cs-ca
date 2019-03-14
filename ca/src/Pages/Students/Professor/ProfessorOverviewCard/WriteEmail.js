@@ -1,4 +1,6 @@
+
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
@@ -16,7 +18,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
-import axios from 'axios/index'
+import { sendMailToProfessor, setMailStatus } from '../../../../Redux/Students/Actions/Professor'
+import { getTimestamp } from '../../../../Utilities'
+import { FETCHING_STATUS } from '../../../../Utilities/constant'
 
 const styles = {
   appBar: {
@@ -37,97 +41,89 @@ function Transition (props) {
 class FullScreenDialog extends React.Component {
   constructor (props) {
     super(props)
-    this.handleClickOpen = this.handleClickOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
+    this.handleDialogOpen = this.handleDialogOpen.bind(this)
+    this.handleDialogClose = this.handleDialogClose.bind(this)
     this.onChange = this.onChange.bind(this)
-    this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleSend = this.handleSend.bind(this)
     this.state = {
       open: false,
-      ckeditorContent: '',
+      content: '',
       title: ''
     }
   }
 
-  handleClickOpen () {
+  componentDidUpdate () {
+    if (this.props.status === FETCHING_STATUS.DONE) {
+      this.props.sendMailReset()
+      this.handleDialogClose()
+    }
+  }
+
+  handleDialogOpen () {
     this.setState({ open: true })
   }
 
-  handleClose () {
+  handleDialogClose () {
     this.setState({ open: false })
   }
 
-  onChange (event) {
+  onChange (property, value) {
     this.setState({
-      ckeditorContent: event.editor.getData()
-    })
-  }
-
-  handleTitleChange (event) {
-    this.setState({
-      title: event.target.value
+      [property]: value
     })
   }
 
   handleSend () {
-    if (this.state.title === '') {
+    if (!this.state.title) {
       window.alert('主旨請勿留白！')
       return
     }
-    let r = window.confirm('確定寄出？')
-    if (!r) return
-    let _this = this
-    let dt = new Date()
-    let time = dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() + '  ' + dt.getHours() + ':' + dt.getMinutes()
-    axios.post('/students/mail/sendtoteacher', {
-      title: _this.state.title,
-      content: _this.state.ckeditorContent,
-      time: time,
-      sender_email: _this.props.studentIdcard.email,
-      receiver_email: _this.props.profile.email,
-      teacher: _this.props.profile.tname,
-      name: _this.props.studentIdcard.sname,
-      id: _this.props.studentIdcard.student_id
-    })
-      .then(res => {
-        this.handleClose()
+
+    if (window.confirm('確定寄出？')) {
+      this.props.sendMail({
+        title: this.state.title,
+        content: this.state.content,
+        time: getTimestamp(),
+        sender_email: this.props.studentIdcard.email,
+        receiver_email: this.props.profile.email,
+        teacher: this.props.profile.tname,
+        name: this.props.studentIdcard.sname,
+        id: this.props.studentIdcard.student_id
       })
-      .catch(err => {
-        window.alert('寄送失敗！請檢查連線並再送出去一次')
-        console.log(err)
-      })
+    }
   }
 
   render () {
     const { classes } = this.props
     return (
       <div>
-        {this.props.rwd
-          ? <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
-            <ListItemIcon className={classes.icon}>
-              <Email />
-            </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary='Send Email!' />
-          </MenuItem>
-          : <Tooltip title='Send email to professor!' placement='top' classes={{ tooltip: classes.tooltip }}>
-            <IconButton
-              onClick={this.handleClickOpen}
-              aria-expanded={this.state.expanded}
-              aria-label='Show more'
-            >
-              <Email />
-            </IconButton>
-          </Tooltip>
+        {
+          this.props.rwd
+            ? <MenuItem className={classes.menuItem} onClick={this.handleDialogOpen}>
+              <ListItemIcon className={classes.icon}>
+                <Email />
+              </ListItemIcon>
+              <ListItemText classes={{ primary: classes.primary }} inset primary='Send Email!' />
+            </MenuItem>
+            : <Tooltip title='Send email to professor!' placement='top' classes={{ tooltip: classes.tooltip }}>
+              <IconButton
+                onClick={this.handleDialogOpen}
+                aria-expanded={this.state.expanded}
+                aria-label='Show more'
+              >
+                <Email />
+              </IconButton>
+            </Tooltip>
         }
         <Dialog
           fullScreen
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={this.handleDialogClose}
           TransitionComponent={Transition}
         >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color='inherit' onClick={this.handleClose} aria-label='Close'>
+              <IconButton color='inherit' onClick={this.handleDialogClose} aria-label='Close'>
                 <CloseIcon />
               </IconButton>
               <Typography variant='title' color='inherit' className={classes.flex}>
@@ -146,11 +142,15 @@ class FullScreenDialog extends React.Component {
               fullWidth
               margin='normal'
               className='write-email-title'
-              onChange={this.handleTitleChange}
+              onChange={(e) => this.onChange('title', e.target.value)}
               value={this.state.title}
             />
             <div style={{ height: '20px' }} />
-            <CKEditor activeClass='p10' content={this.state.ckeditorContent} events={{ 'change': this.onChange }} />
+            <CKEditor
+              activeClass='p10'
+              content={this.state.content}
+              events={{ change: (e) => this.onChange('content', e.editor.getData()) }}
+            />
             <div className='pull-right'>
               <Button variant='contained' color='primary' onClick={this.handleSend}>
                 寄出！
@@ -167,4 +167,12 @@ FullScreenDialog.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(FullScreenDialog)
+const mapStateToProps = (state) => ({
+  status: state.Student.Professor.status_mail
+})
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  sendMail: (payload) => dispatch(sendMailToProfessor(payload)),
+  sendMailReset: () => dispatch(setMailStatus(FETCHING_STATUS.IDLE))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FullScreenDialog))
