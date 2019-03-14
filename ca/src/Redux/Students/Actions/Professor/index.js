@@ -1,7 +1,7 @@
 
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import FakeData from '../../../../Resources/FakeData'
+// import FakeData from '../../../../Resources/FakeData'
 import { FETCHING_STATUS } from '../../../../Utilities/constant'
 
 export const setStatus = createAction('SET_STATUS')
@@ -14,26 +14,26 @@ export const storeImage = createAction('STORE_IMAGE')
 
 export const fetchProfessors = (page = 1) => dispatch => {
   dispatch(setStatus(FETCHING_STATUS.FETCHING))
-  axios.get('/students/ProInfo')
+  axios.get('/students/professorInfo/list')
     .then(res => {
       dispatch(storeProfessors(res.data))
       dispatch(setStatus(FETCHING_STATUS.DONE))
     })
     .catch(error => {
       console.log(error)
-      dispatch(storeProfessors(FakeData.ProjectNum))
-      dispatch(setStatus(FETCHING_STATUS.DONE))
+      // dispatch(storeProfessors(FakeData.ProjectNum))
+      // dispatch(setStatus(FETCHING_STATUS.DONE))
     })
 
-  axios.get('/students/mentorInfo')
+  axios.get('/students/professorInfo/getMentor')
     .then(res => {
       dispatch(storeProfessorMentor(res.data))
       dispatch(setStatus(FETCHING_STATUS.DONE))
     })
     .catch(error => {
       console.log(error)
-      dispatch(storeProfessorMentor([{ 'tname': '張立平' }]))
-      dispatch(setStatus(FETCHING_STATUS.DONE))
+      // dispatch(storeProfessorMentor([{ 'tname': '張立平' }]))
+      // dispatch(setStatus(FETCHING_STATUS.DONE))
     })
 }
 
@@ -50,12 +50,12 @@ export const sendMailToProfessor = (payload) => dispatch => {
 }
 
 export const getPastProjects = (payload) => dispatch => {
-  axios.post('/students/project/ResearchInfoOfPro', payload)
+  axios.post('/students/professorInfo/pastResearch', payload)
     .then(res => {
       dispatch(storePastProjects(res.data))
     })
     .catch(err => {
-      dispatch(storePastProjects(FakeData.ProfessorProject))
+      // dispatch(storePastProjects(FakeData.ProfessorProject))
       console.log(err)
     })
 }
