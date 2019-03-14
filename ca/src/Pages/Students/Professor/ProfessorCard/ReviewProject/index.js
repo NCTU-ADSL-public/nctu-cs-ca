@@ -1,4 +1,6 @@
+
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
@@ -13,9 +15,8 @@ import List from '@material-ui/icons/List'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import FakeData from './FakeData'
-import Card from './Card'
-import axios from 'axios/index'
+import ProjectCard from './projectCard'
+import { getPastProjects } from '../../../../../Redux/Students/Actions/Professor'
 
 const styles = {
   appBar: {
@@ -36,77 +37,68 @@ function Transition (props) {
 class Index extends React.Component {
   constructor (props) {
     super(props)
-    this.handleClickOpen = this.handleClickOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.state = {
-      open: false,
-      data: FakeData
-    }
+    this.handleDialogOpen = this.handleDialogOpen.bind(this)
+    this.handleDialogClose = this.handleDialogClose.bind(this)
+    this.state = { open: false }
   }
 
-  handleClickOpen () {
+  handleDialogOpen () {
     this.setState({ open: true })
   }
 
-  handleClose () {
+  handleDialogClose () {
     this.setState({ open: false })
   }
 
   componentDidMount () {
-    axios.post('/students/project/ResearchInfoOfPro', {
+    this.props.getPastProjects({
       teacher_id: this.props.profile.teacher_id
     })
-      .then(res => {
-        this.setState({
-          data: res.data
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
   }
 
   render () {
     const { classes } = this.props
     return (
       <div>
-        {this.props.rwd
-          ? <MenuItem className={classes.menuItem} onClick={this.handleClickOpen}>
-            <ListItemIcon className={classes.icon}>
-              <List />
-            </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary='查看教授過去專題' />
-          </MenuItem>
-          : <Tooltip title='查看教授過去專題' placement='top' classes={{ tooltip: classes.tooltip }}>
-            <IconButton
-              onClick={this.handleClickOpen}
-              aria-expanded={this.state.expanded}
-              aria-label='Show more'
-            >
-              <List />
-            </IconButton>
-          </Tooltip>
+        {
+          this.props.rwd
+            ? <MenuItem className={classes.menuItem} onClick={this.handleDialogOpen}>
+              <ListItemIcon className={classes.icon}>
+                <List />
+              </ListItemIcon>
+              <ListItemText classes={{ primary: classes.primary }} inset primary='查看教授指導專題' />
+            </MenuItem>
+            : <Tooltip title='查看教授指導專題' placement='top' classes={{ tooltip: classes.tooltip }}>
+              <IconButton
+                onClick={this.handleDialogOpen}
+                aria-expanded={this.state.expanded}
+                aria-label='Show more'
+              >
+                <List />
+              </IconButton>
+            </Tooltip>
         }
         <Dialog
           fullScreen
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={this.handleDialogClose}
           TransitionComponent={Transition}
         >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color='inherit' onClick={this.handleClose} aria-label='Close'>
+              <IconButton color='inherit' onClick={this.handleDialogClose} aria-label='Close'>
                 <CloseIcon />
               </IconButton>
               <Typography variant='title' color='inherit' className={classes.flex}>
-                查看教授專題
+                查看教授指導專題
               </Typography>
             </Toolbar>
           </AppBar>
           <div className='container'>
             {
-              this.state.data.map(t =>
-                <Card data={t} profile={this.props.profile} key={t.research_title} />)
+              this.props.pastProjects.map((research, index) => (
+                <ProjectCard data={research} profile={this.props.profile} key={index} />
+              ))
             }
           </div>
         </Dialog>
@@ -119,4 +111,11 @@ Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Index)
+const mapStateToProps = (state, ownProps) => ({
+  pastProjects: state.Student.Professor.past_projects
+})
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  getPastProjects: (payload) => dispatch(getPastProjects(payload))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

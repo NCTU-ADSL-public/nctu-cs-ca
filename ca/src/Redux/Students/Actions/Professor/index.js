@@ -6,6 +6,7 @@ import { FETCHING_STATUS } from '../../../../Utilities/constant'
 export const setStatus = createAction('SET_STATUS')
 export const setMailStatus = createAction('SET_MAIL_STATUS')
 export const storeProfessors = createAction('STORE_PROFESSORS')
+export const storePastProjects = createAction('STORE_PAST_PROJECTS')
 export const filterinput = createAction('FILTER_INPUT')
 export const storeImage = createAction('STORE_IMAGE')
 export const storeProfessorMentor = createAction('STORE_PROFESSOR_MENTOR')
@@ -46,6 +47,17 @@ export const sendMailToProfessor = (payload) => dispatch => {
     })
     .catch(err => {
       window.alert('寄送失敗！請檢查連線後再進行操作')
+      console.log(err)
+    })
+}
+
+export const getPastProjects = (payload) => dispatch => {
+  axios.post('/students/project/ResearchInfoOfPro', payload)
+    .then(res => {
+      dispatch(storePastProjects(res.data))
+    })
+    .catch(err => {
+      dispatch(storePastProjects(FakeData.ProfessorProject))
       console.log(err)
     })
 }

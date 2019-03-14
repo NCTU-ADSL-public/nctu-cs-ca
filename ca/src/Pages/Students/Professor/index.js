@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import FilterInput from './FilterInput'
 import FilterSelect from './FilterSelect'
-import ProfessorOverviewCard from './ProfessorOverviewCard'
+import ProfessorCard from './ProfessorCard'
 import { fetchProfessors } from '../../../Redux/Students/Actions/Professor'
 
 class Index extends React.Component {
@@ -36,7 +36,7 @@ class Index extends React.Component {
             {
               professors && professors.length
                 ? professors.map((data, index) => (
-                  <ProfessorOverviewCard data={data} key={index} studentIdcard={this.props.studentIdcard} />
+                  <ProfessorCard data={data} key={index} studentIdcard={this.props.studentIdcard} />
                 ))
                 : <CircularProgress />
             }

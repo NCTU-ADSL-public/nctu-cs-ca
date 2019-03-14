@@ -32,7 +32,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Grow from '@material-ui/core/Grow'
 import axios from 'axios/index'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
-import { getSemester } from '../../../../Utilities'
+import { getSemester } from '../../../../../Utilities'
 
 const limitcount = 7
 

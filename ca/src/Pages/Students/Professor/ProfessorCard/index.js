@@ -32,7 +32,7 @@ const styles = theme => ({
     transform: 'rotate(180deg)'
   },
   margin: {
-    zIndex: 0
+    margin: theme.spacing.unit * 2
   }
 })
 
@@ -92,7 +92,7 @@ class Index extends React.Component {
           </div>
           <div className='visible-xs visible-sm col-xs-2 col-sm-1'>
             {
-              this.state.loading 
+              this.state.loading
                 ? <CircularProgress />
                 : <Avatar alt='picture' src={this.state.photo === '' ? pic : this.state.photo} className={classes.avatar} />
             }
@@ -102,7 +102,7 @@ class Index extends React.Component {
             <div className='col-xs-8 col-sm-8 col-md-7 col-lg-7'>
               {
                 this.props.isMentor
-                  ? <Badge color='primary' badgeContent={'導師'} className={classes.margin}>
+                  ? <Badge color='primary' badgeContent={'導師'}>
                     <div className='group-title'>{ this.props.data.tname }</div>
                   </Badge>
                   : <div className='group-title'>{ this.props.data.tname }</div>
