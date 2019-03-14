@@ -14,7 +14,7 @@ export const resetCourse = createAction('RESET_COURSE')
 export const errorSubmit = createAction('ERROR_SUBMIT')
 
 export const sendWaiveCourse = (payload) => dispatch => {
-  axios.post('/students//offsetApply/createWaive', payload)
+  axios.post('/students/offsetApply/createWaive', payload)
     .then(res => { window.alert('送出成功') })
     .catch(err => {
       window.alert('送出失敗，請檢查連線是否穩定。')
@@ -23,7 +23,7 @@ export const sendWaiveCourse = (payload) => dispatch => {
 }
 
 export const sendExemptCourse = (payload) => dispatch => {
-  axios.post('/students//offsetApply/createExempt', payload)
+  axios.post('/students/offsetApply/createExempt', payload)
     .then(res => { window.alert('送出成功') })
     .catch(err => {
       window.alert('送出失敗，請檢查連線是否穩定。')
@@ -51,7 +51,7 @@ export const sendEnglishCourse = (payload) => dispatch => {
 
 export const deleteCredit = (payload) => dispatch => {
   dispatch(setDeleteStatus({ status: 'fetching' }))
-  axios.post('/students//offsetApply/delete', payload)
+  axios.post('/students/offsetApply/delete', payload)
     .then(res => {
       window.alert('刪除成功')
       dispatch(setDeleteStatus({ status: 'success' }))
@@ -65,7 +65,7 @@ export const deleteCredit = (payload) => dispatch => {
 
 export const editCredit = (payload) => dispatch => {
   dispatch(setEditStatus({ status: 'fetching' }))
-  axios.post('/students//offsetApply/edit', payload)
+  axios.post('/students/offsetApply/edit', payload)
     .then(res => {
       window.alert('編輯成功')
       dispatch(setEditStatus({ status: 'success' }))
