@@ -13,7 +13,7 @@ export const fetchStart = createAction('FETCH_START')
 export const storeStudentInfo = createAction('STORE_STUDENT_INFO')
 
 const fetchCourseOnly = (payload) => dispatch => {
-  axios.post('/students/graduate/revised', payload).then(res => {
+  axios.post('/students/graduate/detail', payload).then(res => {
     dispatch(storeGraduationCourse(res.data))
     dispatch(storeProfessionalField(payload.professional_field))
   }).catch(err => {
