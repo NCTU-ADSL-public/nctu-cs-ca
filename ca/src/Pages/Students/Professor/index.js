@@ -50,7 +50,7 @@ const getFiltered = (data, mentor, filter) => {
   let _data = [...data]
 
   // filter
-  _data = _data.filter(t => (Number(t.scount) <= filter.scount))
+  _data = _data.filter(t => (t.scount <= filter.scount))
   _data = _data.filter(item => (item.tname.search(filter.name) !== -1))
 
   // search mentor
