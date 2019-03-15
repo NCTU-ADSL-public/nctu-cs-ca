@@ -1,7 +1,12 @@
+
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import TextField from '@material-ui/core/TextField'
+import { withStyles } from '@material-ui/core/styles'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
 
 const styles = theme => ({
   container: {
@@ -14,10 +19,18 @@ const styles = theme => ({
   labelMb: {
     fontSize: '18px'
   },
+  input: {
+    fontSize: '16px'
+  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200
+  },
+  textFieldLong: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300
   },
   menu: {
     width: 150,
@@ -28,27 +41,8 @@ const styles = theme => ({
     fontSize: '18px'
   }
 })
-const mapStateToProps = (state) => ({
-  studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.exemptCourse.class,
-  phone: state.Student.Credit.exemptCourse.phone,
-  original_course_year: state.Student.Credit.exemptCourse.original_course_year,
-  original_course_semester: state.Student.Credit.exemptCourse.original_course_semester,
-  original_course_name: state.Student.Credit.exemptCourse.original_course_name,
-  original_course_department: state.Student.Credit.exemptCourse.original_course_department,
-  original_course_credit: state.Student.Credit.exemptCourse.original_course_credit,
-  original_course_score: state.Student.Credit.exemptCourse.original_course_score,
-  current_course_code: state.Student.Credit.exemptCourse.current_course_code,
-  current_course_name: state.Student.Credit.exemptCourse.current_course_name,
-  current_course_credit: state.Student.Credit.exemptCourse.current_course_credit,
-  current_course_type: state.Student.Credit.exemptCourse.current_course_type,
-  file: state.Student.Credit.exemptCourse.file
-})
 
-const mapDispatchToProps = (dispatch) => ({
-})
-
-class ExemptCourseFormConfirm extends React.Component {
+class CompulsoryCourseFormConfirm extends React.Component {
   render () {
     const { classes } = this.props
     return (
@@ -88,6 +82,7 @@ class ExemptCourseFormConfirm extends React.Component {
               />
               <TextField
                 label='系所/年級/班別'
+                placeholder='例：資工系資工組大一A班'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -116,9 +111,22 @@ class ExemptCourseFormConfirm extends React.Component {
 
             <div style={{ height: '50px' }} />
 
-            <h2>已修習課程資料</h2>
+            <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
+              <TextField
+                label='永久課號'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_code}
+              />
               <TextField
                 label='課程名稱'
                 margin='normal'
@@ -130,7 +138,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                defaultValue={this.props.course_name}
               />
               <TextField
                 label='開課系所'
@@ -143,10 +151,10 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
+                defaultValue={this.props.department}
               />
               <TextField
-                label='修課年級'
+                label='授課老師'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -156,7 +164,34 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+                defaultValue={this.props.teacher}
+              />
+              <TextField
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.credit}
+              />
+              <TextField
+                label='修課學年度'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_year}
               />
               <TextField
                 label='修課學期'
@@ -169,7 +204,40 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下'][this.props.original_course_semester]}
+                defaultValue={['', '上', '下'][this.props.course_semester]}
+              />
+            </div>
+
+            <div style={{ height: '50px' }} />
+
+            <h2>欲抵免之本系課程資訊</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <TextField
+                label='永久課號'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.original_course_code}
+              />
+              <TextField
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.label
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.original_course_name}
               />
               <TextField
                 label='學分'
@@ -185,80 +253,83 @@ class ExemptCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.original_course_credit}
               />
-              <TextField
-                label='成績'
-                placeholder='若無分數則填通過與否'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
-              />
             </div>
 
-            <div style={{ height: '50px' }} />
+            <div style={{ height: '50px', clear: 'both' }} />
 
-            <h2>申請免修課程資料</h2>
+            <h2>申請原因（請擇一選擇）</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
-              />
-              <TextField
-                label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
-              />
-              <TextField
-                label='學分'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
-              />
-              <TextField
-                label='選別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
-              />
+              <FormControl component='fieldset'>
+                <RadioGroup
+                  value={this.props.reason.type}
+                >
+                  <FormControlLabel
+                    disabled
+                    value='被當'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px' }}>
+                        必修課程需重修，然因
+                        <TextField
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            },
+                            readOnly: true
+                          }}
+                          defaultValue={this.props.reason.type === '被當' ? this.props.reason.content : ''}
+                          multiline
+                          rowsMax='1'
+                        />
+                        <br />不可抗拒之理由，需修習外系課程以抵本系必修課程
+                        <font color='red'>(請於檔案上傳部分附上成績單)</font>
+                      </div>
+                    }
+                  />
+                  <FormControlLabel
+                    disabled
+                    value='其他'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px' }}>
+                        其他原因：
+                        <TextField
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            },
+                            readOnly: true
+                          }}
+                          defaultValue={this.props.reason.type === '其他' ? this.props.reason.content : ''}
+                          multiline
+                          rowsMax='1'
+                        />
+                      </div>
+                    }
+                  />
+                </RadioGroup>
+              </FormControl>
             </div>
 
             <div style={{ height: '50px' }} />
@@ -309,6 +380,7 @@ class ExemptCourseFormConfirm extends React.Component {
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='系所/年級/班別'
+                placeholder='例：資工系資工組大一A班'
                 margin='normal'
                 className={classes.textField}
                 InputLabelProps={{
@@ -338,9 +410,129 @@ class ExemptCourseFormConfirm extends React.Component {
 
             <div style={{ height: '50px' }} />
 
-            <h2>已修習課程資料</h2>
+            <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='永久課號'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_code}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='課程名稱'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_name}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='開課系所'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.department}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='授課老師'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.teacher}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='學分'
+                margin='normal'
+                type='number'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.credit}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='修課學年度'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.course_year}
+              />
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='修課學期'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={['', '上', '下'][this.props.course_semester]}
+              />
+            </div>
+
+            <div style={{ height: '50px' }} />
+
+            <h2>欲抵免之本系課程資訊</h2>
+            <hr style={{ margin: '5px' }} />
+            <div style={{ margin: '5px' }}>
+              <TextField
+                style={{ width: 'calc( 100% - 24px )' }}
+                label='永久課號'
+                margin='normal'
+                className={classes.textField}
+                InputLabelProps={{
+                  classes: {
+                    root: classes.labelMb
+                  },
+                  shrink: true
+                }}
+                InputProps={{ readOnly: true }}
+                defaultValue={this.props.original_course_code}
+              />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
                 label='課程名稱'
@@ -357,48 +549,6 @@ class ExemptCourseFormConfirm extends React.Component {
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
-                label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='修課年級'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='修課學期'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下'][this.props.original_course_semester]}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
                 label='學分'
                 margin='normal'
                 type='number'
@@ -412,85 +562,87 @@ class ExemptCourseFormConfirm extends React.Component {
                 InputProps={{ readOnly: true }}
                 defaultValue={this.props.original_course_credit}
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='成績'
-                placeholder='若無分數則填通過與否'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
-              />
             </div>
 
-            <div style={{ height: '50px' }} />
+            <div style={{ height: '50px', clear: 'both' }} />
 
-            <h2>申請免修課程資料</h2>
+            <h2>申請原因（請擇一選擇）</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='學分'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
-              />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                label='選別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
-              />
+              <FormControl component='fieldset'>
+                <RadioGroup
+                  value={this.props.reason.type}
+                >
+                  <FormControlLabel
+                    disabled
+                    value='被當'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px', margin: '15px' }}>
+                        必修課程需重修，然因
+                        <TextField
+                          style={{ width: 'calc( 100% - 24px )' }}
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            },
+                            readOnly: true
+                          }}
+                          defaultValue={this.props.reason.type === '被當' ? this.props.reason.content : ''}
+                          multiline
+                          rowsMax='1'
+                        />
+                        <div style={{ margin: '5px' }}>
+                          不可抗拒之理由，需修習外系課程以抵本系必修課程
+                        </div>
+                        <span style={{ margin: '5px', color: 'red' }}>(請於檔案上傳部分附上成績單)</span>
+                      </div>
+                    }
+                  />
+                  <FormControlLabel
+                    disabled
+                    value='其他'
+                    control={<Radio />}
+                    label={
+                      <div style={{ fontSize: '16px', margin: '15px' }}>
+                        其他原因：
+                        <TextField
+                          style={{ width: 'calc( 100% - 24px )' }}
+                          label=''
+                          placeholder='理由詳述'
+                          margin='normal'
+                          className={classes.textFieldLong}
+                          InputLabelProps={{
+                            classes: {
+                              root: classes.label
+                            },
+                            shrink: true
+                          }}
+                          InputProps={{
+                            classes: {
+                              root: classes.input
+                            },
+                            readOnly: true
+                          }}
+                          defaultValue={this.props.reason.type === '其他' ? this.props.reason.content : ''}
+                          multiline
+                          rowsMax='1'
+                        />
+                      </div>
+                    }
+                  />
+                </RadioGroup>
+              </FormControl>
             </div>
 
             <div style={{ height: '50px' }} />
@@ -507,4 +659,28 @@ class ExemptCourseFormConfirm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ExemptCourseFormConfirm))
+const mapStateToProps = (state) => ({
+  studentIdcard: state.Student.User.studentIdcard,
+  class: state.Student.Credit.compulsoryCourse.class,
+  year: state.Student.Credit.compulsoryCourse.year,
+  semester: state.Student.Credit.compulsoryCourse.semester,
+  department: state.Student.Credit.compulsoryCourse.department,
+  teacher: state.Student.Credit.compulsoryCourse.teacher,
+  credit: state.Student.Credit.compulsoryCourse.credit,
+  original_course_name: state.Student.Credit.compulsoryCourse.original_course_name,
+  original_course_code: state.Student.Credit.compulsoryCourse.original_course_code,
+  original_course_credit: state.Student.Credit.compulsoryCourse.original_course_credit,
+  course_year: state.Student.Credit.compulsoryCourse.course_year,
+  course_semester: state.Student.Credit.compulsoryCourse.course_semester,
+  course_name: state.Student.Credit.compulsoryCourse.course_name,
+  course_code: state.Student.Credit.compulsoryCourse.course_code,
+  reason: state.Student.Credit.compulsoryCourse.reason,
+  phone: state.Student.Credit.compulsoryCourse.phone,
+  course_type: state.Student.Credit.compulsoryCourse.course_type,
+  file: state.Student.Credit.compulsoryCourse.file
+})
+
+const mapDispatchToProps = (dispatch) => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CompulsoryCourseFormConfirm))

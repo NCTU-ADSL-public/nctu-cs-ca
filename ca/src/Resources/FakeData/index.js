@@ -5,7 +5,8 @@ import CoursePass from './CoursePass.json'
 import PrintData from './PrintData.json'
 import StudentList from './StudentList.json'
 import MailList from './MailList.json'
-import ProjectNum from './ProjectNum.json'
+import Project from './Project.json'
+import ProfessorList from './ProfessorList.json'
 import StudentProject from './StudentProject.json'
 import StudentScore from './StudentScore.json'
 import TeacherList from './TeacherList.json'
@@ -24,7 +25,8 @@ export default {
   PrintData,
   StudentList,
   MailList,
-  ProjectNum,
+  Project,
+  ProfessorList,
   StudentProject,
   StudentScore,
   TeacherList,

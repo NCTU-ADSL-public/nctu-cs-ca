@@ -3,9 +3,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Postfile from './Postfile'
-import { englishCourseChange } from '../../../../../Redux/Students/Actions/Credit'
 import Divider from '@material-ui/core/Divider'
+import Postfile from './Postfile'
+import { englishCourseChange } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {

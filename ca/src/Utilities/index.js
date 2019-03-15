@@ -1,4 +1,10 @@
 
+function getYear () {
+  let today = new Date()
+  let year = today.getFullYear()
+  return `${(year - 1912)}`
+}
+
 // 回傳學期字串(e.g. 107-1)
 function getSemester () {
   let today = new Date()
@@ -18,6 +24,7 @@ function getTimestamp () {
 }
 
 export {
+  getYear,
   getSemester,
   getTimestamp
 }

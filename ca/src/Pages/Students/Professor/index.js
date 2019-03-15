@@ -8,9 +8,10 @@ import ProfessorCard from './ProfessorCard'
 import { fetchProfessors } from '../../../Redux/Students/Actions/Professor'
 
 class Index extends React.Component {
-  componentDidMount () {
-    this.props.fetchData()
-  }
+  // 在student head有fetch教授資料 這邊可能就不需要了
+  // componentDidMount () {
+  //   this.props.fetchData()
+  // }
 
   render () {
     const { data, mentor, filter } = this.props.professors
@@ -49,7 +50,7 @@ const getFiltered = (data, mentor, filter) => {
   let _data = [...data]
 
   // filter
-  _data = _data.filter(t => (Number(t.scount) <= filter.scount))
+  _data = _data.filter(t => (t.scount <= filter.scount))
   _data = _data.filter(item => (item.tname.search(filter.name) !== -1))
 
   // search mentor

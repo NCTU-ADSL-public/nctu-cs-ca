@@ -1,8 +1,7 @@
+
 import React from 'react'
-import TextField from '@material-ui/core/TextField'
-import Postfile from './Postfile'
 import { connect } from 'react-redux'
-import { compulsoryCourseChange } from '../../../../../Redux/Students/Actions/Credit'
+import TextField from '@material-ui/core/TextField'
 import { withStyles } from '@material-ui/core/styles'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
@@ -10,6 +9,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
+import Postfile from './Postfile'
+import { compulsoryCourseChange } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {

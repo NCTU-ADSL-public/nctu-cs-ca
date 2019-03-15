@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
-import { Grid, Row } from 'react-bootstrap'
-
-import Navbar from '../../Components/Navbar'
-
-import { fetchProfessors } from '../../Redux/Students/Actions/Professor/index'
-
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { Grid, Row } from 'react-bootstrap'
+import Navbar from '../../Components/Navbar'
+import { fetchProfessors } from '../../Redux/Students/Actions/Professor'
 import { fetchUser } from '../../Redux/Students/Actions/User'
 import { fetchCourse, fetchCoursePass } from '../../Redux/Students/Actions/Map'
 import { fetchGraduationCourse } from '../../Redux/Students/Actions/Graduation'
-import { withRouter } from 'react-router-dom'
+
 
 class Head extends Component {
-  constructor (props) {
-    super(props)
-    this.props.FetchUser()
-    this.props.FetchProfessorInfo()
-    this.props.FetchCourse()
-    this.props.FetchCoursePass()
+  componentDidMount () {
+    this.props.fetchUser()
+    this.props.fetchProfessor()
+    this.props.fetchCourse()
+    this.props.fetchCoursePass()
     this.props.fetchGraduationCourse()
   }
 
@@ -81,10 +78,10 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  FetchUser: () => dispatch(fetchUser()),
-  FetchProfessorInfo: () => dispatch(fetchProfessors()),
-  FetchCourse: () => dispatch(fetchCourse()),
-  FetchCoursePass: () => dispatch(fetchCoursePass()),
+  fetchUser: () => dispatch(fetchUser()),
+  fetchProfessor: () => dispatch(fetchProfessors()),
+  fetchCourse: () => dispatch(fetchCourse()),
+  fetchCoursePass: () => dispatch(fetchCoursePass()),
   fetchGraduationCourse: () => dispatch(fetchGraduationCourse())
 })
 

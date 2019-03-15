@@ -157,7 +157,7 @@ class SendProjectAgree extends React.Component {
 
         let r = window.confirm('注意！如果您確定送出表單且教授也同意了，將代表您加簽 專題（一）課程，確定要送出表單嗎?')
         if (r) {
-          axios.post('/students/researchApply/create', {
+          axios.post('/students/research/create', {
             semester: getSemester(),
             student_num: participants.length,
             tname: _this.props.profile.tname,
