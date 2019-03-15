@@ -66,7 +66,13 @@ class Index extends React.Component {
 
   handleImageDownload () {
     // 如果component已經unmount，則fetch到圖片後不要call setState，不然會造成錯誤
-    let directory = 'professor/' + this.props.data.teacher_id + '.jpg'
+    let directory = this.props.data.path
+    if (!directory) {
+      if (this._isMounted) {
+        this.setState({ loading: false, photo: '' })
+      }
+    }
+
     storageRef
       .child(directory)
       .getDownloadURL()

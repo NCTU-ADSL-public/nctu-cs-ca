@@ -1,8 +1,9 @@
 
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-// import FakeData from '../../../../Resources/FakeData'
+import FakeData from '../../../../Resources/FakeData'
 import { FETCHING_STATUS } from '../../../../Utilities/constant'
+import { getYear } from '../../../../Utilities/'
 
 export const setStatus = createAction('SET_STATUS')
 export const setMailStatus = createAction('SET_MAIL_STATUS')
@@ -12,16 +13,16 @@ export const storePastProjects = createAction('STORE_PAST_PROJECTS')
 export const updateFilter = createAction('UPDATE_FILTER')
 export const storeImage = createAction('STORE_IMAGE')
 
-export const fetchProfessors = (page = 1) => dispatch => {
+export const fetchProfessors = () => dispatch => {
   dispatch(setStatus(FETCHING_STATUS.FETCHING))
-  axios.get('/students/professorInfo/list')
+  axios.get('/students/professorInfo/list', { year: getYear() })
     .then(res => {
       dispatch(storeProfessors(res.data))
       dispatch(setStatus(FETCHING_STATUS.DONE))
     })
     .catch(error => {
       console.log(error)
-      // dispatch(storeProfessors(FakeData.ProjectNum))
+      dispatch(storeProfessors(FakeData.ProfessorList))
       // dispatch(setStatus(FETCHING_STATUS.DONE))
     })
 
