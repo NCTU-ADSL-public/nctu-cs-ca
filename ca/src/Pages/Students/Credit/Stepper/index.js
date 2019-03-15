@@ -1,6 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
+import scrollToComponent from 'react-scroll-to-component'
+import firebase from 'firebase'
 import {
   Step,
   Stepper,
@@ -10,15 +12,16 @@ import { Chip } from '@material-ui/core'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import FormSelectTable from './FormSelectTable'
-import WaiveCourseForm from './CreditCourseTextForm/waiveCourse'
-import ExemptCourseForm from './CreditCourseTextForm/exemptCourse'
-import CompulsoryCourseForm from './CreditCourseTextForm/compulsoryCourse'
-import EnglishCourseForm from './CreditCourseTextForm/englishCourse'
-import WaiveCourseFormConfirm from './CreditCourseTextFormConfirm/waiveCourse'
-import ExemptCourseFormConfirm from './CreditCourseTextFormConfirm/exemptCourse'
-import CompulsoryCourseFormConfirm from './CreditCourseTextFormConfirm/compulsoryCourse'
-import EnglishCourseFormConfirm from './CreditCourseTextFormConfirm/englishCourse'
+import CircleProgress from './CircleProgress'
+import FormSelectTable from '../FormSelectTable'
+import WaiveCourseForm from '../Form/waiveCourse'
+import ExemptCourseForm from '../Form/exemptCourse'
+import CompulsoryCourseForm from '../Form/compulsoryCourse'
+import EnglishCourseForm from '../Form/englishCourse'
+import WaiveCourseFormConfirm from '../FormConfirm/waiveCourse'
+import ExemptCourseFormConfirm from '../FormConfirm/exemptCourse'
+import CompulsoryCourseFormConfirm from '../FormConfirm/compulsoryCourse'
+import EnglishCourseFormConfirm from '../FormConfirm/englishCourse'
 import {
   sendWaiveCourse,
   sendExemptCourse,
@@ -28,10 +31,8 @@ import {
   resetCourse,
   senderrorSubmit
 } from '../../../../Redux/Students/Actions/Credit'
-import './Stepper.css'
-import firebase from 'firebase'
-import CircleProgress from './Components/CircleProgress'
-import scrollToComponent from 'react-scroll-to-component'
+import './style.css'
+
 
 class HorizontalLinearStepper extends React.Component {
   constructor (props) {

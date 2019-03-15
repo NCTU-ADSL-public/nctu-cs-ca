@@ -5,12 +5,12 @@ import {
   Button,
 } from '@material-ui/core'
 
-import WaiveCoursePanel from '../Pages/Students/Credit/CreditPanel/waiveCoursePanel'
-import ExemptCoursePanel from '../Pages/Students/Credit/CreditPanel/exemptCoursePanel'
-import CompulsoryCoursePanel from '../Pages/Students/Credit/CreditPanel/compulsoryCoursePanel'
-import EnglishCoursePanel from '../Pages/Students/Credit/CreditPanel/englishCoursePanel'
-import WaiveCourse from '../Pages/Students/Credit/ApplicationForm/WaiveCourse'
-import ExemptCourse from '../Pages/Students/Credit/ApplicationForm/ExemptCourse'
+import WaiveCoursePanel from '../Pages/Students/Credit/Panel/waiveCoursePanel'
+import ExemptCoursePanel from '../Pages/Students/Credit/Panel/exemptCoursePanel'
+import CompulsoryCoursePanel from '../Pages/Students/Credit/Panel/compulsoryCoursePanel'
+import EnglishCoursePanel from '../Pages/Students/Credit/Panel/englishCoursePanel'
+import WaiveCourse from '../Pages/Students/Credit/PrintForm/WaiveCourse'
+import ExemptCourse from '../Pages/Students/Credit/PrintForm/ExemptCourse'
 
 
 class StudentVerify extends React.Component {

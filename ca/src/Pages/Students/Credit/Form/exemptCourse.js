@@ -1,11 +1,12 @@
+
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
-import { exemptCourseChange } from '../../../../../Redux/Students/Actions/Credit'
-import Postfile from './Postfile'
 import Divider from '@material-ui/core/Divider'
+import { exemptCourseChange } from '../../../../Redux/Students/Actions/Credit'
+import Postfile from './Postfile'
 
 const styles = theme => ({
   container: {
@@ -31,28 +32,6 @@ const styles = theme => ({
     width: 150,
     fontSize: 18
   }
-})
-
-const mapStateToProps = (state) => ({
-  studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.exemptCourse.class,
-  phone: state.Student.Credit.exemptCourse.phone,
-  original_course_year: state.Student.Credit.exemptCourse.original_course_year,
-  original_course_semester: state.Student.Credit.exemptCourse.original_course_semester,
-  original_course_name: state.Student.Credit.exemptCourse.original_course_name,
-  original_course_department: state.Student.Credit.exemptCourse.original_course_department,
-  original_course_credit: state.Student.Credit.exemptCourse.original_course_credit,
-  original_course_score: state.Student.Credit.exemptCourse.original_course_score,
-  current_course_code: state.Student.Credit.exemptCourse.current_course_code,
-  current_course_name: state.Student.Credit.exemptCourse.current_course_name,
-  current_course_credit: state.Student.Credit.exemptCourse.current_course_credit,
-  current_course_type: state.Student.Credit.exemptCourse.current_course_type,
-  file: state.Student.Credit.exemptCourse.file,
-  errorsubmitted: state.Student.Credit.errorsubmitted
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => dispatch(exemptCourseChange(payload))
 })
 
 class ExemptCourseForm extends React.Component {
@@ -626,5 +605,27 @@ class ExemptCourseForm extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  studentIdcard: state.Student.User.studentIdcard,
+  class: state.Student.Credit.exemptCourse.class,
+  phone: state.Student.Credit.exemptCourse.phone,
+  original_course_year: state.Student.Credit.exemptCourse.original_course_year,
+  original_course_semester: state.Student.Credit.exemptCourse.original_course_semester,
+  original_course_name: state.Student.Credit.exemptCourse.original_course_name,
+  original_course_department: state.Student.Credit.exemptCourse.original_course_department,
+  original_course_credit: state.Student.Credit.exemptCourse.original_course_credit,
+  original_course_score: state.Student.Credit.exemptCourse.original_course_score,
+  current_course_code: state.Student.Credit.exemptCourse.current_course_code,
+  current_course_name: state.Student.Credit.exemptCourse.current_course_name,
+  current_course_credit: state.Student.Credit.exemptCourse.current_course_credit,
+  current_course_type: state.Student.Credit.exemptCourse.current_course_type,
+  file: state.Student.Credit.exemptCourse.file,
+  errorsubmitted: state.Student.Credit.errorsubmitted
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  handleChange: (payload) => dispatch(exemptCourseChange(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ExemptCourseForm))
