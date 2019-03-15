@@ -8,9 +8,10 @@ import ProfessorCard from './ProfessorCard'
 import { fetchProfessors } from '../../../Redux/Students/Actions/Professor'
 
 class Index extends React.Component {
-  componentDidMount () {
-    this.props.fetchData()
-  }
+  // 在student head有fetch教授資料 這邊可能就不需要了
+  // componentDidMount () {
+  //   this.props.fetchData()
+  // }
 
   render () {
     const { data, mentor, filter } = this.props.professors
