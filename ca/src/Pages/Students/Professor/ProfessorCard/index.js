@@ -71,6 +71,7 @@ class Index extends React.Component {
       if (this._isMounted) {
         this.setState({ loading: false, photo: '' })
       }
+      return
     }
 
     storageRef

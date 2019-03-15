@@ -15,7 +15,7 @@ export const storeImage = createAction('STORE_IMAGE')
 
 export const fetchProfessors = () => dispatch => {
   dispatch(setStatus(FETCHING_STATUS.FETCHING))
-  axios.get('/students/professorInfo/list', { year: getYear() })
+  axios.get('/students/professorInfo/list', { params: { year: getYear() } })
     .then(res => {
       dispatch(storeProfessors(res.data))
       dispatch(setStatus(FETCHING_STATUS.DONE))
