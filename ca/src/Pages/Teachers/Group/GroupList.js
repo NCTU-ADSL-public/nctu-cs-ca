@@ -399,6 +399,7 @@ class GroupList extends React.Component {
                   parentFunction={this.triggerUpdate}
                   chipOpen={this.state.chipOpen}
                   handleChip={this.handleChip}
+                  sem={this.state.semVal}
                   handleRequestClose={this.handleRequestClose}
                 />
               ))
@@ -469,7 +470,7 @@ const GroupButton = (props) => (
                       {p.replace_pro===1?
                         <ChangeTeacherConfirm
                           research = {props.item}
-                          sem = {this.state.semVal}
+                          sem = {props.sem}
                           student_id={p.student_id}/>
                         :<InfoCard
                         key={i}
