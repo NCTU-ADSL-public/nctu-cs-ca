@@ -95,7 +95,6 @@ class SendProjectAgree extends React.Component {
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handdlePanelChange = this.handdlePanelChange.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
-    this.getApplyFailReason = this.getApplyFailReason.bind(this)
   }
 
   handleDialogOpen () {
