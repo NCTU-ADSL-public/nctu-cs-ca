@@ -30,7 +30,7 @@ class Index extends React.Component {
             className='col-md-6'
             style={{ fontSize: '12px', width: '80px' }}
             color='inherit'
-            onClick={this.handleClick(0)}
+            onClick={() => this.handleClick(0)}
            >
             不同意
           </Button>
@@ -38,7 +38,7 @@ class Index extends React.Component {
             className='col-md-6'
             style={{ fontSize: '12px', width: '80px' }}
             color='inherit'
-            onClick={this.handleClick(1)}
+            onClick={() => this.handleClick(1)}
            >
             同意
           </Button>
