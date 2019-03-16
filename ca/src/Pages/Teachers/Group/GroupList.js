@@ -205,7 +205,7 @@ class GroupList extends React.Component {
 
   fetchData (sem) {
     this.setState({loading: true})
-    // this.setState({groupList: []})
+    this.setState({groupList: []})
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
     // let _this = this
@@ -387,7 +387,7 @@ class GroupList extends React.Component {
             left={40}
             top={100}
             isLoading={this.state.loading} />
-            {this.state.loading && this.state.groupList.length !== 0
+            {!this.state.loading && this.state.groupList.length !== 0
               ? this.state.groupList.map((item, i) => (
                 <GroupButton
                   key={i}
@@ -450,9 +450,7 @@ const GroupButton = (props) => (
 
                   <Chip className='group-chip'
                         key={i}
-                        onClick={() => props.handleChip(props.key + p.student_id)}
-                        // backgroundColor={}
-                    >
+                        onClick={() => props.handleChip(props.key + p.student_id)}>
                     <Avatar src={defaultPic}/> {p.student_id} {p.sname}
                     <span style={{color: 'red'}}>  {p.score}</span>
                   </Chip>
