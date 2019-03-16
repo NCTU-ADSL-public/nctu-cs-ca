@@ -206,7 +206,7 @@ class GroupList extends React.Component {
 
   fetchData (sem) {
     this.setState({loading: true})
-    this.setState({groupList: []})
+    // this.setState({groupList: []})
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
     // let _this = this
