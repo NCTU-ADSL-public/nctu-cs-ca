@@ -374,11 +374,6 @@ class SendProjectAgree extends React.Component {
                               placeholder='專題一 or 專題二'
                               className='project-member-input-rwd'
                               style={{margin: '10px 0 0 15px', width: '100%'}}
-                              startAdornment={
-                                <InputAdornment position='start'>
-                                  <PermIcon />
-                                </InputAdornment>
-                              }
                               InputProps={{
                                 startAdornment: <InputAdornment position='start'>
                                   <PermIcon />
