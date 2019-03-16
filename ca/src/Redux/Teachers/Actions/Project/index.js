@@ -1,5 +1,5 @@
-import { createAction } from 'redux-actions'
-import axios from 'axios/index'
+// import { createAction } from 'redux-actions'
+import axios from 'axios'
 
 export const ChangeTeacher = (payload) => dispatch => {
   axios.post('/professors/research/setReplace', payload)
