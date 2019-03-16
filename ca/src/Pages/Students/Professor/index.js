@@ -16,7 +16,6 @@ class Index extends React.Component {
   render () {
     const { data, mentor, filter } = this.props.professors
     const professors = getFiltered(data, mentor, filter)
-
     return (
       <div className='container'>
         <div className='row'>
