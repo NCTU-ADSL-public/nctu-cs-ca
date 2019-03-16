@@ -72,7 +72,7 @@ class MoveGroupButton extends React.Component {
   }
 
   fetchTarget () {
-    axios.post('/students/graduate/legalTargetGroup', {
+    axios.post('/students/graduate/legalMoveTarget', {
       cn: this.props.item.cn, // 中文課名
       code: this.props.item.code, // 課號
       type: this.props.item.type,
@@ -110,7 +110,7 @@ class MoveGroupButton extends React.Component {
     console.log('this.props.title: ' + title)
     console.log(studentIdcard)
 
-    axios.post('/students/graduate/switchCourse', {
+    axios.post('/students/graduate/moveCourse', {
       cn: cn, // 中文課名
       student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id,
       origin_group: title,
@@ -142,7 +142,7 @@ class MoveGroupButton extends React.Component {
 
   extraPostGradChange () {
     let studentIdcard = this.props.studentIdcard
-    axios.post('/students/graduate/graduateChange/graduateList', {
+    axios.post('/students/graduate/summaryList', {
       student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id
     })
   }

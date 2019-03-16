@@ -11,7 +11,6 @@ import TeacherCourse from './Pages/Teachers/Course'
 import TeacherFamily from './Pages/Teachers/Family'
 import TeacherVerify from './Pages/Teachers/Verify'
 
-import Head from './Pages/Students/Head'
 import AssistantHead from './Pages/Assistants/Head'
 import AssistantHome from './Pages/Assistants/Home'
 import AssistantGrad from './Pages/Assistants/Graduation'
@@ -24,17 +23,17 @@ import StudentVerify from './Components/StudentVerify'
 import StudentList from './Pages/Assistants/Family/StudentList'
 import TeacherList from './Pages/Assistants/Family'
 
-import StudentHome from './Pages/Students/Home/Home'
+import StudentHead from './Pages/Students/Head'
+import StudentHome from './Pages/Students/Home'
 import StudentGrad from './Pages/Students/Graduation'
-
-import StudentCredit from './Pages/Students/Credit'
-// import StudentCreditApply from './Pages/Students/Credit/Stepper'
-
 import StudentMap from './Pages/Students/Map_v2'
 // import StudentMap from './Pages/Students/Map_v3'
 import StudentRecommend from './Pages/Students/Recommend'
+import StudentProfessor from './Pages/Students/Professor'
 import StudentProject from './Pages/Students/Project'
-import StudentProfessor from './Pages/Students/Mentor'
+import StudentCredit from './Pages/Students/Credit'
+// import StudentCreditApply from './Pages/Students/Credit/Stepper'
+
 import Footer from './Components/Footer'
 import Snow from 'react-snow-effect'
 
@@ -60,7 +59,7 @@ const Router = () => (
       <Route path='/' component={Snow} />
 
       <Route path='/assistants' component={AssistantHead} />
-      <Route path='/students' component={Head} />
+      <Route path='/students' component={StudentHead} />
       <Route path='/teachers' component={TeacherHead} />
       <Switch>
         <Route exact path='/' component={Login} />
@@ -68,11 +67,11 @@ const Router = () => (
         <Route exact path='/students/head/' render={() => <StudentHome />} />
         <Route exact path='/students/grad' render={() => <StudentGrad />} />
         <Route exact path='/students/map' render={() => <StudentMap />} />
+        <Route exact path='/students/recommend' render={() => <StudentRecommend />} />
         <Route exact path='/students/professor' render={() => <StudentProfessor />} />
         <Route exact path='/students/project' render={() => <StudentProject />} />
         <Route exact path='/students/credit' render={() => <StudentCredit />} />
         {/* <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} /> */}
-        <Route exact path='/students/recommend' render={() => <StudentRecommend />} />
 
         <Route exact path='/teachers/head' component={TeacherHome} />
         <Route exact path='/teachers/group' component={TeacherGroup} />

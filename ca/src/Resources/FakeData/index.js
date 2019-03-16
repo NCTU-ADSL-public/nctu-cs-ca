@@ -5,7 +5,8 @@ import CoursePass from './CoursePass.json'
 import PrintData from './PrintData.json'
 import StudentList from './StudentList.json'
 import MailList from './MailList.json'
-import ProjectNum from './ProjectNum.json'
+import Project from './Project.json'
+import ProfessorList from './ProfessorList.json'
 import StudentProject from './StudentProject.json'
 import StudentScore from './StudentScore.json'
 import TeacherList from './TeacherList.json'
@@ -14,6 +15,7 @@ import FormList from './FormList.json'
 import RecommendCos from './RecommendCos.json'
 import RecommendHot from './RecommendHot.json'
 import Credit from './Credit.json'
+import ProfessorProject from './ProfessorProject.json'
 
 export default {
   GraduationItems,
@@ -23,7 +25,8 @@ export default {
   PrintData,
   StudentList,
   MailList,
-  ProjectNum,
+  Project,
+  ProfessorList,
   StudentProject,
   StudentScore,
   TeacherList,
@@ -31,5 +34,6 @@ export default {
   FormList,
   RecommendCos,
   RecommendHot,
-  Credit
+  Credit,
+  ProfessorProject
 }

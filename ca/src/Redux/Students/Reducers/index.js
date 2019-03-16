@@ -5,6 +5,7 @@ import Project from './Project'
 import Map from './Map'
 import Graduation from './Graduation'
 import Credit from './Credit'
+import Recommend from './Recommend'
 
 export default combineReducers({
   User,
@@ -12,5 +13,6 @@ export default combineReducers({
   Map,
   Graduation,
   Project,
-  Credit
+  Credit,
+  Recommend
 })

@@ -1,59 +1,24 @@
 
 import { createAction } from 'redux-actions'
 import axios from 'axios'
+// import FakeData from '../../../../Resources/FakeData'
 
 export const storeProjects = createAction('STORE_PROJECTS')
 export const storeProjectImage = createAction('STORE_PROJECT_IMAGE')
 export const storeProjectFile = createAction('STORE_PROJECT_FILE')
 export const storeProjectIntro = createAction('STORE_PROJECT_INTRO')
 
-let FakeData = [
-  {
-    'student_id': '0416008',
-    'semester': '106-2',
-    'sname': '王冠升',
-    'research_title': '虛擬貨幣交易機器人',
-    'tname': '彭文志',
-    'agree': '1',
-    'first_second': '1',
-    'phone': 'sds',
-    'email': 'danny021406.cs04@nctu.edu.tw'
-  },
-  {
-    'student_id': '0416008',
-    'sname': '王冠升',
-    'research_title': '0416008',
-    'semester': '106-2',
-    'tname': '彭文志',
-    'agree': '2',
-    'first_second': '1',
-    'phone': 'sds',
-    'email': 'danny021406.cs04@nctu.edu.tw'
-  },
-  {
-    'student_id': '0416008',
-    'sname': '王冠升',
-    'research_title': '04160ff08',
-    'semester': '106-2',
-    'tname': '彭文志',
-    'agree': '3',
-    'first_second': '1',
-    'phone': 'sds',
-    'email': 'danny021406.cs04@nctu.edu.tw'
-  }
-]
-
 export const fetchProjects = (page = 1) => dispatch => {
-  axios.get('/students/projectPage')
+  axios.get('/students/research/list')
     .then(res => dispatch(storeProjects(res.data)))
     .catch(error => {
       console.log(error)
-      dispatch(storeProjects(FakeData))
+      // dispatch(storeProjects(FakeData.Project))
     })
 }
 
 export const deleteProject = (payload) => dispatch => {
-  axios.post('/students/projectDelete', payload)
+  axios.post('/students/research/delete', payload)
     .then(res => {
       window.location.reload()
     })
@@ -64,7 +29,7 @@ export const deleteProject = (payload) => dispatch => {
 }
 
 export const editProject = (payload) => dispatch => {
-  axios.post('/students/editProject', payload)
+  axios.post('/students/research/edit', payload)
     .then(res => {
       dispatch(storeProjectsIntro(payload.new_intro, payload.new_title, payload.semester))
     })
