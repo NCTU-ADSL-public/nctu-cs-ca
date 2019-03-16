@@ -49,6 +49,7 @@
 }
 .project-member-input{
     margin: 20px 2px 0 1px;
+    padding-bottom: -5px;
     width: 100%;
 }
 .project-member-input-select{
@@ -59,8 +60,8 @@
 }
 .project-member-input-rwd{
     margin: 10px 15px 0 15px;
-    zoom: 110%;
-    width: 100%;
+    zoom: 100%;
+    width: 80%;
 }
 .dialog-content-height{
     height: 600px;

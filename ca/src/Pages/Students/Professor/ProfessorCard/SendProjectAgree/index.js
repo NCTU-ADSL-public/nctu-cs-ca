@@ -21,6 +21,7 @@ import MemberIcon from '@material-ui/icons/Accessibility'
 import EmailIcon from '@material-ui/icons/Email'
 import TocIcon from '@material-ui/icons/Toc'
 import Snackbar from '@material-ui/core/Snackbar'
+import Divider from '@material-ui/core/Divider'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -31,7 +32,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Grow from '@material-ui/core/Grow'
-import axios from 'axios/index'
+import TextField from '@material-ui/core/TextField'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
 import { getSemester } from '../../../../../Utilities'
 import { sendProjectAgree } from '../../../../../Redux/Students/Actions/Professor'
@@ -80,7 +81,7 @@ class SendProjectAgree extends React.Component {
           id: this.props.studentIdcard.student_id + '（自己）',
           phone: '',
           email: '',
-          first_second: 1
+          first_second: 0
         }
       ],
       memberNumber: [1]
@@ -145,7 +146,7 @@ class SendProjectAgree extends React.Component {
     }
     this.setState({
       memberNumber: [...this.state.memberNumber, newNumber],
-      members: [...this.state.members, { id: '', phone: '', email: '' }]
+      members: [...this.state.members, { id: '', phone: '', email: '', first_second: 0 }]
     })
   }
 
@@ -246,7 +247,7 @@ class SendProjectAgree extends React.Component {
                 this.state.memberNumber.map(t => (
                   <Grow in key={t}>
                     <div className='row'>
-                      <div className='col-sm-3 col-md-4 col-lg-4'>
+                      <div className='col-sm-3 col-md-12'>
                         <Input
                           placeholder='學號'
                           className='project-member-input'
@@ -260,7 +261,7 @@ class SendProjectAgree extends React.Component {
                           onChange={(e) => this.handleInputChange(e.target.value, 'id', t - 1)}
                         />
                       </div>
-                      <div className='col-sm-3 col-md-4 col-lg-4'>
+                      <div className='col-sm-3 col-md-4'>
                         <Input
                           placeholder='電話'
                           className='project-member-input'
@@ -273,7 +274,7 @@ class SendProjectAgree extends React.Component {
                           onChange={(e) => this.handleInputChange(e.target.value, 'phone', t - 1)}
                         />
                       </div>
-                      <div className='col-sm-6 col-md-4 col-lg-4'>
+                      <div className='col-sm-6 col-md-4'>
                         <Input
                           placeholder='Email'
                           className='project-member-input'
@@ -286,19 +287,23 @@ class SendProjectAgree extends React.Component {
                           onChange={(e) => this.handleInputChange(e.target.value, 'email', t - 1)}
                         />
                       </div>
-                      <div className='col-sm-6 col-md-4 col-lg-4'>
-                        <Input
-                          placeholder='專題一 or 專題二'
-                          className='project-member-input'
-                          type='number'
-                          startAdornment={
-                            <InputAdornment position='start'>
+                      <div className='col-sm-6 col-md-4'>
+                        <TextField
+                          // className='project-member-input'
+                          style={{margin: '20px 10px 0 1px', width: '100%'}}
+                          InputProps={{
+                            startAdornment: <InputAdornment position='start'>
                               <PermIcon />
                             </InputAdornment>
-                          }
+                          }}
+                          select
                           value={members[t - 1].first_second}
                           onChange={(e) => this.handleInputChange(e.target.value, 'first_second', t - 1)}
-                        />
+                        >
+                          <MenuItem value={0} style={{width: '100%'}}>請選擇專題(ㄧ)或(二)</MenuItem>
+                          <MenuItem value={1} style={{width: '100%'}}>專題（ㄧ）</MenuItem>
+                          <MenuItem value={2} style={{width: '100%'}}>專題（二）</MenuItem>
+                        </TextField>
                       </div>
                     </div>
                   </Grow>
@@ -365,19 +370,28 @@ class SendProjectAgree extends React.Component {
                             />
                           </div>
                           <div className='row'>
-                            <Input
+                            <TextField
                               placeholder='專題一 or 專題二'
                               className='project-member-input-rwd'
-                              fullWidth
-                              type='number'
+                              style={{margin: '10px 0 0 15px', width: '100%'}}
                               startAdornment={
                                 <InputAdornment position='start'>
                                   <PermIcon />
                                 </InputAdornment>
                               }
+                              InputProps={{
+                                startAdornment: <InputAdornment position='start'>
+                                  <PermIcon />
+                                </InputAdornment>
+                              }}
+                              select
                               value={members[t - 1].first_second}
                               onChange={(e) => this.handleInputChange(e.target.value, 'first_second', t - 1)}
-                            />
+                            >
+                              <MenuItem value={0} style={{width: '100%'}}>請選擇專題(ㄧ)或(二)</MenuItem>
+                              <MenuItem value={1} style={{width: '100%'}}>專題（ㄧ）</MenuItem>
+                              <MenuItem value={2} style={{width: '100%'}}>專題（二）</MenuItem>
+                            </TextField>
                           </div>
                         </div>
                       </ExpansionPanelDetails>
