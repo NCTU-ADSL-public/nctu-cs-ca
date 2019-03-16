@@ -1,7 +1,7 @@
 
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-// import FakeData from '../../../../Resources/FakeData'
+import FakeData from '../../../../Resources/FakeData'
 import { FETCHING_STATUS } from '../../../../Utilities/constant'
 import { getYear } from '../../../../Utilities/'
 import { getSemester } from '../../../../Utilities'
@@ -23,7 +23,7 @@ export const fetchProfessors = () => dispatch => {
     })
     .catch(error => {
       console.log(error)
-      // dispatch(storeProfessors(FakeData.ProfessorList))
+      dispatch(storeProfessors(FakeData.ProfessorList))
       // dispatch(setStatus(FETCHING_STATUS.DONE))
     })
 
@@ -73,7 +73,7 @@ export const sendProjectAgree = (payload) => dispatch => {
   let first_second = []
   // 把成員資料放進payload的欄位
   payload.members.forEach((member, index) => {
-    if (!member.id || !member.phone || !member.email) {
+    if (!member.id || !member.phone || !member.email || !member.first_second) {
       window.alert('請填寫完整資訊')
       return
     }

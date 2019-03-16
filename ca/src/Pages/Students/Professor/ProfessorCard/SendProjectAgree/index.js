@@ -123,7 +123,7 @@ class SendProjectAgree extends React.Component {
     }
 
     let payload = {
-      menbers: this.state.members,
+      members: this.state.members,
       student_id: this.props.studentIdcard.student_id,
       semester: getSemester(),
       tname: _this.props.profile.tname,
