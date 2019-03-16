@@ -5,7 +5,12 @@ import { ChangeTeacher } from '../../../../Redux/Teachers/Actions/Project'
 import Button from '@material-ui/core/Button'
 
 class Index extends React.Component {
-  handleClick = (agree) =>{
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick (agree) {
     let payload = {
       student_id: this.props.student_id,
       semester: this.props.sem,
