@@ -13,6 +13,7 @@ import InfoCard from '../Shared/InfoCard'
 import Loading from '../../../Components/Loading'
 import ChangeTitleDialog from './ChangeTitleDialog'
 import ScoreDialog from './ScoreDialog'
+import ChangeTeacherConfirm from './ChangeTeacherConfirm'
 
 // mui
 import Avatar from 'material-ui/Avatar'
@@ -450,7 +451,8 @@ const GroupButton = (props) => (
 
                   <Chip className='group-chip'
                         key={i}
-                        onClick={() => props.handleChip(props.key + p.student_id)}>
+                        onClick={() => props.handleChip(props.key + p.student_id, p.replace_pro)}
+                        backgroundColor={p.replace_pro===1?'red':''}>
                     <Avatar src={defaultPic}/> {p.student_id} {p.sname}
                     <span style={{color: 'red'}}>  {p.score}</span>
                   </Chip>
@@ -464,12 +466,17 @@ const GroupButton = (props) => (
                       autoScrollBodyContent
                       contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
                     >
-                      <InfoCard
+                      {p.replace_pro===1?
+                        <ChangeTeacherConfirm
+                          research = {props.item}
+                          sem = {this.state.semVal}
+                          student_id={p.student_id}/>
+                        :<InfoCard
                         key={i}
                         student={p}
                         sender={props.idCard.tname}
                         sender_email={props.idCard.email}
-                      />
+                      />}
                     </Dialog>
                   </MuiThemeProvider>
 
