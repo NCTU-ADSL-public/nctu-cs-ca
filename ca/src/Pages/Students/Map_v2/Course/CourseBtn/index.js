@@ -170,10 +170,10 @@ class Todo extends React.Component {
   }
 
   componentWillMount () {
-    this.initial()
-    this.setState({
-      searchCourse: searchCourse
-    })
+    // this.initial()
+    // this.setState({
+    //   searchCourse: searchCourse
+    // })
   }
 
   initial () {
@@ -196,40 +196,40 @@ class Todo extends React.Component {
   }
 
   handleOpen () {
-    let _this = this
-
-    axios.post('/students/courseMap/courseInfo', {
-      cos_cname: _this.props.cos_cname
-    })
-      .then(res => {
-        this.setState({ coursedata: res.data, isDone: true })
-        let id = 0
-        let searchCourse = []
-        res.data.forEach(data => {
-          for (let i = 0; i < data.time.length; i++) {
-            id++
-            searchCourse.push({
-              id: id,
-              teacher: data.name,
-              code: data.codes[i],
-              stuLimit: data.stuLimit[i],
-              stuNum: data.stuNum[i],
-              photo: data.photo,
-              english: data.english[i],
-              info: '敬請期待'
-            })
-          }
-        })
-
-        _this.setState({
-          searchCourse: searchCourse,
-          isDone: true
-        })
-      })
-      .catch(err => {
-        // window.location.replace("/logout ");
-        console.log(err)
-      })
+    // let _this = this
+    //
+    // axios.post('/students/courseMap/courseInfo', {
+    //   cos_cname: _this.props.cos_cname
+    // })
+    //   .then(res => {
+    //     this.setState({ coursedata: res.data, isDone: true })
+    //     let id = 0
+    //     let searchCourse = []
+    //     res.data.forEach(data => {
+    //       for (let i = 0; i < data.time.length; i++) {
+    //         id++
+    //         searchCourse.push({
+    //           id: id,
+    //           teacher: data.name,
+    //           code: data.codes[i],
+    //           stuLimit: data.stuLimit[i],
+    //           stuNum: data.stuNum[i],
+    //           photo: data.photo,
+    //           english: data.english[i],
+    //           info: '敬請期待'
+    //         })
+    //       }
+    //     })
+    //
+    //     _this.setState({
+    //       searchCourse: searchCourse,
+    //       isDone: true
+    //     })
+    //   })
+    //   .catch(err => {
+    //     // window.location.replace("/logout ");
+    //     console.log(err)
+    //   })
     this.setState({ open: true })
   }
 
@@ -260,53 +260,54 @@ class Todo extends React.Component {
   getinfo () {
     return (
       <div style={{ marginTop: '20px' }}>
-        <div style={{ float: 'left' }}>授課教授:&nbsp;&nbsp;&nbsp;
-          {this.state.searchCourse[this.state.value].teacher.split(' ').map((name, index) =>
+        敬啟期待
+        {/*<div style={{ float: 'left' }}>授課教授:&nbsp;&nbsp;&nbsp;*/}
+          {/*{this.state.searchCourse[this.state.value].teacher.split(' ').map((name, index) =>*/}
 
-          <MuiThemeProvider key={index}>
-              <Chip
-              labelStyle={fontStyle}
-              style={{
-                margin: 4,
-                float: 'right'
-              }}
-            >
-              <Avatar src={this.state.searchCourse[this.state.value].photo === null ? '' : this.state.searchCourse[this.state.value].photo} />
-              {name}
-            </Chip>
-            </MuiThemeProvider>
-        )}
-        </div>
-        <br />
-        <br />
-        <br />
-        <div style={{ clear: 'left' }}>課號: &nbsp;{this.state.searchCourse[this.state.value].code}</div>
-        <br />
-        <div style={{ float: 'left' }}>
-          時間:&nbsp;&nbsp;&nbsp;
-          <MuiThemeProvider>
-            <SelectField
-              value={this.state.value + 1}
-              onChange={this.handleChange}
-              style={{ float: 'right', marginTop: '-15px', width: '500px' }}
-              maxHeight={200}
-              labelStyle={fontStyle}
-              selectedMenuItemStyle={{ color: '#26A69A' }}
-            >
-              {this.getMenuItem()}
-            </SelectField>
-          </MuiThemeProvider>
-        </div>
-        <br />
-        <div style={{ clear: 'left' }}>學生上限: &nbsp;{this.state.searchCourse[this.state.value].stuLimit}</div>
-        <br />
-        <div>學生人數: &nbsp;{this.state.searchCourse[this.state.value].stuNum}</div>
-        <br />
-        <div>英文授課: &nbsp;{this.state.searchCourse[this.state.value].english}</div>
-        <br />
-        <div>簡介: &nbsp;{this.state.searchCourse[this.state.value].info}</div>
-        <br />
-        <div />
+          {/*<MuiThemeProvider key={index}>*/}
+              {/*<Chip*/}
+              {/*labelStyle={fontStyle}*/}
+              {/*style={{*/}
+                {/*margin: 4,*/}
+                {/*float: 'right'*/}
+              {/*}}*/}
+            {/*>*/}
+              {/*<Avatar src={this.state.searchCourse[this.state.value].photo === null ? '' : this.state.searchCourse[this.state.value].photo} />*/}
+              {/*{name}*/}
+            {/*</Chip>*/}
+            {/*</MuiThemeProvider>*/}
+        {/*)}*/}
+        {/*</div>*/}
+        {/*<br />*/}
+        {/*<br />*/}
+        {/*<br />*/}
+        {/*<div style={{ clear: 'left' }}>課號: &nbsp;{this.state.searchCourse[this.state.value].code}</div>*/}
+        {/*<br />*/}
+        {/*<div style={{ float: 'left' }}>*/}
+          {/*時間:&nbsp;&nbsp;&nbsp;*/}
+          {/*<MuiThemeProvider>*/}
+            {/*<SelectField*/}
+              {/*value={this.state.value + 1}*/}
+              {/*onChange={this.handleChange}*/}
+              {/*style={{ float: 'right', marginTop: '-15px', width: '500px' }}*/}
+              {/*maxHeight={200}*/}
+              {/*labelStyle={fontStyle}*/}
+              {/*selectedMenuItemStyle={{ color: '#26A69A' }}*/}
+            {/*>*/}
+              {/*{this.getMenuItem()}*/}
+            {/*</SelectField>*/}
+          {/*</MuiThemeProvider>*/}
+        {/*</div>*/}
+        {/*<br />*/}
+        {/*<div style={{ clear: 'left' }}>學生上限: &nbsp;{this.state.searchCourse[this.state.value].stuLimit}</div>*/}
+        {/*<br />*/}
+        {/*<div>學生人數: &nbsp;{this.state.searchCourse[this.state.value].stuNum}</div>*/}
+        {/*<br />*/}
+        {/*<div>英文授課: &nbsp;{this.state.searchCourse[this.state.value].english}</div>*/}
+        {/*<br />*/}
+        {/*<div>簡介: &nbsp;{this.state.searchCourse[this.state.value].info}</div>*/}
+        {/*<br />*/}
+        {/*<div />*/}
       </div>
     )
   }
@@ -366,8 +367,8 @@ class Todo extends React.Component {
               </Toolbar>
             </AppBar>
           </DialogTitle>
-          <DialogContent>
-            {(this.props.cos_cname.match('化學') || this.props.cos_cname.match('生物') || this.props.cos_cname.match('物理') || this.props.cos_cname.match('微積分')) ? '暫無簡介' : this.state.isDone ? this.getinfo() : <Loading className={classes.progress} /> }
+          <DialogContent style={{height: '200px', textAlign: 'center', padding: '50px', fontSize: '20px'}}>
+            敬請期待
           </DialogContent>
         </Dialog>
       </div>
