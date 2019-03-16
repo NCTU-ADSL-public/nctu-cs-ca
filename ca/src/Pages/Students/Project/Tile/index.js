@@ -18,7 +18,6 @@ import Edit from '../Edit'
 import img from '../Image/1.jpg'
 import img2 from '../Image/2.jpg'
 import img3 from '../Image/rejection.jpg'
-import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 import {
   storeProjectsImage,
   storeProjectsFile,

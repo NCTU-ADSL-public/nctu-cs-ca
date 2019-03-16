@@ -1,5 +1,4 @@
 import React from 'react'
-import { fetchUser } from '../../../../Redux/Teachers/Actions/User'
 import { connect } from 'react-redux'
 import { ChangeTeacher } from '../../../../Redux/Teachers/Actions/Project'
 import Button from '@material-ui/core/Button'

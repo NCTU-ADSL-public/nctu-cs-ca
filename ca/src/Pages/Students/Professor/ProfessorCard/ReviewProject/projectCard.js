@@ -93,12 +93,12 @@ class ProjectCard extends React.Component {
               </Avatar>
             }
             title={this.props.data.research_title}
-            subheader={'年度：' + this.props.data.year}
+            subheader={'學期：' + this.props.data.semester}
           />
           <CardMedia
             className={classes.media}
             image={this.state.image}
-            title='ㄏ ㄏ'
+            title=''
           />
           <CardActions className={classes.actions} disableActionSpacing>
             <div className={classes.expand}>
