@@ -451,7 +451,8 @@ const GroupButton = (props) => (
                   <Chip className='group-chip'
                         key={i}
                         onClick={() => props.handleChip(props.key + p.student_id)}
-                        backgroundColor={}>
+                        // backgroundColor={}
+                    >
                     <Avatar src={defaultPic}/> {p.student_id} {p.sname}
                     <span style={{color: 'red'}}>  {p.score}</span>
                   </Chip>
