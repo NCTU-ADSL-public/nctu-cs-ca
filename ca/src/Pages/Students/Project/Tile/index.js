@@ -18,6 +18,7 @@ import Edit from '../Edit'
 import img from '../Image/1.jpg'
 import img2 from '../Image/2.jpg'
 import img3 from '../Image/rejection.jpg'
+import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 import {
   storeProjectsImage,
   storeProjectsFile,
@@ -57,6 +58,9 @@ const styles = {
     cursor: 'pointer',
     animationDuration: '1.5s',
     animationIterationCount: '1'
+  },
+  button: {
+    margin: '3px'
   }
 }
 
@@ -163,7 +167,7 @@ class Tile extends React.Component {
         <GridTile
           cols={1}
           rows={1}
-          title={data.research_title}
+          title={data.research_title + (data.replace_pro === 1 ? '(申請更換專題中)' : '')}
           titleStyle={styles.titleStyle}
           titleBackground='linear-gradient(to top, rgba(62,39,35,0.7) 70%, rgba(62,39,35,0.3) 80%, rgba(62,39,35,0) 100%)'
           style={rwd ? styles.gridStyleRwd : styles.gridStyle}
@@ -188,7 +192,7 @@ class Tile extends React.Component {
                 <CloseIcon />
               </IconButton>
               <Typography variant='title' color='inherit' className={classes.flex}>
-                { data.research_title }
+                { data.research_title } {data.replace_pro === 1 ? '(申請更換專題中)' : ''}
               </Typography>
               {
                 isAgreed

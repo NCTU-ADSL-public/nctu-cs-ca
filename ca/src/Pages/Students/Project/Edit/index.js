@@ -10,15 +10,22 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles/index'
 import firebase from 'firebase'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItemText from '@material-ui/core/ListItemText'
 import Form from '../Form'
 import {
   editProject,
   storeProjectsImage,
   storeProjectsFile,
-  storeProjectsIntro
+  storeProjectsIntro,
+  changeProjectProfessor
 } from '../../../../Redux/Students/Actions/Project'
 
 let storageRef = firebase.storage().ref()
+const ITEM_HEIGHT = 48
 
 const styles = {
   appBar: {
@@ -45,15 +52,37 @@ class Edit extends React.Component {
     this.handleDialogOpen = this.handleDialogOpen.bind(this)
     this.handleDialogClose = this.handleDialogClose.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangeProfessor = this.handleChangeProfessor.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.state = {
       open: false,
       image: '',
       file: '',
       new_title: this.props.project.research_title, // 學生不能改題目
-      new_intro: ''
+      new_intro: '',
+      anchorEl: null
     }
     this.imageRef = React.createRef()
     this.fileRef = React.createRef()
+  }
+
+  handleChangeProfessor () {
+    let id = this.props.studentProfile.student_id
+    let replacePro = (this.props.project.replace_pro === 1 ? 0 : 1)
+    if (replacePro && window.confirm('按確定以傳送通知給老師，如老師同意更換專題將可以重新申請專題。')) {
+      this.props.changeProjectProfessor(id)
+    }
+    if (!replacePro && window.confirm('按確定以收回專題更換申請。')) {
+      this.props.changeProjectProfessor(id)
+    }
+  }
+  handleClick (event) {
+    this.setState({ anchorEl: event.currentTarget })
+  }
+
+  handleClose () {
+    this.setState({ anchorEl: null })
   }
 
   handleDialogOpen () {
@@ -135,15 +164,55 @@ class Edit extends React.Component {
 
   render () {
     const { fullScreen, classes } = this.props
+    const { anchorEl } = this.state
     return (
       <div>
-        <Button
-          onClick={this.handleDialogOpen}
-          style={{ fontSize: '12px' }}
-          color='inherit'
+        <IconButton
+          aria-label='More'
+          aria-owns={anchorEl ? 'long-menu' : null}
+          aria-haspopup='true'
+          onClick={this.handleClick}
+          style={{color: 'white'}}
         >
-          編輯
-        </Button>
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id='long-menu'
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: 200,
+              fontSize: '20px'
+            }
+          }}
+        >
+          <MenuItem
+            style={{ fontSize: '20px' }}
+            onClick={this.handleChangeProfessor}>
+            <ListItemText inset primary={this.props.project.replace_pro === 1 ? '收回申請更換教授' : '申請更換教授'} />
+          </MenuItem>
+          <MenuItem
+            onClick={this.handleDialogOpen}>
+            <ListItemText style={{ fontSize: '12px' }} inset primary={'編輯'} />
+          </MenuItem>
+          {/*<Button*/}
+            {/*style={{ fontSize: '12px', width: '80px' }}*/}
+            {/*color='inherit'*/}
+            {/*>*/}
+            {/**/}
+          {/*</Button>*/}
+          {/*<Button*/}
+            {/*onClick={this.handleDialogOpen}*/}
+            {/*style={{ fontSize: '12px' }}*/}
+            {/*color='inherit'*/}
+          {/*>*/}
+            {/*編輯*/}
+          {/*</Button>*/}
+        </Menu>
+
         <Dialog
           open={this.state.open}
           onClose={this.handleDialogClose}
@@ -190,7 +259,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   editProject: (payload) => dispatch(editProject(payload)),
   storeImage: (image) => dispatch(storeProjectsImage(image, ownProps.project.research_title, ownProps.project.semester)),
   storeFile: (file) => dispatch(storeProjectsFile(file, ownProps.project.research_title, ownProps.project.semester)),
-  storeIntro: (intro) => dispatch(storeProjectsIntro(intro, ownProps.project.research_title, ownProps.project.semester))
+  storeIntro: (intro) => dispatch(storeProjectsIntro(intro, ownProps.project.research_title, ownProps.project.semester)),
+  changeProjectProfessor: (id, replace_pro) => dispatch(changeProjectProfessor({
+    student_id: id,
+    semester: ownProps.project.semester,
+    research_title: ownProps.project.research_title,
+    replace_pro: ownProps.project.replace_pro === 1 ? 0 : 1
+  }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withMobileDialog()(Edit)))

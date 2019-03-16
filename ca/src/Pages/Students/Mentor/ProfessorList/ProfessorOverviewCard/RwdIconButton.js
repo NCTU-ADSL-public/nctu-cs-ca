@@ -2,7 +2,7 @@ import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import WriteEmail from './WriteEmail'
+// import WriteEmail from './WriteEmail'
 import SendProjectAgree from './SendProjectAgree'
 import ReviewProject from './ReviewProject/index'
 
@@ -51,7 +51,7 @@ class LongMenu extends React.Component {
             }
           }}
         >
-          <WriteEmail rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
+          {/*<WriteEmail rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />*/}
           <SendProjectAgree rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
           <ReviewProject rwd profile={this.props.profile} studentIdcard={this.props.studentIdcard} />
         </Menu>

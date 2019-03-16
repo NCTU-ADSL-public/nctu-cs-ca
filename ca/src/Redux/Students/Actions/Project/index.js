@@ -88,3 +88,12 @@ export const storeProjectsIntro = (intro, researchTitle, semester) => dispatch =
   let object = { intro, researchTitle, semester }
   dispatch(storeProjectIntro(object))
 }
+export const changeProjectProfessor = (payload) => dispatch => {
+  axios.post('/students/research/setReplace', payload)
+    .then(res => {
+    })
+    .catch(err => {
+      window.alert('儲存失敗，請檢察網路連線')
+      console.log(err)
+    })
+}
