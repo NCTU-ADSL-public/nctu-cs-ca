@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input'
 import AddIcon from '@material-ui/icons/Add'
+import PermIcon from '@material-ui/icons/PermIdentity'
 import Remove from '@material-ui/icons/Remove'
 import PhoneIcon from '@material-ui/icons/LocalPhone'
 import MemberIcon from '@material-ui/icons/Accessibility'
@@ -33,6 +34,7 @@ import Grow from '@material-ui/core/Grow'
 import axios from 'axios/index'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
 import { getSemester } from '../../../../../Utilities'
+import { sendProjectAgree } from '../../../../../Redux/Students/Actions/Professor'
 
 const limitcount = 7
 
@@ -77,7 +79,8 @@ class SendProjectAgree extends React.Component {
         {
           id: this.props.studentIdcard.student_id + '（自己）',
           phone: '',
-          email: ''
+          email: '',
+          first_second: 1
         }
       ],
       memberNumber: [1]
@@ -113,81 +116,23 @@ class SendProjectAgree extends React.Component {
 
   handleSubmit () {
     let _this = this
-    let phones = []
-    let emails = []
-    let participants = []
 
     if (!this.state.title) {
       window.alert('請填寫研究主題')
       return
     }
 
-    // 把成員資料放進payload的欄位
-    this.state.members.forEach((member, index) => {
-      if (!member.id || !member.phone || !member.email) {
-        window.alert('請填寫完整資訊')
-        return
-      }
-      if (index === 0) { // 是自己
-        participants.push(this.props.studentIdcard.student_id)
-      } else {
-        participants.push(member.id)
-      }
-      phones.push(member.phone)
-      emails.push(member.email)
-    })
+    let payload = {
+      menbers: this.state.members,
+      student_id: this.props.studentIdcard.student_id,
+      semester: getSemester(),
+      tname: _this.props.profile.tname,
+      teacher_id: _this.props.profile.teacher_id,
+      teacher_email: _this.props.profile.email,
+      research_title: _this.state.title
+    }
 
-    let stateString = []
-    axios.post('/students/project/ShowStudentResearchStatus', {
-      participants: participants
-    })
-      .then(res => {
-        res.data.forEach(data => {
-          if (data.status !== '1' && data.status !== '2' && data.status !== '3') {
-            window.alert(`${data.student_id} 因 ${this.getApplyFailReason(data.status)} 申請失敗`)
-            return
-          }
-          if (data.status === '2') {
-            let r = window.confirm('注意!如果您確定送出表單且教授也同意了，' + data.student_id + '同學將會修改專題二（意同於更改專題）請按確定以繼續')
-            if (!r) return
-          }
-
-          stateString.push(data.status)
-        })
-
-        let r = window.confirm('注意！如果您確定送出表單且教授也同意了，將代表您加簽 專題（一）課程，確定要送出表單嗎?')
-        if (r) {
-          axios.post('/students/research/create', {
-            semester: getSemester(),
-            student_num: participants.length,
-            tname: _this.props.profile.tname,
-            teacher_id: _this.props.profile.teacher_id,
-            teacher_email: _this.props.profile.email,
-            first_second: stateString,
-            research_title: _this.state.title,
-            participants: participants,
-            phones: phones,
-            email: emails
-          })
-            .then(res => {
-              if (res.data.signal === 1) {
-                window.alert('申請成功，等候教授回覆')
-                _this.handleClose()
-              } else {
-                window.alert('申請失敗，請重新送出，如成員中有審核中的專題將不能申請。')
-              }
-            })
-            .catch(err => {
-              // window.location.replace("/logout ");
-              window.alert('送出失敗，請檢查連線是否穩定。')
-              console.log(err)
-            })
-        }
-      })
-      .catch(err => {
-        window.alert('送出失敗，請檢查連線是否穩定。')
-        console.log(err)
-      })
+    this.props.sendProjectAgree(payload)
   }
 
   handleAddMember () {
@@ -234,17 +179,6 @@ class SendProjectAgree extends React.Component {
     let newMembers = [...this.state.members]
     newMembers[index][property] = value
     this.setState({ members: newMembers })
-  }
-
-  getApplyFailReason (str) {
-    switch (str) {
-      case '1': return '專題一'
-      case '2': return '專題二'
-      case '3': return '基礎程式設計成績待審核'
-      case '4': return '重複提交(當學期只能有一個專題/專題申請表)'
-      case '5': return '已修過專1專2'
-      default : return ''
-    }
   }
 
   render () {
@@ -353,6 +287,20 @@ class SendProjectAgree extends React.Component {
                           onChange={(e) => this.handleInputChange(e.target.value, 'email', t - 1)}
                         />
                       </div>
+                      <div className='col-sm-6 col-md-4 col-lg-4'>
+                        <Input
+                          placeholder='專題一 or 專題二'
+                          className='project-member-input'
+                          type='number'
+                          startAdornment={
+                            <InputAdornment position='start'>
+                              <PermIcon />
+                            </InputAdornment>
+                          }
+                          value={members[t - 1].first_second}
+                          onChange={(e) => this.handleInputChange(e.target.value, 'first_second', t - 1)}
+                        />
+                      </div>
                     </div>
                   </Grow>
                 ))
@@ -417,6 +365,21 @@ class SendProjectAgree extends React.Component {
                               onChange={(e) => this.handleInputChange(e.target.value, 'email', t - 1)}
                             />
                           </div>
+                          <div className='row'>
+                            <Input
+                              placeholder='專題一 or 專題二'
+                              className='project-member-input-rwd'
+                              fullWidth
+                              type='number'
+                              startAdornment={
+                                <InputAdornment position='start'>
+                                  <PermIcon />
+                                </InputAdornment>
+                              }
+                              value={members[t - 1].first_second}
+                              onChange={(e) => this.handleInputChange(e.target.value, 'first_second', t - 1)}
+                            />
+                          </div>
                         </div>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -473,4 +436,8 @@ const mapStateToProps = (state) => ({
   researchStatus: state.Student.Professor.research_status
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(withMobileDialog()(SendProjectAgree)))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  sendProjectAgree: (payload) => dispatch(sendProjectAgree(payload))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withMobileDialog()(SendProjectAgree)))
