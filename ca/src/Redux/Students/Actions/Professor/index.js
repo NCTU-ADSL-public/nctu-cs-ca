@@ -88,7 +88,7 @@ export const sendProjectAgree = (payload) => dispatch => {
     first_second.push(member.first_second)
   })
   if (postFlag) {
-    axios.post('/students/project/ShowStudentResearchStatus', {
+    axios.post('/students/research/showStudentStatus', {
       participants: participants
     })
       .then(res => {
