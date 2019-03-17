@@ -41,8 +41,7 @@ class Index extends React.Component {
     super(props)
     this.state = {
       expanded: false,
-      photo: props.data.photo,
-      loading: props.data.photo === undefined
+      loading: true
     }
     this.handleExpandClick = this.handleExpandClick.bind(this)
     this.handleImageDownload = this.handleImageDownload.bind(this)
@@ -69,7 +68,7 @@ class Index extends React.Component {
     let directory = this.props.data.path
     if (!directory) {
       if (this._isMounted) {
-        this.setState({ loading: false, photo: '' })
+        this.setState({ loading: false })
       }
       return
     }
@@ -80,21 +79,21 @@ class Index extends React.Component {
       .then(url => {
         this.props.storeImage(url)
         if (this._isMounted) {
-          this.setState({ loading: false, photo: url })
+          this.setState({ loading: false })
         }
       })
       .catch(error => {
         console.log(error)
-        if (this._isMounted) {
-          this.setState({ loading: false, photo: '' })
-        }
         this.props.storeImage('')
+        if (this._isMounted) {
+          this.setState({ loading: false })
+        }       
       })
   }
 
   render () {
     const { classes } = this.props
-    const photo = this.state.photo ? this.state.photo : pic
+    const photo = this.props.data.photo ? this.props.data.photo : pic
     return (
       <div className='group-btn-student'>
         <div className='row'>
