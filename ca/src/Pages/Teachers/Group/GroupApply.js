@@ -204,8 +204,10 @@ class GroupApply extends React.Component {
   }
 
   fetchData () {
+    if(this.props.idCard.teacher_id === '001')
+      return
     axios.get('/professors/researchApply/list', {
-      id: this.props.idCard.id
+      id: this.props.idCard.teacher_id
     }).then(res => {
       console.log(res.data)
       this.setState({
