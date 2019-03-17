@@ -204,33 +204,36 @@ class GroupApply extends React.Component {
   }
 
   fetchData () {
+    let validId = true
     if(this.props.idCard.teacher_id === '001')
-      return
-    axios.get('/professors/researchApply/list', {
-      id: this.props.idCard.teacher_id
-    }).then(res => {
-      console.log(res.data)
-      this.setState({
-        applyList: res.data,
-        loading: false
+      validId = false
+    if(validId) {
+      axios.get('/professors/researchApply/list', {
+        id: this.props.idCard.teacher_id
+      }).then(res => {
+        console.log(res.data)
+        this.setState({
+          applyList: res.data,
+          loading: false
+        })
+      }).catch(err => {
+        console.log(err)
       })
-    }).catch(err => {
-      console.log(err)
-    })
-    let Today = new Date()
-    let semester = ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
-    axios.post('/professors/research/list', {
-      teacherId: this.props.idCard.teacher_id,
-      sem: semester
-    }).then(res => {
-      this.setState({loading: false})
-      this.setState({
-        current_accept: res.data.current_accept,
+      let Today = new Date()
+      let semester = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
+      axios.post('/professors/research/list', {
+        teacherId: this.props.idCard.teacher_id,
+        sem: semester
+      }).then(res => {
+        this.setState({loading: false})
+        this.setState({
+          current_accept: res.data.current_accept,
+        })
+      }).catch(err => {
+        this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
+        console.log(err)
       })
-    }).catch(err => {
-      this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
-      console.log(err)
-    })
+    }
   }
 
   componentDidMount () {
