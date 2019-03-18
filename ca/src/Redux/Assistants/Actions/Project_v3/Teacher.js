@@ -83,9 +83,9 @@ export const downloadCsv = req => dispatch => {
     let data = res.data
     let csvArr = []
     console.log(data)
-    csvArr.push(['專題名稱', '老師', '姓名', '學號', '成績', '評語'])
+    csvArr.push(['學生學號', '學生姓名', '指導教授', '專題名稱', '專題級數'])
     for (let i = 0; i < data.length; i++) {
-      csvArr.push([data[i].research_title, data[i].tname, data[i].sname, data[i].student_id, data[i].score, data[i].comment])
+      csvArr.push([data[i].student_id, data[i].sname, data[i].tname, data[i].research_title, data[i].first_second])
     }
     console.log(csvArr)
     dispatch(storeScoreCsvData(csvArr))

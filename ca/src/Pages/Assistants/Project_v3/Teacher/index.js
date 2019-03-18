@@ -503,6 +503,7 @@ class index extends React.Component {
 const mapStateToProps = (state) => ({
   teachers: state.Assistant.Project.Teacher.teachers,
   csvData: state.Assistant.Project.Teacher.csvData,
+  start: state.Assistant.Project.Teacher.start,
 })
 
 const mapDispatchToProps = (dispatch) => ({

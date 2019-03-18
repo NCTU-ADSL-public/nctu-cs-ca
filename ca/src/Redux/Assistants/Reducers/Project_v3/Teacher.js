@@ -93,6 +93,7 @@ const initialState = {
     ['Raed', 'Labes', 'rl@smthing.co.com'],
     ['Yezzi', 'Min l3b', 'ymin@cocococo.com']
   ],
+  start: false
 }
 
 export default handleActions({
