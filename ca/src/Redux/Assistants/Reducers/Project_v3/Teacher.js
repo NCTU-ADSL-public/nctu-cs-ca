@@ -87,6 +87,12 @@ const initialState = {
       ]
     }
   }]
+  ,csvData: [
+    ['firstname', 'lastname', 'email'],
+    ['Ahmed', 'Tomi', 'ah@smthing.co.com'],
+    ['Raed', 'Labes', 'rl@smthing.co.com'],
+    ['Yezzi', 'Min l3b', 'ymin@cocococo.com']
+  ],
 }
 
 export default handleActions({
@@ -138,5 +144,16 @@ export default handleActions({
         }))
       }
     }))
-  })
+  }),
+  STORE_SCORE_CSV_DATA: (state, action) => {
+    return ({ ...state,
+      csvData: action.payload,
+      start: false
+    })
+  },
+  STORE_SCORE_CSV_DATA_START: (state, action) => {
+    return ({ ...state,
+      start: true
+    })
+  }
 }, initialState)
