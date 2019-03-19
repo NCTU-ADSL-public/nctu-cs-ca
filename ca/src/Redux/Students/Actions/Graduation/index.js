@@ -46,7 +46,7 @@ export const fetchGraduationCourse = (payload = null) => dispatch => {
 
 export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild) => dispatch => {
   dispatch(fetchStart())
-  axios.get('/assistants/graduate/revised', {
+  axios.get('/assistants/graduate/detail', {
     params: {
       student_id: id,
       professional_field: 2
