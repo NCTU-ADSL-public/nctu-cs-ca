@@ -97,7 +97,7 @@ class Family extends React.Component {
     }
   }
   componentDidMount () {
-    axios.get('/assistants/advisee/TeacherList').then(res => {
+    axios.get('/assistants/advisee/teacherList').then(res => {
       this.setState({teacherList: res.data})
     }).catch(err => {
       console.log(err)

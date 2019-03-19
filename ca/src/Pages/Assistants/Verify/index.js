@@ -244,11 +244,11 @@ class Verify extends React.Component {
   }
   componentDidMount () {
     // get TeacherList for TransferTo
-    axios.get('/assistants/advisee/TeacherList').then(res => {
+    axios.get('/assistants/advisee/teacherList').then(res => {
       this.setState({teacherList: res.data.sort((a, b) => b.status - a.status).map(t => ({id: t.id, name: t.name, status: t.status}))})
     })
     // get all verify items
-    axios.get('/assistants/ShowUserOffsetApplyForm').then(res => {
+    axios.get('/assistants/offsetApply/Show').then(res => {
       this.setState({formList: res.data.map((e, i) => ({...e, id: i})), fetching: false})
     }).catch(err => {
       console.log(err)
@@ -265,7 +265,7 @@ class Verify extends React.Component {
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid, date, email} = this.state.formList[id]
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: [
         {
           sid: sid,
@@ -293,7 +293,7 @@ class Verify extends React.Component {
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid, date, email} = this.state.formList[id]
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: [
         {
           sid: sid,
@@ -321,7 +321,7 @@ class Verify extends React.Component {
     // this.setState({formList:updatedList})
     let updatedList = this.state.formList
     let {sid, date, email} = this.state.formList[id]
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: [
         {
           sid: sid,
@@ -360,7 +360,7 @@ class Verify extends React.Component {
   }
   handleOk () {
     let updatedList = this.state.formList
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           return ({
@@ -388,7 +388,7 @@ class Verify extends React.Component {
   }
   handleWithdraw () {
     let updatedList = this.state.formList
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           return ({
@@ -417,7 +417,7 @@ class Verify extends React.Component {
   handleSend () {
     let updatedList = this.state.formList
     let status = this.state.teacherList.filter(e => e.id === this.state.transferTo)[0].status === 1 ? 1 : 5
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           return ({
@@ -445,7 +445,7 @@ class Verify extends React.Component {
   }
   handleAllReset () {
     let updatedList = this.state.formList
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           return ({
@@ -473,7 +473,7 @@ class Verify extends React.Component {
   }
   handleReturn () {
     let updatedList = this.state.formList
-    axios.post('/assistants/SetOffsetApplyFormAgreeStatus', {
+    axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
         e => {
           return ({
