@@ -30,7 +30,9 @@ import DoneIcon from '@material-ui/icons/Done'
 import Add from '@material-ui/icons/Add'
 import Warning from '@material-ui/icons/Warning'
 import Button from '@material-ui/core/Button'
-import { fetchTeachers, setAddStatus, setFirstSecond, deteleResearch } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
+import { fetchTeachers, setAddStatus, setFirstSecond, deteleResearch, downloadCsv } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
+import { CSVLink } from "react-csv"
 
 const ADD_STATUS_COLOR = [red['A100'], green[300]]
 const STATUS_COLOR_L = [red[100], green[200]]
@@ -98,6 +100,10 @@ const styles = theme => ({
   buttonRemove: {
     fontSize: 20,
     color: 'red'
+  },
+  button: {
+    width: '100%',
+    fontSize: '15px'
   }
 })
 
@@ -127,6 +133,7 @@ class index extends React.Component {
     }
     const { semester, grade } = this.state
     props.fetch_teachers({ semester, grade })
+    props.download_csv({ semester: this.state.semester })
   }
 
   filter = (teachers) => {
@@ -175,6 +182,17 @@ class index extends React.Component {
       console.log(data.post_item)
       console.log(submit_student_object)
     }
+  }
+
+
+  fuck = () => {
+    let data = this.props.csvData
+    if(this.props.start)
+      return ''
+    return <CSVLink
+      data={data}>
+      下載
+    </CSVLink>
   }
 
   render() {
@@ -236,7 +254,7 @@ class index extends React.Component {
               />
             </FormControl>
           </div>
-          <div className='col-md-4 col-lg-4 col-xs-12' >
+          <div className='col-md-3 col-lg-3 col-xs-12' >
             <FormControl style={{ width: '100%' }}>
               <InputLabel
                 FormLabelClasses={{
@@ -259,6 +277,7 @@ class index extends React.Component {
                 onChange={
                   (event) => {
                     fetch_teachers({ semester: event.target.value, grade })
+                    this.props.download_csv({ semester: event.target.value })
                     this.setState({ semester: event.target.value, page: 0 })
                   }
                 }
@@ -271,7 +290,7 @@ class index extends React.Component {
               </Select>
             </FormControl>
           </div>
-          <div className='col-md-4 col-lg-4 col-xs-12' >
+          <div className='col-md-3 col-lg-3 col-xs-12' >
             <FormControl style={{ width: '100%' }}>
               <InputLabel
                 FormLabelClasses={{
@@ -293,6 +312,7 @@ class index extends React.Component {
                 style={{ fontSize: '15px' }}
                 onChange={
                   (event) => {
+                    this.props.download_csv({ semester: event.target.value })
                     fetch_teachers({ grade: event.target.value, semester })
                     this.setState({ grade: event.target.value, page: 0 })
                   }
@@ -302,6 +322,14 @@ class index extends React.Component {
                 {[...Array(9)].map((x, i) => <MenuItem value={"0" + (i + 1)} style={{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
               </Select>
             </FormControl>
+          </div>
+          <div className = 'col-md-2 col-lg-2 col-xs-12' >
+            <Button variant="contained" className={classes.button}
+                    // onClick = { () => download_csv({ semester, first_second})}
+            >
+              <CloudDownloadIcon style = {{ fontSize: '20px' }}/>
+              {this.fuck()}
+            </Button>
           </div>
         </div>
         <div style={{ minHeight: '570px' }} >
@@ -473,14 +501,17 @@ class index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  teachers: state.Assistant.Project.Teacher.teachers
+  teachers: state.Assistant.Project.Teacher.teachers,
+  csvData: state.Assistant.Project.Teacher.csvData,
+  start: state.Assistant.Project.Teacher.start,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetch_teachers: (post_item) => dispatch(fetchTeachers(post_item)),
   set_add_status: (post_item) => dispatch(setAddStatus(post_item)),
   set_first_second: (post_item) => dispatch(setFirstSecond(post_item)),
-  delete_research: (post_item) => dispatch(deteleResearch(post_item))
+  delete_research: (post_item) => dispatch(deteleResearch(post_item)),
+  download_csv: (post_item) => dispatch(downloadCsv(post_item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))
