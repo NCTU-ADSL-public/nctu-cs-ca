@@ -7,7 +7,7 @@ export const update_first_second = createAction('UPDATE_FIRST_SECOND')
 export const delete_research = createAction('DELETE_RESEARCH')
 
 export const fetchTeachers = (post_item) => dispatch => {
-  axios.post('/assistants/project/ProResearchList', post_item).then(res => {
+  axios.post(' /assistants/research/professorList', post_item).then(res => {
     console.log('Fetching')
     console.log('POST_Item')
     console.log(post_item)
@@ -20,7 +20,7 @@ export const fetchTeachers = (post_item) => dispatch => {
 }
 
 export const setAddStatus = (post_item) => dispatch => {
-  axios.post('/assistants/SetAddStatus', post_item).then(res => {
+  axios.post('/assistants/research/setAddStatus', post_item).then(res => {
     console.log('setAddStatus')
     console.log('POST_Item')
     console.log(post_item)
@@ -37,7 +37,7 @@ export const setAddStatus = (post_item) => dispatch => {
 }
 
 export const setFirstSecond = (post_item) => dispatch => {
-  axios.patch('/assistants/SetFirstSecond', post_item).then(res => {
+  axios.patch('/assistants/research/setFirstSecond', post_item).then(res => {
     console.log('setFirstSecond')
     console.log('POST_Item')
     console.log(post_item)
@@ -54,7 +54,7 @@ export const setFirstSecond = (post_item) => dispatch => {
 }
 
 export const deteleResearch = (post_item) => dispatch => {
-  axios.post('/assistants/DeleteResearch', post_item).then(res => {
+  axios.post(' /assistants/research/delete', post_item).then(res => {
     console.log('deleteResearch')
     console.log('post_item')
     console.log(post_item)
