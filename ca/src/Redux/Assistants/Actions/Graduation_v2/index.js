@@ -9,9 +9,9 @@ export const fetach_start = createAction('FETCH_START')
 
 export const triggerUpdateData = () => dispatch => {
   ['四'].forEach(title => {
-    axios.post('/assistants/graduate/gradeStudent', { grade: title }).then(res => {
+    axios.post('/assistants/graduate/gradeStudentId', { grade: title }).then(res => {
       res.data.forEach(student => {
-        axios.get('/assistants/graduate/graduateList', {
+        axios.get('/assistants/graduate/studentListUpdate', {
           params: {
             student_id: student.student_id
           }
@@ -23,10 +23,10 @@ export const triggerUpdateData = () => dispatch => {
 
 export const fetchStudent = grade => dispatch => {
   dispatch(fetach_start())
-  axios.post('/assistants/graduate/graduateStudent', { grade }).then(res => {
+  axios.post('/assistants/graduate/studentList', { grade }).then(res => {
     dispatch(store_student(res.data))
   })
-  axios.post('/assistants/graduate/graduateListDownload', { grade }).then(res => {
+  axios.post('/assistants/graduate/studentListDownload', { grade }).then(res => {
     // let data = res.data
     // let csvArr = []
     // csvArr.push([
