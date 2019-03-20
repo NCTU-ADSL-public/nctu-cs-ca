@@ -79,7 +79,7 @@ export const downloadCsv = req => dispatch => {
   //   csvArr.push([data[i].tname, data[i].sname, data[i].student_id, data[i].score, data[i].comment])
   // }
   dispatch(storeScoreCsvDataStart())
-  axios.post('/assistants/research/studentListDownload', req).then(res => {
+  axios.post('/assistants/research/professorListDownload', req).then(res => {
     let data = res.data
     let csvArr = []
     console.log(data)
