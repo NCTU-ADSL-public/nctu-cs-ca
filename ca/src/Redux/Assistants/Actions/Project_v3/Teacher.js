@@ -10,7 +10,7 @@ export const storeScoreCsvDataStart = createAction('STORE_SCORE_CSV_DATA_START')
 
 
 export const fetchTeachers = (post_item) => dispatch => {
-  axios.post(' /assistants/research/professorList', post_item).then(res => {
+  axios.post('/assistants/research/professorList', post_item).then(res => {
     console.log('Fetching')
     console.log('POST_Item')
     console.log(post_item)
@@ -57,7 +57,7 @@ export const setFirstSecond = (post_item) => dispatch => {
 }
 
 export const deteleResearch = (post_item) => dispatch => {
-  axios.post(' /assistants/research/delete', post_item).then(res => {
+  axios.post('/assistants/research/delete', post_item).then(res => {
     console.log('deleteResearch')
     console.log('post_item')
     console.log(post_item)
@@ -79,7 +79,7 @@ export const downloadCsv = req => dispatch => {
   //   csvArr.push([data[i].tname, data[i].sname, data[i].student_id, data[i].score, data[i].comment])
   // }
   dispatch(storeScoreCsvDataStart())
-  axios.post('/assistants/project/StudentResearchListDownload', req).then(res => {
+  axios.post('/assistants/research/studentListDownload', req).then(res => {
     let data = res.data
     let csvArr = []
     console.log(data)
