@@ -100,7 +100,7 @@ class StudentList extends React.Component {
       //   studentList: tmp,
       //   cardShow: true
       // })
-      axios.post('/StudentGradeList', {
+      axios.post('/assistants/advisee/semesterScoreList', {
         student_id: this.state.studentList[r].student_id
       }).then(res => {
         tmp[r].score = res.data
