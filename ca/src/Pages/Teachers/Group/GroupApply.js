@@ -110,7 +110,7 @@ class GroupApply extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      fuck: '系統正在拚命讀取資料中，請你再拿出多一點耐心等候。',
+      fuck: '系統正在讀取資料中，請耐心等候。',
       current_accept: 0,
       chipOpen: new Map(),
       applyList: [],
@@ -232,6 +232,20 @@ class GroupApply extends React.Component {
       }).catch(err => {
         this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
         console.log(err)
+      })
+    }else{
+      let inter = 250
+      // Magic update
+      setTimeout(
+        () => {
+          console.log('----- fetchData AGAIN!!!! ----')
+          this.fetchData()
+        }, inter)
+      }
+
+      this.setState({
+        fuck: '唉呀，好像有什麼出錯了。',
+        loading: false
       })
     }
   }
