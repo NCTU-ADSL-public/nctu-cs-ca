@@ -56,7 +56,7 @@ class Group extends React.Component {
   }
   render () {
     return (
-      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} style={{marginTop: '-8px'}}>
+      <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex} style={{marginTop: 'calc( 60px - 7vh )'}}>
         <MuiThemeProvider>
         <Tabs
           value={this.state.value}
