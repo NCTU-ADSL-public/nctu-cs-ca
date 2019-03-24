@@ -209,6 +209,15 @@ class GroupList extends React.Component {
     // this.setState({groupList: []})
     console.log('idCard: ' + this.props.idCard.tname)
     console.log('sem: ' + sem)
+
+    if( this.props.idCard.teacher_id === '001' ){
+      setTimeout(
+        () => {
+          console.log('----- fetchData /professors/research/list AGAIN!!!! ----')
+          this.fetchData()
+        }, 500)
+      return
+    }
     // let _this = this
     axios.post('/professors/research/list', {
       teacherId: this.props.idCard.teacher_id,
