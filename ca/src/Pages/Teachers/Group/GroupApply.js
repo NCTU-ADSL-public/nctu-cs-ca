@@ -241,7 +241,6 @@ class GroupApply extends React.Component {
           console.log('----- fetchData AGAIN!!!! ----')
           this.fetchData()
         }, inter)
-      }
 
       this.setState({
         fuck: '唉呀，好像有什麼出錯了。',
