@@ -41,13 +41,14 @@ class TileContent extends React.Component {
   render () {
     const { classes, data } = this.props
     // 太舊的資料是書面申請 所以agree是undefined
-    const isAgreed = (data.agree === '1' || data.agree === undefined)
-    const projectImg = (data.photo !== '' || data.photo === 'loading') ? data.photo : img
+    // const isAgreed = (data.agree === '1' || data.agree === undefined)
+    const isLoading = (data.photo === 'loading')
+    const projectImg = (data.photo !== '') ? data.photo : img
     return (
       <div className='container' style={{ fontSize: '15px', marginTop: '20px' }}>
         <div className='hidden-md hidden-lg'>
           {
-            isAgreed
+            isLoading
               ? <CircularProgress className={classes.progress} />
               : <img src={projectImg} alt='waiting for loading' className='img-responsive' />
           }
@@ -68,7 +69,7 @@ class TileContent extends React.Component {
         <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6' style={{ height: '100px' }} />
         <div className='hidden-xs hidden-sm col-md-6 col-lg-6' style={{ position: 'absolute', right: '0' }}>
           {
-            isAgreed
+            isLoading
               ? <CircularProgress className={classes.progress} />
               : <img src={projectImg} alt='waiting for loading' className='img-responsive' />
           }
