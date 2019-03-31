@@ -20,7 +20,6 @@ import {
   editProject,
   storeProjectsImage,
   storeProjectsFile,
-  storeProjectsIntro,
   changeProjectProfessor
 } from '../../../../Redux/Students/Actions/Project'
 
@@ -60,7 +59,7 @@ class Edit extends React.Component {
       image: '',
       file: '',
       new_title: this.props.project.research_title, // 學生不能改題目
-      new_intro: '',
+      new_intro: this.props.project.intro,
       anchorEl: null
     }
     this.imageRef = React.createRef()
@@ -241,6 +240,7 @@ class Edit extends React.Component {
               updateImage={(image) => this.setState({ image })}
               updateFile={(file) => this.setState({ file })}
               updateIntro={(intro) => this.setState({ new_intro: intro })}
+              handleSubmit={() => this.handleSubmit()}
               imageRef={this.imageRef}
               fileRef={this.fileRef}
             />
@@ -259,7 +259,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   editProject: (payload) => dispatch(editProject(payload)),
   storeImage: (image) => dispatch(storeProjectsImage(image, ownProps.project.research_title, ownProps.project.semester)),
   storeFile: (file) => dispatch(storeProjectsFile(file, ownProps.project.research_title, ownProps.project.semester)),
-  storeIntro: (intro) => dispatch(storeProjectsIntro(intro, ownProps.project.research_title, ownProps.project.semester)),
   changeProjectProfessor: (id, replace_pro) => dispatch(changeProjectProfessor({
     student_id: id,
     semester: ownProps.project.semester,
