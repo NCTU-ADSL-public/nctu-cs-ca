@@ -15,13 +15,13 @@ import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import Form from '../Form'
+import Form from './Form/index'
 import {
   editProject,
   storeProjectsImage,
   storeProjectsFile,
   changeProjectProfessor
-} from '../../../../Redux/Students/Actions/Project'
+} from '../../../../../Redux/Students/Actions/Project/index'
 
 let storageRef = firebase.storage().ref()
 const ITEM_HEIGHT = 48

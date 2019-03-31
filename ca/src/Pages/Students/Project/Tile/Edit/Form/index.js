@@ -1,5 +1,5 @@
 import React from 'react'
-import { LabeledInput } from '../../../../Components/FormUtils'
+import { LabeledInput } from '../../../../../../Components/FormUtils/index'
 import CKEditor from 'react-ckeditor-component'
 import './style.css'
 
@@ -59,7 +59,7 @@ const Form = props => (
 
       <div className='justify-content-center pull-right'>
         <button
-          type='submit'
+          // type='submit'
           style={{ margin: '2px', backgroundColor: '#795548', borderColor: '#795548' }}
           className='btn btn-success btn-large'
           onClick={props.handleSubmit}
