@@ -105,7 +105,7 @@ class Edit extends React.Component {
       research_title: project.research_title,
       new_title: project.research_title, // 學生不能改題目
       new_intro: this.state.new_intro
-    })
+    }, () => this.handleDialogClose())
 
     // 重新上傳圖片
     if (this.state.image) {
@@ -256,7 +256,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  editProject: (payload) => dispatch(editProject(payload)),
+  editProject: (payload, handleClose) => dispatch(editProject(payload, handleClose)),
   storeImage: (image) => dispatch(storeProjectsImage(image, ownProps.project.research_title, ownProps.project.semester)),
   storeFile: (file) => dispatch(storeProjectsFile(file, ownProps.project.research_title, ownProps.project.semester)),
   changeProjectProfessor: (id, replace_pro) => dispatch(changeProjectProfessor({

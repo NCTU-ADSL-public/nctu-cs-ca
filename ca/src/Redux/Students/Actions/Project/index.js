@@ -28,10 +28,11 @@ export const deleteProject = (payload) => dispatch => {
     })
 }
 
-export const editProject = (payload) => dispatch => {
+export const editProject = (payload, handleClose) => dispatch => {
   axios.post('/students/research/edit', payload)
     .then(res => {
       dispatch(storeProjectsIntro(payload.new_intro, payload.new_title, payload.semester))
+      handleClose()
     })
     .catch(err => {
       window.alert('儲存失敗，請檢察網路連線')
