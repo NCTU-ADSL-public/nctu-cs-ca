@@ -240,7 +240,7 @@ class Edit extends React.Component {
               updateImage={(image) => this.setState({ image })}
               updateFile={(file) => this.setState({ file })}
               updateIntro={(intro) => this.setState({ new_intro: intro })}
-              handleSubmit={() => this.handleSubmit()}
+              handleSubmit={(e) => this.handleSubmit(e)}
               imageRef={this.imageRef}
               fileRef={this.fileRef}
             />
