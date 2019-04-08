@@ -119,16 +119,9 @@ export const fetchStudent = grade => dispatch => {
 
 export const setGradutateState = post_item => dispatch => {
   axios.post('/assistants/graduate/check', post_item).then(res => {
-    console.log('Fetching')
-    console.log('POST_Item')
-    console.log(post_item)
-    console.log('RES DATA')
-    console.log(res.data)
     dispatch(set_graduate_state(post_item))
   }).catch(err => {
     console.log(err)
-    console.log('POST_Item')
-    console.log(post_item)
   })
 }
 

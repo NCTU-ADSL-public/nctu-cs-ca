@@ -30,7 +30,7 @@ import DoneIcon from '@material-ui/icons/Done'
 import Add from '@material-ui/icons/Add'
 import Warning from '@material-ui/icons/Warning'
 import Button from '@material-ui/core/Button'
-import { fetchTeachers, setAddStatus, setFirstSecond, deteleResearch, downloadCsv } from '../../../../Redux/Assistants/Actions/Project_v3/Teacher'
+import { fetchTeachers, setAddStatus, setFirstSecond, deteleResearch, downloadCsv } from '../../../../Redux/Assistants/Actions/Project/Teacher'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from "react-csv"
 
@@ -138,20 +138,6 @@ class index extends React.Component {
 
   filter = (teachers) => {
     const { input, filter_status } = this.state
-    console.log(
-      teachers.filter((teacher) =>
-        (input === ''
-          || teacher.professor_name.toLowerCase().search(input.toLowerCase()) !== -1
-        )
-        &&
-        (
-          !filter_status.reduce((haveTrue, value) => haveTrue || value, false)
-          ||
-          ((!filter_status[0] || (teacher.accept_status === 1))
-            && (!filter_status[1] || (teacher.pending_status === 1)))
-        )
-      )
-    )
     return (
       teachers.filter((teacher) =>
         (input === ''
@@ -176,11 +162,8 @@ class index extends React.Component {
   }
 
   handleDelete = data => {
-    const { /*submit_page_open,*/ submit_student_object } = this.state
     if (data.status === "0") {
       this.setState({ submit_page_open: true, submit_student_object: data.post_item })
-      console.log(data.post_item)
-      console.log(submit_student_object)
     }
   }
 
@@ -223,7 +206,7 @@ class index extends React.Component {
               <div style={{ display: 'flex' }}>
                 {
                   ['待助理加簽', '待教授審核'].map((title, index) => (
-                    <Chip label={title} className={classes.chip} onClick={() => this.toggleStatusFilter(index)} style={{ background: filter_status[index] ? FILTER_STATUS_COLOR[index] : null }} />
+                    <Chip key = {index} label={title} className={classes.chip} onClick={() => this.toggleStatusFilter(index)} style={{ background: filter_status[index] ? FILTER_STATUS_COLOR[index] : null }} />
                   ))
                 }
               </div>
@@ -231,7 +214,7 @@ class index extends React.Component {
               <div style={{ display: 'flex' }}>
                 {
                   ['專題一', '專題二', '待確認通過基礎程式設計'].map((title, index) => (
-                    <Chip label={title} className={classes.chip} onClick={() => this.toggleProjectFilter(index)} style={{ background: filter_project[index] ? blue[300] : null }} />
+                    <Chip key = { index} label={title} className={classes.chip} onClick={() => this.toggleProjectFilter(index)} style={{ background: filter_project[index] ? blue[300] : null }} />
                   ))
                 }
               </div>
@@ -319,7 +302,7 @@ class index extends React.Component {
                 }
               >
                 <MenuItem value={"all"} style={{ fontSize: '20px' }} >全部年級</MenuItem>
-                {[...Array(9)].map((x, i) => <MenuItem value={"0" + (i + 1)} style={{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
+                {[...Array(9)].map((x, i) => <MenuItem key = {i} value={"0" + (i + 1)} style={{ fontSize: '20px' }} >{"0" + (i + 1)}</MenuItem>)}
               </Select>
             </FormControl>
           </div>
@@ -336,7 +319,7 @@ class index extends React.Component {
           {this.filter(teachers).slice(page * number_per_page, (page + 1) * number_per_page)
             .map((teacher, index) => {
               return (
-                <div style={{ margin: '5px auto', width: '100%' }}>
+                <div key = {index} style={{ margin: '5px auto', width: '100%' }}>
                   <ExpansionPanel expanded={panel_open[index]} onChange={() => this.setState({ panel_open: panel_open.map((val, i) => i === index ? !val : val) })} >
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} classes={{ root: teacher.professor_status === "1" ? classes.expansionPanelSummaryRootPending : classes.expansionPanelSummaryRoot }} >
                       <div style={{ width: '100%', display: 'flex' }} >
@@ -355,16 +338,16 @@ class index extends React.Component {
                           teacher.accepted.projects.length !== 0 ?
                             <div style={{ display: 'block' }}>
                               {
-                                teacher.accepted.projects.map(project => {
+                                teacher.accepted.projects.map((project, index) => {
                                   return (
-                                    <div style={{ marginBottom: '40px' }} >
+                                    <div key = {index} style={{ marginBottom: '40px' }} >
                                       <hr />
                                       <div style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{project.title}</div>
                                       <br />
                                       {
-                                        project.students.map(student => (
+                                        project.students.map((student, index) => (
                                           !filter_project.reduce((haveTrue, value) => haveTrue || value, false) || filter_project[parseInt(student.first_second, 10) - 1] ?
-                                            <Tooltip title={PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)] + " " + project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")} placement="top" classes={{ tooltip: classes.tooltip }} >
+                                            <Tooltip key = {index} title={PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)] + " " + project.students[0].semester.substr(0, 3) + (project.students[0].semester[4] === "1" ? "上" : "下")} placement="top" classes={{ tooltip: classes.tooltip }} >
                                               <Chip
                                                 label={student.id + " " + student.name}
                                                 className={classes.chip}
@@ -385,6 +368,7 @@ class index extends React.Component {
                                             </Tooltip>
                                             :
                                             <Chip
+                                              key = {index}
                                               label={student.id + " " + student.name}
                                               className={classes.chip}
                                               style={{ background: grey[100], color: grey[300] }}
@@ -409,16 +393,16 @@ class index extends React.Component {
                           teacher.pending.projects.length !== 0 ?
                             <div style={{ display: 'block' }}>
                               {
-                                teacher.pending.projects.map(project => {
+                                teacher.pending.projects.map((project, index) => {
                                   return (
-                                    <div style={{ marginBottom: '40px' }} >
+                                    <div key = {index} style={{ marginBottom: '40px' }} >
                                       <hr />
                                       <div style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >{project.title}</div>
                                       <br />
                                       {
-                                        project.students.map(student => (
+                                        project.students.map((student, index) => (
                                           !filter_project.reduce((haveTrue, value) => haveTrue || value, false) || filter_project[parseInt(student.first_second, 10) - 1] ?
-                                            <Tooltip title={PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)]} placement="top" classes={{ tooltip: classes.tooltip }} >
+                                            <Tooltip key = {index} title={PROJECT_FIRST_SECOND_CN[parseInt(student.first_second, 10)]} placement="top" classes={{ tooltip: classes.tooltip }} >
                                               <Chip
                                                 label={student.id + " " + student.name}
                                                 className={classes.chip}
@@ -428,6 +412,7 @@ class index extends React.Component {
                                             </Tooltip>
                                             :
                                             <Chip
+                                              key = {index}
                                               label={student.id + " " + student.name}
                                               className={classes.chip}
                                               style={{ background: grey[100], color: grey[300] }}

@@ -11,7 +11,7 @@ import FirstPage from '@material-ui/icons/FirstPage'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 import LastPage from '@material-ui/icons/LastPage'
-import { fetchScores, downloadCsv } from '../../../../Redux/Assistants/Actions/Project_v3/Score'
+import { fetchScores, downloadCsv } from '../../../../Redux/Assistants/Actions/Project/Score'
 import grey from '@material-ui/core/colors/grey'
 import Button from '@material-ui/core/Button'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
@@ -96,9 +96,8 @@ class index extends React.Component {
 
   render() {
 
-    const { classes, fetch_scores, scores, download_csv, csvData } = this.props
+    const { classes, fetch_scores, scores, download_csv } = this.props
     const { input, page, number_per_page, semester, first_second } = this.state
-    console.log(csvData)
     return (
       <div className = { classes.root } >
         <div className = 'row' style = {{ marginTop: '30px', marginBottom: '20px' }}>

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Dialog from '@material-ui/core/Dialog'
 import TextField from '@material-ui/core/TextField'
-import { setScores } from '../../../../Redux/Assistants/Actions/Project_v3/Score'
+import { setScores } from '../../../../Redux/Assistants/Actions/Project/Score'
 
 const styles = theme => ({
   button: {
@@ -51,7 +51,7 @@ class ScoreList extends React.Component {
     return (
       scores.map((score, index) => {
         return (
-          <div style={{ margin: '5px auto', fontFamily: 'Noto Sans CJK TC' }}>
+          <div style={{ margin: '5px auto', fontFamily: 'Noto Sans CJK TC' }} key = {index} >
             <ExpansionPanel expanded={true} >
               <ExpansionPanelSummary>
                 <div style={{ width: '100%', display: 'flex' }}>

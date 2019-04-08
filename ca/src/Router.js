@@ -14,7 +14,7 @@ import TeacherVerify from './Pages/Teachers/Verify'
 import AssistantHead from './Pages/Assistants/Head'
 import AssistantHome from './Pages/Assistants/Home'
 import AssistantGrad from './Pages/Assistants/Graduation'
-import AssistantProject from './Pages/Assistants/Project_v3'
+import AssistantProject from './Pages/Assistants/Project'
 import AssistantVerify from './Pages/Assistants/Verify'
 import AssistantMail from './Pages/Assistants/Mail'
 
