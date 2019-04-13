@@ -92,7 +92,7 @@ const initialState = {
 
 export default handleActions({
   UPDATE_APPLY_LIST: (state, action) => {
-    console.log('UPDATE_APPLY_LIST ACTION: ', {...state, applyList: {...action.payload}})
-    return ({...state, applyList: {...action.payload}})
+    console.log('UPDATE_APPLY_LIST ACTION: ', {...state, applyList: [...action.payload]})
+    return ({...state, applyList: [...action.payload]})
   }
 }, initialState)
