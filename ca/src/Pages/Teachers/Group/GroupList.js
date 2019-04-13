@@ -23,6 +23,9 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+// REDUX
+import { fetchResearchList } from '../../../Redux/Teachers/Actions/Research/index'
+
 // css
 import './GroupList.css'
 import { connect } from 'react-redux'
@@ -37,70 +40,13 @@ let config = {
   serviceAccount: '../../../../Resources/nctu-csca-firebase-admins.json',
   messagingSenderId: '612862784976'
 }
-
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
   let auth = firebase.auth()
   auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
 }
 let storageRef = firebase.storage().ref()
-const styles = {
-  mainTitle: {
-    fontSize: '2.8em',
-    fontWeight: '500',
-    color: '#6e8086',
-    margin: '32px 0 0 70px',
-    float: 'left'
-  },
-  subTitle: {
-    fontSize: '1.2em',
-    fontWeight: '4300',
-    color: '#bfbfbf',
-    margin: '55px 0 0 70px',
-    float: 'left'
-  },
-  groups: {
-    margin: '0 0 60px 0'
-  },
-  groupBtn: {
-    margin: 30,
-    padding: 20,
-    background: '#ececec',
-    borderRadius: '6px',
-    border: '1px #dfdfdf solid',
-    boxShadow: 'rgba(51, 51, 102, 0.3) 2px 1px 20px -2px'
-  },
-  pic: {
-    width: '200px',
-    height: '200px'
-  },
-  groupYear: {
-    fontSize: '1.2em',
-    fontWeight: '200',
-    color: '#575757'
-  },
-  groupTitle: {
-    fontSize: '2em',
-    fontWeight: '100',
-    color: '#575757'
-  },
-  groupModify: {
-    margin: '10px 10px 5px 0',
-    float: 'left'
-  },
-  chip: {
-    margin: 5
-  },
-  chipWrapper: {
-    padding: 5,
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  block: {
-    display: 'block',
-    height: 50
-  }
-}
+
 
 class GroupList extends React.Component {
   constructor (props) {
@@ -108,199 +54,36 @@ class GroupList extends React.Component {
     this.state = {
       loading: true,
       message: '系統正在讀取資料中，請耐心等候。',
-      index: 0,
-      cs_number: 0,
-      other_number: 0,
       chipOpen: new Map(),
-      groupList: [
-        {
-          research_title: 'epth estimation from Single image',
-          participants: [
-            {
-              student_id: '0399999',
-              sname: '陳罐頭',
-              detail: '資工系 網多組3 ',
-              score: ''
-            },
-            {
-              student_id: '0399777',
-              sname: '李小霖',
-              detail: '資工系 網多組3 ',
-              score: ''
-            },
-            {
-              student_id: '0391234',
-              sname: '郭梁兒',
-              detail: '資工系 網多組3 '
-            },
-            {
-              student_id: '0399666',
-              sname: '耿平',
-              detail: '資工系 網多組3 ',
-              score: ''
-            },
-            {
-              student_id: '0391555',
-              sname: '余阿杰',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        },
-        {
-          research_title: '虛擬貨幣交易機器人',
-          participants: [
-            {
-              student_id: '0399998',
-              sname: '陳干頭',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        },
-        {
-          research_title: 'IOT智慧家庭監控應用',
-          participants: [
-            {
-              student_id: '0399997',
-              sname: '陳平頭',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        },
-        {
-          research_title: 'Android 系統記乾憶體管理改進',
-          participants: [
-            {
-              student_id: '0399987',
-              sname: '陳頭',
-              detail: '資工系 網多組3 '
-            }
-          ],
-          year: '106'
-        }
-      ],
-      initItem: [
-        {
-          'student_id': '0316000',
-          'sname': '吳泓寬',
-          'program': '網多',
-          'graduate': '0',
-          'graduate_submit': '0',
-          'email': 'student@gmail.com',
-          'failed': true,
-          'score': FakeData.StudentScore,
-        },
-      ],
-      semVal: this.getSemester(),
+      semVal: getSemester(),
       semList: ['107-2'],
     }
   }
 
-  getSemester () {
-    let Today = new Date()
-    return ((Today.getFullYear()-1912)+ Number(((Today.getMonth()+1)>=8?1:0))) + '-' + ((Today.getMonth()+1)>=8?'1':'2')
-  }
-
-  fetchData (sem) {
+  fetchData () {
     this.setState({loading: true})
-    // this.setState({groupList: []})
-    console.log('idCard: ' + this.props.idCard.tname)
-    console.log('sem: ' + sem)
-
-    if( this.props.idCard.teacher_id === '001' ){
-      // setTimeout(
-      //   () => {
-      //     console.log('----- fetchData /professors/research/list AGAIN!!!! ----')
-      //     this.fetchData()
-      //   }, 500)
+    let tid = this.props.idCard.teacher_id
+    if( tid === '001' ){
+      // NOT A VALID TID
+      setTimeout(
+        () => {
+          console.log('----- fetchData AGAIN!!!! ----')
+          this.fetchData()
+        }, 1500)
       return
     }
-    // let _this = this
-    axios.post('/professors/research/list', {
-      teacherId: this.props.idCard.teacher_id,
-      sem: sem
-    }).then(res => {
-      this.setState({loading: false})
-      this.setState({
-        cs_number: res.data.cs_number,
-        other_number: res.data.other_number,
-        groupList: []
-        // groupList: res.data.groups
-      })
-
-      // year research_title
-      let data = res.data.groups
-      this.setState({groupList: data})
-      // let dataList = []
-      console.log(data)
-      /*
-      if(data !== undefined){
-        data.forEach( item => {
-          let directory = item.year + '/' + this.props.idCard.tname + '/' + item.research_title + '/image/image.jpg'
-          let pathReference = storageRef.child(directory)
-          pathReference.getDownloadURL().then(url => {
-            let data_ = {...item, image: url}
-            directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
-            pathReference = storageRef.child(directory)
-            pathReference.getDownloadURL().then(url => {
-              dataList.push({...data_, file: url})
-              _this.setState({
-                loading: false,
-                groupList: [..._this.state.groupList, {...data_, file: url}]
-              })
-            }).catch(error => {
-              console.log(error)
-              dataList.push(data_)
-              _this.setState({
-                loading: false,
-                groupList: [..._this.state.groupList, {...data_, file: url}]
-              })
-            })
-          }).catch(error => {
-            console.log(error)
-            let data_ = {...item}
-            directory = item.year + '/' + _this.props.idCard.tname + '/' + item.research_title + '/file/file.pdf'
-            pathReference = storageRef.child(directory)
-            pathReference.getDownloadURL().then(url => {
-              dataList.push({...data_, file: url})
-              _this.setState({
-                loading: false,
-                groupList: [..._this.state.groupList, {...data_, file: url}]
-              })
-            }).catch(error => {
-              console.log(error)
-              dataList.push(data_)
-              _this.setState({
-                loading: false,
-                groupList: [..._this.state.groupList, {...data_}]
-              })
-            })
-          })
-        })
-        console.log('DATA:', data)
-        console.log('DATA LIST:', dataList)
-      }
-      */
-
-    }).catch(err => {
-      this.setState({message: '抱歉，好像讀不到資料的樣子。'})
-      console.log(err)
-    })
+    this.props.FetchResearchList(tid)
+    this.setState({loading: false})
   }
 
   componentDidMount () {
-    this.fetchData(this.state.semVal)
+    this.fetchData()
     this.makeSemList()
   }
 
-  async componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
-      await this.setState({
-        groupList: []
-      })
-      this.fetchData(this.state.semVal)
+      this.fetchData()
     }
   }
 
@@ -312,7 +95,7 @@ class GroupList extends React.Component {
 
   triggerUpdate = () => {
     this.delay(1000).then((v) => (
-      this.fetchData(this.state.semVal)
+      this.fetchData()
     )).catch((e) => (
       console.log('trigger update error' + e)
     ))
@@ -332,12 +115,12 @@ class GroupList extends React.Component {
 
   handleDropDownChange = (event, index, semVal) => {
     this.setState({semVal})
-    this.fetchData(semVal)
+    this.fetchData()
   }
 
   makeSemList = () => {
     let semList = []
-    let tmp = this.getSemester()
+    let tmp = getSemester()
     semList.push(tmp)
     while(tmp !== '106-2'){
       if(tmp[4] === '1'){
@@ -352,8 +135,10 @@ class GroupList extends React.Component {
   }
 
   render () {
-    const csNum = this.state.cs_number
-    const otherNum = this.state.other_number
+    const { research } = this.props
+    const csNum = research.cs_number
+    const otherNum = research.other_number
+    const groups = research.groups
 
     return (
       <Grid style={{minHeight: 500}}>
@@ -396,8 +181,8 @@ class GroupList extends React.Component {
             left={40}
             top={100}
             isLoading={this.state.loading} />
-            {!this.state.loading && this.state.groupList.length !== 0
-              ? this.state.groupList.map((item, i) => (
+            {!this.state.loading && groups.length !== undefined
+              ? groups.map((item, i) => (
                 <GroupButton
                   key={i}
                   keyId={i}
@@ -500,10 +285,17 @@ const GroupButton = (props) => (
   </Grid>
 )
 
+const getSemester = () => {
+  const Today = new Date()
+  return ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
+}
+
 const mapStateToProps = (state) => ({
   idCard: state.Teacher.User.idCard,
+  research: state.Teacher.Research.research
 })
 const mapDispatchToProps = (dispatch) => ({
+  FetchResearchList: () => dispatch(fetchResearchList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

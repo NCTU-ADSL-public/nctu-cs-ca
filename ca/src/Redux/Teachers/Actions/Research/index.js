@@ -3,6 +3,7 @@ import axios from 'axios'
 
 // DEFINE ALL ACTIONS FOR REDUCERS (FETCHING DATA IS DONE HERE)
 export const UpdateApplyList = createAction('UPDATE_APPLY_LIST')
+export const UpdateResearchList = createAction('UPDATE_RESEARCH_LIST')
 
 export const ChangeTeacher = (payload) => dispatch => {
   axios.post('/professors/research/setReplace', payload)
@@ -16,19 +17,29 @@ export const ChangeTeacher = (payload) => dispatch => {
 }
 
 export const fetchResearchApplyList = (tid) => dispatch => {
-  console.log('---------- FETCH RESEARCH APPLY LIST ---------------')
   axios.get('/professors/researchApply/list', {
     id: tid
   }).then(res => {
     dispatch(UpdateApplyList(res.data))
-    /*
-    this.setState({
-      applyList: res.data,
-      loading: false
-    })
-    */
   }).catch(err => {
     console.log(err)
   })
+}
 
+export const fetchResearchList = (tid) => dispatch => {
+  let sem = getSemester()
+  axios.post('/professors/research/list', {
+    teacherId: tid,
+    sem: sem
+  }).then(res => {
+    dispatch(UpdateResearchList(res.data))
+  }).catch(err => {
+    this.setState({message: '抱歉，好像讀不到資料的樣子。'})
+    console.log(err)
+  })
+}
+
+const getSemester = () => {
+  const Today = new Date()
+  return ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
 }

@@ -15,7 +15,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { withStyles } from '@material-ui/core/styles/index'
 // REDUX
 import { connect } from 'react-redux'
-import { fetchResearchApplyList } from '../../../Redux/Teachers/Actions/Research/index'
+import { fetchResearchApplyList, fetchResearchList } from '../../../Redux/Teachers/Actions/Research/index'
 
 const styles = {
   noticeTitle: {
@@ -115,151 +115,25 @@ class GroupApply extends React.Component {
     this.state = {
       loading: true,
       message: '系統正在讀取資料中，請耐心等候。',
-      current_accept: 0,
       chipOpen: new Map(),
-      applyList: [],
-      // applyList: [
-      //   { research_title: '資料錯誤',
-      //     status: 0,
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0399999',
-      //         sname: '陳罐頭',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       },
-      //       { student_id: '0391234',
-      //         sname: '郭梁兒',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       },
-      //       { student_id: '0391666',
-      //         sname: '耿平',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 0,
-      //       },
-      //       { student_id: '0416014',
-      //         sname: '王立洋',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       },
-      //       { student_id: '0391444',
-      //         sname: '俞阿杰',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 0,
-      //       }
-      //     ]
-      //   },
-      //   { research_title: '我的專題',
-      //     status: 0,
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0416014',
-      //         sname: '王立洋',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       }
-      //     ]
-      //   },
-      //   { research_title: '資料錯誤',
-      //     status: '2',
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0399997',
-      //         sname: '陳乾頭',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 0,
-      //       }
-      //     ]
-      //   },
-      //   { research_title: '資料錯誤',
-      //     status: '3',
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0399987',
-      //         sname: '陳憨頭',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       }
-      //     ]
-      //   }
-      // ]
     }
   }
 
   fetchData () {
+    this.setState({loading: true})
     let tid = this.props.idCard.teacher_id
-    let validId = true
-    if(tid === '001')
-      validId = false
-    if(validId) {
-      this.props.FetchResearchApplyList(tid)
-      console.log('----------------------- props')
-      console.log(this.props)
-/*
-      axios.get('/professors/researchApply/list', {
-        id: this.props.idCard.teacher_id
-      }).then(res => {
-        console.log(res.data)
-        this.setState({
-          applyList: res.data,
-          loading: false
-        })
-      }).catch(err => {
-        console.log(err)
-      })
-*/
-      const semester = getSemester()
-
-      axios.post('/professors/research/list', {
-        teacherId: this.props.idCard.teacher_id,
-        sem: semester
-      }).then(res => {
-        this.setState({loading: false})
-        this.setState({
-          current_accept: res.data.current_accept,
-        })
-      }).catch(err => {
-        this.setState({message: '抱歉，好像讀不到資料的樣子。'})
-        console.log(err)
-      })
-
-    }else{
-      let inter = 250
-      // Magic update
+    if( tid === '001' ){
+      // NOT A VALID TID
       setTimeout(
         () => {
           console.log('----- fetchData AGAIN!!!! ----')
           this.fetchData()
-        }, inter)
-
-      this.setState({
-        message: '唉呀，好像有什麼出錯了。',
-        loading: false
-      })
+        }, 1500)
+      return
     }
-
-
+    this.props.FetchResearchApplyList(tid)
+    this.props.FetchResearchList(tid)
+    this.setState({loading: false})
   }
 
   componentDidMount () {
@@ -302,7 +176,7 @@ class GroupApply extends React.Component {
   }
 
   render () {
-    const acc = this.state.current_accept
+    const acc = this.props.research.current_accept
     const { applyList } = this.props
     return (
       <Grid style={{minHeight: 500}}>
@@ -336,7 +210,7 @@ class GroupApply extends React.Component {
             left={40}
             top={100}
             isLoading={this.state.loading} />
-          {applyList !== undefined && applyList
+          {!this.state.loading && applyList !== undefined
             ?
               applyList.map((item, i) => (
                 <ApplyButton
@@ -350,17 +224,12 @@ class GroupApply extends React.Component {
                   handleRequestClose={this.handleRequestClose}
                 />
               ))
-            : '(目前尚無專題申請)'
+            : ''
           }
         </Row>
       </Grid>
     )
   }
-}
-
-const getSemester = () => {
-  const Today = new Date()
-  return ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
 }
 
 const StudentStatusHint = (props) => (
@@ -440,10 +309,12 @@ const ApplyButton = (props) => {
 
 const mapStateToProps = (state) => ({
   idCard: state.Teacher.User.idCard,
-  applyList: state.Teacher.Research.applyList
+  applyList: state.Teacher.Research.applyList,
+  research: state.Teacher.Research.research
 })
 const mapDispatchToProps = (dispatch) => ({
-  FetchResearchApplyList: () => dispatch(fetchResearchApplyList())
+  FetchResearchApplyList: () => dispatch(fetchResearchApplyList()),
+  FetchResearchList: () => dispatch(fetchResearchList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(GroupApply))
