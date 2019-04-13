@@ -210,11 +210,11 @@ class GroupList extends React.Component {
     console.log('sem: ' + sem)
 
     if( this.props.idCard.teacher_id === '001' ){
-      setTimeout(
-        () => {
-          console.log('----- fetchData /professors/research/list AGAIN!!!! ----')
-          this.fetchData()
-        }, 500)
+      // setTimeout(
+      //   () => {
+      //     console.log('----- fetchData /professors/research/list AGAIN!!!! ----')
+      //     this.fetchData()
+      //   }, 500)
       return
     }
     // let _this = this

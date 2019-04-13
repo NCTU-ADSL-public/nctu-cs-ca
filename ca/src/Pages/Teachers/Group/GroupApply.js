@@ -208,6 +208,8 @@ class GroupApply extends React.Component {
   }
 
   fetchData () {
+    console.log('----------------------- props')
+    console.log(this.props)
     let tid = this.props.idCard.teacher_id
     let validId = true
     if(tid === '001')
@@ -227,8 +229,7 @@ class GroupApply extends React.Component {
         console.log(err)
       })
 */
-      let Today = new Date()
-      let semester = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
+      const semester = getSemester()
 
       axios.post('/professors/research/list', {
         teacherId: this.props.idCard.teacher_id,
@@ -243,16 +244,14 @@ class GroupApply extends React.Component {
         console.log(err)
       })
 
-
-
     }else{
       let inter = 250
       // Magic update
-      setTimeout(
-        () => {
-          console.log('----- fetchData AGAIN!!!! ----')
-          this.fetchData()
-        }, inter)
+      // setTimeout(
+      //   () => {
+      //     console.log('----- fetchData AGAIN!!!! ----')
+      //     this.fetchData()
+      //   }, inter)
 
       this.setState({
         message: '唉呀，好像有什麼出錯了。',
@@ -337,7 +336,7 @@ class GroupApply extends React.Component {
             left={40}
             top={100}
             isLoading={this.state.loading} />
-          {applyList !== undefined
+          {applyList !== undefined && applyList
             ?
               applyList.map((item, i) => (
                 <ApplyButton
@@ -357,6 +356,11 @@ class GroupApply extends React.Component {
       </Grid>
     )
   }
+}
+
+const getSemester = () => {
+  const Today = new Date()
+  return ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
 }
 
 const StudentStatusHint = (props) => (
