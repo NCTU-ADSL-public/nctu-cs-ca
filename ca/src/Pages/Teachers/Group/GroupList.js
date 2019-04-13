@@ -294,7 +294,7 @@ const mapStateToProps = (state) => ({
   research: state.Teacher.Research.research
 })
 const mapDispatchToProps = (dispatch) => ({
-  FetchResearchList: () => dispatch(fetchResearchList())
+  FetchResearchList: (tid, sem) => dispatch(fetchResearchList(tid, sem))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)
