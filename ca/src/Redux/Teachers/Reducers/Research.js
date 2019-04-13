@@ -119,7 +119,7 @@ export default handleActions({
     return ({...state, applyList: [...action.payload]})
   },
   UPDATE_RESEARCH_LIST: (state, action) => {
-    console.log('UPDATE_RESEARCH_LIST ACTION: ', { ...state, researchList: {...action.payload} })
-    return ({ ...state, researchList: {...action.payload} })
+    console.log('UPDATE_RESEARCH_LIST ACTION: ', { ...state, research: {...action.payload} })
+    return ({ ...state, research: {...action.payload} })
   }
 }, initialState)
