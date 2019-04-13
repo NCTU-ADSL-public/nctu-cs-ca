@@ -116,12 +116,14 @@ class GroupApply extends React.Component {
       loading: true,
       message: '系統正在讀取資料中，請耐心等候。',
       chipOpen: new Map(),
+      sem: getSemester()
     }
   }
 
   fetchData () {
     this.setState({loading: true})
     let tid = this.props.idCard.teacher_id
+    let sem = this.state.sem
     if( tid === '001' ){
       // NOT A VALID TID
       setTimeout(
@@ -132,7 +134,7 @@ class GroupApply extends React.Component {
       return
     }
     this.props.FetchResearchApplyList(tid)
-    this.props.FetchResearchList(tid)
+    this.props.FetchResearchList(tid, sem)
     this.setState({loading: false})
   }
 
@@ -304,6 +306,11 @@ const ApplyButton = (props) => {
       </Row>
     </Grid>
   )
+}
+
+const getSemester = () => {
+  const Today = new Date()
+  return ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
 }
 
 

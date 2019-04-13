@@ -60,7 +60,7 @@ class GroupList extends React.Component {
     }
   }
 
-  fetchData () {
+  fetchData (sem) {
     this.setState({loading: true})
     let tid = this.props.idCard.teacher_id
     if( tid === '001' ){
@@ -68,22 +68,22 @@ class GroupList extends React.Component {
       setTimeout(
         () => {
           console.log('----- fetchData AGAIN!!!! ----')
-          this.fetchData()
+          this.fetchData(sem)
         }, 1500)
       return
     }
-    this.props.FetchResearchList(tid)
+    this.props.FetchResearchList(tid, sem)
     this.setState({loading: false})
   }
 
   componentDidMount () {
-    this.fetchData()
+    this.fetchData(this.state.semVal)
     this.makeSemList()
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
-      this.fetchData()
+      this.fetchData(this.state.semVal)
     }
   }
 
@@ -95,7 +95,7 @@ class GroupList extends React.Component {
 
   triggerUpdate = () => {
     this.delay(1000).then((v) => (
-      this.fetchData()
+      this.fetchData(this.state.semVal)
     )).catch((e) => (
       console.log('trigger update error' + e)
     ))
@@ -115,7 +115,7 @@ class GroupList extends React.Component {
 
   handleDropDownChange = (event, index, semVal) => {
     this.setState({semVal})
-    this.fetchData()
+    this.fetchData(semVal)
   }
 
   makeSemList = () => {
@@ -135,10 +135,9 @@ class GroupList extends React.Component {
   }
 
   render () {
-    const { research } = this.props
-    const csNum = research.cs_number
-    const otherNum = research.other_number
-    const groups = research.groups
+    const csNum = this.props.research.cs_number
+    const otherNum = this.props.research.other_number
+    const groups = this.props.research.groups
 
     return (
       <Grid style={{minHeight: 500}}>

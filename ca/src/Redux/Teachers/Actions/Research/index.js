@@ -26,20 +26,13 @@ export const fetchResearchApplyList = (tid) => dispatch => {
   })
 }
 
-export const fetchResearchList = (tid) => dispatch => {
-  let sem = getSemester()
+export const fetchResearchList = (tid, sem) => dispatch => {
   axios.post('/professors/research/list', {
     teacherId: tid,
     sem: sem
   }).then(res => {
     dispatch(UpdateResearchList(res.data))
   }).catch(err => {
-    this.setState({message: '抱歉，好像讀不到資料的樣子。'})
     console.log(err)
   })
-}
-
-const getSemester = () => {
-  const Today = new Date()
-  return ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
 }
