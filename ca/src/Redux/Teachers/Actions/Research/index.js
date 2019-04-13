@@ -27,6 +27,9 @@ export const fetchResearchApplyList = (tid) => dispatch => {
 }
 
 export const fetchResearchList = (tid, sem) => dispatch => {
+  console.log('----- fetchResearchList ----')
+  console.log('tid: ' + tid)
+  console.log('sem: ' + sem)
   axios.post('/professors/research/list', {
     teacherId: tid,
     sem: sem
