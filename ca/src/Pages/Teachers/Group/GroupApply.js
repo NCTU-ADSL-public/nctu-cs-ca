@@ -14,6 +14,9 @@ import { Dialog } from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles/index'
+// REDUX
+import { fetchResearchApplyList } from '../../../Redux/Teachers/Actions/Research/index'
+
 const styles = {
   noticeTitle: {
     fontSize: '2.8em',
@@ -105,12 +108,13 @@ const styles = {
   }
 }
 
+
 class GroupApply extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       loading: true,
-      fuck: '系統正在讀取資料中，請耐心等候。',
+      message: '系統正在讀取資料中，請耐心等候。',
       current_accept: 0,
       chipOpen: new Map(),
       applyList: [],
@@ -208,6 +212,8 @@ class GroupApply extends React.Component {
     if(this.props.idCard.teacher_id === '001')
       validId = false
     if(validId) {
+      this.props.fetchResearchApplyList()
+/*
       axios.get('/professors/researchApply/list', {
         id: this.props.idCard.teacher_id
       }).then(res => {
@@ -219,8 +225,10 @@ class GroupApply extends React.Component {
       }).catch(err => {
         console.log(err)
       })
+*/
       let Today = new Date()
       let semester = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
+
       axios.post('/professors/research/list', {
         teacherId: this.props.idCard.teacher_id,
         sem: semester
@@ -230,9 +238,12 @@ class GroupApply extends React.Component {
           current_accept: res.data.current_accept,
         })
       }).catch(err => {
-        this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
+        this.setState({message: '抱歉，好像讀不到資料的樣子。'})
         console.log(err)
       })
+
+
+
     }else{
       let inter = 250
       // Magic update
@@ -243,10 +254,12 @@ class GroupApply extends React.Component {
         }, inter)
 
       this.setState({
-        fuck: '唉呀，好像有什麼出錯了。',
+        message: '唉呀，好像有什麼出錯了。',
         loading: false
       })
     }
+
+
   }
 
   componentDidMount () {
@@ -290,6 +303,7 @@ class GroupApply extends React.Component {
 
   render () {
     const acc = this.state.current_accept
+    const applyList = this.props.applyList
     return (
       <Grid style={{minHeight: 500}}>
         <Row>
@@ -316,15 +330,15 @@ class GroupApply extends React.Component {
 
         </Row>
         <Row style={styles.groups}>
-          {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.fuck}</div>}
+          {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.message}</div>}
           <Loading
             size={100}
             left={40}
             top={100}
             isLoading={this.state.loading} />
-          {this.state.applyList.length !== 0
+          {applyList.length !== 0
             ?
-              this.state.applyList.map((item, i) => (
+              applyList.map((item, i) => (
                 <ApplyButton
                   key={i}
                   keyId={i}
@@ -421,8 +435,10 @@ const ApplyButton = (props) => {
 
 const mapStateToProps = (state) => ({
   idCard: state.Teacher.User.idCard,
+  applyList: state.Teacher.Research.applyList
 })
 const mapDispatchToProps = (dispatch) => ({
+  fetchResearchApplyList: () => dispatch(fetchResearchApplyList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(GroupApply))

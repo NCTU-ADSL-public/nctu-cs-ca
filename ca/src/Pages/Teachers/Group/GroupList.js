@@ -37,13 +37,13 @@ let config = {
   serviceAccount: '../../../../Resources/nctu-csca-firebase-admins.json',
   messagingSenderId: '612862784976'
 }
+
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
   let auth = firebase.auth()
   auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
 }
-// let storageRef = firebase.storage().ref()
-/*
+let storageRef = firebase.storage().ref()
 const styles = {
   mainTitle: {
     fontSize: '2.8em',
@@ -101,14 +101,13 @@ const styles = {
     height: 50
   }
 }
-*/
 
 class GroupList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       loading: true,
-      fuck: '系統正在拚命讀取資料中，請你再拿出多一點耐心等候。',
+      message: '系統正在讀取資料中，請耐心等候。',
       index: 0,
       cs_number: 0,
       other_number: 0,
@@ -286,7 +285,7 @@ class GroupList extends React.Component {
       */
 
     }).catch(err => {
-      this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
+      this.setState({message: '抱歉，好像讀不到資料的樣子。'})
       console.log(err)
     })
   }
@@ -391,7 +390,7 @@ class GroupList extends React.Component {
             </Col>
           </Row>
           <Row className='groups'>
-            {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.fuck}</div>}
+            {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.message}</div>}
             <Loading
             size={100}
             left={40}
