@@ -12,9 +12,9 @@ import Chip from 'material-ui/Chip'
 import { Dialog } from 'material-ui'
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles/index'
 // REDUX
+import { connect } from 'react-redux'
 import { fetchResearchApplyList } from '../../../Redux/Teachers/Actions/Research/index'
 
 const styles = {
@@ -208,11 +208,12 @@ class GroupApply extends React.Component {
   }
 
   fetchData () {
+    let tid = this.props.idCard.teacher_id
     let validId = true
-    if(this.props.idCard.teacher_id === '001')
+    if(tid === '001')
       validId = false
     if(validId) {
-      this.props.fetchResearchApplyList()
+      this.props.FetchResearchApplyList(tid)
 /*
       axios.get('/professors/researchApply/list', {
         id: this.props.idCard.teacher_id
@@ -303,7 +304,7 @@ class GroupApply extends React.Component {
 
   render () {
     const acc = this.state.current_accept
-    const applyList = this.props.applyList
+    const { applyList } = this.props
     return (
       <Grid style={{minHeight: 500}}>
         <Row>
@@ -336,7 +337,7 @@ class GroupApply extends React.Component {
             left={40}
             top={100}
             isLoading={this.state.loading} />
-          {applyList.length !== 0
+          {applyList !== undefined
             ?
               applyList.map((item, i) => (
                 <ApplyButton
@@ -360,10 +361,10 @@ class GroupApply extends React.Component {
 
 const StudentStatusHint = (props) => (
   <MuiThemeProvider>
-      <Chip style={styles.chip }
-            backgroundColor={ props.status === 1 ? '#BDD8CC' : '#FFCD80' }>
-        <Avatar src={defaultPic}/> { props.status === 1 ? '本系生' : '外系生' }
-      </Chip>
+    <Chip style={styles.chip }
+          backgroundColor={ props.status === 1 ? '#BDD8CC' : '#FFCD80' }>
+      <Avatar src={defaultPic}/> { props.status === 1 ? '本系生' : '外系生' }
+    </Chip>
   </MuiThemeProvider>
 )
 
@@ -438,7 +439,7 @@ const mapStateToProps = (state) => ({
   applyList: state.Teacher.Research.applyList
 })
 const mapDispatchToProps = (dispatch) => ({
-  fetchResearchApplyList: () => dispatch(fetchResearchApplyList())
+  FetchResearchApplyList: () => dispatch(fetchResearchApplyList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(GroupApply))

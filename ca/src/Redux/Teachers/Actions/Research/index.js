@@ -15,18 +15,18 @@ export const ChangeTeacher = (payload) => dispatch => {
     })
 }
 
-
-export const fetchResearchApplyList = (page = 1) => dispatch => {
+export const fetchResearchApplyList = (tid) => dispatch => {
+  console.log('---------- FETCH RESEARCH APPLY LIST ---------------')
   axios.get('/professors/researchApply/list', {
-    id: this.props.idCard.teacher_id
+    id: tid
   }).then(res => {
-    console.log('---------- FETCH RESEARCH APPLY LIST ---------------')
     dispatch(UpdateApplyList(res.data))
     /*
     this.setState({
       applyList: res.data,
       loading: false
-    })*/
+    })
+    */
   }).catch(err => {
     console.log(err)
   })
