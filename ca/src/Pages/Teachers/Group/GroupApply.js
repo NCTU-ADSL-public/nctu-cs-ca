@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 import defaultPic from '../../../Resources/defalt.jpg'

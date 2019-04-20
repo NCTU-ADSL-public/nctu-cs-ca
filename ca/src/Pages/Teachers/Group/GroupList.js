@@ -1,12 +1,10 @@
 import React from 'react'
-import axios from 'axios'
 
 import { Grid, Row, Col, Image, Button } from 'react-bootstrap'
 // resource
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
 import firebase from 'firebase'
-import FakeData from '../../../Resources/FakeData'
 
 // component
 import InfoCard from '../Shared/InfoCard'
