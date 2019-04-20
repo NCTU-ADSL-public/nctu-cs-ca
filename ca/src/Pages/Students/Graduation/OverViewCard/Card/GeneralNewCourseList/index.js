@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import PopoverButton from './PopoverButton'
-import MoveGroupButton from './MoveGroupButton'
-import './GeneralNewCourseList.css'
+import PopoverButton from '../PopoverButton'
+import MoveGroupButton from '../MoveGroupButton'
+import './style.css'
 
 const styles = theme => ({
   container: {
@@ -205,6 +205,7 @@ class GeneralNewCourseList extends React.Component {
       })
     }
   }
+  
   render () {
     const { classes, overview, rwd, selection, title } = this.props
 

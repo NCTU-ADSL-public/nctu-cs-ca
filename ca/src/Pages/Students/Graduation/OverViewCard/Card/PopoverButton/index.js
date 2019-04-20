@@ -1,11 +1,12 @@
+
 import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import FlatButton from 'material-ui/FlatButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Popover from '@material-ui/core/Popover'
 import '../../../../../../../node_modules/animate.css/animate.css'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { connect } from 'react-redux'
 import { changeCourse } from '../../../../../../Redux/Students/Actions/Graduation'
 
 const style = {
@@ -49,7 +50,7 @@ const styles = theme => ({
   }
 })
 
-class PopoverButton extends React.Component {
+class Index extends React.Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -118,7 +119,7 @@ class PopoverButton extends React.Component {
   }
 }
 
-PopoverButton.propTypes = {
+Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
@@ -131,4 +132,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PopoverButton))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

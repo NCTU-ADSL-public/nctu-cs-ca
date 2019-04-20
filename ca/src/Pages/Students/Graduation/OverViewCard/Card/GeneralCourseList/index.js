@@ -1,8 +1,8 @@
 import React from 'react'
-import PopoverButton from './PopoverButton'
-import MoveGroupButton from './MoveGroupButton'
+import PopoverButton from '../PopoverButton'
+import MoveGroupButton from '../MoveGroupButton'
 
-class GeneralCourseList extends React.Component {
+class Index extends React.Component {
   constructor (props) {
     super(props)
     this.decideBtnBgColor = this.decideBtnBgColor.bind(this)
@@ -45,9 +45,8 @@ class GeneralCourseList extends React.Component {
     })
   }
 
-  componentDidUpdate (NextProp, NextState) {
-    if (NextProp.courses !== this.props.courses) {
-      console.log('------------- GeneralCourseList updates -------------------')
+  componentDidUpdate (prevProp) {
+    if (prevProp.courses !== this.props.courses) {
       this.generalCourseTypes = [
         {
           name: '當代',
@@ -80,12 +79,13 @@ class GeneralCourseList extends React.Component {
           courses: []
         }
       ]
-      NextProp.courses.forEach(course => {
+      prevProp.courses.forEach(course => {
         let type = this.generalCourseTypes.find(type => course.dimension === type.dimension)
         if (type) type.courses.push(course)
       })
     }
   }
+  
   decideBtnBgColor (courses) {
     if (courses.length === 0) {
       return '#D95467'
@@ -148,4 +148,4 @@ class GeneralCourseList extends React.Component {
   }
 }
 
-export default GeneralCourseList
+export default Index

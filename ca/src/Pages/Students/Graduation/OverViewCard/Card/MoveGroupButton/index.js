@@ -1,5 +1,8 @@
+
 import React from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 // MUI
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -7,11 +10,8 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
 // REDUX
-import { connect } from 'react-redux'
 import { changeCourse, fetchGraduationCourse } from '../../../../../../Redux/Students/Actions/Graduation'
-
 import '../../../../../../../node_modules/animate.css/animate.css'
-import PropTypes from 'prop-types'
 
 const style = {
   Button: {
@@ -58,7 +58,7 @@ const styles = theme => ({
   }
 })
 
-class MoveGroupButton extends React.Component {
+class Index extends React.Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -80,9 +80,7 @@ class MoveGroupButton extends React.Component {
     }).then(res => {
       this.setState({targets: res.data})
     }).catch(err => {
-      console.log('============ MoveGroupButton ==============')
       console.log(err)
-      console.log('===========================================')
     })
   }
 
@@ -105,10 +103,6 @@ class MoveGroupButton extends React.Component {
     this.setState({
       anchorEl: null
     })
-    console.log('============ MoveGroupButton switchCourse ==============')
-    console.log('target: ' + target)
-    console.log('this.props.title: ' + title)
-    console.log(studentIdcard)
 
     axios.post('/students/graduate/moveCourse', {
       cn: cn, // 中文課名
@@ -124,7 +118,6 @@ class MoveGroupButton extends React.Component {
       while (inter < 100000) {
         setTimeout(
           () => {
-            console.log('----- fetchGraduationCourse! ----')
             this.props.fetchGraduationCourse()
           }, inter)
         inter *= 2
@@ -137,7 +130,6 @@ class MoveGroupButton extends React.Component {
     }).catch(err => {
       console.log(err)
     })
-    console.log('===========================================')
   }
 
   extraPostGradChange () {
@@ -190,7 +182,7 @@ class MoveGroupButton extends React.Component {
   }
 }
 
-MoveGroupButton.propTypes = {
+Index.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
@@ -206,4 +198,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MoveGroupButton))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

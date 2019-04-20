@@ -1,6 +1,7 @@
+
 import React from 'react'
-import Card from './Card'
 import { connect } from 'react-redux'
+import Card from './Card'
 
 class Index extends React.Component {
   constructor (props) {
