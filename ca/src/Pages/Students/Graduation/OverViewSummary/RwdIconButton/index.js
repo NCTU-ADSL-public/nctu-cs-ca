@@ -1,14 +1,15 @@
+
 import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import SendReviewBtn from './SendReviewBtn'
-import PrintBtn from './PrintBtn'
-import ResetCourseBtn from './ResetCourseBtn'
+import SendReview from './SendReview'
+import Print from './Print'
+import ResetCourse from './ResetCourse'
 
 const ITEM_HEIGHT = 48
 
-class LongMenu extends React.Component {
+class Index extends React.Component {
   constructor (props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -51,13 +52,13 @@ class LongMenu extends React.Component {
             }
           }}
         >
-          <SendReviewBtn />
-          <PrintBtn rwd />
-          <ResetCourseBtn />
+          <SendReview />
+          <Print rwd />
+          <ResetCourse />
         </Menu>
       </div>
     )
   }
 }
 
-export default LongMenu
+export default Index

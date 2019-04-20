@@ -1,7 +1,7 @@
-import React from 'react'
-import './GradTable.css'
 
-import GradCategory from './GradCategory'
+import React from 'react'
+import GradTable from './GradTable'
+import './GradTable.css'
 
 class PrintForm extends React.Component {
   render () {
@@ -20,7 +20,8 @@ class PrintForm extends React.Component {
 
           if (this.props.reviewCheck === 0) {
             generalCat.push(item)
-          } else {
+          }
+          else {
             if (this.props.generalCourseSelect === 0 && item.title === '通識(舊制)') {
               generalCat.push(item)
             }
@@ -28,10 +29,12 @@ class PrintForm extends React.Component {
               generalCat.push(item)
             }
           }
-        } else {
+        }
+        else {
           generalCat.push(item)
         }
-      } else if (item.require !== 0) {
+      }
+      else if (item.require !== 0) {
         depCat.push(item)
       }
     })
@@ -51,7 +54,8 @@ class PrintForm extends React.Component {
         default:
           break
       }
-    } else {
+    }
+    else {
       switch (this.props.profile.program) {
         case '資工A':
         case '資工B':
@@ -121,13 +125,15 @@ class PrintForm extends React.Component {
           </tr>
         </tbody>
 
-        {depCat.map((category, index) =>
-          <GradCategory
-            key={index}
-            subjects={category.course}
-            name={category.title}
-          />
-        )}
+        {
+          depCat.map((category, index) => (
+            <GradTable
+              key={index}
+              subjects={category.course}
+              name={category.title}
+            />
+          ))
+        }
 
         <tbody>
           <tr>
@@ -137,14 +143,16 @@ class PrintForm extends React.Component {
           </tr>
         </tbody>
 
-        {generalCat.map((category, index) =>
-          <GradCategory
-            key={index}
-            subjects={category.course}
-            name={category.title}
-            graduationCheckEnglishTest={this.props.graduationCheckEnglishTest}
-          />
-        )}
+        {
+          generalCat.map((category, index) => (
+            <GradTable
+              key={index}
+              subjects={category.course}
+              name={category.title}
+              graduationCheckEnglishTest={this.props.graduationCheckEnglishTest}
+            />
+          ))
+        }
       </table>
     )
   }

@@ -1,9 +1,35 @@
+
 import React from 'react'
 import './GradTable.css'
 
-import GradSubject from './GradSubject'
+class GradSubject extends React.Component {
+  render () {
+    let realscore = [null, null, null, null, null, null, null, null, null, null, null, null]
+    realscore[this.props.year * 3 + this.props.semester - 3] = this.props.score
+    return (
+      <tr className={(this.props.name === ' ') ? 'bigger-row' : ''}>
+        <td className='left-text'>{this.props.name}</td>
+        <td>{realscore[0]}</td>
+        <td>{realscore[1]}</td>
+        <td>{realscore[2]}</td>
+        <td>{realscore[3]}</td>
+        <td>{realscore[4]}</td>
+        <td>{realscore[5]}</td>
+        <td>{realscore[6]}</td>
+        <td>{realscore[7]}</td>
+        <td>{realscore[8]}</td>
+        <td>{realscore[9]}</td>
+        <td>{realscore[10]}</td>
+        <td>{realscore[11]}</td>
+        <td>{this.props.credit}</td>
+        <td>{this.props.realCredit}</td>
+        <td className='left-text' style={{ paddingLeft: 5 }}>{this.props.comment}</td>
+      </tr>
+    )
+  }
+}
 
-class GradCategory extends React.Component {
+class GradTable extends React.Component {
   render () {
     let { name, subjects } = this.props
     for (let i = 0; i < subjects.length; i++) {
@@ -47,7 +73,8 @@ class GradCategory extends React.Component {
       }
 
       // 未修
-      if ((subjects[i].score === null || subjects[i].score === -1) && subjects[i].complete === false) {
+      if ((subjects[i].score === null || subjects[i].score === -1) &&
+          subjects[i].complete === false) {
         subjects[i].realCredit = '　'
         subjects[i].originalCredit += '　'
       }
@@ -75,28 +102,33 @@ class GradCategory extends React.Component {
           <td className='title-text'>備註</td>
         </tr>
 
-        {subjects.map((subject, index) =>
-          <GradSubject
-            key={index}
-            name={subject.cn + ' ' + subject.en}
-            credit={subject.originalCredit}
-            realCredit={subject.realCredit}
-            score={subject.score}
-            semester={subject.semester}
-            year={subject.year}
-            comment={subject.comment + ((subject.english === true) ? ' 英文授課' : '')}
-          />
-        )}
-        {name === '外語' &&
-        <tr>
-          <td className='bg-orange left-text' colSpan='17'>
-            <span style={{ fontSize: '8pt', fontWeight: 'bold', color: '#0000FF' }}>★英檢未通過者需加修並通過「英文進階課程」4學分或於畢業前自行報名並通過所列任ㄧ英文能力檢定考試與標準</span>
-          </td>
-        </tr>
+        {
+          subjects.map((subject, index) => (
+            <GradSubject
+              key={index}
+              name={subject.cn + ' ' + subject.en}
+              credit={subject.originalCredit}
+              realCredit={subject.realCredit}
+              score={subject.score}
+              semester={subject.semester}
+              year={subject.year}
+              comment={subject.comment + ((subject.english === true) ? ' 英文授課' : '')}
+            />
+          ))
+        }
+        {
+          name === '外語' &&
+          <tr>
+            <td className='bg-orange left-text' colSpan='17'>
+              <span style={{ fontSize: '8pt', fontWeight: 'bold', color: '#0000FF' }}>
+                ★英檢未通過者需加修並通過「英文進階課程」4學分或於畢業前自行報名並通過所列任ㄧ英文能力檢定考試與標準
+              </span>
+            </td>
+          </tr>
         }
       </tbody>
     )
   }
 }
 
-export default GradCategory
+export default GradTable

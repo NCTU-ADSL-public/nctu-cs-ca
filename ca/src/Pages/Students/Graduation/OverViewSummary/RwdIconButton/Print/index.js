@@ -1,11 +1,12 @@
+
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import { connect } from 'react-redux'
 import PrintIcon from '@material-ui/icons/Print'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
 
@@ -31,9 +32,13 @@ class Index extends React.Component {
 
   render () {
     const { classes, rwd } = this.props
+    const sid = this.props.studentIdcard.student_id
     if (rwd) {
       return (
-        <MenuItem className={classes.menuItem} onClick={() => this.printGradTable('104學年度畢業預審表-' + this.props.studentIdcard.student_id)}>
+        <MenuItem
+          className={classes.menuItem}
+          onClick={() => this.printGradTable('104學年度畢業預審表-' + sid)}
+        >
           <ListItemIcon className={classes.icon}>
             <PrintIcon />
           </ListItemIcon>
@@ -43,7 +48,14 @@ class Index extends React.Component {
     }
     return (
       <div>
-        <Button variant='contained' color='default' className={classes.button} size='large' fullWidth onClick={() => this.printGradTable('104學年度畢業預審表-' + this.props.studentIdcard.student_id)}>
+        <Button
+          variant='contained'
+          color='default'
+          className={classes.button}
+          size='large'
+          fullWidth
+          onClick={() => this.printGradTable('104學年度畢業預審表-' + sid)}
+        >
           <PrintIcon className={classes.icon} />
           列印預審文件
         </Button>
@@ -57,9 +69,7 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  printdata: state.Student.Graduation.data,
-  studentIdcard: state.Student.User.studentIdcard,
-  englishCheck: state.Student.Graduation.englishCheck
+  studentIdcard: state.Student.User.studentIdcard
 })
 
 const mapDispatchToProps = (dispatch) => ({

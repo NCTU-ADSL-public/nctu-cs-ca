@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -16,7 +17,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Select from '@material-ui/core/Select'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
-import PrintForm from '../PrintBtn/PrintForm'
+import PrintForm from '../Print/PrintForm'
 import { reviewSubmit } from '../../../../../../Redux/Students/Actions/Graduation/'
 
 const styles = theme => ({
