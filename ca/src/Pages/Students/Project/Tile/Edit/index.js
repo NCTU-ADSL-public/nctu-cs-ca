@@ -263,7 +263,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     student_id: id,
     semester: ownProps.project.semester,
     research_title: ownProps.project.research_title,
-    replace_pro: ownProps.project.replace_pro === 1 ? 0 : 1
+    replace_pro: ownProps.project.replace_pro === 1 ? 0 : 1,
+    tname: ownProps.project.tname
   }))
 })
 
