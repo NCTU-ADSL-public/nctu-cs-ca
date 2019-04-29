@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 import defaultPic from '../../../Resources/defalt.jpg'
@@ -12,8 +11,11 @@ import Chip from 'material-ui/Chip'
 import { Dialog } from 'material-ui'
 // for multiTheme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles/index'
+// REDUX
+import { connect } from 'react-redux'
+import { fetchResearchApplyList, fetchResearchList } from '../../../Redux/Teachers/Actions/Research/index'
+
 const styles = {
   noticeTitle: {
     fontSize: '2.8em',
@@ -105,148 +107,34 @@ const styles = {
   }
 }
 
+
 class GroupApply extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       loading: true,
-      fuck: '系統正在讀取資料中，請耐心等候。',
-      current_accept: 0,
+      message: '系統正在讀取資料中，請耐心等候。',
       chipOpen: new Map(),
-      applyList: [],
-      // applyList: [
-      //   { research_title: '資料錯誤',
-      //     status: 0,
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0399999',
-      //         sname: '陳罐頭',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       },
-      //       { student_id: '0391234',
-      //         sname: '郭梁兒',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       },
-      //       { student_id: '0391666',
-      //         sname: '耿平',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 0,
-      //       },
-      //       { student_id: '0416014',
-      //         sname: '王立洋',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       },
-      //       { student_id: '0391444',
-      //         sname: '俞阿杰',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 0,
-      //       }
-      //     ]
-      //   },
-      //   { research_title: '我的專題',
-      //     status: 0,
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0416014',
-      //         sname: '王立洋',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       }
-      //     ]
-      //   },
-      //   { research_title: '資料錯誤',
-      //     status: '2',
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0399997',
-      //         sname: '陳乾頭',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 0,
-      //       }
-      //     ]
-      //   },
-      //   { research_title: '資料錯誤',
-      //     status: '3',
-      //     year: '107-1',
-      //     first_second: '2',
-      //     participants: [
-      //       { student_id: '0399987',
-      //         sname: '陳憨頭',
-      //         email: 'danny021406@gmail.com',
-      //         phone: '',
-      //         first_second: '2',
-      //         student_status: 1,
-      //       }
-      //     ]
-      //   }
-      // ]
+      sem: getSemester()
     }
   }
 
   fetchData () {
-    let validId = true
-    if(this.props.idCard.teacher_id === '001')
-      validId = false
-    if(validId) {
-      axios.get('/professors/researchApply/list', {
-        id: this.props.idCard.teacher_id
-      }).then(res => {
-        console.log(res.data)
-        this.setState({
-          applyList: res.data,
-          loading: false
-        })
-      }).catch(err => {
-        console.log(err)
-      })
-      let Today = new Date()
-      let semester = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
-      axios.post('/professors/research/list', {
-        teacherId: this.props.idCard.teacher_id,
-        sem: semester
-      }).then(res => {
-        this.setState({loading: false})
-        this.setState({
-          current_accept: res.data.current_accept,
-        })
-      }).catch(err => {
-        this.setState({fuck: '抱歉，好像讀不到資料的樣子。'})
-        console.log(err)
-      })
-    }else{
-      let inter = 250
-      // Magic update
+    this.setState({loading: true})
+    let tid = this.props.idCard.teacher_id
+    let sem = this.state.sem
+    if( tid === '001' ){
+      // NOT A VALID TID
       setTimeout(
         () => {
           console.log('----- fetchData AGAIN!!!! ----')
           this.fetchData()
-        }, inter)
-
-      this.setState({
-        fuck: '唉呀，好像有什麼出錯了。',
-        loading: false
-      })
+        }, 1500)
+      return
     }
+    this.props.FetchResearchApplyList(tid)
+    this.props.FetchResearchList(tid, sem)
+    this.setState({loading: false})
   }
 
   componentDidMount () {
@@ -289,7 +177,8 @@ class GroupApply extends React.Component {
   }
 
   render () {
-    const acc = this.state.current_accept
+    const acc = this.props.research.current_accept
+    const { applyList } = this.props
     return (
       <Grid style={{minHeight: 500}}>
         <Row>
@@ -316,15 +205,15 @@ class GroupApply extends React.Component {
 
         </Row>
         <Row style={styles.groups}>
-          {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.fuck}</div>}
+          {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.message}</div>}
           <Loading
             size={100}
             left={40}
             top={100}
             isLoading={this.state.loading} />
-          {this.state.applyList.length !== 0
+          {!this.state.loading && applyList !== undefined
             ?
-              this.state.applyList.map((item, i) => (
+              applyList.map((item, i) => (
                 <ApplyButton
                   key={i}
                   keyId={i}
@@ -336,7 +225,7 @@ class GroupApply extends React.Component {
                   handleRequestClose={this.handleRequestClose}
                 />
               ))
-            : '(目前尚無專題申請)'
+            : ''
           }
         </Row>
       </Grid>
@@ -346,10 +235,10 @@ class GroupApply extends React.Component {
 
 const StudentStatusHint = (props) => (
   <MuiThemeProvider>
-      <Chip style={styles.chip }
-            backgroundColor={ props.status === 1 ? '#BDD8CC' : '#FFCD80' }>
-        <Avatar src={defaultPic}/> { props.status === 1 ? '本系生' : '外系生' }
-      </Chip>
+    <Chip style={styles.chip }
+          backgroundColor={ props.status === 1 ? '#BDD8CC' : '#FFCD80' }>
+      <Avatar src={defaultPic}/> { props.status === 1 ? '本系生' : '外系生' }
+    </Chip>
   </MuiThemeProvider>
 )
 
@@ -418,11 +307,20 @@ const ApplyButton = (props) => {
   )
 }
 
+const getSemester = () => {
+  const Today = new Date()
+  return ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0))) + '-' + ((Today.getMonth() + 1) >= 8 ? '1' : '2')
+}
+
 
 const mapStateToProps = (state) => ({
   idCard: state.Teacher.User.idCard,
+  applyList: state.Teacher.Research.applyList,
+  research: state.Teacher.Research.research
 })
 const mapDispatchToProps = (dispatch) => ({
+  FetchResearchApplyList: (tid) => dispatch(fetchResearchApplyList()),
+  FetchResearchList: (tid, sem) => dispatch(fetchResearchList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(GroupApply))
