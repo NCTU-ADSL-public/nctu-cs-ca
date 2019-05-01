@@ -40,7 +40,7 @@ class Index extends React.Component {
     const { check, englishCheck, overview } = this.props
     let reviewStatus, englishStatus
 
-    switch (check) {
+    switch (parseInt(check)) {
       case 0:
         reviewStatus = '未送審'
         break
@@ -53,9 +53,11 @@ class Index extends React.Component {
       default:
         reviewStatus = '錯誤'
     }
-    console.log("english check");
+    console.log("englishCheck");
     console.log(englishCheck);
-    switch (englishCheck) {
+    console.log("parseInt(englishCheck)")
+    console.log(parseInt(englishCheck));
+    switch (parseInt(englishCheck)) {
       case 0:
         englishStatus = '未考過英檢'
         break
@@ -74,6 +76,8 @@ class Index extends React.Component {
       default:
         englishStatus = '未考過英檢'
     }
+    console.log("englishStatus")
+    console.log(englishStatus)
 
     return (
       <div>
