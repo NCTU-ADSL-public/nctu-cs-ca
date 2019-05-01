@@ -74,7 +74,7 @@ class Index extends React.Component {
         englishStatus = '已考過英檢'
         break
       default:
-        englishStatus = '未考過英檢'
+        englishStatus = '錯誤'
     }
     console.log("englishStatus")
     console.log(englishStatus)
