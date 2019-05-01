@@ -53,6 +53,8 @@ class Index extends React.Component {
       default:
         reviewStatus = '錯誤'
     }
+    console.log("english check");
+    console.log(englishCheck);
     switch (englishCheck) {
       case 0:
         englishStatus = '未考過英檢'
