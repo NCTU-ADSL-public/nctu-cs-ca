@@ -10,7 +10,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
 // REDUX
-import { changeCourse, fetchGraduationCourse } from '../../../../../../Redux/Students/Actions/Graduation'
+import { changeCourse, fetchGraduationCourse, fetchLegalMoveTarget } from '../../../../../../Redux/Students/Actions/Graduation'
 import '../../../../../../../node_modules/animate.css/animate.css'
 
 const style = {
@@ -72,16 +72,9 @@ class Index extends React.Component {
   }
 
   fetchTarget () {
-    axios.post('/students/graduate/legalMoveTarget', {
-      cn: this.props.item.cn, // 中文課名
-      code: this.props.item.code, // 課號
-      type: this.props.item.type,
-      studentId: this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
-    }).then(res => {
-      this.setState({targets: res.data})
-    }).catch(err => {
-      console.log(err)
-    })
+    const {cn, code, type} = this.props.item
+    const id = this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
+    this.props.fetchLegalMoveTarget(cn, code, type, id)
   }
 
   handleClick (event) {
@@ -141,7 +134,8 @@ class Index extends React.Component {
 
   render () {
     const { label, classes, englishCheck } = this.props
-    const { anchorEl, targets } = this.state
+    const item = this.props.item
+    const { anchorEl } = this.state
     const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'english' || this.state.targets.length === 0
 
     return (
@@ -165,7 +159,7 @@ class Index extends React.Component {
           onClose={this.handleClose}
           className={classes.root}
         >
-          {targets.map((item, index) => (
+          {item.moveTargets !== undefined ? item.moveTargets.map((item, index) => (
             <MenuItem
               key={index}
               onClick={() => this.handleItemSelected(item.title)}
@@ -173,7 +167,7 @@ class Index extends React.Component {
             >
               {item.title}
             </MenuItem>
-          ))}
+          )) : ''}
 
         </Menu>
 
@@ -195,6 +189,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
+  fetchLegalMoveTarget: (cn, code, type, id) => dispatch(fetchLegalMoveTarget(cn, code, type, id)),
   changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
 })
 

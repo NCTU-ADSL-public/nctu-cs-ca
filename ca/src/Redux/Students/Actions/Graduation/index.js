@@ -12,6 +12,7 @@ export const storeGradEnglishTestCheck = createAction('STORE_GRAD_ENGLISH_TEST_C
 export const updateCourse = createAction('UPDATE_COURSE')
 export const fetchStart = createAction('FETCH_START')
 export const storeStudentInfo = createAction('STORE_STUDENT_INFO')
+export const storeLegalMoveTarget = createAction('STORE_LEGAL_MOVE_TARGET')
 
 const fetchCourseOnly = (payload) => dispatch => {
   axios
@@ -122,4 +123,18 @@ export const changeCourse = (from, end, course) => dispatch => {
 
 export const filterInput = value => dispatch => {
   dispatch(filterinput(value))
+}
+
+export const fetchLegalMoveTarget = (cn, code, type, id) => dispatch => {
+  axios.post('/students/graduate/legalMoveTarget', {
+    cn: cn, // 中文課名
+    code: code, // 課號
+    type: type,
+    studentId: id
+  }).then(res => {
+    let payload = { targets: res.data, cn, code, type }
+    dispatch(storeLegalMoveTarget(payload))
+  }).catch(err => {
+    console.log(err)
+  })
 }

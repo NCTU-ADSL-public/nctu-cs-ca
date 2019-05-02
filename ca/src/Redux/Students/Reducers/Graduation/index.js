@@ -31,6 +31,23 @@ export default handleActions({
       status: 'DONE'
     }
   },
+  STORE_LEGAL_MOVE_TARGET: (state, action) => {
+    let overview = state.overview
+    let { targets, cn, code, type } = action.payload
+    let typeId = overview.findIndex(x => x.course.find(x => x.cn === cn && x.code === code && x.type === type))
+    let courseId = overview[typeId].course.findIndex(x => x.cn === cn && x.code === code && x.type === type)
+    let newCourse = overview[typeId].course[courseId]
+    newCourse = { ...newCourse, moveTargets: targets }
+    overview[typeId].course[courseId] = newCourse
+    //
+    console.log('------------------- STORE_LEGAL_MOVE_TARGET ----------------------')
+    console.log(overview)
+    //
+    return {
+      ...state,
+      overview
+    }
+  },
   UPDATE_COURSE: (state, action) => {
     let newdata = state.data
     let indexRef = action.payload
