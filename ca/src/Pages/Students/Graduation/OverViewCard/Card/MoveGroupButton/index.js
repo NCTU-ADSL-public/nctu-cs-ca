@@ -136,7 +136,7 @@ class Index extends React.Component {
     const { label, classes, englishCheck } = this.props
     const item = this.props.item
     const { anchorEl } = this.state
-    const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'english' || this.state.targets.length === 0
+    const shouldBeDisabled = ((englishCheck === '0' || englishCheck === null) && this.props.item.cn.search('進階英文') !== -1) || this.props.item.reason === 'english' || this.item.moveTargets.length === 0
 
     return (
       <div style={style.Popover}>
