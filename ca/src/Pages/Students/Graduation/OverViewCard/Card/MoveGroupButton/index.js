@@ -75,6 +75,8 @@ class Index extends React.Component {
     const {cn, code, type} = this.props.item
     const id = this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
     this.props.fetchLegalMoveTarget(cn, code, type, id)
+    this.forceUpdate()
+    console.log(this.props.item)
   }
 
   handleClick (event) {
