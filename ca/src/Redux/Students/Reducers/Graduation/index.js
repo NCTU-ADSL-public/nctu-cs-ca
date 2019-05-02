@@ -45,7 +45,7 @@ export default handleActions({
     //
     return {
       ...state,
-      data
+      data: [ ...data ]
     }
   },
   UPDATE_COURSE: (state, action) => {
