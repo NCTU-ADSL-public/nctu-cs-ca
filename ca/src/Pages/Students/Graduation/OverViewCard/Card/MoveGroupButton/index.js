@@ -141,9 +141,8 @@ class Index extends React.Component {
         (englishCheck === '0' || englishCheck === null) &&
         this.props.item.cn.search('進階英文') !== -1
       ) ||
-      this.props.item.reason === 'english' ||
-      this.item.moveTargets === undefined ||
-      this.item.moveTargets.length === 0
+      this.props.item.reason === 'english'
+      // typeof this.item.moveTargets === 'undefined'
     )
 
     return (
@@ -154,10 +153,10 @@ class Index extends React.Component {
           onClick={this.handleClick}
           className={classes.root}
           // 由前端所擋掉的移動
-          disabled={shouldBeDisabled}
+          disabled={shouldBeDisabled || item.moveTargets === undefined || item.moveTargets.length === 0}
           // style={{ display: shouldBeDisabled ? 'none' : '' }}
         >
-          {shouldBeDisabled ? '不能移動此課程' : label}
+          { shouldBeDisabled || item.moveTargets === undefined || item.moveTargets.length === 0 ? '不能移動此課程' : label }
         </Button>
 
         <Menu
