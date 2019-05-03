@@ -79,7 +79,7 @@ class Index extends React.Component {
       () => {
         console.log('----- MoveGroupButton CHECK this.props.item ----')
         console.log(this.props.item)
-      }, 5000)
+      }, 1000)
   }
 
   handleClick (event) {
