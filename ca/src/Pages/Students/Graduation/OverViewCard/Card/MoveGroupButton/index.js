@@ -75,11 +75,6 @@ class Index extends React.Component {
     const {cn, code, type} = this.props.item
     const id = this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
     this.props.fetchLegalMoveTarget(cn, code, type, id)
-    setTimeout(
-      () => {
-        console.log('----- MoveGroupButton CHECK this.props.item ----')
-        console.log(this.props.item)
-      }, 1000)
   }
 
   handleClick (event) {
@@ -111,6 +106,11 @@ class Index extends React.Component {
       console.log('┌---- RESPONSE ----')
       console.log(res)
       console.log('└------------------')
+      //
+      // REFRESH
+      window.location.reload()
+      //
+      //
       let inter = 250
       // Magic update
       while (inter < 100000) {
