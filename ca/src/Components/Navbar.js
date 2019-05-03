@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Navbar, Nav, NavItem, DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap'
 import defalt from '../Resources/defalt.jpg'
-import dinoIcon from '../Resources/dinoIcon_snow.gif'
+import dinoIcon from '../Resources/dinoIcon_graduate.png'
 import NavButton from './NavButton'
 import './Navbar.css'
 

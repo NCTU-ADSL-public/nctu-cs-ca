@@ -75,8 +75,11 @@ class Index extends React.Component {
     const {cn, code, type} = this.props.item
     const id = this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
     this.props.fetchLegalMoveTarget(cn, code, type, id)
-    this.forceUpdate()
-    console.log(this.props.item)
+    setTimeout(
+      () => {
+        console.log('----- MoveGroupButton CHECK this.props.item ----')
+        console.log(this.props.item)
+      }, 5000)
   }
 
   handleClick (event) {
@@ -155,10 +158,10 @@ class Index extends React.Component {
           onClick={this.handleClick}
           className={classes.root}
           // 由前端所擋掉的移動
-          disabled={shouldBeDisabled || item.moveTargets === undefined || item.moveTargets.length === 0}
+          disabled={shouldBeDisabled}
           // style={{ display: shouldBeDisabled ? 'none' : '' }}
         >
-          { shouldBeDisabled || item.moveTargets === undefined || item.moveTargets.length === 0 ? '不能移動此課程' : label }
+          { shouldBeDisabled ? '不能移動此課程' : label }
         </Button>
 
         <Menu
