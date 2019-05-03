@@ -32,7 +32,7 @@ export default handleActions({
     }
   },
   STORE_LEGAL_MOVE_TARGET: (state, action) => {
-    let data = state.data
+    let data = JSON.parse(JSON.stringify(state.data))
     let { targets, cn, code, type } = action.payload
     let typeId = data.findIndex(x => x.course.find(x => x.cn === cn && x.code === code && x.type === type))
     let courseId = data[typeId].course.findIndex(x => x.cn === cn && x.code === code && x.type === type)
@@ -45,7 +45,7 @@ export default handleActions({
     //
     return {
       ...state,
-      data: [ ...data ]
+      data
     }
   },
   UPDATE_COURSE: (state, action) => {
