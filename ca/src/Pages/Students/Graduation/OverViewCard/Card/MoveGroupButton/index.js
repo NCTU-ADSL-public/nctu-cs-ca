@@ -118,7 +118,7 @@ class Index extends React.Component {
       console.log('└------------------')
       //
       // REFRESH
-      window.location.reload()
+      // window.location.reload()
       //
       //
       let inter = 250
@@ -156,8 +156,7 @@ class Index extends React.Component {
         (englishCheck === '0' || englishCheck === null) &&
         item.cn.search('進階英文') !== -1
       ) ||
-      item.reason === 'english' ||
-      targets.length === 0
+      item.reason === 'english'
       // typeof this.item.moveTargets === 'undefined'
     )
 

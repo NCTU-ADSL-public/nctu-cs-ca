@@ -56,7 +56,7 @@ if (!firebase.apps.length) {
 const Router = () => (
   <BrowserRouter>
     <div>
-      <Route path='/' component={Snow} />
+      {/*<Route path='/' component={Snow} />*/}
 
       <Route path='/assistants' component={AssistantHead} />
       <Route path='/students' component={StudentHead} />
