@@ -1,20 +1,17 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import SwipeableViews from 'react-swipeable-views'
 
 import Student from './Student'
+import Teacher from './Teacher'
+import Score from './Score'
 
 const styles = theme => ({
-  tabRoot: {
-    minWidth: '33%',
-    minHeight: '60px'
-  },
   tabsIndicator: {
-    backgroundColor: 'rgb(0, 188, 212)'
+    backgroundColor: '#68BB66'
   },
   tabRoot: {
     minWidth: '33%',
@@ -24,10 +21,69 @@ const styles = theme => ({
     fontSize: 25
   },
   tabSelected: {
-    color: 'rgb(0, 188, 212)',
+    color: '#68BB66',
     transition: 'color 0.3s'
   }
 })
+
+class index extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      tabIndex: 0
+    }
+  }
+
+  render () {
+    const { classes } = this.props
+
+    return (
+      <div>
+        <Tabs
+          value={this.state.tabIndex}
+          onChange={(event, value) => this.setState({ tabIndex: value })}
+          centered
+          classes={{
+            root: classes.tabsRoot,
+            indicator: classes.tabsIndicator
+          }}
+        >
+          <Tab
+            label='學生狀況'
+            classes={{
+              root: classes.tabRoot,
+              label: classes.tabLabel,
+              selected: classes.tabSelected
+            }}
+          />
+          <Tab
+            label='教授狀況'
+            classes={{
+              root: classes.tabRoot,
+              label: classes.tabLabel,
+              selected: classes.tabSelected
+            }}
+          />
+          <Tab
+            label='成績查詢'
+            classes={{
+              root: classes.tabRoot,
+              label: classes.tabLabel,
+              selected: classes.tabSelected
+            }}
+          />
+        </Tabs>
+        <SwipeableViews
+          index={this.state.tabIndex}
+        >
+          <div><Student /></div>
+          <div><Teacher /></div>
+          <div><Score /></div>
+        </SwipeableViews>
+      </div>
+    )
+  }
+}
 
 const mapStateToProps = (state) => ({
 
@@ -36,54 +92,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 
 })
-
-class index extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      tab_index: 0
-    }
-  }
-
-  render () {
-    const { classes } = this.props
-    const { tab_index } = this.state
-
-    return (
-      <div>
-        <Tabs
-          value={tab_index}
-          onChange={
-            (event, value) => this.setState({ tab_index: value })
-          }
-          centered
-          classes={{
-            root: classes.tabsRoot,
-            indicator: classes.tabsIndicator
-          }}
-        >
-          {['學生狀況', '教授狀況', '成績查詢'].map((title, _) =>
-            <Tab
-              key={_}
-              label={title}
-              classes={{
-                root: classes.tabRoot,
-                label: classes.tabLabel,
-                selected: classes.tabSelected
-              }}
-            />
-          )}
-        </Tabs>
-        <SwipeableViews
-          index={tab_index}
-        >
-          <div><Student /></div>
-          <div>Hello23</div>
-          <div>Hello123</div>
-        </SwipeableViews>
-      </div>
-    )
-  }
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))

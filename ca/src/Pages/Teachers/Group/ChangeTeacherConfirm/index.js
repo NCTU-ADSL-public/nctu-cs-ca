@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ChangeTeacher } from '../../../../Redux/Teachers/Actions/Project'
+import { ChangeTeacher } from '../../../../Redux/Teachers/Actions/Research'
 import Button from '@material-ui/core/Button'
 
 class Index extends React.Component {

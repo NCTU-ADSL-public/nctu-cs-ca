@@ -1,0 +1,14 @@
+
+.general-course-dimension {
+	background-color: #EAEAEA;
+	font-size: 18px;
+	padding-left: 15px;
+	white-space:nowrap;
+}
+
+.general-left-arrow {
+	border-color: transparent transparent transparent #EAEAEA;
+	border-style: dashed solid dashed dashed;
+	border-width: 17px 0px 17px 20px;
+	margin-left: -60px;
+}

@@ -23,7 +23,7 @@ import FirstPage from '@material-ui/icons/FirstPage'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 import LastPage from '@material-ui/icons/LastPage'
-import { fetchStudent, triggerUpdateData } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
+import { fetchStudent, triggerUpdateData } from '../../../Redux/Assistants/Actions/Graduation/index'
 import Button from '@material-ui/core/Button'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink/*,CSVDownload*/ } from "react-csv"
@@ -245,6 +245,7 @@ class index extends React.Component {
               <div style = {{ display: 'flex' }}>
                 {['資A', '資B'].map( (title, index) => (
                     <Chip
+                      key = {index}
                       label = {
                         <span>
                           <div style = {{ display: 'inline', verticalAlign: 'middle' }} >{title}</div>
@@ -260,6 +261,7 @@ class index extends React.Component {
               <div style = {{ display: 'flex' }}>
                 {['網多', '資電'].map( (title, index) => (
                   <Chip
+                    key = {index}
                     label = {
                       <span>
                         <div style = {{ display: 'inline', verticalAlign: 'middle' }} >{title}</div>
@@ -376,7 +378,6 @@ class index extends React.Component {
                 onChange = {
                   (event) => {
                     this.setState({ input: event.target.value, page: 0 })
-                    console.log(students)
                   }
                 }
                 value = { input }

@@ -14,7 +14,7 @@ import Tab from '@material-ui/core/Tab'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Tooltip from '@material-ui/core/Tooltip'
-import { setGradutateState } from '../../../Redux/Assistants/Actions/Graduation_v2/index'
+import { setGradutateState } from '../../../Redux/Assistants/Actions/Graduation/index'
 
 const styles = theme => ({
   card: {
@@ -194,8 +194,8 @@ class ListPanel extends React.Component {
                       style={{ width: '100%' }}
                     >
                       {
-                        student.current.map((title) => (
-                          <Tab label={title} classes={{
+                        student.current.map((title, index) => (
+                          <Tab key = {index} label={title} classes={{
                             root: classes.tabRootCurrent,
                             label: classes.tabLabel,
                             selected: classes.tabSelected
@@ -203,8 +203,8 @@ class ListPanel extends React.Component {
                         ))
                       }
                       {
-                        student.compulse.map((title) => (
-                          <Tab label={title} classes={{
+                        student.compulse.map((title, index) => (
+                          <Tab key = {index} label={title} classes={{
                             root: classes.tabRoot,
                             label: classes.tabLabel,
                             selected: classes.tabSelected
@@ -227,8 +227,8 @@ class ListPanel extends React.Component {
                         style={{ width: '100%' }}
                       >
                         {
-                          student.current.map((title) => (
-                            <Tab label={title} classes={{
+                          student.current.map((title, index) => (
+                            <Tab key = {index} label={title} classes={{
                               root: classes.tabRootCurrent,
                               label: classes.tabLabel,
                               selected: classes.tabSelected
@@ -236,8 +236,8 @@ class ListPanel extends React.Component {
                           ))
                         }
                         {
-                          student.compulse.map((title) => (
-                            <Tab label={title} classes={{
+                          student.compulse.map((title, index) => (
+                            <Tab key = {index} label={title} classes={{
                               root: classes.tabRoot,
                               label: classes.tabLabel,
                               selected: classes.tabSelected
