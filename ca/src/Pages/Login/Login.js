@@ -9,7 +9,7 @@ import './Login.css'
 import PopoverExampleAnimation from './popover'
 import { grey50 } from 'material-ui/styles/colors'
 
-import dinoIcon from '../../Resources/dinodino_login.png'
+import dinoIcon from '../../Resources/dinodino_login_graduate.png'
 
 class Login extends React.Component {
   constructor (props) {
