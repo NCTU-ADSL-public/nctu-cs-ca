@@ -72,9 +72,19 @@ class Index extends React.Component {
   }
 
   fetchTarget () {
-    const {cn, code, type} = this.props.item
-    const id = this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
-    this.props.fetchLegalMoveTarget(cn, code, type, id)
+    axios.post('/students/graduate/legalMoveTarget', {
+      cn: this.props.item.cn, // 中文課名
+      code: this.props.item.code, // 課號
+      type: this.props.item.type,
+      studentId: this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
+    }).then(res => {
+      this.setState({targets: res.data})
+    }).catch(err => {
+      console.log(err)
+    })
+    // const {cn, code, type} = this.props.item
+    // const id = this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
+    // this.props.fetchLegalMoveTarget(cn, code, type, id)
   }
 
   handleClick (event) {
@@ -140,13 +150,14 @@ class Index extends React.Component {
   render () {
     const { label, classes, englishCheck } = this.props
     const item = this.props.item
-    const { anchorEl } = this.state
+    const { anchorEl, targets } = this.state
     const shouldBeDisabled = (
       (
         (englishCheck === '0' || englishCheck === null) &&
-        this.props.item.cn.search('進階英文') !== -1
+        item.cn.search('進階英文') !== -1
       ) ||
-      this.props.item.reason === 'english'
+      item.reason === 'english' ||
+      targets.length === 0
       // typeof this.item.moveTargets === 'undefined'
     )
 
@@ -171,7 +182,7 @@ class Index extends React.Component {
           onClose={this.handleClose}
           className={classes.root}
         >
-          {item.moveTargets !== undefined ? item.moveTargets.map((item, index) => (
+          {targets !== undefined ? targets.map((item, index) => (
             <MenuItem
               key={index}
               onClick={() => this.handleItemSelected(item.title)}
