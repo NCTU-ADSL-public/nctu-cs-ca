@@ -151,7 +151,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下'][this.props.original_course_semester]}
+                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
               />
               <TextField
                 label='學分'
@@ -377,7 +377,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下'][this.props.original_course_semester]}
+                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
