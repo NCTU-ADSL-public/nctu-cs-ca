@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles,createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import {
   ExpansionPanel,
   ExpansionPanelDetails,
@@ -33,6 +33,7 @@ import FaceIcon from '@material-ui/icons/Face'
 import TrashIcon from '@material-ui/icons/Delete'
 import CheckNone from '@material-ui/icons/CheckBoxOutlineBlank'
 import ReturnIcon from '@material-ui/icons/Replay'
+import HistoryIcon from '@material-ui/icons/History'
 import TIcon from '@material-ui/icons/TurnedInNot'
 // import SwitchIcon from '@material-ui/icons/Flag'
 import Check from '@material-ui/icons/CheckBox'
@@ -42,178 +43,23 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import FakeData from '../../../Resources/FakeData'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from 'react-csv'
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: 'rgb(104, 187, 102)'
-    }
-  }
-})
-
-const styles = () => ({
-  root: {
-    margin: '100px auto',
-    marginBottom: 50,
-    width: '90%'
-  },
-  loading: {
-    position: 'relative',
-    left: '45%'
-  },
-  subtitle: {
-    fontSize: '1.2em'
-  },
-  progress: {
-    margin: '0 10px'
-  },
-  btn: {
-    fontSize: 15,
-    minWidth: 150,
-    textAlign: 'center'
-  },
-  input: {
-    fontSize: 17
-  },
-  font: {
-    fontSize: 15,
-    fontWeight: 400,
-    textAlign: 'center'
-  },
-  font2: {
-    fontSize: 14,
-    fontWeight: 400,
-    textAlign: 'center'
-  },
-  font3: {
-    color: 'rgba(0, 0, 0, 0.54)',
-    fontSize: 16,
-    fontWeight: 400,
-    textAlign: 'center',
-    '&:not(:first-child)': {
-      borderLeft: 'white solid 1px'
-    }
-  },
-  font4: {
-    color: '#f44336',
-    fontSize: 14,
-    fontWeight: 400,
-    textAlign: 'center'
-  },
-  font5: {
-    fontSize: 16,
-    fontWeight: 400
-    // textAlign: 'center'
-  },
-  font6: {
-    fontSize: 15,
-    fontWeight: 400,
-    cursor: 'pointer',
-    textAlign: 'center'
-  },
-  to: {
-    display: 'inline-block',
-    width: 100,
-    height: 10,
-    backgroundColor: '#eee'
-  },
-  action: {
-    position: 'relative',
-    right: 10
-  },
-  side: {
-    position: 'fixed',
-    top: 110,
-    left: 5,
-    width: 50
-  },
-  sideIcon2: {
-    position: 'absolute',
-    top: 60,
-    left: 'calc(100vw - 260px)'
-  },
-  Panels: {
-    width: 'calc(100vw - 80px)',
-    position: 'absolute',
-    top: 110,
-    left: 60,
-    paddingBottom: 50
-  },
-  selected: {
-    backgroundColor: '#b2e4a57d'
-  },
-  options: {
-    background: '#f5f5f5',
-    width: '100%',
-    zIndex: 20,
-    top: 0,
-    marginLeft: 58,
-    paddingTop: 60,
-    left: 0,
-    position: 'fixed'
-    // borderBottom: '1px solid rgba(0, 0, 0, 0.34)'
-  },
-  state: {
-    position: 'fixed',
-    left: 6,
-    bottom: 6,
-    color: '#eee',
-    zIndex: 1080
-  },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  chip: {
-    fontWeight: 'normal',
-    marginRight: '1em'
-  },
-  header: {
-    backgroundColor: 'rgba(143, 195, 131, 0.23)',
-    padding: '2px  0'
-  }
-})
-
-const Arrow = () => (
-  <svg height='8' width='130'>
-    <circle cx='2' cy='4' r='2' fill='rgb(200,200,200)' />
-    <circle cx='8' cy='4' r='2' fill='rgb(195,195,195)' />
-    <circle cx='14' cy='4' r='2' fill='rgb(190,190,190)' />
-    <circle cx='20' cy='4' r='2' fill='rgb(185,185,185)' />
-    <circle cx='26' cy='4' r='2' fill='rgb(180,180,180)' />
-    <circle cx='32' cy='4' r='2' fill='rgb(175,175,175)' />
-    <circle cx='38' cy='4' r='2' fill='rgb(170,170,170)' />
-    <circle cx='44' cy='4' r='2' fill='rgb(165,165,165)' />
-    <circle cx='50' cy='4' r='2' fill='rgb(160,160,160)' />
-    <circle cx='56' cy='4' r='2' fill='rgb(155,155,155)' />
-    <circle cx='62' cy='4' r='2' fill='rgb(150,150,150)' />
-    <circle cx='68' cy='4' r='2' fill='rgb(145,145,145)' />
-    <circle cx='74' cy='4' r='2' fill='rgb(140,140,140)' />
-    <circle cx='80' cy='4' r='2' fill='rgb(135,135,135)' />
-    <circle cx='86' cy='4' r='2' fill='rgb(130,130,130)' />
-    <circle cx='92' cy='4' r='2' fill='rgb(125,125,125)' />
-    <circle cx='98' cy='4' r='2' fill='rgb(120,120,120)' />
-    <circle cx='104' cy='4' r='2' fill='rgb(115,115,115)' />
-    <circle cx='110' cy='4' r='2' fill='rgb(110,110,110)' />
-    <circle cx='116' cy='4' r='2' fill='rgb(105,105,105)' />
-    <polygon points='121,0 121,8 129,4' style={{fill: 'rgb(100,100,100)'}} />
-  </svg>
-)
-const type = [[0], [1], [5], [2], [6], [3, 4]]
-const typeName = [['本系必修課程抵免', '#8ed875', '必'], ['英授專業課程抵免', '#3498DB', '英'], ['學分抵免', '#2C3E50', '抵'], ['課程免修', '#E74C3C', '免']]
-const statusName = ['申請中', '等候主管同意', '同意抵免', '抵免失敗', '抵免失敗', '等候老師同意', '退回等學生修改']
-const creditName = ['compulsory_course', 'english_course', 'waive_course', 'exempt_course']
+import Arrow from './Arrow'
+import { theme, styles } from './styles'
+import {type, typeName, statusName, creditName } from './macro'
 
 class Verify extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-// for test
+/******start for test*****
       formList: FakeData.FormList.map((e, i) => ({...e, id: i})),
       teacherList: FakeData.TeacherList.sort((a, b) => b.status - a.status),
-// end for test
-      // formList:[],
-      // teacherList: [],
+      formListOld:FakeData.FormList.map((e, i) => ({...e, id: i})),
+*********end for test***************/
+      formList:[],
+      teacherList: [],
+      formListOld:[],
+      isOld: false,
       open: false,
       message: 0,
       index: 0,
@@ -223,24 +69,8 @@ class Verify extends React.Component {
       transferTo: '',
       return: '',
       anchorEl: null,
-      fetching: false
+      fetching: true
     }
-    this.handleAgree = this.handleAgree.bind(this)
-    this.handleDisagree = this.handleDisagree.bind(this)
-    this.handleReset = this.handleReset.bind(this)
-    this.handleSelect = this.handleSelect.bind(this)
-    this.handleSend = this.handleSend.bind(this)
-    this.handleWithdraw = this.handleWithdraw.bind(this)
-    this.handleAllReset = this.handleAllReset.bind(this)
-    this.selectAll = this.selectAll.bind(this)
-    this.snackbarOpen = this.snackbarOpen.bind(this)
-    this.snackbarClose = this.snackbarClose.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleOk = this.handleOk.bind(this)
-    this.handleSwitch = this.handleSwitch.bind(this)
-    this.handleReason = this.handleReason.bind(this)
-    this.handleReturn = this.handleReturn.bind(this)
-    this.downCSV = this.downCSV.bind(this)
   }
   componentDidMount () {
     // get TeacherList for TransferTo
@@ -253,13 +83,16 @@ class Verify extends React.Component {
     }).catch(err => {
       console.log(err)
     })
+    axios.get('/assistants/offsetApply/Show?old=true').then(res => {
+      this.setState({formListOld: res.data.map((e, i) => ({...e, id: i}))})
+    }).catch(err => {
+      console.log(err)
+    })
   }
-
-  handleChange (event) {
+  handleChange = (event) => {
     this.setState({ transferTo: event.target.value})
   }
-
-  handleAgree (id) {
+  handleAgree = (id) => {
     // let updatedList = this.state.formList
     // updatedList[id].agreeByA = 1
     // this.setState({formList:updatedList})
@@ -287,7 +120,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleDisagree (id) {
+  handleDisagree = (id) =>{
     // let updatedList = this.state.formList
     // updatedList[id].agreeByA = 2
     // this.setState({formList:updatedList})
@@ -315,7 +148,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleReset (id) {
+  handleReset = (id) => {
     // let updatedList = this.state.formList
     // updatedList[id].agreeByA = 0
     // this.setState({formList:updatedList})
@@ -343,7 +176,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleSelect (e, id) {
+  handleSelect = (e, id) => {
     let updatedArray = this.state.select
     if (this.state.select.includes(id)) {
       updatedArray = updatedArray.filter(e => e !== id)
@@ -358,7 +191,7 @@ class Verify extends React.Component {
     }
     e.stopPropagation()
   }
-  handleOk () {
+  handleOk = () => {
     let updatedList = this.state.formList
     axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
@@ -386,7 +219,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleWithdraw () {
+  handleWithdraw = () => {
     let updatedList = this.state.formList
     axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
@@ -414,7 +247,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleSend () {
+  handleSend = () => {
     let updatedList = this.state.formList
     let status = this.state.teacherList.filter(e => e.id === this.state.transferTo)[0].status === 1 ? 1 : 5
     axios.post('/assistants/offsetApply/setAgree', {
@@ -443,7 +276,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleAllReset () {
+  handleAllReset = () => {
     let updatedList = this.state.formList
     axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
@@ -471,7 +304,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleReturn () {
+  handleReturn = () => {
     let updatedList = this.state.formList
     axios.post('/assistants/offsetApply/setAgree', {
       courses: this.state.select.map(
@@ -499,7 +332,7 @@ class Verify extends React.Component {
       this.setState({open: true, message: 1})
     })
   }
-  handleSwitch (i) {
+  handleSwitch = (i) => {
     if (this.state.type.length === 4) {
       let tmp = []
       tmp.push(i)
@@ -518,10 +351,11 @@ class Verify extends React.Component {
       this.setState({selectAll: false, select: [], type: tmp})
     }
   }
-  handleReason (e) {
+  handleReason =(e) =>
+   {
     this.setState({return: e.target.value})
   }
-  selectAll () {
+  selectAll = () => {
     let updatedArray = this.state.select
     if (!this.state.selectAll) {
       updatedArray = this.state.formList.filter(e => (type[this.state.index].includes(e.status) && this.state.type.includes(e.type))).map(e => e.id)
@@ -530,7 +364,7 @@ class Verify extends React.Component {
       this.setState({select: [], selectAll: false, transferTo: ''})
     }
   }
-  downCSV (i) {
+  downCSV = (i) => {
     switch (i) {
       case 2:
         return (this.state.formList.filter(e => (e.type === 2))
@@ -643,18 +477,21 @@ class Verify extends React.Component {
         break
     }
   }
-  snackbarOpen () {
+  snackbarOpen = () => {
     this.setState({open: true})
   }
-  snackbarClose () {
+  snackbarClose = () => {
     this.setState({open: false})
   }
   render () {
     const {classes} = this.props
     // const semester = ['上', '下', '暑']
+    let Data = this.state.isOld ? this.state.formListOld : this.state.formList
     return (
       <div className={classes.root}>
-        {/* <span className={classes.state}>{`目前顯示：${['申請中', '等待主任同意', '等待授課老師同意', '已同意'][this.state.index]}的${typeName[this.state.type][0]}抵免單`}</span> */}
+        {/* {
+          this.state.isOld && <span className={classes.state}>{`目前顯示為歷史資料，欲至本學期抵免請點擊左下按鈕`}</span>
+        } */}
         <MuiThemeProvider theme={theme}>
           <div className={classes.side}>
             {/* { this.state.formList.filter(e => e.status===0).length > 0 && */}
@@ -666,7 +503,7 @@ class Verify extends React.Component {
                   selectAll: false,
                   isRecord: false
                 })}
-                color={(this.state.index === 0) ? 'primary' : 'default'}
+                color={(this.state.index === 0) ? this.state.isOld ? 'secondary':'primary' : 'default'}
             >
                 <ApplyIcon />
               </IconButton>
@@ -680,7 +517,7 @@ class Verify extends React.Component {
                   selectAll: false,
                   isRecord: false
                 })}
-                color={(this.state.index === 1) ? 'primary' : 'default'}
+                color={(this.state.index === 1) ? this.state.isOld ? 'secondary':'primary' : 'default'}
             >
                 <WaitIcon />
               </IconButton>
@@ -693,7 +530,7 @@ class Verify extends React.Component {
                   selectAll: false,
                   isRecord: false
                 })}
-                color={(this.state.index === 2) ? 'primary' : 'default'}
+                color={(this.state.index === 2) ? this.state.isOld ? 'secondary':'primary' : 'default'}
             >
                 <AlarmIcon />
               </IconButton>
@@ -707,7 +544,7 @@ class Verify extends React.Component {
                   selectAll: false,
                   isRecord: false
                 })}
-                color={(this.state.index === 3) ? 'primary' : 'default'}
+                color={(this.state.index === 3) ? this.state.isOld ? 'secondary':'primary' : 'default'}
             >
                 <OKIcon />
               </IconButton>
@@ -721,7 +558,7 @@ class Verify extends React.Component {
                   selectAll: false,
                   isRecord: false
                 })}
-                color={(this.state.index === 4) ? 'primary' : 'default'}
+                color={(this.state.index === 4) ?this.state.isOld ? 'secondary': 'primary' : 'default'}
             >
                 <ReturnIcon />
               </IconButton>
@@ -734,9 +571,24 @@ class Verify extends React.Component {
                   selectAll: false,
                   isRecord: false
                 })}
-                color={(this.state.index === 5) ? 'primary' : 'default'}
+                color={(this.state.index === 5) ?this.state.isOld ? 'secondary': 'primary' : 'default'}
             >
                 <TrashIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={'歷史資料'} placement='right'>
+              <IconButton className={classes.sideIconBottom}
+                onClick={() => {
+                  this.setState({
+                    isOld: !this.state.isOld,
+                    select: [],
+                    selectAll: false,
+                    isRecord: false
+                  })
+                }}
+                color={(this.state.isOld) ? 'secondary' : 'default'}
+            >
+                <HistoryIcon />
               </IconButton>
             </Tooltip>
           </div>
@@ -889,7 +741,7 @@ class Verify extends React.Component {
                     <TrashIcon />
                   </IconButton>
                 </Tooltip> */}
-              </React.Fragment>))
+              </React.Fragment>)) || (this.state.index === 6 && "")
               )
             }
           <div className={classes.sideIcon2}>
@@ -1024,11 +876,11 @@ class Verify extends React.Component {
           {
             this.state.fetching
             ? (<MuiThemeProvider theme={theme}>
-              <CircularProgress className={classes.loading} />
+              <CircularProgress className={classes.loading} color={this.state.isOld? 'secondary':'primary'}/>
             </MuiThemeProvider>)
-            : (this.state.formList.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
-              ? this.state.formList
-                .filter(
+            : 
+            (Data.filter(apply => (type[this.state.index].includes(apply.status)) && (this.state.type.includes(apply.type))).length > 0
+              ? Data.filter(
                   apply => type[this.state.index].includes(apply.status) && (this.state.type.includes(apply.type))
                 )
                 .map(
@@ -1090,14 +942,10 @@ class Verify extends React.Component {
                               </React.Fragment>
                             }
                           </span>
-                          {/* <Chip
-                            style={apply.previous ? {background: '#28a745', color: '#fff', fontSize: 14, fontWeight: 400}
-                              : {background: '#6c757d', color: '#fff', fontSize: 14, fontWeight: 400}}
-                            label={
-                              apply.previous
-                                ? <span onClick={(e) => e.stopPropagation()}>以前已同意過此抵免規則</span>
-                                : <span onClick={(e) => e.stopPropagation()}>以前未有過此抵免規則</span>
-                            } /> */}
+                          {apply.previous && 
+                          <Chip
+                            style={{background: '#e26e6e', color: '#fff', fontSize: 14, fontWeight: 400}}
+                            label={<span onClick={(e) => e.stopPropagation()}>重送的抵免單</span>} />}
                           {apply.status === 5 && <Chip
                             style={{background: '#dc3545', color: '#fff', fontSize: 14, fontWeight: 400, marginLeft: 5}}
                             label={
@@ -1131,7 +979,7 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>課程綱要</TableCell>
                             </TableRow>
                             <TableRow>
-                              <TableCell className={classes.font}>{`${apply.nameA}${apply.type !== 3 ? `(${apply.codeA})` : ''}`}</TableCell>
+                              <TableCell className={classes.font}>{`${apply.year}-${apply.semester} ${apply.nameA}${apply.type !== 3 ? ` (${apply.codeA})` : ''}`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
                               <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
