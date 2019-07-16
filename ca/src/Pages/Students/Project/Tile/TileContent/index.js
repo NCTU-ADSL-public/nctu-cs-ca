@@ -55,7 +55,6 @@ class TileContent extends React.Component {
           <p><i className='glyphicon glyphicon-file' />團隊報告: { this.getFile() }</p>
           <p><i className='glyphicon glyphicon-user' />指導教授: { data.tname }</p>
           <p><i className='glyphicon glyphicon-pencil' />年度: { data.semester }</p>
-          <p><i className='glyphicon glyphicon-bullhorn' />分數: { data.score }</p>
         </div>
         <div className='col-xs-12 col-sm-12 col-md-5 col-lg-5' style={{ marginTop: '5px' }}>
           <br />
@@ -76,7 +75,6 @@ class TileContent extends React.Component {
           <p><i className='glyphicon glyphicon-file' />團隊報告: { this.getFile() }</p>
           <p><i className='glyphicon glyphicon-user' />指導教授: { data.tname }</p>
           <p><i className='glyphicon glyphicon-pencil' />年度: { data.semester }</p>
-          <p><i className='glyphicon glyphicon-bullhorn' />分數: { data.score }</p>
         </div>
       </div>
     )
