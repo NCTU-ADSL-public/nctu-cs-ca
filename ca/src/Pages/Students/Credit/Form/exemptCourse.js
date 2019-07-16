@@ -188,6 +188,7 @@ class ExemptCourseForm extends React.Component {
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
+                <MenuItem value={3} style={{ height: '10px' }}>暑</MenuItem>
               </TextField>
               <TextField
                 label='學分'
@@ -470,6 +471,7 @@ class ExemptCourseForm extends React.Component {
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
+                <MenuItem value={3} style={{ height: '10px' }}>暑</MenuItem>
               </TextField>
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}

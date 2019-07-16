@@ -50,7 +50,7 @@ const decideBtnBgColor = (completed, reason, selection) => {
 }
 
 const GeneralCoursePopover = props => {
-  const { rwd, type, title } = props
+  const { rwd, type, title, assis } = props
   return (
     <div className='col-xs-6 col-sm-3 col-md-2'>
       <PopoverButton
@@ -67,7 +67,7 @@ const GeneralCoursePopover = props => {
                   <div style={{ float: 'right', color: '#9e48d9' }}>&nbsp;&nbsp;&nbsp;(當期課程)</div>
                   <div style={{ margin: '0 0 15px 8px' }}>
                     {/* An option for student to move a course to other group */}
-                    {this.props.assis ? '' : <MoveGroupButton
+                    {assis ? '' : <MoveGroupButton
                       key={key}
                       title={title}
                       item={course}
@@ -83,7 +83,7 @@ const GeneralCoursePopover = props => {
                   <div style={{ float: 'right', color: '#6A94A2' }}>&nbsp;&nbsp;&nbsp;{course.score}</div>
                   <div style={{ margin: '0 0 15px 8px' }}>
                     {/* An option for student to move a course to other group */}
-                    {this.props.assis ? '' : <MoveGroupButton
+                    {assis ? '' : <MoveGroupButton
                       key={key}
                       title={title}
                       item={course}

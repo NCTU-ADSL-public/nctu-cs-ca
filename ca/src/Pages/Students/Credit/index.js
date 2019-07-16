@@ -1,12 +1,12 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-// import { Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-// import Menu from '@material-ui/core/Menu'
+import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import WaiveCoursePanel from './Panel/waiveCoursePanel'
 import ExemptCoursePanel from './Panel/exemptCoursePanel'
@@ -139,7 +139,7 @@ class Index extends React.Component {
     const exemptCourse = this.props.creditInfo.exempt_course.filter((data) => this.checkFilter(1, data.status))
     const compulsoryCourse = this.props.creditInfo.compulsory_course.filter((data) => this.checkFilter(2, data.status))
     const englishCourse = this.props.creditInfo.english_course.filter((data) => this.checkFilter(3, data.status))
-    // const anchorElement = this.state.showPrintMenu
+    const anchorElement = this.state.showPrintMenu
     const printFormNumber = this.state.printFormNumber
 
     return (
@@ -182,7 +182,6 @@ class Index extends React.Component {
                   <MenuItem value={3} style={{ height: '10px' }}>退件</MenuItem>
                 </Select>
               </FormControl>
-              {/*
               <Link to='/students/credit/apply'>
                 <Button
                   className={classes.btn}
@@ -215,14 +214,12 @@ class Index extends React.Component {
                   <MenuItem onClick={() => this.printApplicationTable(1, '課程免修申請表')}>課程免修申請表</MenuItem>
                 </Menu>
               </div>
-              */}
             </div>
           </div>
 
           {/* For mobile screen */}
           <div className='hidden-sm hidden-md hidden-lg' style={{ margin: '20px 20px 5px 20px' }}>
             <div style={{ width: '300px' }}>
-              {/*
               <Link to='/students/credit/apply'>
                 <Button
                   className={classes.btn}
@@ -255,7 +252,6 @@ class Index extends React.Component {
                 <MenuItem onClick={() => this.printApplicationTable(0, '抵免學分申請表')}>抵免學分申請表</MenuItem>
                 <MenuItem onClick={() => this.printApplicationTable(1, '課程免修申請表')}>課程免修申請表</MenuItem>
               </Menu>
-              */}
             </div>
 
             <FormControl className={classes.formControl}>

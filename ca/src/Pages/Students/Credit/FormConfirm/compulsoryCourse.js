@@ -204,7 +204,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下'][this.props.course_semester]}
+                defaultValue={['', '上', '下', '暑'][this.props.course_semester]}
               />
             </div>
 
@@ -510,7 +510,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下'][this.props.course_semester]}
+                defaultValue={['', '上', '下', '暑'][this.props.course_semester]}
               />
             </div>
 
