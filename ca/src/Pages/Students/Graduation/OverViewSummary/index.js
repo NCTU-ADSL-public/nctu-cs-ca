@@ -2,7 +2,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CircularProgressbar from 'react-circular-progressbar'
-import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import RwdIconButton from './RwdIconButton'
 import DetailProgressBar from './DetailProgressBar'
