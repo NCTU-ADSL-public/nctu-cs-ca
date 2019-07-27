@@ -37,7 +37,7 @@ class Index extends React.Component {
       return (
         <MenuItem
           className={classes.menuItem}
-          onClick={() => this.printGradTable('104學年度畢業預審表-' + sid)}
+          onClick={() => this.printGradTable('105學年度畢業預審表-' + sid)}
         >
           <ListItemIcon className={classes.icon}>
             <PrintIcon />
@@ -54,7 +54,7 @@ class Index extends React.Component {
           className={classes.button}
           size='large'
           fullWidth
-          onClick={() => this.printGradTable('104學年度畢業預審表-' + sid)}
+          onClick={() => this.printGradTable('105學年度畢業預審表-' + sid)}
         >
           <PrintIcon className={classes.icon} />
           列印預審文件
