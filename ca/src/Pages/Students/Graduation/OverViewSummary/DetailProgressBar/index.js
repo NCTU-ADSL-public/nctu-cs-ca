@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import withMobileDialog from '@material-ui/core/withMobileDialog/'
 import AnimatedProgress from '../../../../../Components/AnimatedProgress'
+import './style.css'
 
 const styles = theme => ({
   root: {

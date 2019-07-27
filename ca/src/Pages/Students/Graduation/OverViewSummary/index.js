@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import RwdIconButton from './RwdIconButton'
 import DetailProgressBar from './DetailProgressBar'
-import './style.css'
 
 const styles = theme => ({
   progress: {
