@@ -7,70 +7,23 @@ import Divider from '@material-ui/core/Divider'
 import RwdIconButton from './RwdIconButton'
 import DetailProgressBar from './DetailProgressBar'
 
-const styles = theme => ({
-  progress: {
-    left: '30px',
-    top: '30px',
-    position: 'absolute'
-  },
-  progressRwd: {
-    position: 'absolute',
-    left: '18%'
-  },
-  button: {
-    margin: '20px 0 20px 0',
-    background: '#7c7c7c',
-    color: '#ffffff'
-  },
-  icon: {
-    marginRight: theme.spacing.unit
-  },
-  text: {
-    fontSize: '40px',
-    left: '100px',
-    top: '90px',
-    position: 'absolute',
-    textAlign: 'center'
-  }
-})
+const reviewStatus = {
+  '0': '未送審',
+  '1': '審核中',
+  '2': '審核通過',
+  '3': '審核不通過'
+}
+const englishStatus = {
+  '0': '未考過英檢',
+  '1': '通過外語榮譽學分（可免修外語）',
+  '2': '已通過英檢免試申請',
+  '3': '已考過英檢',
+  '4': '已考過英檢'
+}
 
 class Index extends React.Component {
   render () {
     const { check, englishCheck, overview } = this.props
-    let reviewStatus, englishStatus
-
-    switch (parseInt(check)) {
-      case 0:
-        reviewStatus = '未送審'
-        break
-      case 1:
-        reviewStatus = '審核中'
-        break
-      case 2:
-        reviewStatus = '審核完畢'
-        break
-      default:
-        reviewStatus = '錯誤'
-    }
-    switch (parseInt(englishCheck)) {
-      case 0:
-        englishStatus = '未考過英檢'
-        break
-      case 1:
-        englishStatus = '通過外語榮譽學分（可免修英文）'
-        break
-      case 2:
-        englishStatus = '已通過英檢免試申請'
-        break
-      case 3:
-        englishStatus = '已考過英檢'
-        break
-      case 4:
-        englishStatus = '已考過英檢'
-        break
-      default:
-        englishStatus = '錯誤'
-    }
 
     return (
       <div>
@@ -96,11 +49,11 @@ class Index extends React.Component {
                   </div>
                 }
                 <div>
-                  是否已考過英檢：{englishStatus}
+                  是否已考過英檢：{ englishStatus[englishCheck] }
                 </div>
                 <div>
                   畢業預審是否已送交助理審核：
-                  <span style={{ color: '#FF0000' }}>{reviewStatus}</span>
+                  <span style={{ color: '#FF0000' }}>{ reviewStatus[check] }</span>
                 </div>
               </div>
               <div className='pull-right col-sm-1 col-md-1'>
@@ -161,4 +114,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
+export default connect(mapStateToProps, mapDispatchToProps)(Index)
