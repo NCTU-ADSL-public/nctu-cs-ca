@@ -35,7 +35,7 @@ import StudentCredit from './Pages/Students/Credit'
 import StudentCreditApply from './Pages/Students/Credit/Stepper'
 
 import Footer from './Components/Footer'
-import Snow from 'react-snow-effect'
+// import Snow from 'react-snow-effect'
 
 import AutoLogout from './Components/AutoLogout'
 import firebase from 'firebase'

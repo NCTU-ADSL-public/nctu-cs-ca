@@ -8,7 +8,7 @@ class GradSubject extends React.Component {
     realscore[this.props.year * 3 + this.props.semester - 3] = this.props.score
 
     return (
-      <tr className={(this.props.name === ' ') && 'bigger-row'}>
+      <tr className={(this.props.name === ' ') ? 'bigger-row' : ''}>
         <td className='left-text'>{ this.props.name }</td>
         {
           realscore.map((score, index) =>(
