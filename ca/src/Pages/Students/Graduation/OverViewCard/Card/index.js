@@ -162,10 +162,23 @@ class Index extends React.Component {
             <div style={{ padding: '15px' }}>
               {
                 this.props.title === '通識(舊制)'
-                  ? <GeneralCourseList courses={this.props.data.course} title={this.props.title} rwd />
+                  ? <GeneralCourseList
+                    courses={this.props.data.course}
+                    title={this.props.title}
+                    rwd
+                  />
                   : this.props.title === '通識(新制)'
-                    ? <GeneralNewCourseList courses={this.props.data.course} overview={this.props.data} title={this.props.title} rwd />
-                    : <CourseList items={this.props.data.course} title={this.props.title} rwd />
+                    ? <GeneralNewCourseList
+                      courses={this.props.data.course}
+                      overview={this.props.data}
+                      title={this.props.title}
+                      rwd
+                    />
+                    : <CourseList
+                      courses={this.props.data.course}
+                      title={this.props.title}
+                      rwd
+                    />
               }
             </div>
           </Dialog>
@@ -198,55 +211,64 @@ class Index extends React.Component {
                 </div>
               </div>
               {
-                this.props.title === '共同必修'
-                  ? <div
-                    className='col-md-3'
-                    style={{ marginLeft: '-7%' }}
+                this.props.title === '共同必修' &&
+                <div className='col-md-3' style={{ marginLeft: '-7%' }}>
+                  <Button
+                    variant='outlined'
+                    aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                    aria-haspopup='true'
+                    onClick={this.professionalMenuOpen}
+                    disabled={this.props.reviewCheck !== 0}
                   >
-                    <Button
-                      variant='outlined'
-                      aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
-                      aria-haspopup='true'
-                      onClick={this.professionalMenuOpen}
-                      disabled={this.props.reviewCheck !== 0}
-                    >
-                      {
-                        !isNaN(this.props.professionalField)
-                          ? professionalGroup[this.props.professionalField]
-                          : '畢業組別選擇'
-                      }
-                    </Button>
-                    <Menu
-                      id='simple-menu'
-                      anchorEl={this.state.anchorEl}
-                      open={Boolean(this.state.anchorEl)}
-                      onClose={this.professionalMenuClose}
-                      className={classes.root}
-                    >
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
-                        網多組(網)
-                      </MenuItem>
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
-                        網多組(多)
-                      </MenuItem>
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(2, e)}>
-                        資工組
-                      </MenuItem>
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(3, e)}>
-                        資電組
-                      </MenuItem>
-                    </Menu>
-                  </div>
-                  : <div />
+                    {
+                      !isNaN(this.props.professionalField)
+                        ? professionalGroup[this.props.professionalField]
+                        : '畢業組別選擇'
+                    }
+                  </Button>
+                  <Menu
+                    id='simple-menu'
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.professionalMenuClose}
+                    className={classes.root}
+                  >
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
+                      網多組(網)
+                    </MenuItem>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
+                      網多組(多)
+                    </MenuItem>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(2, e)}>
+                      資工組
+                    </MenuItem>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(3, e)}>
+                      資電組
+                    </MenuItem>
+                  </Menu>
+                </div>
               }
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               {
                 this.props.title === '通識(舊制)'
-                  ? <GeneralCourseList assis={this.props.assis} courses={this.props.data.course} title={this.props.title} />
+                  ? <GeneralCourseList
+                    assis={this.props.assis}
+                    courses={this.props.data.course}
+                    title={this.props.title}
+                  />
                   : this.props.title === '通識(新制)'
-                    ? <GeneralNewCourseList assis={this.props.assis} courses={this.props.data.course} overview={this.props.data} title={this.props.title} />
-                    : <CourseList assis={this.props.assis} items={this.props.data.course} title={this.props.title} />
+                    ? <GeneralNewCourseList
+                      assis={this.props.assis}
+                      courses={this.props.data.course}
+                      overview={this.props.data}
+                      title={this.props.title}
+                    />
+                    : <CourseList
+                      assis={this.props.assis}
+                      courses={this.props.data.course}
+                      title={this.props.title}
+                    />
               }
             </ExpansionPanelDetails>
           </ExpansionPanel>
