@@ -6,7 +6,10 @@ import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 
-import { statusHandleChange } from '../../../../Redux/Assistants/Actions/Project/Status'
+import {
+  fetchStatus,
+  statusHandleChange
+} from '../../../../Redux/Assistants/Actions/Project/Status'
 
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
@@ -45,6 +48,16 @@ class StatusControl extends React.Component {
     super(props);
     this.state = {
         
+    }
+  }
+
+  fetchStatus = (payload) => {
+    if (
+      payload.year !== "" &&
+      payload.semester !== "" &&
+      payload.first_second !== ""
+    ) {
+      this.props.fetch_status(payload)
     }
   }
 
@@ -102,6 +115,11 @@ class StatusControl extends React.Component {
                 this.props.statusHandleChange({ 
                   year: event.target.value 
                 })
+                this.fetchStatus({
+                  year: event.target.value,
+                  semester: Status.semester,
+                  first_second: Status.first_second
+                })
               }
             }
           >
@@ -138,6 +156,11 @@ class StatusControl extends React.Component {
                 this.props.statusHandleChange({ 
                   semester: event.target.value 
                 })
+                this.fetchStatus({
+                  year: Status.year,
+                  semester: event.target.value,
+                  first_second: Status.first_second
+                })
               }
             }
           >
@@ -173,6 +196,11 @@ class StatusControl extends React.Component {
                 this.props.statusHandleChange({ 
                   first_second: event.target.value 
                 })
+                this.fetchStatus({
+                  year: Status.year,
+                  semester: Status.semester,
+                  first_second: event.target.value
+                })
               }
             }
           >
@@ -190,7 +218,18 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  statusHandleChange: (payload) => dispatch(statusHandleChange(payload))
+  statusHandleChange: (payload) => dispatch(statusHandleChange(payload)),
+  fetch_status: (payload) => dispatch(fetchStatus(payload))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StatusControl))
+
+/*
+
+      props.fetch_status({
+        year: props.Status.year,
+        semester: props.Status.semester,
+        first_second: props.Status.first_second
+      })
+*/

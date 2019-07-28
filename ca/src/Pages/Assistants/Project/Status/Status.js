@@ -15,9 +15,6 @@ import green from '@material-ui/core/colors/green'
 import Avatar from '@material-ui/core/Avatar'
 import Chip from '@material-ui/core/Chip'
 
-import {
-  fetchStatus
-} from '../../../../Redux/Assistants/Actions/Project/Status'
 
 const ADD_STATUS_COLOR = [red['A100'], green[300]]
 const STATUS_COLOR_L = [red[100], green[200]]
@@ -50,20 +47,6 @@ class Status extends React.Component {
     super(props);
     this.state = {
         
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.Status.year !== "" &&
-      nextProps.Status.semester !== "" &&
-      nextProps.Status.first_second !== ""
-    ) {
-      
-      nextProps.fetch_status({
-        year: nextProps.Status.year,
-        semester: nextProps.Status.semester,
-        first_second: nextProps.Status.first_second
-      })
     }
   }
 
@@ -174,7 +157,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_status: (payload) => dispatch(fetchStatus(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Status))
