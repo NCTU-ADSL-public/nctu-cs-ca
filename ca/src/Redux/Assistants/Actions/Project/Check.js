@@ -17,8 +17,8 @@ import axios from 'axios'
 //   })
 // }
 
-export const score_handle_change = createAction('SCORE_HANDLE_CHANGE');
+export const check_handle_change = createAction('CHECK_HANDLE_CHANGE');
 
-export const scoreHandleChange = (payload) => dispatch => {
-    dispatch(score_handle_change(payload));
+export const checkHandleChange = (payload) => dispatch => {
+    dispatch(check_handle_change(payload));
 }

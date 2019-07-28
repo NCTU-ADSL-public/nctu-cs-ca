@@ -17,8 +17,18 @@ import axios from 'axios'
 //   })
 // }
 
-export const score_handle_change = createAction('SCORE_HANDLE_CHANGE');
+export const status_handle_change = createAction('STATUS_HANDLE_CHANGE');
 
-export const scoreHandleChange = (payload) => dispatch => {
-    dispatch(score_handle_change(payload));
+export const statusHandleChange = (payload) => dispatch => {
+    dispatch(status_handle_change(payload));
+}
+
+export const fetchStatus = (payload) => dispatch => {
+    axios.post('/assistants/research/professorList', payload).then(res => {
+        console.log("axios post /assistants/research/professorList")
+        dispatch(status_handle_change({teachers: res.data}))
+        console.log({teachers: res.data})
+    }).catch(err => {
+        console.log(err)
+    })
 }

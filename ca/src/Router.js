@@ -38,7 +38,7 @@ import Footer from './Components/Footer'
 import Snow from 'react-snow-effect'
 
 import AutoLogout from './Components/AutoLogout'
-import firebase from 'firebase'
+import firebase from 'firebase' 
 
 injectTapEventPlugin()
 let config = {

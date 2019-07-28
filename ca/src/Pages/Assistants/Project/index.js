@@ -1,96 +1,164 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import SwipeableViews from 'react-swipeable-views'
 
-import Student from './Student'
-import Teacher from './Teacher'
-import Score from './Score'
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+
+import Check from './Check/Check';
+import CheckControl from './Check/CheckControl';
+import Status from './Status/Status';
+import StatusControl from './Status/StatusControl';
+import Score from './Score/Score';
+import ScoreControl from './Score/ScoreControl';
+
 
 const styles = theme => ({
-  tabsIndicator: {
-    backgroundColor: '#68BB66'
+  root: {
+    width: '100%',
   },
-  tabRoot: {
-    minWidth: '33%',
-    minHeight: '60px'
+  drawer: {
+    position: 'fixed',
+    overflow: 'hidden',
+    zIndex: 1,
+    flexGrow: 1,
+    display: 'flex',
+    height: '100vh',
   },
-  tabLabel: {
-    fontSize: 25
+  button: {
+    fontSize: '20px',
   },
-  tabSelected: {
-    color: '#68BB66',
-    transition: 'color 0.3s'
-  }
+  drawerPaper: {
+    position: 'relative',
+    width: '30vh',
+    background: '#EBEBEB',
+    color: '#3B3B3B'
+  },
+  warningText: {
+    fontSize: '30px',
+    flex: 1,
+    textAlign: 'center',
+    color: '#6f6f6f'
+  },
+
+  cssLabel: {
+    fontSize: 20,
+    '&$cssFocused': {
+      color: '#68BB66'
+    },
+    fontWeight: 'normal'
+  },
+  cssFocused: {},
+  cssUnderline: {
+    '&:after': {
+      borderBottomColor: '#68BB66'
+    },
+  },
 })
 
 class index extends React.Component {
-  constructor () {
-    super()
+
+  constructor(props) {
+    super(props);
     this.state = {
-      tabIndex: 0
+      type: 'UNCHOOSE',
     }
+    
   }
 
   render () {
-    const { classes } = this.props
+    const { classes } = this.props;
+    const { type } = this.state;
 
     return (
-      <div>
-        <Tabs
-          value={this.state.tabIndex}
-          onChange={(event, value) => this.setState({ tabIndex: value })}
-          centered
-          classes={{
-            root: classes.tabsRoot,
-            indicator: classes.tabsIndicator
-          }}
-        >
-          <Tab
-            label='學生狀況'
+      <div className={classes.root}>
+        <div className={classes.drawer}>
+          <Drawer
+            variant="permanent"
             classes={{
-              root: classes.tabRoot,
-              label: classes.tabLabel,
-              selected: classes.tabSelected
+              paper: classes.drawerPaper,
             }}
-          />
-          <Tab
-            label='教授狀況'
-            classes={{
-              root: classes.tabRoot,
-              label: classes.tabLabel,
-              selected: classes.tabSelected
-            }}
-          />
-          <Tab
-            label='成績查詢'
-            classes={{
-              root: classes.tabRoot,
-              label: classes.tabLabel,
-              selected: classes.tabSelected
-            }}
-          />
-        </Tabs>
-        <SwipeableViews
-          index={this.state.tabIndex}
-        >
-          <div><Student /></div>
-          <div><Teacher /></div>
-          <div><Score /></div>
-        </SwipeableViews>
+          >
+            <Button 
+              className={classes.button}
+              style = {{
+                color: (type === 'CHECK' ? '#68BB66' : '#6f6f6f')
+              }}
+              onClick = { () => this.setState({
+                type: 'CHECK'
+              })}
+            >
+              專題審核
+            </Button>
+            <Button 
+              className={classes.button}
+              style = {{
+                color: (type === 'STATUS' ? '#68BB66' : '#6f6f6f'),
+              }}
+              onClick = { () => this.setState({
+                type: 'STATUS'
+              })}
+            >
+              專題狀況
+            </Button>
+            <Button 
+              className={classes.button} 
+              style = {{
+                color: (type === 'SCORE' ? '#68BB66' : '#6f6f6f')
+              }}
+              onClick = { () => this.setState({
+                type: 'SCORE'
+              })}
+            >
+              專題評分
+            </Button>
+            <Divider />
+            {
+              type === 'UNCHOOSE' ? (
+                ''
+              ) : type === 'CHECK' ? (
+                <CheckControl />
+              ) : type === 'STATUS' ? (
+                <StatusControl />
+              ) : type === 'SCORE' ? (
+                <ScoreControl />
+              ) : ''
+            }
+          </Drawer>
+        </div>
+        <div style = {{ marginLeft: '30vh' }}>
+        {
+          type === 'UNCHOOSE' ? (
+            <div style = {{ display: 'flex', width: '100%' }}>
+              <div style = {{ flex: 0.1 }}/>
+              <div className={classes.warningText}>
+                請選取左方的選項
+              </div>
+              <div style = {{ flex: 0.1 }} />
+            </div>
+          ) : type === 'CHECK' ? (
+            <Check />
+          ) : type === 'STATUS' ? (
+            <Status />
+          ) : type === 'SCORE' ? (
+            <Score />
+          ) : ''
+        }
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-
+  Status: state.Assistant.Project.Status,
+  Check: state.Assistant.Project.Check,
+  Score: state.Assistant.Project.Score
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+  
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))

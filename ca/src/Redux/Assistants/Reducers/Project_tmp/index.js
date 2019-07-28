@@ -1,11 +1,10 @@
 import {combineReducers} from 'redux'
-import Status from './Status'
-import Check from './Check'
+import Student from './Student'
+import Teacher from './Teacher'
 import Score from './Score'
 
-
 export default combineReducers({
-    Status,
-    Check,
-    Score
+  Student,
+  Teacher,
+  Score
 })

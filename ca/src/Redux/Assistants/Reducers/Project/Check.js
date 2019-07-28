@@ -1,12 +1,12 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-    scores: [],
+    checks: [],
     input: ''
 }
 
 export default handleActions({
-    SCORE_HANDLE_CHANGE: (state, action) => ({ 
+    CHECK_HANDLE_CHANGE: (state, action) => ({ 
       ...state,
       ...action.payload
     }),
