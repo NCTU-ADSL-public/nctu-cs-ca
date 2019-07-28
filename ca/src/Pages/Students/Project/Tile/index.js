@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
-import ListItemText from '@material-ui/core/ListItemText'
+import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -197,10 +196,13 @@ class Tile extends React.Component {
               {
                 isAgreed
                   ? <Edit project={data} />
-                  : <MenuItem
-                    onClick={(isAgreed) ? this.handleDialogClose : this.deleteData}>
-                    <ListItemText style={{ fontSize: '12px' }} inset primary={data.agree === '3' ? '刪除' : '收回'} />
-                  </MenuItem>
+                  : <Button
+                    style={{ fontSize: '12px' }}
+                    color='inherit'
+                    onClick={(isAgreed) ? this.handleDialogClose : this.deleteData}
+                  >
+                    { data.agree === '3' ? '刪除' : '收回' }
+                  </Button>
               }
             </Toolbar>
           </AppBar>
