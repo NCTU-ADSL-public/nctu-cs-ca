@@ -1,11 +1,11 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  teachers: [/*{
+  teachers: [{
     "professor_name": "易志偉",
     "accept_status": "0",
     "pending_status": "0",
-    "gradeCnt": 5,
+    "gradeCnt": 20,
     "accepted": {
       "projects": [
         {
@@ -97,7 +97,7 @@ const initialState = {
     "pending": {
       "projects": []
     }
-  }*/],
+  }],
   input: '',
   year: '',
   semester: '',
