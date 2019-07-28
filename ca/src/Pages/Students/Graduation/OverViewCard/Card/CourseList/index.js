@@ -2,23 +2,9 @@
 import React from 'react'
 import PopoverButton from '../PopoverButton'
 import MoveGroupButton from '../MoveGroupButton'
+import { courseBtnColor } from '../../../../../../Utilities'
 
 const physicalCourse = ['物理(一)', '物理(二)', '物理(一)榮譽班', '物理(二)榮譽班', '微處理機系統實驗']
-
-const decideBtnBgColor = (completed, reason) => {
-  let color = completed
-    ? (reason === 'notCS')
-      ? '#a29951'
-      : (reason === 'free1' || reason === 'free2' || reason === 'english')
-        ? '#6A94A2'
-        : (reason === 'now')
-          ? '#ab6bd9'
-          : '#3db586'
-    : (reason === 'now')
-        ? '#ab6bd9'
-        : '#d95467'
-  return color
-}
 
 const Index = (props) => {
   const { courses, rwd, title } = props
@@ -30,7 +16,7 @@ const Index = (props) => {
           <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2' key={index}>
             <PopoverButton
               label={(physicalCourse.includes(course.cn) && course.realCredit > 0) ? `${course.cn}  ${course.realCredit}學分` : course.cn}
-              backgroundColor={decideBtnBgColor(course.complete, course.reason)}
+              backgroundColor={courseBtnColor(course.complete, course.reason)}
               flash={!course.complete}
               rwd={rwd}
             >

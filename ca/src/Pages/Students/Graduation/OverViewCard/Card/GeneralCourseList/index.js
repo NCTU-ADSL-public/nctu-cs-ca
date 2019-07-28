@@ -1,23 +1,10 @@
+
 import React from 'react'
 import PopoverButton from '../PopoverButton'
 import MoveGroupButton from '../MoveGroupButton'
+import { generalCourseBtnColor } from '../../../../../../Utilities'
 
 class Index extends React.Component {
-  constructor (props) {
-    super(props)
-    this.decideBtnBgColor = this.decideBtnBgColor.bind(this)
-  }
-  
-  decideBtnBgColor (courses) {
-    if (courses.length === 0) {
-      return '#d95467'
-    } else if (courses.length === 1 && courses[0].reason === 'now') {
-      return '#ab6bd9'
-    } else {
-      return '#3cab7d'
-    }
-  }
-
   render () {
     const { title, rwd } = this.props
     let generalCourseTypes = [
@@ -87,7 +74,7 @@ class Index extends React.Component {
             <div className='col-xs-6 col-sm-3 col-md-2 col-lg-2' key={index}>
               <PopoverButton
                 label={type.name}
-                backgroundColor={this.decideBtnBgColor(type.courses)}
+                backgroundColor={generalCourseBtnColor(type.courses)}
                 flash={(type.length === 0)}
                 rwd={rwd}
               >
