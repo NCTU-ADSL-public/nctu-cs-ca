@@ -82,7 +82,9 @@ class StatusControl extends React.Component {
             }}
             onChange={
               (event) => this.props.statusHandleChange({
-                input: event.target.value
+                input: event.target.value[event.target.value.length - 1] === "\\" ? 
+                  event.target.value.substr(0, event.target.value.length - 1) :
+                  event.target.value
               })
             }
             value={Status.input}

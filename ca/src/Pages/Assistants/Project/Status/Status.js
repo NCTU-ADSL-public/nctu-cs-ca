@@ -69,6 +69,44 @@ class Status extends React.Component {
     )
   }
 
+  input_filter = (teachers, target) => {
+    return teachers.filter( teacher => {
+      return (
+        target === '' || 
+        teacher.professor_name.search(target) !== -1 ||
+        teacher.accepted.projects.reduce( (project_prev, project) =>
+          project_prev |= project.students.reduce( (student_prev, student) =>
+            student_prev |= student.id.search(target) !== -1 || student.name.search(target) !== -1
+          ,0)
+        ,false)
+      )
+    })
+  }
+
+  hightlight = (label, raw_input) => {
+    if (raw_input === '')
+      return label
+    const target = new RegExp(raw_input,"gi");
+    var result, indices = [];
+    while ( (result = target.exec(label)) ) {
+        indices.push(result.index);
+    }
+    indices.push(label.length)
+    return indices.length ? (
+      <span>
+        <span>{label.substr(0, indices[0])}</span>
+        {
+          indices.map( (index, idx) =>
+            <span key={idx}>
+              <span style={{background: 'yellow'}}>{label.substr(index, raw_input.length)}</span>
+              <span>{idx === indices.length - 1 ? '' : label.substr(index + raw_input.length, indices[idx + 1] - index - raw_input.length)}</span>
+            </span>
+          )
+        }
+      </span>
+    ) : label
+  }
+
   render () {
     const { classes, Status } = this.props;
     const {  } = this.state;
@@ -83,78 +121,79 @@ class Status extends React.Component {
       ) : (
         <div className={classes.container} >
         {
-          Status.teachers.map( (teacher, idx) => 
-            <div key={idx} style={{ width: '80%', margin: '0 auto', marginBottom: '20px', background: 'red' }}>
-              <ExpansionPanel expanded>
-                <ExpansionPanelSummary>
-                  <div style={{ width: '100%', display: 'flex' }} >
-                    <div style={{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{teacher.professor_name}</div>
-                    <LinearProgress variant="determinate"
-                      value={ teacher.gradeCnt / 7 * 100 }
-                      style={{ flex: 0.6, margin: '10px auto' }}
-                    />
-                    <div style={{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{teacher.gradeCnt} 人</div>
-                  </div>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <div style={{ width: '100%' }}>
-                    <div style={{ fontWeight: 'bold', fontSize: '25px' }}>接受列表</div>
-                    <hr style={{marginTop: '1px'}} />
-                    {
-                      teacher.accepted.projects.length !== 0 ? (
-                        teacher.accepted.projects.map( (project, idx) => 
-                          <div key={idx} style={{ paddingLeft: '10px'}}>
-                            <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold' }}>
-                              { project.title }
+          this.input_filter(Status.teachers, Status.input).length ? 
+            this.input_filter(Status.teachers, Status.input).map( (teacher, idx) => 
+              <div key={idx} style={{ width: '80%', margin: '0 auto', marginBottom: '20px', background: 'red' }}>
+                <ExpansionPanel expanded>
+                  <ExpansionPanelSummary>
+                    <div style={{ width: '100%', display: 'flex' }} >
+                      <div style={{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{this.hightlight(teacher.professor_name, Status.input)}</div>
+                      <LinearProgress variant="determinate"
+                        value={ teacher.gradeCnt / 7 * 100 }
+                        style={{ flex: 0.6, margin: '10px auto' }}
+                      />
+                      <div style={{ fontSize: 20, flex: 0.2, textAlign: 'center', color: 'black' }} >{teacher.gradeCnt} 人</div>
+                    </div>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <div style={{ width: '100%' }}>
+                      <div style={{ fontWeight: 'bold', fontSize: '25px' }}>接受列表</div>
+                      <hr style={{marginTop: '1px'}} />
+                      {
+                        teacher.accepted.projects.length !== 0 ? (
+                          teacher.accepted.projects.map( (project, idx) => 
+                            <div key={idx} style={{ paddingLeft: '10px'}}>
+                              <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold' }}>
+                                { this.hightlight(project.title, Status.input) }
+                              </div>
+                              {
+                                project.students.map( (student, idx) => (
+                                  <Chip
+                                    label={this.hightlight(student.id + " " + student.name, Status.input)}
+                                    className={classes.chip}
+                                    style={{ background: ADD_STATUS_COLOR[parseInt(student.add_status, 10)] }}
+                                    avatar={<Avatar style={{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status, 10)] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
+                                  />
+                                ))
+                              }
+                              <br />
+                              <br />
+                              <br />
                             </div>
-                            {
-                              project.students.map( (student, idx) => (
-                                <Chip
-                                  label={student.id + " " + student.name}
-                                  className={classes.chip}
-                                  style={{ background: ADD_STATUS_COLOR[parseInt(student.add_status, 10)] }}
-                                  avatar={<Avatar style={{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status, 10)] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
-                                />
-                              ))
-                            }
-                            <br />
-                            <br />
-                            <br />
-                          </div>
-                        )
-                      ) : this.warningText("無資料", classes.warningTextSmall)
-                    }
-                    <div style={{ fontWeight: 'bold', fontSize: '25px' }}>審核列表</div>
-                    <hr style={{marginTop: '1px'}} />
-                    {
-                      teacher.pending.projects.length !== 0 ? (
-                        teacher.pending.projects.map( (project, idx) => 
-                          <div key={idx} style={{ paddingLeft: '10px'}}>
-                            <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold' }}>
-                              { project.title }
+                          )
+                        ) : this.warningText("無資料", classes.warningTextSmall)
+                      }
+                      <div style={{ fontWeight: 'bold', fontSize: '25px' }}>審核列表</div>
+                      <hr style={{marginTop: '1px'}} />
+                      {
+                        teacher.pending.projects.length !== 0 ? (
+                          teacher.pending.projects.map( (project, idx) => 
+                            <div key={idx} style={{ paddingLeft: '10px'}}>
+                              <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold' }}>
+                                { project.title }
+                              </div>
+                              {
+                                project.students.map( (student, idx) => (
+                                  <Chip
+                                    label={this.hightlight(student.id + " " + student.name, Status.input)}
+                                    className={classes.chip}
+                                    style={{ background: yellow[300] }}
+                                    avatar={<Avatar style={{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
+                                  />
+                                ))
+                              }
+                              <br />
+                              <br />
+                              <br />
                             </div>
-                            {
-                              project.students.map( (student, idx) => (
-                                <Chip
-                                  label={student.id + " " + student.name}
-                                  className={classes.chip}
-                                  style={{ background: yellow[300] }}
-                                  avatar={<Avatar style={{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
-                                />
-                              ))
-                            }
-                            <br />
-                            <br />
-                            <br />
-                          </div>
-                        )
-                      ) : this.warningText("無資料", classes.warningTextSmall)
-                    }
-                  </div>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-            </div>
-          )
+                          )
+                        ) : this.warningText("無資料", classes.warningTextSmall)
+                      }
+                    </div>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              </div>
+            ) : this.warningText("找不到符合的資料，點此可以清掉所有搜尋條件", classes.warningText)
         }
         </div>
       )
