@@ -18,6 +18,8 @@ const fetchCourseOnly = (payload) => dispatch => {
   axios
     .post('/students/graduate/detail', payload)
     .then(res => {
+      console.log(res.data)
+      console.log(payload.professional_field)
       dispatch(storeGraduationCourse(res.data))
       dispatch(storeProfessionalField(payload.professional_field))
     })

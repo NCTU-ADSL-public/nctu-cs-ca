@@ -1,0 +1,21 @@
+
+.overview{
+    clear: both;
+}
+.overviewCourse{
+    font-size: 0.8em;
+    color: #7c7c7c;
+}
+.showCourseOverview{
+    color: #7c7c7c;
+    font-weight: 400;
+    margin: 5px 0 5px 0;
+}
+.progressBar {
+    display: inline-block;
+    margin-right: 5px;
+}
+.progressBar2 {
+    display: inline-block;
+    margin-right: 25px;
+}

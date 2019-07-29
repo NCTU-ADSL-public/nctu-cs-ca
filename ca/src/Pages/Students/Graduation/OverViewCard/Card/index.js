@@ -26,6 +26,7 @@ import {
   fetchGraduationCourse,
   fetchGraduationCourseAssistantVersion
 } from '../../../../../Redux/Students/Actions/Graduation'
+import './style.css'
 
 const styles = theme => ({
   container: {
@@ -36,14 +37,7 @@ const styles = theme => ({
     fontSize: '20px'
   },
   textRwd: {
-    fontSize: '10px'
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
-  },
-  littletext: {
-    fontSize: '15px'
+    fontSize: '8px'
   },
   appBar: {
     position: 'relative',
@@ -51,10 +45,6 @@ const styles = theme => ({
   },
   flex: {
     flex: 1
-  },
-  chip: {
-    margin: '5px',
-    fontSize: '18px'
   },
   progress: {
     backgroundColor: '#00a152'
@@ -68,6 +58,15 @@ const styles = theme => ({
 function Transition (props) {
   return <Grow {...props} />
 }
+
+const Title = (props) => (
+  <div>
+    <div className='cardTitle'>{ props.title }</div>
+    <font size={5} color='#338d68'>{ props.complete }</font>/
+    <div className='cardTitle'>{ props.require }</div>
+    { props.unit }
+  </div>
+)
 
 class Index extends React.Component {
   constructor (props) {
@@ -126,15 +125,21 @@ class Index extends React.Component {
 
   render () {
     const { classes, rwd } = this.props
+    const professionalGroup = ['網多組(網)', '網多組(多)', '資工組', '資電組']
     if (this.props.data === undefined) return ''
+
+    // for mobile
     if (rwd) {
       return (
         <div>
           <div className='col-xs-6 col-sm-6 well'>
-            <div style={{ fontSize: '0.8em' }} className='showcourseoverview' onClick={this.handleOpen}>
-              {this.props.title}&nbsp;&nbsp;
-              <font size={5} color='#338d68'>{this.props.complete}</font>
-              /{this.props.require}&nbsp;學分<br />
+            <div className={classes.textRwd} onClick={this.handleOpen}>
+              <Title
+                title={this.props.title}
+                complete={this.props.complete}
+                require={this.props.require}
+                unit={this.props.unit}
+              />
               <AnimatedProgress value={this.props.value} />
             </div>
           </div>
@@ -150,23 +155,38 @@ class Index extends React.Component {
                   <CloseIcon />
                 </IconButton>
                 <Typography variant='title' color='inherit' className={classes.flex}>
-                  {this.props.title}
+                  { this.props.title }
                 </Typography>
               </Toolbar>
             </AppBar>
             <div style={{ padding: '15px' }}>
               {
                 this.props.title === '通識(舊制)'
-                  ? <GeneralCourseList courses={this.props.data.course} title={this.props.title} rwd />
+                  ? <GeneralCourseList
+                    courses={this.props.data.course}
+                    title={this.props.title}
+                    rwd
+                  />
                   : this.props.title === '通識(新制)'
-                    ? <GeneralNewCourseList courses={this.props.data.course} overview={this.props.overview} title={this.props.title} rwd />
-                    : <CourseList items={this.props.data.course} title={this.props.title} rwd />
+                    ? <GeneralNewCourseList
+                      courses={this.props.data.course}
+                      overview={this.props.data}
+                      title={this.props.title}
+                      rwd
+                    />
+                    : <CourseList
+                      courses={this.props.data.course}
+                      title={this.props.title}
+                      rwd
+                    />
               }
             </div>
           </Dialog>
         </div>
       )
     }
+
+    // for PC
     return (
       <div className={classes.container}>
         <div className='row'>
@@ -181,58 +201,74 @@ class Index extends React.Component {
                 />
               </div>
               <div className='col-md-4' style={{ marginLeft: '10px' }}>
-                <div className={rwd ? classes.textRwd : classes.text}>
-                  {this.props.title}&nbsp;&nbsp;
-                  <font size={5} color='#338d68'>{this.props.complete}</font>
-                  /{this.props.require}&nbsp;
-                  （{this.props.isMen ? '門' : '學分'}）
+                <div className={classes.text}>
+                  <Title
+                    title={this.props.title}
+                    complete={this.props.complete}
+                    require={this.props.require}
+                    unit={this.props.unit}
+                  />
                 </div>
               </div>
               {
-                this.props.title === '共同必修'
-                  ? <div
-                    className='col-md-3'
-                    style={{ marginLeft: '-7%' }}
-                    hidden={this.props.assis ? this.props.idCard.program.slice(0, 2) !== '網多' : this.props.studentIdcard.program.slice(0, 2) !== '網多'}
+                this.props.title === '共同必修' &&
+                <div className='col-md-3' style={{ marginLeft: '-7%' }}>
+                  <Button
+                    variant='outlined'
+                    aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+                    aria-haspopup='true'
+                    onClick={this.professionalMenuOpen}
+                    disabled={this.props.reviewCheck !== 0}
                   >
-                    <Button
-                      variant='outlined'
-                      aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
-                      aria-haspopup='true'
-                      onClick={this.professionalMenuOpen}
-                      disabled={this.props.reviewCheck !== 0}
-                    >
-                      {
-                        !isNaN(this.props.professionalField)
-                          ? this.props.professionalField === 0 ? '網路領域' : '多媒體領域'
-                          : '網多組專業選擇'
-                      }
-                    </Button>
-                    <Menu
-                      id='simple-menu'
-                      anchorEl={this.state.anchorEl}
-                      open={Boolean(this.state.anchorEl)}
-                      onClose={this.professionalMenuClose}
-                      className={classes.root}
-                    >
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
-                        網路領域
-                      </MenuItem>
-                      <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
-                        多媒體領域
-                      </MenuItem>
-                    </Menu>
-                  </div>
-                  : <div />
+                    {
+                      !isNaN(this.props.professionalField)
+                        ? professionalGroup[this.props.professionalField]
+                        : '畢業組別選擇'
+                    }
+                  </Button>
+                  <Menu
+                    id='simple-menu'
+                    anchorEl={this.state.anchorEl}
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.professionalMenuClose}
+                    className={classes.root}
+                  >
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(0, e)}>
+                      網多組(網)
+                    </MenuItem>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(1, e)}>
+                      網多組(多)
+                    </MenuItem>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(2, e)}>
+                      資工組
+                    </MenuItem>
+                    <MenuItem className={classes.root} onClick={(e) => this.professionalMenuSelect(3, e)}>
+                      資電組
+                    </MenuItem>
+                  </Menu>
+                </div>
               }
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               {
                 this.props.title === '通識(舊制)'
-                  ? <GeneralCourseList assis={this.props.assis} courses={this.props.data.course} title={this.props.title} />
+                  ? <GeneralCourseList
+                    assis={this.props.assis}
+                    courses={this.props.data.course}
+                    title={this.props.title}
+                  />
                   : this.props.title === '通識(新制)'
-                    ? <GeneralNewCourseList assis={this.props.assis} courses={this.props.data.course} overview={this.props.overview} title={this.props.title} />
-                    : <CourseList assis={this.props.assis} items={this.props.data.course} title={this.props.title} />
+                    ? <GeneralNewCourseList
+                      assis={this.props.assis}
+                      courses={this.props.data.course}
+                      overview={this.props.data}
+                      title={this.props.title}
+                    />
+                    : <CourseList
+                      assis={this.props.assis}
+                      courses={this.props.data.course}
+                      title={this.props.title}
+                    />
               }
             </ExpansionPanelDetails>
           </ExpansionPanel>
@@ -248,7 +284,6 @@ Index.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
-  overview: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
   studentIdcard: state.Student.User.studentIdcard,
   idCard: state.Student.Graduation.idCardForassistans,
   assis: state.Student.Graduation.assis,
