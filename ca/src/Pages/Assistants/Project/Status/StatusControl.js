@@ -224,12 +224,3 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StatusControl))
-
-/*
-
-      props.fetch_status({
-        year: props.Status.year,
-        semester: props.Status.semester,
-        first_second: props.Status.first_second
-      })
-*/

@@ -35,6 +35,12 @@ const styles = theme => ({
     textAlign: 'center',
     color: '#6f6f6f'
   },
+  warningTextSmall: {
+    fontSize: '20px',
+    flex: 1,
+    textAlign: 'center',
+    color: '#6f6f6f'
+  },
   chip: {
     margin: '10px',
     fontSize: '15px',
@@ -50,40 +56,35 @@ class Status extends React.Component {
     }
   }
 
+  warningText = (text, css) => {
+    const { classes } = this.props
+    return (
+      <div style = {{ display: 'flex', width: '100%' }}>
+        <div style = {{ flex: 0.1 }}/>
+        <div className={css}>
+          {text}
+        </div>
+        <div style = {{ flex: 0.1 }} />
+      </div>
+    )
+  }
+
   render () {
     const { classes, Status } = this.props;
     const {  } = this.state;
 
     return (
       Status.year === '' ? (
-        <div style = {{ display: 'flex', width: '100%' }}>
-          <div style = {{ flex: 0.1 }}/>
-          <div className={classes.warningText}>
-            請選取學年
-          </div>
-          <div style = {{ flex: 0.1 }} />
-        </div>
+        this.warningText("請選取學年", classes.warningText)
       ) : Status.semester === '' ? (
-        <div style = {{ display: 'flex', width: '100%' }}>
-          <div style = {{ flex: 0.1 }}/>
-          <div className={classes.warningText}>
-            請選取學期
-          </div>
-          <div style = {{ flex: 0.1 }} />
-        </div>
+        this.warningText("請選取學期", classes.warningText)
       ) : Status.first_second === '' ? (
-        <div style = {{ display: 'flex', width: '100%' }}>
-          <div style = {{ flex: 0.1 }}/>
-          <div className={classes.warningText}>
-            請選取專題
-          </div>
-          <div style = {{ flex: 0.1 }} />
-        </div>
+        this.warningText("請選取專題", classes.warningText)
       ) : (
         <div className={classes.container} >
         {
           Status.teachers.map( (teacher, idx) => 
-            <div key={idx} style={{ width: '80%', margin: '0 auto', marginBottom: '20px' }}>
+            <div key={idx} style={{ width: '80%', margin: '0 auto', marginBottom: '20px', background: 'red' }}>
               <ExpansionPanel expanded>
                 <ExpansionPanelSummary>
                   <div style={{ width: '100%', display: 'flex' }} >
@@ -96,49 +97,58 @@ class Status extends React.Component {
                   </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                  <div style = {{ width: '100%' }}>
-                    <div style={{ fontWeight: 'bold', fontSize: '30px' }}>接受列表</div>
+                  <div style={{ width: '100%' }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '25px' }}>接受列表</div>
+                    <hr style={{marginTop: '1px'}} />
                     {
                       teacher.accepted.projects.length !== 0 ? (
-                        <div style={{ display: 'block' }}>
-                        <hr />
-                        {
-                          teacher.accepted.projects.map( (project, idx) => (
-                            <div key={idx}>
-                              <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold'}}>
-                                { project.title }
-                              </div>
-                              <br />
-                              {
-                                project.students.map( (student, idx) => (
-                                  <Chip
-                                    label={student.id + " " + student.name}
-                                    className={classes.chip}
-                                    style={{ background: ADD_STATUS_COLOR[parseInt(student.add_status, 10)] }}
-                                    avatar={<Avatar style={{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status, 10)] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
-                                  />
-                                ))
-                              }
-                              <hr />
+                        teacher.accepted.projects.map( (project, idx) => 
+                          <div key={idx} style={{ paddingLeft: '10px'}}>
+                            <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold' }}>
+                              { project.title }
                             </div>
-                          ))
-                        }
-                        </div>
-                      ) : (
-                        <div style={{ width: '100%', display: 'flex', justifyContent: "center" }}>
-                          <div style={{ fontSize: 18, color: grey[500] }} >尚未有接受的專題</div>
-                        </div>
-                      )
+                            {
+                              project.students.map( (student, idx) => (
+                                <Chip
+                                  label={student.id + " " + student.name}
+                                  className={classes.chip}
+                                  style={{ background: ADD_STATUS_COLOR[parseInt(student.add_status, 10)] }}
+                                  avatar={<Avatar style={{ fontSize: 20, background: STATUS_COLOR_L[parseInt(student.add_status, 10)] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
+                                />
+                              ))
+                            }
+                            <br />
+                            <br />
+                            <br />
+                          </div>
+                        )
+                      ) : this.warningText("無資料", classes.warningTextSmall)
                     }
-                    <div style={{ fontWeight: 'bold', fontSize: '30px' }}>審核列表</div>
+                    <div style={{ fontWeight: 'bold', fontSize: '25px' }}>審核列表</div>
+                    <hr style={{marginTop: '1px'}} />
                     {
                       teacher.pending.projects.length !== 0 ? (
-                        ''
-                      ) : (
-                        <div style={{ width: '100%', display: 'flex', justifyContent: "center" }}>
-                          <div style={{ fontSize: 18, color: grey[500] }} >尚未有申請的專題</div>
-                        </div>
-                      )
+                        teacher.pending.projects.map( (project, idx) => 
+                          <div key={idx} style={{ paddingLeft: '10px'}}>
+                            <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold' }}>
+                              { project.title }
+                            </div>
+                            {
+                              project.students.map( (student, idx) => (
+                                <Chip
+                                  label={student.id + " " + student.name}
+                                  className={classes.chip}
+                                  style={{ background: yellow[300] }}
+                                  avatar={<Avatar style={{ fontSize: 20, background: yellow[200] }}>{STUDENT_STATUS_CN[parseInt(student.status, 10)]}</Avatar>}
+                                />
+                              ))
+                            }
+                            <br />
+                            <br />
+                            <br />
+                          </div>
+                        )
+                      ) : this.warningText("無資料", classes.warningTextSmall)
                     }
                   </div>
                 </ExpansionPanelDetails>

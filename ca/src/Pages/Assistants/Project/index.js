@@ -67,6 +67,22 @@ class index extends React.Component {
     
   }
 
+  toolBarButton = (hightlight, type, label) => {
+    return (
+      <Button 
+        className={this.props.classes.button}
+        style = {{
+          color: (hightlight ? '#68BB66' : '#6f6f6f')
+        }}
+        onClick = { () => this.setState({
+          type
+        })}
+      >
+        {label}
+      </Button>
+    )
+  }
+
   render () {
     const { classes } = this.props;
     const { type } = this.state;
@@ -80,44 +96,12 @@ class index extends React.Component {
               paper: classes.drawerPaper,
             }}
           >
-            <Button 
-              className={classes.button}
-              style = {{
-                color: (type === 'CHECK' ? '#68BB66' : '#6f6f6f')
-              }}
-              onClick = { () => this.setState({
-                type: 'CHECK'
-              })}
-            >
-              專題審核
-            </Button>
-            <Button 
-              className={classes.button}
-              style = {{
-                color: (type === 'STATUS' ? '#68BB66' : '#6f6f6f'),
-              }}
-              onClick = { () => this.setState({
-                type: 'STATUS'
-              })}
-            >
-              專題狀況
-            </Button>
-            <Button 
-              className={classes.button} 
-              style = {{
-                color: (type === 'SCORE' ? '#68BB66' : '#6f6f6f')
-              }}
-              onClick = { () => this.setState({
-                type: 'SCORE'
-              })}
-            >
-              專題評分
-            </Button>
+            {this.toolBarButton(type === 'CHECK', 'CHECK', '專題審核')}
+            {this.toolBarButton(type === 'STATUS', 'STATUS', '專題狀況')}
+            {this.toolBarButton(type === 'SCORE', 'SCORE', '專題評分')}
             <Divider />
             {
-              type === 'UNCHOOSE' ? (
-                ''
-              ) : type === 'CHECK' ? (
+              type === 'CHECK' ? (
                 <CheckControl />
               ) : type === 'STATUS' ? (
                 <StatusControl />
