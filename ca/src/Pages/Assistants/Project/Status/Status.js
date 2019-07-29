@@ -77,7 +77,7 @@ class Status extends React.Component {
         teacher.accepted.projects.reduce( (project_prev, project) =>
           project_prev |= project.students.reduce( (student_prev, student) =>
             student_prev |= student.id.search(target) !== -1 || student.name.search(target) !== -1
-          ,0)
+          ,0) || project.title.search(target) !== -1
         ,false)
       )
     })
@@ -170,7 +170,7 @@ class Status extends React.Component {
                           teacher.pending.projects.map( (project, idx) => 
                             <div key={idx} style={{ paddingLeft: '10px'}}>
                               <div style={{ fontSize: '20px', color: 'black', fontWeight: 'bold' }}>
-                                { project.title }
+                                { this.hightlight(project.title, Status.input) }
                               </div>
                               {
                                 project.students.map( (student, idx) => (
