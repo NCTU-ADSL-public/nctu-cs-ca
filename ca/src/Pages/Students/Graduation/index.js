@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import OverViewSummary from './OverViewSummary'
 import OverViewCard from './OverViewCard'
 import PrintForm from './OverViewSummary/RwdIconButton/Print/PrintForm'
-import { fetchGraduationCourse } from '../../../Redux/Students/Actions/Graduation'
 import './style.css'
 
 class Index extends React.Component {
@@ -38,7 +37,6 @@ class Index extends React.Component {
             generalCourseSelect={this.props.generalCourseSelect}
           />
         </div>
-
       </div>
     )
   }
@@ -55,7 +53,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: () => dispatch(fetchGraduationCourse())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
