@@ -7,6 +7,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const styles = theme => ({
   container: {
@@ -32,31 +34,32 @@ class Check extends React.Component {
       <div className={classes.container}>
         <Table>
           <TableHead>
-            <TableRow>
-              <TableCell style={{fontSize: '20px'}}>學號</TableCell>
-              <TableCell style={{fontSize: '20px'}}>姓名</TableCell>
-              <TableCell style={{fontSize: '20px'}}>專題狀態</TableCell>
+            <TableRow style={{display: 'flex'}}>
+              <TableCell style={{fontSize: '20px', flex: 0.2}}>學號</TableCell>
+              <TableCell style={{fontSize: '20px', flex: 0.2}}>姓名</TableCell>
+              <TableCell style={{fontSize: '20px', flex: 0.4}}>專題狀態</TableCell>
+              <TableCell style={{fontSize: '20px', flex: 0.1}} />
+              <TableCell style={{fontSize: '20px', flex: 0.1}} />
             </TableRow>
           </TableHead>
           <TableBody>
           {
             this.props.Check.checks.map( check => (
-              <TableRow>
-                <TableCell style={{fontSize: '18px'}}>{check.id}</TableCell>
-                <TableCell style={{fontSize: '18px'}}>{check.name}</TableCell>
-                <TableCell style={{fontSize: '18px'}}>{check.first_second}</TableCell>
+              <TableRow hover>
+                <TableCell style={{fontSize: '18px', flex: 0.2}}>{check.id}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.2}}>{check.name}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.4}}>{check.first_second}</TableCell>
+                <TableCell>
+                  <DoneIcon style={{fontSize: '18px'}} />
+                </TableCell>
+                <TableCell>
+                  <ClearIcon style={{fontSize: '18px'}} />
+                </TableCell>
               </TableRow>
             ))
           }
           </TableBody>
         </Table>
-      {
-        this.props.Check.checks.map( check => (
-          <div>
-            {check.id}
-          </div>
-        ))
-      }
       </div>
     )
   }
