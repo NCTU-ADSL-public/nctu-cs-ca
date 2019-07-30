@@ -20,5 +20,59 @@ import axios from 'axios'
 export const check_handle_change = createAction('CHECK_HANDLE_CHANGE');
 
 export const checkHandleChange = (payload) => dispatch => {
-    dispatch(check_handle_change(payload));
+  dispatch(check_handle_change(payload));
+}
+
+
+
+export const fetchCheck = (payload) => dispatch => {
+  axios.all([
+    axios.post('/assistants/research/professorList', {
+      ...payload,
+      first_second: 1
+    }),
+    axios.post('/assistants/research/professorList', {
+      ...payload,
+      first_second: 2
+    }),
+    axios.post('/assistants/research/professorList', {
+      ...payload,
+      first_second: 3
+    })
+  ]).then(axios.spread((first_res, second_res, third_res) => {
+    dispatch(check_handle_change({
+      checks: [
+        ...first_res.map( teacher => 
+          teacher.accepted.projects.map( project => (
+            project.students.filter( student => 
+              student.add_status === "0" 
+            ).map( student => ({
+              ...student,
+              professor_name: teacher.professor_name
+            }))
+          ))
+        ).flat(2),
+        ...second_res.map( teacher => 
+          teacher.accepted.projects.map( project => (
+            project.students.filter( student => 
+              student.add_status === "0" 
+            ).map( student => ({
+              ...student,
+              professor_name: teacher.professor_name
+            }))
+          ))
+        ).flat(2),
+        ...third_res.map( teacher => 
+          teacher.accepted.projects.map( project => (
+            project.students.filter( student => 
+              student.add_status === "0" 
+            ).map( student => ({
+              ...student,
+              professor_name: teacher.professor_name
+            }))
+          ))
+        ).flat(2)
+      ]
+    }))
+  })).catch( err => console.log(err) )
 }

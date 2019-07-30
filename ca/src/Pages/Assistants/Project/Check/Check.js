@@ -25,14 +25,20 @@ class Check extends React.Component {
 
     return (
       <div className={classes.container}>
-        Check Hello
+      {
+        this.props.Check.checks.map( check => (
+          <div>
+            {check.id}
+          </div>
+        ))
+      }
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-
+  Check: state.Assistant.Project.Check,
 })
 
 const mapDispatchToProps = (dispatch) => ({

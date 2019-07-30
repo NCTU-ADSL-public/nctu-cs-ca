@@ -14,6 +14,10 @@ import Score from './Score/Score';
 import ScoreControl from './Score/ScoreControl';
 
 
+import {
+  fetchStatus,
+} from '../../../Redux/Assistants/Actions/Project/Status'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -74,9 +78,27 @@ class index extends React.Component {
         style = {{
           color: (hightlight ? '#68BB66' : '#6f6f6f')
         }}
-        onClick = { () => this.setState({
-          type
-        })}
+        onClick = { () => {
+          this.setState({
+            type
+          })
+          type === 'CHECK' ? (
+            ''
+          ) : type === 'STATUS' ? (
+            (
+              this.props.Status.year !== '' &&
+              this.props.Status.semester !== '' &&
+              this.props.Status.first_second !== ''
+            ) ? 
+              this.props.fetch_status({
+                year: this.props.Status.year,
+                semester: this.props.Status.semester,
+                first_second: this.props.Status.first_second
+              }) : ''
+          ) : type === 'SCORE' ? (
+            ''
+          ) : ''
+        }}
       >
         {label}
       </Button>
@@ -142,7 +164,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  
+  fetch_status: (payload) => dispatch(fetchStatus(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))

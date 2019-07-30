@@ -6,7 +6,10 @@ import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 
-import { checkHandleChange } from '../../../../Redux/Assistants/Actions/Project/Check'
+import { 
+  fetchCheck,
+  checkHandleChange
+} from '../../../../Redux/Assistants/Actions/Project/Check'
 
 const styles = theme => ({
   container: {
@@ -41,6 +44,10 @@ class CheckControl extends React.Component {
     this.state = {
         
     }
+    this.props.fetch_check({
+      year: '107',
+      semester: '2'
+    })
   }
 
   render () {
@@ -81,6 +88,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  fetch_check: (payload) => dispatch(fetchCheck(payload)),
   checkHandleChange: (payload) => dispatch(checkHandleChange(payload))
 })
 

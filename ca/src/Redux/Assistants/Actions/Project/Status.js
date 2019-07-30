@@ -25,7 +25,6 @@ export const statusHandleChange = (payload) => dispatch => {
 
 export const fetchStatus = (payload) => dispatch => {
   axios.post('/assistants/research/professorList', payload).then(res => {
-    console.log("axios post /assistants/research/professorList")
     dispatch(status_handle_change({
       teachers: res.data.map( teacher => ({
           ...teacher,
@@ -34,8 +33,7 @@ export const fetchStatus = (payload) => dispatch => {
           }, 0)
       }))
     }))
-      console.log({teachers: res.data})
-    }).catch(err => {
-      console.log(err)
+  }).catch(err => {
+    console.log(err)
   })
 }
