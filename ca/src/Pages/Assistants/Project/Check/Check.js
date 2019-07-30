@@ -34,27 +34,27 @@ class Check extends React.Component {
       <div className={classes.container}>
         <Table>
           <TableHead>
-            <TableRow style={{display: 'flex'}}>
-              <TableCell style={{fontSize: '20px', flex: 0.2}}>學號</TableCell>
-              <TableCell style={{fontSize: '20px', flex: 0.2}}>姓名</TableCell>
-              <TableCell style={{fontSize: '20px', flex: 0.4}}>專題狀態</TableCell>
-              <TableCell style={{fontSize: '20px', flex: 0.1}} />
-              <TableCell style={{fontSize: '20px', flex: 0.1}} />
+            <TableRow style={{display: 'flex', justifyContent: 'center'}}>
+              <TableCell style={{fontSize: '20px', flex: 0.05, paddingTop: '11px'}} />
+              <TableCell style={{fontSize: '20px', flex: 0.05, paddingTop: '11px'}} />
+              <TableCell style={{fontSize: '20px', flex: 0.2, paddingTop: '11px'}}>學號</TableCell>
+              <TableCell style={{fontSize: '20px', flex: 0.2, paddingTop: '11px'}}>姓名</TableCell>
+              <TableCell style={{fontSize: '20px', flex: 0.4, paddingTop: '11px'}}>專題狀態</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
           {
             this.props.Check.checks.map( check => (
-              <TableRow hover>
-                <TableCell style={{fontSize: '18px', flex: 0.2}}>{check.id}</TableCell>
-                <TableCell style={{fontSize: '18px', flex: 0.2}}>{check.name}</TableCell>
-                <TableCell style={{fontSize: '18px', flex: 0.4}}>{check.first_second}</TableCell>
-                <TableCell>
-                  <DoneIcon style={{fontSize: '18px'}} />
+              <TableRow hover style={{display: 'flex', justifyContent: 'center'}}>
+                <TableCell style={{fontSize: '18px', flex: 0.05, paddingTop: '11px'}}>
+                  <DoneIcon />
                 </TableCell>
-                <TableCell>
-                  <ClearIcon style={{fontSize: '18px'}} />
+                <TableCell style={{fontSize: '18px', flex: 0.05, paddingTop: '11px'}}>
+                  <ClearIcon />
                 </TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.2, paddingTop: '11px'}}>{check.id}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.2, paddingTop: '11px'}}>{check.name}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.4, paddingTop: '11px'}}>{check.first_second}</TableCell>
               </TableRow>
             ))
           }
