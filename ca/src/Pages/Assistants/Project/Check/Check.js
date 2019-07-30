@@ -26,6 +26,30 @@ class Check extends React.Component {
     }
   }
 
+  hightlight = (label, raw_input) => {
+    if (raw_input === '')
+      return label
+    const target = new RegExp(raw_input,"gi");
+    var result, indices = [];
+    while ( (result = target.exec(label)) ) {
+        indices.push(result.index);
+    }
+    indices.push(label.length)
+    return indices.length ? (
+      <span>
+        <span>{label.substr(0, indices[0])}</span>
+        {
+          indices.map( (index, idx) =>
+            <span key={idx}>
+              <span style={{background: 'yellow'}}>{label.substr(index, raw_input.length)}</span>
+              <span>{idx === indices.length - 1 ? '' : label.substr(index + raw_input.length, indices[idx + 1] - index - raw_input.length)}</span>
+            </span>
+          )
+        }
+      </span>
+    ) : label
+  }
+
   render () {
     const { classes } = this.props;
     const {  } = this.state;
@@ -52,9 +76,9 @@ class Check extends React.Component {
                 <TableCell style={{fontSize: '18px', flex: 0.05, paddingTop: '11px'}}>
                   <ClearIcon />
                 </TableCell>
-                <TableCell style={{fontSize: '18px', flex: 0.2, paddingTop: '11px'}}>{check.id}</TableCell>
-                <TableCell style={{fontSize: '18px', flex: 0.2, paddingTop: '11px'}}>{check.name}</TableCell>
-                <TableCell style={{fontSize: '18px', flex: 0.4, paddingTop: '11px'}}>{check.first_second}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.2, paddingTop: '11px'}}>{this.hightlight(check.id, this.props.Check.input)}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.2, paddingTop: '11px'}}>{this.hightlight(check.name, this.props.Check.input)}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.4, paddingTop: '11px'}}>{this.hightlight(check.first_second, this.props.Check.input)}</TableCell>
               </TableRow>
             ))
           }
