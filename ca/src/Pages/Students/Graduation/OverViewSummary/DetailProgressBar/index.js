@@ -116,7 +116,7 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview
+  overview: state.Student.Graduation.detail.overview
 })
 const mapDispatchToProps = (dispatch) => ({
 })

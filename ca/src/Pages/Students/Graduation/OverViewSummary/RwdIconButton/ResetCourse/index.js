@@ -10,7 +10,7 @@ import AutoRenewIcon from '@material-ui/icons/Autorenew'
 // REDUX
 import { connect } from 'react-redux'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
-import { fetchGraduationCourse } from '../../../../../../Redux/Students/Actions/Graduation'
+import { getGraduationInfo } from '../../../../../../Redux/Students/Actions/Graduation'
 
 const styles = theme => ({
   button: {
@@ -40,8 +40,8 @@ class Index extends React.Component {
     while (inter < 500000) {
       setTimeout(
         () => {
-          console.log('----- fetchGraduationCourse! ----')
-          this.props.fetchGraduationCourse()
+          console.log('----- getGraduationInfo! ----')
+          this.props.getGraduationInfo()
         }, inter)
       inter *= 2
     }
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: () => dispatch(fetchGraduationCourse())
+  getGraduationInfo: () => dispatch(getGraduationInfo())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withMobileDialog()(withStyles(styles)(Index)))

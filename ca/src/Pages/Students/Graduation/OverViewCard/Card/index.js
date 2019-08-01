@@ -23,8 +23,8 @@ import CourseList from './CourseList'
 import GeneralCourseList from './GeneralCourseList'
 import GeneralNewCourseList from './GeneralNewCourseList'
 import {
-  fetchGraduationCourse,
-  fetchGraduationCourseAssistantVersion
+  getGraduationInfo,
+  getGraduationInfoAssistantVersion
 } from '../../../../../Redux/Students/Actions/Graduation'
 import './style.css'
 
@@ -116,10 +116,10 @@ class Index extends React.Component {
     event.stopPropagation()
     let idCard = this.props.idCard
     if (this.props.assis) {
-      this.props.fetchGraduationCourseAssistantVersion(idCard.id, idCard.sname, idCard.program, field)
+      this.props.getGraduationInfoAssistantVersion(idCard.id, idCard.sname, idCard.program, field)
     }
     else {
-      this.props.fetchGraduationCourse({ professional_field: field })
+      this.props.getGraduationInfo({ professional_field: field })
     }
   }
 
@@ -283,17 +283,17 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
+  data: state.Student.Graduation.detail.data.filter(t => t.title === ownProps.title)[0],
   studentIdcard: state.Student.User.studentIdcard,
-  idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis,
-  reviewCheck: state.Student.Graduation.check,
-  professionalField: state.Student.Graduation.professional_field
+  idCard: state.Student.Graduation.assistant.idCard,
+  assis: state.Student.Graduation.assistant.using,
+  reviewCheck: state.Student.Graduation.getReview.check,
+  professionalField: state.Student.Graduation.getReview.professionalField
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload)),
-  fetchGraduationCourseAssistantVersion: (id, sname, program, feild) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program, feild))
+  getGraduationInfo: (payload) => dispatch(getGraduationInfo(payload)),
+  getGraduationInfoAssistantVersion: (id, sname, program, field) => dispatch(getGraduationInfoAssistantVersion(id, sname, program, field))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

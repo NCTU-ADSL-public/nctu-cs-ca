@@ -10,7 +10,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
 // REDUX
-import { changeCourse, fetchGraduationCourse, fetchLegalMoveTarget } from '../../../../../../Redux/Students/Actions/Graduation'
+import { getGraduationInfo/*,changeCourse, fetchLegalMoveTarget*/ } from '../../../../../../Redux/Students/Actions/Graduation'
 import '../../../../../../../node_modules/animate.css/animate.css'
 
 const style = {
@@ -126,7 +126,7 @@ class Index extends React.Component {
       while (inter < 100000) {
         setTimeout(
           () => {
-            this.props.fetchGraduationCourse()
+            this.props.getGraduationInfo()
           }, inter)
         inter *= 2
       }
@@ -203,16 +203,16 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview,
+  overview: state.Student.Graduation.detail.overview,
   studentIdcard: state.Student.User.studentIdcard,
-  idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis
+  idCard: state.Student.Graduation.assistant.idCard,
+  assis: state.Student.Graduation.assistant.using
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
-  fetchLegalMoveTarget: (cn, code, type, id) => dispatch(fetchLegalMoveTarget(cn, code, type, id)),
-  changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
+  getGraduationInfo: () => dispatch(getGraduationInfo()),
+  // fetchLegalMoveTarget: (cn, code, type, id) => dispatch(fetchLegalMoveTarget(cn, code, type, id)),
+  // changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
