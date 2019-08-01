@@ -84,13 +84,17 @@ export const fetchCheck = (payload) => dispatch => {
 }
 
 export const agreeCheck = (payload) => dispatch => {
-  axios.post('/assistants/SetAddStatus', payload).then( res => {
-    
-  }).catch(err => console.log(err))
+  axios.all([
+    axios.post('/assistants/research/setAddStatus', payload),
+    axios.post('/assistants/research/setFirstSecond', payload)
+  ]).then(axios.spread((first_res, second_res) => {
+    console.log(first_res.data);
+    console.log(second_res.data);
+  })).catch(err => console.log(err))
 }
 
 export const rejectCheck = (payload) => dispatch => {
-  axios.post('/assistants/DeteleResearch', payload).then( res => {
-
+  axios.post('/assistants/research/detele', payload).then( res => {
+    console.log(res.data)
   }).catch(err => console.log(err))
 }
