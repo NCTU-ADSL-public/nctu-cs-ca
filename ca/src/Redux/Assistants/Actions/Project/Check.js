@@ -94,7 +94,7 @@ export const agreeCheck = (payload) => dispatch => {
 }
 
 export const rejectCheck = (payload) => dispatch => {
-  axios.post('/assistants/research/detele', payload).then( res => {
+  axios.post('/assistants/research/delete', payload).then( res => {
     console.log(res.data)
   }).catch(err => console.log(err))
 }
