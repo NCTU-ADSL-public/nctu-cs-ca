@@ -85,7 +85,7 @@ class Check extends React.Component {
                 <TableCell style={{flex: 0.025, padding: '0px'}}>
                   <IconButton style={{color: 'green', fontSize: '18px'}}
                     onClick = { () =>
-                      this.props.agreeCheck({
+                      this.props.agree_check({
                         "student_id": check.id,
                         "research_title": check.research_title,
                         "semester": check.semester,
@@ -99,7 +99,7 @@ class Check extends React.Component {
                 <TableCell style={{flex: 0.025, padding: '0px'}}>
                   <IconButton style={{color: 'red', fontSize: '18px'}}
                     onClick = { () => 
-                      this.props.rejectCheck({
+                      this.props.reject_check({
                         "student_id": check.id,
                         "research_title": check.research_title,
                         "semester": check.semester,
