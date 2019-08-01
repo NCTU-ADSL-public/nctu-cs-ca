@@ -1078,6 +1078,12 @@
     ]
   },
   {
+    "title": "抵免研究所課程",
+    "credit": 0,
+    "require": 0,
+    "course": []
+  },
+  {
     "total": 101,
     "total_require": 128,
     "compulsory": 58,
