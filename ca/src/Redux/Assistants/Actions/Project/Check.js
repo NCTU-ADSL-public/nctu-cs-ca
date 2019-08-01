@@ -48,7 +48,9 @@ export const fetchCheck = (payload) => dispatch => {
               student.add_status === "0" 
             ).map( student => ({
               ...student,
-              professor_name: teacher.professor_name
+              professor_name: teacher.professor_name,
+              research_title: project.title,
+              semester: payload.year + '-' + payload.semester
             }))
           ))
         ).flat(2),
@@ -58,7 +60,9 @@ export const fetchCheck = (payload) => dispatch => {
               student.add_status === "0" 
             ).map( student => ({
               ...student,
-              professor_name: teacher.professor_name
+              professor_name: teacher.professor_name,
+              research_title: project.title,
+              semester: payload.year + '-' + payload.semester
             }))
           ))
         ).flat(2),
@@ -68,11 +72,25 @@ export const fetchCheck = (payload) => dispatch => {
               student.add_status === "0" 
             ).map( student => ({
               ...student,
-              professor_name: teacher.professor_name
+              professor_name: teacher.professor_name,
+              research_title: project.title,
+              semester: payload.year + '-' + payload.semester
             }))
           ))
         ).flat(2)
       ]
     }))
   })).catch( err => console.log(err) )
+}
+
+export const agreeCheck = (payload) => dispatch => {
+  axios.post('/assistants/SetAddStatus', payload).then( res => {
+    
+  }).catch(err => console.log(err))
+}
+
+export const rejectCheck = (payload) => dispatch => {
+  axios.post('/assistants/DeteleResearch', payload).then( res => {
+
+  }).catch(err => console.log(err))
 }

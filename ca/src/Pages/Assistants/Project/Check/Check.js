@@ -11,6 +11,11 @@ import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 
+import {
+  agreeCheck,
+  rejectCheck
+} from '../../../../Redux/Assistants/Actions/Project/Check';
+
 const styles = theme => ({
   container: {
     width: '80%',
@@ -78,12 +83,30 @@ class Check extends React.Component {
             this.props.Check.checks.map( (check, idx) => (
               <TableRow hover style={{display: 'flex', justifyContent: 'center'}} key={idx}>
                 <TableCell style={{flex: 0.025, padding: '0px'}}>
-                  <IconButton style={{color: 'green', fontSize: '18px'}}>
+                  <IconButton style={{color: 'green', fontSize: '18px'}}
+                    onClick = { () =>
+                      this.props.agreeCheck({
+                        "student_id": check.id,
+                        "research_title": check.research_title,
+                        "semester": check.semester,
+                        "first_second": check.first_second
+                      })
+                    }
+                  >
                     <DoneIcon />
                   </IconButton>
                 </TableCell>
                 <TableCell style={{flex: 0.025, padding: '0px'}}>
-                  <IconButton style={{color: 'red', fontSize: '18px'}}>
+                  <IconButton style={{color: 'red', fontSize: '18px'}}
+                    onClick = { () => 
+                      this.props.rejectCheck({
+                        "student_id": check.id,
+                        "research_title": check.research_title,
+                        "semester": check.semester,
+                        "first_second": check.first_second
+                      })
+                    }
+                  >
                     <ClearIcon />
                   </IconButton>
                 </TableCell>
@@ -105,7 +128,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+  agree_check: (payload) => dispatch(agreeCheck(payload)),
+  reject_check: (payload) => dispatch(rejectCheck(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Check))
