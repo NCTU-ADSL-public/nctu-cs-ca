@@ -1,16 +1,18 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import PropTypes from 'prop-types'
-// MUI
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-
-// REDUX
-import { changeCourse, fetchGraduationCourse, fetchLegalMoveTarget } from '../../../../../../Redux/Students/Actions/Graduation'
+import actions from '../../../../../../Redux/Students/Actions/Graduation'
+import {
+  getGraduationInfo,
+  getMoveTargets,
+  moveCourse,
+  calculateCredit
+} from '../../../../../../Redux/Students/Actions/Graduation'
 import '../../../../../../../node_modules/animate.css/animate.css'
 
 const style = {
@@ -63,28 +65,29 @@ class Index extends React.Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleItemSelect = this.handleItemSelect.bind(this)
     this.state = {
       isOpened: false,
       anchorEl: null,
       targets: []
     }
-    this.fetchTarget()
   }
 
-  fetchTarget () {
-    axios.post('/students/graduate/legalMoveTarget', {
-      cn: this.props.item.cn, // 中文課名
-      code: this.props.item.code, // 課號
-      type: this.props.item.type,
+  componentDidMount () {
+    this.props.getMoveTargets({
+      cn: this.props.course.cn, // 中文課名
+      code: this.props.course.code, // 課號
+      type: this.props.course.type,
       studentId: this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
-    }).then(res => {
-      this.setState({targets: res.data})
-    }).catch(err => {
-      console.log(err)
     })
-    // const {cn, code, type} = this.props.item
-    // const id = this.props.assis ? this.props.idCard.id : this.props.studentIdcard.student_id
-    // this.props.fetchLegalMoveTarget(cn, code, type, id)
+  }
+
+  componentDidUpdate () {
+    // 移動成功後，重新拿課程資料並重置移動狀態
+    if (this.props.success) {
+      this.props.getGraduationInfo()
+      this.props.resetMove()
+    }
   }
 
   handleClick (event) {
@@ -99,98 +102,69 @@ class Index extends React.Component {
     })
   }
 
-  handleItemSelected (target) {
-    let cn = this.props.item.cn
+  handleItemSelect (target) {
     let studentIdcard = this.props.studentIdcard
-    let title = this.props.title
-    this.setState({
-      anchorEl: null
+
+    this.props.moveCourse({
+      cn: this.props.course.cn, // 中文課名
+      student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id,
+      origin_group: this.props.title,
+      target_group: target
     })
 
-    axios.post('/students/graduate/moveCourse', {
-      cn: cn, // 中文課名
-      student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id,
-      origin_group: title,
-      target_group: target
-    }).then(res => {
-      console.log('┌---- RESPONSE ----')
-      console.log(res)
-      console.log('└------------------')
-      //
-      // REFRESH
-      // window.location.reload()
-      //
-      //
-      let inter = 250
-      // Magic update
-      while (inter < 100000) {
-        setTimeout(
-          () => {
-            this.props.fetchGraduationCourse()
-          }, inter)
-        inter *= 2
-      }
-      setTimeout(
-        () => {
-          console.log('----- POST students/graduate/graduateChange/graduateList ----')
-          this.extraPostGradChange()
-        }, 10000)
-    }).catch(err => {
-      console.log(err)
+    this.setState({
+      anchorEl: null
     })
   }
 
   extraPostGradChange () {
     let studentIdcard = this.props.studentIdcard
-    axios.post('/students/graduate/summaryList', {
+    this.props.calculateCredit({
       student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id
     })
   }
 
   render () {
-    const { label, classes, englishCheck } = this.props
-    const item = this.props.item
-    const { anchorEl, targets } = this.state
+    const { classes, englishCheck, course, targets } = this.props
     const shouldBeDisabled = (
       (
         (englishCheck === '0' || englishCheck === null) &&
-        item.cn.search('進階英文') !== -1
+        course.cn.search('進階英文') !== -1
       ) ||
-      item.reason === 'english'
-      // typeof this.item.moveTargets === 'undefined'
+      course.reason === 'english'
     )
 
     return (
       <div style={style.Popover}>
-
         <Button
           variant='outlined'
           onClick={this.handleClick}
           className={classes.root}
           // 由前端所擋掉的移動
           disabled={shouldBeDisabled}
-          // style={{ display: shouldBeDisabled ? 'none' : '' }}
         >
-          { shouldBeDisabled ? '不能移動此課程' : label }
+          { shouldBeDisabled ? '不能移動此課程' : '移動課程' }
         </Button>
 
         <Menu
           id='simple-menu'
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
+          anchorEl={this.state.anchorEl}
+          open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
           className={classes.root}
         >
-          {targets !== undefined ? targets.map((item, index) => (
-            <MenuItem
-              key={index}
-              onClick={() => this.handleItemSelected(item.title)}
-              className={classes.root}
-            >
-              {item.title}
-            </MenuItem>
-          )) : ''}
-
+          {
+            targets &&
+            targets.map((target, index) => (
+              <MenuItem
+                key={index}
+                onClick={() => this.handleItemSelect(target.title)}
+                className={classes.root}
+              >
+                { target.title }
+              </MenuItem>
+            ))
+          }
         </Menu>
 
       </div>
@@ -203,16 +177,20 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview,
+  overview: state.Student.Graduation.detail.overview,
   studentIdcard: state.Student.User.studentIdcard,
-  idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis
+  idCard: state.Student.Graduation.assistant.idCard,
+  assis: state.Student.Graduation.assistant.using,
+  targets: state.Student.Graduation.moveCourse.targets,
+  success: state.Student.Graduation.moveCourse.success
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: () => dispatch(fetchGraduationCourse()),
-  fetchLegalMoveTarget: (cn, code, type, id) => dispatch(fetchLegalMoveTarget(cn, code, type, id)),
-  changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
+  getGraduationInfo: () => dispatch(getGraduationInfo()),
+  getMoveTargets: (payload) => dispatch(getMoveTargets(payload)),
+  moveCourse: (payload) => dispatch(moveCourse(payload)),
+  calculateCredit: (payload) => dispatch(calculateCredit(payload)),
+  resetMove: () => dispatch(actions.graduation.moveCourse.setSuccess(false))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))
