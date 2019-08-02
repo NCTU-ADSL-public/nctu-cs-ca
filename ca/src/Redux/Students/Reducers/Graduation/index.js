@@ -47,7 +47,7 @@ export default handleActions({
         check: action.payload
       }})
     },
-    GET_REVIRW: {
+    GET_REVIEW: {
       STORE: (state, action) => ({ ...state, getReview: {
         ...state.getReview,
         check: action.payload.check.state,
@@ -55,7 +55,7 @@ export default handleActions({
         professionalField: action.payload.professional_field
       }})
     },
-    SEND_REVIRW: {
+    SEND_REVIEW: {
       STORE: (state, action) => ({ ...state, getReview: {
         ...state.getReview,
         check: action.payload.check.state,
@@ -69,7 +69,7 @@ export default handleActions({
       }}),
       SET_SUCCESS: (state, action) => ({ ...state, moveCourse: {
         ...state.moveCourse,
-        successs: action.payload
+        success: action.payload
       }})
     },
     ASSISTANT: {

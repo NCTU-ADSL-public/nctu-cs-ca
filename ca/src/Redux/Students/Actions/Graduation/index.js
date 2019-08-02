@@ -11,10 +11,10 @@ const actions = createActions({
     ENGLISH: {
       STORE: null
     },
-    GET_REVIRW: {
+    GET_REVIEW: {
       STORE: null
     },
-    SEND_REVIRW: {
+    SEND_REVIEW: {
       STORE: null
     },
     MOVE_COURSE: {
@@ -142,7 +142,6 @@ export const moveCourse = (payload) => dispatch => {
   axios
     .post('/students/graduate/moveCourse', payload)
     .then(res => {
-      console.log(res.data)
       dispatch(actions.graduation.moveCourse.setSuccess(true))
     })
     .catch(err => {
