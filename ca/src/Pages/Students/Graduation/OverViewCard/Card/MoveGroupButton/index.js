@@ -10,8 +10,7 @@ import actions from '../../../../../../Redux/Students/Actions/Graduation'
 import {
   getGraduationInfo,
   getMoveTargets,
-  moveCourse,
-  calculateCredit
+  moveCourse
 } from '../../../../../../Redux/Students/Actions/Graduation'
 import '../../../../../../../node_modules/animate.css/animate.css'
 
@@ -117,13 +116,6 @@ class Index extends React.Component {
     })
   }
 
-  extraPostGradChange () {
-    let studentIdcard = this.props.studentIdcard
-    this.props.calculateCredit({
-      student_id: this.props.assis ? this.props.idCard.id : studentIdcard.student_id
-    })
-  }
-
   render () {
     const { classes, englishCheck, course, targets } = this.props
     const shouldBeDisabled = (
@@ -189,7 +181,6 @@ const mapDispatchToProps = (dispatch) => ({
   getGraduationInfo: () => dispatch(getGraduationInfo()),
   getMoveTargets: (payload) => dispatch(getMoveTargets(payload)),
   moveCourse: (payload) => dispatch(moveCourse(payload)),
-  calculateCredit: (payload) => dispatch(calculateCredit(payload)),
   resetMove: () => dispatch(actions.graduation.moveCourse.setSuccess(false))
 })
 
