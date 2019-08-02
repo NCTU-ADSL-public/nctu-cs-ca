@@ -148,13 +148,3 @@ export const moveCourse = (payload) => dispatch => {
       console.log(err)
     })
 }
-
-export const calculateCredit = (payload) => dispatch => {
-  axios
-    .post('/students/graduate/summaryList', payload)
-    .then(res => {
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
