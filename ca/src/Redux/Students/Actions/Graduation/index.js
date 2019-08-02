@@ -17,6 +17,10 @@ const actions = createActions({
     SEND_REVIRW: {
       STORE: null
     },
+    MOVE_COURSE: {
+      STORE: null,
+      SET_SUCCESS: null
+    },
     ASSISTANT: {
       STORE: null
     }
@@ -123,25 +127,35 @@ export const reviewSubmit = (payload) => dispatch => {
     })
 }
 
-// export const changeCourse = (from, end, course) => dispatch => {
-//   let object = { from, end, course }
-//   dispatch(updateCourse(object))
-// }
+export const getMoveTargets = (payload) => dispatch => {
+  axios
+    .post('/students/graduate/legalMoveTarget', payload)
+    .then(res => {
+      dispatch(actions.graduation.moveCourse.store(res.data))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 
-// export const filterInput = value => dispatch => {
-//   dispatch(filterinput(value))
-// }
+export const moveCourse = (payload) => dispatch => {
+  axios
+    .post('/students/graduate/moveCourse', payload)
+    .then(res => {
+      console.log(res.data)
+      dispatch(actions.graduation.moveCourse.setSuccess(true))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 
-// export const fetchLegalMoveTarget = (cn, code, type, id) => dispatch => {
-//   axios.post('/students/graduate/legalMoveTarget', {
-//     cn: cn, // 中文課名
-//     code: code, // 課號
-//     type: type,
-//     studentId: id
-//   }).then(res => {
-//     let payload = { targets: res.data, cn, code, type }
-//     dispatch(storeLegalMoveTarget(payload))
-//   }).catch(err => {
-//     console.log(err)
-//   })
-// }
+export const calculateCredit = (payload) => dispatch => {
+  axios
+    .post('/students/graduate/summaryList', payload)
+    .then(res => {
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}

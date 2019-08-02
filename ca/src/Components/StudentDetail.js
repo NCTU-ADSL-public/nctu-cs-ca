@@ -19,9 +19,7 @@ class StudentDetail extends React.Component {
     )
   }
 }
-const mapState = (state) => ({
-  done: state.Student.Graduation.status === 'DONE'
-})
+const mapState = (state) => ({})
 
 const mapDispatch = (dispatch) => ({
   getGraduationInfoAssistantVersion: (id, sname, program, feild) => dispatch(getGraduationInfoAssistantVersion(id, sname, program, feild))
