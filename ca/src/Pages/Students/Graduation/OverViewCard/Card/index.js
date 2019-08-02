@@ -59,14 +59,28 @@ function Transition (props) {
   return <Grow {...props} />
 }
 
-const Title = (props) => (
-  <div>
-    <div className='cardTitle'>{ props.title }</div>
-    <font size={5} color='#338d68'>{ props.complete }</font>/
-    <div className='cardTitle'>{ props.require }</div>
-    { props.unit }
-  </div>
-)
+const Title = (props) => {
+  // 抵免研究所、雙主修...
+  if (props.optional) {
+    return (
+      <div>
+        <div className='cardTitle'>{ props.title }</div>
+        <font size={5} color='#338d68'>{ props.complete }</font>
+        <div className='cardTitle' />
+        { props.unit }
+      </div>
+    )
+  }
+  // 一般類別
+  return (
+    <div>
+      <div className='cardTitle'>{ props.title }</div>
+      <font size={5} color='#338d68'>{ props.complete }</font>/
+      <div className='cardTitle'>{ props.require }</div>
+      { props.unit }
+    </div>
+  )
+}
 
 class Index extends React.Component {
   constructor (props) {
@@ -138,6 +152,7 @@ class Index extends React.Component {
                 title={this.props.title}
                 complete={this.props.complete}
                 require={this.props.require}
+                optional={this.props.optional}
                 unit={this.props.unit}
               />
               <AnimatedProgress value={this.props.value} />
@@ -206,6 +221,7 @@ class Index extends React.Component {
                     title={this.props.title}
                     complete={this.props.complete}
                     require={this.props.require}
+                    optional={this.props.optional}
                     unit={this.props.unit}
                   />
                 </div>

@@ -1084,6 +1084,12 @@
     "course": []
   },
   {
+    "title": "雙主修、輔系、學分學程",
+    "credit": 0,
+    "require": 0,
+    "course": []
+  },
+  {
     "total": 101,
     "total_require": 128,
     "compulsory": 58,
@@ -1110,6 +1116,7 @@
     "service_require": 2,
     "art": 2,
     "art_require": 2,
-    "graduate": 0
+    "graduate": 0,
+    "dmajor_minor_program": 0
   }
 ]
