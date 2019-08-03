@@ -10,5 +10,8 @@ export default handleActions({
       ...state,
       ...action.payload
     }),
-
+    CHECK_DELETE: (state, action) => ({
+      ...state,
+      checks: state.checks.filter( check => check.id != action.payload )
+    })
 }, initialState)
