@@ -90,6 +90,11 @@ class Index extends React.Component {
               complete={overview.pro}
               require={overview.pro_require}
             />
+            <NoProgressBar
+              title='雙主修、輔系、學分學程'
+              unit='學分'
+              complete={overview.dmajor_minor_program}
+            />
           </div>
           <div className='overviewCourse col-sm-3 col-md-3'>
             <ProgressBar
@@ -116,7 +121,7 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview
+  overview: state.Student.Graduation.detail.overview
 })
 const mapDispatchToProps = (dispatch) => ({
 })

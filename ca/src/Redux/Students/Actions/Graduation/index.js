@@ -1,35 +1,47 @@
 
-import { createAction } from 'redux-actions'
+import { createActions } from 'redux-actions'
 import axios from 'axios'
 import FakeData from '../../../../Resources/FakeData'
 
-export const storeGraduationCourse = createAction('STORE_GRADUATION_COURSE')
-export const storeProfessionalField = createAction('STORE_PROFESSIONAL_FIELD')
-export const storeGeneralCourseSelect = createAction('STORE_GRAD_GENERAL_COURSE_SELECT')
-export const storeGradCheck = createAction('STORE_GRAD_CHECK')
-export const filterinput = createAction('FILTER_INPUT')
-export const storeGradEnglishTestCheck = createAction('STORE_GRAD_ENGLISH_TEST_CHECK')
-export const updateCourse = createAction('UPDATE_COURSE')
-export const fetchStart = createAction('FETCH_START')
-export const storeStudentInfo = createAction('STORE_STUDENT_INFO')
-export const storeLegalMoveTarget = createAction('STORE_LEGAL_MOVE_TARGET')
+const actions = createActions({
+  GRADUATION: {
+    DETAIL: {
+      STORE: null
+    },
+    ENGLISH: {
+      STORE: null
+    },
+    GET_REVIEW: {
+      STORE: null
+    },
+    SEND_REVIEW: {
+      STORE: null
+    },
+    MOVE_COURSE: {
+      STORE: null,
+      SET_SUCCESS: null
+    },
+    ASSISTANT: {
+      STORE: null
+    }
+  }
+})
 
-const fetchCourseOnly = (payload) => dispatch => {
+export default actions
+
+const getCourseDetail = (payload) => dispatch => {
   axios
     .post('/students/graduate/detail', payload)
     .then(res => {
-      console.log(res.data)
-      console.log(payload.professional_field)
-      dispatch(storeGraduationCourse(res.data))
-      dispatch(storeProfessionalField(payload.professional_field))
+      dispatch(actions.graduation.detail.store(res.data))
     })
     .catch(err => {
-      dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
+      dispatch(actions.graduation.detail.store(FakeData.GraduationItems_Revised))
       console.log(err)
   })
 }
 
-export const fetchGraduationCourse = (payload = null) => dispatch => {
+export const getGraduationInfo = (payload = null) => dispatch => {
   axios
     .get('/students/graduate/check')
     .then(res => {
@@ -41,27 +53,26 @@ export const fetchGraduationCourse = (payload = null) => dispatch => {
         newPayload = { ...payload }
       }
 
-      dispatch(fetchCourseOnly(newPayload))
-      dispatch(storeGradCheck(res.data.check.state))
-      dispatch(storeGeneralCourseSelect(res.data.general_course.type))
+      dispatch(getCourseDetail(newPayload))
+      dispatch(actions.graduation.getReview.store({ ...res.data, ...newPayload }))
     })
     .catch(err => {
       let newPayload = { ...payload, check: { state: 0 } }
-      dispatch(fetchCourseOnly(newPayload))
+      dispatch(getCourseDetail(newPayload))
       console.log(err)
     })
 
   axios
-    .get('/students/graduate/english').then(res => {
-      dispatch(storeGradEnglishTestCheck(res.data.check.state))
+    .get('/students/graduate/english')
+    .then(res => {
+      dispatch(actions.graduation.english.store(res.data.check.state))
     })
     .catch(err => {
       console.log(err)
     })
 }
 
-export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild) => dispatch => {
-  dispatch(fetchStart())
+export const getGraduationInfoAssistantVersion = (id, sname, program, field) => dispatch => {
   axios
     .get('/assistants/graduate/detail', {
       params: {
@@ -70,10 +81,10 @@ export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild)
       }
     })
     .then(res => {
-      dispatch(storeGraduationCourse(res.data))
+      dispatch(actions.graduation.detail.store(res.data))
     })
     .catch(err => {
-      dispatch(storeGraduationCourse(FakeData.GraduationItems_Revised))
+      dispatch(actions.graduation.detail.store(FakeData.GraduationItems_Revised))
       console.log(err)
     })
 
@@ -84,8 +95,7 @@ export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild)
       }
     })
     .then(res => {
-      dispatch(storeGradCheck(res.data.check.state))
-      dispatch(storeGeneralCourseSelect(res.data.general_course.type))
+      dispatch(actions.graduation.getReview.store(res.data))
     })
     .catch(err => {
       console.log(err)
@@ -98,45 +108,43 @@ export const fetchGraduationCourseAssistantVersion = (id, sname, program, feild)
       }
     })
     .then(res => {
-      dispatch(storeGradEnglishTestCheck(res.data.check.state))
+      dispatch(actions.graduation.english.store(res.data.check.state))
     })
     .catch(err => {
       console.log(err)
     })
-  dispatch(storeStudentInfo({ id, sname, program }))
+  dispatch(actions.graduation.assistant.store({ id, sname, program }))
 }
 
 export const reviewSubmit = (payload) => dispatch => {
   axios
     .post('/students/graduate/check', payload)
     .then(res => {
-      dispatch(storeGradCheck(res.data.check.state))
-      dispatch(storeGeneralCourseSelect(res.data.general_course.type))
+      dispatch(actions.graduation.sendReview.store(res.data))
     })
     .catch(err => {
       console.log(err)
     })
 }
 
-export const changeCourse = (from, end, course) => dispatch => {
-  let object = { from, end, course }
-  dispatch(updateCourse(object))
+export const getMoveTargets = (payload) => dispatch => {
+  axios
+    .post('/students/graduate/legalMoveTarget', payload)
+    .then(res => {
+      dispatch(actions.graduation.moveCourse.store(res.data))
+    })
+    .catch(err => {
+      console.log(err)
+    })
 }
 
-export const filterInput = value => dispatch => {
-  dispatch(filterinput(value))
-}
-
-export const fetchLegalMoveTarget = (cn, code, type, id) => dispatch => {
-  axios.post('/students/graduate/legalMoveTarget', {
-    cn: cn, // 中文課名
-    code: code, // 課號
-    type: type,
-    studentId: id
-  }).then(res => {
-    let payload = { targets: res.data, cn, code, type }
-    dispatch(storeLegalMoveTarget(payload))
-  }).catch(err => {
-    console.log(err)
-  })
+export const moveCourse = (payload) => dispatch => {
+  axios
+    .post('/students/graduate/moveCourse', payload)
+    .then(res => {
+      dispatch(actions.graduation.moveCourse.setSuccess(true))
+    })
+    .catch(err => {
+      console.log(err)
+    })
 }
