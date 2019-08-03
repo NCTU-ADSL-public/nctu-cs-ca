@@ -13,6 +13,9 @@ import StatusControl from './Status/StatusControl';
 import Score from './Score/Score';
 import ScoreControl from './Score/ScoreControl';
 
+import { 
+  fetchCheck,
+} from '../../../Redux/Assistants/Actions/Project/Check'
 
 import {
   fetchStatus,
@@ -68,7 +71,10 @@ class index extends React.Component {
     this.state = {
       type: 'UNCHOOSE',
     }
-    
+    this.props.fetch_check({
+      year: '107',
+      semester: '2'
+    })
   }
 
   toolBarButton = (hightlight, type, label) => {
@@ -164,7 +170,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetch_status: (payload) => dispatch(fetchStatus(payload))
+  fetch_status: (payload) => dispatch(fetchStatus(payload)),
+  fetch_check: (payload) => dispatch(fetchCheck(payload)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(index))

@@ -139,7 +139,7 @@ class Check extends React.Component {
           <DialogContent>
             <DialogContentText>
               {
-                this.state.check.first_second === 3 &&
+                this.state.check.first_second === "3" &&
                 <div style={{fontSize: '20px', margin: '10px', color: 'red', fontWeight: 'bold'}}>
                   {"請確認是否通過基礎程式設計"}
                 </div>
