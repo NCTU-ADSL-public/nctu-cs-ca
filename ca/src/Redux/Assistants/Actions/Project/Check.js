@@ -1,29 +1,12 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 
-// export const store_teachers = createAction('STORE_TEACHERS')
-// export const update_add_status = createAction('UPDATE_ADD_STATUS')
-// export const update_first_second = createAction('UPDATE_FIRST_SECOND')
-// export const delete_research = createAction('DELETE_RESEARCH')
-// export const storeScoreCsvData = createAction('STORE_SCORE_CSV_DATA')
-// export const storeScoreCsvDataStart = createAction('STORE_SCORE_CSV_DATA_START')
-
-
-// export const fetchTeachers = (post_item) => dispatch => {
-//   axios.post('/assistants/research/professorList', post_item).then(res => {
-//     dispatch(store_teachers(res.data))
-//   }).catch(err => {
-//     console.log(err)
-//   })
-// }
-
 export const check_handle_change = createAction('CHECK_HANDLE_CHANGE');
+export const check_delete = createAction('CHECK_DELETE')
 
 export const checkHandleChange = (payload) => dispatch => {
   dispatch(check_handle_change(payload));
 }
-
-
 
 export const fetchCheck = (payload) => dispatch => {
   axios.all([
@@ -48,7 +31,9 @@ export const fetchCheck = (payload) => dispatch => {
               student.add_status === "0" 
             ).map( student => ({
               ...student,
-              professor_name: teacher.professor_name
+              professor_name: teacher.professor_name,
+              research_title: project.title,
+              semester: payload.year + '-' + payload.semester
             }))
           ))
         ).flat(2),
@@ -58,7 +43,9 @@ export const fetchCheck = (payload) => dispatch => {
               student.add_status === "0" 
             ).map( student => ({
               ...student,
-              professor_name: teacher.professor_name
+              professor_name: teacher.professor_name,
+              research_title: project.title,
+              semester: payload.year + '-' + payload.semester
             }))
           ))
         ).flat(2),
@@ -68,11 +55,34 @@ export const fetchCheck = (payload) => dispatch => {
               student.add_status === "0" 
             ).map( student => ({
               ...student,
-              professor_name: teacher.professor_name
+              professor_name: teacher.professor_name,
+              research_title: project.title,
+              semester: payload.year + '-' + payload.semester
             }))
           ))
         ).flat(2)
       ]
     }))
   })).catch( err => console.log(err) )
+}
+
+export const agreeCheck = (payload) => dispatch => {
+  axios.all([
+    axios.post('/assistants/research/setAddStatus', payload),
+    axios.post('/assistants/research/setFirstSecond', payload)
+  ]).then(axios.spread((first_res, second_res) => {
+    dispatch(check_delete(payload.student_id))
+    window.confirm("加選成功")
+  })).catch(err => 
+    window.confirm("加選失敗，請檢查網路是否建立連線")
+  )
+}
+
+export const rejectCheck = (payload) => dispatch => {
+  axios.post('/assistants/research/delete', payload).then( res => {
+    dispatch(check_delete(payload.student_id))
+    window.confirm("退選成功")
+  }).catch(err => 
+    window.confirm("退選失敗，請檢查網路是否建立連線")
+  )
 }

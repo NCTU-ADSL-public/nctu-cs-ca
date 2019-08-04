@@ -7,7 +7,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Popover from '@material-ui/core/Popover'
 import '../../../../../../../node_modules/animate.css/animate.css'
 import { withStyles } from '@material-ui/core/styles'
-import { changeCourse } from '../../../../../../Redux/Students/Actions/Graduation'
 
 const style = {
   Button: {
@@ -124,12 +123,11 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview,
-  assis: state.Student.Graduation.assis
+  overview: state.Student.Graduation.detail.overview,
+  assis: state.Student.Graduation.assistant.using
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCourse: (from, end, course) => dispatch(changeCourse(from, end, course))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

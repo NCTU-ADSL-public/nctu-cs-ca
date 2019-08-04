@@ -101,7 +101,15 @@ class Index extends React.Component {
           title='抵免研究所課程'
           rwd={rwd}
           complete={this.props.overview.graduate}
-          require={this.props.overview.graduate}
+          optional={true}
+          value={100}
+          unit='學分'
+        />
+        <Card
+          title='雙主修、輔系、學分學程'
+          rwd={rwd}
+          complete={this.props.overview.dmajor_minor_program}
+          optional={true}
           value={100}
           unit='學分'
         />
@@ -111,9 +119,9 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  overview: state.Student.Graduation.overview,
-  reviewCheck: state.Student.Graduation.check,
-  generalCourseSelect: state.Student.Graduation.generalCourseSelect
+  overview: state.Student.Graduation.detail.overview,
+  reviewCheck: state.Student.Graduation.getReview.check,
+  generalCourseSelect: state.Student.Graduation.getReview.generalCourseSelect
 })
 
 const mapDispatchToProps = (dispatch) => ({

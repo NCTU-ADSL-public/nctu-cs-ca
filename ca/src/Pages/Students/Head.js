@@ -6,7 +6,7 @@ import Navbar from '../../Components/Navbar'
 import { fetchProfessors } from '../../Redux/Students/Actions/Professor'
 import { fetchUser } from '../../Redux/Students/Actions/User'
 import { fetchCourse, fetchCoursePass } from '../../Redux/Students/Actions/Map'
-import { fetchGraduationCourse } from '../../Redux/Students/Actions/Graduation'
+import { getGraduationInfo } from '../../Redux/Students/Actions/Graduation'
 
 
 class Head extends Component {
@@ -15,7 +15,7 @@ class Head extends Component {
     this.props.fetchProfessor()
     this.props.fetchCourse()
     this.props.fetchCoursePass()
-    this.props.fetchGraduationCourse()
+    this.props.getGraduationInfo()
   }
 
   render () {
@@ -82,7 +82,7 @@ const mapDispatch = (dispatch) => ({
   fetchProfessor: () => dispatch(fetchProfessors()),
   fetchCourse: () => dispatch(fetchCourse()),
   fetchCoursePass: () => dispatch(fetchCoursePass()),
-  fetchGraduationCourse: () => dispatch(fetchGraduationCourse())
+  getGraduationInfo: () => dispatch(getGraduationInfo())
 })
 
 export default connect(mapState, mapDispatch)(withRouter(Head))

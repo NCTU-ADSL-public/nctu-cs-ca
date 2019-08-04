@@ -162,14 +162,14 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  reviewData: state.Student.Graduation.data,
+  reviewData: state.Student.Graduation.detail.data,
   studentIdcard: state.Student.User.studentIdcard,
-  englishCheck: state.Student.Graduation.englishCheck,
-  idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis,
-  reviewCheck: state.Student.Graduation.check,
-  generalCourseSelect: state.Student.Graduation.generalCourseSelect,
-  professionalField: state.Student.Graduation.professional_field
+  englishCheck: state.Student.Graduation.english.check,
+  idCard: state.Student.Graduation.assistant.idCard,
+  assis: state.Student.Graduation.assistant.using,
+  reviewCheck: state.Student.Graduation.getReview.check,
+  generalCourseSelect: state.Student.Graduation.getReview.generalCourseSelect,
+  professionalField: state.Student.Graduation.getReview.professionalField
 })
 
 const mapDispatchToProps = (dispatch) => ({

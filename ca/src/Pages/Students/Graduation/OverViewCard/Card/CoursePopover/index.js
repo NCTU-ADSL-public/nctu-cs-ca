@@ -58,8 +58,7 @@ const CoursePopover = props => {
           !props.assis &&
           <MoveGroupButton
             title={title}
-            item={course}
-            label={'移動課程'}
+            course={course}
             rwd={rwd}
           />
         }
@@ -89,8 +88,8 @@ const GeneralCoursePopover = props => {
                   !props.assis &&
                   <MoveGroupButton
                     title={title}
-                    item={course}
-                    label='移動課程'
+                    course={course}
+                    rwd={rwd}
                   />
                 }
               </div>

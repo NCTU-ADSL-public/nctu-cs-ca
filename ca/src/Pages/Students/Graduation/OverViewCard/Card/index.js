@@ -23,8 +23,8 @@ import CourseList from './CourseList'
 import GeneralCourseList from './GeneralCourseList'
 import GeneralNewCourseList from './GeneralNewCourseList'
 import {
-  fetchGraduationCourse,
-  fetchGraduationCourseAssistantVersion
+  getGraduationInfo,
+  getGraduationInfoAssistantVersion
 } from '../../../../../Redux/Students/Actions/Graduation'
 import './style.css'
 
@@ -59,14 +59,28 @@ function Transition (props) {
   return <Grow {...props} />
 }
 
-const Title = (props) => (
-  <div>
-    <div className='cardTitle'>{ props.title }</div>
-    <font size={5} color='#338d68'>{ props.complete }</font>/
-    <div className='cardTitle'>{ props.require }</div>
-    { props.unit }
-  </div>
-)
+const Title = (props) => {
+  // 抵免研究所、雙主修...
+  if (props.optional) {
+    return (
+      <div>
+        <div className='cardTitle'>{ props.title }</div>
+        <font size={5} color='#338d68'>{ props.complete }</font>
+        <div className='cardTitle' />
+        { props.unit }
+      </div>
+    )
+  }
+  // 一般類別
+  return (
+    <div>
+      <div className='cardTitle'>{ props.title }</div>
+      <font size={5} color='#338d68'>{ props.complete }</font>/
+      <div className='cardTitle'>{ props.require }</div>
+      { props.unit }
+    </div>
+  )
+}
 
 class Index extends React.Component {
   constructor (props) {
@@ -116,10 +130,10 @@ class Index extends React.Component {
     event.stopPropagation()
     let idCard = this.props.idCard
     if (this.props.assis) {
-      this.props.fetchGraduationCourseAssistantVersion(idCard.id, idCard.sname, idCard.program, field)
+      this.props.getGraduationInfoAssistantVersion(idCard.id, idCard.sname, idCard.program, field)
     }
     else {
-      this.props.fetchGraduationCourse({ professional_field: field })
+      this.props.getGraduationInfo({ professional_field: field })
     }
   }
 
@@ -138,6 +152,7 @@ class Index extends React.Component {
                 title={this.props.title}
                 complete={this.props.complete}
                 require={this.props.require}
+                optional={this.props.optional}
                 unit={this.props.unit}
               />
               <AnimatedProgress value={this.props.value} />
@@ -206,6 +221,7 @@ class Index extends React.Component {
                     title={this.props.title}
                     complete={this.props.complete}
                     require={this.props.require}
+                    optional={this.props.optional}
                     unit={this.props.unit}
                   />
                 </div>
@@ -283,17 +299,17 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  data: state.Student.Graduation.data.filter(t => t.title === ownProps.title)[0],
+  data: state.Student.Graduation.detail.data.filter(t => t.title === ownProps.title)[0],
   studentIdcard: state.Student.User.studentIdcard,
-  idCard: state.Student.Graduation.idCardForassistans,
-  assis: state.Student.Graduation.assis,
-  reviewCheck: state.Student.Graduation.check,
-  professionalField: state.Student.Graduation.professional_field
+  idCard: state.Student.Graduation.assistant.idCard,
+  assis: state.Student.Graduation.assistant.using,
+  reviewCheck: state.Student.Graduation.getReview.check,
+  professionalField: state.Student.Graduation.getReview.professionalField
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGraduationCourse: (payload) => dispatch(fetchGraduationCourse(payload)),
-  fetchGraduationCourseAssistantVersion: (id, sname, program, feild) => dispatch(fetchGraduationCourseAssistantVersion(id, sname, program, feild))
+  getGraduationInfo: (payload) => dispatch(getGraduationInfo(payload)),
+  getGraduationInfoAssistantVersion: (id, sname, program, field) => dispatch(getGraduationInfoAssistantVersion(id, sname, program, field))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

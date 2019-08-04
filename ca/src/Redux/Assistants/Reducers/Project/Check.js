@@ -1,19 +1,7 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-    checks: [{
-      id: "0616014",
-      name: "楊",
-      first_second: "1"
-    },{
-      id: "0616015",
-      name: "楊",
-      first_second: "2"
-    },{
-      id: "0616014",
-      name: "楊",
-      first_second: "3"
-    }],
+    checks: [],
     input: ''
 }
 
@@ -22,5 +10,8 @@ export default handleActions({
       ...state,
       ...action.payload
     }),
-
+    CHECK_DELETE: (state, action) => ({
+      ...state,
+      checks: state.checks.filter( check => check.id != action.payload )
+    })
 }, initialState)
