@@ -87,7 +87,7 @@ class Index extends React.Component {
         this.props.storeImage('')
         if (this._isMounted) {
           this.setState({ loading: false })
-        }       
+        }
       })
   }
 

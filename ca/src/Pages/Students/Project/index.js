@@ -4,7 +4,7 @@ import { GridList } from 'material-ui/GridList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ProjectTile from './Tile'
 import { fetchProjects } from '../../../Redux/Students/Actions/Project'
-import AddIcons from './AddProject/index_'
+import AddIcons from './AddProject'
 import './style.css'
 
 const styles = {
@@ -53,7 +53,7 @@ class Index extends React.Component {
                   <ProjectTile data={tile} key={index} rwd />
                 ))
               }
-              <AddIcons rwd/>
+              <AddIcons rwd />
             </GridList>
           </div>
         </div>
