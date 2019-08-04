@@ -1,55 +1,44 @@
+
 import React from 'react'
-import axios from 'axios'
-// MUI
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AutoRenewIcon from '@material-ui/icons/Autorenew'
-// REDUX
-import { connect } from 'react-redux'
 import withMobileDialog from '@material-ui/core/withMobileDialog/index'
-import { getGraduationInfo } from '../../../../../../Redux/Students/Actions/Graduation'
+import {
+  actions,
+  getGraduationInfo,
+  resetCourse
+} from '../../../../../../Redux/Students/Actions/Graduation'
 
 const styles = theme => ({
-  button: {
-    margin: '20px 0 20px 0',
-    background: '#7c7c7c',
-    color: '#ffffff'
-  },
   icon: {
     marginRight: theme.spacing.unit
   }
 })
 
 class Index extends React.Component {
-  resetCourse () {
-    console.log('============ ResetCourseBtn resetCourse ==============')
-    axios.post('/students/graduate/resetMove', {
-      student_id: this.props.studentIdcard.student_id
-    }).then(res => {
-      console.log('┌---- RESPONSE ----')
-      console.log(res)
-      console.log('└------------------')
-    }).catch(err => {
-      console.log(err)
-    })
-    console.log('===========================================')
-    let inter = 250
-    while (inter < 500000) {
-      setTimeout(
-        () => {
-          console.log('----- getGraduationInfo! ----')
-          this.props.getGraduationInfo()
-        }, inter)
-      inter *= 2
+  componentDidUpdate () {
+    // 恢復成功後，重新拿課程資料並重置移動狀態
+    if (this.props.success) {
+      this.props.getGraduationInfo()
+      this.props.resetCourseDone()
     }
   }
+
+  handleClick () {
+    this.props.resetCourse({
+      student_id: this.props.studentIdcard.student_id
+    })
+  }
+
   render () {
     const { classes } = this.props
     return (
-      <MenuItem className={classes.menuItem} onClick={() => this.resetCourse()}>
+      <MenuItem onClick={() => this.handleClick()}>
         <ListItemIcon className={classes.icon}>
           <AutoRenewIcon />
         </ListItemIcon>
@@ -64,11 +53,14 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  studentIdcard: state.Student.User.studentIdcard
+  studentIdcard: state.Student.User.studentIdcard,
+  success: state.Student.Graduation.resetCourse.success
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getGraduationInfo: () => dispatch(getGraduationInfo())
+  getGraduationInfo: () => dispatch(getGraduationInfo()),
+  resetCourse: (payload) => dispatch(resetCourse(payload)),
+  resetCourseDone: () => dispatch(actions.graduation.resetCourse.setSuccess(false))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withMobileDialog()(withStyles(styles)(Index)))

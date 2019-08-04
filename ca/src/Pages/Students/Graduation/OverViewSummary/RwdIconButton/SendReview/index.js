@@ -91,11 +91,11 @@ class Index extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <MenuItem className={classes.menuItem} onClick={this.handleOpen}>
+        <MenuItem onClick={this.handleOpen}>
           <ListItemIcon className={classes.icon}>
             <CheckIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary='送出預審' />
+          <ListItemText inset primary='送出預審' />
         </MenuItem>
         <Dialog
           fullScreen={this.props.fullScreen}
