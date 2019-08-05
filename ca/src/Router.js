@@ -75,7 +75,7 @@ const Router = () => (
         <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} />
 
         <Route exact path='/teachers/head' component={TeacherHome} />
-        <Route exact path='/teachers/group' component={TeacherGroup} />
+        <Route exact path='/teachers/group' component={TeacherProject} />
         <Route exact path='/teachers/project' component={TeacherProject} />
         <Route exact path='/teachers/course' component={TeacherCourse} />
         <Route exact path='/teachers/family' component={TeacherFamily} />

@@ -11,8 +11,10 @@ import GroupList from './GroupList'
 import GroupApply from '../Group/GroupApply'
 // css
 import './style.css'
+// REDUX
+import { connect } from 'react-redux'
 
-class Group extends React.Component {
+class Index extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -50,4 +52,11 @@ class Group extends React.Component {
     )
   }
 }
-export default Group
+
+const mapStateToProps = (state) => ({
+  idCard: state.Teacher.User.idCard
+})
+const mapDispatchToProps = (dispatch) => ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index)
