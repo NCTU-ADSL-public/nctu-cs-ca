@@ -70,6 +70,8 @@ class GroupList extends React.Component {
     }
     this.props.FetchResearchList(tid, sem)
     this.setState({loading: false})
+    console.log('----- this.props.research.groups ----')
+    console.log(this.props.research.groups)
   }
 
   componentDidMount () {
@@ -109,9 +111,9 @@ class GroupList extends React.Component {
     })
   }
 
-  handleDropDownChange = (event, index, semVal) => {
-    this.setState({semVal})
-    this.fetchData(semVal)
+  handleDropDownChange = (event, index, yearVal) => {
+    this.setState({yearVal})
+    this.fetchData(yearVal)
   }
 
   makeYearList = () => {
