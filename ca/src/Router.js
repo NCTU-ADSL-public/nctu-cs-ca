@@ -7,6 +7,7 @@ import Login from './Pages/Login/Login'
 import TeacherHead from './Pages/Teachers/Head'
 import TeacherHome from './Pages/Teachers/Home'
 import TeacherGroup from './Pages/Teachers/Group/Group'
+import TeacherProject from './Pages/Teachers/Project'
 import TeacherCourse from './Pages/Teachers/Course'
 import TeacherFamily from './Pages/Teachers/Family'
 import TeacherVerify from './Pages/Teachers/Verify'
@@ -75,6 +76,7 @@ const Router = () => (
 
         <Route exact path='/teachers/head' component={TeacherHome} />
         <Route exact path='/teachers/group' component={TeacherGroup} />
+        <Route exact path='/teachers/project' component={() => <TeacherProject />} />
         <Route exact path='/teachers/course' component={TeacherCourse} />
         <Route exact path='/teachers/family' component={TeacherFamily} />
         <Route exact path='/teachers/verify' component={TeacherVerify} />
