@@ -9,7 +9,7 @@ const initialState = {
 }
 
 export default handleActions({
-  STATUS_HANDLE_CHANGE: (state, action) => ({ 
+  PROJECT_STATUS_HANDLE_CHANGE: (state, action) => ({ 
     ...state,
     ...action.payload
   })

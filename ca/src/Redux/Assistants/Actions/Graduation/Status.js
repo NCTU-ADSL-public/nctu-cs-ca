@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 
-export const status_handle_change = createAction('STATUS_HANDLE_CHANGE');
+export const status_handle_change = createAction('GRADUATION_STATUS_HANDLE_CHANGE');
 
 export const statusHandleChange = (payload) => dispatch => {
   dispatch(status_handle_change(payload));

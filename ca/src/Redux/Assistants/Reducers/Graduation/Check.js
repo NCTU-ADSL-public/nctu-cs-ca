@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export default handleActions({
-  CHECK_HANDLE_CHANGE: (state, action) => ({ 
+  GRADUATION_CHECK_HANDLE_CHANGE: (state, action) => ({ 
     ...state,
     ...action.payload
   })
