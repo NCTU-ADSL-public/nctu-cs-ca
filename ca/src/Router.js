@@ -41,7 +41,7 @@ import Footer from './Components/Footer'
 import AutoLogout from './Components/AutoLogout'
 import firebase from 'firebase' 
 
-injectTapEventPlugin()
+// injectTapEventPlugin()
 let config = {
   apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
   authDomain: 'code-86ba4.firebaseapp.com',

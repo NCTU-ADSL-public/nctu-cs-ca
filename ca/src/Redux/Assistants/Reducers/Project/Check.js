@@ -6,9 +6,12 @@ const initialState = {
 }
 
 export default handleActions({
-    CHECK_HANDLE_CHANGE: (state, action) => ({ 
+    PROJECT_CHECK_HANDLE_CHANGE: (state, action) => ({ 
       ...state,
       ...action.payload
     }),
-
+    CHECK_DELETE: (state, action) => ({
+      ...state,
+      checks: state.checks.filter( check => check.id != action.payload )
+    })
 }, initialState)

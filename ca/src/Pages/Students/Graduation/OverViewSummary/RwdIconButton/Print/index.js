@@ -35,14 +35,11 @@ class Index extends React.Component {
     const sid = this.props.studentIdcard.student_id
     if (rwd) {
       return (
-        <MenuItem
-          className={classes.menuItem}
-          onClick={() => this.printGradTable('105學年度畢業預審表-' + sid)}
-        >
+        <MenuItem onClick={() => this.printGradTable('105學年度畢業預審表-' + sid)}>
           <ListItemIcon className={classes.icon}>
             <PrintIcon />
           </ListItemIcon>
-          <ListItemText classes={{ primary: classes.primary }} inset primary='列印預審文件' />
+          <ListItemText inset primary='列印預審文件' />
         </MenuItem>
       )
     }

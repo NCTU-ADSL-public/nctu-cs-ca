@@ -3,7 +3,7 @@ import { createActions } from 'redux-actions'
 import axios from 'axios'
 import FakeData from '../../../../Resources/FakeData'
 
-const actions = createActions({
+export const actions = createActions({
   GRADUATION: {
     DETAIL: {
       STORE: null
@@ -21,13 +21,14 @@ const actions = createActions({
       STORE: null,
       SET_SUCCESS: null
     },
+    RESET_COURSE: {
+      SET_SUCCESS: null
+    },
     ASSISTANT: {
       STORE: null
     }
   }
 })
-
-export default actions
 
 const getCourseDetail = (payload) => dispatch => {
   axios
@@ -143,6 +144,17 @@ export const moveCourse = (payload) => dispatch => {
     .post('/students/graduate/moveCourse', payload)
     .then(res => {
       dispatch(actions.graduation.moveCourse.setSuccess(true))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
+export const resetCourse = (payload) => dispatch => {
+  axios
+    .post('/students/graduate/resetMove', payload)
+    .then(res => {
+      dispatch(actions.graduation.resetCourse.setSuccess(true))
     })
     .catch(err => {
       console.log(err)
