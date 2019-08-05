@@ -22,7 +22,7 @@ import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 // REDUX
-import { fetchResearchList } from '../../../Redux/Teachers/Actions/Research/index'
+import { fetchResearchList1, fetchResearchList2 } from '../../../Redux/Teachers/Actions/Research/index'
 import { connect } from 'react-redux'
 
 // FIRE BASE
@@ -56,7 +56,7 @@ class GroupList extends React.Component {
     }
   }
 
-  fetchData (sem) {
+  fetchData (year) {
    // this.setState({loading: true})
     let tid = this.props.idCard.teacher_id
     if( tid === '001' ){
@@ -64,24 +64,27 @@ class GroupList extends React.Component {
       setTimeout(
         () => {
           console.log('----- fetchData AGAIN!!!! ----')
-          this.fetchData(sem)
+          this.fetchData(year)
         }, 1500)
       return
     }
-    this.props.FetchResearchList(tid, sem)
+    this.props.FetchResearchList1(tid, year)
+    this.props.FetchResearchList2(tid, year)
     this.setState({loading: false})
-    console.log('----- this.props.research.groups ----')
-    console.log(this.props.research.groups)
+    console.log('----- this.props.research1.groups ----')
+    console.log(this.props.research1.groups)
+    console.log('----- this.props.research2.groups ----')
+    console.log(this.props.research2.groups)
   }
 
   componentDidMount () {
-    this.fetchData(this.state.semVal)
+    this.fetchData(this.state.yearVal)
     this.makeYearList()
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.idCard !== nextProps.idCard) {
-      this.fetchData(this.state.semVal)
+      this.fetchData(this.state.yearVal)
     }
   }
 
@@ -93,7 +96,7 @@ class GroupList extends React.Component {
 
   triggerUpdate = () => {
     this.delay(1000).then((v) => (
-      this.fetchData(this.state.semVal)
+      this.fetchData(this.state.yearVal)
     )).catch((e) => (
       console.log('trigger update error' + e)
     ))
@@ -129,9 +132,10 @@ class GroupList extends React.Component {
   }
 
   render () {
-    const csNum = this.props.research.cs_number
-    const otherNum = this.props.research.other_number
-    const groups = this.props.research.groups
+    const csNum = this.props.research1.cs_number
+    const otherNum = this.props.research1.other_number
+    const groups1 = this.props.research1.groups
+    const groups2 = this.props.research2.groups
 
     return (
         <div>
@@ -169,8 +173,8 @@ class GroupList extends React.Component {
               left={40}
               top={100}
               isLoading={this.state.loading} />
-            {!this.state.loading && groups.length !== undefined
-              ? groups.map((item, i) => {
+            {!this.state.loading && groups1.length !== undefined
+              ? groups1.map((item, i) => {
                 if(item.year[4] === '1')
                   return (
                     <GroupButton
@@ -201,8 +205,8 @@ class GroupList extends React.Component {
               left={40}
               top={100}
               isLoading={this.state.loading} />
-            {!this.state.loading && groups.length !== undefined
-              ? groups.map((item, i) => {
+            {!this.state.loading && groups2.length !== undefined
+              ? groups2.map((item, i) => {
                 if(item.year[4] === '2')
                   return (
                     <GroupButton
@@ -314,10 +318,12 @@ const getSemester = () => {
 
 const mapStateToProps = (state) => ({
   idCard: state.Teacher.User.idCard,
-  research: state.Teacher.Research.research
+  research1: state.Teacher.Research.research1,
+  research2: state.Teacher.Research.research2
 })
 const mapDispatchToProps = (dispatch) => ({
-  FetchResearchList: (tid, sem) => dispatch(fetchResearchList(tid, sem))
+  FetchResearchList1: (tid, year) => dispatch(fetchResearchList1(tid, year)),
+  FetchResearchList2: (tid, year) => dispatch(fetchResearchList2(tid, year))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList)
