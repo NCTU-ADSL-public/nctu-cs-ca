@@ -10,6 +10,7 @@ import {
   fetchCheck,
   checkHandleChange
 } from '../../../../Redux/Assistants/Actions/Project/Check'
+import { getSemester } from '../../../../Utilities'
 
 const styles = theme => ({
   container: {
@@ -45,8 +46,8 @@ class CheckControl extends React.Component {
         
     }
     this.props.fetch_check({
-      year: '107',
-      semester: '2'
+      year: getSemester().substr(0, 3),
+      semester: getSemester().substr(4, 5)
     })
   }
 
