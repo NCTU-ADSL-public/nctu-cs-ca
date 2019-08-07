@@ -21,6 +21,8 @@ import {
   fetchStatus,
 } from '../../../Redux/Assistants/Actions/Project/Status'
 
+import { getSemester } from '../../../Utilities'
+
 const styles = theme => ({
   root: {
     width: '100%',
