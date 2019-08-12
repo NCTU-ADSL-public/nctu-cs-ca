@@ -65,7 +65,7 @@ class GroupList extends React.Component {
         () => {
           console.log('----- fetchData AGAIN!!!! ----')
           this.fetchData(year)
-        }, 1500)
+        }, 4000)
       return
     }
     this.props.FetchResearchList1(tid, year)
@@ -104,7 +104,7 @@ class GroupList extends React.Component {
 
   handleChip = (i) => {
     let chipOpen = this.state.chipOpen
-    chipOpen.set(i, true)
+    chipOpen.set(i, false)
     this.setState({chipOpen})
   }
 
@@ -167,11 +167,10 @@ class GroupList extends React.Component {
             上學期
           </div>
           <div className='groups'>
-            {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.message}</div>}
             <Loading
-              size={100}
+              size={50}
               left={40}
-              top={100}
+              top={20}
               isLoading={this.state.loading} />
             {!this.state.loading && groups1.length !== undefined
               ? groups1.map((item, i) => {
@@ -199,11 +198,10 @@ class GroupList extends React.Component {
             下學期
           </div>
           <div className='groups'>
-            {this.state.loading && <div style={{fontSize: 28, color: 'red'}}>{this.state.message}</div>}
             <Loading
-              size={100}
+              size={50}
               left={40}
-              top={100}
+              top={20}
               isLoading={this.state.loading} />
             {!this.state.loading && groups2.length !== undefined
               ? groups2.map((item, i) => {

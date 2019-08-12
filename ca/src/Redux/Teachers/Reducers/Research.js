@@ -56,11 +56,11 @@ const initialState = {
     current_accept: 0,
     groups: [
       {
-        research_title: '洨敬白布雞使喚唷際甘草精華雄沒醉不女人',
+        research_title: '...',
         participants: [
           {
-            student_id: '0412121',
-            sname: '陳罐頭',
+            student_id: '...',
+            sname: '...',
             detail: '...',
             score: ''
           },
@@ -92,11 +92,11 @@ const initialState = {
         year: '108-2'
       },
       {
-        research_title: '洨敬白布雞使喚華雄沒醉不女人',
+        research_title: '...',
         participants: [
           {
-            student_id: '0412121',
-            sname: '陳罐頭',
+            student_id: '...',
+            sname: '...',
             detail: '...',
             score: ''
           },
@@ -153,11 +153,11 @@ const initialState = {
     current_accept: 0,
     groups: [
       {
-        research_title: '洨敬白布雞使喚唷際甘草精華雄沒醉不女人',
+        research_title: '...',
         participants: [
           {
-            student_id: '0412121',
-            sname: '陳罐頭',
+            student_id: '...',
+            sname: '...',
             detail: '...',
             score: ''
           },
@@ -189,11 +189,11 @@ const initialState = {
         year: '108-2'
       },
       {
-        research_title: '洨敬白布雞使喚華雄沒醉不女人',
+        research_title: '...',
         participants: [
           {
-            student_id: '0412121',
-            sname: '陳罐頭',
+            student_id: '...',
+            sname: '...',
             detail: '...',
             score: ''
           },
