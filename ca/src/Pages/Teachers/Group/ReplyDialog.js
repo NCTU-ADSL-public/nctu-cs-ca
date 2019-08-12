@@ -122,6 +122,10 @@ export default class ReplyDialog extends React.Component {
   }
 
   handleClose = (status) => {
+    console.log(status)
+    const statusText = status === 3 ? '『拒絕』' : '『接受』'
+    if( !window.confirm('確定回覆' + statusText + '?') ) return
+
     let students = this.props.participants.map( p => (
       {
         student_id: p.student_id,
@@ -177,7 +181,7 @@ export default class ReplyDialog extends React.Component {
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            請選擇接受、拒絕或考慮中。
+            請選擇『接受』或『拒絕』此申請，此動作不可反悔。
           </Dialog>
         </MuiThemeProvider>
       </div>

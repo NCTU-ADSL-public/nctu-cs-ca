@@ -8,7 +8,7 @@ import DescriptionIcon from '@material-ui/icons/Description'
 import ApplyIcon from '@material-ui/icons/AssignmentTurnedIn'
 // components
 import GroupList from './GroupList'
-import GroupApply from '../Group/GroupApply'
+import GroupApply from './GroupApply'
 // css
 import './style.css'
 // REDUX

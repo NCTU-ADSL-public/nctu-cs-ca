@@ -57,7 +57,7 @@ class GroupList extends React.Component {
   }
 
   fetchData (year) {
-   // this.setState({loading: true})
+   this.setState({loading: true})
     let tid = this.props.idCard.teacher_id
     if( tid === '001' ){
       // NOT A VALID TID
@@ -132,8 +132,8 @@ class GroupList extends React.Component {
   }
 
   render () {
-    const csNum = this.props.research1.cs_number
-    const otherNum = this.props.research1.other_number
+    const csNum = this.props.research1.cs_number + this.props.research2.cs_number
+    const otherNum = this.props.research1.other_number + this.props.research2.other_number
     const groups1 = this.props.research1.groups
     const groups2 = this.props.research2.groups
 
