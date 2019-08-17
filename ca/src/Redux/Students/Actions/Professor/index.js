@@ -71,11 +71,14 @@ export const sendProjectAgree = (payload) => dispatch => {
   let emails = []
   let participants = []
   let first_second = []
+  let department = []
   let postFlag = true
   // 把成員資料放進payload的欄位
   payload.members.forEach((member, index) => {
-    if (!member.id || !member.phone || !member.email || !member.first_second) {
-      window.alert('請填寫完整資訊')
+    if (!member.id || !member.phone || !member.email || !member.first_second || !member.department) {
+      postFlag = false
+    }
+    if (member.department === 2 && department.name === '') {
       postFlag = false
     }
     if (index === 0) { // 是自己
@@ -86,6 +89,7 @@ export const sendProjectAgree = (payload) => dispatch => {
     phones.push(member.phone)
     emails.push(member.email)
     first_second.push(member.first_second)
+    department.push(member.department)
   })
   if (postFlag) {
     axios.post('/students/research/showStudentStatus', {
@@ -111,6 +115,7 @@ export const sendProjectAgree = (payload) => dispatch => {
               teacher_id: payload.teacher_id,
               teacher_email: payload.teacher_email,
               first_second: first_second,
+              department: department,
               research_title: payload.research_title,
               participants: participants,
               phones: phones,
@@ -135,5 +140,7 @@ export const sendProjectAgree = (payload) => dispatch => {
         window.alert('送出失敗，請檢查連線是否穩定。')
         console.log(err)
       })
+  } else {
+    window.alert('請填寫完整資訊')
   }
 }

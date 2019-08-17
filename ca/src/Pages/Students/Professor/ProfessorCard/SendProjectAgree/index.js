@@ -80,7 +80,9 @@ class SendProjectAgree extends React.Component {
           id: this.props.studentIdcard.student_id + '（自己）',
           phone: '',
           email: '',
-          first_second: 0
+          first_second: 0,
+          department: 0,
+          name: ''
         }
       ],
       memberNumber: [1]
@@ -115,9 +117,20 @@ class SendProjectAgree extends React.Component {
 
   handleSubmit () {
     let _this = this
+    let number_tmp = 0
 
     if (!this.state.title) {
       window.alert('請填寫研究主題')
+      return
+    }
+    for (let i = 0; i < this.state.members.length; i++) {
+      if (this.state.members[i].department === 1) {
+        number_tmp = number_tmp + 1
+      }
+    }
+    console.log(this.state.members)
+    if (number_tmp > limitcount - this.props.profile.scount) {
+      window.alert('專題成員已超過該教授上限！')
       return
     }
 
@@ -137,15 +150,15 @@ class SendProjectAgree extends React.Component {
   handleAddMember () {
     let newNumber = this.state.memberNumber.length + 1
     if (newNumber > limitcount - this.props.profile.scount) {
-      this.handleSnackbarOpen('專題成員不能超過該教授上限！')
-      return
-    } else if (newNumber > 4) {
+      this.handleSnackbarOpen('專題成員已超過該教授上限！如有外系成員不算在教授上限內。')
+    }
+    if (newNumber > 4) {
       this.handleSnackbarOpen('專題成員不能超過4位！')
       return
     }
     this.setState({
       memberNumber: [...this.state.memberNumber, newNumber],
-      members: [...this.state.members, { id: '', phone: '', email: '', first_second: 0 }]
+      members: [...this.state.members, { id: '', phone: '', email: '', first_second: 0, department: 0, name: '' }]
     })
   }
 
@@ -246,7 +259,7 @@ class SendProjectAgree extends React.Component {
                 this.state.memberNumber.map(t => (
                   <Grow in key={t}>
                     <div className='row'>
-                      <div className='col-sm-3 col-md-12'>
+                      <div className='col-sm-3 col-md-4'>
                         <Input
                           placeholder='學號'
                           className='project-member-input'
@@ -303,6 +316,38 @@ class SendProjectAgree extends React.Component {
                           <MenuItem value={1} style={{width: '100%'}}>專題（ㄧ）</MenuItem>
                           <MenuItem value={2} style={{width: '100%'}}>專題（二）</MenuItem>
                         </TextField>
+                      </div>
+                      <div className='col-sm-6 col-md-4'>
+                        <TextField
+                          // className='project-member-input'
+                          style={{margin: '20px 10px 0 1px', width: '100%'}}
+                          InputProps={{
+                            startAdornment: <InputAdornment position='start'>
+                              <PermIcon />
+                            </InputAdornment>
+                          }}
+                          select
+                          value={members[t - 1].department}
+                          onChange={(e) => this.handleInputChange(e.target.value, 'department', t - 1)}
+                        >
+                          <MenuItem value={0} style={{width: '100%'}}>請選擇系所</MenuItem>
+                          <MenuItem value={1} style={{width: '100%'}}>資工系</MenuItem>
+                          <MenuItem value={2} style={{width: '100%'}}>非資工系</MenuItem>
+                        </TextField>
+                      </div>
+
+                      <div className='col-sm-3 col-md-4' style={{display: members[t - 1].department === 2 ? '' : 'none'}}>
+                        <Input
+                          placeholder='姓名（外系需填）'
+                          className='project-member-input'
+                          startAdornment={
+                            <InputAdornment position='start'>
+                              <MemberIcon />
+                            </InputAdornment>
+                          }
+                          value={members[t - 1].name}
+                          onChange={(e) => this.handleInputChange(e.target.value, 'name', t - 1)}
+                        />
                       </div>
                     </div>
                   </Grow>
@@ -386,6 +431,40 @@ class SendProjectAgree extends React.Component {
                               <MenuItem value={1} style={{width: '100%'}}>專題（ㄧ）</MenuItem>
                               <MenuItem value={2} style={{width: '100%'}}>專題（二）</MenuItem>
                             </TextField>
+                          </div>
+                          <div className='row' >
+                            <TextField
+                              placeholder='請選擇系所'
+                              className='project-member-input-rwd'
+                              style={{margin: '10px 0 0 15px', width: '100%'}}
+                              InputProps={{
+                                startAdornment: <InputAdornment position='start'>
+                                  <PermIcon />
+                                </InputAdornment>
+                              }}
+                              select
+                              value={members[t - 1].department}
+                              onChange={(e) => this.handleInputChange(e.target.value, 'department', t - 1)}
+                            >
+                              <MenuItem value={0} style={{width: '100%'}}>請選擇系所</MenuItem>
+                              <MenuItem value={1} style={{width: '100%'}}>資工系</MenuItem>
+                              <MenuItem value={2} style={{width: '100%'}}>非資工系</MenuItem>
+                            </TextField>
+                          </div>
+
+                          <div className='row' style={{display: members[t - 1].department === 2 ? '' : 'none'}}>
+                            <Input
+                              placeholder='姓名（外系須填）'
+                              className='project-member-input-rwd'
+                              fullWidth
+                              startAdornment={
+                                <InputAdornment position='start'>
+                                  <MemberIcon />
+                                </InputAdornment>
+                              }
+                              value={members[t - 1].name}
+                              onChange={(e) => this.handleInputChange(e.target.value, 'name', t - 1)}
+                            />
                           </div>
                         </div>
                       </ExpansionPanelDetails>
