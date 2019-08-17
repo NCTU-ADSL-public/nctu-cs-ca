@@ -14,7 +14,7 @@ import Tab from '@material-ui/core/Tab'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Tooltip from '@material-ui/core/Tooltip'
-import { setGradutateState } from '../../../Redux/Assistants/Actions/Graduation/index'
+import { setGradutateState } from '../../../Redux/Assistants/Actions/Graduation_tmp/index'
 
 const styles = theme => ({
   card: {

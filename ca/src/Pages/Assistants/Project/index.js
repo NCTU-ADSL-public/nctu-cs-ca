@@ -21,6 +21,8 @@ import {
   fetchStatus,
 } from '../../../Redux/Assistants/Actions/Project/Status'
 
+import { getSemester } from '../../../Utilities'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -72,8 +74,8 @@ class index extends React.Component {
       type: 'UNCHOOSE',
     }
     this.props.fetch_check({
-      year: '107',
-      semester: '2'
+      year: getSemester().substr(0, 3),
+      semester: getSemester().substr(4, 5)
     })
   }
 

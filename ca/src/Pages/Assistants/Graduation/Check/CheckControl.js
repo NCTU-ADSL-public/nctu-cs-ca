@@ -6,17 +6,15 @@ import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 
-import { 
-  fetchCheck,
+import {
   checkHandleChange
-} from '../../../../Redux/Assistants/Actions/Project/Check'
-import { getSemester } from '../../../../Utilities'
+} from '../../../../Redux/Assistants/Actions/Graduation/Check'
 
 const styles = theme => ({
   container: {
     width: '80%',
     margin: '0 auto',
-    marginTop: '20px'
+    marginTop: '20px',
   },
   warningText: {
     fontSize: '30px',
@@ -37,27 +35,23 @@ const styles = theme => ({
       borderBottomColor: '#68BB66'
     },
   },
+    
 })
-class CheckControl extends React.Component {
 
+class CheckControl extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-        
+
     }
-    this.props.fetch_check({
-      year: getSemester().substr(0, 3),
-      semester: getSemester().substr(4, 5)
-    })
   }
 
-  render () {
-    const { classes, Check } = this.props;
-    const {  } = this.state;
+  render() {
+    const { classes, Check } = this.props
 
     return (
       <div className={classes.container}>
-        <FormControl style={{ width: '100%', marginBottom: '10px', flex: 1 }}>
+        <FormControl style={{ width: '100%', flex: 1 }}>
           <InputLabel
             FormLabelClasses={{
               root: classes.cssLabel,
@@ -85,14 +79,14 @@ class CheckControl extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  Check: state.Assistant.Graduation.Check,
 
-const mapStateToProps = (state) => ({
-  Check: state.Assistant.Project.Check,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  fetch_check: (payload) => dispatch(fetchCheck(payload)),
+const mapDispatchToProps = dispatch => ({
   checkHandleChange: (payload) => dispatch(checkHandleChange(payload))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CheckControl))

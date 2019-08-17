@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
 
-export const check_handle_change = createAction('CHECK_HANDLE_CHANGE');
+export const check_handle_change = createAction('PROJECT_CHECK_HANDLE_CHANGE');
 export const check_delete = createAction('CHECK_DELETE')
 
 export const checkHandleChange = (payload) => dispatch => {

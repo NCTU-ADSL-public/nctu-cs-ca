@@ -108,6 +108,8 @@ export default class ScoreDialog extends React.Component {
     if(status !== 1){
       if( window.confirm('確定要放棄評分? 輸入的資料將會被清除!') ) this.setState({open: false})
     }else if(status === 1 && this.checkAllText() ){
+      if( !window.confirm('是否確定評分?') ) return
+
       this.setState({open: false})
       console.log('----------------------- /professors/students/setScore ---------------------------')
 

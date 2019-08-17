@@ -1,0 +1,109 @@
+.mainTitle {
+    font-size: 2.8em;
+    font-weight: 500;
+    color: #6e8086;
+    margin: 32px 0 0 70px;
+    float: left;
+}
+
+.subTitle {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #858585;
+    padding: 10px 0 0 70px;
+    float: left;
+    width: 100%;
+}
+
+.subTitle-sem {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #ffffff;
+    padding: 10px 0 10px 70px;
+    margin: 0 0px 20px 30px;
+    border-radius: 2px;
+    float: left;
+    width: 100%;
+    background: #1fac63;
+}
+
+.subTitle-sem-orange {
+    background: #ff9f6a;
+}
+
+.subTitle-item {
+    float: left;
+}
+
+.subTitle-item-mui {
+    position: relative;
+    top: -18px;
+}
+
+.apply-btn-year {
+    font-size: 19px;
+    font-weight: bolder;
+    padding: 4px 8px;
+    margin: 10px;
+    border-radius: 10px;
+    background: rgb(234, 176, 189);
+    color: #fff6f2;
+}
+
+.groups {
+    margin: 0 0 60px 0;
+    clear: both;
+}
+
+.groupBtn {
+    margin: 30px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 6px;
+    border-left: 5px #1fac63 solid;
+}
+
+.groupBtn-orange {
+    margin: 30px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 6px;
+    border-left: 5px #ff9f6a solid;
+}
+
+.group-pic {
+    width: 200px;
+    height: 200px;
+}
+
+.groupYear {
+    font-size: 1.2em;
+    font-weight: 200;
+    color: #575757;
+}
+
+.groupTitle {
+    font-size: 2em;
+    font-weight: 100;
+    color: #575757;
+}
+
+.groupModify {
+    margin: 10px 10px 5px 0;
+    float: left;
+}
+
+.group-chip {
+    margin: 5px !important;
+}
+
+.chipWrapper {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.block {
+    display: block;
+    height: 50px;
+}

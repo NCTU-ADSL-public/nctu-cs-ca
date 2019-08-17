@@ -21,6 +21,9 @@ const initialState = {
     targets: [],
     success: false
   },
+  resetCourse: {
+    success: false
+  },
   assistant: {
     idCard: {},
     using: false
@@ -69,6 +72,12 @@ export default handleActions({
       }}),
       SET_SUCCESS: (state, action) => ({ ...state, moveCourse: {
         ...state.moveCourse,
+        success: action.payload
+      }})
+    },
+    RESET_COURSE: {
+      SET_SUCCESS: (state, action) => ({ ...state, resetCourse: {
+        ...state.resetCourse,
         success: action.payload
       }})
     },

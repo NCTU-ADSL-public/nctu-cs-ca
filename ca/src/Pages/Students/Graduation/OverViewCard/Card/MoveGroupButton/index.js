@@ -6,8 +6,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import actions from '../../../../../../Redux/Students/Actions/Graduation'
 import {
+  actions,
   getGraduationInfo,
   getMoveTargets,
   moveCourse
@@ -85,7 +85,7 @@ class Index extends React.Component {
     // 移動成功後，重新拿課程資料並重置移動狀態
     if (this.props.success) {
       this.props.getGraduationInfo()
-      this.props.resetMove()
+      this.props.moveCourseDone()
     }
   }
 
@@ -181,7 +181,7 @@ const mapDispatchToProps = (dispatch) => ({
   getGraduationInfo: () => dispatch(getGraduationInfo()),
   getMoveTargets: (payload) => dispatch(getMoveTargets(payload)),
   moveCourse: (payload) => dispatch(moveCourse(payload)),
-  resetMove: () => dispatch(actions.graduation.moveCourse.setSuccess(false))
+  moveCourseDone: () => dispatch(actions.graduation.moveCourse.setSuccess(false))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

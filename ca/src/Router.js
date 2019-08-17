@@ -7,6 +7,7 @@ import Login from './Pages/Login/Login'
 import TeacherHead from './Pages/Teachers/Head'
 import TeacherHome from './Pages/Teachers/Home'
 import TeacherGroup from './Pages/Teachers/Group/Group'
+import TeacherProject from './Pages/Teachers/Project'
 import TeacherCourse from './Pages/Teachers/Course'
 import TeacherFamily from './Pages/Teachers/Family'
 import TeacherVerify from './Pages/Teachers/Verify'
@@ -40,7 +41,7 @@ import Footer from './Components/Footer'
 import AutoLogout from './Components/AutoLogout'
 import firebase from 'firebase' 
 
-injectTapEventPlugin()
+// injectTapEventPlugin()
 let config = {
   apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
   authDomain: 'code-86ba4.firebaseapp.com',
@@ -74,7 +75,8 @@ const Router = () => (
         <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} />
 
         <Route exact path='/teachers/head' component={TeacherHome} />
-        <Route exact path='/teachers/group' component={TeacherGroup} />
+        <Route exact path='/teachers/group' component={TeacherProject} />
+        <Route exact path='/teachers/project' component={TeacherProject} />
         <Route exact path='/teachers/course' component={TeacherCourse} />
         <Route exact path='/teachers/family' component={TeacherFamily} />
         <Route exact path='/teachers/verify' component={TeacherVerify} />
