@@ -72,13 +72,14 @@ export const sendProjectAgree = (payload) => dispatch => {
   let participants = []
   let first_second = []
   let department = []
+  let name = []
   let postFlag = true
   // 把成員資料放進payload的欄位
   payload.members.forEach((member, index) => {
     if (!member.id || !member.phone || !member.email || !member.first_second || !member.department) {
       postFlag = false
     }
-    if (member.department === 2 && department.name === '') {
+    if (member.department === 2 && member.name === '') {
       postFlag = false
     }
     if (index === 0) { // 是自己
@@ -90,6 +91,7 @@ export const sendProjectAgree = (payload) => dispatch => {
     emails.push(member.email)
     first_second.push(member.first_second)
     department.push(member.department)
+    name.push(member.name)
   })
   if (postFlag) {
     axios.post('/students/research/showStudentStatus', {
@@ -119,7 +121,8 @@ export const sendProjectAgree = (payload) => dispatch => {
               research_title: payload.research_title,
               participants: participants,
               phones: phones,
-              email: emails
+              email: emails,
+              name: name
             })
               .then(res => {
                 if (res.data.signal === 1) {
