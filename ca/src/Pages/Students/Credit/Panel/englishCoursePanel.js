@@ -15,16 +15,12 @@ import {
   TableRow
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import Button from '@material-ui/core/Button'
-// import Icon from '@material-ui/core/Icon'
-// import DeleteIcon from '@material-ui/icons/Delete'
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
+import DeleteIcon from '@material-ui/icons/Delete'
 import { actions, deleteCredit } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
-  container: {
-    margin: '1%',
-    fontFamily: 'Noto Sans CJK TC'
-  },
   subtitle1: {
     fontSize: 18,
     fontWeight: 400,
@@ -94,29 +90,8 @@ class Index extends React.Component {
 
   render () {
     const { classes, data, mobile } = this.props
-    let color, status
-    switch (data.status) {
-      case 0:
-        color = '#f3864a'
-        status = '審核中'
-        break
-      case 1:
-        color = '#3aa276'
-        status = '審核通過'
-        break
-      case 2:
-        color = '#d93a64'
-        status = '審核不通過'
-        break
-      case 3:
-        color = '#aaaaaa'
-        status = '退件'
-        break
-      default:
-        color = '#ffffff'
-        status = '---'
-        break
-    }
+    const color = ['#f3864a', '#3aa276', '#d93a64', '#aaaaaa', '#ffffff'][data.status]
+    const status = ['審核中', '審核通過', '審核不通過', '退件', '---'][data.status]
 
     if (mobile) {
       return (
@@ -128,9 +103,10 @@ class Index extends React.Component {
               borderRadius: '0 0 2px 0',
               color: '#fff',
               textAlign: 'center'
-            }}>{status}</div>
+            }}>
+              { status }
+            </div>
             <div style={{ flex: 0.98 }} />
-            {/*
             <Icon
               style={{ color: 'grey', fontSize: '30px' }}
               onClick={this.handleEdit}
@@ -141,7 +117,6 @@ class Index extends React.Component {
               style={{ color: 'grey', fontSize: '30px' }}
               onClick={this.handleDelete}
             />
-            */}
           </div>
 
           <div style={{ margin: '20px 0 15px 0', display: 'flex', justifyContent: 'center' }}>
@@ -170,7 +145,9 @@ class Index extends React.Component {
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.headFont}>檔案</TableCell>
-                  <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
+                  <TableCell className={classes.font}>
+                    <a target='_blank' rel='noopener noreferrer' href={data.file}>下載</a>
+                  </TableCell>
                 </TableRow>
                 {
                   data.status === 3 &&
@@ -215,7 +192,9 @@ class Index extends React.Component {
                   <TableRow>
                     <TableCell className={classes.font}>{data.course_name}</TableCell>
                     <TableCell className={classes.font}>{data.department}</TableCell>
-                    <TableCell className={classes.font}><a target='_blank' rel='noopener noreferrer' href={data.file}> 下載 </a></TableCell>
+                    <TableCell className={classes.font}>
+                      <a target='_blank' rel='noopener noreferrer' href={data.file}>下載</a>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -231,7 +210,6 @@ class Index extends React.Component {
 
           <div style={{ display: 'flex', position: 'relative', height: '20px', top: '-40px' }}>
             <div style={{ flex: 0.92 }} />
-            {/*
             <Button
               variant='fab'
               color='primary'
@@ -254,7 +232,6 @@ class Index extends React.Component {
             >
               <DeleteIcon />
             </Button>
-            */}
           </div>
         </div>
       )

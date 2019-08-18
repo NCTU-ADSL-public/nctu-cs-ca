@@ -340,37 +340,37 @@ class HorizontalLinearStepper extends React.Component {
   getStepContent (stepIndex) {
     switch (stepIndex) {
       case 0:
-        return (<FormSelectTable selectCreditForm={this.selectCreditForm} />)
+        return <FormSelectTable selectCreditForm={this.selectCreditForm} />
       case 1: {
         switch (this.state.selectFormIndex) {
           case 0:
-            return (<WaiveCourseForm />)
+            return <WaiveCourseForm />
           case 1:
-            return (<ExemptCourseForm />)
+            return <ExemptCourseForm />
           case 2:
-            return (<CompulsoryCourseForm />)
+            return <CompulsoryCourseForm />
           case 3:
-            return (<EnglishCourseForm />)
+            return <EnglishCourseForm />
           default:
-            return ''
+            return null
         }
       }
       case 2: {
         switch (this.state.selectFormIndex) {
           case 0:
-            return (<WaiveCourseFormConfirm />)
+            return <WaiveCourseFormConfirm />
           case 1:
-            return (<ExemptCourseFormConfirm />)
+            return <ExemptCourseFormConfirm />
           case 2:
-            return (<CompulsoryCourseFormConfirm />)
+            return <CompulsoryCourseFormConfirm />
           case 3:
-            return (<EnglishCourseFormConfirm />)
+            return <EnglishCourseFormConfirm />
           default:
-            return ''
+            return null
         }
       }
       default:
-        return 'You\'re a long way from home sonny jim!'
+        return null
     }
   }
 
@@ -400,7 +400,8 @@ class HorizontalLinearStepper extends React.Component {
                 </Step>
               </Stepper>
             </div>
-            {/* For mobile screen */}
+
+            {/* For mobile xs */}
             <div className='hidden-sm hidden-md hidden-lg'>
               <div style={{ margin: '5px 3px 20px 3px', display: 'flex', justifyContent: 'center' }}>
                 <Chip
@@ -419,6 +420,7 @@ class HorizontalLinearStepper extends React.Component {
                 />
               </div>
             </div>
+
             <div style={contentStyle}>
               {
                 finished

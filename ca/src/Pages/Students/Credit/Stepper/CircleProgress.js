@@ -7,28 +7,31 @@ const styles = theme => ({
   progress: {
     margin: theme.spacing.unit * 2,
   },
-});
+})
 
 class CircularDeterminate extends React.Component {
-  state = {
-    completed: 0,
-  };
+  constructor (props) {
+    super(props)
+    this.state = {
+      completed: 0
+    }
+  }
 
   componentDidMount() {
-    this.timer = setInterval(this.progress, 20);
+    this.timer = window.setInterval(this.progress, 20)
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    window.clearInterval(this.timer)
   }
 
   progress = () => {
-    const { completed } = this.state;
-    this.setState({ completed: completed >= 100 ? 0 : completed + 1 });
-  };
+    const { completed } = this.state
+    this.setState({ completed: completed >= 100 ? 0 : completed + 1 })
+  }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <div>
         <CircularProgress
@@ -37,12 +40,12 @@ class CircularDeterminate extends React.Component {
           value={this.state.completed}
         />
       </div>
-    );
+    )
   }
 }
 
 CircularDeterminate.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
 export default withStyles(styles)(CircularDeterminate)
