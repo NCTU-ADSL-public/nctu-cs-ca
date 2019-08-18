@@ -2,35 +2,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
-import { actions } from '../../../../Redux/Students/Actions/Credit'
+import {
+  TextInput,
+  TextInputDefault,
+  SelectInput
+} from '../FormInput'
 import Postfile from './Postfile'
+import { actions } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {
     width: '100%',
     margin: '0 auto'
-  },
-  label: {
-    fontSize: '20px'
-  },
-  labelMb: {
-    fontSize: 18
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  menu: {
-    width: 150,
-    fontSize: '20px'
-  },
-  menuMb: {
-    width: 150,
-    fontSize: 18
   }
 })
 
@@ -46,63 +31,31 @@ class ExemptCourseForm extends React.Component {
             <h1 style={{color: 'black'}} >課程免修單</h1>
             <Divider />
             <div style={{ color: 'red', fontSize: '20px' }}>申請多門抵免需額外填寫另一張表單</div>
+
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
               />
-              <TextField
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
               />
-              <TextField
+              <TextInput
                 label='系所/年級/班別'
                 placeholder='例：資工系資工組大一A班'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.class}
+                handleChange={(value) => this.props.updatePayload({ class: value })}
                 error={this.props.error && payload.class === ''}
-                onChange={(event) => this.props.updatePayload({ class: event.target.value })}
               />
-              <TextField
+              <TextInput
                 label='手機'
                 margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.phone}
+                handleChange={(value) => this.props.updatePayload({ phone: value })}
                 error={this.props.error && payload.phone === ''}
-                onChange={(event) => this.props.updatePayload({ phone: event.target.value })}
               />
             </div>
 
@@ -111,114 +64,54 @@ class ExemptCourseForm extends React.Component {
             <h2>已修習課程資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.original_course_name}
+                handleChange={(value) => this.props.updatePayload({ original_course_name: value })}
                 error={this.props.error && payload.original_course_name === ''}
-                onChange={(event) => this.props.updatePayload({ original_course_name: event.target.value })}
               />
-              <TextField
+              <TextInput
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.original_course_department}
+                handleChange={(value) => this.props.updatePayload({ original_course_department: value })}
                 error={this.props.error && payload.original_course_department === ''}
-                onChange={(event) => this.props.updatePayload({ original_course_department: event.target.value })}
               />
-              <TextField
-                select
+              <SelectInput
                 label='修課年級'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                margin='normal'
                 value={payload.original_course_year}
+                handleChange={(value) => this.props.updatePayload({ original_course_year: value })}
                 error={this.props.error && payload.original_course_year === 0}
-                onChange={(event) => this.props.updatePayload({ original_course_year: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課年級</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>一</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>二</MenuItem>
                 <MenuItem value={3} style={{ height: '10px' }}>三</MenuItem>
                 <MenuItem value={4} style={{ height: '10px' }}>四</MenuItem>
-              </TextField>
-              <TextField
-                select
+              </SelectInput>
+              <SelectInput
                 label='修課學期'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                margin='normal'
                 value={payload.original_course_semester}
+                handleChange={(value) => this.props.updatePayload({ original_course_semester: value })}
                 error={this.props.error && payload.original_course_semester === 0}
-                onChange={(event) => this.props.updatePayload({ original_course_semester: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
                 <MenuItem value={3} style={{ height: '10px' }}>暑</MenuItem>
-              </TextField>
-              <TextField
+              </SelectInput>
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                error={this.props.error && payload.original_course_credit === ''}
                 value={payload.original_course_credit}
-                onChange={(event) => this.props.updatePayload({ original_course_credit: event.target.value })}
+                handleChange={(value) => this.props.updatePayload({ original_course_credit: value })}
+                error={this.props.error && payload.original_course_credit === ''}
               />
-              <TextField
+              <TextInput
                 label='成績'
                 placeholder='若無分數則填通過與否'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.original_course_score}
+                handleChange={(value) => this.props.updatePayload({ original_course_score: value })}
                 error={this.props.error && payload.original_course_score === ''}
-                onChange={(event) => this.props.updatePayload({ original_course_score: event.target.value })}
               />
             </div>
 
@@ -227,69 +120,31 @@ class ExemptCourseForm extends React.Component {
             <h2>申請免修課程資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInput
                 label='永久課號'
                 placeholder='例：DCP1183'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.current_course_code}
+                handleChange={(value) => this.props.updatePayload({ current_course_code: value })}
                 error={this.props.error && payload.current_course_code === ''}
-                onChange={(event) => this.props.updatePayload({ current_course_code: event.target.value })}
               />
-              <TextField
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.current_course_name}
+                handleChange={(value) => this.props.updatePayload({ current_course_name: value })}
                 error={this.props.error && payload.current_course_name === ''}
-                onChange={(event) => this.props.updatePayload({ current_course_name: event.target.value })}
               />
-              <TextField
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
                 value={payload.current_course_credit}
+                handleChange={(value) => this.props.updatePayload({ current_course_credit: value })}
                 error={this.props.error && payload.current_course_credit === ''}
-                onChange={(event) => this.props.updatePayload({ current_course_credit: event.target.value })}
               />
-              <TextField
-                select
+              <SelectInput
                 label='選別'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                margin='normal'
                 value={payload.current_course_type}
+                handleChange={(value) => this.props.updatePayload({ current_course_type: value })}
                 error={this.props.error && payload.current_course_type === '請選擇選別'}
-                onChange={(event) => this.props.updatePayload({ current_course_type: event.target.value })}
               >
                 <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
                 <MenuItem value={'必修'} style={{ height: '10px' }}>必修</MenuItem>
@@ -298,7 +153,7 @@ class ExemptCourseForm extends React.Component {
                 <MenuItem value={'外語'} style={{ height: '10px' }}>外語</MenuItem>
                 <MenuItem value={'體育'} style={{ height: '10px' }}>體育</MenuItem>
                 <MenuItem value={'大學部修研究所課程'} style={{ height: '10px' }}>大學部修研究所課程</MenuItem>
-              </TextField>
+              </SelectInput>
             </div>
 
             <div style={{ height: '50px' }} />
@@ -321,67 +176,35 @@ class ExemptCourseForm extends React.Component {
             <h2 style={{color: 'black', fontSize: '20px'}} >課程免修單</h2>
             <Divider />
             <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
+
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='系所/年級/班別'
                 placeholder='例：資工系資工組大一A班'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.class}
+                handleChange={(value) => this.props.updatePayload({ class: value })}
                 error={this.props.error && payload.class === ''}
-                onChange={(event) => this.props.updatePayload({ class: event.target.value })}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='手機'
                 margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.phone}
+                handleChange={(value) => this.props.updatePayload({ phone: value })}
                 error={this.props.error && payload.phone === ''}
-                onChange={(event) => this.props.updatePayload({ phone: event.target.value })}
+                mobile
               />
             </div>
 
@@ -390,120 +213,60 @@ class ExemptCourseForm extends React.Component {
             <h2>已修習課程資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.original_course_name}
+                handleChange={(value) => this.props.updatePayload({ original_course_name: value })}
                 error={this.props.error && payload.original_course_name === ''}
-                onChange={(event) => this.props.updatePayload({ original_course_name: event.target.value })}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.original_course_department}
+                handleChange={(value) => this.props.updatePayload({ original_course_department: value })}
                 error={this.props.error && payload.original_course_department === ''}
-                onChange={(event) => this.props.updatePayload({ original_course_department: event.target.value })}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                select
+              <SelectInput
                 label='修課年級'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menuMb
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                margin='normal'
                 value={payload.original_course_year}
+                handleChange={(value) => this.props.updatePayload({ original_course_year: value })}
                 error={this.props.error && payload.original_course_year === 0}
-                onChange={(event) => this.props.updatePayload({ original_course_year: event.target.value })}
+                mobile
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課年級</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>一</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>二</MenuItem>
                 <MenuItem value={3} style={{ height: '10px' }}>三</MenuItem>
                 <MenuItem value={4} style={{ height: '10px' }}>四</MenuItem>
-              </TextField>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                select
+              </SelectInput>
+              <SelectInput
                 label='修課學期'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menuMb
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                margin='normal'
                 value={payload.original_course_semester}
+                handleChange={(value) => this.props.updatePayload({ original_course_semester: value })}
                 error={this.props.error && payload.original_course_semester === 0}
-                onChange={(event) => this.props.updatePayload({ original_course_semester: event.target.value })}
+                mobile
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
                 <MenuItem value={3} style={{ height: '10px' }}>暑</MenuItem>
-              </TextField>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              </SelectInput>
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.original_course_credit}
+                handleChange={(value) => this.props.updatePayload({ original_course_credit: value })}
                 error={this.props.error && payload.original_course_credit === ''}
-                onChange={(event) => this.props.updatePayload({ original_course_credit: event.target.value })}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='成績'
                 placeholder='若無分數則填通過與否'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.original_course_score}
+                handleChange={(value) => this.props.updatePayload({ original_course_score: value })}
                 error={this.props.error && payload.original_course_score === ''}
-                onChange={(event) => this.props.updatePayload({ original_course_score: event.target.value })}
+                mobile
               />
             </div>
 
@@ -512,73 +275,35 @@ class ExemptCourseForm extends React.Component {
             <h2>申請免修課程資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='永久課號'
                 placeholder='例：DCP1183'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.current_course_code}
+                handleChange={(value) => this.props.updatePayload({ current_course_code: value })}
                 error={this.props.error && payload.current_course_code === ''}
-                onChange={(event) => this.props.updatePayload({ current_course_code: event.target.value })}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.current_course_name}
+                handleChange={(value) => this.props.updatePayload({ current_course_name: value })}
                 error={this.props.error && payload.current_course_name === ''}
-                onChange={(event) => this.props.updatePayload({ current_course_name: event.target.value })}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
                 value={payload.current_course_credit}
+                handleChange={(value) => this.props.updatePayload({ current_course_credit: value })}
                 error={this.props.error && payload.current_course_credit === ''}
-                onChange={(event) => this.props.updatePayload({ current_course_credit: event.target.value })}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                select
+              <SelectInput
                 label='選別'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menuMb
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                margin='normal'
                 value={payload.current_course_type}
+                handleChange={(value) => this.props.updatePayload({ current_course_type: value })}
                 error={this.props.error && payload.current_course_type === '請選擇選別'}
-                onChange={(event) => this.props.updatePayload({ current_course_type: event.target.value })}
+                mobile
               >
                 <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
                 <MenuItem value={'必修'} style={{ height: '10px' }}>必修</MenuItem>
@@ -587,7 +312,7 @@ class ExemptCourseForm extends React.Component {
                 <MenuItem value={'外語'} style={{ height: '10px' }}>外語</MenuItem>
                 <MenuItem value={'體育'} style={{ height: '10px' }}>體育</MenuItem>
                 <MenuItem value={'大學部修研究所課程'} style={{ height: '10px' }}>大學部修研究所課程</MenuItem>
-              </TextField>
+              </SelectInput>
             </div>
 
             <div style={{ height: '50px' }} />
