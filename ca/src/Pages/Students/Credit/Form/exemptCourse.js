@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
-import { exemptCourseChange } from '../../../../Redux/Students/Actions/Credit'
+import { actions } from '../../../../Redux/Students/Actions/Credit'
 import Postfile from './Postfile'
 
 const styles = theme => ({
@@ -36,7 +36,7 @@ const styles = theme => ({
 
 class ExemptCourseForm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
 
     return (
       <div>
@@ -86,9 +86,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.class}
-                error={this.props.errorsubmitted ? this.props.class === '' : false}
-                onChange={(event) => this.props.handleChange({ class: event.target.value })}
+                value={payload.class}
+                error={this.props.error && payload.class === ''}
+                onChange={(event) => this.props.updatePayload({ class: event.target.value })}
               />
               <TextField
                 label='手機'
@@ -100,9 +100,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.phone}
-                error={this.props.errorsubmitted ? this.props.phone === '' : false}
-                onChange={(event) => this.props.handleChange({ phone: event.target.value })}
+                value={payload.phone}
+                error={this.props.error && payload.phone === ''}
+                onChange={(event) => this.props.updatePayload({ phone: event.target.value })}
               />
             </div>
 
@@ -121,9 +121,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_name}
-                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
+                value={payload.original_course_name}
+                error={this.props.error && payload.original_course_name === ''}
+                onChange={(event) => this.props.updatePayload({ original_course_name: event.target.value })}
               />
               <TextField
                 label='開課系所'
@@ -135,9 +135,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_department}
-                error={this.props.errorsubmitted ? this.props.original_course_department === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_department: event.target.value })}
+                value={payload.original_course_department}
+                error={this.props.error && payload.original_course_department === ''}
+                onChange={(event) => this.props.updatePayload({ original_course_department: event.target.value })}
               />
               <TextField
                 select
@@ -155,9 +155,9 @@ class ExemptCourseForm extends React.Component {
                   shrink: true
                 }}
                 margin='normal'
-                value={this.props.original_course_year}
-                error={this.props.errorsubmitted ? this.props.original_course_year === 0 : false}
-                onChange={(event) => this.props.handleChange({ original_course_year: event.target.value })}
+                value={payload.original_course_year}
+                error={this.props.error && payload.original_course_year === 0}
+                onChange={(event) => this.props.updatePayload({ original_course_year: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課年級</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>一</MenuItem>
@@ -181,9 +181,9 @@ class ExemptCourseForm extends React.Component {
                   shrink: true
                 }}
                 margin='normal'
-                value={this.props.original_course_semester}
-                error={this.props.errorsubmitted ? this.props.original_course_semester === 0 : false}
-                onChange={(event) => this.props.handleChange({ original_course_semester: event.target.value })}
+                value={payload.original_course_semester}
+                error={this.props.error && payload.original_course_semester === 0}
+                onChange={(event) => this.props.updatePayload({ original_course_semester: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
@@ -201,9 +201,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
-                value={this.props.original_course_credit}
-                onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
+                error={this.props.error && payload.original_course_credit === ''}
+                value={payload.original_course_credit}
+                onChange={(event) => this.props.updatePayload({ original_course_credit: event.target.value })}
               />
               <TextField
                 label='成績'
@@ -216,9 +216,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_score}
-                error={this.props.errorsubmitted ? this.props.original_course_score === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_score: event.target.value })}
+                value={payload.original_course_score}
+                error={this.props.error && payload.original_course_score === ''}
+                onChange={(event) => this.props.updatePayload({ original_course_score: event.target.value })}
               />
             </div>
 
@@ -238,9 +238,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.current_course_code}
-                error={this.props.errorsubmitted ? this.props.current_course_code === '' : false}
-                onChange={(event) => this.props.handleChange({ current_course_code: event.target.value })}
+                value={payload.current_course_code}
+                error={this.props.error && payload.current_course_code === ''}
+                onChange={(event) => this.props.updatePayload({ current_course_code: event.target.value })}
               />
               <TextField
                 label='課程名稱'
@@ -252,9 +252,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.current_course_name}
-                error={this.props.errorsubmitted ? this.props.current_course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ current_course_name: event.target.value })}
+                value={payload.current_course_name}
+                error={this.props.error && payload.current_course_name === ''}
+                onChange={(event) => this.props.updatePayload({ current_course_name: event.target.value })}
               />
               <TextField
                 label='學分'
@@ -267,9 +267,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.current_course_credit}
-                error={this.props.errorsubmitted ? this.props.current_course_credit === '' : false}
-                onChange={(event) => this.props.handleChange({ current_course_credit: event.target.value })}
+                value={payload.current_course_credit}
+                error={this.props.error && payload.current_course_credit === ''}
+                onChange={(event) => this.props.updatePayload({ current_course_credit: event.target.value })}
               />
               <TextField
                 select
@@ -287,9 +287,9 @@ class ExemptCourseForm extends React.Component {
                   shrink: true
                 }}
                 margin='normal'
-                value={this.props.current_course_type}
-                error={this.props.errorsubmitted ? this.props.current_course_type === '請選擇選別' : false}
-                onChange={(event) => this.props.handleChange({ current_course_type: event.target.value })}
+                value={payload.current_course_type}
+                error={this.props.error && payload.current_course_type === '請選擇選別'}
+                onChange={(event) => this.props.updatePayload({ current_course_type: event.target.value })}
               >
                 <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
                 <MenuItem value={'必修'} style={{ height: '10px' }}>必修</MenuItem>
@@ -307,9 +307,9 @@ class ExemptCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                fileChange={(file) => this.props.handleChange({ file: file })}
-                error={this.props.errorsubmitted ? this.props.file === '' : false}
-                file={this.props.file}
+                fileChange={(file) => this.props.updatePayload({ file: file })}
+                error={this.props.error && payload.file === ''}
+                file={payload.file}
               />
             </div>
           </div>
@@ -364,9 +364,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.class}
-                error={this.props.errorsubmitted ? this.props.class === '' : false}
-                onChange={(event) => this.props.handleChange({ class: event.target.value })}
+                value={payload.class}
+                error={this.props.error && payload.class === ''}
+                onChange={(event) => this.props.updatePayload({ class: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -379,9 +379,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.phone}
-                error={this.props.errorsubmitted ? this.props.phone === '' : false}
-                onChange={(event) => this.props.handleChange({ phone: event.target.value })}
+                value={payload.phone}
+                error={this.props.error && payload.phone === ''}
+                onChange={(event) => this.props.updatePayload({ phone: event.target.value })}
               />
             </div>
 
@@ -401,9 +401,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_name}
-                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
+                value={payload.original_course_name}
+                error={this.props.error && payload.original_course_name === ''}
+                onChange={(event) => this.props.updatePayload({ original_course_name: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -416,9 +416,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_department}
-                error={this.props.errorsubmitted ? this.props.original_course_department === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_department: event.target.value })}
+                value={payload.original_course_department}
+                error={this.props.error && payload.original_course_department === ''}
+                onChange={(event) => this.props.updatePayload({ original_course_department: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -437,9 +437,9 @@ class ExemptCourseForm extends React.Component {
                   shrink: true
                 }}
                 margin='normal'
-                value={this.props.original_course_year}
-                error={this.props.errorsubmitted ? this.props.original_course_year === 0 : false}
-                onChange={(event) => this.props.handleChange({ original_course_year: event.target.value })}
+                value={payload.original_course_year}
+                error={this.props.error && payload.original_course_year === 0}
+                onChange={(event) => this.props.updatePayload({ original_course_year: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課年級</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>一</MenuItem>
@@ -464,9 +464,9 @@ class ExemptCourseForm extends React.Component {
                   shrink: true
                 }}
                 margin='normal'
-                value={this.props.original_course_semester}
-                error={this.props.errorsubmitted ? this.props.original_course_semester === 0 : false}
-                onChange={(event) => this.props.handleChange({ original_course_semester: event.target.value })}
+                value={payload.original_course_semester}
+                error={this.props.error && payload.original_course_semester === 0}
+                onChange={(event) => this.props.updatePayload({ original_course_semester: event.target.value })}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
@@ -485,9 +485,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_credit}
-                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
+                value={payload.original_course_credit}
+                error={this.props.error && payload.original_course_credit === ''}
+                onChange={(event) => this.props.updatePayload({ original_course_credit: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -501,9 +501,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.original_course_score}
-                error={this.props.errorsubmitted ? this.props.original_course_score === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_score: event.target.value })}
+                value={payload.original_course_score}
+                error={this.props.error && payload.original_course_score === ''}
+                onChange={(event) => this.props.updatePayload({ original_course_score: event.target.value })}
               />
             </div>
 
@@ -524,9 +524,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.current_course_code}
-                error={this.props.errorsubmitted ? this.props.current_course_code === '' : false}
-                onChange={(event) => this.props.handleChange({ current_course_code: event.target.value })}
+                value={payload.current_course_code}
+                error={this.props.error && payload.current_course_code === ''}
+                onChange={(event) => this.props.updatePayload({ current_course_code: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -539,9 +539,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.current_course_name}
-                error={this.props.errorsubmitted ? this.props.current_course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ current_course_name: event.target.value })}
+                value={payload.current_course_name}
+                error={this.props.error && payload.current_course_name === ''}
+                onChange={(event) => this.props.updatePayload({ current_course_name: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -555,9 +555,9 @@ class ExemptCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.current_course_credit}
-                error={this.props.errorsubmitted ? this.props.current_course_credit === '' : false}
-                onChange={(event) => this.props.handleChange({ current_course_credit: event.target.value })}
+                value={payload.current_course_credit}
+                error={this.props.error && payload.current_course_credit === ''}
+                onChange={(event) => this.props.updatePayload({ current_course_credit: event.target.value })}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -576,9 +576,9 @@ class ExemptCourseForm extends React.Component {
                   shrink: true
                 }}
                 margin='normal'
-                value={this.props.current_course_type}
-                error={this.props.errorsubmitted ? this.props.current_course_type === '請選擇選別' : false}
-                onChange={(event) => this.props.handleChange({ current_course_type: event.target.value })}
+                value={payload.current_course_type}
+                error={this.props.error && payload.current_course_type === '請選擇選別'}
+                onChange={(event) => this.props.updatePayload({ current_course_type: event.target.value })}
               >
                 <MenuItem value={'請選擇選別'} style={{ height: '10px' }}>請選擇選別</MenuItem>
                 <MenuItem value={'必修'} style={{ height: '10px' }}>必修</MenuItem>
@@ -596,9 +596,9 @@ class ExemptCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                fileChange={(file) => this.props.handleChange({ file: file })}
-                error={this.props.errorsubmitted ? this.props.file === '' : false}
-                file={this.props.file}
+                fileChange={(file) => this.props.updatePayload({ file: file })}
+                error={this.props.error && payload.file === ''}
+                file={payload.file}
               />
             </div>
           </div>
@@ -610,24 +610,12 @@ class ExemptCourseForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.exemptCourse.class,
-  phone: state.Student.Credit.exemptCourse.phone,
-  original_course_year: state.Student.Credit.exemptCourse.original_course_year,
-  original_course_semester: state.Student.Credit.exemptCourse.original_course_semester,
-  original_course_name: state.Student.Credit.exemptCourse.original_course_name,
-  original_course_department: state.Student.Credit.exemptCourse.original_course_department,
-  original_course_credit: state.Student.Credit.exemptCourse.original_course_credit,
-  original_course_score: state.Student.Credit.exemptCourse.original_course_score,
-  current_course_code: state.Student.Credit.exemptCourse.current_course_code,
-  current_course_name: state.Student.Credit.exemptCourse.current_course_name,
-  current_course_credit: state.Student.Credit.exemptCourse.current_course_credit,
-  current_course_type: state.Student.Credit.exemptCourse.current_course_type,
-  file: state.Student.Credit.exemptCourse.file,
-  errorsubmitted: state.Student.Credit.errorsubmitted
+  payload: state.Student.Credit.exemptCourse,
+  error: state.Student.Credit.form.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => dispatch(exemptCourseChange(payload))
+  updatePayload: (payload) => dispatch(actions.credit.exemptCourse.store(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ExemptCourseForm))

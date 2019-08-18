@@ -18,7 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 // import Button from '@material-ui/core/Button'
 // import Icon from '@material-ui/core/Icon'
 // import DeleteIcon from '@material-ui/icons/Delete'
-import { englishCourseChange, deleteCredit } from '../../../../Redux/Students/Actions/Credit'
+import { actions, deleteCredit } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {
@@ -79,7 +79,7 @@ class Index extends React.Component {
     // 只有被退件才能編輯
     if (this.props.data.status === 3) {
       window.alert('編輯請重新上傳附件檔案')
-      this.props.handleChange({
+      this.props.updatePayload({
         ...this.props.data
       })
       this.props.history.push({
@@ -270,7 +270,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => dispatch(englishCourseChange(payload)),
+  updatePayload: (payload) => dispatch(actions.credit.englishCourse.store(payload)),
   deleteCredit: (payload) => dispatch(deleteCredit(payload))
 })
 

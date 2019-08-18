@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Divider from '@material-ui/core/Divider'
 import Postfile from './Postfile'
-import { englishCourseChange } from '../../../../Redux/Students/Actions/Credit'
+import { actions } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {
@@ -43,7 +43,8 @@ const styles = theme => ({
 
 class EnglishCourseForm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
+
     return (
       <div>
         {/* For PC screen */}
@@ -92,14 +93,13 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.class}
-                error={this.props.errorsubmitted ? this.props.class === '' : false}
-                onChange={(event) => this.props.handleChange({ class: event.target.value })}
+                value={payload.class}
+                onChange={(e) => this.props.updatePayload({ class: e.target.value })}
+                error={this.props.error && payload.class === ''}
               />
               <TextField
                 label='手機'
                 margin='normal'
-                error={this.props.errorsubmitted ? this.props.phone === '' : false}
                 className={classes.textField}
                 InputLabelProps={{
                   classes: {
@@ -107,8 +107,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.phone}
-                onChange={(event) => this.props.handleChange({ phone: event.target.value })}
+                value={payload.phone}
+                onChange={(e) => this.props.updatePayload({ phone: e.target.value })}
+                error={this.props.error && payload.phone === ''}
               />
             </div>
 
@@ -128,9 +129,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.course_code}
-                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
-                onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+                value={payload.course_code}
+                onChange={(e) => this.props.updatePayload({ course_code: e.target.value })}
+                error={this.props.error && payload.course_code === ''}
               />
               <TextField
                 label='課程名稱'
@@ -143,8 +144,8 @@ class EnglishCourseForm extends React.Component {
                   shrink: true
                 }}
                 value={this.props.course_name}
-                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+                onChange={(e) => payload.updatePayload({ course_name: e.target.value })}
+                error={this.props.error && payload.course_name === ''}
               />
               <TextField
                 label='開課系所'
@@ -156,9 +157,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.department}
-                error={this.props.errorsubmitted ? this.props.department === '' : false}
-                onChange={(event) => this.props.handleChange({ department: event.target.value })}
+                value={payload.department}
+                onChange={(e) => this.props.updatePayload({ department: e.target.value })}
+                error={this.props.error && payload.department === ''}
               />
               <TextField
                 label='授課老師'
@@ -170,9 +171,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.teacher}
-                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
-                onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
+                value={payload.teacher}
+                onChange={(e) => this.props.updatePayload({ teacher: e.target.value })}
+                error={this.props.error && payload.teacher === ''}
               />
               <TextField
                 label='學分'
@@ -185,9 +186,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.credit}
-                error={this.props.errorsubmitted ? this.props.credit === '' : false}
-                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
+                value={payload.credit}
+                onChange={(e) => this.props.updatePayload({ credit: e.target.value })}
+                error={this.props.error && payload.credit === ''}
               />
             </div>
 
@@ -200,7 +201,8 @@ class EnglishCourseForm extends React.Component {
                 label=''
                 placeholder='理由詳述'
                 margin='normal'
-                className={classes.textFieldLong}
+                multiline
+                rowsMax='1'
                 InputLabelProps={{
                   classes: {
                     root: classes.label
@@ -212,11 +214,9 @@ class EnglishCourseForm extends React.Component {
                     root: classes.input
                   }
                 }}
-                value={this.props.reason}
-                error={this.props.errorsubmitted ? this.props.reason === '' : false}
-                onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                multiline
-                rowsMax='1'
+                value={payload.reason}
+                onChange={(e) => this.props.updatePayload({ reason: e.target.value })}
+                error={this.props.error && payload.reason === ''}
               />
             </div>
 
@@ -226,9 +226,9 @@ class EnglishCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                fileChange={(file) => this.props.handleChange({ file: file })}
-                error={this.props.errorsubmitted ? this.props.file === '' : false}
                 file={this.props.file}
+                fileChange={(file) => this.props.updatePayload({ file: file })}
+                error={this.props.error && payload.file === ''}
               />
             </div>
 
@@ -292,9 +292,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                value={this.props.class}
-                error={this.props.errorsubmitted ? this.props.class === '' : false}
-                onChange={(event) => this.props.handleChange({ class: event.target.value })}
+                value={payload.class}
+                onChange={(e) => this.props.updatePayload({ class: e.target.value })}
+                error={this.props.error && payload.class === ''}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -307,9 +307,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.phone === '' : false}
-                value={this.props.phone}
-                onChange={(event) => this.props.handleChange({ phone: event.target.value })}
+                value={payload.phone}
+                onChange={(e) => this.props.updatePayload({ phone: e.target.value })}
+                error={this.props.error && payload.phone === ''}
               />
             </div>
 
@@ -330,9 +330,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
-                value={this.props.course_code}
-                onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+                value={payload.course_code}
+                onChange={(e) => this.props.updatePayload({ course_code: e.target.value })}
+                error={this.props.error && payload.course_code === ''}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -345,9 +345,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
-                value={this.props.course_name}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+                value={payload.course_name}
+                onChange={(e) => this.props.updatePayload({ course_name: e.target.value })}
+                error={this.props.error && payload.course_name === ''}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -360,9 +360,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.department === '' : false}
-                value={this.props.department}
-                onChange={(event) => this.props.handleChange({ department: event.target.value })}
+                value={payload.department}
+                onChange={(e) => this.props.updatePayload({ department: e.target.value })}
+                error={this.props.error && payload.department === ''}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -375,9 +375,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
-                value={this.props.teacher}
-                onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
+                value={payload.teacher}
+                onChange={(e) => this.props.updatePayload({ teacher: e.target.value })}
+                error={this.props.error && payload.teacher === ''}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -391,9 +391,9 @@ class EnglishCourseForm extends React.Component {
                   },
                   shrink: true
                 }}
-                error={this.props.errorsubmitted ? this.props.credit === '' : false}
-                value={this.props.credit}
-                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
+                value={payload.credit}
+                onChange={(e) => this.props.updatePayload({ credit: e.target.value })}
+                error={this.props.error && payload.credit === ''}
               />
             </div>
 
@@ -407,6 +407,8 @@ class EnglishCourseForm extends React.Component {
                 label=''
                 placeholder='理由詳述'
                 margin='normal'
+                multiline
+                rowsMax='1'
                 className={classes.textFieldLong}
                 InputLabelProps={{
                   classes: {
@@ -419,11 +421,9 @@ class EnglishCourseForm extends React.Component {
                     root: classes.input
                   }
                 }}
-                error={this.props.errorsubmitted ? this.props.reason === '' : false}
-                value={this.props.reason}
-                onChange={(event) => this.props.handleChange({ reason: event.target.value })}
-                multiline
-                rowsMax='1'
+                value={payload.reason}
+                onChange={(e) => this.props.updatePayload({ reason: e.target.value })}
+                error={this.props.error && payload.reason === ''}
               />
             </div>
 
@@ -433,9 +433,9 @@ class EnglishCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                fileChange={(file) => this.props.handleChange({ file: file })}
-                error={this.props.errorsubmitted ? this.props.file === '' : false}
-                file={this.props.file}
+                file={payload.file}
+                fileChange={(file) => this.props.updatePayload({ file: file })}
+                error={this.props.error && payload.file === ''}
               />
             </div>
 
@@ -456,22 +456,12 @@ class EnglishCourseForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.englishCourse.class,
-  year: state.Student.Credit.englishCourse.year,
-  semester: state.Student.Credit.englishCourse.semester,
-  department: state.Student.Credit.englishCourse.department,
-  teacher: state.Student.Credit.englishCourse.teacher,
-  credit: state.Student.Credit.englishCourse.credit,
-  course_name: state.Student.Credit.englishCourse.course_name,
-  course_code: state.Student.Credit.englishCourse.course_code,
-  reason: state.Student.Credit.englishCourse.reason,
-  phone: state.Student.Credit.englishCourse.phone,
-  file: state.Student.Credit.englishCourse.file,
-  errorsubmitted: state.Student.Credit.errorsubmitted
+  payload: state.Student.Credit.englishCourse,
+  error: state.Student.Credit.form.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => { dispatch(englishCourseChange(payload)) }
+  updatePayload: (payload) => dispatch(actions.credit.englishCourse.store(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EnglishCourseForm))

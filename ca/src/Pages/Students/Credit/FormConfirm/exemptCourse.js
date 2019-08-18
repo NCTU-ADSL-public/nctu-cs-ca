@@ -32,7 +32,8 @@ const styles = theme => ({
 
 class ExemptCourseFormConfirm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
+
     return (
       <div>
         {/* For PC screen */}
@@ -79,7 +80,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                defaultValue={payload.class}
               />
               <TextField
                 label='手機'
@@ -92,7 +93,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                defaultValue={payload.phone}
               />
             </div>
 
@@ -112,7 +113,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                defaultValue={payload.original_course_name}
               />
               <TextField
                 label='開課系所'
@@ -125,7 +126,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
+                defaultValue={payload.original_course_department}
               />
               <TextField
                 label='修課年級'
@@ -138,7 +139,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+                defaultValue={['', '一', '二', '三', '四'][payload.original_course_year]}
               />
               <TextField
                 label='修課學期'
@@ -151,7 +152,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
+                defaultValue={['', '上', '下', '暑'][payload.original_course_semester]}
               />
               <TextField
                 label='學分'
@@ -165,7 +166,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                defaultValue={payload.original_course_credit}
               />
               <TextField
                 label='成績'
@@ -179,7 +180,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
+                defaultValue={payload.original_course_score}
               />
             </div>
 
@@ -199,7 +200,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
+                defaultValue={payload.current_course_code}
               />
               <TextField
                 label='課程名稱'
@@ -212,7 +213,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
+                defaultValue={payload.current_course_name}
               />
               <TextField
                 label='學分'
@@ -226,7 +227,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
+                defaultValue={payload.current_course_credit}
               />
               <TextField
                 label='選別'
@@ -239,7 +240,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
+                defaultValue={payload.current_course_type}
               />
             </div>
 
@@ -248,7 +249,7 @@ class ExemptCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              檔案：{'need change'}
             </div>
           </div>
         </div>
@@ -300,7 +301,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                defaultValue={payload.class}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -314,7 +315,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                defaultValue={payload.phone}
               />
             </div>
 
@@ -335,7 +336,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                defaultValue={payload.original_course_name}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -349,7 +350,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
+                defaultValue={payload.original_course_department}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -363,7 +364,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+                defaultValue={['', '一', '二', '三', '四'][payload.original_course_year]}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -377,7 +378,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
+                defaultValue={['', '上', '下', '暑'][payload.original_course_semester]}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -392,7 +393,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                defaultValue={payload.original_course_credit}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -407,7 +408,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
+                defaultValue={payload.original_course_score}
               />
             </div>
 
@@ -428,7 +429,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
+                defaultValue={payload.current_course_code}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -442,7 +443,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
+                defaultValue={payload.current_course_name}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -457,7 +458,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
+                defaultValue={payload.current_course_credit}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -471,7 +472,7 @@ class ExemptCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
+                defaultValue={payload.current_course_type}
               />
             </div>
 
@@ -480,7 +481,7 @@ class ExemptCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              檔案：{'need change'}
             </div>
           </div>
         </div>
@@ -491,19 +492,7 @@ class ExemptCourseFormConfirm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.exemptCourse.class,
-  phone: state.Student.Credit.exemptCourse.phone,
-  original_course_year: state.Student.Credit.exemptCourse.original_course_year,
-  original_course_semester: state.Student.Credit.exemptCourse.original_course_semester,
-  original_course_name: state.Student.Credit.exemptCourse.original_course_name,
-  original_course_department: state.Student.Credit.exemptCourse.original_course_department,
-  original_course_credit: state.Student.Credit.exemptCourse.original_course_credit,
-  original_course_score: state.Student.Credit.exemptCourse.original_course_score,
-  current_course_code: state.Student.Credit.exemptCourse.current_course_code,
-  current_course_name: state.Student.Credit.exemptCourse.current_course_name,
-  current_course_credit: state.Student.Credit.exemptCourse.current_course_credit,
-  current_course_type: state.Student.Credit.exemptCourse.current_course_type,
-  file: state.Student.Credit.exemptCourse.file
+  payload: state.Student.Credit.exemptCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -12,7 +12,7 @@ import WaiveCoursePanel from './Panel/waiveCoursePanel'
 import ExemptCoursePanel from './Panel/exemptCoursePanel'
 import CompulsoryCoursePanel from './Panel/compulsoryCoursePanel'
 import EnglishCoursePanel from './Panel/englishCoursePanel'
-import { getCreditInfo, resetCourse, senderrorSubmit } from '../../../Redux/Students/Actions/Credit'
+import { actions, getCreditList } from '../../../Redux/Students/Actions/Credit'
 import creditImg from '../../../Resources/credit_no_upload.png'
 import WaiveCourse from './PrintForm/WaiveCourse'
 import ExemptCourse from './PrintForm/ExemptCourse'
@@ -86,15 +86,15 @@ class Index extends React.Component {
   }
 
   componentDidMount () {
-    this.props.getCreditInfo()
+    this.props.getCreditList()
     this.props.resetCourse()
-    this.props.senderrorSubmit(false)
+    this.props.setError(false)
   }
 
   componentDidUpdate (prevProps) {
     if (this.props.deleteStatus !== prevProps.deleteStatus &&
         this.props.deleteStatus === 'success') {
-      this.props.getCreditInfo()
+      this.props.getCreditList()
     }
     if (this.state.doPrinting) {
       this.setState({doPrinting: false})
@@ -135,10 +135,10 @@ class Index extends React.Component {
 
   render () {
     const { classes } = this.props
-    const waiveCourse = this.props.creditInfo.waive_course.filter((data) => this.checkFilter(0, data.status))
-    const exemptCourse = this.props.creditInfo.exempt_course.filter((data) => this.checkFilter(1, data.status))
-    const compulsoryCourse = this.props.creditInfo.compulsory_course.filter((data) => this.checkFilter(2, data.status))
-    const englishCourse = this.props.creditInfo.english_course.filter((data) => this.checkFilter(3, data.status))
+    const waiveCourse = this.props.creditList.waive_course.filter((data) => this.checkFilter(0, data.status))
+    const exemptCourse = this.props.creditList.exempt_course.filter((data) => this.checkFilter(1, data.status))
+    const compulsoryCourse = this.props.creditList.compulsory_course.filter((data) => this.checkFilter(2, data.status))
+    const englishCourse = this.props.creditList.english_course.filter((data) => this.checkFilter(3, data.status))
     const anchorElement = this.state.showPrintMenu
     const printFormNumber = this.state.printFormNumber
 
@@ -187,7 +187,7 @@ class Index extends React.Component {
                   className={classes.btn}
                   variant='contained'
                   color='primary'
-                  onClick={() => this.props.senderrorSubmit(false)}
+                  onClick={() => this.props.setError(false)}
                 >
                   抵免申請
                 </Button>
@@ -226,7 +226,7 @@ class Index extends React.Component {
                   variant='contained'
                   color='primary'
                   style={{ margin: 'auto', width: '40%' }}
-                  onClick={() => this.props.senderrorSubmit(false)}
+                  onClick={() => this.props.setError(false)}
                 >
                   抵免申請
                 </Button>
@@ -365,15 +365,15 @@ class Index extends React.Component {
         <div id='printArea'>
           {
             printFormNumber === 0 &&
-            this.props.creditInfo.waive_course &&
-            this.props.creditInfo.waive_course.length &&
-            <WaiveCourse courses={ this.props.creditInfo.waive_course } />
+            this.props.creditList.waive_course &&
+            this.props.creditList.waive_course.length &&
+            <WaiveCourse courses={ this.props.creditList.waive_course } />
           }
           {
             printFormNumber === 1 &&
-            this.props.creditInfo.exempt_course &&
-            this.props.creditInfo.exempt_course.length &&
-            <ExemptCourse courses={ this.props.creditInfo.exempt_course } />
+            this.props.creditList.exempt_course &&
+            this.props.creditList.exempt_course.length &&
+            <ExemptCourse courses={ this.props.creditList.exempt_course } />
           }
         </div>
       </div>
@@ -386,14 +386,14 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  creditInfo: state.Student.Credit.creditInfo,
+  creditList: state.Student.Credit.list,
   deleteStatus: state.Student.Credit.delete.status
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getCreditInfo: () => dispatch(getCreditInfo()),
-  resetCourse: () => dispatch(resetCourse()),
-  senderrorSubmit: (payload) => dispatch(senderrorSubmit(payload))
+  getCreditList: () => dispatch(getCreditList()),
+  resetCourse: () => dispatch(actions.credit.form.reset()),
+  setError: (payload) => dispatch(actions.credit.form.setError(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

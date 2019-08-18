@@ -23,13 +23,12 @@ import ExemptCourseFormConfirm from '../FormConfirm/exemptCourse'
 import CompulsoryCourseFormConfirm from '../FormConfirm/compulsoryCourse'
 import EnglishCourseFormConfirm from '../FormConfirm/englishCourse'
 import {
+  actions,
   sendWaiveCourse,
   sendExemptCourse,
   sendCompulsoryCourse,
   sendEnglishCourse,
-  editCredit,
-  resetCourse,
-  senderrorSubmit
+  editCredit
 } from '../../../../Redux/Students/Actions/Credit'
 import './style.css'
 
@@ -89,7 +88,7 @@ class HorizontalLinearStepper extends React.Component {
       this.setState({ stepIndex: stepIndex - 1 })
     } else if (stepIndex === 1) {
       this.props.resetCourse()
-      this.props.senderrorSubmit(false)
+      this.props.setError(false)
 
       if (this.props.location.state && this.props.location.state.edit) {
         // 是編輯就跳回抵免首頁
@@ -132,7 +131,7 @@ class HorizontalLinearStepper extends React.Component {
           current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!current_course_code.match(foreverCodepattern)) {
@@ -157,7 +156,7 @@ class HorizontalLinearStepper extends React.Component {
           current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!current_course_code.match(foreverCodepattern)) {
@@ -177,7 +176,7 @@ class HorizontalLinearStepper extends React.Component {
             original_course_code && original_course_name && original_course_credit)
         ) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!course_code.match(foreverCodepattern) || !original_course_code.match(foreverCodepattern)) {
@@ -189,7 +188,7 @@ class HorizontalLinearStepper extends React.Component {
         const { file, phone, reason, department, teacher, credit, course_code, course_name } = this.props.englishCourse
         if (!(file.name && this.props.englishCourse.class && phone && reason && department && teacher && credit && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!course_code.match(foreverCodepattern)) {
@@ -198,7 +197,7 @@ class HorizontalLinearStepper extends React.Component {
         }
         this.setState({ file: file })
       }
-      this.props.senderrorSubmit(false)
+      this.props.setError(false)
     } else if (stepIndex === 2) {
       if (selectFormIndex === 0) {
         if (window.confirm('確定送出「學分抵免單」?')) {
@@ -532,8 +531,8 @@ const mapDispatchToProps = (dispatch) => ({
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
   sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   editCredit: (payload) => dispatch(editCredit(payload)),
-  resetCourse: () => dispatch(resetCourse()),
-  senderrorSubmit: (payload) => dispatch(senderrorSubmit(payload))
+  resetCourse: () => dispatch(actions.credit.form.reset()),
+  setError: (payload) => dispatch(actions.credit.form.setError(payload))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper))

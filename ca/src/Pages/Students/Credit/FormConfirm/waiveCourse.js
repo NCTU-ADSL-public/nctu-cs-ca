@@ -32,7 +32,8 @@ const styles = theme => ({
 
 class WaiveCourseFormConfirm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
+
     return (
       <div>
         {/* For PC screen */}
@@ -79,7 +80,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                defaultValue={payload.class}
               />
               <TextField
                 label='手機'
@@ -92,7 +93,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                defaultValue={payload.phone}
               />
             </div>
 
@@ -113,7 +114,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_school}
+                defaultValue={payload.original_school}
               />
               <TextField
                 label='原就讀系所科別'
@@ -126,7 +127,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_department}
+                defaultValue={payload.original_department}
               />
               <TextField
                 label='原就讀校系畢業學分數'
@@ -140,7 +141,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_graduation_credit}
+                defaultValue={payload.original_graduation_credit}
               />
             </div>
 
@@ -156,7 +157,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                defaultValue={payload.original_course_name}
               />
               <TextField
                 label='開課系所'
@@ -169,7 +170,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
+                defaultValue={payload.original_course_department}
               />
               <TextField
                 label='修課年級'
@@ -182,7 +183,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+                defaultValue={['', '一', '二', '三', '四'][payload.original_course_year]}
               />
               <TextField
                 label='修課學期'
@@ -195,7 +196,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
+                defaultValue={['', '上', '下', '暑'][payload.original_course_semester]}
               />
               <TextField
                 label='學分'
@@ -209,7 +210,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                defaultValue={payload.original_course_credit}
               />
               <TextField
                 label='成績'
@@ -223,7 +224,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
+                defaultValue={payload.original_course_score}
               />
             </div>
 
@@ -243,7 +244,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
+                defaultValue={payload.current_course_code}
               />
               <TextField
                 label='科目名稱'
@@ -256,7 +257,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
+                defaultValue={payload.current_course_name}
               />
               <TextField
                 label='學分'
@@ -269,7 +270,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
+                defaultValue={payload.current_course_credit}
               />
               <TextField
                 label='選別'
@@ -282,7 +283,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
+                defaultValue={payload.current_course_type}
               />
             </div>
 
@@ -291,7 +292,7 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              檔案：{'need change'}
             </div>
           </div>
         </div>
@@ -343,7 +344,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                defaultValue={payload.class}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -357,7 +358,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                defaultValue={payload.phone}
               />
             </div>
 
@@ -379,7 +380,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_school}
+                defaultValue={payload.original_school}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -393,7 +394,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_department}
+                defaultValue={payload.original_department}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -408,7 +409,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_graduation_credit}
+                defaultValue={payload.original_graduation_credit}
               />
             </div>
 
@@ -425,7 +426,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                defaultValue={payload.original_course_name}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -439,7 +440,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
+                defaultValue={payload.original_course_department}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -453,7 +454,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+                defaultValue={['', '一', '二', '三', '四'][payload.original_course_year]}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -467,7 +468,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
+                defaultValue={['', '上', '下', '暑'][payload.original_course_semester]}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -482,7 +483,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                defaultValue={payload.original_course_credit}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -497,7 +498,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
+                defaultValue={payload.original_course_score}
               />
             </div>
 
@@ -518,7 +519,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
+                defaultValue={payload.current_course_code}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -532,7 +533,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
+                defaultValue={payload.current_course_name}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -546,7 +547,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
+                defaultValue={payload.current_course_credit}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -560,7 +561,7 @@ class WaiveCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
+                defaultValue={payload.current_course_type}
               />
             </div>
 
@@ -569,7 +570,7 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              檔案：{'need change'}
             </div>
           </div>
         </div>
@@ -580,24 +581,7 @@ class WaiveCourseFormConfirm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.waiveCourse.class,
-  phone: state.Student.Credit.waiveCourse.phone,
-  original_school: state.Student.Credit.waiveCourse.original_school,
-  original_department: state.Student.Credit.waiveCourse.original_department,
-  current_school: state.Student.Credit.waiveCourse.current_school,
-  current_department: state.Student.Credit.waiveCourse.current_department,
-  original_graduation_credit: state.Student.Credit.waiveCourse.original_graduation_credit,
-  original_course_name: state.Student.Credit.waiveCourse.original_course_name,
-  original_course_department: state.Student.Credit.waiveCourse.original_course_department,
-  original_course_credit: state.Student.Credit.waiveCourse.original_course_credit,
-  original_course_score: state.Student.Credit.waiveCourse.original_course_score,
-  original_course_year: state.Student.Credit.waiveCourse.original_course_year,
-  original_course_semester: state.Student.Credit.waiveCourse.original_course_semester,
-  current_course_code: state.Student.Credit.waiveCourse.current_course_code,
-  current_course_name: state.Student.Credit.waiveCourse.current_course_name,
-  current_course_credit: state.Student.Credit.waiveCourse.current_course_credit,
-  current_course_type: state.Student.Credit.waiveCourse.current_course_type,
-  file: state.Student.Credit.waiveCourse.file
+  payload: state.Student.Credit.waiveCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -44,7 +44,8 @@ const styles = theme => ({
 
 class CompulsoryCourseFormConfirm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
+
     return (
       <div>
         {/* For PC screen */}
@@ -92,7 +93,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                defaultValue={payload.class}
               />
               <TextField
                 label='手機'
@@ -105,7 +106,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                defaultValue={payload.phone}
               />
             </div>
 
@@ -125,7 +126,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_code}
+                defaultValue={payload.course_code}
               />
               <TextField
                 label='課程名稱'
@@ -138,7 +139,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_name}
+                defaultValue={payload.course_name}
               />
               <TextField
                 label='開課系所'
@@ -151,7 +152,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.department}
+                defaultValue={payload.department}
               />
               <TextField
                 label='授課老師'
@@ -164,7 +165,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.teacher}
+                defaultValue={payload.teacher}
               />
               <TextField
                 label='學分'
@@ -178,7 +179,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.credit}
+                defaultValue={payload.credit}
               />
               <TextField
                 label='修課學年度'
@@ -191,7 +192,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_year}
+                defaultValue={payload.course_year}
               />
               <TextField
                 label='修課學期'
@@ -204,7 +205,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.course_semester]}
+                defaultValue={['', '上', '下', '暑'][payload.course_semester]}
               />
             </div>
 
@@ -224,7 +225,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_code}
+                defaultValue={payload.original_course_code}
               />
               <TextField
                 label='課程名稱'
@@ -237,7 +238,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                defaultValue={payload.original_course_name}
               />
               <TextField
                 label='學分'
@@ -251,7 +252,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                defaultValue={payload.original_course_credit}
               />
             </div>
 
@@ -262,7 +263,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <div style={{ margin: '5px' }}>
               <FormControl component='fieldset'>
                 <RadioGroup
-                  value={this.props.reason.type}
+                  value={payload.reason.type}
                 >
                   <FormControlLabel
                     disabled
@@ -288,7 +289,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '被當' ? this.props.reason.content : ''}
+                          defaultValue={payload.reason.type === '被當' ? payload.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />
@@ -321,7 +322,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '其他' ? this.props.reason.content : ''}
+                          defaultValue={payload.reason.type === '其他' ? payload.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />
@@ -337,7 +338,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              檔案：{'need change'}
             </div>
           </div>
         </div>
@@ -390,7 +391,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                defaultValue={payload.class}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -404,7 +405,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                defaultValue={payload.phone}
               />
             </div>
 
@@ -425,7 +426,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_code}
+                defaultValue={payload.course_code}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -439,7 +440,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_name}
+                defaultValue={payload.course_name}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -453,7 +454,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.department}
+                defaultValue={payload.department}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -467,7 +468,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.teacher}
+                defaultValue={payload.teacher}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -482,7 +483,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.credit}
+                defaultValue={payload.credit}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -496,7 +497,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_year}
+                defaultValue={payload.course_year}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -510,7 +511,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.course_semester]}
+                defaultValue={['', '上', '下', '暑'][payload.course_semester]}
               />
             </div>
 
@@ -531,7 +532,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_code}
+                defaultValue={payload.original_course_code}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -545,7 +546,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                defaultValue={payload.original_course_name}
               />
               <TextField
                 style={{ width: 'calc( 100% - 24px )' }}
@@ -560,7 +561,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                   shrink: true
                 }}
                 InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                defaultValue={payload.original_course_credit}
               />
             </div>
 
@@ -571,7 +572,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <div style={{ margin: '5px' }}>
               <FormControl component='fieldset'>
                 <RadioGroup
-                  value={this.props.reason.type}
+                  value={payload.reason.type}
                 >
                   <FormControlLabel
                     disabled
@@ -598,7 +599,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '被當' ? this.props.reason.content : ''}
+                          defaultValue={payload.reason.type === '被當' ? payload.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />
@@ -634,7 +635,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
                             },
                             readOnly: true
                           }}
-                          defaultValue={this.props.reason.type === '其他' ? this.props.reason.content : ''}
+                          defaultValue={payload.reason.type === '其他' ? payload.reason.content : ''}
                           multiline
                           rowsMax='1'
                         />
@@ -650,7 +651,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              檔案：{'need change'}
             </div>
           </div>
         </div>
@@ -661,23 +662,7 @@ class CompulsoryCourseFormConfirm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.compulsoryCourse.class,
-  year: state.Student.Credit.compulsoryCourse.year,
-  semester: state.Student.Credit.compulsoryCourse.semester,
-  department: state.Student.Credit.compulsoryCourse.department,
-  teacher: state.Student.Credit.compulsoryCourse.teacher,
-  credit: state.Student.Credit.compulsoryCourse.credit,
-  original_course_name: state.Student.Credit.compulsoryCourse.original_course_name,
-  original_course_code: state.Student.Credit.compulsoryCourse.original_course_code,
-  original_course_credit: state.Student.Credit.compulsoryCourse.original_course_credit,
-  course_year: state.Student.Credit.compulsoryCourse.course_year,
-  course_semester: state.Student.Credit.compulsoryCourse.course_semester,
-  course_name: state.Student.Credit.compulsoryCourse.course_name,
-  course_code: state.Student.Credit.compulsoryCourse.course_code,
-  reason: state.Student.Credit.compulsoryCourse.reason,
-  phone: state.Student.Credit.compulsoryCourse.phone,
-  course_type: state.Student.Credit.compulsoryCourse.course_type,
-  file: state.Student.Credit.compulsoryCourse.file
+  payload: state.Student.Credit.compulsoryCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({
