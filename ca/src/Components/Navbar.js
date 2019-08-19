@@ -7,7 +7,14 @@ import { Navbar, Nav, NavItem, DropdownButton, MenuItem, ButtonToolbar } from 'r
 import defalt from '../Resources/defalt.jpg'
 import dinoIcon from '../Resources/dinoIcon_graduate.png'
 import NavButton from './NavButton'
+import { withStyles } from '@material-ui/core/styles'
 import './Navbar.css'
+
+import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import Select from '@material-ui/core/Select'
+import { MenuItem as _MenuItem } from '@material-ui/core'
 
 const style = {
   BrandBox: {
@@ -35,7 +42,20 @@ const style = {
     fontFamily: 'Noto Sans CJK TC',
     fontSize: 14,
     color: '#7B7B7B'
-  }
+  },
+  cssLabel: {
+    fontSize: 15,
+    '&$cssFocused': {
+      color: '#68BB66'
+    },
+    fontWeight: 'normal'
+  },
+  cssFocused: {},
+  cssUnderline: {
+    '&:after': {
+      borderBottomColor: '#68BB66'
+    },
+  },
 }
 
 class _Navbar extends React.Component {
@@ -43,7 +63,8 @@ class _Navbar extends React.Component {
     super(props)
     this.state = {
       selectedButtonIndex: 0,
-      onClicks: props.onTouchTaps.map((callback, index) => this.wrapCallback(callback, index))
+      onClicks: props.onTouchTaps.map((callback, index) => this.wrapCallback(callback, index)),
+      assistant_type: 'assistant'
     }
     this.wrapCallback = this.wrapCallback.bind(this)
     this.onToggleCollapse = this.onToggleCollapse.bind(this)
@@ -102,6 +123,7 @@ class _Navbar extends React.Component {
 
   render () {
     const { onClicks } = this.state
+    const { classes } = this.props
     const navItems = {
       'student': [
         <NavButton key={0} label='首頁' icon='fa fa-flag' onClick={onClicks[0]} selected={this.props.router && this.props.location.pathname.match(this.props.router[0]) !== null} />,
@@ -171,6 +193,40 @@ class _Navbar extends React.Component {
             </ButtonToolbar>
           </NavItem>
         </Nav>
+        <Nav pullRight>{
+          (process.env.REACT_APP_ASSISTANT_SUPER_mode && this.props.type === 'assistant') ? 
+            <FormControl style={{ width: '150px', marginRight: '20px' }} >
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.cssLabel,
+                  focused: classes.cssFocused,
+                }}
+              >
+                切換角色
+              </InputLabel>
+              <Select
+                input={
+                  <Input
+                    classes={{
+                      underline: classes.cssUnderline,
+                    }}
+                  />
+                }
+                value={this.state.assistant_type}
+                style={{ fontSize: '15px' }}
+                onChange={
+                  (event) => {
+                    this.setState({ assistant_type: event.target.value })
+                  }
+                }
+              >
+                <_MenuItem value={"assistant"} style={{ fontSize: '20px' }} >助理</_MenuItem>
+                <_MenuItem value={"teacher"} style={{ fontSize: '20px' }} >教授</_MenuItem>
+                <_MenuItem value={"student"} style={{ fontSize: '20px' }} >學生</_MenuItem>
+              </Select>
+            </FormControl> : ''
+          }
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   }
@@ -183,4 +239,4 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
 })
 
-export default connect(mapState, mapDispatch)(withRouter(_Navbar))
+export default connect(mapState, mapDispatch)(withRouter(withStyles(style)(_Navbar)))
