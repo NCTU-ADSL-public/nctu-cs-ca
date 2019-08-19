@@ -2,7 +2,6 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import scrollToComponent from 'react-scroll-to-component'
-import firebase from 'firebase'
 import {
   Step,
   Stepper,
@@ -23,14 +22,14 @@ import ExemptCourseFormConfirm from '../FormConfirm/exemptCourse'
 import CompulsoryCourseFormConfirm from '../FormConfirm/compulsoryCourse'
 import EnglishCourseFormConfirm from '../FormConfirm/englishCourse'
 import {
+  actions,
   sendWaiveCourse,
   sendExemptCourse,
   sendCompulsoryCourse,
   sendEnglishCourse,
-  editCredit,
-  resetCourse,
-  senderrorSubmit
+  editCredit
 } from '../../../../Redux/Students/Actions/Credit'
+import { getSemester } from '../../../../Utilities'
 import './style.css'
 
 
@@ -41,11 +40,11 @@ class HorizontalLinearStepper extends React.Component {
     this.handlePrev = this.handlePrev.bind(this)
     this.getStepContent = this.getStepContent.bind(this)
     this.selectCreditForm = this.selectCreditForm.bind(this)
-    this.handleUploadImage = this.handleUploadImage.bind(this)
+    this.handleUpload = this.handleUpload.bind(this)
     this.state = {
       finished: false,
-      stepIndex: 0,
-      selectFormIndex: -1
+      step: 0,
+      formType: -1
     }
   }
 
@@ -54,8 +53,8 @@ class HorizontalLinearStepper extends React.Component {
     if (this.props.location.state && this.props.location.state.edit) {
       // 直接跳過選取表單的步驟
       this.setState({
-        stepIndex: 1,
-        selectFormIndex: this.props.location.state.index
+        step: 1,
+        formType: this.props.location.state.index
       })
     }
     scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000 })
@@ -65,8 +64,8 @@ class HorizontalLinearStepper extends React.Component {
     // 回復為初始狀態，並清除每個表單的輸入
     this.setState({
       finished: false,
-      stepIndex: 0,
-      selectFormIndex: -1
+      step: 0,
+      formType: -1
     })
     this.props.resetCourse()
   }
@@ -78,42 +77,42 @@ class HorizontalLinearStepper extends React.Component {
 
   selectCreditForm (index) {
     this.setState({
-      selectFormIndex: index
+      formType: index
     })
   }
 
   handlePrev () {
-    const { stepIndex } = this.state
+    const { step } = this.state
     scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000})
-    if (stepIndex === 2) {
-      this.setState({ stepIndex: stepIndex - 1 })
-    } else if (stepIndex === 1) {
+    if (step === 2) {
+      this.setState({ step: step - 1 })
+    } else if (step === 1) {
       this.props.resetCourse()
-      this.props.senderrorSubmit(false)
+      this.props.setError(false)
 
       if (this.props.location.state && this.props.location.state.edit) {
         // 是編輯就跳回抵免首頁
         this.props.history.push('/students/credit')
       } else {
         // 是新增就跳回選取表單種類畫面
-        this.setState({ stepIndex: stepIndex - 1 })
+        this.setState({ step: step - 1 })
       }
-    } else if (stepIndex === 0) {
+    } else if (step === 0) {
       this.props.resetCourse()
       this.props.history.push('/students/credit')
     }
   }
 
   handleNext () {
-    const { stepIndex, selectFormIndex } = this.state
+    const { step, formType } = this.state
     scrollToComponent(this.Top, { offset: -20, align: 'top', duration: 1000})
     let foreverCodepattern = new RegExp('[a-zA-Z]+[0-9]+')
 
-    if (stepIndex === 0 && selectFormIndex === -1) {
+    if (step === 0 && formType === -1) {
       window.alert('請選擇表單')
       return
-    } else if (stepIndex === 1) {
-      if (selectFormIndex === 0) {
+    } else if (step === 1) {
+      if (formType === 0) {
         const {
           file, phone, original_school, original_department,
           original_graduation_credit,
@@ -124,7 +123,7 @@ class HorizontalLinearStepper extends React.Component {
         } = this.props.waiveCourse
         if (
           // 因為syntax問題 所以class這樣寫
-          !(file.name && this.props.waiveCourse.class && phone && original_school && original_department &&
+          !(file && this.props.waiveCourse.class && phone && original_school && original_department &&
           original_graduation_credit &&
           original_course_semester && original_course_year &&
           original_course_name && original_course_department &&
@@ -132,7 +131,7 @@ class HorizontalLinearStepper extends React.Component {
           current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!current_course_code.match(foreverCodepattern)) {
@@ -140,7 +139,7 @@ class HorizontalLinearStepper extends React.Component {
           return
         }
         this.setState({ file: file })
-      } else if (selectFormIndex === 1) {
+      } else if (formType === 1) {
         const {
           file, phone,
           original_course_semester, original_course_year,
@@ -150,14 +149,14 @@ class HorizontalLinearStepper extends React.Component {
         } = this.props.exemptCourse
         if (
           // 因為syntax問題 所以class這樣寫
-          !(file.name && this.props.exemptCourse.class && phone &&
+          !(file && this.props.exemptCourse.class && phone &&
           original_course_semester && original_course_year &&
           original_course_name && original_course_department &&
           original_course_credit && original_course_score &&
           current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
         ) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!current_course_code.match(foreverCodepattern)) {
@@ -165,19 +164,19 @@ class HorizontalLinearStepper extends React.Component {
           return
         }
         this.setState({ file: file })
-      } else if (selectFormIndex === 2) {
+      } else if (formType === 2) {
         const {
           file, phone, reason, department, teacher, credit,
           course_year, course_semester, course_code, course_name,
           original_course_code, original_course_name, original_course_credit
         } = this.props.compulsoryCourse
         if (
-          !(file.name && this.props.compulsoryCourse.class && phone && reason.content && department && teacher && credit &&
+          !(file && this.props.compulsoryCourse.class && phone && reason.content && department && teacher && credit &&
             course_year && course_semester && course_code && course_name &&
             original_course_code && original_course_name && original_course_credit)
         ) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!course_code.match(foreverCodepattern) || !original_course_code.match(foreverCodepattern)) {
@@ -185,11 +184,11 @@ class HorizontalLinearStepper extends React.Component {
           return
         }
         this.setState({ file: file })
-      } else if (selectFormIndex === 3) {
+      } else if (formType === 3) {
         const { file, phone, reason, department, teacher, credit, course_code, course_name } = this.props.englishCourse
-        if (!(file.name && this.props.englishCourse.class && phone && reason && department && teacher && credit && course_name && course_code)) {
+        if (!(file && this.props.englishCourse.class && phone && reason && department && teacher && credit && course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
-          this.props.senderrorSubmit(true)
+          this.props.setError(true)
           return
         }
         if (!course_code.match(foreverCodepattern)) {
@@ -198,185 +197,107 @@ class HorizontalLinearStepper extends React.Component {
         }
         this.setState({ file: file })
       }
-      this.props.senderrorSubmit(false)
-    } else if (stepIndex === 2) {
-      if (selectFormIndex === 0) {
-        if (window.confirm('確定送出「學分抵免單」?')) {
-          this.handleUploadImage(selectFormIndex)
-        } else return
-      } else if (selectFormIndex === 1) {
-        if (window.confirm('確定送出「課程免修單」?')) {
-          this.handleUploadImage(selectFormIndex)
-        } else return
-      } else if (selectFormIndex === 2) {
-        if (window.confirm('確定送出「本系必修課程抵免單」?')) {
-          this.handleUploadImage(selectFormIndex)
-        } else return
-      } else if (selectFormIndex === 3) {
-        if (window.confirm('確定送出「英授專業課程抵免單」?')) {
-          this.handleUploadImage(selectFormIndex)
-        } else return
+      this.props.setError(false)
+    } else if (step === 2) {
+      const confirmMsg = [
+        '確定送出「學分抵免單」?',
+        '確定送出「課程免修單」?',
+        '確定送出「本系必修課程抵免單」?',
+        '確定送出「英授專業課程抵免單」?'
+      ]
+      if (window.confirm(confirmMsg[formType])) {
+        this.handleUpload(formType)
+      } else {
+        return
       }
     }
 
     this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2
+      step: step + 1,
+      finished: step >= 2
     })
   }
 
-  handleUploadImage (selectFormIndex) {
-    let storageRef = firebase.storage().ref()
-    let Today = new Date()
-    let year = ((Today.getFullYear() - 1912) + Number(((Today.getMonth() + 1) >= 8 ? 1 : 0)))
-    let semester = (((Today.getMonth() + 1) >= 8) || (Today.getMonth() + 1) === 1) ? '1' : '2'
-    let time = Today.getFullYear().toString() + Today.getMonth().toString() + Today.getDate().toString() + Today.getHours().toString() + Today.getMinutes().toString() + Today.getSeconds().toString()
-    let this_ = this
-    let directory = 'credit/' + this.props.studentIdcard.student_id + '/' + time + '_' + this.state.file.name
+  handleUpload (formType) {
     this.setState({ progressComplete: false })
 
-    let file = this.state.file
-    let uploadTask = storageRef.child(directory).put(file)
-    uploadTask.on(
-      'state_changed',
-      function (snapshot) {
-      },
-      function (error) {
-        console.log(error)
-      },
-      function () {
-        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-          console.log(downloadURL)
-          this_.setState({ progressComplete: true })
-          if (selectFormIndex === 0) {
-            if (this_.props.location.state && this_.props.location.state.edit) {
-              // 編輯
-              this_.props.editCredit({
-                ...this_.props.waiveCourse,
-                credit_type: 1,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            } else {
-              // 新增
-              this_.props.sendWaiveCourse({
-                ...this_.props.waiveCourse,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            }
-          } else if (selectFormIndex === 1) {
-            if (this_.props.location.state && this_.props.location.state.edit) {
-              // 編輯
-              this_.props.editCredit({
-                ...this_.props.exemptCourse,
-                credit_type: 2,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            } else {
-              // 新增
-              this_.props.sendExemptCourse({
-                ...this_.props.exemptCourse,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            }
-          } else if (selectFormIndex === 2) {
-            if (this_.props.location.state && this_.props.location.state.edit) {
-              // 編輯
-              this_.props.editCredit({
-                ...this_.props.compulsoryCourse,
-                credit_type: 3,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            } else {
-              // 新增
-              this_.props.sendCompulsoryCourse({
-                ...this_.props.compulsoryCourse,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            }
-          } else if (selectFormIndex === 3) {
-            if (this_.props.location.state && this_.props.location.state.edit) {
-              // 編輯
-              this_.props.editCredit({
-                ...this_.props.englishCourse,
-                credit_type: 4,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            } else {
-              // 新增
-              this_.props.sendEnglishCourse({
-                ...this_.props.englishCourse,
-                file: downloadURL,
-                apply_year: year,
-                apply_semester: semester,
-                apply_time: Today.toLocaleString()
-              })
-            }
-          }
-        })
-      }
-    )
+    const isEdit = this.props.location.state && this.props.location.state.edit
+    const today = new Date()
+    const semester = getSemester()
+    const time = {
+      apply_year: semester.substr(0, 3),
+      apply_semester: semester.substr(4, 5),
+      apply_time: today.toLocaleString()
+    }
+
+    if (formType === 0) {
+      const payload = { ...this.props.waiveCourse, ...time }
+      isEdit
+        ? this.props.editCredit({ payload, credit_type: 1 })
+        : this.props.sendWaiveCourse(payload)
+    }
+    else if (formType === 1) {
+      const payload = { ...this.props.exemptCourse, ...time }
+      isEdit
+        ? this.props.editCredit({ ...payload, credit_type: 2 })
+        : this.props.sendExemptCourse(payload)
+    }
+    else if (formType === 2) {
+      const payload = { ...this.props.compulsoryCourse, ...time }
+      isEdit
+        ? this.props.editCredit({ ...payload, credit_type: 3 })
+        : this.props.sendCompulsoryCourse(payload)
+    }
+    else if (formType === 3) {
+      const payload = { ...this.props.englishCourse, ...time }
+      console.log(payload)
+      isEdit
+        ? this.props.editCredit({ ...payload, credit_type: 4 })
+        : this.props.sendEnglishCourse(payload)
+    }
+
+    this.setState({ progressComplete: true })
   }
 
-  getStepContent (stepIndex) {
-    switch (stepIndex) {
+  getStepContent (step) {
+    switch (step) {
       case 0:
-        return (<FormSelectTable selectCreditForm={this.selectCreditForm} />)
+        return <FormSelectTable selectCreditForm={this.selectCreditForm} />
       case 1: {
-        switch (this.state.selectFormIndex) {
+        switch (this.state.formType) {
           case 0:
-            return (<WaiveCourseForm />)
+            return <WaiveCourseForm />
           case 1:
-            return (<ExemptCourseForm />)
+            return <ExemptCourseForm />
           case 2:
-            return (<CompulsoryCourseForm />)
+            return <CompulsoryCourseForm />
           case 3:
-            return (<EnglishCourseForm />)
+            return <EnglishCourseForm />
           default:
-            return ''
+            return null
         }
       }
       case 2: {
-        switch (this.state.selectFormIndex) {
+        switch (this.state.formType) {
           case 0:
-            return (<WaiveCourseFormConfirm />)
+            return <WaiveCourseFormConfirm />
           case 1:
-            return (<ExemptCourseFormConfirm />)
+            return <ExemptCourseFormConfirm />
           case 2:
-            return (<CompulsoryCourseFormConfirm />)
+            return <CompulsoryCourseFormConfirm />
           case 3:
-            return (<EnglishCourseFormConfirm />)
+            return <EnglishCourseFormConfirm />
           default:
-            return ''
+            return null
         }
       }
       default:
-        return 'You\'re a long way from home sonny jim!'
+        return null
     }
   }
 
   render () {
-    const { finished, stepIndex } = this.state
+    const { finished, step } = this.state
     const contentStyle = { margin: '0 16px' }
     const styles = {
       chipActive: { background: '#4cc065', color: '#fafafa', fontSize: 14, fontWeight: 'bold' },
@@ -389,7 +310,7 @@ class HorizontalLinearStepper extends React.Component {
           <div style={{ width: '100%', maxWidth: 1500, margin: 'auto' }}>
             {/* For PC screen */}
             <div className='hidden-xs'>
-              <Stepper activeStep={stepIndex}>
+              <Stepper activeStep={step}>
                 <Step>
                   <StepLabel>選擇抵免申請項目</StepLabel>
                 </Step>
@@ -401,25 +322,27 @@ class HorizontalLinearStepper extends React.Component {
                 </Step>
               </Stepper>
             </div>
-            {/* For mobile screen */}
+
+            {/* For mobile xs */}
             <div className='hidden-sm hidden-md hidden-lg'>
               <div style={{ margin: '5px 3px 20px 3px', display: 'flex', justifyContent: 'center' }}>
                 <Chip
-                  style={stepIndex === 0 ? styles.chipActive : styles.chipDefault}
+                  style={step === 0 ? styles.chipActive : styles.chipDefault}
                   label={<span>選擇抵免申請項目</span>}
                 />
                 <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }} />
                 <Chip
-                  style={stepIndex === 1 ? styles.chipActive : styles.chipDefault}
+                  style={step === 1 ? styles.chipActive : styles.chipDefault}
                   label={<span>填寫表單</span>}
                 />
                 <span className='glyphicon glyphicon-chevron-right' style={{ margin: '4px 3px 0 0', color: '#b2b2b2' }} />
                 <Chip
-                  style={stepIndex === 2 ? styles.chipActive : styles.chipDefault}
+                  style={step === 2 ? styles.chipActive : styles.chipDefault}
                   label={<span>確認送出</span>}
                 />
               </div>
             </div>
+
             <div style={contentStyle}>
               {
                 finished
@@ -459,18 +382,18 @@ class HorizontalLinearStepper extends React.Component {
                     }
                   </div>
                   : <div>
-                    <div>{this.getStepContent(stepIndex)}</div>
+                    <div>{this.getStepContent(step)}</div>
                     <div style={{ marginTop: 12, height: 80 }}>
                       <RaisedButton
-                        label={stepIndex === 2 ? '送出!' : '下一步'}
+                        label={step === 2 ? '送出!' : '下一步'}
                         primary
                         onClick={this.handleNext}
                         style={{ marginRight: 12, float: 'right' }}
                       />
                       <FlatButton
                         label={
-                          (stepIndex === 0) ||
-                          (stepIndex === 1 && this.props.location.state && this.props.location.state.edit)
+                          (step === 0) ||
+                          (step === 1 && this.props.location.state && this.props.location.state.edit)
                             ? '返回' : '上一步'
                         }
                         onClick={this.handlePrev}
@@ -480,7 +403,7 @@ class HorizontalLinearStepper extends React.Component {
                   </div>
               }
               {
-                stepIndex === 0 &&
+                step === 0 &&
                 <div style={{ fontSize: '20px' }}>
                   各項申請流程說明如下：<br /><br />
                   ㄧ、學分抵免申請：<br />
@@ -532,8 +455,8 @@ const mapDispatchToProps = (dispatch) => ({
   sendCompulsoryCourse: (payload) => dispatch(sendCompulsoryCourse(payload)),
   sendEnglishCourse: (payload) => dispatch(sendEnglishCourse(payload)),
   editCredit: (payload) => dispatch(editCredit(payload)),
-  resetCourse: () => dispatch(resetCourse()),
-  senderrorSubmit: (payload) => dispatch(senderrorSubmit(payload))
+  resetCourse: () => dispatch(actions.credit.form.reset()),
+  setError: (payload) => dispatch(actions.credit.form.setError(payload))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HorizontalLinearStepper))

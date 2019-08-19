@@ -43,7 +43,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 // import FakeData from '../../../Resources/FakeData'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from 'react-csv'
-import Arrow from './Arrow'
+import Arrow from '../../../Components/Arrow'
 import { theme, styles } from './styles'
 import {type, typeName, statusName, creditName } from './macro'
 

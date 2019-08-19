@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -12,7 +13,8 @@ import WaiveCoursePanel from './Panel/waiveCoursePanel'
 import ExemptCoursePanel from './Panel/exemptCoursePanel'
 import CompulsoryCoursePanel from './Panel/compulsoryCoursePanel'
 import EnglishCoursePanel from './Panel/englishCoursePanel'
-import { getCreditInfo, resetCourse, senderrorSubmit } from '../../../Redux/Students/Actions/Credit'
+import { actions, getCreditList } from '../../../Redux/Students/Actions/Credit'
+import { FETCHING_STATUS } from '../../../Utilities/constant'
 import creditImg from '../../../Resources/credit_no_upload.png'
 import WaiveCourse from './PrintForm/WaiveCourse'
 import ExemptCourse from './PrintForm/ExemptCourse'
@@ -86,18 +88,18 @@ class Index extends React.Component {
   }
 
   componentDidMount () {
-    this.props.getCreditInfo()
+    this.props.getCreditList()
     this.props.resetCourse()
-    this.props.senderrorSubmit(false)
+    this.props.setError(false)
   }
 
   componentDidUpdate (prevProps) {
     if (this.props.deleteStatus !== prevProps.deleteStatus &&
-        this.props.deleteStatus === 'success') {
-      this.props.getCreditInfo()
+        this.props.deleteStatus === FETCHING_STATUS.DONE) {
+      this.props.getCreditList()
     }
     if (this.state.doPrinting) {
-      this.setState({doPrinting: false})
+      this.setState({ doPrinting: false })
       window.print()
     }
   }
@@ -135,10 +137,10 @@ class Index extends React.Component {
 
   render () {
     const { classes } = this.props
-    const waiveCourse = this.props.creditInfo.waive_course.filter((data) => this.checkFilter(0, data.status))
-    const exemptCourse = this.props.creditInfo.exempt_course.filter((data) => this.checkFilter(1, data.status))
-    const compulsoryCourse = this.props.creditInfo.compulsory_course.filter((data) => this.checkFilter(2, data.status))
-    const englishCourse = this.props.creditInfo.english_course.filter((data) => this.checkFilter(3, data.status))
+    const waiveCourse = this.props.creditList.waive_course.filter((data) => this.checkFilter(0, data.status))
+    const exemptCourse = this.props.creditList.exempt_course.filter((data) => this.checkFilter(1, data.status))
+    const compulsoryCourse = this.props.creditList.compulsory_course.filter((data) => this.checkFilter(2, data.status))
+    const englishCourse = this.props.creditList.english_course.filter((data) => this.checkFilter(3, data.status))
     const anchorElement = this.state.showPrintMenu
     const printFormNumber = this.state.printFormNumber
 
@@ -157,11 +159,12 @@ class Index extends React.Component {
               <div className={classes.status3} />
               <div className={classes.text}>退件</div>
             </div>
+
             <div className='pull-right'>
               <FormControl className={classes.formControl}>
                 <Select
                   value={this.state.filter.type}
-                  onChange={(event) => this.handleFilterChange('type', event.target.value)}
+                  onChange={(e) => this.handleFilterChange('type', e.target.value)}
                 >
                   <MenuItem value={-1} style={{ height: '10px' }}>所有抵免種類</MenuItem>
                   <MenuItem value={0} style={{ height: '10px' }}>學分抵免</MenuItem>
@@ -173,7 +176,7 @@ class Index extends React.Component {
               <FormControl className={classes.formControl}>
                 <Select
                   value={this.state.filter.status}
-                  onChange={(event) => this.handleFilterChange('status', event.target.value)}
+                  onChange={(e) => this.handleFilterChange('status', e.target.value)}
                 >
                   <MenuItem value={-1} style={{ height: '10px' }}>所有狀態</MenuItem>
                   <MenuItem value={0} style={{ height: '10px' }}>審核中</MenuItem>
@@ -187,7 +190,7 @@ class Index extends React.Component {
                   className={classes.btn}
                   variant='contained'
                   color='primary'
-                  onClick={() => this.props.senderrorSubmit(false)}
+                  onClick={() => this.props.setError(false)}
                 >
                   抵免申請
                 </Button>
@@ -200,24 +203,27 @@ class Index extends React.Component {
                   aria-owns={anchorElement ? 'print-menu' : undefined}
                   aria-haspopup='true'
                   onClick={this.handlePrintBtnClick}
-                  disabled
                 >
                   列印申請表
                 </Button>
                 <Menu
-                  id="print-menu"
+                  id='print-menu'
                   anchorEl={anchorElement}
                   open={Boolean(anchorElement)}
                   onClose={this.handlePrintMenuClose}
                 >
-                  <MenuItem onClick={() => this.printApplicationTable(0, '抵免學分申請表')}>抵免學分申請表</MenuItem>
-                  <MenuItem onClick={() => this.printApplicationTable(1, '課程免修申請表')}>課程免修申請表</MenuItem>
+                  <MenuItem onClick={() => this.printApplicationTable(0, '抵免學分申請表')}>
+                    抵免學分申請表
+                  </MenuItem>
+                  <MenuItem onClick={() => this.printApplicationTable(1, '課程免修申請表')}>
+                    課程免修申請表
+                  </MenuItem>
                 </Menu>
               </div>
             </div>
           </div>
 
-          {/* For mobile screen */}
+          {/* For mobile & xs */}
           <div className='hidden-sm hidden-md hidden-lg' style={{ margin: '20px 20px 5px 20px' }}>
             <div style={{ width: '300px' }}>
               <Link to='/students/credit/apply'>
@@ -226,7 +232,7 @@ class Index extends React.Component {
                   variant='contained'
                   color='primary'
                   style={{ margin: 'auto', width: '40%' }}
-                  onClick={() => this.props.senderrorSubmit(false)}
+                  onClick={() => this.props.setError(false)}
                 >
                   抵免申請
                 </Button>
@@ -239,25 +245,28 @@ class Index extends React.Component {
                 aria-haspopup='true'
                 style={{ margin: 'auto', width: '40%', marginLeft: '5px' }}
                 onClick={this.handlePrintBtnClick}
-                disabled
               >
                 列印申請表
               </Button>
               <Menu
-                id="print-menu"
+                id='print-menu'
                 anchorEl={anchorElement}
                 open={Boolean(anchorElement)}
                 onClose={this.handlePrintMenuClose}
               >
-                <MenuItem onClick={() => this.printApplicationTable(0, '抵免學分申請表')}>抵免學分申請表</MenuItem>
-                <MenuItem onClick={() => this.printApplicationTable(1, '課程免修申請表')}>課程免修申請表</MenuItem>
+                <MenuItem onClick={() => this.printApplicationTable(0, '抵免學分申請表')}>
+                  抵免學分申請表
+                </MenuItem>
+                <MenuItem onClick={() => this.printApplicationTable(1, '課程免修申請表')}>
+                  課程免修申請表
+                </MenuItem>
               </Menu>
             </div>
 
             <FormControl className={classes.formControl}>
               <Select
                 value={this.state.filter.type}
-                onChange={(event) => this.handleFilterChange('type', event.target.value)}
+                onChange={(e) => this.handleFilterChange('type', e.target.value)}
               >
                 <MenuItem value={-1} style={{ height: '10px' }}>所有抵免種類</MenuItem>
                 <MenuItem value={0} style={{ height: '10px' }}>學分抵免</MenuItem>
@@ -269,7 +278,7 @@ class Index extends React.Component {
             <FormControl className={classes.formControl}>
               <Select
                 value={this.state.filter.status}
-                onChange={(event) => this.handleFilterChange('status', event.target.value)}
+                onChange={(e) => this.handleFilterChange('status', e.target.value)}
               >
                 <MenuItem value={-1} style={{ height: '10px' }}>所有狀態</MenuItem>
                 <MenuItem value={0} style={{ height: '10px' }}>審核中</MenuItem>
@@ -285,25 +294,25 @@ class Index extends React.Component {
             {
               waiveCourse &&
               waiveCourse.map((data, index) => (
-                <WaiveCoursePanel key={index} data={{ ...data }} />
+                <WaiveCoursePanel key={index} data={data} />
               ))
             }
             {
               exemptCourse &&
               exemptCourse.map((data, index) => (
-                <ExemptCoursePanel key={index} data={{ ...data }} />
+                <ExemptCoursePanel key={index} data={data} />
               ))
             }
             {
               compulsoryCourse &&
               compulsoryCourse.map((data, index) => (
-                <CompulsoryCoursePanel key={index} data={{ ...data }} />
+                <CompulsoryCoursePanel key={index} data={data} />
               ))
             }
             {
               englishCourse &&
               englishCourse.map((data, index) => (
-                <EnglishCoursePanel key={index} data={{ ...data }} />
+                <EnglishCoursePanel key={index} data={data} />
               ))
             }
             {
@@ -311,43 +320,45 @@ class Index extends React.Component {
               exemptCourse && !exemptCourse.length &&
               compulsoryCourse && !compulsoryCourse.length &&
               englishCourse && !englishCourse.length &&
-              <div className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2' style={{ marginTop: '50px' }}>
+              <div
+                className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2'
+                style={{ marginTop: '50px' }}
+              >
                 <h2 className='text-center'>尚無任何抵免申請</h2>
                 <img className={classes.img} src={creditImg} alt='' />
               </div>
             }
           </div>
 
-          {/* For mobile xs */}
+          {/* For mobile & xs */}
           <div
             className='hidden-sm hidden-md hidden-lg'
             style={{
               marginTop: '15px',
               width: '100vw'
-
             }}>
             {
               waiveCourse &&
               waiveCourse.map((data, index) => (
-                <WaiveCoursePanel key={index} data={{ ...data }} mobile />
+                <WaiveCoursePanel key={index} data={data} mobile />
               ))
             }
             {
               exemptCourse &&
               exemptCourse.map((data, index) => (
-                <ExemptCoursePanel key={index} data={{ ...data }} mobile />
+                <ExemptCoursePanel key={index} data={data} mobile />
               ))
             }
             {
               compulsoryCourse &&
               compulsoryCourse.map((data, index) => (
-                <CompulsoryCoursePanel key={index} data={{ ...data }} mobile />
+                <CompulsoryCoursePanel key={index} data={data} mobile />
               ))
             }
             {
               englishCourse &&
               englishCourse.map((data, index) => (
-                <EnglishCoursePanel key={index} data={{ ...data }} mobile />
+                <EnglishCoursePanel key={index} data={data} mobile />
               ))
             }
             {
@@ -355,25 +366,29 @@ class Index extends React.Component {
               exemptCourse && !exemptCourse.length &&
               compulsoryCourse && !compulsoryCourse.length &&
               englishCourse && !englishCourse.length &&
-              <div className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2' style={{ marginTop: '50px' }}>
+              <div
+                className='col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2'
+                style={{ marginTop: '50px' }}
+              >
                 <h3 className='text-center'>尚無任何抵免申請</h3>
                 <img className={classes.img} src={creditImg} alt='' />
               </div>
             }
           </div>
         </div>
+
         <div id='printArea'>
           {
             printFormNumber === 0 &&
-            this.props.creditInfo.waive_course &&
-            this.props.creditInfo.waive_course.length &&
-            <WaiveCourse courses={ this.props.creditInfo.waive_course } />
+            this.props.creditList.waive_course &&
+            this.props.creditList.waive_course.length &&
+            <WaiveCourse courses={this.props.creditList.waive_course} />
           }
           {
             printFormNumber === 1 &&
-            this.props.creditInfo.exempt_course &&
-            this.props.creditInfo.exempt_course.length &&
-            <ExemptCourse courses={ this.props.creditInfo.exempt_course } />
+            this.props.creditList.exempt_course &&
+            this.props.creditList.exempt_course.length &&
+            <ExemptCourse courses={this.props.creditList.exempt_course} />
           }
         </div>
       </div>
@@ -386,14 +401,14 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  creditInfo: state.Student.Credit.creditInfo,
+  creditList: state.Student.Credit.list,
   deleteStatus: state.Student.Credit.delete.status
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getCreditInfo: () => dispatch(getCreditInfo()),
-  resetCourse: () => dispatch(resetCourse()),
-  senderrorSubmit: (payload) => dispatch(senderrorSubmit(payload))
+  getCreditList: () => dispatch(getCreditList()),
+  resetCourse: () => dispatch(actions.credit.form.reset()),
+  setError: (payload) => dispatch(actions.credit.form.setError(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Index))

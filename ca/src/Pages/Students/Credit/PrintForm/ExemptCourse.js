@@ -68,7 +68,7 @@ class ExemptCourse extends React.Component {
             {
               exemptCourse &&
               exemptCourse.map((data, index) => (
-                <tr style={{ height: '42.45pt' }}>
+                <tr key={index} style={{ height: '42.45pt' }}>
                   <td>{index+1}</td>
                   <td>{data.original_course_name}</td>
                   <td>{data.original_course_year}</td>

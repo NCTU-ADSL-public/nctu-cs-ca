@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import TextField from '@material-ui/core/TextField'
 import { withStyles } from '@material-ui/core/styles'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
@@ -9,52 +8,26 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
+import {
+  TextInput,
+  TextInputDefault,
+  LongInput,
+  SelectInput
+} from '../FormInput'
 import Postfile from './Postfile'
-import { compulsoryCourseChange } from '../../../../Redux/Students/Actions/Credit'
+import { actions } from '../../../../Redux/Students/Actions/Credit'
 
 const styles = theme => ({
   container: {
     width: '100%',
     margin: '0 auto'
-  },
-  label: {
-    fontSize: '20px'
-  },
-  labelMb: {
-    fontSize: '18px'
-  },
-  input: {
-    fontSize: '16px'
-  },
-  menu: {
-    width: 150,
-    fontSize: '20px'
-  },
-  menuMb: {
-    width: 150,
-    fontSize: '18px'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  textFieldLong: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 300
-  },
-  formControl: {
-    margin: theme.spacing.unit * 3
-  },
-  group: {
-    margin: `${theme.spacing.unit}px 0`
   }
 })
 
 class CompulsoryCourseForm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
+
     return (
       <div>
         {/* For PC screen */}
@@ -63,63 +36,31 @@ class CompulsoryCourseForm extends React.Component {
             <h1 style={{color: 'black'}} >本系必修課程抵免單</h1>
             <Divider />
             <div style={{ color: 'red', fontSize: '20px' }}>申請多門抵免需額外填寫另一張表單</div>
+
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
               />
-              <TextField
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
               />
-              <TextField
+              <TextInput
                 label='系所/年級/班別'
                 placeholder='例：資工系資工組大一A班'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.class}
-                error={this.props.errorsubmitted ? this.props.class === '' : false}
-                onChange={(event) => this.props.handleChange({ class: event.target.value })}
+                value={payload.class}
+                handleChange={(value) => this.props.updatePayload({ class: value })}
+                error={this.props.error && payload.class === ''}
               />
-              <TextField
+              <TextInput
                 label='手機'
                 margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.phone}
-                error={this.props.errorsubmitted ? this.props.phone === '' : false}
-                onChange={(event) => this.props.handleChange({ phone: event.target.value })}
+                value={payload.phone}
+                handleChange={(value) => this.props.updatePayload({ phone: value })}
+                error={this.props.error && payload.phone === ''}
               />
             </div>
 
@@ -128,118 +69,56 @@ class CompulsoryCourseForm extends React.Component {
             <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInput
                 label='永久課號'
                 placeholder='例：DCP1183'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_code}
-                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
-                onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+                value={payload.course_code}
+                handleChange={(value) => this.props.updatePayload({ course_code: value })}
+                error={this.props.error && payload.course_code === ''}
               />
-              <TextField
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_name}
-                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+                value={payload.course_name}
+                handleChange={(value) => this.props.updatePayload({ course_name: value })}
+                error={this.props.error && payload.course_name === ''}
               />
-              <TextField
+              <TextInput
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                error={this.props.errorsubmitted ? this.props.department === '' : false}
-                value={this.props.department}
-                onChange={(event) => this.props.handleChange({ department: event.target.value })}
+                value={payload.department}
+                handleChange={(value) => this.props.updatePayload({ department: value })}
+                error={this.props.error && payload.department === ''}
               />
-              <TextField
+              <TextInput
                 label='授課老師'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.teacher}
-                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
-                onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
+                value={payload.teacher}
+                handleChange={(value) => this.props.updatePayload({ teacher: value })}
+                error={this.props.error && payload.teacher === ''}
               />
-              <TextField
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.credit}
-                error={this.props.errorsubmitted ? this.props.credit === '' : false}
-                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
+                value={payload.credit}
+                handleChange={(value) => this.props.updatePayload({ credit: value })}
+                error={this.props.error && payload.credit === ''}
               />
-              <TextField
+              <TextInput
                 label='修課學年度'
                 type='number'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_year}
-                error={this.props.errorsubmitted ? this.props.course_year === '' : false}
-                onChange={(event) => this.props.handleChange({ course_year: event.target.value })}
+                value={payload.course_year}
+                handleChange={(value) => this.props.updatePayload({ course_year: value })}
+                error={this.props.error && payload.course_year === ''}
               />
-              <TextField
-                select
+              <SelectInput
                 label='修課學期'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                margin='normal'
-                value={this.props.course_semester}
-                error={this.props.errorsubmitted ? this.props.course_semester === '' : false}
-                onChange={(event) => this.props.handleChange({ course_semester: event.target.value })}
+                value={payload.course_semester}
+                handleChange={(value) => this.props.updatePayload({ course_semester: value })}
+                error={this.props.error && payload.course_semester === 0}
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
                 <MenuItem value={3} style={{ height: '10px' }}>暑</MenuItem>
-              </TextField>
+              </SelectInput>
             </div>
 
             <div style={{ height: '50px' }} />
@@ -247,49 +126,25 @@ class CompulsoryCourseForm extends React.Component {
             <h2>欲抵免之本系課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInput
                 label='永久課號'
                 placeholder='例：DCP1183'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.original_course_code}
-                error={this.props.errorsubmitted ? this.props.original_course_code === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
+                value={payload.original_course_code}
+                handleChange={(value) => this.props.updatePayload({ original_course_code: value })}
+                error={this.props.error && payload.original_course_code === ''}
               />
-              <TextField
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.original_course_name}
-                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
+                value={payload.original_course_name}
+                handleChange={(value) => this.props.updatePayload({ original_course_name: value })}
+                error={this.props.error && payload.original_course_name === ''}
               />
-              <TextField
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.original_course_credit}
-                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
+                value={payload.original_course_credit}
+                handleChange={(value) => this.props.updatePayload({ original_course_credit: value })}
+                error={this.props.error && payload.original_course_credit === ''}
               />
             </div>
 
@@ -300,10 +155,10 @@ class CompulsoryCourseForm extends React.Component {
             <div style={{ margin: '5px' }}>
               <FormControl component='fieldset'>
                 <RadioGroup
-                  value={this.props.reason.type}
-                  onChange={(event) => this.props.handleChange({
+                  value={payload.reason.type}
+                  onChange={(e) => this.props.updatePayload({
                     reason: {
-                      type: event.target.value,
+                      type: e.target.value,
                       content: ''
                     }
                   })}
@@ -314,33 +169,18 @@ class CompulsoryCourseForm extends React.Component {
                     label={
                       <div style={{ fontSize: '16px' }}>
                         必修課程需重修，然因
-                        <TextField
+                        <LongInput
                           label=''
                           placeholder='理由詳述'
-                          margin='normal'
-                          className={classes.textFieldLong}
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.label
-                            },
-                            shrink: true
-                          }}
-                          InputProps={{
-                            classes: {
-                              root: classes.input
-                            }
-                          }}
-                          disabled={this.props.reason.type === '其他'}
-                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
-                          value={this.props.reason.type === '被當' ? this.props.reason.content : ''}
-                          onChange={(event) => this.props.handleChange({
+                          value={payload.reason.type === '被當' ? payload.reason.content : ''}
+                          handleChange={(value) => this.props.updatePayload({
                             reason: {
-                              ...this.props.reason,
-                              content: event.target.value
+                              ...payload.reason,
+                              content: value
                             }
                           })}
-                          multiline
-                          rowsMax='1'
+                          error={this.props.error && payload.reason.content === ''}
+                          disabled={payload.reason.type === '其他'}
                         />
                         <br />不可抗拒之理由，需修習外系課程以抵本系必修課程
                         <font color='red'>(請於檔案上傳部分附上成績單)</font>
@@ -353,33 +193,18 @@ class CompulsoryCourseForm extends React.Component {
                     label={
                       <div style={{ fontSize: '16px' }}>
                         其他原因：
-                        <TextField
+                        <LongInput
                           label=''
                           placeholder='理由詳述'
-                          margin='normal'
-                          className={classes.textFieldLong}
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.label
-                            },
-                            shrink: true
-                          }}
-                          InputProps={{
-                            classes: {
-                              root: classes.input
-                            }
-                          }}
-                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
-                          disabled={this.props.reason.type === '被當'}
-                          value={this.props.reason.type === '其他' ? this.props.reason.content : ''}
-                          onChange={(event) => this.props.handleChange({
+                          value={payload.reason.type === '其他' ? payload.reason.content : ''}
+                          handleChange={(value) => this.props.updatePayload({
                             reason: {
-                              ...this.props.reason,
-                              content: event.target.value
+                              ...payload.reason,
+                              content: value
                             }
                           })}
-                          multiline
-                          rowsMax='1'
+                          error={this.props.error && payload.reason.content === ''}
+                          disabled={payload.reason.type === '被當'}
                         />
                       </div>
                     }
@@ -394,9 +219,8 @@ class CompulsoryCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                fileChange={(file) => this.props.handleChange({ file: file })}
-                error={this.props.errorsubmitted ? this.props.file === '' : false}
-                file={this.props.file}
+                handleChange={(value) => this.props.updatePayload({ file: value })}
+                error={this.props.error && payload.file === ''}
               />
             </div>
           </div>
@@ -408,67 +232,35 @@ class CompulsoryCourseForm extends React.Component {
             <h2 style={{color: 'black', fontSize: '20px'}} >本系必修課程抵免單</h2>
             <Divider />
             <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
+
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='系所/年級/班別'
                 placeholder='例：資工系資工組大一A班'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                value={this.props.class}
-                error={this.props.errorsubmitted ? this.props.class === '' : false}
-                onChange={(event) => this.props.handleChange({ class: event.target.value })}
+                value={payload.class}
+                handleChange={(value) => this.props.updatePayload({ class: value })}
+                error={this.props.error && payload.class === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='手機'
                 margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.phone}
-                error={this.props.errorsubmitted ? this.props.phone === '' : false}
-                onChange={(event) => this.props.handleChange({ phone: event.target.value })}
+                value={payload.phone}
+                handleChange={(value) => this.props.updatePayload({ phone: value })}
+                error={this.props.error && payload.phone === ''}
+                mobile
               />
             </div>
 
@@ -477,125 +269,63 @@ class CompulsoryCourseForm extends React.Component {
             <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='永久課號'
                 placeholder='例：DCP1183'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_code}
-                error={this.props.errorsubmitted ? this.props.course_code === '' : false}
-                onChange={(event) => this.props.handleChange({ course_code: event.target.value })}
+                value={payload.course_code}
+                handleChange={(value) => this.props.updatePayload({ course_code: value })}
+                error={this.props.error && payload.course_code === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_name}
-                error={this.props.errorsubmitted ? this.props.course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ course_name: event.target.value })}
+                value={payload.course_name}
+                handleChange={(value) => this.props.updatePayload({ course_name: value })}
+                error={this.props.error && payload.course_name === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.department}
-                error={this.props.errorsubmitted ? this.props.department === '' : false}
-                onChange={(event) => this.props.handleChange({ department: event.target.value })}
+                value={payload.department}
+                handleChange={(value) => this.props.updatePayload({ department: value })}
+                error={this.props.error && payload.department === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='授課老師'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.teacher}
-                error={this.props.errorsubmitted ? this.props.teacher === '' : false}
-                onChange={(event) => this.props.handleChange({ teacher: event.target.value })}
+                value={payload.teacher}
+                handleChange={(value) => this.props.updatePayload({ teacher: value })}
+                error={this.props.error && payload.teacher === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.credit}
-                error={this.props.errorsubmitted ? this.props.credit === '' : false}
-                onChange={(event) => this.props.handleChange({ credit: event.target.value })}
+                value={payload.credit}
+                handleChange={(value) => this.props.updatePayload({ credit: value })}
+                error={this.props.error && payload.credit === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='修課學年度'
                 type='number'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.course_year}
-                error={this.props.errorsubmitted ? this.props.course_year === '' : false}
-                onChange={(event) => this.props.handleChange({ course_year: event.target.value })}
+                value={payload.course_year}
+                handleChange={(value) => this.props.updatePayload({ course_year: value })}
+                error={this.props.error && payload.course_year === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
-                select
+              <SelectInput
                 label='修課學期'
-                className={classes.textField}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menuMb
-                  }
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                margin='normal'
-                value={this.props.course_semester}
-                error={this.props.errorsubmitted ? this.props.course_semester === '' : false}
-                onChange={(event) => this.props.handleChange({ course_semester: event.target.value })}
+                value={payload.course_semester}
+                handleChange={(value) => this.props.updatePayload({ course_semester: value })}
+                error={this.props.error && payload.course_semester === 0}
+                mobile
               >
                 <MenuItem value={0} style={{ height: '10px' }}>請選擇修課學期</MenuItem>
                 <MenuItem value={1} style={{ height: '10px' }}>上</MenuItem>
                 <MenuItem value={2} style={{ height: '10px' }}>下</MenuItem>
                 <MenuItem value={3} style={{ height: '10px' }}>暑</MenuItem>
-              </TextField>
+              </SelectInput>
             </div>
 
             <div style={{ height: '50px' }} />
@@ -603,51 +333,28 @@ class CompulsoryCourseForm extends React.Component {
             <h2>欲抵免之本系課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.original_course_code}
-                error={this.props.errorsubmitted ? this.props.original_course_code === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_code: event.target.value })}
+                placeholder='例：DCP1183'
+                value={payload.original_course_code}
+                handleChange={(value) => this.props.updatePayload({ original_course_code: value })}
+                error={this.props.error && payload.original_course_code === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.original_course_name}
-                error={this.props.errorsubmitted ? this.props.original_course_name === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_name: event.target.value })}
+                value={payload.original_course_name}
+                handleChange={(value) => this.props.updatePayload({ original_course_name: value })}
+                error={this.props.error && payload.original_course_name === ''}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInput
                 label='學分'
-                margin='normal'
                 type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                value={this.props.original_course_credit}
-                error={this.props.errorsubmitted ? this.props.original_course_credit === '' : false}
-                onChange={(event) => this.props.handleChange({ original_course_credit: event.target.value })}
+                value={payload.original_course_credit}
+                handleChange={(value) => this.props.updatePayload({ original_course_credit: value })}
+                error={this.props.error && payload.original_course_credit === ''}
+                mobile
               />
             </div>
 
@@ -658,10 +365,10 @@ class CompulsoryCourseForm extends React.Component {
             <div style={{ margin: '5px' }}>
               <FormControl component='fieldset'>
                 <RadioGroup
-                  value={this.props.reason.type}
-                  onChange={(event) => this.props.handleChange({
+                  value={payload.reason.type}
+                  onChange={(e) => this.props.updatePayload({
                     reason: {
-                      type: event.target.value,
+                      type: e.target.value,
                       content: ''
                     }
                   })}
@@ -672,34 +379,19 @@ class CompulsoryCourseForm extends React.Component {
                     label={
                       <div style={{ fontSize: '16px' }}>
                         必修課程需重修，然因
-                        <TextField
-                          style={{ width: 'calc( 100% - 24px )' }}
+                        <LongInput
                           label=''
                           placeholder='理由詳述'
-                          margin='normal'
-                          className={classes.textFieldLong}
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.label
-                            },
-                            shrink: true
-                          }}
-                          InputProps={{
-                            classes: {
-                              root: classes.input
-                            }
-                          }}
-                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
-                          disabled={this.props.reason.type === '其他'}
-                          value={this.props.reason.type === '被當' ? this.props.reason.content : ''}
-                          onChange={(event) => this.props.handleChange({
+                          value={payload.reason.type === '被當' ? payload.reason.content : ''}
+                          handleChange={(value) => this.props.updatePayload({
                             reason: {
-                              ...this.props.reason,
-                              content: event.target.value
+                              ...payload.reason,
+                              content: value
                             }
                           })}
-                          multiline
-                          rowsMax='1'
+                          error={this.props.error && payload.reason.content === ''}
+                          disabled={payload.reason.type === '其他'}
+                          mobile
                         />
                         <div style={{ margin: '5px' }}>
                           不可抗拒之理由，需修習外系課程以抵本系必修課程
@@ -714,34 +406,19 @@ class CompulsoryCourseForm extends React.Component {
                     label={
                       <div style={{ fontSize: '16px' }}>
                         其他原因：
-                        <TextField
-                          style={{ width: 'calc( 100% - 24px )' }}
+                        <LongInput
                           label=''
                           placeholder='理由詳述'
-                          margin='normal'
-                          className={classes.textFieldLong}
-                          InputLabelProps={{
-                            classes: {
-                              root: classes.label
-                            },
-                            shrink: true
-                          }}
-                          InputProps={{
-                            classes: {
-                              root: classes.input
-                            }
-                          }}
-                          error={this.props.errorsubmitted ? this.props.reason.content === '' : false}
-                          disabled={this.props.reason.type === '被當'}
-                          value={this.props.reason.type === '其他' ? this.props.reason.content : ''}
-                          onChange={(event) => this.props.handleChange({
+                          value={payload.reason.type === '其他' ? payload.reason.content : ''}
+                          handleChange={(value) => this.props.updatePayload({
                             reason: {
-                              ...this.props.reason,
-                              content: event.target.value
+                              ...payload.reason,
+                              content: value
                             }
                           })}
-                          multiline
-                          rowsMax='1'
+                          error={this.props.error && payload.reason.content === ''}
+                          disabled={payload.reason.type === '被當'}
+                          mobile
                         />
                       </div>
                     }
@@ -756,9 +433,8 @@ class CompulsoryCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                fileChange={(file) => this.props.handleChange({ file: file })}
-                error={this.props.errorsubmitted ? this.props.file === '' : false}
-                file={this.props.file}
+                handleChange={(value) => this.props.updatePayload({ file: value })}
+                error={this.props.error && payload.file === ''}
               />
             </div>
           </div>
@@ -770,27 +446,12 @@ class CompulsoryCourseForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.compulsoryCourse.class,
-  year: state.Student.Credit.compulsoryCourse.year,
-  semester: state.Student.Credit.compulsoryCourse.semester,
-  department: state.Student.Credit.compulsoryCourse.department,
-  teacher: state.Student.Credit.compulsoryCourse.teacher,
-  credit: state.Student.Credit.compulsoryCourse.credit,
-  original_course_name: state.Student.Credit.compulsoryCourse.original_course_name,
-  original_course_code: state.Student.Credit.compulsoryCourse.original_course_code,
-  original_course_credit: state.Student.Credit.compulsoryCourse.original_course_credit,
-  course_year: state.Student.Credit.compulsoryCourse.course_year,
-  course_semester: state.Student.Credit.compulsoryCourse.course_semester,
-  course_name: state.Student.Credit.compulsoryCourse.course_name,
-  course_code: state.Student.Credit.compulsoryCourse.course_code,
-  reason: state.Student.Credit.compulsoryCourse.reason,
-  phone: state.Student.Credit.compulsoryCourse.phone,
-  file: state.Student.Credit.compulsoryCourse.file,
-  errorsubmitted: state.Student.Credit.errorsubmitted
+  payload: state.Student.Credit.compulsoryCourse,
+  error: state.Student.Credit.form.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChange: (payload) => { dispatch(compulsoryCourseChange(payload)) }
+  updatePayload: (payload) => dispatch(actions.credit.compulsoryCourse.store(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CompulsoryCourseForm))

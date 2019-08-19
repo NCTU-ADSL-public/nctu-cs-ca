@@ -1,7 +1,14 @@
+
 import { handleActions } from 'redux-actions'
+import { FETCHING_STATUS } from '../../../../Utilities/constant'
 
 const initialState = {
-  errorsubmitted: false,
+  list: {
+    waive_course: [],
+    exempt_course: [],
+    compulsory_course: [],
+    english_course: []
+  },
   waiveCourse: {
     apply_year: 107,
     apply_semester: 2,
@@ -77,76 +84,69 @@ const initialState = {
     course_name: '',
     file: ''
   },
-  creditInfo: {
-    waive_course: [],
-    exempt_course: [],
-    compulsory_course: [],
-    english_course: []
-  },
   delete: {
-    status: 'idle'
+    status: FETCHING_STATUS.IDLE
   },
   edit: {
-    status: 'idle'
+    status: FETCHING_STATUS.IDLE
+  },
+  form: {
+    error: false
   }
 }
 
 export default handleActions({
-  WAIVE_COURSE_CHANGE: (state, action) => ({
-    ...state,
-    waiveCourse: {
-      ...state.waiveCourse,
-      ...action.payload
+  CREDIT: {
+    LIST: {
+      STORE: (state, action) => ({ ...state, list: action.payload })
+    },
+    WAIVE_COURSE: {
+      STORE: (state, action) => ({ ...state, waiveCourse: {
+        ...state.waiveCourse,
+        ...action.payload
+      }})
+    },
+    EXEMPT_COURSE: {
+      STORE: (state, action) => ({ ...state, exemptCourse: {
+        ...state.exemptCourse,
+        ...action.payload
+      }})
+    },
+    COMPULSORY_COURSE: {
+      STORE: (state, action) => ({ ...state, compulsoryCourse: {
+        ...state.compulsoryCourse,
+        ...action.payload
+      }})
+    },
+    ENGLISH_COURSE: {
+      STORE: (state, action) => ({ ...state, englishCourse: {
+        ...state.englishCourse,
+        ...action.payload
+      }})
+    },
+    EDIT: {
+      SET_STATUS: (state, action) => ({ ...state, edit: {
+        ...state.edit,
+        status: action.payload
+      }})
+    },
+    DELETE: {
+      SET_STATUS: (state, action) => ({ ...state, delete: {
+        ...state.delete,
+        status: action.payload
+      }})
+    },
+    FORM: {
+      RESET: (state, action) => ({ ...state,
+        waiveCourse: initialState.waiveCourse,
+        exemptCourse: initialState.exemptCourse,
+        compulsoryCourse: initialState.compulsoryCourse,
+        englishCourse: initialState.englishCourse
+      }),
+      SET_ERROR: (state, action) => ({ ...state, form: {
+        ...state.form,
+        error: action.payload
+      }})
     }
-  }),
-  EXEMPT_COURSE_CHANGE: (state, action) => ({
-    ...state,
-    exemptCourse: {
-      ...state.exemptCourse,
-      ...action.payload
-    }
-  }),
-  COMPULSORY_COURSE_CHANGE: (state, action) => ({
-    ...state,
-    compulsoryCourse: {
-      ...state.compulsoryCourse,
-      ...action.payload
-    }
-  }),
-  ENGLISH_COURSE_CHANGE: (state, action) => ({
-    ...state,
-    englishCourse: {
-      ...state.englishCourse,
-      ...action.payload
-    }
-  }),
-  SET_DELETE_STATUS: (state, action) => ({
-    ...state,
-    delete: {
-      ...state.delete,
-      ...action.payload
-    }
-  }),
-  SET_EDIT_STATUS: (state, action) => ({
-    ...state,
-    edit: {
-      ...state.edit,
-      ...action.payload
-    }
-  }),
-  STORE_CREDIT_INFO: (state, action) => ({
-    ...state,
-    creditInfo: action.payload
-  }),
-  RESET_COURSE: (state, action) => ({
-    ...state,
-    waiveCourse: initialState.waiveCourse,
-    exemptCourse: initialState.exemptCourse,
-    compulsoryCourse: initialState.compulsoryCourse,
-    englishCourse: initialState.englishCourse
-  }),
-  ERROR_SUBMIT: (state, action) => ({
-    ...state,
-    errorsubmitted: action.payload
-  })
+  }
 }, initialState)
