@@ -2,37 +2,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
+import { TextInputDefault } from '../FormInput'
 
 const styles = theme => ({
   container: {
     width: '100%',
     margin: '0 auto'
-  },
-  label: {
-    fontSize: '20px'
-  },
-  labelMb: {
-    fontSize: '18px'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  menu: {
-    width: 150,
-    fontSize: '20px'
-  },
-  menuMb: {
-    width: 150,
-    fontSize: '18px'
   }
 })
 
 class WaiveCourseFormConfirm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
+
     return (
       <div>
         {/* For PC screen */}
@@ -42,57 +24,21 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
               />
-              <TextField
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
               />
-              <TextField
+              <TextInputDefault
                 label='系所/年級/班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                value={payload.class}
               />
-              <TextField
+              <TextInputDefault
                 label='手機'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                value={payload.phone}
               />
             </div>
 
@@ -101,129 +47,44 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>原就讀學校及科目資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='原就讀學校'
-                placeholder='非跨校抵免填交通大學'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_school}
+                value={payload.original_school}
               />
-              <TextField
+              <TextInputDefault
                 label='原就讀系所科別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_department}
+                value={payload.original_department}
               />
-              <TextField
+              <TextInputDefault
                 label='原就讀校系畢業學分數'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_graduation_credit}
+                value={payload.original_graduation_credit}
               />
             </div>
 
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='科目名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                value={payload.original_course_name}
               />
-              <TextField
+              <TextInputDefault
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
+                value={payload.original_course_department}
               />
-              <TextField
+              <TextInputDefault
                 label='修課年級'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+                value={['', '一', '二', '三', '四'][payload.original_course_year]}
               />
-              <TextField
+              <TextInputDefault
                 label='修課學期'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
+                value={['', '上', '下', '暑'][payload.original_course_semester]}
               />
-              <TextField
+              <TextInputDefault
                 label='學分'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                value={payload.original_course_credit}
               />
-              <TextField
+              <TextInputDefault
                 label='成績'
-                placeholder='若無分數則填通過與否'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
+                value={payload.original_course_score}
               />
             </div>
 
@@ -232,57 +93,21 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>抵免本校之科目資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
+                value={payload.current_course_code}
               />
-              <TextField
+              <TextInputDefault
                 label='科目名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
+                value={payload.current_course_name}
               />
-              <TextField
+              <TextInputDefault
                 label='學分'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
+                value={payload.current_course_credit}
               />
-              <TextField
+              <TextInputDefault
                 label='選別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
+                value={payload.current_course_type}
               />
             </div>
 
@@ -291,7 +116,9 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              <a href={payload.file} download={`${this.props.studentIdcard.student_id}_學分抵免.pdf`}>
+                檔案下載
+              </a>
             </div>
           </div>
         </div>
@@ -303,61 +130,25 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='系所/年級/班別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                value={payload.class}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='手機'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                value={payload.phone}
+                mobile
               />
             </div>
 
@@ -366,138 +157,53 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>原就讀學校及科目資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='原就讀學校'
-                placeholder='非跨校抵免填交通大學'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_school}
+                value={payload.original_school}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='原就讀系所科別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_department}
+                value={payload.original_department}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='原就讀校系畢業學分數'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_graduation_credit}
+                value={payload.original_graduation_credit}
+                mobile
               />
             </div>
 
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='科目名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_name}
+                value={payload.original_course_name}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_department}
+                value={payload.original_course_department}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='修課年級'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={['', '一', '二', '三', '四'][this.props.original_course_year]}
+                value={['', '一', '二', '三', '四'][payload.original_course_year]}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='修課學期'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={['', '上', '下', '暑'][this.props.original_course_semester]}
+                value={['', '上', '下', '暑'][payload.original_course_semester]}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='學分'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_credit}
+                value={payload.original_course_credit}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='成績'
-                placeholder='若無分數則填通過與否'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.original_course_score}
+                value={payload.original_course_score}
+                mobile
               />
             </div>
 
@@ -506,61 +212,25 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>抵免本校之科目資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_code}
+                value={payload.current_course_code}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='科目名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_name}
+                value={payload.current_course_name}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='學分'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_credit}
+                value={payload.current_course_credit}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='選別'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.current_course_type}
+                value={payload.current_course_type}
+                mobile
               />
             </div>
 
@@ -569,7 +239,9 @@ class WaiveCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              <a href={payload.file} download={`${this.props.studentIdcard.student_id}_學分抵免.pdf`}>
+                檔案下載
+              </a>
             </div>
           </div>
         </div>
@@ -580,24 +252,7 @@ class WaiveCourseFormConfirm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.waiveCourse.class,
-  phone: state.Student.Credit.waiveCourse.phone,
-  original_school: state.Student.Credit.waiveCourse.original_school,
-  original_department: state.Student.Credit.waiveCourse.original_department,
-  current_school: state.Student.Credit.waiveCourse.current_school,
-  current_department: state.Student.Credit.waiveCourse.current_department,
-  original_graduation_credit: state.Student.Credit.waiveCourse.original_graduation_credit,
-  original_course_name: state.Student.Credit.waiveCourse.original_course_name,
-  original_course_department: state.Student.Credit.waiveCourse.original_course_department,
-  original_course_credit: state.Student.Credit.waiveCourse.original_course_credit,
-  original_course_score: state.Student.Credit.waiveCourse.original_course_score,
-  original_course_year: state.Student.Credit.waiveCourse.original_course_year,
-  original_course_semester: state.Student.Credit.waiveCourse.original_course_semester,
-  current_course_code: state.Student.Credit.waiveCourse.current_course_code,
-  current_course_name: state.Student.Credit.waiveCourse.current_course_name,
-  current_course_credit: state.Student.Credit.waiveCourse.current_course_credit,
-  current_course_type: state.Student.Credit.waiveCourse.current_course_type,
-  file: state.Student.Credit.waiveCourse.file
+  payload: state.Student.Credit.waiveCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({

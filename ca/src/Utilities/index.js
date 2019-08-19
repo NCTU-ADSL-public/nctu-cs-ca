@@ -10,7 +10,7 @@ function getSemester () {
   let today = new Date()
   let year = today.getFullYear()
   let month = today.getMonth() + 1
-  return ((year - 1912) + (month >= 8 ? 1 : 0)) + '-' + (month >= 8 ? '1' : '2')
+  return ((year - 1912) + (month >= 8 ? 1 : 0)) + '-' + ((month >= 8 || month === 1) ? '1' : '2')
 }
 
 function getTimestamp () {
@@ -23,8 +23,18 @@ function getTimestamp () {
   return year + '/' + month + '/' + date + '  ' + hour + ':' + minute
 }
 
+function base64encode (file) {
+  return new Promise((resolve, reject) => {
+    const reader = new window.FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+}
+
 export {
   getYear,
   getSemester,
-  getTimestamp
+  getTimestamp,
+  base64encode
 }

@@ -2,106 +2,47 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
+import {
+  TextInputDefault,
+  LongInputDefault
+} from '../FormInput'
 
 const styles = theme => ({
   container: {
     width: '100%',
     margin: '0 auto'
-  },
-  label: {
-    fontSize: '20px'
-  },
-  labelMb: {
-    fontSize: '18px'
-  },
-  menu: {
-    width: 150,
-    fontSize: '20px'
-  },
-  menuMb: {
-    width: 150,
-    fontSize: '18px'
-  },
-  input: {
-    fontSize: '16px'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  textFieldLong: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 300
   }
 })
 
 class EnglishCourseFormConfirm extends React.Component {
   render () {
-    const { classes } = this.props
+    const { classes, payload } = this.props
+
     return (
       <div>
         { /* For PC screen */ }
         <div className='hidden-xs'>
           <div className={classes.container}>
             <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
+
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
               />
-              <TextField
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
               />
-              <TextField
+              <TextInputDefault
                 label='系所/年級/班別'
-                placeholder='例：資工系資工組大一A班'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                value={payload.class}
               />
-              <TextField
+              <TextInputDefault
                 label='手機'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                value={payload.phone}
               />
             </div>
 
@@ -110,71 +51,25 @@ class EnglishCourseFormConfirm extends React.Component {
             <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <TextInputDefault
                 label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_code}
+                value={payload.course_code}
               />
-              <TextField
+              <TextInputDefault
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_name}
+                value={payload.course_name}
               />
-              <TextField
+              <TextInputDefault
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.department}
+                value={payload.department}
               />
-              <TextField
+              <TextInputDefault
                 label='授課老師'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.teacher}
+                value={payload.teacher}
               />
-              <TextField
+              <TextInputDefault
                 label='學分'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.credit}
+                value={payload.credit}
               />
             </div>
 
@@ -183,26 +78,9 @@ class EnglishCourseFormConfirm extends React.Component {
             <h2>申請原因</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
+              <LongInputDefault
                 label=''
-                placeholder='理由詳述'
-                margin='normal'
-                className={classes.textFieldLong}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{
-                  classes: {
-                    root: classes.input
-                  },
-                  readOnly: true
-                }}
-                defaultValue={this.props.reason}
-                multiline
-                rowsMax='1'
+                value={payload.reason}
               />
             </div>
 
@@ -211,7 +89,9 @@ class EnglishCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              <a href={payload.file} download={`${this.props.studentIdcard.student_id}_英文專業課程抵免.pdf`}>
+                檔案下載
+              </a>
             </div>
 
             <div style={{ height: '50px' }} />
@@ -229,65 +109,29 @@ class EnglishCourseFormConfirm extends React.Component {
         <div className='hidden-sm hidden-md hidden-lg'>
           <div className={classes.container}>
             <h4 style={{ color: 'red' }}>確認無誤後送出</h4>
+
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='申請人'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.sname}
+                value={this.props.studentIdcard.sname}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='學號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.studentIdcard.student_id}
+                value={this.props.studentIdcard.student_id}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='系所/年級/班別'
-                placeholder='例：資工系資工組大一A班'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.label
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.class}
+                value={payload.class}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='手機'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.phone}
+                value={payload.phone}
+                mobile
               />
             </div>
 
@@ -296,76 +140,30 @@ class EnglishCourseFormConfirm extends React.Component {
             <h2>擬修課程資訊</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='永久課號'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_code}
+                value={payload.course_code}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='課程名稱'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.course_name}
+                value={payload.course_name}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='開課系所'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.department}
+                value={payload.department}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='授課老師'
-                margin='normal'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.teacher}
+                value={payload.teacher}
+                mobile
               />
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <TextInputDefault
                 label='學分'
-                margin='normal'
-                type='number'
-                className={classes.textField}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{ readOnly: true }}
-                defaultValue={this.props.credit}
+                value={payload.credit}
+                mobile
               />
             </div>
 
@@ -374,27 +172,10 @@ class EnglishCourseFormConfirm extends React.Component {
             <h2>申請原因</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              <TextField
-                style={{ width: 'calc( 100% - 24px )' }}
+              <LongInputDefault
                 label=''
-                placeholder='理由詳述'
-                margin='normal'
-                className={classes.textFieldLong}
-                InputLabelProps={{
-                  classes: {
-                    root: classes.labelMb
-                  },
-                  shrink: true
-                }}
-                InputProps={{
-                  classes: {
-                    root: classes.input
-                  },
-                  readOnly: true
-                }}
-                defaultValue={this.props.reason}
-                multiline
-                rowsMax='1'
+                value={payload.reason}
+                mobile
               />
             </div>
 
@@ -403,7 +184,9 @@ class EnglishCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{this.props.file.name}
+              <a href={payload.file} download={`${this.props.studentIdcard.student_id}_英文專業課程抵免.pdf`}>
+                檔案下載
+              </a>
             </div>
 
             <div style={{ height: '50px' }} />
@@ -423,17 +206,7 @@ class EnglishCourseFormConfirm extends React.Component {
 
 const mapStateToProps = (state) => ({
   studentIdcard: state.Student.User.studentIdcard,
-  class: state.Student.Credit.englishCourse.class,
-  year: state.Student.Credit.englishCourse.year,
-  semester: state.Student.Credit.englishCourse.semester,
-  department: state.Student.Credit.englishCourse.department,
-  teacher: state.Student.Credit.englishCourse.teacher,
-  credit: state.Student.Credit.englishCourse.credit,
-  course_name: state.Student.Credit.englishCourse.course_name,
-  course_code: state.Student.Credit.englishCourse.course_code,
-  reason: state.Student.Credit.englishCourse.reason,
-  phone: state.Student.Credit.englishCourse.phone,
-  file: state.Student.Credit.englishCourse.file
+  payload: state.Student.Credit.englishCourse
 })
 
 const mapDispatchToProps = (dispatch) => ({
