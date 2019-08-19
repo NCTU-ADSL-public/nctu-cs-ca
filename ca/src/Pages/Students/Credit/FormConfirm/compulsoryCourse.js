@@ -150,7 +150,9 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{'need change'}
+              <a href={payload.file} download={`${this.props.studentIdcard.student_id}_本系必修課程抵免.pdf`}>
+                檔案下載
+              </a>
             </div>
           </div>
         </div>
@@ -301,7 +303,9 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <h2>課程綱要或課程資料上傳</h2>
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
-              檔案：{'need change'}
+              <a href={payload.file} download={`${this.props.studentIdcard.student_id}_本系必修課程抵免.pdf`}>
+                檔案下載
+              </a>
             </div>
           </div>
         </div>

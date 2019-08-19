@@ -1,8 +1,10 @@
+
 import React from 'react'
 import input from 'react-bootstrap'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
+import { base64encode } from '../../../../Utilities'
 
 const styles = theme => ({
   button: {
@@ -26,36 +28,45 @@ const styles = theme => ({
 class Postfile extends React.Component {
   constructor (props) {
     super(props)
-    this.handleFileChange = this.handleFileChange.bind(this)
+    this.state = {
+      filename: '請合併為一個PDF檔案再上傳'
+    }
     this.fileRef = React.createRef()
+    this.handleFileChange = this.handleFileChange.bind(this)
   }
 
   handleFileChange (e) {
-    this.props.fileChange(e)
+    const file = e.target.files[0]
+    base64encode(file)
+      .then(encoded => {
+        this.props.handleChange(encoded)
+        this.setState({ filename: file.name })
+      })
   }
 
   render () {
     const { classes } = this.props
     return (
-      <form onSubmit={this.handleUploadImage}>
+      <form>
         <div className='hidden-xs'>
           <label htmlFor='fileInput'>
             <Button
               variant='outlined'
               className={classes.button}
-              onClick={() => this.fileRef.current.click()}
               style={{ borderColor: this.props.error ? 'red' : 'black' }}
+              onClick={() => this.fileRef.current.click()}
             >
               選擇檔案
               <CloudUploadIcon className={classes.rightIcon} />
             </Button>
-            <div className={classes.text1}>{this.props.file && this.props.file.name ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
+            <div className={classes.text1}>{ this.state.filename }</div>
             <input
               style={{ display: 'none' }}
               ref={this.fileRef}
               type='file'
+              accept='.pdf'
               id='fileInput'
-              onChange={(e) => this.handleFileChange(e.target.files[0])}
+              onChange={this.handleFileChange}
             />
           </label>
         </div>
@@ -65,19 +76,20 @@ class Postfile extends React.Component {
               size='small'
               variant='outlined'
               className={classes.button}
-              onClick={() => this.fileRef.current.click()}
               style={{ borderColor: this.props.error ? 'red' : 'black' }}
+              onClick={() => this.fileRef.current.click()}
             >
               選擇檔案
               <CloudUploadIcon className={classes.rightIcon} />
             </Button>
-            <div className={classes.text2}>{this.props.file && this.props.file.name ? this.props.file.name : '請合併為一個PDF檔案再上傳'}</div>
+            <div className={classes.text2}>{ this.state.filename }</div>
             <input
               style={{ display: 'none' }}
               ref={this.fileRef}
               type='file'
+              accept='.pdf'
               id='fileInput'
-              onChange={(e) => this.handleFileChange(e.target.files[0])}
+              onChange={this.handleFileChange}
             />
           </label>
         </div>

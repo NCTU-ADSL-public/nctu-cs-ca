@@ -92,6 +92,7 @@ class Index extends React.Component {
     const { classes, data, mobile } = this.props
     const color = ['#f3864a', '#3aa276', '#d93a64', '#aaaaaa', '#ffffff'][data.status]
     const status = ['審核中', '審核通過', '審核不通過', '退件', '---'][data.status]
+    const sid = this.props.studentIdcard.student_id
 
     if (mobile) {
       return (
@@ -146,7 +147,7 @@ class Index extends React.Component {
                 <TableRow>
                   <TableCell className={classes.headFont}>檔案</TableCell>
                   <TableCell className={classes.font}>
-                    <a target='_blank' rel='noopener noreferrer' href={data.file}>下載</a>
+                    <a href={data.file} download={`${sid}_英授專業課程抵免.pdf`}>下載</a>
                   </TableCell>
                 </TableRow>
                 {
@@ -193,7 +194,7 @@ class Index extends React.Component {
                     <TableCell className={classes.font}>{data.course_name}</TableCell>
                     <TableCell className={classes.font}>{data.department}</TableCell>
                     <TableCell className={classes.font}>
-                      <a target='_blank' rel='noopener noreferrer' href={data.file}>下載</a>
+                      <a href={data.file} download={`${sid}_英授專業課程抵免.pdf`}>下載</a>
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -244,6 +245,7 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
+  studentIdcard: state.Student.User.studentIdcard
 })
 
 const mapDispatchToProps = (dispatch) => ({

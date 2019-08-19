@@ -117,8 +117,7 @@ class EnglishCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                file={payload.file}
-                fileChange={(file) => this.props.updatePayload({ file: file })}
+                handleChange={(value) => this.props.updatePayload({ file: value })}
                 error={this.props.error && payload.file === ''}
               />
             </div>
@@ -237,8 +236,7 @@ class EnglishCourseForm extends React.Component {
             <hr style={{ margin: '5px' }} />
             <div style={{ margin: '5px' }}>
               <Postfile
-                file={payload.file}
-                fileChange={(file) => this.props.updatePayload({ file: file })}
+                handleChange={(value) => this.props.updatePayload({ file: value })}
                 error={this.props.error && payload.file === ''}
               />
             </div>
