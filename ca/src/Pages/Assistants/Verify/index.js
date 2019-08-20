@@ -369,7 +369,7 @@ class Verify extends React.Component {
       case 2:
         return (this.state.formList.filter(e => (e.type === 2))
         .map(e => {
-          SEMESTER_CN = ['', '上學期', '下學期', '暑修']
+          const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
           return ({
             type: '學分抵免',
             sid: e.sid,
@@ -392,7 +392,7 @@ class Verify extends React.Component {
       case 3:
         return (this.state.formList.filter(e => (e.type === 3))
         .map(e => {
-          SEMESTER_CN = ['', '上學期', '下學期', '暑修']
+          const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
           return ({
             type: '課程免修',
             sid: e.sid,
@@ -415,7 +415,7 @@ class Verify extends React.Component {
       case 0:
         return this.state.formList.filter(e => e.type === 0)
       .map(e => {
-        SEMESTER_CN = ['', '上學期', '下學期', '暑修']
+        const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
         return ({
           type: '本系必修課程抵免',
           sid: e.sid,
@@ -436,7 +436,7 @@ class Verify extends React.Component {
       case 1:
         return this.state.formList.filter(e => e.type === 1)
       .map(e => {
-        SEMESTER_CN = ['', '上學期', '下學期', '暑修']
+        const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
         return ({
           type: '英授專業課程抵免',
           sid: e.sid,
