@@ -369,14 +369,7 @@ class Verify extends React.Component {
       case 2:
         return (this.state.formList.filter(e => (e.type === 2))
         .map(e => {
-          let date = e.date.split('-'), year, semester
-          if (parseInt(date[1], 10) < 8) {
-            year = parseInt(date[0], 10) - 1912
-            semester = '下學期'
-          } else {
-            year = parseInt(date[0], 10) - 1911
-            semester = '上學期'
-          }
+          SEMESTER_CN = ['', '上學期', '下學期', '暑修']
           return ({
             type: '學分抵免',
             sid: e.sid,
@@ -389,22 +382,17 @@ class Verify extends React.Component {
             nameB: e.nameB,
             creditB: e.creditB,
             typeB: e.typeB,
-            year: year,
-            semester: semester,
+            apply_year: e.apply_year,
+            apply_semester: SEMESTER_CN[e.apply_semester],
+            cos_year_old: e.cos_year_old,
+            cos_semester_old: SEMESTER_CN[e.cos_semester_old],
             status: statusName[e.status]
           })
         }))
       case 3:
         return (this.state.formList.filter(e => (e.type === 3))
         .map(e => {
-          let date = e.date.split('-'), year, semester
-          if (parseInt(date[1], 10) < 8) {
-            year = parseInt(date[0], 10) - 1912
-            semester = '下學期'
-          } else {
-            year = parseInt(date[0], 10) - 1911
-            semester = '上學期'
-          }
+          SEMESTER_CN = ['', '上學期', '下學期', '暑修']
           return ({
             type: '課程免修',
             sid: e.sid,
@@ -417,22 +405,17 @@ class Verify extends React.Component {
             nameB: e.nameB,
             creditB: e.creditB,
             typeB: e.typeB,
-            year: year,
-            semester: semester,
+            apply_year: e.apply_year,
+            apply_semester: SEMESTER_CN[e.apply_semester],
+            cos_year_old: e.cos_year_old,
+            cos_semester_old: SEMESTER_CN[e.cos_semester_old],
             status: statusName[e.status]
           })
         }))
       case 0:
         return this.state.formList.filter(e => e.type === 0)
       .map(e => {
-        let date = e.date.split('-'), year, semester
-        if (parseInt(date[1], 10) < 8) {
-          year = parseInt(date[0], 10) - 1912
-          semester = '下學期'
-        } else {
-          year = parseInt(date[0], 10) - 1911
-          semester = '上學期'
-        }
+        SEMESTER_CN = ['', '上學期', '下學期', '暑修']
         return ({
           type: '本系必修課程抵免',
           sid: e.sid,
@@ -443,22 +426,17 @@ class Verify extends React.Component {
           creditA: e.creditA,
           codeB: e.codeB,
           nameB: e.nameB,
-          year: year,
-          semester: semester,
+          apply_year: e.apply_year,
+          apply_semester: SEMESTER_CN[e.apply_semester],
+          cos_year_old: e.cos_year_old,
+          cos_semester_old: SEMESTER_CN[e.cos_semester_old],
           status: statusName[e.status]
         })
       })
       case 1:
         return this.state.formList.filter(e => e.type === 1)
       .map(e => {
-        let date = e.date.split('-'), year, semester
-        if (parseInt(date[1], 10) < 8) {
-          year = parseInt(date[0], 10) - 1912
-          semester = '下學期'
-        } else {
-          year = parseInt(date[0], 10) - 1911
-          semester = '上學期'
-        }
+        SEMESTER_CN = ['', '上學期', '下學期', '暑修']
         return ({
           type: '英授專業課程抵免',
           sid: e.sid,
@@ -468,8 +446,10 @@ class Verify extends React.Component {
           nameA: e.nameA,
           department: e.department,
           teacher: e.teacher,
-          year: year,
-          semester: semester,
+          apply_year: e.apply_year,
+          apply_semester: SEMESTER_CN[e.apply_semester],
+          cos_year_old: e.cos_year_old,
+          cos_semester_old: SEMESTER_CN[e.cos_semester_old],
           status: statusName[e.status]
         })
       })
@@ -799,10 +779,12 @@ class Verify extends React.Component {
                     { label: '修課資料|課程名稱', key: 'nameA' },
                     { label: '修課資料|開課系所', key: 'department' },
                     { label: '修課資料|學分數', key: 'creditA' },
+                    { label: '修課資料|學年', key: 'cos_year_old' },
+                    { label: '修課資料|學期', key: 'cos_semester_old' },
                     { label: '抵免科目資料|永久課號', key: 'codeB' },
                     { label: '抵免科目資料|課程名稱', key: 'nameB' },
-                    { label: '申請學年度', key: 'year' },
-                    { label: '申請學期', key: 'semester' },
+                    { label: '申請學年度', key: 'apply_year' },
+                    { label: '申請學期', key: 'apply_semester' },
                     { label: '申請狀態', key: 'status' }]}>
                 <MenuItem >
                     本系必修課程抵免
@@ -819,8 +801,10 @@ class Verify extends React.Component {
                     { label: '課程名稱', key: 'nameA' },
                     { label: '開課系所', key: 'department' },
                     { label: '授課老師', key: 'teacher' },
-                    { label: '申請學年度', key: 'year' },
-                    { label: '申請學期', key: 'semester' },
+                    { label: '修課學年', key: 'cos_year_old' },
+                    { label: '修課學期', key: 'cos_semester_old' },
+                    { label: '申請學年度', key: 'apply_year' },
+                    { label: '申請學期', key: 'apply_semester' },
                     { label: '申請狀態', key: 'status' }]}>
                 <MenuItem >
                     英授專業課程抵免
@@ -836,12 +820,14 @@ class Verify extends React.Component {
                     { label: '修課資料|科目名稱', key: 'nameA' },
                     { label: '修課資料|開課系所', key: 'department' },
                     { label: '修課資料|學分數', key: 'creditA' },
+                    { label: '修課資料|學年', key: 'cos_year_old' },
+                    { label: '修課資料|學期', key: 'cos_semester_old' },
                     { label: '抵免科目資料|永久課號', key: 'codeB' },
                     { label: '抵免科目資料|科目名稱', key: 'nameB' },
                     { label: '抵免科目資料|學分', key: 'creditB' },
                     { label: '抵免科目資料|選別', key: 'typeB' },
-                    { label: '申請學年度', key: 'year' },
-                    { label: '申請學期', key: 'semester' },
+                    { label: '申請學年度', key: 'apply_year' },
+                    { label: '申請學期', key: 'apply_semester' },
                     { label: '申請狀態', key: 'status' }]}>
                 <MenuItem >
                     學分抵免
@@ -857,12 +843,14 @@ class Verify extends React.Component {
                     { label: '修課資料|科目名稱', key: 'nameA' },
                     { label: '修課資料|開課系所', key: 'department' },
                     { label: '修課資料|學分數', key: 'creditA' },
+                    { label: '修課資料|學年', key: 'cos_year_old' },
+                    { label: '修課資料|學期', key: 'cos_semester_old' },
                     { label: '抵免科目資料|永久課號', key: 'codeB' },
                     { label: '抵免科目資料|科目名稱', key: 'nameB' },
                     { label: '抵免科目資料|學分', key: 'creditB' },
                     { label: '抵免科目資料|選別', key: 'typeB' },
-                    { label: '申請學年度', key: 'year' },
-                    { label: '申請學期', key: 'semester' },
+                    { label: '申請學年度', key: 'apply_year' },
+                    { label: '申請學期', key: 'apply_semester' },
                     { label: '申請狀態', key: 'status' }]}>
                 <MenuItem >
                     課程免修
@@ -979,7 +967,7 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>課程綱要</TableCell>
                             </TableRow>
                             <TableRow>
-                              <TableCell className={classes.font}>{`${apply.year}-${apply.semester} ${apply.nameA}${apply.type !== 3 ? ` (${apply.codeA})` : ''}`}</TableCell>
+                              <TableCell className={classes.font}>{`${apply.cos_year_old}-${apply.cos_semester_old} ${apply.nameA}${apply.type !== 3 ? ` (${apply.codeA})` : ''}`}</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
                               <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
