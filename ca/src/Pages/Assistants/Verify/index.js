@@ -45,7 +45,7 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from 'react-csv'
 import Arrow from '../../../Components/Arrow'
 import { theme, styles } from './styles'
-import {type, typeName, statusName, creditName } from './macro'
+import {type, typeName, statusName, creditName, semesterName, gradeName } from './macro'
 
 class Verify extends React.Component {
   constructor (props) {
@@ -369,7 +369,6 @@ class Verify extends React.Component {
       case 2:
         return (this.state.formList.filter(e => (e.type === 2))
         .map(e => {
-          const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
           return ({
             type: '學分抵免',
             sid: e.sid,
@@ -383,16 +382,15 @@ class Verify extends React.Component {
             creditB: e.creditB,
             typeB: e.typeB,
             apply_year: e.apply_year,
-            apply_semester: SEMESTER_CN[e.apply_semester],
+            apply_semester: semesterName[e.apply_semester],
             cos_year_old: e.cos_year_old,
-            cos_semester_old: SEMESTER_CN[e.cos_semester_old],
+            cos_semester_old: semesterName[e.cos_semester_old],
             status: statusName[e.status]
           })
         }))
       case 3:
         return (this.state.formList.filter(e => (e.type === 3))
         .map(e => {
-          const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
           return ({
             type: '課程免修',
             sid: e.sid,
@@ -406,16 +404,15 @@ class Verify extends React.Component {
             creditB: e.creditB,
             typeB: e.typeB,
             apply_year: e.apply_year,
-            apply_semester: SEMESTER_CN[e.apply_semester],
-            cos_year_old: e.cos_year_old,
-            cos_semester_old: SEMESTER_CN[e.cos_semester_old],
+            apply_semester: semesterName[e.apply_semester],
+            cos_year_old: gradeName[e.cos_year_old],
+            cos_semester_old: semesterName[e.cos_semester_old],
             status: statusName[e.status]
           })
         }))
       case 0:
         return this.state.formList.filter(e => e.type === 0)
       .map(e => {
-        const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
         return ({
           type: '本系必修課程抵免',
           sid: e.sid,
@@ -427,16 +424,15 @@ class Verify extends React.Component {
           codeB: e.codeB,
           nameB: e.nameB,
           apply_year: e.apply_year,
-          apply_semester: SEMESTER_CN[e.apply_semester],
+          apply_semester: semesterName[e.apply_semester],
           cos_year_old: e.cos_year_old,
-          cos_semester_old: SEMESTER_CN[e.cos_semester_old],
+          cos_semester_old: semesterName[e.cos_semester_old],
           status: statusName[e.status]
         })
       })
       case 1:
         return this.state.formList.filter(e => e.type === 1)
       .map(e => {
-        const SEMESTER_CN = ['', '上學期', '下學期', '暑修']
         return ({
           type: '英授專業課程抵免',
           sid: e.sid,
@@ -447,9 +443,9 @@ class Verify extends React.Component {
           department: e.department,
           teacher: e.teacher,
           apply_year: e.apply_year,
-          apply_semester: SEMESTER_CN[e.apply_semester],
+          apply_semester: semesterName[e.apply_semester],
           cos_year_old: e.cos_year_old,
-          cos_semester_old: SEMESTER_CN[e.cos_semester_old],
+          cos_semester_old: semesterName[e.cos_semester_old],
           status: statusName[e.status]
         })
       })
@@ -967,7 +963,12 @@ class Verify extends React.Component {
                               <TableCell className={classes.font3}>課程綱要</TableCell>
                             </TableRow>
                             <TableRow>
-                              <TableCell className={classes.font}>{`${apply.cos_year_old}-${apply.cos_semester_old} ${apply.nameA}${apply.type !== 3 ? ` (${apply.codeA})` : ''}`}</TableCell>
+                              <TableCell className={classes.font}>{
+                                apply.type === 3 ? 
+                                  gradeName[apply.cos_year_old] + semesterName[apply.cos_semester_old] + " " + apply.nameA
+                                :
+                                `${apply.cos_year_old}-${semesterName[apply.cos_semester_old]} ${apply.nameA}${apply.type !== 3 ? ` (${apply.codeA})` : ''}`
+                              }</TableCell>
                               <TableCell className={classes.font}>{apply.department}</TableCell>
                               <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
                               <TableCell className={classes.font6} ><a target='_blank' rel='noopener noreferrer' href={apply.file}>課程綱要下載</a></TableCell>
