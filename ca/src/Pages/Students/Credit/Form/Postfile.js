@@ -42,6 +42,7 @@ class Postfile extends React.Component {
         this.props.handleChange(encoded)
         this.setState({ filename: file.name })
       })
+      .catch(err => console.log(err))
   }
 
   render () {
