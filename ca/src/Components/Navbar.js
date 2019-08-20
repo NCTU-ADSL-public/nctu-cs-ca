@@ -123,8 +123,6 @@ class _Navbar extends React.Component {
 
   
   render () {
-    console.log("Hello")
-    console.log(process.env.REACT_APP_ASSISTANT_SUPER_mode)
 
     const { onClicks } = this.state
     const { classes } = this.props
@@ -198,7 +196,7 @@ class _Navbar extends React.Component {
           </NavItem>
         </Nav>
         <Nav pullRight>{
-          (process.env.REACT_APP_ASSISTANT_SUPER_mode && this.props.type === 'assistant') ? 
+          (process.env.REACT_APP_ASSISTANT_SUPER_mode === "on" && this.props.type === 'assistant') ? 
             <FormControl style={{ width: '150px', marginRight: '20px' }} >
               <InputLabel
                 FormLabelClasses={{
