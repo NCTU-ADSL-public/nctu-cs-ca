@@ -121,7 +121,11 @@ class _Navbar extends React.Component {
     )
   }
 
+  
   render () {
+    console.log("Hello")
+    console.log(process.env.REACT_APP_ASSISTANT_SUPER_mode)
+
     const { onClicks } = this.state
     const { classes } = this.props
     const navItems = {
