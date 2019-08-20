@@ -7,7 +7,7 @@ import {createStore, applyMiddleware} from 'redux'
 import Reducers from './Redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
-console.log(process.env)
+console.log(process.env.REACT_APP_ASSISTANT_SUPER_mode)
 let store = createStore(Reducers, applyMiddleware(thunk))
 
 ReactDOM.render(<Provider store={store}><Router /></Provider>, document.getElementById('root'))
