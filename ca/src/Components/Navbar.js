@@ -9,6 +9,7 @@ import dinoIcon from '../Resources/dinoIcon_graduate.png'
 import NavButton from './NavButton'
 import { withStyles } from '@material-ui/core/styles'
 import './Navbar.css'
+import {OnSuperMode} from '../Redux/Assistants/Actions/User'
 
 import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
@@ -61,10 +62,11 @@ const style = {
 class _Navbar extends React.Component {
   constructor (props) {
     super(props)
+    if (props.type === 'assistant')
+      props.OnSuperMode();
     this.state = {
       selectedButtonIndex: 0,
       onClicks: props.onTouchTaps.map((callback, index) => this.wrapCallback(callback, index)),
-      assistant_type: 'assistant'
     }
     this.wrapCallback = this.wrapCallback.bind(this)
     this.onToggleCollapse = this.onToggleCollapse.bind(this)
@@ -196,7 +198,7 @@ class _Navbar extends React.Component {
           </NavItem>
         </Nav>
         <Nav pullRight>{
-          (process.env.REACT_APP_ASSISTANT_SUPER_mode === "on" && this.props.type === 'assistant') ? 
+          (process.env.REACT_APP_ASSISTANT_SUPER_mode === "on" && this.props.superMode) ? 
             <FormControl style={{ width: '150px', marginRight: '20px' }} >
               <InputLabel
                 FormLabelClasses={{
@@ -235,10 +237,12 @@ class _Navbar extends React.Component {
 }
 
 const mapState = (state) => ({
-  color: state.Student.User.FooterColor
+  color: state.Student.User.FooterColor,
+  superMode: state.Assistant.User.superMode
 })
 
 const mapDispatch = (dispatch) => ({
+  OnSuperMode: () => dispatch(OnSuperMode())
 })
 
 export default connect(mapState, mapDispatch)(withRouter(withStyles(style)(_Navbar)))

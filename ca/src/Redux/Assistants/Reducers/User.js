@@ -8,9 +8,11 @@ const initalState = {
     grad: '',
     id: 'T1234',
     email: 'xxx@gmail.com'
-  }
+  },
+  superMode: false
 }
 
 export default handleActions({
-  UPDATE_USER_INFO: (state, action) => ({...state, idCard: action.payload})
+  UPDATE_USER_INFO: (state, action) => ({...state, idCard: action.payload}),
+  ON_SUPER_MODE: (state, action) => ({ ...state, superMode: true })
 }, initalState)
