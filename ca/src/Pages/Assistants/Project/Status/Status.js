@@ -7,7 +7,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import LinearProgress from '@material-ui/core/LinearProgress'
 
-import grey from '@material-ui/core/colors/grey'
 import red from '@material-ui/core/colors/red'
 import yellow from '@material-ui/core/colors/yellow'
 import green from '@material-ui/core/colors/green'
@@ -18,9 +17,7 @@ import Chip from '@material-ui/core/Chip'
 
 const ADD_STATUS_COLOR = [red['A100'], green[300]]
 const STATUS_COLOR_L = [red[100], green[200]]
-const FILTER_STATUS_COLOR = [red['A100'], yellow[300]]
 const STUDENT_STATUS_CN = ['外', '本']
-const PROJECT_FIRST_SECOND_CN = ['', '專題一', '專題二', '需確認是否過基礎程式設計']
 
 const styles = theme => ({
   container: {
@@ -57,7 +54,6 @@ class Status extends React.Component {
   }
 
   warningText = (text, css) => {
-    const { classes } = this.props
     return (
       <div style = {{ display: 'flex', width: '100%' }}>
         <div style = {{ flex: 0.1 }}/>
@@ -109,7 +105,6 @@ class Status extends React.Component {
 
   render () {
     const { classes, Status } = this.props;
-    const {  } = this.state;
 
     return (
       Status.year === '' ? (

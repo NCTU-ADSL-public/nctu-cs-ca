@@ -16,3 +16,5 @@ export const ChangeFooterColor = (color) => dispatch => {
   // console.log(color)
   dispatch(ChangefooterColor(color))
 }
+
+export const studentUpdateIdCard = createAction('STUDENT_UPDATE_IDCARD');

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, NavLink, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -10,6 +10,8 @@ import NavButton from './NavButton'
 import { withStyles } from '@material-ui/core/styles'
 import './Navbar.css'
 import {OnSuperMode} from '../Redux/Assistants/Actions/User'
+import {studentUpdateIdCard} from '../Redux/Students/Actions/User'
+import {teacherUpdateIdCard} from '../Redux/Teachers/Actions/User'
 
 import FormControl from '@material-ui/core/FormControl'
 import Input from '@material-ui/core/Input'
@@ -64,6 +66,14 @@ class _Navbar extends React.Component {
     super(props)
     if (props.type === 'assistant')
       props.OnSuperMode();
+    if (props.superMode) {
+      console.log("Hello")
+      console.log(props.type)
+      if (props.type === 'student')
+        props.studentUpdateIdCard();
+      if (props.type === 'teacher')
+        props.teacherUpdateIdCard();
+    }
     this.state = {
       selectedButtonIndex: 0,
       onClicks: props.onTouchTaps.map((callback, index) => this.wrapCallback(callback, index)),
@@ -216,17 +226,30 @@ class _Navbar extends React.Component {
                     }}
                   />
                 }
-                value={this.state.assistant_type}
+                value={this.props.type}
                 style={{ fontSize: '15px' }}
-                onChange={
-                  (event) => {
-                    this.setState({ assistant_type: event.target.value })
-                  }
-                }
               >
-                <_MenuItem value={"assistant"} style={{ fontSize: '20px' }} >助理</_MenuItem>
-                <_MenuItem value={"teacher"} style={{ fontSize: '20px' }} >教授</_MenuItem>
-                <_MenuItem value={"student"} style={{ fontSize: '20px' }} >學生</_MenuItem>
+                <_MenuItem 
+                  value={"assistant"} 
+                  style={{ fontSize: '20px' }} 
+                  component={Link} to='/assistants/head'
+                >
+                  助理端
+                </_MenuItem>
+                <_MenuItem 
+                  value={"teacher"} 
+                  style={{ fontSize: '20px' }} 
+                  component={Link} to='/teachers/head'
+                >
+                  教授端
+                </_MenuItem>
+                <_MenuItem
+                  value={"student"} 
+                  style={{ fontSize: '20px' }}
+                  component={Link} to='/students/head'
+                >
+                  學生端
+                </_MenuItem>
               </Select>
             </FormControl> : ''
           }
@@ -242,7 +265,9 @@ const mapState = (state) => ({
 })
 
 const mapDispatch = (dispatch) => ({
-  OnSuperMode: () => dispatch(OnSuperMode())
+  OnSuperMode: () => dispatch(OnSuperMode()),
+  studentUpdateIdCard: () => dispatch(studentUpdateIdCard()),
+  teacherUpdateIdCard: () => dispatch(teacherUpdateIdCard())
 })
 
 export default connect(mapState, mapDispatch)(withRouter(withStyles(style)(_Navbar)))

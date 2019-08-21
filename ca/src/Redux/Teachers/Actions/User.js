@@ -13,3 +13,4 @@ export const fetchUser = (page = 1) => dispatch => {
     console.log(err)
   })
 }
+export const teacherUpdateIdCard = createAction('TEACHER_UPDATE_IDCARD');
