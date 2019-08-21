@@ -25,6 +25,7 @@ function getTimestamp () {
 
 function base64encode (file) {
   return new Promise((resolve, reject) => {
+    if (!file)  reject('no file selected')
     const reader = new window.FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => resolve(reader.result)
