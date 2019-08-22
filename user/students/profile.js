@@ -5,14 +5,15 @@ var query = require('../../../db/msql');
 var utils = require('../../../utils');
 var csrf = require('csurf');
 
-
-router.get('/students/profile', function(req, res){
+var getStudentId = require('../common/handler/getStudentId');
+var StudentId = getStudentId.getStudentId.studentId;
+router.get('/students/profile',StudentId, function(req, res){
 
     if(req.session.profile){
         
 	var personStatus = JSON.parse(req.session.profile).personStatus;
-	if(personStatus === 's' || personStatus === 'w'){
-		var studentId = utils.getPersonId(JSON.parse(req.session.profile));
+	if(personStatus === 's' || personStatus === 'w' || personStatus ==='a'){
+		var studentId = res.locals.studentId;
 
         	if(!studentId){
               		//////console.log("No Student Id");
