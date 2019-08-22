@@ -2,7 +2,8 @@
 function getYear () {
   let today = new Date()
   let year = today.getFullYear()
-  return `${(year - 1912)}`
+  let month = today.getMonth() + 1
+  return `${(year - 1912) + (month >= 8 ? 1 : 0)}`
 }
 
 // 回傳學期字串(e.g. 107-1)
