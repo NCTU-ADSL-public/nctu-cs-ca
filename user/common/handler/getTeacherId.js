@@ -12,7 +12,7 @@ getTeacherId.teacherId = function(req, res, next){
         let checkIndex = checkPage.indexOf("/", 1);
         checkPage = checkPage.substring(1, checkIndex);
 
-        if(checkPage === "teachers"){
+        if(checkPage === "professors"){
 
            res.locals.teacherId = utils.getPersonId(JSON.parse(req.session.profile));
 
