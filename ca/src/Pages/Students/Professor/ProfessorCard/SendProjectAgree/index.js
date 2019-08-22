@@ -62,6 +62,35 @@ const styles = theme => ({
   }
 })
 
+const departmentList = [
+  '資訊工程學系',
+  '奈米科學及工程學士學位學程',
+  '理學院科學學士學位學程',
+  '電機資訊學士班',
+  '電子工程學系',
+  '機械工程學系',
+  '土木工程學系',
+  '材料科學與工程學系',
+  '電子物理學系',
+  '應用數學系',
+  '電機工程學系',
+  '光電工程學系',
+  '應用化學系',
+  '生物科技學系',
+  '管理科學系',
+  '運輸與物流管理學系',
+  '工業工程與管理學系',
+  '百川學士學位學程',
+  '外國語文學系',
+  '資訊管理與財務金融學系',
+  '人文社會學系',
+  '傳播與科技學系',
+  '系統工程與科技學士學位學程'
+]
+  // ? professors.map((data, index) => (
+  //   <ProfessorCard data={data} key={index} studentIdcard={this.props.studentIdcard} />
+  // ))
+
 const Transition = (props) => (
   <Slide direction='up' {...props} />
 )
@@ -81,7 +110,7 @@ class SendProjectAgree extends React.Component {
           phone: '',
           email: '',
           first_second: 0,
-          department: 0,
+          department: '資訊工程學系',
           name: ''
         }
       ],
@@ -124,7 +153,7 @@ class SendProjectAgree extends React.Component {
       return
     }
     for (let i = 0; i < this.state.members.length; i++) {
-      if (this.state.members[i].department === 1) {
+      if (this.state.members[i].department === '資訊工程學系') {
         number_tmp = number_tmp + 1
       }
     }
@@ -158,7 +187,7 @@ class SendProjectAgree extends React.Component {
     }
     this.setState({
       memberNumber: [...this.state.memberNumber, newNumber],
-      members: [...this.state.members, { id: '', phone: '', email: '', first_second: 0, department: 0, name: '' }]
+      members: [...this.state.members, { id: '', phone: '', email: '', first_second: 0, department: '資訊工程學系', name: '' }]
     })
   }
 
@@ -330,13 +359,18 @@ class SendProjectAgree extends React.Component {
                           value={members[t - 1].department}
                           onChange={(e) => this.handleInputChange(e.target.value, 'department', t - 1)}
                         >
-                          <MenuItem value={0} style={{width: '100%'}}>請選擇系所</MenuItem>
-                          <MenuItem value={1} style={{width: '100%'}}>資工系</MenuItem>
-                          <MenuItem value={2} style={{width: '100%'}}>非資工系</MenuItem>
+                          {
+                            departmentList.map((department) => (
+                              <MenuItem value={department} style={{width: '100%'}}>{department}</MenuItem>
+                            ))
+                          }
+                          {/*<MenuItem value={0} style={{width: '100%'}}>請選擇系所</MenuItem>*/}
+                          {/*<MenuItem value={1} style={{width: '100%'}}>資工系</MenuItem>*/}
+                          {/*<MenuItem value={2} style={{width: '100%'}}>非資工系</MenuItem>*/}
                         </TextField>
                       </div>
 
-                      <div className='col-sm-3 col-md-4' style={{display: members[t - 1].department === 2 ? '' : 'none'}}>
+                      <div className='col-sm-3 col-md-4' style={{display: members[t - 1].department === '資訊工程學系' ? 'none' : ''}}>
                         <Input
                           placeholder='姓名（外系需填）'
                           className='project-member-input'
@@ -427,9 +461,14 @@ class SendProjectAgree extends React.Component {
                               value={members[t - 1].first_second}
                               onChange={(e) => this.handleInputChange(e.target.value, 'first_second', t - 1)}
                             >
-                              <MenuItem value={0} style={{width: '100%'}}>請選擇專題(ㄧ)或(二)</MenuItem>
-                              <MenuItem value={1} style={{width: '100%'}}>專題（ㄧ）</MenuItem>
-                              <MenuItem value={2} style={{width: '100%'}}>專題（二）</MenuItem>
+                              {
+                                departmentList.map((department) => (
+                                  <MenuItem value={department} style={{width: '100%'}}>{department}</MenuItem>
+                                ))
+                              }
+                              {/* <MenuItem value={0} style={{width: '100%'}}>請選擇專題(ㄧ)或(二)</MenuItem> */}
+                              {/* <MenuItem value={1} style={{width: '100%'}}>專題（ㄧ）</MenuItem> */}
+                              {/* <MenuItem value={2} style={{width: '100%'}}>專題（二）</MenuItem> */}
                             </TextField>
                           </div>
                           <div className='row' >
@@ -452,7 +491,7 @@ class SendProjectAgree extends React.Component {
                             </TextField>
                           </div>
 
-                          <div className='row' style={{display: members[t - 1].department === 2 ? '' : 'none'}}>
+                          <div className='row' style={{display: members[t - 1].department === '資訊工程學系' ? 'none' : ''}}>
                             <Input
                               placeholder='姓名（外系須填）'
                               className='project-member-input-rwd'
