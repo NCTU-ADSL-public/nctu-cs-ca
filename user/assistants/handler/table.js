@@ -323,11 +323,12 @@ table.offsetApplyShow = function(req, res, next) {
                         "status": parseInt(result[i].agree),
                         "previous": result[i].previous == "0" ? false : true,
                         "date": result[i].timestamp,
-                        "file": result[i].file,
                         "transferTo": "",
                         "cos_year_old": result[i].cos_year_old,
                         "cos_semester_old": parseInt(result[i].cos_semester_old)
                  	};
+                    // "file": result[i].file,
+
                     if (one.type == 0) {
                     	one.nameA = result[i].cos_cname;
                         one.codeA = result[i].cos_code;
