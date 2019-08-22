@@ -18,7 +18,6 @@ import { storeProfessorsImage } from '../../../../Redux/Students/Actions/Profess
 import pic from '../../../../Resources/defalt.jpg'
 import './style.css'
 
-let storageRef = firebase.storage().ref()
 
 const styles = theme => ({
   expand: {
@@ -65,30 +64,31 @@ class Index extends React.Component {
 
   handleImageDownload () {
     // 如果component已經unmount，則fetch到圖片後不要call setState，不然會造成錯誤
-    let directory = this.props.data.path
-    if (!directory) {
+    let photo = this.props.data.photo
+    if (!photo) {
       if (this._isMounted) {
         this.setState({ loading: false })
       }
       return
     }
+    this.props.storeImage(photo)
 
-    storageRef
-      .child(directory)
-      .getDownloadURL()
-      .then(url => {
-        this.props.storeImage(url)
-        if (this._isMounted) {
-          this.setState({ loading: false })
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        this.props.storeImage('')
-        if (this._isMounted) {
-          this.setState({ loading: false })
-        }
-      })
+    // storageRef
+    //   .child(directory)
+    //   .getDownloadURL()
+    //   .then(url => {
+    //     this.props.storeImage(url)
+    //     if (this._isMounted) {
+    //       this.setState({ loading: false })
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //     this.props.storeImage('')
+    //     if (this._isMounted) {
+    //       this.setState({ loading: false })
+    //     }
+    //   })
   }
 
   render () {
