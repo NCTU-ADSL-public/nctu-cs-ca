@@ -1031,19 +1031,9 @@ table.professorInfoList = function(req, res, next){
                 var flag;
                 for(var i = 0; i < result.length; i++){
                     for(var j = 0; j < result[i].gradeCnt.length; j++){
-                        var pic_route = '/home/nctuca/db_data/photo/' + result[i].teacher_id + '.jpg';
-                        var pic_path = 'professor/'+ result[i].teacher_id + '.jpg';
                         
-                        var path;
-                        try{
-                                var stats = fs.statSync(pic_route);
-                                path = pic_path;
-                            }
-                            catch(err){
-                                path = "";
-                            }
                         if(result[i].gradeCnt[j].grade == grade){
-                            info.push({ tname: result[i].tname,teacher_id: result[i].teacher_id, phone:result[i].phone, email: result[i].email, expertise: result[i].expertise, info : result[i].info, path : path, scount: parseInt(result[i].gradeCnt[j].scount)});
+                            info.push({ tname: result[i].tname,teacher_id: result[i].teacher_id, phone:result[i].phone, email: result[i].email, expertise: result[i].expertise, info : result[i].info, photo : result[i].photo, scount: parseInt(result[i].gradeCnt[j].scount)});
                             flag =1;
                             break;
                         }                       
@@ -1051,7 +1041,7 @@ table.professorInfoList = function(req, res, next){
                             flag = 0;
                     }
                     if (flag==0)
-                        info.push({ tname: result[i].tname,teacher_id:result[i].teacher_id, phone:result[i].phone, email: result[i].email, expertise: result[i].expertise, info : result[i].info, path : path, scount: 0 });
+                        info.push({ tname: result[i].tname,teacher_id:result[i].teacher_id, phone:result[i].phone, email: result[i].email, expertise: result[i].expertise, info : result[i].info, photo : result[i].photo, scount: 0 });
                 }
                 req.list = info;   
                 if(req.list)
