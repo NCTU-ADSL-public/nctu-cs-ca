@@ -23,7 +23,7 @@ class index extends React.Component {
 		this.props.getFormList()
 	}
   snackbarClose = () => {
-    this.setState({open: false})
+    this.props.verifyHandleChange({open: false})
   }
   render() {
     const { classes, Verify } = this.props;

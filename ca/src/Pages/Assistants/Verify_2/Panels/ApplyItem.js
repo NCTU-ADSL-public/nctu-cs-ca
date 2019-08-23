@@ -91,7 +91,11 @@ class ApplyItem extends React.Component {
                   <div>永久課號:&nbsp;{apply.codeA}</div>
                   <div>學分:&nbsp;{apply.creditA}</div>
                 </React.Fragment>
-              } placement='top'>
+              } placement='top'
+                classes={{
+                  tooltip: classes.tooltip
+                }}
+              >
                 <Button color='primary' onClick={(e) => e.stopPropagation()} className={classes.btn}>
                   {apply.nameA}
                 </Button>
@@ -105,7 +109,11 @@ class ApplyItem extends React.Component {
                       <div>永久課號:&nbsp;{apply.codeB}</div>
                       <div>學分:&nbsp;{apply.creditB}</div>
                     </React.Fragment>
-                  } placement='top'>
+                  } placement='top'
+                    classes={{
+                      tooltip: classes.tooltip
+                    }}
+                  >
                     <Button color='primary' onClick={(e) => e.stopPropagation()}className={classes.btn}>
                       {apply.nameB}
                     </Button>
