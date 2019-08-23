@@ -167,7 +167,15 @@ class ApplyItem extends React.Component {
                 }</TableCell>
                 <TableCell className={classes.font}>{apply.department}</TableCell>
                 <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
-                <TableCell className={classes.font6} ><a onClick={() => this.props.verifyHandleDownloadFile({"sid": apply.sid, "date": apply.date})}>抵免附件下載</a></TableCell>
+                <TableCell className={classes.font6} >
+                  <Button 
+                    color="primary" 
+                    className={classes.btn}
+                    onClick={() => this.props.verifyHandleDownloadFile({"sid": apply.sid, "date": apply.date})}
+                  >
+                    抵免附件下載
+                  </Button>
+                </TableCell>
               </TableRow>
               <TableRow className={classes.header}>
                 <TableCell className={classes.font3}>申請日期</TableCell>
