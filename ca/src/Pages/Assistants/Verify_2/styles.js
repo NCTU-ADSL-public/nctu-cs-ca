@@ -99,8 +99,8 @@ const styles = () => ({
   },
   Panels: {
     width: 'calc(100vw - 80px)',
-    position: 'absolute',
-    top: 110,
+    position: 'relative',
+    top: 180,
     left: 60,
     paddingBottom: 50
   },
