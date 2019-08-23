@@ -79,7 +79,7 @@ class OptionToolIcons extends React.Component {
 			req: {
 				courses: Verify.select.map(
 					e => ({
-						sid: Verify.formList[e].id,
+						sid: Verify.formList[e].sid,
 						timestamp: Verify.formList[e].date,
 						reason: null,
 						email: Verify.formList[e].email

@@ -20,7 +20,7 @@ const initalState = {
 	transferTo: '',
 	return: '',
 	anchorEl: null,
-	fetching: false
+	fetching: true
 }
 
 export default handleActions({
