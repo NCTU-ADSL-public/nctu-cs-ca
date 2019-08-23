@@ -60,13 +60,11 @@ const Router = () => (
   <BrowserRouter>
     <div>
       {/*<Route path='/' component={Snow} />*/}
-
-      <Route path='/assistants' component={AssistantHead} />
-      <Route path='/students' component={StudentHead} />
-      <Route path='/teachers' component={TeacherHead} />
       <Switch>
         <Route exact path='/' component={Login} />
         {/* students route */}
+
+        <Route exact path='/students' component={StudentHead} />
         <Route exact path='/students/head/' render={() => <StudentHome />} />
         <Route exact path='/students/grad' render={() => <StudentGrad />} />
         <Route exact path='/students/map' render={() => <StudentMap />} />
@@ -76,6 +74,7 @@ const Router = () => (
         <Route exact path='/students/credit' render={() => <StudentCredit />} />
         <Route exact path='/students/credit/apply' render={() => <StudentCreditApply />} />
 
+        <Route exact path='/teachers' component={TeacherHead} />
         <Route exact path='/teachers/head' component={TeacherHome} />
         <Route exact path='/teachers/group' component={TeacherProject} />
         <Route exact path='/teachers/project' component={TeacherProject} />
@@ -83,6 +82,7 @@ const Router = () => (
         <Route exact path='/teachers/family' component={TeacherFamily} />
         <Route exact path='/teachers/verify' component={TeacherVerify} />
 
+        <Route exact path='/assistants' component={AssistantHead} />
         <Route exact path='/assistants/head' render={() => <Frame><AssistantHome /></Frame>} />
         <Route exact path='/assistants/grad' render={() => <Frame><AssistantGrad /></Frame>} />
         <Route exact path='/assistants/project' render={() => <Frame><AssistantProject /></Frame>} />
