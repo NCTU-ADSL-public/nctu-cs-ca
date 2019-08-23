@@ -190,7 +190,7 @@ export const verifyHandleAllReset = payload => dispatch => {
 
 export const verifyHandleDownloadFile = payload => dispatch => {
 	axios
-		.post('/assistants/offsetApply/file', payload)
+		.post('/assistants/offsetApply/File', payload)
 		.then( res => {
 			if (res.data.file) {
 				const linkSource = res.data.file;
