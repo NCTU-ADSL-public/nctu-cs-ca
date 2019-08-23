@@ -25,9 +25,9 @@ export const getFormList = () => dispatch => {
 			formList: res.data
 				.map((e, i) => ({
 					...e,
-					id: i,
-					fetching: false
-				}))
+					id: i
+				})),
+			fetching: false
 		}))
 	})
 }
