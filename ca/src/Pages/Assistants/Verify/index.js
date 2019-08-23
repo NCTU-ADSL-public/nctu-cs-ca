@@ -40,7 +40,7 @@ import Check from '@material-ui/icons/CheckBox'
 import Send from '@material-ui/icons/Send'
 import Reset from '@material-ui/icons/Restore'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import FakeData from '../../../Resources/FakeData'
+import FakeData from '../../../Resources/FakeData'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import { CSVLink } from 'react-csv'
 import Arrow from '../../../Components/Arrow'
@@ -51,14 +51,14 @@ class Verify extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-/******start for test*****
       formList: FakeData.FormList.map((e, i) => ({...e, id: i})),
       teacherList: FakeData.TeacherList.sort((a, b) => b.status - a.status),
       formListOld:FakeData.FormList.map((e, i) => ({...e, id: i})),
-*********end for test***************/
+/******start for test*****
       formList:[],
       teacherList: [],
       formListOld:[],
+*********end for test***************/
       isOld: false,
       open: false,
       message: 0,
@@ -69,7 +69,7 @@ class Verify extends React.Component {
       transferTo: '',
       return: '',
       anchorEl: null,
-      fetching: true
+      fetching: false
     }
   }
   componentDidMount () {
