@@ -359,6 +359,33 @@ table.offsetApplyShow = function(req, res, next) {
     	res.redirect('/');
 }
 
+
+table.offsetApplyFile = function(req, res, next) {
+    if (req.session.profile) {
+        var input = req.body;
+        query.ShowUserOffsetApplyForm({all_student: true}, function(err, result) {
+        	if(err){
+            	throw err;
+               	res.redirect('/');
+            }
+            if(!result)
+            	res.redirect('/');
+            else {
+               	result = JSON.parse(result);
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].timestamp !== input.date || result[i].student_id !== input.sid)
+                        continue;
+                    req.file = {
+                        "file": result[i].file
+                    }
+                    next();
+                }
+            }
+        });
+    } else res.redirect('/');
+}
+
+
 // ----------------------------------------------------------------------offset table
 
 // research table--------------------------------------------------------------------

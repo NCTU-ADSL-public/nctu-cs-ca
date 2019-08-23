@@ -8,6 +8,7 @@ var table = require('./handler/table');
 var offsetApplySetAgree = table.table.offsetApplySetAgree;
 var offsetApplyInfo = table.table.offsetApplyInfo;
 var offsetApplyShow = table.table.offsetApplyShow;
+var offsetApplyFile = table.table.offsetApplyFile;
 var StudentId = getStudentId.getStudentId.studentId;
 
 router.post('/assistants/offsetApply/setAgree', offsetApplySetAgree, function(req, res) {
@@ -23,6 +24,10 @@ router.get('/assistants/offsetApply/Info', StudentId, offsetApplyInfo, function(
 router.get('/assistants/offsetApply/Show', csrfProtection, offsetApplyShow, function(req, res) {
 // router.get('/assistants/ShowUserOffsetApplyForm', offsetApplyShow, function(req, res) {
     res.send(req.show);
+});
+
+router.post('/assistants/offsetApply/File', csrfProtection, offsetApplyFile, function(req, res) {
+    res.send(req.file);
 });
 
 module.exports = router;
