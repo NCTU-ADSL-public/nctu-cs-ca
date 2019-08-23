@@ -88,7 +88,7 @@ const Router = () => (
         <Route exact path='/assistants/project' render={() => <Frame><AssistantProject /></Frame>} />
         <Route exact path='/assistants/family' render={() => <Frame><TeacherList /></Frame>} />
         <Route exact path='/assistants/family/:tid' component={StudentList} />
-        <Route exact path='/assistants/verify' component={AssistantVerify} />
+        <Route exact path='/assistants/verify' component={AssistantVerify_2} />
         <Route exact path='/assistants/marmot0814/verify' render={ () => <Frame><AssistantVerify_2 /></Frame> } />
         <Route exact path='/assistants/mail' render={() => <Frame><AssistantMail /></Frame>} />
         <Route exact path='/assistants/setting' render={() => <Frame><AssistantSetting /></Frame>} />
