@@ -1,6 +1,5 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios';
-import Verify from '../../../../Pages/Assistants/Verify';
 
 export const verifyHandleChange = createAction('VERIFY_HANDLE_CHANGE');
 
@@ -175,6 +174,32 @@ export const verifyHandleAllReset = payload => dispatch => {
 					message: 0,
 					select: [],
 				}))
+			} else {
+				dispatch(verifyHandleChange({
+					open: true,
+					message: 1
+				}))
+			}
+		}).catch( err => {
+			dispatch(verifyHandleChange({
+				open: true,
+				message: 1
+			}))
+		})
+}
+
+export const verifyHandleDownloadFile = payload => dispatch => {
+	axios
+		.post('/assistants/offsetApply/file', payload)
+		.then( res => {
+			if (res.data.file) {
+				const linkSource = res.data.file;
+				const downloadLink = document.createElement("a");
+				const fileName = payload.sid + "_抵免文件.pdf";
+		
+				downloadLink.href = linkSource;
+				downloadLink.download = fileName;
+				downloadLink.click();
 			} else {
 				dispatch(verifyHandleChange({
 					open: true,
