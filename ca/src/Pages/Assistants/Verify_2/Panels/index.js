@@ -12,11 +12,12 @@ import {
 } from '@material-ui/core'
 
 import ApplyItem from './ApplyItem'
+import { getSemester } from '../../../../Utilities';
 
 class index extends React.Component {
   render() {
     const { classes, Verify } = this.props;
-    let Data = Verify.isOld ? Verify.formListOld : Verify.formList
+    let Data = Verify.isOld ? Verify.formList : Verify.formList.filter( e => e.apply_semester === getSemester())
     return (
       <div className={ classes.Panels }>
       {

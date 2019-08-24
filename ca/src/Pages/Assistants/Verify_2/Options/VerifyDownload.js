@@ -11,13 +11,14 @@ import {
 
 import { verifyHandleChange } from '../../../../Redux/Assistants/Actions/Verify'
 import { CSVLink } from 'react-csv'
+import { getSemester } from '../../../../Utilities'
 
 class VerifyDownload extends React.Component {
 	downCSV = (i) => {
 		const { Verify } = this.props
     switch (i) {
       case 2:
-        return (Verify.formList.filter(e => (e.type === 2))
+        return (Verify.formList.filter(e => (e.type === 2 && e.apply_semester === getSemester()))
         .map(e => {
           return ({
             type: '學分抵免',
@@ -39,7 +40,7 @@ class VerifyDownload extends React.Component {
           })
         }))
       case 3:
-        return (Verify.formList.filter(e => (e.type === 3))
+        return (Verify.formList.filter(e => (e.type === 3 && e.apply_semester === getSemester()))
         .map(e => {
           return ({
             type: '課程免修',
@@ -61,7 +62,7 @@ class VerifyDownload extends React.Component {
           })
         }))
       case 0:
-        return Verify.formList.filter(e => e.type === 0)
+        return Verify.formList.filter(e => e.type === 0 && e.apply_semester === getSemester())
       .map(e => {
         return ({
           type: '本系必修課程抵免',
@@ -81,7 +82,7 @@ class VerifyDownload extends React.Component {
         })
       })
       case 1:
-        return Verify.formList.filter(e => e.type === 1)
+        return Verify.formList.filter(e => e.type === 1 && e.apply_semester === getSemester())
       .map(e => {
         return ({
           type: '英授專業課程抵免',
