@@ -325,7 +325,7 @@ table.offsetApplyShow = function(req, res, next) {
                         "date": result[i].timestamp,
                         "transferTo": "",
                         "cos_year_old": result[i].cos_year_old,
-                        "cos_semester_old": parseInt(result[i].cos_semester_old)
+                        "cos_semester_old": parseInt(result[i].cos_semester_old),
                         "resend": parseInt(result[i].resend) === 1 ? true : false
                  	};
                     // "file": result[i].file,
