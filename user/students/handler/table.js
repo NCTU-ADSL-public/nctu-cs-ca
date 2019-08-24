@@ -392,7 +392,7 @@ table.offsetApplyEdit = function(req, res, next){
                 reason_type: null,
                 state: 0,
                 timestamp: req.body.timestamp,
-                resend: req.body.resend ? 1 : 0
+                resend: 1
             }
         }
         else if (req.body.credit_type == 2){ // 課程免修
@@ -422,7 +422,7 @@ table.offsetApplyEdit = function(req, res, next){
                 reason_type: null,
                 state :0,
                 timestamp: req.body.timestamp,
-                resend: req.body.resend ? 1 : 0
+                resend: 1
             }
         }
         else if (req.body.credit_type == 3){ // 必修抵免
@@ -452,7 +452,7 @@ table.offsetApplyEdit = function(req, res, next){
                 reason_type: req.body.reason.type,
                 state: 0,
                 timestamp: req.body.timestamp,
-                resend: req.body.resend ? 1 : 0
+                resend: 1
             }
 
         }
@@ -483,7 +483,7 @@ table.offsetApplyEdit = function(req, res, next){
                 reason_type: null,
                 state: 0,
                 timestamp: req.body.timestamp,
-                resend: req.body.resend ? 1 : 0
+                resend: 1
             }
         }
          query.ModifyOffsetApplyForm(data, function(err, result) {
