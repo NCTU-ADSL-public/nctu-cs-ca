@@ -12,7 +12,6 @@ import CloseIcon from '@material-ui/icons/Close'
 import Grow from '@material-ui/core/Grow'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { GridTile } from 'material-ui/GridList'
-import firebase from 'firebase'
 import TileContent from './TileContent'
 import Edit from './Edit'
 import img from '../Image/1.jpg'
@@ -23,8 +22,6 @@ import {
   storeProjectsFile,
   deleteProject
 } from '../../../../Redux/Students/Actions/Project'
-
-let storageRef = firebase.storage().ref()
 
 const styles = {
   appBar: {
@@ -84,28 +81,28 @@ class Tile extends React.Component {
   }
 
   fetchImage () {
-    const { data } = this.props
-    if (data.image && data.file) return
+    // const { data } = this.props
+    // if (data.image && data.file) return
 
-    let directory = `${data.semester}/${data.tname}/${data.research_title}/image/image.jpg`
-    storageRef
-      .child(directory)
-      .getDownloadURL()
-      .then(url => this.props.storeImage(url))
-      .catch(error => {
-        this.props.storeImage('')
-        console.log(error)
-      })
+    // let directory = `${data.semester}/${data.tname}/${data.research_title}/image/image.jpg`
+    // storageRef
+    //   .child(directory)
+    //   .getDownloadURL()
+    //   .then(url => this.props.storeImage(url))
+    //   .catch(error => {
+    //     this.props.storeImage('')
+    //     console.log(error)
+    //   })
 
-    directory = `${data.semester}/${data.tname}/${data.research_title}/file/file.pdf`
-    storageRef
-      .child(directory)
-      .getDownloadURL()
-      .then(url => this.props.storeFile(url))
-      .catch(error => {
-        this.props.storeImage('')
-        console.log(error)
-      })
+    // directory = `${data.semester}/${data.tname}/${data.research_title}/file/file.pdf`
+    // storageRef
+    //   .child(directory)
+    //   .getDownloadURL()
+    //   .then(url => this.props.storeFile(url))
+    //   .catch(error => {
+    //     this.props.storeImage('')
+    //     console.log(error)
+    //   })
   }
 
   deleteData () {
