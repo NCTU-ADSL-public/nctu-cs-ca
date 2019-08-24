@@ -17,7 +17,7 @@ import { getSemester } from '../../../../Utilities';
 class index extends React.Component {
   render() {
     const { classes, Verify } = this.props;
-    let Data = Verify.isOld ? Verify.formList : Verify.formList.filter( e => e.apply_semester === getSemester())
+    let Data = Verify.isOld ? Verify.formList : Verify.formList.filter( e => `${e.apply_year}-${e.apply_semester}` === getSemester())
     return (
       <div className={ classes.Panels }>
       {

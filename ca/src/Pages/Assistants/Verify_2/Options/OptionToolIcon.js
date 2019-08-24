@@ -123,7 +123,8 @@ class OptionToolIcons extends React.Component {
 				),
 				status: Verify.teacherList.filter(
 					e => e.id === Verify.transferTo
-				)[0].status === 1 ? 1 : 5
+				)[0].status === 1 ? 1 : 5,
+				transferTo: Verify.transferTo
 			},
 			Verify
 		})
