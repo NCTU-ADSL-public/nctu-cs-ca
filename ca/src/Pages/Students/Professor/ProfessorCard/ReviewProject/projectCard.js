@@ -11,9 +11,8 @@ import Avatar from '@material-ui/core/Avatar'
 import red from '@material-ui/core/colors/red'
 import NoImage from './1.jpg'
 import ProjectDetail from './projectDetail'
-import firebase from 'firebase'
 
-let storageRef = firebase.storage().ref()
+// let storageRef = firebase.storage().ref()
 
 const styles = theme => ({
   card: {
@@ -55,29 +54,29 @@ class ProjectCard extends React.Component {
   }
 
   componentDidMount () {
-    let directory = `${this.props.data.year}/${this.props.profile.tname}/${this.props.data.research_title}/image/image.jpg`
-    storageRef
-      .child(directory)
-      .getDownloadURL()
-      .then(url => {
-        this.setState({ image: url })
-      })
-      .catch(error => {
-        console.log(error)
-        this.setState({ image: NoImage })
-      })
+    // let directory = `${this.props.data.year}/${this.props.profile.tname}/${this.props.data.research_title}/image/image.jpg`
+    // storageRef
+    //   .child(directory)
+    //   .getDownloadURL()
+    //   .then(url => {
+    //     this.setState({ image: url })
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //     this.setState({ image: NoImage })
+    //   })
 
-    directory = `${this.props.data.year}/${this.props.profile.tname}/${this.props.data.research_title}/file/file.pdf`
-    storageRef
-      .child(directory)
-      .getDownloadURL()
-      .then(url => {
-        this.setState({ file: url })
-      })
-      .catch(error => {
-        console.log(error)
-        this.setState({ file: '' })
-      })
+    // directory = `${this.props.data.year}/${this.props.profile.tname}/${this.props.data.research_title}/file/file.pdf`
+    // storageRef
+    //   .child(directory)
+    //   .getDownloadURL()
+    //   .then(url => {
+    //     this.setState({ file: url })
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //     this.setState({ file: '' })
+    //   })
   }
 
   render () {
