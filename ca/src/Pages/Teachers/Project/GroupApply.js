@@ -230,66 +230,56 @@ const StudentStatusHint = (props) => (
 
 const ApplyButton = (props) => {
   return (
-    <Grid style={styles.groupBtn} key={props.keyId}>
-      <Row style={{marginBottom: '10px'}}>
-        <Col xs={12} md={12} lg={12}>
-          <ReplyDialog
-            idCard={props.idCard}
-            status={props.item.status}
-            title={props.item.research_title}
-            participants={props.item.participants}
-            firstSecond={props.item.first_second}
-            year={props.item.year}
-            parentFunction={props.parentFunction}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} md={12} lg={12}>
-          <div style={styles.groupTitle}>
-            <span className='apply-btn-year'>{props.item.year}</span>
-            {props.item.research_title}
-          </div>
-          <div>
-            <MuiThemeProvider>
-              <div style={styles.chipWrapper}>
-                {props.item.participants.map((p, i) => (
-                  <div key={i}>
+    <div className='groupBtn' key={props.keyId}>
+      <ReplyDialog
+        idCard={props.idCard}
+        status={props.item.status}
+        title={props.item.research_title}
+        participants={props.item.participants}
+        firstSecond={props.item.first_second}
+        year={props.item.year}
+        parentFunction={props.parentFunction}
+      />
+      <div className='groupTitle'>
+        <span className='apply-btn-year'>{props.item.year}</span>
+        {props.item.research_title}
+      </div>
+      <div>
+        <MuiThemeProvider>
+          <div className='chipWrapper'>
+            {props.item.participants.map((p, i) => (
+              <div key={i}>
+                <Chip className='group-chip'
+                      backgroundColor={ p.student_status === 1 ? '#BDD8CC' : '#FFCD80' }
+                      key={i}
+                      onClick={() => props.handleChip(props.key + p.student_id)}>
+                  <Avatar src={defaultPic}/> {p.student_id} {p.sname}
+                  <span style={{color: 'red'}}>  {p.score}</span>
+                </Chip>
 
-                    <Chip style={styles.chip }
-                          backgroundColor={ p.student_status === 1 ? '#BDD8CC' : '#FFCD80' }
-                          key={i}
-                          onClick={() => props.handleChip(props.key + p.student_id)}>
-                      <Avatar src={defaultPic}/> {p.student_id} {p.sname}
-                      <span style={{color: 'red'}}>  {p.score}</span>
-                    </Chip>
-
-                    <MuiThemeProvider>
-                      <Dialog
-                        key={i}
-                        modal={false}
-                        open={props.chipOpen.size === 0 ? false : props.chipOpen.get(props.key + p.student_id)}
-                        onRequestClose={() => props.handleRequestClose()}
-                        autoScrollBodyContent
-                        contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
-                      >
-                        <InfoCard
-                          key={i}
-                          student={p}
-                          sender={props.idCard.tname}
-                          sender_email={props.idCard.email}
-                        />
-                      </Dialog>
-                    </MuiThemeProvider>
-
-                  </div>
-                ))}
+                <MuiThemeProvider>
+                  <Dialog
+                    key={i}
+                    modal={false}
+                    open={props.chipOpen.size === 0 ? false : props.chipOpen.get(props.key + p.student_id)}
+                    onRequestClose={() => props.handleRequestClose()}
+                    autoScrollBodyContent
+                    contentStyle={{maxWidth: 'none', width: '90%', position: 'absolute', top: 0, left: '5%'}}
+                  >
+                    <InfoCard
+                      key={i}
+                      student={p}
+                      sender={props.idCard.tname}
+                      sender_email={props.idCard.email}
+                    />
+                  </Dialog>
+                </MuiThemeProvider>
               </div>
-            </MuiThemeProvider>
+            ))}
           </div>
-        </Col>
-      </Row>
-    </Grid>
+        </MuiThemeProvider>
+      </div>
+    </div>
   )
 }
 
