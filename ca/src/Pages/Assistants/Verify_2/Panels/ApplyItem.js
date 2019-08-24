@@ -122,7 +122,7 @@ class ApplyItem extends React.Component {
                 </React.Fragment>
               }
             </span>
-            {apply.previous && 
+            {apply.resend && 
             <Chip
               style={{background: '#e26e6e', color: '#fff', fontSize: 14, fontWeight: 400}}
               label={<span onClick={(e) => e.stopPropagation()}>重送的抵免單</span>} />}
