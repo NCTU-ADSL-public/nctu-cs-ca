@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import './index.css'
 import img0 from '../../../Resources/courseMap_cscs.png'
+import img1 from '../../../Resources/courseMap_cscs108.png'
+import img2 from '../../../Resources/courseMap_cscs108_s.png'
 import { connect } from 'react-redux'
 
 function TabContainer ({ children, dir }) {
@@ -46,18 +48,11 @@ class index extends React.Component {
   render () {
     return (
       <div style={{ marginTop: 'calc( -7vh )' }}>
-        <div className='hidden-xs hidden-sm'
-          style={{
-            padding: '0',
-            background: '#313131',
-            height: '100vh'
-          }}>
-          <img src={img0} className='image'
-            style={{
-              maxWidth: '80vw',
-              width: 'auto',
-              paddingTop: '51px'
-            }} />
+        <div className='map-box'>
+          <img src={img1} className='image-map' />
+        </div>
+        <div className='map-box'>
+          <img src={img2} className='image-map-2' />
         </div>
       </div>
     )
