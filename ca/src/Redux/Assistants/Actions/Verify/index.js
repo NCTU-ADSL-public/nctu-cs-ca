@@ -24,7 +24,8 @@ export const getFormList = () => dispatch => {
 			formList: res.data
 				.map((e, i) => ({
 					...e,
-					id: i
+					id: i,
+					status: e.status === null ? 2 : e.status
 				})),
 			fetching: false
 		}))
@@ -35,7 +36,6 @@ export const verifyHandleOk = payload => dispatch => {
 	axios
 		.post('/assistants/offsetApply/setAgree', payload.req)
 		.then( res => {
-			let updatedList = payload.Verify.formList;
 			if (res.data.signal === 1) {
 				dispatch(verifyHandleChange({
 					formList: payload.Verify.formList.map(
