@@ -233,7 +233,7 @@ class HorizontalLinearStepper extends React.Component {
     if (formType === 0) {
       const payload = { ...this.props.waiveCourse, ...time }
       isEdit
-        ? this.props.editCredit({ payload, credit_type: 1 })
+        ? this.props.editCredit({ ...payload, credit_type: 1 })
         : this.props.sendWaiveCourse(payload)
     }
     else if (formType === 1) {
