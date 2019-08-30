@@ -2,6 +2,23 @@ import React from 'react'
 import { LabeledInput } from '../../../../../../Components/FormUtils/index'
 import CKEditor from 'react-ckeditor-component'
 import './style.css'
+import { base64encode } from '../../../../../../Utilities'
+
+function updateImage (file) {
+  base64encode(file)
+    .then(encoded => {
+      return encoded
+    })
+    .catch(err => console.log(err))
+}
+
+function updateFile (file) {
+  base64encode(file)
+    .then(encoded => {
+      return encoded
+    })
+    .catch(err => console.log(err))
+}
 
 const Form = props => (
   <div className='col-xs-12 col-sm-12 col-md-12' style={{ marginTop: '10px' }}>
@@ -13,10 +30,10 @@ const Form = props => (
             accept='image/*'
             type='file'
             hidden
-            onChange={(e) => props.updateImage(e.target.files[0])}
+            onChange={(e) => props.updateImage(updateImage(e.target.files[0]))}
           />
           <div className='text-center clickable upload-picture' onClick={() => props.imageRef.current.click()}>
-            { props.image ? props.image.name : '點選以上傳,建議800x400以達最佳效果(需小於2MB)' }
+            { props.image ? <img src={'data:image/png;base64,' + props.image} /> : '點選以上傳,建議800x400以達最佳效果(需小於2MB)' }
           </div>
         </div>
       </LabeledInput>
@@ -27,10 +44,10 @@ const Form = props => (
             ref={props.fileRef}
             type='file'
             hidden
-            onChange={(e) => props.updateFile(e.target.files[0])}
+            onChange={(e) => props.updateFile(updateFile(e.target.files[0]))}
           />
           <div className='text-center clickable upload-picture' onClick={() => props.fileRef.current.click()}>
-            { props.file ? props.file.name : '點選以上傳,限上傳PDF檔案' }
+            { props.file ? <a target='_blank' rel='noopener noreferrer' href={'data:application/pdf;base64,' + props.file} style={{ cursor: 'pointer' }}>點這裡</a> : '點選以上傳,限上傳PDF檔案' }
           </div>
         </div>
       </LabeledInput>

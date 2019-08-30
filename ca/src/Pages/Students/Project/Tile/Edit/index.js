@@ -54,6 +54,7 @@ class Edit extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.updateImage = this.updateImage(this)
+    this.updateFile = this.updateFile(this)
     this.state = {
       open: false,
       image: '',
@@ -106,6 +107,9 @@ class Edit extends React.Component {
       new_title: project.research_title, // 學生不能改題目
       new_intro: this.state.new_intro
     }, () => this.handleDialogClose())
+
+    this.props.storeImage(this.state.image)
+    this.props.storeFile(this.state.file)
 
     // 重新上傳圖片
     // if (this.state.image) {
@@ -161,17 +165,21 @@ class Edit extends React.Component {
     // }
   }
   updateImage (file) {
+    let _this = this
     base64encode(file)
       .then(encoded => {
-        this.setState({ image: encoded })
+        _this.props.storeImage(encoded)
+        _this.setState({ image: encoded })
       })
       .catch(err => console.log(err))
   }
 
   updateFile (file) {
+    let _this = this
     base64encode(file)
       .then(encoded => {
-        this.setState({ file: encoded })
+        _this.storeFile(encoded)
+        _this.setState({ file: encoded })
       })
       .catch(err => console.log(err))
   }
@@ -252,8 +260,8 @@ class Edit extends React.Component {
             <Form
               {...this.state}
               project={this.props.project}
-              updateImage={(image) => this.updateImage(image)}
-              updateFile={(file) => this.updateFile(file)}
+              updateImage={(image) => this.setState({ image })}
+              updateFile={(file) => this.setState({ file })}
               updateIntro={(intro) => this.setState({ new_intro: intro })}
               handleSubmit={(e) => this.handleSubmit(e)}
               imageRef={this.imageRef}
