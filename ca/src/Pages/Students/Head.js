@@ -8,7 +8,6 @@ import { fetchUser } from '../../Redux/Students/Actions/User'
 import { fetchCourse, fetchCoursePass } from '../../Redux/Students/Actions/Map'
 import { getGraduationInfo } from '../../Redux/Students/Actions/Graduation'
 
-
 class Head extends Component {
   componentDidMount () {
     this.props.fetchUser()
@@ -16,6 +15,7 @@ class Head extends Component {
     this.props.fetchCourse()
     this.props.fetchCoursePass()
     this.props.getGraduationInfo()
+
   }
 
   render () {

@@ -71,7 +71,7 @@ class Index extends React.Component {
       }
       return
     }
-    this.props.storeImage(photo)
+    this.props.storeImage('data:image/png;base64,' + photo)
 
     // storageRef
     //   .child(directory)
