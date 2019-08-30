@@ -274,8 +274,8 @@ class Edit extends React.Component {
             <Form
               {...this.state}
               project={this.props.project}
-              updateImage={(image) => this.updateImage(image)}
-              updateFile={(file) => this.updateFile(file)}
+              updateImage={(e, image) => this.updateImage(image)}
+              updateFile={(e, file) => this.updateFile(file)}
               updateIntro={(intro) => this.setState({ new_intro: intro })}
               handleSubmit={(e) => this.handleSubmit(e)}
               imageRef={this.imageRef}
