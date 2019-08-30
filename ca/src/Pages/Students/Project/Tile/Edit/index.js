@@ -105,25 +105,26 @@ class Edit extends React.Component {
       first_second: project.first_second,
       research_title: project.research_title,
       new_title: project.research_title, // 學生不能改題目
-      new_intro: this.state.new_intro
+      new_intro: this.state.new_intro,
+      new_link: this.state.image
     }, () => this.handleDialogClose())
 
     // this.props.storeImage(this.state.image)
     // this.props.storeFile(this.state.file)
 
-    base64encode(this.state.image)
-      .then(encoded => {
-        _this.props.storeImage(encoded)
-        _this.setState({ image: encoded })
-      })
-      .catch(err => console.log(err))
-
-    base64encode(this.state.file)
-      .then(encoded => {
-        _this.props.storeFile(encoded)
-        _this.setState({ file: encoded })
-      })
-      .catch(err => console.log(err))
+    // base64encode(this.state.image)
+    //   .then(encoded => {
+    //     _this.props.storeImage(encoded)
+    //     _this.setState({ image: encoded })
+    //   })
+    //   .catch(err => console.log(err))
+    //
+    // base64encode(this.state.file)
+    //   .then(encoded => {
+    //     _this.props.storeFile(encoded)
+    //     _this.setState({ file: encoded })
+    //   })
+    //   .catch(err => console.log(err))
     // 重新上傳圖片
     // if (this.state.image) {
     //   let directory = `${project.semester}/${project.tname}/${project.research_title}/image/`
@@ -182,7 +183,7 @@ class Edit extends React.Component {
     base64encode(file)
       .then(encoded => {
         _this.props.storeImage(encoded)
-        _this.setState({ image: encoded })
+        _this.setState({ image: file.name })
       })
       .catch(err => console.log(err))
   }
@@ -192,7 +193,7 @@ class Edit extends React.Component {
     base64encode(file)
       .then(encoded => {
         _this.storeFile(encoded)
-        _this.setState({ file: encoded })
+        _this.setState({ file: file.name })
       })
       .catch(err => console.log(err))
   }
@@ -273,8 +274,8 @@ class Edit extends React.Component {
             <Form
               {...this.state}
               project={this.props.project}
-              updateImage={(image) => this.setState({ image })}
-              updateFile={(file) => this.setState({ file })}
+              updateImage={(image) => this.updateImage(image)}
+              updateFile={(file) => this.updateFile(file)}
               updateIntro={(intro) => this.setState({ new_intro: intro })}
               handleSubmit={(e) => this.handleSubmit(e)}
               imageRef={this.imageRef}

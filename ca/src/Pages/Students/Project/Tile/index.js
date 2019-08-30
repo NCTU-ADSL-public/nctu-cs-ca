@@ -81,6 +81,7 @@ class Tile extends React.Component {
   }
 
   fetchImage () {
+    this.props.storeImage(this.props.link)
     // const { data } = this.props
     // if (data.image && data.file) return
 
