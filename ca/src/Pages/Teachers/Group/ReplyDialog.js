@@ -123,6 +123,12 @@ export default class ReplyDialog extends React.Component {
 
   handleClose = (status) => {
     console.log(status)
+    // 如果按在視窗外面就跳出，什麼都不做
+    if( status !== 1 && status !== 3 ) {
+      this.setState({open: false})
+      return
+    }
+    // 防呆確認
     const statusText = status === 3 ? '『拒絕』' : '『接受』'
     if( !window.confirm('確定回覆' + statusText + '?') ) return
 

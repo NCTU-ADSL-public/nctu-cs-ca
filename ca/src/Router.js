@@ -19,6 +19,7 @@ import AssistantProject from './Pages/Assistants/Project'
 import AssistantVerify from './Pages/Assistants/Verify'
 import AssistantMail from './Pages/Assistants/Mail'
 import AssistantSetting from './Pages/Assistants/Setting'
+import AssistantVerify_2 from './Pages/Assistants/Verify_2'
 
 import StudentDetail from './Components/StudentDetail'
 import StudentVerify from './Components/StudentVerify'
@@ -29,7 +30,7 @@ import StudentHead from './Pages/Students/Head'
 import StudentHome from './Pages/Students/Home'
 import StudentGrad from './Pages/Students/Graduation'
 import StudentMap from './Pages/Students/Map_v2'
-// import StudentMap from './Pages/Students/Map_v3'
+import StudentMapV3 from './Pages/Students/Map_v3'
 import StudentRecommend from './Pages/Students/Recommend'
 import StudentProfessor from './Pages/Students/Professor'
 import StudentProject from './Pages/Students/Project'
@@ -40,35 +41,35 @@ import Footer from './Components/Footer'
 // import Snow from 'react-snow-effect'
 
 import AutoLogout from './Components/AutoLogout'
-import firebase from 'firebase' 
 
 // injectTapEventPlugin()
-let config = {
-  apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
-  authDomain: 'code-86ba4.firebaseapp.com',
-  databaseURL: 'https://code-86ba4.firebaseio.com',
-  projectId: 'code-86ba4',
-  storageBucket: 'code-86ba4.appspot.com',
-  messagingSenderId: '354539568437'
-}
-if (!firebase.apps.length) {
-  firebase.initializeApp(config)
-}
+// let config = {
+//   apiKey: 'AIzaSyC64Eitf77FqUAMjjPaG1_rk3Sr6pyttoo',
+//   authDomain: 'code-86ba4.firebaseapp.com',
+//   databaseURL: 'https://code-86ba4.firebaseio.com',
+//   projectId: 'code-86ba4',
+//   storageBucket: 'code-86ba4.appspot.com',
+//   messagingSenderId: '354539568437'
+// }
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(config)
+// }
 
 const Router = () => (
   <BrowserRouter>
     <div>
       {/*<Route path='/' component={Snow} />*/}
-
-      <Route path='/assistants' component={AssistantHead} />
       <Route path='/students' component={StudentHead} />
       <Route path='/teachers' component={TeacherHead} />
+      <Route path='/assistants' component={AssistantHead} />
       <Switch>
         <Route exact path='/' component={Login} />
         {/* students route */}
+
         <Route exact path='/students/head/' render={() => <StudentHome />} />
         <Route exact path='/students/grad' render={() => <StudentGrad />} />
         <Route exact path='/students/map' render={() => <StudentMap />} />
+        <Route exact path='/students/map_v3' render={() => <StudentMapV3 />} />
         <Route exact path='/students/recommend' render={() => <StudentRecommend />} />
         <Route exact path='/students/professor' render={() => <StudentProfessor />} />
         <Route exact path='/students/project' render={() => <StudentProject />} />
@@ -87,7 +88,8 @@ const Router = () => (
         <Route exact path='/assistants/project' render={() => <Frame><AssistantProject /></Frame>} />
         <Route exact path='/assistants/family' render={() => <Frame><TeacherList /></Frame>} />
         <Route exact path='/assistants/family/:tid' component={StudentList} />
-        <Route exact path='/assistants/verify' component={AssistantVerify} />
+        <Route exact path='/assistants/verify' component={AssistantVerify_2} />
+        <Route exact path='/assistants/marmot0814/verify' render={ () => <Frame><AssistantVerify_2 /></Frame> } />
         <Route exact path='/assistants/mail' render={() => <Frame><AssistantMail /></Frame>} />
         <Route exact path='/assistants/setting' render={() => <Frame><AssistantSetting /></Frame>} />
         <Route path='/assistants/head/s/:sid/:sname/:program' component={StudentDetail} />

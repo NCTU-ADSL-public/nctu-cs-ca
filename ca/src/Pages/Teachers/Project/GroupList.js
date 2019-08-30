@@ -4,7 +4,6 @@ import { Grid, Row, Col, Image, Button } from 'react-bootstrap'
 // resource
 import pic from '../../../Resources/BeautifalGalaxy.jpg'
 import defaultPic from '../../../Resources/defalt.jpg'
-import firebase from 'firebase'
 
 // component
 import InfoCard from '../Shared/InfoCard'
@@ -24,24 +23,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 // REDUX
 import { fetchResearchList1, fetchResearchList2 } from '../../../Redux/Teachers/Actions/Research/index'
 import { connect } from 'react-redux'
-
-// FIRE BASE
-let config = {
-  apiKey: 'AIzaSyAFVgUFaZk23prpVeXTkFvXdUhSXy5xzNU',
-  authDomain: 'nctu-csca.firebaseapp.com',
-  databaseURL: 'https://nctu-csca.firebaseio.com',
-  projectId: 'nctu-csca',
-  storageBucket: 'nctu-csca.appspot.com',
-  serviceAccount: '../../../../Resources/nctu-csca-firebase-admins.json',
-  messagingSenderId: '612862784976'
-}
-if (!firebase.apps.length) {
-  firebase.initializeApp(config)
-  let auth = firebase.auth()
-  auth.signInWithEmailAndPassword('nctucsca@gmail.com', 'axc3262757')
-}
-let storageRef = firebase.storage().ref()
-
 
 class GroupList extends React.Component {
   constructor (props) {
