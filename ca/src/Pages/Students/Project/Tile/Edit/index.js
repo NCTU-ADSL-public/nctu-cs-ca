@@ -108,9 +108,22 @@ class Edit extends React.Component {
       new_intro: this.state.new_intro
     }, () => this.handleDialogClose())
 
-    this.props.storeImage(this.state.image)
-    this.props.storeFile(this.state.file)
+    // this.props.storeImage(this.state.image)
+    // this.props.storeFile(this.state.file)
 
+    base64encode(this.state.image)
+      .then(encoded => {
+        _this.props.storeImage(encoded)
+        _this.setState({ image: encoded })
+      })
+      .catch(err => console.log(err))
+
+    base64encode(this.state.file)
+      .then(encoded => {
+        _this.props.storeFile(encoded)
+        _this.setState({ file: encoded })
+      })
+      .catch(err => console.log(err))
     // 重新上傳圖片
     // if (this.state.image) {
     //   let directory = `${project.semester}/${project.tname}/${project.research_title}/image/`
