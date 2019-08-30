@@ -1,4 +1,5 @@
 var query = require('../../../../db/msql');
+var utils = require('../../../../utils');
 var table = {};
 var nodemailer = require('nodemailer');
 var mail_info = require('../../../auth/nctu/mail_info');
@@ -113,7 +114,7 @@ table.curriculumScoreDetail = function(req, res, next){
 
 table.offsetApplySetAgree = function(req, res, next){
     if(req.session.profile){
-        var teacherId = res.locals.teacherId;
+        var teacherId = utils.getPersonId(JSON.parse(req.session.profile));
 		var teacher_email = '';
         query.ShowUserInfo(teacherId, function(err,result){
             if(err){
