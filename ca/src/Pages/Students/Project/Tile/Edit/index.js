@@ -15,6 +15,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Form from './Form/index'
+import { base64encode } from '../../../../../Utilities'
 import {
   editProject,
   storeProjectsImage,
@@ -52,6 +53,7 @@ class Edit extends React.Component {
     this.handleChangeProfessor = this.handleChangeProfessor.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.updateImage = this.updateImage(this)
     this.state = {
       open: false,
       image: '',
@@ -158,6 +160,21 @@ class Edit extends React.Component {
     //   )
     // }
   }
+  updateImage (file) {
+    base64encode(file)
+      .then(encoded => {
+        this.setState({ image: encoded })
+      })
+      .catch(err => console.log(err))
+  }
+
+  updateFile (file) {
+    base64encode(file)
+      .then(encoded => {
+        this.setState({ file: encoded })
+      })
+      .catch(err => console.log(err))
+  }
 
   render () {
     const { fullScreen, classes } = this.props
@@ -235,8 +252,8 @@ class Edit extends React.Component {
             <Form
               {...this.state}
               project={this.props.project}
-              updateImage={(image) => this.setState({ image })}
-              updateFile={(file) => this.setState({ file })}
+              updateImage={(image) => this.updateImage(image)}
+              updateFile={(file) => this.updateFile(file)}
               updateIntro={(intro) => this.setState({ new_intro: intro })}
               handleSubmit={(e) => this.handleSubmit(e)}
               imageRef={this.imageRef}

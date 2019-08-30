@@ -173,7 +173,7 @@ class Tile extends React.Component {
           {
             data.photo === undefined || data.photo === 'loading'
               ? <CircularProgress className={classes.progress} />
-              : <img className='img-responsive' src={this.getImage()} alt='' />
+              : <img className='img-responsive' src={'data:image/png;base64,' + this.getImage()} alt='' />
           }
         </GridTile>
         <Dialog

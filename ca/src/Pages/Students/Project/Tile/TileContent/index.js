@@ -34,7 +34,7 @@ class TileContent extends React.Component {
       case 'loading':
         return '上傳中...'
       default:
-        return <a target='_blank' rel='noopener noreferrer' href={file} style={{ cursor: 'pointer' }}>點這裡</a>
+        return <a target='_blank' rel='noopener noreferrer' href={'data:application/pdf;base64,' + file} style={{ cursor: 'pointer' }}>點這裡</a>
     }
   }
 
@@ -50,7 +50,7 @@ class TileContent extends React.Component {
           {
             isLoading
               ? <CircularProgress className={classes.progress} />
-              : <img src={projectImg} alt='waiting for loading' className='img-responsive' />
+              : <img src={'data:image/png;base64,' + projectImg} alt='waiting for loading' className='img-responsive' />
           }
           <p><i className='glyphicon glyphicon-file' />團隊報告: { this.getFile() }</p>
           <p><i className='glyphicon glyphicon-user' />指導教授: { data.tname }</p>
@@ -70,7 +70,7 @@ class TileContent extends React.Component {
           {
             isLoading
               ? <CircularProgress className={classes.progress} />
-              : <img src={projectImg} alt='waiting for loading' className='img-responsive' />
+              : <img src={'data:image/png;base64,' + projectImg} alt='waiting for loading' className='img-responsive' />
           }
           <p><i className='glyphicon glyphicon-file' />團隊報告: { this.getFile() }</p>
           <p><i className='glyphicon glyphicon-user' />指導教授: { data.tname }</p>
