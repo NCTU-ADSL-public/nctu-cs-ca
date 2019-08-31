@@ -60,7 +60,7 @@ class Edit extends React.Component {
       image: '',
       file: this.props.project.filename,
       imageEncode: this.props.project.photo,
-      fileEncode: this.props.file,
+      fileEncode: this.props.project.file,
       new_title: this.props.project.research_title, // 學生不能改題目
       new_intro: this.props.project.intro,
       anchorEl: null
@@ -98,6 +98,7 @@ class Edit extends React.Component {
   handleSubmit (event) {
     const { project } = this.props
     event.preventDefault()
+    this.props.storeFile(this.state.fileEncode)
     this.props.editProject({
       student_id: this.props.studentProfile.student_id,
       tname: project.tname,
