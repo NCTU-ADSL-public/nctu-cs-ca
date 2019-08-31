@@ -82,9 +82,9 @@ class Tile extends React.Component {
 
   fetchImage () {
     const { data } = this.props
-    if (data.image && data.file) return
-    this.props.storeImage(this.props.photo)
-    this.props.storeFile(this.props.file)
+    if (data.photo && data.file) return
+    this.props.storeImage(data.photo)
+    this.props.storeFile(data.file)
   }
 
   deleteData () {
@@ -118,7 +118,6 @@ class Tile extends React.Component {
       </div>
     )
   }
-
   getImage () {
     // 根據同意、申請中、拒絕來決定圖片
     switch (this.props.data.agree) {
@@ -187,7 +186,7 @@ class Tile extends React.Component {
           </AppBar>
           {
             isAgreed
-              ? <TileContent file={data.file} photo={data.photo} data={data} />
+              ? <TileContent data={data} />
               : this.getString(data.agree)
           }
         </Dialog>
