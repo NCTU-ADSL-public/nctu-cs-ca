@@ -763,7 +763,7 @@ table.researchShowStudentStatus = function(req, res, next){
 table.researchEdit = function(req, res, next){
     if(req.session.profile){
         var info = req.body;
-        var set_project = {tname: info.tname, research_title : info.research_title, first_second:info.first_second,semester:info.semester,  new_title : info.research_title, new_file: info.new_file, new_photo: info.new_photo, new_filename: info.new_filename, new_intro:info.new_intro};
+        var set_project = {tname: info.tname, research_title : info.research_title, first_second:info.first_second,semester:info.semester,  new_title : info.research_title, new_file: info.new_file, new_photo: info.new_photo, new_filename: info.new_fileName, new_intro:info.new_intro};
 	query.SetResearchInfo(set_project, function(err){
             if(err){
                throw err;
