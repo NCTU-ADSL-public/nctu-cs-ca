@@ -3,24 +3,27 @@ import './form.css'
 
 class ExemptCourse extends React.Component {
   render () {
-    const exemptCourse = this.props.courses
+    const { courses } = this.props
+    const sid = this.props.studentIdcard.student_id
+    const { sname, program, grade } = this.props.studentIdcard
+
     return (
       <div>
         <div style={{ marginBottom: '12pt', textAlign: 'center', fontSize: '16pt' }}>國立交通大學課程免修申請單</div>
         <div>
           <span>系所班：</span>
-          <span className='underline w-8em' />
+          <span className='underline'>{`資工系${program}${grade}`}</span>
           <span className='field'>□學士班</span>
           <span className='field'>□碩士班</span>
           <span className='field'>□博士班</span>
         </div>
         <div style={{ marginTop: '5pt' }}>
           <span>學號：</span>
-          <span className='underline w-8em' />
+          <span className='underline w-8em'>{sid}</span>
           <span className='field'>姓名：</span>
-          <span className='underline w-8em' />
+          <span className='underline w-8em'>{sname}</span>
           <span className='field'>手機：</span>
-          <span className='underline'>{exemptCourse[0].phone}</span>
+          <span className='underline'>{courses[0].phone}</span>
           <span className='field'>申請日期：</span>
           <span className='underline w-2em' />
           <span>年</span>
@@ -66,8 +69,8 @@ class ExemptCourse extends React.Component {
               <td>成績</td>
             </tr>
             {
-              exemptCourse &&
-              exemptCourse.map((data, index) => (
+              courses &&
+              courses.map((data, index) => (
                 <tr key={index} style={{ height: '42.45pt' }}>
                   <td>{index+1}</td>
                   <td>{data.original_course_name}</td>
