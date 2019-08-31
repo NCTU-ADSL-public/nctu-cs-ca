@@ -100,7 +100,13 @@ class Index extends React.Component {
     }
     if (this.state.doPrinting) {
       this.setState({ doPrinting: false })
+      // 設定橫向列印
+      let fileStyle = document.createElement('style')
+      fileStyle.innerHTML = "@page{size: landscape;}"
+      window.document.head.appendChild(fileStyle)
       window.print()
+      // 取消橫向列印
+      window.document.head.removeChild(fileStyle)
     }
   }
 
