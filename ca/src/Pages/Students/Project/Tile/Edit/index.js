@@ -58,7 +58,7 @@ class Edit extends React.Component {
     this.state = {
       open: false,
       image: '',
-      file: this.props.project.file,
+      file: this.props.project.filename,
       imageEncode: this.props.project.photo,
       fileEncode: this.props.file,
       new_title: this.props.project.research_title, // 學生不能改題目
