@@ -3,7 +3,9 @@ import './form.css'
 
 class WaiveCourse extends React.Component {
   render () {
-    const waiveCourse = this.props.courses
+    const { courses } = this.props
+    const sid = this.props.studentIdcard.student_id
+    const { sname, program, grade } = this.props.studentIdcard
 
     return (
       <div style={{ position: 'relative' }}>
@@ -11,17 +13,17 @@ class WaiveCourse extends React.Component {
           <span style={{ letterSpacing: '2pt' }}>國立交通大學抵免學分申請表</span>
         </div>
         <div style={{ marginTop: '6pt', marginRight: '3.1pt', fontSize: '10pt' }}>
-          系所/年級/班別：<span className='underline'>{waiveCourse[0].class} </span>
-          學號：<span className='underline w-8em' />
-          姓名：<span className='underline w-8em' />
-          手機：<span className='underline'>{waiveCourse[0].phone}</span>
+          系所/年級/班別：<span className='underline'>{`資工系${program}${grade}`}</span>
+          學號：<span className='underline w-8em'>{sid}</span>
+          姓名：<span className='underline w-8em'>{sname}</span>
+          手機：<span className='underline'>{courses[0].phone}</span>
         </div>
         <div style={{ marginTop: '6pt', marginRight: '3.1pt', fontSize: '10pt' }}>
-          原就讀學校：<span className='underline'>{waiveCourse[0].original_school}</span>
-          系所科別：<span className='underline'>{waiveCourse[0].original_department}</span>
+          原就讀學校：<span className='underline'>{courses[0].original_school}</span>
+          系所科別：<span className='underline'>{courses[0].original_department}</span>
           <span>&nbsp;&nbsp; </span>
           原就讀學系所科畢業應修學分數不得少於
-          <span className='underline'>{waiveCourse[0].original_graduation_credit} </span>
+          <span className='underline'>{courses[0].original_graduation_credit}</span>
           學分<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
           申請日期：<span className='underline w-2em' />年<span className='underline w-2em' />月<span className='underline w-2em' />日
         </div>
@@ -69,8 +71,8 @@ class WaiveCourse extends React.Component {
                 <td style={{ width: '9.2pt' }}>下</td>
               </tr>
               {
-                waiveCourse &&
-                waiveCourse.map((data, index) => (
+                courses &&
+                courses.map((data, index) => (
                   <tr style={{ height: '32pt' }} key={index}>
                     <td style={{ width: '17.1pt', textAlign: 'center', fontSize: '10pt' }}>{ index+1 }</td>
                     <td style={{ width: '153.2pt' }}>{data.original_course_name}</td>

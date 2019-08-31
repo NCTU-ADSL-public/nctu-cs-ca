@@ -21,6 +21,9 @@ const styles = theme => ({
 class CompulsoryCourseFormConfirm extends React.Component {
   render () {
     const { classes, payload } = this.props
+    const sid = this.props.studentIdcard.student_id
+    const { sname, program, grade } = this.props.studentIdcard
+    const classDetail = `資工系${program}${grade}`
 
     return (
       <div>
@@ -34,15 +37,15 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <div style={{ margin: '5px' }}>
               <TextInputDefault
                 label='申請人'
-                value={this.props.studentIdcard.sname}
+                value={sname}
               />
               <TextInputDefault
                 label='學號'
-                value={this.props.studentIdcard.student_id}
+                value={sid}
               />
               <TextInputDefault
                 label='系所/年級/班別'
-                value={payload.class}
+                value={classDetail}
               />
               <TextInputDefault
                 label='手機'
@@ -167,17 +170,17 @@ class CompulsoryCourseFormConfirm extends React.Component {
             <div style={{ margin: '5px' }}>
               <TextInputDefault
                 label='申請人'
-                value={this.props.studentIdcard.sname}
+                value={sname}
                 mobile
               />
               <TextInputDefault
                 label='學號'
-                value={this.props.studentIdcard.student_id}
+                value={sid}
                 mobile
               />
               <TextInputDefault
                 label='系所/年級/班別'
-                value={payload.class}
+                value={classDetail}
                 mobile
               />
               <TextInputDefault

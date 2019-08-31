@@ -22,6 +22,9 @@ const styles = theme => ({
 class ExemptCourseForm extends React.Component {
   render () {
     const { classes, payload } = this.props
+    const sid = this.props.studentIdcard.student_id
+    const { sname, program, grade } = this.props.studentIdcard
+    const classDetail = `資工系${program}${grade}`
 
     return (
       <div>
@@ -37,18 +40,15 @@ class ExemptCourseForm extends React.Component {
             <div style={{ margin: '5px' }}>
               <TextInputDefault
                 label='申請人'
-                value={this.props.studentIdcard.sname}
+                value={sname}
               />
               <TextInputDefault
                 label='學號'
-                value={this.props.studentIdcard.student_id}
+                value={sid}
               />
               <TextInput
                 label='系所/年級/班別'
-                placeholder='例：資工系資工組大一A班'
-                value={payload.class}
-                handleChange={(value) => this.props.updatePayload({ class: value })}
-                error={this.props.error && payload.class === ''}
+                value={classDetail}
               />
               <TextInput
                 label='手機'
@@ -181,20 +181,17 @@ class ExemptCourseForm extends React.Component {
             <div style={{ margin: '5px' }}>
               <TextInputDefault
                 label='申請人'
-                value={this.props.studentIdcard.sname}
+                value={sname}
                 mobile
               />
               <TextInputDefault
                 label='學號'
-                value={this.props.studentIdcard.student_id}
+                value={sid}
                 mobile
               />
               <TextInput
                 label='系所/年級/班別'
-                placeholder='例：資工系資工組大一A班'
-                value={payload.class}
-                handleChange={(value) => this.props.updatePayload({ class: value })}
-                error={this.props.error && payload.class === ''}
+                value={classDetail}
                 mobile
               />
               <TextInput
