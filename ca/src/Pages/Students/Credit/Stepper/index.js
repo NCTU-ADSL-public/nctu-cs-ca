@@ -111,25 +111,23 @@ class HorizontalLinearStepper extends React.Component {
     if (step === 0 && formType === -1) {
       window.alert('請選擇表單')
       return
-    } else if (step === 1) {
+    }
+    else if (step === 1) {
       if (formType === 0) {
         const {
-          file, phone, original_school, original_department,
-          original_graduation_credit,
-          original_course_semester, original_course_year,
-          original_course_name, original_course_department,
-          original_course_credit, original_course_score,
+          file, phone,
+          original_school,original_department, original_graduation_credit,
+          original_course_semester, original_course_year, original_course_name,
+          original_course_department, original_course_credit, original_course_score,
           current_course_code, current_course_credit, current_course_name, current_course_type
         } = this.props.waiveCourse
-        if (
-          // 因為syntax問題 所以class這樣寫
-          !(file && this.props.waiveCourse.class && phone && original_school && original_department &&
-          original_graduation_credit &&
-          original_course_semester && original_course_year &&
-          original_course_name && original_course_department &&
-          original_course_credit && original_course_score &&
-          current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
-        ) {
+        
+        if (!(file && phone &&
+              original_school && original_department && original_graduation_credit &&
+              original_course_semester && original_course_year && original_course_name &&
+              original_course_department && original_course_credit && original_course_score &&
+              current_course_code && current_course_credit &&
+              current_course_name && current_course_type !== '請選擇選別')) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -138,8 +136,10 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
-      } else if (formType === 1) {
+      }
+      else if (formType === 1) {
         const {
           file, phone,
           original_course_semester, original_course_year,
@@ -147,14 +147,13 @@ class HorizontalLinearStepper extends React.Component {
           original_course_credit, original_course_score,
           current_course_code, current_course_credit, current_course_name, current_course_type
         } = this.props.exemptCourse
-        if (
-          // 因為syntax問題 所以class這樣寫
-          !(file && this.props.exemptCourse.class && phone &&
-          original_course_semester && original_course_year &&
-          original_course_name && original_course_department &&
-          original_course_credit && original_course_score &&
-          current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
-        ) {
+        
+        if (!(file && phone &&
+              original_course_semester && original_course_year &&
+              original_course_name && original_course_department &&
+              original_course_credit && original_course_score &&
+              current_course_code && current_course_credit &&
+              current_course_name && current_course_type !== '請選擇選別')) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -163,18 +162,19 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
-      } else if (formType === 2) {
+      }
+      else if (formType === 2) {
         const {
           file, phone, reason, department, teacher, credit,
           course_year, course_semester, course_code, course_name,
           original_course_code, original_course_name, original_course_credit
         } = this.props.compulsoryCourse
-        if (
-          !(file && this.props.compulsoryCourse.class && phone && reason.content && department && teacher && credit &&
-            course_year && course_semester && course_code && course_name &&
-            original_course_code && original_course_name && original_course_credit)
-        ) {
+
+        if (!(file && phone && reason.content && department && teacher && credit &&
+              course_year && course_semester && course_code && course_name &&
+              original_course_code && original_course_name && original_course_credit)) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -183,10 +183,16 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
-      } else if (formType === 3) {
-        const { file, phone, reason, department, teacher, credit, course_code, course_name } = this.props.englishCourse
-        if (!(file && this.props.englishCourse.class && phone && reason && department && teacher && credit && course_name && course_code)) {
+      }
+      else if (formType === 3) {
+        const {
+          file, phone, reason, department, teacher, credit, course_code, course_name
+        } = this.props.englishCourse
+        
+        if (!(file && phone && reason && department && teacher && credit &&
+              course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -195,10 +201,13 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
       }
+
       this.props.setError(false)
-    } else if (step === 2) {
+    }
+    else if (step === 2) {
       const confirmMsg = [
         '確定送出「學分抵免單」?',
         '確定送出「課程免修單」?',
@@ -207,9 +216,8 @@ class HorizontalLinearStepper extends React.Component {
       ]
       if (window.confirm(confirmMsg[formType])) {
         this.handleUpload(formType)
-      } else {
-        return
       }
+      else return
     }
 
     this.setState({
