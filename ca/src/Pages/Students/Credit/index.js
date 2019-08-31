@@ -100,7 +100,13 @@ class Index extends React.Component {
     }
     if (this.state.doPrinting) {
       this.setState({ doPrinting: false })
+      // 設定橫向列印
+      let fileStyle = document.createElement('style')
+      fileStyle.innerHTML = "@page{size: landscape;}"
+      window.document.head.appendChild(fileStyle)
       window.print()
+      // 取消橫向列印
+      window.document.head.removeChild(fileStyle)
     }
   }
 
@@ -382,13 +388,19 @@ class Index extends React.Component {
             printFormNumber === 0 &&
             this.props.creditList.waive_course &&
             this.props.creditList.waive_course.length &&
-            <WaiveCourse courses={this.props.creditList.waive_course} />
+            <WaiveCourse
+              studentIdcard={this.props.studentIdcard}
+              courses={this.props.creditList.waive_course}
+            />
           }
           {
             printFormNumber === 1 &&
             this.props.creditList.exempt_course &&
             this.props.creditList.exempt_course.length &&
-            <ExemptCourse courses={this.props.creditList.exempt_course} />
+            <ExemptCourse
+              studentIdcard={this.props.studentIdcard}
+              courses={this.props.creditList.exempt_course}
+            />
           }
         </div>
       </div>
@@ -401,6 +413,7 @@ Index.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
+  studentIdcard: state.Student.User.studentIdcard,
   creditList: state.Student.Credit.list,
   deleteStatus: state.Student.Credit.delete.status
 })

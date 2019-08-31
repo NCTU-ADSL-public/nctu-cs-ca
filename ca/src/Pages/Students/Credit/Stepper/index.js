@@ -111,25 +111,23 @@ class HorizontalLinearStepper extends React.Component {
     if (step === 0 && formType === -1) {
       window.alert('請選擇表單')
       return
-    } else if (step === 1) {
+    }
+    else if (step === 1) {
       if (formType === 0) {
         const {
-          file, phone, original_school, original_department,
-          original_graduation_credit,
-          original_course_semester, original_course_year,
-          original_course_name, original_course_department,
-          original_course_credit, original_course_score,
+          file, phone,
+          original_school,original_department, original_graduation_credit,
+          original_course_semester, original_course_year, original_course_name,
+          original_course_department, original_course_credit, original_course_score,
           current_course_code, current_course_credit, current_course_name, current_course_type
         } = this.props.waiveCourse
-        if (
-          // 因為syntax問題 所以class這樣寫
-          !(file && this.props.waiveCourse.class && phone && original_school && original_department &&
-          original_graduation_credit &&
-          original_course_semester && original_course_year &&
-          original_course_name && original_course_department &&
-          original_course_credit && original_course_score &&
-          current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
-        ) {
+        
+        if (!(file && phone &&
+              original_school && original_department && original_graduation_credit &&
+              original_course_semester && original_course_year && original_course_name &&
+              original_course_department && original_course_credit && original_course_score &&
+              current_course_code && current_course_credit &&
+              current_course_name && current_course_type !== '請選擇選別')) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -138,8 +136,10 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
-      } else if (formType === 1) {
+      }
+      else if (formType === 1) {
         const {
           file, phone,
           original_course_semester, original_course_year,
@@ -147,14 +147,13 @@ class HorizontalLinearStepper extends React.Component {
           original_course_credit, original_course_score,
           current_course_code, current_course_credit, current_course_name, current_course_type
         } = this.props.exemptCourse
-        if (
-          // 因為syntax問題 所以class這樣寫
-          !(file && this.props.exemptCourse.class && phone &&
-          original_course_semester && original_course_year &&
-          original_course_name && original_course_department &&
-          original_course_credit && original_course_score &&
-          current_course_code && current_course_credit && current_course_name && current_course_type !== '請選擇選別')
-        ) {
+        
+        if (!(file && phone &&
+              original_course_semester && original_course_year &&
+              original_course_name && original_course_department &&
+              original_course_credit && original_course_score &&
+              current_course_code && current_course_credit &&
+              current_course_name && current_course_type !== '請選擇選別')) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -163,18 +162,19 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
-      } else if (formType === 2) {
+      }
+      else if (formType === 2) {
         const {
           file, phone, reason, department, teacher, credit,
           course_year, course_semester, course_code, course_name,
           original_course_code, original_course_name, original_course_credit
         } = this.props.compulsoryCourse
-        if (
-          !(file && this.props.compulsoryCourse.class && phone && reason.content && department && teacher && credit &&
-            course_year && course_semester && course_code && course_name &&
-            original_course_code && original_course_name && original_course_credit)
-        ) {
+
+        if (!(file && phone && reason.content && department && teacher && credit &&
+              course_year && course_semester && course_code && course_name &&
+              original_course_code && original_course_name && original_course_credit)) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -183,10 +183,16 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
-      } else if (formType === 3) {
-        const { file, phone, reason, department, teacher, credit, course_code, course_name } = this.props.englishCourse
-        if (!(file && this.props.englishCourse.class && phone && reason && department && teacher && credit && course_name && course_code)) {
+      }
+      else if (formType === 3) {
+        const {
+          file, phone, reason, department, teacher, credit, course_code, course_name
+        } = this.props.englishCourse
+        
+        if (!(file && phone && reason && department && teacher && credit &&
+              course_name && course_code)) {
           window.alert('請確實填寫每個欄位!')
           this.props.setError(true)
           return
@@ -195,10 +201,13 @@ class HorizontalLinearStepper extends React.Component {
           window.alert('請填寫”永久課號“!')
           return
         }
+        
         this.setState({ file: file })
       }
+
       this.props.setError(false)
-    } else if (step === 2) {
+    }
+    else if (step === 2) {
       const confirmMsg = [
         '確定送出「學分抵免單」?',
         '確定送出「課程免修單」?',
@@ -207,9 +216,8 @@ class HorizontalLinearStepper extends React.Component {
       ]
       if (window.confirm(confirmMsg[formType])) {
         this.handleUpload(formType)
-      } else {
-        return
       }
+      else return
     }
 
     this.setState({
@@ -305,7 +313,7 @@ class HorizontalLinearStepper extends React.Component {
     }
 
     return (
-      <div className='Credt-title-text' ref={(div) => { this.Top = div }}>
+      <div className='credit-text' ref={(div) => { this.Top = div }}>
         <MuiThemeProvider>
           <div style={{ width: '100%', maxWidth: 1500, margin: 'auto' }}>
             {/* For PC screen */}
@@ -404,33 +412,52 @@ class HorizontalLinearStepper extends React.Component {
               }
               {
                 step === 0 &&
-                <div style={{ fontSize: '20px' }}>
-                  各項申請流程說明如下：<br /><br />
-                  ㄧ、學分抵免申請：<br />
+                <div className='instruction'>
+                  各項申請流程說明如下：<br />
+                  <div className='text-bold'>ㄧ、學分抵免申請：</div>
                   <ol>
-                    <li>線上填寫抵免學分申請表，並上傳「原就讀學校歷年成績單或學分證明」，以外校(系)課程申請抵免者，另須上傳該課程之課程綱要(教材用書、任課教師、授課內容、評分方式等說明)。</li>
-                    <li>繳交「抵免學分申請表」與「原就讀學校歷年成績單或學分證明正本」至系辦。</li>
+                    <li>線上填寫抵免學分申請表，並上傳「原就讀學校歷年成績單或學分證明」，以外校(系)課程申請抵免者，另須上傳原就讀校系科目之課程綱要(教材用書、任課教師、授課內容、評分方式等說明)。</li>
+                    <li>
+                      <span>系統列印「抵免學分申請表」，併同「原就讀學校歷年成績單或學分證明</span>
+                      <span className='text-bold text-underline'>正本</span>
+                      <span>」繳交至系辦。</span>
+                    </li>
                     <li>
                       抵免學分辦法請參閱本校
                       <a
+                        className='text-underline'
                         href='https://aadm.nctu.edu.tw/rule/#registra'
-                        alt=''
                         target='_blank'
                         rel='noopener noreferrer'
+                        alt=''
                       >
                         註冊組網頁
                       </a>
                     </li>
                   </ol>
-                  二、課程免修申請：<br />
+                  <div className='text-bold'>二、課程免修申請：</div>
                   <ol>
-                    <li>線上填寫課程免修申請單，並上傳「已修習科目之歷年成績單或學分證明」，以外校(系)課程申請免修者，另須上傳該課程之課程綱要(教材用書、任課教師、授課內容、評分方式等說明)。</li>
-                    <li>繳交「課程免修申請單」與「原就讀學校歷年成績單或學分證明正本」至系辦。</li>
+                    <li>線上填寫課程免修申請單，並上傳「已修習科目之歷年成績單或學分證明」，以外校(系)課程申請免修者，另須上傳原就讀校系科目之課程綱要(教材用書、任課教師、授課內容、評分方式等說明)。</li>
+                    <li>
+                      <span>系統列印「課程免修申請單」，併同「已修習科目之歷年成績單或學分證明</span>
+                      <span className='text-bold text-underline'>正本</span>
+                      <span>」繳交至系辦。</span>
+                    </li>
+                    <li className='text-red'>註：自106學年度起入學者，若於「入學前」參加本系『程式能力鑑定』成績為5分(含)以上，得「於入學時」申請免修『計算機概論與程式設計』(無學分)。</li>
                   </ol>
-                  三、外系所學分承認申請：<br />
+                  <div className='text-bold'>三、外系所學分承認申請：</div>
                   <ol>
-                    <li>必修課程需重修，然因不可抗拒之理由，需修習外系所開授課程，以抵本系必修課程：系統填寫申請表並上傳擬修課程之課程綱要，以重修為理由申請者另須上傳成績單。</li>
-                    <li>擬修習外系英文授課專業課程，並申請為本系畢業學分規定之「畢業前須通過1門本系開授或認可之英文授課專業課程」：系統填寫申請表並上傳擬修課程之課程綱要。</li>
+                    <li>
+                      <div className='text-bold'>必修課程修習外系所課程申請：</div>
+                      <span className='text-underline'>必修課程需重修，然因不可抗拒之理由，需修習外系所開授課程，以抵本系必修課程</span>
+                      <span>：系統填寫申請表並上傳擬修課程之課程綱要，</span>
+                      <span className='text-red'>以重修為理由申請者另須上傳成績單以玆證明</span>。
+                    </li>
+                    <li>
+                      <div className='text-bold'>英授專業修習外系所課程申請：</div>
+                      <span className='text-underline'>擬修習外系英文授課專業課程，並申請為本系畢業學分規定之「畢業前須通過1門本系開授或認可之英文授課專業課程」</span>
+                      <span>：系統填寫申請表並上傳擬修課程之課程綱要。</span>
+                    </li>
                   </ol>
                 </div>
               }
