@@ -13,7 +13,7 @@ export const fetchProjects = (page = 1) => dispatch => {
     .then(res => dispatch(storeProjects(res.data)))
     .catch(error => {
       console.log(error)
-      dispatch(storeProjects(FakeData.Project))
+      // dispatch(storeProjects(FakeData.Project))
     })
 }
 
