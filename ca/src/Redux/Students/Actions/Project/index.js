@@ -1,7 +1,7 @@
 
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-// import FakeData from '../../../../Resources/FakeData'
+import FakeData from '../../../../Resources/FakeData'
 
 export const storeProjects = createAction('STORE_PROJECTS')
 export const storeProjectImage = createAction('STORE_PROJECT_IMAGE')
@@ -13,7 +13,7 @@ export const fetchProjects = (page = 1) => dispatch => {
     .then(res => dispatch(storeProjects(res.data)))
     .catch(error => {
       console.log(error)
-      // dispatch(storeProjects(FakeData.Project))
+      dispatch(storeProjects(FakeData.Project))
     })
 }
 
@@ -32,6 +32,8 @@ export const editProject = (payload, handleClose) => dispatch => {
   axios.post('/students/research/edit', payload)
     .then(res => {
       dispatch(storeProjectsIntro(payload.new_intro, payload.new_title, payload.semester))
+      dispatch(storeProjectsImage(payload.new_photo, payload.new_title, payload.semester))
+      dispatch(storeProjectsFile(payload.new_file, payload.new_title, payload.semester))
       handleClose()
     })
     .catch(err => {
@@ -40,13 +42,13 @@ export const editProject = (payload, handleClose) => dispatch => {
     })
 }
 
-export const storeProjectsImage = (url, researchTitle, semester) => dispatch => {
-  let object = { url, researchTitle, semester }
+export const storeProjectsImage = (encode, researchTitle, semester) => dispatch => {
+  let object = { encode, researchTitle, semester }
   dispatch(storeProjectImage(object))
 }
 
-export const storeProjectsFile = (url, researchTitle, semester) => dispatch => {
-  let object = { url, researchTitle, semester }
+export const storeProjectsFile = (encode, researchTitle, semester) => dispatch => {
+  let object = { encode, researchTitle, semester }
   dispatch(storeProjectFile(object))
 }
 

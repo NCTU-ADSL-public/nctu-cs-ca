@@ -81,29 +81,10 @@ class Tile extends React.Component {
   }
 
   fetchImage () {
-    this.props.storeImage(this.props.link)
-    // const { data } = this.props
-    // if (data.image && data.file) return
-
-    // let directory = `${data.semester}/${data.tname}/${data.research_title}/image/image.jpg`
-    // storageRef
-    //   .child(directory)
-    //   .getDownloadURL()
-    //   .then(url => this.props.storeImage(url))
-    //   .catch(error => {
-    //     this.props.storeImage('')
-    //     console.log(error)
-    //   })
-
-    // directory = `${data.semester}/${data.tname}/${data.research_title}/file/file.pdf`
-    // storageRef
-    //   .child(directory)
-    //   .getDownloadURL()
-    //   .then(url => this.props.storeFile(url))
-    //   .catch(error => {
-    //     this.props.storeImage('')
-    //     console.log(error)
-    //   })
+    const { data } = this.props
+    if (data.image && data.file) return
+    this.props.storeImage(this.props.photo)
+    this.props.storeFile(this.props.file)
   }
 
   deleteData () {
@@ -174,8 +155,8 @@ class Tile extends React.Component {
           {
             data.photo === undefined || data.photo === 'loading'
               ? <CircularProgress className={classes.progress} />
-              : <img className='img-responsive' src={'data:image/png;base64,' + this.getImage()} alt='' />
-          }
+              : <img className='img-responsive' src={this.getImage()} alt='' />
+            }
         </GridTile>
         <Dialog
           fullScreen={isAgreed}
@@ -206,7 +187,7 @@ class Tile extends React.Component {
           </AppBar>
           {
             isAgreed
-              ? <TileContent file={data.file} image={data.image} data={data} />
+              ? <TileContent file={data.file} photo={data.photo} data={data} />
               : this.getString(data.agree)
           }
         </Dialog>

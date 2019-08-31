@@ -10,7 +10,7 @@ export default handleActions({
   STORE_PROJECT_IMAGE: (state, action) => {
     let newdata = state.data
     let index = newdata.findIndex(x => { return x.research_title === action.payload.researchTitle && x.semester === action.payload.semester })
-    newdata[index] = { ...newdata[index], photo: action.payload.url }
+    newdata[index] = { ...newdata[index], photo: action.payload.encode }
     return {
       ...state,
       data: [...newdata]
@@ -19,7 +19,7 @@ export default handleActions({
   STORE_PROJECT_FILE: (state, action) => {
     let newdata = state.data
     let index = newdata.findIndex(x => { return x.research_title === action.payload.researchTitle && x.semester === action.payload.semester })
-    newdata[index] = { ...newdata[index], file: action.payload.url }
+    newdata[index] = { ...newdata[index], file: action.payload.encode }
     return {
       ...state,
       data: [...newdata]

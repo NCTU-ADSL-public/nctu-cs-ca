@@ -53,12 +53,14 @@ class Edit extends React.Component {
     this.handleChangeProfessor = this.handleChangeProfessor.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
-    this.updateImage = this.updateImage(this)
-    this.updateFile = this.updateFile(this)
+    this.updateImage = this.updateImage.bind(this)
+    this.updateFile = this.updateFile.bind(this)
     this.state = {
       open: false,
       image: '',
       file: '',
+      imageEncode: '',
+      fileEncode: '',
       new_title: this.props.project.research_title, // 學生不能改題目
       new_intro: this.props.project.intro,
       anchorEl: null
@@ -89,12 +91,11 @@ class Edit extends React.Component {
     this.setState({ open: true })
   }
 
-  handleDialogClose () {
+  handleDialogClose (submit = false) {
     this.setState({ open: false })
   }
 
   handleSubmit (event) {
-    let _this = this
     const { project } = this.props
     event.preventDefault()
 
@@ -106,83 +107,18 @@ class Edit extends React.Component {
       research_title: project.research_title,
       new_title: project.research_title, // 學生不能改題目
       new_intro: this.state.new_intro,
-      new_link: this.state.image
-    }, () => this.handleDialogClose())
-
-    // this.props.storeImage(this.state.image)
-    // this.props.storeFile(this.state.file)
-
-    // base64encode(this.state.image)
-    //   .then(encoded => {
-    //     _this.props.storeImage(encoded)
-    //     _this.setState({ image: encoded })
-    //   })
-    //   .catch(err => console.log(err))
-    //
-    // base64encode(this.state.file)
-    //   .then(encoded => {
-    //     _this.props.storeFile(encoded)
-    //     _this.setState({ file: encoded })
-    //   })
-    //   .catch(err => console.log(err))
-    // 重新上傳圖片
-    // if (this.state.image) {
-    //   let directory = `${project.semester}/${project.tname}/${project.research_title}/image/`
-    //   storageRef
-    //     .child(directory)
-    //     .delete()
-    //     .then(function () {})
-    //     .catch((error) => console.log(error))
-
-    //   let uploadTask = storageRef.child(directory + 'image.jpg').put(this.state.image)
-    //   uploadTask.on(
-    //     'state_changed',
-    //     function (snapshot) {
-    //       _this.props.storeImage('loading', project.research_title, project.semester)
-    //     },
-    //     function (error) {
-    //       console.log(error)
-    //     },
-    //     function () {
-    //       uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-    //         console.log(downloadURL)
-    //         _this.props.storeImage(downloadURL, project.research_title, project.semester)
-    //       })
-    //     }
-    //   )
-    // }
-
-    // 重新上傳檔案
-    // if (this.state.file) {
-    //   let directory = `${project.semester}/${project.tname}/${project.research_title}/file/`
-    //   storageRef
-    //     .child(directory)
-    //     .delete()
-    //     .then(function () {})
-    //     .catch((error) => console.log(error))
-
-    //   let uploadTask = storageRef.child(directory + 'file.pdf').put(this.state.file)
-    //   uploadTask.on(
-    //     'state_changed',
-    //     function (snapshot) {
-    //       _this.props.storeFile('loading', project.research_title, project.semester)
-    //     },
-    //     function (error) {
-    //       console.log(error)
-    //     },
-    //     function () {
-    //       uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-    //         _this.props.storeFile(downloadURL, project.research_title, project.semester)
-    //       })
-    //     }
-    //   )
-    // }
+      new_photo: this.state.imageEncode,
+      new_file: this.state.fileEncode,
+      new_fileName: this.state.file
+    }, () => this.handleDialogClose(true))
   }
+
   updateImage (file) {
     let _this = this
     base64encode(file)
       .then(encoded => {
-        _this.props.storeImage(encoded)
+        console.log(encoded)
+        _this.setState({ imageEncode: encoded })
         _this.setState({ image: file.name })
       })
       .catch(err => console.log(err))
@@ -192,7 +128,7 @@ class Edit extends React.Component {
     let _this = this
     base64encode(file)
       .then(encoded => {
-        _this.storeFile(encoded)
+        _this.setState({ fileEncode: encoded })
         _this.setState({ file: file.name })
       })
       .catch(err => console.log(err))
@@ -234,19 +170,19 @@ class Edit extends React.Component {
             onClick={this.handleDialogOpen}>
             <ListItemText style={{ fontSize: '12px' }} inset primary={'編輯'} />
           </MenuItem>
-          {/*<Button*/}
-            {/*style={{ fontSize: '12px', width: '80px' }}*/}
-            {/*color='inherit'*/}
-            {/*>*/}
-            {/**/}
-          {/*</Button>*/}
-          {/*<Button*/}
-            {/*onClick={this.handleDialogOpen}*/}
-            {/*style={{ fontSize: '12px' }}*/}
-            {/*color='inherit'*/}
-          {/*>*/}
-            {/*編輯*/}
-          {/*</Button>*/}
+          {/* <Button */}
+          {/* style={{ fontSize: '12px', width: '80px' }} */}
+          {/* color='inherit' */}
+          {/* > */}
+          {/**/}
+          {/* </Button> */}
+          {/* <Button */}
+          {/* onClick={this.handleDialogOpen} */}
+          {/* style={{ fontSize: '12px' }} */}
+          {/* color='inherit' */}
+          {/* > */}
+          {/* 編輯 */}
+          {/* </Button> */}
         </Menu>
 
         <Dialog
@@ -274,8 +210,8 @@ class Edit extends React.Component {
             <Form
               {...this.state}
               project={this.props.project}
-              updateImage={(e, image) => this.updateImage(image)}
-              updateFile={(e, file) => this.updateFile(file)}
+              updateImage={(image) => this.updateImage(image)}
+              updateFile={(file) => this.updateFile(file)}
               updateIntro={(intro) => this.setState({ new_intro: intro })}
               handleSubmit={(e) => this.handleSubmit(e)}
               imageRef={this.imageRef}
