@@ -1,17 +1,35 @@
-.Credt-title-text{
-    background: #F5F5F5;
+.credit-text {
     padding: 2% 8% 10% 6%;
-    color: #7B7B7B;
-    font-size: 1.5em;
+    color: #555555;
+    font-size: 18px;
+}
+
+.instruction {
+    font-family: DFKai-sb;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+.instruction .text-bold {
+    font-weight: 400;
+}
+
+.instruction .text-red {
+    color: red;
+}
+
+.instruction .text-underline {
+    border-bottom: 1px solid;
 }
 
 
 @media only screen and (max-width: 500px) {
-
-    .Credt-title-text {
+    .credit-text {
         margin: 0 5% 6% 5%;
         padding: 60px 10px 3px 10px;
-        color: #7B7B7B;
-        font-size: 1.5em;
+    }
+
+    .instruction {
+        line-height: 28px;
     }
 }
