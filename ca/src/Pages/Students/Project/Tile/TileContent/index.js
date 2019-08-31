@@ -24,6 +24,7 @@ class TileContent extends React.Component {
   constructor (props) {
     super(props)
     this.getFile = this.getFile.bind(this)
+    this.displayFile = this.displayFile.bind(this)
   }
 
   getFile () {
@@ -34,8 +35,14 @@ class TileContent extends React.Component {
       case 'loading':
         return '上傳中...'
       default:
-        return <a target='_blank' rel='noopener noreferrer' href={file} style={{ cursor: 'pointer' }}>點這裡</a>
+        return <a onClick={() => this.displayFile()} style={{ cursor: 'pointer' }}>點這裡</a>
     }
+  }
+
+  displayFile () {
+    let htmlstring = '<iframe width=\'100%\' height=\'100%\' src="' + this.props.data.file + '"/>'
+    let win = window.open('#', '_blank')
+    win.document.write(htmlstring)
   }
 
   render () {

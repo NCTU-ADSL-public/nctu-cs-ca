@@ -98,7 +98,6 @@ class Edit extends React.Component {
   handleSubmit (event) {
     const { project } = this.props
     event.preventDefault()
-
     this.props.editProject({
       student_id: this.props.studentProfile.student_id,
       tname: project.tname,
