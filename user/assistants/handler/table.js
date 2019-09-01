@@ -299,12 +299,26 @@ table.offsetApplyShow = function(req, res, next) {
                 var group = [];   
                 for(var i = 0; i < result.length; i++){
                     // if(result[i].apply_year != year || result[i].apply_semester != sem) continue;
+
+                    query.ShowUserInfo(result[i].student_id, function(err, ret) {
+                        if (err) {
+                            throw err;
+                            res.redirect('/');
+                        } 
+                        if (!result)
+                            res.redirect('/');
+                        else {
+                            ret = JSON.parse(ret);
+                            req.current_student_program = ret.program;
+                            next();
+                        }
+                    });
                 	var one = {
                     	"apply_year" : result[i].apply_year,
                         "apply_semester" : parseInt(result[i].apply_semester),
                         "sid": result[i].student_id,
                         "name": result[i].sname,
-                        "info": result[i].class,
+                        "info": req.current_student_program,
                    	    "phone": result[i].phone,
                         "nameA": result[i].cos_cname_old,
               	        "codeA": result[i].cos_code_old,
