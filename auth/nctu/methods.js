@@ -8,9 +8,9 @@ var url = "https://id.nctu.edu.tw/o/authorize/?client_id=QkP1fSywwMdJ3i6boO3jw2F
 var redirectPath = utils.redirectPath;
 var oAuthNctu = {
     grant_type : "authorization_code",
-    client_id : "QkP1fSywwMdJ3i6boO3jw2F7SfZiutyc6tihAvK6",
+    client_id :     randoms.randomVals.nctuClientId,
     client_secret : randoms.randomVals.nctuClientKey,
-    redirect_uri : "http://140.113.17.22:1234/auth/Nctu/callback"
+    redirect_uri :  randoms.randomVals.redirectUrl
 }
 
 exports.oAuthNctu = oAuthNctu;
