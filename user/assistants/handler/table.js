@@ -178,7 +178,6 @@ table.offsetApplyInfo = function(req, res, next) {
                     if (result[i].offset_type === "2") {
                         var waive = {
                             "timestamp": result[i].timestamp,
-                            "class": result[i].class,
                             "phone": result[i].phone,
                             "original_school": result[i].school_old,
                             "original_department": result[i].dep_old,
@@ -246,7 +245,6 @@ table.offsetApplyInfo = function(req, res, next) {
                     } else if (result[i].offset_type === "3") {
                         var exempt = {
                             "timestamp": result[i].timestamp,
-                            "class": result[i].class,
                             "phone": result[i].phone,
                             "apply_year" : parseInt(result[i].apply_year),
                             "apply_semester" : parseInt(result[i].apply_semester),

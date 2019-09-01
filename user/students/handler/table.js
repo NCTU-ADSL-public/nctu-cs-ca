@@ -39,7 +39,6 @@ table.offsetApplyList = function(req, res, next){
                      if(result[i].offset_type === "2"){
                          var waive = {
                              "timestamp": result[i].timestamp,
-                             "class": result[i].class,
                              "phone": result[i].phone,
                              "original_school": result[i].school_old,
                              "original_department": result[i].dep_old,
@@ -69,7 +68,6 @@ table.offsetApplyList = function(req, res, next){
                      else if(result[i].offset_type === "1"){
                          var english = {
                              "timestamp": result[i].timestamp,
-                             "class": result[i].class,
                              "apply_year" : parseInt(result[i].apply_year),
                              "apply_semester" : parseInt(result[i].apply_semester),
                              "phone": result[i].phone,
@@ -89,7 +87,6 @@ table.offsetApplyList = function(req, res, next){
                      else if(result[i].offset_type === "0"){
                          var compulsory = {
                              "timestamp": result[i].timestamp,
-                             "class": result[i].class,
                              "apply_year" : parseInt(result[i].apply_year),
                              "apply_semester" : parseInt(result[i].apply_semester),
                              "phone": result[i].phone,
@@ -115,7 +112,6 @@ table.offsetApplyList = function(req, res, next){
                       else if(result[i].offset_type === "3"){
                          var exempt = {
                              "timestamp": result[i].timestamp,
-                             "class": result[i].class,
                              "phone": result[i].phone,
                              "apply_year" : parseInt(result[i].apply_year),
                              "apply_semester" : parseInt(result[i].apply_semester),
@@ -158,7 +154,6 @@ table.offsetCreateCompulsory = function(req, res, next){
             var data = {
               student_id: StudentId,
               phone: req.body.phone,
-              class: req.body.class,
               apply_year: req.body.apply_year,
               apply_semester: req.body.apply_semester,
               cos_dep_old: req.body.department,
@@ -209,7 +204,6 @@ table.offsetCreateEnglish = function(req, res, next){
             var data = {
               student_id: StudentId,
               phone: req.body.phone,
-              class: req.body.class,
               apply_year: req.body.apply_year,
               apply_semester: req.body.apply_semester,
               cos_dep_old: req.body.department,
@@ -263,7 +257,6 @@ table.offsetCreateExempt = function(req, res, next){
         var data = {
             student_id: student_id,
             phone: req.body.phone,
-            class: req.body.class,
             apply_year: req.body.apply_year,
             apply_semester: req.body.apply_semester,
             cos_dep_old: req.body.original_course_department,
@@ -316,7 +309,6 @@ if (req.session.profile) {
         var data = {
             student_id: student_id,
             phone: req.body.phone,
-            class: req.body.class,
             apply_year: req.body.apply_year,
             apply_semester: req.body.apply_semester,
             cos_dep_old: req.body.original_course_department,
@@ -369,7 +361,6 @@ table.offsetApplyEdit = function(req, res, next){
             var data = { 
                 student_id: student_id,
                 phone: req.body.phone,
-                class: req.body.class,
                 apply_year: req.body.apply_year,
                 apply_semester: req.body.apply_semester,
                 cos_dep_old: req.body.original_course_department,
@@ -399,7 +390,6 @@ table.offsetApplyEdit = function(req, res, next){
              var data = { 
                 student_id: student_id,
                 phone: req.body.phone,
-                class: req.body.class,
                 apply_year: req.body.apply_year,
                 apply_semester: req.body.apply_semester,
                 cos_dep_old: req.body.original_course_department,
@@ -429,7 +419,6 @@ table.offsetApplyEdit = function(req, res, next){
              var data = { 
                 student_id: student_id,
                 phone: req.body.phone,
-                class: null,
                 apply_year: req.body.apply_year,
                 apply_semester: req.body.apply_semester,
                 cos_dep_old: req.body.department,
@@ -460,7 +449,6 @@ table.offsetApplyEdit = function(req, res, next){
              var data = { 
                 student_id: student_id,
                 phone: req.body.phone,
-                class: null,
                 apply_year: req.body.apply_year,
                 apply_semester: req.body.apply_semester,
                 cos_dep_old: req.body.department,
