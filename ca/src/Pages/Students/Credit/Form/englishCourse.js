@@ -32,7 +32,6 @@ class EnglishCourseForm extends React.Component {
           <div className={classes.container}>
             <h1 style={{color: 'black'}} >英授專業課程抵免單</h1>
             <Divider />
-            <div style={{ color: 'red', fontSize: '20px' }}>申請多門抵免需額外填寫另一張表單</div>
 
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
@@ -138,7 +137,6 @@ class EnglishCourseForm extends React.Component {
           <div className={classes.container}>
             <h2 style={{color: 'black', fontSize: '20px'}} >英授專業課程抵免單</h2>
             <Divider />
-            <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
 
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />

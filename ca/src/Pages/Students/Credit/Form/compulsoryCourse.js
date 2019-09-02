@@ -38,7 +38,9 @@ class CompulsoryCourseForm extends React.Component {
           <div className={classes.container}>
             <h1 style={{color: 'black'}} >本系必修課程抵免單</h1>
             <Divider />
-            <div style={{ color: 'red', fontSize: '20px' }}>申請多門抵免需額外填寫另一張表單</div>
+            <div style={{ color: 'red', fontSize: '20px' }}>
+              若申請兩門抵一門(例如：「計算機概論」+「程式設計」抵免「計算機概論與程式設計」)，請將兩門課程分成兩個申請單填寫
+            </div>
 
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
@@ -231,7 +233,9 @@ class CompulsoryCourseForm extends React.Component {
           <div className={classes.container}>
             <h2 style={{color: 'black', fontSize: '20px'}} >本系必修課程抵免單</h2>
             <Divider />
-            <div style={{ color: 'red', fontSize: '16px' }}>申請多門抵免需額外填寫另一張表單</div>
+            <div style={{ color: 'red', fontSize: '16px' }}>
+              若申請兩門抵一門(例如：「計算機概論」+「程式設計」抵免「計算機概論與程式設計」)，請將兩門課程分成兩個申請單填寫
+            </div>
 
             <h2>基本資料</h2>
             <hr style={{ margin: '5px' }} />
