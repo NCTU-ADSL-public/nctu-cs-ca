@@ -442,10 +442,15 @@ table.getGraduateCheck = function(req, res, next){
                 var program = result[0].program;
                 var default_field = 0;
                 switch(program){
-                    case '資電':
+                    //資電 = D
+		    case '資電':
+		    case 'D':
                         default_field = 3;
                         break;
-                    case '資工':
+                    //資工A = A, 資工B = B
+		    case '資工':
+		    case 'A':
+		    case 'B':
                         default_field = 2;
                         break;
                     default:
