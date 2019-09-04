@@ -212,7 +212,7 @@ class ApplyItem extends React.Component {
             fontWeight: 'bold',
             cursor: 'pointer',
             verticalAlign: 'middle'}}
-            onClick={() => window.open(`/assistants/head/c/${apply.sid}/${creditName[apply.type]}/${apply.date}`)}
+            onClick={() => window.open(`/assistants/head/c/${apply.sid}/${creditName[apply.type]}/${apply.date}/${apply.name}/${apply.grade}/${apply.program}`)}
           />
         </div>
         {/* <ExpansionPanelActions>

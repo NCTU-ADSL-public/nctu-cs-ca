@@ -76,8 +76,18 @@ class StudentVerify extends React.Component {
         }
       <div id='printArea'>
           {
-            (this.props.match.params.type === name[2] && this.state.all.length > 0 && <WaiveCourse courses={this.state.all}/>) 
-             || (this.props.match.params.type === name[3] && this.state.all.length > 0 && <ExemptCourse courses={this.state.all}/>)
+            (this.props.match.params.type === name[2] && this.state.all.length > 0 && <WaiveCourse courses={this.state.all} studentIdcard={{
+              student_id: this.props.match.params.sid,
+              sname: this.props.match.params.sname,
+              program: this.props.match.params.program,
+              grade: this.props.match.params.grade
+            }} />) 
+             || (this.props.match.params.type === name[3] && this.state.all.length > 0 && <ExemptCourse courses={this.state.all} studentIdcard={{
+              student_id: this.props.match.params.sid,
+              sname: this.props.match.params.sname,
+              program: this.props.match.params.program,
+              grade: this.props.match.params.grade
+            }} />)
           }
         </div>
       </React.Fragment>
