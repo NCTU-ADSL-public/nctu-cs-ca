@@ -302,6 +302,8 @@ table.offsetApplyShow = function(req, res, next) {
                         "apply_semester" : parseInt(result[i].apply_semester),
                         "sid": result[i].student_id,
                         "name": result[i].sname,
+                        "program": result[i].program,
+                        "grade": result[i].grade,
                         "info": result[i].program + "大" + result[i].grade,
                    	    "phone": result[i].phone,
                         "nameA": result[i].cos_cname_old,
