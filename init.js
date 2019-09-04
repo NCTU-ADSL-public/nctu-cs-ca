@@ -85,7 +85,8 @@ app.use('/teachers/course', express.static('./public', {index: 'index.html'}));
 */
  
   app.use('/assistants/head/s/:sid/:sname/:sgroup', express.static('./public', { index: 'index.html'}));
-  app.use('/assistants/head/c/:sid/:type/:time', express.static('./public', { index: 'index.html'}));
+  app.use('/assistants/head/c/:sid/:type/:time/:sname/:grade/:program', express.static('./public', { index: 'index.html'}));
+
   //app.use('/api/', api());
 
 
