@@ -56,95 +56,72 @@ const initialState = {
     current_accept: 0,
     groups: [
       // {
-      //   research_title: '...',
+      //   research_title: '此為測試資料',
       //   participants: [
       //     {
-      //       student_id: '...',
-      //       sname: '...',
+      //       student_id: '0123334',
+      //       sname: '孔甲己',
       //       detail: '...',
-      //       score: ''
+      //       score: '100',
+      //       comment: 'yo'
       //     },
       //     {
-      //       student_id: '...',
-      //       sname: '...',
+      //       student_id: '0123335',
+      //       sname: '孔乙己',
       //       detail: '...',
-      //       score: ''
+      //       score: '20'
       //     },
       //     {
-      //       student_id: '...',
-      //       sname: '...',
+      //       student_id: '0123336',
+      //       sname: '孔丙己',
       //       detail: '...',
-      //       score: ''
+      //       score: '30'
       //     },
       //     {
-      //       student_id: '...',
-      //       sname: '...',
+      //       student_id: '0123333',
+      //       sname: '孔丁己',
       //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
+      //       score: '40'
       //     }
       //   ],
-      //   year: '108-2'
+      //   year: '188-1'
       // },
-      // {
-      //   research_title: '...',
-      //   participants: [
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     }
-      //   ],
-      //   year: '108-1'
-      // },
-      // {
-      //   research_title: '...',
-      //   participants: [
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     }
-      //   ],
-      //   year: '...'
-      // }
+      {
+        research_title: '...',
+        participants: [
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          }
+        ],
+        year: '-1'
+      }
     ]
   },
   research2: {
@@ -152,96 +129,42 @@ const initialState = {
     other_number: 0,
     current_accept: 0,
     groups: [
-      // {
-      //   research_title: '...',
-      //   participants: [
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     }
-      //   ],
-      //   year: '108-2'
-      // },
-      // {
-      //   research_title: '...',
-      //   participants: [
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     }
-      //   ],
-      //   year: '108-1'
-      // },
-      // {
-      //   research_title: '...',
-      //   participants: [
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     },
-      //     {
-      //       student_id: '...',
-      //       sname: '...',
-      //       detail: '...',
-      //       score: ''
-      //     }
-      //   ],
-      //   year: '...'
-      // }
+      {
+        research_title: '...',
+        participants: [
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          },
+          {
+            student_id: '...',
+            sname: '...',
+            detail: '...',
+            score: ''
+          }
+        ],
+        year: '-2'
+      }
     ]
   },
   research: {
@@ -250,7 +173,7 @@ const initialState = {
     current_accept: 0,
     groups: [
       {
-        research_title: '洨敬白布雞使喚唷際甘草精華雄沒醉不女人',
+        research_title: '---',
         participants: [
           {
             student_id: '0412121',

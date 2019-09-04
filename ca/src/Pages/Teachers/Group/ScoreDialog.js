@@ -85,23 +85,23 @@ export default class ScoreDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      score: ['','','','',''],
-      comment: ['','','','',''],
-      err: ['','','','',''],
+      scores: [],
+      comments: [],
+      errs: [],
     }
   }
 
   handleOpen = () => {
-    let score = ['', '', '', '', '']
-    let err =  ['', '', '', '', '']
-    let comment = ['', '', '', '', '']
+    let scores = new Array(this.props.participants.length).fill('')
+    let errs = new Array(this.props.participants.length).fill('')
+    let comments =  new Array(this.props.participants.length).fill('')
     this.props.participants.forEach((item, i) => {
-      if( this.isInt100(item.score) ) score[i] = item.score
+      if( this.isInt100(item.score) ) scores[i] = item.score
     })
     this.props.participants.forEach((item, i) => {
-      if( item.comment !== null ) comment[i] = item.comment
+      if( item.comment !== null ) comments[i] = item.comment
     })
-    this.setState({open: true, score, err, comment})
+    this.setState({open: true, scores, errs, comments})
   }
 
   handleClose = (status) => {
@@ -116,13 +116,11 @@ export default class ScoreDialog extends React.Component {
       console.log('tname: ' + this.props.idCard.tname)
       console.log('research_title: ' + this.props.title)
       console.log('first_second: ' + this.props.firstSecond)
-      console.log('students: ' + this.props.participants)
 
       this.props.participants.forEach((item, i) => {
-        console.log('student: ' + item)
         console.log('student_id: ' + item.student_id)
-        console.log('new_score[' + i + ']: ' + this.state.score[i])
-        console.log('comment[' + i + ']: ' + this.state.comment[i])
+        console.log('new_score[' + i + ']: ' + this.state.scores[i])
+        console.log('comment[' + i + ']: ' + this.state.comments[i])
 
         axios.post('/professors/research/setScore', {
           student_id: item.student_id,
@@ -130,8 +128,8 @@ export default class ScoreDialog extends React.Component {
           research_title: this.props.title,
           first_second: item.firstSecond,
           year: this.props.year,
-          new_score: this.state.score[i],
-          comment: this.state.comment[i]
+          new_score: this.state.scores[i],
+          comment: this.state.comments[i]
         }).then(res => {
           // Magic update
           setTimeout(
@@ -159,28 +157,23 @@ export default class ScoreDialog extends React.Component {
   }
 
   checkAllText = () => {
-    let score = this.state.score
-    let err = this.state.err
+    let scores = this.state.scores
+    let errs = this.state.errs
     let studentNum = this.props.participants.length
-    err.forEach(i => {
-      err[i] = ( this.isInt100(score[i]) ? '' :'分數必須是0~100之間的整數' )
+    errs.forEach(i => {
+      errs[i] = ( this.isInt100(scores[i]) ? '' :'分數必須是0~100之間的整數' )
     })
-    this.setState({err})
+    this.setState({errs})
     let pass = false
     for(let i=0; i<studentNum; i++){
-      pass = this.isInt100(score[i])
+      pass = this.isInt100(scores[i])
       if(!pass) break
     }
-    // let pass = (
-    //   this.isInt100(score[0]) &&
-    //   this.isInt100(score[1]) &&
-    //   this.isInt100(score[2]) &&
-    //   this.isInt100(score[3]) )
     if (!pass) alert('分數輸入格式錯誤! 請修正後再送出。')
     if(pass){
-      for(let i=0; i<this.state.score.length; ++i){
-        if(parseFloat(score[i]) >= 90){
-          if(this.state.comment[i] === ''){
+      for(let i=0; i<studentNum; i++){
+        if(parseFloat(scores[i]) >= 90){
+          if(this.state.comments[i] === ''){
             pass = false
           }
         }
@@ -199,17 +192,17 @@ export default class ScoreDialog extends React.Component {
   handleComment = (event, i) => {
     console.log(event.target.value)
 
-    let _comment = {...this.state.comment}
-    _comment[i] = event.target.value
-    this.setState({comment:_comment})
+    let _comments = {...this.state.comments}
+    _comments[i] = event.target.value
+    this.setState({comments:_comments})
   }
 
   handleChangeScore = (event, i) => {
-    let score = this.state.score
-    let err = this.state.err
-    score[i] = event.target.value
-    err[i] = ( this.isInt100(score[i]) ? '' :'分數必須是0~100之間的整數' )
-    this.setState({score, err})
+    let scores = this.state.scores
+    let errs = this.state.errs
+    scores[i] = event.target.value
+    errs[i] = ( this.isInt100(scores[i]) ? '' :'分數必須是0~100之間的整數' )
+    this.setState({scores, errs})
   }
 
   render () {
@@ -249,16 +242,17 @@ export default class ScoreDialog extends React.Component {
                   <MuiThemeProvider >
                     <TextField
                       floatingLabelStyle={{fontSize: 24, color: '#452b12'}}
-                      floatingLabelText={item.student_id + ' ' + item.sname}
+                      floatingLabelText={item.student_id + ' ' + item.sname + '  的評分：'}
                       floatingLabelFixed
                       style={styles.text1}
                       placeholder={'請在此填寫評分'}
-                      errorText={this.state.err[i]}
+                      value={this.state.scores[i]}
+                      errorText={this.state.errs[i]}
                       onChange={(event) => this.handleChangeScore(event, i)}
 
                     />
                   </MuiThemeProvider>
-                  { ( this.state.score[i] !== '' && (parseFloat(this.state.score[i]) >= 90 || parseFloat(this.state.score[i]) < 60 ) )?
+                  { ( this.state.scores[i] !== '' && (parseFloat(this.state.scores[i]) >= 90 || parseFloat(this.state.scores[i]) < 60 ) )?
                     <div style={{borderLeft: '10px solid #e63e42', paddingLeft: 10, marginLeft: 10, background: '#f2f2f2'}}>
                     <TextField
                       floatingLabelStyle={{fontSize: 22, color: '#e63e42'}}
@@ -266,8 +260,7 @@ export default class ScoreDialog extends React.Component {
                       floatingLabelFixed
                       placeholder={'---------- 請用你的滑鼠在這裡點一下，在此填寫評語給 ' + item.sname + ' ----------'}
                       style={styles.text3}
-
-                      value={this.state.comment[i]}
+                      value={this.state.comments[i]}
                       onChange={(event) =>this.handleComment(event, i)}
                     /></div> : '' }
                 </div>

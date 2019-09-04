@@ -17,8 +17,8 @@ export default handleActions({
     return ({...state, idCard: {...action.payload}})
   },
   TEACHER_UPDATE_IDCARD: (state, action) => {
-    return ({ ...state, 
-     idCard: {
+    return ({ ...state,
+      idCard: {
         ...state.idCard,
         tname: '助理端測試教授帳號',
         teacher_id: 'T0000'

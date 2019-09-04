@@ -449,17 +449,16 @@ class SendProjectAgree extends React.Component {
                           </div>
                           <div className='row'>
                             <TextField
-                              placeholder='專題一 or 專題二'
-                              className='project-member-input-rwd'
-                              style={{margin: '10px 0 0 15px', width: '100%'}}
+                              // className='project-member-input'
+                              style={{margin: '20px 10px 0 1px', width: '100%'}}
                               InputProps={{
                                 startAdornment: <InputAdornment position='start'>
                                   <PermIcon />
                                 </InputAdornment>
                               }}
                               select
-                              value={members[t - 1].first_second}
-                              onChange={(e) => this.handleInputChange(e.target.value, 'first_second', t - 1)}
+                              value={members[t - 1].department}
+                              onChange={(e) => this.handleInputChange(e.target.value, 'department', t - 1)}
                             >
                               {
                                 departmentList.map((department) => (
@@ -471,25 +470,25 @@ class SendProjectAgree extends React.Component {
                               {/* <MenuItem value={2} style={{width: '100%'}}>專題（二）</MenuItem> */}
                             </TextField>
                           </div>
-                          <div className='row' >
-                            <TextField
-                              placeholder='請選擇系所'
-                              className='project-member-input-rwd'
-                              style={{margin: '10px 0 0 15px', width: '100%'}}
-                              InputProps={{
-                                startAdornment: <InputAdornment position='start'>
-                                  <PermIcon />
-                                </InputAdornment>
-                              }}
-                              select
-                              value={members[t - 1].department}
-                              onChange={(e) => this.handleInputChange(e.target.value, 'department', t - 1)}
-                            >
-                              <MenuItem value={0} style={{width: '100%'}}>請選擇系所</MenuItem>
-                              <MenuItem value={1} style={{width: '100%'}}>資工系</MenuItem>
-                              <MenuItem value={2} style={{width: '100%'}}>非資工系</MenuItem>
-                            </TextField>
-                          </div>
+                          {/*<div className='row' >*/}
+                            {/*<TextField*/}
+                              {/*placeholder='請選擇系所'*/}
+                              {/*className='project-member-input-rwd'*/}
+                              {/*style={{margin: '10px 0 0 15px', width: '100%'}}*/}
+                              {/*InputProps={{*/}
+                                {/*startAdornment: <InputAdornment position='start'>*/}
+                                  {/*<PermIcon />*/}
+                                {/*</InputAdornment>*/}
+                              {/*}}*/}
+                              {/*select*/}
+                              {/*value={members[t - 1].department}*/}
+                              {/*onChange={(e) => this.handleInputChange(e.target.value, 'department', t - 1)}*/}
+                            {/*>*/}
+                              {/*<MenuItem value={0} style={{width: '100%'}}>請選擇系所</MenuItem>*/}
+                              {/*<MenuItem value={1} style={{width: '100%'}}>資工系</MenuItem>*/}
+                              {/*<MenuItem value={2} style={{width: '100%'}}>非資工系</MenuItem>*/}
+                            {/*</TextField>*/}
+                          {/*</div>*/}
 
                           <div className='row' style={{display: members[t - 1].department === '資訊工程學系' ? 'none' : ''}}>
                             <Input
