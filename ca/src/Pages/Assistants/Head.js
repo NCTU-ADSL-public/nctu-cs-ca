@@ -10,7 +10,7 @@ class Head extends React.Component {
   constructor (props) {
     super(props)
     axios.get('/assistants/profile').then(studentData => {
-      if (studentData[0].status) {
+      if (studentData.data[0].status) {
         this.props.UpdateUserInfo({
           name: studentData.data[0].aname,
           prog: studentData.data[0].assistant_id,
