@@ -101,7 +101,7 @@ class Check extends React.Component {
               <TableRow hover style={{display: 'flex', justifyContent: 'center'}} key={idx}>
                 <TableCell style={{flex: 0.025, padding: '0px'}}>
                   <Tooltip
-                    title={'確認加選'} 
+                    title={'加選'} 
                     placement='top'
                     classes={{
                       tooltip: classes.tooltip
