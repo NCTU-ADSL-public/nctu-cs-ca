@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 
 import Table from '@material-ui/core/Table';
+import Tooltip from '@material-ui/core/Tooltip';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -30,6 +31,9 @@ const styles = theme => ({
   },
   dialog: {
     minWidth: '500px'
+  },
+  tooltip: {
+    fontSize: '15px'
   }
 })
 
@@ -87,6 +91,7 @@ class Check extends React.Component {
               </TableCell>
               <TableCell style={{fontSize: '25px', flex: 0.175, paddingTop: '11px', paddingLeft: '20px'}}>學號</TableCell>
               <TableCell style={{fontSize: '25px', flex: 0.175, paddingTop: '11px', paddingLeft: '0px'}}>姓名</TableCell>
+              <TableCell style={{fontSize: '25px', flex: 0.175, paddingTop: '11px', paddingLeft: '0px'}}>教授</TableCell>
               <TableCell style={{fontSize: '25px', flex: 0.6, paddingTop: '11px', paddingLeft: '0px'}}>專題狀態</TableCell>
             </TableRow>
           </TableHead>
@@ -95,31 +100,48 @@ class Check extends React.Component {
             this.props.Check.checks.map( (check, idx) => (
               <TableRow hover style={{display: 'flex', justifyContent: 'center'}} key={idx}>
                 <TableCell style={{flex: 0.025, padding: '0px'}}>
-                  <IconButton style={{color: 'green', fontSize: '18px'}}
-                    onClick = { () =>
-                      this.setState({ 
-                        agreeOpen: true,
-                        check
-                      })
-                    }
+                  <Tooltip
+                    title={'確認加選'} 
+                    placement='top'
+                    classes={{
+                      tooltip: classes.tooltip
+                    }}
                   >
-                    <DoneIcon />
-                  </IconButton>
+                    <IconButton style={{color: 'green', fontSize: '18px'}}
+                      onClick = { () =>
+                        this.setState({ 
+                          agreeOpen: true,
+                          check
+                        })
+                      }
+                    >
+                      <DoneIcon />
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
                 <TableCell style={{flex: 0.025, padding: '0px'}}>
-                  <IconButton style={{color: 'red', fontSize: '18px'}}
-                    onClick = { () => 
-                      this.setState({
-                        rejectOpen: true,
-                        check
-                      })
-                    }
+                  <Tooltip
+                    title={'退選'} 
+                    placement='top'
+                    classes={{
+                      tooltip: classes.tooltip
+                    }}
                   >
-                    <ClearIcon />
-                  </IconButton>
+                    <IconButton style={{color: 'red', fontSize: '18px'}}
+                      onClick = { () => 
+                        this.setState({
+                          rejectOpen: true,
+                          check
+                        })
+                      }
+                    >
+                      <ClearIcon />
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
                 <TableCell style={{fontSize: '18px', flex: 0.175, paddingTop: '11px', paddingLeft: '20px'}}>{this.hightlight(check.id, this.props.Check.input)}</TableCell>
                 <TableCell style={{fontSize: '18px', flex: 0.175, paddingTop: '11px', paddingLeft: '0px'}}>{this.hightlight(check.name, this.props.Check.input)}</TableCell>
+                <TableCell style={{fontSize: '18px', flex: 0.175, paddingTop: '11px', paddingLeft: '0px'}}>{this.hightlight(check.professor_name, this.props.Check.input)}</TableCell>
                 <TableCell style={{fontSize: '18px', flex: 0.6, paddingTop: '11px', color: parseInt(check.first_second)=== 3 ? 'red' : '', paddingLeft: '0px'}}>{this.hightlight(FIRST_SECOND_CN[check.first_second], this.props.Check.input)}</TableCell>
               </TableRow>
             ))
