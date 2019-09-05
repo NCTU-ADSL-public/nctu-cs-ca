@@ -18,21 +18,11 @@ class RightSideIcon extends React.Component {
   handleSwitch = (i) => {
 		const { Verify } = this.props;
     if (Verify.type.length === 4) {
-      let tmp = []
-      tmp.push(i)
-      this.props.verifyHandleChange({selectAll: false, select: [], type: tmp})
+    	this.props.verifyHandleChange({selectAll: false, select: [], type: [i]})
     } else if (Verify.type.includes(i)) {
-      if (Verify.type.length === 1) {
-        this.props.verifyHandleChange({selectAll: false, select: [], type: [0, 1, 2, 3]})
-      } else {
-        let tmp = Verify.type
-        tmp = tmp.filter(e => e !== i)
-        this.props.verifyHandleChange({selectAll: false, select: [], type: tmp})
-      }
+		this.props.verifyHandleChange({selectAll: false, select: [], type: [0, 1, 2, 3]})
     } else {
-      let tmp = Verify.type
-      tmp.push(i)
-      this.props.verifyHandleChange({selectAll: false, select: [], type: tmp})
+      this.props.verifyHandleChange({selectAll: false, select: [], type: [i]})
     }
 	}
 	

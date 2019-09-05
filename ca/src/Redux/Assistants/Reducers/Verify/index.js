@@ -5,11 +5,9 @@ const initalState = {
 /******start for test*****
 	formList: FakeData.FormList.map((e, i) => ({...e, id: i})),
   teacherList: FakeData.TeacherList.sort((a, b) => b.status - a.status),
-	formListOld:FakeData.FormList.map((e, i) => ({...e, id: i})),
 *********end for test***************/
 	formList:[],
 	teacherList: [],
-	formListOld:[],
 	isOld: false,
 	open: false,
 	message: 0,
