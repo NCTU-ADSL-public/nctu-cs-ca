@@ -201,7 +201,7 @@ class ApplyItem extends React.Component {
                 ((apply.status === 6) || (apply.status === 0 && apply.reject_reason !== null)) && (
                   <TableRow>
                     <TableCell className={classes.font3} >退回原因</TableCell>
-                    <TableCell className={classes.font1} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-' : apply.reject_reason}</TableCell>
+                    <TableCell className={classes.font} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-' : apply.reject_reason}</TableCell>
                   </TableRow>
                 )
              }
