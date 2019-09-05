@@ -166,7 +166,7 @@ class ApplyItem extends React.Component {
                   `${apply.cos_year_old}-${semesterName[apply.cos_semester_old]} ${apply.nameA}${apply.type !== 3 ? ` (${apply.codeA})` : ''}`
                 }</TableCell>
                 <TableCell className={classes.font}>{apply.department}</TableCell>
-                <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此抵免不需要成績</i></span> : apply.score}</TableCell>
+                <TableCell className={classes.font}>{(apply.type === 0 || apply.type === 1) ? <span style={{color: '#888'}}><i>此項申請為修習前提出，無成績資料</i></span> : apply.score}</TableCell>
                 <TableCell className={classes.font6} >
                   <Button 
                     color="primary" 
@@ -189,8 +189,11 @@ class ApplyItem extends React.Component {
                     <Avatar>
                       <TIcon />
                     </Avatar>
-              }label={apply.reason_type} />
-                }
+              }label={apply.reason_type === '被當' || apply.reason_type === '重修' ? 
+                <span className={classes.font2} style={{ color: 'red' }}>重修</span> :
+                <span className={classes.font2} >{apply.reason_type}</span>
+                } />
+              }
                   {apply.reason}
                 </TableCell>
               </TableRow>
@@ -198,7 +201,7 @@ class ApplyItem extends React.Component {
                 ((apply.status === 6) || (apply.status === 0 && apply.reject_reason !== null)) && (
                   <TableRow>
                     <TableCell className={classes.font3} >退回原因</TableCell>
-                    <TableCell className={classes.font} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-' : apply.reject_reason}</TableCell>
+                    <TableCell className={classes.font1} colSpan={3} >{(apply.reject_reason === '' || apply.reject_reason === undefined) ? '-' : apply.reject_reason}</TableCell>
                   </TableRow>
                 )
              }
