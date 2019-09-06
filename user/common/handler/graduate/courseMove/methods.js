@@ -61,7 +61,7 @@ methods.checkCard = function(req, res){
                 break;
             case "通識":
                 //theCard = new General(cardCode, cardName, cardType, studentId); 
-                theCard = new General(cardCode, cardType);
+                theCard = new General(cardCode, studentId);
                 //console.log(5);
                 break;
             case "體育":
@@ -88,12 +88,29 @@ methods.checkCard = function(req, res){
         }
         //let checkResult = {title: ''};
         //checkResult.title = allGroup[i];
+        let countGeneral = 0;
         theCard.check(function(flag){
             if (cardCode === '') {
                 cantMove.push({title: flag});
             } else {
-                if(flag != '')
-                    canMoveGroup.push({title: flag});
+                if(flag != ''){
+                    if(flag.substring(0,2) == '通識'){
+                        let dimension = flag.split('|');
+                        let old = dimension[0];
+                        let new_ = dimension[1];
+                        let new_one = new_.split(',');
+                        for(let i = 0; i < new_one.length; i++){
+                            let one = new_one[i];
+                            one = one.substring(0, one.length-5);
+                            canMoveGroup.push({title: one});
+                            countGeneral++;
+                        }
+                        old = old.substring(0, old.length-5);
+                        canMoveGroup.push({title: old});
+                    }
+                    else
+                        canMoveGroup.push({title: flag});
+                }
                 else
                     cantMove.push({title: flag});
             }
@@ -105,8 +122,10 @@ methods.checkCard = function(req, res){
             else{            
                 cantMove.push(checkResult);
             }*/
-            if(canMoveGroup.length + cantMove.length == allGroup.length)
+            if((canMoveGroup.length + cantMove.length - countGeneral) == allGroup.length){
+                console.log(canMoveGroup);
                 res.send(canMoveGroup);
+            }
         });
     }
 }

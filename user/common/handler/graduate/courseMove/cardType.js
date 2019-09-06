@@ -222,25 +222,33 @@ cardsets.Language.prototype.check = function(callback){
 
 }
 
-cardsets.General = function(code, type){
+cardsets.General = function(code, sId){
     
-    this.type = type; // Eg: 外語 
     this.code = code;
+    this.sId = sId;
     
 };
 
 cardsets.General.prototype = new cardsets.Card();
 
 cardsets.General.prototype.check = function(callback){
-    let checkType;
-    if(this.type)
-        checkType = this.type.substring(0,2);
-    else
-        checkType = "";
     let checkCode = this.code;
-    if(checkType === "通識")
-        callback('通識');
-    else{
+    let studentId = this.sId;
+	query.ShowUserAllScore(studentId, function(err, result){
+        let res = JSON.parse(result);
+        for(let i = 0; i < res.length; i++){
+            if(checkCode == res[i].cos_code){
+                if(res[i].brief){
+                    callback('通識(舊制)-' + res[i].brief + '|通識(新制)-' + res[i].brief_new);
+                    return;
+                }
+                else{
+                    callback('');
+                    return;
+                }
+            }
+        }
+    });
     // some classes can be admit as general course
         /*query.general_cos_rule(function(err, result){
             let table = JSON.parse(result);
@@ -253,9 +261,6 @@ cardsets.General.prototype.check = function(callback){
             }            
             callback(false);
        });*/
-            callback('');
-    }
-
 }
 
 cardsets.PE = function(code){
