@@ -97,7 +97,6 @@ methods.checkCard = function(req, res){
                     if(flag.substring(0,2) == '通識'){
                         let dimension = flag.split('|');
                         let old = dimension[0].split('/');
-                        console.log(old);
                         old = old[0];
                         let new_ = dimension[1];
                         let new_one = new_.split(',');
