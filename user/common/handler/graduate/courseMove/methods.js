@@ -96,7 +96,9 @@ methods.checkCard = function(req, res){
                 if(flag != ''){
                     if(flag.substring(0,2) == '通識'){
                         let dimension = flag.split('|');
-                        let old = dimension[0];
+                        let old = dimension[0].split('/');
+                        console.log(old);
+                        old = old[0];
                         let new_ = dimension[1];
                         let new_one = new_.split(',');
                         for(let i = 0; i < new_one.length; i++){
@@ -105,7 +107,7 @@ methods.checkCard = function(req, res){
                             canMoveGroup.push({title: one});
                             countGeneral++;
                         }
-                        old = old.substring(0, old.length-5);
+                        old = old.substring(0, old.length);
                         canMoveGroup.push({title: old});
                     }
                     else
