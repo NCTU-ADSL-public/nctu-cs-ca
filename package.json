@@ -64,7 +64,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "concurrently": "^3.5.0",
     "css-loader": "^0.28.7",
-    "detect-character-encoding": "^0.5.1",
+    "detect-character-encoding": "^0.7.0",
     "extract-text-webpack-plugin": "^3.0.1",
     "fs": "0.0.1-security",
     "gm": "^1.23.0",
