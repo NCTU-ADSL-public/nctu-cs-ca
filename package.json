@@ -72,7 +72,7 @@
     "helmet": "^3.8.1",
     "material-ui": "^0.19.2",
     "mute-stream": "0.0.7",
-    "node-sass": "^4.5.3",
+    "node-sass": "^7.0.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "rc-tabs": "^9.1.4",
     "react-circular-progressbar": "^0.2.2",
