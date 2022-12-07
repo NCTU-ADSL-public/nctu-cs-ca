@@ -34,7 +34,7 @@
     "body-parser": "^1.18.2",
     "client-sessions": "^0.8.0",
     "ejs": "^2.5.7",
-    "express": "^4.15.4",
+    "express": "^4.17.3",
     "generic-pool": "^3.1.8",
     "line-reader": "^0.4.0",
     "mariadb": "^1.0.2",
